@@ -13,6 +13,10 @@ Need version enabled when new commit is pushed.
 
 Need a script to istall the software on customer machine.
 
+Can ignore the ssh part as of now.
+
+
+
 
 
 
