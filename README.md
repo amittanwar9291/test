@@ -7,6 +7,14 @@ Need to implement K8s cluster for deployment of final product..can be one master
 
 Use Azure devops for the pipeline.
 
+Need logging enable on a sepearte server.
+
+Need version enabled when new commit is pushed.
+
+Need a script to istall the software on customer machine.
+
+
+
 
 
 
