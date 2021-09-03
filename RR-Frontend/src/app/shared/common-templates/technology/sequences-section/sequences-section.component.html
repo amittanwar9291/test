@@ -1,0 +1,56 @@
+<div class="c-col-3 c-sep c-pad-r f-vertical f-align-start col-h-100">
+  <div class="c-col-3 f-space-between f-horizontal f-align-center">
+    <h1 rr-id="uni_x_030207">
+      {{ 'shared-templates.technology.sequences.value' | translate }}
+    </h1>
+    <rr-reset-button
+      rr-id="uni_x_030421"
+      *ngIf="model.sequencesType === sequencesType.Individual"
+      [disabled]="isResetButtonDisabled()"
+      (reset)="reset()"
+    >
+    </rr-reset-button>
+  </div>
+  <img
+    class="m-t-25 m-b-27"
+    src="assets/img/technology/rr-sequence.svg"
+    rr-id="uni_x_030208"
+  />
+  <div class="c-col-3 f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad-r f-vertical o-list">
+      <div
+        *ngIf="model.sequencesType === sequencesType.CenterStandard"
+        class="o-radio-list f-vertical m-b-15"
+      >
+        <h2 rr-id="uni_x_030215" class="m-b-8">
+          {{ customCentreSpecificSetTranslationKey | translate }}
+        </h2>
+        <p-dropdown
+          rr-id="uni_x_030216"
+          class="m-b-0"
+          name="setName"
+          styleClass="o-width-100 ui-brown-box"
+          rrDropdownClear
+          placeholder="{{ isSetSelected() ? model.setName : 'shared.pleaseSelect' | translate }}"
+          [options]="cspDropdown"
+          [(ngModel)]="model.setName"
+          (onChange)="applyPreferences($event.value)"
+        >
+        </p-dropdown>
+      </div>
+      <rr-sequences-finding-column
+        [handler]="sequenceHandlerRef"
+        [customFindingOptionsTranslationKey]="customFindingOptionsTranslationKey"
+        [customFindingPropertyName]="customFindingPropertyName"
+        [customColumnTitleTranslationKey]="customColumnTitle"
+        [isCSPMode]="model.sequencesType === sequencesType.CenterStandard"
+        (changeInSubcomponent)="onSequencesFindingChange()"
+      >
+      </rr-sequences-finding-column>
+    </div>
+    <div class="c-col-2 c-pad-l">
+      <!-- Here the custom (module-specific) sequences template is projected using the Angular's content projection pattern -->
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

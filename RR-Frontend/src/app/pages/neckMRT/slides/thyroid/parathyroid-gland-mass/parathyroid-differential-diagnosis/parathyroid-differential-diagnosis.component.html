@@ -1,0 +1,99 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-12 m-b-12 o-radio-list">
+      <h2 rr-id="nec_m_070262">
+        {{ 'neckMRT.thyroid.differentialDiagnosis.value' | translate }}
+      </h2>
+      <div class="f-vertical o-radio-list m-b-10">
+        <h3 rr-id="nec_m_070263" class="m-b-4">
+          {{ 'neckMRT.thyroid.differentialDiagnosis1.value' | translate }}*
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="nec_m_070264"
+          [diagnosisNumber]="1"
+          [(ngModel)]="model.differentialDiagnosisType1"
+          name="differentialDiagnosisType1"
+          [options]="w032"
+          group="true"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosisType1"
+          (selectionChanged)="model.isSuspicionOf = false; model.isSubordinate = false"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="m-b-21"
+        [rrDisable]="model.differentialDiagnosisType1 === 'None'"
+      >
+        <p-checkbox
+          rr-id="nec_m_070288"
+          [(ngModel)]="model.isSuspicionOf"
+          name="isSuspicionOf"
+          label="{{ 'neckMRT.thyroid.suspicionOf.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="f-vertical o-radio-list m-b-30"
+        [rrDisable]="model.differentialDiagnosisType1 === 'None'"
+      >
+        <h3 rr-id="nec_m_070266" class="m-b-4">
+          {{ "neckMRT.thyroid.differentialDiagnosis2.value" | translate }}
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="nec_m_070267"
+          class="m-b-11"
+          [diagnosisNumber]="2"
+          [(ngModel)]="model.differentialDiagnosisType2"
+          name="differentialDiagnosis2"
+          [options]="w033"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="model.isSubordinate = false"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="o-radio-list"
+          [rrDisable]="
+            model.differentialDiagnosisType2 === differentialDiagnosisType2.None
+          "
+        >
+          <p-checkbox
+            rr-id="nec_m_070268"
+            [(ngModel)]="model.isSubordinate"
+            name="isSubordinate"
+            label="{{ 'neckMRT.thyroid.subordinate.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_070269"
+          [(ngModel)]="model.isMoreThanOneLesionOfTheSameEntity"
+          name="isMoreThanOneLesionOfTheSameEntity"
+          label="{{
+            'neckMRT.thyroid.lesionOfTheSameEntity.value' | translate
+          }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-12 m-b-12 o-radio-list">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      >
+      </rr-reference-picture>
+    </div>
+    <div
+      class="c-col-1 c-sep c-pad f-vertical m-t-12 m-b-12 o-radio-list"
+    ></div>
+    <div
+      class="c-col-1 c-sep c-pad-l f-vertical m-t-12 m-b-12 o-radio-list"
+    ></div>
+  </div>
+</div>

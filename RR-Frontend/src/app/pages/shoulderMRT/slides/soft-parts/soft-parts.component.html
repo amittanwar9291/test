@@ -1,0 +1,104 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-radio-list f-vertical">
+      <h1 rr-id="sho_m_080103" class="m-b-18">
+        {{ "shoulderMRT.softParts.findings.value" | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="sho_m_080104"
+        label="{{ 'shoulderMRT.softParts.noDetectionOfPathologicalSoftTissue.value' | translate }}"
+        name="areFindings"
+        [(ngModel)]="model.areFindings"
+        [value]="areFindings.No"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="sho_m_080105"
+        label="{{ 'shoulderMRT.softParts.findings.value' | translate }}"
+        name="areFindings"
+        [(ngModel)]="model.areFindings"
+        [value]="areFindings.Yes"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        name="findingHandler"
+        validationName="findings"
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        (findingChange)="updateMusculatureFindingHandler()"
+        (newFindingAdded)="updateMusculatureFindingHandler()"
+        (findingRemoved)="updateMusculatureFindingHandler()"
+        (findingTypeChange)="updateMusculatureFindingHandler()"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="col-h-100 f-vertical c-pad-l">
+      <div
+        class="f-start f-vertical"
+        [ngClass]="findingHandler.currentItem.findingType === findingType.Musculature ? 'm-h-127': 'm-h-117'"
+      >
+        <h1
+          rr-id="sho_m_080201"
+          class="m-b-24"
+          [hidden]="isFindingHeaderDisabled()"
+        >
+          {{ 'shoulderMRT.softParts.findings.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div
+        class="col-h-100"
+        [ngSwitch]="findingHandler.currentItem.findingType"
+      >
+        <!-- None -->
+        <div
+          *ngSwitchCase="findingType.None"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </div>
+
+        <!-- Lymph Nodes -->
+        <rr-lymph-nodes
+          *ngSwitchCase="findingType.LymphNodes"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-lymph-nodes>
+
+        <!-- Musculature -->
+        <rr-musculature
+          *ngSwitchCase="findingType.Musculature"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+          [findingDropdownConfig]="findingMusculatureDropdownConfig"
+          [findingMusculatureHandler]="findingMusculatureHandler"
+        >
+        </rr-musculature>
+
+        <!-- Sternoclavicular joint -->
+        <rr-sternoclavicular-joint
+          *ngSwitchCase="findingType.SternoclavicularJoint"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-sternoclavicular-joint>
+
+        <!-- Pleura -->
+        <rr-pleura
+          *ngSwitchCase="findingType.Pleura"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-pleura>
+      </div>
+    </div>
+  </div>
+</form>

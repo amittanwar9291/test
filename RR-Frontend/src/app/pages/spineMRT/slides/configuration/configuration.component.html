@@ -1,0 +1,115 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerConfig">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_m_040103" class="m-b-15">
+        {{ 'spineMRT.configuration.findings.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="spi_m_040104"
+        label="{{ 'spineMRT.configuration.regularFormRegularAlignment.value' | translate }}"
+        class="text-break"
+        name="areFindings"
+        value="False"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="spi_m_040105"
+        label="{{'spineMRT.configuration.findings.value' | translate}}"
+        name="areFindings"
+        value="True"
+        class="m-b-19"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingHandlerComponent'"
+        [validationName]="'findings'"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-col-4 c-pad-l f-vertical">
+        <h1
+          rr-id="spi_m_040201"
+          *ngIf="findingHandler.currentItem.findingType!== configurationFindingTypeEnum.None"
+        >
+          {{'spineMRT.configuration.findings.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === configurationFindingTypeEnum.None"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad configurations-column"
+        ></div>
+        <div class="c-col-1 c-pad-l configurations-column"></div>
+      </div>
+
+      <div
+        *ngIf="findingHandler.currentItem.findingType === configurationFindingTypeEnum.Deviation"
+      >
+        <rr-spine-mrt-configuration-divergence
+          [model]="findingHandler.currentItem"
+          (emitLocalizer)="setLargeLocalizerOpened($event)"
+        >
+        </rr-spine-mrt-configuration-divergence>
+      </div>
+
+      <div
+        *ngIf="findingHandler.currentItem.findingType === configurationFindingTypeEnum.Spondylolisthesis"
+      >
+        <rr-spine-mrt-configuration-spondylolisthesis
+          [model]="findingHandler.currentItem"
+          (emitLocalizer)="setLargeLocalizerOpened($event)"
+        >
+        </rr-spine-mrt-configuration-spondylolisthesis>
+      </div>
+
+      <div
+        *ngIf="findingHandler.currentItem.findingType === configurationFindingTypeEnum.TransitionalVertebra"
+      >
+        <rr-spine-mrt-configuration-transition-variant
+          [model]="findingHandler.currentItem"
+        >
+        </rr-spine-mrt-configuration-transition-variant>
+      </div>
+
+      <div
+        *ngIf="findingHandler.currentItem.findingType === configurationFindingTypeEnum.Scoliosis"
+      >
+        <rr-spine-mrt-configuration-scoliosis
+          [model]="findingHandler.currentItem"
+          (emitLocalizer)="setLargeLocalizerOpened($event)"
+        >
+        </rr-spine-mrt-configuration-scoliosis>
+      </div>
+    </div>
+  </div>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="largeLocalizerConfig"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="largeLocalizerConfig.localizerModel"
+      [logicType]="largeLocalizerConfig.localizerLogicType"
+      [selectionAccessibilityMode]="largeLocalizerConfig.selectionAccessibilityMode"
+      [localizationTitle]="largeLocalizerConfig.localizerTitle"
+      [localizationDescription]="largeLocalizerConfig.localizerDescription"
+      (close)="onLargeLocalizerClosed()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-complex>
+  </div>
+</form>

@@ -1,0 +1,339 @@
+<div class="f-horizontal lower-columns">
+  <div class="c-col-1 c-pad-r c-sep f-vertical o-radio-list">
+    <h2 rr-id="han_m_040206">
+      {{ "handMRT.bones.localization.value" | translate }}*
+    </h2>
+    <rr-hand-details-small
+      name="involvedBonesLocalizer"
+      rr-id="han_m_0402103"
+      [side]="side"
+      [isComplex]="false"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.involvedBonesLocalizer"
+      rrValidation="involvedBonesLocalizer"
+      isLocalizer="true"
+    ></rr-hand-details-small>
+    <h2 rr-id="han_m_0402104" class="m-t-20">
+      {{ "handMRT.bones.stage.value" | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="han_m_0402105"
+      name="osteomyelitisStageType"
+      [value]="stageType.Acute"
+      label="{{ 'handMRT.bones.acute.value' | translate }}"
+      [(ngModel)]="model.osteomyelitisStageType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="han_m_0402106"
+      name="osteomyelitisStageType"
+      [value]="stageType.Chronic"
+      label="{{ 'handMRT.bones.chronic.value' | translate }}"
+      [(ngModel)]="model.osteomyelitisStageType"
+    ></p-radioButton>
+
+    <h2 rr-id="han_m_0402107" class="m-t-20">
+      {{ "handMRT.bones.cortical.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="han_m_0402108"
+      binary="true"
+      name="isThinning"
+      label="{{ 'handMRT.bones.thinning(scalopping.value' | translate }}"
+      [(ngModel)]="model.isThinning"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="han_m_0402109"
+      binary="true"
+      name="isDestruction"
+      label="{{ 'handMRT.bones.destruction.value' | translate }}"
+      [(ngModel)]="model.isDestruction"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-2 c-pad f-start f-vertical o-radio-list">
+    <h2 rr-id="han_m_0403249">
+      {{ "handMRT.bones.spongiosa.value" | translate }}
+    </h2>
+    <div class="f-horizontal h-100">
+      <div class="c-col-1 c-pad-r f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="han_m_0403250"
+          binary="true"
+          name="isBoneMarrowEdema"
+          label="{{ 'handMRT.bones.boneMarrowEdema.value' | translate }}"
+          [(ngModel)]="model.isBoneMarrowEdema"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="han_m_0403251"
+          binary="true"
+          name="isIntraosseousAbscess"
+          label="{{
+            'handMRT.bones.intraosseousAbscess(BrodieAbscess.value' | translate
+          }}"
+          [(ngModel)]="model.isIntraosseousAbscess"
+          rrContentReset="intraosseousAbscessBlock"
+        ></p-checkbox>
+        <div
+          id="intraosseousAbscessBlock"
+          [rrDisable]="!model.isIntraosseousAbscess"
+          class="o-radio-list nested-content"
+        >
+          <div>
+            <p rr-id="han_m_0403252">
+              {{ "handMRT.bones.size.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="han_m_0403253"
+              labelRrId="han_m_0403254"
+              name="intraosseousAbscessSize"
+              [config]="{ labelWidth: 140, min: 1, max: 99 }"
+              [label]="'handMRT.bones.inMm.value' | translate"
+              [(ngModel)]="model.intraosseousSize"
+              (announceModelChange)="resetNumberInputsIntraosseousAbscess()"
+            ></rr-number-input>
+          </div>
+          <div [rrDisable]="!model.intraosseousSize">
+            <p rr-id="han_m_0403255">
+              {{ "handMRT.bones.2ndPlane.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="han_m_0403256"
+              labelRrId="han_m_0403257"
+              name="intraosseousAbscess2ndPlaneSize"
+              [config]="{ labelWidth: 140, min: 1, max: 99 }"
+              [label]="'handMRT.bones.inMm.value' | translate"
+              [(ngModel)]="model.intraosseous2ndPlaneSize"
+              (announceModelChange)="resetNumberInputsIntraosseousAbscess()"
+            ></rr-number-input>
+          </div>
+          <div [rrDisable]="model.intraosseous2ndPlaneSize === null">
+            <p rr-id="han_m_0403258">
+              {{ "handMRT.bones.3rdPlane.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="han_m_0403259"
+              labelRrId="han_m_0403260"
+              name="intraosseousAbscess3rdPlaneSize"
+              [config]="{ labelWidth: 140, min: 1, max: 99 }"
+              [label]="'handMRT.bones.inMm.value' | translate"
+              [(ngModel)]="model.intraosseous3rdPlaneSize"
+              (announceModelChange)="resetNumberInputsIntraosseousAbscess()"
+            ></rr-number-input>
+          </div>
+          <p rr-id="han_m_0403261" class="m-t-15">
+            {{ "handMRT.bones.details.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="han_m_0403262"
+            binary="true"
+            name="isPenumbraSign"
+            label="{{ 'handMRT.bones.penumbraSign.value' | translate }}"
+            [(ngModel)]="model.isPenumbraSign"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="han_m_0403263"
+            binary="true"
+            name="isPeripheralContrast"
+            label="{{
+              'handMRT.bones.peripheralContrastEnhancement.value' | translate
+            }}"
+            [(ngModel)]="model.isPeripheralContrast"
+            [rrDisable]="!isCMYes"
+          ></p-checkbox>
+          <p-checkbox
+            class="m-t-20"
+            rr-id="han_m_0403264"
+            binary="true"
+            name="isIntaosseousLasion"
+            label="{{ 'handMRT.bones.lesionSameEntity.value' | translate }}"
+            [(ngModel)]="model.isIntaosseousLasion"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep-l f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="han_m_0404117"
+          binary="true"
+          name="isSequester"
+          label="{{ 'handMRT.bones.sequester.value' | translate }}"
+          rrContentReset="sequesterBlock"
+          [(ngModel)]="model.isSequester"
+        ></p-checkbox>
+        <div
+          id="sequesterBlock"
+          [rrDisable]="!model.isSequester"
+          class="o-radio-list nested-content text-break"
+        >
+          <div>
+            <p rr-id="han_m_0404118">
+              {{ "handMRT.bones.size.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="han_m_0404119"
+              labelRrId="han_m_0404120"
+              name="sequesterSize"
+              [config]="{ labelWidth: 140, min: 1, max: 99 }"
+              [label]="'handMRT.bones.inMm.value' | translate"
+              [(ngModel)]="model.sequesterSize"
+              (announceModelChange)="resetNumberInputsSequester()"
+            ></rr-number-input>
+          </div>
+          <div [rrDisable]="model.sequesterSize === null">
+            <p rr-id="han_m_0404121">
+              {{ "handMRT.bones.2ndPlane.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="han_m_0404122"
+              labelRrId="han_m_0404123"
+              name="sequester2ndPlaneSize"
+              [config]="{ labelWidth: 140, min: 1, max: 99 }"
+              [label]="'handMRT.bones.inMm.value' | translate"
+              [(ngModel)]="model.sequester2ndPlaneSize"
+              (announceModelChange)="resetNumberInputsSequester()"
+            ></rr-number-input>
+          </div>
+          <div [rrDisable]="model.sequester2ndPlaneSize === null">
+            <p rr-id="han_m_0404124">
+              {{ "handMRT.bones.3rdPlane.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="han_m_0404125"
+              labelRrId="han_m_0404126"
+              name="sequester3rdPlaneSize"
+              [config]="{ labelWidth: 140, min: 1, max: 99 }"
+              [label]="'handMRT.bones.inMm.value' | translate"
+              [(ngModel)]="model.sequester3rdPlaneSize"
+              (announceModelChange)="resetNumberInputsSequester()"
+            ></rr-number-input>
+          </div>
+          <p rr-id="han_m_0404127" class="m-t-15">
+            {{ "handMRT.bones.details.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="han_m_0404128"
+            binary="true"
+            name="isNoContrastEnhancement"
+            label="{{
+              'handMRT.bones.noContrastEnhancement.value' | translate
+            }}"
+            [(ngModel)]="model.isNoContrastEnhancement"
+            [rrDisable]="!isCMYes"
+          ></p-checkbox>
+          <p-checkbox
+            class="m-t-20"
+            rr-id="han_m_0404129"
+            binary="true"
+            name="isSequesterLasion"
+            label="{{ 'handMRT.bones.lesionSameEntity.value' | translate }}"
+            [(ngModel)]="model.isSequesterLasion"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l o-radio-list">
+    <h2 rr-id="han_m_0405110">
+      {{ "handMRT.bones.associatedFindings.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="han_m_0405111"
+      binary="true"
+      name="isOsteolysis"
+      label="{{ 'handMRT.bones.osteolysis.value' | translate }}"
+      [(ngModel)]="model.isOsteolysis"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="han_m_0405112"
+      binary="true"
+      name="isBoneApposition"
+      label="{{ 'handMRT.bones.boneApposition.value' | translate }}"
+      [(ngModel)]="model.isBoneApposition"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="han_m_0405113"
+      binary="true"
+      name="isPeriostealThickening"
+      label="{{ 'handMRT.bones.periostealThickening.value' | translate }}"
+      [(ngModel)]="model.isPeriostealThickening"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="han_m_0405114"
+      binary="true"
+      name="isPeriostealRupture"
+      label="{{ 'handMRT.bones.periostealRupture.value' | translate }}"
+      [(ngModel)]="model.isPeriostealRupture"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="han_m_0405115"
+      binary="true"
+      name="isSubperiostealAbscess"
+      label="{{ 'handMRT.bones.subperiostealAbscess.value' | translate }}"
+      [(ngModel)]="model.isSubperiostealAbscess"
+      rrContentReset="subperiostealAbscessBlock"
+    ></p-checkbox>
+    <div
+      id="subperiostealAbscessBlock"
+      class="nested-content text-break"
+      [rrDisable]="!model.isSubperiostealAbscess"
+    >
+      <p rr-id="han_m_0405116">
+        {{ "handMRT.bones.size.value" | translate }}
+      </p>
+      <rr-number-input
+        inputRrId="han_m_0405117"
+        labelRrId="han_m_0405118"
+        name="subperiostealSize"
+        [config]="{ labelWidth: 140, min: 1, max: 99 }"
+        [label]="'handMRT.bones.inMm.value' | translate"
+        [(ngModel)]="model.subperiostealSize"
+      ></rr-number-input>
+    </div>
+    <p-checkbox
+      class="m-t-15"
+      rr-id="han_m_0405119"
+      binary="true"
+      name="isSoftTissueEdema"
+      label="{{ 'handMRT.bones.softTissueEdema.value' | translate }}"
+      [(ngModel)]="model.isSoftTissueEdema"
+    ></p-checkbox>
+
+    <h2 rr-id="han_m_0405120" class="m-t-30">
+      {{ "handMRT.bones.differentialDiagnosis.value" | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="han_m_0405121"
+      name="osteomyelitisDifferentialDiagnosisType"
+      [value]="osteomyelitisDifferentialDiagnosisType.EwingSarcoma"
+      label="{{ 'handMRT.bones.ewingSarcoma.value' | translate }}"
+      [(ngModel)]="model.osteomyelitisDifferentialDiagnosisType"
+      rrContentReset="osteomyelitisDifferentialDiagnosisType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="han_m_0405122"
+      name="osteomyelitisDifferentialDiagnosisType"
+      [value]="osteomyelitisDifferentialDiagnosisType.Chondroblastoma"
+      label="{{ 'handMRT.bones.chondroblastoma.value' | translate }}"
+      [(ngModel)]="model.osteomyelitisDifferentialDiagnosisType"
+      rrContentReset="osteomyelitisDifferentialDiagnosisType"
+    ></p-radioButton>
+    <div
+      id="osteomyelitisDifferentialDiagnosisTypeBlock"
+      [rrDisable]="
+        model.osteomyelitisDifferentialDiagnosisType ===
+        osteomyelitisDifferentialDiagnosisType.None
+      "
+    >
+      <p-checkbox
+        rr-id="han_m_0405123"
+        class="m-t-20"
+        binary="true"
+        name="isSecondary"
+        label="{{ 'handMRT.bones.secondaryV2.value' | translate }}"
+        [(ngModel)]="model.isSecondary"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,405 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+    >
+      <h2 rr-id="mam_mx_050202">
+        {{'mammaMX.mammographyFinding.differentialDiagnosis1.value' |
+        translate}}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        isActiveOnIKnow="true"
+        [options]="massDifferentialDiagnosisOptions"
+        [(ngModel)]="model.massKnownDiagnosisType"
+        name="massKnownDiagnosisType"
+        group="true"
+        rrId="mam_mx_050203"
+        [parentViewModel]="model"
+        rrValidation="massKnownDiagnosisType"
+        (selectionChanged)="resetIsSubordinated(); resetIsSuspicionOf(); resetPresetsDependentProperties()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="mam_mx_050204"
+        name="isHistologicallyConfirmed"
+        label="{{'mammaMX.mammographyFinding.histologicallyConfirmed.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isHistologicallyConfirmed"
+        rrContentReset="histologicallySecuredTypeBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isHistologicallyConfirmed"
+        id="histologicallySecuredTypeBlock"
+      >
+        <p-radioButton
+          rr-id="mam_mx_050205"
+          rrUnClickRadio
+          name="histologicallySecuredType"
+          [value]="histologicallySecuredType.Benign"
+          label="{{'mammaMX.mammographyFinding.benign.value' | translate}}"
+          [(ngModel)]="model.histologicallySecuredType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_mx_050206"
+          rrUnClickRadio
+          name="histologicallySecuredType"
+          [value]="histologicallySecuredType.Malignant"
+          label="{{'mammaMX.mammographyFinding.malignant.value' | translate}}"
+          [(ngModel)]="model.histologicallySecuredType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <h3
+      rr-id="mam_mx_050207"
+      class="localizer-header"
+      rrValidation="breastLocation"
+      innerHTML="{{'mammaMX.mammographyFinding.localizationMultipleonesided.value' | translate}}*"
+    ></h3>
+    <rr-breast-full-cross-shoulder
+      name="breastLocation"
+      [(ngModel)]="model.breastLocation"
+      rr-id="mam_mx_050208"
+      rrValidation="breastLocation"
+      isLocalizer="true"
+    >
+    </rr-breast-full-cross-shoulder>
+    <rr-depth-section
+      [model]="model"
+      [isNumberInputInAnotherColumn]="true"
+    ></rr-depth-section>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <p rr-id="mam_mx_050369" class="m-b-5">
+      {{'mammaMX.mammographyFinding.distanceToNipple.value' | translate}}
+    </p>
+    <rr-number-input
+      inputRrId="mam_mx_050301"
+      labelRrId="mam_mx_050302"
+      name="distanceToNippleInMm"
+      class="m-b-15"
+      label="{{'mammaMX.mammographyFinding.inMm.value' | translate}}"
+      [config]="{min:1, max: 150}"
+      [(ngModel)]="model.distanceToNippleInMm"
+    >
+    </rr-number-input>
+    <h2 rr-id="mam_mx_050303">
+      {{'mammaMX.mammographyFinding.size.value' | translate}}
+    </h2>
+    <rr-number-input
+      inputRrId="mam_mx_050304"
+      labelRrId="mam_mx_050305"
+      name="largestDiameterInMm"
+      labelStyleClass="text-break"
+      label="{{'mammaMX.mammographyFinding.largestDiameterInMm.value' | translate}}"
+      [config]="{min:1, max: 150, labelWidth: 150}"
+      [(ngModel)]="model.largestDiameterInMm"
+      rrValidation="largestDiameterInMm"
+    >
+    </rr-number-input>
+    <rr-number-input
+      inputRrId="mam_mx_050306"
+      labelRrId="mam_mx_050307"
+      name="layerRectangularInMm"
+      class="m-b-13"
+      labelStyleClass="text-break"
+      label="{{'mammaMX.mammographyFinding.layerRectangularInMm.value' | translate}}"
+      [config]="{ min: 1, max: 150, labelWidth: 160}"
+      [(ngModel)]="model.layerRectangularInMm"
+    >
+    </rr-number-input>
+    <h2 rr-id="mam_mx_050308">
+      {{'mammaMX.mammographyFinding.form.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="mam_mx_050309"
+      rrUnClickRadio
+      name="formType"
+      [value]="formType.Oval"
+      label="{{'mammaMX.mammographyFinding.oval.value' | translate}}"
+      [(ngModel)]="model.formType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050310"
+      rrUnClickRadio
+      name="formType"
+      [value]="formType.Round"
+      label="{{'mammaMX.mammographyFinding.round.value' | translate}}"
+      [(ngModel)]="model.formType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050311"
+      rrUnClickRadio
+      name="formType"
+      [value]="formType.Irregular"
+      label="{{'mammaMX.mammographyFinding.irregular.value' | translate}}"
+      [(ngModel)]="model.formType"
+    >
+    </p-radioButton>
+    <h2 rr-id="mam_mx_050312">
+      {{'mammaMX.mammographyFinding.margin.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="mam_mx_050313"
+      rrUnClickRadio
+      name="marginType"
+      [value]="marginType.Circumscribed"
+      label="{{'mammaMX.mammographyFinding.circumscribed.value' | translate}}"
+      [(ngModel)]="model.marginType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050314"
+      rrInfoIcon="mam_mx_05_01"
+      rrUnClickRadio
+      name="marginType"
+      [value]="marginType.Obscured"
+      label="{{'mammaMX.mammographyFinding.obscured.value' | translate}}"
+      [(ngModel)]="model.marginType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050315"
+      rrInfoIcon="mam_mx_05_01"
+      rrUnClickRadio
+      name="marginType"
+      [value]="marginType.Microlobulated"
+      label="{{'mammaMX.mammographyFinding.microlobulated.value' | translate}}"
+      [(ngModel)]="model.marginType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050316"
+      rrUnClickRadio
+      name="marginType"
+      [value]="marginType.Indistinct"
+      label="{{'mammaMX.mammographyFinding.indistinct.value' | translate}}"
+      [(ngModel)]="model.marginType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050317"
+      rrUnClickRadio
+      name="marginType"
+      [value]="marginType.Spiculated"
+      label="{{'mammaMX.mammographyFinding.spiculated.value' | translate}}"
+      [(ngModel)]="model.marginType"
+    >
+    </p-radioButton>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="mam_mx_050401">
+      {{'mammaMX.mammographyFinding.density.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="mam_mx_050402"
+      rrUnClickRadio
+      name="densityType"
+      [value]="densityType.HigherThanSurroundingParenchyma"
+      label="{{'mammaMX.mammographyFinding.higherThanSurroundingParenchyma.value' | translate}}"
+      [(ngModel)]="model.densityType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050403"
+      rrUnClickRadio
+      name="densityType"
+      [value]="densityType.EquivalentToParenchyma"
+      label="{{'mammaMX.mammographyFinding.parenchymaEquivalent.value' | translate}}"
+      [(ngModel)]="model.densityType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050404"
+      rrUnClickRadio
+      name="densityType"
+      [value]="densityType.LessThanSurroundingParenchyma"
+      label="{{'mammaMX.mammographyFinding.lessThanSurroundingParenchyma.value' | translate}}"
+      [(ngModel)]="model.densityType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_050405"
+      rrUnClickRadio
+      name="densityType"
+      class="m-b-6"
+      [value]="densityType.FatEquivalent"
+      label="{{'mammaMX.mammographyFinding.fatEquivalent.value' | translate}}"
+      [(ngModel)]="model.densityType"
+    >
+    </p-radioButton>
+    <h2 rr-id="mam_mx_050406">
+      {{'mammaMX.mammographyFinding.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="mam_mx_050407"
+      name="isSkinRetraction"
+      label="{{'mammaMX.mammographyFinding.skinRetraction.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSkinRetraction"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050408"
+      name="isNippleRetraction"
+      label="{{'mammaMX.mammographyFinding.nippleRetraction.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isNippleRetraction"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050409"
+      name="isSkinThickening"
+      label="{{'mammaMX.mammographyFinding.skinThickening.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSkinThickening"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050410"
+      name="isTrabecularThickening"
+      label="{{'mammaMX.mammographyFinding.trabecularThickening.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isTrabecularThickening"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050411"
+      name="isAxillaryLymphadenopathy"
+      label="{{'mammaMX.mammographyFinding.axillaryLymphadenopathy.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAxillaryLymphadenopathy"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050412"
+      name="isArchitecturalDistorsion"
+      class="m-b-30"
+      label="{{'mammaMX.mammographyFinding.architecturalDistorsion.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isArchitecturalDistorsion"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050413"
+      name="isCalcificationInTheLesion"
+      class="m-b-7"
+      label="{{'mammaMX.mammographyFinding.calcificationInTheLesion.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isCalcificationInTheLesion"
+      rrContentReset="calcificationInTheLesionTypeBlock"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isCalcificationInTheLesion"
+      id="calcificationInTheLesionTypeBlock"
+    >
+      <p-dropdown
+        rr-id="mam_mx_050414"
+        [(ngModel)]="model.calcificationInTheLesionType"
+        styleClass="o-width-100 ui-brown-box"
+        name="calcificationInTheLesionType"
+        group="true"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="calcificationInTheLesionOptions"
+        rrDropdownClear
+      >
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="mam_mx_050501">
+      {{'mammaMX.mammographyFinding.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div class="f-vertical o-radio-list">
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.descriptionType === descriptionType.IKnow"
+      >
+        <p rr-id="mam_mx_050502" class="m-b-3">
+          {{'mammaMX.mammographyFinding.differentialDiagnosis1.value' |
+          translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="massKnownDiagnosisOptions"
+          [(ngModel)]="model.massDifferentialDiagnosis1Type"
+          name="massDifferentialDiagnosis1Type"
+          group="true"
+          rrId="mam_mx_050503"
+          [parentViewModel]="model"
+          rrValidation="massDifferentialDiagnosis1Type"
+          (selectionChanged)="resetIsSuspicionOf(); resetIsSubordinated()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="mam_mx_050504"
+          name="isSuspicionOf"
+          class="m-b-13"
+          label="{{'mammaMX.mammographyFinding.suspicionOf.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="model.massDifferentialDiagnosis1Type === 'None'"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="f-vertical o-radio-list m-b-19"
+        [rrDisable]="model.massDifferentialDiagnosis1Type === 'None' && model.massKnownDiagnosisType === 'None'"
+      >
+        <p rr-id="mam_mx_050505" class="m-b-3">
+          {{'mammaMX.mammographyFinding.differentialDiagnosis2.value' |
+          translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="massDifferentialDiagnosisOptions"
+          [(ngModel)]="model.massDifferentialDiagnosis2Type"
+          name="massDifferentialDiagnosis2Type"
+          group="true"
+          rrId="mam_mx_050506"
+          [parentViewModel]="model"
+          (selectionChanged)="resetIsSubordinated()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="mam_mx_050507"
+          name="isSubordinate"
+          label="{{'mammaMX.mammographyFinding.subordinate.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSubordinate"
+          [rrDisable]="model.massDifferentialDiagnosis2Type === 'None'"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="o-radio-list"
+        [rrDisable]="model.massDifferentialDiagnosis2Type === 'None'"
+      >
+        <p rr-id="mam_mx_050508" class="m-b-2">
+          {{'mammaMX.mammographyFinding.differentialDiagnosis3.value' |
+          translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="3"
+          [options]="massDifferentialDiagnosisOptions"
+          [(ngModel)]="model.massDifferentialDiagnosis3Type"
+          name="massDifferentialDiagnosis3Type"
+          group="true"
+          rrId="mam_mx_050509"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="p-l-10 p-r-10">
+      <h2 rr-id="hea_m_0902104">
+        {{ "headMRT.cerebrospinalFluid.extension.value" | translate}}
+      </h2>
+      <p rr-id="hea_m_0902105" class="m-t-10">
+        {{ "headMRT.cerebrospinalFluid.size.value" | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="hea_m_0902106"
+        labelRrId="hea_m_0902107"
+        name="size"
+        [(ngModel)]="model.size"
+        [label]="'headMRT.cerebrospinalFluid.inMm.value' | translate"
+        (announceModelChange)="resetBothPlanes()"
+        [config]="{ min: 1, max: 99}"
+      >
+      </rr-number-input>
+      <div [rrDisable]="!model.size">
+        <p rr-id="hea_m_0902108" class="m-t-10">
+          {{ "headMRT.cerebrospinalFluid.2ndPlane.value" | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="hea_m_0902109"
+          labelRrId="hea_m_0902110"
+          name="secondPlane"
+          [(ngModel)]="model.secondPlane"
+          [label]="'headMRT.cerebrospinalFluid.inMm.value' | translate"
+          (announceModelChange)="resetThirdPlane()"
+          [config]="{ min: 1, max: 99}"
+        >
+        </rr-number-input>
+      </div>
+      <div [rrDisable]="!model.secondPlane">
+        <p rr-id="hea_m_0902111" class="m-t-10">
+          {{ "headMRT.cerebrospinalFluid.3rdPlane.value" | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="hea_m_0902112"
+          labelRrId="hea_m_0902113"
+          name="thirdPlane"
+          [(ngModel)]="model.thirdPlane"
+          [label]="'headMRT.cerebrospinalFluid.inMm.value' | translate"
+          [config]="{ min: 1, max: 99}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="f-vertical o-radio-list m-l-10 m-b-15">
+      <h2 rr-id="hea_m_090389" class="m-b-25">
+        {{ "headMRT.cerebrospinalFluid.t1wSignal.value" | translate}}
+      </h2>
+      <rr-signal-slider
+        name="t1WSignal"
+        rr-id="hea_m_090390"
+        [(ngModel)]="model.t1WSignal"
+        class="sliders-z-index"
+      >
+      </rr-signal-slider>
+    </div>
+    <div class="f-vertical o-radio-list m-l-10 m-b-15">
+      <h2 rr-id="hea_m_090391" class="m-b-25">
+        {{ "headMRT.cerebrospinalFluid.t2wSignal.value" | translate}}
+      </h2>
+      <rr-signal-slider
+        name="t2WSignal"
+        rr-id="hea_m_090392"
+        [(ngModel)]="model.t2WSignal"
+        class="sliders-z-index"
+      >
+      </rr-signal-slider>
+    </div>
+    <div class="f-vertical o-radio-list m-l-10 m-b-15">
+      <h2 rr-id="hea_m_090393" class="m-b-25">
+        {{ "headMRT.cerebrospinalFluid.fLAIRSignal.value" | translate}}
+      </h2>
+      <rr-signal-slider
+        name="flairSignal"
+        rr-id="hea_m_090394"
+        [(ngModel)]="model.flairSignal"
+        class="sliders-z-index"
+      >
+      </rr-signal-slider>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <h2 rr-id="hea_m_090478" class="m-b-10">
+      {{ "headMRT.cerebrospinalFluid.t2SWISignal.value" | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="hea_m_090479"
+      binary="true"
+      name="isSignalVoid"
+      label="{{ 'headMRT.cerebrospinalFluid.signalVoid.value' | translate }}"
+      [(ngModel)]="model.isSignalVoid"
+      rrContentReset="signalVoidBlock"
+      class="m-b-10"
+    ></p-checkbox>
+    <div
+      id="signalVoidBlock"
+      [rrDisable]="!model.isSignalVoid"
+      class="nested-content o-radio-list"
+    >
+      <p-radioButton
+        rr-id="hea_m_090480"
+        name="signalVoidType"
+        [value]="signalVoidType.Calcification"
+        label="{{'headMRT.cerebrospinalFluid.calcification.value' | translate}}"
+        [(ngModel)]="model.signalVoidType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_090481"
+        name="signalVoidType"
+        [value]="signalVoidType.Blood"
+        label="{{'headMRT.cerebrospinalFluid.blood.value' | translate}}"
+        [(ngModel)]="model.signalVoidType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <h2 rr-id="hea_m_090447" class="m-t-20 m-b-10">
+      {{ "headMRT.cerebrospinalFluid.associatedFindings.value" | translate}}
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="hea_m_090448"
+        binary="true"
+        name="isVasospasm"
+        label="{{ 'headMRT.cerebrospinalFluid.vasospasm.value' | translate }}"
+        [(ngModel)]="model.isVasospasm"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_090449"
+        binary="true"
+        name="isIschemia"
+        label="{{ 'headMRT.cerebrospinalFluid.ischemia.value' | translate }}"
+        [(ngModel)]="model.isIschemia"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_090450"
+        binary="true"
+        name="isSubduralHematoma"
+        label="{{ 'headMRT.cerebrospinalFluid.subduralHematoma.value' | translate }}"
+        [(ngModel)]="model.isSubduralHematoma"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_090451"
+        binary="true"
+        name="isEpiduralHematoma"
+        label="{{ 'headMRT.cerebrospinalFluid.epiduralHematoma.value' | translate }}"
+        [(ngModel)]="model.isEpiduralHematoma"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l m-t-10 m-b-10"></div>
+</div>

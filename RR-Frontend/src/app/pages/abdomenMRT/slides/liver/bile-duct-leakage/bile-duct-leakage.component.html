@@ -1,0 +1,219 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-start o-list">
+    <div class="o-radio-list">
+      <h2
+        rr-id="abd_m_0402143"
+        rrInfoIcon="abd_m_04_06"
+        infoIconPdfLandscape="true"
+        rrValidation="liverPathologyLocations"
+      >
+        {{'abdomenMRT.liver.localization.value' | translate}}*
+      </h2>
+      <rr-liver-pathology-small-localizer
+        rr-id="abd_m_0402142"
+        name="liverPathologyLocations"
+        [(ngModel)]="model.liverPathologyLocations"
+        rrValidation="liverPathologyLocations"
+        [isLocalizer]="true"
+        (click)="openLargeLocalizer()"
+      >
+      </rr-liver-pathology-small-localizer>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_0402120">
+        {{'abdomenMRT.liver.extension.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_0402121"
+        rrUnClickRadio
+        name="extensionType"
+        [value]="extensionType.ShortSegment"
+        label="{{'abdomenMRT.liver.shortsegment.value' | translate}}"
+        [(ngModel)]="model.extensionType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_0402122"
+        rrUnClickRadio
+        name="extensionType"
+        [value]="extensionType.LongSegment"
+        label="{{'abdomenMRT.liver.longsegment.value' | translate}}"
+        [(ngModel)]="model.extensionType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical c-sep c-pad-l o-list">
+    <p-checkbox
+      rr-id="abd_m_040378"
+      name="isAdjacentFluidFormation"
+      label="{{'abdomenMRT.liver.adjacentfluidFormation.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAdjacentFluidFormation"
+      class="text-break"
+      labelStyleClass="ui-fat-label"
+      rrContentReset="isAdjacentFluidBlock1 isAdjacentFluidBlock2"
+    >
+    </p-checkbox>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start o-list">
+        <div
+          class="nested-content"
+          id="isAdjacentFluidBlock1"
+          [rrDisable]="!model.isAdjacentFluidFormation"
+        >
+          <div class="o-radio-list">
+            <h3 rr-id="abd_m_040379">
+              {{'abdomenMRT.liver.details.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="abd_m_040380"
+              name="isEncapsulation"
+              label="{{'abdomenMRT.liver.encapsulation.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isEncapsulation"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_040381"
+              name="isGasInclusion"
+              label="{{'abdomenMRT.liver.gasInclusion.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isGasInclusion"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_040382"
+              name="isPeripheralEnhancement"
+              label="{{'abdomenMRT.liver.peripheralEnhancement.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPeripheralEnhancement"
+              [rrDisable]="!isCMReinforced"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_040383"
+              name="isDiffusionRestriction"
+              label="{{'abdomenMRT.liver.diffusionRestriction.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isDiffusionRestriction"
+              [rrDisable]="!isDWIInAnySequence"
+            >
+            </p-checkbox>
+          </div>
+          <div class="o-radio-list">
+            <h3 rr-id="abd_m_040384" class="m-t-25">
+              {{'abdomenMRT.liver.localization.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="abd_m_040385"
+              name="isExtrahepatic"
+              label="{{'abdomenMRT.liver.extrahepatic.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isExtrahepatic"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_040386"
+              name="isIntrahepatic"
+              label="{{'abdomenMRT.liver.intrahepatic.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isIntrahepatic"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-list">
+        <div
+          class="f-vertical nested-content o-radio-list"
+          id="isAdjacentFluidBlock2"
+          [rrDisable]="!model.isAdjacentFluidFormation"
+        >
+          <h2 rr-id="abd_m_040472">
+            {{'abdomenMRT.liver.extension.value' | translate}}
+          </h2>
+          <h3 rr-id="abd_m_040473">
+            {{'abdomenMRT.liver.size.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_040474"
+            labelRrId="abd_m_040475"
+            name="sizeInMm"
+            label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+            [config]="{ min: 1, max: 99, placeholder: '--' }"
+            [(ngModel)]="model.sizeInMm"
+            (announceModelChange)="resetExtensionInputs()"
+            rrValidation="sizeInMm"
+            class="m-b-8"
+          >
+          </rr-number-input>
+          <div class="o-radio-list m-b-6" [rrDisable]="!model.sizeInMm">
+            <h3 rr-id="abd_m_040476">
+              {{'abdomenMRT.liver.2ndPlane.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_040477"
+              labelRrId="abd_m_040478"
+              name="secondPlaneInMm"
+              label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99, placeholder: '--' }"
+              [(ngModel)]="model.secondPlaneInMm"
+              (announceModelChange)="resetExtensionInputs()"
+            >
+            </rr-number-input>
+          </div>
+          <div class="o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+            <h3 rr-id="abd_m_040479">
+              {{'abdomenMRT.liver.3rdPlane.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_040480"
+              labelRrId="abd_m_040481"
+              name="thirdPlaneInMm"
+              label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99, placeholder: '--' }"
+              [(ngModel)]="model.thirdPlaneInMm"
+              (announceModelChange)="resetExtensionInputs()"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_040539" class="m-b-10">
+        {{ "abdomenMRT.liver.differentialDiagnosis.value" | translate }}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_040548"
+        [diagnosisNumber]="1"
+        [options]="bileDuctLeakageDDOptions"
+        [(ngModel)]="model.differentialDiagnosis"
+        name="differentialDiagnosis"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis"
+        (selectionChanged)="model.isSignsOfInfection = false"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="abd_m_040555"
+        name="isSignsOfInfection"
+        label="{{'abdomenMRT.liver.signsOfInfection.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSignsOfInfection"
+        [rrDisable]="model.differentialDiagnosis !== differentialDiagnosis.PostoperativeFluidCollection"
+      >
+      </p-checkbox>
+    </div>
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+    >
+    </rr-reference-picture>
+  </div>
+</div>

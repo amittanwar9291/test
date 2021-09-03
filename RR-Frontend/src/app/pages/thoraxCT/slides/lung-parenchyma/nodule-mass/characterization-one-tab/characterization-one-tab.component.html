@@ -1,0 +1,676 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <div class="o-radio-list m-l-10">
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="tho_c_0502400" class="m-b-3">
+          {{'thoraxCT.lungParenchyma.differentialDiagnosis1.value'|translate}}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          [options]="model.findingType === lungParenchymaFindingTypeEnum.Nodule ? ddW019 : ddW022"
+          name="mainCharacteristicsDifferentialDiagnosis01"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="clearIsSubordinated()"
+          [(ngModel)]="model.mainCharacteristicsDifferentialDiagnosis01"
+          rrValidation="mainCharacteristicsDifferentialDiagnosis01"
+          rrId="tho_c_0502301"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="tho_c_0502401"
+          label="{{'thoraxCT.lungParenchyma.histologyKnown.value' | translate}}"
+          name="isHistologyKnown"
+          binary="true"
+          [(ngModel)]="model.isHistologyKnown"
+          rrContentReset="histologyKnownTypeContainer"
+        ></p-checkbox>
+        <div
+          id="histologyKnownTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isHistologyKnown"
+        >
+          <p-radioButton
+            rr-id="tho_c_0502303"
+            label="{{'thoraxCT.lungParenchyma.benign.value' | translate}}"
+            name="histologyKnownType"
+            [value]="histologyKnownTypeEnum.Benign"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0502304"
+            label="{{'thoraxCT.lungParenchyma.malignant.value' | translate}}"
+            name="histologyKnownType"
+            [value]="histologyKnownTypeEnum.Malignant"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <h2 rr-id="tho_c_050203" class="m-t-28">
+        {{'thoraxCT.lungParenchyma.localization.value' |translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_050204"
+        label="{{'thoraxCT.lungParenchyma.atSegmentLevel.value' | translate}}"
+        name="mainCharacteristicsLocalizationType"
+        [value]="lungParenchymaLocalizationTypeEnum.AtSegmentLevel"
+        [(ngModel)]="model.mainCharacteristicsLocalizationType"
+        rrValidation="mainCharacteristicsLocalizationType"
+        (onClick)="clearLocalizer('flaps')"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_050205"
+        label="{{'thoraxCT.lungParenchyma.atLobeLevel.value' | translate}}"
+        name="mainCharacteristicsLocalizationType"
+        [value]="lungParenchymaLocalizationTypeEnum.AtLobeLevel"
+        [(ngModel)]="model.mainCharacteristicsLocalizationType"
+        rrValidation="mainCharacteristicsLocalizationType"
+        (onClick)="clearLocalizer('segments')"
+      >
+      </p-radioButton>
+      <div
+        class="nested-content"
+        *ngIf="model.mainCharacteristicsLocalizationType === lungParenchymaLocalizationTypeEnum.AtSegmentLevel"
+      >
+        <p
+          rr-id="tho_c_0502501"
+          rrValidation="mainCharacteristicsLungsSegmentsLocation"
+        >
+          {{'thoraxCT.lungParenchyma.segments.value' | translate}}*
+        </p>
+        <rr-lungs-segments-simple
+          class="nested-localizer"
+          rr-id="tho_c_050214"
+          name="mainCharacteristicsLungsSegmentsLocation"
+          (click)="openLargeLocalizer('segments', 'mainCharacteristicsLungsSegmentsLocation')"
+          [(ngModel)]="model.mainCharacteristicsLungsSegmentsLocation"
+          rrValidation="mainCharacteristicsLungsSegmentsLocation"
+          isLocalizer="true"
+        ></rr-lungs-segments-simple>
+      </div>
+      <div
+        class="nested-content"
+        *ngIf="model.mainCharacteristicsLocalizationType === lungParenchymaLocalizationTypeEnum.AtLobeLevel"
+      >
+        <p rr-id="tho_c_0502500">
+          {{'thoraxCT.lungParenchyma.flaps.value' | translate}}*
+        </p>
+        <rr-lungs-flaps-simple
+          rr-id="tho_c_0502302"
+          name="mainCharacteristicsLungsFlapsLocation"
+          (click)="openLargeLocalizer('flaps', 'mainCharacteristicsLungsFlapsLocation')"
+          [(ngModel)]="model.mainCharacteristicsLungsFlapsLocation"
+          rrValidation="mainCharacteristicsLungsFlapsLocation"
+          isLocalizer="true"
+        ></rr-lungs-flaps-simple>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Nodule"
+    class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+  >
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_050302">
+        {{'thoraxCT.lungParenchyma.detailsLocalization.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050303"
+        label="{{'thoraxCT.lungParenchyma.pleuralBased.value' | translate}}"
+        name="localizationDetailsType"
+        [value]="localizationDetailsTypeEnum.PleuralBased"
+        [(ngModel)]="model.localizationDetailsType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050304"
+        label="{{'thoraxCT.lungParenchyma.subpleural.value' | translate}}"
+        name="localizationDetailsType"
+        [value]="localizationDetailsTypeEnum.Subpleural"
+        [(ngModel)]="model.localizationDetailsType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050305"
+        label="{{'thoraxCT.lungParenchyma.parenchymatous.value' | translate}}"
+        name="localizationDetailsType"
+        [value]="localizationDetailsTypeEnum.Parenchymatous"
+        [(ngModel)]="model.localizationDetailsType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050306"
+        label="{{'thoraxCT.lungParenchyma.atTheMajorObliqueFissure.value' | translate}}"
+        name="localizationDetailsType"
+        [value]="localizationDetailsTypeEnum.AtTheMajorOrObliqueFissure"
+        [(ngModel)]="model.localizationDetailsType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [rrDisable]="!isRightSideOnFlapsOrSegmentsLocalizersSelected()"
+        rrUnClickRadio
+        rr-id="tho_c_050307"
+        label="{{'thoraxCT.lungParenchyma.atTheMinorHorizontalFissure.value' | translate}}"
+        name="localizationDetailsType"
+        [value]="localizationDetailsTypeEnum.AtTheMinorOrHorizontalFissure"
+        [(ngModel)]="model.localizationDetailsType"
+      >
+      </p-radioButton>
+      <div class="nested-content o-radio-list">
+        <h2 rr-id="tho_c_050308" class="m-t-30">
+          {{'thoraxCT.lungParenchyma.perifissuralNodulus.value' | translate}}
+        </h2>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="tho_c_050309"
+          label="{{'thoraxCT.lungParenchyma.typicalPFN.value' | translate}}"
+          name="perifissuralNodulusType"
+          [value]="perifissuralNodulusTypeEnum.TypicalPFN"
+          [(ngModel)]="model.perifissuralNodulusType"
+          rrContentReset="distanceToInterlobularSeptumInMmContainer"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="tho_c_050310"
+          label="{{'thoraxCT.lungParenchyma.atypicalPFN.value' | translate}}"
+          name="perifissuralNodulusType"
+          [value]="perifissuralNodulusTypeEnum.AtypicalPFN"
+          [(ngModel)]="model.perifissuralNodulusType"
+          rrContentReset="distanceToInterlobularSeptumInMmContainer"
+        >
+        </p-radioButton>
+        <div
+          id="distanceToInterlobularSeptumInMmContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.perifissuralNodulusType !== perifissuralNodulusTypeEnum.AtypicalPFN"
+        >
+          <p rr-id="tho_c_050308" class="text-break">
+            {{'thoraxCT.lungParenchyma.distanceToInterlobularSeptum.value' |
+            translate}}
+          </p>
+          <rr-number-input
+            inputRrId="tho_c_050312"
+            labelRrId="tho_c_050313"
+            name="distanceToInterlobularSeptumInMm"
+            label="{{'thoraxCT.lungParenchyma.inMm.value' | translate}}"
+            [config]="{max: 15}"
+            [(ngModel)]="model.distanceToInterlobularSeptumInMm"
+          ></rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Mass"
+    class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15 f-vertical"
+  >
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_0503244">
+        {{'thoraxCT.lungParenchyma.detailsLocalization.value' | translate}}
+      </h2>
+      <p-dropdown
+        styleClass="o-width-100 ui-brown-box"
+        [placeholder]="'shared.pleaseSelect' | translate"
+        [options]="ddW021"
+        name="localizationDetailsType"
+        [(ngModel)]="model.localizationDetailsType"
+        rrDropdownClear
+        [rrDropdownExcludedOptions]="getDetailLocalisationExcludedOption()"
+        rr-id="tho_c_0503245"
+      >
+      </p-dropdown>
+
+      <div class="f-vertical o-radio-list m-t-15">
+        <h2 rr-id="tho_c_0503238">
+          {{'thoraxCT.lungParenchyma.measurementValues.value' | translate}}
+        </h2>
+        <p rr-id="tho_c_0503239" rrInfoIcon="tho_c_05_02" class="m-b-0">
+          {{'thoraxCT.lungParenchyma.maxAxialDiameter.value' | translate}}*
+        </p>
+        <rr-number-input
+          inputRrId="tho_c_0503240"
+          labelRrId="tho_c_0503241"
+          [config]="{min: 31, max: 999}"
+          name="measuredValuesMaxDiameterAxialInMm"
+          rrValidation="measuredValuesMaxDiameterAxialInMm"
+          label="{{'thoraxCT.lungParenchyma.inMm.value' | translate}}"
+          [(ngModel)]="model.measuredValuesMaxDiameterAxialInMm"
+        ></rr-number-input>
+
+        <p rr-id="tho_c_0503400" class="m-b-0">
+          {{'thoraxCT.lungParenchyma.volume.value' | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="tho_c_0503242"
+          labelRrId="tho_c_0503243"
+          [config]="{min: 0, max: 30}"
+          name="measuredValuesVolumeInMm3"
+          label="{{'thoraxCT.lungParenchyma.inMmCubic.value' | translate}}"
+          [(ngModel)]="model.measuredValuesVolumeInMm3"
+        ></rr-number-input>
+        <rr-reference-picture
+          class="m-t-20"
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          [elementsRrIds]="referencePictureElementsRrIds"
+          name="uploadedImageFile"
+        ></rr-reference-picture>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Nodule"
+    class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+  >
+    <div class="m-l-10 f-vertical">
+      <h2 rr-id="tho_c_050404" class="m-b-5">
+        {{'thoraxCT.lungParenchyma.measurementValues.value' | translate}}
+      </h2>
+      <p rr-id="tho_c_0504203" rrInfoIcon="tho_c_05_02">
+        {{'thoraxCT.lungParenchyma.maxAxialDiameter.value' | translate}}*
+      </p>
+      <rr-number-input
+        inputRrId="tho_c_050405"
+        labelRrId="tho_c_050406"
+        name="measuredValuesMaxDiameterAxialInMm"
+        [config]="{min: 1, max: 30}"
+        label="{{'thoraxCT.lungParenchyma.inMm.value' | translate}}"
+        [(ngModel)]="model.measuredValuesMaxDiameterAxialInMm"
+        rrValidation="measuredValuesMaxDiameterAxialInMm"
+      ></rr-number-input>
+
+      <p rr-id="tho_c_0504204" class="m-t-10">
+        {{'thoraxCT.lungParenchyma.volume.value' | translate}}
+      </p>
+      <rr-number-input
+        class="m-b-25"
+        inputRrId="tho_c_050408"
+        labelRrId="tho_c_050409"
+        [config]="{min: 0, max: 30}"
+        name="measuredValuesVolumeInMm3"
+        label="{{'thoraxCT.lungParenchyma.inMmCubic.value' | translate}}"
+        [(ngModel)]="model.measuredValuesVolumeInMm3"
+      ></rr-number-input>
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="uploadedImageFile"
+      ></rr-reference-picture>
+    </div>
+  </div>
+  <div
+    *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Mass"
+    class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15"
+  >
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_050501">
+        {{'thoraxCT.lungParenchyma.density.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_0504302"
+        label="{{'thoraxCT.lungParenchyma.solid.value' | translate}}"
+        name="densityType"
+        [value]="lungParenchymaDensityTypeEnum.Solid"
+        rrContentReset="subsolidTypeContainer2 averageDensityInHUContainer2"
+        [(ngModel)]="model.densityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_0504303"
+        label="{{'thoraxCT.lungParenchyma.subsolid.value' | translate}}"
+        name="densityType"
+        [value]="lungParenchymaDensityTypeEnum.Subsolid"
+        rrContentReset="subsolidTypeContainer2 averageDensityInHUContainer2"
+        [(ngModel)]="model.densityType"
+      >
+      </p-radioButton>
+      <div
+        id="subsolidTypeContainer2"
+        class="nested-content o-radio-list"
+        [rrDisable]="model.densityType !== lungParenchymaDensityTypeEnum.Subsolid"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="tho_c_0504304"
+          label="{{'thoraxCT.lungParenchyma.partiallySolid.value' | translate}}"
+          name="subsolidType"
+          [value]="subsolidTypeEnum.PartiallySolid"
+          [(ngModel)]="model.subsolidType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="tho_c_0504305"
+          label="{{'thoraxCT.lungParenchyma.groundGlassLesion.value' | translate}}"
+          name="subsolidType"
+          [value]="subsolidTypeEnum.GroundGlassLesion"
+          [(ngModel)]="model.subsolidType"
+        >
+        </p-radioButton>
+      </div>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050506"
+        label="{{'thoraxCT.lungParenchyma.averageDensity.value' | translate}}"
+        name="densityType"
+        [value]="lungParenchymaDensityTypeEnum.AverageDensity"
+        rrContentReset="subsolidTypeContainer2 averageDensityInHUContainer2"
+        [(ngModel)]="model.densityType"
+      >
+      </p-radioButton>
+      <div
+        id="averageDensityInHUContainer2"
+        class="nested-content o-radio-list"
+        [rrDisable]="model.densityType !== lungParenchymaDensityTypeEnum.AverageDensity"
+      >
+        <rr-number-input
+          inputRrId="tho_c_0504307"
+          labelRrId="tho_c_0504308"
+          name="averageDensityInHU"
+          label="{{'thoraxCT.lungParenchyma.inHU.value' | translate}}"
+          [(ngModel)]="model.averageDensityInHU"
+        ></rr-number-input>
+      </div>
+
+      <h2 rr-id="tho_c_0504309">
+        {{'thoraxCT.lungParenchyma.margin.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_0504310"
+        label="{{'thoraxCT.lungParenchyma.wellDefined.value' | translate}}"
+        name="marginType"
+        [value]="marginTypeEnum.WellDefined"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_0504311"
+        label="{{'thoraxCT.lungParenchyma.illDefined.value' | translate}}"
+        name="marginType"
+        [value]="marginTypeEnum.IllDefined"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+
+      <h2 rr-id="tho_c_0504312">
+        {{'thoraxCT.lungParenchyma.homogeneity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_0504313"
+        label="{{'thoraxCT.lungParenchyma.homogenous.value' | translate}}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Homogeneous"
+        [(ngModel)]="model.homogeneityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_0504314"
+        label="{{'thoraxCT.lungParenchyma.heterogenous.value' | translate}}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Heterogeneous"
+        [(ngModel)]="model.homogeneityType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+
+  <div
+    *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Nodule"
+    class="c-col-1 c-sep c-pad-l o-radio-list m-t-15 m-b-15"
+  >
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_050501">
+        {{'thoraxCT.lungParenchyma.density.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050502"
+        label="{{'thoraxCT.lungParenchyma.solid.value' | translate}}"
+        name="densityType"
+        [value]="lungParenchymaDensityTypeEnum.Solid"
+        rrContentReset="subsolidTypeContainer averageDensityInHUContainer"
+        [(ngModel)]="model.densityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050503"
+        label="{{'thoraxCT.lungParenchyma.subsolid.value' | translate}}"
+        name="densityType"
+        [value]="lungParenchymaDensityTypeEnum.Subsolid"
+        rrContentReset="subsolidTypeContainer averageDensityInHUContainer"
+        [(ngModel)]="model.densityType"
+      >
+      </p-radioButton>
+      <div
+        id="subsolidTypeContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="model.densityType !== lungParenchymaDensityTypeEnum.Subsolid"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="tho_c_050504"
+          label="{{'thoraxCT.lungParenchyma.partiallySolid.value' | translate}}"
+          name="subsolidType"
+          [value]="subsolidTypeEnum.PartiallySolid"
+          [(ngModel)]="model.subsolidType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="tho_c_050505"
+          label="{{'thoraxCT.lungParenchyma.groundGlassLesion.value' | translate}}"
+          name="subsolidType"
+          [value]="subsolidTypeEnum.GroundGlassLesion"
+          [(ngModel)]="model.subsolidType"
+        >
+        </p-radioButton>
+      </div>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050506"
+        label="{{'thoraxCT.lungParenchyma.averageDensity.value' | translate}}"
+        name="densityType"
+        [value]="lungParenchymaDensityTypeEnum.AverageDensity"
+        rrContentReset="subsolidTypeContainer averageDensityInHUContainer"
+        [(ngModel)]="model.densityType"
+      >
+      </p-radioButton>
+      <div
+        id="averageDensityInHUContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="model.densityType !== lungParenchymaDensityTypeEnum.AverageDensity"
+      >
+        <rr-number-input
+          inputRrId="tho_c_0505300"
+          labelRrId="tho_c_0505301"
+          name="averageDensityInHU"
+          label="{{'thoraxCT.lungParenchyma.inHU.value' | translate}}"
+          [(ngModel)]="model.averageDensityInHU"
+        ></rr-number-input>
+      </div>
+
+      <h2 rr-id="tho_c_050507">
+        {{'thoraxCT.lungParenchyma.margin.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050508"
+        label="{{'thoraxCT.lungParenchyma.wellDefined.value' | translate}}"
+        name="marginType"
+        [value]="marginTypeEnum.WellDefined"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050509"
+        label="{{'thoraxCT.lungParenchyma.illDefined.value' | translate}}"
+        name="marginType"
+        [value]="marginTypeEnum.IllDefined"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+
+      <h2 rr-id="tho_c_050510">
+        {{'thoraxCT.lungParenchyma.homogeneity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050511"
+        label="{{'thoraxCT.lungParenchyma.homogenous.value' | translate}}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Homogeneous"
+        [(ngModel)]="model.homogeneityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="tho_c_050512"
+        label="{{'thoraxCT.lungParenchyma.heterogenous.value' | translate}}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Heterogeneous"
+        [(ngModel)]="model.homogeneityType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div
+    *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Mass"
+    class="c-col-1 c-sep c-pad-l o-radio-list m-t-15 m-b-15"
+  >
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="ho_c_0505301">
+        {{'thoraxCT.lungParenchyma.internalChange.value' |translate}}
+      </h2>
+      <p-checkbox
+        rrInfoIcon="tho_c_05_03"
+        rr-id="tho_c_0505302"
+        label="{{'thoraxCT.lungParenchyma.riglerNotchSign.value' | translate}}"
+        name="isRiglerNotchSign"
+        binary="true"
+        [(ngModel)]="model.isRiglerNotchSign"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0505303"
+        label="{{'thoraxCT.lungParenchyma.eccentricNecrosis.value' | translate}}"
+        name="isEccentricNecrosis"
+        binary="true"
+        [(ngModel)]="model.isEccentricNecrosis"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0505304"
+        label="{{'thoraxCT.lungParenchyma.centralNecrosis.value' | translate}}"
+        name="isCentralNecrosis"
+        binary="true"
+        [(ngModel)]="model.isCentralNecrosis"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0505305"
+        label="{{'thoraxCT.lungParenchyma.fat.value' | translate}}"
+        name="isFat"
+        binary="true"
+        [(ngModel)]="model.isFat"
+      ></p-checkbox>
+      <p-checkbox
+        rrInfoIcon="tho_c_05_04"
+        rr-id="tho_c_0505306"
+        label="{{'thoraxCT.lungParenchyma.calcification.value' | translate}}"
+        name="isCalcification"
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        rrContentReset="calcificationTypeContainer"
+      ></p-checkbox>
+      <div
+        id="calcificationTypeContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isCalcification"
+      >
+        <p-radioButton
+          rr-id="tho_c_0505307"
+          label="{{'thoraxCT.lungParenchyma.diffuse.value' | translate}}"
+          name="calcificationType"
+          [value]="lungParenchymaCalcificationTypeEnum.Diffuse"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0505308"
+          label="{{'thoraxCT.lungParenchyma.central.value' | translate}}"
+          name="calcificationType"
+          [value]="lungParenchymaCalcificationTypeEnum.Centrally"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0505309"
+          label="{{'thoraxCT.lungParenchyma.popcornLike.value' | translate}}"
+          name="calcificationType"
+          [value]="lungParenchymaCalcificationTypeEnum.Popcornstyle"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0505310"
+          label="{{'thoraxCT.lungParenchyma.concentric.value' | translate}}"
+          name="calcificationType"
+          [value]="lungParenchymaCalcificationTypeEnum.Concentric"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0505311"
+          label="{{'thoraxCT.lungParenchyma.microcalcification.value' | translate}}"
+          name="calcificationType"
+          [value]="lungParenchymaCalcificationTypeEnum.Microcalcification"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0505312"
+          label="{{'thoraxCT.lungParenchyma.eccentric.value' | translate}}"
+          name="calcificationType"
+          [value]="lungParenchymaCalcificationTypeEnum.Eccentric"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <p-checkbox
+        rr-id="tho_c_0505313"
+        label="{{'thoraxCT.lungParenchyma.cavitation.value' | translate}}"
+        name="isCavitation"
+        binary="true"
+        [(ngModel)]="model.isCavitation"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

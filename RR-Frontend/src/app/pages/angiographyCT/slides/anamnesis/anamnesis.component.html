@@ -1,0 +1,53 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <p-tabView class="rr-tabView">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            rr-id="ang_c_020103"
+            class="custom-tab-header"
+            [rrValidation]="['isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG']"
+            ifAny="true"
+            allFindings="true"
+          >
+            {{'angiographyCT.anamnesis.anamnesisindicationTab.value' |
+            translate}}
+          </h1>
+        </ng-template>
+        <rr-anamnesis-tab
+          [model]="model"
+          [indicationFindingHandler]="indicationFindingHandler"
+          [indicationFindingDropdownConfig]="indicationFindingDropdownConfig"
+        ></rr-anamnesis-tab>
+      </p-tabPanel>
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            rr-id="ang_c_020201"
+            class="custom-tab-header"
+            [rrValidation]="['isPartialLungResectionSideLeft isPartialLungResectionSideRight', 'isAorticValve isMitralValve', 'afterTransplantationType']"
+            ifAny="true"
+            [inSecondFinding]="true"
+            allFindings="true"
+          >
+            {{'angiographyCT.anamnesis.priorInterventionsTab.value' |
+            translate}}
+          </h1>
+        </ng-template>
+        <rr-prior-interventions
+          [model]="model"
+          [priorIntervestionFindingHandler]="priorIntervestionFindingHandler"
+          [priorIntervestionFindingDropdownConfig]="priorIntervestionFindingDropdownConfig"
+        ></rr-prior-interventions>
+      </p-tabPanel>
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1 rr-id="ang_c_020301" class="custom-tab-header">
+            {{'angiographyCT.anamnesis.priorExamsTab.value' | translate}}
+          </h1>
+        </ng-template>
+        <rr-prior-exams [model]="model"></rr-prior-exams>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</form>

@@ -1,0 +1,389 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 class="m-b-20" rr-id="tho_c_080202">
+      {{ "thoraxCT.bones.side.value" | translate }}*
+    </h2>
+    <p-radioButton
+      [(ngModel)]="model.sideType"
+      name="sideType"
+      rrValidation="sideType"
+      [value]="locationType.Right"
+      label="{{ 'thoraxCT.bones.right.value' | translate }}"
+      rr-id="tho_c_080204"
+    ></p-radioButton>
+    <p-radioButton
+      [(ngModel)]="model.sideType"
+      name="sideType"
+      rrValidation="sideType"
+      [value]="locationType.Left"
+      label="{{ 'thoraxCT.bones.left.value' | translate }}"
+      rr-id="tho_c_080203"
+    ></p-radioButton>
+  </div>
+  <div class="f-vertical triple-col">
+    <div class="triple-col-header c-pad-l o-radio-list">
+      <h2 class="m-b-10 text-break" rr-id="tho_c_0803200">
+        {{ "thoraxCT.bones.classification.value" | translate }}*
+      </h2>
+    </div>
+    <div class="triple-col-content f-horizontal">
+      <div class="double-col f-vertical c-sep">
+        <div class="double-col-header c-pad-l o-radio-list">
+          <p-checkbox
+            labelStyleClass="ui-fat-label"
+            class="m-b-10"
+            name="isOClassification"
+            label="{{ 'thoraxCT.bones.aOClassification.value' | translate }}"
+            rr-id="tho_c_0803201"
+            binary="true"
+            [(ngModel)]="model.isAOClassification"
+            rrContentReset="AOClassificationContainer"
+            rrValidation="isAOClassification isRockwood isTossy"
+          ></p-checkbox>
+        </div>
+        <div class="nested-content c-pad-l o-radio-list">
+          <p rr-id="tho_c_0803202" class="text-break">
+            {{ "thoraxCT.bones.characterizationAOClassificationLeftA015.value" |
+            translate }}*
+          </p>
+        </div>
+
+        <div
+          id="AOClassificationContainer"
+          class="double-col-content f-horizontal"
+          [rrDisable]="!model.isAOClassification"
+        >
+          <div class="c-col-1 c-sep c-pad">
+            <div class="nested-content o-radio-list">
+              <p-radioButton
+                name="claviculaeFractureType"
+                [value]="claviculaeFractureType.Fifteen1MedialEndSegment"
+                label="{{
+                  'thoraxCT.bones.151MedialEndSegment.value' | translate
+                }}"
+                rr-id="tho_c_0803203"
+                class="text-break"
+                [(ngModel)]="model.claviculaeFractureType"
+                rrValidation="claviculaeFractureType"
+                rrContentReset="diaphysealSegmentClaviculaeTypeContainer lateralEndSegmentClaviculaeTypeContainer notFurtherDefinedClassificationTypeContainer"
+              ></p-radioButton>
+              <div
+                id="medialEndSegmentClaviculaeTypeContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="
+                  model.claviculaeFractureType !==
+                  claviculaeFractureType.Fifteen1MedialEndSegment
+                "
+              >
+                <p rr-id="tho_c_0803204">
+                  {{ "thoraxCT.bones.fractureType.value" | translate }}
+                </p>
+                <p-radioButton
+                  name="medialEndSegmentClaviculaeType"
+                  [value]="
+                    medialEndSegmentClaviculaeType.Fifteen1AExtraarticular
+                  "
+                  label="{{
+                    'thoraxCT.bones.151AExtraarticular.value' | translate
+                  }}"
+                  rr-id="tho_c_0803205"
+                  [(ngModel)]="model.medialEndSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="medialEndSegmentClaviculaeType"
+                  [value]="
+                    medialEndSegmentClaviculaeType.Fifteen1BPartialArticular
+                  "
+                  label="{{
+                    'thoraxCT.bones.151BPartialArticular.value' | translate
+                  }}"
+                  rr-id="tho_c_0803206"
+                  [(ngModel)]="model.medialEndSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="medialEndSegmentClaviculaeType"
+                  [value]="
+                    medialEndSegmentClaviculaeType.Fifteen1CCompleteArticular
+                  "
+                  label="{{
+                    'thoraxCT.bones.151CCompleteArticular.value' | translate
+                  }}"
+                  rr-id="tho_c_0803207"
+                  [(ngModel)]="model.medialEndSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <p-radioButton
+                name="claviculaeFractureType"
+                [value]="claviculaeFractureType.Fifteen2DiaphysealSegment"
+                label="{{
+                  'thoraxCT.bones.152DiaphysealSegment.value' | translate
+                }}"
+                rr-id="tho_c_0803208"
+                [(ngModel)]="model.claviculaeFractureType"
+                rrValidation="claviculaeFractureType"
+                rrContentReset="medialEndSegmentClaviculaeTypeContainer lateralEndSegmentClaviculaeTypeContainer notFurtherDefinedClassificationTypeContainer"
+              ></p-radioButton>
+              <div
+                id="diaphysealSegmentClaviculaeTypeContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="
+                  model.claviculaeFractureType !==
+                  claviculaeFractureType.Fifteen2DiaphysealSegment
+                "
+              >
+                <p rr-id="tho_c_0803209">
+                  {{ "thoraxCT.bones.fractureType.value" | translate }}
+                </p>
+                <p-radioButton
+                  name="diaphysealSegmentClaviculaeType"
+                  [value]="diaphysealSegmentClaviculaeType.Fifteen2ASimple"
+                  label="{{ 'thoraxCT.bones.152ASimple.value' | translate }}"
+                  rr-id="tho_c_0803210"
+                  [(ngModel)]="model.diaphysealSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="diaphysealSegmentClaviculaeType"
+                  [value]="diaphysealSegmentClaviculaeType.Fifteen2BWedge"
+                  label="{{ 'thoraxCT.bones.152BWedge.value' | translate }}"
+                  rr-id="tho_c_0803211"
+                  [(ngModel)]="model.diaphysealSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="diaphysealSegmentClaviculaeType"
+                  [value]="
+                    diaphysealSegmentClaviculaeType.Fifteen2CMultifragmentary
+                  "
+                  label="{{
+                    'thoraxCT.bones.152CMultifragmentary.value' | translate
+                  }}"
+                  rr-id="tho_c_0803212"
+                  [(ngModel)]="model.diaphysealSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-sep c-pad">
+            <div class="nested-content o-radio-list">
+              <p-radioButton
+                name="claviculaeFractureType"
+                [value]="claviculaeFractureType.Fifteen3LateralEndSegment"
+                label="{{
+                  'thoraxCT.bones.15CLateralEndSegment.value' | translate
+                }}"
+                rr-id="tho_c_0804200"
+                [(ngModel)]="model.claviculaeFractureType"
+                rrValidation="claviculaeFractureType"
+                rrContentReset="medialEndSegmentClaviculaeTypeContainer diaphysealSegmentClaviculaeTypeContainer notFurtherDefinedClassificationTypeContainer"
+              ></p-radioButton>
+              <div
+                id="lateralEndSegmentClaviculaeTypeContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="
+                  model.claviculaeFractureType !==
+                  claviculaeFractureType.Fifteen3LateralEndSegment
+                "
+              >
+                <p rr-id="tho_c_0804201">
+                  {{ "thoraxCT.bones.fractureType.value" | translate }}
+                </p>
+                <p-radioButton
+                  name="lateralEndSegmentClaviculaeType"
+                  [value]="
+                    lateralEndSegmentClaviculaeType.Fifteen3AExtraarticular
+                  "
+                  label="{{
+                    'thoraxCT.bones.153AExtraarticular.value' | translate
+                  }}"
+                  rr-id="tho_c_0804202"
+                  [(ngModel)]="model.lateralEndSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="lateralEndSegmentClaviculaeType"
+                  [value]="
+                    lateralEndSegmentClaviculaeType.Fifteen3BPartialArticular
+                  "
+                  label="{{
+                    'thoraxCT.bones.153BPartialArticular.value' | translate
+                  }}"
+                  rr-id="tho_c_0804203"
+                  [(ngModel)]="model.lateralEndSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="lateralEndSegmentClaviculaeType"
+                  [value]="
+                    lateralEndSegmentClaviculaeType.Fifteen3CCompleteArticular
+                  "
+                  label="{{
+                    'thoraxCT.bones.15CCompleteArticular.value' | translate
+                  }}"
+                  rr-id="tho_c_0804234"
+                  [(ngModel)]="model.lateralEndSegmentClaviculaeType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <p-radioButton
+                name="claviculaeFractureType"
+                class="m-t-15"
+                [value]="claviculaeFractureType.FifteenNotFurtherSpecified"
+                label="{{
+                  'thoraxCT.bones.15NotFurtherDefined.value' | translate
+                }}"
+                rr-id="tho_c_0804204"
+                [(ngModel)]="model.claviculaeFractureType"
+                rrValidation="claviculaeFractureType"
+                rrContentReset="medialEndSegmentClaviculaeTypeContainer diaphysealSegmentClaviculaeTypeContainer lateralEndSegmentClaviculaeTypeContainer"
+              ></p-radioButton>
+              <div
+                id="notFurtherDefinedClassificationTypeContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="
+                  model.claviculaeFractureType !==
+                  claviculaeFractureType.FifteenNotFurtherSpecified
+                "
+              >
+                <p-radioButton
+                  name="notFurtherDefinedClassificationType"
+                  [value]="notFurtherDefinedClassificationType.FractureOlderRemodeled"
+                  label="{{
+                    'thoraxCT.bones.fractureOlderRemodeled.value' | translate
+                  }}"
+                  rr-id="tho_c_0804205"
+                  [(ngModel)]="model.notFurtherDefinedClassificationType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="notFurtherDefinedClassificationType"
+                  [value]="notFurtherDefinedClassificationType.Suspected"
+                  label="{{ 'thoraxCT.bones.suspected.value' | translate }}"
+                  rr-id="tho_c_0804232"
+                  [(ngModel)]="model.notFurtherDefinedClassificationType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l o-radio-list">
+        <p-checkbox
+          labelStyleClass="ui-fat-label"
+          name="isRockwood"
+          label="{{ 'thoraxCT.bones.rockwood.value' | translate }}"
+          rr-id="tho_c_0805200"
+          binary="true"
+          [(ngModel)]="model.isRockwood"
+          rrContentReset="rockwoodTypeContainer"
+          rrValidation="isAOClassification isRockwood isTossy"
+        ></p-checkbox>
+        <div
+          id="rockwoodTypeContainer"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isRockwood"
+        >
+          <p rr-id="tho_c_0805201" rrInfoIcon="tho_c_08_02">
+            {{ "thoraxCT.bones.degreeOfInjury.value" | translate }}
+          </p>
+          <p-radioButton
+            name="rockwoodType"
+            [value]="rockwoodTypeEnum.Grade1"
+            label="{{ 'thoraxCT.bones.grade.value' | translate }} 1"
+            rr-id="tho_c_0805202"
+            [(ngModel)]="model.rockwoodType"
+            rrValidation="rockwoodType"
+          ></p-radioButton>
+          <p-radioButton
+            name="rockwoodType"
+            [value]="rockwoodTypeEnum.Grade2"
+            label="{{ 'thoraxCT.bones.grade.value' | translate }} 2"
+            rr-id="tho_c_0805203"
+            [(ngModel)]="model.rockwoodType"
+            rrValidation="rockwoodType"
+          ></p-radioButton>
+          <p-radioButton
+            name="rockwoodType"
+            [value]="rockwoodTypeEnum.Grade3"
+            label="{{ 'thoraxCT.bones.grade.value' | translate }} 3"
+            rr-id="tho_c_0805204"
+            [(ngModel)]="model.rockwoodType"
+            rrValidation="rockwoodType"
+          ></p-radioButton>
+          <p-radioButton
+            name="rockwoodType"
+            [value]="rockwoodTypeEnum.Grade4"
+            label="{{ 'thoraxCT.bones.grade.value' | translate }} 4"
+            rr-id="tho_c_0805205"
+            [(ngModel)]="model.rockwoodType"
+            rrValidation="rockwoodType"
+          ></p-radioButton>
+          <p-radioButton
+            name="rockwoodType"
+            [value]="rockwoodTypeEnum.Grade5"
+            label="{{ 'thoraxCT.bones.grade.value' | translate }} 5"
+            rr-id="tho_c_0805206"
+            [(ngModel)]="model.rockwoodType"
+            rrValidation="rockwoodType"
+          ></p-radioButton>
+          <p-radioButton
+            name="rockwoodType"
+            [value]="rockwoodTypeEnum.Grade6"
+            label="{{ 'thoraxCT.bones.grade.value' | translate }} 6"
+            rr-id="tho_c_0805207"
+            [(ngModel)]="model.rockwoodType"
+            rrValidation="rockwoodType"
+          ></p-radioButton>
+        </div>
+        <p-checkbox
+          labelStyleClass="ui-fat-label"
+          name="isTossy"
+          label="{{ 'thoraxCT.bones.tossy.value' | translate }}"
+          rr-id="tho_c_0805208"
+          binary="true"
+          [(ngModel)]="model.isTossy"
+          rrContentReset="tossyTypeContainer"
+          rrValidation="isAOClassification isRockwood isTossy"
+        ></p-checkbox>
+        <div
+          id="tossyTypeContainer"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isTossy"
+        >
+          <p rr-id="tho_c_0805209" rrInfoIcon="tho_c_08_03">
+            {{ "thoraxCT.bones.degreeOfInjury.value" | translate }}
+          </p>
+          <p-radioButton
+            name="tossyType"
+            [value]="tossyTypeEnum.Tossy1"
+            label="{{ 'thoraxCT.bones.tossy.value' | translate }} 1"
+            rr-id="tho_c_0805210"
+            [(ngModel)]="model.tossyType"
+            rrValidation="tossyType"
+          ></p-radioButton>
+          <p-radioButton
+            name="tossyType"
+            [value]="tossyTypeEnum.Tossy2"
+            label="{{ 'thoraxCT.bones.tossy.value' | translate }} 2"
+            rr-id="tho_c_0805211"
+            [(ngModel)]="model.tossyType"
+            rrValidation="tossyType"
+          ></p-radioButton>
+          <p-radioButton
+            name="tossyType"
+            [value]="tossyTypeEnum.Tossy3"
+            label="{{ 'thoraxCT.bones.tossy.value' | translate }} 3"
+            rr-id="tho_c_0805212"
+            [(ngModel)]="model.tossyType"
+            rrValidation="tossyType"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

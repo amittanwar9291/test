@@ -1,0 +1,190 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- First column, with dynamic components -->
+    <div class="c-col-1 c-sep c-pad-r f-vertical o-list">
+      <div class="f-vertical f-start o-radio-list m-b-15">
+        <h1 rr-id="mam_m_080103" class="m-b-20">
+          {{ 'mammaMRT.bones.bones.value' | translate }}*
+        </h1>
+        <p-radioButton
+          name="areFindings"
+          [value]="bonesType.Unremarkable"
+          label="{{ 'mammaMRT.bones.unremarkable.value' | translate }}"
+          rr-id="mam_m_080104"
+          [(ngModel)]="model.bonesType"
+          rrValidation="bonesType"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          name="areFindings"
+          [value]="bonesType.BoneLesion"
+          label="{{ 'mammaMRT.bones.boneLesion.value' | translate }}"
+          rr-id="mam_m_080105"
+          [(ngModel)]="model.bonesType"
+          rrValidation="bonesType"
+          notInFinding="true"
+        ></p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        name="findingsHandlerComponent"
+        [disabled]="model.bonesType !== bonesType.BoneLesion"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="c-col-4 c-pad-l c-sep f-vertical">
+      <div class="f-vertical o-list m-h-88">
+        <!-- Finding number -->
+        <h1
+          rr-id="mam_m_080201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ 'mammaMRT.bones.findingXX.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div class="f-horizontal c-sep f-fill-available-space">
+        <div class="c-col-1 c-sep c-pad-r">
+          <div
+            class="o-radio-list f-vertical"
+            *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          >
+            <h3
+              rr-id="mam_m_080202"
+              class="m-b-11"
+              *ngIf="showLocalizationHeader()"
+            >
+              {{ 'mammaMRT.bones.localization.value' | translate }}*
+            </h3>
+
+            <div
+              *ngIf="showIsTVBSection()"
+              class="f-horizontal"
+              [ngClass]="{ 'm-b-32': findingHandler.currentItem.findingType === findingType.VertebralBody,
+                          'm-b-36': findingHandler.currentItem.findingType === findingType.Rib }"
+            >
+              <div class="f-vertical o-radio-list tvb-column-left">
+                <p-checkbox
+                  *ngFor="let item of [1, 3, 5, 7, 9, 11]"
+                  [attr.rr-id]="getTVBRrId(item)"
+                  [label]="getTVBLabel(item)"
+                  [name]="'isTVB' + item"
+                  [ngModel]="getTVBModel(item)"
+                  (ngModelChange)="setTVBModel(item, $event)"
+                  binary="true"
+                  [rrValidation]="rrValidationCheckboxes"
+                >
+                </p-checkbox>
+              </div>
+              <div class="f-vertical o-radio-list tvb-column-right">
+                <p-checkbox
+                  *ngFor="let item of [2, 4, 6, 8, 10, 12]"
+                  [attr.rr-id]="getTVBRrId(item)"
+                  [label]="getTVBLabel(item)"
+                  [name]="'isTVB' + item"
+                  [ngModel]="getTVBModel(item)"
+                  (ngModelChange)="setTVBModel(item, $event)"
+                  binary="true"
+                  [rrValidation]="rrValidationCheckboxes"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+
+            <div
+              *ngIf="showBoneLocalizationType()"
+              class="f-vertical o-radio-list"
+              [ngClass]="{ 'm-b-23': findingHandler.currentItem.findingType === findingType.ProxHumerus
+                              || findingHandler.currentItem.findingType === findingType.Clavicle,
+                       'm-b-29': findingHandler.currentItem.findingType === findingType.Rib }"
+              [rrDisable]="isBoneLocalizationDisabled()"
+            >
+              <ng-container
+                *ngIf="findingHandler.currentItem.findingType === findingType.ProxHumerus
+                                || findingHandler.currentItem.findingType === findingType.Clavicle"
+              >
+                <p-radioButton
+                  rr-id="mam_m_080203"
+                  name="boneLocalization"
+                  [(ngModel)]="findingHandler.currentItem.boneLocalization"
+                  [value]="boneLocalizationType.Right"
+                  label="{{ 'mammaMRT.bones.right.value' | translate }}"
+                  rrValidation="boneLocalization"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_080204"
+                  name="boneLocalization"
+                  [(ngModel)]="findingHandler.currentItem.boneLocalization"
+                  [value]="boneLocalizationType.Left"
+                  label="{{ 'mammaMRT.bones.links.value' | translate }}"
+                  rrValidation="boneLocalization"
+                >
+                </p-radioButton>
+              </ng-container>
+              <ng-container
+                *ngIf="findingHandler.currentItem.findingType === findingType.Rib"
+              >
+                <p-radioButton
+                  rr-id="mam_m_080203"
+                  name="boneLocalization"
+                  [(ngModel)]="findingHandler.currentItem.boneLocalization"
+                  [value]="boneLocalizationType.Right"
+                  label="{{ 'mammaMRT.bones.right.value' | translate }}"
+                  rrValidation="boneLocalization"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_080204"
+                  name="boneLocalization"
+                  [(ngModel)]="findingHandler.currentItem.boneLocalization"
+                  [value]="boneLocalizationType.Left"
+                  label="{{ 'mammaMRT.bones.links.value' | translate }}"
+                  rrValidation="boneLocalization"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </ng-container>
+            </div>
+            <rr-number-input
+              [ngClass]="{ 'm-b-16': findingHandler.currentItem.findingType === findingType.ProxHumerus
+                              || findingHandler.currentItem.findingType === findingType.Clavicle,
+                       'm-b-12': findingHandler.currentItem.findingType === findingType.Sternum
+                       || findingHandler.currentItem.findingType === findingType.VertebralBody
+                       || findingHandler.currentItem.findingType === findingType.Rib }"
+              name="maxDiameterInMm"
+              [(ngModel)]="findingHandler.currentItem.maxDiameterInMm"
+              [config]="{ max: 60, labelWidth: 160 }"
+              labelRrId="mam_m_080206"
+              inputRrId="mam_m_080205"
+              labelStyleClass="text-break"
+              label="{{ 'mammaMRT.bones.maxDiameterInMm.value' | translate }}"
+            ></rr-number-input>
+            <div class="f-vertical o-radio-list">
+              <h3 rr-id="mam_m_080207">
+                {{ 'mammaMRT.bones.typeOfLesion.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="mam_m_080208"
+                [options]="lesionTypes"
+                [(ngModel)]="findingHandler.currentItem.lesionType"
+                rrDropdownClear
+                styleClass="ui-brown-box o-width-100"
+                name="lesionType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                rrValidation="lesionType"
+                rrMetaKeyBlock
+              ></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+    </div>
+  </div>
+</form>

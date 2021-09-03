@@ -1,0 +1,168 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-list">
+      <h2
+        rr-id="abd_m_0402141"
+        rrInfoIcon="abd_m_04_06"
+        infoIconPdfLandscape="true"
+        rrValidation="liverPathologyLocations"
+      >
+        {{'abdomenMRT.liver.localization.value' | translate}}*
+      </h2>
+      <rr-liver-pathology-small-localizer
+        rr-id="abd_m_0402142"
+        name="liverPathologyLocations"
+        [(ngModel)]="model.liverPathologyLocations"
+        rrValidation="liverPathologyLocations"
+        [isLocalizer]="true"
+        (click)="openLargeLocalizer()"
+        [elementUpdate]="resetRadioButtons()"
+      >
+      </rr-liver-pathology-small-localizer>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-list">
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="abd_m_040387">
+          {{'abdomenMRT.liver.extension.value' | translate}}
+        </h2>
+        <h3 rr-id="abd_m_040388" class="m-b-7">
+          {{'abdomenMRT.liver.size.value' | translate}}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_040389"
+          labelRrId="abd_m_040390"
+          name="sizeInMm"
+          label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.sizeInMm"
+          (announceModelChange)="resetExtensionInputs()"
+        >
+        </rr-number-input>
+        <div class="o-radio-list" [rrDisable]="!model.sizeInMm">
+          <h3 rr-id="abd_m_040391" class="m-b-6">
+            {{'abdomenMRT.liver.2ndPlane.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_040392"
+            labelRrId="abd_m_040393"
+            name="secondPlaneInMm"
+            label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+            [config]="{ min: 1, max: 999, placeholder: '---' }"
+            [(ngModel)]="model.secondPlaneInMm"
+            (announceModelChange)="resetExtensionInputs()"
+          >
+          </rr-number-input>
+        </div>
+        <div class="o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+          <h3 rr-id="abd_m_040394" class="m-b-5">
+            {{'abdomenMRT.liver.3rdPlane.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_040395"
+            labelRrId="abd_m_040396"
+            name="thirdPlaneInMm"
+            label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+            [config]="{ min: 1, max: 999, placeholder: '---' }"
+            [(ngModel)]="model.thirdPlaneInMm"
+            (announceModelChange)="resetExtensionInputs()"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_040482">
+          {{'abdomenMRT.liver.morphology.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_040483"
+          name="isLongSegmentalStricture"
+          label="{{'abdomenMRT.liver.longSegmentalstricture.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLongSegmentalStricture"
+          class="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_040484"
+          name="isIrregularWallThickening"
+          label="{{'abdomenMRT.liver.irregularWallThickening.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isIrregularWallThickening"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_040485"
+          name="isLateEnhancementOfTheMassWallThickening"
+          label="{{'abdomenMRT.liver.lateEnhancementofTheMasswallThickening.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLateEnhancementOfTheMassWallThickening"
+          class="text-break"
+          [rrDisable]="!isCMReinforced"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_040486"
+          name="isAbsenceOfWashout"
+          label="{{'abdomenMRT.liver.absenceOfWashout.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isAbsenceOfWashout"
+          [rrDisable]="!isCMReinforced"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_040487"
+          name="isCapsularRetraction"
+          label="{{'abdomenMRT.liver.capsularRetraction.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCapsularRetraction"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-9 m-b-12 o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_040549">
+          {{'abdomenMRT.liver.growthPattern.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_040550"
+          rrUnClickRadio
+          name="growthPatternType"
+          [value]="growthPatternType.Focal"
+          label="{{'abdomenMRT.liver.growthPatternFocal.value' | translate}}"
+          [(ngModel)]="model.growthPatternType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040551"
+          rrUnClickRadio
+          name="growthPatternType"
+          [value]="growthPatternType.Periductal"
+          label="{{'abdomenMRT.liver.periductal.value' | translate}}"
+          [(ngModel)]="model.growthPatternType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040552"
+          rrUnClickRadio
+          name="growthPatternType"
+          [value]="growthPatternType.Intraductal"
+          label="{{'abdomenMRT.liver.intraductal.value' | translate}}"
+          [(ngModel)]="model.growthPatternType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040553"
+          rrUnClickRadio
+          name="growthPatternType"
+          [value]="growthPatternType.SpaceOccupying"
+          label="{{'abdomenMRT.liver.spaceoccupying.value' | translate}}"
+          [(ngModel)]="model.growthPatternType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

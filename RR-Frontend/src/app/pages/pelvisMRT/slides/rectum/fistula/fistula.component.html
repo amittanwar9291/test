@@ -1,0 +1,145 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="o-radio-list m-b-32">
+      <h2 rr-id="pel_m_0802116">
+        {{ 'pelvisMRT.rectum.fistula.value' | translate }}*
+      </h2>
+      <p-dropdown
+        styleClass="ui-brown-box o-width-100"
+        [options]="fistelDropdownOptions"
+        name="fistulaType"
+        rr-id="pel_m_0802117"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+        (ngModelChange)="clearFistulaModel()"
+        [(ngModel)]="model.fistulaType"
+        rrValidation="fistulaType"
+        [scrollHeight]="'245px'"
+      >
+      </p-dropdown>
+    </div>
+    <div id="quantityBlock" *ngIf="model.fistulaType === fistulaType.Complex">
+      <div class="o-radio-list m-b-30">
+        <h2 rr-id="pel_m_0802118">
+          {{ 'pelvisMRT.rectum.organInvolvement.value' | translate }}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.urinaryBladder.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802119"
+          name="isUrinaryBladder"
+          [(ngModel)]="model.isUrinaryBladder"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.uterineCervix.value' | translate}}"
+          binary="true"
+          [rrDisable]="localizationModel?.patientInformation.gender !== gender.Female"
+          rr-id="pel_m_0802120"
+          name="isUterineCervix"
+          [(ngModel)]="model.isUterineCervix"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.vagina.value' | translate}}"
+          binary="true"
+          [rrDisable]="localizationModel?.patientInformation.gender !== gender.Female"
+          rr-id="pel_m_0802121"
+          name="isVagina"
+          [(ngModel)]="model.isVagina"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.sphincter.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802122"
+          name="isSphincter"
+          [(ngModel)]="model.isSphincter"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.analChannel.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802123"
+          name="isAnalChannel"
+          [(ngModel)]="model.isAnalChannel"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.rectum.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802124"
+          name="isRectum"
+          [(ngModel)]="model.isRectum"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.colon.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802125"
+          name="isColon"
+          [(ngModel)]="model.isColon"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.osSacrum.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802126"
+          name="isSacrum"
+          [(ngModel)]="model.isSacrum"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.coccyx.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802127"
+          name="isCoccygis"
+          [(ngModel)]="model.isCoccygis"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <rr-perianal
+    [model]="model"
+    [fistulaLocalizationSSLTypeDropdownOptions]="fistulaLocalizationSSLTypeDropdownOptions"
+    [technologyModel]="technologyModel"
+    *ngIf="model.fistulaType === fistulaType.Perianal"
+    (openLargeLocaliser)="openLargeLocaliserFn()"
+  ></rr-perianal>
+  <rr-rectovaginal-anovaginal
+    [model]="model"
+    *ngIf="model.fistulaType === fistulaType.Rectovaginal"
+    [technologyModel]="technologyModel"
+  ></rr-rectovaginal-anovaginal>
+  <rr-kolovaginal
+    [model]="model"
+    *ngIf="model.fistulaType === fistulaType.Colovaginal"
+    [technologyModel]="technologyModel"
+  ></rr-kolovaginal>
+  <rr-kolovesikal
+    [model]="model"
+    *ngIf="model.fistulaType === fistulaType.Colovesical"
+    [technologyModel]="technologyModel"
+  ></rr-kolovesikal>
+  <rr-vesicovaginal
+    [model]="model"
+    *ngIf="model.fistulaType === fistulaType.Vesicovaginal"
+    [technologyModel]="technologyModel"
+  ></rr-vesicovaginal>
+  <rr-vesicocervical
+    [model]="model"
+    *ngIf="model.fistulaType === fistulaType.Vesicocervical"
+    [technologyModel]="technologyModel"
+  ></rr-vesicocervical>
+  <rr-complex
+    [model]="model"
+    [localizationModel]="localizationModel"
+    *ngIf="model.fistulaType === fistulaType.Complex"
+    [technologyModel]="technologyModel"
+  ></rr-complex>
+  <rr-pilonidal-sinus
+    [model]="model"
+    *ngIf="model.fistulaType === fistulaType.PilonidalSinus"
+    [technologyModel]="technologyModel"
+  ></rr-pilonidal-sinus>
+  <div
+    class="f-horizontal col-h-100"
+    *ngIf="!model.fistulaType || model.fistulaType === fistulaType.None"
+  >
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad-l c-sep"></div>
+  </div>
+</div>

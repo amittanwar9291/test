@@ -1,0 +1,187 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_c_0902117">
+        {{ "headCT.cerebrospinalFluidSpace.associatedFindings.value" |
+        translate}}
+      </h2>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.subependymalNodules.value' | translate}}"
+        rr-id="hea_c_0902118"
+        binary="true"
+        rrContentReset="calcifiedContainer"
+        name="isSubependymalNodules"
+        [(ngModel)]="model.isSubependymalNodules"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="calcifiedContainer"
+        [rrDisable]="!model.isSubependymalNodules"
+      >
+        <p-checkbox
+          label="{{'headCT.cerebrospinalFluidSpace.calcified.value' | translate}}"
+          rr-id="hea_c_0902119"
+          binary="true"
+          name="isCalcified"
+          [(ngModel)]="model.isCalcified"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.hypertrophyChoroidPlexus.value' | translate}}"
+        rr-id="hea_c_0902120"
+        binary="true"
+        name="isHypertrophyChoroidPlexus"
+        [(ngModel)]="model.isHypertrophyChoroidPlexus"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.perifocalEdema.value' | translate}}"
+        rr-id="hea_c_0902121"
+        binary="true"
+        name="isPerifocalEdema"
+        [(ngModel)]="model.isPerifocalEdema"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.hydrocephalus.value' | translate}}"
+        rr-id="hea_c_0902122"
+        binary="true"
+        name="isHydrocephalus"
+        [(ngModel)]="model.isHydrocephalus"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div [rrDisable]="!isCMYes" class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_c_0903105">
+        {{
+        "headCT.cerebrospinalFluidSpace.contrastEnhancementQuantitative.value" |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0903106"
+        label="{{'headCT.cerebrospinalFluidSpace.no.value' | translate}}"
+        name="contrastEnhancementQuantitativeType"
+        rrContentReset="contrastEnhancementQuantitativeType cmDistributionTypeContainer"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0903107"
+        label="{{'headCT.cerebrospinalFluidSpace.weak.value' | translate}}"
+        name="contrastEnhancementQuantitativeType"
+        rrContentReset="cmHomogeneityTypeContainer cmDistributionTypeContainer"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Low"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0903108"
+        label="{{'headCT.cerebrospinalFluidSpace.significant.value' | translate}}"
+        name="contrastEnhancementQuantitativeType"
+        rrContentReset="cmHomogeneityTypeContainer cmDistributionTypeContainer"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Strong"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <div
+        class="o-radio-list nested-content"
+        id="cmHomogeneityTypeContainer"
+        [rrDisable]="!isCMWeakOrSignificant()"
+      >
+        <p-radioButton
+          rr-id="hea_c_0903109"
+          label="{{'headCT.cerebrospinalFluidSpace.homogeneous.value' | translate}}"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0903110"
+          label="{{'headCT.cerebrospinalFluidSpace.heterogeneous.value' | translate}}"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div
+        class="o-radio-list m-t-30"
+        id="cmDistributionTypeContainer"
+        [rrDisable]="!isCMWeakOrSignificant()"
+      >
+        <h2 rr-id="hea_c_0903111">
+          {{
+          "headCT.cerebrospinalFluidSpace.contrastEnhancementDistribution.value"
+          | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="hea_c_0903112"
+          label="{{'headCT.cerebrospinalFluidSpace.peripheral.value' | translate}}"
+          name="contrastEnhancementDistributionType"
+          [value]="contrastDistributionTypeEnum.Peripheral"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0903113"
+          label="{{'headCT.cerebrospinalFluidSpace.entireLesion.value' | translate}}"
+          name="contrastEnhancementDistributionType"
+          [value]="contrastDistributionTypeEnum.EntireLesion"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0903114"
+          label="{{'headCT.cerebrospinalFluidSpace.central.value' | translate}}"
+          name="contrastEnhancementDistributionType"
+          [value]="contrastDistributionTypeEnum.Central"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0903115"
+          label="{{'headCT.cerebrospinalFluidSpace.septal.value' | translate}}"
+          name="contrastEnhancementDistributionType"
+          [value]="contrastDistributionTypeEnum.Septal"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0903116"
+          label="{{'headCT.cerebrospinalFluidSpace.nodular.value' | translate}}"
+          name="contrastEnhancementDistributionType"
+          [value]="contrastDistributionTypeEnum.Nodular"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0903117"
+          label="{{'headCT.cerebrospinalFluidSpace.multinodular.value' | translate}}"
+          name="contrastEnhancementDistributionType"
+          [value]="contrastDistributionTypeEnum.Multinodular"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13"></div>
+</div>

@@ -1,0 +1,76 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="ang_m_070103">
+        {{'angiographyMRT.abdomen.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="ang_m_070104"
+          label="{{'angiographyMRT.abdomen.noAbnormalFindingsInTheMesenteric.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          value="False"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_m_070105"
+          label="{{'angiographyMRT.abdomen.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          value="True"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [customLabelCalculator]="customLabelCalculator"
+          [attr.name]="'findingHandlerComponent'"
+          [validationName]="'findings'"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType('None') ? 'f-end' : 'f-space-between'"
+    >
+      <div *ngIf="isFindingType('None')" class="f-horizontal">
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          style="height: 554px"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l" style="height: 554px"></div>
+      </div>
+      <div *ngIf="!isFindingType('None')" class="c-pad-l f-vertical">
+        <h1 rr-id="ang_m_070201">
+          {{'angiographyMRT.abdomen.findingXX.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <rr-renal-artery
+        *ngIf="isFindingType('RenalArtery')"
+        [model]="findingHandler.currentItem"
+      ></rr-renal-artery>
+      <rr-kidney-vein
+        *ngIf="isFindingType('RenalVein')"
+        [model]="findingHandler.currentItem"
+      ></rr-kidney-vein>
+      <rr-mesenteric-vessels
+        *ngIf="isFindingType('MesentericVessels')"
+        [model]="findingHandler.currentItem"
+      ></rr-mesenteric-vessels>
+      <rr-portal-venous-system
+        *ngIf="isFindingType('LiverVeins')"
+        [model]="findingHandler.currentItem"
+      ></rr-portal-venous-system>
+    </div>
+  </div>
+</form>

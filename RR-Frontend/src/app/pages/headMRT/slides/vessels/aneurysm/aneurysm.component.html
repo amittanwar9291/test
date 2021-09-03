@@ -1,0 +1,410 @@
+<div class="f-vertical main-container o-radio-list">
+  <h2 rr-id="hea_m_040255" class="c-pad">
+    {{ 'headMRT.vessels.localization.value' | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad o-list">
+      <div class="o-radio-list">
+        <p-radioButton
+          rr-id="hea_m_040256"
+          name="localizationAneurysmaType"
+          [(ngModel)]="model.localizationAneurysmaType"
+          [value]="localizationAneurysmaTypeEnum.CircleOfWilliscerebral"
+          rrValidation="localizationAneurysmaType"
+          rrContentReset="vertebralArterySideContainer internalCarotidArterySideContainer"
+          label="{{'headMRT.vessels.circleOfWillis&cerebral.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_040257"
+          name="localizationAneurysmaType"
+          [(ngModel)]="model.localizationAneurysmaType"
+          [value]="localizationAneurysmaTypeEnum.VertebralArtery"
+          rrContentReset="internalCarotidArterySideContainer"
+          rrValidation="localizationAneurysmaType"
+          (click)="resetLocalizer(); closeError();"
+          label="{{'headMRT.vessels.vertebralArtery.value' | translate }}"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_040258"
+          name="localizationAneurysmaType"
+          [(ngModel)]="model.localizationAneurysmaType"
+          [value]="localizationAneurysmaTypeEnum.InternalCarotidArtery"
+          rrValidation="localizationAneurysmaType"
+          rrContentReset="vertebralArterySideContainer"
+          (click)="resetLocalizer(); closeError();"
+          label="{{'headMRT.vessels.internalCarotidArtery.value' | translate }}"
+        >
+        </p-radioButton>
+      </div>
+      <div class="o-radio-list">
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+        ></rr-reference-picture>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad">
+      <div
+        class="o-radio-list"
+        *ngIf="model.localizationAneurysmaType === localizationAneurysmaTypeEnum.CircleOfWilliscerebral"
+      >
+        <h3
+          rr-id="hea_m_040353"
+          rrValidation="affectedSegmentsOrVesselsLocation"
+        >
+          {{ 'headMRT.vessels.arteriessegments.value' | translate }}*
+        </h3>
+        <rr-arteries-segments-small-localizer
+          rr-id="hea_m_040354"
+          name="affectedSegmentsOrVesselsLocation"
+          [model]="model.affectedSegmentsOrVesselsLocation"
+          rrValidation="affectedSegmentsOrVesselsLocation"
+          isLocalizer="true"
+          (click)="openLargeLocalizer('arteriesSegments')"
+        >
+        </rr-arteries-segments-small-localizer>
+      </div>
+      <div
+        id="vertebralArterySideContainer"
+        class="o-list"
+        *ngIf="model.localizationAneurysmaType === localizationAneurysmaTypeEnum.VertebralArtery"
+      >
+        <div class="o-radio-list">
+          <h3 rr-id="hea_m_040355">
+            {{'headMRT.vessels.side.value' | translate }}*
+          </h3>
+          <p-radioButton
+            rr-id="hea_m_040356"
+            name="sideType"
+            [(ngModel)]="model.sideType"
+            [value]="sideTypeEnum.Right"
+            rrValidation="sideType"
+            label="{{'headMRT.vessels.right.value' | translate }}"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_040357"
+            name="sideType"
+            [(ngModel)]="model.sideType"
+            [value]="sideTypeEnum.Left"
+            rrValidation="sideType"
+            label="{{'headMRT.vessels.left.value' | translate }}"
+          >
+          </p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <h3
+            rr-id="hea_m_040358"
+            rrInfoIcon="hea_m_04_14"
+            [infoIconPdfLandscape]="true"
+          >
+            {{'headMRT.vessels.segment.value' | translate }}
+          </h3>
+          <p-checkbox
+            rr-id="hea_m_040359"
+            name="isV1"
+            [(ngModel)]="model.isV1"
+            binary="true"
+            label="{{'headMRT.vessels.v1.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040360"
+            name="isV2"
+            binary="true"
+            [(ngModel)]="model.isV2"
+            label="{{'headMRT.vessels.v2.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040361"
+            name="isV3"
+            binary="true"
+            [(ngModel)]="model.isV3"
+            label="{{'headMRT.vessels.v3.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040362"
+            name="isV4"
+            binary="true"
+            [(ngModel)]="model.isV4"
+            label="{{'headMRT.vessels.v4.value' | translate }}"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div
+        id="internalCarotidArterySideContainer"
+        class="o-list"
+        *ngIf="model.localizationAneurysmaType === localizationAneurysmaTypeEnum.InternalCarotidArtery"
+      >
+        <div class="o-radio-list">
+          <h3 rr-id="hea_m_040363">
+            {{'headMRT.vessels.side.value' | translate }}*
+          </h3>
+          <p-radioButton
+            rr-id="hea_m_040364"
+            name="sideType"
+            [(ngModel)]="model.sideType"
+            [value]="sideTypeEnum.Right"
+            rrValidation="sideType"
+            label="{{'headMRT.vessels.right.value' |
+          translate }}"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_040365"
+            name="sideType"
+            [(ngModel)]="model.sideType"
+            [value]="sideTypeEnum.Left"
+            rrValidation="sideType"
+            label="{{'headMRT.vessels.left.value' |
+          translate }}"
+          >
+          </p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <h3 rr-id="hea_m_040366">
+            {{'headMRT.vessels.segmentsAccordingToBouthillier.value' |
+            translate}}
+          </h3>
+          <rr-carotid-artery-small-localizer
+            rr-id="hea_m_040367"
+            name="segmentsBouthillierLocations"
+            [ngModel]="model.segmentsBouthillierLocations"
+            (click)="openLargeLocalizer('arotidArtery')"
+          ></rr-carotid-artery-small-localizer>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad ">
+      <div
+        *ngIf="model.localizationAneurysmaType !== localizationAneurysmaTypeEnum.None"
+        class="o-list"
+      >
+        <div class=" o-radio-list">
+          <h2 rr-id="hea_m_040456">
+            {{ 'headMRT.vessels.shape.value' | translate }}
+          </h2>
+          <p-dropdown
+            rr-id="hea_m_040457"
+            styleClass="o-width-100 ui-brown-box"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            name="shapeType"
+            [(ngModel)]="model.shapeType"
+            [options]="w014Form"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div class="o-radio-list">
+          <div class="o-radio-list">
+            <h2 rr-id="hea_m_040458">
+              {{ 'headMRT.vessels.extensionAneurysm.value' | translate }}
+            </h2>
+            <rr-number-input
+              name="extensionAneurysm"
+              [(ngModel)]="model.extensionAneurysm"
+              inputRrId="hea_m_040459"
+              labelRrId="hea_m_040460"
+              (announceModelChange)="resetInput()"
+              [label]="'headMRT.vessels.inMm.value' | translate"
+              [config]="{min: 1, max: 60}"
+            ></rr-number-input>
+          </div>
+          <div [rrDisable]="!model.extensionAneurysm" class="o-radio-list">
+            <h3 rr-id="hea_m_040461">
+              {{ 'headMRT.vessels.2ndPlane.value' | translate }}
+            </h3>
+            <rr-number-input
+              name="secondPlane"
+              [(ngModel)]="model.secondPlane"
+              inputRrId="hea_m_040462"
+              labelRrId="hea_m_040463"
+              (announceModelChange)="resetInput()"
+              [label]="'headMRT.vessels.inMm.value' | translate"
+              [config]="{min: 1, max: 60}"
+            ></rr-number-input>
+          </div>
+          <div class="o-radio-list" [rrDisable]="!model.secondPlane">
+            <h3 rr-id="hea_m_040464">
+              {{ 'headMRT.vessels.3rdPlane.value' | translate }}
+            </h3>
+            <rr-number-input
+              name="thirdPlane"
+              [(ngModel)]="model.thirdPlane"
+              inputRrId="hea_m_040465"
+              labelRrId="hea_m_040466"
+              [label]="'headMRT.vessels.inMm.value' | translate"
+              [config]="{min: 1, max: 60}"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="hea_m_040467">
+            {{ 'headMRT.vessels.aneurysmNeckWidth.value' | translate }}
+          </h2>
+          <rr-number-input
+            name="aneurysmNeckWidth"
+            [(ngModel)]="model.aneurysmNeckWidth"
+            inputRrId="hea_m_040468"
+            labelRrId="hea_m_040470"
+            [label]="'headMRT.vessels.inMm.value' | translate"
+            [config]="{labelWidth: 60, min: 1, max: 10, placeholder: '--'}"
+          ></rr-number-input>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="hea_m_040471">
+            {{ 'headMRT.vessels.alignmentOfAneurysmDome.value' | translate }}
+          </h2>
+          <p-dropdown
+            rr-id="hea_m_040472"
+            styleClass="o-width-100 ui-brown-box"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            name="alignmentOfAneurysmDomeType"
+            [(ngModel)]="model.alignmentOfAneurysmDomeType"
+            [options]="w015AlignmentAneurysmRadome"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l">
+      <div
+        *ngIf="model.localizationAneurysmaType !== localizationAneurysmaTypeEnum.None"
+        class="o-list"
+      >
+        <div class="o-radio-list">
+          <h2 rr-id="hea_m_040525">
+            {{ 'headMRT.vessels.complications.value' | translate }}
+          </h2>
+          <p-checkbox
+            rr-id="hea_m_040526"
+            name="isSubarachnoidHemorrhage"
+            [(ngModel)]="model.isSubarachnoidHemorrhage"
+            binary="true"
+            rrContentReset="subarachnoidHemorrhageContainer"
+            label="{{'headMRT.vessels.subarachnoidHemorrhage.value' | translate}}"
+          >
+          </p-checkbox>
+          <div
+            id="subarachnoidHemorrhageContainer"
+            [rrDisable]="!model.isSubarachnoidHemorrhage"
+            class="nested-content o-radio-list"
+          >
+            <p-radioButton
+              rr-id="hea_m_040527"
+              name="subarachnoidHemorrhageType"
+              [(ngModel)]="model.subarachnoidHemorrhageType"
+              [value]="subarachnoidHemorrhageTypeEnum.Minor"
+              rrUnClickRadio
+              label="{{'headMRT.vessels.minor.value' | translate}}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040528"
+              name="subarachnoidHemorrhageType"
+              [(ngModel)]="model.subarachnoidHemorrhageType"
+              [value]="subarachnoidHemorrhageTypeEnum.Pronounced"
+              rrUnClickRadio
+              label="{{'headMRT.vessels.pronounced.value' | translate}}"
+            >
+            </p-radioButton>
+            <h3 rr-id="hea_m_040529">
+              {{ 'headMRT.vessels.localization.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="hea_m_040530"
+              name="subarachnoidHemorrhageLocalizationType"
+              [(ngModel)]="model.subarachnoidHemorrhageLocalizationType"
+              [value]="subarachnoidHemorrhageLocalizationTypeEnum.Perimesencephalic"
+              rrUnClickRadio
+              label="{{'headMRT.vessels.perimesencephalic.value' | translate}}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040531"
+              name="subarachnoidHemorrhageLocalizationType"
+              [(ngModel)]="model.subarachnoidHemorrhageLocalizationType"
+              [value]="subarachnoidHemorrhageLocalizationTypeEnum.SylvianFissure"
+              rrUnClickRadio
+              label="{{'headMRT.vessels.sylvianFissure.value' | translate}}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040532"
+              name="subarachnoidHemorrhageLocalizationType"
+              [(ngModel)]="model.subarachnoidHemorrhageLocalizationType"
+              [value]="subarachnoidHemorrhageLocalizationTypeEnum.ExternalCerebrospinalFluidSpaces"
+              rrUnClickRadio
+              label="{{'headMRT.vessels.externalCerebrospinalFluidSpaces.value' | translate}}"
+            >
+            </p-radioButton>
+          </div>
+          <p-checkbox
+            rr-id="hea_m_040533"
+            name="isThrombosis"
+            [(ngModel)]="model.isThrombosis"
+            rrContentReset="thrombosisContiner"
+            binary="true"
+            label="{{'headMRT.vessels.thrombosis.value' | translate}}"
+          ></p-checkbox>
+          <div
+            id="thrombosisContiner"
+            [rrDisable]="!model.isThrombosis"
+            class="nested-content o-radio-list"
+          >
+            <p-checkbox
+              rr-id="hea_m_040534"
+              name="isEccentric"
+              [(ngModel)]="model.isEccentric"
+              binary="true"
+              label="{{'headMRT.vessels.eccentric.value' | translate}}"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="hea_m_040535"
+            name="isDownstreamInfarctAreas"
+            [(ngModel)]="model.isDownstreamInfarctAreas"
+            binary="true"
+            label="{{'headMRT.vessels.downstreamInfarctAreas.value' | translate}}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040536"
+            name="isInflammatoryChange"
+            [(ngModel)]="model.isInflammatoryChange"
+            binary="true"
+            label="{{'headMRT.vessels.inflammatoryChange.value' | translate}}"
+            [rrDisable]="!isContrastEnhanced"
+          ></p-checkbox>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="hea_m_040537">
+            {{ 'headMRT.vessels.differentialDiagnosis.value' | translate }}
+          </h2>
+          <p-dropdown
+            *ngIf="!model.affectedSegmentsOrVesselsLocation.bA"
+            rr-id="hea_m_040538"
+            styleClass="o-width-100 ui-brown-box"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            name="differentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosisType"
+            [options]="w016DifferentialdiagnoseForBA"
+            rrDropdownClear
+          ></p-dropdown>
+          <p-dropdown
+            *ngIf="model.affectedSegmentsOrVesselsLocation.bA"
+            rr-id="hea_m_040538"
+            styleClass="o-width-100 ui-brown-box"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            name="differentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosisType"
+            [options]="w016Differentialdiagnose"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

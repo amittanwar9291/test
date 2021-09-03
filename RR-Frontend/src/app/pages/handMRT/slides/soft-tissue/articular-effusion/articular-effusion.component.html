@@ -1,0 +1,101 @@
+<div class="f-horizontal h-555">
+  <div class="c-col-1 c-pad c-sep">
+    <h2 rr-id="han_m_080202" class="m-b-20">
+      {{ 'handMRT.softTissue.localization.value' | translate }}*
+    </h2>
+    <rr-hand-joints-small
+      rr-id="han_m_080203"
+      name="handJointsLocalizer"
+      [side]="localizerSide"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.handJointsLocalizer"
+      rrValidation="handJointsLocalizer"
+      isLocalizer="true"
+    ></rr-hand-joints-small>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <div class="o-list" [rrDisable]="!isSigngleValueSelected()">
+      <div class="o-radio-list m-b-30">
+        <h2 rr-id="han_m_080301">
+          {{ 'handMRT.softTissue.quantity.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="han_m_080302"
+          name="quantityType"
+          [value]="quantityType.Low"
+          label="{{ 'handMRT.softTissue.low.value' | translate }}"
+          [(ngModel)]="model.quantityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="han_m_080303"
+          name="quantityType"
+          [value]="quantityType.Pronounced"
+          label="{{ 'handMRT.softTissue.pronounced.value' | translate }}"
+          [(ngModel)]="model.quantityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="han_m_080304">
+          {{ 'handMRT.softTissue.quality.value' | translate }}
+        </h2>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.softTissue.hemarthros.value' | translate}}"
+          rr-id="han_m_080305"
+          name="isHemarthros"
+          [(ngModel)]="model.isHemarthros"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.softTissue.capsuleRupture.value' | translate}}"
+          rr-id="han_m_080306"
+          name="isCapsuleRupture"
+          [(ngModel)]="model.isCapsuleRupture"
+          rrContentReset="isArticularEffusionWithExtraarticularBlock"
+        ></p-checkbox>
+        <div
+          class="p-l-35"
+          id="isArticularEffusionWithExtraarticularBlock"
+          [rrDisable]="!model.isCapsuleRupture"
+        >
+          <p-checkbox
+            binary="true"
+            label="{{'handMRT.softTissue.articularEffusionWithExtraarticular.value' | translate}}"
+            rr-id="han_m_080307"
+            name="isArticularEffusionWithExtraarticularSpread"
+            [(ngModel)]="model.isArticularEffusionWithExtraarticularSpread"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.softTissue.looseBody.value' | translate}}"
+          rr-id="han_m_080308"
+          name="isLooseBody"
+          [(ngModel)]="model.isLooseBody"
+          (onChange)="resetDiameter($event)"
+        ></p-checkbox>
+        <div class="p-l-35" [rrDisable]="!model.isLooseBody">
+          <p rr-id="han_m_080309">
+            {{'handMRT.softTissue.diameter.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="han_m_080310"
+            labelRrId="han_m_080311"
+            name="diameterInMm"
+            [(ngModel)]="model.diameterInMm"
+            [label]="'handMRT.softTissue.inMm.value' | translate"
+            [config]="{min: 1, max: 30, labelWidth: 200}"
+            rrValidation="diameterLargestLesion"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep"></div>
+  <div class="c-col-1 c-pad-l c-sep"></div>
+</div>

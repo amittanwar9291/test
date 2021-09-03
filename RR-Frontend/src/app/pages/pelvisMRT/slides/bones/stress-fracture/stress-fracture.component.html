@@ -1,0 +1,141 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 rr-id="pel_m_100202" class="m-b-27 m-t-3" rrValidation="hipLocalizer">
+      {{ "pelvisMRT.bones.localization.value" | translate }}*
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+      rrValidation="hipLocalizer"
+      isLocalizer="true"
+    >
+    </rr-hips-small>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <div [rrDisable]="!isFemoralSelected()">
+      <h2 class="m-b-27 m-t-3" rr-id="pel_m_100326">
+        {{ "pelvisMRT.bones.localizationFemoralNeck.value" | translate }}
+      </h2>
+      <div class="o-list">
+        <div class="o-radio-list m-b-25">
+          <p-radioButton
+            rr-id="pel_m_100327"
+            label="{{ 'pelvisMRT.bones.medial.value' | translate }}"
+            [(ngModel)]="model.localizationFemoralNeckType"
+            [value]="localizationFemoralNeckType.Medial"
+            name="localizationFemoralNeckType"
+            rrValidation="localizationFemoralNeckType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100328"
+            label="{{ 'pelvisMRT.bones.lateral.value' | translate }}"
+            [(ngModel)]="model.localizationFemoralNeckType"
+            [value]="localizationFemoralNeckType.Lateral"
+            name="localizationFemoralNeckType"
+            rrValidation="localizationFemoralNeckType"
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p-checkbox
+            rr-id="pel_m_100329"
+            label="{{
+              'pelvisMRT.bones.hypointenseLineFrom.value' | translate
+            }}"
+            [(ngModel)]="model.isHypointenseLine"
+            binary="true"
+            name="isHypointenseLine"
+            rrContentReset="hypointenseBlock"
+          ></p-checkbox>
+          <div
+            id="hypointenseBlock"
+            class="o-radio-list left-indent"
+            [rrDisable]="!model.isHypointenseLine"
+          >
+            <p rr-id="pel_m_100330">
+              {{ "pelvisMRT.bones.boneWidthCoronaryMeasurement.value" |
+              translate }}
+            </p>
+            <p-radioButton
+              rr-id="pel_m_100331"
+              label="{{ 'pelvisMRT.bones.below50.value' | translate }}"
+              [(ngModel)]="model.boneWidthType"
+              [value]="boneWidthType.Below50Percent"
+              name="boneWidthType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_100332"
+              label="{{ 'pelvisMRT.bones.equalToOr.value' | translate }}"
+              [(ngModel)]="model.boneWidthType"
+              [value]="boneWidthType.EqualToOrAbove50Percent"
+              name="boneWidthType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <div class="o-list m-t-3">
+      <h2 class="m-b-18" rr-id="pel_m_100464">
+        {{ "pelvisMRT.bones.associatedFindings.value" | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="pel_m_100466"
+          label="{{ 'pelvisMRT.bones.boneMarrowEdema.value' | translate }}"
+          [(ngModel)]="model.isBoneMarrowEdema"
+          binary="true"
+          name="isBoneMarrowEdema"
+          rrContentReset="boneMarrowOedemaBlock"
+        ></p-checkbox>
+        <div
+          id="boneMarrowOedemaBlock"
+          class="o-radio-list left-indent"
+          [rrDisable]="!model.isBoneMarrowEdema || !isFemoralSelected()"
+        >
+          <p rr-id="pel_m_100467" class="text-break">
+            {{ 'pelvisMRT.bones.extentEdema(coronalMeasurement).value' |
+            translate}}
+          </p>
+          <div class="o-radio-list">
+            <p-radioButton
+              rr-id="pel_m_100468"
+              label="{{ 'pelvisMRT.bones.mm.value' | translate }}"
+              [(ngModel)]="model.wideEdemaMeasurementCoronaryType"
+              [value]="wideEdemaMeasurementCoronaryType.BelowOrEqualTo6Mm"
+              name="wideEdemaMeasurementCoronaryType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_100469"
+              label="{{ 'pelvisMRT.bones.moreThan6mm.value' | translate }}"
+              [(ngModel)]="model.wideEdemaMeasurementCoronaryType"
+              [value]="wideEdemaMeasurementCoronaryType.Above6Mm"
+              name="wideEdemaMeasurementCoronaryType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="pel_m_1004200"
+          label="{{ 'pelvisMRT.bones.correspondingHypointensityT1w.value' | translate }}"
+          [(ngModel)]="model.isCorrespondingHypointensityT1w"
+          binary="true"
+          name="isCorrespondingHypointensityT1w"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100465"
+          label="{{ 'pelvisMRT.bones.periostealEdema.value' | translate }}"
+          [(ngModel)]="model.isPeriostealOedema"
+          binary="true"
+          name="isPeriostealOedema"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical"></div>
+</div>

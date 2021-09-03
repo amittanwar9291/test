@@ -1,0 +1,87 @@
+<div class="c-col-1 c-pad c-sep col-h-100">
+  <div class="o-list">
+    <h2 rr-id="pel_m_090252" class="m-t-4">
+      {{ 'pelvisMRT.bladder.traumaDetails.value' | translate }}*
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="pel_m_090253"
+        name="isBladderrupture"
+        label="{{'pelvisMRT.bladder.bladderrupture.value' | translate }}"
+        [(ngModel)]="model.isBladderrupture"
+        rrValidation="isBladderrupture isBladderTamponade"
+        rrContentReset="bladderruptureGroup"
+        binary="true"
+      >
+      </p-checkbox>
+      <div
+        id="bladderruptureGroup"
+        class="o-radio-list p-l-35 m-b-22"
+        [rrDisable]="!model.isBladderrupture"
+      >
+        <p-checkbox
+          rr-id="pel_m_090254"
+          name="isIntraperitoneal"
+          label="{{'pelvisMRT.bladder.intraperitoneal.value' | translate }}"
+          [(ngModel)]="model.isIntraperitoneal"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_090255"
+          name="isExtraperitoneal"
+          label="{{'pelvisMRT.bladder.extraperitoneal.value' | translate }}"
+          [(ngModel)]="model.isExtraperitoneal"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="pel_m_090256"
+        name="isBladderTamponade"
+        label="{{'pelvisMRT.bladder.bladderTamponade.value' | translate }}"
+        [(ngModel)]="model.isBladderTamponade"
+        rrValidation="isBladderrupture isBladderTamponade"
+        rrContentReset="bladderTamponadeGroup"
+        binary="true"
+      >
+      </p-checkbox>
+      <div
+        id="bladderTamponadeGroup"
+        class="o-radio-list p-l-35"
+        [rrDisable]="!model.isBladderTamponade"
+      >
+        <p-checkbox
+          rr-id="pel_m_090257"
+          name="isBloodClot"
+          label="{{'pelvisMRT.bladder.bloodClot.value' | translate }}"
+          [(ngModel)]="model.isBloodClot"
+          binary="true"
+          rrContentReset="bloodClotGroup"
+        >
+        </p-checkbox>
+        <div
+          id="bloodClotGroup"
+          class="p-l-35"
+          [rrDisable]="!model.isBloodClot"
+        >
+          <rr-number-input
+            inputRrId="pel_m_090258"
+            labelRrId="pel_m_090259"
+            name="maxDiameterInMm"
+            labelStyleClass="text-break2"
+            [label]="'pelvisMRT.bladder.maxDiameterInMm.value' | translate"
+            [(ngModel)]="model.maxDiameterInMm"
+          ></rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-pad c-sep col-h-100"></div>
+<div class="c-col-1 c-pad c-sep col-h-100"></div>
+<div class="c-col-1 c-pad-l col-h-100">
+  <rr-shared-urinary-bladder-column
+    [model]="model"
+  ></rr-shared-urinary-bladder-column>
+</div>

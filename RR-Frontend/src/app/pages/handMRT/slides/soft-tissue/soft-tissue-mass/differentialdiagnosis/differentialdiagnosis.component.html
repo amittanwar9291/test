@@ -1,0 +1,92 @@
+<div class="f-horizontal w-100 h-100">
+  <div class="c-col-1 c-pad c-sep m-t-30 m-b-15">
+    <div class="p-l-10 o-list">
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+      >
+        <h2 rr-id="han_m_080222" rrInfoIcon="han_m_08_07">
+          {{'handMRT.softTissue.differentialDiagnosis1.value' | translate}}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="w018"
+          group="true"
+          name="differentialDiagnosis1"
+          rrId="han_m_080223"
+          [(ngModel)]="model.differentialDiagnosis1"
+          (selectionChanged)="resetDependenciesDifferentialDiagnose1D()"
+          rrValidation="differentialDiagnosis1"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.softTissue.suspected.value' | translate}}"
+          rr-id="han_m_080224"
+          name="isSuspected"
+          [(ngModel)]="model.isSuspected"
+          [rrDisable]="model.differentialDiagnosis1 === softTissueDifferentialDiagnosisTypeEnum.None"
+        ></p-checkbox>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis1 === softTissueDifferentialDiagnosisTypeEnum.None && model.differentialDiagnosis === softTissueDifferentialDiagnosisTypeEnum.None"
+      >
+        <h2 rr-id="han_m_080225">
+          {{'handMRT.softTissue.differentialDiagnosis2.value' | translate}}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="w019"
+          group="true"
+          name="differentialDiagnosis2"
+          rrId="han_m_080223"
+          [(ngModel)]="model.differentialDiagnosis2"
+          (selectionChanged)="resetDependenciesDifferentialDiagnose2D()"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.softTissue.secondary.value' | translate}}"
+          rr-id="han_m_080227"
+          name="isSecondary"
+          [(ngModel)]="model.isSecondary"
+          [rrDisable]="model.differentialDiagnosis2 === softTissueDifferentialDiagnosisTypeEnum.None"
+        ></p-checkbox>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis2 === softTissueDifferentialDiagnosisTypeEnum.None"
+      >
+        <h2 rr-id="han_m_080228">
+          {{'handMRT.softTissue.differentialDiagnosis3.value' | translate}}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="3"
+          [options]="w019"
+          group="true"
+          name="differentialDiagnosis3"
+          rrId="han_m_080223"
+          [(ngModel)]="model.differentialDiagnosis3"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep m-t-30 m-b-15">
+    <div class="p-l-10">
+      <p-checkbox
+        binary="true"
+        label="{{'handMRT.softTissue.lesionSameEntity.value' | translate}}"
+        rr-id="han_m_080337"
+        name="isMoreThanOneLesionSameEntity"
+        [(ngModel)]="model.isMoreThanOneLesionSameEntity"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep m-t-30 m-b-15"></div>
+  <div class="c-col-1 c-pad-l m-t-30 m-b-15"></div>
+</div>

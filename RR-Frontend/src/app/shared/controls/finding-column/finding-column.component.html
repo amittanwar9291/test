@@ -1,0 +1,85 @@
+<div class="f-vertical f-space-between f-fill-available-space">
+  <div class="o-radio-list">
+    <div
+      *ngFor="let item of handler.collection | displayActive | paginate: { id: instanceId, itemsPerPage: config.itemCount, currentPage: page } ; let i = index"
+      (click)="setActiveElement(i)"
+    >
+      <rr-multi-value-dropdown
+        *ngIf="!item.isDeleted"
+        [dropdownValues]="config.dropdownValues"
+        [selectedValue]="item[config.findingType]"
+        [customLabelInput]="getCustomLabel(calculateIndex(i))"
+        [index]="(calculateIndex(i))"
+        [indexLabel]="showIndexLabel ? (calculateIndex(i + 1)) : null"
+        (componentDeleted)="removeFinding(calculateIndex(i), item.id)"
+        (newSelection)="updateFindingName($event, item)"
+        [placeholder]="config.placeholder"
+        [disabled]="(calculateIndex(i) !== handler.currentItemIndex) || isDisabled"
+        [attr.rr-id]="getDynamicComponentRRId(calculateIndex(i))"
+        [isItemInvalid]="isElementErrored(item)"
+        [groupedOptions]="config.groupedOptions"
+      >
+      </rr-multi-value-dropdown>
+      <div class="i-know-selection" *ngIf="isIKnowIDescribeDisplayed(i, item)">
+        <rr-description-type
+          name="mamma.description"
+          [ngModel]="item.descriptionType"
+          [descriptionType]="getDescriptionType(item)"
+          [descriptionLabelClass]="config.descriptionLabelClass"
+          [iDescribeLabelRRId]="config.findingColumnIds.iDescribeLabelRRId"
+          [iKnowLabelRRId]="config.findingColumnIds.iKnowLabelRRId"
+          [iDescribeRadioRRId]="config.findingColumnIds.iDescribeRadioRRId"
+          [iKnowRadioRRId]="config.findingColumnIds.iKnowRadioRRId"
+          (ngModelChange)="descriptionTypeChanged($event, calculateIndex(i))"
+        ></rr-description-type>
+      </div>
+    </div>
+    <rr-dynamic-container [hidden]="true"></rr-dynamic-container>
+    <button
+      type="button"
+      (click)="addFinding()"
+      class="dynamic-component-button"
+      [hidden]="isButtonHidden()"
+      [class.disabled]="disableDynamicComponentButton()"
+      [disabled]="disableDynamicComponentButton()"
+      [attr.rr-id]="config.findingColumnIds.buttonRRId"
+    >
+      {{config.buttonText}}
+    </button>
+  </div>
+
+  <pagination-template
+    #pagination="paginationApi"
+    [id]="instanceId"
+    (pageChange)="setPage($event)"
+    [class.disabled]="isDisabled"
+  >
+    <ul class="pagination" *ngIf="!(pagination.pages.length === 0)">
+      <li
+        class="pagination-item"
+        *ngFor="let page of pagination.pages"
+        (click)="pagination.setCurrent(page.value)"
+        [class.current]="pagination.getCurrent() === page.value"
+        [class.ellipsis]="page.label === '...'"
+        [ngClass]="getPaginatorClass(page)"
+      >
+        <a
+          tabindex="0"
+          (keyup.enter)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() !== page.value"
+        >
+          <span
+            >{{ (page.label === '...') ? page.label : (page.label |
+            number:'')}}</span
+          >
+        </a>
+        <ng-container *ngIf="pagination.getCurrent() === page.value">
+          <span
+            >{{ (page.label === '...') ? page.label : (page.label |
+            number:'')}}</span
+          >
+        </ng-container>
+      </li>
+    </ul>
+  </pagination-template>
+</div>

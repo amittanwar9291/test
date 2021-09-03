@@ -1,0 +1,81 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-center f-horizontal">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical">
+      <h1 rr-id="sho_m_070103">
+        {{ "shoulderMRT.jointAndBursae.finding.value" | translate }}*
+      </h1>
+      <div class="o-radio-list overdropdown">
+        <p-radioButton
+          label="{{
+            'shoulderMRT.jointAndBursae.notJointEffusion.value' | translate
+          }}"
+          rr-id="sho_m_070104"
+          name="areFindings"
+          [value]="areFindingsType.No"
+          [(ngModel)]="model.areFindings"
+          class="text-break"
+          rrValidation="areFindings"
+          [notInFinding]="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{ 'shoulderMRT.jointAndBursae.finding.value' | translate }}"
+          rr-id="sho_m_070105"
+          name="areFindings"
+          [value]="areFindingsType.Yes"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          [notInFinding]="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsType.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-vertical col-h-100">
+      <div class="finding-header c-pad-l">
+        <h1
+          rr-id="sho_m_070201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ 'shoulderMRT.jointAndBursae.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <div *ngSwitchCase="findingType.ArticularEffusion" class="col-h-100">
+          <rr-articular-effusion
+            [model]="findingHandler.currentItem"
+          ></rr-articular-effusion>
+        </div>
+        <div *ngSwitchCase="findingType.Capsule" class="col-h-100">
+          <rr-capsule
+            [model]="findingHandler.currentItem"
+            [isCmReinforcedTypeYes]="isCmReinforcedTypeYes"
+          ></rr-capsule>
+        </div>
+        <div *ngSwitchCase="findingType.Bursitis" class="col-h-100">
+          <rr-bursitis [model]="findingHandler.currentItem"></rr-bursitis>
+        </div>
+        <div *ngSwitchCase="findingType.FreeJointBody" class="col-h-100">
+          <rr-free-joint-body
+            [model]="findingHandler.currentItem"
+          ></rr-free-joint-body>
+        </div>
+        <div *ngSwitchDefault class="f-horizontal col-h-100">
+          <div class="c-col-1 c-sep c-pad f-vertical"></div>
+          <div class="c-col-1 c-sep c-pad f-vertical"></div>
+          <div class="c-col-1 c-sep c-pad f-vertical"></div>
+          <div class="c-col-1 c-sep c-pad-l f-vertical"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

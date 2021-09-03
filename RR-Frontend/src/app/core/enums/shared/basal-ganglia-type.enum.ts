@@ -1,0 +1,37 @@
+export enum BasalGangliaTypeEnum {
+  // Right
+  ThalamusRight = 'thalamusRight',
+  PutamenRight = 'putamenRight',
+  GlobusPallidusRight = 'globusPallidusRight',
+  GlobusPallidusInternalRight = 'globusPallidusInternalRight',
+  GlobusPallidusExternalRight = 'globusPallidusExternalRight',
+  CaudateNucleusRight = 'caudateNucleusRight',
+  HeadCaudateNucleusRight = 'headCaudateNucleusRight',
+  BodyCaudateNucleusRight = 'bodyCaudateNucleusRight',
+  TailCcaudateNucleusRight = 'tailCcaudateNucleusRight',
+  InternalCapsuleRight = 'internalCapsuleRight',
+  AnteriorLimbInternalCapsuleRight = 'anteriorLimbInternalCapsuleRight',
+  GenuInternalCapsuleRight = 'genuInternalCapsuleRight',
+  PosteriorLimbInternalCapsuleRight = 'posteriorLimbInternalCapsuleRight',
+  ExternalCapsuleRight = 'externalCapsuleRight',
+  ExtremeCapsuleRight = 'extremeCapsuleRight',
+  ClaustrumRight = 'claustrumRight',
+
+  // Left
+  ThalamusLeft = 'thalamusLeft',
+  PutamenLeft = 'putamenLeft',
+  GlobusPallidusLeft = 'globusPallidusLeft',
+  GlobusPallidusInternalLeft = 'globusPallidusInternalLeft',
+  GlobusPallidusExternalLeft = 'globusPallidusExternalLeft',
+  CaudateNucleusLeft = 'caudateNucleusLeft',
+  HeadCaudateNucleusLeft = 'headCaudateNucleusLeft',
+  BodyCaudateNucleusLeft = 'bodyCaudateNucleusLeft',
+  TailCcaudateNucleusLeft = 'tailCcaudateNucleusLeft',
+  InternalCapsuleLeft = 'internalCapsuleLeft',
+  AnteriorLimbInternalCapsuleLeft = 'anteriorLimbInternalCapsuleLeft',
+  GenuInternalCapsuleLeft = 'genuInternalCapsuleLeft',
+  PosteriorLimbInternalCapsuleLeft = 'posteriorLimbInternalCapsuleLeft',
+  ExternalCapsuleLeft = 'externalCapsuleLeft',
+  ExtremeCapsuleLeft = 'extremeCapsuleLeft',
+  ClaustrumLeft = 'claustrumLeft'
+}

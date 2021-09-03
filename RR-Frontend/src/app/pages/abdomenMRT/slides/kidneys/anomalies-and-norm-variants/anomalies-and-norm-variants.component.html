@@ -1,0 +1,415 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_070202">
+        {{ 'abdomenMRT.kidneys.side.value' | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070203"
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        label="{{ 'abdomenMRT.kidneys.right.value' | translate }}"
+        [value]="sideType.Right"
+        rrValidation="sideType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070204"
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        label="{{ 'abdomenMRT.kidneys.left.value' | translate }}"
+        [value]="sideType.Left"
+        rrValidation="sideType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical c-pad-l c-sep o-list">
+    <h2 rr-id="abd_m_070301">
+      {{'abdomenMRT.kidneys.normVariantanomaly.value' | translate}}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep o-list">
+        <div class="o-radio-list">
+          <p-radioButton
+            rr-id="abd_m_070302"
+            name="normVariantOrAnomalyType"
+            [value]="normVariantOrAnomalyType.Kidney"
+            label="{{'abdomenMRT.kidneys.kidney.value' | translate}}"
+            [(ngModel)]="model.normVariantOrAnomalyType"
+            rrValidation="normVariantOrAnomalyType"
+            rrContentReset="renalArteryBlock renalVeinsBlock ureterBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_070303"
+            name="normVariantOrAnomalyType"
+            [value]="normVariantOrAnomalyType.RenalArtery"
+            label="{{'abdomenMRT.kidneys.renalArtery.value' | translate}}"
+            [(ngModel)]="model.normVariantOrAnomalyType"
+            rrValidation="normVariantOrAnomalyType"
+            rrContentReset="kidneysBlock1 kidneysBlock2 renalArteryBlock renalVeinsBlock ureterBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_070304"
+            name="normVariantOrAnomalyType"
+            [value]="normVariantOrAnomalyType.RenalVeins"
+            label="{{'abdomenMRT.kidneys.renalVeins.value' | translate}}"
+            [(ngModel)]="model.normVariantOrAnomalyType"
+            rrValidation="normVariantOrAnomalyType"
+            rrContentReset="kidneysBlock1 kidneysBlock2 renalArteryBlock ureterBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_070305"
+            name="normVariantOrAnomalyType"
+            [value]="normVariantOrAnomalyType.Ureter"
+            label="{{'abdomenMRT.kidneys.ureter.value' | translate}}"
+            [(ngModel)]="model.normVariantOrAnomalyType"
+            rrValidation="normVariantOrAnomalyType"
+            rrContentReset="kidneysBlock1 kidneysBlock2 renalArteryBlock renalVeinsBlock"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad o-list">
+        <div [ngSwitch]="model.normVariantOrAnomalyType">
+          <div
+            class="o-radio-list"
+            id="kidneysBlock1"
+            *ngSwitchCase="normVariantOrAnomalyType.Kidney"
+          >
+            <h2 rr-id="abd_m_070401" rrInfoIcon="abd_m_07_01">
+              {{'abdomenMRT.kidneys.type.value' | translate}}*
+            </h2>
+            <p-checkbox
+              rr-id="abd_m_070402"
+              name="isAgenesis"
+              label="{{'abdomenMRT.kidneys.agenesis.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAgenesis"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070403"
+              name="isAplasia"
+              label="{{'abdomenMRT.kidneys.aplasia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAplasia"
+              rrContentReset="isAplasiaBlock"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isAplasiaBlock"
+              [rrDisable]="!model.isAplasia"
+            >
+              <p-checkbox
+                rr-id="abd_m_070404"
+                name="isEnlargementOfTheContralateralKidney"
+                label="{{'abdomenMRT.kidneys.enlargementOfThecontralateralKidney.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isEnlargementOfTheContralateralKidney"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              rr-id="abd_m_070405"
+              name="isHypoplasia"
+              label="{{'abdomenMRT.kidneys.hypoplasia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isHypoplasia"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070406"
+              name="isLobarDysmorphia"
+              label="{{'abdomenMRT.kidneys.lobarDysmorphia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isLobarDysmorphia"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isLobarDysmorphiaBlock"
+              [rrDisable]="!model.isLobarDysmorphia"
+            >
+              <p-checkbox
+                rr-id="abd_m_0704131"
+                name="isDDMass"
+                label="{{'abdomenMRT.kidneys.dDMass.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isDDMass"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              rr-id="abd_m_070407"
+              name="isDuplexCollectingSystem"
+              label="{{'abdomenMRT.kidneys.duplexCollectingSystem.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isDuplexCollectingSystem"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070408"
+              name="isDoubleKidney"
+              label="{{'abdomenMRT.kidneys.doubleKidney.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isDoubleKidney"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070409"
+              name="isRenalEctopy"
+              label="{{'abdomenMRT.kidneys.renalEctopy.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isRenalEctopy"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070410"
+              name="isFloatingKidney"
+              label="{{'abdomenMRT.kidneys.floatingKidney.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isFloatingKidney"
+              [rrValidation]="kidneysValidationBlock"
+            >
+            </p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            id="renalArteryBlock"
+            *ngSwitchCase="normVariantOrAnomalyType.RenalArtery"
+          >
+            <h2 rr-id="abd_m_070401">
+              {{'abdomenMRT.kidneys.type.value' | translate}}*
+            </h2>
+            <p-radioButton
+              rr-id="abd_m_070411"
+              name="renalArteryType"
+              [value]="renalArteryType.TwoVesselSupply"
+              label="{{'abdomenMRT.kidneys.2vesselSupply.value' | translate}}"
+              [(ngModel)]="model.renalArteryType"
+              rrValidation="renalArteryType"
+              rrContentReset="renalArteryTypeBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070412"
+              name="renalArteryType"
+              [value]="renalArteryType.ThreeVesselSupply"
+              label="{{'abdomenMRT.kidneys.3vesselSupply.value' | translate}}"
+              [(ngModel)]="model.renalArteryType"
+              rrValidation="renalArteryType"
+              rrContentReset="renalArteryTypeBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070413"
+              name="renalArteryType"
+              [value]="renalArteryType.EarlyBifurcationRenalArtery"
+              label="{{'abdomenMRT.kidneys.earlyBifurcationOfTheRenal.value' | translate}}"
+              [(ngModel)]="model.renalArteryType"
+              rrValidation="renalArteryType"
+              rrContentReset="renalArteryTypeBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070414"
+              name="renalArteryType"
+              [value]="renalArteryType.PolarArtery"
+              label="{{'abdomenMRT.kidneys.polarArtery.value' | translate}}"
+              [(ngModel)]="model.renalArteryType"
+              rrValidation="renalArteryType"
+            >
+            </p-radioButton>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="renalArteryTypeBlock"
+              [rrDisable]="model.renalArteryType !== renalArteryType.PolarArtery"
+            >
+              <p-radioButton
+                rr-id="abd_m_070487"
+                rrUnClickRadio
+                name="polarArteryType"
+                [value]="polarArteryType.Cranial"
+                label="{{'abdomenMRT.kidneys.cranial.value' | translate}}"
+                [(ngModel)]="model.polarArteryType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="abd_m_070487"
+                rrUnClickRadio
+                name="polarArteryType"
+                [value]="polarArteryType.Caudal"
+                label="{{'abdomenMRT.kidneys.caudal.value' | translate}}"
+                [(ngModel)]="model.polarArteryType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+          <div
+            class="o-radio-list"
+            id="renalVeinsBlock"
+            *ngSwitchCase="normVariantOrAnomalyType.RenalVeins"
+          >
+            <h2 rr-id="abd_m_070401">
+              {{'abdomenMRT.kidneys.type.value' | translate}}*
+            </h2>
+            <p-radioButton
+              rr-id="abd_m_070415"
+              name="renalVeinsType"
+              [value]="renalVeinsType.RetroaorticLeftRenal"
+              label="{{'abdomenMRT.kidneys.retroaorticLeftrenalVein.value' | translate}}"
+              [(ngModel)]="model.renalVeinsType"
+              rrValidation="renalVeinsType"
+              rrContentReset="multipleRenalVeinsBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070415"
+              name="renalVeinsType"
+              [value]="renalVeinsType.MultipleRenal"
+              label="{{'abdomenMRT.kidneys.multipleRenalVeins.value' | translate}}"
+              [(ngModel)]="model.renalVeinsType"
+              rrValidation="renalVeinsType"
+            >
+            </p-radioButton>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="multipleRenalVeinsBlock"
+              [rrDisable]="model.renalVeinsType !== renalVeinsType.MultipleRenal"
+            >
+              <p-checkbox
+                rr-id="abd_m_070489"
+                name="isBifurcatedLeftRenalVeinAnteriorAndPosteriorAorta"
+                label="{{'abdomenMRT.kidneys.bifurcatedLeftRenalVeinanteriorPosterior.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isBifurcatedLeftRenalVeinAnteriorAndPosteriorAorta"
+                class="text-break"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div
+            class="o-radio-list"
+            id="ureterBlock"
+            *ngSwitchCase="normVariantOrAnomalyType.Ureter"
+          >
+            <h2 rr-id="abd_m_070401">
+              {{'abdomenMRT.kidneys.type.value' | translate}}*
+            </h2>
+            <p-radioButton
+              rr-id="abd_m_070417"
+              name="ureterType"
+              [value]="ureterType.UreterFissus"
+              label="{{'abdomenMRT.kidneys.ureterFissus.value' | translate}}"
+              [(ngModel)]="model.ureterType"
+              rrValidation="ureterType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070418"
+              name="ureterType"
+              [value]="ureterType.UreterDuplex"
+              label="{{'abdomenMRT.kidneys.ureterDuplex.value' | translate}}"
+              [(ngModel)]="model.ureterType"
+              rrValidation="ureterType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c-col-1 c-pad-l c-sep-l o-list"
+        [ngClass]="{'m-t-20': model.normVariantOrAnomalyType === normVariantOrAnomalyType.Kidney}"
+      >
+        <div
+          class="o-radio-list"
+          id="kidneysBlock2"
+          *ngIf="model.normVariantOrAnomalyType === normVariantOrAnomalyType.Kidney"
+        >
+          <p-checkbox
+            rr-id="abd_m_070503"
+            name="isFusionAnomalies"
+            label="{{'abdomenMRT.kidneys.fusionAnomalies.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isFusionAnomalies"
+            [rrValidation]="kidneysValidationBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isFusionAnomaliesBlock"
+            [rrDisable]="!model.isFusionAnomalies"
+          >
+            <p-radioButton
+              rr-id="abd_m_070504"
+              rrUnClickRadio
+              name="fusionAnomaliesKidneyType"
+              [value]="fusionAnomaliesKidneyType.Horseshoe"
+              label="{{'abdomenMRT.kidneys.horseshoeKidney.value' | translate}}"
+              [(ngModel)]="model.fusionAnomaliesKidneyType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070505"
+              rrUnClickRadio
+              name="fusionAnomaliesKidneyType"
+              [value]="fusionAnomaliesKidneyType.Pancake"
+              label="{{'abdomenMRT.kidneys.pancakeKidney.value' | translate}}"
+              [(ngModel)]="model.fusionAnomaliesKidneyType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070506"
+              rrUnClickRadio
+              name="fusionAnomaliesKidneyType"
+              [value]="fusionAnomaliesKidneyType.CrossedEctopic"
+              label="{{'abdomenMRT.kidneys.crossedEctopicKidney.value' | translate}}"
+              [(ngModel)]="model.fusionAnomaliesKidneyType"
+            >
+            </p-radioButton>
+          </div>
+          <p-checkbox
+            rr-id="abd_m_070507"
+            name="isNonrotation"
+            label="{{'abdomenMRT.kidneys.nonrotation.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isNonrotation"
+            [rrValidation]="kidneysValidationBlock"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_070508"
+            name="isPersistentFetalLobulation"
+            label="{{'abdomenMRT.kidneys.persistentFetalLobulation.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isPersistentFetalLobulation"
+            [rrValidation]="kidneysValidationBlock"
+          >
+          </p-checkbox>
+        </div>
+        <rr-reference-picture
+          [(ngModel)]="model.normVariantOrAnomalyReferencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="normVariantOrAnomalyReferencePicture"
+          [elementsRrIds]="anomaliesAndNormVariantsReferencePictureElementsRrIds"
+          [pictureFileType]="imageFileTypeEnum.NormVariantOrAnomalyImageFile"
+          *ngIf="model.normVariantOrAnomalyType !== normVariantOrAnomalyType.None"
+        >
+        </rr-reference-picture>
+      </div>
+    </div>
+  </div>
+</div>

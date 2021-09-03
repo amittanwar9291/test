@@ -1,0 +1,301 @@
+<div class="col-h-100 f-horizontal">
+  <div class="c-col-1 c-sep c-pad-r">
+    <div class="o-radio-list">
+      <h2 rr-id="spi_c_0402203">
+        {{ 'spineCT.configuration.pattern.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_0402204"
+        [(ngModel)]="model.patternType"
+        label="{{ 'spineCT.configuration.cShaped.value' | translate }}"
+        [value]="patternType.CShaped"
+        name="patternType"
+        rrContentReset="sShapedCheckboxes"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_0402205"
+        [(ngModel)]="model.patternType"
+        label="{{ 'spineCT.configuration.sshaped.value' | translate }}"
+        [value]="patternType.SShaped"
+        name="patternType"
+        rrContentReset="sShapedCheckboxes"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        [rrDisable]="model.patternType !== patternType.SShaped"
+        id="sShapedCheckboxes"
+      >
+        <p-checkbox
+          rr-id="spi_c_0402206"
+          [(ngModel)]="model.isCervicothoracic"
+          binary="true"
+          label="{{ 'spineCT.configuration.cervicothoracic.value' | translate }}"
+          name="isCervicothoracic"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="spi_c_0402207"
+          [(ngModel)]="model.isThoracolumbar"
+          binary="true"
+          label="{{ 'spineCT.configuration.thoracolumbar.value' | translate }}"
+          name="isThoracolumbar"
+        ></p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="spi_c_0402208"
+        [(ngModel)]="model.patternType"
+        label="{{ 'spineCT.configuration.tripleScoliosis.value' | translate }}"
+        [value]="patternType.TripleScoliosis"
+        name="patternType"
+        rrContentReset="sShapedCheckboxes"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div class="o-radio-list m-t-30">
+      <h2 rr-id="spi_c_0402209">
+        {{ 'spineCT.configuration.torsion.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="spi_c_0402210"
+        [(ngModel)]="model.isTorsionCervicalSpine"
+        binary="true"
+        label="{{ 'spineCT.configuration.cervicalSpine.value' | translate }}"
+        name="isTorsionCervicalSpine"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_c_0402211"
+        [(ngModel)]="model.isTorsionThoracicSpine"
+        binary="true"
+        label="{{ 'spineCT.configuration.thoracicSpine.value' | translate }}"
+        name="isTorsionThoracicSpine"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_c_0402212"
+        [(ngModel)]="model.isTorsionLumbarSpine"
+        binary="true"
+        label="{{ 'spineCT.configuration.lumbarSpine.value' | translate }}"
+        name="isTorsionLumbarSpine"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="spi_c_0403200"
+      [(ngModel)]="model.isCervicalSpine"
+      binary="true"
+      label="{{ 'spineCT.configuration.cervicalSpine.value' | translate }}"
+      name="isCervicalSpine"
+      rrContentReset="sectionHWS"
+      (click)="resetLocalizer('cervicalSpineLocation')"
+      labelStyleClass="ui-fat-label"
+    >
+    </p-checkbox>
+    <div
+      class="o-radio-list"
+      id="sectionHWS"
+      [rrDisable]="!model.isCervicalSpine"
+    >
+      <p rr-id="spi_c_0403201">
+        {{ 'spineCT.configuration.vertexCervicalSpine.value' | translate }}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_c_0403202"
+        (click)="openLargeLocalizer(selectionAccessibilityModeEnum.C0toC7)"
+        [spineLocation]="model.cervicalSpineLocation"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        [selectionAccessibilityMode]="selectionAccessibilityModeEnum.C0toC7"
+        [attr.name]="'cervicalSpineLocation'"
+      >
+      </rr-spine-simple>
+      <p-radioButton
+        class="m-t-10"
+        rr-id="spi_c_0403203"
+        [(ngModel)]="model.cervicalVertexSpineType"
+        label="{{ 'spineCT.configuration.rightConvex.value' | translate }}"
+        [value]="cervicalVertexSpineType.RightConvex"
+        name="cervicalVertexSpineType"
+        rrContentReset="rrNumberInputHWS"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_0403204"
+        [(ngModel)]="model.cervicalVertexSpineType"
+        label="{{ 'spineCT.configuration.leftConvex.value' | translate }}"
+        [value]="cervicalVertexSpineType.LeftConvex"
+        name="cervicalVertexSpineType"
+        rrContentReset="rrNumberInputHWS"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="rrNumberInputHWS"
+        [rrDisable]="model.cervicalVertexSpineType===cervicalVertexSpineType.None"
+      >
+        <p
+          rr-id="spi_c_0403205"
+          rrInfoIcon="spi_c_04_04"
+          infoIconPdfLandscape="true"
+        >
+          {{ 'spineCT.configuration.cobbAngle.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="spi_c_0403206"
+          [(ngModel)]="model.cervicalSpineCobbAngle"
+          labelRrId="spi_c_0403207"
+          name="cervicalSpineCobbAngle"
+          label="{{ 'spineCT.configuration.degree.value' | translate }}"
+          [config]="{ min: 1, max: 180, placeholder: '---' }"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="spi_c_0404200"
+      [(ngModel)]="model.isThoracicSpine"
+      binary="true"
+      label="{{ 'spineCT.configuration.thoracicSpine.value' | translate }}"
+      name="isThoracicSpine"
+      rrContentReset="sectionBWS"
+      (click)="resetLocalizer('thoracicSpineLocation')"
+      labelStyleClass="ui-fat-label"
+    >
+    </p-checkbox>
+    <div
+      class="o-radio-list"
+      id="sectionBWS"
+      [rrDisable]="!model.isThoracicSpine"
+    >
+      <p rr-id="spi_c_0404201">
+        {{ 'spineCT.configuration.vertexOfThoracicSpine.value' | translate }}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_c_0404202"
+        (click)="openLargeLocalizer(selectionAccessibilityModeEnum.TH1toTH12)"
+        [spineLocation]="model.thoracicSpineLocation"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        [selectionAccessibilityMode]="selectionAccessibilityModeEnum.TH1toTH12"
+        [attr.name]="'thoracicSpineLocation'"
+      >
+      </rr-spine-simple>
+      <p-radioButton
+        class="m-t-10"
+        rr-id="spi_c_0404203"
+        [(ngModel)]="model.thoracicVertexSpineType"
+        label="{{ 'spineCT.configuration.rightConvex.value' | translate }}"
+        [value]="thoracicVertexSpineType.RightConvex"
+        name="thoracicVertexSpineType"
+        rrContentReset="rrNumberInputBWS"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_0404204"
+        [(ngModel)]="model.thoracicVertexSpineType"
+        label="{{ 'spineCT.configuration.leftConvex.value' | translate }}"
+        [value]="thoracicVertexSpineType.LeftConvex"
+        name="thoracicVertexSpineType"
+        rrContentReset="rrNumberInputBWS"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="rrNumberInputBWS"
+        [rrDisable]="model.thoracicVertexSpineType===thoracicVertexSpineType.None"
+      >
+        <p
+          rr-id="spi_c_0404205"
+          rrInfoIcon="spi_c_04_04"
+          infoIconPdfLandscape="true"
+        >
+          {{ 'spineCT.configuration.cobbAngle.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="spi_c_0404206"
+          [(ngModel)]="model.thoracicSpineCobbAngle"
+          labelRrId="spi_c_0404207"
+          name="thoracicSpineCobbAngle"
+          label="{{ 'spineCT.configuration.degree.value' | translate }}"
+          [config]="{ min: 1, max: 180, placeholder: '---' }"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad-l f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="spi_c_0405200"
+      [(ngModel)]="model.isLumbarSpine"
+      binary="true"
+      label="{{ 'spineCT.configuration.lumbarSpine.value' | translate }}"
+      name="isLumbarSpine"
+      rrContentReset="sectionLWS"
+      (click)="resetLocalizer('lumbarSpineLocation')"
+      labelStyleClass="ui-fat-label"
+    >
+    </p-checkbox>
+    <div
+      class="o-radio-list"
+      id="sectionLWS"
+      [rrDisable]="!model.isLumbarSpine"
+    >
+      <p rr-id="spi_c_0405201">
+        {{ 'spineCT.configuration.vertexLumbarSpine.value' | translate }}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_c_0405202"
+        (click)="openLargeLocalizer(selectionAccessibilityModeEnum.L1toOsCoccygis)"
+        [spineLocation]="model.lumbarSpineLocation"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        [selectionAccessibilityMode]="selectionAccessibilityModeEnum.L1toOsCoccygis"
+        [attr.name]="'lumbarSpineLocation'"
+      >
+      </rr-spine-simple>
+      <p-radioButton
+        class="m-t-10"
+        rr-id="spi_c_0405203"
+        [(ngModel)]="model.lumbarVertexSpineType "
+        label="{{ 'spineCT.configuration.rightConvex.value' | translate }}"
+        [value]="lumbarVertexSpineType.RightConvex"
+        name="lumbarVertexSpineType"
+        rrContentReset="rrNumberInputLWS"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_0405204"
+        [(ngModel)]="model.lumbarVertexSpineType "
+        label="{{ 'spineCT.configuration.leftConvex.value' | translate }}"
+        [value]="lumbarVertexSpineType.LeftConvex"
+        name="lumbarVertexSpineType"
+        rrContentReset="rrNumberInputLWS"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="rrNumberInputLWS"
+        [rrDisable]="model.lumbarVertexSpineType===lumbarVertexSpineType.None"
+      >
+        <p
+          rr-id="spi_c_0405205"
+          rrInfoIcon="spi_c_04_04"
+          infoIconPdfLandscape="true"
+        >
+          {{ 'spineCT.configuration.cobbAngle.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="spi_c_0405206"
+          [(ngModel)]="model.lumbarSpineCobbAngle"
+          labelRrId="spi_c_0405207"
+          name="lumbarSpineCobbAngle"
+          label="{{ 'spineCT.configuration.degree.value' | translate }}"
+          [config]="{ min: 1, max: 180, placeholder: '---' }"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+</div>

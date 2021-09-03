@@ -1,0 +1,67 @@
+export class BonesTranslationsModel {
+  fracture: string;
+  tibia: string;
+  fibula: string;
+  malleoli: string;
+  talus: string;
+  calcaneus: string;
+  osNaviculare: string;
+  osCuneiformMedia: string;
+  osCuneiformIntermedium: string;
+  osCuneiformLateral: string;
+  osCuboideum: string;
+  osMetatarsal1: string;
+  osMetatarsal2: string;
+  osMetatarsal3: string;
+  osMetatarsal4: string;
+  osMetatarsal5: string;
+  proximalPhalanxD1: string;
+  proximalPhalanxD2: string;
+  proximalPhalanxD3: string;
+  proximalPhalanxD4: string;
+  proximalPhalanxD5: string;
+  middlePhalanxD2: string;
+  middlePhalanxD3: string;
+  middlePhalanxD4: string;
+  middlePhalanxD5: string;
+  distalPhalanxD1: string;
+  distalPhalanxD2: string;
+  distalPhalanxD3: string;
+  distalPhalanxD4: string;
+  distalPhalanxD5: string;
+  complexOrMultipleBones: string;
+
+  constructor() {
+    this.fracture = 'Fracture';
+    this.tibia = 'Distal Tibia';
+    this.fibula = 'Distal Fibula';
+    this.malleoli = 'Malleoli';
+    this.talus = 'Talus';
+    this.calcaneus = 'Calcaneus';
+    this.osNaviculare = 'Os naviculare';
+    this.osCuneiformMedia = 'Os cuneiform';
+    this.osCuneiformIntermedium = 'Os cuneiform';
+    this.osCuneiformLateral = 'Os cuneiform';
+    this.osCuboideum = 'Os cuboideum';
+    this.osMetatarsal1 = 'Os metatarsal 1';
+    this.osMetatarsal2 = 'Os metatarsal 2';
+    this.osMetatarsal3 = 'Os metatarsal 3';
+    this.osMetatarsal4 = 'Os metatarsal 4';
+    this.osMetatarsal5 = 'Os metatarsal 5';
+    this.proximalPhalanxD1 = 'Proximal phalanx D1';
+    this.proximalPhalanxD2 = 'Proximal phalanx D2';
+    this.proximalPhalanxD3 = 'Proximal phalanx D3';
+    this.proximalPhalanxD4 = 'Proximal phalanx D4';
+    this.proximalPhalanxD5 = 'Proximal phalanx D5';
+    this.middlePhalanxD2 = 'Middle phalanx D2';
+    this.middlePhalanxD3 = 'Middle phalanx D3';
+    this.middlePhalanxD4 = 'Middle phalanx D4';
+    this.middlePhalanxD5 = 'Middle phalanx D5';
+    this.distalPhalanxD1 = 'Distal phalanx D1';
+    this.distalPhalanxD2 = 'Distal phalanx D2';
+    this.distalPhalanxD3 = 'Distal phalanx D3';
+    this.distalPhalanxD4 = 'Distal phalanx D4';
+    this.distalPhalanxD5 = 'Distal phalanx D5';
+    this.complexOrMultipleBones = 'Complex / Multiple bones';
+  }
+}

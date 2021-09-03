@@ -1,0 +1,152 @@
+<div class="f-vertical f-start o-radio-list col-h-100">
+  <h2 rr-id="tho_m_0602114" class="c-pad-l">
+    {{ "thoraxMRT.pleura.pancreasDetails.value" | translate }}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <p-checkbox
+        rr-id="tho_m_0602115"
+        name="isFocalPancreaticLesion"
+        rrValidation="isFocalPancreaticLesion isDiffusePancreaticLesion isWirsungDuctDilatation"
+        rrContentReset="isFocalPancreaticLesion-block"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{ 'thoraxMRT.pleura.focalPancreaticLesion.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFocalPancreaticLesion"
+      ></p-checkbox>
+      <div
+        id="isFocalPancreaticLesion-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isFocalPancreaticLesion"
+      >
+        <p rr-id="tho_m_0602116" class="m-b-5">
+          {{ "thoraxMRT.pleura.localization.value" | translate }}*
+        </p>
+        <p-radioButton
+          rr-id="tho_m_0602117"
+          name="leasionLocalizationType"
+          [(ngModel)]="model.leasionLocalizationType"
+          rrValidation="leasionLocalizationType"
+          [value]="leasionLocalizationTypeEnum.Head"
+          label="{{ 'thoraxMRT.pleura.head.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0602118"
+          name="leasionLocalizationType"
+          [(ngModel)]="model.leasionLocalizationType"
+          rrValidation="leasionLocalizationType"
+          [value]="leasionLocalizationTypeEnum.Body"
+          label="{{ 'thoraxMRT.pleura.body.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0602119"
+          name="leasionLocalizationType"
+          [(ngModel)]="model.leasionLocalizationType"
+          rrValidation="leasionLocalizationType"
+          [value]="leasionLocalizationTypeEnum.Tail"
+          label="{{ 'thoraxMRT.pleura.tail.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0602120"
+          name="leasionLocalizationType"
+          [(ngModel)]="model.leasionLocalizationType"
+          rrValidation="leasionLocalizationType"
+          [value]="leasionLocalizationTypeEnum.UncinateProcess"
+          label="{{ 'thoraxMRT.pleura.uncinateProcess.value' | translate }}"
+        ></p-radioButton>
+        <p rr-id="tho_m_0602121" class="m-t-17 m-b-3">
+          {{ "thoraxMRT.pleura.maxDiameter.value" | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="tho_m_0602122"
+          labelRrId="tho_m_0602123"
+          name="focalPancreaticLesionMaxDiameterInMm"
+          rrValidation="focalPancreaticLesionMaxDiameterInMm"
+          [(ngModel)]="model.focalPancreaticLesionMaxDiameterInMm"
+          [label]="'thoraxMRT.pleura.inMm.value' | translate"
+          [config]="{ labelWidth: 175, min: 1, max: 250, placeholder: '---' }"
+        ></rr-number-input>
+        <p rr-id="tho_m_0602124" class="m-t-18 m-b-1">
+          {{ "thoraxMRT.pleura.differentialDiagnosis.value" | translate }}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="differentialDiagnosisOptions"
+          name="differentialDiagnosis"
+          rr-id="tho_m_0602125"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.differentialDiagnosis"
+          (selectionChanged)="clearSuspicionCheckbox()"
+        >
+        </p-dropdown>
+        <div
+          class="o-radio-list"
+          [rrDisable]="
+            model.differentialDiagnosis === pleuraDiagnosisTypeEnum.None
+          "
+        >
+          <p-checkbox
+            rr-id="tho_m_0602126"
+            name="isSuspicionOf"
+            label="{{ 'thoraxMRT.pleura.suspicionOf.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOf"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="tho_m_0602190"
+          name="isMoreThan1Lesion"
+          class="m-t-21"
+          label="{{ 'thoraxMRT.pleura.lesionOfTheSame.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isMoreThan1Lesion"
+        ></p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+      <p-checkbox
+        rr-id="tho_m_0603109"
+        name="isDiffusePancreaticLesion"
+        rrValidation="isFocalPancreaticLesion isDiffusePancreaticLesion isWirsungDuctDilatation"
+        labelStyleClass="ui-fat-label"
+        rrContentReset="isDiffusePancreaticLesion-block"
+        label="{{
+          'thoraxMRT.pleura.diffusePancreaticLesion.value' | translate
+        }}"
+        binary="true"
+        [(ngModel)]="model.isDiffusePancreaticLesion"
+      ></p-checkbox>
+      <div
+        id="isDiffusePancreaticLesion-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isDiffusePancreaticLesion"
+      >
+        <p-checkbox
+          rr-id="tho_m_0603110"
+          name="isFattyAtrophy"
+          label="{{ 'thoraxMRT.pleura.fattyAtrophy.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isFattyAtrophy"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="tho_m_0603111"
+        class="m-t-21"
+        name="isWirsungDuctDilatation"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{
+          'thoraxMRT.pleura.wirsungsDuctDilatation.value' | translate
+        }}"
+        binary="true"
+        [(ngModel)]="model.isWirsungDuctDilatation"
+        rrValidation="isFocalPancreaticLesion isDiffusePancreaticLesion isWirsungDuctDilatation"
+      ></p-checkbox>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad"></div>
+
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

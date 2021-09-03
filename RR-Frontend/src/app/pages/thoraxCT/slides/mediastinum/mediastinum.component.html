@@ -1,0 +1,109 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center" *ngIf="isLargeLocalizerOpened">
+    <rr-lungs-complex
+      name="lungsLocationLarge"
+      [(ngModel)]="findingHandler.currentItem.lungsLocation"
+      (close)="onLargeLocalizerClosed()"
+    ></rr-lungs-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" [hidden]="isLargeLocalizerOpened">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="tho_c_040103" class="p-b-7">
+        {{'thoraxCT.mediastinum.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="tho_c_040104"
+        label="{{'thoraxCT.mediastinum.lymphNodesMediastinumMediastinal.value' | translate}}"
+        name="areFindings"
+        class="text-break"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        labelStyleClass="text-break"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040105"
+        label="{{'thoraxCT.mediastinum.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        class="p-b-3"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [setDescriptionTypes]="['Mass']"
+        [attr.name]="'findingsHandlerComponent'"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-start" [class.c-pad-l]="!isFindingWithTabs()">
+      <div [class]="findingHandler.currentItem.findingType+'-header'">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== 'None'"
+          rr-id="tho_c_040201"
+        >
+          {{'thoraxCT.mediastinum.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem('None')"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-mediastinum-finding
+          *ngIf="isCurrentItem('Mediastinum')"
+          [model]="findingHandler.currentItem"
+        ></rr-mediastinum-finding>
+        <rr-lymph-nodes
+          *ngIf="isCurrentItem('LymphNodes')"
+          [model]="findingHandler.currentItem"
+          [isRECIST2CheckboxSelectable]="isRECISTCheckboxSelectable()"
+        ></rr-lymph-nodes>
+        <rr-cardio-pulmonary-arteries
+          *ngIf="isCurrentItem('CardiovascularPulmonaryArteries')"
+          [isLargeLocalizerOpened]="isLargeLocalizerOpened"
+          (emitLocalizer)="setLargeLocalizerOpened($event)"
+          [model]="findingHandler.currentItem"
+        ></rr-cardio-pulmonary-arteries>
+        <rr-cardio-heart
+          *ngIf="isCurrentItem('CardiovascularHeart')"
+          [model]="findingHandler.currentItem"
+          [additionalData]="additionalData"
+        ></rr-cardio-heart>
+        <rr-cardio-thoracic-aorta
+          *ngIf="isCurrentItem('CardiovascularThoracicAorta')"
+          [model]="findingHandler.currentItem"
+        ></rr-cardio-thoracic-aorta>
+        <rr-esuphagus
+          *ngIf="isCurrentItem('Esuphagus')"
+          [model]="findingHandler.currentItem"
+        ></rr-esuphagus>
+        <rr-trachea
+          *ngIf="isCurrentItem('Trachea')"
+          [model]="findingHandler.currentItem"
+        ></rr-trachea>
+        <rr-space-requirement
+          *ngIf="isCurrentItem('Mass')"
+          [model]="findingHandler.currentItem"
+          [additionalData]="additionalData"
+        ></rr-space-requirement>
+      </div>
+    </div>
+  </div>
+</form>

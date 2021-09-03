@@ -1,0 +1,125 @@
+<div class="reportlist option-panel-container f-horizontal f-end">
+  <!--  new report-->
+  <button
+    class="button--unfilled"
+    (click)="handleCreateReport()"
+    [disabled]="
+      !isEnablingMode(viewModes.New, viewModes.Clone, viewModes.List) ||
+      !isEditingUser()
+    "
+    pTooltip="{{ 'reportlist.tooltip.new' | translate }}"
+    showDelay="700"
+    [tooltipDisabled]="isNewOrClone()"
+    rr-id="fra_030301"
+  >
+    <img
+      class="option-panel-button-icon"
+      [src]="
+        isNewOrClone()
+          ? 'assets/img/shared/report-list/patient-close.svg'
+          : 'assets/img/shared/report-list/patient.svg'
+      "
+    />
+    <span translate>reportlist.optionsPanel.patient</span>
+  </button>
+
+  <!--  search-->
+  <button
+    class="button--unfilled"
+    (click)="handleSearchReport()"
+    [disabled]="!isEnablingMode(viewModes.Search, viewModes.List)"
+    pTooltip="{{ 'reportlist.tooltip.search' | translate }}"
+    showDelay="700"
+    [tooltipDisabled]="isSearchOrSearchActive()"
+    rr-id="fra_030502"
+  >
+    <img
+      [src]="
+        isSearchOrSearchActive()
+          ? 'assets/img/shared/report-list/search-close.svg'
+          : 'assets/img/shared/report-list/search.svg'
+      "
+    />
+    <span translate>reportlist.optionsPanel.search</span>
+  </button>
+
+  <!--  refresh-->
+  <button
+    class="button--unfilled button--unfilled-icon"
+    (click)="refreshList()"
+    [disabled]="!isEnablingMode(viewModes.List)"
+    pTooltip="{{ 'reportlist.tooltip.refresh' | translate }}"
+    showDelay="700"
+  >
+    <i class="pi pi-refresh"></i>
+  </button>
+
+  <!--  reset filter-->
+  <button
+    class="button--unfilled button--unfilled-icon"
+    (click)="clearOptions()"
+    [disabled]="!isEnablingMode(viewModes.List)"
+    pTooltip="{{ 'reportlist.tooltip.reset' | translate }}"
+    showDelay="700"
+  >
+    <i class="pi pi-times"></i>
+  </button>
+
+  <div class="filter-label-container">
+    <span>{{ "reportlist.filter" | translate }}:</span>
+  </div>
+
+  <!--  status filter-->
+  <div rr-id="fra_030302">
+    <rr-report-list-filter-selection
+      [state]="state"
+      [caption]="'reportlist.status' | translate"
+      [options]="statuses"
+      [filterColumn]="filterColumns.Status"
+      [selections]="filterSelections[filterColumns.Status]"
+      [styleClass]="'option-panel-dropdown option-panel-dropdown--medium'"
+      (select)="onFilterValueSelected()"
+    ></rr-report-list-filter-selection>
+  </div>
+
+  <!--  examination filter-->
+  <div rr-id="fra_030302">
+    <rr-report-list-filter-selection
+      [state]="state"
+      [caption]="'reportlist.examination' | translate"
+      [options]="examinations"
+      [filterColumn]="filterColumns.Examination"
+      [selections]="filterSelections[filterColumns.Examination]"
+      [styleClass]="
+        'option-panel-dropdown option-panel-dropdown--large option-panel-dropdown--long'
+      "
+      (select)="onFilterValueSelected()"
+    ></rr-report-list-filter-selection>
+  </div>
+
+  <!--  user filter-->
+  <div rr-id="fra_030401">
+    <rr-report-list-filter-selection
+      [state]="state"
+      [caption]="'reportlist.doctor' | translate"
+      [options]="users"
+      [filterColumn]="filterColumns.User"
+      [selections]="filterSelections[filterColumns.User]"
+      [styleClass]="'option-panel-dropdown'"
+      (select)="onFilterValueSelected()"
+    ></rr-report-list-filter-selection>
+  </div>
+
+  <!--  mine filter-->
+  <button
+    class="button--unfilled button--unfilled-borderless button--unfilled-mine"
+    [ngClass]="{ 'button--unfilled-mine-bold': isCurrentUserFilter() }"
+    (click)="toggleCurrentUserFilter()"
+    [disabled]="!isEnablingMode(viewModes.List)"
+    pTooltip="{{ 'reportlist.tooltip.mine' | translate }}"
+    showDelay="700"
+    rr-id="fra_030501"
+  >
+    <span translate>reportlist.optionsPanel.mine</span>
+  </button>
+</div>

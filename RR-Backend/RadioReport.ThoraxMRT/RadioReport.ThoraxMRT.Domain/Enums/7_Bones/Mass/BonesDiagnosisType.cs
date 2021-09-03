@@ -1,0 +1,37 @@
+namespace RadioReport.ThoraxMRT.Domain.Enums
+{
+    public enum BonesDiagnosisType : byte
+    {
+        None = 0,
+        BenigLesionNotFurtherSpecified = 1,
+        MalignantLesionNotFurtherSpecified = 2,
+        DignityUnclear = 3,
+        IntraosseousLipoma = 4,
+        Haemangioma = 5,
+        IntraosseousCyst = 6,
+        AneurysmalBoneCyst = 7,
+        EosinophilicGranuloma = 8,
+        BoneIslandEnostosis = 9,
+        FibrousDysplasia = 10,
+        OsteoidOsteoma = 11,
+        Osteoblastoma = 12,
+        Osteochondroma = 13,
+        Chondroblastoma = 14,
+        Enchondroma = 15,
+        GiantCellTumourBenign = 16,
+        MetastasisOsteolytic = 17,
+        MetastasisOsteoblastic = 18,
+        MetastasisOsteolyticAndOsteoblastic = 19,
+        Plasmocytoma = 20,
+        MultipleMyeloma = 21,
+        EwingSarcoma = 22,
+        Osteosarcoma = 23,
+        Chondrosarcoma = 24,
+        Chordoma = 25,
+        Lymphoma = 26,
+        GiantCellTumourMalignant = 27,
+        SchmorlsNodes = 28,
+        Osteomyelitis = 29,
+        BoneInfarction = 30,
+    }
+}

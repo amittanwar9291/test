@@ -1,0 +1,250 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="c-col-1 c-pad sliders-z-index m-t-10 m-b-10">
+    <div class="o-list p-l-10 p-r-10">
+      <div class="o-radio-list">
+        <h2 rr-id="spi_m_070227" class="m-b-0">
+          {{ 'spineMRT.spinalCanal.signalBehaviourT1w.value' | translate }}
+        </h2>
+        <p rr-id="spi_m_070228" class="font-15">
+          {{ 'spineMRT.spinalCanal.signalBehaviourReferenceSpinal.value' |
+          translate }}
+        </p>
+        <rr-slider-number-triple-input
+          rr-id="spi_m_070252"
+          name="t1wSignal"
+          [(ngModel)]="model.t1wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="spi_m_070229" class="m-b-0">
+          {{ 'spineMRT.spinalCanal.signalBehaviourT2w.value' | translate }}
+        </h2>
+        <p rr-id="spi_m_070256" class="font-15">
+          {{ 'spineMRT.spinalCanal.signalBehaviourReferenceSpinal.value' |
+          translate }}
+        </p>
+        <rr-slider-number-triple-input
+          rr-id="spi_m_070251"
+          name="t2wSignal"
+          [(ngModel)]="model.t2wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep-l m-t-65 m-b-10">
+    <div class="o-radio-list p-l-10 p-r-10 m-t-10 text-break">
+      <h2 rr-id="spi_m_070352">
+        {{ 'spineMRT.spinalCanal.detail.value' | translate }}
+      </h2>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.t2wHypointenseMargin.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isT2wHypointenseRim"
+        rr-id="spi_m_070353"
+        name="isT2wHypointenseRim"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.t1wHeterogeneousSignalIntensity.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isT1wHeterogeneousSignalIntensity"
+        rr-id="spi_m_070354"
+        name="isT1wHeterogeneousSignalIntensity"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.calcification.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        rr-id="spi_m_070355"
+        name="isCalcification"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.bleedingIn.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isHemorrhage"
+        rr-id="spi_m_070356"
+        name="isHaemorrhage"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.hypointensAfterFatSaturation.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isHypointenseAfterFatSaturation"
+        rr-id="spi_m_070357"
+        name="isHypointenseAfterFatSaturation"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.liquorisointens.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLiquorisointense"
+        rr-id="spi_m_070358"
+        name="isLiquorisointense"
+      >
+      </p-checkbox>
+      <p-checkbox
+        *ngIf="model.spinalCanalLocation.extradural"
+        label="{{ 'spineMRT.spinalCanal.fatIsointens.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isFatIsointens"
+        rr-id="spi_m_070378"
+        name="isFatIsointens"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.sTIRTIRMHyperintensive.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSTIROrTIRMHyperintense"
+        rr-id="spi_m_070359"
+        name="isSTIROrTIRMHyperintense"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep-l m-t-10 m-b-10">
+    <div
+      class="o-radio-list p-l-10 p-r-10"
+      [rrDisable]="!isCMReinforcedTypeYes"
+    >
+      <h2 rr-id="spi_m_070441">
+        {{ 'spineMRT.spinalCanal.kMEnhancement.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="spi_m_070442"
+        [value]="contrastEnhancementTypeEnum.Strong"
+        name="contrastEnhancementType"
+        [(ngModel)]="model.contrastEnhancementType"
+        label="{{ 'spineMRT.spinalCanal.powerful.value' | translate}}"
+        rrUnClickRadio
+        rrContentReset="cmEnhancementHomogeneityTypeBlock"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_m_070443"
+        [value]="contrastEnhancementTypeEnum.Weak"
+        name="contrastEnhancementType"
+        [(ngModel)]="model.contrastEnhancementType"
+        label="{{ 'spineMRT.spinalCanal.low.value' | translate}}"
+        rrUnClickRadio
+        rrContentReset="cmEnhancementHomogeneityTypeBlock"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_m_070444"
+        [value]="contrastEnhancementTypeEnum.No"
+        name="contrastEnhancementType"
+        [(ngModel)]="model.contrastEnhancementType"
+        label="{{ 'spineMRT.spinalCanal.no.value' | translate}}"
+        rrUnClickRadio
+        rrContentReset="cmEnhancementHomogeneityTypeBlock"
+      ></p-radioButton>
+      <div
+        id="cmEnhancementHomogeneityTypeBlock"
+        class="o-radio-list nested-content"
+        [rrDisable]="model.contrastEnhancementType !== contrastEnhancementTypeEnum.Strong && model.contrastEnhancementType !== contrastEnhancementTypeEnum.Weak"
+      >
+        <p-radioButton
+          rr-id="spi_m_070445"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          label="{{ 'spineMRT.spinalCanal.homogeneous.value' | translate}}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_m_070446"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          label="{{ 'spineMRT.spinalCanal.heterogeneous.value' | translate}}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_m_070447"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.RimEnhancement"
+          label="{{ 'spineMRT.spinalCanal.marginal.value' | translate}}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          *ngIf="model.spinalCanalLocation.epidural"
+          rr-id="spi_m_0704201"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Epidural"
+          label="{{ 'spineMRT.spinalCanal.epidural.value' | translate}}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          *ngIf="model.spinalCanalLocation.extradural"
+          rr-id="spi_m_0704202"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.TailSign"
+          label="{{ 'spineMRT.spinalCanal.tailSign.value' | translate}}"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad-l c-sep-l m-t-10 m-b-10">
+    <div class="o-list p-l-5">
+      <div class="o-radio-list m-b-25">
+        <h2 rr-id="spi_m_070542">
+          {{ 'spineMRT.spinalCanal.shapeMyelon.value' | translate}}
+        </h2>
+        <p-checkbox
+          *ngIf="model.spinalCanalLocation.extramedullary || model.spinalCanalLocation.epidural"
+          binary="true"
+          rr-id="spi_m_070543"
+          label="{{ 'spineMRT.spinalCanal.distension.value' | translate}}"
+          name="isSwelling"
+          [(ngModel)]="model.isSwelling"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          rr-id="spi_m_070544"
+          label="{{ 'spineMRT.spinalCanal.displacement.value' | translate}}"
+          name="isDisplacement"
+          [(ngModel)]="model.isDisplacement"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          rr-id="spi_m_070545"
+          label="{{ 'spineMRT.spinalCanal.compression.value' | translate}}"
+          name="isCompression"
+          [(ngModel)]="model.isCompression"
+        ></p-checkbox>
+      </div>
+      <div
+        class="o-radio-list"
+        *ngIf="model.spinalCanalLocation.extradural || model.spinalCanalLocation.epidural"
+      >
+        <h2 rr-id="spi_m_070550">
+          {{ 'spineMRT.spinalCanal.shapeEpiduralSpace.value' | translate}}
+        </h2>
+        <p-checkbox
+          *ngIf="model.spinalCanalLocation.epidural"
+          binary="true"
+          rr-id="spi_m_070551"
+          label="{{ 'spineMRT.spinalCanal.wideningEpiduralGreaseMeshMm.value' | translate}}"
+          name="isWideningEpiduralFatTissueMoreThan7Mm"
+          [(ngModel)]="model.isWideningEpiduralFatTissueMoreThan7Mm"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          rr-id="spi_m_070552"
+          label="{{ 'spineMRT.spinalCanal.deformationOfTheDural.value' | translate}}"
+          name="isDeformationOfTheDuralSac"
+          [(ngModel)]="model.isDeformationOfTheDuralSac"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

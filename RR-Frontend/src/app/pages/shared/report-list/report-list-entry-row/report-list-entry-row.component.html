@@ -1,0 +1,196 @@
+<div
+  class="reportlist-row reportlist-body-row"
+  [ngClass]="{ 'reportlist-body-row--locked': report?.report.isLocked }"
+>
+  <!--  add button-->
+  <div class="reportlist-cell" [ngClass]="{ 'clonereport-cell': isCloneable }">
+    <div
+      class="reportlist-cell-hitarea"
+      [ngClass]="{
+        'reportlist-cell-hitarea--clickable': isList() && isCloneable
+      }"
+      (click)="emitCloneReport()"
+      pTooltip="{{ 'reportlist.tooltip.clone' | translate }}"
+      showDelay="700"
+      [tooltipDisabled]="!isCloneable"
+    >
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <img
+            *ngIf="isCloneable"
+            src="assets/img/shared/report-list/plus.svg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient name-->
+  <div class="reportlist-cell reportlist-cell--bold" rr-id="fra_030104">
+    <div
+      class="reportlist-cell-hitarea"
+      [ngClass]="{ 'reportlist-cell-hitarea--clickable': !isDialog }"
+      (click)="emitShowPatientOverview()"
+    >
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <div class="patient-name-display-container">
+            <span>{{ getPatientName() }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient gender-->
+  <div class="reportlist-cell" rr-id="fra_030105">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span translate
+            >reportlist.genderEnum.{{ report.patient.gender }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient birthdate-->
+  <div class="reportlist-cell" rr-id="fra_030204">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span *ngIf="report.patient.birthDate"
+            >{{ report.patient.birthDate | date: dateFormat }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient age-->
+  <div class="reportlist-cell" rr-id="fra_030205">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>{{ report.report.patientAge }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  freefield-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  status-->
+  <div
+    class="reportlist-cell status-cell"
+    [ngClass]="{
+      'status-cell--open': report.report.status === reportStatuses.Open,
+      'status-cell--inprogress':
+        report.report.status === reportStatuses.InProgress,
+      'status-cell--completed':
+        report.report.status === reportStatuses.Completed,
+      'status-cell--exported': report.report.status === reportStatuses.Exported,
+      'status-cell--canceled': report.report.status === reportStatuses.Canceled,
+      'status-cell--approved': report.report.status === reportStatuses.Approved,
+      'status-cell--generated':
+        report.report.status === reportStatuses.Generated
+    }"
+    rr-id="fra_030307"
+  >
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>{{ getStatusTranslation(report.report.status) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  examination type-->
+  <div class="reportlist-cell" rr-id="fra_030308">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span
+            >{{ getModuleNameTranslation(report.report.examinationType) }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  examination date-->
+  <div class="reportlist-cell" rr-id="fra_030309">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span *ngIf="report.report.examinationDate"
+            >{{ report.report.examinationDate | date: dateFormat }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  user label-->
+  <div class="reportlist-cell" rr-id="fra_030405">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>{{ report.report.userLabel }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  findings date-->
+  <div class="reportlist-cell" rr-id="fra_030505">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span *ngIf="report.report.findingsDate"
+            >{{ report.report.findingsDate | date: dateFormat }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  freefield-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>{{ report.report.freeField }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  freefield-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  enter button-->
+  <div class="reportlist-cell reportlist-cell--center openreport-cell">
+    <div
+      class="reportlist-cell-hitarea"
+      [ngClass]="{ 'reportlist-cell-hitarea--clickable': isList() }"
+      (click)="emitOpenReport()"
+    >
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <img
+            *ngIf="!report?.report.isLocked"
+            src="assets/img/layout/rr-arrow-right.svg"
+          />
+          <i *ngIf="report?.report.isLocked" class="pi pi-lock"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,425 @@
+<div class="f-vertical c-pad c-sep m-t-14 m-b-13">
+  <h2 rr-id="abd_m_070259" class="m-b-9">
+    {{ 'abdomenMRT.kidneys.differentialDiagnosis.value' | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad-r f-vertical o-list">
+      <div
+        class="f-vertical o-radio-list m-b-11"
+        [rrDisable]="model.descriptionType === descriptionType.IKnow"
+      >
+        <h3 rr-id="abd_m_070260" class="m-b-4">
+          {{ 'abdomenMRT.kidneys.differentialDiagnosis1.value' | translate }}*
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_070261"
+          [diagnosisNumber]="1"
+          [options]="diffDiagnosisOptions1"
+          [(ngModel)]="model.kidneysDifferentialDiagnosisType1"
+          name="kidneysDifferentialDiagnosisType1"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDifferentialDiagnosis1DependentModel()"
+          rrValidation="kidneysDifferentialDiagnosisType1"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical o-radio-list m-b-31"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType1 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_070262"
+          [(ngModel)]="model.isSuspicionOf"
+          name="isSuspicionOf"
+          label="{{ 'abdomenMRT.kidneys.suspicionOf.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="isBosniakClassificationDisabled(1) || model.descriptionType === descriptionType.IKnow"
+      >
+        <h3 rr-id="abd_m_070263" rrInfoIcon="abd_m_07_03" class="m-b-4">
+          {{ 'abdomenMRT.kidneys.bosniakClassification.value' | translate }}
+        </h3>
+        <p-dropdown
+          rr-id="abd_m_070264"
+          styleClass="o-width-100 ui-brown-box"
+          [options]="bosniakClassificationOptions"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          name="bosniakClassificationType1"
+          [(ngModel)]="model.bosniakClassificationType1"
+          rrDropdownClear
+          (ngModelChange)="resetBosniakDependent(1)"
+        >
+        </p-dropdown>
+      </div>
+      <ng-container *ngIf="isBosniak2OrBosniak2F(1)">
+        <div class="f-vertical o-radio-list">
+          <h3 rr-id="abd_m_0702104">
+            {{'abdomenMRT.kidneys.followup.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_0702105"
+            labelRrId="abd_m_0702106"
+            name="dD1FollowUpMonths"
+            label="{{ 'abdomenMRT.kidneys.months.value' | translate }}"
+            [config]="{ min: 1, max: 48, placeholder: '--' }"
+            [(ngModel)]="model.dD1FollowUpMonths"
+          >
+          </rr-number-input>
+        </div>
+        <div class="o-radio-list">
+          <h3 rr-id="abd_m_0702107">
+            {{'abdomenMRT.kidneys.modality.value' | translate}}
+          </h3>
+          <p-radioButton
+            rr-id="abd_m_0702108"
+            rrUnClickRadio
+            name="dD1ModalityType"
+            [value]="modalityType.Sonography"
+            label="{{'abdomenMRT.kidneys.sonography.value' | translate}}"
+            [(ngModel)]="model.dD1ModalityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_0702109"
+            rrUnClickRadio
+            name="dD1ModalityType"
+            [value]="modalityType.CMCT"
+            label="{{'abdomenMRT.kidneys.cMCT.value' | translate}}"
+            [(ngModel)]="model.dD1ModalityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_0702110"
+            rrUnClickRadio
+            name="dD1ModalityType"
+            [value]="modalityType.CMMRI"
+            label="{{'abdomenMRT.kidneys.cMMRI.value' | translate}}"
+            [(ngModel)]="model.dD1ModalityType"
+          >
+          </p-radioButton>
+        </div>
+      </ng-container>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical o-list">
+      <div
+        class="f-vertical o-radio-list m-b-11"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType === differentialDiagnosisType.None
+        && model.kidneysDifferentialDiagnosisType1 === differentialDiagnosisType.None"
+      >
+        <h3 rr-id="abd_m_070344" class="m-b-4">
+          {{ 'abdomenMRT.kidneys.differentialDiagnosis2.value' | translate }}
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_070345"
+          [diagnosisNumber]="2"
+          [options]="diffDiagnosisOptions2And3"
+          [(ngModel)]="model.kidneysDifferentialDiagnosisType2"
+          name="kidneysDifferentialDiagnosisType2"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDifferentialDiagnosis2DependentModel()"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical o-radio-list m-b-31"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType2 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_070346"
+          [(ngModel)]="model.isSubordinate"
+          name="isSubordinate"
+          label="{{ 'abdomenMRT.kidneys.subordinate.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="isBosniakClassificationDisabled(2)"
+      >
+        <h3 rr-id="abd_m_070347" rrInfoIcon="abd_m_07_03" class="m-b-4">
+          {{ 'abdomenMRT.kidneys.bosniakClassification.value' | translate }}
+        </h3>
+        <p-dropdown
+          rr-id="abd_m_070348"
+          styleClass="o-width-100 ui-brown-box"
+          [options]="bosniakClassificationOptions"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          name="bosniakClassificationType2"
+          [(ngModel)]="model.bosniakClassificationType2"
+          rrDropdownClear
+          (ngModelChange)="resetBosniakDependent(2)"
+        >
+        </p-dropdown>
+      </div>
+      <ng-container *ngIf="isBosniak2OrBosniak2F(2)">
+        <div class="f-vertical o-radio-list">
+          <h3 rr-id="abd_m_0703103">
+            {{'abdomenMRT.kidneys.followup.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_0703104"
+            labelRrId="abd_m_0703105"
+            name="dD2FollowUpMonths"
+            label="{{ 'abdomenMRT.kidneys.months.value' | translate }}"
+            [config]="{ min: 1, max: 48, placeholder: '--' }"
+            [(ngModel)]="model.dD2FollowUpMonths"
+          >
+          </rr-number-input>
+        </div>
+        <div class="o-radio-list">
+          <h3 rr-id="abd_m_0703106">
+            {{'abdomenMRT.kidneys.modality.value' | translate}}
+          </h3>
+          <p-radioButton
+            rr-id="abd_m_0703107"
+            rrUnClickRadio
+            name="dD2ModalityType"
+            [value]="modalityType.Sonography"
+            label="{{'abdomenMRT.kidneys.sonography.value' | translate}}"
+            [(ngModel)]="model.dD2ModalityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_0703108"
+            rrUnClickRadio
+            name="dD2ModalityType"
+            [value]="modalityType.CMCT"
+            label="{{'abdomenMRT.kidneys.cMCT.value' | translate}}"
+            [(ngModel)]="model.dD2ModalityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_0703109"
+            rrUnClickRadio
+            name="dD2ModalityType"
+            [value]="modalityType.CMMRI"
+            label="{{'abdomenMRT.kidneys.cMMRI.value' | translate}}"
+            [(ngModel)]="model.dD2ModalityType"
+          >
+          </p-radioButton>
+        </div>
+      </ng-container>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical o-list">
+      <div
+        class="f-vertical o-radio-list m-b-67"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType2 === differentialDiagnosisType.None"
+      >
+        <h3 rr-id="abd_m_070464" class="m-b-4">
+          {{ 'abdomenMRT.kidneys.differentialDiagnosis3.value' | translate }}
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_070465"
+          [diagnosisNumber]="3"
+          [options]="diffDiagnosisOptions2And3"
+          [(ngModel)]="model.kidneysDifferentialDiagnosisType3"
+          name="kidneysDifferentialDiagnosisType3"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDifferentialDiagnosis3DependentModel()"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="isBosniakClassificationDisabled(3)"
+      >
+        <h3 rr-id="abd_m_070466" rrInfoIcon="abd_m_07_03" class="m-b-4">
+          {{ 'abdomenMRT.kidneys.bosniakClassification.value' | translate }}
+        </h3>
+        <p-dropdown
+          rr-id="abd_m_070467"
+          styleClass="o-width-100 ui-brown-box"
+          [options]="bosniakClassificationOptions"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          name="bosniakClassificationType3"
+          [(ngModel)]="model.bosniakClassificationType3"
+          rrDropdownClear
+          (ngModelChange)="resetBosniakDependent(3)"
+        >
+        </p-dropdown>
+      </div>
+      <ng-container *ngIf="isBosniak2OrBosniak2F(3)">
+        <div class="f-vertical o-radio-list">
+          <h3 rr-id="abd_m_0704116">
+            {{'abdomenMRT.kidneys.followup.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_0704117"
+            labelRrId="abd_m_0704118"
+            name="dD3FollowUpMonths"
+            label="{{ 'abdomenMRT.kidneys.months.value' | translate }}"
+            [config]="{ min: 1, max: 48, placeholder: '--' }"
+            [(ngModel)]="model.dD3FollowUpMonths"
+          >
+          </rr-number-input>
+        </div>
+        <div class="o-radio-list">
+          <h3 rr-id="abd_m_0704119">
+            {{'abdomenMRT.kidneys.modality.value' | translate}}
+          </h3>
+          <p-radioButton
+            rr-id="abd_m_0704120"
+            rrUnClickRadio
+            name="dD3ModalityType"
+            [value]="modalityType.Sonography"
+            label="{{'abdomenMRT.kidneys.sonography.value' | translate}}"
+            [(ngModel)]="model.dD3ModalityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_0704121"
+            rrUnClickRadio
+            name="dD3ModalityType"
+            [value]="modalityType.CMCT"
+            label="{{'abdomenMRT.kidneys.cMCT.value' | translate}}"
+            [(ngModel)]="model.dD3ModalityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_0704122"
+            rrUnClickRadio
+            name="dD3ModalityType"
+            [value]="modalityType.CMMRI"
+            label="{{'abdomenMRT.kidneys.cMMRI.value' | translate}}"
+            [(ngModel)]="model.dD3ModalityType"
+          >
+          </p-radioButton>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-14 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <div id="localization-block" class="o-radio-list">
+      <p-checkbox
+        rr-id="abd_m_070545"
+        [(ngModel)]="model.isMoreThanOneLesionSameEntity"
+        name="isMoreThanOneLesionSameEntity"
+        label="{{ 'abdomenMRT.kidneys.lesionOfTheSameEntity.value' | translate }}"
+        binary="true"
+        rrContentReset="isMoreThanOneLesionSameEntityBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="isMoreThanOneLesionSameEntityBlock"
+        [rrDisable]="!model.isMoreThanOneLesionSameEntity"
+      >
+        <p-checkbox
+          rr-id="abd_m_070546"
+          name="isLocalization"
+          label="{{'abdomenMRT.kidneys.localization.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLocalization"
+          rrContentReset="isLocalizationBlock"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-list nested-content"
+          id="isLocalizationBlock"
+          [rrDisable]="!model.isLocalization"
+        >
+          <div class="o-radio-list">
+            <h3 rr-id="abd_m_070547">
+              {{'abdomenMRT.kidneys.side.value' | translate}}*
+            </h3>
+            <p-radioButton
+              rr-id="abd_m_070548"
+              name="massSideMoreThanOneLesionType"
+              [value]="sideType.Right"
+              label="{{'abdomenMRT.kidneys.right.value' | translate}}"
+              [(ngModel)]="model.massSideMoreThanOneLesionType"
+              rrValidation="massSideMoreThanOneLesionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_070549"
+              name="massSideMoreThanOneLesionType"
+              [value]="sideType.Left"
+              label="{{'abdomenMRT.kidneys.left.value' | translate}}"
+              [(ngModel)]="model.massSideMoreThanOneLesionType"
+              rrValidation="massSideMoreThanOneLesionType"
+            >
+            </p-radioButton>
+          </div>
+          <div class="o-radio-list">
+            <h3 rr-id="abd_m_070550">
+              {{'abdomenMRT.kidneys.localization.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="abd_m_070551"
+              name="isUpperPoleKidney"
+              label="{{'abdomenMRT.kidneys.upperPoleOfTheKidney.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isUpperPoleKidney"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070552"
+              name="isCranialThird"
+              label="{{'abdomenMRT.kidneys.cranialThird.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isCranialThird"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070553"
+              name="isMiddleThird"
+              label="{{'abdomenMRT.kidneys.middleThird.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMiddleThird"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070554"
+              name="isLowerThird"
+              label="{{'abdomenMRT.kidneys.lowerThird.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isLowerThird"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070555"
+              name="isLowerPoleKidney"
+              label="{{'abdomenMRT.kidneys.lowerPoleOfTheKidney.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isLowerPoleKidney"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_070556"
+              name="isRenalHilus"
+              label="{{'abdomenMRT.kidneys.renalHilus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isRenalHilus"
+              class="m-b-30"
+            >
+            </p-checkbox>
+          </div>
+          <div class="o-radio-list">
+            <h3 rr-id="abd_m_070557">
+              {{'abdomenMRT.kidneys.details.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="abd_m_070558"
+              name="isDetailsCompletelyIntrarenal"
+              label="{{'abdomenMRT.kidneys.completelyIntrarenal.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isDetailsCompletelyIntrarenal"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

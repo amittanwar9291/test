@@ -1,0 +1,306 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+      <div
+        [rrDisable]="model.descriptionType !== desctiptionType.IKnow"
+        class="f-vertical o-radio-list m-l-10"
+      >
+        <h2 rr-id="abd_m_090203" class="m-t-2">
+          {{'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+          translate}} 1*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_090272"
+          name="differentialDiagnosisType"
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosisOptions"
+          [(ngModel)]="model.differentialDiagnosisType"
+          [parentViewModel]="model"
+          hasPresets="true"
+          group="true"
+          rrValidation="differentialDiagnosisType"
+          (selectionChanged)="resetDiffDiagnosisDependent()"
+          isActiveOnIKnow="true"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="abd_m_090205"
+          binary="true"
+          name="isHistologyKnown"
+          [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisType.None"
+          [(ngModel)]="model.isHistologyKnown"
+          label="{{'abdomenMRT.gastrointestinal.histologyKnown.value' | translate }}"
+          rrContentReset="histologyKnownContainer"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="histologyKnownContainer"
+          [rrDisable]="!model.isHistologyKnown"
+        >
+          <p-radioButton
+            rr-id="abd_m_090206"
+            name="histologyKnownType"
+            [(ngModel)]="model.histologyKnownType"
+            [value]="histologyKnownType.Benign"
+            label="{{'abdomenMRT.gastrointestinal.benign.value' | translate }}"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_090207"
+            name="histologyKnownType"
+            [(ngModel)]="model.histologyKnownType"
+            [value]="histologyKnownType.Malignant"
+            label="{{'abdomenMRT.gastrointestinal.malignant.value' | translate }}"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="f-vertical m-t-14 o-radio-list c-sep m-b-15">
+      <h2 rr-id="abd_m_090302" class="m-t-2 c-pad-l m-l-10">
+        {{ 'abdomenMRT.gastrointestinal.localization.value' | translate }}*
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad f-vertical m-t-10">
+          <div class="o-radio-list m-l-10" id="localizationContainer">
+            <p-checkbox
+              rr-id="abd_m_090374"
+              binary="true"
+              name="isDuodenum"
+              [(ngModel)]="model.isDuodenum"
+              rrContentReset="duodenumContainer"
+              [rrValidation]="localizationCheckboxes"
+              [rrDisable]="!model.isDuodenum && isLocalizationChecked && !model.isJejunum "
+              label="{{ 'abdomenMRT.gastrointestinal.duodenum.value' | translate }}"
+            >
+            </p-checkbox>
+            <div
+              class="nested-content o-radio-list"
+              id="duodenumContainer"
+              [rrDisable]="!model.isDuodenum"
+            >
+              <p-checkbox
+                rr-id="abd_m_090375"
+                binary="true"
+                name="isParsDescendens"
+                [(ngModel)]="model.isParsDescendens"
+                label="{{ 'abdomenMRT.gastrointestinal.parsDescendens.value' | translate }}"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="abd_m_090376"
+                binary="true"
+                name="isParsHorizontalis"
+                [(ngModel)]="model.isParsHorizontalis"
+                label="{{ 'abdomenMRT.gastrointestinal.parsHorizontalis.value' | translate }}"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="abd_m_090377"
+                binary="true"
+                name="isParsAscendens"
+                [(ngModel)]="model.isParsAscendens"
+                label="{{ 'abdomenMRT.gastrointestinal.parsAscendens.value' | translate }}"
+              >
+              </p-checkbox>
+            </div>
+
+            <p-checkbox
+              rr-id="abd_m_090378"
+              binary="true"
+              name="isJejunum"
+              [rrDisable]="!model.isJejunum && isLocalizationChecked && !model.isDuodenum && !model.isIleum "
+              [(ngModel)]="model.isJejunum"
+              [rrValidation]="localizationCheckboxes"
+              label="{{ 'abdomenMRT.gastrointestinal.jejunum.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090379"
+              binary="true"
+              name="isIleum"
+              [(ngModel)]="model.isIleum"
+              [rrValidation]="localizationCheckboxes"
+              [rrDisable]="!model.isIleum && isLocalizationChecked && !model.isJejunum && !model.isCecum"
+              label="{{ 'abdomenMRT.gastrointestinal.ileum.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090380"
+              binary="true"
+              name="isCecum"
+              [rrDisable]="!model.isCecum && isLocalizationChecked && !model.isIleum && !model.isVermiformAppendix && !model.isAscendingColon"
+              [(ngModel)]="model.isCecum"
+              [rrValidation]="localizationCheckboxes"
+              rrContentReset="cecumDisabledContainer localizationCecumContainer"
+              label="{{ 'abdomenMRT.gastrointestinal.cecum.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090381"
+              binary="true"
+              name="isVermiformAppendix"
+              [rrDisable]="!model.isVermiformAppendix && isLocalizationChecked && !model.isCecum && !model.isAscendingColon"
+              [(ngModel)]="model.isVermiformAppendix"
+              [rrValidation]="localizationCheckboxes"
+              label="{{ 'abdomenMRT.gastrointestinal.vermiformAppendix.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+          <div class="m-l-10 o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_090447"
+              binary="true"
+              name="isAscendingColon"
+              [rrDisable]="!model.isAscendingColon && isLocalizationChecked && !model.isCecum && !model.isVermiformAppendix && !model.isHepaticFlexure"
+              [(ngModel)]="model.isAscendingColon"
+              [rrValidation]="localizationCheckboxes"
+              label="{{ 'abdomenMRT.gastrointestinal.ascendingColon.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090448"
+              binary="true"
+              name="isHepaticFlexure"
+              [(ngModel)]="model.isHepaticFlexure"
+              [rrValidation]="localizationCheckboxes"
+              [rrDisable]="!model.isHepaticFlexure && isLocalizationChecked && !model.isAscendingColon && !model.isTransverseColon"
+              label="{{ 'abdomenMRT.gastrointestinal.hepaticFlexure.value' | translate }}"
+            >
+            </p-checkbox>
+
+            <p-checkbox
+              rr-id="abd_m_090449"
+              binary="true"
+              name="isTransverseColon"
+              [(ngModel)]="model.isTransverseColon"
+              [rrValidation]="localizationCheckboxes"
+              [rrDisable]="!model.isTransverseColon && isLocalizationChecked && !model.isHepaticFlexure && !model.isSplenicFlexure"
+              label="{{ 'abdomenMRT.gastrointestinal.transverseColon.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090450"
+              binary="true"
+              name="isSplenicFlexure"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isSplenicFlexure"
+              [rrDisable]="!model.isSplenicFlexure && isLocalizationChecked && !model.isTransverseColon && !model.isDescendingColon"
+              label="{{ 'abdomenMRT.gastrointestinal.splenicFlexure.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090451"
+              binary="true"
+              name="isDescendingColon"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isDescendingColon"
+              [rrDisable]="!model.isDescendingColon && isLocalizationChecked && !model.isSplenicFlexure && !model.isSigmoidColon"
+              label="{{ 'abdomenMRT.gastrointestinal.descendingColon.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090452"
+              binary="true"
+              name="isSigmoidColon"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isSigmoidColon"
+              [rrDisable]="!model.isSigmoidColon && isLocalizationChecked && !model.isDescendingColon && !model.isRectumUpperThird"
+              label="{{ 'abdomenMRT.gastrointestinal.sigmoidColon.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090453"
+              binary="true"
+              name="isRectumUpperThird"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isRectumUpperThird"
+              [rrDisable]="!model.isRectumUpperThird && isLocalizationChecked && !model.isSigmoidColon && !model.isRectumMiddleThird"
+              label="{{ 'abdomenMRT.gastrointestinal.rectumUpperThird.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090454"
+              binary="true"
+              name="isRectumMiddleThird"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isRectumMiddleThird"
+              [rrDisable]="!model.isRectumMiddleThird && isLocalizationChecked && !model.isRectumUpperThird && !model.isRectumLowerThird"
+              label="{{ 'abdomenMRT.gastrointestinal.rectumMiddleThird.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090455"
+              binary="true"
+              name="isRectumLowerThird"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isRectumLowerThird"
+              [rrDisable]="!model.isRectumLowerThird && isLocalizationChecked && !model.isRectumMiddleThird && !model.isAnalCanal"
+              label="{{ 'abdomenMRT.gastrointestinal.rectumLowerThird.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090456"
+              binary="true"
+              name="isAnalCanal"
+              [rrValidation]="localizationCheckboxes"
+              [(ngModel)]="model.isAnalCanal"
+              [rrDisable]="!model.isAnalCanal && isLocalizationChecked && !model.isRectumLowerThird"
+              label="{{ 'abdomenMRT.gastrointestinal.analCanal.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-15">
+      <div class="m-l-10 o-radio-list f-vertical">
+        <h2 rr-id="abd_m_090538" class="m-t-2">
+          {{ 'abdomenMRT.gastrointestinal.measurementIntestinalWall.value' |
+          translate }}*
+        </h2>
+        <rr-number-input
+          inputRrId="abd_m_090539"
+          labelRrId="abd_m_090540"
+          name="measurementIntestinalWallInMm"
+          rrValidation="measurementIntestinalWallInMm"
+          [(ngModel)]="model.measurementIntestinalWallInMm"
+          [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+          [config]="{min: 1, max: 999, placeholder: '---'}"
+          (announceModelChange)="model.secondPlaneInMm = null"
+        ></rr-number-input>
+        <div
+          [rrDisable]="!model.measurementIntestinalWallInMm"
+          class="o-radio-list"
+        >
+          <p rr-id="abd_m_090541">
+            {{ 'abdomenMRT.gastrointestinal.2ndPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="abd_m_090542"
+            labelRrId="abd_m_090543"
+            name="thicknessOfTheIntestinalWallSecondPlaneInMm"
+            [(ngModel)]="model.secondPlaneInMm"
+            [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+          ></rr-number-input>
+        </div>
+        <h2 rr-id="abd_m_090544" class="m-t-15">
+          {{ 'abdomenMRT.gastrointestinal.longitudinalExtension.value' |
+          translate }}
+        </h2>
+        <rr-number-input
+          labelRrId="abd_m_090546"
+          inputRrId="abd_m_090545"
+          name="longitudinalExtensionInMm"
+          [(ngModel)]="model.longitudinalExtensionInMm"
+          [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+          [config]="{min: 1, max: 999, placeholder: '---'}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</div>

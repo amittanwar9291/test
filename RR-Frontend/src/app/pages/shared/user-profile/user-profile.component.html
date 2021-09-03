@@ -1,0 +1,325 @@
+<form>
+  <div class="profile f-horizontal f-center">
+    <div class="c-sep profile-col pl-20 pr-10">
+      <div class="profile-gray-panel f-vertical f-align-center">
+        <div class="panel-user-initials">{{initial}}</div>
+        <div class="panel-user-name f-vertical f-align-center">
+          <span *ngIf="model.firstName" class="panel-user-name-element"
+            >{{model.firstName}}</span
+          >
+          <span *ngIf="!model.firstName" class="panel-user-name-element"
+            >{{ 'users.profile.firstName' | translate }}</span
+          >
+          <span *ngIf="model.surname" class="panel-user-name-element"
+            >{{model.surname}}</span
+          >
+          <span *ngIf="!model.surname" class="panel-user-name-element"
+            >{{ 'users.profile.surname' | translate }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="c-sep profile-col pl-20 pr-10">
+      <p class="profile-section-header">
+        {{ 'users.profile.person' | translate }}
+      </p>
+      <div class="profile-form-element profile-form-element-full">
+        <div class="profile-form-element-label">
+          {{ 'users.profile.firstName' | translate }}
+          <span *ngIf="!shouldNotBeEditable()">*</span>
+        </div>
+        <div class="profile-form-element-input">
+          <input
+            rr-id="fra_080202-2"
+            type="text"
+            [ngClass]="{'blue-border': isAdmin, 'gray-border': shouldNotBeEditable()}"
+            placeholder="{{ 'users.profile.firstName' | translate }}"
+            name="firstName"
+            [(ngModel)]="model.firstName"
+            [readonly]="shouldNotBeEditable()"
+            (change)="nameChanged()"
+          />
+        </div>
+      </div>
+      <div class="profile-form-element profile-form-element-full">
+        <div class="profile-form-element-label">
+          {{ 'users.profile.surname' | translate }}
+          <span *ngIf="!shouldNotBeEditable()">*</span>
+        </div>
+        <div class="profile-form-element-input">
+          <input
+            rr-id="fra_080202-2"
+            type="text"
+            [ngClass]="{'blue-border': isAdmin, 'gray-border': shouldNotBeEditable()}"
+            placeholder="{{ 'users.profile.surname' | translate }}"
+            name="surname"
+            [(ngModel)]="model.surname"
+            [readonly]="shouldNotBeEditable()"
+            (change)="nameChanged()"
+          />
+        </div>
+      </div>
+      <span class="profile-form-element-half-container">
+        <div class="profile-form-element profile-form-element-half">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.salutation' | translate }}
+            <span *ngIf="!shouldNotBeEditable()">*</span>
+          </div>
+          <div class="profile-form-element-input">
+            <p-dropdown
+              rrDropdownClear
+              [styleClass]="shouldNotBeEditable() ? 'ui-brown-box' : ''"
+              rr-id="fra_080207-2"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [readonly]="shouldNotBeEditable()"
+              [options]="salutations"
+              name="salutation"
+              [(ngModel)]="model.salutation"
+              [style]="{'width':'100%'}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="profile-form-element profile-form-element-half">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.initial' | translate }}
+            <span *ngIf="!shouldNotBeEditable()">*</span>
+          </div>
+          <div class="profile-form-element-input">
+            <input
+              rr-id="fra_080208-2"
+              type="text"
+              class="blocked-input"
+              placeholder="- -"
+              maxlength="3"
+              (input)="toUppercase()"
+              [readonly]="shouldNotBeEditable()"
+              [ngClass]="{'blue-border': isAdmin, 'gray-border': shouldNotBeEditable()}"
+              name="initial"
+              [(ngModel)]="model.initial"
+            />
+          </div>
+        </div>
+      </span>
+      <div class="profile-form-element profile-form-element-full">
+        <div class="profile-form-element-label">
+          {{ 'users.profile.title' | translate }}
+        </div>
+        <div class="profile-form-element-input">
+          <p-dropdown
+            rrDropdownClear
+            [styleClass]="shouldNotBeEditable() ? 'ui-brown-box' : ''"
+            rr-id="fra_080210-2"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [readonly]="shouldNotBeEditable()"
+            [options]="titles"
+            name="title"
+            [(ngModel)]="model.title"
+            [style]="{'width':'100%'}"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="profile-form-element profile-form-element-full">
+        <div class="profile-form-element-label">
+          {{ 'users.profile.position' | translate }}
+        </div>
+        <div class="profile-form-element-input">
+          <p-dropdown
+            rrDropdownClear
+            [styleClass]="shouldNotBeEditable() ? 'ui-brown-box' : ''"
+            rr-id="fra_080212-2"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [readonly]="shouldNotBeEditable()"
+            [options]="positions"
+            name="position"
+            [(ngModel)]="model.position"
+            [style]="{'width':'100%'}"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="c-sep profile-col"></div>
+    <div class="c-sep profile-col-double f-horizontal">
+      <div class="profile-row pl-15">
+        <p class="profile-section-header">
+          {{ 'users.profile.dataOfUser' | translate }}
+        </p>
+      </div>
+      <div class="c-sep profile-col profile-col-lower pl-15 pr-10 p">
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.userRole' | translate }}
+            <span *ngIf="!shouldNotBeEditable()">*</span>
+          </div>
+          <div class="profile-form-element-input">
+            <p-dropdown
+              rrDropdownClear
+              [styleClass]="shouldNotBeEditable() ? 'ui-brown-box' : ''"
+              rr-id="fra_080403-2"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [readonly]="shouldNotBeEditable()"
+              [options]="userRoles"
+              name="userRole"
+              [(ngModel)]="model.role"
+              [style]="{'width':'100%'}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.id' | translate }}
+          </div>
+          <div class="profile-form-element-input">
+            <input
+              rr-id="fra_080405-2"
+              type="text"
+              [ngClass]="{'blue-border': isAdmin, 'gray-border': shouldNotBeEditable()}"
+              placeholder="EVBK-R-548245-X58"
+              name="externalId"
+              [(ngModel)]="model.externalId"
+              [readonly]="true"
+            />
+          </div>
+        </div>
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.username' | translate }}
+            <span *ngIf="!shouldNotBeEditable()">*</span>
+          </div>
+          <div class="profile-form-element-input">
+            <input
+              rr-id="fra_080407-2"
+              type="text"
+              [ngClass]="{'blue-border': isAdmin, 'gray-border': shouldNotBeEditable()}"
+              placeholder="{{ 'users.profile.firstName' | translate }}{{ 'users.profile.surname' | translate }}"
+              name="userName"
+              [(ngModel)]="model.userName"
+              [readonly]="shouldNotBeEditable()"
+            />
+          </div>
+        </div>
+
+        <div
+          *ngIf="isNew"
+          class="profile-form-element profile-form-element-full"
+        >
+          <div class="profile-form-element-label">
+            {{ 'users.profile.password' | translate }}
+          </div>
+          <div class="profile-form-element-input">
+            <input
+              rr-id=""
+              type="text"
+              class="gray-border blocked-input"
+              placeholder="N30-q"
+              name="password"
+              [(ngModel)]="model.password"
+              [readonly]="true"
+            />
+          </div>
+        </div>
+        <div
+          *ngIf="!isNew"
+          class="profile-form-element profile-form-element-full"
+        >
+          <div class="profile-form-element-label">
+            {{ 'users.profile.password' | translate }} (Klicken um zu Editieren)
+          </div>
+          <div class="profile-form-element-input">
+            <button
+              class="btn-password-new blue-border"
+              type="button"
+              (click)="changePassword($event)"
+            >
+              ••••••••••••••
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="!isNew && isAdmin"
+          class="profile-form-element profile-form-element-full"
+        >
+          <div class="profile-form-element-input">
+            <button
+              class="btn-password-reset"
+              *ngIf="!isNew && isAdmin"
+              type="button"
+              (click)="setDefaultPassword()"
+            >
+              Reset Password
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="c-sep profile-col profile-col-lower pl-15 pr-10">
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.approvalLevel' | translate }}
+          </div>
+          <div class="profile-form-element-input">
+            <p-dropdown
+              rrDropdownClear
+              [styleClass]="shouldNotBeEditable() ? 'ui-brown-box' : ''"
+              rr-id="fra_080503-2"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [readonly]="shouldNotBeEditable()"
+              [options]="approvalLevels"
+              name="approvalLevel"
+              [(ngModel)]="model.approvalLevel"
+              [style]="{'width':'100%'}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="profile-form-element-gap"></div>
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.languageApp' | translate }}
+          </div>
+          <div class="profile-form-element-input">
+            <p-dropdown
+              rrDropdownClear
+              rr-id="fra_080505-2"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [options]="languages"
+              name="languageOfProgram"
+              [(ngModel)]="model.languageOfProgram"
+              [style]="{'width':'100%'}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.languageDoctor' | translate }}
+          </div>
+          <div class="profile-form-element-input">
+            <p-dropdown
+              rrDropdownClear
+              rr-id="fra_080507-2"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [options]="languages"
+              name="languageDoctorFindings"
+              [(ngModel)]="model.languageDoctorFindings"
+              [style]="{'width':'100%'}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="profile-form-element profile-form-element-full">
+          <div class="profile-form-element-label">
+            {{ 'users.profile.languagePatient' | translate }}
+          </div>
+          <div class="profile-form-element-input">
+            <p-dropdown
+              rrDropdownClear
+              rr-id="fra_080509-2"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [options]="languages"
+              name="languagePatientFindings"
+              [(ngModel)]="model.languagePatientFindings"
+              [style]="{'width':'100%'}"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

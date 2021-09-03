@@ -1,0 +1,114 @@
+<div class="f-horizontal h-530">
+  <div class="c-col-1 c-pad f-start o-radio-list">
+    <div class="p-l-10">
+      <h2 rr-id="anc_m_0402228">
+        {{'feetMRT.bones.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div
+        class="m-t-10"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        <p rr-id="anc_m_0402229">
+          {{'feetMRT.bones.differentialDiagnosis1.value' | translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosis"
+          [(ngModel)]="model.differentialDiagnosis1"
+          group="true"
+          name="differentialDiagnosis1"
+          rrId="anc_m_0402230"
+          (selectionChanged)="clearDifferentialDiagnosis01()"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          name="isSuspicionOf"
+          label="{{ 'feetMRT.bones.suspicionOf.value' | translate }}"
+          rr-id="anc_m_0402231"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+          class="m-t-10"
+        ></p-checkbox>
+      </div>
+
+      <div
+        class="m-t-20"
+        [rrDisable]="model.differentialDiagnosis1 === differentialDiagnosisTypeEnum.None && model.spaceRequirementDifferentialDiagnosis === differentialDiagnosisTypeEnum.None"
+      >
+        <p rr-id="anc_m_0402232">
+          {{'feetMRT.bones.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="differentialDiagnosis"
+          [(ngModel)]="model.differentialDiagnosis2"
+          group="true"
+          name="differentialDiagnosis2"
+          rrId="anc_m_0402233"
+          (selectionChanged)="clearDifferentialDiagnosis02()"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis2"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          name="isSubordinated"
+          label="{{ 'feetMRT.bones.subordinated.value' | translate }}"
+          rr-id="anc_m_0402234"
+          binary="true"
+          [(ngModel)]="model.isSubordinated"
+          class="m-t-10"
+        ></p-checkbox>
+      </div>
+
+      <div
+        class="m-t-20"
+        [rrDisable]="model.differentialDiagnosis2 === differentialDiagnosisTypeEnum.None"
+      >
+        <p rr-id="anc_m_0402235">
+          {{'feetMRT.bones.differentialDiagnosis3.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="3"
+          [options]="differentialDiagnosis"
+          [(ngModel)]="model.differentialDiagnosis3"
+          group="true"
+          name="differentialDiagnosis3"
+          rrId="anc_m_0402236"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis3"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start">
+    <div class="p-l-10 o-radio-list m-t-30">
+      <p-checkbox
+        name="isMoreThanOneLesionSameEntity"
+        label="{{ 'feetMRT.bones.lesionSameEntity.value' | translate }}"
+        rr-id="anc_m_0403255"
+        binary="true"
+        [(ngModel)]="model.isMoreThanOneLesionSameEntity"
+        rrContentReset="moreThanLesionSubBlock"
+      ></p-checkbox>
+      <div
+        class="nested-content"
+        id="moreThanLesionSubBlock"
+        [rrDisable]="!model.isMoreThanOneLesionSameEntity"
+      >
+        <p-checkbox
+          name="isInsideTheBonePrimarilyAffected"
+          class="text-break"
+          label="{{ 'feetMRT.bones.insideTheBonePrimarilyAffected.value' | translate }}"
+          rr-id="anc_m_0403256"
+          binary="true"
+          [(ngModel)]="model.isInsideTheBonePrimarilyAffected"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start"></div>
+  <div class="c-col-1 c-pad-l c-sep-l f-start"></div>
+</div>

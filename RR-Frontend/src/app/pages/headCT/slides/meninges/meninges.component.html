@@ -1,0 +1,76 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="hea_c_050103" class="m-b-15">
+        {{ 'headCT.meninges.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="hea_c_050104"
+        label="{{ 'headCT.meninges.normalImagingOfTheMeninges.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_050105"
+        label="{{'headCT.meninges.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+        [setDescriptionTypes]="[meningesFindingTypeEnum.Mass]"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="!isFindingType(meningesFindingTypeEnum.None)"
+          rr-id="hea_c_050201"
+        >
+          {{ 'headCT.meninges.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isFindingType(meningesFindingTypeEnum.None)"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-mass
+        *ngIf="isFindingType(meningesFindingTypeEnum.Mass)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass>
+      <rr-diffuse-changes
+        *ngIf="isFindingType(meningesFindingTypeEnum.DiffuseChanges)"
+        [model]="findingHandler.currentItem"
+      ></rr-diffuse-changes>
+      <rr-subdural-hematoma
+        *ngIf="isFindingType(meningesFindingTypeEnum.SubduralHematoma)"
+        [model]="findingHandler.currentItem"
+      ></rr-subdural-hematoma>
+      <rr-epidural-hematoma
+        *ngIf="isFindingType(meningesFindingTypeEnum.EpiduralHematoma)"
+        [model]="findingHandler.currentItem"
+      ></rr-epidural-hematoma>
+    </div>
+  </div>
+</form>

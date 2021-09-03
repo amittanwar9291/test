@@ -1,0 +1,237 @@
+<div class="f-horizontal h-510">
+  <div class="c-col-1 c-pad f-start">
+    <div class="o-list p-l-10">
+      <h2 class="m-b-17" rr-id="pel_m_070228" rrInfoIcon="pel_m_07_05">
+        {{ 'pelvisMRT.pelvicFloor.middleCompartment.value' | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="pel_m_070229"
+          class="m-b-16"
+          name="isUterineVaginalProlapse"
+          [(ngModel)]="model.isUterineVaginalProlapse"
+          rrContentReset="middleCompartment middleCompartmentMlp uterineVaginalProlapseDetails"
+          (onChange)="clearStaticInputs()"
+          label="{{ 'pelvisMRT.pelvicFloor.uterusvaginalProlapse.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <div
+          id="middleCompartment"
+          [rrDisable]="!model.isUterineVaginalProlapse"
+          class="o-radio-list p-l-35 text-break"
+        >
+          <p rr-id="pel_m_0702105" rrInfoIcon="pel_m_07_06">
+            {{ 'pelvisMRT.pelvicFloor.maximumExtensionCraniocaudal.value' |
+            translate }}
+          </p>
+          <div class="m-b-8">
+            <rr-number-input
+              inputRrId="pel_m_0702106"
+              labelRrId="pel_m_0702107"
+              name="maxMiddleCraniocaudalExtensionToPclInMm"
+              [config]="{min: 10, max: 80, inputWidth: 85}"
+              [label]="'pelvisMRT.pelvicFloor.inMm.value' | translate"
+              [(ngModel)]="model.maxMiddleCraniocaudalExtensionToPclInMm"
+              (announceModelChange)="setPCLGradingValue()"
+            ></rr-number-input>
+          </div>
+          <div class="o-radio-list">
+            <div
+              class="o-radio-list"
+              [rrDisable]="!isDynamicOnLocalization || model.maxMiddleCraniocaudalExtensionToPclInMm === null"
+            >
+              <p rr-id="pel_m_0702108">
+                {{ 'pelvisMRT.pelvicFloor.phase.value' | translate }}
+              </p>
+              <p-radioButton
+                rr-id="pel_m_0702109"
+                name="middleCraniocaudalExtensionToPclPhaseType"
+                [value]="phaseType.Rest"
+                rrValidation="middleCraniocaudalExtensionToPclPhaseType"
+                [(ngModel)]="model.middleCraniocaudalExtensionToPclPhaseType"
+                label="{{ 'pelvisMRT.pelvicFloor.silenceNoAsterisk.value' | translate }}"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="pel_m_0702110"
+                name="middleCraniocaudalExtensionToPclPhaseType"
+                class="m-b-13"
+                [value]="phaseType.Defecation"
+                rrValidation="middleCraniocaudalExtensionToPclPhaseType"
+                [(ngModel)]="model.middleCraniocaudalExtensionToPclPhaseType"
+                label="{{ 'pelvisMRT.pelvicFloor.defecationNoAsterisk.value' | translate }}"
+              ></p-radioButton>
+            </div>
+            <div
+              [rrDisable]="!(model.maxMiddleCraniocaudalExtensionToPclInMm > 0)"
+              class="nested-content o-radio-list"
+            >
+              <p rr-id="pel_m_0702111">
+                {{ 'pelvisMRT.pelvicFloor.grading.value' | translate }}
+              </p>
+              <input
+                class="rr-text-input__input"
+                rr-id="pel_m_0702112"
+                lang="en-150"
+                type="text"
+                name="pclGrading"
+                value="{{gradingTypeText.pclGrading | translate}}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start m-t-75">
+    <div id="middleCompartmentMlp" class="o-list p-l-45">
+      <div
+        class="o-radio-list text-break"
+        [rrDisable]="!model.isUterineVaginalProlapse"
+      >
+        <p rr-id="pel_m_0703103" rrInfoIcon="pel_m_07_07">
+          {{ 'pelvisMRT.pelvicFloor.extensionCraniocaudal.value' | translate }}
+        </p>
+        <div class="o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_0703104"
+            name="middleCraniocoudalExtensionMlpPositionType"
+            [value]="mlpPositionType.AboveTheMPL"
+            (onClick)="setMPLGradingValue()"
+            [(ngModel)]="model.middleCraniocoudalExtensionMlpPositionType"
+            label="{{ 'pelvisMRT.pelvicFloor.aboveTheMPL.value' | translate }}"
+            rrContentReset="expansionDetails"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0703105"
+            [value]="mlpPositionType.BelowTheMPL"
+            (onClick)="setMPLGradingValue()"
+            name="middleCraniocoudalExtensionMlpPositionType"
+            [(ngModel)]="model.middleCraniocoudalExtensionMlpPositionType"
+            label="{{ 'pelvisMRT.pelvicFloor.belowTheMPL.value' | translate }}"
+            rrContentReset="expansionDetails"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0703106"
+            [value]="mlpPositionType.OrganEversion"
+            (onClick)="setMPLGradingValue()"
+            name="middleCraniocoudalExtensionMlpPositionType"
+            [(ngModel)]="model.middleCraniocoudalExtensionMlpPositionType"
+            label="{{ 'pelvisMRT.pelvicFloor.organVersion.value' | translate }}"
+            rrContentReset="expansionDetails"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div
+          id="expansionDetails"
+          class="o-radio-list p-l-35"
+          [rrDisable]="model.middleCraniocoudalExtensionMlpPositionType !== mlpPositionType.AboveTheMPL &&
+                       model.middleCraniocoudalExtensionMlpPositionType !== mlpPositionType.BelowTheMPL"
+        >
+          <p rr-id="pel_m_0703107">
+            {{ 'pelvisMRT.pelvicFloor.expansion.value' | translate }}
+          </p>
+          <div class="m-b-5">
+            <rr-number-input
+              inputRrId="pel_m_0703108"
+              labelRrId="pel_m_0703109"
+              name="middleCraniocoudalExtensionToMPLInMm"
+              [(ngModel)]="model.middleCraniocoudalExtensionToMPLInMm"
+              [config]="{min: 1, max: setMaxExpansionValue(), inputWidth: 85}"
+              [label]="'pelvisMRT.pelvicFloor.inMm.value' | translate"
+              (announceModelChange)="setMPLGradingValue()"
+              rrValidation="middleCraniocoudalExtensionToMPLInMm"
+            >
+            </rr-number-input>
+          </div>
+          <div
+            class="o-radio-list"
+            [rrDisable]="!isDynamicOnLocalization || model.middleCraniocoudalExtensionToMPLInMm === null"
+          >
+            <p rr-id="pel_m_0703110">
+              {{ 'pelvisMRT.pelvicFloor.phase.value' | translate }}
+            </p>
+            <p-radioButton
+              rr-id="pel_m_0703111"
+              name="middleCraniocaudalExtensionToMplPhaseType"
+              [value]="phaseType.Rest"
+              rrValidation="middleCraniocaudalExtensionToMplPhaseType"
+              [(ngModel)]="model.middleCraniocaudalExtensionToMplPhaseType"
+              label="{{ 'pelvisMRT.pelvicFloor.silenceNoAsterisk.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0703112"
+              name="middleCraniocaudalExtensionToMplPhaseType"
+              [value]="phaseType.Defecation"
+              rrValidation="middleCraniocaudalExtensionToMplPhaseType"
+              [(ngModel)]="model.middleCraniocaudalExtensionToMplPhaseType"
+              label="{{ 'pelvisMRT.pelvicFloor.defecationNoAsterisk.value' | translate }}"
+            ></p-radioButton>
+          </div>
+        </div>
+        <div
+          [rrDisable]="model.middleCraniocoudalExtensionMlpPositionType === mlpPositionType.None &&
+                          !(model.middleCraniocoudalExtensionToMPLInMm > 0)"
+          class="nested-content o-radio-list"
+        >
+          <p rr-id="pel_m_0703113">
+            {{ 'pelvisMRT.pelvicFloor.grading.value' | translate }}
+          </p>
+          <input
+            class="rr-text-input__input"
+            rr-id="pel_m_0703114"
+            lang="en-150"
+            type="text"
+            name="mplGrading"
+            value="{{gradingTypeText.mplGrading | translate}}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start m-t-80">
+    <div class="o-list p-l-10">
+      <div
+        id="uterineVaginalProlapseDetails"
+        class="o-radio-list"
+        [rrDisable]="!model.isUterineVaginalProlapse"
+      >
+        <p rr-id="pel_m_0704102" class="m-b-30">
+          {{ 'pelvisMRT.pelvicFloor.details.value' | translate }}
+        </p>
+        <p-checkbox
+          rr-id="pel_m_070418"
+          name="isUterineProlapseExceedingGenital"
+          [(ngModel)]="model.isUterineProlapseExceedingGenital"
+          label="{{ 'pelvisMRT.pelvicFloor.uterineProlapseBeyondThe.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_070419"
+          name="isEversionOfTheVaginalWalls"
+          [(ngModel)]="model.isEversionOfTheVaginalWalls"
+          label="{{ 'pelvisMRT.pelvicFloor.eversionOfTheVaginal.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_070420"
+          name="isHorizontalShiftOfTheVaginalAxis"
+          [(ngModel)]="model.isHorizontalShiftOfTheVaginalAxis"
+          label="{{ 'pelvisMRT.pelvicFloor.horizontalDisplacementOfThe.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_070421"
+          name="isEvidenceOfLargeUterusMyoma"
+          [(ngModel)]="model.isEvidenceOfLargeUterusMyoma"
+          label="{{ 'pelvisMRT.pelvicFloor.evidenceOfLargeUterus.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l f-start m-t-35">
+    <div class="o-list p-l-10"></div>
+  </div>
+</div>

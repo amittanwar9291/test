@@ -1,0 +1,96 @@
+<header class="left-menu-header">
+  <div class="left-menu-header__avatar">{{ user?.initial }}</div>
+  <div class="left-menu-header__first-name">{{ user?.firstName }}</div>
+  <div class="left-menu-header__last-name">{{ user?.surname }}</div>
+  <div class="left-menu-header__language-change">
+    <span class="language-change-header"
+      >{{ "layout.languageSwitch.header" | translate }}</span
+    >
+    <div class="language-change-dropdown">
+      <p-dropdown
+        styleClass="ui-brown-box o-width-100"
+        [options]="languages"
+        name="currentLanguage"
+        placeholder="{{'shared.pleaseSelect' | translate}}"
+        (onChange)="switchLanguage()"
+        [(ngModel)]="currentLanguage"
+      >
+      </p-dropdown>
+    </div>
+    <span class="language-change-disclaimer"
+      >{{ "layout.languageSwitch.disclaimer" | translate }}</span
+    >
+  </div>
+</header>
+<ul>
+  <li>
+    <a (click)="navigate('/presets')">{{ "layout.start" | translate }}</a>
+  </li>
+  <li>
+    <a (click)="navigate('/reports')">{{ "layout.reports" | translate }}</a>
+  </li>
+  <li>
+    <a (click)="navigate('/help')">{{ "layout.help" | translate }}</a>
+  </li>
+  <li>
+    <a (click)="navigate('/aboutrr')"
+      >{{ "layout.aboutRR" | translate }}<sup>®</sup></a
+    >
+  </li>
+  <li>
+    <a (click)="navigate('/users/' + user?.userId)"
+      >{{ "layout.userProfile" | translate }}</a
+    >
+  </li>
+  <li *ngIf="user?.role === roles.ADMIN || user?.role === roles.S_ADMIN">
+    <a (click)="navigate('/centerspecificPreferences')">
+      {{ "layout.centerspecificPreferences" | translate }}
+    </a>
+  </li>
+  <li>
+    <a (click)="navigate('/statistics')"
+      >{{ "layout.statistics" | translate }}</a
+    >
+  </li>
+  <li *ngIf="user?.role === roles.ADMIN || user?.role === roles.S_ADMIN">
+    <a (click)="navigate('/tracking-statistics')"
+      >{{ "layout.trackingStatistics" | translate }}</a
+    >
+  </li>
+  <li *ngIf="user?.role === roles.ADMIN || user?.role === roles.S_ADMIN">
+    <a (click)="navigate('/settings')">{{ "layout.settings" | translate }}</a>
+  </li>
+  <li *ngIf="user?.role === roles.ADMIN || user?.role === roles.S_ADMIN">
+    <a (click)="navigate('/users')"
+      >{{ "layout.userManagement" | translate }}</a
+    >
+  </li>
+  <li>
+    <a (click)="logout()">{{ "layout.logout" | translate }}</a>
+  </li>
+
+  <!--  todo for development and testing purpose only-->
+  <li *ngIf="shouldBeVisible()">
+    <div>
+      <a (click)="validationTrigger()" style="width: 100%">
+        Validation
+        <span *ngIf="validation">OFF</span>
+        <span *ngIf="!validation">ON</span>
+      </a>
+    </div>
+    <div>
+      <a (click)="logValidationErrors()">
+        Log invalid elements
+        <span *ngIf="validationLogger">OFF</span>
+        <span *ngIf="!validationLogger">ON</span>
+      </a>
+    </div>
+    <div>
+      <a (click)="toggleReportSearchBar()">
+        Hide report search bar
+        <span *ngIf="!hideReportSearchBar">OFF</span>
+        <span *ngIf="hideReportSearchBar">ON</span>
+      </a>
+    </div>
+  </li>
+</ul>

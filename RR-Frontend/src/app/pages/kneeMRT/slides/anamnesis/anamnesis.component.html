@@ -1,0 +1,545 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-pad c-sep f-vertical f-start">
+      <div class="m-b-22">
+        <h1 rr-id="kne_m_020103">
+          {{'kneeMRT.anamnesis.21Trauma.value' | translate}}
+        </h1>
+        <img
+          rr-id="kne_m_020104"
+          class="trauma__header-icon"
+          src="assets/img/kneeMRT/icons/2-1.svg"
+        />
+      </div>
+
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start">
+          <div class="o-radio-list">
+            <p-checkbox
+              rr-id="kne_m_020105"
+              binary="true"
+              name="isTrauma"
+              label="{{'kneeMRT.anamnesis.trauma.value' | translate}}"
+              labelStyleClass="ui-fat-label"
+              (onChange)="clearTraumaDetails()"
+              [(ngModel)]="model.isTrauma"
+            ></p-checkbox>
+
+            <p
+              rr-id="kne_m_020106"
+              class="trauma__details"
+              [rrDisable]="!model.isTrauma"
+            >
+              {{'kneeMRT.anamnesis.details.value' | translate}}
+            </p>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="kne_m_020107"
+              name="traumaType"
+              label="{{'kneeMRT.anamnesis.twisted.value' | translate}}"
+              [rrDisable]="!model.isTrauma"
+              [value]="traumaType.Twisted"
+              [(ngModel)]="model.traumaType"
+              rrContentReset="traumaVelocityTypeBlock"
+            ></p-radioButton>
+            <div
+              class="nested-content o-radio-list f-vertical f-space-between"
+              [rrDisable]="!model.isTrauma || model.traumaType !== 'Twisted'"
+              id="traumaVelocityTypeBlock"
+            >
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="kne_m_020108"
+                name="traumaVelocityType"
+                label="{{'kneeMRT.anamnesis.lowVelocity.value' | translate}}"
+                [value]="traumaVelocityType.Low"
+                [(ngModel)]="model.traumaVelocityType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="kne_m_020109"
+                name="traumaVelocityType"
+                label="{{'kneeMRT.anamnesis.highVelocity.value' | translate}}"
+                [value]="traumaVelocityType.High"
+                [(ngModel)]="model.traumaVelocityType"
+              >
+              </p-radioButton>
+            </div>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="kne_m_020110"
+              name="fall"
+              label="{{'kneeMRT.anamnesis.fall.value' | translate}}"
+              [rrDisable]="!model.isTrauma"
+              [value]="traumaType.Fall"
+              [(ngModel)]="model.traumaType"
+              rrContentReset="traumaVelocityTypeBlock"
+            ></p-radioButton>
+          </div>
+
+          <rr-month-year-input
+            rr-id="kne_m_020111"
+            name="dateOfTrauma"
+            label="{{'kneeMRT.anamnesis.periodTrauma.value' | translate}}"
+            [rrDisable]="!model.isTrauma"
+            [(ngModel)]="model.dateOfTrauma"
+          ></rr-month-year-input>
+        </div>
+
+        <div class="c-col-1 c-pad-l o-radio-list f-vertical">
+          <p-checkbox
+            rr-id="kne_m_020201"
+            binary="true"
+            name="isLuxationPatella"
+            label="{{'kneeMRT.anamnesis.luxationPatella.value' | translate}}"
+            class="m-b-0"
+            labelStyleClass="ui-fat-label"
+            (onChange)="clearLuxation()"
+            [(ngModel)]="model.isLuxationPatella"
+          ></p-checkbox>
+
+          <rr-month-year-input
+            rr-id="kne_m_020202"
+            name="dateOfLuxation"
+            label="{{'kneeMRT.anamnesis.dateOfLuxation.value' | translate}}"
+            class="m-b-25"
+            [(ngModel)]="model.dateOfLuxation"
+            [rrDisable]="!model.isLuxationPatella"
+          >
+          </rr-month-year-input>
+
+          <div class="f-vertical f-start o-radio-list">
+            <p-checkbox
+              rr-id="kne_m_020205"
+              binary="true"
+              name="isFracture"
+              label="{{'kneeMRT.anamnesis.fracture.value' | translate}}"
+              labelStyleClass="ui-fat-label"
+              rrContentReset="fractureLocalizationBlock"
+              [(ngModel)]="model.isFracture"
+            ></p-checkbox>
+            <div
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isFracture"
+              id="fractureLocalizationBlock"
+            >
+              <p rr-id="kne_m_020206">
+                {{'kneeMRT.anamnesis.fractureLocalization.value' | translate}}
+              </p>
+              <p-checkbox
+                rr-id="kne_m_020207"
+                binary="true"
+                name="isFemur"
+                label="{{'kneeMRT.anamnesis.femur.value' | translate}}"
+                [(ngModel)]="model.isFemur"
+                rrValidation="isFemur isTibia isFibula isPatella"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_020208"
+                binary="true"
+                name="isTibia"
+                label="{{'kneeMRT.anamnesis.tibia.value' | translate}}"
+                [(ngModel)]="model.isTibia"
+                rrValidation="isFemur isTibia isFibula isPatella"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_020209"
+                binary="true"
+                name="isFibula"
+                label="{{'kneeMRT.anamnesis.fibula.value' | translate}}"
+                [(ngModel)]="model.isFibula"
+                rrValidation="isFemur isTibia isFibula isPatella"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_020210"
+                binary="true"
+                name="isPatella"
+                label="{{'kneeMRT.anamnesis.patella.value' | translate}}"
+                [(ngModel)]="model.isPatella"
+                rrValidation="isFemur isTibia isFibula isPatella"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-2 c-pad c-sep f-vertical f-start">
+      <div class="m-b-18">
+        <h1 rr-id="kne_m_020301">
+          {{'kneeMRT.anamnesis.previousSurgery.value' | translate}}
+        </h1>
+        <img
+          rr-id="kne_m_020302"
+          class="m-t-4"
+          src="assets/img/kneeMRT/icons/2-2.svg"
+        />
+      </div>
+
+      <div class="f-horizontal col-h-100">
+        <div
+          class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list col-h-100"
+        >
+          <div
+            id="isOther-block"
+            class="f-vertical f-start o-radio-list"
+            [rrDisable]="model.isOther"
+          >
+            <p-checkbox
+              rr-id="kne_m_020303"
+              binary="true"
+              name="isLigamentReconstruction"
+              label="{{'kneeMRT.anamnesis.ligamentReconstruction.value' | translate}}"
+              class="m-b-7"
+              labelStyleClass="ui-fat-label"
+              rrContentReset="ligamentReconstructionBlock"
+              [(ngModel)]="model.isLigamentReconstruction"
+            ></p-checkbox>
+            <div
+              class="f-vertical f-start nested-content o-radio-list m-b-16"
+              [rrDisable]="!model.isLigamentReconstruction"
+              id="ligamentReconstructionBlock"
+            >
+              <p rr-id="kne_m_020304">
+                {{'kneeMRT.anamnesis.fractureLocalization.value' | translate}}
+              </p>
+              <p-checkbox
+                rr-id="kne_m_020305"
+                binary="true"
+                name="isAnteriorCruciateLigament"
+                label="{{'kneeMRT.anamnesis.anteriorCruciateLigament.value' | translate}}"
+                [(ngModel)]="model.isAnteriorCruciateLigament"
+                rrValidation="isAnteriorCruciateLigament isMedialCollateralLigament isLateralCollateralLigament isPosteriorCruciateLigament"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_020306"
+                binary="true"
+                name="isMedialCollateralLigament"
+                label="{{'kneeMRT.anamnesis.medialCollateralLigament.value' | translate}}"
+                [(ngModel)]="model.isMedialCollateralLigament"
+                rrValidation="isAnteriorCruciateLigament isMedialCollateralLigament isLateralCollateralLigament isPosteriorCruciateLigament"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_020307"
+                binary="true"
+                name="isLateralCollateralLigament"
+                label="{{'kneeMRT.anamnesis.lateralCollateralLigament.value' | translate}}"
+                [(ngModel)]="model.isLateralCollateralLigament"
+                rrValidation="isAnteriorCruciateLigament isMedialCollateralLigament isLateralCollateralLigament isPosteriorCruciateLigament"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_020308"
+                binary="true"
+                name="isPosteriorCruciateLigament"
+                label="{{'kneeMRT.anamnesis.posteriorCruciateLigament.value' | translate}}"
+                [(ngModel)]="model.isPosteriorCruciateLigament"
+                rrValidation="isAnteriorCruciateLigament isMedialCollateralLigament isLateralCollateralLigament isPosteriorCruciateLigament"
+              ></p-checkbox>
+            </div>
+
+            <p-checkbox
+              rr-id="kne_m_020309"
+              binary="true"
+              name="isOsteosynthesis"
+              label="{{'kneeMRT.anamnesis.osteosynthesis.value' | translate}}"
+              class="m-t-8"
+              labelStyleClass="ui-fat-label"
+              rrContentReset="isIntramedullaryNailingOsteosynthesisBlock"
+              [(ngModel)]="model.isOsteosynthesis"
+            ></p-checkbox>
+            <div
+              class="f-vertical f-start nested-content o-radio-list m-b-10"
+              [rrDisable]="!model.isOsteosynthesis"
+              id="isIntramedullaryNailingOsteosynthesisBlock"
+            >
+              <p-checkbox
+                rr-id="kne_m_020310"
+                binary="true"
+                name="isIntramedullaryNailingOsteosynthesis"
+                label="{{'kneeMRT.anamnesis.intramedullaryNailingOsteosynthesis.value' | translate}}"
+                [(ngModel)]="model.isIntramedullaryNailingOsteosynthesis"
+              >
+              </p-checkbox>
+            </div>
+
+            <p-checkbox
+              rr-id="kne_m_020311"
+              binary="true"
+              name="isEndoprosthesis"
+              label="{{'kneeMRT.anamnesis.endoprosthesis.value' | translate}}"
+              class="m-b-3"
+              labelStyleClass="ui-fat-label"
+              [(ngModel)]="model.isEndoprosthesis"
+            >
+            </p-checkbox>
+
+            <p-checkbox
+              rr-id="kne_m_020312"
+              binary="true"
+              name="isCartilageTransplantation"
+              label="{{'kneeMRT.anamnesis.cartilageTransplantation.value' | translate}}"
+              class="m-t-6"
+              labelStyleClass="ui-fat-label"
+              rrContentReset="cartilageTransplantationTypeBlock"
+              [(ngModel)]="model.isCartilageTransplantation"
+            ></p-checkbox>
+            <div
+              class="f-vertical f-start nested-content o-radio-list m-b-0"
+              [rrDisable]="!model.isCartilageTransplantation"
+              id="cartilageTransplantationTypeBlock"
+            >
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="kne_m_020313"
+                name="cartilageTransplantationType"
+                label="{{'kneeMRT.anamnesis.autologousMatrixInducedChondrogenesisAmic.value' | translate}}"
+                [value]="cartilageTransplantationType.AutologousMatrixInducedChondrogenesis"
+                [(ngModel)]="model.cartilageTransplantationType"
+              ></p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="kne_m_020314"
+                name="cartilageTransplantationType"
+                label="{{'kneeMRT.anamnesis.autologousChondrocyteTransplantationAct.value' | translate}}"
+                [value]="cartilageTransplantationType.AutologousChondrocyteTransplantation"
+                [(ngModel)]="model.cartilageTransplantationType"
+              ></p-radioButton>
+            </div>
+
+            <p-checkbox
+              rr-id="kne_m_020315"
+              binary="true"
+              name="isSubchondralDrilling"
+              label="{{'kneeMRT.anamnesis.subchondralDrilling.value' | translate}}"
+              labelStyleClass="ui-fat-label"
+              [(ngModel)]="model.isSubchondralDrilling"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="kne_m_020316"
+              binary="true"
+              name="isLateralRetinacularRelease"
+              label="{{'kneeMRT.anamnesis.lateralRetinacularRelease.value' | translate}}"
+              labelStyleClass="ui-fat-label"
+              [(ngModel)]="model.isLateralRetinacularRelease"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="kne_m_020317"
+            binary="true"
+            name="isOther"
+            rrContentReset="isOther-block isMeniscusSurgery-block"
+            label="{{'kneeMRT.anamnesis.notFurtherSpecified.value' | translate}}"
+            labelStyleClass="ui-fat-label"
+            [(ngModel)]="model.isOther"
+            (onChange)="clearMeniscusSurgery()"
+          ></p-checkbox>
+        </div>
+
+        <div
+          class="c-col-1 c-pad-l f-vertical f-start o-radio-list"
+          id="isMeniscusSurgery-block"
+          [rrDisable]="model.isOther"
+        >
+          <p-checkbox
+            rr-id="kne_m_020401"
+            binary="true"
+            name="isMeniscusSurgery"
+            label="{{'kneeMRT.anamnesis.meniscusSurgery.value' | translate}}"
+            labelStyleClass="ui-fat-label"
+            (onChange)="clearMeniscusSurgery()"
+            [(ngModel)]="model.isMeniscusSurgery"
+          ></p-checkbox>
+          <div
+            class="f-vertical f-start f-space-between col-h-100 nested-content"
+          >
+            <p-checkbox
+              rr-id="kne_m_020402"
+              binary="true"
+              name="isResection"
+              label="{{'kneeMRT.anamnesis.resection.value' | translate}}"
+              class="m-b-12"
+              [rrDisable]="!model.isMeniscusSurgery"
+              (onChange)="clearResectionLocation()"
+              [(ngModel)]="model.isResection"
+            ></p-checkbox>
+            <p
+              rr-id="kne_m_020403"
+              class="m-b-3"
+              [rrDisable]="!model.isResection"
+            >
+              {{'kneeMRT.anamnesis.resectionLocalization.value' | translate}}
+            </p>
+            <rr-knee-cross
+              rr-id="kne_m_020404"
+              name="resectionLocation"
+              class="m-b-8"
+              [rrDisable]="!model.isMeniscusSurgery || !model.isResection"
+              [(ngModel)]="model.resectionLocation"
+            ></rr-knee-cross>
+
+            <p-checkbox
+              rr-id="kne_m_020405"
+              binary="true"
+              name="isSuture"
+              label="{{'kneeMRT.anamnesis.suture.value' | translate}}"
+              class="m-b-12"
+              [rrDisable]="!model.isMeniscusSurgery"
+              (onChange)="clearSutureLocation()"
+              [(ngModel)]="model.isSuture"
+            >
+            </p-checkbox>
+            <p rr-id="kne_m_020406" class="m-b-3" [rrDisable]="!model.isSuture">
+              {{'kneeMRT.anamnesis.sutureLocalization.value' | translate}}
+            </p>
+            <rr-knee-cross
+              rr-id="kne_m_020407"
+              name="sutureLocation"
+              [rrDisable]="!model.isMeniscusSurgery || !model.isSuture"
+              [(ngModel)]="model.sutureLocation"
+            ></rr-knee-cross>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <div class="m-b-21">
+        <h1 rr-id="kne_m_020501">
+          {{'kneeMRT.anamnesis.symptoms.value' | translate}}
+        </h1>
+        <img
+          rr-id="kne_m_020502"
+          class="m-t-15"
+          src="assets/img/kneeMRT/icons/2-3.svg"
+        />
+      </div>
+
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="kne_m_020503"
+          binary="true"
+          name="isInstability"
+          label="{{'kneeMRT.anamnesis.instability.value' | translate}}"
+          class="m-b-7"
+          labelStyleClass="ui-fat-label"
+          rrContentReset="instabilityLocalizationTypeBlock"
+          [(ngModel)]="model.isInstability"
+        ></p-checkbox>
+        <div
+          class="f-vertical f-start nested-content o-radio-list m-b-18"
+          [rrDisable]="!model.isInstability"
+          id="instabilityLocalizationTypeBlock"
+        >
+          <p rr-id="kne_m_020504">
+            {{'kneeMRT.anamnesis.instabilityLocalization.value' | translate}}
+          </p>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020505"
+            name="instabilityLocalizationType"
+            label="{{'kneeMRT.anamnesis.medial.value' | translate}}"
+            [value]="instabilityLocalizationType.Medial"
+            [(ngModel)]="model.instabilityLocalizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020506"
+            name="instabilityLocalizationType"
+            label="{{'kneeMRT.anamnesis.lateral.value' | translate}}"
+            [value]="instabilityLocalizationType.Lateral"
+            [(ngModel)]="model.instabilityLocalizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020507"
+            name="instabilityLocalizationType"
+            label="{{'kneeMRT.anamnesis.anterior.value' | translate}}"
+            [value]="instabilityLocalizationType.Anterior"
+            [(ngModel)]="model.instabilityLocalizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020508"
+            name="instabilityLocalizationType"
+            label="{{'kneeMRT.anamnesis.posterior.value' | translate}}"
+            [value]="instabilityLocalizationType.Posterior"
+            [(ngModel)]="model.instabilityLocalizationType"
+          >
+          </p-radioButton>
+        </div>
+
+        <p-checkbox
+          rr-id="kne_m_020509"
+          binary="true"
+          name="isKneePain"
+          label="{{'kneeMRT.anamnesis.kneePain.value' | translate}}"
+          class="m-b-7"
+          labelStyleClass="ui-fat-label"
+          rrContentReset="kneePainLocalizationTypeBlock"
+          [(ngModel)]="model.isKneePain"
+        ></p-checkbox>
+        <div
+          class="f-vertical f-start nested-content o-radio-list m-b-16"
+          [rrDisable]="!model.isKneePain"
+          id="kneePainLocalizationTypeBlock"
+        >
+          <p rr-id="kne_m_020510" class="m-b-8">
+            {{'kneeMRT.anamnesis.kneePainLocalization.value' | translate}}
+          </p>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020511"
+            name="kneePainLocalizationType"
+            label="{{'kneeMRT.anamnesis.medial.value' | translate}}"
+            [value]="kneePainLocalizationType.Medial"
+            [(ngModel)]="model.kneePainLocalizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020512"
+            name="kneePainLocalizationType"
+            label="{{'kneeMRT.anamnesis.lateral.value' | translate}}"
+            [value]="kneePainLocalizationType.Lateral"
+            [(ngModel)]="model.kneePainLocalizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020513"
+            name="kneePainLocalizationType"
+            label="{{'kneeMRT.anamnesis.anterior.value' | translate}}"
+            [value]="kneePainLocalizationType.Anterior"
+            [(ngModel)]="model.kneePainLocalizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="kne_m_020514"
+            name="kneePainLocalizationType"
+            label="{{'kneeMRT.anamnesis.posterior.value' | translate}}"
+            [value]="kneePainLocalizationType.Posterior"
+            [(ngModel)]="model.kneePainLocalizationType"
+          >
+          </p-radioButton>
+        </div>
+
+        <div>
+          <rr-month-year-input
+            rr-id="kne_m_020515"
+            name="clinic.dateOfMRIPreliminaryExamination"
+            label="{{'kneeMRT.anamnesis.mriPreliminaryExamination.value' | translate}}"
+            [boldLabel]="true"
+            [(ngModel)]="model.dateOfMRIPreliminaryExamination"
+          ></rr-month-year-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

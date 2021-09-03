@@ -1,0 +1,142 @@
+<div class="f-vertical f-start main-container">
+  <div class="col-h-100 f-horizontal">
+    <div class="f-vertical c-sep">
+      <div class="p-l-15">
+        <h2 class="m-b-10" rr-id="ang_c_040210">
+          {{ "angiographyCT.coronaryArteries.localization.value" | translate }}
+        </h2>
+      </div>
+      <rr-shared-coronary-artery-columns
+        [model]="model"
+        class="col-h-100"
+      ></rr-shared-coronary-artery-columns>
+    </div>
+
+    <div class="f-vertical c-col-1 c-sep c-pad-l">
+      <h2 class="m-b-10" rr-id="ang_c_040501">
+        {{ "angiographyCT.coronaryArteries.cADRADS.value" | translate }}
+      </h2>
+      <h2 class="m-b-10" rr-id="ang_c_040502">
+        {{ "angiographyCT.coronaryArteries.modifier.value" | translate }}
+      </h2>
+
+      <div class="o-radio-list m-b-20">
+        <p-checkbox
+          rr-id="ang_c_040503"
+          label="{{ 'angiographyCT.coronaryArteries.nNondiagnostic.value' | translate }}"
+          [(ngModel)]="model.isNNonDiagnostic"
+          binary="true"
+          name="isNNonDiagnostic"
+        ></p-checkbox>
+
+        <p-checkbox
+          rr-id="ang_c_040504"
+          label="{{ 'angiographyCT.coronaryArteries.sStents.value' | translate }}"
+          [(ngModel)]="model.isSStents"
+          binary="true"
+          name="isSStents"
+        ></p-checkbox>
+
+        <p-checkbox
+          rr-id="ang_c_040505"
+          label="{{ 'angiographyCT.coronaryArteries.gImplants.value' | translate }}"
+          [(ngModel)]="model.isGImplants"
+          binary="true"
+          name="isGImplants"
+        ></p-checkbox>
+
+        <p-checkbox
+          rr-id="ang_c_040506"
+          label="{{ 'angiographyCT.coronaryArteries.vVulnerablePlaques.value' | translate }}"
+          [(ngModel)]="model.isVVulnerablePlaques"
+          binary="true"
+          name="isVVulnerablePlaques"
+          rrContentReset="isVVulnerablePlaquesBlock"
+        ></p-checkbox>
+
+        <div
+          class="nested-content o-radio-list"
+          id="isVVulnerablePlaquesBlock"
+          [rrDisable]="!model.isVVulnerablePlaques"
+        >
+          <p-checkbox
+            rr-id="ang_c_040507"
+            label="{{ 'angiographyCT.coronaryArteries.hypodensePlaques.value' | translate }}"
+            [(ngModel)]="model.isHypodensePlaques"
+            binary="true"
+            name="isHypodensePlaques"
+          ></p-checkbox>
+
+          <p-checkbox
+            rr-id="ang_c_040508"
+            label="{{ 'angiographyCT.coronaryArteries.positiveRemodeling.value' | translate }}"
+            [(ngModel)]="model.isPositiveRemodeling"
+            binary="true"
+            name="isPositiveRemodeling"
+          ></p-checkbox>
+
+          <p-checkbox
+            rr-id="ang_c_040509"
+            label="{{ 'angiographyCT.coronaryArteries.spottyCalcification.value' | translate }}"
+            [(ngModel)]="model.isSpottyCalcification"
+            binary="true"
+            name="isSpottyCalcification"
+          ></p-checkbox>
+
+          <p-checkbox
+            rr-id="ang_c_040510"
+            label="{{ 'angiographyCT.coronaryArteries.napkinringSign.value' | translate }}"
+            [(ngModel)]="model.isNapkinRingSign"
+            binary="true"
+            name="isNapkinRingSign"
+          ></p-checkbox>
+        </div>
+      </div>
+
+      <h2 class="m-b-5" rr-id="ang_c_040511" rrInfoIcon="ang_c_04_08">
+        {{ "angiographyCT.coronaryArteries.stenosis.value" | translate }}
+      </h2>
+
+      <p-dropdown
+        styleClass="ui-brown-box o-width-100"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="w014"
+        [(ngModel)]="model.stenosisType"
+        name="stenosisType"
+        rr-id="ang_c_040512"
+        [scrollHeight]="'420px'"
+        rrDropdownClear
+      >
+      </p-dropdown>
+
+      <p-checkbox
+        rr-id="ang_c_040513"
+        rrInfoIcon="ang_c_04_09"
+        binary="true"
+        name="isIndexLesion"
+        class="m-t-20 m-b-10"
+        labelStyleClass="ui-fat-label"
+        label="{{ 'angiographyCT.coronaryArteries.indexLesion.value' | translate }}"
+        [(ngModel)]="model.isIndexLesion"
+        (onChange)="model.cadradsScoreType = cADRADSScoreTypeEnum.None"
+      >
+      </p-checkbox>
+
+      <div class="nested-content" [rrDisable]="!model.isIndexLesion">
+        <p rr-id="ang_c_040514">
+          {{'angiographyCT.coronaryArteries.cADRADSScore.value' | translate}}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="w015"
+          [(ngModel)]="model.cadradsScoreType"
+          name="cadradsScoreType"
+          rr-id="ang_c_040515"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+</div>

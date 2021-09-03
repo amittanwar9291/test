@@ -1,0 +1,381 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical o-radio-list m-t-14">
+    <h2 rr-id="abd_m_090232">
+      {{ 'abdomenMRT.gastrointestinal.complicationcourseOfDisease.value'
+      |translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+        <div class="o-radio-list">
+          <p-radioButton
+            rr-id="abd_m_090233"
+            name="complicationCourseOfDiseaseType"
+            [(ngModel)]="model.complicationCourseOfDiseaseType"
+            [value]="complicationCourseOfDiseaseType.AnastomoticInsufficiency"
+            label="{{ 'abdomenMRT.gastrointestinal.anastomoticInsufficiency.value' | translate }}"
+            (onClick)="resetAllInputs()"
+            rrContentReset="statusPostContainer fluidCollectionDifferentialContainer fluidCollectionContainer hematomaContainer"
+            rrValidation="complicationCourseOfDiseaseType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_090234"
+            name="complicationCourseOfDiseaseType"
+            [(ngModel)]="model.complicationCourseOfDiseaseType"
+            [value]="complicationCourseOfDiseaseType.ExtraintestinalFluidCollection"
+            label="{{ 'abdomenMRT.gastrointestinal.extraintestinalFluidCollection.value' | translate }}"
+            (onClick)="resetAllInputs()"
+            rrValidation="complicationCourseOfDiseaseType"
+            rrContentReset="statusPostContainer anastomoticInsufficiencyContainer fluidCollectionDifferentialContainer fluidCollectionContainer hematomaContainer"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_090235"
+            name="complicationCourseOfDiseaseType"
+            [(ngModel)]="model.complicationCourseOfDiseaseType"
+            [value]="complicationCourseOfDiseaseType.FluidCollection"
+            label="{{ 'abdomenMRT.gastrointestinal.fluidCollection.value' | translate }}"
+            rrValidation="complicationCourseOfDiseaseType"
+            (onClick)="resetAllInputs()"
+            rrContentReset="statusPostContainer anastomoticInsufficiencyContainer hematomaContainer"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_090236"
+            name="complicationCourseOfDiseaseType"
+            [(ngModel)]="model.complicationCourseOfDiseaseType"
+            [value]="complicationCourseOfDiseaseType.Hematoma"
+            label="{{ 'abdomenMRT.gastrointestinal.hematoma.value' | translate }}"
+            rrValidation="complicationCourseOfDiseaseType"
+            (onClick)="resetAllInputs()"
+            rrContentReset="statusPostContainer anastomoticInsufficiencyContainer fluidCollectionDifferentialContainer fluidCollectionContainer"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_090237"
+            name="complicationCourseOfDiseaseType"
+            [(ngModel)]="model.complicationCourseOfDiseaseType"
+            [value]="complicationCourseOfDiseaseType.StatusPost"
+            rrValidation="complicationCourseOfDiseaseType"
+            label="{{ 'abdomenMRT.gastrointestinal.statusPost.value' | translate }}"
+            (onClick)="resetAllInputs()"
+            rrContentReset="anastomoticInsufficiencyContainer fluidCollectionDifferentialContainer fluidCollectionContainer hematomaContainer"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start">
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.AnastomoticInsufficiency"
+        >
+          <div class="o-radio-list" id="anastomoticInsufficiencyContainer">
+            <h2 rr-id="abd_m_090331">
+              {{
+              'abdomenMRT.gastrointestinal.detailsAnastomoticInsufficiency.value'
+              | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="abd_m_090332"
+              name="isSuspicionOf"
+              [(ngModel)]="model.isSuspicionOf"
+              binary="true"
+              label="{{'abdomenMRT.gastrointestinal.suspicionOf.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.FluidCollection"
+        >
+          <div class="o-radio-list" id="fluidCollectionContainer">
+            <h2 rr-id="abd_m_090335">
+              {{ 'abdomenMRT.gastrointestinal.detailsFluidCollection.value' |
+              translate }}
+            </h2>
+            <p-checkbox
+              [rrDisable]="!isCMReinforced"
+              rr-id="abd_m_090336"
+              name="isMarginalContrastEnhancement"
+              [(ngModel)]="model.isMarginalContrastEnhancement"
+              binary="true"
+              label="{{'abdomenMRT.gastrointestinal.marginalContrastenhancement.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.Hematoma"
+        >
+          <div class="o-radio-list" id="hematomaContainer">
+            <h2 rr-id="abd_m_090337">
+              {{ 'abdomenMRT.gastrointestinal.detailsHematoma.value' | translate
+              }}
+            </h2>
+            <p-checkbox
+              rr-id="abd_m_090338"
+              binary="true"
+              name="isActiveBleeding"
+              [(ngModel)]="model.isActiveBleeding"
+              label="{{'abdomenMRT.gastrointestinal.activeBleeding.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090339"
+              binary="true"
+              name="isSignsOfSuperinfection"
+              [(ngModel)]="model.isSignsOfSuperinfection"
+              label="{{'abdomenMRT.gastrointestinal.signsOfSuperinfection.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.StatusPost"
+        >
+          <div class="o-radio-list" id="statusPostContainer">
+            <h2 rr-id="abd_m_090340">
+              {{ 'abdomenMRT.gastrointestinal.detailsStatusPost.value' |
+              translate }}
+            </h2>
+            <p-checkbox
+              rr-id="abd_m_090341"
+              binary="true"
+              name="isStomachResection"
+              [(ngModel)]="model.isStomachResection"
+              label="{{'abdomenMRT.gastrointestinal.stomachResection.value' | translate }}"
+              rrContentReset="isStomachResectionBlocked"
+            >
+            </p-checkbox>
+            <div
+              [rrDisable]="!model.isStomachResection"
+              class="nested-content o-radio-list"
+              id="isStomachResectionBlocked"
+            >
+              <p-radioButton
+                rr-id="abd_m_090342"
+                name="stomachResectionType"
+                [(ngModel)]="model.stomachResectionType"
+                [value]="stomachResectionType.Partial"
+                rrUnClickRadio
+                label="{{'abdomenMRT.gastrointestinal.partial.value' | translate }}"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="abd_m_090343"
+                name="stomachResectionType"
+                [(ngModel)]="model.stomachResectionType"
+                [value]="stomachResectionType.Complete"
+                rrUnClickRadio
+                label="{{'abdomenMRT.gastrointestinal.complete.value' | translate }}"
+              >
+              </p-radioButton>
+            </div>
+            <p-checkbox
+              rr-id="abd_m_090344"
+              binary="true"
+              name="isBiliodigestiveAnastomosis"
+              [(ngModel)]="model.isBiliodigestiveAnastomosis"
+              label="{{'abdomenMRT.gastrointestinal.biliodigestiveAnastomosis.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090345"
+              binary="true"
+              name="isBraunAnastomosis"
+              [(ngModel)]="model.isBraunAnastomosis"
+              label="{{'abdomenMRT.gastrointestinal.braunAnastomosis.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090346"
+              binary="true"
+              name="isFundoplication"
+              [(ngModel)]="model.isFundoplication"
+              label="{{'abdomenMRT.gastrointestinal.fundoplication.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090347"
+              binary="true"
+              name="isRouxYReconstruction"
+              [(ngModel)]="model.isRouxYReconstruction"
+              label="{{'abdomenMRT.gastrointestinal.rouxYReconstruction.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090348"
+              binary="true"
+              name="isGastricBanding"
+              [(ngModel)]="model.isGastricBanding"
+              label="{{'abdomenMRT.gastrointestinal.gastricBanding.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090349"
+              binary="true"
+              name="isBariatricSurgery"
+              [(ngModel)]="model.isBariatricSurgery"
+              label="{{'abdomenMRT.gastrointestinal.bariatricSurgery.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </ng-container>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start">
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.AnastomoticInsufficiency"
+        >
+          <div class="o-radio-list">
+            <rr-reference-picture
+              [(ngModel)]="model.referencePicture"
+              [referenceId]="model.id"
+              [fileUploadUrl]="fileUploadUrl"
+              name="referencePicture"
+            >
+            </rr-reference-picture>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.FluidCollection || model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.Hematoma"
+        >
+          <div class="o-radio-list f-vertical">
+            <h2 rr-id="abd_m_090402">
+              {{ 'abdomenMRT.gastrointestinal.extension.value' | translate }}
+            </h2>
+            <p rr-id="abd_m_090403">
+              {{ 'abdomenMRT.gastrointestinal.size.value' | translate }}
+            </p>
+            <rr-number-input
+              labelRrId="abd_m_090405"
+              inputRrId="abd_m_090404"
+              name="sizeInMm"
+              [(ngModel)]="model.sizeInMm"
+              [config]="{min: 1, max: 999, placeholder: '---'}"
+              [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+              (announceModelChange)="resetInput()"
+            ></rr-number-input>
+            <div [rrDisable]="!model.sizeInMm" class="o-radio-list">
+              <p rr-id="abd_m_090406">
+                {{ 'abdomenMRT.gastrointestinal.2ndPlane.value' | translate }}
+              </p>
+              <rr-number-input
+                labelRrId="abd_m_090408"
+                inputRrId="abd_m_090407"
+                name="secondPlaneInMm"
+                [(ngModel)]="model.secondPlaneInMm"
+                [config]="{min: 1, max: 999, placeholder: '---'}"
+                [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+                (announceModelChange)="resetInput()"
+              ></rr-number-input>
+            </div>
+            <div [rrDisable]="!model.secondPlaneInMm" class="o-radio-list">
+              <p rr-id="abd_m_090409">
+                {{ 'abdomenMRT.gastrointestinal.3rdPlane.value' | translate }}
+              </p>
+              <rr-number-input
+                labelRrId="abd_m_090411"
+                inputRrId="abd_m_090410"
+                name="thirdPlaneInMm"
+                [(ngModel)]="model.thirdPlaneInMm"
+                [config]="{min: 1, max: 999, placeholder: '---'}"
+                [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+              ></rr-number-input>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.StatusPost"
+        >
+          <div class="o-radio-list">
+            <div>
+              <rr-reference-picture
+                [(ngModel)]="model.referencePicture"
+                [referenceId]="model.id"
+                [fileUploadUrl]="fileUploadUrl"
+                name="referencePicture"
+              >
+              </rr-reference-picture>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep f-vertical f-start">
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.FluidCollection"
+        >
+          <div class="o-radio-list" id="fluidCollectionDifferentialContainer">
+            <h2 rr-id="abd_m_090520">
+              {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+              translate }}
+            </h2>
+            <p-checkbox
+              rr-id="abd_m_090521"
+              name="isAbscess"
+              [(ngModel)]="model.isAbscess"
+              binary="true"
+              label="{{'abdomenMRT.gastrointestinal.abscess.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_090522"
+              binary="true"
+              name="isSeroma"
+              [(ngModel)]="model.isSeroma"
+              label="{{'abdomenMRT.gastrointestinal.seroma.value' | translate }}"
+            >
+            </p-checkbox>
+            <div class="o-radio-list m-t-30">
+              <p-checkbox
+                rr-id="abd_m_090595"
+                name="isOneLesionOfTheSameEntity"
+                [(ngModel)]="model.isOneLesionOfTheSameEntity"
+                label="{{ 'abdomenMRT.gastrointestinal.lesionOfTheSame.value' | translate }}"
+                binary="true"
+                rrContentReset="isOneLesionOfTheSameEntityBlock"
+              >
+              </p-checkbox>
+              <div
+                class="nested-content o-radio-list"
+                id="isOneLesionOfTheSameEntityBlock"
+                [rrDisable]="!model.isOneLesionOfTheSameEntity"
+              >
+                <p-checkbox
+                  rr-id="abd_m_090596"
+                  name="isCommunicating"
+                  [(ngModel)]="model.isCommunicating"
+                  label="{{ 'abdomenMRT.gastrointestinal.communicating.value' | translate }}"
+                  binary="true"
+                >
+                </p-checkbox>
+              </div>
+              <div class="m-t-17">
+                <rr-reference-picture
+                  [(ngModel)]="model.referencePicture"
+                  [referenceId]="model.id"
+                  [fileUploadUrl]="fileUploadUrl"
+                  name="referencePicture"
+                >
+                </rr-reference-picture>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.complicationCourseOfDiseaseType === complicationCourseOfDiseaseType.Hematoma"
+        >
+          <div class="o-radio-list">
+            <div>
+              <rr-reference-picture
+                [(ngModel)]="model.referencePicture"
+                [referenceId]="model.id"
+                [fileUploadUrl]="fileUploadUrl"
+                name="referencePicture"
+              >
+              </rr-reference-picture>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

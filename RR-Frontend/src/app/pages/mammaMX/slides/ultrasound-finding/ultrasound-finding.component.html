@@ -1,0 +1,80 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-list">
+      <h1 rr-id="mam_mx_070103" class="m-b-17">
+        {{ 'mammaMX.ultrasoundFinding.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_070104"
+        [(ngModel)]="model.areFindings"
+        label="{{ 'mammaMX.ultrasoundFinding.noFinding.value' | translate }}"
+        name="areFindings"
+        class="m-b-10"
+        [value]="areFindingsType.No"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_070105"
+        [(ngModel)]="model.areFindings"
+        label="{{ 'mammaMX.ultrasoundFinding.finding.value' | translate }}"
+        name="areFindings"
+        class="m-b-17"
+        [value]="areFindingsType.Yes"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindingsType.Yes"
+        [setDescriptionTypes]="[{ findingName: findingType.Mass }]"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div
+      class="f-start f-vertical"
+      [ngClass]="{ 'c-col-4 c-pad-l': findingHandler.currentItem.findingType !== findingType.Mass }"
+    >
+      <div
+        class="c-col-4 f-start f-vertical"
+        [ngClass]="{
+        'm-h-115': findingHandler.currentItem.findingType !== findingType.Mass,
+        'c-pad-l m-h-49': findingHandler.currentItem.findingType === findingType.Mass
+        }"
+      >
+        <h1
+          rr-id="mam_mx_070201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          class="o-width-100"
+        >
+          {{ 'mammaMX.ultrasoundFinding.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <rr-mass
+          *ngSwitchCase="findingType.Mass"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-mass>
+
+        <rr-calcification
+          *ngSwitchCase="findingType.Calcification"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-calcification>
+
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

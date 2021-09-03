@@ -1,0 +1,233 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep c-pad o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="anc_m_040207">
+        {{ 'feetMRT.bones.localization.value' | translate }}*
+      </h2>
+      <rr-foot-big-joints-simple
+        [model]="model.threeDimensionalLocalization"
+        [side]="side"
+        (click)="openLargeLocalizer()"
+        rrValidation="threeDimensionalLocalization"
+        isLocalizer="true"
+      ></rr-foot-big-joints-simple>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="anc_m_0402237">
+        {{ 'feetMRT.bones.intensity.value' | translate }}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        name="intensityType"
+        [value]="intensityType.Moderate"
+        label="{{ 'feetMRT.bones.moderate.value' | translate }}"
+        rr-id="anc_m_0402238"
+        [(ngModel)]="model.intensityType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        name="intensityType"
+        [value]="intensityType.Marked"
+        label="{{ 'feetMRT.bones.marked.value' | translate }}"
+        rr-id="anc_m_0402239"
+        [(ngModel)]="model.intensityType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="anc_m_040386">
+      {{ 'feetMRT.bones.typicalFindings.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isArticularEffusion"
+      label="{{ 'feetMRT.bones.articularEffusion.value' | translate }}"
+      rr-id="anc_m_040387"
+      binary="true"
+      [(ngModel)]="model.isArticularEffusion"
+    ></p-checkbox>
+    <p-checkbox
+      name="isSynovitis"
+      label="{{ 'feetMRT.bones.synovitis.value' | translate }}"
+      [rrContentReset]="'block1'"
+      rr-id="anc_m_040388"
+      binary="true"
+      [(ngModel)]="model.isSynovitis"
+    ></p-checkbox>
+    <div
+      id="block1"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isSynovitis"
+    >
+      <p-checkbox
+        name="isHyperplasia"
+        label="{{ 'feetMRT.bones.hyperplasia.value' | translate }}"
+        rr-id="anc_m_040389"
+        binary="true"
+        [(ngModel)]="model.isHyperplasia"
+      ></p-checkbox>
+      <p-checkbox
+        name="isT2wHyperintensity"
+        label="{{ 'feetMRT.bones.t2wHyperintense.value' | translate }}"
+        rr-id="anc_m_040390"
+        binary="true"
+        [(ngModel)]="model.isT2wHyperintensity"
+      ></p-checkbox>
+      <p-checkbox
+        [rrDisable]="!isCMYes"
+        name="isIncreasedContrastEnhancement"
+        label="{{ 'feetMRT.bones.increasedContrastEnhancement.value' | translate }}"
+        class="text-break"
+        rr-id="anc_m_040391"
+        binary="true"
+        [(ngModel)]="model.isIncreasedContrastEnhancement"
+      ></p-checkbox>
+      <p-checkbox
+        name="isPannus"
+        label="{{ 'feetMRT.bones.pannus.value' | translate }}"
+        rr-id="anc_m_040392"
+        binary="true"
+        [(ngModel)]="model.isPannus"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="anc_m_0404102" class="text-break">
+      {{ 'feetMRT.bones.osseousChanges.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isErosions"
+      label="{{ 'feetMRT.bones.erosions.value' | translate }}"
+      [rrContentReset]="'block2'"
+      rr-id="anc_m_0404103"
+      binary="true"
+      [(ngModel)]="model.isErosions"
+    ></p-checkbox>
+    <div
+      id="block2"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isErosions"
+    >
+      <p-radioButton
+        rrUnClickRadio
+        name="erosionsLocalizationType"
+        [value]="erosionsLocalizationTypes.JointFacet"
+        label="{{ 'feetMRT.bones.jointFacet.value' | translate }}"
+        rr-id="anc_m_0404105"
+        [(ngModel)]="model.erosionsLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        name="erosionsLocalizationType"
+        [value]="erosionsLocalizationTypes.AtTheCapsularInsertion"
+        label="{{ 'feetMRT.bones.atTheCapsularInsertion.value' | translate }}"
+        rr-id="anc_m_0404106"
+        [(ngModel)]="model.erosionsLocalizationType"
+      ></p-radioButton>
+    </div>
+    <p-checkbox
+      name="isInflammatoryBoneMarrowEdema"
+      label="{{ 'feetMRT.bones.boneMarrowEdema.value' | translate }}"
+      [rrContentReset]="'block3'"
+      rr-id="anc_m_0404107"
+      binary="true"
+      [(ngModel)]="model.isInflammatoryBoneMarrowEdema"
+      class="text-break"
+    ></p-checkbox>
+    <div
+      id="block3"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isInflammatoryBoneMarrowEdema"
+    >
+      <p-radioButton
+        rrUnClickRadio
+        name="inflammatoryBoneMarrowEdemaLocalizationType"
+        [value]="enflammatoryBoneMarrowEdemaLocalizationTypes.subchondral"
+        label="{{ 'feetMRT.bones.subchondral.value' | translate }}"
+        rr-id="anc_m_0404109"
+        [(ngModel)]="model.inflammatoryBoneMarrowEdemaLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        name="inflammatoryBoneMarrowEdemaLocalizationType"
+        [value]="enflammatoryBoneMarrowEdemaLocalizationTypes.diaphyseal"
+        label="{{ 'feetMRT.bones.diaphyseal.value' | translate }}"
+        rr-id="anc_m_0404110"
+        [(ngModel)]="model.inflammatoryBoneMarrowEdemaLocalizationType"
+      ></p-radioButton>
+    </div>
+    <p-checkbox
+      name="isIntraosseousCysts"
+      label="{{ 'feetMRT.bones.intraosseousCysts.value' | translate }}"
+      rr-id="anc_m_0404111"
+      binary="true"
+      [(ngModel)]="model.isIntraosseousCysts"
+    ></p-checkbox>
+    <p-checkbox
+      name="isChondropathy"
+      label="{{ 'feetMRT.bones.chondropathy.value' | translate }}"
+      rr-id="anc_m_0404112"
+      binary="true"
+      [(ngModel)]="model.isChondropathy"
+    ></p-checkbox>
+    <p-checkbox
+      name="isPeriostitis"
+      label="{{ 'feetMRT.bones.periostitis.value' | translate }}"
+      rr-id="anc_m_0404113"
+      binary="true"
+      [(ngModel)]="model.isPeriostitis"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list">
+    <h2 rr-id="anc_m_040599" class="text-break">
+      {{ 'feetMRT.bones.progressiveOsseousChanges.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isProliferativeBoneChanges"
+      label="{{ 'feetMRT.bones.proliferativeBonechanges.value' | translate }}"
+      rr-id="anc_m_0405100"
+      binary="true"
+      [(ngModel)]="model.isProliferativeBoneChanges"
+    ></p-checkbox>
+    <p-checkbox
+      name="isDestructions"
+      label="{{ 'feetMRT.bones.destructions.value' | translate }}"
+      rr-id="anc_m_0405101"
+      binary="true"
+      [(ngModel)]="model.isDestructions"
+    ></p-checkbox>
+    <p-checkbox
+      name="isAnkylosis"
+      label="{{ 'feetMRT.bones.ankylosis.value' | translate }}"
+      rr-id="anc_m_0405102"
+      binary="true"
+      [(ngModel)]="model.isAnkylosis"
+    ></p-checkbox>
+    <h2 rr-id="anc_m_0405106" class="m-t-40">
+      {{ 'feetMRT.bones.differentialDiagnosis.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="arthritisDifferentialDiagnosisType"
+      [value]="differentialDiagnosisTypes.RheumatoidArthritis"
+      label="{{ 'feetMRT.bones.rheumatoidArthritis.value' | translate }}"
+      rr-id="anc_m_0405107"
+      [(ngModel)]="model.arthritisDifferentialDiagnosisType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="arthritisDifferentialDiagnosisType"
+      [value]="differentialDiagnosisTypes.PsoriaticArthritis"
+      label="{{ 'feetMRT.bones.psoriaticArthritis.value' | translate }}"
+      rr-id="anc_m_0405108"
+      [(ngModel)]="model.arthritisDifferentialDiagnosisType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="arthritisDifferentialDiagnosisType"
+      [value]="differentialDiagnosisTypes.TophaceusGout"
+      label="{{ 'feetMRT.bones.tophaceusGout.value' | translate }}"
+      rr-id="anc_m_0405109"
+      [(ngModel)]="model.arthritisDifferentialDiagnosisType"
+    ></p-radioButton>
+  </div>
+</div>

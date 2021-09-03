@@ -1,0 +1,286 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="f-vertical c-sep">
+      <div class="f-vertical c-pad f-align-start">
+        <h1 rr-id="hip_m_020103" class="m-b-20">
+          {{'hipMRT.anamnesis.indication.value' | translate}}
+        </h1>
+        <img
+          rr-id="hip_m_020104"
+          src="assets/img/hipMRT/icons/2-1.svg"
+          alt="indication"
+          class="m-b-42"
+        />
+      </div>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad c-sep f-vertical f-start">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [setConfig]="findingDropdownConfig"
+            [disabled]="false"
+          ></rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+          <rr-indication-findings
+            *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+            [model]="findingHandler.currentItem"
+            [currentFindingHeader]="selectedFindingName"
+          ></rr-indication-findings>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <div class="f-align-start o-radio-list m-b-25">
+        <h1 rr-id="hip_m_020301">
+          {{'hipMRT.anamnesis.previousInterventions.value' | translate}}
+        </h1>
+        <img
+          rr-id="hip_m_020302"
+          src="assets/img/hipMRT/icons/2-2.svg"
+          alt="previousInterventions"
+        />
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020303"
+        name="isEndoprosthesis"
+        label="{{'hipMRT.anamnesis.endoprosthesis.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isEndoprosthesis"
+        rrContentReset="isEndoprosthesis-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isEndoprosthesis"
+        id="isEndoprosthesis-block"
+      >
+        <p-checkbox
+          rr-id="hip_m_020304"
+          name="isEndoprosthesisRight"
+          label="{{'hipMRT.anamnesis.right.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isEndoprosthesisRight"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_020305"
+          name="isEndoprosthesisLeft"
+          label="{{'hipMRT.anamnesis.left.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isEndoprosthesisLeft"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020306"
+        name="isLabralSurgery"
+        label="{{'hipMRT.anamnesis.labralSurgery.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLabralSurgery"
+        rrContentReset="isLabralSurgery-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isLabralSurgery"
+        id="isLabralSurgery-block"
+      >
+        <p-checkbox
+          rr-id="hip_m_020307"
+          name="isLabralSurgeryRight"
+          label="{{'hipMRT.anamnesis.right.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLabralSurgeryRight"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_020308"
+          name="isLabralSurgeryLeft"
+          label="{{'hipMRT.anamnesis.left.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLabralSurgeryLeft"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020309"
+        name="isOffsetCorrection"
+        label="{{'hipMRT.anamnesis.offsetCorrection.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isOffsetCorrection"
+        rrContentReset="isOffsetCorrection-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isOffsetCorrection"
+        id="isOffsetCorrection-block"
+      >
+        <p-checkbox
+          rr-id="hip_m_020310"
+          name="isOffsetCorrectionRight"
+          label="{{'hipMRT.anamnesis.right.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isOffsetCorrectionRight"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_020311"
+          name="isOffsetCorrectionLeft"
+          label="{{'hipMRT.anamnesis.left.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isOffsetCorrectionLeft"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020312"
+        name="isCartilageTransplantation"
+        label="{{'hipMRT.anamnesis.cartilageTransplantation.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCartilageTransplantation"
+        rrContentReset="isCartilageTransplantation-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isCartilageTransplantation"
+        id="isCartilageTransplantation-block"
+      >
+        <p-radioButton
+          rr-id="hip_m_020313"
+          rrUnClickRadio
+          name="cartilageTransplantationType"
+          [value]="cartilageTransplantationType.Amic"
+          label="{{'hipMRT.anamnesis.autologousMatrixinducedChondrogenesisAMIC.value' | translate}}"
+          [(ngModel)]="model.cartilageTransplantationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_020314"
+          rrUnClickRadio
+          name="cartilageTransplantationType"
+          [value]="cartilageTransplantationType.Act"
+          label="{{'hipMRT.anamnesis.autologousChondrocyteTransplantationACT.value' | translate}}"
+          [(ngModel)]="model.cartilageTransplantationType"
+          class="m-b-0"
+        >
+        </p-radioButton>
+        <p rr-id="hip_m_020315">
+          {{'hipMRT.anamnesis.side.value' | translate}}
+        </p>
+        <p-checkbox
+          rr-id="hip_m_020316"
+          name="isCartilageTransplantationSideRight"
+          label="{{'hipMRT.anamnesis.right.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCartilageTransplantationSideRight"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_020317"
+          name="isCartilageTransplantationSideLeft"
+          label="{{'hipMRT.anamnesis.left.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCartilageTransplantationSideLeft"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <div class="f-vertical f-align-start">
+        <h1 rr-id="hip_m_020401" class="m-b-5">
+          {{'hipMRT.anamnesis.priorExaminations.value' | translate}}
+        </h1>
+        <img
+          rr-id="hip_m_020402"
+          src="assets/img/hipMRT/icons/2-3.svg"
+          alt="priorExaminations"
+          class="m-b-30"
+        />
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020407"
+        name="isXRay"
+        label="{{'hipMRT.anamnesis.xray.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isXRay"
+        rrContentReset="isXRay-block"
+        class="m-b-0"
+        (onChange)="resetXRayDate()"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content m-b-21"
+        [rrDisable]="!model.isXRay"
+        id="isXRay-block"
+      >
+        <rr-month-year-input
+          labelRrId="hip_m_020408"
+          monthRrId="hip_m_020409"
+          yearRrId="hip_m_020410"
+          [(ngModel)]="model.xRayDate"
+          label="{{ 'hipMRT.anamnesis.date.value' | translate }}"
+          name="xRayDate"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020411"
+        name="isCT"
+        label="{{'hipMRT.anamnesis.cT.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCT"
+        rrContentReset="isCT-block"
+        class="m-b-0"
+        (onChange)="resetCTDate()"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content m-b-18"
+        [rrDisable]="!model.isCT"
+        id="isCT-block"
+      >
+        <rr-month-year-input
+          labelRrId="hip_m_020412"
+          monthRrId="hip_m_020413"
+          yearRrId="hip_m_020414"
+          [(ngModel)]="model.ctDate"
+          label="{{ 'hipMRT.anamnesis.date.value' | translate }}"
+          name="ctDate"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        rr-id="hip_m_020415"
+        name="isMRI"
+        label="{{'hipMRT.anamnesis.mRI.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMRI"
+        rrContentReset="isMRI-block"
+        class="m-b-0"
+        (onChange)="resetMRIDate()"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content"
+        [rrDisable]="!model.isMRI"
+        id="isMRI-block"
+      >
+        <rr-month-year-input
+          labelRrId="hip_m_020416"
+          monthRrId="hip_m_020417"
+          yearRrId="hip_m_020418"
+          [(ngModel)]="model.mriDate"
+          label="{{ 'hipMRT.anamnesis.date.value' | translate }}"
+          name="mriDate"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+  </div>
+</form>

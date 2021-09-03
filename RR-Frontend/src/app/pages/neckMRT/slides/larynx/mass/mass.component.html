@@ -1,0 +1,55 @@
+<p-tabView class="rr-tabView">
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="nec_m_050202"
+        [rrValidation]="[
+        'differentialDiagnosis',
+        'isSupraglotticSpace isGlottis isSubglotticSpace',
+        'localizationAxialType',
+        'marginType',
+        'sizeInMm'
+        ]"
+        ifAny="true"
+      >
+        {{ 'neckMRT.larynx.characterizationI.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-one
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [diffDiagnosisOptions]="differentialDiagnosisOptions"
+    >
+    </rr-characterization-one>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="nec_m_050301">
+        {{ 'neckMRT.larynx.characterizationII.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-two
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [isCMReinforced]="isCMReinforced"
+      [isDWI]="isDWI"
+    >
+    </rr-characterization-two>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="nec_m_050401" rrValidation="differentialDiagnosis1">
+        {{ 'neckMRT.larynx.differentialDiagnosis.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-differential-diagnosis
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [diffDiagnosisFullOptions]="differentialDiagnosisOptions"
+      [diffDiagnosisRestrictedOptions]="restrictedDifferentialDiagnosisOptions"
+    >
+    </rr-differential-diagnosis>
+  </p-tabPanel>
+</p-tabView>

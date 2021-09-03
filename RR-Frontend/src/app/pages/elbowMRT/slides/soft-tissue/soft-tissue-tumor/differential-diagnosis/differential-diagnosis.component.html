@@ -1,0 +1,91 @@
+<div class="f-horizontal f-start col-h-550 o-width-100 p-t-28 p-b-12">
+  <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType === descriptionType.IKnow"
+      >
+        <h2 rr-id="elb_m_0702209" rrInfoIcon="elb_m_07_02">
+          {{'elbowMRT.softTissue.differentialDiagnosis.value' | translate}}
+        </h2>
+        <p rr-id="elb_m_070259" class="m-b-0">
+          {{'elbowMRT.softTissue.differentialDiagnosis1star.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          name="differentialDiagnosis1Type"
+          [(ngModel)]="model.differentialDiagnosis1Type"
+          [options]="differentialDiagnosis1Options"
+          group="true"
+          rrId="elb_m_070260"
+          (selectionChanged)="resetIsSuspectedDiagnosis(); resetIsSecondary()"
+          rrValidation="differentialDiagnosis1Type"
+          class="m-b-12"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="elb_m_0702210"
+          name="isSuspectedDiagnosis"
+          binary="true"
+          label="{{ 'elbowMRT.softTissue.suspected.value' | translate }}"
+          [(ngModel)]="model.isSuspectedDiagnosis"
+          [rrDisable]="model.differentialDiagnosis1Type === 'None'"
+        ></p-checkbox>
+      </div>
+
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis1Type === 'None'
+                            && model.mainFeaturesDifferentialDiagnosisType === 'None'"
+      >
+        <p rr-id="elb_m_070261" class="m-b-2">
+          {{'elbowMRT.softTissue.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          name="differentialDiagnosis2Type"
+          [(ngModel)]="model.differentialDiagnosis2Type"
+          [options]="differentialDiagnosis2Options"
+          group="true"
+          rrId="elb_m_070262"
+          (selectionChanged)="resetIsSecondary()"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis2Type === 'None'"
+      >
+        <p-checkbox
+          rr-id="elb_m_070263"
+          label="{{'elbowMRT.softTissue.secondary.value' | translate}}"
+          binary="true"
+          class="m-b-21"
+          name="isSecondary"
+          [(ngModel)]="model.isSecondary"
+        >
+        </p-checkbox>
+
+        <p rr-id="elb_m_070264" class="m-b-0">
+          {{'elbowMRT.softTissue.differentialDiagnosis3.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="3"
+          name="differentialDiagnosis3Type"
+          [(ngModel)]="model.differentialDiagnosis3Type"
+          [options]="differentialDiagnosis2Options"
+          group="true"
+          rrId="elb_m_070265"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-radio-list"></div>
+  <div class="c-col-1 c-pad c-sep o-radio-list"></div>
+  <div class="c-col-1 c-pad-l c-sep o-radio-list"></div>
+</div>

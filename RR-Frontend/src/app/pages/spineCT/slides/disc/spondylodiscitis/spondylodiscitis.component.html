@@ -1,0 +1,177 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rrValidation="spineLocation" rr-id="spi_c_0502303">
+      {{'spineCT.disc.localization.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_c_050205"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="spi_c_050331" rrInfoIcon="spi_c_05_07">
+      {{'spineCT.disc.spondylodiscitisDetails.value'|translate}}
+    </h2>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isIncreasedSizeOfTheDisc"
+      label="{{'spineCT.disc.increasedSizeOfTheDisc.value'| translate}}"
+      rr-id="spi_c_050332"
+      name="isIncreasedSizeOfTheDisc"
+    ></p-checkbox>
+    <p-checkbox
+      [rrDisable]="!isCMYes"
+      binary="true"
+      [(ngModel)]="model.isContrastEnhancementOfTheDisc"
+      label="{{'spineCT.disc.contrastEnhancementOfTheDisc.value'| translate}}"
+      rr-id="spi_c_050333"
+      name="isContrastEnhancementOfTheDisc"
+    ></p-checkbox>
+    <p-checkbox
+      labelStyleClass="text-break"
+      binary="true"
+      [(ngModel)]="model.isIrregularityOfAdjacentVertebralEndplates"
+      label="{{'spineCT.disc.irregularityOfAdjacentVertebralEndplates.value'| translate}}"
+      rr-id="spi_c_050334"
+      name="isIrregularityOfAdjacentVertebralEndplates"
+    ></p-checkbox>
+  </div>
+  <div class="f-vertical col-h-100">
+    <h2 rr-id="spi_c_0504303" class="p-l-15 m-b-10">
+      {{'spineCT.disc.perifocalTissueReaction.value'|translate}}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad o-radio-list p-t-10 f-vertical">
+        <h2 rr-id="spi_c_0504601">
+          {{'spineCT.disc.localizationAxial.value'|translate}}
+        </h2>
+        <rr-axial-localizer
+          rr-id="spi_c_0504304"
+          [ngModel]="model.spineAxialLocation"
+          name="spineAxialLocation"
+        ></rr-axial-localizer>
+
+        <p-checkbox
+          class="m-t-15"
+          labelStyleClass="text-break"
+          binary="true"
+          [(ngModel)]="model.isParavertebralInflammatoryResponse"
+          label="{{'spineCT.disc.paravertebralInflammatoryResponse.value'| translate}}"
+          rr-id="spi_c_0504305"
+          name="isParavertebralInflammatoryResponse"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isSoftTissueEdema"
+          label="{{'spineCT.disc.softTissueEdema.value'| translate}}"
+          rr-id="spi_c_0504306"
+          name="isSoftTissueEdema"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l o-radio-list">
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isAbscess"
+          label="{{'spineCT.disc.abscess.value'| translate}}"
+          rr-id="spi_c_0505306"
+          name="isAbscess"
+          rrContentReset="abscessDetailsContainer"
+        ></p-checkbox>
+        <div
+          id="abscessDetailsContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isAbscess"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isIntraspinal"
+            label="{{'spineCT.disc.intraspinal.value'| translate}}"
+            rr-id="spi_c_0505310"
+            name="isIntraspinal"
+            rrContentReset="intraspinalLargestDiameterInMmContainer"
+          ></p-checkbox>
+          <div
+            id="intraspinalLargestDiameterInMmContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isIntraspinal"
+          >
+            <p rr-id="spi_c_0505251">
+              {{'spineCT.disc.largestDiameter.value'|translate}}
+            </p>
+            <rr-number-input
+              label="{{ 'spineCT.disc.inMm.value' | translate }}"
+              inputRrId="spi_c_0505311"
+              labelRrId="spi_c_0505312"
+              name="intraspinalLargestDiameterInMm"
+              [(ngModel)]="model.intraspinalLargestDiameterInMm"
+              [config]="{ min: 1, max: 60}"
+            ></rr-number-input>
+          </div>
+
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isParavertebral"
+            label="{{'spineCT.disc.paravertebral.value'| translate}}"
+            rr-id="spi_c_0505307"
+            name="isParavertebral"
+            rrContentReset="paravertebralDetailsCOntainer"
+          ></p-checkbox>
+          <div
+            id="paravertebralDetailsCOntainer"
+            class="nested-content o-radio-list f-vertical"
+            [rrDisable]="!model.isParavertebral"
+          >
+            <p rr-id="spi_c_0505252">
+              {{'spineCT.disc.largestDiameter.value'|translate}}
+            </p>
+            <rr-number-input
+              label="{{ 'spineCT.disc.inMm.value' | translate }}"
+              inputRrId="spi_c_0505308"
+              labelRrId="spi_c_0505309"
+              name="paravertebralLargestDiameterInMm"
+              [(ngModel)]="model.paravertebralLargestDiameterInMm"
+              [config]="{ min: 1, max: 60}"
+            ></rr-number-input>
+            <p-checkbox
+              [rrDisable]="!isLocatedAtPsoasMusclePermited()"
+              binary="true"
+              [(ngModel)]="model.isLocatedAtPsoasMuscle"
+              label="{{'spineCT.disc.locatedAtPsoasMuscle.value'| translate}}"
+              rr-id="spi_c_0505253"
+              name="isLocatedAtPsoasMuscle"
+            ></p-checkbox>
+          </div>
+        </div>
+        <h2 rr-id="spi_c_0505313" class="m-t-35">
+          {{'spineCT.disc.differentialDiagnosis.value'|translate}}
+        </h2>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isActiveDiscitis"
+          label="{{'spineCT.disc.activeDiscitis.value'| translate}}"
+          rr-id="spi_c_0505314"
+          name="isActiveDiscitis"
+          rrContentReset="secondaryContainer"
+        ></p-checkbox>
+        <div
+          id="secondaryContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isActiveDiscitis"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isSecondary"
+            label="{{'spineCT.disc.subordinate.value'| translate}}"
+            rr-id="spi_c_0505315"
+            name="isSecondary"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

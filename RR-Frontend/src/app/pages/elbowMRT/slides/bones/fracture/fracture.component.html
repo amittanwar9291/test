@@ -1,0 +1,73 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="elb_m_040206">
+      {{'elbowMRT.bones.localization.value' | translate}}
+    </h2>
+    <p-dropdown
+      name="fractureType"
+      rr-id="elb_m_040207"
+      rrValidation="fractureType"
+      placeholder="{{'elbowMRT.bones.placeholder' | translate}}"
+      [options]="ddlW013"
+      [(ngModel)]="model.fractureType"
+      styleClass="o-width-100 ui-brown-box"
+      (onChange)="clearOptions()"
+      class="m-b-19"
+      rrDropdownClear
+    ></p-dropdown>
+
+    <div
+      *ngIf="model.fractureType === fractureTypeEnum.RadialHead"
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="elb_m_0402101" class="m-t-14">
+        {{'elbowMRT.bones.classification.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="elb_m_040208"
+        label="{{'elbowMRT.bones.aOClassificationAO2R1.value' | translate}}"
+        name="classificationType"
+        rrValidation="classificationType"
+        [(ngModel)]="model.classificationType"
+        [rrContentReset]="clearClassificationTypeDetails(bonesClassificationTypeEnum.AO)"
+        [value]="bonesClassificationTypeEnum.AO"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040209"
+        label="{{'elbowMRT.bones.modifiedAccordingToMason.value' | translate}}"
+        name="classificationType"
+        rrValidation="classificationType"
+        [(ngModel)]="model.classificationType"
+        [rrContentReset]="clearClassificationTypeDetails(bonesClassificationTypeEnum.ModifiedAccordingToMason)"
+        [value]="bonesClassificationTypeEnum.ModifiedAccordingToMason"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <ng-container *ngIf="model.fractureType === fractureTypeEnum.None">
+    <div class="c-col-1 c-sep-l c-pad "></div>
+    <div class="c-col-1 c-sep c-sep-l c-pad"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </ng-container>
+
+  <rr-radial-head
+    *ngIf="model.fractureType === fractureTypeEnum.RadialHead"
+    [model]="model"
+  ></rr-radial-head>
+  <rr-proximal-ulna
+    *ngIf="model.fractureType === fractureTypeEnum.ProximalUlna"
+    [model]="model"
+  ></rr-proximal-ulna>
+  <rr-distal-humerus
+    *ngIf="model.fractureType === fractureTypeEnum.DistalHumerus"
+    [model]="model"
+  ></rr-distal-humerus>
+  <rr-diaphyseal-radius
+    *ngIf="model.fractureType === fractureTypeEnum.DiaphysealRadius"
+    [model]="model"
+  ></rr-diaphyseal-radius>
+  <rr-diaphyseal-ulna
+    *ngIf="model.fractureType === fractureTypeEnum.DiaphysealUlna"
+    [model]="model"
+  ></rr-diaphyseal-ulna>
+</div>

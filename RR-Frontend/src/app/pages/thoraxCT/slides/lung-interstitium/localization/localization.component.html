@@ -1,0 +1,231 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad  m-t-10 m-b-10">
+    <div class="p-l-10 o-radio-list">
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="tho_c_0602102" class="m-b-3">
+          {{'thoraxCT.lungInterstitium.differentialDiagnosis1.value' |
+          translate}}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="diagnosisDropDownList"
+          group="true"
+          rrValidation="differentialDiagnosis"
+          notInFinding="true"
+          [(ngModel)]="model.differentialDiagnosis"
+          (selectionChanged)="onDiagnosisChanged();"
+          rrId="tho_c_0602103"
+          [skipOnExclusion]="this.notExcludedOptions"
+          name="differentialDiagnosis"
+          [parentViewModel]="model"
+          isActiveOnIKnow="true"
+          [noAutoModelUpdate]="true"
+          (presetDataFromBackend)="onPresetData($event)"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <h2 rr-id="tho_c_0602104" class="m-t-37">
+        {{'thoraxCT.lungInterstitium.dominantPattern.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_0602105"
+        rrValidation="dominantPatternType"
+        notInFinding="true"
+        name="dominantPatternType"
+        [value]="dominantPatternTypeEnum.Nodular"
+        [(ngModel)]="model.dominantPatternType"
+        label="{{'thoraxCT.lungInterstitium.nodular.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0602106"
+        rrValidation="dominantPatternType"
+        notInFinding="true"
+        name="dominantPatternType"
+        [value]="dominantPatternTypeEnum.Reticular"
+        [(ngModel)]="model.dominantPatternType"
+        label="{{'thoraxCT.lungInterstitium.reticular.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0602107"
+        rrValidation="dominantPatternType"
+        notInFinding="true"
+        name="dominantPatternType"
+        [value]="dominantPatternTypeEnum.IncreasedParenchymalDensity"
+        [(ngModel)]="model.dominantPatternType"
+        label="{{'thoraxCT.lungInterstitium.increasedParenchymalDensity.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0602108"
+        rrValidation="dominantPatternType"
+        notInFinding="true"
+        name="dominantPatternType"
+        [value]="dominantPatternTypeEnum.DecreasedParenchymalDensity"
+        [(ngModel)]="model.dominantPatternType"
+        label="{{'thoraxCT.lungInterstitium.decreasedParenchymalDensity.value' | translate}}"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical m-t-10 m-b-10">
+    <div class="triple-col-header p-l-25">
+      <h2 rr-id="tho_c_0603101">
+        {{'thoraxCT.lungInterstitium.distribution.value' | translate}}
+      </h2>
+    </div>
+    <div class="triple-col-content f-horizontal">
+      <div class="c-col-1 c-sep c-pad">
+        <div class="p-l-10 o-radio-list">
+          <p rr-id="tho_c_0603102" class="m-b-6">
+            {{'thoraxCT.lungInterstitium.localizationCraniocaudal.value'
+            |translate}}
+          </p>
+          <p-radioButton
+            rr-id="tho_c_0603103"
+            rrValidation="localizationCraniocaudalType"
+            notInFinding="true"
+            name="localizationCraniocaudalType"
+            (onClick)="clearLocalizer()"
+            [value]="lungInterstitiumLocalizationCraniocaudalTypeEnum.Diffuse"
+            [(ngModel)]="model.localizationCraniocaudalType"
+            label="{{'thoraxCT.lungInterstitium.diffuse.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0603104"
+            rrValidation="localizationCraniocaudalType"
+            notInFinding="true"
+            name="localizationCraniocaudalType"
+            (onClick)="clearLocalizer()"
+            [value]="lungInterstitiumLocalizationCraniocaudalTypeEnum.Basal"
+            [(ngModel)]="model.localizationCraniocaudalType"
+            label="{{'thoraxCT.lungInterstitium.basal.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0603105"
+            rrValidation="localizationCraniocaudalType"
+            notInFinding="true"
+            name="localizationCraniocaudalType"
+            (onClick)="clearLocalizer()"
+            [value]="lungInterstitiumLocalizationCraniocaudalTypeEnum.Apical"
+            [(ngModel)]="model.localizationCraniocaudalType"
+            label="{{'thoraxCT.lungInterstitium.apical.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0603106"
+            rrValidation="localizationCraniocaudalType"
+            notInFinding="true"
+            name="localizationCraniocaudalType"
+            rrContentReset="comparisonBetweenSidesType-block"
+            [value]="lungInterstitiumLocalizationCraniocaudalTypeEnum.Focal"
+            [(ngModel)]="model.localizationCraniocaudalType"
+            label="{{'thoraxCT.lungInterstitium.focal.value' | translate}}"
+          ></p-radioButton>
+          <div class="nested-content">
+            <rr-lungs-flaps-simple
+              rr-id="tho_c_0603107"
+              name="lungsFlapsLocation"
+              (click)="openLargeLocalizer('flaps', 'lungsFlapsLocation')"
+              [(ngModel)]="model.lungsFlapsLocation"
+            ></rr-lungs-flaps-simple>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad">
+        <div class="p-l-10 o-radio-list">
+          <p rr-id="tho_c_0604101" class="m-b-6">
+            {{'thoraxCT.lungInterstitium.localizationAxial.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="tho_c_0604102"
+            name="localizationAxialType"
+            rrUnClickRadio
+            [value]="localizationAxialTypeEnum.Subpleural"
+            [(ngModel)]="model.localizationAxialType"
+            label="{{'thoraxCT.lungInterstitium.subpleural.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0604103"
+            name="localizationAxialType"
+            rrUnClickRadio
+            [value]="localizationAxialTypeEnum.Bronchocentric"
+            [(ngModel)]="model.localizationAxialType"
+            label="{{'thoraxCT.lungInterstitium.bronchocentric.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0604104"
+            name="localizationAxialType"
+            rrUnClickRadio
+            [value]="localizationAxialTypeEnum.Diffuse"
+            [(ngModel)]="model.localizationAxialType"
+            label="{{'thoraxCT.lungInterstitium.diffuse.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0604105"
+            name="localizationAxialType"
+            rrUnClickRadio
+            [value]="localizationAxialTypeEnum.SubstantialExclusionOfExtrapleuralSpace"
+            [(ngModel)]="model.localizationAxialType"
+            label="{{'thoraxCT.lungInterstitium.substantialExclusionOfExtrapleuralSpace.value' | translate}}"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div
+          class="p-l-10 o-radio-list"
+          id="comparisonBetweenSidesType-block"
+          [rrDisable]="model.localizationCraniocaudalType === lungInterstitiumLocalizationCraniocaudalTypeEnum.Focal"
+        >
+          <p rr-id="tho_c_0605100">
+            {{'thoraxCT.lungInterstitium.sideComparison.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="tho_c_0605101"
+            name="sideComparisonType"
+            [value]="sideComparisonTypeEnum.Symmetrical"
+            rrContentReset="asymmetricalType-block"
+            rrUnClickRadio
+            [(ngModel)]="model.sideComparisonType"
+            label="{{'thoraxCT.lungInterstitium.symmetrical.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0605102"
+            name="sideComparisonType"
+            class="m-b-5"
+            [value]="sideComparisonTypeEnum.Asymmetrical"
+            rrContentReset="asymmetricalType-block"
+            rrUnClickRadio
+            [(ngModel)]="model.sideComparisonType"
+            label="{{'thoraxCT.lungInterstitium.asymmetrical.value' | translate}}"
+          ></p-radioButton>
+          <div
+            id="asymmetricalType-block"
+            class="f-vertical f-start o-radio-list nested-content"
+            [rrDisable]="model.sideComparisonType !== sideComparisonTypeEnum.Asymmetrical"
+          >
+            <p rr-id="tho_c_0605103" class="m-b-6">
+              {{'thoraxCT.lungInterstitium.dominantSide.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="tho_c_0605104"
+              rrValidation="asymmetricalType"
+              notInFinding="true"
+              name="asymmetricalType"
+              [value]="locationTypeEnum.Right"
+              [(ngModel)]="model.asymmetricalType"
+              label="{{'thoraxCT.lungInterstitium.right.value' | translate}}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_c_0605105"
+              rrValidation="asymmetricalType"
+              notInFinding="true"
+              name="asymmetricalType"
+              [value]="locationTypeEnum.Left"
+              [(ngModel)]="model.asymmetricalType"
+              label="{{'thoraxCT.lungInterstitium.left.value' | translate}}"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

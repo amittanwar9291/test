@@ -1,0 +1,183 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <p-checkbox
+        rr-id="tho_c_0603172"
+        name="isBronchiectasis"
+        rrContentReset="isBronchiectasis-block"
+        label="{{'thoraxCT.lungInterstitium.bronchiectasis.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isBronchiectasis"
+      >
+      </p-checkbox>
+      <div
+        id="isBronchiectasis-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isBronchiectasis"
+      >
+        <p-radioButton
+          rr-id="tho_c_0603173"
+          rrUnClickRadio
+          name="bronchiectasisType"
+          [value]="bronchiectasisTypeEnum.Cylindrical"
+          [(ngModel)]="model.bronchiectasisType"
+          label="{{'thoraxCT.lungInterstitium.cylindrical.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0603174"
+          rrUnClickRadio
+          name="bronchiectasisType"
+          [value]="bronchiectasisTypeEnum.Varicose"
+          [(ngModel)]="model.bronchiectasisType"
+          label="{{'thoraxCT.lungInterstitium.varicose.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0603175"
+          rrUnClickRadio
+          name="bronchiectasisType"
+          [value]="bronchiectasisTypeEnum.Cystic"
+          [(ngModel)]="model.bronchiectasisType"
+          label="{{'thoraxCT.lungInterstitium.cystic.value' | translate}}"
+        ></p-radioButton>
+        <p-checkbox
+          rr-id="tho_c_0603176"
+          name="isTractionBronchiectasis"
+          label="{{'thoraxCT.lungInterstitium.tractionBronchiectasis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isTractionBronchiectasis"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="tho_c_0603177"
+          name="isSignetRingSign"
+          label="{{'thoraxCT.lungInterstitium.signetRingSign.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSignetRingSign"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="tho_c_0603178"
+        name="isBronchiolectasis"
+        label="{{'thoraxCT.lungInterstitium.bronchiolectasis.value' | translate}}"
+        binary="true"
+        rrContentReset="isBronchiolectasis-block"
+        [(ngModel)]="model.isBronchiolectasis"
+      >
+      </p-checkbox>
+      <div
+        id="isBronchiolectasis-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isBronchiolectasis"
+      >
+        <p-checkbox
+          rr-id="tho_c_0603179"
+          name="isTractionBronchiolectasis"
+          label="{{'thoraxCT.lungInterstitium.tractionBronchiolectasis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isTractionBronchiolectasis"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="tho_c_0603180"
+        name="isBronchialWallThickening"
+        label="{{'thoraxCT.lungInterstitium.bronchialWallThickening.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isBronchialWallThickening"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <p-checkbox
+        rr-id="tho_c_0604204"
+        name="isMucoidImpaction"
+        label="{{'thoraxCT.lungInterstitium.mucoidImpaction.value' | translate}}"
+        binary="true"
+        (onChange)="clearLocalizers()"
+        rrContentReset="isMucoidImpaction-block"
+        [(ngModel)]="model.isMucoidImpaction"
+      >
+      </p-checkbox>
+      <div
+        id="isMucoidImpaction-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isMucoidImpaction"
+      >
+        <h2 rr-id="tho_c_0604205">
+          {{'thoraxCT.lungInterstitium.localization.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="tho_c_0604206"
+          rrUnClickRadio
+          name="localizationLevel"
+          (onClick)="clearLocalizers()"
+          [value]="localizationLevelTypeEnum.SegmentLevel"
+          [(ngModel)]="model.localizationLevel"
+          label="{{'thoraxCT.lungInterstitium.atSegmentLevel.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0604207"
+          rrUnClickRadio
+          name="localizationLevel"
+          class="m-b-4"
+          (onClick)="clearLocalizers()"
+          [value]="localizationLevelTypeEnum.LobeLevel"
+          [(ngModel)]="model.localizationLevel"
+          label="{{'thoraxCT.lungInterstitium.atLobeLevel.value' | translate}}"
+        ></p-radioButton>
+
+        <div
+          *ngIf="model.localizationLevel === localizationLevelTypeEnum.SegmentLevel"
+          class="f-vertical f-start o-radio-list nested-content"
+        >
+          <p
+            rr-id="tho_c_0604208"
+            rrValidation="lungsSegmentsLocation"
+            noUpdate="true"
+          >
+            {{'thoraxCT.lungInterstitium.localization.value' | translate}}*
+          </p>
+
+          <rr-lungs-segments-simple
+            *ngIf="model.localizationLevel === localizationLevelTypeEnum.SegmentLevel"
+            rrValidation="lungsSegmentsLocation"
+            isLocalizer="true"
+            rr-id="tho_c_0604117"
+            (click)="openLargeLocalizer('segments', 'lungsSegmentsLocation')"
+            name="lungsSegmentsLocation"
+            [(ngModel)]="model.lungsSegmentsLocation"
+          ></rr-lungs-segments-simple>
+        </div>
+
+        <div
+          *ngIf="model.localizationLevel === localizationLevelTypeEnum.LobeLevel"
+          class="f-vertical f-start o-radio-list nested-content"
+        >
+          <p
+            rr-id="tho_c_0604208"
+            rrValidation="lungsFlapsLocation2"
+            noUpdate="true"
+          >
+            {{'thoraxCT.lungInterstitium.localization.value' | translate}}*
+          </p>
+          <rr-lungs-flaps-simple
+            *ngIf="model.localizationLevel === localizationLevelTypeEnum.LobeLevel"
+            rrValidation="lungsFlapsLocation2"
+            isLocalizer="true"
+            class="nested-localizer-flaps"
+            (click)="openLargeLocalizer('flaps', 'lungsFlapsLocation2')"
+            rr-id="tho_c_0604108"
+            name="lungsFlapsLocation2"
+            [(ngModel)]="model.lungsFlapsLocation2"
+          ></rr-lungs-flaps-simple>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10"></div>
+</div>

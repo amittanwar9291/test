@@ -1,0 +1,118 @@
+<form #autosaveForm="ngForm" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list">
+        <h1 class="m-b-16" rr-id="nec_m_070103">
+          {{ "neckMRT.thyroid.finding.value" | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="nec_m_070104"
+          name="areFindings"
+          class="text-break"
+          [value]="areFindings.No"
+          label="{{
+            'neckMRT.thyroid.regularImagingOfTheorthotopicThyroid.value'
+              | translate
+          }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070105"
+          name="areFindings"
+          [value]="areFindings.Yes"
+          label="{{ 'neckMRT.thyroid.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setConfig]="findingDropdownConfig"
+        [customLabelCalculator]="getCustomLabel.bind(this)"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-vertical col-h-100" [class.c-pad-l]="!isFindingWithTabs">
+      <div [ngClass]="isFindingWithTabs ? 'm-h-48' : 'm-h-123'">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="nec_m_070201"
+          [class.c-pad-l]="isFindingWithTabs"
+        >
+          {{ "neckMRT.thyroid.finding.value" | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+      <div
+        *ngIf="
+          findingHandler.currentItem.findingType === findingType.None;
+          else findings
+        "
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-pad-r c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+
+      <ng-template #findings>
+        <div class="f-horizontal col-h-100">
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <!-- AnomaliesNormalVariantsThyroidGland -->
+            <rr-anomalies-normal-variants-thyroid-gland
+              *ngSwitchCase="findingType.AnomaliesNormalVariantsThyroidGland"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-anomalies-normal-variants-thyroid-gland>
+
+            <!-- Thyroidectomy -->
+            <rr-thyroidectomy
+              *ngSwitchCase="findingType.Thyroidectomy"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-thyroidectomy>
+
+            <!-- ThyroidGoiterMassInflammation -->
+            <rr-thyroid-goiter-mass-inflammation
+              *ngSwitchCase="findingType.ThyroidGoiterMassInflammation"
+              [model]="findingHandler.currentItem"
+              [isCMReinforced]="isContrastEnhanced"
+              [isDWI]="isDWI"
+            >
+            </rr-thyroid-goiter-mass-inflammation>
+
+            <!-- ParathyroidGlandMass -->
+            <rr-parathyroid-gland-mass
+              *ngSwitchCase="findingType.ParathyroidGlandMass"
+              [model]="findingHandler.currentItem"
+              [isCMReinforced]="isContrastEnhanced"
+              [isDWI]="isDWI"
+            >
+            </rr-parathyroid-gland-mass>
+
+            <!-- SalivaryGlandsMassInflammation -->
+            <rr-salivary-glands-mass-inflammation
+              *ngSwitchCase="findingType.SalivaryGlandsMassInflammation"
+              [model]="findingHandler.currentItem"
+              [isCMReinforced]="isContrastEnhanced"
+              [isDWI]="isDWI"
+              [salivaryGlandsDDOptions]="salivaryGlandsDDOptions"
+              [salivaryGlandsDDOptions2]="salivaryGlandsDDOptions2"
+            >
+            </rr-salivary-glands-mass-inflammation>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,178 @@
+<form>
+  <div class="f-horizontal f-center m-t-54">
+    <div class="statistic-container">
+      <div class="statistic-container-top">
+        <h2 class="statistic-header m-b-1" rrInfoIcon="statistic_info_01">
+          {{ "statistics.numberOfReports" | translate }}
+        </h2>
+        <p class="statistic-subheader">
+          {{ "statistics.byYearAllYears" | translate }}
+        </p>
+      </div>
+      <div class="statistic-circle">
+        <p-dropdown
+          name="selectedYear"
+          class="o-width-100"
+          styleClass="preferences-dropdown"
+          [options]="yearsDropdownOptions"
+          [(ngModel)]="model.numberOfReports.selectedYearOption"
+          (onChange)="getNumberOfReportsStatistic()"
+        ></p-dropdown>
+        <p class="statistic-circle-specific-year">
+          {{ model.numberOfReports.inSpecificYear | dotsToCommas }}
+        </p>
+        <p class="statistic-circle-all-years-header">
+          {{ "statistics.allYears" | translate }} ({{totalNumberOfReportYears}})
+        </p>
+        <p class="statistic-circle-all-years">
+          {{ model.numberOfReports.inAllYears | dotsToCommas }}
+        </p>
+      </div>
+    </div>
+    <div class="statistic-container">
+      <div class="statistic-container-top">
+        <h2 class="statistic-header text-break" rrInfoIcon="statistic_info_01">
+          {{ "statistics.numberOfReportsByExamination" | translate }}
+        </h2>
+        <p class="statistic-subheader">
+          {{ "statistics.byYearAllYears" | translate }}
+        </p>
+        <div class="statistic-module-container">
+          <p-dropdown
+            name="selectedModule"
+            class="o-width-100"
+            styleClass="preferences-dropdown preferences-dropdown--black"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="modulesDropdownOptions"
+            [(ngModel)]="model.numberOfReportsByExamination.selectedModule"
+            (onChange)="getNumberOfReportsByExaminationStatistic()"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="statistic-circle">
+        <p-dropdown
+          name="selectedYear"
+          class="o-width-100"
+          styleClass="preferences-dropdown"
+          [options]="yearsDropdownOptions"
+          [(ngModel)]="model.numberOfReportsByExamination.selectedYearOption"
+          (onChange)="getNumberOfReportsByExaminationStatistic()"
+        ></p-dropdown>
+        <p class="statistic-circle-specific-year">
+          {{ model.numberOfReportsByExamination.inSpecificYear | dotsToCommas }}
+        </p>
+        <p class="statistic-circle-all-years-header">
+          {{ "statistics.allYears" | translate }} ({{totalNumberOfReportYears}})
+        </p>
+        <p class="statistic-circle-all-years">
+          {{ model.numberOfReportsByExamination.inAllYears | dotsToCommas }}
+        </p>
+      </div>
+    </div>
+    <div class="statistic-container statistic-container--black">
+      <div class="statistic-container-top">
+        <h2 class="statistic-header text-break" rrInfoIcon="statistic_info_01">
+          {{ "statistics.numberOfReportsPerRadiologist" | translate }}
+        </h2>
+        <p class="statistic-subheader">
+          {{ "statistics.byYearAllYears" | translate }}
+        </p>
+      </div>
+      <div class="statistic-circle">
+        <p-dropdown
+          name="selectedYear"
+          class="o-width-100"
+          styleClass="preferences-dropdown"
+          [options]="yearsDropdownOptions"
+          [(ngModel)]="model.numberOfReportsPerRadiologist.selectedYearOption"
+          (onChange)="getNumberOfReportsPerRadiologistStatistic()"
+        ></p-dropdown>
+        <p class="statistic-circle-specific-year">
+          {{ model.numberOfReportsPerRadiologist.inSpecificYear | dotsToCommas
+          }}
+        </p>
+        <p class="statistic-circle-all-years-header">
+          {{ "statistics.allYears" | translate }} ({{totalNumberOfReportYears}})
+        </p>
+        <p class="statistic-circle-all-years">
+          {{ model.numberOfReportsPerRadiologist.inAllYears | dotsToCommas }}
+        </p>
+      </div>
+    </div>
+    <div class="statistic-container statistic-container--gray">
+      <div class="statistic-container-top">
+        <h2 class="statistic-header" rrInfoIcon="statistic_info_01">
+          {{ "statistics.averageTimeOfReport" | translate }}
+        </h2>
+        <p class="statistic-subheader">
+          {{ "statistics.byYearAllYears" | translate }}
+        </p>
+      </div>
+      <div class="statistic-circle">
+        <p-dropdown
+          name="selectedYear"
+          class="o-width-100"
+          styleClass="preferences-dropdown"
+          [options]="yearsDropdownOptions"
+          [(ngModel)]="model.averageTimeOfReport.selectedYearOption"
+          (onChange)="getAverageTimeOfReportStatistic()"
+        ></p-dropdown>
+        <p class="statistic-circle-specific-year">
+          {{ model.averageTimeOfReport.inSpecificYear / 60 | number : '1.1-1' |
+          dotsToCommas }} min
+        </p>
+        <p class="statistic-circle-all-years-header">
+          {{ "statistics.allYears" | translate }} ({{totalNumberOfReportYears}})
+        </p>
+        <p class="statistic-circle-all-years">
+          {{ model.averageTimeOfReport.inAllYears / 60 | number : '1.1-1' |
+          dotsToCommas }} min
+        </p>
+      </div>
+    </div>
+    <div class="statistic-container statistic-container--gray">
+      <div class="statistic-container-top">
+        <h2 class="statistic-header text-break" rrInfoIcon="statistic_info_01">
+          {{ "statistics.averageTimeOfReportByExamination" | translate }}
+        </h2>
+        <p class="statistic-subheader">
+          {{ "statistics.byYearAllYears" | translate }}
+        </p>
+        <div class="statistic-module-container">
+          <p-dropdown
+            name="selectedModule"
+            class="o-width-100 preferences-dropdown--black"
+            styleClass="preferences-dropdown preferences-dropdown--black"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="modulesDropdownOptions"
+            [(ngModel)]="model.averageTimeOfReportByExamination.selectedModule"
+            (onChange)="getAverageTimeOfReportsByExaminationStatistic()"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="statistic-circle">
+        <p-dropdown
+          name="selectedYear"
+          class="o-width-100"
+          styleClass="preferences-dropdown"
+          [options]="yearsDropdownOptions"
+          [(ngModel)]="model.averageTimeOfReportByExamination.selectedYearOption"
+          (onChange)="getAverageTimeOfReportsByExaminationStatistic()"
+        ></p-dropdown>
+        <p class="statistic-circle-specific-year">
+          {{ model.averageTimeOfReportByExamination.inSpecificYear / 60 | number
+          : '1.1-1' | dotsToCommas }} min
+        </p>
+        <p class="statistic-circle-all-years-header">
+          {{ "statistics.allYears" | translate }} ({{totalNumberOfReportYears}})
+        </p>
+        <p class="statistic-circle-all-years">
+          {{ model.averageTimeOfReportByExamination.inAllYears / 60 | number :
+          '1.1-1' | dotsToCommas }} min
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

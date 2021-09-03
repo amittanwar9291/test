@@ -1,0 +1,324 @@
+<div class="h-555">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-pad f-vertical m-t-33 m-b-13 o-list">
+      <div class="p-l-10 o-radio-list triple-slider">
+        <h2 rr-id="pel_m_0602443" class="m-b-15">
+          {{'pelvisMRT.femaleGender.surrounding.value' | translate}}
+        </h2>
+        <h2 rr-id="pel_m_0602444" class="m-b-2">
+          {{'pelvisMRT.femaleGender.t1wSignal.value' | translate}}
+        </h2>
+        <p rr-id="pel_m_0602444" class="font-15 m-b-10">
+          {{'pelvisMRT.femaleGender.inComparisonTo.value' | translate}}
+        </p>
+        <rr-slider-number-triple-input
+          name="additionalT1wSignal"
+          rr-id="pel_m_0602445"
+          [(ngModel)]="model.additionalT1wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+      <div class="p-l-10 o-radio-list m-b-19 triple-slider">
+        <h2 rr-id="pel_m_0602446" class="m-b-2">
+          {{'pelvisMRT.femaleGender.t2wSignal.value' | translate}}
+        </h2>
+        <p rr-id="pel_m_0602446" class="font-15 m-b-10">
+          {{'pelvisMRT.femaleGender.inComparisonTo.value' | translate}}
+        </p>
+        <rr-slider-number-triple-input
+          name="additionalT2wSignal"
+          rr-id="pel_m_0602447"
+          [(ngModel)]="model.additionalT2wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep-l c-pad f-vertical m-t-60 m-b-13 o-list">
+      <div class="o-radio-list p-l-10 m-b-35" [rrDisable]="!isCM">
+        <p rr-id="pel_m_0603139" class="m-b-14">
+          {{'pelvisMRT.femaleGender.contrastEnhancement.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="pel_m_0603140"
+          label="{{'pelvisMRT.femaleGender.strong.value' | translate}}"
+          name="contrastEnhancementType2"
+          [value]="contrastEnhancementTypeEnum.Strong"
+          [(ngModel)]="model.contrastEnhancementType2"
+          rrContentReset="contrastEnhancementHomogenityType2Block"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0603141"
+          label="{{'pelvisMRT.femaleGender.low.value' | translate}}"
+          name="contrastEnhancementType2"
+          [value]="contrastEnhancementTypeEnum.Low"
+          [(ngModel)]="model.contrastEnhancementType2"
+          rrContentReset="contrastEnhancementHomogenityType2Block"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0603142"
+          label="{{'pelvisMRT.femaleGender.no.value' | translate}}"
+          name="contrastEnhancementType2"
+          [value]="contrastEnhancementTypeEnum.No"
+          [(ngModel)]="model.contrastEnhancementType2"
+          rrContentReset="contrastEnhancementHomogenityType2Block"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <div
+          id="contrastEnhancementHomogenityType2Block"
+          class="m-l-35 o-radio-list"
+          [rrDisable]="model.contrastEnhancementType2 !== contrastEnhancementTypeEnum.Low &&
+            model.contrastEnhancementType2 !== contrastEnhancementTypeEnum.Strong"
+        >
+          <p-radioButton
+            rr-id="pel_m_0603143"
+            label="{{'pelvisMRT.femaleGender.homogeneous.value' | translate}}"
+            name="contrastEnhancementHomogenityType2"
+            [value]="homogenityTypeEnum.Homogeneous"
+            [(ngModel)]="model.contrastEnhancementHomogenityType2"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0603144"
+            label="{{'pelvisMRT.femaleGender.heterogeneous.value' | translate}}"
+            name="contrastEnhancementHomogenityType2"
+            [value]="homogenityTypeEnum.Heterogeneous"
+            [(ngModel)]="model.contrastEnhancementHomogenityType2"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="o-radio-list p-l-10">
+        <p rr-id="pel_m_0603460">
+          {{'pelvisMRT.femaleGender.details.value' | translate}}
+        </p>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.thickenedUterosacralLigaments.value' | translate}}"
+          rr-id="pel_m_0603145"
+          binary="true"
+          labelStyleClass="text-break"
+          name="isThickenedUterosacralLigaments"
+          [(ngModel)]="model.isThickenedUterosacralLigaments"
+          rrContentReset="cMEnhancementBlock"
+        >
+        </p-checkbox>
+        <div
+          id="cMEnhancementBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!(isCM && model.isThickenedUterosacralLigaments)"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.contrastEnhancement.value' | translate}}"
+            rr-id="pel_m_0603147"
+            binary="true"
+            name="isContrastEnhancement"
+            [(ngModel)]="model.isContrastEnhancement"
+          >
+          </p-checkbox>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.markedPeriuterineVessels.value' | translate}}"
+          rr-id="pel_m_0603148"
+          binary="true"
+          name="isMarkedUterineVessels"
+          [(ngModel)]="model.isMarkedUterineVessels"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep-l c-pad f-vertical m-t-33 m-b-13 o-list">
+      <div class="o-radio-list p-l-10">
+        <h2 rr-id="pel_m_0604140" class="m-b-15">
+          {{'pelvisMRT.femaleGender.complications.value' | translate}}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.ovarianVeinThrombosis.value' | translate}}"
+          rr-id="pel_m_0604141"
+          binary="true"
+          name="isOvarianVeinThrombosis"
+          [(ngModel)]="model.isOvarianVeinThrombosis"
+          rrContentReset="sideBlock"
+        >
+        </p-checkbox>
+        <div
+          id="sideBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isOvarianVeinThrombosis"
+        >
+          <p rr-id="pel_m_0604452" class="m-b-5">
+            {{'pelvisMRT.femaleGender.side.value' | translate}}*
+          </p>
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.right.value' | translate}}"
+            rr-id="pel_m_0604142"
+            binary="true"
+            name="isRight"
+            [(ngModel)]="model.isRight"
+            rrValidation="isRight isLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.left.value' | translate}}"
+            rr-id="pel_m_0604143"
+            binary="true"
+            name="isLeft"
+            [(ngModel)]="model.isLeft"
+            rrValidation="isRight isLeft"
+          >
+          </p-checkbox>
+        </div>
+        <div class="o-radio-list" [rrDisable]="!isCM">
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.peritonealContrastEnhancement.value' | translate}}"
+            rr-id="pel_m_0604149"
+            binary="true"
+            name="isPeritonealContrastEnhancement"
+            [(ngModel)]="model.isPeritonealContrastEnhancement"
+            rrContentReset="contrastEnhancementType3Block"
+          >
+          </p-checkbox>
+          <div
+            id="contrastEnhancementType3Block"
+            class="o-radio-list p-l-35"
+            [rrDisable]="!model.isPeritonealContrastEnhancement"
+          >
+            <p-radioButton
+              rr-id="pel_m_0604150"
+              label="{{'pelvisMRT.femaleGender.strong.value' | translate}}"
+              name="contrastEnhancementType3"
+              [value]="contrastEnhancementTypeEnum.Strong"
+              [(ngModel)]="model.contrastEnhancementType3"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0604151"
+              label="{{'pelvisMRT.femaleGender.low.value' | translate}}"
+              name="contrastEnhancementType3"
+              [value]="contrastEnhancementTypeEnum.Low"
+              [(ngModel)]="model.contrastEnhancementType3"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0604152"
+              label="{{'pelvisMRT.femaleGender.no.value' | translate}}"
+              name="contrastEnhancementType3"
+              [value]="contrastEnhancementTypeEnum.No"
+              [(ngModel)]="model.contrastEnhancementType3"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.ileus.value' | translate}}"
+          rr-id="pel_m_0604153"
+          binary="true"
+          name="isIleus"
+          [(ngModel)]="model.isIleus"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.hydroureter.value' | translate}}"
+          rr-id="pel_m_0604154"
+          binary="true"
+          name="isHydroureter"
+          [(ngModel)]="model.isHydroureter"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep-l c-pad-l f-vertical m-t-33 m-b-13 o-list">
+      <div class="o-radio-list p-l-10 m-b-30">
+        <h2 rr-id="pel_m_0605242" class="m-b-15">
+          {{'pelvisMRT.femaleGender.associatedFindings.value' | translate}}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.ascites.value' | translate}}"
+          rr-id="pel_m_0605243"
+          binary="true"
+          name="isAscites"
+          [(ngModel)]="model.isAscites"
+          rrContentReset="ascitesBlock"
+        >
+        </p-checkbox>
+        <div
+          id="ascitesBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isAscites"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.t1wSignalIncrease.value' | translate}}"
+            rr-id="pel_m_0605244"
+            binary="true"
+            name="isAscitesT1wSignalIncrease"
+            [(ngModel)]="model.isAscitesT1wSignalIncrease"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.hemosiderin.value' | translate}}"
+            rr-id="pel_m_0605245"
+            binary="true"
+            name="isHemosiderin"
+            [(ngModel)]="model.isHemosiderin"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.focal.value' | translate}}"
+            rr-id="pel_m_0605246"
+            binary="true"
+            name="isFocal"
+            [(ngModel)]="model.isFocal"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.generalized.value' | translate}}"
+            rr-id="pel_m_0605247"
+            binary="true"
+            name="isGeneralized"
+            [(ngModel)]="model.isGeneralized"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="o-radio-list p-l-10 m-b-10 p-r-20">
+        <h2 rr-id="pel_m_060520">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis.value' | translate}}
+        </h2>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="w055DifferentialDiagnosisType"
+          name="differentialDiagnosis"
+          rr-id="pel_m_0605248"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          (onChange)="resetPidCheckbox($event)"
+          [scrollHeight]="'420px'"
+          [(ngModel)]="model.differentialDiagnosis"
+        >
+        </p-dropdown>
+      </div>
+      <div class="o-radio-list p-l-10">
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.pID.value' | translate}}"
+          rr-id="pel_m_060566"
+          *ngIf="model.differentialDiagnosis === femaleGenderDiagnosisTypeEnum.Endometritis"
+          binary="true"
+          name="isPID"
+          [(ngModel)]="model.isPID"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

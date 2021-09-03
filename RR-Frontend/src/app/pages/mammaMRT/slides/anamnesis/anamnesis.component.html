@@ -1,0 +1,184 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-pad-r f-vertical c-sep f-space-between">
+      <div class="c-col-2 f-vertical m-b-25">
+        <h1 rr-id="mam_m_020103" class="text-break m-b-20">
+          {{ "mammaMRT.anamnesis.personalAndFamilyHistory.value" | translate }}
+        </h1>
+        <div class="o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="mam_m_020104"
+            label="{{ 'mammaMRT.anamnesis.negativ.value' | translate }}"
+            name="wasFamilyCanscer"
+            [(ngModel)]="model.ownFamilyAnamnesisPresent"
+            [value]="ownFamilyAnamnesisPresentType.Negative"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_020105"
+            label="{{ 'mammaMRT.anamnesis.positiv.value' | translate }}"
+            name="wasFamilyCancer"
+            [(ngModel)]="model.ownFamilyAnamnesisPresent"
+            [value]="ownFamilyAnamnesisPresentType.Positive"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-2 f-horizontal f-fill-available-space">
+        <div class="c-col-1 c-sep c-pad-r f-vertical f-fill-available-space">
+          <rr-finding-column
+            [handler]="familyPersonHandler"
+            [disabled]="model.ownFamilyAnamnesisPresent !==ownFamilyAnamnesisPresentType.Positive"
+            [setConfig]="familyPersonConfig"
+            [customLabelCalculator]="getCustomLabel.bind(this)"
+            [validationName]="'ownFamilyAnamnesisFindings'"
+            (findingChange)="resetOwnAnamnesisDate()"
+          >
+          </rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad-l f-vertical">
+          <rr-family-person
+            class="f-fill-available-space f-vertical"
+            *ngIf="anyPersonSelected()"
+            [model]="familyPersonHandler.currentItem"
+            [selectedPerson]="getSelectedOptionName()"
+            [sides]="sides"
+          >
+          </rr-family-person>
+          <rr-own-anamnesis
+            class="f-fill-available-space f-vertical"
+            *ngIf="
+              ownAnamnesis.indexOf(
+                familyPersonHandler.currentItem.findingType
+              ) > -1
+            "
+            [model]="familyPersonHandler.currentItem"
+            [selectedAnamnesis]="getSelectedOptionName()"
+          >
+          </rr-own-anamnesis>
+          <div
+            *ngIf="familyPersonHandler.currentItem.findingType == 'None'"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 f-vertical f-space-between c-sep c-pad">
+      <h1 rr-id="mam_m_020301" class="text-break">
+        {{ "mammaMRT.anamnesis.menstruationAndPregnancy.value" | translate }}
+      </h1>
+      <div class="anamnesis-column">
+        <div class="o-radio-list m-b-30">
+          <h2 rr-id="mam_m_020302">
+            {{ "mammaMRT.anamnesis.menstruation.value" | translate }}
+          </h2>
+          <p-radioButton
+            name="menstruationType"
+            [value]="menstruationType.NoCycle"
+            [(ngModel)]="model.menstruationType"
+            label="{{
+              'mammaMRT.anamnesis.noCyclePostmenopausal.value' | translate
+            }}"
+            rr-id="mam_m_020303"
+            rrUnClickRadio
+            (onClick)="resetCalendar()"
+          >
+          </p-radioButton>
+          <p-radioButton
+            name="menstruationType"
+            [value]="menstruationType.MenstrualCycleExisting"
+            [(ngModel)]="model.menstruationType"
+            label="{{ 'mammaMRT.anamnesis.menstrualCycleExisting.value' | translate }}"
+            rr-id="mam_m_020304"
+            rrUnClickRadio
+            (onClick)="resetCalendar()"
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="o-radio-list m-b-70"
+          [rrDisable]="model.menstruationType !== menstruationType.MenstrualCycleExisting"
+          id="menstruationTypeBlock"
+        >
+          <p rr-id="mam_m_020305" class="m-b-5">
+            {{ "mammaMRT.anamnesis.dayOneOfLastMenstruation.value" | translate
+            }}
+          </p>
+          <rr-calendar-input
+            name="calendar"
+            rr-id="mam_m_020306"
+            [(ngModel)]="model.calendar"
+            ngDefaultControl
+            [clear]="shouldBeCleared"
+          >
+          </rr-calendar-input>
+        </div>
+        <h2 rr-id="mam_m_020307" class="m-b-6">
+          {{ "mammaMRT.anamnesis.pregnancy.value" | translate }}
+        </h2>
+        <p rr-id="mam_m_020308" class="m-b-1">
+          {{ "mammaMRT.anamnesis.quantity.value" | translate }}
+        </p>
+        <div class="f-start f-vertical o-width-50">
+          <p-dropdown
+            rr-id="mam_m_020309"
+            class="pregnancies-dropdown"
+            styleClass="o-width-100 ui-brown-box"
+            name="pregnancies"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="pregnancies"
+            rrDropdownClear
+            [(ngModel)]="model.pregnanciesQuantity"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-2 c-sep c-pad-l f-vertical">
+      <div class="f-vertical o-radio-list m-b-25">
+        <h1 rr-id="mam_m_020401" class="text-break m-b-20">
+          {{ "mammaMRT.anamnesis.previousInterventions.value" | translate }}
+        </h1>
+        <p-radioButton
+          name="arePreviousTherapies"
+          [value]="arePrevousTherapies.No"
+          label="{{ 'mammaMRT.anamnesis.no.value' | translate }}"
+          rr-id="mam_m_020402"
+          [(ngModel)]="model.arePreviousTherapies"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          name="arePreviousTherapies"
+          [value]="arePrevousTherapies.Yes"
+          label="{{ 'mammaMRT.anamnesis.yes.value' | translate }}"
+          rr-id="mam_m_020403"
+          [(ngModel)]="model.arePreviousTherapies"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="f-horizontal f-fill-available-space">
+        <div class=" c-col-1 o-radio-list f-vertical c-pad-r c-sep">
+          <rr-finding-column
+            [handler]="previousTherapieHandler"
+            [disabled]="model.arePreviousTherapies !== arePrevousTherapies.Yes"
+            [setConfig]="previousTherapieConfig"
+            [validationName]="'previousTherapiesFindings'"
+            [validationSecondFinding]="true"
+            (findingChange)="resetPreviousTherapiesDate()"
+          >
+          </rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad-l f-vertical o-list">
+          <rr-previous-therapies
+            class="f-horizontal f-fill-available-space"
+            [model]="previousTherapieHandler.currentItem"
+          >
+          </rr-previous-therapies>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

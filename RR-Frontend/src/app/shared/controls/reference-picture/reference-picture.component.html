@@ -1,0 +1,73 @@
+<div
+  class="f-start f-vertical o-radio-list reference-picture"
+  *ngIf="isLayerPositionModelBound"
+  [rrDisable]="isDisabled"
+>
+  <h2
+    [attr.rr-id]="getRrId(referencePictureElementsEnum.headerId)"
+    *ngIf="isHeader"
+    class="reference-picture__header m-b-6"
+  >
+    {{ 'shared-templates.referenceImage.header.value' | translate }}
+  </h2>
+  <div class="f-start f-horizontal reference-picture__inputs m-b-9">
+    <div class="f-start f-vertical o-radio-list inputs__column">
+      <p
+        [attr.rr-id]="getRrId(referencePictureElementsEnum.serialNoLabelId)"
+        class="m-b-2"
+      >
+        {{ 'shared-templates.referenceImage.' + (this.shortLabels ?
+        'serialNoShort': 'serialNo') + '.value' | translate }}
+      </p>
+      <input
+        [attr.rr-id]="getRrId(referencePictureElementsEnum.serialNoInputId)"
+        [(ngModel)]="ngValue.serialNumber"
+        class="ui-brown-box ui-box-height-standard inputs__input"
+        type="text"
+        placeholder="{{ 'shared-templates.referenceImage.' + (shortLabels ? 'serialNoShort': 'serialNo') + '.value' | translate }}"
+        name="serialNumber"
+        (ngModelChange)="updateReferencePicture(); serialNumberEvent.emit()"
+        rrInputSpecialCharactersRestricted
+        maxlength="20"
+      />
+    </div>
+    <div class="f-start f-vertical o-radio-list inputs__column">
+      <p
+        [attr.rr-id]="getRrId(referencePictureElementsEnum.pictureNoLabelId)"
+        class="m-b-2"
+      >
+        {{ 'shared-templates.referenceImage.' + (shortLabels ? 'imageNoShort':
+        'imageNo') + '.value' | translate }}
+      </p>
+      <input
+        [attr.rr-id]="getRrId(referencePictureElementsEnum.pictureNoInputId)"
+        [(ngModel)]="ngValue.pictureNumber"
+        class="ui-brown-box ui-box-height-standard inputs__input"
+        type="text"
+        placeholder="{{ 'shared-templates.referenceImage.' + (shortLabels ? 'imageNoShort': 'imageNo') + '.value' | translate }}"
+        name="pictureNumber"
+        (ngModelChange)="updateReferencePicture(); pictureNumberEvent.emit()"
+        rrInputSpecialCharactersRestricted
+        maxlength="20"
+      />
+    </div>
+  </div>
+  <p
+    [attr.rr-id]="getRrId(referencePictureElementsEnum.importLabelId)"
+    class="m-b-2"
+  >
+    {{ 'shared-templates.referenceImage.importReferenceImage.value' | translate
+    }}
+  </p>
+  <rr-uploader
+    [attr.rr-id]="getRrId(referencePictureElementsEnum.importInputId)"
+    [initFileModel]="ngValue.uploadedImageFile"
+    [operationsUrl]="fileUploadUrl"
+    [referenceId]="referenceId"
+    [fileType]="pictureFileType"
+    (fileUploaded)="onUploaderFileUpload($event)"
+    [fileRemovingPending$]="uploaderFileRemovingPending$"
+    name="imageFile"
+    #uploader
+  ></rr-uploader>
+</div>

@@ -1,0 +1,88 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+      <h1 rr-id="mam_mx_080103" class="m-b-18">
+        {{ 'mammaMX.lymphNodes.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_080104"
+        [(ngModel)]="model.areFindings"
+        label="{{ 'mammaMX.lymphNodes.noSuspiciousOrPathologically.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindings.No"
+        rrValidation="areFindings"
+        [notInFinding]="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_080105"
+        [(ngModel)]="model.areFindings"
+        label="{{ 'mammaMX.lymphNodes.finding.value' | translate }}"
+        name="areFindings"
+        [value]="areFindings.Yes"
+        class="m-b-15"
+        rrValidation="areFindings"
+        [notInFinding]="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-start f-vertical c-pad-l">
+      <div class="m-h-116">
+        <h1
+          rr-id="mam_mx_080201"
+          [hidden]="findingHandler.currentItem.findingType === findingType.None"
+        >
+          {{ 'mammaMX.lymphNodes.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+
+        <rr-axillary-lymph-node
+          *ngSwitchCase="findingType.AxillaryLymphNode"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-axillary-lymph-node>
+
+        <rr-intramammary-lymph-node
+          *ngSwitchCase="findingType.IntramammaryLymphNode"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-intramammary-lymph-node>
+
+        <rr-cervical-lymph-node
+          *ngSwitchCase="findingType.CervicalLymphNode"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-cervical-lymph-node>
+
+        <rr-parasternal-lymph-node
+          *ngSwitchCase="findingType.ParasternalLymphNode"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-parasternal-lymph-node>
+
+        <rr-supraclavicular-lymph-node
+          *ngSwitchCase="findingType.SupraclavicularLymphNode"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-supraclavicular-lymph-node>
+      </ng-container>
+    </div>
+  </div>
+</form>

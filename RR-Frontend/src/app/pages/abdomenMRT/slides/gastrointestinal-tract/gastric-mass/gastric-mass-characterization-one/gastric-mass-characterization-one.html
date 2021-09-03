@@ -1,0 +1,280 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15 o-radio-list">
+      <div
+        class="f-vertical o-radio-list m-l-10"
+        [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+      >
+        <h2 rr-id="abd_m_090203" class="m-t-2">
+          {{'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+          translate}} 1*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_040204"
+          name="differentialDiagnosisType"
+          group="true"
+          hasPresets="true"
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosisOptions"
+          [(ngModel)]="model.differentialDiagnosisType"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosisType"
+          (selectionChanged)="diagnosisDependentReset()"
+          isActiveOnIKnow="true"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <div class="f-vertical o-radio-list m-b-32">
+          <p-checkbox
+            rr-id="abd_m_090205"
+            name="isHistologyKnown"
+            [(ngModel)]="model.isHistologyKnown"
+            label="{{ 'abdomenMRT.gastrointestinal.histologyKnown.value' | translate }}"
+            binary="true"
+            rrContentReset="isHistologyKnownBlock"
+            [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisType.None"
+          >
+          </p-checkbox>
+          <div
+            id="isHistologyKnownBlock"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isHistologyKnown"
+          >
+            <p-radioButton
+              rr-id="abd_m_090206"
+              name="histologyKnownType"
+              [(ngModel)]="model.histologyKnownType"
+              [value]="histologyKnownType.Benign"
+              rrUnClickRadio
+              label="{{ 'abdomenMRT.gastrointestinal.benign.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_090207"
+              label="{{ 'abdomenMRT.gastrointestinal.malignant.value' | translate }}"
+              name="histologyKnownType"
+              [(ngModel)]="model.histologyKnownType"
+              [value]="histologyKnownType.Malignant"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+      <div class="m-l-10 o-radio-list">
+        <h2 rr-id="abd_m_090302" class="m-t-2">
+          {{ 'abdomenMRT.gastrointestinal.localization.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_090303"
+          label="{{ 'abdomenMRT.gastrointestinal.cardia.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.Cardia"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090304"
+          label="{{ 'abdomenMRT.gastrointestinal.fundus.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.Fundus"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090305"
+          label="{{ 'abdomenMRT.gastrointestinal.corpus.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.Corpus"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090306"
+          label="{{ 'abdomenMRT.gastrointestinal.antrum.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.Antrum"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090307"
+          label="{{ 'abdomenMRT.gastrointestinal.pylorum.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.Pylorum"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090308"
+          label="{{ 'abdomenMRT.gastrointestinal.greaterCurvature.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.GreaterCurvature"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090309"
+          label="{{ 'abdomenMRT.gastrointestinal.lesserCurvature.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.LesserCurvature"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090310"
+          label="{{ 'abdomenMRT.gastrointestinal.diffuse.value' | translate }}"
+          name="gastricLocalizationType"
+          [(ngModel)]="model.gastricLocalizationType"
+          [value]="gastricLocalizationType.Diffuse"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+      <div class="o-radio-list f-vertical ">
+        <h2 rr-id="abd_m_090402">
+          {{ 'abdomenMRT.gastrointestinal.extension.value' | translate }}
+        </h2>
+        <p rr-id="abd_m_090403">
+          {{ 'abdomenMRT.gastrointestinal.size.value' | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="abd_m_090405"
+          inputRrId="abd_m_090404"
+          name="sizeInMm"
+          [(ngModel)]="model.sizeInMm"
+          [config]="{min: 1, max: 999, placeholder: '---'}"
+          [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+          (announceModelChange)="resetInput()"
+          rrValidation="sizeInMm"
+        ></rr-number-input>
+        <div [rrDisable]="!model.sizeInMm" class="o-radio-list">
+          <p rr-id="abd_m_090406">
+            {{ 'abdomenMRT.gastrointestinal.2ndPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            labelRrId="abd_m_090408"
+            inputRrId="abd_m_090407"
+            name="secondPlaneInMm"
+            [(ngModel)]="model.secondPlaneInMm"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+            [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+            (announceModelChange)="resetInput()"
+          ></rr-number-input>
+        </div>
+        <div [rrDisable]="!model.secondPlaneInMm" class="o-radio-list">
+          <p rr-id="abd_m_090409">
+            {{ 'abdomenMRT.gastrointestinal.3rdPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            labelRrId="abd_m_090411"
+            inputRrId="abd_m_090410"
+            name="thirdPlaneInMm"
+            [(ngModel)]="model.thirdPlaneInMm"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+            [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+          ></rr-number-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-15">
+      <div class="m-l-10 o-radio-list">
+        <h2 rr-id="abd_m_090501" class="m-t-2">
+          {{ 'abdomenMRT.gastrointestinal.margin.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_090502"
+          label="{{ 'abdomenMRT.gastrointestinal.circumscribed.value' | translate }}"
+          name="marginType"
+          [(ngModel)]="model.marginType"
+          [value]="marginType.Circumscribed"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090503"
+          label="{{ 'abdomenMRT.gastrointestinal.noncircumscribed.value' | translate }}"
+          name="marginType"
+          [(ngModel)]="model.marginType"
+          [value]="marginType.NonCircumscribed"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="m-l-10 o-radio-list">
+        <h2 rr-id="abd_m_090504" class="m-t-15">
+          {{ 'abdomenMRT.gastrointestinal.homogeneity.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_090505"
+          label="{{ 'abdomenMRT.gastrointestinal.homogeneous.value' | translate }}"
+          name="homogeneityType"
+          [(ngModel)]="model.homogeneityType"
+          [value]="homogeneityType.Homogeneous"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090506"
+          label="{{ 'abdomenMRT.gastrointestinal.heterogeneous.value' | translate }}"
+          name="homogeneityType"
+          [(ngModel)]="model.homogeneityType"
+          [value]="homogeneityType.Heterogeneous"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="m-l-10 o-radio-list">
+        <h2 rr-id="abd_m_090507" class="m-t-15">
+          {{ 'abdomenMRT.gastrointestinal.form.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_090508"
+          label="{{ 'abdomenMRT.gastrointestinal.round.value' | translate }}"
+          name="formType"
+          [(ngModel)]="model.formType"
+          [value]="formType.Round"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090509"
+          label="{{ 'abdomenMRT.gastrointestinal.oval.value' | translate }}"
+          name="formType"
+          [(ngModel)]="model.formType"
+          [value]="formType.Oval"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090510"
+          label="{{ 'abdomenMRT.gastrointestinal.multilobulated.value' | translate }}"
+          name="formType"
+          [(ngModel)]="model.formType"
+          [value]="formType.Multilobulated"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090511"
+          label="{{ 'abdomenMRT.gastrointestinal.irregular.value' | translate }}"
+          name="formType"
+          [(ngModel)]="model.formType"
+          [value]="formType.Irregular"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

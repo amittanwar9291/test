@@ -1,0 +1,54 @@
+<div class="main">
+  <p-tabView
+    class="rr-tabView"
+    [activeIndex]="currentTabIndex"
+    (activeIndexChange)="updateCurrentTabIndex($event)"
+  >
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="tho_c_050202"
+          rrValidation="mainCharacteristicsDifferentialDiagnosis01 mainCharacteristicsLocalizationType measuredValuesMaxDiameterAxialInMm mainCharacteristicsLungsSegmentsLocation mainCharacteristicsLungsFlapsLocation"
+          ifAny="true"
+        >
+          {{'thoraxCT.lungParenchyma.characterizationI.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-characterization-one-tab
+        [model]="model"
+      ></rr-characterization-one-tab>
+    </p-tabPanel>
+
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1 rr-id="tho_c_050301">
+          {{ 'thoraxCT.lungParenchyma.characterizationII.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-nodule-characterization-two-tab
+        *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Nodule"
+        [model]="model"
+      ></rr-nodule-characterization-two-tab>
+      <rr-mass-characterization-two-tab
+        *ngIf="model.findingType === lungParenchymaFindingTypeEnum.Mass"
+        [model]="model"
+      ></rr-mass-characterization-two-tab>
+    </p-tabPanel>
+
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="tho_c_050401"
+          rrValidation="differentialDiagnosis01 differentialDiagnosisLocalizationType"
+          ifAny="true"
+        >
+          {{'thoraxCT.lungParenchyma.differentialDiagnosisTabHeader.value' |
+          translate }}
+        </h1>
+      </ng-template>
+      <rr-differential-diagnosis-tab
+        [model]="model"
+      ></rr-differential-diagnosis-tab>
+    </p-tabPanel>
+  </p-tabView>
+</div>

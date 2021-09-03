@@ -1,0 +1,173 @@
+<div class="vagina-space-height">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-29 m-b-13 o-list">
+      <h2 rr-id="pel_m_0602181" class="p-l-10 m-b-13">
+        {{'pelvisMRT.femaleGender.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="o-radio-list p-l-10">
+        <div
+          [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+          class="m-b-13"
+        >
+          <p rr-id="pel_m_0602182">
+            {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' |
+            translate}}
+            <span
+              *ngIf="model.descriptionType === descriptionTypeEnum.IDescribe"
+              >*</span
+            >
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0602460"
+            [diagnosisNumber]="1"
+            group="true"
+            [options]="w063DifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosis1"
+            [parentViewModel]="model"
+            name="differentialDiagnosis1"
+            (selectionChanged)="resetDifferentialDiagnosis1DependantFields()"
+            rrValidation="differentialDiagnosis1"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          class="m-b-13"
+          [rrDisable]="model.differentialDiagnosis === femaleGenderDiagnosisTypeEnum.None && model.differentialDiagnosis1 === femaleGenderDiagnosisTypeEnum.None"
+        >
+          <p rr-id="pel_m_0602184">
+            {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' |
+            translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0602461"
+            [diagnosisNumber]="2"
+            group="true"
+            [options]="w064DifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosis2"
+            [parentViewModel]="model"
+            name="differentialDiagnosis2"
+            (selectionChanged)="resetDifferentialDiagnosis2DependantFields()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          [rrDisable]="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.None"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.subordinate.value' | translate}}"
+            rr-id="pel_m_0602186"
+            binary="true"
+            name="isSubordinate"
+            [(ngModel)]="model.isSubordinate"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-29 m-b-13 o-list">
+      <div
+        *ngIf="model.differentialDiagnosis1 === femaleGenderDiagnosisTypeEnum.Leiomyoma"
+        class="p-l-10"
+      >
+        <h2 rr-id="pel_m_0603230" class="m-b-10">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.degeneration.value' | translate}}"
+            rr-id="pel_m_0603231"
+            binary="true"
+            name="isDegeneration1"
+            [(ngModel)]="model.isDegeneration1"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div
+        *ngIf="model.differentialDiagnosis1 === femaleGenderDiagnosisTypeEnum.BartholinCyst"
+        class="p-l-10"
+      >
+        <h2 rr-id="pel_m_0603230" class="m-b-10">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.bartholinitis.value' | translate}}"
+            rr-id="pel_m_0603232"
+            binary="true"
+            name="isBartholinitis1"
+            [(ngModel)]="model.isBartholinitis1"
+            rrContentReset="isAbscess1"
+          >
+          </p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            id="isAbscess1"
+            [rrDisable]="!model.isBartholinitis1"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.femaleGender.abscess.value' | translate}}"
+              rr-id="pel_m_0603233"
+              binary="true"
+              name="isAbscess1"
+              [(ngModel)]="model.isAbscess1"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-29 m-b-13 o-list">
+      <div
+        *ngIf="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.Leiomyoma"
+        class="p-l-10"
+      >
+        <h2 rr-id="pel_m_0604208" class="m-b-10">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.degeneration.value' | translate}}"
+            rr-id="pel_m_0604209"
+            binary="true"
+            name="isDegeneration2"
+            [(ngModel)]="model.isDegeneration2"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div
+        *ngIf="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.BartholinCyst"
+        class="p-l-10"
+      >
+        <h2 rr-id="pel_m_0604208" class="m-b-10">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.bartholinitis.value' | translate}}"
+            rr-id="pel_m_0604210"
+            binary="true"
+            name="isBartholinitis2"
+            [(ngModel)]="model.isBartholinitis2"
+            rrContentReset="isAbscess2"
+          >
+          </p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            id="isAbscess2"
+            [rrDisable]="!model.isBartholinitis2"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.femaleGender.abscess.value' | translate}}"
+              rr-id="pel_m_0604211"
+              binary="true"
+              name="isAbscess2"
+              [(ngModel)]="model.isAbscess2"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-29 m-b-13 o-list"></div>
+  </div>
+</div>

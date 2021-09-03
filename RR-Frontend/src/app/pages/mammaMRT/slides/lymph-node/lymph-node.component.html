@@ -1,0 +1,620 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-list">
+      <div class="f-start f-vertical o-list m-b-29">
+        <!-- prettier-ignore -->
+        <h1 rr-id="mam_m_070103" class="m-h-46" rrInfoIcon="mam_m_07_01">
+          {{ "mammaMRT.lymphs.lymphNodesAxillary.value" | translate }}</h1>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_070104"
+            [(ngModel)]="model.axillaryLymphNodesType"
+            label="{{ 'mammaMRT.lymphs.noLNEnlargement.value' | translate }}"
+            labelStyleClass="text-break"
+            name="axillaryLymphNodesType"
+            [value]="axillaryLymphNodesType.NoLNEnlargement"
+            rrUnClickRadio
+            rrContentReset="limitCentralFattyLilusContain"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_070105"
+            [(ngModel)]="model.axillaryLymphNodesType"
+            label="{{
+              'mammaMRT.lymphs.enlargedLymphNodesWithFattyHilum.value'
+                | translate
+            }}"
+            labelStyleClass="text-break"
+            name="axillaryLymphNodesType"
+            [value]="axillaryLymphNodesType.EnlargedLymphNodesWithFattyHilum"
+            rrUnClickRadio
+            rrContentReset="limitCentralFattyLilusContain"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_070118"
+            [(ngModel)]="model.axillaryLymphNodesType"
+            label="{{ 'mammaMRT.lymphs.lymphadenoptahy.value' | translate }}"
+            name="axillaryLymphNodesType"
+            [value]="axillaryLymphNodesType.Lymphadenoptahy"
+            rrUnClickRadio
+            rrContentReset="limitCentralFattyLilusContain"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div
+        class="f-start f-vertical nested-content"
+        id="limitCentralFattyLilusContain"
+        [rrDisable]="
+          model.axillaryLymphNodesType ===
+            axillaryLymphNodesType.NoLNEnlargement ||
+          model.axillaryLymphNodesType === axillaryLymphNodesType.None
+        "
+      >
+        <div class="f-start f-vertical o-radio-list m-b-45">
+          <p-checkbox
+            rr-id="mam_m_070106"
+            class="m-b-6"
+            [(ngModel)]="model.isRightAxillary"
+            label="{{ 'mammaMRT.lymphs.right.value' | translate }}"
+            binary="true"
+            name="isRightAxillary"
+            rrContentReset="rightAxillary"
+          >
+          </p-checkbox>
+          <div
+            class="f-start f-vertical o-radio-list nested-content"
+            id="rightAxillary"
+            [rrDisable]="!model.isRightAxillary"
+          >
+            <rr-number-input
+              rr-id="mam_m_070107"
+              [(ngModel)]="model.rightAxillaryShortAxis"
+              name="rightAxillaryShortAxis"
+              label="{{
+                'mammaMRT.lymphs.maxShortAxisDiameter.value' | translate
+              }}"
+              labelRrId="mam_m_070108"
+              labelStyleClass="text-break2"
+              infoIconRrId="mam_m_070119"
+              [config]="{
+                min: 1,
+                max: 50,
+                hasInfoIcon: true,
+                isPadForIcon: true
+              }"
+              class="m-b-13 pad-icon"
+            ></rr-number-input>
+            <p-checkbox
+              rr-id="mam_m_070109"
+              [(ngModel)]="model.isRightAxillaryLevelI"
+              label="{{
+                'mammaMRT.lymphs.levelILowerAxilia.value' | translate
+              }}"
+              binary="true"
+              name="isRightAxillaryLevelI"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_m_070110"
+              [(ngModel)]="model.isRightAxillaryLevelII"
+              label="{{
+                'mammaMRT.lymphs.levelIIMiddleAxilia.value' | translate
+              }}"
+              binary="true"
+              name="isRightAxillaryLevelII"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_m_070111"
+              [(ngModel)]="model.isRightAxillaryLevelIII"
+              label="{{
+                'mammaMRT.lymphs.levelIIIApicalAxilia.value' | translate
+              }}"
+              binary="true"
+              name="isRightAxillaryLevelIII"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="f-start f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="mam_m_070112"
+            [(ngModel)]="model.isLeftAxillary"
+            class="m-b-9"
+            label="{{ 'mammaMRT.lymphs.left.value' | translate }}"
+            binary="true"
+            name="isLeftAxillary"
+            rrContentReset="leftAxillary"
+          >
+          </p-checkbox>
+          <div
+            class="f-start f-vertical o-radio-list nested-content"
+            id="leftAxillary"
+            [rrDisable]="!model.isLeftAxillary"
+          >
+            <rr-number-input
+              rr-id="mam_m_070113"
+              [(ngModel)]="model.leftAxillaryShortAxis"
+              name="leftAxillaryShortAxis"
+              label="{{
+                'mammaMRT.lymphs.maxShortAxisDiameter.value' | translate
+              }}"
+              labelRrId="mam_m_070114"
+              labelStyleClass="text-break2"
+              infoIconRrId="mam_m_070119"
+              [config]="{
+                min: 1,
+                max: 50,
+                hasInfoIcon: true,
+                isPadForIcon: true
+              }"
+              class="m-b-9 pad-icon"
+            ></rr-number-input>
+            <p-checkbox
+              rr-id="mam_m_070115"
+              [(ngModel)]="model.isLeftAxillaryLevelI"
+              label="{{
+                'mammaMRT.lymphs.levelILowerAxilia.value' | translate
+              }}"
+              binary="true"
+              name="isLeftAxillaryLevelI1"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_m_070116"
+              [(ngModel)]="model.isLeftAxillaryLevelII"
+              label="{{
+                'mammaMRT.lymphs.levelIIMiddleAxilia.value' | translate
+              }}"
+              binary="true"
+              name="isLeftAxillaryLevelII"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_m_070117"
+              [(ngModel)]="model.isLeftAxillaryLevelIII"
+              label="{{
+                'mammaMRT.lymphs.levelIIIApicalAxilia.value' | translate
+              }}"
+              binary="true"
+              name="isLeftAxillaryLevelIII"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-start f-vertical o-list">
+      <div class="f-start f-vertical o-list m-b-35">
+        <h1 rr-id="mam_m_070201" class="m-h-46">
+          {{ "mammaMRT.lymphs.lymphNodesOther.value" | translate }}
+        </h1>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_070202"
+            [(ngModel)]="model.otherLymphNodesType"
+            label="{{
+              'mammaMRT.lymphs.noLNEnlargement2.value' | translate
+            }}"
+            labelStyleClass="text-break"
+            name="otherLymphNodesType"
+            class="text-break"
+            [value]="otherLymphNodesType.NoLNEnlargement"
+            rrUnClickRadio
+            rrContentReset="pathologicallyIncreased"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_070203"
+            [(ngModel)]="model.otherLymphNodesType"
+            label="{{
+              'mammaMRT.lymphs.enlargedLymphNodesWithFattyHilum2.value'
+                | translate
+            }}"
+            labelStyleClass="text-break"
+            name="otherLymphNodesType"
+            class="text-break"
+            [value]="otherLymphNodesType.EnlargedLymphNodesWithFattyHilum"
+            rrUnClickRadio
+            rrContentReset="pathologicallyIncreased"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_070213"
+            [(ngModel)]="model.otherLymphNodesType"
+            label="{{
+              'mammaMRT.lymphs.lymphadenopathy2.value' | translate
+            }}"
+            labelStyleClass="text-break"
+            name="otherLymphNodesType"
+            [value]="otherLymphNodesType.LymphadenopathyUnexplained"
+            rrUnClickRadio
+            rrContentReset="pathologicallyIncreased"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        id="pathologicallyIncreased"
+        [rrDisable]="
+          model.otherLymphNodesType === otherLymphNodesType.NoLNEnlargement ||
+          model.otherLymphNodesType === otherLymphNodesType.None
+        "
+      >
+        <rr-number-input
+          rr-id="mam_m_070214"
+          [(ngModel)]="model.cervicalMaxShortAxisInMm"
+          name="cervicalMaxShortAxisInMm"
+          label="{{
+            'mammaMRT.lymphs.maxShortAxisDiameter.value' | translate
+          }}"
+          class="m-b-15"
+          labelRrId="mam_m_070216"
+          labelStyleClass="text-break2"
+          infoIconRrId="mam_m_070119"
+          [config]="{ min: 1, max: 50, hasInfoIcon: true }"
+        ></rr-number-input>
+        <div class="f-start f-vertical o-radio-list m-b-38">
+          <p-checkbox
+            rr-id="mam_m_070204"
+            [(ngModel)]="model.isRightCervical"
+            label="{{ 'mammaMRT.lymphs.cervicalRight.value' | translate }}"
+            binary="true"
+            name="isRightCervical"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="mam_m_070205"
+            [(ngModel)]="model.isLeftCervical"
+            label="{{ 'mammaMRT.lymphs.cervicalLeft.value' | translate }}"
+            binary="true"
+            name="isLeftCervical"
+          ></p-checkbox>
+        </div>
+        <div class="f-start f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="mam_m_070206"
+            [(ngModel)]="model.isRightParasternal"
+            label="{{
+              'mammaMRT.lymphs.parasternalRight.value' | translate
+            }}"
+            binary="true"
+            name="isRightParasternal"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="mam_m_070209"
+            [(ngModel)]="model.isLeftParasternal"
+            label="{{ 'mammaMRT.lymphs.parasternalLeft.value' | translate }}"
+            binary="true"
+            name="isLeftParasternal"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-start f-vertical o-list">
+      <h1 rr-id="mam_m_070301" class="m-h-46">
+        {{ "mammaMRT.lymphs.thyroidGland.value" | translate }}
+      </h1>
+      <div class="f-start f-vertical o-radio-list m-b-79">
+        <p-checkbox
+          rr-id="mam_m_070303"
+          [(ngModel)]="model.isEnlarged"
+          label="{{ 'mammaMRT.lymphs.enlarged.value' | translate }}"
+          binary="true"
+          name="isEnlarged"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="mam_m_070304"
+          [(ngModel)]="model.isThyroidNodule"
+          label="{{ 'mammaMRT.lymphs.knot.value' | translate }}"
+          binary="true"
+          name="isThyroidNodule"
+        ></p-checkbox>
+      </div>
+      <h1 rr-id="mam_m_070305" class="m-b-20">
+        {{ "mammaMRT.lymphs.focalLiverLesion.value" | translate }}
+      </h1>
+      <div class="f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="mam_m_070306"
+          [(ngModel)]="model.focalLiverLesionType"
+          label="{{ 'mammaMRT.lymphs.benigne.value' | translate }}"
+          name="focalLiverLesionType"
+          [value]="focalLiverLesionType.Benign"
+          rrUnClickRadio
+          rrContentReset="liverLesionBenigneType lisOverOneLesionsOfSameEntityBlock"
+        ></p-radioButton>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="liverLesionBenigneType"
+          [rrDisable]="
+            model.focalLiverLesionType !== focalLiverLesionType.Benign
+          "
+        >
+          <p-radioButton
+            rr-id="mam_m_070307"
+            [(ngModel)]="model.liverLesionBenigneType"
+            label="{{ 'mammaMRT.lymphs.cyst.value' | translate }}"
+            name="liverLesionBenigneType"
+            [value]="liverLesionBenigneType.Cyst"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_070308"
+            [(ngModel)]="model.liverLesionBenigneType"
+            label="{{ 'mammaMRT.lymphs.hemangioma.value' | translate }}"
+            name="liverLesionBenigneType"
+            [value]="liverLesionBenigneType.Hemangioma"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="mam_m_070309"
+          [(ngModel)]="model.focalLiverLesionType"
+          label="{{ 'mammaMRT.lymphs.maligne.value' | translate }}"
+          name="focalLiverLesionType"
+          [value]="focalLiverLesionType.Malignant"
+          rrUnClickRadio
+          rrContentReset="liverLesionBenigneType lisOverOneLesionsOfSameEntityBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_070310"
+          [(ngModel)]="model.focalLiverLesionType"
+          label="{{ 'mammaMRT.lymphs.notClear.value' | translate }}"
+          name="focalLiverLesionType"
+          [value]="focalLiverLesionType.UnknownDignity"
+          class="m-b-21"
+          rrUnClickRadio
+          rrContentReset="liverLesionBenigneType lisOverOneLesionsOfSameEntityBlock"
+        ></p-radioButton>
+        <div
+          id="lisOverOneLesionsOfSameEntityBlock"
+          [rrDisable]="model.focalLiverLesionType === focalLiverLesionType.None"
+        >
+          <p-checkbox
+            rr-id="mam_m_070311"
+            [(ngModel)]="model.isOverOneLesionsOfSameEntity"
+            label="{{
+              'mammaMRT.lymphs.lesionsOfTheSame.value' | translate
+            }}"
+            binary="true"
+            name="isOverOneLesionsOfSameEntity"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-2 c-sep c-pad-l f-start f-vertical o-list">
+      <h1 rr-id="mam_m_070401" class="m-h-46">
+        {{ "mammaMRT.lymphs.lungs.value" | translate }}
+      </h1>
+      <div class="f-start f-vertical o-radio-list m-b-18">
+        <p-radioButton
+          rr-id="mam_m_070402"
+          [(ngModel)]="model.lungDiseaseType"
+          label="{{ 'mammaMRT.lymphs.lungCircleHeart.value' | translate }}"
+          name="lungDiseaseType"
+          [value]="lungDiseaseType.PulmonaryNodule"
+          rrUnClickRadio
+          [rrContentReset]="blocksToClear"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_070403"
+          [(ngModel)]="model.lungDiseaseType"
+          label="{{ 'mammaMRT.lymphs.roomRequirement.value' | translate }}"
+          name="lungDiseaseType"
+          [value]="lungDiseaseType.Mass"
+          rrUnClickRadio
+          [rrContentReset]="blocksToClear"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_070404"
+          [(ngModel)]="model.lungDiseaseType"
+          label="{{ 'mammaMRT.lymphs.pleuralEffusion.value' | translate }}"
+          name="lungDiseaseType"
+          [value]="lungDiseaseType.PleuralEffusion"
+          rrUnClickRadio
+          [rrContentReset]="blocksToClear"
+        ></p-radioButton>
+      </div>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad-r f-vertical">
+          <div class="o-list nested-content">
+            <div
+              *ngIf="model.lungDiseaseType !== lungDiseaseType.None"
+              id="isLocalizationBlock"
+              class="f-vertical o-radio-list"
+              [ngClass]="
+                model.lungDiseaseType === lungDiseaseType.PleuralEffusion
+                  ? 'm-b-40'
+                  : 'm-b-26'
+              "
+            >
+              <p rr-id="mam_m_070405" class="m-b-9">
+                {{ "mammaMRT.lymphs.localizationMultipleSelection.value" |
+                translate }}*
+              </p>
+              <p-checkbox
+                label="{{ 'mammaMRT.lymphs.right.value' | translate }}"
+                [(ngModel)]="model.isLocalizationRight"
+                name="isLocalizationRight"
+                binary="true"
+                rr-id="mam_m_0704100"
+                rrValidation="isLocalizationLeft isLocalizationRight"
+                rrContentReset="isLocalizationRightBlock"
+              ></p-checkbox>
+              <p-checkbox
+                label="{{ 'mammaMRT.lymphs.left.value' | translate }}"
+                [(ngModel)]="model.isLocalizationLeft"
+                name="isLocalizationLeft"
+                binary="true"
+                rr-id="mam_m_0704101"
+                rrValidation="isLocalizationLeft isLocalizationRight"
+                rrContentReset="isLocalizationLeftBlock"
+              ></p-checkbox>
+            </div>
+            <div class="f-start f-vertical">
+              <div
+                *ngIf="
+                  model.lungDiseaseType === lungDiseaseType.PleuralEffusion
+                "
+                id="localizationBlock"
+                class="f-vertical nested-content"
+              >
+                <div
+                  id="isLocalizationRightBlock"
+                  class="f-vertical o-radio-list m-b-23"
+                  [rrDisable]="!model.isLocalizationRight"
+                >
+                  <p rr-id="mam_m_070410" class="m-b-7">
+                    {{ "mammaMRT.lymphs.rightDetails.value" | translate }}
+                  </p>
+                  <p-radioButton
+                    rr-id="mam_m_070411"
+                    [(ngModel)]="model.rightBreastDetailType"
+                    label="{{
+                      'mammaMRT.lymphs.slightly.value' | translate
+                    }}"
+                    name="rightBreastDetailType"
+                    [value]="breastDetailType.Slightly"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="mam_m_070412"
+                    [(ngModel)]="model.rightBreastDetailType"
+                    label="{{
+                      'mammaMRT.lymphs.significant.value' | translate
+                    }}"
+                    name="rightBreastDetailType"
+                    [value]="breastDetailType.Significant"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  id="isLocalizationLeftBlock"
+                  class="f-vertical o-radio-list"
+                  [rrDisable]="!model.isLocalizationLeft"
+                >
+                  <p rr-id="mam_m_070413" class="m-b-7">
+                    {{ "mammaMRT.lymphs.leftDetails.value" | translate }}
+                  </p>
+                  <p-radioButton
+                    rr-id="mam_m_070414"
+                    [(ngModel)]="model.leftBreastDetailType"
+                    label="{{
+                      'mammaMRT.lymphs.slightly.value' | translate
+                    }}"
+                    name="leftBreastDetailType"
+                    [value]="breastDetailType.Slightly"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="mam_m_070415"
+                    [(ngModel)]="model.leftBreastDetailType"
+                    label="{{
+                      'mammaMRT.lymphs.significant.value' | translate
+                    }}"
+                    name="leftBreastDetailType"
+                    [value]="breastDetailType.Significant"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nested-content" id="numberInputsBlock">
+            <rr-number-input
+              *ngIf="
+                model.lungDiseaseType === lungDiseaseType.PulmonaryNodule ||
+                model.lungDiseaseType === lungDiseaseType.Mass
+              "
+              [(ngModel)]="model.maxDiameterAxialInMm"
+              name="maxDiameterAxialInMm"
+              label="{{
+                'mammaMRT.lymphs.maxDiameterAxialMm.value' | translate
+              }}"
+              labelRrId="mam_m_070408"
+              inputRrId="mam_m_070407"
+              infoIconRrId="mam_m_070409"
+              labelStyleClass="text-break"
+              [config]="{ max: 30, labelWidth: 140, hasInfoIcon: true }"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l f-start f-vertical o-radio-list">
+          <div
+            *ngIf="model.lungDiseaseType !== lungDiseaseType.None"
+            id="infiltrationAndDifferentialDiagnosisBlock"
+          >
+            <div
+              *ngIf="model.lungDiseaseType === lungDiseaseType.Mass"
+              class="f-start f-vertical o-radio-list m-b-28 m-t-3"
+            >
+              <p rr-id="mam_m_070504" class="m-b-9">
+                {{ "mammaMRT.lymphs.infiltration.value" | translate }}
+              </p>
+              <p-checkbox
+                rr-id="mam_m_070505"
+                [(ngModel)]="model.isPleura"
+                label="{{ 'mammaMRT.lymphs.pleura.value' | translate }}"
+                binary="true"
+                name="isPleura"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="mam_m_070506"
+                [(ngModel)]="model.isPericardium"
+                label="{{ 'mammaMRT.lymphs.pericardium.value' | translate }}"
+                binary="true"
+                name="isPericardium"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="mam_m_070507"
+                [(ngModel)]="model.isBones"
+                label="{{ 'mammaMRT.lymphs.bones.value' | translate }}"
+                binary="true"
+                name="isBones"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="mam_m_070508"
+                class="m-b-20"
+                [(ngModel)]="model.isMediastinum"
+                label="{{ 'mammaMRT.lymphs.mediastinum.value' | translate }}"
+                binary="true"
+                name="isMediastinum"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="mam_m_070509"
+                [(ngModel)]="model.isSuspected"
+                label="{{ 'mammaMRT.lymphs.suspected.value' | translate }}"
+                binary="true"
+                name="isSuspected"
+              ></p-checkbox>
+            </div>
+            <div class="f-start f-vertical o-radio-list m-t-7">
+              <h2 rr-id="mam_m_070501" class="m-b-12">
+                {{ "mammaMRT.lymphs.differentialDiagnosis.value" | translate }}
+              </h2>
+              <p-radioButton
+                rr-id="mam_m_070502"
+                [(ngModel)]="model.differentialDiagnosisType"
+                label="{{
+                  'mammaMRT.lymphs.consolidation.value' | translate
+                }}"
+                name="differentialDiagnosisType"
+                [value]="differentialDiagnosisType.Consolidation"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_070503"
+                [(ngModel)]="model.differentialDiagnosisType"
+                label="{{ 'mammaMRT.lymphs.atelectasis.value' | translate }}"
+                name="differentialDiagnosisType"
+                [value]="differentialDiagnosisType.Atelectasis"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

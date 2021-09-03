@@ -1,0 +1,93 @@
+<div class="f-vertical col-h-100" [ngClass]="{'bsa-container': isBSA}">
+  <div class="f-vertical m-b-26">
+    <h1 rr-id="uni_01_011" class="m-b-14">
+      {{ 'shared-templates.patient-data.patientData.value' | translate }}
+    </h1>
+    <rr-bmi-calculator
+      name="bmiCalculator"
+      [(ngModel)]="model.bmiCalculator"
+      [bsaModelProperty]="bsaModelProperty"
+      [isBSA]="isBSA"
+    >
+    </rr-bmi-calculator>
+  </div>
+  <div
+    class="f-horizontal gender-and-age-height"
+    [ngClass]="{
+      'm-t-34': !isBSA,
+      'm-t-8': isBSA
+    }"
+  >
+    <div class="c-col-1 c-sep c-pad-r">
+      <div class="f-start f-vertical o-radio-list">
+        <h2 rr-id="uni_01_005">
+          {{ 'shared-templates.patient-data.gender.value' | translate }}<span
+            *ngIf="genderMandatory"
+            >*</span
+          >
+        </h2>
+        <div class="f-start f-vertical o-radio-list">
+          <div class="o-radio-list" *ngIf="genderMandatory">
+            <p-radioButton
+              rr-id="uni_01_007"
+              label="{{ 'shared-templates.patient-data.female.value' | translate }}"
+              name="patientInformation.gender"
+              [(ngModel)]="model.gender"
+              [value]="genderTypeEnum.Female"
+              (onClick)="genderChange.emit(model.gender)"
+              rrValidation="patientInformation.gender"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="uni_01_006"
+              label="{{ 'shared-templates.patient-data.male.value' | translate }}"
+              name="patientInformation.gender"
+              [(ngModel)]="model.gender"
+              [value]="genderTypeEnum.Male"
+              (onClick)="genderChange.emit(model.gender)"
+              rrValidation="patientInformation.gender"
+            >
+            </p-radioButton>
+          </div>
+          <div class="o-radio-list" *ngIf="!genderMandatory">
+            <p-radioButton
+              rr-id="uni_01_007"
+              rrUnClickRadio
+              label="{{ 'shared-templates.patient-data.female.value' | translate }}"
+              name="gender"
+              [(ngModel)]="model.gender"
+              [value]="genderTypeEnum.Female"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="uni_01_006"
+              rrUnClickRadio
+              label="{{ 'shared-templates.patient-data.male.value' | translate }}"
+              name="gender"
+              [(ngModel)]="model.gender"
+              [value]="genderTypeEnum.Male"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep" [ngClass]="isBSA ? 'c-pad' : 'c-pad-l'">
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="uni_01_008">
+          {{ 'shared-templates.patient-data.age.value' | translate }}
+        </h2>
+        <rr-number-input
+          name="age"
+          inputRrId="uni_01_009"
+          labelRrId="uni_01_010"
+          [(ngModel)]="model.age"
+          label="{{ 'shared-templates.patient-data.years.value' | translate }}"
+          [config]="{ readonly: true }"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+    <div *ngIf="isBSA" class="c-col-1 c-sep c-pad-l"></div>
+  </div>
+</div>

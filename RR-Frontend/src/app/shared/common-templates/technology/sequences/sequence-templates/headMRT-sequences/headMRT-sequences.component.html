@@ -1,0 +1,197 @@
+<rr-sequences-base-template [itemIndex]="itemIndex" [disabled]="disabled">
+  <ng-container ngProjectAs="firstColumn">
+    <div class="o-radio-list m-b-16">
+      <h2 rr-id="uni_x_030307" rrInfoIcon="hea_m_03_01" class="m-b-3">
+        {{ 'shared-templates.technology.sequenceType.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="uni_x_030308"
+        [(ngModel)]="model.sequenceType"
+        styleClass="o-width-100 ui-brown-box"
+        name="sequenceType"
+        [options]="sequenceTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      ></p-dropdown>
+    </div>
+    <div class="o-radio-list m-b-16">
+      <h2 rr-id="uni_x_030309" class="m-b-4">
+        {{ 'shared-templates.technology.plane.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="uni_x_030310"
+        styleClass="o-width-100 ui-brown-box"
+        name="orientationType"
+        [options]="orientationTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [(ngModel)]="model.orientationType"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-dropdown>
+    </div>
+    <div class="o-radio-list m-b-16">
+      <h2 rr-id="hea_m_030301" class="m-b-3">
+        {{ 'shared-templates.technology.otherApplications.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="hea_m_030302"
+        [(ngModel)]="model.otherApplicationsType"
+        styleClass="o-width-100 ui-brown-box"
+        name="otherApplicationsType"
+        [options]="otherApplicationsTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      ></p-dropdown>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="uni_x_030313">
+        {{ 'shared-templates.technology.additionalFeatures.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="uni_x_030314"
+        [(ngModel)]="model.isSaturatedFat"
+        name="isSaturatedFat"
+        label="{{ 'shared-templates.technology.fatSaturated.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030315"
+        [(ngModel)]="model.is3D"
+        name="is3D"
+        label="{{ 'shared-templates.technology.3D.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030316"
+        [(ngModel)]="model.isParallelImaging"
+        name="isParallelImaging"
+        label="{{ 'shared-templates.technology.parallelImaging.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_0303102"
+        [(ngModel)]="model.isCineImaging"
+        name="isCineImaging"
+        label="{{ 'shared-templates.technology.cineImaging.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+    </div>
+  </ng-container>
+  <ng-container ngProjectAs="secondColumn">
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="hea_m_030401"
+        [(ngModel)]="model.isHighResolution"
+        name="isHighResolution"
+        label="{{ 'shared-templates.technology.highResolution2.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_030402"
+        [(ngModel)]="model.isChemicalShiftImaging"
+        name="isChemicalShiftImaging"
+        label="{{ 'shared-templates.technology.chemicalShiftImaging2.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_030403"
+        [(ngModel)]="model.isCompressedSense"
+        name="isCompressedSense"
+        label="{{ 'shared-templates.technology.compressedSense.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list m-b-16 m-t-16"
+        [rrDisable]="isPostContrastDisabled()"
+      >
+        <h2 rr-id="uni_x_030414">
+          {{ 'shared-templates.technology.postContrast2.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="uni_x_030415"
+          name="isDynamicsAfterContrastInjection"
+          [(ngModel)]="model.isDynamicsAfterContrastInjection"
+          label="{{ 'shared-templates.technology.dynamicsAfterCMInjection.value' | translate }}"
+          binary="true"
+          (onChange)="emitModelChangeInSubcomponent()"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="uni_x_030419"
+          name="isSubtraction"
+          [(ngModel)]="model.isSubtraction"
+          label="{{ 'shared-templates.technology.subtraction.value' | translate }}"
+          binary="true"
+          (onChange)="emitModelChangeInSubcomponent()"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list" *ngIf="isTechniqueDWIEnabled()">
+        <h2 rr-id="hea_m_030404">
+          {{ 'shared-templates.technology.techniqueDwi2.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="hea_m_030405"
+          name="isEpiDwi"
+          [(ngModel)]="model.isEpiDwi"
+          label="{{ 'shared-templates.technology.epiDwi.value' | translate }}"
+          binary="true"
+          (onChange)="emitModelChangeInSubcomponent()"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_030406"
+          name="isHasteNonEpiDwi"
+          [(ngModel)]="model.isHasteNonEpiDwi"
+          label="{{ 'shared-templates.technology.hasteNonEpiDwi.value' | translate }}"
+          binary="true"
+          (onChange)="emitModelChangeInSubcomponent()"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="uni_x_030431"
+          [(ngModel)]="model.isADCMap"
+          name="isADCMap"
+          label="{{ 'shared-templates.technology.adcMap.value' | translate }}"
+          binary="true"
+          (onChange)="emitModelChangeInSubcomponent()"
+          rrContentReset="ADCMapBlock"
+          [explicitFormToReset]="formRef"
+        >
+        </p-checkbox>
+        <div
+          id="ADCMapBlock"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isADCMap"
+        >
+          <p-checkbox
+            rr-id="uni_x_030430"
+            [(ngModel)]="model.isCalculated"
+            name="isCalculated"
+            label="{{ 'shared-templates.technology.calculated.value' | translate }}"
+            binary="true"
+            (onChange)="emitModelChangeInSubcomponent()"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</rr-sequences-base-template>

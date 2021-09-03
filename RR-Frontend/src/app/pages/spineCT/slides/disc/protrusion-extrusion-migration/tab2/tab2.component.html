@@ -1,0 +1,308 @@
+<div
+  [rrDisable]="!helperService.isSingleSelectOnLocalizer(model)"
+  class="col-h-100"
+>
+  <div
+    *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion, discFindingTypeEnum.Extrusion], model)"
+    class="f-horizontal f-start col-h-100 o-width-100"
+  >
+    <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+      <div class="o-radio-list m-l-10">
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isOsteochondrosis"
+          label="{{'spineCT.disc.osteochondrosis.value'| translate}}"
+          rr-id="spi_c_050313"
+          name="isOsteochondrosis"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isOsteophyteFormation"
+          label="{{'spineCT.disc.osteophyteFormation.value'| translate}}"
+          rr-id="spi_c_050312"
+          name="isOsteophyteFormation"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isDiscCalcification"
+          label="{{'spineCT.disc.discCalcification.value'| translate}}"
+          rr-id="spi_c_0503202"
+          name="isDiscCalcification"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isVacuumPhenomenon"
+          label="{{'spineCT.disc.vacuumPhenomenon.value'| translate}}"
+          rr-id="spi_c_0503203"
+          name="isVacuumPhenomenon"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="f-vertical o-radio-list m-t-15 m-b-15">
+      <p-checkbox
+        class="m-l-25"
+        binary="true"
+        [(ngModel)]="model.isFacetJointArthropathy"
+        label="{{'spineCT.disc.facetJointArthropathy.value'| translate}}"
+        rr-id="spi_c_050411"
+        name="isFacetJointArthropathy"
+        rrContentReset="facetJointArthropathyCharacteristicContainer"
+      ></p-checkbox>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad">
+          <div
+            class="o-radio-list m-l-45"
+            id="facetJointArthropathyCharacteristicContainer"
+            [rrDisable]="!model.isFacetJointArthropathy"
+          >
+            <p rr-id="spi_c_050412">
+              {{'spineCT.disc.localization.value'|translate}}*
+            </p>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isFacetJointArthropathyRight"
+              label="{{'spineCT.disc.right.value'| translate}}"
+              rr-id="spi_c_050413"
+              name="isFacetJointArthropathyRight"
+              rrValidation="isFacetJointArthropathyRight isFacetJointArthropathyLeft"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isFacetJointArthropathyLeft"
+              label="{{'spineCT.disc.left.value'| translate}}"
+              rr-id="spi_c_050414"
+              name="isFacetJointArthropathyLeft"
+              rrValidation="isFacetJointArthropathyRight isFacetJointArthropathyLeft"
+            ></p-checkbox>
+
+            <p rr-id="spi_c_0504222">
+              {{'spineCT.disc.details.value'|translate}}
+            </p>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isHypertrophy"
+              label="{{'spineCT.disc.hypertrophy.value'| translate}}"
+              rr-id="spi_c_0504500"
+              name="isHypertrophy"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isSynovialCyst"
+              label="{{'spineCT.disc.synovialCyst.value'| translate}}"
+              rr-id="spi_c_0504503"
+              name="isSynovialCyst"
+              rrContentReset="synovialCystSideContainer"
+            ></p-checkbox>
+            <div
+              class="o-radio-list nested-content"
+              id="synovialCystSideContainer"
+              [rrDisable]="!model.isSynovialCyst"
+            >
+              <p rr-id="spi_c_0504504">
+                {{'spineCT.disc.side.value'|translate}}*
+              </p>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isSynovialCystRight"
+                label="{{'spineCT.disc.right.value'| translate}}"
+                rr-id="spi_c_0504505"
+                name="isSynovialCystRight"
+                rrValidation="isSynovialCystRight isSynovialCystLeft"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isSynovialCystLeft"
+                label="{{'spineCT.disc.left.value'| translate}}"
+                rr-id="spi_c_0504506"
+                name="isSynovialCystLeft"
+                rrValidation="isSynovialCystRight isSynovialCystLeft"
+              ></p-checkbox>
+              <p rr-id="spi_c_0504223">
+                {{'spineCT.disc.maxDiameter.value'|translate}}
+              </p>
+              <rr-number-input
+                labelRrId="spi_c_0504508"
+                inputRrId="spi_c_0504507"
+                name="maxDiameterInMm"
+                [config]="{min: 1, max: 30}"
+                [(ngModel)]="model.maxDiameterInMm"
+                [label]="'spineCT.disc.inMm.value' | translate"
+              ></rr-number-input>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l"></div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Migration], model)"
+    class="f-horizontal f-start col-h-100 o-width-100"
+  >
+    <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+      <div class="o-radio-list m-l-10 f-vertical">
+        <h2 rr-id="spi_c_0503204">
+          {{'spineCT.disc.craniocaudalExtension.value'| translate}}
+        </h2>
+        <rr-number-input
+          labelRrId="spi_c_050319"
+          inputRrId="spi_c_050318"
+          name="craniocaudalExtensionInMm"
+          [config]="{min: 1, max: 30}"
+          [(ngModel)]="model.craniocaudalExtensionInMm"
+          [label]="'spineCT.disc.inMm.value' | translate"
+        ></rr-number-input>
+        <h2 rr-id="spi_c_0503205" class="m-t-15">
+          {{'spineCT.disc.levelCraniocaudal.value'| translate}}
+        </h2>
+        <p-radioButton
+          rr-id="spi_c_050321"
+          label="{{ 'spineCT.disc.suprapedicular.value' | translate }}"
+          name="levelCraniocaudalType"
+          [value]="levelCraniocaudalTypeEnum.Suprapedicular"
+          rrUnClickRadio
+          [(ngModel)]="model.levelCraniocaudalType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_050322"
+          label="{{ 'spineCT.disc.pedicular.value' | translate }}"
+          name="levelCraniocaudalType"
+          [value]="levelCraniocaudalTypeEnum.Pedicular"
+          rrUnClickRadio
+          [(ngModel)]="model.levelCraniocaudalType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_050323"
+          label="{{ 'spineCT.disc.infrapedicular.value' | translate }}"
+          name="levelCraniocaudalType"
+          [value]="levelCraniocaudalTypeEnum.Infrapedicular"
+          rrUnClickRadio
+          [(ngModel)]="model.levelCraniocaudalType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_050324"
+          label="{{ 'spineCT.disc.discLevel.value' | translate }}"
+          name="levelCraniocaudalType"
+          [value]="levelCraniocaudalTypeEnum.DiscLevel"
+          rrUnClickRadio
+          [(ngModel)]="model.levelCraniocaudalType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="f-vertical o-radio-list m-t-15 m-b-15">
+      <h2 rr-id="spi_c_0504224" class="p-l-25">
+        {{'spineCT.disc.osseousFindings.value'| translate}}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad o-radio-list">
+          <div class="o-radio-list m-l-10">
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isOsteochondrosis"
+              label="{{'spineCT.disc.osteochondrosis.value'| translate}}"
+              rr-id="spi_c_0504225"
+              name="isOsteochondrosis"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isRetrospondylophyte"
+              label="{{'spineCT.disc.retrospondylophyte.value'| translate}}"
+              rr-id="spi_c_0504226"
+              name="isRetrospondylophyte"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isFacetJointArthropathy"
+              label="{{'spineCT.disc.facetJointArthritis.value'| translate}}"
+              rr-id="spi_c_050411"
+              name="isFacetJointArthropathy"
+              rrContentReset="facetJointArthropathyCharacteristicContainer2"
+            ></p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l">
+          <div
+            class="o-radio-list m-l-35"
+            *ngIf="model.isFacetJointArthropathy"
+            id="facetJointArthropathyCharacteristicContainer2"
+          >
+            <p rr-id="spi_c_0505215">
+              {{'spineCT.disc.localization.value'|translate}}*
+            </p>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isFacetJointArthropathyRight"
+              label="{{'spineCT.disc.right.value'| translate}}"
+              rr-id="spi_c_0505216"
+              name="isFacetJointArthropathyRight"
+              rrValidation="isFacetJointArthropathyRight isFacetJointArthropathyLeft"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isFacetJointArthropathyLeft"
+              label="{{'spineCT.disc.left.value'| translate}}"
+              rr-id="spi_c_0505217"
+              name="isFacetJointArthropathyLeft"
+              rrValidation="isFacetJointArthropathyRight isFacetJointArthropathyLeft"
+            ></p-checkbox>
+
+            <p rr-id="spi_c_0505218">
+              {{'spineCT.disc.details.value'|translate}}
+            </p>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isHypertrophy"
+              label="{{'spineCT.disc.hypertrophy.value'| translate}}"
+              rr-id="spi_c_0505219"
+              name="isHypertrophy"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isSynovialCyst"
+              label="{{'spineCT.disc.synovialCyst.value'| translate}}"
+              rr-id="spi_c_0505220"
+              name="isSynovialCyst"
+              rrContentReset="synovialCystSideContainer2"
+            ></p-checkbox>
+            <div
+              class="o-radio-list nested-content"
+              id="synovialCystSideContainer2"
+              [rrDisable]="!model.isSynovialCyst"
+            >
+              <p rr-id="spi_c_0505221">
+                {{'spineCT.disc.side.value'|translate}}*
+              </p>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isSynovialCystRight"
+                label="{{'spineCT.disc.right.value'| translate}}"
+                rr-id="spi_c_0505222"
+                name="isSynovialCystRight"
+                rrValidation="isSynovialCystRight isSynovialCystLeft"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isSynovialCystLeft"
+                label="{{'spineCT.disc.left.value'| translate}}"
+                rr-id="spi_c_0505223"
+                name="isSynovialCystLeft"
+                rrValidation="isSynovialCystRight isSynovialCystLeft"
+              ></p-checkbox>
+              <p rr-id="spi_c_0505224">
+                {{'spineCT.disc.maxDiameter.value'|translate}}
+              </p>
+              <rr-number-input
+                labelRrId="spi_c_0505226"
+                inputRrId="spi_c_0505225"
+                name="maxDiameterInMm"
+                [config]="{min: 1, max: 30}"
+                [(ngModel)]="model.maxDiameterInMm"
+                [label]="'spineCT.disc.inMm.value' | translate"
+              ></rr-number-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

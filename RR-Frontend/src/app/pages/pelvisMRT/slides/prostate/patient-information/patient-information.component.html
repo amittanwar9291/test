@@ -1,0 +1,128 @@
+<h1 rr-id="pel_m_040201" class="m-b-70 m-l-15" rrInfoIcon="pel_m_04_01">
+  {{ 'pelvisMRT.prostata.metricDetails.value' | translate }}
+</h1>
+<div class="f-horizontal patient-information-height">
+  <div class="c-col-1 c-pad c-sep f-vertical o-radio-list">
+    <div>
+      <p rr-id="pel_m_040202" class="m-b-5">
+        {{ 'pelvisMRT.prostata.width.value' | translate }}
+      </p>
+      <div class="m-b-10">
+        <rr-number-input
+          name="widthInMm"
+          [inputRrId]="'pel_m_040203'"
+          [labelRrId]="'pel_m_040204'"
+          [labelStyleClass]="'text-break'"
+          [(ngModel)]="model.widthInMm"
+          (ngModelChange)="calculateVolume()"
+          [config]="{min: 5, max: 100, placeholder: '---'}"
+          [label]="'pelvisMRT.prostata.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+      <p rr-id="pel_m_040257" class="m-b-5">
+        {{ 'pelvisMRT.prostata.height.value' | translate }}
+      </p>
+      <div class="m-b-10">
+        <rr-number-input
+          name="heightInMm"
+          [inputRrId]="'pel_m_040205'"
+          [labelRrId]="'pel_m_040206'"
+          [(ngModel)]="model.heightInMm"
+          [labelStyleClass]="'text-break'"
+          (ngModelChange)="calculateVolume()"
+          [config]="{min: 5, max: 100, placeholder: '---'}"
+          [label]="'pelvisMRT.prostata.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+      <p rr-id="pel_m_040258" class="m-b-5">
+        {{ 'pelvisMRT.prostata.aPDiameter.value' | translate }}
+      </p>
+      <div class="m-b-5">
+        <rr-number-input
+          name="aPdiameterInMm"
+          [labelStyleClass]="'text-break'"
+          [inputRrId]="'pel_m_040207'"
+          [labelRrId]="'pel_m_040208'"
+          [(ngModel)]="model.aPdiameterInMm"
+          (ngModelChange)="calculateVolume()"
+          [config]="{min: 5, max: 100, placeholder: '---'}"
+          [label]="'pelvisMRT.prostata.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+    </div>
+    <div class="o-radio-list">
+      <div [rrDisable]="volumeDisable()">
+        <p rr-id="pel_m_040209">
+          {{ 'pelvisMRT.prostata.volume.value' | translate }}
+        </p>
+        <rr-number-input
+          name="volumeInCm3"
+          [inputRrId]="'pel_m_040210'"
+          [labelRrId]="'pel_m_040211'"
+          labelStyleClass="text-break2"
+          [(ngModel)]="model.volumeInCm3"
+          [config]="{readonly: true, placeholder: '---,-'}"
+          [label]="'pelvisMRT.prostata.inCm.value' | translate"
+        ></rr-number-input>
+      </div>
+      <div
+        class="o-radio-list"
+        [rrDisable]="model.volumeInCm3 === 'None' || model.volumeInCm3 === null"
+      >
+        <p-radioButton
+          rr-id="pel_m_040212"
+          [value]="volumeType.Inconspicuous"
+          name="volumeType"
+          [(ngModel)]="model.volumeType"
+          label="{{ 'pelvisMRT.prostata.inconspicuous.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_040213"
+          [value]="volumeType.Enlarged"
+          name="volumeType"
+          [(ngModel)]="model.volumeType"
+          label="{{ 'pelvisMRT.prostata.enlarged.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <div class="o-radio-list m-t-20">
+        <p rr-id="pel_m_040214" rrInfoIcon="pel_m_04_02">
+          {{ 'pelvisMRT.prostata.pSADensity.value' | translate }}
+        </p>
+        <div [rrDisable]="setDisablePsaVolumeType()">
+          <rr-number-input
+            name="psaVolume"
+            [inputRrId]="'pel_m_040215'"
+            [labelRrId]="'pel_m_040216'"
+            [(ngModel)]="model.psaVolume"
+            labelStyleClass="text-break2"
+            [config]="{readonly: true, placeholder: '---,--'}"
+            [label]="'pelvisMRT.prostata.pSAVolume.value' | translate"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div class="o-radio-list" [rrDisable]="setDisablePsaVolumeType()">
+        <p-radioButton
+          rr-id="pel_m_040217"
+          [value]="psaVolumeType.Unsuspicious"
+          name="psaVolumeType"
+          [(ngModel)]="model.psaVolumeType"
+          label="{{ 'pelvisMRT.prostata.unsuspicious.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_040218"
+          [value]="psaVolumeType.Noticeable"
+          name="psaVolumeType"
+          [(ngModel)]="model.psaVolumeType"
+          label="{{ 'pelvisMRT.prostata.noticeable.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+  <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+  <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+</div>

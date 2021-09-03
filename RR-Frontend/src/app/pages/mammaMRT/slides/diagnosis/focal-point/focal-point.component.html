@@ -1,0 +1,473 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical o-list">
+    <div
+      class="f-vertical o-radio-list first-column-header m-b-15"
+      [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+    >
+      <div>
+        <h2 rr-id="mam_m_060203" class="m-b-9">
+          {{ 'mammaMRT.diagnosis.differentialDiagnosis1.value' | translate }} *
+        </h2>
+        <rr-info-icon
+          rr-id="mam_m_060202"
+          [isDiffDiagnosisArticleListAttached]="true"
+          [hidden]="true"
+        ></rr-info-icon>
+      </div>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        isActiveOnIKnow="true"
+        [options]="differentialDiagnosisOptions"
+        [(ngModel)]="model.diagnosisType"
+        name="diagnosisType"
+        (selectionChanged)="clearDependentProps()"
+        group="true"
+        rrId="mam_m_060204"
+        [parentViewModel]="model"
+        rrValidation="diagnosisType"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-24"
+      [rrDisable]="model.diagnosisType === 'None'"
+    >
+      <p-checkbox
+        rr-id="mam_m_060219"
+        name="isHistologicalConfirmation"
+        label="{{
+          'mammaMRT.diagnosis.histologicalConfirmation.value' | translate
+        }}"
+        [(ngModel)]="model.isHistologicalConfirmation"
+        rrContentReset="isHistologicallySecured-block"
+        binary="true"
+      >
+      </p-checkbox>
+      <div
+        id="isHistologicallySecured-block"
+        class="f-horizontal horizontal-radio-buttons"
+        [rrDisable]="!model.isHistologicalConfirmation"
+      >
+        <p-radioButton
+          rr-id="mam_m_060220"
+          name="histologicallySecuredType"
+          [(ngModel)]="model.histologicallySecuredType"
+          [value]="historicallySecuredType.Benigne"
+          rrUnClickRadio
+          label="{{ 'mammaMRT.diagnosis.benign.value' | translate }}"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_060221"
+          name="histologicallySecuredType"
+          [(ngModel)]="model.histologicallySecuredType"
+          [value]="historicallySecuredType.Maligne"
+          rrUnClickRadio
+          label="{{ 'mammaMRT.diagnosis.malignant.value' | translate }}"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="f-vertical o-radio-list m-b-15">
+      <h3
+        rr-id="mam_m_060222"
+        rrInfoIcon="mam_m_060223"
+        style="width: 101%;"
+        rrValidation="findingLocation"
+        noUpdate="true"
+      >
+        {{ "mammaMRT.diagnosis.localizationMultifocalUnilateral.value" |
+        translate }}*
+      </h3>
+      <rr-breast-full-cross-shoulder
+        name="findingLocation"
+        [(ngModel)]="model.findingLocation"
+        rr-id="mam_m_060205"
+        rrValidation="findingLocation"
+        isLocalizer="true"
+      >
+      </rr-breast-full-cross-shoulder>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-10"
+      [rrDisable]="isMainPartDisabled()"
+    >
+      <h2 rr-id="mam_m_060224">
+        {{ "mammaMRT.diagnosis.size.value" | translate }}
+      </h2>
+      <rr-number-input
+        inputRrId="mam_m_060225"
+        labelRrId="mam_m_060226"
+        name="largestDiameterInMm"
+        [(ngModel)]="model.largestDiameterInMm"
+        labelStyleClass="text-break2"
+        [config]="{ max: 150 }"
+        [label]="'mammaMRT.diagnosis.largestDiameterInMm.value' | translate"
+      >
+      </rr-number-input>
+      <rr-number-input
+        inputRrId="mam_m_060227"
+        labelRrId="mam_m_060228"
+        name="axisRightAngledInMm"
+        [(ngModel)]="model.axisRightAngledInMm"
+        labelStyleClass="text-break2"
+        [config]="{ max: 150 }"
+        [label]="'mammaMRT.diagnosis.2ndAxisRightAngledInMm.value' | translate"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-vertical o-radio-list" [rrDisable]="isMainPartDisabled()">
+      <h2 rr-id="mam_m_060229">
+        {{ "mammaMRT.diagnosis.nippleToLesionDistance.value" | translate }}
+      </h2>
+      <rr-number-input
+        inputRrId="mam_m_060230"
+        labelRrId="mam_m_060231"
+        name="distanceToNippleInMm"
+        [(ngModel)]="model.distanceToNippleInMm"
+        labelStyleClass="text-break2"
+        [config]="{ max: 300 }"
+        [label]="'mammaMRT.diagnosis.inMm.value' | translate"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical o-list">
+    <div
+      class="f-vertical o-radio-list m-b-15"
+      [rrDisable]="isMainPartDisabled()"
+    >
+      <h2 rr-id="mam_m_060322">
+        {{ "mammaMRT.diagnosis.shape.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="mam_m_060323"
+        name="formType"
+        [(ngModel)]="model.formType"
+        [value]="formType.Round"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.round.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060324"
+        name="formType"
+        [(ngModel)]="model.formType"
+        [value]="formType.Oval"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.oval.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060325"
+        name="formType"
+        [(ngModel)]="model.formType"
+        [value]="formType.Irregular"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.irregular.value' | translate }}"
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list" [rrDisable]="isMainPartDisabled()">
+      <h2 rr-id="mam_m_060326">
+        {{ "mammaMRT.diagnosis.margin.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="mam_m_060327"
+        name="demarcationType"
+        [(ngModel)]="model.demarcationType"
+        [value]="demarcationType.Circumscribed"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.circumscribed.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060328"
+        name="demarcationType"
+        [(ngModel)]="model.demarcationType"
+        [value]="demarcationType.Irregular"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.irregular2.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060329"
+        name="demarcationType"
+        [(ngModel)]="model.demarcationType"
+        [value]="demarcationType.Spiculated"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.spiculated.value' | translate }}"
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical" [rrDisable]="isMainPartDisabled()">
+      <h2 rr-id="mam_m_060309-1" class="m-b-2">
+        {{ "mammaMRT.diagnosis.signalT1wNative.value" | translate }}
+      </h2>
+      <p rr-id="mam_m_060309-2" class="slider-small-caption">
+        {{ "mammaMRT.diagnosis.signalNativeAdditionalInfo.value" | translate }}
+      </p>
+      <rr-signal-slider
+        rr-id="mam_m_060310"
+        name="signalT1w"
+        [(ngModel)]="model.signalT1w"
+      >
+      </rr-signal-slider>
+    </div>
+    <div class="f-vertical m-b-23" [rrDisable]="isMainPartDisabled()">
+      <h2 rr-id="mam_m_060311-1">
+        {{ "mammaMRT.diagnosis.signalT2wNative.value" | translate }}
+      </h2>
+      <p rr-id="mam_m_060311-2" class="slider-small-caption">
+        {{ "mammaMRT.diagnosis.signalNativeAdditionalInfo.value" | translate }}
+      </p>
+      <rr-signal-slider
+        rr-id="mam_m_060312"
+        name="signalT2w"
+        [(ngModel)]="model.signalT2w"
+      >
+      </rr-signal-slider>
+    </div>
+    <div class="o-radio-list" [rrDisable]="isMainPartDisabled()">
+      <p-checkbox
+        rr-id="mam_m_060314"
+        name="isIntralesionalFat"
+        label="{{ 'mammaMRT.diagnosis.intralesionalFat.value' | translate }}"
+        [(ngModel)]="model.isIntralesionalFat"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical o-list">
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="isMainPartDisabled() || isCmPartDisabled()"
+    >
+      <h2 rr-id="mam_m_060401" rrInfoIcon="mam_m_060420">
+        {{ "mammaMRT.diagnosis.enhancement.value" | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="mam_m_060402"
+        [options]="enhancementsListOptions"
+        [scrollHeight]="300"
+        [(ngModel)]="model.enhancementType"
+        rrDropdownClear
+        styleClass="ui-brown-box o-width-100"
+        name="enhancementType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      ></p-dropdown>
+    </div>
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="isMainPartDisabled() || isCmPartDisabled()"
+    >
+      <h2 rr-id="mam_m_060403">
+        {{ "mammaMRT.diagnosis.cMDynamicInitial.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="mam_m_060404"
+        name="kmDynamicInitialType"
+        [(ngModel)]="model.kmDynamicInitialType"
+        [value]="kmDynamicInitialType.Slowly"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.slow.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060405"
+        name="kmDynamicInitialType"
+        [(ngModel)]="model.kmDynamicInitialType"
+        [value]="kmDynamicInitialType.Medium"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.medium.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060406"
+        name="kmDynamicInitialType"
+        [(ngModel)]="model.kmDynamicInitialType"
+        [value]="kmDynamicInitialType.Fast"
+        value="Fast"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.fast.value' | translate }}"
+      >
+      </p-radioButton>
+    </div>
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="isMainPartDisabled() || isCmPartDisabled()"
+    >
+      <h2 rr-id="mam_m_060407">
+        {{ "mammaMRT.diagnosis.cMDynamicDelayed.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="mam_m_060408"
+        name="kmDynamicDelayedType"
+        [(ngModel)]="model.kmDynamicDelayedType"
+        [value]="kmDynamicDelayedType.Progressive"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.progressive.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060409"
+        name="kmDynamicDelayedType"
+        [(ngModel)]="model.kmDynamicDelayedType"
+        [value]="kmDynamicDelayedType.Plateau"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.plateau.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_060410"
+        name="kmDynamicDelayedType"
+        [(ngModel)]="model.kmDynamicDelayedType"
+        [value]="kmDynamicDelayedType.WashOut"
+        rrUnClickRadio
+        label="{{ 'mammaMRT.diagnosis.washOut.value' | translate }}"
+      >
+      </p-radioButton>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-13"
+      [rrDisable]="isMainPartDisabled() || isCmPartDisabled()"
+    >
+      <p-checkbox
+        rr-id="mam_m_060421"
+        name="isDiffusionRestriction"
+        label="{{
+          'mammaMRT.diagnosis.diffusionRestriction.value' | translate
+        }}"
+        [(ngModel)]="model.isDiffusionRestriction"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="mam_m_060422"
+        name="isAdditionalIpsilateralLesionsSameEntity"
+        label="{{
+          'mammaMRT.diagnosis.additionalIpsilateralLesionsSameEntity.value'
+            | translate
+        }}"
+        [(ngModel)]="model.isAdditionalIpsilateralLesionsSameEntity"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <div class="f-vertical o-radio-list" [rrDisable]="isMainPartDisabled()">
+      <h2 rr-id="mam_m_060411">
+        {{ "mammaMRT.diagnosis.infiltration.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="mam_m_060412"
+        name="isSkinInfiltration"
+        label="{{ 'mammaMRT.diagnosis.skin.value' | translate }}"
+        [(ngModel)]="model.isSkinInfiltration"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="mam_m_060413"
+        name="isPectoralisMuscleInfiltration"
+        label="{{ 'mammaMRT.diagnosis.pectoralisMuscle.value' | translate }}"
+        [(ngModel)]="model.isPectoralisMuscleInfiltration"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="mam_m_060414"
+        name="isChestWall"
+        label="{{ 'mammaMRT.diagnosis.chestWall.value' | translate }}"
+        [(ngModel)]="model.isChestWall"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l f-vertical o-list">
+    <div>
+      <h2 rr-id="mam_m_060501" class="m-b-12">
+        {{ "mammaMRT.diagnosis.differentialDiagnosis.value" | translate }}
+      </h2>
+      <rr-info-icon
+        rr-id="mam_m_060502"
+        [isDiffDiagnosisArticleListAttached]="true"
+        [hidden]="true"
+      ></rr-info-icon>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-23"
+      [rrDisable]="model.descriptionType === 'IKnow'"
+    >
+      <h3 rr-id="mam_m_060503" class="m-b-5">
+        {{ "mammaMRT.diagnosis.differentialDiagnosis1.value" | translate }} *
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="differentialDiagnosisOptions"
+        [(ngModel)]="model.additionalDiagnosis1Type"
+        name="additionalDiagnosis1Type"
+        (selectionChanged)="resetIsSubordinate()"
+        group="true"
+        rrId="mam_m_060504"
+        [parentViewModel]="model"
+        rrValidation="additionalDiagnosis1Type"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-23"
+      [rrDisable]="isDifferentialDiagnosis02Disabled()"
+    >
+      <h3 rr-id="mam_m_060505" class="m-b-5">
+        {{ 'mammaMRT.diagnosis.differentialDiagnosis2.value' | translate }}
+      </h3>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="differentialDiagnosisRestrictedOptions"
+        [(ngModel)]="model.additionalDiagnosis2Type"
+        name="additionalDiagnosis2Type"
+        (selectionChanged)="resetIsSubordinate()"
+        group="true"
+        rrId="mam_m_060506"
+        [parentViewModel]="model"
+      ></rr-differential-diagnosis-dropdown>
+
+      <p-checkbox
+        rr-id="mam_m_060507"
+        [rrDisable]="model.additionalDiagnosis2Type === 'None'"
+        name="isSubordinated"
+        label="{{ 'mammaMRT.diagnosis.subordinated.value' | translate }}"
+        [(ngModel)]="model.isSubordinated"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-50"
+      [rrDisable]="model.additionalDiagnosis2Type === 'None'"
+    >
+      <h3 rr-id="mam_m_060508" class="m-b-5">
+        {{ 'mammaMRT.diagnosis.differentialDiagnosis3.value' | translate }}
+      </h3>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="3"
+        [options]="differentialDiagnosisRestrictedOptions"
+        [(ngModel)]="model.additionalDiagnosis3Type"
+        name="additionalDiagnosis3Type"
+        group="true"
+        rrId="mam_m_060509"
+        [parentViewModel]="model"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+</div>

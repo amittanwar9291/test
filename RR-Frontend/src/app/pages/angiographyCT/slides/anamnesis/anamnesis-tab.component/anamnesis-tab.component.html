@@ -1,0 +1,54 @@
+<div class="f-vertical f-center col-h-100 o-width-100">
+  <h1 rr-id="ang_c_020104" class="c-pad-l m-t-14">
+    {{'angiographyCT.anamnesis.anamnesisindication.value' | translate }}
+  </h1>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad m-t-14 m-b-12 f-vertical o-list">
+      <rr-finding-column
+        [handler]="indicationFindingHandler"
+        [disabled]="false"
+        [setConfig]="indicationFindingDropdownConfig"
+        attr.name="findingHandlerComponent"
+        [validationName]="['isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG']"
+      >
+      </rr-finding-column>
+    </div>
+    <div
+      *ngIf="indicationFindingHandler.currentItem.indicationFindingType === indicationFindingType.None"
+      class="f-start f-horizontal col-h-100 col-h-100 m-t-14 m-b-12"
+    >
+      <div class="c-col-1 c-sep c-pad m-t-14 m-b-12"></div>
+      <div class="c-col-1 c-sep c-pad m-t-14 m-b-12"></div>
+      <div class="c-col-1 c-sep c-pad m-t-14 m-b-12"></div>
+      <div class="c-col-1 c-pad m-t-14 m-b-12"></div>
+    </div>
+    <rr-pavk
+      *ngIf="indicationFindingHandler.currentItem.indicationFindingType === indicationFindingType.PeripheralArteryDiseasePAD"
+      [model]="indicationFindingHandler.currentItem"
+    >
+    </rr-pavk>
+    <rr-aneurysma
+      *ngIf="indicationFindingHandler.currentItem.indicationFindingType === indicationFindingType.Aneurysm"
+      [model]="indicationFindingHandler.currentItem"
+    >
+    </rr-aneurysma>
+    <rr-aortic-vaskulitis
+      *ngIf="isAorticVaskulitisVisible()"
+      [model]="indicationFindingHandler.currentItem"
+    >
+    </rr-aortic-vaskulitis>
+    <rr-penetrating-intramural-dissection
+      *ngIf="isPenetratingIntramuralDissectionVisible()"
+      [model]="indicationFindingHandler.currentItem"
+    >
+    </rr-penetrating-intramural-dissection>
+    <rr-coronary
+      *ngIf="indicationFindingHandler.currentItem.indicationFindingType === indicationFindingType.CoronaryArteryDisease"
+      [model]="indicationFindingHandler.currentItem"
+    ></rr-coronary>
+    <rr-risk
+      *ngIf="indicationFindingHandler.currentItem.indicationFindingType === indicationFindingType.RiskFactors"
+      [model]="indicationFindingHandler.currentItem"
+    ></rr-risk>
+  </div>
+</div>

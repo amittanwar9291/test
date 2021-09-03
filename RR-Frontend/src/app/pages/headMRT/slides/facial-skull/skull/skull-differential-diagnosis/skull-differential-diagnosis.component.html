@@ -1,0 +1,95 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_1102322">
+        {{ "headMRT.facialSkull.differentialDiagnosis.value" | translate }}
+      </h2>
+      <div
+        class="f-vertical"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+      >
+        <p rr-id="hea_m_1102323">
+          {{ "headMRT.facialSkull.differentialDiagnosis1.value" | translate }}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          class="m-b-10"
+          rrId="hea_m_1102324"
+          [diagnosisNumber]="1"
+          [options]="w060"
+          [(ngModel)]="model.differentialDiagnosis1Type"
+          name="differentialDiagnosis1Type"
+          group="true"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1Type"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel1()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.differentialDiagnosis1Type === facialSkullDiagnosisTypeEnum.None"
+          rr-id="hea_m_1102325"
+          name="isSuspicionOf"
+          label="{{ 'headMRT.facialSkull.suspicionOf.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+        ></p-checkbox>
+      </div>
+      <div
+        class="m-t-20 f-vertical"
+        [rrDisable]="model.differentialDiagnosis1Type === facialSkullDiagnosisTypeEnum.None && model.differentialDiagnosis1LocalizationType === facialSkullDiagnosisTypeEnum.None"
+      >
+        <p rr-id="hea_m_1102326">
+          {{ "headMRT.facialSkull.differentialDiagnosis2.value" | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          class="m-b-10"
+          rrId="hea_m_1102327"
+          [diagnosisNumber]="2"
+          [options]="w061"
+          [(ngModel)]="model.differentialDiagnosis2Type"
+          name="differentialDiagnosis2Type"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel2()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.differentialDiagnosis2Type === facialSkullDiagnosisTypeEnum.None"
+          rr-id="hea_m_1102328"
+          name="isSubordinate"
+          label="{{ 'headMRT.facialSkull.subordinate.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isSubordinate"
+        ></p-checkbox>
+      </div>
+      <div
+        class="m-t-20 f-vertical"
+        [rrDisable]="model.differentialDiagnosis2Type === facialSkullDiagnosisTypeEnum.None"
+      >
+        <p rr-id="hea_m_1102329">
+          {{ "headMRT.facialSkull.differentialDiagnosis3.value" | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_1102330"
+          [diagnosisNumber]="3"
+          [options]="w061"
+          [(ngModel)]="model.differentialDiagnosis3Type"
+          name="differentialDiagnosis3Type"
+          group="true"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <p-checkbox
+        class="m-t-35"
+        rr-id="hea_m_1102331"
+        name="isMoreThan1LesionOfTheSameEntity"
+        label="{{ 'headMRT.facialSkull.moreThenOneLesionOfTheSameEntity.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isMoreThan1LesionOfTheSameEntity"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13"></div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13"></div>
+</div>

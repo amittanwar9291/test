@@ -1,0 +1,255 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-start f-vertical">
+    <rr-side [(ngModel)]="model.sideType" name="sideType"></rr-side>
+  </div>
+
+  <div class="c-col-2 c-pad c-sep f-vertical">
+    <h2 rr-id="hip_m_050330" class="m-b-11">
+      {{ 'hipMRT.cartilageAndLabrum.pathology.value' | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical">
+        <p-checkbox
+          rr-id="hip_m_050301"
+          [(ngModel)]="model.isTear"
+          label="{{ 'hipMRT.cartilageAndLabrum.tear.value' | translate }}"
+          name="isTear"
+          class="m-b-7"
+          binary="true"
+          rrContentReset="isTearBlock"
+          (onChange)="clearCartilageLocalizer()"
+          rrValidation="isTear isDegeneration isParalabralCyst"
+        >
+        </p-checkbox>
+        <div
+          id="isTearBlock"
+          class="f-start f-vertical o-list nested-content"
+          [rrDisable]="!model.isTear"
+        >
+          <div class="f-start f-vertical o-radio-list m-b-27">
+            <p
+              rr-id="hip_m_050302"
+              class="m-b-7"
+              rrValidation="cartilageLocalizer"
+            >
+              {{ "hipMRT.cartilageAndLabrum.localization.value" | translate }}*
+            </p>
+            <rr-hip-cartilage-small
+              rr-id="hip_m_050303"
+              [(ngModel)]="model.cartilageLocalizer"
+              name="cartilageLocalizer"
+              (click)="openLargeLocalizer()"
+              rrValidation="cartilageLocalizer"
+              [isLocalizer]="true"
+            ></rr-hip-cartilage-small>
+            <p rr-id="hip_m_050304" class="m-t-11 m-b-8">
+              {{ "hipMRT.cartilageAndLabrum.type.value" | translate }}
+            </p>
+            <p-radioButton
+              rr-id="hip_m_050305"
+              [(ngModel)]="model.formType"
+              label="{{ 'hipMRT.cartilageAndLabrum.partial.value' | translate }}"
+              name="formType"
+              [value]="formType.Partial"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050306"
+              [(ngModel)]="model.formType"
+              label="{{ 'hipMRT.cartilageAndLabrum.complete.value' | translate }}"
+              name="formType"
+              [value]="formType.Complete"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050307"
+              [(ngModel)]="model.formType"
+              label="{{ 'hipMRT.cartilageAndLabrum.delamination.value' | translate }}"
+              name="formType"
+              [value]="formType.Delamination"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div class="f-start f-vertical o-radio-list">
+            <p rr-id="hip_m_050308" class="m-b-8">
+              {{ "hipMRT.cartilageAndLabrum.furtherImageFeatures2.value" |
+              translate }}
+            </p>
+            <p-checkbox
+              rr-id="hip_m_050309"
+              [(ngModel)]="model.isFurtherImageFeatures"
+              label="{{ 'hipMRT.cartilageAndLabrum.furtherImageFeatures.value' | translate }}"
+              name="isFurtherImageFeatures"
+              binary="true"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-list">
+        <div class="f-start f-vertical o-radio-list m-b-30">
+          <p-checkbox
+            rr-id="hip_m_050401"
+            [(ngModel)]="model.isDegeneration"
+            label="{{ 'hipMRT.cartilageAndLabrum.degeneration.value' | translate }}"
+            name="isDegeneration"
+            class="m-b-10"
+            binary="true"
+            rrContentReset="isDegenerationBlock"
+            rrValidation="isTear isDegeneration isParalabralCyst"
+          >
+          </p-checkbox>
+          <div
+            id="isDegenerationBlock"
+            class="f-start f-vertical o-radio-list nested-content"
+            [rrDisable]="!model.isDegeneration"
+          >
+            <p-radioButton
+              rr-id="hip_m_050402"
+              [(ngModel)]="model.degenerationType"
+              label="{{ 'hipMRT.cartilageAndLabrum.mucoid.value' | translate }}"
+              name="degenerationType"
+              [value]="degenerationType.Mucoid"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050403"
+              [(ngModel)]="model.degenerationType"
+              label="{{ 'hipMRT.cartilageAndLabrum.ossified.value' | translate }}"
+              name="degenerationType"
+              [value]="degenerationType.Ossified"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <div class="f-start f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="hip_m_050404"
+            [(ngModel)]="model.isParalabralCyst"
+            label="{{ 'hipMRT.cartilageAndLabrum.paralabralCyst.value' | translate }}"
+            name="isParalabralCyst"
+            binary="true"
+            class="m-b-7"
+            rrContentReset="isParalabralCystBlock"
+            rrValidation="isTear isDegeneration isParalabralCyst"
+          >
+          </p-checkbox>
+          <div
+            id="isParalabralCystBlock"
+            class="f-start f-vertical o-radio-list nested-content"
+            [rrDisable]="!model.isParalabralCyst"
+          >
+            <p rr-id="hip_m_050425" class="m-b-2">
+              {{ 'hipMRT.cartilageAndLabrum.maxSize.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="hip_m_050405"
+              labelRrId="hip_m_050406"
+              [(ngModel)]="model.maxSizeInMm"
+              label="{{ 'hipMRT.cartilageAndLabrum.inMm.value' | translate }}"
+              name="maxSizeInMm"
+              [config]="{ min: 1, max: 30 }"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-list">
+    <div class="f-start f-vertical o-radio-list m-b-30">
+      <h2 rr-id="hip_m_050501" class="m-b-11">
+        {{ "hipMRT.cartilageAndLabrum.differentialDiagnosis.value" | translate
+        }}
+      </h2>
+      <p-radioButton
+        rr-id="hip_m_050502"
+        [(ngModel)]="model.differentialDiagnosis"
+        label="{{ 'hipMRT.cartilageAndLabrum.labralPlica.value' | translate }}"
+        name="differentialDiagnosis"
+        [value]="differentialDiagnosis.LabralPlica"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_050503"
+        [(ngModel)]="model.differentialDiagnosis"
+        label="{{ 'hipMRT.cartilageAndLabrum.femoralNeckPlica.value' | translate }}"
+        name="differentialDiagnosis"
+        [value]="differentialDiagnosis.FemoralNeckPlica"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_050504"
+        [(ngModel)]="model.differentialDiagnosis"
+        label="{{ 'hipMRT.cartilageAndLabrum.ligamentalPlica.value' | translate }}"
+        name="differentialDiagnosis"
+        [value]="differentialDiagnosis.LigamentalPlica"
+        rrInfoIcon="hip_m_05_01"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-start f-vertical o-radio-list m-b-30">
+      <h2 rr-id="hip_m_050506" rrInfoIcon="hip_m_05_02" class="m-b-7">
+        {{ "hipMRT.cartilageAndLabrum.acetabularMeasurements.value" | translate
+        }}
+      </h2>
+      <p rr-id="hip_m_050505" class="m-b-2">
+        {{ 'hipMRT.cartilageAndLabrum.inclination.value' | translate }}
+      </p>
+      <rr-number-input
+        inputRrId="hip_m_050507"
+        labelRrId="hip_m_050508"
+        [(ngModel)]="model.inclinationInDegrees"
+        label="{{ 'hipMRT.cartilageAndLabrum.inDegrees.value' | translate }}"
+        name="inclinationInDegrees"
+        [config]="{ min: 25, max: 65 }"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-start f-vertical o-radio-list">
+      <h2 rr-id="hip_m_050509">
+        {{ "hipMRT.cartilageAndLabrum.associatedFindings.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hip_m_050510"
+        [(ngModel)]="model.isDysplasia"
+        label="{{ 'hipMRT.cartilageAndLabrum.dysplasia.value' | translate }}"
+        name="isDysplasia"
+        binary="true"
+        rrContentReset="isDysplasiaBlock"
+      >
+      </p-checkbox>
+      <div
+        id="isDysplasiaBlock"
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isDysplasia"
+      >
+        <p-checkbox
+          rr-id="hip_m_050511"
+          [(ngModel)]="model.isFemoralHead"
+          label="{{ 'hipMRT.cartilageAndLabrum.femoralHead.value' | translate }}"
+          name="isFemoralHead"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_050520"
+          [(ngModel)]="model.isAcetabulum"
+          label="{{ 'hipMRT.cartilageAndLabrum.acetabulum.value' | translate }}"
+          name="isAcetabulum"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

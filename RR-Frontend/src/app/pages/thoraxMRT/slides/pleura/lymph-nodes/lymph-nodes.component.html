@@ -1,0 +1,340 @@
+<div class="f-vertical f-start o-radio-list col-h-100">
+  <h2 rr-id="tho_m_060299" class="c-pad-l">
+    {{ "thoraxMRT.pleura.classification.value" | translate }}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <p-radioButton
+        rr-id="tho_m_0602100"
+        name="lymphNodesAxillaType"
+        class="text-break"
+        [rrContentReset]="
+          clearLymphNodesDetails(
+            lymphNodesAxillaryTypeEnum.BorderlineCentralFatHilusPreserved
+          )
+        "
+        label="{{
+          'thoraxMRT.pleura.borderlineCentralFatHilus.value' | translate
+        }}"
+        [(ngModel)]="model.lymphNodesAxillaType"
+        rrValidation="lymphNodesAxillaType"
+        [value]="lymphNodesAxillaryTypeEnum.BorderlineCentralFatHilusPreserved"
+      ></p-radioButton>
+
+      <p-radioButton
+        rr-id="tho_m_0602101"
+        name="lymphNodesAxillaType"
+        [rrContentReset]="
+          clearLymphNodesDetails(lymphNodesAxillaryTypeEnum.Pathological)
+        "
+        label="{{ 'thoraxMRT.pleura.pathological.value' | translate }}"
+        [(ngModel)]="model.lymphNodesAxillaType"
+        rrValidation="lymphNodesAxillaType"
+        [value]="lymphNodesAxillaryTypeEnum.Pathological"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="col3-block"
+      class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list"
+    >
+      <div
+        class="f-vertical f-start o-radio-list"
+        *ngIf="
+          model.lymphNodesAxillaType ===
+          lymphNodesAxillaryTypeEnum.BorderlineCentralFatHilusPreserved
+        "
+      >
+        <h2 rr-id="tho_m_060383" class="m-b-10">
+          {{ "thoraxMRT.pleura.side.value" | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="tho_m_060384"
+          name="isLymphNodeRight"
+          label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+          binary="true"
+          rrValidation="isLymphNodeRight isLymphNodeLeft"
+          rrContentReset="isLymphNodeRight-block localizationLevel-block"
+          [(ngModel)]="model.isLymphNodeRight"
+        ></p-checkbox>
+        <div
+          id="isLymphNodeRight-block"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isLymphNodeRight"
+        >
+          <p rr-id="tho_m_060385">
+            {{ "thoraxMRT.pleura.shortAxisDiameterSAD.value" | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_060386"
+            labelRrId="tho_m_060387"
+            name="rightMarginalShortAxisDiameter"
+            [(ngModel)]="model.rightMarginalShortAxisDiameter"
+            [label]="'thoraxMRT.pleura.inMm.value' | translate"
+            [config]="{ min: 1, max: 99, inputWidth: 74 }"
+          ></rr-number-input>
+        </div>
+        <p-checkbox
+          rr-id="tho_m_060388"
+          name="isLymphNodeLeft"
+          rrValidation="isLymphNodeRight isLymphNodeLeft"
+          label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+          binary="true"
+          rrContentReset="isLymphNodeLeft-block"
+          [(ngModel)]="model.isLymphNodeLeft"
+        ></p-checkbox>
+        <div
+          id="isLymphNodeLeft-block"
+          class="nested-content"
+          [rrDisable]="!model.isLymphNodeLeft"
+        >
+          <p rr-id="tho_m_060389">
+            {{ "thoraxMRT.pleura.shortAxisDiameterSAD.value" | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_060390"
+            labelRrId="tho_m_060391"
+            name="leftMarginalShortAxisDiameter"
+            [(ngModel)]="model.leftMarginalShortAxisDiameter"
+            [label]="'thoraxMRT.pleura.inMm.value' | translate"
+            [config]="{ labelWidth: 175, min: 1, max: 150, inputWidth: 74 }"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list"
+        *ngIf="
+          model.lymphNodesAxillaType === lymphNodesAxillaryTypeEnum.Pathological
+        "
+      >
+        <h2 rr-id="tho_m_060392" class="m-b-10">
+          {{ "thoraxMRT.pleura.side.value" | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="tho_m_060393"
+          name="isLymphNodeRight"
+          label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+          binary="true"
+          rrValidation="isLymphNodeRight isLymphNodeLeft"
+          rrContentReset="isLymphNodeRight-block localizationLevel-block"
+          [(ngModel)]="model.isLymphNodeRight"
+        ></p-checkbox>
+        <div
+          id="isLymphNodeRight-block"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isLymphNodeRight"
+        >
+          <p rr-id="tho_m_060394">
+            {{ "thoraxMRT.pleura.shortAxisDiameterSAD.value" | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_060395"
+            labelRrId="tho_m_060396"
+            name="rightMarginalShortAxisDiameter"
+            [(ngModel)]="model.rightMarginalShortAxisDiameter"
+            [label]="'thoraxMRT.pleura.inMm.value' | translate"
+            [config]="{ labelWidth: 175, min: 1, max: 150, inputWidth: 74 }"
+          ></rr-number-input>
+
+          <p rr-id="tho_m_060397" rrInfoIcon="tho_m_06_04" class="m-t-16">
+            {{ "thoraxMRT.pleura.localizationLevel.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="tho_m_060398"
+            name="isRightLevel1"
+            label="{{ 'thoraxMRT.pleura.levelI.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isRightLevel1"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_060399"
+            name="isRightLevel2"
+            label="{{ 'thoraxMRT.pleura.levelII.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isRightLevel2"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_0603100"
+            name="isRightLevel3"
+            label="{{ 'thoraxMRT.pleura.levelIII.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isRightLevel3"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div
+      id="col4-block"
+      class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list"
+    >
+      <div
+        class="f-vertical f-start o-radio-list"
+        *ngIf="
+          model.lymphNodesAxillaType === lymphNodesAxillaryTypeEnum.Pathological
+        "
+        [class.m-t-31]="
+          model.lymphNodesAxillaType === lymphNodesAxillaryTypeEnum.Pathological
+        "
+      >
+        <p-checkbox
+          rr-id="tho_m_060468"
+          name="isLymphNodeLeft"
+          rrValidation="isLymphNodeRight isLymphNodeLeft"
+          label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+          binary="true"
+          rrContentReset="isLymphNodeLeft2-block"
+          [(ngModel)]="model.isLymphNodeLeft"
+        ></p-checkbox>
+        <div
+          id="isLymphNodeLeft2-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isLymphNodeLeft"
+        >
+          <p rr-id="tho_m_060469">
+            {{ "thoraxMRT.pleura.shortAxisDiameterSAD.value" | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_060470"
+            labelRrId="tho_m_060471"
+            name="leftMarginalShortAxisDiameter"
+            [(ngModel)]="model.leftMarginalShortAxisDiameter"
+            [label]="'thoraxMRT.pleura.inMm.value' | translate"
+            [config]="{ labelWidth: 175, min: 1, max: 150, inputWidth: 74 }"
+          ></rr-number-input>
+          <p rr-id="tho_m_060472" rrInfoIcon="tho_m_06_04" class="m-t-16">
+            {{ "thoraxMRT.pleura.localizationLevel.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="tho_m_060473"
+            name="isLeftLevel1"
+            label="{{ 'thoraxMRT.pleura.levelI.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isLeftLevel1"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_060474"
+            name="isLeftLevel2"
+            label="{{ 'thoraxMRT.pleura.levelII.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isLeftLevel2"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_060475"
+            name="isLeftLevel3"
+            label="{{ 'thoraxMRT.pleura.levelIII.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isLeftLevel3"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start c-pad-l">
+      <div
+        class="o-radio-list"
+        *ngIf="
+          model.lymphNodesAxillaType === lymphNodesAxillaryTypeEnum.Pathological
+        "
+      >
+        <h2 rr-id="tho_m_060551">
+          {{ "thoraxMRT.pleura.signal.value" | translate }}
+        </h2>
+        <p-checkbox
+          [rrDisable]="!isWeightingTypeDWI"
+          rr-id="tho_m_060552"
+          name="isDiffusionRestriction"
+          label="{{
+            'thoraxMRT.pleura.diffusionRestriction.value' | translate
+          }}"
+          binary="true"
+          [(ngModel)]="model.isDiffusionRestriction"
+        ></p-checkbox>
+        <p-checkbox
+          [rrDisable]="!isCMYes"
+          rr-id="tho_m_060553"
+          name="isContrastEnhancement"
+          label="{{ 'thoraxMRT.pleura.contrastEnhancement.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isContrastEnhancement"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_m_060554"
+          name="isSignalVoid"
+          label="{{ 'thoraxMRT.pleura.signalVoid.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isSignalVoid"
+          rrContentReset="signalVoidBlock"
+        ></p-checkbox>
+        <div
+          id="signalVoidBlock"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isSignalVoid"
+        >
+          <p-radioButton
+            rr-id="tho_m_060555"
+            name="focalSignalVoidsType"
+            rrUnClickRadio
+            label="{{ 'thoraxMRT.pleura.calcification.value' | translate }}"
+            [(ngModel)]="model.focalSignalVoidsType"
+            [value]="focalSignalVoidsTypeEnum.Calcification"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_060556"
+            name="focalSignalVoidsType"
+            rrUnClickRadio
+            label="{{ 'thoraxMRT.pleura.air.value' | translate }}"
+            [(ngModel)]="model.focalSignalVoidsType"
+            [value]="focalSignalVoidsTypeEnum.Air"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_060557"
+            name="focalSignalVoidsType"
+            rrUnClickRadio
+            label="{{ 'thoraxMRT.pleura.fibrosis.value' | translate }}"
+            [(ngModel)]="model.focalSignalVoidsType"
+            [value]="focalSignalVoidsTypeEnum.Fibrosis"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_060558"
+            name="focalSignalVoidsType"
+            rrUnClickRadio
+            label="{{ 'thoraxMRT.pleura.flowVoid.value' | translate }}"
+            [(ngModel)]="model.focalSignalVoidsType"
+            [value]="focalSignalVoidsTypeEnum.FlowVoid"
+          ></p-radioButton>
+        </div>
+        <h2 rr-id="tho_m_060559" class="m-t-20">
+          {{ "thoraxMRT.pleura.otherFeatures.value" | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="tho_m_060560"
+          name="isHemorrhage"
+          label="{{ 'thoraxMRT.pleura.hemorrhage.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isHemorrhage"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_m_060561"
+          name="isAbscess"
+          label="{{ 'thoraxMRT.pleura.abscess.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isAbscess"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_m_060562"
+          name="isNecrosis"
+          label="{{ 'thoraxMRT.pleura.necrosis.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isNecrosis"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_m_060563"
+          name="isVascularContact"
+          label="{{ 'thoraxMRT.pleura.vascularContact.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isVascularContact"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

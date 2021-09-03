@@ -1,0 +1,76 @@
+<div class="f-fill-available-space f-vertical f-space-between">
+  <div>
+    <h2 rr-id="mam_mx_020219" class="m-b-3">
+      {{ "mammaMX.medicalHistory.personalMedicalHistory.value" | translate }}
+    </h2>
+    <h2 rr-id="mam_mx_020220">
+      {{ selectedAnamnesis }}
+    </h2>
+    <rr-month-year-input
+      labelRrId="mam_mx_020210"
+      monthRrId="mam_mx_020211"
+      yearRrId="mam_mx_020212"
+      [(ngModel)]="model.ownAnamnesisDate"
+      label="{{ 'mammaMX.medicalHistory.date.value' | translate }}"
+      class="m-b-12 custom-label-margin"
+      name="ownAnamnesisDate"
+    >
+    </rr-month-year-input>
+  </div>
+  <div
+    class="f-start f-vertical o-radio-list"
+    [hidden]="model.findingType !== ownFamilyAnamnesisType.BreastCarcinoma"
+  >
+    <h2 rr-id="mam_mx_020213">
+      {{ "mammaMX.medicalHistory.dateRelatedToMenopause.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="mam_mx_020214"
+      [(ngModel)]="model.menopauseType"
+      label="{{'mammaMX.medicalHistory.premenopausal.value' | translate}}"
+      name="menopauseType"
+      [value]="menopauseType.Premenopausal"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_020215"
+      [(ngModel)]="model.menopauseType"
+      label="{{ 'mammaMX.medicalHistory.perimenopausal.value' | translate }}"
+      name="menopauseType"
+      [value]="menopauseType.Perimenopausal"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_020216"
+      [(ngModel)]="model.menopauseType"
+      label="{{ 'mammaMX.medicalHistory.postmenopausal.value' | translate }}"
+      name="menopauseType"
+      [value]="menopauseType.Postmenopausal"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="f-start f-vertical localizer-bottom-fix">
+    <p
+      rr-id="mam_mx_020217"
+      class="m-b-3"
+      rrValidation="breastLocation"
+      noUpdate="true"
+    >
+      {{ 'mammaMX.medicalHistory.localizationMultipleSelection.value' |
+      translate }}*
+    </p>
+    <rr-breast-simple
+      rr-id="mam_mx_020218"
+      [(ngModel)]="model.breastLocation"
+      name="model.breastLocation"
+      #breastLocation
+      [elementUpdate]="breastLocation.selectionChange"
+      rrValidation="breastLocation"
+      isLocalizer="true"
+    >
+    </rr-breast-simple>
+  </div>
+</div>

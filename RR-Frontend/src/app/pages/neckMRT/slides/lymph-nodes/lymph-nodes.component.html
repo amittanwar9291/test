@@ -1,0 +1,72 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list">
+        <h1 class="m-b-16" rr-id="nec_m_080103">
+          {{ 'neckMRT.lymphNodes.finding.value' | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="nec_m_080104"
+          name="areFindings"
+          [value]="areFindings.No"
+          label="{{ 'neckMRT.lymphNodes.noEvidenceOfPathologiclymph.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_080105"
+          name="areFindings"
+          [value]="areFindings.Yes"
+          label="{{ 'neckMRT.lymphNodes.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-vertical col-h-100 c-pad-l">
+      <div class="m-h-117">
+        <h1
+          rr-id="nec_m_080201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ 'neckMRT.lymphNodes.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === findingType.None; else findings"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-pad-r c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+
+      <ng-template #findings>
+        <div class="f-horizontal col-h-100">
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <rr-lymph-nodes-finding
+              *ngSwitchCase="findingType.LymphNodes"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-lymph-nodes-finding>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

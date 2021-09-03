@@ -1,0 +1,68 @@
+<div
+  class="f-vertical f-space-between f-fill-available-space"
+  [rrDisable]="isDisabled"
+>
+  <div class="o-radio-list">
+    <div class="f-horizontal f-space-between m-b-15">
+      <h2 rr-id="fra_070104">
+        {{ mode === moduleTypes.MRI ? config.mri.columnHeader :
+        config.ct.columnHeader }}
+      </h2>
+      <button
+        *ngIf="isEditMode"
+        rr-id="fra_07_08"
+        type="button"
+        class="action-button action-button-save"
+        (click)="onNameSave()"
+      >
+        SAVE
+      </button>
+      <button
+        *ngIf="!isEditMode"
+        rr-id="fra_07_05"
+        type="button"
+        class="action-button action-button-edit"
+        (click)="onNameEdit()"
+        [rrDisable]="isEditButtonDisabled()"
+      >
+        EDIT
+      </button>
+    </div>
+    <div
+      *ngFor="let item of handler.collection | displayActive
+      | paginate: { id: instanceId, itemsPerPage: config.itemCount, currentPage: page }; index as i"
+    >
+      <rr-centerspecific-preferences-input
+        #preferencesItem
+        [attr.rr-id]="getDynamicComponentRRId(i)"
+        [isEditMode]="isItemEditable(calculateIndex(i), handler.currentItemIndex)"
+        [inactive]="(calculateIndex(i) !== handler.currentItemIndex) || isDisabled"
+        [preferenceName]="getPreferenceName(i)"
+        [moduleType]="mode"
+        (itemDeleted)="removePreference(calculateIndex(i))"
+        (click)="setActiveElement(i)"
+      >
+      </rr-centerspecific-preferences-input>
+    </div>
+    <button
+      type="button"
+      (click)="addPreference()"
+      class="dynamic-component-button"
+      [hidden]="isButtonHidden()"
+      [rrDisable]="isAddButtonDisabled()"
+      [attr.rr-id]="mode === moduleTypes.MRI ? config.mri.buttonRRID : config.ct.buttonRRID"
+    >
+      {{ mode === moduleTypes.MRI ? config.mri.buttonText : config.ct.buttonText
+      }}
+    </button>
+  </div>
+
+  <pagination-controls
+    [attr.rr-id]="config.paginatorRRId"
+    (pageChange)="setPage($event)"
+    directionLinks="false"
+    id="{{instanceId}}"
+    #pagination
+  >
+  </pagination-controls>
+</div>

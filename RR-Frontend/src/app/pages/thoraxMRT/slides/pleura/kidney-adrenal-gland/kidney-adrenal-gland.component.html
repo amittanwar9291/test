@@ -1,0 +1,273 @@
+<div class="f-vertical f-start o-radio-list col-h-100">
+  <h2 rr-id="tho_m_0602128" class="c-pad-l">
+    {{ "thoraxMRT.pleura.kidneyadrenalGlandDetails.value" | translate }}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad o-radio-list">
+      <p-checkbox
+        rr-id="tho_m_0602129"
+        name="isKidney"
+        rrValidation="isKidney isAdrenalGlandMass"
+        rrContentReset="isKidney-block col3-block"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{ 'thoraxMRT.pleura.kidney.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isKidney"
+      ></p-checkbox>
+      <div
+        id="isKidney-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isKidney"
+      >
+        <p rr-id="tho_m_0602130" class="m-b-6">
+          {{ "thoraxMRT.pleura.pathology.value" | translate }}
+        </p>
+        <p-checkbox
+          rr-id="tho_m_0602131"
+          name="isKidneyFocalLesion"
+          rrValidation="isKidneyFocalLesion isUrinaryRetention"
+          rrContentReset="isKidneyFocalLesion-block"
+          label="{{ 'thoraxMRT.pleura.focalLesion.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isKidneyFocalLesion"
+        ></p-checkbox>
+        <div
+          id="isKidneyFocalLesion-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isKidneyFocalLesion"
+        >
+          <p rr-id="tho_m_0602132">
+            {{ "thoraxMRT.pleura.side.value" | translate }}
+          </p>
+          <p-radioButton
+            rr-id="tho_m_0602133"
+            name="focalLeasionSiteType"
+            [(ngModel)]="model.focalLeasionSiteType"
+            rrValidation="focalLeasionSiteType"
+            [value]="siteTypeEnum.Right"
+            label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_0602134"
+            name="focalLeasionSiteType"
+            [(ngModel)]="model.focalLeasionSiteType"
+            rrValidation="focalLeasionSiteType"
+            [value]="siteTypeEnum.Left"
+            label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+          ></p-radioButton>
+
+          <p rr-id="tho_m_0602135" class="m-t-12 m-b-1">
+            {{ "thoraxMRT.pleura.maxDiameter.value" | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_0602136"
+            labelRrId="tho_m_0602137"
+            name="kidneyFocalLesionMaxDiameterInMm"
+            [(ngModel)]="model.kidneyFocalLesionMaxDiameterInMm"
+            [label]="'thoraxMRT.pleura.inMm.value' | translate"
+            [config]="{ labelWidth: 175, min: 1, max: 250, placeholder: '---' }"
+          ></rr-number-input>
+          <p rr-id="tho_m_0602138" class="m-t-17 m-b-1">
+            {{ "thoraxMRT.pleura.differentialDiagnosis.value" | translate }}
+          </p>
+          <p-dropdown
+            styleClass="ui-brown-box o-width-100"
+            [options]="differentialDiagnosisTypeOptions"
+            name="differentialDiagnosis"
+            rr-id="tho_m_0602139"
+            [placeholder]="'shared.pleaseSelect' | translate"
+            rrDropdownClear
+            [(ngModel)]="model.differentialDiagnosis"
+            (onChange)="clearSuspicionCheckbox()"
+          >
+          </p-dropdown>
+          <div
+            class="o-radio-list"
+            [rrDisable]="
+              model.differentialDiagnosis === pleuraDiagnosisTypeEnum.None
+            "
+          >
+            <p-checkbox
+              rr-id="tho_m_0602140"
+              name="isSuspicionOf"
+              label="{{ 'thoraxMRT.pleura.suspicionOf.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isSuspicionOf"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="tho_m_0602172"
+            class="m-t-21 text-break"
+            name="isMoreThanOneLesion"
+            label="{{ 'thoraxMRT.pleura.lesionOfTheSame.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isMoreThan1Lesion"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="col3-block"
+      class="c-col-1 f-vertical f-start c-pad c-sep-l o-radio-list m-t-68"
+    >
+      <div
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isKidney"
+      >
+        <p-checkbox
+          rr-id="tho_m_0603112"
+          name="isUrinaryRetention"
+          rrValidation="isKidneyFocalLesion isUrinaryRetention"
+          rrContentReset="isUrinaryRetention-block"
+          label="{{ 'thoraxMRT.pleura.urinaryRetention.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isUrinaryRetention"
+        ></p-checkbox>
+        <div
+          id="isUrinaryRetention-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isUrinaryRetention"
+        >
+          <p rr-id="tho_m_0603113" class="m-b-5">
+            {{ "thoraxMRT.pleura.side.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="tho_m_0603114"
+            rrValidation="isUrinaryRetentionLeft isUrinaryRetentionRight"
+            name="isUrinaryRetentionRight"
+            label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isUrinaryRetentionRight"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_0603115"
+            rrValidation="isUrinaryRetentionLeft isUrinaryRetentionRight"
+            name="isUrinaryRetentionLeft"
+            label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isUrinaryRetentionLeft"
+          ></p-checkbox>
+
+          <p rr-id="tho_m_0603116" class="m-t-17">
+            {{ "thoraxMRT.pleura.gradingMaxExtent.value" | translate }}
+          </p>
+          <p-radioButton
+            rr-id="tho_m_0603117"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade1"
+            label="{{ 'thoraxMRT.pleura.grade.value' | translate }} 1"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_0603118"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade2"
+            label="{{ 'thoraxMRT.pleura.grade.value' | translate }} 2"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_0603119"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade3"
+            label="{{ 'thoraxMRT.pleura.grade.value' | translate }} 3"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_0603120"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade4"
+            label="{{ 'thoraxMRT.pleura.grade.value' | translate }} 4"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start o-radio-list c-sep-l c-sep c-pad">
+      <p-checkbox
+        rr-id="tho_m_060476"
+        name="isAdrenalGlandMass"
+        labelStyleClass="ui-fat-label"
+        rrValidation="isKidney isAdrenalGlandMass"
+        rrContentReset="isAdrenalGlandMass-block"
+        label="{{ 'thoraxMRT.pleura.adrenalGlandMass.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isAdrenalGlandMass"
+      ></p-checkbox>
+      <div
+        id="isAdrenalGlandMass-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isAdrenalGlandMass"
+      >
+        <p rr-id="tho_m_060477" class="m-b-5">
+          {{ "thoraxMRT.pleura.side.value" | translate }}
+        </p>
+        <p-radioButton
+          rr-id="tho_m_060478"
+          name="adrenalGlandMassSiteType"
+          [(ngModel)]="model.adrenalGlandMassSiteType"
+          rrValidation="adrenalGlandMassSiteType"
+          [value]="siteTypeEnum.Right"
+          label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_060479"
+          name="adrenalGlandMassSiteType"
+          [(ngModel)]="model.adrenalGlandMassSiteType"
+          rrValidation="adrenalGlandMassSiteType"
+          [value]="siteTypeEnum.Left"
+          label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+        ></p-radioButton>
+
+        <p rr-id="tho_m_060480" class="m-t-18 m-b-2">
+          {{ "thoraxMRT.pleura.maxDiameter.value" | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="tho_m_060481"
+          labelRrId="tho_m_060482"
+          name="massAdrenalGlandMaxDiameterInMm"
+          [(ngModel)]="model.massAdrenalGlandMaxDiameterInMm"
+          [label]="'thoraxMRT.pleura.inMm.value' | translate"
+          [config]="{ labelWidth: 175, min: 1, max: 200, placeholder: '---' }"
+        ></rr-number-input>
+        <p rr-id="tho_m_060483" class="m-t-16 m-b-2">
+          {{ "thoraxMRT.pleura.differentialDiagnosis.value" | translate }}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="massAdrenalGlandClassificationTypeOptions"
+          name="massAdrenalGlandClassificationType"
+          rr-id="tho_m_060484"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.massAdrenalGlandDifferentialDiagnosis"
+          (onChange)="clearSuspicionOfMassAdrenalGlandCheckbox()"
+        >
+        </p-dropdown>
+        <div
+          class="o-radio-list"
+          [rrDisable]="
+            model.massAdrenalGlandDifferentialDiagnosis ===
+            pleuraDiagnosisTypeEnum.None
+          "
+        >
+          <p-checkbox
+            rr-id="tho_m_060485"
+            name="isSuspicionOfMassAdrenalGland"
+            label="{{ 'thoraxMRT.pleura.suspicionOf.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOfMassAdrenalGland"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

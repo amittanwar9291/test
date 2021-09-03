@@ -1,0 +1,64 @@
+<div class="rr-number-input">
+  <label
+    *ngIf="configVal.showLabel && configVal.labelBeforeInput && configVal.hasInfoIcon;"
+    [ngClass]="labelStyleClass"
+    class="rr-number-input__label--before-input"
+    [attr.rr-id]="labelRrId"
+  >
+    <span>
+      {{ this.getLabelFirstLine() }}
+      <br />{{ this.getLabelFromSecondLine() }}
+    </span>
+  </label>
+
+  <label
+    *ngIf="configVal.showLabel && configVal.labelBeforeInput && !configVal.hasInfoIcon;"
+    [ngClass]="labelStyleClass"
+    class="rr-number-input__label--before-input"
+    [attr.rr-id]="labelRrId"
+    >{{ label }}</label
+  >
+
+  <input
+    class="rr-number-input__input rr-number-input__input--{{configVal.borderColor}}"
+    lang="en-150"
+    [ngStyle]="{'width': configVal.inputWidth + 'px'}"
+    type="number"
+    [attr.rr-id]="inputRrId"
+    [placeholder]="configVal.placeholder"
+    [step]="configVal.step"
+    [min]="configVal.min"
+    [max]="configVal.max"
+    [(ngModel)]="ngValue"
+    rrInputMinMaxValidation
+    [readOnly]="configVal.readonly"
+    [attr.readonly-color]="configVal.readonlyColor"
+    (modelUpdate)="onModelUpdate($event)"
+  />
+
+  <label
+    *ngIf="configVal.showLabel && !configVal.labelBeforeInput && configVal.hasInfoIcon;"
+    [ngStyle]="{'width': configVal.labelWidth + 'px'}"
+    [ngClass]="labelStyleClass"
+    class="rr-number-input__label--after-input"
+    [attr.rr-id]="labelRrId"
+  >
+    <span
+      [rrInfoIcon]="infoIconRrId"
+      [infoIconStyles]="{marginTop: !!getLabelFromSecondLine() ? '-4px': '-20px'}"
+      >{{ this.getLabelFirstLine() }}
+      <br *ngIf="!!getLabelFromSecondLine()" />{{ this.getLabelFromSecondLine()
+      }}
+    </span>
+  </label>
+
+  <label
+    *ngIf="configVal.showLabel && !configVal.labelBeforeInput && !configVal.hasInfoIcon;"
+    [ngStyle]="{'width': configVal.labelWidth + 'px'}"
+    [ngClass]="labelStyleClass"
+    class="rr-number-input__label rr-number-input__label--after-input label-white-space"
+    [attr.rr-id]="labelRrId"
+    >{{ this.getLabelFirstLine() }} <br />{{ this.getLabelFromSecondLine()
+    }}</label
+  >
+</div>

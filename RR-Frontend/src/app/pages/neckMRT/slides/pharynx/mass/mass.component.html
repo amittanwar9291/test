@@ -1,0 +1,64 @@
+<p-tabView class="rr-tabView right-edge-tab">
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="nec_m_040207"
+        [rrValidation]="['differentialDiagnosis', 'isNasopharynx isOropharynx isHypopharynx', 'isRoof isNasopharynxPosteriorWall isNasopharynxLateralWall isInferiorSoftPalate', 'isOropharynxPosteriorWall isOropharynxLateralWall isInferior', 'isHypopharynxPosteriorWall isPiriformSinus isPostcricoidRegion', 'orientationAxialType']"
+        ifAny="true"
+      >
+        {{ 'neckMRT.pharynx.characterizationI.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-one
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [diffDiagnosisOptions]="differentialDiagnosisOptions"
+      [orientationAxialOptions]="orientationAxialOptions"
+    >
+    </rr-characterization-one>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="nec_m_040324"
+        [rrValidation]="['sizeInMm', 'marginType']"
+        ifAny="true"
+      >
+        {{ 'neckMRT.pharynx.characterizationII.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-two class="f-horizontal col-h-100" [model]="model">
+    </rr-characterization-two>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="nec_m_040407">
+        {{ 'neckMRT.pharynx.characterizationIII.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-three
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [isContrastEnhanced]="isContrastEnhanced"
+      [isDWI]="isDWI"
+    >
+    </rr-characterization-three>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="nec_m_040501" [rrValidation]="['differentialDiagnosis1']">
+        {{ 'neckMRT.pharynx.differentialDiagnosis.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-differential-diagnosis
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [diffDiagnosisOptions]="differentialDiagnosisOptions"
+      [restrictedDiffDiagnosisOptions]="restrictedDifferentialDiagnosisOptions"
+    >
+    </rr-differential-diagnosis>
+  </p-tabPanel>
+</p-tabView>

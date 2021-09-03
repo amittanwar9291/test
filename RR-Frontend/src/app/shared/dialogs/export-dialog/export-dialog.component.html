@@ -1,0 +1,69 @@
+<div
+  class="export-dialog-content"
+  [ngStyle]="{'zoom': zoom}"
+  style="width: 639px;height: 439px;"
+>
+  <div class="export-header">
+    <span *ngIf="!isConfirmed">{{ "report.exporting" | translate }}</span>
+    <span *ngIf="isConfirmed && !isCompleted"
+      >{{ "report.exportInProgress" | translate }}</span
+    >
+    <span *ngIf="isConfirmed && isCompleted"
+      >{{ "report.exportCompleted" | translate }}</span
+    >
+  </div>
+  <div class="export-box p-col-100">
+    <div *ngIf="!isConfirmed">
+      <div
+        class="p-col-100 f-horizontal f-space-between f-align-center export-checkboxes"
+      >
+        <p-checkbox
+          name="reportExport"
+          label="{{ 'report.finding' | translate }} {{ reportLabel | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <p-dropdown
+          [options]="languages"
+          [(ngModel)]="selectedLang"
+          [style]="{'width':'75px'}"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="selectedLang">
+              {{ selectedLang.toUpperCase() }}
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div style="width: 150px;">{{ lang.label }}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div
+        class="p-col-100 f-horizontal f-space-between f-align-center export-buttons"
+      >
+        <button class="btnCancel" (click)="cancel()">
+          {{ "report.cancel" | translate }}
+        </button>
+        <button class="btnOk" (click)="confirm()">
+          {{ "report.ok" | translate }}
+        </button>
+      </div>
+    </div>
+    <div *ngIf="isConfirmed">
+      <div
+        class="p-col-100 f-horizontal f-center export-loader"
+        *ngIf="!isCompleted"
+      >
+        <rr-loader [isCompleted]="false"></rr-loader>
+      </div>
+      <div
+        class="p-col-100 f-horizontal f-center export-loader"
+        *ngIf="isCompleted"
+      >
+        <rr-loader [isCompleted]="true"></rr-loader>
+      </div>
+    </div>
+  </div>
+  <div class="p-col-100 export-logo">
+    <img alt="RadioReport Logo" src="assets/img/layout/rr-logo.svg" />
+  </div>
+</div>

@@ -1,0 +1,167 @@
+<div class="f-vertical f-start col-h-100 o-width-100 o-radio-list">
+  <h2 class="p-l-25 m-t-10">
+    {{'thoraxCT.softParts.differentialDiagnosis.value' | translate}}
+  </h2>
+  <div class="f-horizontal f-start multi-col">
+    <div class="c-col-1 c-sep c-pad">
+      <div class="o-radio-list m-l-10">
+        <div
+          class="f-vertical f-start o-radio-list m-r-12 p-b-1"
+          [rrDisable]="model.descriptionType !== 'IDescribe'"
+        >
+          <p class="m-b-2">
+            {{'thoraxCT.softParts.differentialDiagnosis1.value' | translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="1"
+            [options]="ddlW033"
+            [(ngModel)]="model.differentialDiagnosis01"
+            name="differentialDiagnosis01"
+            group="true"
+            rrId="tho_c_070233"
+            (selectionChanged)="clearDDL1Checkboxes()"
+            [parentViewModel]="model"
+            rrValidation="differentialDiagnosis01"
+          ></rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            [rrDisable]="model.differentialDiagnosis01 === softPartsDiagnosisTypeEnum.None"
+            rr-id="tho_c_0702132"
+            name="isSuspected"
+            [(ngModel)]="model.isSuspected"
+            label="{{'thoraxCT.softParts.suspected.value' | translate}}"
+            binary="true"
+          ></p-checkbox>
+        </div>
+        <div
+          class="f-vertical f-start o-radio-list m-r-12"
+          [rrDisable]="model.differentialDiagnosis01 === softPartsDiagnosisTypeEnum.None && model.differentialDiagnosis === softPartsDiagnosisTypeEnum.None"
+        >
+          <p rr-id="tho_c_070234" class="m-b-3">
+            {{'thoraxCT.softParts.differentialDiagnosis2.value' | translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="2"
+            [options]="ddlW034"
+            [(ngModel)]="model.differentialDiagnosis02"
+            name="differentialDiagnosis02"
+            group="true"
+            rrId="tho_c_070235"
+            (selectionChanged)="clearDDL2Checkboxes()"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+          <div
+            class="f-vertical f-start o-radio-list"
+            [rrDisable]="model.differentialDiagnosis02 === softPartsDiagnosisTypeEnum.None"
+          >
+            <p-checkbox
+              rr-id="tho_c_070236"
+              name="isSubordinated"
+              [(ngModel)]="model.isSubordinated"
+              label="{{'thoraxCT.softParts.subordinated.value' | translate}}"
+              binary="true"
+            ></p-checkbox>
+            <p rr-id="tho_c_070237" class="m-b-3">
+              {{'thoraxCT.softParts.differentialDiagnosis3.value' | translate}}
+            </p>
+            <rr-differential-diagnosis-dropdown
+              [diagnosisNumber]="3"
+              [options]="ddlW034"
+              [(ngModel)]="model.differentialDiagnosis03"
+              name="differentialDiagnosis03"
+              group="true"
+              rrId="tho_c_070238"
+              (selectionChanged)="clearDDL3Checkbox()"
+              [parentViewModel]="model"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+        <p-checkbox
+          class="m-t-20"
+          rr-id="tho_c_070239"
+          name="isMoreThanOneLesion"
+          [(ngModel)]="model.isMoreThanOneLesion"
+          label="{{'thoraxCT.softParts.lesionSamePathology.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad">
+      <div class="o-radio-list m-l-10" *ngIf="isFirstDiagnosisSelected()">
+        <h2 rr-id="tho_c_070322">
+          {{'thoraxCT.softParts.differentialDiagnosisDetails.value' |
+          translate}}
+        </h2>
+        <p
+          *ngIf="isDiagnosisNoDetails(model.differentialDiagnosis) && isDiagnosisNoDetails(model.differentialDiagnosis01)"
+          rr-id="tho_c_0703148"
+        >
+          {{'thoraxCT.softParts.NoFurtherDetails.value' | translate}}
+        </p>
+
+        <p-checkbox
+          *ngIf="model.differentialDiagnosis === softPartsDiagnosisTypeEnum.PleuralEffusionTrapped
+          || model.differentialDiagnosis01 === softPartsDiagnosisTypeEnum.PleuralEffusionTrapped"
+          rr-id="tho_c_070332"
+          name="isCloakPleuralEffusion"
+          [(ngModel)]="model.isCloakPleuralEffusion"
+          label="{{'thoraxCT.softParts.CloakPleuralEffusion.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad ">
+      <div
+        class="o-radio-list m-l-10"
+        *ngIf="isFirstDiagnosisSelected()"
+        [rrDisable]="model.differentialDiagnosis02 === softPartsDiagnosisTypeEnum.None"
+      >
+        <h2 rr-id="tho_c_0704121">
+          {{'thoraxCT.softParts.differentialDiagnosisDetails2.value' |
+          translate}}
+        </h2>
+        <p
+          *ngIf="isDiagnosisNoDetails(model.differentialDiagnosis02)"
+          rr-id="tho_c_0704122"
+        >
+          {{'thoraxCT.softParts.NoFurtherDetails.value' | translate}}
+        </p>
+
+        <p-checkbox
+          *ngIf="model.differentialDiagnosis02 === softPartsDiagnosisTypeEnum.PleuralEffusionTrapped"
+          rr-id="tho_c_0704123"
+          name="isCloakPleuralEffusion"
+          [(ngModel)]="model.isCloakPleuralEffusion"
+          label="{{'thoraxCT.softParts.CloakPleuralEffusion.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l">
+      <div
+        class="o-radio-list m-l-10"
+        *ngIf="isFirstDiagnosisSelected()"
+        [rrDisable]="model.differentialDiagnosis03 === softPartsDiagnosisTypeEnum.None"
+      >
+        <h2 rr-id="tho_c_070584">
+          {{'thoraxCT.softParts.differentialDiagnosisDetails3.value' |
+          translate}}
+        </h2>
+        <p
+          *ngIf="isDiagnosisNoDetails(model.differentialDiagnosis03)"
+          rr-id="tho_c_070585"
+        >
+          {{'thoraxCT.softParts.NoFurtherDetails.value' | translate}}
+        </p>
+
+        <p-checkbox
+          *ngIf="model.differentialDiagnosis03 === softPartsDiagnosisTypeEnum.PleuralEffusionTrapped"
+          rr-id="tho_c_070586"
+          name="isCloakPleuralEffusion"
+          [(ngModel)]="model.isCloakPleuralEffusion"
+          label="{{'thoraxCT.softParts.CloakPleuralEffusion.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

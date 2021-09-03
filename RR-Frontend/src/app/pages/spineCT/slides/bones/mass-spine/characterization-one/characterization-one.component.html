@@ -1,0 +1,293 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-10 m-b-10">
+    <div class="c-col-1 c-sep c-pad">
+      <div class="o-list p-l-10">
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="spi_c_0602206" rrValidation="spineLocation">
+            {{ 'spineCT.bones.localizationOfVertebra.value' | translate }}*
+          </h2>
+          <rr-spine-simple
+            rr-id="spi_c_060203"
+            [spineLocation]="model.spineLocation"
+            (click)="openLargeLocalizer()"
+            isLocalizer="true"
+            [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+            rrValidation="spineLocation"
+          >
+          </rr-spine-simple>
+        </div>
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="spi_c_0602207" rrValidation="vertebralBodyLocalizations">
+            {{ 'spineCT.bones.localizationInTheVertebraCcenterOfLesion.value' |
+            translate }}*
+          </h2>
+          <rr-spine-disc-general-localizer
+            rr-id="spi_c_0602208"
+            [logicType]="'ventralAndDorsal'"
+            [(ngModel)]="model.vertebralBodyLocalizations"
+            name="vertebralBodyLocalizations"
+            isSingleChoice="true"
+            isLocalizer="true"
+            rrValidation="vertebralBodyLocalizations"
+          >
+          </rr-spine-disc-general-localizer>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad">
+      <div class="o-list p-l-10">
+        <div
+          class="f-vertical o-radio-list"
+          [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+        >
+          <p rr-id="spi_c_0603216" rrInfoIcon="spi_c_06_15" class="m-b-5">
+            {{ 'spineCT.bones.differentialDiagnosis1.value' | translate }}*
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="spi_c_0603217"
+            [diagnosisNumber]="1"
+            [options]="differentialDiagnosisW022"
+            [(ngModel)]="model.bonesDiagnosis1"
+            name="bonesDiagnosis1"
+            group="true"
+            [parentViewModel]="model"
+            isActiveOnIKnow="true"
+            rrValidation="bonesDiagnosis1"
+            (selectionChanged)="clearDD2Subordinate()"
+          >
+          </rr-differential-diagnosis-dropdown>
+        </div>
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="spi_c_0603218">
+            {{ 'spineCT.bones.expansion.value' | translate }}
+          </h2>
+          <p rr-id="spi_c_0603219">
+            {{ 'spineCT.bones.maxDiameter.value' | translate }}*
+          </p>
+          <rr-number-input
+            inputRrId="spi_c_0603220"
+            labelRrId="spi_c_0603221"
+            name="expansionMaxDiameterInMm"
+            [(ngModel)]="model.expansionMaxDiameterInMm"
+            label="{{ 'spineCT.bones.inMM.value' | translate }}"
+            [config]="{ min: 1, max: 999, placeholder: '---' }"
+            (announceModelChange)="resetDependField()"
+            rrValidation="expansionMaxDiameterInMm"
+          >
+          </rr-number-input>
+          <div [rrDisable]="!model.expansionMaxDiameterInMm">
+            <p rr-id="spi_c_0603222">
+              {{ 'spineCT.bones.2ndPlane.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="spi_c_0603223"
+              labelRrId="spi_c_0603224"
+              name="expansion2ndPlaneInMm"
+              [(ngModel)]="model.expansion2ndPlaneInMm"
+              label="{{ 'spineCT.bones.inMM.value' | translate }}"
+              [config]="{ min: 1, max: 999, placeholder: '---' }"
+              (announceModelChange)="resetDependField()"
+            >
+            </rr-number-input>
+          </div>
+          <div [rrDisable]="!model.expansion2ndPlaneInMm">
+            <p rr-id="spi_c_0603225">
+              {{ 'spineCT.bones.3rdPlane.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="spi_c_0603226"
+              labelRrId="spi_c_0603227"
+              name="expansion3rdPlaneInMm"
+              [(ngModel)]="model.expansion3rdPlaneInMm"
+              label="{{ 'spineCT.bones.inMM.value' | translate }}"
+              [config]="{ min: 1, max: 999, placeholder: '---' }"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0603228">
+            {{ "spineCT.bones.margin.value" | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="spi_c_0603229"
+            name="marginType"
+            [(ngModel)]="model.marginType"
+            rrUnClickRadio
+            [value]="marginTypeEnum.Circumscribed"
+            label="{{ 'spineCT.bones.circumscribed.value' | translate }}"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0603230"
+            name="marginType"
+            [(ngModel)]="model.marginType"
+            [value]="marginTypeEnum.NonCircumscribed"
+            label="{{ 'spineCT.bones.nonCircumscribed.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad">
+      <div class="o-list p-l-10">
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0604213">
+            {{ 'spineCT.bones.homogeneity.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="spi_c_0604214"
+            name="homogeneityType"
+            [(ngModel)]="model.homogeneityType"
+            [value]="homogeneityTypeEnum.Homogeneous"
+            label="{{ 'spineCT.bones.homogeneous.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604215"
+            name="homogeneityType"
+            [(ngModel)]="model.homogeneityType"
+            [value]="homogeneityTypeEnum.Heterogeneous"
+            label="{{ 'spineCT.bones.heterogeneous.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0604216">
+            {{ 'spineCT.bones.cortex.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="spi_c_0604217"
+            name="cortexType"
+            [(ngModel)]="model.cortexType"
+            [value]="cortexTypeEnum.Intact"
+            label="{{ 'spineCT.bones.intact.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604218"
+            name="cortexType"
+            [(ngModel)]="model.cortexType"
+            [value]="cortexTypeEnum.Thinning"
+            label="{{ 'spineCT.bones.thinningScalopping.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604219"
+            name="cortexType"
+            [(ngModel)]="model.cortexType"
+            [value]="cortexTypeEnum.Destruction"
+            label="{{ 'spineCT.bones.destruction.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604220"
+            name="cortexType"
+            [(ngModel)]="model.cortexType"
+            [value]="cortexTypeEnum.Neocortex"
+            label="{{ 'spineCT.bones.neocortex.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0604221">
+            {{ 'spineCT.bones.shape.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="spi_c_0604222"
+            name="formType"
+            [(ngModel)]="model.formType"
+            [value]="formTypeEnum.Round"
+            label="{{ 'spineCT.bones.round.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604223"
+            name="formType"
+            [(ngModel)]="model.formType"
+            [value]="formTypeEnum.Oval"
+            label="{{ 'spineCT.bones.oval.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604224"
+            name="formType"
+            [(ngModel)]="model.formType"
+            [value]="formTypeEnum.Irregular"
+            label="{{ 'spineCT.bones.irregular.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l">
+      <div class="o-list p-l-10">
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0605237">
+            {{ 'spineCT.bones.density.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="spi_c_0605238"
+            name="massSpineDensityType"
+            [(ngModel)]="model.massSpineDensityType"
+            [value]="massSpineDensityTypeEnum.FatIsodensApproxMinus100HU"
+            label="{{ 'spineCT.bones.fatIsodensApprox100HU.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0605239"
+            name="massSpineDensityType"
+            [(ngModel)]="model.massSpineDensityType"
+            [value]="massSpineDensityTypeEnum.FluidIsodensAbove0HU"
+            label="{{ 'spineCT.bones.fluidIsodens0HU.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0605240"
+            name="massSpineDensityType"
+            [(ngModel)]="model.massSpineDensityType"
+            [value]="massSpineDensityTypeEnum.SoftTissueIsodense"
+            label="{{ 'spineCT.bones.softTissueIsodense.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0605241" rrInfoIcon="spi_c_06_13">
+            {{ "spineCT.bones.matrix.value" | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="spi_c_0605242"
+            name="matrixType"
+            [(ngModel)]="model.matrixType"
+            [value]="matrixTypeEnum.Osseous"
+            label="{{ 'spineCT.bones.osseous.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0605243"
+            name="matrixType"
+            [(ngModel)]="model.matrixType"
+            [value]="matrixTypeEnum.Chondroid"
+            label="{{ 'spineCT.bones.chondroid.value' | translate }}"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

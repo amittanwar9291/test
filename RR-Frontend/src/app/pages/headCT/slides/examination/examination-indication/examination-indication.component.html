@@ -1,0 +1,879 @@
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.None)"
+  class="c-col-1 c-pad-l c-sep f-start"
+></div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.IntracranialHemorrhage)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010501">
+      {{ "headCT.examination.intracranialHemorrhage.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010502"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010503"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010504"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010576">
+      {{ "headCT.examination.coagulation.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_010577"
+      label="{{ 'headCT.examination.knownCoagulopathy.value' | translate }}"
+      [(ngModel)]="model.isKnownCoagulopathy"
+      name="isKnownCoagulopathy"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_010578"
+      label="{{ 'headCT.examination.knownAnticoagulation.value' | translate }}"
+      [(ngModel)]="model.isKnownAnticoagulation"
+      name="isKnownAnticoagulation"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010505">
+      {{ "headCT.examination.details.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010518"
+      name="detailsType"
+      [value]="detailsTypeEnum.SubduralHematoma"
+      label="{{ 'headCT.examination.subduralHematoma.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      rrContentReset="subarachnoidHemorrhageSAHBlock"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010519"
+      name="detailsType"
+      [value]="detailsTypeEnum.IntraparenchymalHemorrhage"
+      label="{{
+        'headCT.examination.intraparenchymalHemorrhage.value' | translate
+      }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      rrContentReset="subarachnoidHemorrhageSAHBlock"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010520"
+      name="detailsType"
+      class="text-break"
+      [value]="detailsTypeEnum.SubarachnoidHemorrhageSAH"
+      label="{{
+        'headCT.examination.subarachnoidHemorrhageSAH.value' | translate
+      }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      rrContentReset="subarachnoidHemorrhageSAHBlock"
+      rrInfoIcon="hea_c_01_03"
+    >
+    </p-radioButton>
+    <div
+      id="subarachnoidHemorrhageSAHBlock"
+      class="nested-content"
+      [rrDisable]="
+        model.detailsType !== detailsTypeEnum.SubarachnoidHemorrhageSAH
+      "
+    >
+      <p rr-id="hea_c_010521" class="m-b-0">
+        {{ "headCT.examination.huntHessScale.value" | translate }}
+      </p>
+      <p-dropdown
+        styleClass="o-width-90 ui-brown-box"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="dropdownW005"
+        [(ngModel)]="model.huntHessScaleType"
+        rrDropdownClear
+        name="huntHessScaleType"
+        rr-id="hea_c_010522"
+      >
+      </p-dropdown>
+    </div>
+    <p-radioButton
+      rr-id="hea_c_010523"
+      name="detailsType"
+      [value]="detailsTypeEnum.EpiduralHematoma"
+      label="{{ 'headCT.examination.epiduralHematoma.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      rrContentReset="subarachnoidHemorrhageSAHBlock"
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Trauma)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010554">
+      {{ "headCT.examination.trauma.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010555"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrContentReset="chronicBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010556"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrContentReset="chronicBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010557"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrContentReset="chronicBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010557"
+      [(ngModel)]="model.indicationSubType"
+      [value]="indicationSubTypeEnum.Chronic"
+      name="indicationSubType"
+      label="{{ 'headCT.examination.chronic.value' | translate }}"
+      rrContentReset="chronicBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <div
+      class="nested-content"
+      [rrDisable]="traumaDetailsDisabled()"
+      id="chronicBlock"
+    >
+      <p rr-id="hea_c_010580">
+        {{ "headCT.examination.details.value" | translate }}
+      </p>
+      <p-checkbox
+        name="isPathologilacFindingInPreviousExamination"
+        [(ngModel)]="model.isPathologilacFindingInPreviousExamination"
+        label="{{
+          'headCT.examination.pathologicalFindinginPreviousExamination.value'
+            | translate
+        }}"
+        class="text-break"
+        binary="true"
+        rr-id="hea_c_010581"
+        [rrDisable]="
+          model.indicationSubType !== indicationSubTypeEnum.FollowupExamination
+        "
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isProgressiveClinicalFindings"
+        [(ngModel)]="model.isProgressiveClinicalFindings"
+        label="{{
+          'headCT.examination.progressiveClinicalFindings.value' | translate
+        }}"
+        binary="true"
+        rr-id="hea_c_010582"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010560">
+      {{ "headCT.examination.characterization.value" | translate }}
+    </h2>
+    <p-checkbox
+      name="isMinorTrauma"
+      [(ngModel)]="model.isMinorTrauma"
+      label="{{ 'headCT.examination.minorTraumaGSG.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_010561"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isMajorTrauma"
+      [(ngModel)]="model.isMajorTrauma"
+      label="{{ 'headCT.examination.majorTraumaGSG.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_010583"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isPenetratingInjury"
+      [(ngModel)]="model.isPenetratingInjury"
+      label="{{ 'headCT.examination.penetratingInjury.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_010584"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isPolytrauma"
+      [(ngModel)]="model.isPolytrauma"
+      label="{{ 'headCT.examination.polytrauma.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_010562"
+      rrContentReset="isPolytraumaBlock"
+    >
+    </p-checkbox>
+    <div
+      id="isPolytraumaBlock"
+      class="nested-content"
+      [rrDisable]="!model.isPolytrauma"
+    >
+      <p
+        rr-id="hea_c_010564"
+        class="m-b-0"
+        rrInfoIcon="hea_c_01_04"
+        [infoIconPdfLandscape]="true"
+      >
+        {{ "headCT.examination.glasgowComaScaleGCS.value" | translate }}
+      </p>
+      <rr-number-input
+        [label]="'headCT.examination.points.value' | translate"
+        [config]="{ min: 3, max: 15 }"
+        inputRrId="hea_c_010565"
+        labelRrId="hea_c_010566"
+        name="glasgowComaScale"
+        [(ngModel)]="model.glasgowComaScale"
+      ></rr-number-input>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Ischemia)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010585">
+      {{ "headCT.examination.ischemia.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010586"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010587"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010588"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010505">
+      {{ "headCT.examination.details.value" | translate }}
+    </h2>
+    <p-checkbox
+      name="isIchemia "
+      [(ngModel)]="model.isIschemia"
+      label="{{ 'headCT.examination.ischemia.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_010506"
+      rrContentReset="isIschemiaBlock"
+    >
+    </p-checkbox>
+    <div
+      id="isIschemiaBlock"
+      class="nested-content"
+      [rrDisable]="!model.isIschemia"
+    >
+      <p rr-id="hea_c_010508" rrInfoIcon="hea_c_01_01" class="m-b-0">
+        {{ "headCT.examination.nIHSSScore.value" | translate }}
+      </p>
+      <rr-number-input
+        [label]="'headCT.examination.points.value' | translate"
+        [config]="{ max: 22 }"
+        inputRrId="hea_c_010509"
+        labelRrId="hea_c_010510"
+        name="nihssScore"
+        [(ngModel)]="model.nihssScore"
+      ></rr-number-input>
+      <p
+        rr-id="hea_c_010511"
+        rrInfoIcon="hea_c_01_02"
+        class="text-break m-b-0 m-t-7"
+      >
+        {{ "headCT.examination.aSPECTScorefromPreliminaryExamination.value" |
+        translate }}
+      </p>
+      <rr-number-input
+        [label]="'headCT.examination.points.value' | translate"
+        [config]="{ max: 10 }"
+        inputRrId="hea_c_010512"
+        labelRrId="hea_c_010513"
+        name="aspectScore"
+        [(ngModel)]="model.aspectScore"
+      ></rr-number-input>
+      <p rr-id="hea_c_010514" class="text-break m-b-0 m-t-7">
+        {{ "headCT.examination.hoursAfterclinicalOnset.value" | translate }}
+      </p>
+      <rr-number-input
+        [label]="'headCT.examination.hours.value' | translate"
+        [config]="{ min: 1, max: 99 }"
+        inputRrId="hea_c_010515"
+        labelRrId="hea_c_010516"
+        name="hoursAfterClinicalOnset"
+        [(ngModel)]="model.hoursAfterClinicalOnset"
+      ></rr-number-input>
+      <p-checkbox
+        name="isWakeUpStroke "
+        [(ngModel)]="model.isWakeUpStroke"
+        label="{{ 'headCT.examination.wakeUpStroke.value' | translate }}"
+        binary="true"
+        rr-id="hea_c_010517"
+        class="m-t-10"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Hypoxia)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010589">
+      {{ "headCT.examination.hypoxicEncephalopathy.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010590"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010591"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010592"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Infection)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010524">
+      {{ "headCT.examination.infection.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010525"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010526"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010527"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Neoplasia)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010593">
+      {{ "headCT.examination.neoplasia.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010594"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010595"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010596"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.ExclusionOfMetastasis"
+      label="{{ 'headCT.examination.exclusionOfMetastasis.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010597"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Neurodegeneration)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010598">
+      {{ "headCT.examination.neurodegeneration.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010599"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.InitialDiagnostic"
+      label="{{ 'headCT.examination.initialDiagnostics.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0105100"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Seizure)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010542">
+      {{ "headCT.examination.seizure.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010543"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010544"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010545"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_010546">
+      {{ "headCT.examination.details.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010547"
+      name="detailsType"
+      [value]="detailsTypeEnum.KnownEpilepsy"
+      label="{{ 'headCT.examination.knownEpilepsy.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      (click)="clearDate()"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010548"
+      name="detailsType"
+      [value]="detailsTypeEnum.FirstSeizure"
+      label="{{ 'headCT.examination.firstSeizure.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      (click)="clearDate()"
+    >
+    </p-radioButton>
+    <div
+      class="o-radio-list nested-content"
+      [rrDisable]="model.detailsType !== detailsTypeEnum.FirstSeizure"
+    >
+      <rr-month-year-input
+        labelRrId="hea_c_010549"
+        monthRrId="hea_c_010550"
+        yearRrId="hea_c_010551"
+        customLabelClass="m-b-0"
+        nested="true"
+        [(ngModel)]="model.date"
+        label="{{ 'headCT.examination.date.value' | translate }}"
+        name="date"
+      ></rr-month-year-input>
+    </div>
+    <p-radioButton
+      rr-id="hea_c_010552"
+      label="{{ 'headCT.examination.statusEpilepticus.value' | translate }}"
+      name="detailsType"
+      [value]="detailsTypeEnum.StatusEpilepticus"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+      (click)="clearDate()"
+    ></p-radioButton>
+    <p-checkbox
+      name="isRefractoryEpilepsy"
+      [(ngModel)]="model.isRefractoryEpilepsy"
+      label="{{ 'headCT.examination.refractoryEpilepsy.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_010553"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Perioperative)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_0105101">
+      {{ "headCT.examination.perioperative.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_0105102"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Preoperative"
+      label="{{ 'headCT.examination.preoperative.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrContentReset="postinterventionalBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0105103"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Postoperative"
+      label="{{ 'headCT.examination.postoperative.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrContentReset="postinterventionalBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0105104"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Postinterventional"
+      label="{{ 'headCT.examination.postinterventional.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrContentReset="postinterventionalBlock"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <div
+      id="postinterventionalBlock"
+      class="nested-content"
+      [rrDisable]="model.indicationSubType !== indicationSubTypeEnum.Postinterventional"
+    >
+      <p-checkbox
+        name="isVerificationOfShuntPositioning"
+        [(ngModel)]="model.isVerificationOfShuntPositioning"
+        label="{{
+          'headCT.examination.verificationOfShuntPositioning.value' | translate
+        }}"
+        binary="true"
+        rr-id="hea_c_0105105"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.Headache)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_0105106" class="text-break">
+      {{ "headCT.examination.headacheCombinedWith.value" | translate }}
+    </h2>
+    <p-checkbox
+      name="isSubacuteTrauma"
+      [(ngModel)]="model.isSubacuteTrauma"
+      label="{{ 'headCT.examination.subacuteTrauma.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105107"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isExertion"
+      [(ngModel)]="model.isExertion"
+      label="{{ 'headCT.examination.exertion.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105108"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isNeurologicalDeficit"
+      [(ngModel)]="model.isNeurologicalDeficit"
+      label="{{ 'headCT.examination.neurologicalDeficit.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105109"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isNeoplasia"
+      [(ngModel)]="model.isNeoplasia"
+      label="{{ 'headCT.examination.neoplasia.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105110"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isImmuneSupression"
+      [(ngModel)]="model.isImmuneSupression"
+      label="{{ 'headCT.examination.immuneSuppression.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105111"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isPregnacy"
+      [(ngModel)]="model.isPregnancy"
+      label="{{ 'headCT.examination.pregnancy.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105112"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isPapilledema"
+      [(ngModel)]="model.isPapilledema"
+      label="{{ 'headCT.examination.papilledema.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105113"
+    >
+    </p-checkbox>
+  </div>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_0105114" class="text-break">
+      {{ "headCT.examination.course.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_0105115"
+      name="headacheCourseType"
+      [value]="headacheCourseTypeEnum.NewOnset"
+      label="{{ 'headCT.examination.newOnset.value' | translate }}"
+      [(ngModel)]="model.headacheCourseType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0105116"
+      name="headacheCourseType"
+      [value]="headacheCourseTypeEnum.Progressive"
+      label="{{ 'headCT.examination.progressive.value' | translate }}"
+      [(ngModel)]="model.headacheCourseType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="o-radio-list">
+    <h2 rr-id="hea_c_0105117">
+      {{ "headCT.examination.expression.value" | translate }}
+    </h2>
+    <p-checkbox
+      name="isThunderclapHeadache"
+      [(ngModel)]="model.isThunderclapHeadache"
+      label="{{ 'headCT.examination.thunderclapHeadache.value' | translate }}"
+      binary="true"
+      rr-id="hea_c_0105118"
+    >
+    </p-checkbox>
+  </div>
+</div>
+
+<div
+  *ngIf="isFindingType(examinationFindingTypeEnum.OtherIndications)"
+  class="c-col-1 c-pad-l c-sep f-start"
+>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010567">
+      {{ "headCT.examination.otherIndications.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010568"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.SuspicionOf"
+      label="{{ 'headCT.examination.suspicionOf.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010569"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.Exclusion"
+      label="{{ 'headCT.examination.exclusion.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010570"
+      name="indicationSubType"
+      [value]="indicationSubTypeEnum.FollowupExamination"
+      label="{{ 'headCT.examination.followupExamination.value' | translate }}"
+      [(ngModel)]="model.indicationSubType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="o-radio-list m-b-20">
+    <h2 rr-id="hea_c_010571">
+      {{ "headCT.examination.details.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_010572"
+      name="detailsType"
+      [value]="detailsTypeEnum.FocalNeurologicDeficit"
+      label="{{ 'headCT.examination.focalNeurologicDeficit.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010573"
+      name="detailsType"
+      [value]="detailsTypeEnum.ClinicalSymptomInNeedOfClarification"
+      label="{{ 'headCT.examination.clinicalSymptomInNeed.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0105120"
+      name="detailsType"
+      [value]="detailsTypeEnum.ExclusionOfOrganicCorrelate"
+      label="{{ 'headCT.examination.exclusionOfOrganiccorrelate.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010574"
+      name="detailsType"
+      [value]="detailsTypeEnum.AcuteDelirium"
+      label="{{ 'headCT.examination.acuteDelirium.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_010575"
+      name="detailsType"
+      [value]="detailsTypeEnum.IcpIncrease"
+      label="{{ 'headCT.examination.iCPIncrease.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0105119"
+      name="detailsType"
+      [value]="detailsTypeEnum.DiagnosticWorkupOfClarifications"
+      label="{{ 'headCT.examination.diagnosticWorkupOfCalcifications.value' | translate }}"
+      [(ngModel)]="model.detailsType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+</div>

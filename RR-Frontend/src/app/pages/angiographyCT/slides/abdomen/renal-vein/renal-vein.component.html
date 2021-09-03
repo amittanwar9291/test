@@ -1,0 +1,161 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-4 f-vertical col-h-100">
+    <h2 rr-id="ang_c_080202">
+      {{ "angiographyCT.abdomen.localization.value" | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list m-t-13">
+        <p-radioButton
+          rr-id="ang_c_080203"
+          label="{{ 'angiographyCT.abdomen.right.value' | translate }}"
+          name="sideType"
+          [(ngModel)]="model.sideType"
+          [value]="sideType.Right"
+          rrValidation="sideType"
+          rrContentReset="findingDetails"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_080204"
+          label="{{ 'angiographyCT.abdomen.left.value' | translate }}"
+          name="sideType"
+          [(ngModel)]="model.sideType"
+          [value]="sideType.Left"
+          rrValidation="sideType"
+          rrContentReset="findingDetails"
+        ></p-radioButton>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start m-t-13">
+        <div
+          class="o-radio-list"
+          id="findingDetails"
+          *ngIf="model.sideType === sideType.Right || model.sideType === sideType.Left"
+        >
+          <h2 rr-id="ang_c_080379">
+            {{ "angiographyCT.abdomen.finding.value" | translate }}*
+          </h2>
+          <p-checkbox
+            rr-id="ang_c_080380"
+            *ngIf="model.sideType === sideType.Right"
+            name="isAnatomicVariants"
+            [(ngModel)]="model.isAnatomicVariants"
+            rrValidation="isRenalVeinThrombosis isAnatomicVariants"
+            binary="true"
+            label="{{ 'angiographyCT.abdomen.anatomicVariantsRight.value' | translate }}"
+            rrContentReset="anatomicVariantsDetails"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="ang_c_080388"
+            *ngIf="model.sideType === sideType.Left"
+            name="isAnatomicVariants"
+            [(ngModel)]="model.isAnatomicVariants"
+            rrValidation="isRenalVeinThrombosis isAnatomicVariants"
+            binary="true"
+            label="{{ 'angiographyCT.abdomen.anatomicVariantsLeft.value' | translate }}"
+            rrContentReset="anatomicVariantsDetails"
+          ></p-checkbox>
+          <div id="anatomicVariantsDetails">
+            <div class="o-radio-list" [rrDisable]="!model.isAnatomicVariants">
+              <div
+                class="o-radio-list nested-content"
+                *ngIf="model.sideType === sideType.Right"
+              >
+                <p-checkbox
+                  rr-id="ang_c_080381"
+                  name="isMultipleRenalVeins"
+                  [(ngModel)]="model.isMultipleRenalVeins"
+                  binary="true"
+                  label="{{ 'angiographyCT.abdomen.multipleRenalVeins.value' | translate }}"
+                ></p-checkbox>
+              </div>
+            </div>
+            <div
+              class="o-radio-list nested-content"
+              *ngIf="model.sideType === sideType.Left"
+              [rrDisable]="!model.isAnatomicVariants"
+            >
+              <p-checkbox
+                rr-id="ang_c_080390"
+                name="isRetroaortalCourseLeftRenalVein"
+                [(ngModel)]="model.isRetroaortalCourseLeftRenalVein"
+                binary="true"
+                label="{{ 'angiographyCT.abdomen.retroaortalCourseLeftrenalVein.value' | translate }}"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="ang_c_080391"
+                name="isMultipleRenalVeins"
+                [(ngModel)]="model.isMultipleRenalVeins"
+                binary="true"
+                label="{{ 'angiographyCT.abdomen.multipleRenalVeins.value' | translate }}"
+                rrContentReset="multipleRenalVeinsDetails"
+              ></p-checkbox>
+              <div
+                class="o-radio-list nested-content"
+                id="multipleRenalVeinsDetails"
+                [rrDisable]="!model.isMultipleRenalVeins"
+              >
+                <p-checkbox
+                  rr-id="ang_c_080392"
+                  class="text-break"
+                  name="isBifurcatedPreAndRetroarticLeftRenalVein"
+                  [(ngModel)]="model.isBifurcatedPreAndRetroarticLeftRenalVein"
+                  binary="true"
+                  label="{{ 'angiographyCT.abdomen.bifurcatedPreAndRetroartic.value' | translate }}"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+          <p-checkbox
+            rr-id="ang_c_080382"
+            name="isRenalVeinThrombosis"
+            [(ngModel)]="model.isRenalVeinThrombosis"
+            binary="true"
+            rrValidation="isRenalVeinThrombosis isAnatomicVariants"
+            label="{{ 'angiographyCT.abdomen.renalVeinThrombosisRVT.value' | translate }}"
+            rrContentReset="renalVeinThrombosisRVTDetails"
+          ></p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            id="renalVeinThrombosisRVTDetails"
+            [rrDisable]="!model.isRenalVeinThrombosis"
+          >
+            <p-checkbox
+              rr-id="ang_c_080383"
+              name="isDecreasedPerfusion"
+              [(ngModel)]="model.isDecreasedPerfusion"
+              binary="true"
+              label="{{ 'angiographyCT.abdomen.decreasedRenalPerfusion.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="ang_c_080384"
+              name="isCorticalHemorrhages"
+              [(ngModel)]="model.isCorticalHemorrhages"
+              binary="true"
+              label="{{ 'angiographyCT.abdomen.corticalHemorrhages.value' | translate }}"
+            ></p-checkbox>
+            <p rr-id="ang_c_080385" class="m-t-15">
+              {{ 'angiographyCT.abdomen.organSize.value' | translate }}
+            </p>
+            <p-radioButton
+              rr-id="ang_c_080386"
+              name="organSizeType"
+              [(ngModel)]="model.organSizeType"
+              [value]="organSizeType.Enlargement"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.enlargement.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080387"
+              name="organSizeType"
+              [(ngModel)]="model.organSizeType"
+              [value]="organSizeType.ShrunkenKidney"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.shrunkenKidney.value' | translate }}"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical m-t-13"></div>
+      <div class="c-col-1 c-pad-l f-vertical f-start"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="f-horizontal f-start main o-width-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_0402122">
+      {{ "headCT.vessels.venousSinusBrainVeins.value" | translate }}
+    </h2>
+    <p
+      rr-id="hea_c_0402123"
+      rrInfoIcon="hea_c_04_10"
+      rrValidation="cerebralVenousThrombosisLocation"
+    >
+      {{ "headCT.vessels.localization.value" | translate }}*
+    </p>
+    <rr-cerebral-venous-thrombosis-localizer-simple
+      rr-id="hea_c_040293"
+      (click)="openLargeLocalizer(headCTVesselsLocalizersTypeEnum.cerebralVenousThrombosis)"
+      [(ngModel)]="model.cerebralVenousThrombosisLocation"
+      name="cerebralVenousThrombosisLocation"
+      rrValidation="cerebralVenousThrombosisLocation"
+      isLocalizer="true"
+    >
+    </rr-cerebral-venous-thrombosis-localizer-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_0403144">
+      {{ "headCT.vessels.pathology.value" | translate }}*
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_0403145"
+      label="{{'headCT.vessels.partialThrombosis.value' | translate}}"
+      name="pathologyType"
+      rrValidation="pathologyType"
+      [value]="pathologyTypeEnum.PartialThrombosis"
+      [(ngModel)]="model.pathologyType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0403146"
+      label="{{'headCT.vessels.completeThrombosis.value' | translate}}"
+      name="pathologyType"
+      rrValidation="pathologyType"
+      [value]="pathologyTypeEnum.CompleteThrombosis"
+      [(ngModel)]="model.pathologyType"
+    >
+    </p-radioButton>
+    <h2 rr-id="hea_c_0403147" class="m-t-35">
+      {{ "headCT.vessels.associatedFindings2.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_0403148"
+      name="isCongestiveHemorrhage"
+      label="{{'headCT.vessels.congestiveHemorrhage.value' | translate}}"
+      binary="true"
+      rrContentReset="petechialHemorrhagesContainer"
+      [(ngModel)]="model.isCongestiveHemorrhage"
+    >
+    </p-checkbox>
+    <div
+      class="nested-content o-radio-list"
+      id="petechialHemorrhagesContainer"
+      [rrDisable]="!model.isCongestiveHemorrhage"
+    >
+      <p-checkbox
+        rr-id="hea_c_0403149"
+        name="isPetechialHemorrhages"
+        label="{{'headCT.vessels.petechialHemorrhages.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPetechialHemorrhages"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="hea_c_0403150"
+      name="isEctasiaOfTheUpstreamVeins"
+      label="{{'headCT.vessels.ectasiaOfTheUpstreamVeins.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isEctasiaOfTheUpstreamVeins"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_0403151"
+      name="isSAH"
+      label="{{'headCT.vessels.SAH.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSAH"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_0403152"
+      name="isCerebralEdema"
+      label="{{'headCT.vessels.cerebralEdema.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isCerebralEdema"
+    >
+    </p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_0404191" rrInfoIcon="hea_c_04_12">
+      {{ "headCT.vessels.differentialDiagnosis.value" | translate }}
+    </h2>
+    <p-dropdown
+      styleClass="ui-brown-box o-width-100"
+      [options]="w017"
+      name="vesselsDiagnosisType"
+      rr-id="hea_c_0404192"
+      placeholder="{{'shared.pleaseSelect' | translate}}"
+      rrDropdownClear
+      [(ngModel)]="model.vesselsDiagnosisType"
+    >
+    </p-dropdown>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      [elementsRrIds]="referencePictureElementsRrIds"
+      [pictureFileType]="'ImageFile'"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+</div>

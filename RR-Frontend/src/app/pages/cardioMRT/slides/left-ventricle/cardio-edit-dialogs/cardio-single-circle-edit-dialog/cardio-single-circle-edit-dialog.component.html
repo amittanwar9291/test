@@ -1,0 +1,41 @@
+<div
+  class="f-vertical f-space-between col-h-100 localizer-dialog-small"
+  [ngStyle]="{ 'zoom': zoom }"
+  rrBlockForm
+>
+  <div class="f-vertical max-h-240">
+    <div class="f-horizontal f-space-between">
+      <h1 [attr.rr-id]="localizerConfig.headerRrID" class="header-text">
+        {{ localizerConfig.headerTranslationKey | translate }}
+      </h1>
+      <rr-close-button class="close-button" (buttonPressed)="close()">
+      </rr-close-button>
+    </div>
+    <div class="f-horizontal f-space-between" style="max-height: 168px;">
+      <p
+        [attr.rr-id]="localizerConfig.instructionRrID"
+        class="text-break instruction-text"
+      >
+        {{ localizerConfig.instructionTranslationKey | translate }}
+      </p>
+      <rr-cardio-color-picker
+        class="m-t-5"
+        style="position: relative;"
+        [sectionTypes]="localizerConfig.colorPickerConfig"
+        (sectionSelected)="onToggleSectionType($event)"
+      >
+      </rr-cardio-color-picker>
+    </div>
+  </div>
+
+  <div class="localizer m-b-19">
+    <rr-cardio-circle-editable-multicolor-localizer
+      [attr.rr-id]="localizerConfig.localizerRrID"
+      [isDisabled]="!activeSectionType"
+      [selectionData]="selectionData"
+      [showVessels]="localizerConfig.showVessels"
+      (sectionToggled)="onToggleSection($event)"
+    >
+    </rr-cardio-circle-editable-multicolor-localizer>
+  </div>
+</div>

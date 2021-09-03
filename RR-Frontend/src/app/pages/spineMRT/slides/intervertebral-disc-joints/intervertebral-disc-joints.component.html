@@ -1,0 +1,103 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div *ngIf="largeLocalizerConfig" style="margin-top: -100px">
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="findingHandler.currentItem.spineLocation"
+      [logicType]="largeLocalizerConfig.logicType"
+      (close)="closeLargeLocalizer()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      [localizationDescription]="largeLocalizerConfig.localizationDescription"
+    >
+    </rr-spine-complex>
+  </div>
+  <div *ngIf="!largeLocalizerConfig" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_m_050103" class="m-b-15">
+        {{ 'spineMRT.disc.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="spi_m_050104"
+        label="{{ 'spineMRT.disc.intervertebralDiscJointsInconspicuous.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_m_050105"
+        label="{{'spineMRT.disc.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="dynamicConfig"
+        [attr.name]="'findings'"
+        [customLabelCalculator]="customLabelCalculator"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="!isCurrentItem([intervertebralDiscJointsFindingTypesEnum.None])"
+          rr-id="spi_m_050201"
+        >
+          {{ 'spineMRT.disc.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.None])"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-annulus-fissure
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.AnnularFissure])"
+        [model]="findingHandler.currentItem"
+      ></rr-annulus-fissure>
+      <rr-degeneration
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.Degeneration])"
+        [model]="findingHandler.currentItem"
+      ></rr-degeneration>
+      <rr-protrusion-extrusion-migration-sequestration
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.Protrusion, intervertebralDiscJointsFindingTypesEnum.Extrusion, intervertebralDiscJointsFindingTypesEnum.Migration, intervertebralDiscJointsFindingTypesEnum.Sequestration])"
+        [model]="findingHandler.currentItem"
+      ></rr-protrusion-extrusion-migration-sequestration>
+      <rr-facet-joint-arthrosis
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.FacetJointArthrosis])"
+        [model]="findingHandler.currentItem"
+      ></rr-facet-joint-arthrosis>
+      <rr-erosive-osteochondrosis
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.ErosiveIntervertebralOsteochondrosis])"
+        [model]="findingHandler.currentItem"
+      ></rr-erosive-osteochondrosis>
+      <rr-inflammatory
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.InflammatoryOrSpondylodiscitis])"
+        [model]="findingHandler.currentItem"
+      ></rr-inflammatory>
+      <rr-trauma
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.Trauma])"
+        [model]="findingHandler.currentItem"
+      ></rr-trauma>
+      <rr-rheumatism
+        *ngIf="isCurrentItem([intervertebralDiscJointsFindingTypesEnum.RheumatoidArthritis])"
+        [model]="findingHandler.currentItem"
+      ></rr-rheumatism>
+    </div>
+  </div>
+</form>

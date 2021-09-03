@@ -1,0 +1,252 @@
+<div class="f-horizontal main-container  o-width-100 col-h-100">
+  <div class="c-col-1 c-pad m-t-15 m-b-15 o-radio-list">
+    <div
+      class="f-vertical f-start o-radio-list m-l-10"
+      [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+    >
+      <h2 rr-id="hea_m_050203">
+        {{'headMRT.meninges.differentialDiagnosis1.value' | translate}}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="hea_m_050204"
+        name="massDifferentialDiagnosisLocalization"
+        group="true"
+        [diagnosisNumber]="1"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.massDifferentialDiagnosisLocalization"
+        [parentViewModel]="model"
+        rrValidation="massDifferentialDiagnosisLocalization"
+        (selectionChanged)="resetDifferentialDiagnosisDependantModel1()"
+        isActiveOnIKnow="true"
+      ></rr-differential-diagnosis-dropdown>
+      <div
+        [rrDisable]="model.massDifferentialDiagnosisLocalization === meningesMassDiagnosisType.None"
+        class="o-radio-list"
+      >
+        <p-checkbox
+          rr-id="hea_m_050205"
+          class="m-b-10"
+          name="isHistologyKnown"
+          label="{{
+          'headMRT.meninges.histologyKnown.value' | translate
+        }}"
+          binary="true"
+          [(ngModel)]="model.isHistologyKnown"
+          rrContentReset="isHistologyKnownBlock"
+        ></p-checkbox>
+        <div
+          id="isHistologyKnownBlock"
+          [rrDisable]="!model.isHistologyKnown"
+          class="o-radio-list m-l-30"
+        >
+          <p-radioButton
+            rr-id="hea_m_050206"
+            class="m-b-10"
+            label="{{ 'headMRT.meninges.benign.value' | translate }}"
+            name="histologyKnownType"
+            [value]="histologyKnownType.Benign"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_050207"
+            class="m-b-10"
+            label="{{ 'headMRT.meninges.malignant.value' | translate }}"
+            name="histologyKnownType"
+            [value]="histologyKnownType.Malignant"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="m-l-10">
+      <h2 rr-id="hea_m_050208" class="m-b-8 m-t-38">
+        {{ "headMRT.meninges.side.value" | translate }}*
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050209"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.right.value' | translate }}"
+        name="isRight"
+        binary="true"
+        [(ngModel)]="model.isRight"
+        rrValidation="isRight isLeft isMedian"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050210"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.left.value' | translate }}"
+        name="isLeft"
+        binary="true"
+        [(ngModel)]="model.isLeft"
+        rrValidation="isRight isLeft isMedian"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050211"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.median.value' | translate }}"
+        name="isMedian"
+        binary="true"
+        [(ngModel)]="model.isMedian"
+        rrValidation="isRight isLeft isMedian"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-45 m-b-15 o-radio-list">
+    <div class="m-l-10">
+      <h2 rr-id="hea_m_050302" class="m-b-8 m-t-5">
+        {{ "headMRT.meninges.region.value" | translate }}*
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050303"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.frontal.value' | translate }}"
+        name="isFrontal"
+        binary="true"
+        [(ngModel)]="model.isFrontal"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050304"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.temporal.value' | translate }}"
+        name="isTemporal"
+        binary="true"
+        [(ngModel)]="model.isTemporal"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050305"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.parietal.value' | translate }}"
+        name="isParietal"
+        binary="true"
+        [(ngModel)]="model.isParietal"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050306"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.occipital.value' | translate }}"
+        name="isOccipital"
+        binary="true"
+        [(ngModel)]="model.isOccipital"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050307"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.infratentorial.value' | translate }}"
+        name="isInfratentorial"
+        binary="true"
+        [(ngModel)]="model.isInfratentorial"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-45 m-b-15 o-radio-list">
+    <div class="m-l-10">
+      <h2 rr-id="hea_m_050402" class="m-b-8 m-t-5">
+        {{ "headMRT.meninges.details.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050403"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.falx.value' | translate }}"
+        name="isFalx"
+        binary="true"
+        [(ngModel)]="model.isFalx"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050404"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.tentorium.value' | translate }}"
+        name="isTentorium"
+        binary="true"
+        [(ngModel)]="model.isTentorium"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050405"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.laminaCribrosa.value' | translate }}"
+        name="isLaminaCribrosa"
+        binary="true"
+        [(ngModel)]="model.isLaminaCribrosa"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050406"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.opticNerveSheath.value' | translate }}"
+        name="isOpticNerveSheath"
+        binary="true"
+        [(ngModel)]="model.isOpticNerveSheath"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050407"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.intrasellar.value' | translate }}"
+        name="isIntrasellar"
+        binary="true"
+        [(ngModel)]="model.isIntrasellar"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050408"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.posteriorClinoidProcess.value' | translate }}"
+        name="isPosteriorClinoidProcess"
+        binary="true"
+        [(ngModel)]="model.isPosteriorClinoidProcess"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050409"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.sphenoidWing.value' | translate }}"
+        name="isSphenoidWing"
+        binary="true"
+        [(ngModel)]="model.isSphenoidWing"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050410"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.cerebellopontineAngle.value' | translate }}"
+        name="isCerebellopontineAngle"
+        binary="true"
+        [(ngModel)]="model.isCerebellopontineAngle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050411"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.sulcusSigmoideus.value' | translate }}"
+        name="isSulcusSigmoideus"
+        binary="true"
+        [(ngModel)]="model.isSulcusSigmoideus"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050412"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.trigoneOfTheLateral.value' | translate }}"
+        name="isTrigoneOfTheLateralVentricle"
+        binary="true"
+        [(ngModel)]="model.isTrigoneOfTheLateralVentricle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050413"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.insularCistern.value' | translate }}"
+        name="isInsularCistern"
+        binary="true"
+        [(ngModel)]="model.isInsularCistern"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050414"
+        class="m-b-10"
+        label="{{ 'headMRT.meninges.foramenMagnum.value' | translate }}"
+        name="isForamenMagnum"
+        binary="true"
+        [(ngModel)]="model.isForamenMagnum"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l m-t-15 m-b-15 o-radio-list"></div>
+</div>

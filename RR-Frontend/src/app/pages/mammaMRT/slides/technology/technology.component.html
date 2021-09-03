@@ -1,0 +1,145 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r">
+      <rr-cm-reinforced-card
+        name="cmReinforcedType"
+        [(ngModel)]="model.cmReinforcedType"
+        (click)="activateSequencePanel(false)"
+        (changeInSubcomponent)="onContrastEnhancedChange()"
+        [isDisabled]="isSequencePanelActive"
+        validationObjects="cmSideEffects"
+      ></rr-cm-reinforced-card>
+      <rr-sequences-card
+        name="sequencesType"
+        [(ngModel)]="model.sequencesType"
+        (click)="activateSequencePanel(true)"
+        [mode]="moduleTypes.MRI"
+        [isDisabled]="!isSequencePanelActive"
+        [isMandatory]="false"
+        (changeInSubcomponent)="clearSequences($event)"
+      ></rr-sequences-card>
+      <div *ngIf="isSequencePanelActive" class="o-radio-list m-t-31">
+        <h2 rr-id="uni_x_030111">
+          {{ 'shared-templates.technology.magneticFieldStrength.value' |
+          translate }}
+        </h2>
+        <p-radioButton
+          rr-id="uni_x_030112"
+          label="{{ 'shared-templates.technology.oneAndHalfT.value' | translate }}"
+          name="magneticFieldStrengthType"
+          [value]="magneticFieldStrengthType.OneAndHalfT"
+          [(ngModel)]="model.magneticFieldStrengthType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="uni_x_030113"
+          label="{{ 'shared-templates.technology.threeT.value' | translate }}"
+          name="magneticFieldStrengthType"
+          [value]="magneticFieldStrengthType.ThreeT"
+          [(ngModel)]="model.magneticFieldStrengthType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!isSequencePanelActive">
+      <rr-contrast-medium-section [model]="model">
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="uni_x_030219">
+            {{ 'mammaMRT.technology.contrastInjection.value' | translate }}
+          </h2>
+          <p-checkbox
+            rr-id="uni_x_030218"
+            label="{{ 'mammaMRT.technology.automatedContrastInjection.value' | translate }}"
+            binary="true"
+            name="isAutomatedCAInjection"
+            [(ngModel)]="model.isAutomatedCAInjection"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_x_030217"
+            label="{{ 'mammaMRT.technology.computerAidedAnalysisOfCAdynamics.value' | translate }}"
+            binary="true"
+            name="isComputerAidedAnalysisOfCADynamics"
+            [(ngModel)]="model.isComputerAidedAnalysisOfCADynamics"
+            labelStyleClass="text-break"
+          >
+          </p-checkbox>
+        </div>
+      </rr-contrast-medium-section>
+    </ng-container>
+
+    <ng-container *ngIf="isSequencePanelActive">
+      <div class="c-col-3 f-horizontal c-pad c-sep">
+        <rr-sequences-section
+          [model]="model"
+          [sequenceHandlerRef]="sequenceHandler"
+          [cspPreferences]="centerspecificPreferencesData"
+          (sequencesFindingColumnChanged)="changeSequencesTypeToIndividual()"
+        >
+          <rr-mamma-mrt-sequence
+            class="col-h-100"
+            [model]="sequenceHandler.currentItem"
+            [itemIndex]="sequenceHandler.currentItemIndex"
+            [disabled]="isSequenceColumnDisabled()"
+            (changeInSubcomponent)="changeSequencesTypeToIndividual()"
+            [cmReinforcedType]="model.cmReinforcedType"
+          >
+          </rr-mamma-mrt-sequence>
+        </rr-sequences-section>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <div class="f-vertical o-radio-list">
+          <h1 rr-id="uni_x_030508" class="m-b-22">
+            {{ 'shared-templates.technology.limitedQuality.value' | translate }}
+          </h1>
+          <p-checkbox
+            rr-id="uni_x_030509"
+            name="isMotion"
+            labelStyleClass="ui-thin-label"
+            label="{{ 'shared-templates.technology.motion.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isMotion"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_x_030511"
+            name="isPulsationOrBreathing"
+            labelStyleClass="ui-thin-label"
+            label="{{ 'shared-templates.technology.pulsationBreathing.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isPulsationOrBreathing"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_y_030502"
+            name="isSusceptibilityArtifacts"
+            labelStyleClass="ui-thin-label"
+            label="{{ 'shared-templates.technology.susceptibilityArtifacts.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSusceptibilityArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_x_030520"
+            name="isIncorrectSubtraction"
+            labelStyleClass="ui-thin-label"
+            label="{{ 'shared-templates.technology.failedSubtraction.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isIncorrectSubtraction"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_x_030521"
+            name="isOther"
+            labelStyleClass="ui-thin-label"
+            label="{{ 'shared-templates.technology.other.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isOther"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>

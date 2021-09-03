@@ -1,0 +1,42 @@
+<rr-report-list-header-row [state]="state"></rr-report-list-header-row>
+
+<p-scrollPanel #scrollPanel styleClass="reportlist-table-scrollpanel">
+  <ng-container *ngIf="isList()">
+    <rr-report-list-entry-row
+      *ngFor="let report of reports"
+      [report]="report"
+      [state]="state"
+      [isCloneable]="isCloneable"
+      [isDialog]="isDialog"
+      (cloneReport)="onCloneReport(report)"
+      (openReport)="onOpenReport($event)"
+      (showPatientOverview)="onShowPatientOverview(report)"
+    ></rr-report-list-entry-row>
+  </ng-container>
+
+  <ng-container *ngIf="isCloneable && isClone()">
+    <rr-report-list-entry-row
+      [report]="clonedModel"
+      [state]="state"
+      [isCloneable]="isCloneable"
+      [isDialog]="isDialog"
+      (showPatientOverview)="onShowPatientOverview(clonedModel)"
+    ></rr-report-list-entry-row>
+  </ng-container>
+
+  <ng-container
+    *ngIf="
+      (isCreational && isNew()) ||
+      (isCloneable && isClone()) ||
+      (isSearchable && isSearch())
+    "
+  >
+    <rr-report-list-edit-row
+      [editModel]="editModel"
+      [state]="state"
+      (finishEditing)="onFinishEditing($event)"
+    ></rr-report-list-edit-row>
+  </ng-container>
+</p-scrollPanel>
+
+<rr-report-list-pagination [state]="state"></rr-report-list-pagination>

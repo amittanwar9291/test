@@ -1,0 +1,89 @@
+<div class="f-fill-available-space f-vertical">
+  <div class="f-vertical m-b-10">
+    <h2 rr-id="mam_m_020219-1" class="m-b-3">
+      {{ "mammaMRT.anamnesis.familyPerson.value" | translate }}
+    </h2>
+    <h2 rr-id="mam_m_020220" class="m-b-12">
+      {{ selectedPerson }}
+    </h2>
+    <h2 rr-id="mam_m_020221">
+      {{'mammaMRT.anamnesis.medicalHistory.value' | translate}}*
+    </h2>
+  </div>
+  <p-checkbox
+    rr-id="mam_m_020203"
+    name="isBreastCancer"
+    label="{{ 'mammaMRT.anamnesis.breastCancer.value' | translate }}"
+    [(ngModel)]="model.isBreastCancer"
+    labelStyleClass="ui-fat-label"
+    binary="true"
+    rrContentReset="isBreastCancerBlock"
+    class="m-b-15"
+    rrValidation="isBreastCancer isOvarianCancer"
+  >
+  </p-checkbox>
+  <div id="isBreastCancerBlock" [rrDisable]="!model.isBreastCancer">
+    <p-dropdown
+      rr-id="mam_m_020204"
+      styleClass="o-width-100 ui-brown-box"
+      name="model.familyPerson1.mammaCancerLocation"
+      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      [options]="sides"
+      rrDropdownClear
+      [(ngModel)]="model.breastCarcinomaType"
+    >
+    </p-dropdown>
+    <p rr-id="mam_m_020205" class="m-t-12">
+      {{ "mammaMRT.anamnesis.age.value" | translate }}
+    </p>
+    <div class="f-start f-vertical o-width-50">
+      <p-dropdown
+        rr-id="mam_m_020206"
+        [virtualScroll]="false"
+        itemSize="20"
+        styleClass="o-width-100 ui-brown-box"
+        name="mammaCancerYearOfAge1"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        #mammaKarziom
+        (onShow)="center45Value(mammaKarziom)"
+        [options]="years"
+        rrDropdownClear
+        [(ngModel)]="model.breastCarcinomaAge"
+      >
+      </p-dropdown>
+    </div>
+  </div>
+  <p-checkbox
+    rr-id="mam_m_020207"
+    name="isOvarianCancer"
+    label="{{ 'mammaMRT.anamnesis.ovarianCancer.value' | translate }}"
+    [(ngModel)]="model.isOvarianCancer"
+    labelStyleClass="ui-fat-label"
+    binary="true"
+    rrContentReset="isOvarianCancerBlock"
+    class="m-b-8 m-t-32"
+    rrValidation="isBreastCancer isOvarianCancer"
+  >
+  </p-checkbox>
+  <div id="isOvarianCancerBlock" [rrDisable]="!model.isOvarianCancer">
+    <p rr-id="mam_m_020208">
+      {{ "mammaMRT.anamnesis.age.value" | translate }}
+    </p>
+    <div class="f-start f-vertical o-width-50">
+      <p-dropdown
+        rr-id="mam_m_020209"
+        [virtualScroll]="false"
+        itemSize="20"
+        styleClass="o-width-100 ui-brown-box"
+        name="mammaCancerYearOfAge2"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        #familyPerson1CancerYearOfAge
+        (onShow)="center45Value(familyPerson1CancerYearOfAge)"
+        [options]="years"
+        rrDropdownClear
+        [(ngModel)]="model.ovarianCancerAge"
+      >
+      </p-dropdown>
+    </div>
+  </div>
+</div>

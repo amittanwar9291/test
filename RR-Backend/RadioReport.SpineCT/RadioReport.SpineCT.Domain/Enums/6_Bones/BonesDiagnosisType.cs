@@ -1,0 +1,43 @@
+namespace RadioReport.SpineCT.Domain.Enums.Bones
+{
+    public enum BonesDiagnosisType : byte
+    {
+        None = 0,
+        BenignLesionNotFurtherClassified = 1,
+        MalignantLesionNotFurtherClassified = 2,
+        DignityUnclear = 3,
+        IntraosseousLipoma = 4,
+        Hemangioma = 5,
+        IntraosseousCyst = 6,
+        AneurysmaticBoneCyst = 7,
+        EosinophilicGranuloma = 8,
+        BoneIslandOrEnostosis = 9, 
+        FibrousDysplasia = 10,
+        OsteoidOsteoma = 11,
+        Osteoblastoma = 12,
+        Osteochondroma = 13,
+        Chondroblastoma = 14,
+        Enchondroma = 15,
+        OsteolyticBoneMetastasis = 16,
+        OsteoblasticBoneMetastasis = 17,
+        OsteolyticAndOsteoblasticBoneMetastasis = 18,
+        Plasmocytoma = 19,
+        MultipleMyeloma = 20,
+        EwingsSarcoma = 21,
+        Osteosarcoma = 22,
+        Chondrosarcoma = 23,
+        Chordoma = 24,
+        Lymphoma = 25,
+        GiantCellTumor = 26,
+        SchmorlNodes  = 27,
+        Osteomyelitis = 28,
+        BoneInfarction = 29,
+        BenignLesionNotFurtherSpecified = 30,
+        MalignantLesionNotFurtherSpecified = 31,
+        OsteolyticMetastasis = 32,
+        Metastasis = 33,
+        HeightLossStandardVariant = 34,
+        ScheuermannsDisease = 35,
+        VertebraRemodelling = 36
+    }
+}

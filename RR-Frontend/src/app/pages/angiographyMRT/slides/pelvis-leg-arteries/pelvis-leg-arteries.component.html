@@ -1,0 +1,90 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <div class="f-vertical f-start o-radio-list col-h-100">
+        <h1 rr-id="ang_m_080103" class="p-b-7">
+          {{'angiographyMRT.pelvisLegArteries.finding.value' | translate}}*
+        </h1>
+        <p-radioButton
+          rr-id="ang_m_080104"
+          label="{{'angiographyMRT.pelvisLegArteries.noAbnormalFindingsIn.value' | translate}}"
+          name="areFindings"
+          class="text-break m-b-2"
+          [value]="areFindingsEnum.No"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_m_080105"
+          label="{{'angiographyMRT.pelvisLegArteries.finding.value' | translate}}"
+          class="p-t-5 p-b-7"
+          name="areFindings"
+          [value]="areFindingsEnum.Yes"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDynamicPartDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [validationName]="'findings'"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <div class="f-vertical f-space-between c-pad-l">
+      <div class="header-height f-vertical f-start">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== 'None'"
+          rr-id="ang_m_080201"
+        >
+          {{'angiographyMRT.pelvisLegArteries.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.None)"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-standard-variants
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.AnatomicVariants)"
+          [model]="findingHandler.currentItem"
+        ></rr-standard-variants>
+
+        <rr-arteriosclerotic-pavk
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.ArterioscleroticPAVK)"
+          [model]="findingHandler.currentItem"
+        ></rr-arteriosclerotic-pavk>
+
+        <rr-aneurysm
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.Aneurysm)"
+          [model]="findingHandler.currentItem"
+        ></rr-aneurysm>
+
+        <rr-non-arteriosclerotic-pavk
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.NonArterioscleroticPAVK)"
+          [model]="findingHandler.currentItem"
+        ></rr-non-arteriosclerotic-pavk>
+
+        <rr-after-therapy
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.AfterTherapy)"
+          [model]="findingHandler.currentItem"
+        ></rr-after-therapy>
+      </div>
+    </div>
+  </div>
+</form>

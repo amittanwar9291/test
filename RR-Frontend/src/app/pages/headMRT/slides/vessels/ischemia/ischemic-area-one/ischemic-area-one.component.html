@@ -1,0 +1,382 @@
+<div class="f-horizontal main-container col-h-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15  o o-radio-list">
+    <h2 rr-id="hea_m_040213">
+      {{ 'headMRT.vessels.patternTwo.value' | translate }}
+    </h2>
+    <div class="o-radio-list m-b-30" id="pattern">
+      <p-radioButton
+        rr-id="hea_m_040214"
+        name="patternType"
+        [(ngModel)]="model.patternType"
+        [value]="patternTypeEnum.Lacunary"
+        rrContentReset="lacunaryCheckedContainer territorialCheckedContainer borderZoneCheckedContainer"
+        rrUnClickRadio
+        rrInfoIcon="hea_m_04_02"
+        label="{{ 'headMRT.vessels.lacunary.value' | translate }}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040215"
+        name="patternType"
+        [(ngModel)]="model.patternType"
+        [value]="patternTypeEnum.Territorial"
+        rrUnClickRadio
+        rrContentReset="lacunaryCheckedContainer territorialCheckedContainer borderZoneCheckedContainer"
+        label="{{'headMRT.vessels.territorial.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040216"
+        name="patternType"
+        [(ngModel)]="model.patternType"
+        [value]="patternTypeEnum.BorderZone"
+        rrContentReset="lacunaryCheckedContainer territorialCheckedContainer borderZoneCheckedContainer"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.borderZone.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040217"
+        name="patternType"
+        [(ngModel)]="model.patternType"
+        [value]="patternTypeEnum.Cortical"
+        rrContentReset="lacunaryCheckedContainer territorialCheckedContainer borderZoneCheckedContainer"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.cortical.value' | translate }}"
+      >
+      </p-radioButton>
+      <div
+        id="lacunaryCheckedContainer"
+        class="nested-content o-radio-list"
+        *ngIf="model.patternType === patternTypeEnum.Lacunary"
+      >
+        <p-checkbox
+          rr-id="hea_m_040218"
+          name="isPerifocalGliosis"
+          [(ngModel)]="model.isPerifocalGliosis"
+          binary="true"
+          label="{{'headMRT.vessels.perifocalGliosis.value'| translate}}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040219"
+          name="isEtatLacunaire"
+          [(ngModel)]="model.isEtatLacunaire"
+          binary="true"
+          rrInfoIcon="hea_m_04_03"
+          label="{{'headMRT.vessels.étatLacunaire.value'| translate}}"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        id="territorialCheckedContainer"
+        class="nested-content o-radio-list"
+        *ngIf="model.patternType === patternTypeEnum.Territorial"
+      >
+        <p-checkbox
+          rr-id="hea_m_040222"
+          name="isCortexWedgeShapedConfiguration"
+          [(ngModel)]="model.isCortexWedgeShapedConfiguration"
+          binary="true"
+          label="{{'headMRT.vessels.wedgeshapedConfiguration.value'| translate}}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040223"
+          name="isWhiteMatterAffected"
+          [(ngModel)]="model.isWhiteMatterAffected"
+          binary="true"
+          label="{{'headMRT.vessels.whiteMatterAffected.value'| translate}}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040224"
+          name="isCortexAffected"
+          [(ngModel)]="model.isCortexAffected"
+          binary="true"
+          label="{{'headMRT.vessels.cortexAffected.value'| translate}}"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        id="borderZoneCheckedContainer"
+        class="nested-content o-radio-list"
+        *ngIf="model.patternType === patternTypeEnum.BorderZone"
+      >
+        <p-checkbox
+          rr-id="hea_m_040225"
+          name="isStringOfPearlsAspect"
+          [(ngModel)]="model.isStringOfPearlsAspect"
+          binary="true"
+          label="{{'headMRT.vessels.stringOfPearlsAspect.value'| translate}}"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <h2
+      rr-id="hea_m_040220"
+      class="m-t-30 m-b-15"
+      rrInfoIcon="hea_m_04_15"
+      [infoIconPdfLandscape]="true"
+    >
+      {{ 'headMRT.vessels.signalT2FLAIR.value' | translate }}
+    </h2>
+    <rr-slider-number-triple-input
+      rr-id="hea_m_040221"
+      name="signalT2Flare"
+      [(ngModel)]="model.signalT2Flare"
+      class="sliders-z-index"
+    ></rr-slider-number-triple-input>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-list m-t-15 m-b-15">
+    <div class="o-radio-list" [rrDisable]="!isDWIInAnySequence">
+      <h2
+        rr-id="hea_m_040302"
+        rrInfoIcon="hea_m_04_04"
+        [rrDisable]="!isDWIInAnySequence"
+      >
+        {{ 'headMRT.vessels.diffusionImaging.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_040303"
+        class="text-break"
+        name="diffusionImagingType"
+        [(ngModel)]="model.diffusionImagingType"
+        [value]="diffusionImagingTypeEnum.NoDiffusionRestriction"
+        rrContentReset="diffusionRestrictionContainer"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.noDiffusionRestriction.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040304"
+        class="text-break"
+        name="diffusionImagingType"
+        [(ngModel)]="model.diffusionImagingType"
+        [value]="diffusionImagingTypeEnum.DiffusionRestriction"
+        rrContentReset="diffusionRestrictionContainer"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.diffusionRestriction.value' | translate }}"
+      >
+      </p-radioButton>
+      <div
+        class="nested-content"
+        id="diffusionRestrictionContainer"
+        [rrDisable]="model.diffusionImagingType !==diffusionImagingTypeEnum.DiffusionRestriction"
+      >
+        <p-radioButton
+          rr-id="hea_m_040305"
+          name="diffusionRestrictionType"
+          [(ngModel)]="model.diffusionRestrictionType"
+          [value]="diffusionRestrictionTypeEnum.LessThanThird"
+          rrUnClickRadio
+          label="{{'headMRT.vessels.ofTheAffectedvascularTerritoryOne.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_040306"
+          name="diffusionRestrictionType"
+          [(ngModel)]="model.diffusionRestrictionType"
+          [value]="diffusionRestrictionTypeEnum.MoreThanThird"
+          rrUnClickRadio
+          label="{{'headMRT.vessels.ofTheAffectedvascularTerritoryTwo.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-radioButton>
+      </div>
+      <h3 rr-id="hea_m_040307">
+        {{ 'headMRT.vessels.dWISignal.value' | translate }}
+      </h3>
+      <p-radioButton
+        rr-id="hea_m_040308"
+        name="dWISignalType"
+        [(ngModel)]="model.dwiSignalType"
+        [value]="dwiSignalTypeEnum.Increased"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.increased.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040309"
+        name="dWISignalType"
+        [(ngModel)]="model.dwiSignalType"
+        [value]="dwiSignalTypeEnum.Decreased"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.decreased.value' | translate }}"
+      >
+      </p-radioButton>
+      <h3 rr-id="hea_m_040310">
+        {{ 'headMRT.vessels.aDCMap.value' | translate }}
+      </h3>
+      <p-radioButton
+        rr-id="hea_m_040311"
+        name="aDCMapType"
+        [(ngModel)]="model.adcMapType"
+        [value]="adcMapTypeEnum.Increased"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.increased.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040312"
+        name="aDCMapType"
+        [(ngModel)]="model.adcMapType"
+        [value]="adcMapTypeEnum.Decreased"
+        rrUnClickRadio
+        label="{{'headMRT.vessels.decreased.value' | translate }}"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <h2 rr-id="hea_m_040416" rrInfoIcon="hea_m_04_05" class="m-b-10">
+      {{ 'headMRT.vessels.fLAIRDWIRatio.value' | translate }}
+    </h2>
+    <div class="o-radio-list m-b-24">
+      <p-radioButton
+        rr-id="hea_m_040417"
+        name="fLAIRDWIRatioType"
+        [(ngModel)]="model.flairdwiRatioType"
+        [value]="fLAIRDWIRatioTypeEnum.NoFLAIRDWIMismatch"
+        rrUnClickRadio
+        label="{{ 'headMRT.vessels.noFLAIRDWIMismatch.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040418"
+        name="fLAIRDWIRatioType"
+        [(ngModel)]="model.flairdwiRatioType"
+        [value]="fLAIRDWIRatioTypeEnum.HyperintenseAreaLessThanDiffusionRestrictedArea"
+        rrUnClickRadio
+        labelStyleClass="text-break"
+        label="{{ 'headMRT.vessels.fLAIRHyperintenseAreaDiffusionOne.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        class="text-break"
+        rr-id="hea_m_040419"
+        name="fLAIRDWIRatioType"
+        [(ngModel)]="model.flairdwiRatioType"
+        [value]="fLAIRDWIRatioTypeEnum.HyperintenseAreaEqualDiffusionRestrictedArea"
+        rrUnClickRadio
+        label="{{ 'headMRT.vessels.fLAIRHyperintenseAreaDiffusionTwo.value' | translate }}"
+      >
+      </p-radioButton>
+    </div>
+    <h2 rr-id="hea_m_040420" class="m-t-23 m-b-15">
+      {{ 'headMRT.vessels.t1wSignal.value' | translate }}
+    </h2>
+    <rr-slider-number-triple-input
+      rr-id="hea_m_040421"
+      name="signalT1w"
+      [(ngModel)]="model.signalT1w"
+      class="sliders-z-index"
+    ></rr-slider-number-triple-input>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad-l m-t-15 m-b-15 o-radio-list"
+    [rrDisable]="!isContrastEnhanced"
+  >
+    <h2 rr-id="hea_m_040502">
+      {{ 'headMRT.vessels.mRPerfusion.value' | translate }}
+    </h2>
+    <div class="o-radio-list">
+      <p-radioButton
+        rr-id="hea_m_040503"
+        name="mrPerfusionType"
+        [(ngModel)]="model.mrPerfusionType"
+        [value]="mRPerfusionTypeEnum.Normal"
+        rrUnClickRadio
+        rrContentReset="pathologicalFindingsContainer"
+        label="{{ 'headMRT.vessels.normal.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040504"
+        name="mrPerfusionType"
+        [(ngModel)]="model.mrPerfusionType"
+        [value]="mRPerfusionTypeEnum.PathologicalFindings"
+        rrContentReset="pathologicalFindingsContainer"
+        rrUnClickRadio
+        label="{{ 'headMRT.vessels.pathologicalFindings.value' | translate }}"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040505"
+        name="mrPerfusionType"
+        [(ngModel)]="model.mrPerfusionType"
+        [value]="mRPerfusionTypeEnum.NotEvaluable"
+        rrUnClickRadio
+        rrContentReset="pathologicalFindingsContainer"
+        label="{{ 'headMRT.vessels.notEvaluable.value' | translate }}"
+      >
+      </p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="pathologicalFindingsContainer"
+        [rrDisable]="model.mrPerfusionType !==mRPerfusionTypeEnum.PathologicalFindings"
+      >
+        <p-checkbox
+          class="p-r-40"
+          rr-id="hea_m_040506"
+          name="isRelativeReductionCBFCBV"
+          binary="true"
+          [(ngModel)]="model.isRelativeReductionCBFCBV"
+          rrUnClickRadio
+          label="{{'headMRT.vessels.relativeReductionofCBFAnd.value'| translate}}"
+          labelStyleClass="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040507"
+          rrInfoIcon="hea_m_04_06"
+          name="isProlongationOfMTT"
+          binary="true"
+          [(ngModel)]="model.isProlongationOfMTT"
+          rrUnClickRadio
+          label="{{'headMRT.vessels.prolongationOfMTT.value'| translate}}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040508"
+          name="isProlongationOfTTP"
+          binary="true"
+          [(ngModel)]="model.isProlongationOfTTP"
+          rrUnClickRadio
+          label="{{'headMRT.vessels.prolongationOfTTP.value'| translate}}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040509"
+          name="isPWIDWIMismatch"
+          [(ngModel)]="model.isPWIDWIMismatch"
+          binary="true"
+          rrContentReset="pWIDWIMismatchContainer"
+          rrUnClickRadio
+          label="{{'headMRT.vessels.pWIDWIMismatch.value'| translate}}"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="pWIDWIMismatchContainer"
+          [rrDisable]="!model.isPWIDWIMismatch"
+        >
+          <h3 rr-id="hea_m_040510">
+            {{'headMRT.vessels.pWIDWIRatio.value'| translate}}
+          </h3>
+          <h3 rr-id="hea_m_040511">
+            {{ 'headMRT.vessels.penumbra(tissueAtRisk.value' | translate }}
+          </h3>
+          <rr-number-input
+            name="penumbraTissueAtRisk"
+            [(ngModel)]="model.penumbraTissueAtRisk"
+            inputRrId="hea_m_040512"
+            labelRrId="hea_m_040513"
+            [label]="'headMRT.vessels.in.value' | translate"
+            [config]="{min: 1, max: 100, placeholder: '---'}"
+          ></rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

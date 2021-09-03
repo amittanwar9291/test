@@ -1,0 +1,58 @@
+<h2 *ngIf="label">{{ label }}</h2>
+<div class="container">
+  <input
+    type="range"
+    tabindex="-1"
+    class="left-fill"
+    min="{{ min }}"
+    max="{{ maxNumberInSlider }}"
+    step="{{ step }}"
+    [(ngModel)]="tempVal"
+    value="ngValue"
+    (change)="changeState()"
+  />
+  <input
+    type="range"
+    class="thumb"
+    min="{{ min }}"
+    max="{{ maxNumberInSlider }}"
+    step="{{ step }}"
+    [(ngModel)]="tempVal"
+    value="ngValue"
+    (change)="changeState()"
+  />
+  <div class="slim-line"></div>
+</div>
+<div
+  class="labels block-click"
+  [ngClass]="{ 'labels--new-labels': isNewLabels, 'labels--technology-labels': isTechnologyLabels }"
+>
+  <div *ngIf="!customSliderLabels" class="labels-container">
+    <div
+      *ngIf="isNullable"
+      class="label-item"
+      [ngStyle]="{'width': 'calc(100% / ' + (fakeMaxArrayInSlider.length) +')'}"
+      (click)="select(null)"
+    >
+      <span>{{ 'controls.sliderNumberInput.nullLabel' | translate }}</span>
+    </div>
+    <div
+      class="label-item"
+      *ngFor="let item of fakeMaxArrayInSlider; let index = index, let last = last;"
+      [ngStyle]="{'width': last ? 'unset': 'calc(100% / ' + (fakeMaxArrayInSlider.length) +')'}"
+      (click)="select((index * step) + min)"
+    >
+      <span>{{ (index * step) + min }}</span>
+    </div>
+  </div>
+  <div *ngIf="customSliderLabels" class="labels-container">
+    <div
+      *ngFor="let item of customSliderLabels; let index = index, let last = last, let first = first"
+      class="label-item"
+      [ngStyle]="{'width': first || last ? '' : 'calc(100% / ' + (customSliderLabels.length) +')'}"
+      (click)="select((index * step) + min)"
+    >
+      <span>{{ item }}</span>
+    </div>
+  </div>
+</div>

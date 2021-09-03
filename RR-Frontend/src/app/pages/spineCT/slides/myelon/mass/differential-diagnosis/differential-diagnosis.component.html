@@ -1,0 +1,197 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="p-l-10 o-radio-list" [rrDisable]="!isCMYes">
+      <h2 rr-id="spi_c_070222" class="m-b-12">
+        {{ "spineCT.myelonSpinalCanal.contrastEnhancementQuantitative.value" |
+        translate }}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_070223"
+        label=" {{ 'spineCT.myelonSpinalCanal.no.value' | translate }}"
+        name="contrastEnhancementQuantitativeType"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        rrContentReset="ddHomogeneityTypeContainer contrastEnhancementDistributionContainer"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070224"
+        label=" {{ 'spineCT.myelonSpinalCanal.weak.value' | translate }}"
+        name="contrastEnhancementQuantitativeType"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Weak"
+        rrContentReset="ddHomogeneityTypeContainer contrastEnhancementDistributionContainer"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070225"
+        label=" {{ 'spineCT.myelonSpinalCanal.significant.value' | translate }}"
+        name="contrastEnhancementQuantitativeType"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Significant"
+        rrContentReset="ddHomogeneityTypeContainer contrastEnhancementDistributionContainer"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="ddHomogeneityTypeContainer"
+        [rrDisable]="isCMQuantitativeNotWeakOrSignificant()"
+        class="nested-content o-radio-list"
+      >
+        <p-radioButton
+          rr-id="spi_c_070226"
+          label=" {{ 'spineCT.myelonSpinalCanal.homogeneous.value' | translate }}"
+          name="ddHomogeneityType"
+          [(ngModel)]="model.ddHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070227"
+          label=" {{ 'spineCT.myelonSpinalCanal.heterogeneous.value' | translate }}"
+          name="ddHomogeneityType"
+          [(ngModel)]="model.ddHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+
+      <div
+        class="o-radio-list"
+        [rrDisable]="isCMQuantitativeNotWeakOrSignificant()"
+        id="contrastEnhancementDistributionContainer"
+      >
+        <h2 rr-id="spi_c_070228" class="m-b-12 m-t-20">
+          {{ "spineCT.myelonSpinalCanal.contrastEnhancementDistribution.value" |
+          translate }}
+        </h2>
+        <p-radioButton
+          rr-id="spi_c_070229"
+          label=" {{ 'spineCT.myelonSpinalCanal.peripheral.value' | translate }}"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Peripheral"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070230"
+          label=" {{ 'spineCT.myelonSpinalCanal.rimEnhancement.value' | translate }}"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.RimEnhancement"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070231"
+          label=" {{ 'spineCT.myelonSpinalCanal.entireLesion.value' | translate }}"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.EntireLesion"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070232"
+          label=" {{ 'spineCT.myelonSpinalCanal.central.value' | translate }}"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Central"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070233"
+          label=" {{ 'spineCT.myelonSpinalCanal.septal.value' | translate }}"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Septal"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="p-l-10 o-radio-list">
+      <h2 rr-id="spi_c_070328">
+        {{ "spineCT.myelonSpinalCanal.differentialDiagnosis.value" | translate
+        }}
+      </h2>
+      <p rr-id="spi_c_070329" class="m-b-0">
+        {{ "spineCT.myelonSpinalCanal.differentialDiagnosis1.value" | translate
+        }}*
+      </p>
+      <rr-differential-diagnosis-dropdown
+        rrId="spi_c_070330"
+        [diagnosisNumber]="1"
+        group="true"
+        name="differentialDiagnosis1Type"
+        [(ngModel)]="model.differentialDiagnosis1Type"
+        [options]="w013DifferentialDiagnose1"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis1Type"
+        (selectionChanged)="onDiagnosis1Change()"
+      ></rr-differential-diagnosis-dropdown>
+      <div
+        [rrDisable]="model.differentialDiagnosis1Type === myelonDifferentialDiagnoseTypeEnum.None"
+      >
+        <p-checkbox
+          class="m-t-12"
+          rr-id="spi_c_070331"
+          label=" {{ 'spineCT.myelonSpinalCanal.suspicionOf.value' | translate }}"
+          name="isSuspicionOf"
+          [(ngModel)]="model.isSuspicionOf"
+          binary="true"
+        ></p-checkbox>
+        <p rr-id="spi_c_070332" class="m-t-15 m-b-0">
+          {{ "spineCT.myelonSpinalCanal.differentialDiagnosis2.value" |
+          translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="spi_c_070333"
+          name="differentialDiagnosis2Type"
+          [(ngModel)]="model.differentialDiagnosis2Type"
+          [diagnosisNumber]="2"
+          [parentViewModel]="model"
+          group="true"
+          [options]="w014DifferentialDiagnose2"
+          (selectionChanged)="model.isSubordinate = false;"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.differentialDiagnosis2Type === myelonDifferentialDiagnoseTypeEnum.None"
+          class="m-t-12"
+          rr-id="spi_c_070334"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+          binary="true"
+          label=" {{ 'spineCT.myelonSpinalCanal.subordinate.value' | translate }}"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="p-l-10 o-radio-list">
+      <p-checkbox
+        rr-id="spi_c_070440"
+        labelStyleClass="ui-fat-label"
+        label=" {{ 'spineCT.myelonSpinalCanal.lesionOfTheSame.value' | translate }}"
+        name="isDifferentialDiagnosisAbove1LesionOfTheSameEntity"
+        [(ngModel)]="model.isDifferentialDiagnosisAbove1LesionOfTheSameEntity"
+        binary="true"
+        (onChange)="checkAndClearLocalizer()"
+      ></p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isDifferentialDiagnosisAbove1LesionOfTheSameEntity"
+      >
+        <p rr-id="spi_c_070441">
+          {{ 'spineCT.myelonSpinalCanal.localization.value' | translate }}
+        </p>
+
+        <rr-spine-simple
+          rr-id="spi_c_070442"
+          (click)="openLargeLocalizer()"
+          [spineLocation]="model.differentialDiagnosisAbove1LesionLocations"
+          [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        ></rr-spine-simple>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

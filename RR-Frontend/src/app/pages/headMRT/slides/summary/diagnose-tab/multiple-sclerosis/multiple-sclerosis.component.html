@@ -1,0 +1,408 @@
+<div class="f-horizontal f-start h-100 o-width-100">
+  <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-42 o-list">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120202" rrInfoIcon="hea_m_12_01">
+        {{ "headMRT.summary.initialDiagnosis.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120203"
+        [(ngModel)]="model.isSpatialDissemination"
+        name="isSpatialDissemination"
+        label="{{ 'headMRT.summary.spatialDissemination.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120204"
+        [(ngModel)]="model.isTemporalDissemination"
+        name="isTemporalDissemination"
+        label="{{ 'headMRT.summary.temporalDissemination.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120205">
+        {{ "headMRT.summary.progressControl.value" | translate }}
+      </h2>
+      <rr-month-year-input
+        name="progressControlDate"
+        [label]="'headMRT.summary.dateOfPreliminaryExamination.value' | translate"
+        labelRrId="hea_m_120206"
+        monthRrId="hea_m_120207"
+        yearRrId="hea_m_120208"
+        [(ngModel)]="model.progressControlDate"
+        customLabelClass="m-t-0"
+        class="o-width-100"
+      >
+      </rr-month-year-input>
+      <p-radioButton
+        class="m-t-10"
+        rr-id="hea_m_120209"
+        label="{{'headMRT.summary.progression.value' | translate}}"
+        name="progressControlType"
+        [value]="progressControlType.Progression"
+        [(ngModel)]="model.progressControlType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_120210"
+        label="{{'headMRT.summary.regression.value' | translate}}"
+        name="progressControlType"
+        [value]="progressControlType.Regression"
+        [(ngModel)]="model.progressControlType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_120211"
+        label="{{'headMRT.summary.stable.value' | translate}}"
+        name="progressControlType"
+        [value]="progressControlType.Stable"
+        [(ngModel)]="model.progressControlType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-42">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_120301">
+        {{ "headMRT.summary.lesions.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120302"
+        [(ngModel)]="model.isPeriventricular"
+        name="isPeriventricular"
+        label="{{ 'headMRT.summary.periventricular.value' | translate }}"
+        binary="true"
+        rrContentReset="periventricular"
+      >
+      </p-checkbox>
+      <div
+        id="periventricular"
+        [rrDisable]="!model.isPeriventricular"
+        class="nested-content"
+      >
+        <rr-number-input
+          rr-id="hea_m_120303"
+          [(ngModel)]="model.periventricular"
+          labelRrId="hea_m_120304"
+          name="periventricular"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{placeholder: '- -', min: 1, max: 99}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120305"
+        [(ngModel)]="model.isCortical"
+        name="isCortical"
+        label="{{ 'headMRT.summary.cortical.value' | translate }}"
+        binary="true"
+        rrContentReset="cortical"
+      >
+      </p-checkbox>
+      <div id="cortical" [rrDisable]="!model.isCortical" class="nested-content">
+        <rr-number-input
+          rr-id="hea_m_120306"
+          [(ngModel)]="model.cortical"
+          labelRrId="hea_m_120307"
+          name="cortical"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{ min: 1, max: 99, placeholder: '- -'}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120308"
+        [(ngModel)]="model.isJuxtacortical"
+        name="isJuxtacortical"
+        label="{{ 'headMRT.summary.juxtacortical.value' | translate }}"
+        binary="true"
+        rrContentReset="juxtacortical"
+      >
+      </p-checkbox>
+      <div
+        id="juxtacortical"
+        [rrDisable]="!model.isJuxtacortical"
+        class="nested-content"
+      >
+        <rr-number-input
+          rr-id="hea_m_120309"
+          [(ngModel)]="model.juxtacortical"
+          labelRrId="hea_m_120310"
+          name="juxtacortical"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{ min: 1, max: 99, placeholder: '- -'}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120311"
+        [(ngModel)]="model.isInfratentorial"
+        name="isInfratentorial"
+        label="{{ 'headMRT.summary.infratentorial.value' | translate }}"
+        binary="true"
+        rrContentReset="infratentorial"
+      >
+      </p-checkbox>
+      <div
+        id="infratentorial"
+        [rrDisable]="!model.isInfratentorial"
+        class="nested-content"
+      >
+        <rr-number-input
+          rr-id="hea_m_120312"
+          [(ngModel)]="model.infratentorial"
+          labelRrId="hea_m_120313"
+          name="infratentorial"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{ min: 1, max: 99, placeholder: '- -'}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120314"
+        [(ngModel)]="model.isSpinal"
+        name="isSpinal"
+        label="{{ 'headMRT.summary.spinal.value' | translate }}"
+        binary="true"
+        rrContentReset="spinal"
+      >
+      </p-checkbox>
+      <div id="spinal" [rrDisable]="!model.isSpinal" class="nested-content">
+        <rr-number-input
+          rr-id="hea_m_120315"
+          [(ngModel)]="model.spinal"
+          labelRrId="hea_m_120316"
+          name="spinal"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{ min: 1, max: 99, placeholder: '- -'}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120317"
+        [(ngModel)]="model.isOpticNeuritis"
+        name="isOpticNeuritis"
+        label="{{ 'headMRT.summary.opticNeuritis.value' | translate }}"
+        binary="true"
+        rrContentReset="opticNeuritisBlock"
+      >
+      </p-checkbox>
+      <div
+        id="opticNeuritisBlock"
+        [rrDisable]="!model.isOpticNeuritis"
+        class="nested-content o-radio-list"
+      >
+        <p-checkbox
+          rr-id="hea_m_120318"
+          [(ngModel)]="model.isRight"
+          name="isRight"
+          label="{{ 'headMRT.summary.right.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_120319"
+          [(ngModel)]="model.isLeft"
+          name="isLeft"
+          label="{{ 'headMRT.summary.left.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-42">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120401">
+        {{ "headMRT.summary.details.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120402"
+        [(ngModel)]="model.isActiveLesions"
+        name="isActiveLesions"
+        label="{{ 'headMRT.summary.activeLesions.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120403"
+        [(ngModel)]="model.isNewLesions"
+        name="isNewLesions"
+        label="{{ 'headMRT.summary.newLesions.value' | translate }}"
+        binary="true"
+        rrContentReset="isNewLesionsContainer"
+      >
+      </p-checkbox>
+      <div
+        id="isNewLesionsContainer"
+        [rrDisable]="!model.isNewLesions"
+        class="nested-content"
+      >
+        <p-checkbox
+          rr-id="hea_m_120404"
+          [(ngModel)]="model.isActive"
+          name="isActive"
+          label="{{ 'headMRT.summary.active.value' | translate }}"
+          binary="true"
+          class="m-b-10"
+        >
+        </p-checkbox>
+        <rr-number-input
+          rr-id="hea_m_120405"
+          [(ngModel)]="model.newLesions"
+          labelRrId="hea_m_120406"
+          name="newLesions"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{placeholder: '- -', min: 1, max: 99}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120407"
+        [(ngModel)]="model.isBlackHoles"
+        name="isBlackHoles"
+        label="{{ 'headMRT.summary.blackHoles.value' | translate }}"
+        binary="true"
+        class="m-b-10"
+        rrContentReset="isBlackHolesContainer"
+      >
+      </p-checkbox>
+      <div
+        id="isBlackHolesContainer"
+        class="nested-content"
+        [rrDisable]="!model.isBlackHoles"
+      >
+        <rr-number-input
+          rr-id="hea_m_120408"
+          [(ngModel)]="model.blackHoles"
+          labelRrId="hea_m_120409"
+          name="blackHoles"
+          label="{{ 'headMRT.summary.numberOfLesions.value' | translate }}"
+          [config]="{placeholder: '- -', min: 1, max: 99}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120410"
+        [(ngModel)]="model.isDawsonFinger"
+        name="isDawsonFinger"
+        label="{{ 'headMRT.summary.dawsonFinger.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120411"
+        [(ngModel)]="model.isPerivenousSpread"
+        name="isPerivenousSpread"
+        label="{{ 'headMRT.summary.perivenousSpread.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120412"
+        [(ngModel)]="model.isCorpusCallosumUndersurface"
+        name="isCorpusCallosumUndersurface"
+        label="{{ 'headMRT.summary.corpusCallosumUndersurface.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120413"
+        [(ngModel)]="model.isTumefactiveMS"
+        name="isTumefactiveMS"
+        label="{{ 'headMRT.summary.tumefactiveMS.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120414"
+        [(ngModel)]="model.isIncompleteRingEnhancement"
+        name="isIncompleteRingenhancement"
+        label="{{ 'headMRT.summary.incompleteRingenhancement.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+        [rrDisable]="!isContrastEnhanced"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l m-b-11 m-t-42 o-list">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120501">
+        {{ "headMRT.summary.otherDisease.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_120502"
+        label="{{'headMRT.summary.progressiveMultifocalleukoencephalopathy(PML.value' | translate}}"
+        name="otherDiseaseType"
+        [value]="otherDiseaseType.ProgressiveMultifocalLeukoencephalopathy"
+        [(ngModel)]="model.otherDiseaseType"
+        rrUnClickRadio
+        rrContentReset="otherDiseaseTypeContainer"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_120503"
+        label="{{'headMRT.summary.pMLIRIS.value' | translate}}"
+        name="otherDiseaseType"
+        [value]="otherDiseaseType.PMLIRIS"
+        [(ngModel)]="model.otherDiseaseType"
+        rrUnClickRadio
+        rrContentReset="otherDiseaseTypeContainer"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_120504"
+        label="{{'headMRT.summary.cNSLymphoma.value' | translate}}"
+        name="otherDiseaseType"
+        [value]="otherDiseaseType.CNSLymphoma"
+        [(ngModel)]="model.otherDiseaseType"
+        rrUnClickRadio
+        rrContentReset="otherDiseaseTypeContainer"
+      >
+      </p-radioButton>
+      <div
+        id="otherDiseaseTypeContainer"
+        class="nested-content"
+        [rrDisable]="model.otherDiseaseType === otherDiseaseType.None"
+      >
+        <p-checkbox
+          rr-id="hea_m_120505"
+          [(ngModel)]="model.isSuspicionOf"
+          name="isSuspicionOf"
+          label="{{ 'headMRT.summary.suspicionOf.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120506">
+        {{ "headMRT.summary.differentialDiagnosis.value" | translate }}
+      </h2>
+      <div class="p-r-15">
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_120507"
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosisOptions"
+          [(ngModel)]="model.summaryDiagnosisType"
+          name="summaryDiagnosisType"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+</div>

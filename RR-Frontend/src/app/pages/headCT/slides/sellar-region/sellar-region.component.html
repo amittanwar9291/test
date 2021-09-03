@@ -1,0 +1,123 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_c_100103">
+        {{'headCT.sellarRegion.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_c_100104"
+          label="{{'headCT.sellarRegion.normalImagingOfThesellar.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="sellarRegionAreFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_100105"
+          label="{{'headCT.sellarRegion.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="sellarRegionAreFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+          rrContentReset="noFindings-block"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="model.areFindings !== sellarRegionAreFindingsEnum.Yes"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+          [setDescriptionTypes]="[sellarRegionFindingTypeEnum.Pathology]"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical h-100"
+      [ngClass]="findingHandler.currentItem.findingType === sellarRegionFindingTypeEnum.None ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="findingHandler.currentItem.findingType === sellarRegionFindingTypeEnum.None"
+        class="f-horizontal main-container h-100 empty-column-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === sellarRegionFindingTypeEnum.Pathology"
+        class="column-height"
+      >
+        <h1 rr-id="hea_c_100201" class="m-b-25 p-l-15">
+          {{'headCT.sellarRegion.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+        <p-tabView class="rr-tabView head-ct-sellar-region-tabs">
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                class="custom-tab-header"
+                rr-id="hea_c_100202"
+                [rrValidation]="['sellarRegionDiagnosisLocalizationType', 'extensionSize']"
+                ifAny="true"
+              >
+                {{ 'headCT.sellarRegion.localizationTabHeader.value' | translate
+                }}
+              </h1>
+            </ng-template>
+            <rr-localization
+              [model]="findingHandler.currentItem"
+              [differentialDiagnoseW48]="differentialDiagnoseW48"
+            ></rr-localization>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1 rr-id="hea_c_100301" class="custom-tab-header">
+                {{ 'headCT.sellarRegion.characterizationI.value' |translate }}
+              </h1>
+            </ng-template>
+            <rr-characterization-one
+              [model]="findingHandler.currentItem"
+            ></rr-characterization-one>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header" class="custom-tab-header">
+              <h1 rr-id="hea_c_100401" rrValidation="carotidArterySideType">
+                {{ 'headCT.sellarRegion.characterizationII.value' |translate }}
+              </h1>
+            </ng-template>
+            <rr-characterization-two
+              [model]="findingHandler.currentItem"
+              [isCMYes]="isCMYes"
+            ></rr-characterization-two>
+          </p-tabPanel>
+
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                rr-id="hea_c_100501"
+                class="custom-tab-header"
+                rrValidation="sellarRegionDiagnosis1Type"
+              >
+                {{ 'headCT.sellarRegion.differentialDiagnosisTabHeader.value'
+                |translate }}
+              </h1>
+            </ng-template>
+            <rr-differential-diagnosis
+              [model]="findingHandler.currentItem"
+              [differentialDiagnoseW48]="differentialDiagnoseW48"
+              [differentialDiagnoseW49]="differentialDiagnoseW49"
+            ></rr-differential-diagnosis>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</form>

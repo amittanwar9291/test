@@ -1,0 +1,251 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r o-list">
+    <h2
+      rr-id="kne_m_060202"
+      rrInfoIcon="kne_m_060204"
+      class="m-t-4 m-b-13 non-break-icon"
+      rrValidation="location"
+    >
+      {{ 'kneeMRT.osteoInterface.localization.value' | translate }}
+    </h2>
+    <rr-knee-osteo
+      rr-id="kne_m_060203"
+      [(ngModel)]="model.location"
+      name="location"
+      rrValidation="location"
+      isLocalizer="true"
+    ></rr-knee-osteo>
+  </div>
+  <div class="c-col-2 c-sep c-pad f-vertical m-t-2">
+    <div class="f-start f-vertical o-list m-b-8">
+      <p-checkbox
+        rr-id="kne_m_060301"
+        [(ngModel)]="model.isOsteophytes"
+        label="{{ 'kneeMRT.osteoInterface.osteophytes.value' | translate }}"
+        binary="true"
+        name="isOsteophytes"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_060302"
+        [(ngModel)]="model.isChondropathy"
+        label="{{ 'kneeMRT.osteoInterface.chondropathy.value' | translate }}"
+        binary="true"
+        name="isChondropathy"
+        labelStyleClass="ui-fat-label"
+        rrInfoIcon="kne_m_060303"
+        rrContentReset="isChondropathy-block"
+      >
+      </p-checkbox>
+    </div>
+    <div class="f-horizontal col-h-100" id="isChondropathy-block">
+      <div class="c-col-1 c-sep c-pad-r">
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          [rrDisable]="!model.isChondropathy"
+        >
+          <p rr-id="kne_m_060304" class="m-b-6">
+            {{ 'kneeMRT.osteoInterface.outerbridgeClassification.value' |
+            translate }}
+          </p>
+          <p-radioButton
+            rr-id="kne_m_060305"
+            [(ngModel)]="model.outerbridgeClassificationType"
+            label="{{ 'kneeMRT.osteoInterface.gradeI.value' | translate }}"
+            name="outerbridgeClassificationType"
+            [value]="outerbridgeClassificationType.GradeI"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_060306"
+            [(ngModel)]="model.outerbridgeClassificationType"
+            label="{{ 'kneeMRT.osteoInterface.gradeII.value' | translate }}"
+            name="outerbridgeClassificationType"
+            [value]="outerbridgeClassificationType.GradeII"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_060307"
+            [(ngModel)]="model.outerbridgeClassificationType"
+            label="{{ 'kneeMRT.osteoInterface.gradeIII.value' | translate }}"
+            name="outerbridgeClassificationType"
+            [value]="outerbridgeClassificationType.GradeIII"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_060308"
+            [(ngModel)]="model.outerbridgeClassificationType"
+            label="{{ 'kneeMRT.osteoInterface.gradeIV.value' | translate }}"
+            name="outerbridgeClassificationType"
+            [value]="outerbridgeClassificationType.GradeIV"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div
+          class="f-start f-vertical o-list"
+          [rrDisable]="!model.isChondropathy"
+        >
+          <div class="f-start f-vertical o-radio-list m-b-29">
+            <p-checkbox
+              rr-id="kne_m_060401"
+              [(ngModel)]="model.isExpansiveness"
+              label="{{ 'kneeMRT.osteoInterface.size.value' | translate }}"
+              binary="true"
+              name="isExpansiveness"
+              rrContentReset="expansiveness-block"
+            >
+            </p-checkbox>
+            <div
+              class="f-start f-vertical nested-content"
+              id="expansiveness-block"
+              [rrDisable]="!model.isExpansiveness"
+            >
+              <p rr-id="kne_m_060402">
+                {{ 'kneeMRT.osteoInterface.largestDiameter.value' | translate
+                }}*
+              </p>
+              <rr-number-input
+                rr-id="kne_m_060402"
+                labelRrId="kne_m_060403"
+                [(ngModel)]="model.expansivenessMaxDiameterInMm"
+                name="expansivenessMaxDiameterInMm"
+                label="{{ 'kneeMRT.osteoInterface.inMm.value' | translate }}"
+                [config]="{ max: 30 }"
+                rrValidation="expansivenessMaxDiameterInMm"
+              >
+              </rr-number-input>
+            </div>
+            <p-checkbox
+              rr-id="kne_m_060409"
+              [(ngModel)]="model.isChondrocalcinosis"
+              label="{{ 'kneeMRT.osteoInterface.chondrocalcinosis.value' | translate }}"
+              binary="true"
+              name="isChondrocalcinosis"
+            >
+            </p-checkbox>
+          </div>
+          <h2 rr-id="kne_m_060404" class="m-b-10">
+            {{'kneeMRT.osteoInterface.articularSurfaces.value' | translate}}
+          </h2>
+
+          <p-radioButton
+            rr-id="kne_m_060405"
+            class="m-b-10"
+            [(ngModel)]="model.jointSurfaceType"
+            label="{{ 'kneeMRT.osteoInterface.unipolar.value' | translate }}"
+            name="jointSurfaceType"
+            [value]="jointSurfaceType.Unipolar"
+            rrUnClickRadio
+            rrContentReset="unipolarJointSurfaceType-block"
+          ></p-radioButton>
+          <div
+            id="unipolarJointSurfaceType-block"
+            class="f-start f-vertical o-radio-list nested-content"
+            [rrDisable]="model.jointSurfaceType !== jointSurfaceType.Unipolar"
+          >
+            <p-radioButton
+              rr-id="kne_m_060406"
+              [(ngModel)]="model.unipolarJointSurfaceType"
+              label="{{ 'kneeMRT.osteoInterface.femur.value' | translate }}"
+              name="unipolarJointSurfaceType"
+              [value]="unipolarJointSurfaceType.Femur"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="kne_m_060407"
+              [(ngModel)]="model.unipolarJointSurfaceType"
+              label="{{ 'kneeMRT.osteoInterface.tibia.value' | translate }}"
+              name="unipolarJointSurfaceType"
+              [value]="unipolarJointSurfaceType.Tibia"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <p-radioButton
+            rr-id="kne_m_060408"
+            [(ngModel)]="model.jointSurfaceType"
+            label="{{ 'kneeMRT.osteoInterface.bipolar.value' | translate }}"
+            name="jointSurfaceType"
+            [value]="jointSurfaceType.Bipolar"
+            rrUnClickRadio
+            rrContentReset="unipolarJointSurfaceType-block"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-2">
+    <div class="f-start f-vertical o-list">
+      <p-checkbox
+        rr-id="kne_m_060501"
+        [(ngModel)]="model.isSubchondralCysts"
+        label="{{ 'kneeMRT.osteoInterface.subchondralCystsGeodes.value' | translate }}"
+        binary="true"
+        name="isSubchondralCysts"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_060502"
+        [(ngModel)]="model.isSubchondralEdema"
+        label="{{'kneeMRT.osteoInterface.subchondralEdema.value' | translate}}"
+        binary="true"
+        name="isSubchondralEdema"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_060503"
+        label="{{'kneeMRT.osteoInterface.subchondralSclerosis.value' | translate}}"
+        binary="true"
+        name="isSubchondralSclerosis"
+        [(ngModel)]="model.isSubchondralSclerosis"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_060504"
+        [(ngModel)]="model.isSynovialCyst"
+        label="{{ 'kneeMRT.osteoInterface.synovialCyst.value' | translate }}"
+        binary="true"
+        name="isSynovialCyst"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_060505"
+        [(ngModel)]="model.isBoneMarrowEdema"
+        label="{{ 'kneeMRT.osteoInterface.boneMarrowEdemaCircumscribed.value' | translate }}"
+        binary="true"
+        name="isBoneMarrowEdema"
+        class="m-b-17"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+
+      <div class="f-vertical f-start o-radio-list">
+        <h2 rr-id="kne_m_060506">
+          {{ 'kneeMRT.osteoInterface.gradeOfArthrosis.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="kne_m_060507"
+          [(ngModel)]="model.formOfArthrosisType"
+          label="{{ 'kneeMRT.osteoInterface.moderate.value' | translate }}"
+          name="formOfArthrosisType"
+          [value]="formOfArthrosisType.Moderate"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_060508"
+          [(ngModel)]="model.formOfArthrosisType"
+          label="{{ 'kneeMRT.osteoInterface.distinct.value' | translate }}"
+          name="formOfArthrosisType"
+          [value]="formOfArthrosisType.Distinct"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

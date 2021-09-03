@@ -1,0 +1,106 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="elb_m_0402143" class="m-b-9">
+        {{'elbowMRT.bones.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div
+        class="f-vertical f-start o-radio-list m-r-12 p-b-1"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+      >
+        <p rr-id="elb_m_0402144" class="m-b-2">
+          {{'elbowMRT.bones.differentialDiagnosis1.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="ddlW015"
+          [(ngModel)]="model.differentialDiagnosis1"
+          group="true"
+          name="differentialDiagnosis1"
+          rrId="elb_m_0402145"
+          (selectionChanged)="clearDDLCheckboxes()"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list m-r-12"
+        [rrDisable]="model.differentialDiagnosis1 === diagnosisTypeEnum.None && model.differentialDiagnosis === diagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="elb_m_0402146"
+          name="isSuspectedDiagnosis"
+          [(ngModel)]="model.isSuspectedDiagnosis"
+          label="{{'elbowMRT.bones.suspectedDiagnosis.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+        <p rr-id="elb_m_0402147" class="m-b-3 m-t-6">
+          {{'elbowMRT.bones.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="ddlW016"
+          [(ngModel)]="model.differentialDiagnosis2"
+          group="true"
+          name="differentialDiagnosis2"
+          rrId="elb_m_0402148"
+          (selectionChanged)="clearSubordinateCheckbox()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="f-vertical f-start o-radio-list"
+          [rrDisable]="model.differentialDiagnosis2 === diagnosisTypeEnum.None"
+        >
+          <p-checkbox
+            rr-id="elb_m_0402149"
+            name="isSubordinated"
+            class="m-b-13"
+            [(ngModel)]="model.isSubordinated"
+            label="{{'elbowMRT.bones.subordinated.value' | translate}}"
+            binary="true"
+          ></p-checkbox>
+          <p rr-id="elb_m_0402150" class="m-b-3 m-t-10">
+            {{'elbowMRT.bones.differentialDiagnosis3.value' | translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="3"
+            [options]="ddlW016"
+            [(ngModel)]="model.differentialDiagnosis3"
+            group="true"
+            name="differentialDiagnosis3"
+            rrId="elb_m_0402151"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10">
+      <p-checkbox
+        rr-id="elb_m_0403204"
+        class="m-t-32"
+        name="isMoreThanOneLesionSameEntity"
+        rrContentReset="isMoreThanOneLesionSameEntity-block"
+        [(ngModel)]="model.isMoreThanOneLesionSameEntity"
+        label="{{'elbowMRT.bones.lesionSameEntity.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <div
+        id="isMoreThanOneLesionSameEntity-block"
+        class="f-vertical f-start nested-content"
+        [rrDisable]="!model.isMoreThanOneLesionSameEntity"
+      >
+        <p-checkbox
+          rr-id="elb_m_0403205"
+          name="isWithinThePrimarilyAffectedBone"
+          [(ngModel)]="model.isWithinThePrimarilyAffectedBone"
+          label="{{'elbowMRT.bones.withinThePrimarilyaffected.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10"></div>
+</div>

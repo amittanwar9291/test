@@ -1,0 +1,157 @@
+<div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-radio-list">
+  <div
+    class="f-vertical o-radio-list m-b-20"
+    [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+  >
+    <h2 rr-id="hip_m_040247" class="m-b-6">
+      {{'hipMRT.bones.differentialDiagnosis1.value' | translate}}*
+    </h2>
+    <rr-differential-diagnosis-dropdown
+      [diagnosisNumber]="1"
+      isActiveOnIKnow="true"
+      name="mainDiagnosisType"
+      [(ngModel)]="model.mainDiagnosisType"
+      [options]="massOsteolysisDifferentialDiagnosisTypeOptions"
+      group="true"
+      rrId="hip_m_040248"
+      (selectionChanged)="resetHistoryKnownBlock(); resetDifferentialDiagnosis()"
+      [parentViewModel]="model"
+      rrValidation="mainDiagnosisType"
+      class="m-b-8"
+    >
+    </rr-differential-diagnosis-dropdown>
+    <p-checkbox
+      rr-id="hip_m_040249"
+      name="isHistologyKnown"
+      label="{{'hipMRT.bones.histologyKnown.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isHistologyKnown"
+      rrContentReset="isHistologyKnownBlock"
+      [rrDisable]="model.mainDiagnosisType === mainDiagnosisType.None"
+      class="m-b-8"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isHistologyKnown"
+      id="isHistologyKnownBlock"
+    >
+      <p-radioButton
+        rr-id="hip_m_040250"
+        rrUnClickRadio
+        name="histologyKnownType"
+        [value]="histologyKnownType.Benign"
+        label="{{'hipMRT.bones.benign.value' | translate}}"
+        [(ngModel)]="model.histologyKnownType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_040251"
+        rrUnClickRadio
+        name="histologyKnownType"
+        [value]="histologyKnownType.Malignant"
+        label="{{'hipMRT.bones.malignant.value' | translate}}"
+        [(ngModel)]="model.histologyKnownType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <h2 rr-id="hip_m_040204" rrValidation="hipSpecificLocalizations">
+    {{'hipMRT.bones.localization.value' | translate}}*
+  </h2>
+  <rr-hips-small
+    rr-id="hip_m_040205"
+    name="hipSpecificLocalizations"
+    (click)="openLargeLocalizer()"
+    [(ngModel)]="model.hipSpecificLocalizations"
+    rrValidation="hipSpecificLocalizations"
+    isLocalizer="true"
+  >
+  </rr-hips-small>
+</div>
+<div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-radio-list">
+  <h2 rr-id="hip_m_0403124" class="m-b-11">
+    {{'hipMRT.bones.boneParts.value' | translate}}
+  </h2>
+  <p-checkbox
+    rr-id="hip_m_0403125"
+    name="isEpiphysis"
+    label="{{'hipMRT.bones.epiphysis.value' | translate}}"
+    binary="true"
+    [(ngModel)]="model.isEpiphysis"
+  >
+  </p-checkbox>
+  <p-checkbox
+    rr-id="hip_m_0403126"
+    name="isMetaphysis"
+    label="{{'hipMRT.bones.metaphysis.value' | translate}}"
+    binary="true"
+    [(ngModel)]="model.isMetaphysis"
+  >
+  </p-checkbox>
+  <p-checkbox
+    rr-id="hip_m_0403127"
+    name="isDiaphysis"
+    label="{{'hipMRT.bones.diaphysis.value' | translate}}"
+    binary="true"
+    [(ngModel)]="model.isDiaphysis"
+  >
+  </p-checkbox>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-radio-list">
+  <h2 rr-id="hip_m_040486" class="m-b-12">
+    {{'hipMRT.bones.expansion2.value' | translate}}
+  </h2>
+  <h3 rr-id="hip_m_040487" class="m-b-5">
+    {{'hipMRT.bones.size.value' | translate}}*
+  </h3>
+  <rr-number-input
+    inputRrId="hip_m_040489"
+    labelRrId="hip_m_040488"
+    name="expansionSizeInMm"
+    label="{{'hipMRT.bones.inMm.value' | translate}}"
+    [config]="{min: 1, max: 500, placeholder: '---'}"
+    [(ngModel)]="model.expansionSizeInMm"
+    rrValidation="expansionSizeInMm"
+    (ngModelChange)="resetRelevantSequesterValues()"
+  >
+  </rr-number-input>
+  <div class="o-radio-list" [rrDisable]="!model.expansionSizeInMm">
+    <h3 rr-id="hip_m_040490" class="m-b-6">
+      {{'hipMRT.bones.2ndPlane.value' | translate}}
+    </h3>
+    <rr-number-input
+      inputRrId="hip_m_040492"
+      labelRrId="hip_m_040491"
+      name="expansionSecondSizeInMm"
+      label="{{'hipMRT.bones.inMm.value' | translate}}"
+      [config]="{min: 1, max: 500, placeholder: '---'}"
+      [(ngModel)]="model.expansionSecondSizeInMm"
+      (ngModelChange)="resetRelevantSequesterValues()"
+    >
+    </rr-number-input>
+  </div>
+  <div class="o-radio-list" [rrDisable]="!model.expansionSecondSizeInMm">
+    <h3 rr-id="hip_m_040493" class="m-b-6">
+      {{'hipMRT.bones.3rdPlane.value' | translate}}
+    </h3>
+    <rr-number-input
+      inputRrId="hip_m_040495"
+      labelRrId="hip_m_040494"
+      name="expansionThirdSizeInMm"
+      label="{{'hipMRT.bones.inMm.value' | translate}}"
+      [config]="{min: 1, max: 500, placeholder: '---'}"
+      [(ngModel)]="model.expansionThirdSizeInMm"
+    >
+    </rr-number-input>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad-l f-vertical m-t-9 m-b-12 o-radio-list">
+  <rr-reference-picture
+    [(ngModel)]="model.referencePicture"
+    [referenceId]="model.id"
+    [fileUploadUrl]="fileUploadUrl"
+    name="referencePicture"
+    class="c-pad-r"
+  ></rr-reference-picture>
+</div>

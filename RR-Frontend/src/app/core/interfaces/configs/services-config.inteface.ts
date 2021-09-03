@@ -1,0 +1,47 @@
+import { IReportsConfig } from './reports-config.interface';
+import { IMammaMrtConfig } from './mamma-mrt-config.interface';
+import { IShoulderMrtConfig } from './shoulder-mrt-config.interface';
+import { IKneeMrtConfig } from './knee-mrt-config.interface';
+import { ISpineMrtConfig } from './spine-mrt-config.interface';
+import { ICardioMrtConfig } from './cardio-mrt-config.interface';
+import { IThoraxCtConfig } from './thorax-ct-config.interface';
+import { IHipMrtConfig } from './hip-mrt-config.interface';
+import { IHandMrtConfig } from './hand-mrt-config.interface';
+import { ISpineCtConfig } from './spine-ct-config.interface';
+import { IElbowMrtConfig } from './elbow-mrt-config.interface';
+import { IPelvisMrtConfig } from './pelvis-mrt-config.interface';
+import { IFeetMrtConfig } from './feet-mrt-config.interface';
+import { IAngiographyMrtConfig } from './angiography-mrt-config.interface';
+import { IMammaMxConfig } from '@interfaces/configs/mamma-mx-config.interface';
+import { IAbdomenMrtConfig } from '@interfaces/configs/abdomen-mrt-config.interface';
+import { IThoraxMrtConfig } from '@interfaces/configs/thorax-mrt-config.interface';
+import { INeckMrtConfig } from '@interfaces/configs/neck-mrt-config.interface';
+import { IHeadMrtConfig } from './head-mrt-config.interface';
+import { IAngiographyCtConfig } from './angiography-ct-config.interface';
+import { IHeadCtConfig } from '@interfaces/configs/head-ct-config.interface';
+import { IAbdomenCtConfig } from '@interfaces/configs/abdomen-ct-config.interface';
+
+export interface IServicesConfig {
+  reports: IReportsConfig;
+  mammaMRT: IMammaMrtConfig;
+  shoulderMRT: IShoulderMrtConfig;
+  kneeMRT: IKneeMrtConfig;
+  spineMRT: ISpineMrtConfig;
+  cardioMRT: ICardioMrtConfig;
+  thoraxCT: IThoraxCtConfig;
+  hipMRT: IHipMrtConfig;
+  angiographyMRT: IAngiographyMrtConfig;
+  angiographyCT: IAngiographyCtConfig;
+  handMRT: IHandMrtConfig;
+  spineCT: ISpineCtConfig;
+  elbowMRT: IElbowMrtConfig;
+  pelvisMRT: IPelvisMrtConfig;
+  feetMRT: IFeetMrtConfig;
+  mammaMX: IMammaMxConfig;
+  abdomenMRT: IAbdomenMrtConfig;
+  thoraxMRT: IThoraxMrtConfig;
+  neckMRT: INeckMrtConfig;
+  headMRT: IHeadMrtConfig;
+  headCT: IHeadCtConfig;
+  abdomenCT: IAbdomenCtConfig;
+}

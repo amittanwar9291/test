@@ -1,0 +1,287 @@
+<div class="f-horizontal f-start" style="height: 552px">
+  <div class="c-col-1 c-pad c-sep">
+    <h2 rr-id="spi_c_070202" class="m-b-12" rrValidation="spineLocation">
+      {{ "spineCT.myelonSpinalCanal.localization.value" | translate }}*
+    </h2>
+    <rr-spine-simple
+      rr-id="spi_c_070203"
+      (click)="openLargeLocalizer()"
+      [spineLocation]="model.spineLocation"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      isLocalizer="true"
+      rrValidation="spineLocation"
+    >
+    </rr-spine-simple>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-radio-list">
+    <h2 rr-id="spi_c_070301" rrInfoIcon="spi_c_07_01" class="m-b-12">
+      {{ "spineCT.myelonSpinalCanal.grade.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="spi_c_070302"
+      name="spinalCanalStenosisDetailType"
+      [(ngModel)]="model.spinalCanalStenosisDetailType"
+      [value]="spinalCanalStenosisDetailTypeEnum.RelativeSpinalkanalstenoseLS"
+      rrUnClickRadio
+      label="{{'spineCT.myelonSpinalCanal.relative.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_070303"
+      name="spinalCanalStenosisDetailType"
+      [(ngModel)]="model.spinalCanalStenosisDetailType"
+      [value]="spinalCanalStenosisDetailTypeEnum.AbsoluteSpinalCanastenosislumbar"
+      rrUnClickRadio
+      label="{{'spineCT.myelonSpinalCanal.absolute.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_070304"
+      name="spinalCanalStenosisDetailType"
+      [(ngModel)]="model.spinalCanalStenosisDetailType"
+      [value]="spinalCanalStenosisDetailTypeEnum.SevereSpinalCanalStenosis"
+      rrUnClickRadio
+      label="{{'spineCT.myelonSpinalCanal.highgrade.value' | translate }}"
+    ></p-radioButton>
+    <h2 rr-id="spi_c_070305" class="m-t-30 m-b-6">
+      {{ "spineCT.myelonSpinalCanal.measurementOfSpinalCanal.value" | translate
+      }}
+    </h2>
+    <p rr-id="spi_c_070306" class="m-b-0">
+      {{ "spineCT.myelonSpinalCanal.sagittalDiameter.value" | translate }}
+    </p>
+    <rr-number-input
+      inputRrId="spi_c_070307"
+      labelRrId="spi_c_070308"
+      name="sagittalDiameterInMm"
+      [(ngModel)]="model.sagittalDiameterInMm"
+      [config]="{min: 1, max: 25}"
+      [label]=" 'spineCT.myelonSpinalCanal.inMm.value' | translate"
+    ></rr-number-input>
+    <p rr-id="spi_c_070309" class="m-t-15 m-b-0">
+      {{ "spineCT.myelonSpinalCanal.transverseDiameter.value" | translate }}
+    </p>
+    <rr-number-input
+      inputRrId="spi_c_070310"
+      labelRrId="spi_c_070311"
+      name="transverseDiameterInMm"
+      [(ngModel)]="model.transverseDiameterInMm"
+      [config]="{min:1, max: 50}"
+      [label]=" 'spineCT.myelonSpinalCanal.inMm.value' | translate"
+    ></rr-number-input>
+  </div>
+  <div class="c-col-2 c-pad-l">
+    <div class="f-vertical">
+      <h2 rr-id="spi_c_070401" class="m-b-12">
+        {{ "spineCT.myelonSpinalCanal.accompanyingChanges.value" | translate }}
+      </h2>
+    </div>
+    <div class="f-horizontal f-start col-h-100">
+      <div class="c-col-1 c-pad-r c-sep m-b-30 o-radio-list">
+        <p-checkbox
+          rr-id="spi_c_070402"
+          label="{{'spineCT.myelonSpinalCanal.spondylosis.value' | translate }}"
+          name="isSpondylosis"
+          [(ngModel)]="model.isSpondylosis"
+          binary="true"
+          rrContentReset="spondylosisDetails"
+          class="m-b-5"
+        ></p-checkbox>
+        <div
+          class="nested-content o-radio-list m-b-10"
+          id="spondylosisDetails"
+          [rrDisable]="!model.isSpondylosis"
+        >
+          <p rr-id="spi_c_070403">
+            {{ "spineCT.myelonSpinalCanal.side.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="spi_c_070404"
+            name="isSpondylosisRightSide"
+            [(ngModel)]="model.isSpondylosisRightSide"
+            binary="true"
+            label="{{'spineCT.myelonSpinalCanal.right.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="spi_c_070405"
+            name="isSpondylosisLeftSide"
+            [(ngModel)]="model.isSpondylosisLeftSide"
+            binary="true"
+            label="{{'spineCT.myelonSpinalCanal.left.value' | translate }}"
+            class="m-b-5"
+          ></p-checkbox>
+          <p rr-id="spi_c_070406" class="m-b-0">
+            {{ "spineCT.myelonSpinalCanal.details.value" | translate }}
+          </p>
+          <p-dropdown
+            rr-id="spi_c_070407"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="w011SpondylarthrosisDetails"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            rrDropdownClear
+            name="spondylosisDetailsType"
+            [(ngModel)]="model.spondylosisDetailsType"
+          ></p-dropdown>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_070408"
+          name="isLigFlavumHypertrophy"
+          [(ngModel)]="model.isLigFlavumHypertrophy"
+          binary="true"
+          label="{{'spineCT.myelonSpinalCanal.ligFlavumHypertrophy.value' | translate }}"
+          rrContentReset="ligFlavumHypertrophyDetails"
+        ></p-checkbox>
+
+        <div
+          [rrDisable]="!model.isLigFlavumHypertrophy"
+          id="ligFlavumHypertrophyDetails"
+          class="nested-content o-radio-list"
+        >
+          <p rr-id="spi_c_070409">
+            {{ "spineCT.myelonSpinalCanal.side.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="spi_c_070410"
+            name="isLigFlavumHypertrophyRightSide"
+            [(ngModel)]="model.isLigFlavumHypertrophyRightSide"
+            binary="true"
+            label="{{'spineCT.myelonSpinalCanal.right.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="spi_c_070411"
+            name="isLigFlavumHypertrophyLeftSide"
+            [(ngModel)]="model.isLigFlavumHypertrophyLeftSide"
+            binary="true"
+            label="{{'spineCT.myelonSpinalCanal.left.value' | translate }}"
+          ></p-checkbox>
+        </div>
+
+        <p-checkbox
+          rr-id="spi_c_070412"
+          label="{{'spineCT.myelonSpinalCanal.discProtrusion.value' | translate }}"
+          name="isLDiscProtrusion"
+          [(ngModel)]="model.isLDiscProtrusion"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="spi_c_070413"
+          label="{{'spineCT.myelonSpinalCanal.retrospondylosis.value' | translate }}"
+          name="isRetrospondylosis"
+          [(ngModel)]="model.isRetrospondylosis"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-pad-l o-radio-list">
+        <p-checkbox
+          rr-id="spi_c_070501"
+          label="{{'spineCT.myelonSpinalCanal.uncovertebralArthrosis.value' | translate }}"
+          name="isUncovertebralArthrosis"
+          [(ngModel)]="model.isUncovertebralArthrosis"
+          binary="true"
+          rrContentReset="uncovertebralArthrosisDetails"
+          class="m-b-5"
+        ></p-checkbox>
+        <div
+          [rrDisable]="!model.isUncovertebralArthrosis"
+          id="uncovertebralArthrosisDetails"
+          class="nested-content o-radio-list"
+        >
+          <p rr-id="spi_c_070502">
+            {{ "spineCT.myelonSpinalCanal.side.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="spi_c_070503"
+            name="isUncovertebralArthrosisRightSide"
+            [(ngModel)]="model.isUncovertebralArthrosisRightSide"
+            binary="true"
+            label="{{'spineCT.myelonSpinalCanal.right.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="spi_c_070504"
+            name="isUncovertebralArthrosisLeftSide"
+            [(ngModel)]="model.isUncovertebralArthrosisLeftSide"
+            binary="true"
+            label="{{'spineCT.myelonSpinalCanal.left.value' | translate }}"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_070505"
+          label="{{'spineCT.myelonSpinalCanal.neuralForaminalCompression.value' | translate }}"
+          name="isNeuralForaminalCompression"
+          [(ngModel)]="model.isNeuralForaminalCompression"
+          binary="true"
+          rrContentReset="neuralForaminalCompressionDetails"
+          class="m-b-5"
+        ></p-checkbox>
+        <div
+          [rrDisable]="!model.isNeuralForaminalCompression"
+          id="neuralForaminalCompressionDetails"
+          class="nested-content o-radio-list"
+        >
+          <p rr-id="spi_c_070506">
+            {{ "spineCT.myelonSpinalCanal.side.value" | translate }}
+          </p>
+          <p-checkbox
+            rr-id="spi_c_070507"
+            label="{{'spineCT.myelonSpinalCanal.right.value' | translate }}"
+            name="isNeuralForaminalCompressionRightSide"
+            [(ngModel)]="model.isNeuralForaminalCompressionRightSide"
+            binary="true"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="spi_c_070508"
+            label="{{'spineCT.myelonSpinalCanal.left.value' | translate }}"
+            name="isNeuralForaminalCompressionLeftSide"
+            [(ngModel)]="model.isNeuralForaminalCompressionLeftSide"
+            binary="true"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_070509"
+          label="{{'spineCT.myelonSpinalCanal.lateralRecessStenosis.value' | translate }}"
+          name="isLateralRecessStenosis"
+          [(ngModel)]="model.isLateralRecessStenosis"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="spi_c_070510"
+          class="text-break"
+          label="{{'spineCT.myelonSpinalCanal.tshapedStenosisOfThespinal.value' | translate }}"
+          name="isTShapedStenosisSpinalCanal"
+          [(ngModel)]="model.isTShapedStenosisSpinalCanal"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="spi_c_070511"
+          label="{{'spineCT.myelonSpinalCanal.pseudospondylolisthesis.value' | translate }}"
+          name="isPseudospondylolisthesis"
+          [(ngModel)]="model.isPseudospondylolisthesis"
+          binary="true"
+          rrContentReset="pseudospondylolisthesisDetails"
+        ></p-checkbox>
+        <div
+          [rrDisable]="!model.isPseudospondylolisthesis"
+          id="pseudospondylolisthesisDetails"
+          class="nested-content o-radio-list"
+        >
+          <p
+            rr-id="spi_c_070512"
+            rrInfoIcon="spi_c_07_02"
+            infoIconPdfLandscape="true"
+            class="m-b-0"
+          >
+            {{ "spineCT.myelonSpinalCanal.accordingToMeyerding.value" |
+            translate }}
+          </p>
+          <p-dropdown
+            rr-id="spi_c_070513"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="w012AccordingToMeyerding"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            rrDropdownClear
+            name="accordingToMeyerdingType"
+            [(ngModel)]="model.accordingToMeyerdingType"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

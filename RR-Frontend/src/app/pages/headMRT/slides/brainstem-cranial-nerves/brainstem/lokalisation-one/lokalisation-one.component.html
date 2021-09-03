@@ -1,0 +1,263 @@
+<div class="f-horizontal main-container ng-star-inserted o-width-100 ">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep m-t-15 m-b-15 c-pad">
+      <div
+        [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+        class="c-col-1"
+      >
+        <div class="m-l-10 m-r-10">
+          <h2 rr-id="hea_m_080203" class="m-b-5">
+            {{ 'headMRT.brainstemCranialNerves.differentialDiagnosis1.value' |
+            translate }}*
+          </h2>
+          <rr-differential-diagnosis-dropdown
+            isActiveOnIKnow="true"
+            rrId="hea_m_080256"
+            [options]="differentialDiagnosisW036"
+            [diagnosisNumber]="1"
+            group="true"
+            name="differentialDiagnosis"
+            [(ngModel)]="model.differentialDiagnosis"
+            rrValidation="differentialDiagnosis"
+            (selectionChanged)="clearDDLCheckboxes()"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            [rrDisable]="model.differentialDiagnosis === differentialDiagnosisType.None"
+            rr-id="hea_m_080250"
+            label="{{'headMRT.brainstemCranialNerves.histologyKnown.value' | translate}}"
+            name="isHistologyKnown"
+            [(ngModel)]="model.isHistologyKnown"
+            rrContentReset="isHistologyKnownBlock"
+            binary="true"
+            class="m-t-10 m-b-10"
+          ></p-checkbox>
+          <div
+            id="isHistologyKnownBlock"
+            [rrDisable]="!model.isHistologyKnown"
+            class="nested-content o-radio-list"
+          >
+            <p-radioButton
+              label="{{'headMRT.brainstemCranialNerves.benign.value' | translate}}"
+              [value]="knownHistologyType.Benign"
+              name="histologyKnownType"
+              rr-id="hea_m_080251"
+              [(ngModel)]="model.histologyKnownType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              label="{{'headMRT.brainstemCranialNerves.malignant.value' | translate}}"
+              [value]="knownHistologyType.Malignant"
+              name="histologyKnownType"
+              rr-id="hea_m_080252"
+              [(ngModel)]="model.histologyKnownType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="f-vertical c-pad-l m-t-15 m-b-15">
+      <h2 class="m-b-10 m-l-5" rr-id="hea_m_080337">
+        {{ 'headMRT.brainstemCranialNerves.localization.value' | translate }}*
+      </h2>
+      <div class="c-col-3 f-horizontal h-100 c-sep">
+        <div class="c-col-1 c-sep c-pad-r">
+          <div class="m-l-5">
+            <p-checkbox
+              label="{{'headMRT.brainstemCranialNerves.mesencephalon.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_080338"
+              name="isMesencephalon"
+              [(ngModel)]="model.isMesencephalon"
+              rrContentReset="isMesencephalon-block"
+              rrValidation="isMesencephalon isPons isMedullaOblongata"
+              class="m-b-10"
+            >
+            </p-checkbox>
+            <div
+              id="isMesencephalon-block"
+              [rrDisable]="!model.isMesencephalon"
+              class="f-vertical f-start o-radio-list nested-content"
+            >
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.crusCerebri.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080339"
+                name="isCrusCerebri"
+                [(ngModel)]="model.isCrusCerebri"
+                rrContentReset="isCrusCerebri-block"
+              >
+              </p-checkbox>
+              <div
+                id="isCrusCerebri-block"
+                [rrDisable]="!model.isCrusCerebri"
+                class="f-vertical f-start o-radio-list nested-content"
+              >
+                <h3 rr-id="hea_m_080340">
+                  {{'headMRT.brainstemCranialNerves.side.value' | translate}}
+                </h3>
+                <p-checkbox
+                  label="{{'headMRT.brainstemCranialNerves.right.value' | translate}}"
+                  binary="true"
+                  rr-id="hea_m_080341"
+                  name="isCrusCerebriRight"
+                  [(ngModel)]="model.isCrusCerebriRight"
+                  rrValidation="isCrusCerebriLeft isCrusCerebriRight"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  label="{{'headMRT.brainstemCranialNerves.left.value' | translate}}"
+                  binary="true"
+                  rr-id="hea_m_080342"
+                  name="isCrusCerebriLeft"
+                  [(ngModel)]="model.isCrusCerebriLeft"
+                  rrValidation="isCrusCerebriLeft isCrusCerebriRight"
+                >
+                </p-checkbox>
+              </div>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.tegmentummesencephali.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080343"
+                name="isTegmentumMesencephali"
+                [(ngModel)]="model.isTegmentumMesencephali"
+                rrContentReset="isTegmentumMesencephali-block"
+                class="text-break"
+              >
+              </p-checkbox>
+              <div
+                id="isTegmentumMesencephali-block"
+                [rrDisable]="!model.isTegmentumMesencephali"
+                class="o-radio-list nested-content"
+              >
+                <p-checkbox
+                  label="{{'headMRT.brainstemCranialNerves.substantiaNigra.value' | translate}}"
+                  binary="true"
+                  rr-id="hea_m_080344"
+                  name="isSubstantiaNigra"
+                  [(ngModel)]="model.isSubstantiaNigra"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  label="{{'headMRT.brainstemCranialNerves.nucleusRuber.value' | translate}}"
+                  binary="true"
+                  rr-id="hea_m_080345"
+                  name="isNucleusRuber"
+                  [(ngModel)]="model.isNucleusRuber"
+                >
+                </p-checkbox>
+              </div>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.laminaTecti.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080346"
+                name="isLaminaTecti"
+                [(ngModel)]="model.isLaminaTecti"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <div class="m-l-5">
+            <p-checkbox
+              label="{{'headMRT.brainstemCranialNerves.pons.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_080437"
+              name="isPons"
+              [(ngModel)]="model.isPons"
+              rrContentReset="isPons-block"
+              rrValidation="isMesencephalon isPons isMedullaOblongata"
+              class="m-b-10"
+            >
+            </p-checkbox>
+            <div
+              id="isPons-block"
+              [rrDisable]="!model.isPons"
+              class="f-vertical f-start o-radio-list nested-content"
+            >
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.right.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080438"
+                name="isPonsRight"
+                [(ngModel)]="model.isPonsRight"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.left.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080439"
+                name="isPonsLeft"
+                [(ngModel)]="model.isPonsLeft"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.central.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080440"
+                name="isPonsCentral"
+                [(ngModel)]="model.isPonsCentral"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.peripheral.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080441"
+                name="isPonsPeripheral"
+                [(ngModel)]="model.isPonsPeripheral"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l c-sep">
+          <div class="m-l-5">
+            <p-checkbox
+              label="{{'headMRT.brainstemCranialNerves.medullaOblongata.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_080530"
+              name="isMedullaOblongata"
+              [(ngModel)]="model.isMedullaOblongata"
+              rrContentReset="isMedullaOblongata-block"
+              rrValidation="isMesencephalon isPons isMedullaOblongata"
+              class="m-b-10"
+            >
+            </p-checkbox>
+            <div
+              id="isMedullaOblongata-block"
+              [rrDisable]="!model.isMedullaOblongata"
+              class="f-vertical f-start o-radio-list nested-content"
+            >
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.anterior.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080531"
+                name="isMedullaOblongataAnterior"
+                [(ngModel)]="model.isMedullaOblongataAnterior"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.central.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080532"
+                name="isMedullaOblongataCentral"
+                [(ngModel)]="model.isMedullaOblongataCentral"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{'headMRT.brainstemCranialNerves.posterior.value' | translate}}"
+                binary="true"
+                rr-id="hea_m_080533"
+                name="isMedullaOblongataPosterior"
+                [(ngModel)]="model.isMedullaOblongataPosterior"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

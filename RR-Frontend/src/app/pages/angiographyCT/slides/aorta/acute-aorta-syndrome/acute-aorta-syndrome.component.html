@@ -1,0 +1,663 @@
+<div class="f-horizontal f-start main-container">
+  <div class="f-vertical o-radio h-100">
+    <h2 class="c-pad m-b-10" rr-id="ang_c_070213" rrInfoIcon="ang_c_07_03">
+      {{ 'angiographyCT.aorta.acuteAortalSyndromeAAS.value' | translate }}
+    </h2>
+    <div
+      class="f-horizontal h-100"
+      *ngIf="model.acuteAortalSyndromeAasType === acuteAortalSyndromeAasType.AorticDissection"
+    >
+      <div class="c-col-1 c-sep c-pad f-vertical">
+        <p-dropdown
+          rr-id="ang_c_070232"
+          name="acuteAortalSyndromeAasType"
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="W019Values"
+          rrDropdownClear
+          [(ngModel)]="model.acuteAortalSyndromeAasType"
+          (onChange)="resetContent()"
+          rrValidation="acuteAortalSyndromeAasType"
+          rrContentReset="test"
+        >
+        </p-dropdown>
+        <h2
+          class="m-t-15 m-b-5"
+          rr-id="ang_c_070233"
+          rrValidation="aortaLocations1"
+        >
+          {{ 'angiographyCT.aorta.localizationEntry.value' | translate }}
+        </h2>
+        <rr-aortic-arch-small-ct-localizer
+          [aorticArch]="model.aortaLocations1"
+          [isArcusAortaeDivided]="true"
+          (click)="openLargeLocalizer(false,true,true)"
+          rrValidation="aortaLocations1"
+          isLocalizer="true"
+          rr-id="ang_c_070234"
+          class="m-b-10 scaled-localizer"
+        >
+        </rr-aortic-arch-small-ct-localizer>
+        <h2
+          class="m-t-15 m-b-5"
+          rr-id="ang_c_070235"
+          rrValidation="aortaLocations2"
+        >
+          {{ 'angiographyCT.aorta.localizationReentry.value' | translate }}
+        </h2>
+        <rr-aortic-arch-small-ct-localizer
+          class="scaled-localizer"
+          [aorticArch]="model.aortaLocations2"
+          [isArcusAortaeDivided]="true"
+          (click)="openLargeLocalizer(true,true,true)"
+          rrValidation="aortaLocations2"
+          isLocalizer="true"
+          rr-id="ang_c_070236"
+        >
+        </rr-aortic-arch-small-ct-localizer>
+      </div>
+      <div class="c-col-1 c-sep c-pad">
+        <h2 class="m-b-10" rr-id="ang_c_070380">
+          {{ 'angiographyCT.aorta.measurement.value' | translate }}
+        </h2>
+        <p class="m-b-5" rr-id="ang_c_070381">
+          {{ 'angiographyCT.aorta.maxDiameterAorta.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.sizeInAxialPlanein.value' | translate"
+          [config]="{min: 1, max: 150, labelWidth: 180, placeholder: '---'}"
+          inputRrId="ang_c_070383"
+          labelRrId="ang_c_070382"
+          name="maxDiameterAortaInMm"
+          class="text-break"
+          [(ngModel)]="model.maxDiameterAortaInMm"
+          (announceModelChange)="resetMeasurementType()"
+        ></rr-number-input>
+        <div [rrDisable]="!model.maxDiameterAortaInMm">
+          <p class="m-t-10 m-b-5" rr-id="ang_c_070384">
+            {{ 'angiographyCT.aorta.localizationOfTheMeasurement.value' |
+            translate }}
+          </p>
+          <p-dropdown
+            rr-id="ang_c_070385"
+            name="localizationOfTheMeasurementType"
+            styleClass="ui-brown-box o-width-100"
+            [options]="W020Values"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            rrDropdownClear
+            [(ngModel)]="model.localizationOfTheMeasurementType"
+            rrValidation="localizationOfTheMeasurementType"
+          >
+          </p-dropdown>
+        </div>
+        <p class="m-t-10 m-b-5" rr-id="ang_c_070386">
+          {{ 'angiographyCT.aorta.craniocaudalLength.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.inMm.value' | translate"
+          [config]="{min: 1, max: 500, labelWidth: 180, placeholder: '---'}"
+          inputRrId="ang_c_070387"
+          labelRrId="ang_c_070388"
+          name="craniocaudalLengthInMm"
+          [(ngModel)]="model.craniocaudalLengthInMm"
+          rrValidation="craniocaudalLengthInMm"
+        ></rr-number-input>
+        <div class="o-radio-list m-r-35">
+          <h2 class="m-t-35 m-b-10" rr-id="ang_c_070389">
+            {{ 'angiographyCT.aorta.associatedFindings.value' | translate }}
+          </h2>
+          <p-checkbox
+            name="isThrombosisFalseLumen"
+            label="{{ 'angiographyCT.aorta.thrombosisFalseLumen.value' | translate }}"
+            rr-id="ang_c_070390"
+            binary="true"
+            [(ngModel)]="model.isThrombosisFalseLumen"
+          ></p-checkbox>
+          <p-checkbox
+            name="isPericardialEffusion"
+            label="{{ 'angiographyCT.aorta.pericardialEffusion.value' | translate }}"
+            rr-id="ang_c_070391"
+            binary="true"
+            [(ngModel)]="model.isPericardialEffusion"
+            (onChange)="resetPericardialEffusionType()"
+          ></p-checkbox>
+          <p-dropdown
+            [rrDisable]="!model.isPericardialEffusion"
+            rr-id="ang_c_070392"
+            name="pericardialEffusionType"
+            styleClass="ui-brown-box o-width-100"
+            [options]="W021Values"
+            placeholder="{{ 'shared.selectCharacterization' | translate }}"
+            rrDropdownClear
+            [(ngModel)]="model.pericardialEffusionType"
+            class="nested-content"
+          >
+          </p-dropdown>
+          <p-checkbox
+            name="isPleuralEffusion"
+            label="{{ 'angiographyCT.aorta.pleuralEffusion.value' | translate }}"
+            rr-id="ang_c_070393"
+            binary="true"
+            [(ngModel)]="model.isPleuralEffusion"
+            (onChange)="resetPleuralEffusionType()"
+            class="m-t-10"
+          ></p-checkbox>
+          <p-dropdown
+            [rrDisable]="!model.isPleuralEffusion"
+            rr-id="ang_c_070394"
+            name="pleuralEffusionType"
+            styleClass="ui-brown-box o-width-100"
+            [options]="W021Values"
+            placeholder="{{ 'shared.selectCharacterization' | translate }}"
+            rrDropdownClear
+            [(ngModel)]="model.pleuralEffusionType"
+            class="nested-content"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+      <div id="test" class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 class="m-b-10" rr-id="ang_c_070452">
+          {{ 'angiographyCT.aorta.branchVesselInvolvement.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isRightCoronaryArtery"
+          label="{{ 'angiographyCT.aorta.rightCoronaryArtery.value' | translate }}"
+          rr-id="ang_c_070453"
+          binary="true"
+          [(ngModel)]="model.isRightCoronaryArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isLeftCoronaryArtery"
+          label="{{ 'angiographyCT.aorta.leftCoronaryArtery.value' | translate }}"
+          rr-id="ang_c_070454"
+          binary="true"
+          [(ngModel)]="model.isLeftCoronaryArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isBrachiocephalicTrunk"
+          label="{{ 'angiographyCT.aorta.brachiocephalicTrunk.value' | translate }}"
+          rr-id="ang_c_070455"
+          binary="true"
+          [(ngModel)]="model.isBrachiocephalicTrunk"
+        ></p-checkbox>
+        <p-checkbox
+          name="isRightSubclavianArtery"
+          label="{{ 'angiographyCT.aorta.rightSubclavianArtery.value' | translate }}"
+          rr-id="ang_c_070456"
+          binary="true"
+          [(ngModel)]="model.isRightSubclavianArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isRightCommonCarotidArtery"
+          label="{{ 'angiographyCT.aorta.rightCommonCarotidArtery.value' | translate }}"
+          rr-id="ang_c_070457"
+          binary="true"
+          [(ngModel)]="model.isRightCommonCarotidArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isLeftCommonCarotidArtery"
+          label="{{ 'angiographyCT.aorta.leftCommonCarotidArtery.value' | translate }}"
+          rr-id="ang_c_070458"
+          binary="true"
+          [(ngModel)]="model.isLeftCommonCarotidArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isLeftSubclavianArtery"
+          label="{{ 'angiographyCT.aorta.leftSubclavianArtery.value' | translate }}"
+          rr-id="ang_c_070459"
+          binary="true"
+          [(ngModel)]="model.isLeftSubclavianArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isCoeliacTrunk"
+          label="{{ 'angiographyCT.aorta.coeliacTrunk.value' | translate }}"
+          rr-id="ang_c_070460"
+          binary="true"
+          [(ngModel)]="model.isCoeliacTrunk"
+        ></p-checkbox>
+        <p-checkbox
+          name="isSuperiorMesentericArterySma"
+          label="{{ 'angiographyCT.aorta.superiorMesentericArterySMA.value' | translate }}"
+          rr-id="ang_c_070461"
+          binary="true"
+          [(ngModel)]="model.isSuperiorMesentericArterySma"
+        ></p-checkbox>
+        <p-checkbox
+          name="isInferiorMesentericArteryIma"
+          label="{{ 'angiographyCT.aorta.inferiorMesentericArteryIMA.value' | translate }}"
+          rr-id="ang_c_070462"
+          binary="true"
+          [(ngModel)]="model.isInferiorMesentericArteryIma"
+        ></p-checkbox>
+        <p-checkbox
+          name="isRightRenalArtery"
+          label="{{ 'angiographyCT.aorta.rightRenalArtery.value' | translate }}"
+          rr-id="ang_c_070463"
+          binary="true"
+          [(ngModel)]="model.isRightRenalArtery"
+        ></p-checkbox>
+        <p-checkbox
+          name="isLeftRenalArtery"
+          label="{{ 'angiographyCT.aorta.leftRenalArtery.value' | translate }}"
+          rr-id="ang_c_070464"
+          binary="true"
+          [(ngModel)]="model.isLeftRenalArtery"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep c-pad">
+        <h2 class="m-b-5" rr-id="ang_c_070549">
+          {{ 'angiographyCT.aorta.classification.value' | translate }}
+        </h2>
+        <p class="m-b-10" rr-id="ang_c_070550" rrInfoIcon="ang_c_07_04">
+          {{ 'angiographyCT.aorta.stanford.value' | translate }}
+        </p>
+        <p-dropdown
+          rr-id="ang_c_070551"
+          name="stanfordType"
+          styleClass="ui-brown-box o-width-100"
+          [options]="W022Values"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          rrDropdownClear
+          [(ngModel)]="model.stanfordType"
+        >
+        </p-dropdown>
+        <p class="m-t-10 m-b-5" rr-id="ang_c_070552" rrInfoIcon="ang_c_07_05">
+          {{ 'angiographyCT.aorta.deBakey.value' | translate }}
+        </p>
+        <p-dropdown
+          rr-id="ang_c_070553"
+          name="debakeyType"
+          styleClass="ui-brown-box o-width-100"
+          [options]="W023Values"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          rrDropdownClear
+          [(ngModel)]="model.debakeyType"
+        >
+        </p-dropdown>
+        <p class="m-t-10 m-b-5" rr-id="ang_c_070554" rrInfoIcon="ang_c_07_06">
+          {{ 'angiographyCT.aorta.svensson.value' | translate }}
+        </p>
+        <p-dropdown
+          rr-id="ang_c_070555"
+          name="svenssonType"
+          styleClass="ui-brown-box o-width-100"
+          [options]="W024Values"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          rrDropdownClear
+          [(ngModel)]="model.svenssonType"
+        >
+        </p-dropdown>
+        <h2 class="m-t-25 m-b-10" rr-id="ang_c_070556">
+          {{ 'angiographyCT.aorta.complication.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isAcuteExtravascularHematoma"
+          label="{{ 'angiographyCT.aorta.acuteExtravascularHematoma.value' | translate }}"
+          rr-id="ang_c_070557"
+          binary="true"
+          [(ngModel)]="model.isAcuteExtravascularHematoma"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="f-horizontal h-100"
+      *ngIf="model.acuteAortalSyndromeAasType === acuteAortalSyndromeAasType.IntramuralHematomaImh"
+    >
+      <div class="c-col-1 c-sep c-pad f-vertical">
+        <p-dropdown
+          rr-id="ang_c_070232"
+          name="acuteAortalSyndromeAasType"
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="W019Values"
+          rrDropdownClear
+          [(ngModel)]="model.acuteAortalSyndromeAasType"
+          (onChange)="resetContent()"
+          rrValidation="acuteAortalSyndromeAasType"
+        >
+        </p-dropdown>
+        <h2
+          class="m-t-15 m-b-5"
+          rr-id="ang_c_070237"
+          rrValidation="aortaLocations1"
+        >
+          {{ 'angiographyCT.aorta.localization.value' | translate }}
+        </h2>
+        <rr-aortic-arch-small-ct-localizer
+          class="scaled-localizer"
+          [aorticArch]="model.aortaLocations1"
+          [isArcusAortaeDivided]="true"
+          (click)="openLargeLocalizer(false, false, true, true)"
+          rrValidation="aortaLocations1"
+          isLocalizer="true"
+          rr-id="ang_c_070238"
+        >
+        </rr-aortic-arch-small-ct-localizer>
+        <div class="o-radio-list">
+          <h2 class="m-t-25 m-b-10" rr-id="ang_c_070239">
+            {{ 'angiographyCT.aorta.beginning.value' | translate }}
+          </h2>
+          <p-radioButton
+            labelStyleClass="text-break"
+            name="beginningType"
+            [value]="beginningType.AscendingAorta"
+            label="{{ 'angiographyCT.aorta.ascendingAorta.value' | translate }}"
+            rr-id="ang_c_070240"
+            [(ngModel)]="model.beginningType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            labelStyleClass="text-break"
+            name="beginningType"
+            [value]="beginningType.DistalToTheOriginOfLeftSubclavianArtery"
+            label="{{ 'angiographyCT.aorta.distalToTheOrigin.value' | translate }}"
+            rr-id="ang_c_070241"
+            [(ngModel)]="model.beginningType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad">
+        <h2 class="m-b-10" rr-id="ang_c_070380">
+          {{ 'angiographyCT.aorta.measurement.value' | translate }}
+        </h2>
+        <p class="m-b-5" rr-id="ang_c_070381">
+          {{ 'angiographyCT.aorta.maxDiameterAorta.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.sizeInAxialPlanein.value' | translate"
+          [config]="{min: 1, max: 150, labelWidth: 180, placeholder: '---'}"
+          inputRrId="ang_c_070383"
+          labelRrId="ang_c_070382"
+          name="maxDiameterAortaInMm"
+          class="text-break"
+          [(ngModel)]="model.maxDiameterAortaInMm"
+          (announceModelChange)="resetMeasurementType()"
+        ></rr-number-input>
+        <div [rrDisable]="!model.maxDiameterAortaInMm">
+          <p class="m-t-10 m-b-5" rr-id="ang_c_070384">
+            {{ 'angiographyCT.aorta.localizationOfTheMeasurement.value' |
+            translate }}
+          </p>
+          <p-dropdown
+            rr-id="ang_c_070385"
+            name="localizationOfTheMeasurementType"
+            styleClass="ui-brown-box o-width-100"
+            [options]="W020Values"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            rrDropdownClear
+            [(ngModel)]="model.localizationOfTheMeasurementType"
+            [rrDisable]="!model.maxDiameterAortaInMm"
+            rrValidation="localizationOfTheMeasurementType"
+          >
+          </p-dropdown>
+        </div>
+        <p class="m-t-10 m-b-5" rr-id="ang_c_070386">
+          {{ 'angiographyCT.aorta.craniocaudalLength.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.inMm.value' | translate"
+          [config]="{min: 1, max: 500, labelWidth: 180, placeholder: '---'}"
+          inputRrId="ang_c_070387"
+          labelRrId="ang_c_070388"
+          name="craniocaudalLengthInMm"
+          [(ngModel)]="model.craniocaudalLengthInMm"
+          rrValidation="craniocaudalLengthInMm"
+        ></rr-number-input>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 class="m-b-10" rr-id="ang_c_070465">
+          {{ 'angiographyCT.aorta.details.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isWallThickening"
+          label="{{ 'angiographyCT.aorta.wallThickening.value' | translate }}"
+          rr-id="ang_c_070466"
+          binary="true"
+          [(ngModel)]="model.isWallThickening"
+          rrContentReset="wallThickeningBlock"
+        ></p-checkbox>
+        <div
+          id="wallThickeningBlock"
+          [rrDisable]="!model.isWallThickening"
+          class="o-radio-list nested-content"
+        >
+          <p-checkbox
+            name="isEccentric"
+            label="{{ 'angiographyCT.aorta.eccentric.value' | translate }}"
+            rr-id="ang_c_070467"
+            binary="true"
+            [(ngModel)]="model.isEccentric"
+          ></p-checkbox>
+          <p class="m-b-10" rr-id="ang_c_070468">
+            {{ 'angiographyCT.aorta.wallThickness.value' | translate }}
+          </p>
+          <rr-number-input
+            [label]="'angiographyCT.aorta.inMm.value' | translate"
+            [config]="{min: 1, max: 99, labelWidth: 180, placeholder: '--'}"
+            inputRrId="ang_c_070469"
+            labelRrId="ang_c_070470"
+            name="wallThicknessInMm"
+            [(ngModel)]="model.wallThicknessInMm"
+          ></rr-number-input>
+          <p class="m-t-10 m-b-10" rr-id="ang_c_070471">
+            {{ 'angiographyCT.aorta.density.value' | translate }}
+          </p>
+          <p-radioButton
+            name="densityType"
+            [value]="densityType.HyperdensAcute"
+            label="{{ 'angiographyCT.aorta.hyperdensAcute.value' | translate }}"
+            rr-id="ang_c_070472"
+            [(ngModel)]="model.densityType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="densityType"
+            [value]="densityType.IsodensChronic"
+            label="{{ 'angiographyCT.aorta.isodensChronic.value' | translate }}"
+            rr-id="ang_c_070473"
+            [(ngModel)]="model.densityType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 class="m-b-10" rr-id="ang_c_070556">
+          {{ 'angiographyCT.aorta.complication.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isRupture"
+          label="{{ 'angiographyCT.aorta.rupture.value' | translate }}"
+          rr-id="ang_c_070558"
+          binary="true"
+          [(ngModel)]="model.isRupture"
+          rrContentReset="isRuptureBlock"
+        ></p-checkbox>
+        <div
+          id="isRuptureBlock"
+          [rrDisable]="!model.isRupture"
+          class="nested-content o-radio-list"
+        >
+          <p-checkbox
+            [rrDisable]="!isCmYes"
+            name="isCmExtravasation"
+            label="{{ 'angiographyCT.aorta.cMExtravasation.value' | translate }}"
+            rr-id="ang_c_070559"
+            binary="true"
+            [(ngModel)]="model.isCmExtravasation"
+          ></p-checkbox>
+          <p-checkbox
+            name="isAcuteExtravascularHematoma"
+            label="{{ 'angiographyCT.aorta.acuteExtravascularhematoma.value' | translate }}"
+            rr-id="ang_c_070560"
+            binary="true"
+            [(ngModel)]="model.isAcuteExtravascularHematoma"
+          ></p-checkbox>
+        </div>
+        <h2 class="m-t-25 m-b-10" rr-id="ang_c_070561">
+          {{ 'angiographyCT.aorta.differentialDiagnosis.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isAortitis"
+          label="{{ 'angiographyCT.aorta.aortitis.value' | translate }}"
+          rr-id="ang_c_070562"
+          binary="true"
+          [(ngModel)]="model.isAortitis"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="f-horizontal h-100"
+      *ngIf="model.acuteAortalSyndromeAasType === acuteAortalSyndromeAasType.PenetratingAorticUlcerPau"
+    >
+      <div class="c-col-1 c-sep c-pad f-vertical">
+        <p-dropdown
+          rr-id="ang_c_070232"
+          name="acuteAortalSyndromeAasType"
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="W019Values"
+          rrDropdownClear
+          [(ngModel)]="model.acuteAortalSyndromeAasType"
+          (onChange)="resetContent()"
+          rrValidation="acuteAortalSyndromeAasType"
+        >
+        </p-dropdown>
+        <h2 class="m-t-20" rr-id="ang_c_070237" rrValidation="aortaLocations1">
+          {{ 'angiographyCT.aorta.localization.value' | translate }}
+        </h2>
+        <rr-aortic-arch-small-ct-localizer
+          class="scaled-localizer"
+          [aorticArch]="model.aortaLocations1"
+          [isArcusAortaeDivided]="true"
+          (click)="openLargeLocalizer(false, false, true, true)"
+          rrValidation="aortaLocations1"
+          isLocalizer="true"
+          rr-id="ang_c_070238"
+        >
+        </rr-aortic-arch-small-ct-localizer>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 class="m-b-10" rr-id="ang_c_070380">
+          {{ 'angiographyCT.aorta.measurement.value' | translate }}
+        </h2>
+        <p class="m-b-5" rr-id="ang_c_070381">
+          {{ 'angiographyCT.aorta.maxDiameterAorta.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.sizeInAxialPlanein.value' | translate"
+          [config]="{min: 1, max: 150, labelWidth: 180, placeholder: '---'}"
+          inputRrId="ang_c_070383"
+          labelRrId="ang_c_070382"
+          name="maxDiameterAortaInMm"
+          class="text-break"
+          [(ngModel)]="model.maxDiameterAortaInMm"
+          (announceModelChange)="resetMeasurementType()"
+        ></rr-number-input>
+        <div [rrDisable]="!model.maxDiameterAortaInMm">
+          <p class="m-t-10 m-b-5" rr-id="ang_c_070384">
+            {{ 'angiographyCT.aorta.localizationOfTheMeasurement.value' |
+            translate }}
+          </p>
+          <p-dropdown
+            rr-id="ang_c_070385"
+            name="localizationOfTheMeasurementType"
+            styleClass="ui-brown-box o-width-100"
+            [options]="W020Values"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            rrDropdownClear
+            [(ngModel)]="model.localizationOfTheMeasurementType"
+            rrValidation="localizationOfTheMeasurementType"
+          >
+          </p-dropdown>
+        </div>
+        <p class="m-t-10 m-b-5" rr-id="ang_c_070386">
+          {{ 'angiographyCT.aorta.craniocaudalLength.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.inMm.value' | translate"
+          [config]="{min: 1, max: 500, labelWidth: 180, placeholder: '---'}"
+          inputRrId="ang_c_070387"
+          labelRrId="ang_c_070388"
+          name="craniocaudalLengthInMm"
+          [(ngModel)]="model.craniocaudalLengthInMm"
+          rrValidation="craniocaudalLengthInMm"
+        ></rr-number-input>
+        <p class="m-t-10 m-b-5" rr-id="ang_c_070395">
+          {{ 'angiographyCT.aorta.depth.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.aorta.inMm.value' | translate"
+          [config]="{min: 1, max: 99, labelWidth: 180, placeholder: '--'}"
+          inputRrId="ang_c_070396"
+          labelRrId="ang_c_070397"
+          name="depthInMm"
+          [(ngModel)]="model.depthInMm"
+        ></rr-number-input>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 class="m-b-10" rr-id="ang_c_070465">
+          {{ 'angiographyCT.aorta.details.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isMushroomShaped"
+          label="{{ 'angiographyCT.aorta.mushroomshaped.value' | translate }}"
+          rr-id="ang_c_070474"
+          binary="true"
+          [(ngModel)]="model.isMushroomShaped"
+        ></p-checkbox>
+        <h2 class="m-t-25" rr-id="ang_c_070475">
+          {{ 'angiographyCT.aorta.complication.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isIntramuralAorticHematoma"
+          label="{{ 'angiographyCT.aorta.intramuralAorticHematoma.value' | translate }}"
+          rr-id="ang_c_070476"
+          binary="true"
+          [(ngModel)]="model.isIntramuralAorticHematoma"
+        ></p-checkbox>
+        <p-checkbox
+          name="isAcuteExtravascularHematoma"
+          label="{{ 'angiographyCT.aorta.acuteExtravascularHematoma.value' | translate }}"
+          rr-id="ang_c_070477"
+          binary="true"
+          [(ngModel)]="model.isAcuteExtravascularHematoma"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 rr-id="ang_c_070561">
+          {{ 'angiographyCT.aorta.differentialDiagnosis.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isAortitis"
+          label="{{ 'angiographyCT.aorta.aortitis.value' | translate }}"
+          rr-id="ang_c_070562"
+          binary="true"
+          [(ngModel)]="model.isAortitis"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="f-horizontal h-100"
+      *ngIf="model.acuteAortalSyndromeAasType === acuteAortalSyndromeAasType.None"
+    >
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <p-dropdown
+          rr-id="ang_c_070232"
+          name="acuteAortalSyndromeAasType"
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="W019Values"
+          rrDropdownClear
+          [(ngModel)]="model.acuteAortalSyndromeAasType"
+          rrValidation="acuteAortalSyndromeAasType"
+        >
+        </p-dropdown>
+      </div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad"></div>
+    </div>
+  </div>
+</div>

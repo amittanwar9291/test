@@ -1,0 +1,402 @@
+<div class="f-horizontal col-h-100 w-100 p-t-29 m-b-20">
+  <div class="c-col-1 c-pad o-list">
+    <div class="o-radio-list p-l-10 m-b-30">
+      <h2 rr-id="pel_m_080232" class="m-b-15">
+        {{ 'pelvisMRT.rectum.pathology.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.sigmoidDiverticulosis.value' | translate}}"
+        rr-id="pel_m_080233"
+        name="pathologyType"
+        [value]="pathologyType.SigmoidDiverticulosis"
+        [(ngModel)]="model.pathologyType"
+        (onClick)="resetContent()"
+        rrContentReset="pathologyBlockCol2 pathologyBlockCol3 pathologyBlockCol4"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.diverticulitis.value' | translate}}"
+        rr-id="pel_m_080234"
+        name="pathologyType"
+        [value]="pathologyType.Diverticulitis"
+        [(ngModel)]="model.pathologyType"
+        (onClick)="resetContent()"
+        rrContentReset="pathologyBlockCol2 pathologyBlockCol3 pathologyBlockCol4"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+    </div>
+    <div *ngIf="model.pathologyType !== pathologyType.None">
+      <div class="o-radio-list m-b-20 p-l-10">
+        <h2 rr-id="pel_m_080235" class="m-b-15">
+          {{ 'pelvisMRT.rectum.numberOfDiverticula.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.multiple.value' | translate}}"
+          rr-id="pel_m_080236"
+          name="numberOfDiverticulaType"
+          [value]="numberOfDiverticulaType.MultipleDiverticula"
+          [(ngModel)]="model.numberOfDiverticulaType"
+          rrContentReset="diameterBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.single.value' | translate}}"
+          rr-id="pel_m_080237"
+          name="numberOfDiverticulaType"
+          [value]="numberOfDiverticulaType.SingleDiverticula"
+          [(ngModel)]="model.numberOfDiverticulaType"
+          rrContentReset="diameterBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          id="diameterBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="model.numberOfDiverticulaType !== numberOfDiverticulaType.SingleDiverticula"
+        >
+          <p rr-id="pel_m_080238">
+            {{ 'pelvisMRT.rectum.diameter.value' | translate }}
+          </p>
+          <rr-number-input
+            [label]="'pelvisMRT.rectum.inMm.value' | translate"
+            [config]="{min: 0, max: 9999}"
+            [inputRrId]="'pel_m_080239'"
+            [labelRrId]="'pel_m_080240'"
+            name="singularDiverticulaDiameter"
+            [(ngModel)]="model.singularDiverticulaDiameter"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div class="o-radio-list p-l-10">
+        <h2 rr-id="pel_m_080241" class="m-b-10">
+          {{ 'pelvisMRT.rectum.localization.value' | translate }}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.oralThird.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802420"
+          name="isUpperThird"
+          [(ngModel)]="model.isUpperThird"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.middleThird.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802430"
+          name="isMiddleThird"
+          [(ngModel)]="model.isMiddleThird"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.aboralThird.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0802440"
+          name="isLowerThird"
+          [(ngModel)]="model.isLowerThird"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad c-sep-l o-list m-b-20 m-t-35"
+    id="pathologyBlockCol2"
+  >
+    <div
+      *ngIf="model.pathologyType === pathologyType.Diverticulitis"
+      class="o-radio-list p-l-10"
+    >
+      <div class="o-radio-list">
+        <h2 rr-id="pel_m_0803350" class="m-b-15">
+          {{ 'pelvisMRT.rectum.morphology.value' | translate }}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.intestinalWallThickening.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080324"
+          name="isIntestinalWallThickening"
+          [(ngModel)]="model.isIntestinalWallThickening"
+          rrContentReset="thickeningOfTheIntestinalBlock"
+        ></p-checkbox>
+        <div
+          id="thickeningOfTheIntestinalBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isIntestinalWallThickening"
+        >
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.focal.value' | translate}}"
+            rr-id="pel_m_080325"
+            name="intestinalWallThickeningType"
+            [value]="intestinalWallThickeningType.Focal"
+            [(ngModel)]="model.intestinalWallThickeningType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.ubiquitous.value' | translate}}"
+            rr-id="pel_m_080326"
+            name="intestinalWallThickeningType"
+            [value]="intestinalWallThickeningType.Ubiquitous"
+            [(ngModel)]="model.intestinalWallThickeningType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p rr-id="pel_m_080327">
+            {{ 'pelvisMRT.rectum.maximumWallThickness.value' | translate }}
+          </p>
+          <rr-number-input
+            [label]="'pelvisMRT.rectum.inMm.value' | translate"
+            [config]="{min: 0, max: 9999}"
+            [inputRrId]="'pel_m_080328'"
+            [labelRrId]="'pel_m_080329'"
+            name="maximumWallThickness"
+            [(ngModel)]="model.maximumWallThickness"
+          ></rr-number-input>
+          <p rr-id="pel_m_0803201">
+            {{ 'pelvisMRT.rectum.longitudinalExpansion.value' | translate }}
+          </p>
+          <div class="m-b-15">
+            <rr-number-input
+              [label]="'pelvisMRT.rectum.inCm.value' | translate"
+              [config]="{min: 0, max: 9999}"
+              [inputRrId]="'pel_m_0803202'"
+              [labelRrId]="'pel_m_0803203'"
+              name="longitudinalExpansion"
+              [(ngModel)]="model.longitudinalExpansion"
+            ></rr-number-input>
+          </div>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.mesentericFatObliteration.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0803204"
+          name="isMesentericFatObliteration"
+          [(ngModel)]="model.isMesentericFatObliteration"
+        ></p-checkbox>
+        <div
+          [rrDisable]="technologyModel && technologyModel.cmReinforcedType !== cmReinforcedType.Yes"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.increasedCMEnhancementOf.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_0803205"
+            name="isIncreasedEnhancementOfIntestinalWall"
+            [(ngModel)]="model.isIncreasedEnhancementOfIntestinalWall"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad c-sep-l o-list m-b-20 m-t-35"
+    id="pathologyBlockCol3"
+  >
+    <div *ngIf="model.pathologyType === pathologyType.Diverticulitis">
+      <h2 rr-id="pel_m_0804125" class="m-b-15 p-l-10">
+        {{ 'pelvisMRT.rectum.perforation.value' | translate }}
+      </h2>
+      <div class="o-radio-list p-l-10">
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.coveredPerforation.value' | translate}}"
+          rr-id="pel_m_0804126"
+          name="sigmoidDiverticularDiseasePerforationType"
+          [value]="perforationType.CoveredPerforation"
+          [(ngModel)]="model.sigmoidDiverticularDiseasePerforationType"
+          rrUnClickRadio
+          rrContentReset="perforationTypeGroup"
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.freePerforation.value' | translate}}"
+          rr-id="pel_m_0804127"
+          name="sigmoidDiverticularDiseasePerforationType"
+          [value]="perforationType.FreePerforation"
+          [(ngModel)]="model.sigmoidDiverticularDiseasePerforationType"
+          rrUnClickRadio
+          rrContentReset="perforationTypeGroup"
+        ></p-radioButton>
+        <div
+          class="p-l-35"
+          id="perforationTypeGroup"
+          [rrDisable]="model.sigmoidDiverticularDiseasePerforationType !== perforationType.FreePerforation"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.indicationsOfFreeAir.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_0804128"
+            name="isFreeAir"
+            [(ngModel)]="model.isFreeAir"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="o-radio-list p-l-10 m-t-35">
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.abscess.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080421"
+          name="isAbscess"
+          [(ngModel)]="model.isAbscess"
+          rrContentReset="abscessBlock"
+        ></p-checkbox>
+        <div
+          id="abscessBlock"
+          class="o-radio-list p-l-35 m-b-20"
+          [rrDisable]="!model.isAbscess"
+        >
+          <p rr-id="pel_m_080422">
+            {{ 'pelvisMRT.rectum.maximumDiameter.value' | translate }}
+          </p>
+          <!-- calculated input -->
+          <rr-number-input
+            [label]="'pelvisMRT.rectum.inMm.value' | translate"
+            [config]="{min: 0, max: 9999}"
+            [inputRrId]="'pel_m_080423'"
+            [labelRrId]="'pel_m_080424'"
+            name="abscessMaximumDiameter"
+            [(ngModel)]="model.abscessMaximumDiameter"
+            (ngModelChange)="maximumDiameterChange($event)"
+          ></rr-number-input>
+          <div class="o-radio-list m-t-10">
+            <p-radioButton
+              label="{{'pelvisMRT.rectum.microAbscessMm.value' | translate}}"
+              rr-id="pel_m_080425"
+              name="abscessMaximumDiameterType"
+              class="radiobutton-readonly"
+              [value]="abscessMaximumDiameterType.Micro"
+              [(ngModel)]="model.abscessMaximumDiameterType"
+              rrContentReset="isPossibleCtGuidedDrainageBlock"
+            ></p-radioButton>
+            <p-radioButton
+              label="{{'pelvisMRT.rectum.macroAbscessMm.value' | translate}}"
+              rr-id="pel_m_080426"
+              name="abscessMaximumDiameterType"
+              class="radiobutton-readonly"
+              [value]="abscessMaximumDiameterType.Macro"
+              [(ngModel)]="model.abscessMaximumDiameterType"
+              rrContentReset="isPossibleCtGuidedDrainageBlock"
+            ></p-radioButton>
+          </div>
+          <div
+            class="o-radio-list p-l-35"
+            [rrDisable]="!macroAbscessMoreThan10Mm"
+            id="isPossibleCtGuidedDrainageBlock"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.rectum.possibleCtGuidedDrainage.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_080427"
+              name="isPossibleCtGuidedDrainage"
+              [(ngModel)]="model.isPossibleCtGuidedDrainage"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.lesion.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_080428"
+            name="isLesion"
+            [(ngModel)]="model.isMoreThanOneLesion"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="pathologyBlockCol4"
+    class="c-col-1 c-pad-l c-sep-l o-list m-t-35 m-b-20"
+  >
+    <div
+      *ngIf="model.pathologyType === pathologyType.Diverticulitis"
+      class="o-radio-list p-l-13"
+    >
+      <h2 rr-id="pel_m_080518" class="m-b-17">
+        {{ 'pelvisMRT.rectum.furtherComplications.value' | translate }}
+      </h2>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.freeFluid.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080519"
+        name="isFreeFluid"
+        [(ngModel)]="model.isFreeFluid"
+        rrContentReset="hemorrhagicBlock"
+      ></p-checkbox>
+      <div
+        id="hemorrhagicBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="!model.isFreeFluid"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.hemorrhagic.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080520"
+          name="isHemorrhagic"
+          [(ngModel)]="model.isHemorrhagic"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.fistula.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080521"
+        name="isFistula"
+        [(ngModel)]="model.isFistula"
+        rrContentReset="fistulaTypeBlock"
+      ></p-checkbox>
+      <div
+        id="fistulaTypeBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="!model.isFistula"
+      >
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.urinaryBladder.value' | translate}}"
+          rr-id="pel_m_080522"
+          name="fistulaType"
+          [value]="complicationsFistulaType.Bladder"
+          [(ngModel)]="model.complicationsFistulaType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.intestine.value' | translate}}"
+          rr-id="pel_m_080523"
+          name="fistulaType"
+          [value]="complicationsFistulaType.Intestine"
+          [(ngModel)]="model.complicationsFistulaType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.uterus.value' | translate}}"
+          rr-id="pel_m_080524"
+          name="fistulaType"
+          [value]="complicationsFistulaType.Uterus"
+          [(ngModel)]="model.complicationsFistulaType"
+          [rrDisable]="localizationModel && localizationModel.patientInformation.gender !== genderType.Female"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.phlegmons.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080525"
+        name="isPhlegmons"
+        [(ngModel)]="model.isPhlegmons"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.stenosis.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080526"
+        name="isStenosis"
+        [(ngModel)]="model.isStenosis"
+        rrContentReset="stenosisGroup"
+      ></p-checkbox>
+      <div class="p-l-35" id="stenosisGroup" [rrDisable]="!model.isStenosis">
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.ileus.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0805101"
+          name="isIleus"
+          [(ngModel)]="model.isIleus"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.peritonitis.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080527"
+        name="isPeritonitis"
+        [(ngModel)]="model.isPeritonitis"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

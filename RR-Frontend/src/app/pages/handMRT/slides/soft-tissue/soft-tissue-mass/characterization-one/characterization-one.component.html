@@ -1,0 +1,278 @@
+<div class="f-horizontal w-100 h-100">
+  <div class="c-col-1 c-pad c-sep o-list m-t-30 m-b-15">
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+    >
+      <h2 rr-id="han_m_080208">
+        {{ 'handMRT.softTissue.differentialDiagnosis.value' | translate }}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="w018"
+        group="true"
+        name="differentialDiagnosis"
+        rrId="han_m_080209"
+        [(ngModel)]="model.differentialDiagnosis"
+        (selectionChanged)="resetDependenciesDifferentialDiagnose()"
+        rrValidation="differentialDiagnosis"
+        [parentViewModel]="model"
+        isActiveOnIKnow="true"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="o-radio-list"
+        [rrDisable]="model.differentialDiagnosis === softTissueDifferentialDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.softTissue.histologyKnown.value' | translate}}"
+          rr-id="han_m_080210"
+          name="isHistologyKnown"
+          [(ngModel)]="model.isHistologyKnown"
+          rrContentReset="histologyKnownBlock"
+        ></p-checkbox>
+        <div
+          id="histologyKnownBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isHistologyKnown"
+        >
+          <p-radioButton
+            rr-id="han_m_080211"
+            name="histologyKnownType"
+            [value]="histologyKnownType.Benign"
+            label="{{ 'handMRT.softTissue.benign.value' | translate }}"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="han_m_080212"
+            name="histologyKnownType"
+            [value]="histologyKnownType.Malignant"
+            label="{{ 'handMRT.softTissue.malignant.value' | translate }}"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list m-t-30 m-b-15">
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_080318">
+        {{ 'handMRT.softTissue.localization.value' | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="han_m_080319"
+        name="localizationType"
+        [value]="localizationType.Palmar"
+        label="{{ 'handMRT.softTissue.palmar.value' | translate }}"
+        [(ngModel)]="model.localizationType"
+        rrValidation="localizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_080320"
+        name="localizationType"
+        [value]="localizationType.Dorsal"
+        label="{{ 'handMRT.softTissue.dorsal.value' | translate }}"
+        [(ngModel)]="model.localizationType"
+        rrValidation="localizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_080321"
+        name="localizationType"
+        [value]="localizationType.Radial"
+        label="{{ 'handMRT.softTissue.radial.value' | translate }}"
+        [(ngModel)]="model.localizationType"
+        rrValidation="localizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_080322"
+        name="localizationType"
+        [value]="localizationType.Ulnar"
+        label="{{ 'handMRT.softTissue.ulnar.value' | translate }}"
+        [(ngModel)]="model.localizationType"
+        rrValidation="localizationType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_080323">
+        {{ 'handMRT.softTissue.centerOfTheSoft.value' | translate }}
+      </h2>
+      <rr-hand-details-small
+        name="handLocationsLocalizer"
+        rr-id="han_m_080324"
+        [side]="localizerModel"
+        [isComplex]="false"
+        (click)="openLocalizer()"
+        [(ngModel)]="model.handLocationsLocalizer"
+      ></rr-hand-details-small>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list m-t-30 m-b-15">
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_0800402">
+        {{ 'handMRT.softTissue.expansion.value' | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p rr-id="han_m_0800403">
+          {{ 'handMRT.softTissue.size.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="han_m_0800404"
+          labelRrId="han_m_0800405"
+          name="size"
+          [(ngModel)]="model.size"
+          [label]="'handMRT.softTissue.inMm.value' | translate"
+          [config]="{min: 1, max: 150, labelWidth: 200, placeholder: '---'}"
+          (announceModelChange)="resetNumberInputs()"
+          rrValidation="size"
+        >
+        </rr-number-input>
+      </div>
+      <div class="o-radio-list" [rrDisable]="model.size === null">
+        <p rr-id="han_m_0800406">
+          {{ 'handMRT.softTissue.2ndPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="han_m_0800407"
+          labelRrId="han_m_0800408"
+          name="secondPlane"
+          [(ngModel)]="model.secondPlane"
+          [label]="'handMRT.softTissue.inMm.value' | translate"
+          [config]="{min: 1, max: 150, labelWidth: 200, placeholder: '---'}"
+          (announceModelChange)="resetNumberInputs()"
+        >
+        </rr-number-input>
+      </div>
+
+      <div class="o-radio-list" [rrDisable]="model.secondPlane === null">
+        <p rr-id="han_m_0800409">
+          {{ 'handMRT.softTissue.3rdPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="han_m_0800410"
+          labelRrId="han_m_0800411"
+          name="thirdPlane"
+          [(ngModel)]="model.thirdPlane"
+          [label]="'handMRT.softTissue.inMm.value' | translate"
+          [config]="{min: 1, max: 150, labelWidth: 200, placeholder: '---'}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep o-list m-t-30 m-b-15">
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_0800501">
+        {{ 'handMRT.softTissue.margin.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="han_m_0800502"
+        name="marginType"
+        [value]="marginType.Sharp"
+        label="{{ 'handMRT.softTissue.sharp.value' | translate }}"
+        [(ngModel)]="model.marginType"
+        rrValidation="marginType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800503"
+        name="marginType"
+        [value]="marginType.IllDefined"
+        label="{{ 'handMRT.softTissue.illDefined.value' | translate }}"
+        [(ngModel)]="model.marginType"
+        rrValidation="marginType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_0800504">
+        {{ 'handMRT.softTissue.homogeneity.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="han_m_0800505"
+        name="homogeneityType"
+        [value]="homogeneityType.Homogeneous"
+        label="{{ 'handMRT.softTissue.homogeneous.value' | translate }}"
+        [(ngModel)]="model.homogeneityType"
+        rrValidation="homogeneityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800506"
+        name="homogeneityType"
+        [value]="homogeneityType.Heterogeneous"
+        label="{{ 'handMRT.softTissue.heterogeneous.value' | translate }}"
+        [(ngModel)]="model.homogeneityType"
+        rrValidation="homogeneityType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_0800507">
+        {{ 'handMRT.softTissue.form.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="han_m_0800508"
+        name="formType"
+        [value]="formType.Round"
+        label="{{ 'handMRT.softTissue.round.value' | translate }}"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800509"
+        name="formType"
+        [value]="formType.Oval"
+        label="{{ 'handMRT.softTissue.oval.value' | translate }}"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800510"
+        name="formType"
+        [value]="formType.Lobulated"
+        label="{{ 'handMRT.softTissue.lobulated.value' | translate }}"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800511"
+        name="formType"
+        [value]="formType.SpindleShaped"
+        label="{{ 'handMRT.softTissue.spindleshaped.value' | translate }}"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800512"
+        name="formType"
+        [value]="formType.BroadBased"
+        label="{{ 'handMRT.softTissue.broadbased.value' | translate }}"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_0800513"
+        name="formType"
+        [value]="formType.Stalked"
+        label="{{ 'handMRT.softTissue.stalked.value' | translate }}"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</div>

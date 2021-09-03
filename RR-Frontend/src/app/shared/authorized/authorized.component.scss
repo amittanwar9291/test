@@ -1,0 +1,82 @@
+/* Screen resolution variables */
+$res-vertical: 1080;
+$res-horizontal: 1920;
+
+$menu-width-px: 320;
+
+/*
+  Functions to simplify layout arrangement.
+  Provided a measure in px, they transform it to vh or vw.
+*/
+@function px2vw($width) {
+  @return 100 * $width / $res-horizontal * 1vw;
+}
+
+@function px2vh($height) {
+  @return 100 * $height / $res-vertical * 1vh;
+}
+
+@mixin transition() {
+  -webkit-transition: left 0.1s linear;
+  -moz-transition: left 0.1s linear;
+  -ms-transition: left 0.1s linear;
+  -o-transition: left 0.1s linear;
+  transition: left 0.1s linear;
+}
+
+@mixin transition--open() {
+  -webkit-transition: left 0.3s linear;
+  -moz-transition: left 0.3s linear;
+  -ms-transition: left 0.3s linear;
+  -o-transition: left 0.3s linear;
+  transition: left 0.3s linear;
+}
+
+.rr-container {
+  height: px2vh($res-vertical);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+
+  > * {
+    height: 100%;
+    top: 0;
+  }
+
+  .rr-container__left-menu {
+    @include transition();
+    position: relative;
+    left: px2vw(-$menu-width-px);
+    width: px2vw($menu-width-px);
+    background: #666;
+    color: #fff;
+    z-index: 10;
+    overflow: hidden;
+
+    &--open {
+      @include transition--open();
+      left: 0;
+    }
+  }
+
+  .rr-container__box {
+    @include transition();
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    &--open {
+      @include transition--open();
+      left: px2vw($menu-width-px);
+    }
+
+    .headers-box {
+      height: px2vh(390);
+      background-color: #00aec2;
+    }
+
+    .page-box {
+      height: px2vh(690);
+    }
+  }
+}

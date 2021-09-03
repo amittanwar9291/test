@@ -1,0 +1,222 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-23 m-b-12">
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="kne_m_0802238" class="m-b-14">
+        {{'kneeMRT.softParts.localizationAxial.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="kne_m_0802239"
+        label="{{'kneeMRT.softParts.anterior.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialTypeEnum.Anterior"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_0802240"
+        label="{{'kneeMRT.softParts.posterior.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialTypeEnum.Posterior"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_0802241"
+        label="{{'kneeMRT.softParts.media.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialTypeEnum.Medial"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_0802242"
+        label="{{'kneeMRT.softParts.lateral.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialTypeEnum.Lateral"
+        class="m-b-18"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <h2 rr-id="kne_m_0802243" class="text-break m-b-13">
+        {{'kneeMRT.softParts.localizationCraniocaudalInRelation.value' |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="kne_m_0802244"
+        label="{{'kneeMRT.softParts.proximal.value' | translate}}"
+        name="localizationCraniocaudalRelationType"
+        [value]="localizationCraniocaudalRelationTypeEnum.Proximal"
+        [(ngModel)]="model.localizationCraniocaudalRelationType"
+        rrValidation="localizationCraniocaudalRelationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_0802245"
+        label="{{'kneeMRT.softParts.distal.value' | translate}}"
+        name="localizationCraniocaudalRelationType"
+        [value]="localizationCraniocaudalRelationTypeEnum.Distal"
+        [(ngModel)]="model.localizationCraniocaudalRelationType"
+        rrValidation="localizationCraniocaudalRelationType"
+      ></p-radioButton>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <p
+        rr-id="kne_m_0803225"
+        class="m-b-0"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+      >
+        {{'kneeMRT.softParts.differentialDiagnosis01.value' | translate}}
+      </p>
+
+      <rr-differential-diagnosis-dropdown
+        class="m-b-45"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+        [diagnosisNumber]="1"
+        isActiveOnIKnow="true"
+        [options]="differentialDiagnosisArray"
+        [(ngModel)]="model.differentialDiagnosis"
+        name="differentialDiagnosis"
+        group="true"
+        rrId="kne_m_0803226"
+        (selectionChanged)="clearIsSecondary()"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis"
+      ></rr-differential-diagnosis-dropdown>
+
+      <h2 rr-id="kne_m_0803227" class="m-b-11">
+        {{'kneeMRT.softParts.size.value' | translate}}
+      </h2>
+      <rr-number-input
+        [(ngModel)]="model.axialMaxInMm"
+        name="axialMaxInMm"
+        [label]="('kneeMRT.softParts.axialMaxInMm.value' | translate) + '*'"
+        [inputRrId]="'kne_m_0803228'"
+        [labelRrId]="'kne_m_0803229'"
+        class="m-b-10"
+        [config]="{labelWidth: 165, min: 1}"
+        rrValidation="axialMaxInMm"
+      ></rr-number-input>
+      <rr-number-input
+        [(ngModel)]="model.secondPlaneAxialInMm"
+        name="secondPlaneAxialInMm"
+        [label]="'kneeMRT.softParts.2ndPlaneAxialIn.value' | translate"
+        [inputRrId]="'kne_m_0803230'"
+        [labelRrId]="'kne_m_0803231'"
+        class="m-b-10"
+        [config]="{labelWidth: 100, min: 1}"
+      ></rr-number-input>
+      <rr-number-input
+        [(ngModel)]="model.craniocaudalInMm"
+        name="craniocaudalInMm"
+        [label]="'kneeMRT.softParts.craniocaudalInMm.value' | translate"
+        [inputRrId]="'kne_m_0803232'"
+        [labelRrId]="'kne_m_0803233'"
+        [config]="{labelWidth: 100, min: 1}"
+      ></rr-number-input>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="kne_m_0804229" class="m-b-13">
+        {{'kneeMRT.softParts.marginsStar.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="kne_m_0804230"
+        label="{{'kneeMRT.softParts.sharp.value' | translate}}"
+        name="demarcationType"
+        [value]="demarcationTypeEnum.Sharp"
+        [(ngModel)]="model.demarcationType"
+        rrValidation="demarcationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_0804231"
+        label="{{'kneeMRT.softParts.illDefined.value' | translate}}"
+        name="demarcationType"
+        [value]="demarcationTypeEnum.OutOfFocus"
+        class="m-b-31"
+        [(ngModel)]="model.demarcationType"
+        rrValidation="demarcationType"
+      ></p-radioButton>
+      <h2 rr-id="kne_m_0804232" class="m-b-15">
+        {{'kneeMRT.softParts.homogeneity.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="kne_m_0804233"
+        label="{{'kneeMRT.softParts.homogeneous.value' | translate}}"
+        name="tissueTumorHomogeneityType"
+        [value]="homogeneityTypeEnum.Homogeneous"
+        [(ngModel)]="model.tissueTumorHomogeneityType"
+        rrValidation="tissueTumorHomogeneityType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_0804234"
+        label="{{'kneeMRT.softParts.heterogeneous.value' | translate}}"
+        name="tissueTumorHomogeneityType"
+        [value]="homogeneityTypeEnum.Heterogeneous"
+        [(ngModel)]="model.tissueTumorHomogeneityType"
+        rrValidation="tissueTumorHomogeneityType"
+      ></p-radioButton>
+    </div>
+
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="kne_m_0805208" class="m-b-19">
+        {{'kneeMRT.softParts.internalChange.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="kne_m_0805209"
+        label="{{'kneeMRT.softParts.fat.value' | translate}}"
+        binary="true"
+        name="isGrease"
+        [(ngModel)]="model.isGrease"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0805210"
+        label="{{'kneeMRT.softParts.cysts.value' | translate}}"
+        binary="true"
+        name="isCysts"
+        [(ngModel)]="model.isCysts"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0805211"
+        label="{{'kneeMRT.softParts.calcification.value' | translate}}"
+        binary="true"
+        name="isCalcification"
+        [(ngModel)]="model.isCalcification"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0805212"
+        label="{{'kneeMRT.softParts.capsule.value' | translate}}"
+        binary="true"
+        name="isCapsule"
+        [(ngModel)]="model.isCapsule"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0805213"
+        label="{{'kneeMRT.softParts.septs.value' | translate}}"
+        binary="true"
+        name="isSepts"
+        [(ngModel)]="model.isSepts"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0805214"
+        label="{{'kneeMRT.softParts.necroses.value' | translate}}"
+        binary="true"
+        name="isNecroses"
+        [(ngModel)]="model.isNecroses"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0805215"
+        label="{{'kneeMRT.softParts.signalVoids.value' | translate}}"
+        binary="true"
+        name="isSignalVoids"
+        [(ngModel)]="model.isSignalVoids"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

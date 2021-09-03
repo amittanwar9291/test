@@ -1,0 +1,257 @@
+<div class="f-horizontal col-h-100 w-100 p-t-29 m-b-20 text-break">
+  <div class="c-col-1 c-pad o-radio-list">
+    <div class="o-radio-list p-l-10 p-r-10 f-vertical">
+      <h2 rr-id="pel_m_080267">
+        {{'pelvisMRT.rectum.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="m-b-10">
+        <p rr-id="pel_m_080264">
+          {{'pelvisMRT.rectum.differentialDiagnosis1.value' | translate}} *
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="differential01Options"
+          [(ngModel)]="model.sigmaMassDifferentialDiagnosisType"
+          group="true"
+          name="sigmaMassDifferentialDiagnosisType"
+          rrId="pel_m_080265"
+          (selectionChanged)="clearDifferentialDiagnosis01()"
+          [parentViewModel]="model"
+          rrValidation="sigmaMassDifferentialDiagnosisType"
+          [alwaysExcluded]="getAlwaysExcludedDiagnosis()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="p-r-15 o-radio-list f-vertical"
+        [rrDisable]="model.sigmaMassDifferentialDiagnosisType === differentialDiagnosisTypeEnum.None"
+        id="third-column-block"
+        class="f-vertical o-radio-list"
+      >
+        <div class="o-radio-list m-b-15">
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.suspicionOf.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_080266"
+            name="isSuspicionOf"
+            [(ngModel)]="model.isSuspicionOf"
+          ></p-checkbox>
+        </div>
+        <p rr-id="pel_m_080268" class="m-b-0">
+          {{'pelvisMRT.rectum.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="differential02Options"
+          [(ngModel)]="model.sigmaMassDifferentialDiagnosis02Type"
+          group="true"
+          name="sigmaMassDifferentialDiagnosis02Type"
+          rrId="pel_m_080269"
+          (selectionChanged)="clearDifferentialDiagnosis02()"
+          [parentViewModel]="model"
+          [alwaysExcluded]="getAlwaysExcludedDiagnosis()"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.subordinate.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080270"
+          [rrDisable]="model.sigmaMassDifferentialDiagnosis02Type === differentialDiagnosisTypeEnum.None"
+          name="isSubordinated"
+          [(ngModel)]="model.isSubordinated"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad c-sep-l o-list m-b-15"
+    [class.third-column-visible]="isThirdColumnVisible()"
+  >
+    <div class="p-l-8" *ngIf="isThirdColumnVisible()">
+      <h2
+        rr-id="pel_m_080363"
+        class="m-b-13"
+        *ngIf="model.sigmaMassDifferentialDiagnosisType === this.differentialDiagnosisTypeEnum.SigmoidColonCancer"
+      >
+        {{'pelvisMRT.rectum.differentialDiagnosis#1.value' | translate}}
+      </h2>
+      <h2
+        rr-id="pel_m_080363"
+        class="m-b-13"
+        *ngIf="model.sigmaMassDifferentialDiagnosis02Type === this.differentialDiagnosisTypeEnum.SigmoidColonCancer"
+      >
+        {{'pelvisMRT.rectum.differentialDiagnosis#2.value' | translate}}
+      </h2>
+      <p rr-id="pel_m_080364" rrInfoIcon="pel_m_08_04" class="m-b-25">
+        {{'pelvisMRT.rectum.tStage.value' | translate}}
+      </p>
+      <div class="o-radio-list m-b-15">
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.t1InfiltrationSubmucosa.value' | translate}}"
+          rr-id="pel_m_080365"
+          name="differentialDiagnosisTStadiumType"
+          [value]="differentialDiagnosisTStadiumTypeEnum.T1"
+          [(ngModel)]="model.differentialDiagnosisTStadiumType"
+          rrContentReset="fourth-column-block fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.t2InfiltrationMuscularisPropria2.value' | translate}}"
+          rr-id="pel_m_080366"
+          name="differentialDiagnosisTStadiumType"
+          [value]="differentialDiagnosisTStadiumTypeEnum.T2"
+          [(ngModel)]="model.differentialDiagnosisTStadiumType"
+          rrContentReset="fourth-column-block fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.t3InfiltrationViaMuscularis.value' | translate}}"
+          rr-id="pel_m_080367"
+          name="differentialDiagnosisTStadiumType"
+          [value]="differentialDiagnosisTStadiumTypeEnum.T3"
+          [(ngModel)]="model.differentialDiagnosisTStadiumType"
+          rrContentReset="fourth-column-block fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.t4InfiltrationOfVisceral.value' | translate}}"
+          rr-id="pel_m_080368"
+          name="differentialDiagnosisTStadiumType"
+          [value]="differentialDiagnosisTStadiumTypeEnum.T4"
+          [(ngModel)]="model.differentialDiagnosisTStadiumType"
+          rrContentReset="fourth-column-block fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.tXPrimaryTumorNot.value' | translate}}"
+          rr-id="pel_m_080369"
+          name="differentialDiagnosisTStadiumType"
+          [value]="differentialDiagnosisTStadiumTypeEnum.TX"
+          [(ngModel)]="model.differentialDiagnosisTStadiumType"
+          rrContentReset="fourth-column-block fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad c-sep-l o-list m-b-15"
+    [class.fourth-column-visible]="isFourthColumnVisible()"
+    [class.fourth-column-empty]="isThirdColumnVisible() && !isFourthColumnVisible()"
+  >
+    <div class="p-l-8" *ngIf="isFourthColumnVisible()" id="fourth-column-block">
+      <h2 rr-id="pel_m_080450" class="m-b-10">
+        {{'pelvisMRT.rectum.infiltration.value' | translate}}
+      </h2>
+      <div class="o-radio-list m-b-15">
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.t4aPeritoneum.value' | translate}}"
+          rr-id="pel_m_080451"
+          name="tstadiumInfiltrationType"
+          [value]="infiltrationTypeEnum.T4aPeritoneum"
+          [(ngModel)]="model.tstadiumInfiltrationType"
+          rrContentReset="fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.rectum.t4bOtherAdjacentOrgans.value' | translate}}"
+          rr-id="pel_m_080452"
+          name="tstadiumInfiltrationType"
+          [value]="infiltrationTypeEnum.T4bAdjacentOrgan"
+          [(ngModel)]="model.tstadiumInfiltrationType"
+          rrContentReset="fifth-column-block"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad-l c-sep-l o-list m-b-15"
+    [class.fifth-column-visible]="isFifthColumnVisible()"
+  >
+    <div class="p-l-8" *ngIf="isFifthColumnVisible()" id="fifth-column-block">
+      <h2 rr-id="pel_m_080540" class="m-b-8">
+        {{'pelvisMRT.rectum.affectedAdjacentOrgan.value' | translate}}
+      </h2>
+      <p rr-id="pel_m_080541" class="font-15 text-break">
+        {{ 'pelvisMRT.rectum.pleaseSelectAtLeast3.value' | translate }}
+      </p>
+      <div class="o-radio-list m-t-10">
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.urinaryBladder.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080542"
+          name="isUrinaryBladder"
+          [(ngModel)]="model.isUrinaryBladder"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.prostate.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080543"
+          name="isProstate"
+          [(ngModel)]="model.isProstate"
+          [rrDisable]="!isMale"
+          [rrValidation]="isMale ? validationElements : ''"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.seminalVesicles2.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080544"
+          name="isSeminalVesicles"
+          [rrDisable]="!isMale"
+          [(ngModel)]="model.isSeminalVesicles"
+          [rrValidation]="isMale ? validationElements : ''"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.uterus.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080545"
+          name="isUterus"
+          [rrDisable]="!isFemale"
+          [(ngModel)]="model.isUterus"
+          [rrValidation]="isFemale ? validationElements : ''"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.vagina.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080546"
+          name="isVagina"
+          [rrDisable]="!isFemale"
+          [(ngModel)]="model.isVagina"
+          [rrValidation]="isFemale ? validationElements : ''"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.peritoneum.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080547"
+          name="isPeritoneum"
+          [(ngModel)]="model.isPeritoneum"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.abdomenpelvicWall.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080548"
+          name="isAbdomenPelvicWall"
+          [(ngModel)]="model.isAbdomenPelvicWall"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.smallIntestine.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080549"
+          name="isSmallIntestine"
+          [(ngModel)]="model.isSmallIntestine"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.leftExternalIliacVessels.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080550"
+          name="isLeftExternalIliacVessels"
+          [(ngModel)]="model.isLeftExternalIliacVessels"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

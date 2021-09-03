@@ -1,0 +1,108 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <div class="f-vertical f-start o-radio-list col-h-100">
+        <h1 rr-id="ang_c_090103" class="p-b-7">
+          {{'angiographyCT.pelvisLegArteries.finding.value' | translate}}*
+        </h1>
+        <p-radioButton
+          rr-id="ang_c_090104"
+          label="{{'angiographyCT.pelvisLegArteries.noAbnormalFindingsIn.value' | translate}}"
+          name="areFindings"
+          class="text-break m-b-2"
+          [value]="areFindingsEnum.No"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+          rrContentReset="isNoMorePathologies-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090105"
+          label="{{'angiographyCT.pelvisLegArteries.finding.value' | translate}}"
+          class="p-t-5 p-b-7"
+          name="areFindings"
+          [value]="areFindingsEnum.Yes"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <div
+          class="f-vertical f-start o-radio-list nested-content"
+          id="isNoMorePathologies-block"
+          [rrDisable]="findingHandler.currentItem.findingType === pelvisLegArteriesFindingTypeEnum.None && findingHandler.currentItemIndex < 1"
+        >
+          <p-checkbox
+            rr-id="ang_c_090109"
+            label="{{'angiographyCT.pelvisLegArteries.noMorePathologiesOf.value' | translate}}"
+            name="isNoMorePathologies"
+            [(ngModel)]="model.isNoMorePathologies"
+            binary="true"
+          ></p-checkbox>
+        </div>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="model.areFindings !== areFindingsEnum.Yes"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [validationName]="'findings'"
+          [customLabelCalculator]="getCustomLabel"
+          (activeFindingChanged)="resetNoMorePathologies()"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <div class="f-vertical f-space-between c-pad-l">
+      <div
+        class=" f-vertical f-start"
+        [ngClass]="findingHandler.currentItem.findingType === 'ArterioscleroticPAVK' ? 'header-height-arterio' : 'header-height'"
+      >
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== pelvisLegArteriesFindingTypeEnum.None"
+          rr-id="ang_c_090201"
+        >
+          {{'angiographyCT.pelvisLegArteries.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.None)"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1  c-sep c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-standard-variants
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.AnatomicVariants)"
+          [model]="findingHandler.currentItem"
+        ></rr-standard-variants>
+
+        <rr-arteriosclerotic-pavk
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.ArterioscleroticPAVK)"
+          [model]="findingHandler.currentItem"
+        ></rr-arteriosclerotic-pavk>
+
+        <rr-vascular-dilatation
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.VascularDilatation)"
+          [model]="findingHandler.currentItem"
+        ></rr-vascular-dilatation>
+
+        <rr-non-arteriosclerotic-pavk
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.NonArterioscleroticPAVK)"
+          [model]="findingHandler.currentItem"
+        ></rr-non-arteriosclerotic-pavk>
+
+        <rr-after-therapy
+          *ngIf="isCurrentItem(pelvisLegArteriesFindingTypeEnum.AfterTherapy)"
+          [model]="findingHandler.currentItem"
+        ></rr-after-therapy>
+      </div>
+    </div>
+  </div>
+</form>

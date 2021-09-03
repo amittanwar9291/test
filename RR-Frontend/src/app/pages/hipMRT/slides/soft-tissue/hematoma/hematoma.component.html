@@ -1,0 +1,150 @@
+<div class="f-horizontal col-h-100 c-pad-l">
+  <div class="c-col-1 c-pad-r c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080327">
+        {{ 'hipMRT.softTissue.expansion.value' | translate }}
+      </h2>
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="hip_m_080328">
+          {{ 'hipMRT.softTissue.size.value' | translate }}*
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_080330"
+          labelRrId="hip_m_080316"
+          name="sizeInMm"
+          label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 500, placeholder: '---' }"
+          [(ngModel)]="model.sizeInMm"
+          (announceModelChange)="resetBothPlanes()"
+          rrValidation="sizeInMm"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.sizeInMm">
+        <h3 rr-id="hip_m_080331">
+          {{ 'hipMRT.softTissue.2ndPlane.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_080333"
+          labelRrId="hip_m_080319"
+          name="secondPlaneInMm"
+          label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 500, placeholder: '---' }"
+          [(ngModel)]="model.secondPlaneInMm"
+          (announceModelChange)="resetThirdPlane()"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+        <h3 rr-id="hip_m_080334">
+          {{ 'hipMRT.softTissue.3rdPlane.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_080336"
+          labelRrId="hip_m_080322"
+          name="thirdPlaneInMm"
+          label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 500, placeholder: '---' }"
+          [(ngModel)]="model.thirdPlaneInMm"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080425">
+        {{ 'hipMRT.softTissue.t1wSignal.value' | translate }}
+      </h2>
+      <p rr-id="hip_m_080426" class="slider-small-caption">
+        {{ 'hipMRT.softTissue.comparedToTheMusculature.value' | translate }}
+      </p>
+      <rr-slider-number-triple-input
+        rr-id="hip_m_080427"
+        name="t1wSignal"
+        [(ngModel)]="model.t1wSignal"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080428">
+        {{ 'hipMRT.softTissue.t2wSignal.value' | translate }}
+      </h2>
+      <p rr-id="hip_m_080429" class="slider-small-caption">
+        {{ 'hipMRT.softTissue.comparedToTheMusculature.value' | translate }}
+      </p>
+      <rr-slider-number-triple-input
+        rr-id="hip_m_080430"
+        name="t2wSignal"
+        [(ngModel)]="model.t2wSignal"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080504" rrInfoIcon="hip_m_08_03">
+        {{ 'hipMRT.softTissue.characterizationHaematoma.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hip_m_080505"
+        [(ngModel)]="model.characterizationHaematomaType"
+        label="{{ 'hipMRT.softTissue.hyperacute.value' | translate }}"
+        [value]="characterizationHematomaType.Hyperacute"
+        name="characterizationHaematomaType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_080506"
+        [(ngModel)]="model.characterizationHaematomaType"
+        label="{{ 'hipMRT.softTissue.acute.value' | translate }}"
+        [value]="characterizationHematomaType.Acute"
+        name="characterizationHaematomaType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_080507"
+        [(ngModel)]="model.characterizationHaematomaType"
+        label="{{ 'hipMRT.softTissue.subacute.value' | translate }}"
+        [value]="characterizationHematomaType.Subacute"
+        name="characterizationHaematomaType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_080508"
+        [(ngModel)]="model.characterizationHaematomaType"
+        label="{{ 'hipMRT.softTissue.chronicOrganized.value' | translate }}"
+        [value]="characterizationHematomaType.ChronicOrganized"
+        name="characterizationHaematomaType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080509" class="m-b-5">
+        {{ 'hipMRT.softTissue.differentialDiagnosis.value' | translate }}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="differentialDiagnosisOptions"
+        name="differentialDiagnosis"
+        rrId="hip_m_080510"
+        [(ngModel)]="model.differentialDiagnosis"
+        [parentViewModel]="model"
+        (selectionChanged)="resetIsSuspected()"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="hip_m_080511"
+        [rrDisable]="model.differentialDiagnosis === differentialDiagnosisType.None"
+        label="{{ 'hipMRT.softTissue.suspected.value' | translate }}"
+        name="isSuspected"
+        binary="true"
+        [(ngModel)]="model.isSuspected"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,699 @@
+<div class="f-vertical f-start o-radio-list col-h-100 c-pad-l">
+  <h2 rr-id="anc_m_040321">
+    {{'feetMRT.bones.aOClassificationAO44.value' | translate}}
+  </h2>
+  <p rr-id="anc_m_0403203" class="m-b-5">
+    {{'feetMRT.bones.evaluationFracture.value' | translate}}
+  </p>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+      <p-radioButton
+        rr-id="anc_m_040322"
+        label="{{'feetMRT.bones.44AInfrasyndesmoticFibulaInjury.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.InfrasyndesmoticFibulaInjury44A"
+        (onClick)="clearFractureForm()"
+        [rrContentReset]="'distalMalleoliFractureType'"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040323"
+        label="{{'feetMRT.bones.44BTranssyndesmoticFibula.value' | translate}}"
+        class="thin-letter-spacing"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.TranssyndesmoticFibula44B"
+        rrInfoIcon="anc_m_04_01"
+        (onClick)="clearFractureForm()"
+        [rrContentReset]="'distalMalleoliFractureType'"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040324"
+        label="{{'feetMRT.bones.44CSuprasyndesmoticFibula.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.SuprasyndesmoticFibula44C"
+        (onClick)="clearFractureForm()"
+        [rrContentReset]="'distalMalleoliFractureType'"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0403205"
+        label="{{'feetMRT.bones.notFurtherSpecified44.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.MalleoliFractureNotFurtherSpecified"
+        class="text-break"
+        (onClick)="clearFractureForm()"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <div
+        id="distalMalleoliFractureType"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureClassificationType !== fractureClassificationType.MalleoliFractureNotFurtherSpecified"
+      >
+        <p-radioButton
+          rr-id="anc_m_0403206"
+          label="{{'feetMRT.bones.fractureConsolidation.value' | translate}}"
+          name="distalTibiaFractureType"
+          [value]="distalTibiaFractureType.FractureConsolidation"
+          [(ngModel)]="model.distalTibiaFractureType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_0403207"
+          label="{{'feetMRT.bones.suspicionOf.value' | translate}}"
+          name="distalTibiaFractureType"
+          [value]="distalTibiaFractureType.SuspicionOf"
+          [(ngModel)]="model.distalTibiaFractureType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="f-vertical f-start o-radio-list col-h-100 c-pad-l">
+      <p
+        *ngIf="![fractureClassificationType.MalleoliFractureNotFurtherSpecified, fractureClassificationType.None].includes(model.fractureClassificationType)"
+        rr-id="anc_m_040407"
+        class="m-b-5"
+      >
+        {{'feetMRT.bones.fractureType.value' | translate}}
+      </p>
+      <div class="f-horizontal f-start col-h-100">
+        <ng-container
+          *ngIf="model.fractureClassificationType === fractureClassificationType.InfrasyndesmoticFibulaInjury44A"
+        >
+          <ng-container *ngTemplateOutlet="Infrasound"></ng-container>
+        </ng-container>
+        <ng-container
+          *ngIf="model.fractureClassificationType === fractureClassificationType.TranssyndesmoticFibula44B"
+        >
+          <ng-container *ngTemplateOutlet="Transsyndesmal"></ng-container>
+        </ng-container>
+        <ng-container
+          *ngIf="model.fractureClassificationType === fractureClassificationType.SuprasyndesmoticFibula44C"
+        >
+          <ng-container *ngTemplateOutlet="Suprasyndesmal"></ng-container>
+        </ng-container>
+        <ng-container
+          *ngIf="[fractureClassificationType.MalleoliFractureNotFurtherSpecified, fractureClassificationType.None].includes(model.fractureClassificationType)"
+        >
+          <div
+            class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r"
+          ></div>
+          <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l"></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #Infrasound>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+    <p-radioButton
+      rr-id="anc_m_040416"
+      label="{{'feetMRT.bones.44A1IsolatedFibulaInjury.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.IsolatedLesionOf44A1"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040417"
+      label="{{'feetMRT.bones.44A2WithMedialMalleolarFracture.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.WithMedialMalleolarFracture44A2"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040418"
+      label="{{'feetMRT.bones.44A3WithPosteromedialFracture.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.WithPosteromedialFracture44A3"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l">
+    <div
+      class="f-vertical f-start o-radio-list m-b-24"
+      *ngIf="model.fractureTypeType === fractureTypeType.IsolatedLesionOf44A1"
+    >
+      <p-radioButton
+        rr-id="anc_m_040536"
+        label="{{'feetMRT.bones.44A11RuptureOfTheLateralCollateralLigament.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-5"
+        [value]="fractureFormSubType.RuptureOfTheLateralCollateralLigament44A11"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040537"
+        label="{{'feetMRT.bones.44A12AvulsionFractureOfTheTipOfTheLateralMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.AvulsionFractureOfTheTipOfTheLateralMalleolus44A12"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040538"
+        label="{{'feetMRT.bones.44A13TransverseFractureOfTheLateralMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.TransverseFractureOfTheLateralMalleolus44A13"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div
+      class="f-vertical f-start o-radio-list m-b-31"
+      *ngIf="model.fractureTypeType === fractureTypeType.WithMedialMalleolarFracture44A2"
+    >
+      <p-radioButton
+        rr-id="anc_m_040539"
+        label="{{'feetMRT.bones.44A21WithRuptureOfTheLateralCollateralLigament.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-3"
+        [value]="fractureFormSubType.WithRuptureOfTheLateralCollateralLigament44A21"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040540"
+        label="{{'feetMRT.bones.44A22WithAvulsionFractureOfTheTipOfTheLatMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WithAvulsionFractureOfTheTipOfTheLatMalleolus44A22"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040541"
+        label="{{'feetMRT.bones.44A23WithTransverseFractureOfTheLateralMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WithTransverseFractureOfTheLateralMalleolus44A23"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.fractureTypeType === fractureTypeType.WithPosteromedialFracture44A3"
+    >
+      <p-radioButton
+        rr-id="anc_m_040542"
+        label="{{'feetMRT.bones.44A31RuptureOfTheLateralCollateralLigamentWithPosteromedialFracture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-4"
+        [value]="fractureFormSubType.RuptureOfTheLateralCollateralLigamentWithPosteromedialFracture44A31"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040543"
+        label="{{'feetMRT.bones.44A32AvulsionFractureOfTheTipOfTheLateralMalleolusWithPosteromedialFracture.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.AvulsionFractureOfTheTipOfTheLateralMalleolusWithPosteromedialFracture44A32"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040544"
+        label="{{'feetMRT.bones.44A33TransverseFractureOfTheMalleolusLateralisWithPosteromedialFracture.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.TransverseFractureOfTheMalleolusLateralisWithPosteromedialFracture44A33"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #Transsyndesmal>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+    <p-radioButton
+      rr-id="anc_m_040419"
+      label="{{'feetMRT.bones.44B1IsolatedFibulaFracture.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.IsolatedFibulaFracture44B1"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040420"
+      label="{{'feetMRT.bones.44B2WithMedialInjury.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.WithMedialInjury44B2"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040421"
+      label="{{'feetMRT.bones.44B3WithMedialInjuryAndFxOfThePosterolateralRim.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.WithMedialInjuryAndFxOfThePosterolateralRim44B3"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+
+  <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l">
+    <ng-container
+      *ngIf="model.fractureTypeType === fractureTypeType.IsolatedFibulaFracture44B1"
+    >
+      <p-radioButton
+        rr-id="anc_m_0405320"
+        label="{{'feetMRT.bones.44B11SimpleFibulaFracture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-1"
+        [value]="fractureFormSubType.SimpleFibulaFracture44B11"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0405321"
+        label="{{'feetMRT.bones.44B12WithRuptureOfTheAnteriorSyndesmosis.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-8"
+        [value]="fractureFormSubType.WithRuptureOfTheAnteriorSyndesmosis44B12"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0405322"
+        label="{{'feetMRT.bones.44B13WedgeMultifragmentaryFibulaFracture.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WedgeMultifragmentaryFibulaFracture44B13"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content m-b-30"
+        [rrDisable]="model.fractureFormSubType === fractureFormSubType.None"
+      >
+        <p-checkbox
+          rr-id="anc_m_0405323"
+          label="{{'feetMRT.bones.nTillauxChaputTubercleFracture.value' | translate}}"
+          name="isnTillauxChaputTubercleFracture"
+          class="text-break2"
+          binary="true"
+          [(ngModel)]="model.isnTillauxChaputTubercleFracture"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_0405324"
+          label="{{'feetMRT.bones.oWagstaffeLeFortAvulsionFracture.value' | translate}}"
+          name="isWagstaffeLeFortAvulsionFracture"
+          binary="true"
+          [(ngModel)]="model.isWagstaffeLeFortAvulsionFracture"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_0405325"
+          label="{{'feetMRT.bones.uSyndesmosisUnstable.value' | translate}}"
+          name="isSyndesmosisUnstable"
+          binary="true"
+          [(ngModel)]="model.isSyndesmosisUnstable"
+        ></p-checkbox>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.fractureTypeType === fractureTypeType.WithMedialInjury44B2"
+    >
+      <p-radioButton
+        rr-id="anc_m_040545"
+        label="{{'feetMRT.bones.44B21SimpleWithRupture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-7 checkbox-width"
+        [value]="fractureFormSubType.SimpleWithRupture44B21"
+        (onClick)="clearFractureFormSubTypeBooleans()"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040546"
+        label="{{'feetMRT.bones.44B22SimpleWithFracture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-6"
+        [value]="fractureFormSubType.SimpleWithFracture44B22"
+        (onClick)="clearFractureFormSubTypeBooleans()"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040550"
+        label="{{'feetMRT.bones.44B23MultifragmentarywedgeFracture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-19"
+        [value]="fractureFormSubType.Multifragment44B23"
+        (onClick)="clearFractureFormSubTypeBooleans()"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div class="f-vertical f-start o-radio-list nested-content m-t-20">
+        <ng-container
+          *ngIf="[fractureFormSubType.SimpleWithRupture44B21, fractureFormSubType.SimpleWithFracture44B22].includes(model.fractureFormSubType)"
+        >
+          <p-checkbox
+            rr-id="anc_m_0405329"
+            label="{{'feetMRT.bones.nTillauxChaputTubercleFracture.value' | translate}}"
+            name="isnTillauxChaputTubercleFracture"
+            class="text-break2"
+            binary="true"
+            [(ngModel)]="model.isnTillauxChaputTubercleFracture"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="anc_m_0405330"
+            label="{{'feetMRT.bones.oWagstaffeLeFortAvulsionFracture.value' | translate}}"
+            name="isWagstaffeLeFortAvulsionFracture"
+            class="m-b-6"
+            binary="true"
+            [(ngModel)]="model.isWagstaffeLeFortAvulsionFracture"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="anc_m_0405331"
+            label="{{'feetMRT.bones.uSyndesmosisUnstable.value' | translate}}"
+            name="isSyndesmosisUnstable"
+            binary="true"
+            [(ngModel)]="model.isSyndesmosisUnstable"
+          ></p-checkbox>
+        </ng-container>
+
+        <ng-container
+          *ngIf="model.fractureFormSubType === fractureFormSubType.Multifragment44B23"
+        >
+          <p-checkbox
+            rr-id="anc_m_0405335"
+            label="{{'feetMRT.bones.rRuptureOfDeltoidLigament.value' | translate}}"
+            name="isRuptureOfTheDeltoidLigament"
+            binary="true"
+            [(ngModel)]="model.isRuptureOfTheDeltoidLigament"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="anc_m_0405336"
+            label="{{'feetMRT.bones.sFractureOfTheMedialMalleolus.value' | translate}}"
+            name="isFractureOfTheMedialMalleolus"
+            binary="true"
+            [(ngModel)]="model.isFractureOfTheMedialMalleolus"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="anc_m_0405337"
+            label="{{'feetMRT.bones.uSyndesmosisUnstable.value' | translate}}"
+            name="isSyndesmosisUnstable"
+            binary="true"
+            [(ngModel)]="model.isSyndesmosisUnstable"
+          ></p-checkbox>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.fractureTypeType === fractureTypeType.WithMedialInjuryAndFxOfThePosterolateralRim44B3"
+    >
+      <p-radioButton
+        rr-id="anc_m_0405338"
+        label="{{'feetMRT.bones.44B31SimpleFractureOfFibulaWithDeltoidLigamentRupture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-7 text-break2"
+        [value]="fractureFormSubType.SimpleFractureOfFibulaWithDeltoidLigamentRupture44B31"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0405339"
+        label="{{'feetMRT.bones.44B32SimpleMedialMalleolusFracture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-4"
+        [value]="fractureFormSubType.SimpleMedialMalleolusFracture44B32"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0405340"
+        label="{{'feetMRT.bones.44B33WedgeOrMultifragmentaryFibularFractureWithFractureOfTheMedialMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-19"
+        [value]="fractureFormSubType.WedgeOrMultifragmentaryFibularFractureWithFractureOfTheMedialMalleolus44B33"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content m-t-20"
+        [rrDisable]="model.fractureFormSubType === 'None'"
+      >
+        <p-checkbox
+          rr-id="anc_m_0405341"
+          label="{{'feetMRT.bones.nTillauxChaputTubercleFracture.value' | translate}}"
+          name="isnTillauxChaputTubercleFracture"
+          class="text-break2"
+          binary="true"
+          [(ngModel)]="model.isnTillauxChaputTubercleFracture"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_0405342"
+          label="{{'feetMRT.bones.oWagstaffeLeFortAvulsionFracture.value' | translate}}"
+          name="isWagstaffeLeFortAvulsionFracture"
+          binary="true"
+          [(ngModel)]="model.isWagstaffeLeFortAvulsionFracture"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_0405343"
+          label="{{'feetMRT.bones.uSyndesmosisUnstable.value' | translate}}"
+          name="isSyndesmosisUnstable"
+          binary="true"
+          [(ngModel)]="model.isSyndesmosisUnstable"
+        ></p-checkbox>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #Suprasyndesmal>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+    <p-radioButton
+      rr-id="anc_m_040422"
+      label="{{'feetMRT.bones.44C1SimpleDiaphysealFibulaFracture.value' | translate}}"
+      name="fractureTypeType"
+      class="m-b-4"
+      [value]="fractureTypeType.SimpleDiaphysealFibulaFracture44C1"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040423"
+      label="{{'feetMRT.bones.44C2WedgeMultifragmentaryDiaphysealFibulaFracture.value' | translate}}"
+      name="fractureTypeType"
+      class="m-b-8"
+      [value]="fractureTypeType.WedgeMultifragmentaryDiaphysealFibulaFracture44C2"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040424"
+      label="{{'feetMRT.bones.44C3ProximalFibulaInjury.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.ProximalFibulaInjury44C3"
+      (onClick)="clearFractureFormSubType()"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l">
+    <ng-container
+      *ngIf="model.fractureTypeType === fractureTypeType.SimpleDiaphysealFibulaFracture44C1"
+      class="m-t-15"
+    >
+      <p-radioButton
+        rr-id="anc_m_040557"
+        label="{{'feetMRT.bones.44C11WithRuptureOfTheDeltoidLigament.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WithRuptureOfTheDeltoidLigament44C11"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearMedialMalleolusType()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040558"
+        label="{{'feetMRT.bones.44C12WithFractureOfTheMedialMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WithFractureOfTheMedialMalleolus44C12"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearMedialMalleolusType()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040559"
+        label="{{'feetMRT.bones.44C13WithMedialAndPosteriorMalleolusFracture.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WithMedialAndPosteriorMalleolusFracture44C13"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearMedialMalleolusType()"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content m-t-10"
+        [rrDisable]="model.fractureFormSubType === fractureFormSubType.None"
+      >
+        <p-radioButton
+          rr-id="anc_m_040560"
+          label="{{'feetMRT.bones.tStableSyndesmosis.value' | translate}}"
+          name="medialMalleolusType"
+          [value]="medialMalleolusType.StableSyndesmosis"
+          [(ngModel)]="model.medialMalleolusType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_0405344"
+          label="{{'feetMRT.bones.uSyndesmosisUnstable.value' | translate}}"
+          name="medialMalleolusType"
+          [value]="medialMalleolusType.SyndesmosisUnstable"
+          [(ngModel)]="model.medialMalleolusType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.fractureTypeType === fractureTypeType.WedgeMultifragmentaryDiaphysealFibulaFracture44C2"
+      class="m-t-15"
+    >
+      <p-radioButton
+        rr-id="anc_m_040561"
+        label="{{'feetMRT.bones.44C21WithRuptureOfTheDeltoidLigament.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-6 text-break2"
+        [value]="fractureFormSubType.WithRuptureOfTheDeltoidLigament44C21"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearMedialMalleolusType()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040562"
+        label="{{'feetMRT.bones.44C22WithFractureOfTheMedialMalleolus.value' | translate}}"
+        name="fractureFormSubType"
+        class="text-break2"
+        [value]="fractureFormSubType.WithFractureOfTheMedialMalleolus44C22"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearMedialMalleolusType()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040563"
+        label="{{'feetMRT.bones.44C23WithMedialAndPosteriorMalleolusFracture.value' | translate}}"
+        name="fractureFormSubType"
+        class="m-b-7"
+        [value]="fractureFormSubType.WithFractureOfTheMedialMalleolus44C23"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearMedialMalleolusType()"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content m-t-20"
+        [rrDisable]="model.fractureFormSubType === fractureFormSubType.None"
+      >
+        <p-radioButton
+          rr-id="anc_m_0405346"
+          label="{{'feetMRT.bones.tStableSyndesmosis.value' | translate}}"
+          name="medialMalleolusType"
+          [value]="medialMalleolusType.StableSyndesmosis"
+          [(ngModel)]="model.medialMalleolusType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_0405347"
+          label="{{'feetMRT.bones.uSyndesmosisUnstable.value' | translate}}"
+          name="medialMalleolusType"
+          [value]="medialMalleolusType.SyndesmosisUnstable"
+          [(ngModel)]="model.medialMalleolusType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.fractureTypeType === fractureTypeType.ProximalFibulaInjury44C3"
+    >
+      <p-radioButton
+        rr-id="anc_m_040564"
+        label="{{'feetMRT.bones.44C31WithMedialSideInjury.value' | translate}}"
+        name="fractureFormSubType"
+        class="text-break2"
+        [value]="fractureTypeType.WithMedialSideInjury44C31"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040565"
+        label="{{'feetMRT.bones.44C32WithShorteningAndMedialSideInjury.value' | translate}}"
+        name="fractureFormSubType"
+        class="text-break2"
+        [value]="fractureFormSubType.WithShorteningAndMedialSideInjury44C32"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040566"
+        label="{{'feetMRT.bones.44C33WithMedialSideInjuryAndPosteriorMalleolusFracture.value' | translate}}"
+        name="fractureFormSubType"
+        [value]="fractureFormSubType.WithMedialSideInjuryAndPosteriorMalleolusFracture44C33"
+        [(ngModel)]="model.fractureFormSubType"
+        rrUnClickRadio
+        (onClick)="clearFractureFormSubTypeBooleans()"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content m-t-30"
+        [rrDisable]="model.fractureFormSubType === fractureFormSubType.None"
+      >
+        <p-checkbox
+          rr-id="anc_m_040567"
+          label="{{'feetMRT.bones.pFibulaNeckFracture.value' | translate}}"
+          name="isFibulaNeckFracture"
+          binary="true"
+          [(ngModel)]="model.isFibulaNeckFracture"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_040568"
+          label="{{'feetMRT.bones.qProximalTibiofibularJointDislocation.value' | translate}}"
+          name="isProximalTibiofibularJointDislocation"
+          binary="true"
+          [(ngModel)]="model.isProximalTibiofibularJointDislocation"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_040569"
+          label="{{'feetMRT.bones.rRuptureOfTheDeltoidLigament.value' | translate}}"
+          name="isRuptureOfTheDeltoidLigament"
+          binary="true"
+          class="text-break2 m-b-6"
+          [(ngModel)]="model.isRuptureOfTheDeltoidLigament"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_040570"
+          label="{{'feetMRT.bones.sFractureOfTheMedialMalleolus.value' | translate}}"
+          name="isFractureOfTheMedialMalleolus"
+          binary="true"
+          [(ngModel)]="model.isFractureOfTheMedialMalleolus"
+        ></p-checkbox>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

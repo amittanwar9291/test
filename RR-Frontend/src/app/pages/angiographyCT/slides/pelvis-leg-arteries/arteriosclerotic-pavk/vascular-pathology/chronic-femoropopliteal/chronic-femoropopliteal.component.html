@@ -1,0 +1,396 @@
+<div
+  class="f-horizontal f-start col-h-100 c-sep-l c-pad-l"
+  id="chronicFemoropoplitealCont"
+>
+  <div class="c-col-1 f-vertical f-start c-pad-r o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_090320">
+        {{'angiographyCT.pelvisLegArteries.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_090321"
+        label="{{'angiographyCT.pelvisLegArteries.right.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090322"
+        label="{{'angiographyCT.pelvisLegArteries.left.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+
+      <h2 rr-id="ang_c_090323" class="m-t-20">
+        {{'angiographyCT.pelvisLegArteries.type.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_090324"
+        label="{{'angiographyCT.pelvisLegArteries.typeA.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.TypeA"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="'typBCont typCCont typDCont'"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090325"
+        label="{{'angiographyCT.pelvisLegArteries.typeB.value' | translate}}"
+        name="classificationAccordingToTASCIISubType"
+        [value]="chronicLesionsTypeEnum.TypeB"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="'typACont typCCont typDCont'"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090326"
+        label="{{'angiographyCT.pelvisLegArteries.typeC.value' | translate}}"
+        name="classificationAccordingToTASCIISubType"
+        [value]="chronicLesionsTypeEnum.TypeC"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="'typACont typBCont typDCont'"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090327"
+        label="{{'angiographyCT.pelvisLegArteries.typeD.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.TypeD"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="'typACont typBCont typCCont'"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <ng-container [ngSwitch]="model.chronicLesionsType">
+    <ng-container *ngSwitchCase="chronicLesionsTypeEnum.None">
+      <ng-container *ngTemplateOutlet="None"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="chronicLesionsTypeEnum.TypeA">
+      <ng-container *ngTemplateOutlet="typeA"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="chronicLesionsTypeEnum.TypeB">
+      <ng-container *ngTemplateOutlet="typeB"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="chronicLesionsTypeEnum.TypeC">
+      <ng-container *ngTemplateOutlet="typeC"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="chronicLesionsTypeEnum.TypeD">
+      <ng-container *ngTemplateOutlet="typeD"></ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #None>
+  <div class="f-horizontal f-start c-sep-l col-h-100 c-pad-l">
+    <div class="c-col-1 c-sep c-pad-r"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</ng-template>
+
+<ng-template #typeA>
+  <div id="typACont" class="f-horizontal c-sep-l f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_090435">
+          {{'angiographyCT.pelvisLegArteries.localization.value' | translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_090436"
+          label="{{'angiographyCT.pelvisLegArteries.commonFemoralArtery(CFA.value' | translate}}"
+          name="femoropoplitealLocalizationType"
+          [value]="femoropoplitealLocalizationTypeEnum.CommonFemoralArtery"
+          [(ngModel)]="model.femoropoplitealLocalizationType"
+          rrValidation="femoropoplitealLocalizationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090437"
+          label="{{'angiographyCT.pelvisLegArteries.superficialFemoralArtery(SFA.value' | translate}}"
+          name="femoropoplitealLocalizationType"
+          [value]="femoropoplitealLocalizationTypeEnum.SuperficialFemoralArtery"
+          [(ngModel)]="model.femoropoplitealLocalizationType"
+          rrValidation="femoropoplitealLocalizationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090438"
+          label="{{'angiographyCT.pelvisLegArteries.poplitealArtery(PA.value' | translate}}"
+          name="femoropoplitealLocalizationType"
+          [value]="femoropoplitealLocalizationTypeEnum.PoplitealArtery"
+          [(ngModel)]="model.femoropoplitealLocalizationType"
+          rrValidation="femoropoplitealLocalizationType"
+        ></p-radioButton>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_090439">
+          {{'angiographyCT.pelvisLegArteries.extent.value' | translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_090440"
+          label="{{'angiographyCT.pelvisLegArteries.singularStenosisCm.value' | translate}}"
+          name="femoropoplitealExtentType"
+          [value]="femoropoplitealExtentTypeEnum.SingularStenosis"
+          [(ngModel)]="model.femoropoplitealExtentType"
+          rrValidation="femoropoplitealExtentType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090441"
+          label="{{'angiographyCT.pelvisLegArteries.singularOcclusionCm.value' | translate}}"
+          name="femoropoplitealExtentType"
+          [value]="femoropoplitealExtentTypeEnum.SingularOcclusion"
+          [(ngModel)]="model.femoropoplitealExtentType"
+          rrContentReset="hemodynamicallyEffectiveCont"
+          rrValidation="femoropoplitealExtentType"
+        ></p-radioButton>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_090442">
+          {{'angiographyCT.pelvisLegArteries.length.value' | translate}}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_c_090444"
+          labelRrId="ang_c_090443"
+          name="length"
+          [(ngModel)]="model.length"
+          [config]="{labelWidth: 160, min: 1, max: 150, placeholder: '---'}"
+        ></rr-number-input>
+        <p-checkbox
+          class="m-t-10"
+          label="{{ 'angiographyCT.pelvisLegArteries.shortLengthStenosis.value' | translate }}"
+          rr-id="ang_c_090445"
+          name="isShortLengthStenosis"
+          [(ngModel)]="model.isShortLengthStenosis"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="c-col-1 f-vertical f-start c-sep-l c-pad-l o-list"
+      [class.m-t-148]="model.femoropoplitealExtentType === femoropoplitealExtentTypeEnum.SingularStenosis"
+    >
+      <div
+        id="hemodynamicallyEffectiveCont"
+        class="f-vertical f-start o-radio-list"
+        *ngIf="model.femoropoplitealExtentType === femoropoplitealExtentTypeEnum.SingularStenosis"
+      >
+        <h2 rr-id="ang_c_090515">
+          {{ 'angiographyCT.pelvisLegArteries.severity.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isHemodynamicallyRelevant"
+          label="{{ 'angiographyCT.pelvisLegArteries.hemodynamicallyRelevant.value' | translate }}"
+          rr-id="ang_c_090516"
+          [(ngModel)]="model.isHemodynamicallyRelevant"
+          binary="true"
+        ></p-checkbox>
+        <h3 rr-id="ang_c_090517">
+          {{ 'angiographyCT.pelvisLegArteries.diameterStenosis.value' |
+          translate }}
+        </h3>
+        <rr-number-input
+          [label]="'angiographyCT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_c_090519"
+          labelRrId="ang_c_090518"
+          name="diameterStenosis"
+          [(ngModel)]="model.diameterStenosis"
+          [config]="{min: 1, max: 30}"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <h3 rr-id="ang_c_090520">
+          {{
+          'angiographyCT.pelvisLegArteries.diameterDiseaseFreepoststenoticSegment.value'
+          | translate }}
+        </h3>
+        <rr-number-input
+          [label]="'angiographyCT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_c_090522"
+          labelRrId="ang_c_090521"
+          name="diameterDiseaseFreePoststenoticSegment"
+          [(ngModel)]="model.diameterDiseaseFreePoststenoticSegment"
+          [config]="{min: 1, max: 30}"
+          (announceModelChange)="calculate()"
+          class="m-t-5"
+        ></rr-number-input>
+        <h3 rr-id="ang_c_090523" class="text-break">
+          {{'angiographyCT.pelvisLegArteries.degreeOfStenosisAccording.value' |
+          translate }}
+        </h3>
+        <rr-number-input
+          [label]="'angiographyCT.pelvisLegArteries.in.value' | translate"
+          inputRrId="ang_c_090525"
+          labelRrId="ang_c_090524"
+          name="degreeOfStenosisAccordingToNASCET"
+          [(ngModel)]="model.degreeOfStenosisAccordingToNASCET"
+          [config]="{readonly: true, min: 1, max: 99}"
+          rrValidation="degreeOfStenosisAccordingToNASCET"
+          class="m-t-5 m-b-10"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #typeB>
+  <div class="f-horizontal f-start c-sep-l col-h-100" id="typBCont">
+    <div class="c-col-1 f-vertical f-start c-pad o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_090446">
+          {{ 'angiographyCT.pelvisLegArteries.details.value' | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_090447"
+          label="{{'angiographyCT.pelvisLegArteries.multipleStenosesAndocclusionsCm.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.MultipleStenoses"
+          class="text-break2"
+          [(ngModel)]="model.typeBDetailsType"
+          [rrContentReset]="clearLengthOnFifthCol(typeBDetailsTypeEnum.MultipleStenoses, 'b-fifth-col')"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090448"
+          label="{{'angiographyCT.pelvisLegArteries.singularStenosisocclusionCmAbove.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.SingularStenosisOcclusion"
+          class="text-break2"
+          [(ngModel)]="model.typeBDetailsType"
+          [rrContentReset]="clearLengthOnFifthCol(typeBDetailsTypeEnum.SingularStenosisOcclusion, 'b-fifth-col')"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090449"
+          label="{{'angiographyCT.pelvisLegArteries.singleOrMultipleLesionswith.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.SingleOrMultipleLesionsWithImprovedPerfusion"
+          class="text-break2"
+          [(ngModel)]="model.typeBDetailsType"
+          [rrContentReset]="clearLengthOnFifthCol(typeBDetailsTypeEnum.SingleOrMultipleLesionsWithImprovedPerfusion, 'b-fifth-col')"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090450"
+          label="{{'angiographyCT.pelvisLegArteries.occlusionCmWithheavyCalcifications.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.OcclusionWithHeavyCalcifications"
+          class="text-break2"
+          [(ngModel)]="model.typeBDetailsType"
+          [rrContentReset]="clearLengthOnFifthCol(typeBDetailsTypeEnum.OcclusionWithHeavyCalcifications, 'b-fifth-col')"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090451"
+          label="{{'angiographyCT.pelvisLegArteries.singularPoplitealArtery(PA.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.SingularPoplitealArteryStenosis"
+          class="text-break2"
+          [(ngModel)]="model.typeBDetailsType"
+          [rrContentReset]="clearLengthOnFifthCol(typeBDetailsTypeEnum.SingularPoplitealArteryStenosis, 'b-fifth-col')"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div id="b-fifth-col" class="c-col-1 c-sep-l c-pad-l m-t-28 o-list">
+      <div
+        *ngIf="model.typeBDetailsType === typeBDetailsTypeEnum.SingularStenosisOcclusion
+                || model.typeBDetailsType === typeBDetailsTypeEnum.SingularPoplitealArteryStenosis"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_090526">
+          {{ 'angiographyCT.pelvisLegArteries.length.value' | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_c_090528"
+          labelRrId="ang_c_090527"
+          name="length"
+          [(ngModel)]="model.length"
+          [config]="{placeholder: '---', labelWidth: 50, min: 1, max: 150}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #typeC>
+  <div id="typCCont" class="f-horizontal c-sep-l f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_090452">
+          {{'angiographyCT.pelvisLegArteries.details.value' | translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_090453"
+          label="{{'angiographyCT.pelvisLegArteries.multipleStenosesOrocclusionsCmwithout.value' | translate}}"
+          name="typeCDetailsType"
+          [value]="typeCDetailsTypeEnum.MultipleStenoses"
+          class="text-break2"
+          [(ngModel)]="model.typeCDetailsType"
+          rrValidation="typeCDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090454"
+          label="{{'angiographyCT.pelvisLegArteries.recurrentStenosisWithNeed.value' | translate}}"
+          name="typeCDetailsType"
+          [value]="typeCDetailsTypeEnum.RecurrentStenosis"
+          class="text-break2"
+          [(ngModel)]="model.typeCDetailsType"
+          rrValidation="typeCDetailsType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 f-vertical f-start c-pad-l o-radio-list"></div>
+  </div>
+</ng-template>
+
+<ng-template #typeD>
+  <div id="typDCont" class="f-horizontal c-sep-l f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_090455">
+          {{'angiographyCT.pelvisLegArteries.details.value' | translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_090456"
+          label="{{'angiographyCT.pelvisLegArteries.chronicOcclusionOf\nthe.value' | translate}}"
+          name="typeDDetailsType"
+          [value]="typeDDetailsTypeEnum.ChronicOcclusionOfTheCommonFemoralArtery"
+          class="text-break2"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+          [rrContentReset]="clearLengthOnFifthColv2(typeDDetailsTypeEnum.ChronicOcclusionOfTheCommonFemoralArtery, 'd-fifth-col')"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090457"
+          label="{{'angiographyCT.pelvisLegArteries.chronicOcclusionOfthePopliteal.value' | translate}}"
+          name="typeDDetailsType"
+          [value]="typeDDetailsTypeEnum.ChronicOcclusionOfThePoplitealArtery"
+          class="text-break2"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+          [rrContentReset]="clearLengthOnFifthColv2(typeDDetailsTypeEnum.ChronicOcclusionOfThePoplitealArtery, 'd-fifth-col')"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div id="d-fifth-col" class="c-col-1 c-sep-l c-pad-l m-t-28">
+      <div
+        *ngIf="model.typeDDetailsType === typeDDetailsTypeEnum.ChronicOcclusionOfTheCommonFemoralArtery"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_090529">
+          {{ 'angiographyCT.pelvisLegArteries.length.value' | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_c_090531"
+          labelRrId="ang_c_090530"
+          name="length"
+          [(ngModel)]="model.length"
+          [config]="{labelWidth: 50, min: 1, max: 800, placeholder: '---'}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,345 @@
+<div class="f-horizontal f-center h-510">
+  <div class="c-col-1 c-pad c-sep o-list f-vertical">
+    <div
+      class="o-radio-list p-l-12 m-t-2 text-break"
+      [rrDisable]="technologyModel?.cmReinforcedType !== simpleAnswerType.Yes"
+    >
+      <h2 rr-id="pel_m_040225" class="text-break">
+        {{ 'pelvisMRT.prostata.dynamicContrastEnhanced.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="pel_m_040226"
+        name="dynamicContrastEnhancedType"
+        [value]="dynamicContrastEnhancedType.DceMrtNegative"
+        [(ngModel)]="model.dynamicContrastEnhancedType"
+        [rrContentReset]="clearDceMrtNegativeType('DceMrtNegative')"
+        label="{{ 'pelvisMRT.prostata.dCEMRTNegative.value' | translate }}"
+        rrValidation="dynamicContrastEnhancedType"
+      ></p-radioButton>
+      <div
+        id="dceMrtNegativeType"
+        class="o-radio-list p-l-35"
+        [rrDisable]="model.dynamicContrastEnhancedType !== 'DceMrtNegative'"
+      >
+        <p-radioButton
+          rr-id="pel_m_040227"
+          rrUnClickRadio
+          name="dceMrtNegativeType"
+          [value]="dceMrtNegativeType.NoEarlyOrSimultaneousKmEnhancement"
+          [(ngModel)]="model.dceMrtNegativeType"
+          label="{{ 'pelvisMRT.prostata.noEarlyOrSimultaneous.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="pel_m_040228"
+          name="dceMrtNegativeType"
+          [value]="dceMrtNegativeType.DiffuseKmEnhancementWithoutSuspectCorrelateInT2w"
+          [(ngModel)]="model.dceMrtNegativeType"
+          label="{{ 'pelvisMRT.prostata.diffuseKMEnhancementWithout.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="pel_m_040229"
+          name="dceMrtNegativeType"
+          [value]="dceMrtNegativeType.FocalKmEnhancementForTypicalBphNodeInT2w"
+          [(ngModel)]="model.dceMrtNegativeType"
+          label="{{ 'pelvisMRT.prostata.focalKMEnhancementFor.value' | translate }}"
+        ></p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="pel_m_040230"
+        rrInfoIcon="pel_m_04_03"
+        name="dynamicContrastEnhancedType"
+        [value]="dynamicContrastEnhancedType.DceMrtPositive"
+        [rrContentReset]="clearDceMrtNegativeType('DceMrtPositive')"
+        [(ngModel)]="model.dynamicContrastEnhancedType"
+        label="{{ 'pelvisMRT.prostata.dCEMRTPositive.value' | translate }}"
+        rrValidation="dynamicContrastEnhancedType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-sep c-pad-l f-vertical">
+    <h2 rr-id="pel_m_040320" class="m-b-13 p-l-10">
+      {{ 'pelvisMRT.prostata.extraprostaticGrowth.value' | translate }}
+    </h2>
+    <div class="c-sep text-break f-horizontal f-center h-100">
+      <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+        <div class="o-radio-list p-l-10">
+          <p-radioButton
+            rr-id="pel_m_040321"
+            name="extraprostaticGrowthType"
+            [value]="extraprostaticGrowthType.NoPenetrationOfPseudocapsule"
+            [rrContentReset]="clearPenetrationOfPseudocapsuleCheckboxes(extraprostaticGrowthType.NoPenetrationOfPseudocapsule)"
+            [(ngModel)]="model.extraprostaticGrowthType"
+            label="{{ 'pelvisMRT.prostata.noPenetrationOfPseudocapsule.value' | translate }}"
+            rrValidation="extraprostaticGrowthType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040322"
+            name="extraprostaticGrowthType"
+            [value]="extraprostaticGrowthType.PenetrationOfPseudocapsule"
+            [rrContentReset]="clearPenetrationOfPseudocapsuleCheckboxes(extraprostaticGrowthType.PenetrationOfPseudocapsule)"
+            [(ngModel)]="model.extraprostaticGrowthType"
+            label="{{ 'pelvisMRT.prostata.penetrationOfPseudocapsule.value' | translate }}"
+            rrValidation="extraprostaticGrowthType"
+          ></p-radioButton>
+          <div
+            id="penetrationOfPseudocapsuleCheckboxes"
+            class="o-radio-list p-l-39"
+            [rrDisable]="model.extraprostaticGrowthType !== extraprostaticGrowthType.PenetrationOfPseudocapsule"
+          >
+            <p-radioButton
+              label="{{ 'pelvisMRT.prostata.broadbasedPseudocapsuleContactMm.value' | translate }}"
+              rr-id="pel_m_040323"
+              name="penetrationOfPseudocapsuleType"
+              [value]="penetrationOfPseudocapsuleType.BroadBasedPseudocapsuleContactMoreThan10Mm"
+              class="m-b-11"
+              [(ngModel)]="model.penetrationOfPseudocapsuleType"
+              rrUnClickRadio
+              rrContentReset="isPseudocapsularBulgingSpiculated infiltrationOfAdjacentStructuresDetails infiltrationOfAdjacentStructuresDetails2"
+            ></p-radioButton>
+            <p-radioButton
+              label="{{'pelvisMRT.prostata.rectoprostaticAngleObliteration.value' | translate }}"
+              rr-id="pel_m_040324"
+              name="penetrationOfPseudocapsuleType"
+              [value]="penetrationOfPseudocapsuleType.RectoprostaticAngleObliteration"
+              class="m-b-3"
+              [(ngModel)]="model.penetrationOfPseudocapsuleType"
+              rrUnClickRadio
+              rrContentReset="isPseudocapsularBulgingSpiculated infiltrationOfAdjacentStructuresDetails infiltrationOfAdjacentStructuresDetails2"
+            ></p-radioButton>
+            <p-radioButton
+              label="{{ 'pelvisMRT.prostata.pseudocapsularBulging.value' | translate }}"
+              rr-id="pel_m_040325"
+              name="penetrationOfPseudocapsuleType"
+              [value]="penetrationOfPseudocapsuleType.PseudocapsularBulging"
+              class="m-b-11"
+              rrContentReset="isPseudocapsularBulgingSpiculated infiltrationOfAdjacentStructuresDetails infiltrationOfAdjacentStructuresDetails2"
+              [(ngModel)]="model.penetrationOfPseudocapsuleType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="isPseudocapsularBulgingSpiculated"
+              class="o-radio-list p-l-35"
+              [rrDisable]="model.penetrationOfPseudocapsuleType !== penetrationOfPseudocapsuleType.PseudocapsularBulging"
+            >
+              <p-checkbox
+                label="{{ 'pelvisMRT.prostata.spiculated.value' | translate }}"
+                rr-id="pel_m_040326"
+                binary="true"
+                class="m-b-11"
+                [(ngModel)]="model.isPseudocapsularBulgingSpiculated"
+                name="isPseudocapsularBulgingSpiculated"
+              ></p-checkbox>
+            </div>
+            <p-radioButton
+              label="{{ 'pelvisMRT.prostata.infiltrationOfAdjacentStructures.value' | translate }}"
+              rr-id="pel_m_040327"
+              name="penetrationOfPseudocapsuleType"
+              [value]="penetrationOfPseudocapsuleType.InfiltrationOfAdjacentStructures"
+              class="m-b-11"
+              [(ngModel)]="model.penetrationOfPseudocapsuleType"
+              rrUnClickRadio
+              rrContentReset="isPseudocapsularBulgingSpiculated infiltrationOfAdjacentStructuresDetails infiltrationOfAdjacentStructuresDetails2"
+            ></p-radioButton>
+            <p-checkbox
+              class="m-t-25"
+              label="{{ 'pelvisMRT.prostata.suspicionOf.value' | translate }}"
+              rr-id="pel_m_040328"
+              binary="true"
+              [(ngModel)]="model.isSuspicionOf"
+              name="isSuspicionOf"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-sep c-pad-l f-vertical">
+    <h2
+      rr-id="pel_m_040432"
+      class="m-b-13 p-l-15 text-break"
+      *ngIf="model.penetrationOfPseudocapsuleType === penetrationOfPseudocapsuleType.InfiltrationOfAdjacentStructures"
+    >
+      {{ 'pelvisMRT.prostata.detailsInfiltrationOfAdjacent.value' | translate }}
+    </h2>
+    <div class="c-sep text-break f-horizontal f-center h-100">
+      <div class="c-col-1 c-pad-l o-list f-vertical">
+        <div
+          class="o-radio-list m-t-2 text-break"
+          *ngIf="model.penetrationOfPseudocapsuleType === penetrationOfPseudocapsuleType.InfiltrationOfAdjacentStructures"
+          id="infiltrationOfAdjacentStructuresDetails"
+        >
+          <div class="o-radio-list">
+            <p-checkbox
+              label="{{ 'pelvisMRT.prostata.seminalVesicles.value' | translate }}"
+              rr-id="pel_m_040433"
+              binary="true"
+              name="isSeminalVesicles"
+              rrContentReset="seminalVesiclesBlock seminalVesiclesBlock2"
+              [(ngModel)]="model.isSeminalVesicles"
+            ></p-checkbox>
+            <div
+              id="seminalVesiclesBlock"
+              class="o-radio-list p-l-27"
+              [rrDisable]="!model.isSeminalVesicles"
+            >
+              <div class="o-radio-list">
+                <p rr-id="pel_m_040439">
+                  {{ 'pelvisMRT.prostata.site.value' | translate }}
+                </p>
+                <p-radioButton
+                  rr-id="pel_m_040434"
+                  name="seminalVesiclesDirectionType"
+                  [value]="directionType.Right"
+                  label="{{ 'pelvisMRT.prostata.right.value' | translate }}"
+                  [(ngModel)]="model.seminalVesiclesDirectionType"
+                  rrValidation="seminalVesiclesDirectionType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_040435"
+                  name="seminalVesiclesDirectionType"
+                  [value]="directionType.Left"
+                  label="{{ 'pelvisMRT.prostata.left.value' | translate }}"
+                  [(ngModel)]="model.seminalVesiclesDirectionType"
+                  rrValidation="seminalVesiclesDirectionType"
+                ></p-radioButton>
+              </div>
+              <p-checkbox
+                label="{{ 'pelvisMRT.prostata.alteredInternalStructure.value' | translate }}"
+                rr-id="pel_m_040436"
+                binary="true"
+                name="isAlteredInternalStructure"
+                [(ngModel)]="model.isAlteredInternalStructure"
+              ></p-checkbox>
+              <p-checkbox
+                label="{{ 'pelvisMRT.prostata.focalOrDiffuseT2w.value' | translate }}"
+                rr-id="pel_m_040437"
+                binary="true"
+                name="isFocalOrDiffuseT2wSignalReduction"
+                rrContentReset="SeparateFocalT2wSignalReduction"
+                [(ngModel)]="model.isFocalOrDiffuseT2wSignalReduction"
+              ></p-checkbox>
+              <div
+                id="SeparateFocalT2wSignalReduction"
+                class="o-radio-list p-l-35"
+                [rrDisable]="!model.isFocalOrDiffuseT2wSignalReduction"
+              >
+                <p-checkbox
+                  label="{{ 'pelvisMRT.prostata.separateFocalT2wSignal.value' | translate }}"
+                  rr-id="pel_m_040438"
+                  rrInfoIcon="pel_m_04_04"
+                  [infoIconStyles]="{ 'margin-top': '-7px' }"
+                  binary="true"
+                  name="isSeparateFocalT2wSignalReduction"
+                  [(ngModel)]="model.isSeparateFocalT2wSignalReduction"
+                ></p-checkbox>
+              </div>
+              <p-checkbox
+                label="{{ 'pelvisMRT.prostata.enlargedEjaculatoryDuctWith.value' | translate }}"
+                rr-id="pel_m_040440"
+                binary="true"
+                name="isEnlargedEjaculatoryDuctWithT2wSignalReduction"
+                [(ngModel)]="model.isEnlargedEjaculatoryDuctWithT2wSignalReduction"
+              ></p-checkbox>
+              <p-checkbox
+                label="{{ 'pelvisMRT.prostata.obliterationOfProstateSeminalVesicleAngle.value' | translate }}"
+                rr-id="pel_m_040441"
+                binary="true"
+                name="isObliterationOfProstateSeminalVesicleAngle"
+                [(ngModel)]="model.isObliterationOfProstateSeminalVesicleAngle"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="c-col-1 c-pad-l c-sep-l o-list f-vertical"
+        id="infiltrationOfAdjacentStructuresDetails2"
+      >
+        <div
+          class="o-radio-list p-l-10"
+          *ngIf="model.penetrationOfPseudocapsuleType === penetrationOfPseudocapsuleType.InfiltrationOfAdjacentStructures"
+        >
+          <div
+            id="seminalVesiclesBlock2"
+            class="o-radio-list p-l-27"
+            [rrDisable]="!model.isSeminalVesicles"
+          >
+            <p-checkbox
+              label="{{ 'pelvisMRT.prostata.directInfiltrationPerContinuitatem.value' | translate }}"
+              rr-id="pel_m_040533"
+              binary="true"
+              name="isDirectInfiltrationPerContinuitatem"
+              [(ngModel)]="model.isDirectInfiltrationPerContinuitatem"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            label="{{ 'pelvisMRT.prostata.neurovascularBundle.value' | translate }}"
+            rr-id="pel_m_040526"
+            binary="true"
+            name="isNeurovascularBundle"
+            rrContentReset="neurovascularBundleBlock"
+            [(ngModel)]="model.isNeurovascularBundle"
+          ></p-checkbox>
+          <div
+            id="neurovascularBundleBlock"
+            class="o-radio-list p-l-35"
+            [rrDisable]="!model.isNeurovascularBundle"
+          >
+            <p rr-id="pel_m_040534">
+              {{ 'pelvisMRT.prostata.site.value' | translate }}
+            </p>
+            <p-radioButton
+              rr-id="pel_m_040527"
+              name="neurovascularBundleDirectionType"
+              [value]="directionType.Right"
+              label="{{ 'pelvisMRT.prostata.right.value' | translate }}"
+              [(ngModel)]="model.neurovascularBundleDirectionType"
+              rrValidation="neurovascularBundleDirectionType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_040528"
+              name="neurovascularBundleDirectionType"
+              [value]="directionType.Left"
+              label="{{ 'pelvisMRT.prostata.left.value' | translate }}"
+              [(ngModel)]="model.neurovascularBundleDirectionType"
+              rrValidation="neurovascularBundleDirectionType"
+            ></p-radioButton>
+          </div>
+          <p-checkbox
+            label="{{ 'pelvisMRT.prostata.rectum.value' | translate }}"
+            rr-id="pel_m_040529"
+            binary="true"
+            class="m-b-11"
+            name="isRectum"
+            [(ngModel)]="model.isRectum"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{ 'pelvisMRT.prostata.urinaryBladder.value' | translate }}"
+            rr-id="pel_m_040530"
+            binary="true"
+            class="m-b-11"
+            name="isUrinaryBladder"
+            [(ngModel)]="model.isUrinaryBladder"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{ 'pelvisMRT.prostata.externalUrethrasphincter.value' | translate }}"
+            rr-id="pel_m_040531"
+            binary="true"
+            class="m-b-11"
+            name="isExternalUrethrasphincter"
+            [(ngModel)]="model.isExternalUrethrasphincter"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{ 'pelvisMRT.prostata.membranousUrethra.value' | translate }}"
+            rr-id="pel_m_040532"
+            binary="true"
+            name="isMembranousUrethra"
+            [(ngModel)]="model.isMembranousUrethra"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

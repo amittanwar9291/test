@@ -1,0 +1,233 @@
+<div class="main f-vertical" rrBlockForm>
+  <div class="f-horizontal f-space-between header-container">
+    <div class="o-radio-list">
+      <h1 rr-id="spi_m_0904103" class="editor-common-font-42">
+        {{ 'spineMRT.sacroiliacJoint.scoreEditorHeader.value' | translate }}
+      </h1>
+      <p
+        rr-id="spi_m_0904104"
+        class="editor-common-subheader text-break m-t-15"
+      >
+        {{ 'spineMRT.sacroiliacJoint.scoreEditorSubheader.value' | translate }}
+      </p>
+    </div>
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 48 48"
+        rr-id="spi_m_0904123"
+      >
+        <g
+          class="close-button"
+          transform="translate(-1621 -148)"
+          (click)="closeEditor()"
+        >
+          <g transform="translate(-148 -50)">
+            <circle cx="24" cy="24" r="24" transform="translate(1769 198)" />
+            <g transform="translate(678.984 -1195.364) rotate(45)">
+              <line x2="26" transform="translate(1777.5 214.5)" />
+              <line x2="26" transform="translate(1790.5 201.5) rotate(90)" />
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="f-start f-horizontal content-container">
+    <div class="c-col-4 c-pad-r c-sep f-vertical f-start">
+      <div class="stepper-container o-radio-list">
+        <h2 rr-id="spi_m_0904105" class="editor-common-header m-b-7">
+          {{ 'spineMRT.sacroiliacJoint.layers1to6.value' | translate }}
+        </h2>
+        <p rr-id="spi_m_0904124" class="editor-common-subheader m-b-20">
+          {{
+          'spineMRT.sacroiliacJoint.sTIRSequenceParacoronaryUserDefined.value' |
+          translate }}
+        </p>
+        <div rr-id="spi_m_0904106" class="stepper">
+          <div class="stepper-items">
+            <div class="stepper-item" [ngClass]="getStepClass(1)">
+              <div
+                class="stepper-item-number"
+                (click)="setStep(1)"
+                style="margin-left: 40px"
+              >
+                1
+              </div>
+              <div class="stepper-item-line"></div>
+            </div>
+            <div class="stepper-item" [ngClass]="getStepClass(2)">
+              <div class="stepper-item-number" (click)="setStep(2)">2</div>
+              <div class="stepper-item-line"></div>
+            </div>
+            <div class="stepper-item" [ngClass]="getStepClass(3)">
+              <div class="stepper-item-number" (click)="setStep(3)">3</div>
+              <div class="stepper-item-line"></div>
+            </div>
+            <div class="stepper-item" [ngClass]="getStepClass(4)">
+              <div class="stepper-item-number" (click)="setStep(4)">4</div>
+              <div class="stepper-item-line"></div>
+            </div>
+            <div class="stepper-item" [ngClass]="getStepClass(5)">
+              <div class="stepper-item-number" (click)="setStep(5)">5</div>
+              <div class="stepper-item-line"></div>
+            </div>
+            <div class="stepper-item" [ngClass]="getStepClass(6)">
+              <div
+                class="stepper-item-number"
+                (click)="setStep(6)"
+                style="margin-right: 40px"
+              >
+                6
+              </div>
+            </div>
+          </div>
+          <div class="stepper-labels">
+            <div class="stepper-labels-item">
+              {{editorModel.scores[0].stepScore || 0}} {{
+              'spineMRT.sacroiliacJoint.points.value' | translate }}
+            </div>
+            <div class="stepper-labels-item">
+              {{editorModel.scores[1].stepScore || 0}} {{
+              'spineMRT.sacroiliacJoint.points.value' | translate }}
+            </div>
+            <div class="stepper-labels-item">
+              {{editorModel.scores[2].stepScore || 0}} {{
+              'spineMRT.sacroiliacJoint.points.value' | translate }}
+            </div>
+            <div class="stepper-labels-item">
+              {{editorModel.scores[3].stepScore || 0}} {{
+              'spineMRT.sacroiliacJoint.points.value' | translate }}
+            </div>
+            <div class="stepper-labels-item">
+              {{editorModel.scores[4].stepScore || 0}} {{
+              'spineMRT.sacroiliacJoint.points.value' | translate }}
+            </div>
+            <div class="stepper-labels-item">
+              {{editorModel.scores[5].stepScore || 0}} {{
+              'spineMRT.sacroiliacJoint.points.value' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="data-container">
+        <div class="f-start f-horizontal">
+          <div class="localizer-container o-radio-list">
+            <h2 rr-id="spi_m_0904107" class="editor-common-header">
+              {{ 'spineMRT.sacroiliacJoint.quadrantsWithBoneMarrowEdema.value' |
+              translate }}
+            </h2>
+            <p rr-id="spi_m_0904108" class="editor-common-subheader">
+              {{
+              'spineMRT.sacroiliacJoint.pleaseClickOnTheCorrespondingFields.value'
+              | translate }}
+            </p>
+            <rr-sparcc-score-localizer-complex
+              rr-id="spi_m_0904109-4"
+              name="score-localizer"
+              [(ngModel)]="editorModel.scores[currentStep - 1].data.scoreLocation"
+              (elementClick)="onLocalizerClicked($event)"
+            ></rr-sparcc-score-localizer-complex>
+          </div>
+          <div class="o-radio-list">
+            <h2 rr-id="spi_m_0904110" class="editor-common-header">
+              {{
+              'spineMRT.sacroiliacJoint.deepBoneMarrowEdemaManifestation.value'
+              | translate }}
+            </h2>
+            <p rr-id="spi_m_0904111" class="editor-common-subheader text-break">
+              {{
+              'spineMRT.sacroiliacJoint.sufficesTo1cmFromJointSurfaceToMedial.value'
+              | translate }}
+            </p>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="editorModel.scores[currentStep - 1].data.isManifestationRight"
+              label="{{ 'spineMRT.sacroiliacJoint.right.value' | translate }}"
+              rr-id="spi_m_0904112-6"
+              (onChange)="updateScoreOnCheckbox(editorModel.scores[currentStep - 1].data.isManifestationRight)"
+              name="isManifestationRight"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="editorModel.scores[currentStep - 1].data.isManifestationLeft"
+              label="{{ 'spineMRT.sacroiliacJoint.left.value' | translate }}"
+              rr-id="spi_m_0904113-6"
+              (onChange)="updateScoreOnCheckbox(editorModel.scores[currentStep -1 ].data.isManifestationLeft)"
+              name="isManifestationLeft"
+            ></p-checkbox>
+
+            <h2 rr-id="spi_m_0904114" class="editor-common-header m-t-40">
+              {{ 'spineMRT.sacroiliacJoint.veryHighSignalInSTIR.value' |
+              translate }}
+            </h2>
+            <p rr-id="spi_m_0904115" class="editor-common-subheader">
+              {{ 'spineMRT.sacroiliacJoint.referencePresacralVenousPlexus.value'
+              | translate }}
+            </p>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="editorModel.scores[currentStep - 1].data.isSTIRRight"
+              label="{{ 'spineMRT.sacroiliacJoint.right.value' | translate }}"
+              rr-id="spi_m_0904116-6"
+              (onChange)="updateScoreOnCheckbox(editorModel.scores[currentStep - 1].data.isSTIRRight)"
+              name="isSTIRRight"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="editorModel.scores[currentStep - 1].data.isSTIRLeft"
+              label="{{ 'spineMRT.sacroiliacJoint.left.value' | translate }}"
+              rr-id="spi_m_0904117-6"
+              (onChange)="updateScoreOnCheckbox(editorModel.scores[currentStep - 1].data.isSTIRLeft)"
+              name="isSTIRLeft"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep f-vertical f-space-between sum-container p-l-12">
+      <div class="o-radio-list m-l-50">
+        <h2 rr-id="spi_m_0904118" class="editor-common-header">
+          {{ 'spineMRT.sacroiliacJoint.sPARCCScore.value' | translate }}
+        </h2>
+        <div
+          rr-id="spi_m_0904119"
+          class="score-sum-counter editor-common-font-45"
+        >
+          {{editorModel.scoreSum || 0}}
+        </div>
+      </div>
+      <div class="f-horizontal f-end">
+        <button
+          *ngIf="currentStep !== 1"
+          rr-id="spi_m_0904120"
+          type="button"
+          class="button button-light no-block-click"
+          (click)="setStep(currentStep - 1)"
+        >
+          {{ 'spineMRT.sacroiliacJoint.back.value' | translate }}
+        </button>
+        <button
+          *ngIf="currentStep !== 6"
+          rr-id="spi_m_0904121"
+          type="button"
+          class="button button-dark no-block-click"
+          (click)="setStep(currentStep + 1)"
+        >
+          {{ 'spineMRT.sacroiliacJoint.continue.value' | translate }}
+        </button>
+        <button
+          *ngIf="currentStep === 6"
+          rr-id="spi_m_0904131"
+          type="button"
+          class="button button-dark no-block-click"
+          (click)="finish()"
+        >
+          {{ 'spineMRT.sacroiliacJoint.exit.value' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

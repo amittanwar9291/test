@@ -1,0 +1,226 @@
+<div class="f-horizontal o-width-100 col-h-100 p-t-7 p-b-12">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-10">
+      <h2 rr-id="anc_m_060235">
+        {{'feetMRT.softTissue.associatedFindings.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="anc_m_060236"
+        label="{{'feetMRT.softTissue.skinThickening.value' | translate}}"
+        name="isCutisThickening"
+        [(ngModel)]="model.isCutisThickening"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060237"
+        label="{{'feetMRT.softTissue.bonyPressureErosion.value' | translate}}"
+        name="isPressureCorrosionBone"
+        [(ngModel)]="model.isPressureCorrosionBone"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060238"
+        label="{{'feetMRT.softTissue.accompanyingBursitis.value' | translate}}"
+        name="isAccompanyingBursitis"
+        [(ngModel)]="model.isAccompanyingBursitis"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+    <div class="f-vertical f-start o-radio-list sliders-z-index p-l-10">
+      <h2 rr-id="anc_m_0603125" class="m-b-0">
+        {{'feetMRT.softTissue.t1wSignal.value' | translate}}
+      </h2>
+      <span rr-id="anc_m_060347" class="m-b-13"
+        >{{'feetMRT.softTissue.comparedToMuscleSignal.value' | translate}}</span
+      >
+      <rr-slider-number-triple-input
+        name="signalT1w"
+        rr-id="anc_m_060348"
+        [(ngModel)]="model.signalT1w"
+      >
+      </rr-slider-number-triple-input>
+      <h2 rr-id="anc_m_0603126" class="m-b-0 m-t-20">
+        {{'feetMRT.softTissue.t2wSignal.value' | translate}}
+      </h2>
+      <span class="m-b-13" rr-id="anc_m_060349">
+        {{'feetMRT.softTissue.comparedToMuscleSignal.value' | translate}}
+      </span>
+      <rr-slider-number-triple-input
+        name="signalT2w"
+        rr-id="anc_m_060350"
+        class="m-b-24"
+        [(ngModel)]="model.signalT2w"
+      >
+      </rr-slider-number-triple-input>
+      <h2 rr-id="anc_m_0603149" rrInfoIcon="anc_m_06_16">
+        {{'feetMRT.softTissue.diffusionImaging.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="anc_m_060351"
+        label="{{'feetMRT.softTissue.diffusionRestriction.value' | translate}}"
+        name="isDiffusionRestriction"
+        [(ngModel)]="model.isDiffusionRestriction"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-10" [rrDisable]="!isCMYes">
+      <h2 rr-id="anc_m_0604101">
+        {{'feetMRT.softTissue.quantitativeContrastEnhancement.value' |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="anc_m_0604102"
+        label="{{'feetMRT.softTissue.no.value' | translate}}"
+        name="quantitativeType"
+        rrContentReset="quantitativeHomogeneityType-block"
+        [value]="quantitativeTypeEnum.No"
+        [(ngModel)]="model.quantitativeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0604103"
+        label="{{'feetMRT.softTissue.mild.value' | translate}}"
+        name="quantitativeType"
+        rrContentReset="quantitativeHomogeneityType-block"
+        [value]="quantitativeTypeEnum.Mild"
+        [(ngModel)]="model.quantitativeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0604104"
+        label="{{'feetMRT.softTissue.strong.value' | translate}}"
+        name="quantitativeType"
+        rrContentReset="quantitativeHomogeneityType-block"
+        [value]="quantitativeTypeEnum.Strong"
+        [(ngModel)]="model.quantitativeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="quantitativeHomogeneityType-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="['No', 'None'].includes(model.quantitativeType)"
+      >
+        <p-radioButton
+          rr-id="anc_m_0604105"
+          label="{{'feetMRT.softTissue.homogeneous.value' | translate}}"
+          name="quantitativeHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          rrContentReset="isInTheSepta-block"
+          [(ngModel)]="model.quantitativeHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_0604106"
+          label="{{'feetMRT.softTissue.heterogeneous.value' | translate}}"
+          name="quantitativeHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          rrContentReset="isInTheSepta-block"
+          [(ngModel)]="model.quantitativeHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          id="isInTheSepta-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="model.quantitativeHomogeneityType !== homogeneityTypeEnum.Heterogeneous"
+        >
+          <p-checkbox
+            rr-id="anc_m_0604107"
+            label="{{'feetMRT.softTissue.inTheSepta.value' | translate}}"
+            name="isInTheSepta"
+            [(ngModel)]="model.isInTheSepta"
+            binary="true"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-10">
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="anc_m_060518" rrInfoIcon="anc_m_06_08">
+          {{'feetMRT.softTissue.differentialDiagnosis.value' | translate}}
+        </h2>
+        <p rr-id="anc_m_060519" class="m-b-0">
+          {{'feetMRT.softTissue.differentialDiagnosis1.value' | translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="anc_m_060520"
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosisW017"
+          [(ngModel)]="model.differentialDiagnosis1"
+          name="differentialDiagnosis1"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="clearDiagnosis2and3DependantFields()"
+          rrValidation="differentialDiagnosis1"
+        ></rr-differential-diagnosis-dropdown>
+
+        <p-checkbox
+          rr-id="anc_m_060561"
+          [rrDisable]="model.differentialDiagnosis1 === 'None' && model.differentialDiagnosis === 'None'"
+          label="{{'feetMRT.softTissue.suspected.value' | translate}}"
+          name="isSuspicionOf"
+          [(ngModel)]="model.isSuspicionOf"
+          binary="true"
+        ></p-checkbox>
+      </div>
+
+      <div
+        class="f-vertical f-start o-radio-list m-t-2"
+        [rrDisable]="model.differentialDiagnosis1 === 'None' && model.differentialDiagnosis === 'None'"
+      >
+        <p rr-id="anc_m_060522" class="m-b-0">
+          {{'feetMRT.softTissue.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="anc_m_060523"
+          [diagnosisNumber]="2"
+          [options]="differentialDiagnosisW018"
+          [(ngModel)]="model.differentialDiagnosis2"
+          name="differentialDiagnosis2"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="clearDiagnosis3DependantFields()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis2 === 'None'"
+      >
+        <p-checkbox
+          rr-id="anc_m_060524"
+          label="{{'feetMRT.softTissue.subordinated.value' | translate}}"
+          [(ngModel)]="model.isSubordinated"
+          binary="true"
+          class="m-b-15 o-width-96"
+          name="isSubordinated"
+        >
+        </p-checkbox>
+
+        <p rr-id="anc_m_060525" class="m-b-0">
+          {{'feetMRT.softTissue.differentialDiagnosis3.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="anc_m_060526"
+          [diagnosisNumber]="3"
+          [options]="differentialDiagnosisW018"
+          [(ngModel)]="model.differentialDiagnosis3"
+          name="differentialDiagnosis3"
+          group="true"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,295 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-pad col-h-100 f-vertical o-radio-list">
+    <h2 rr-id="spi_c_060340">
+      {{'spineCT.bones.fractureOfTheOccipitalCondyle.value' | translate}}
+    </h2>
+    <h2 rr-id="spi_c_060330">
+      {{'spineCT.bones.side.value' | translate}}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r f-vertical f-start o-radio-list">
+        <p-checkbox
+          label="{{ 'spineCT.bones.right.value' | translate }}"
+          rr-id="spi_c_0603241"
+          binary="true"
+          [(ngModel)]="model.isFractureOccipitalCondyleSideRight"
+          name="isFractureOccipitalCondyleSideRight"
+          rrContentReset="rotationOrTranslationRightContainer c0NoFutherDefinedTypeRightContainer fractureStabilityRightContainer"
+          rrValidation="isFractureOccipitalCondyleSideRight isFractureOccipitalCondyleSideLeft"
+        ></p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="fractureStabilityRightContainer"
+          [rrDisable]="!model.isFractureOccipitalCondyleSideRight"
+        >
+          <p rr-id="spi_c_0603242">
+            {{'spineCT.bones.evaluationOfFracture.value' | translate}}*
+          </p>
+          <p-radioButton
+            rr-id="spi_c_060302"
+            name="fractureStabilityRight"
+            [value]="c0StabilityTypeEnum.Stable"
+            label="{{'spineCT.bones.stable.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityRight"
+            rrContentReset="rotationOrTranslationRightContainer c0NoFutherDefinedTypeRightContainer"
+            rrValidation="fractureStabilityRight"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_060303"
+            name="fractureStabilityRight"
+            [value]="c0StabilityTypeEnum.Unstable"
+            label="{{'spineCT.bones.unstable.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityRight"
+            rrContentReset="rotationOrTranslationRightContainer c0NoFutherDefinedTypeRightContainer"
+            rrValidation="fractureStabilityRight"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_060304"
+            name="fractureStabilityRight"
+            [value]="c0StabilityTypeEnum.Dissociation"
+            label="{{'spineCT.bones.dissociation.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityRight"
+            rrContentReset="rotationOrTranslationRightContainer c0NoFutherDefinedTypeRightContainer"
+            rrValidation="fractureStabilityRight"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_060305"
+            name="fractureStabilityRight"
+            [value]="c0StabilityTypeEnum.NotFurtherDefined"
+            label="{{'spineCT.bones.notFurtherDefinedFractureOfTheOccipitalCondyle.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityRight"
+            rrContentReset="rotationOrTranslationRightContainer c0NoFutherDefinedTypeRightContainer"
+            rrValidation="fractureStabilityRight"
+          >
+          </p-radioButton>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="rotationOrTranslationRightContainer"
+            *ngIf="model.fractureStabilityRight === c0StabilityTypeEnum.Unstable"
+          >
+            <p-radioButton
+              rr-id="spi_c_0603243"
+              name="rotationOrTranslationRight"
+              [value]="rotationOrTranslationTypeEnum.Rotation"
+              label="{{'spineCT.bones.rotation.value' | translate}}"
+              [(ngModel)]="model.rotationOrTranslationRight"
+              rrContentReset="rotationRightInDegContainer translationRightInMmContainer"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <div
+              class="nested-content"
+              [rrDisable]="model.rotationOrTranslationRight !== rotationOrTranslationTypeEnum.Rotation"
+              id="rotationRightInDegContainer"
+            >
+              <rr-number-input
+                inputRrId="spi_c_0603244"
+                labelRrId="spi_c_0603245"
+                name="rotationRightInDeg"
+                label="{{'spineCT.bones.degree8.value' | translate}}"
+                [(ngModel)]="model.rotationRightInDeg"
+                [config]="{ min: 9, max: 360}"
+              >
+              </rr-number-input>
+            </div>
+            <p-radioButton
+              rr-id="spi_c_0603246"
+              name="rotationOrTranslationRight"
+              [value]="rotationOrTranslationTypeEnum.Translation"
+              label="{{'spineCT.bones.translation.value' | translate}}"
+              [(ngModel)]="model.rotationOrTranslationRight"
+              rrContentReset="rotationRightInDegContainer translationRightInMmContainer"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <div
+              class="nested-content"
+              [rrDisable]="model.rotationOrTranslationRight !== rotationOrTranslationTypeEnum.Translation"
+              id="translationRightInMmContainer"
+            >
+              <rr-number-input
+                inputRrId="spi_c_0603247"
+                labelRrId="spi_c_0603248"
+                labelStyleClass="text-break2"
+                name="translationRightInMm"
+                label="{{'spineCT.bones.distance1mm.value' | translate}}"
+                [(ngModel)]="model.translationRightInMm"
+                [config]="{ min: 2, max: 99}"
+              >
+              </rr-number-input>
+            </div>
+          </div>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="c0NoFutherDefinedTypeRightContainer"
+            *ngIf="model.fractureStabilityRight === c0StabilityTypeEnum.NotFurtherDefined"
+          >
+            <p-radioButton
+              rr-id="spi_c_0603249"
+              name="c0NoFutherDefinedTypeRight"
+              [value]="noFutherDefinedTypeEnum.SuspectedFracture"
+              label="{{'spineCT.bones.suspectedFracture.value' | translate}}"
+              [(ngModel)]="model.c0NoFutherDefinedTypeRight"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="spi_c_0603250"
+              name="c0NoFutherDefinedTypeRight"
+              [value]="noFutherDefinedTypeEnum.OldAppearingConsolidatedFracture"
+              label="{{'spineCT.bones.oldAppearingConsolidatedFracture.value' | translate}}"
+              [(ngModel)]="model.c0NoFutherDefinedTypeRight"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep-l f-vertical f-start o-radio-list">
+        <p-checkbox
+          label="{{ 'spineCT.bones.left.value' | translate }}"
+          rr-id="spi_c_0604235"
+          binary="true"
+          [(ngModel)]="model.isFractureOccipitalCondyleSideLeft"
+          name="isFractureOccipitalCondyleSideLeft"
+          rrContentReset="fractureStabilityLeftContainer rotationOrTranslationLeftContainer c0NoFutherDefinedTypeLeftContainer"
+          rrValidation="isFractureOccipitalCondyleSideRight isFractureOccipitalCondyleSideLeft"
+        ></p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isFractureOccipitalCondyleSideLeft"
+          id="fractureStabilityLeftContainer"
+        >
+          <p rr-id="spi_c_0604236">
+            {{'spineCT.bones.evaluationOfFracture.value' | translate}}*
+          </p>
+          <p-radioButton
+            rr-id="spi_c_0604237"
+            name="fractureStabilityLeft"
+            [value]="c0StabilityTypeEnum.Stable"
+            label="{{'spineCT.bones.stable.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityLeft"
+            rrContentReset="rotationOrTranslationLeftContainer c0NoFutherDefinedTypeLeftContainer"
+            rrValidation="fractureStabilityLeft"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604238"
+            name="fractureStabilityLeft"
+            [value]="c0StabilityTypeEnum.Unstable"
+            label="{{'spineCT.bones.unstable.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityLeft"
+            rrContentReset="rotationOrTranslationLeftContainer c0NoFutherDefinedTypeLeftContainer"
+            rrValidation="fractureStabilityLeft"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604239"
+            name="fractureStabilityLeft"
+            [value]="c0StabilityTypeEnum.Dissociation"
+            label="{{'spineCT.bones.dissociation.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityLeft"
+            rrContentReset="rotationOrTranslationLeftContainer c0NoFutherDefinedTypeLeftContainer"
+            rrValidation="fractureStabilityLeft"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_0604240"
+            name="fractureStabilityLeft"
+            [value]="c0StabilityTypeEnum.NotFurtherDefined"
+            label="{{'spineCT.bones.notFurtherDefinedFractureOfTheOccipitalCondyle.value' | translate}}"
+            [(ngModel)]="model.fractureStabilityLeft"
+            rrContentReset="rotationOrTranslationLeftContainer c0NoFutherDefinedTypeLeftContainer"
+            rrValidation="fractureStabilityLeft"
+          >
+          </p-radioButton>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="rotationOrTranslationLeftContainer"
+            *ngIf="model.fractureStabilityLeft === c0StabilityTypeEnum.Unstable"
+          >
+            <p-radioButton
+              rr-id="spi_c_0604241"
+              name="rotationOrTranslationLeft"
+              [value]="rotationOrTranslationTypeEnum.Rotation"
+              label="{{'spineCT.bones.rotation.value' | translate}}"
+              [(ngModel)]="model.rotationOrTranslationLeft"
+              rrUnClickRadio
+              rrContentReset="rotationLeftInDegContainer translationLeftInMmContainer"
+            >
+            </p-radioButton>
+            <div
+              class="nested-content"
+              [rrDisable]="model.rotationOrTranslationLeft !== rotationOrTranslationTypeEnum.Rotation"
+              id="rotationLeftInDegContainer"
+            >
+              <rr-number-input
+                inputRrId="spi_c_0604242"
+                labelRrId="spi_c_0604243"
+                name="rotationLeftInDeg"
+                label="{{'spineCT.bones.degree8.value' | translate}}"
+                [config]="{labelWidth: 110,min: 9, max: 360}"
+                [(ngModel)]="model.rotationLeftInDeg"
+              >
+              </rr-number-input>
+            </div>
+            <p-radioButton
+              rr-id="spi_c_0604244"
+              name="rotationOrTranslationLeft"
+              [value]="rotationOrTranslationTypeEnum.Translation"
+              label="{{'spineCT.bones.translation.value' | translate}}"
+              [(ngModel)]="model.rotationOrTranslationLeft"
+              rrUnClickRadio
+              rrContentReset="rotationLeftInDegContainer translationLeftInMmContainer"
+            >
+            </p-radioButton>
+            <div
+              class="nested-content"
+              [rrDisable]="model.rotationOrTranslationLeft !== rotationOrTranslationTypeEnum.Translation"
+              id="translationLeftInMmContainer"
+            >
+              <rr-number-input
+                inputRrId="spi_c_0604245"
+                labelRrId="spi_c_0604246"
+                labelStyleClass="text-break2"
+                name="translationLeftInMm"
+                label="{{'spineCT.bones.distance1mm.value' | translate}}"
+                [(ngModel)]="model.translationLeftInMm"
+                [config]="{min: 2, max: 99}"
+              >
+              </rr-number-input>
+            </div>
+          </div>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="c0NoFutherDefinedTypeLeftContainer"
+            *ngIf="model.fractureStabilityLeft === c0StabilityTypeEnum.NotFurtherDefined"
+          >
+            <p-radioButton
+              rr-id="spi_c_060408"
+              name="c0NoFutherDefinedTypeLeft"
+              [value]="noFutherDefinedTypeEnum.SuspicionOf"
+              label="{{'spineCT.bones.suspicionOf.value' | translate}}"
+              [(ngModel)]="model.c0NoFutherDefinedTypeLeft"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="spi_c_060409"
+              name="c0NoFutherDefinedTypeLeft"
+              [value]="noFutherDefinedTypeEnum.OldAppearingConsolidatedFracture"
+              label="{{'spineCT.bones.oldAppearingConsolidatedFracture.value' | translate}}"
+              [(ngModel)]="model.c0NoFutherDefinedTypeLeft"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l f-vertical f-start"></div>
+</div>

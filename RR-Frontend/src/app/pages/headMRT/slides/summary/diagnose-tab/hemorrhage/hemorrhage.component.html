@@ -1,0 +1,182 @@
+<div class="f-vertical f-start h-100 o-width-100">
+  <h2 rr-id="hea_m_120217" class="m-t-42 p-l-25 c-sep-l">
+    {{ "headMRT.summary.localization.value" | translate }}*
+  </h2>
+  <div class="f-horizontal h-100">
+    <div class="c-col-1 c-sep-l c-pad m-b-11 p-t-10 o-radio-list">
+      <div class="p-l-10 o-radio-list">
+        <p-radioButton
+          rr-id="hea_m_120219"
+          label="{{'headMRT.summary.subarachnoidHemorrhage.value' | translate}}"
+          name="hemorrhageLocalizationType"
+          [value]="hemorrhageLocalizationType.SubarachnoidHemorrhage"
+          [(ngModel)]="model.hemorrhageLocalizationType"
+          rrContentReset="subduralHematomaContainer"
+          rrValidation="hemorrhageLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_120220"
+          label="{{'headMRT.summary.subduralHematoma.value' | translate}}"
+          name="hemorrhageLocalizationType"
+          rrInfoIcon="hea_m_12_03"
+          [value]="hemorrhageLocalizationType.SubduralHematoma"
+          [(ngModel)]="model.hemorrhageLocalizationType"
+          (onClick)="clearCharacterizationDetails()"
+          rrValidation="hemorrhageLocalizationType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div
+      *ngIf="model.hemorrhageLocalizationType === hemorrhageLocalizationType.SubarachnoidHemorrhage"
+      class="f-vertical"
+    >
+      <h2 rr-id="hea_m_120331" class="m-t-10 c-sep-l p-l-25">
+        {{ "headMRT.summary.etiology.value" | translate }}
+      </h2>
+      <div class="f-horizontal h-100">
+        <div class="c-col-1 c-pad c-sep-l m-b-11 p-t-10 o-list">
+          <div class="p-l-10 o-radio-list">
+            <p-radioButton
+              rr-id="hea_m_120332"
+              label="{{'headMRT.summary.traumatic.value' | translate}}"
+              name="etiologyType"
+              [value]="etiologyType.Traumatic"
+              [(ngModel)]="model.etiologyType"
+              rrUnClickRadio
+              (onClick)="clearEtiologyDetails()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_120333"
+              label="{{'headMRT.summary.atraumatic.value' | translate}}"
+              name="etiologyType"
+              [value]="etiologyType.Atraumatic"
+              [(ngModel)]="model.etiologyType"
+              rrUnClickRadio
+              (onClick)="clearEtiologyDetails()"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-10">
+          <div *ngIf="model.etiologyType === etiologyType.Traumatic">
+            <p-checkbox
+              rr-id="hea_m_120425"
+              [(ngModel)]="model.isFracture"
+              name="isFracture"
+              label="{{ 'headMRT.summary.fracture.value' | translate }}"
+              binary="true"
+            >
+            </p-checkbox>
+          </div>
+          <div
+            *ngIf="model.etiologyType === etiologyType.Atraumatic"
+            class="o-radio-list"
+          >
+            <p-radioButton
+              rr-id="hea_m_120426"
+              label="{{'headMRT.summary.rupturedAneurysm.value' | translate}}"
+              name="atraumaticEtiologyType"
+              [value]="atraumaticEtiologyType.RupturedAneurysm"
+              [(ngModel)]="model.atraumaticEtiologyType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_120427"
+              label="{{'headMRT.summary.perimesencephalichemorrhage.value' | translate}}"
+              name="atraumaticEtiologyType"
+              [value]="atraumaticEtiologyType.PerimesencephalicHemorrhage"
+              [(ngModel)]="model.atraumaticEtiologyType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_120428"
+              label="{{'headMRT.summary.aVM.value' | translate}}"
+              name="atraumaticEtiologyType"
+              [value]="atraumaticEtiologyType.AVM"
+              [(ngModel)]="model.atraumaticEtiologyType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_120429"
+              label="{{'headMRT.summary.otherGenesis.value' | translate}}"
+              name="atraumaticEtiologyType"
+              [value]="atraumaticEtiologyType.OtherGenesis"
+              [(ngModel)]="model.atraumaticEtiologyType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="model.hemorrhageLocalizationType !== hemorrhageLocalizationType.SubarachnoidHemorrhage"
+      class="f-horizontal h-100"
+    >
+      <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-10">
+        <div
+          class="p-l-10 o-radio-list"
+          id="subduralHematomaContainer"
+          *ngIf="model.hemorrhageLocalizationType === hemorrhageLocalizationType.SubduralHematoma"
+        >
+          <h2 rr-id="hea_m_120334" rrInfoIcon="hea_m_12_04">
+            {{ "headMRT.summary.characterization.value" | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="hea_m_120335"
+            label="{{'headMRT.summary.acute.value' | translate}}"
+            name="characterizationType"
+            [value]="characterizationType.Acute"
+            [(ngModel)]="model.characterizationType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_120336"
+            label="{{'headMRT.summary.subacute.value' | translate}}"
+            name="characterizationType"
+            [value]="characterizationType.Subacute"
+            [(ngModel)]="model.characterizationType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_120337"
+            label="{{'headMRT.summary.chronic.value' | translate}}"
+            name="characterizationType"
+            [value]="characterizationType.Chronic"
+            [(ngModel)]="model.characterizationType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_120338"
+            label="{{'headMRT.summary.acuteonchronic.value' | translate}}"
+            name="characterizationType"
+            [value]="characterizationType.AcuteOnChronic"
+            [(ngModel)]="model.characterizationType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_120330"
+            label="{{'headMRT.summary.hygroma.value' | translate}}"
+            name="characterizationType"
+            [value]="characterizationType.Hygroma"
+            [(ngModel)]="model.characterizationType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-10"></div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep-l m-b-11 m-t-10"></div>
+  </div>
+</div>

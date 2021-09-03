@@ -1,0 +1,97 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-4 c-pad-r c-sep f-start f-vertical">
+    <h2 rr-id="car_m_090207" class="m-t-2 m-b-9">
+      {{ 'cardioMRT.pericardiumVessels.mediastinalVessels.value' | translate }}*
+    </h2>
+    <div class="c-col-4 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="car_m_090208"
+          [(ngModel)]="model.mediastinalVesselsType"
+          label="{{ 'cardioMRT.pericardiumVessels.coronaryAnomaly.value' | translate }}"
+          name="mediastinalVesselsType"
+          [value]="mediastinalVesselsType.CoronaryAnomaly"
+          rrValidation="mediastinalVesselsType"
+          rrContentReset="aorta-block pulmonaryArteries-block pulmonaryVeins-block venaCava-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090209"
+          [(ngModel)]="model.mediastinalVesselsType"
+          label="{{ 'cardioMRT.pericardiumVessels.aorta.value' | translate }}"
+          name="mediastinalVesselsType"
+          [value]="mediastinalVesselsType.Aorta"
+          rrValidation="mediastinalVesselsType"
+          [rrContentReset]="coronaryAnomalyValidationProperties +'pulmonaryArteries-block pulmonaryVeins-block venaCava-block'"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090210"
+          [(ngModel)]="model.mediastinalVesselsType"
+          label="{{ 'cardioMRT.pericardiumVessels.pulmonaryArteries.value' | translate }}"
+          name="mediastinalVesselsType"
+          [value]="mediastinalVesselsType.PulmonaryArteries"
+          rrValidation="mediastinalVesselsType"
+          [rrContentReset]="coronaryAnomalyValidationProperties + 'aorta-block pulmonaryVeins-block venaCava-block'"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090211"
+          [(ngModel)]="model.mediastinalVesselsType"
+          label="{{ 'cardioMRT.pericardiumVessels.pulmonaryVeins.value' | translate }}"
+          name="mediastinalVesselsType"
+          [value]="mediastinalVesselsType.PulmonaryVeins"
+          rrValidation="mediastinalVesselsType"
+          [rrContentReset]="coronaryAnomalyValidationProperties + 'aorta-block pulmonaryArteries-block venaCava-block'"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090212"
+          [(ngModel)]="model.mediastinalVesselsType"
+          label="{{ 'cardioMRT.pericardiumVessels.venaCava.value' | translate }}"
+          name="mediastinalVesselsType"
+          [value]="mediastinalVesselsType.VenaCava"
+          rrValidation="mediastinalVesselsType"
+          [rrContentReset]="coronaryAnomalyValidationProperties + 'aorta-block pulmonaryArteries-block pulmonaryVeins-block'"
+        ></p-radioButton>
+      </div>
+
+      <ng-container [ngSwitch]="model.mediastinalVesselsType">
+        <rr-corona-anomaly
+          *ngSwitchCase="mediastinalVesselsType.CoronaryAnomaly"
+          [model]="model"
+          class="col-h-100"
+        ></rr-corona-anomaly>
+
+        <rr-aorta
+          *ngSwitchCase="mediastinalVesselsType.Aorta"
+          [model]="model"
+          class="col-h-100"
+        ></rr-aorta>
+
+        <rr-pulmonary-arteries
+          *ngSwitchCase="mediastinalVesselsType.PulmonaryArteries"
+          [model]="model"
+          class="col-h-100"
+        ></rr-pulmonary-arteries>
+
+        <rr-pulmonary-veins
+          *ngSwitchCase="mediastinalVesselsType.PulmonaryVeins"
+          [model]="model"
+          class="col-h-100"
+        ></rr-pulmonary-veins>
+
+        <rr-vena-cava
+          *ngSwitchCase="mediastinalVesselsType.VenaCava"
+          [model]="model"
+          class="col-h-100"
+        ></rr-vena-cava>
+
+        <div
+          *ngSwitchCase="mediastinalVesselsType.None"
+          class="f-horizontal col-h-100"
+        >
+          <div class="c-col-1 c-pad c-sep f-start f-vertical o-list"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

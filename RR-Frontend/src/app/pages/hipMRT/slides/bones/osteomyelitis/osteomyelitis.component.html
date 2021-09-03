@@ -1,0 +1,377 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2
+      rr-id="hip_m_040204"
+      rrValidation="hipSpecificLocalizations"
+      class="m-t-5"
+    >
+      {{'hipMRT.bones.localization.value' | translate}}*
+    </h2>
+    <rr-hips-small
+      rr-id="hip_m_040206"
+      name="hipSpecificLocalizations"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipSpecificLocalizations"
+      rrValidation="hipSpecificLocalizations"
+      isLocalizer="true"
+    >
+    </rr-hips-small>
+    <h2 rr-id="hip_m_040234" class="m-t-15">
+      {{'hipMRT.bones.stage.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_040235"
+      rrUnClickRadio
+      name="stageType"
+      [value]="stageType.Acute"
+      label="{{'hipMRT.bones.acute.value' | translate}}"
+      [(ngModel)]="model.stageType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_040236"
+      rrUnClickRadio
+      name="stageType"
+      [value]="stageType.Chronic"
+      label="{{'hipMRT.bones.chronic.value' | translate}}"
+      [(ngModel)]="model.stageType"
+    >
+    </p-radioButton>
+    <h2 rr-id="hip_m_040237" class="m-t-20">
+      {{'hipMRT.bones.corticalis.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_040238"
+      name="isThinningscalopping"
+      label="{{'hipMRT.bones.thinningScalopping.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isThinningscalopping"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_040239"
+      name="isDestruction"
+      label="{{'hipMRT.bones.destruction.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isDestruction"
+    >
+    </p-checkbox>
+  </div>
+  <div class="f-vertical c-sep c-pad-l">
+    <h2 rr-id="hip_m_0403101" class="m-b-10">
+      {{'hipMRT.bones.spongiosa.value' | translate}}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+        <p-checkbox
+          rr-id="hip_m_0403102"
+          name="isBoneMarrowEdema"
+          label="{{'hipMRT.bones.boneMarrowEdema.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isBoneMarrowEdema"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_0403103"
+          name="isIntraosseousAbscessBrodieAbscess"
+          label="{{'hipMRT.bones.intraosseousAbscessBrodieAbscess.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isIntraosseousAbscessBrodieAbscess"
+          class="text-break m-t-11"
+          rrContentReset="isIntraosseousAbscessBrodieAbscessBlock"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content f-vertical"
+          [rrDisable]="!model.isIntraosseousAbscessBrodieAbscess"
+          id="isIntraosseousAbscessBrodieAbscessBlock"
+        >
+          <h3 rr-id="hip_m_0403104" class="m-b-3">
+            {{'hipMRT.bones.size.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="hip_m_0403106"
+            labelRrId="hip_m_0403105"
+            name="abscessSizeInMm"
+            label="{{'hipMRT.bones.inMm.value' | translate}}"
+            [config]="{min: 1, max: 99}"
+            [(ngModel)]="model.abscessSizeInMm"
+            (ngModelChange)="resetRelevantAbscessValues()"
+          >
+          </rr-number-input>
+          <div class="o-radio-list m-b-12" [rrDisable]="!model.abscessSizeInMm">
+            <h3 rr-id="hip_m_0403107" class="m-b-5">
+              {{'hipMRT.bones.2ndPlane.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="hip_m_0403109"
+              labelRrId="hip_m_0403108"
+              name="abscessSecondSizeInMm"
+              label="{{'hipMRT.bones.inMm.value' | translate}}"
+              [config]="{min: 1, max: 99}"
+              [(ngModel)]="model.abscessSecondSizeInMm"
+              (ngModelChange)="resetRelevantAbscessValues()"
+            >
+            </rr-number-input>
+          </div>
+          <div class="o-radio-list" [rrDisable]="!model.abscessSecondSizeInMm">
+            <h3 rr-id="hip_m_0403110" class="m-b-5">
+              {{'hipMRT.bones.3rdPlane.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="hip_m_0403112"
+              labelRrId="hip_m_0403111"
+              name="abscessThirdSizeInMm"
+              label="{{'hipMRT.bones.inMm.value' | translate}}"
+              [config]="{min: 1, max: 99}"
+              [(ngModel)]="model.abscessThirdSizeInMm"
+            >
+            </rr-number-input>
+          </div>
+          <h3 rr-id="hip_m_0403113" class="m-t-11">
+            {{'hipMRT.bones.details.value' | translate}}
+          </h3>
+          <p-checkbox
+            rr-id="hip_m_0403114"
+            name="isPenumbraSign"
+            label="{{'hipMRT.bones.penumbraSign.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isPenumbraSign"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hip_m_0403115"
+            name="isPeripheralContrastEnhancement"
+            label="{{'hipMRT.bones.peripheralContrastEnhancement.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isPeripheralContrastEnhancement"
+            [rrDisable]="!isContrastEnhanced"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hip_m_0403116"
+            name="isAbscessLesionSame"
+            label="{{'hipMRT.bones.lesionSameEntity.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isAbscessLesionSame"
+            class="m-t-21"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+        <p-checkbox
+          rr-id="hip_m_040471"
+          name="isSequester"
+          label="{{'hipMRT.bones.sequester.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSequester"
+          rrContentReset="isSequesterBlock"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content f-vertical"
+          [rrDisable]="!model.isSequester"
+          id="isSequesterBlock"
+        >
+          <h3 rr-id="hip_m_040472" class="m-b-5">
+            {{'hipMRT.bones.size.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="hip_m_040474"
+            labelRrId="hip_m_040473"
+            name="sequesterSizeInMm"
+            label="{{'hipMRT.bones.inMm.value' | translate}}"
+            [config]="{min: 1, max: 99}"
+            [(ngModel)]="model.sequesterSizeInMm"
+            (ngModelChange)="resetRelevantSequesterValues()"
+          >
+          </rr-number-input>
+          <div class="o-radio-list" [rrDisable]="!model.sequesterSizeInMm">
+            <h3 rr-id="hip_m_040475" class="m-b-5">
+              {{'hipMRT.bones.2ndPlane.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="hip_m_040477"
+              labelRrId="hip_m_040476"
+              name="sequesterSecondSizeInMm"
+              label="{{'hipMRT.bones.inMm.value' | translate}}"
+              [config]="{min: 1, max: 99}"
+              [(ngModel)]="model.sequesterSecondSizeInMm"
+              (ngModelChange)="resetRelevantSequesterValues()"
+            >
+            </rr-number-input>
+          </div>
+          <div
+            class="o-radio-list"
+            [rrDisable]="!model.sequesterSecondSizeInMm"
+          >
+            <h3 rr-id="hip_m_040478" class="m-b-6">
+              {{'hipMRT.bones.3rdPlane.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="hip_m_040480"
+              labelRrId="hip_m_040479"
+              name="sequesterThirdSizeInMm"
+              label="{{'hipMRT.bones.inMm.value' | translate}}"
+              [config]="{min: 1, max: 99}"
+              [(ngModel)]="model.sequesterThirdSizeInMm"
+            >
+            </rr-number-input>
+          </div>
+          <div class="o-radio-list" [rrDisable]="!isContrastEnhanced">
+            <h3 rr-id="hip_m_040481" class="m-t-12">
+              {{'hipMRT.bones.details.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="hip_m_040482"
+              name="isNoContrastEnhancement"
+              label="{{'hipMRT.bones.noContrastEnhancement.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isNoContrastEnhancement"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="hip_m_040483"
+          name="isSinusTractFistula"
+          label="{{'hipMRT.bones.sinusTractFistula.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSinusTractFistula"
+          class="m-t-5"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_040484"
+          name="isSpongiosaLesionSame"
+          label="{{'hipMRT.bones.lesionSameEntity.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSpongiosaLesionSame"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="hip_m_0405108" class="m-t-2">
+      {{'hipMRT.bones.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_0405109"
+      name="isOsteolysis"
+      label="{{'hipMRT.bones.osteolysis.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isOsteolysis"
+      rrContentReset="isOsteolysisBlock"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isOsteolysis"
+      id="isOsteolysisBlock"
+    >
+      <p-checkbox
+        rr-id="hip_m_0405110"
+        name="isCloaca"
+        label="{{'hipMRT.bones.cloaca.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCloaca"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_0405111"
+      name="isBoneApposition"
+      label="{{'hipMRT.bones.boneApposition.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isBoneApposition"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_0405112"
+      name="isPeriostealThickening"
+      label="{{'hipMRT.bones.periostealThickening.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isPeriostealThickening"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_0405113"
+      name="isPeriostealRupture"
+      label="{{'hipMRT.bones.periostealRupture.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isPeriostealRupture"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_0405114"
+      name="isSubperiostealAbscess"
+      label="{{'hipMRT.bones.subperiostealAbscess.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSubperiostealAbscess"
+      rrContentReset="isSubperiostealAbscessBlock"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isSubperiostealAbscess"
+      id="isSubperiostealAbscessBlock"
+    >
+      <h3 rr-id="hip_m_0405115" class="m-b-6">
+        {{'hipMRT.bones.size.value' | translate}}
+      </h3>
+      <rr-number-input
+        inputRrId="hip_m_0405117"
+        labelRrId="hip_m_0405116"
+        name="subperiostealSizeInMm"
+        label="{{'hipMRT.bones.inMm.value' | translate}}"
+        [config]="{min: 1, max: 150, placeholder: '---'}"
+        [(ngModel)]="model.subperiostealSizeInMm"
+      >
+      </rr-number-input>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_0405118"
+      name="isSoftTissueEdema"
+      label="{{'hipMRT.bones.softTissueEdema.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSoftTissueEdema"
+      class="m-t-5"
+    >
+    </p-checkbox>
+    <h2 rr-id="hip_m_0405119" class="m-t-20">
+      {{'hipMRT.bones.differentialDiagnosis.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_0405120"
+      rrUnClickRadio
+      name="osteomyelitisDifferentialDiagnosisType"
+      [value]="osteomyelitisDifferentialDiagnosisType.EwingSarcoma"
+      label="{{'hipMRT.bones.ewingSarcoma.value' | translate}}"
+      [(ngModel)]="model.osteomyelitisDifferentialDiagnosisType"
+      (onClick)="resetIsSecondary()"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_0405121"
+      rrUnClickRadio
+      name="osteomyelitisDifferentialDiagnosisType"
+      [value]="osteomyelitisDifferentialDiagnosisType.Chondroblastoma"
+      label="{{'hipMRT.bones.chondroblastoma.value' | translate}}"
+      [(ngModel)]="model.osteomyelitisDifferentialDiagnosisType"
+      (onClick)="resetIsSecondary()"
+      class="m-b-15"
+    >
+    </p-radioButton>
+    <p-checkbox
+      rr-id="hip_m_0405122"
+      name="isSecondary"
+      label="{{'hipMRT.bones.secondary.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSecondary"
+      [rrDisable]="model.osteomyelitisDifferentialDiagnosisType === osteomyelitisDifferentialDiagnosisType.None"
+    >
+    </p-checkbox>
+  </div>
+</div>

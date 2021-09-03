@@ -1,0 +1,387 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    depends_on:
+      - seq
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+
+  ocelotapigateway:
+    depends_on:
+      - seq
+    env_file: config/rr-service.env
+    environment:
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CORS_ALLOW_ALL: "True"
+
+  vault:
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - vault-data:/vault-storage
+    command: /data/steps.sh
+      
+  portainer:
+    image: portainer/portainer
+    command: --admin-password='$PORTAINER_PASSWORD' -H unix:///var/run/docker.sock 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.3.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-enterprise-kafka:5.3.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_MESSAGE_MAX_BYTES: ${KAFKA_MAXMESSAGEBYTES}
+      KAFKA_LOG_RETENTION_MINUTES: ${KAFKA_LOGRETENTIONMINUTES}
+      CONFLUENT_METRICS_ENABLE: 'false'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: anonymous
+        
+  redis:
+    image: redis:6.0.3-alpine
+
+  seq:
+    image: datalust/seq:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - memory=1g
+      - memory-swap=1g
+
+  minio:
+    image: ${DOCKER_REGISTRY}/radioreport_minio:latest
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESSKEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRETKEY}
+      
+  browserless:
+    image: browserless/chrome:latest
+    environment:
+      TOKEN: ${BROWSERLESSTOKEN}
+      PREBOOT_CHROME: "true"
+      KEEP_ALIVE: "true"
+      CHROME_REFRESH_TIME: 1800000
+      ENABLE_DEBUGGER: "false"
+
+  radioreport-abdomenmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_AbdomenMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+  
+  radioreport-angiographymrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_AngiographyMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+      
+  radioreport-angiographyct-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_AngiographyCT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-cardiomrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_CardioMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-elbowmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_ElbowMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-feetmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_FeetMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-handmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_HandMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-hipmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_HipMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-kneemrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_KneeMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-mammamrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_MammaMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-pelvismrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_PelvisMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-shouldermrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_ShoulderMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-spinect-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_SpineCT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-spinemrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_SpineMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-thoraxct-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_ThoraxCT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-thoraxmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_ThoraxMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-mammamx-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_MammaMX;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-neckmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_NeckMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-headct-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_HeadCT;Username=${DB_USER};Password=${DB_PASSWORD};
+      
+  radioreport-headmrt-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_HeadMRT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-abdomenct-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_AbdomenCT;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-users-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_Users;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-reportlist-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_ReportList;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-tracking-api:
+    depends_on:
+      - postgres
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_Tracking;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-signalr-api:
+    depends_on:
+      - broker
+      - redis
+    env_file: config/rr-service.env
+
+  radioreport-core-institutemanager-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - minio
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_InstituteManager;Username=${DB_USER};Password=${DB_PASSWORD};
+      
+  radioreport-core-patientmanager-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_PatientManager;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-centerspecificsettings-api:
+    depends_on:
+      - postgres
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_CenterSpecificSettings;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-exportinterface-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    
+  radioreport-core-fileexposer-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - minio
+    env_file: config/rr-service.env
+
+  radioreport-core-importinterface-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - minio
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_ImportInterface;Username=${DB_USER};Password=${DB_PASSWORD};
+
+  radioreport-core-scheduler-api:
+    depends_on:
+      - broker
+      - redis
+    env_file: config/rr-service.env
+
+  radioreport-core-htmlrender-api:
+    depends_on:
+      - broker
+      - redis
+      - minio
+      - browserless
+      - seq
+    env_file: config/rr-service.env
+    environment:
+      BrowserlessToken: ${BROWSERLESSTOKEN}
+      
+  radioreport-core-licensemanager-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    environment:
+      CONNECTIONSTRINGS__DEFAULTCONNECTION: Host=${DB_HOST};Database=RadioReport_LicenseManager;Username=${DB_USER};Password=${DB_PASSWORD};
+
+volumes:
+  postgres-data:
+  minio-data:
+  portainer-data:
+  vault-data:

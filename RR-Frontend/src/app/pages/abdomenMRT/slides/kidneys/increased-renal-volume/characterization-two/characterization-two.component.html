@@ -1,0 +1,148 @@
+<div class="f-horizontal m-t-14 m-b-13">
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <div class="o-radio-list" [rrDisable]="!isCMReinforced">
+      <h2 rr-id="abd_m_0702116" class="text-break">
+        {{'abdomenMRT.kidneys.contrastEnhancementrenalParenchymaQuantitative.value'
+        | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_0702111"
+        rrUnClickRadio
+        name="contrastEnhancementRenalParenchymaQuantitative"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        label="{{'abdomenMRT.kidneys.none.value' | translate}}"
+        [(ngModel)]="model.contrastEnhancementRenalParenchymaQuantitative"
+        rrContentReset="contrastEnhancementBlock"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_0702112"
+        rrUnClickRadio
+        name="contrastEnhancementRenalParenchymaQuantitative"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Low"
+        label="{{'abdomenMRT.kidneys.low.value' | translate}}"
+        [(ngModel)]="model.contrastEnhancementRenalParenchymaQuantitative"
+        rrContentReset="contrastEnhancementBlock"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_0702113"
+        rrUnClickRadio
+        name="contrastEnhancementRenalParenchymaQuantitative"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Strong"
+        label="{{'abdomenMRT.kidneys.strong.value' | translate}}"
+        [(ngModel)]="model.contrastEnhancementRenalParenchymaQuantitative"
+        rrContentReset="contrastEnhancementBlock"
+      >
+      </p-radioButton>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="contrastEnhancementBlock"
+        [rrDisable]="isContrastEnhancementQuantitativeNoORNone"
+      >
+        <p-radioButton
+          rr-id="abd_m_0702114"
+          rrUnClickRadio
+          name="contrastEnhancementQuantitativeStrongType"
+          [value]="homogeneityType.Homogeneous"
+          label="{{'abdomenMRT.kidneys.homogeneous.value' | translate}}"
+          [(ngModel)]="model.contrastEnhancementQuantitativeStrongType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_0702115"
+          rrUnClickRadio
+          name="contrastEnhancementQuantitativeStrongType"
+          [value]="homogeneityType.Heterogeneous"
+          label="{{'abdomenMRT.kidneys.heterogeneous.value' | translate}}"
+          [(ngModel)]="model.contrastEnhancementQuantitativeStrongType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <h2 rr-id="abd_m_0703110" class="m-b-9">
+      {{ 'abdomenMRT.kidneys.differentialDiagnosis.value' | translate }}
+    </h2>
+    <div
+      class="f-vertical o-radio-list m-b-16"
+      [rrDisable]="model.descriptionType === descriptionType.IKnow"
+    >
+      <h3 rr-id="abd_m_0703111" class="m-b-4">
+        {{ 'abdomenMRT.kidneys.differentialDiagnosis1.value' | translate }}*
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_0703112"
+        class="m-b-11"
+        [diagnosisNumber]="1"
+        [group]="isDropdownGrouped()"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.kidneysDifferentialDiagnosisType1"
+        name="kidneysDifferentialDiagnosisType1"
+        [parentViewModel]="model"
+        (selectionChanged)="resetDifferentialDiagnosis1DependentModel()"
+        rrValidation="kidneysDifferentialDiagnosisType1"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType1 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_0703113"
+          [(ngModel)]="model.isSuspicionOf"
+          name="isSuspicionOf"
+          label="{{ 'abdomenMRT.kidneys.suspicionOf.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div
+      class="f-vertical o-radio-list m-b-30"
+      [rrDisable]="model.kidneysDifferentialDiagnosisType1 === differentialDiagnosisType.None"
+    >
+      <h3 rr-id="abd_m_0703114" class="m-b-4">
+        {{ 'abdomenMRT.kidneys.differentialDiagnosis2.value' | translate }}
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_0703115"
+        [diagnosisNumber]="2"
+        [group]="isDropdownGrouped()"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.kidneysDifferentialDiagnosisType2"
+        name="kidneysDifferentialDiagnosisType2"
+        [parentViewModel]="model"
+        (selectionChanged)="resetDifferentialDiagnosis2DependentModel()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType2 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_0703116"
+          [(ngModel)]="model.isSubordinate"
+          name="isSubordinate"
+          label="{{ 'abdomenMRT.kidneys.subordinate.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <rr-reference-picture
+      [(ngModel)]="model.increasedRenalVolumeReferencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="increasedRenalVolumeReferencePicture"
+      [elementsRrIds]="increasedRenalVolumeReferencePictureElementsRrIds"
+      [pictureFileType]="imageFileTypeEnum.IncreasedRenalVolumeImageFile"
+    >
+    </rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-pad-l f-vertical o-list"></div>
+</div>

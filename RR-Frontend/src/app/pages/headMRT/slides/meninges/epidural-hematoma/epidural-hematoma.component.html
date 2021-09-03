@@ -1,0 +1,212 @@
+<div class="f-horizontal main-container">
+  <div class="c-col-1 c-pad c-sep">
+    <div class="f-vertical o-radio-list m-b-23">
+      <h2 rr-id="hea_m_0502100" class="m-b-4" rrInfoIcon="hea_m_05_06">
+        {{ "headMRT.meninges.localization.value" | translate }}
+      </h2>
+      <h2 rr-id="hea_m_050289" class="m-t-10">
+        {{ "headMRT.meninges.side.value" | translate }}*
+      </h2>
+      <p-checkbox
+        name="isRight"
+        class="text-break"
+        label="{{ 'headMRT.meninges.right.value' | translate }}"
+        rr-id="hea_m_050290"
+        binary="true"
+        [(ngModel)]="model.isRight"
+        rrValidation="isRight isLeft isMedian"
+      ></p-checkbox>
+      <p-checkbox
+        name="isLeft"
+        class="text-break"
+        label="{{ 'headMRT.meninges.left.value' | translate }}"
+        rr-id="hea_m_050291"
+        binary="true"
+        [(ngModel)]="model.isLeft"
+        rrValidation="isRight isLeft isMedian"
+      ></p-checkbox>
+      <p-checkbox
+        name="isMedian"
+        class="text-break"
+        label="{{ 'headMRT.meninges.median.value' | translate }}"
+        rr-id="hea_m_050292"
+        binary="true"
+        [(ngModel)]="model.isMedian"
+        rrValidation="isRight isLeft isMedian"
+      ></p-checkbox>
+      <h2 rr-id="hea_m_050293" class="m-t-20">
+        {{ "headMRT.meninges.region.value" | translate }}*
+      </h2>
+      <p-checkbox
+        name="isFrontal"
+        class="text-break"
+        label="{{ 'headMRT.meninges.frontal.value' | translate }}"
+        rr-id="hea_m_050294"
+        binary="true"
+        [(ngModel)]="model.isFrontal"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        name="isTemporal"
+        class="text-break"
+        label="{{ 'headMRT.meninges.temporal.value' | translate }}"
+        rr-id="hea_m_050295"
+        binary="true"
+        [(ngModel)]="model.isTemporal"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        name="isParietal"
+        class="text-break"
+        label="{{ 'headMRT.meninges.parietal.value' | translate }}"
+        rr-id="hea_m_050296"
+        binary="true"
+        [(ngModel)]="model.isParietal"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        name="isOccipital"
+        class="text-break"
+        label="{{ 'headMRT.meninges.occipital.value' | translate }}"
+        rr-id="hea_m_050297"
+        binary="true"
+        [(ngModel)]="model.isOccipital"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+      <p-checkbox
+        name="isInfratentorial"
+        class="text-break"
+        label="{{ 'headMRT.meninges.infratentorial.value' | translate }}"
+        rr-id="hea_m_050298"
+        binary="true"
+        [(ngModel)]="model.isInfratentorial"
+        rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <div class="f-vertical m-b-23">
+      <h2 rr-id="hea_m_050374">
+        {{ "headMRT.meninges.extension.value" | translate }}
+      </h2>
+      <p rr-id="hea_m_050375" class="m-t-10">
+        {{ "headMRT.meninges.size.value" | translate }}*
+      </p>
+      <rr-number-input
+        labelRrId="hea_m_050377"
+        inputRrId="hea_m_050376"
+        name="size"
+        [(ngModel)]="model.size"
+        [config]="{ min: 1, max: 250, placeholder: '---' }"
+        [label]="'headMRT.meninges.inMm.value' | translate"
+        (announceModelChange)="resetInput()"
+        rrValidation="size"
+      ></rr-number-input>
+      <div [rrDisable]="!model.size" class="m-t-10">
+        <p rr-id="hea_m_050378" class="m-b-5">
+          {{ "headMRT.meninges.2ndPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="hea_m_050380"
+          inputRrId="hea_m_050379"
+          name="secondPlane"
+          [(ngModel)]="model.secondPlane"
+          [config]="{ min: 1, max: 250, placeholder: '---' }"
+          [label]="'headMRT.meninges.inMm.value' | translate"
+          (announceModelChange)="resetInput()"
+        ></rr-number-input>
+      </div>
+      <div [rrDisable]="!model.secondPlane">
+        <p rr-id="hea_m_050381" class="m-t-5">
+          {{ "headMRT.meninges.3rdPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="hea_m_050383"
+          inputRrId="hea_m_050382"
+          name="thirdPlane"
+          [(ngModel)]="model.thirdPlane"
+          [config]="{ min: 1, max: 250, placeholder: '---' }"
+          [label]="'headMRT.meninges.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+      <p-checkbox
+        name="isDuraleAttachmentExceeded"
+        class="m-t-20"
+        label="{{ 'headMRT.meninges.duraleAttachmentExceeded.value' | translate }}"
+        rr-id="hea_m_050386"
+        binary="true"
+        [(ngModel)]="model.isDuraleAttachmentExceeded"
+      ></p-checkbox>
+      <p-checkbox
+        name="isSuturesNotExceeded"
+        class="m-t-10"
+        label="{{ 'headMRT.meninges.suturesNotExceeded.value' | translate }}"
+        rr-id="hea_m_050384"
+        binary="true"
+        [(ngModel)]="model.isSuturesNotExceeded"
+      ></p-checkbox>
+      <p-checkbox
+        labelStyleClass="text-break"
+        name="isDisplacedDuraBetweenEdhAndBrain"
+        class="m-t-10"
+        label="{{ 'headMRT.meninges.displacedDuraBetweenEDHAnd.value' | translate }}"
+        rr-id="hea_m_050385"
+        binary="true"
+        [(ngModel)]="model.isDisplacedDuraBetweenEdhAndBrain"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <div class="f-vertical o-radio-list m-b-23">
+      <h2 rr-id="hea_m_050465">
+        {{ "headMRT.meninges.configuration.value" | translate }}
+      </h2>
+      <p-checkbox
+        name="isBiconvex"
+        label="{{ 'headMRT.meninges.biconvex.value' | translate }}"
+        rr-id="hea_m_050466"
+        binary="true"
+        [(ngModel)]="model.isBiconvex"
+      ></p-checkbox>
+      <h2 rr-id="hea_m_050467" class="m-t-25">
+        {{ "headMRT.meninges.associatedFindings.value" | translate }}
+      </h2>
+      <p-checkbox
+        name="isSkullFracture"
+        label="{{ 'headMRT.meninges.skullFracture.value' | translate }}"
+        rr-id="hea_m_050468"
+        binary="true"
+        [(ngModel)]="model.isSkullFracture"
+      ></p-checkbox>
+      <p-checkbox
+        name="isContrecoupSdh"
+        label="{{ 'headMRT.meninges.contrecoupSDH.value' | translate }}"
+        rr-id="hea_m_050469"
+        binary="true"
+        [(ngModel)]="model.isContrecoupSdh"
+      ></p-checkbox>
+      <p-checkbox
+        name="isAdjacentContusion"
+        label="{{ 'headMRT.meninges.adjacentContusion.value' | translate }}"
+        rr-id="hea_m_050470"
+        binary="true"
+        [(ngModel)]="model.isAdjacentContusion"
+      ></p-checkbox>
+      <p-checkbox
+        name="isConcomitantCerebrospinalFluidCongestion"
+        label="{{ 'headMRT.meninges.concomitantCerebrospinalFluidCongestion.value' | translate }}"
+        rr-id="hea_m_050471"
+        binary="true"
+        [(ngModel)]="model.isConcomitantCerebrospinalFluidCongestion"
+      ></p-checkbox>
+      <p-checkbox
+        name="isAssociatedInfarction"
+        label="{{ 'headMRT.meninges.associatedInfarction.value' | translate }}"
+        rr-id="hea_m_050472"
+        binary="true"
+        [(ngModel)]="model.isAssociatedInfarction"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep"></div>
+</div>

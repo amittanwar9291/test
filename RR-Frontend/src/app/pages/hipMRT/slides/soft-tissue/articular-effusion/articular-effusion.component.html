@@ -1,0 +1,98 @@
+<div class="f-horizontal col-h-100 c-pad-l">
+  <div class="c-col-1 c-pad-r c-sep o-list">
+    <div class="o-radio-list m-b-44">
+      <h2 rr-id="hip_m_080301">
+        {{ 'hipMRT.softTissue.quantity2.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hip_m_080302"
+        [(ngModel)]="model.quantityType"
+        label="{{ 'hipMRT.softTissue.small.value' | translate }}"
+        [value]="qualityType.Small"
+        name="quantityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_080303"
+        [(ngModel)]="model.quantityType"
+        label="{{ 'hipMRT.softTissue.moderate.value' | translate }}"
+        [value]="qualityType.Moderate"
+        name="quantityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_080304"
+        [(ngModel)]="model.quantityType"
+        label="{{ 'hipMRT.softTissue.pronounced.value' | translate }}"
+        [value]="qualityType.Pronounced"
+        name="quantityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hip_m_080305">
+        {{ 'hipMRT.softTissue.quality.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hip_m_080306"
+        label="{{ 'hipMRT.softTissue.hemorrhagic.value' | translate }}"
+        name="isHemorrhagic"
+        binary="true"
+        rrContentReset="isHemorrhagic-block"
+        [(ngModel)]="model.isHemorrhagic"
+      >
+      </p-checkbox>
+      <div
+        id="isHemorrhagic-block"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isHemorrhagic"
+      >
+        <p-checkbox
+          rr-id="hip_m_080307"
+          label="{{ 'hipMRT.softTissue.sedimentation.value' | translate }}"
+          name="isSedimentation"
+          binary="true"
+          [(ngModel)]="model.isSedimentation"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hip_m_080308"
+        label="{{ 'hipMRT.softTissue.empyema.value' | translate }}"
+        name="isEmpyema"
+        binary="true"
+        [(ngModel)]="model.isEmpyema"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080401" class="m-b-5">
+        {{ 'hipMRT.softTissue.differentialDiagnosis.value' | translate }}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="differentialDiagnosisOptions"
+        name="differentialDiagnosis"
+        rrId="hip_m_080402"
+        [(ngModel)]="model.differentialDiagnosis"
+        [parentViewModel]="model"
+        (selectionChanged)="resetIsSuspected()"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="hip_m_080403"
+        [rrDisable]="model.differentialDiagnosis === differentialDiagnosisType.None"
+        label="{{ 'hipMRT.softTissue.suspected.value' | translate }}"
+        name="isSuspected"
+        binary="true"
+        [(ngModel)]="model.isSuspected"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

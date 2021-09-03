@@ -1,0 +1,185 @@
+<div class="f-vertical f-start main-container bones-hands-column m-t-90">
+  <h2 rr-id="han_m_040206" class="m-b-10">
+    {{ 'handMRT.bones.localization.value' | translate }}*
+  </h2>
+  <div class="f-horizontal f-fill-available-space">
+    <div class="c-col-1 c-pad-r c-sep">
+      <rr-wrist-small
+        rr-id="han_m_040207"
+        name="involvedBonesType"
+        [side]="side"
+        (click)="openLargeLocalizer()"
+        [(ngModel)]="model.involvedBonesType"
+        rrValidation="involvedBonesType"
+        isLocalizer="true"
+      >
+      </rr-wrist-small>
+    </div>
+    <div class="f-horizontal c-col-3 h-100">
+      <div class="c-col-1 c-sep c-pad o-list">
+        <div
+          *ngIf="model.involvedBonesType.scaphoid"
+          id="stagingAccordingToLichtmann"
+        >
+          <h2 rr-id="han_m_040388" class="m-b-10">
+            {{'handMRT.bones.osScaphoideum.value' | translate}}
+          </h2>
+          <div class="o-radio-list f-vertical text-break">
+            <p-radioButton
+              rr-id="han_m_040389"
+              label="{{'handMRT.bones.edematousChanges(T1wSignal.value' | translate}}"
+              name="scaphoideumClassificationType"
+              [value]="scaphoideumClassificationType.EdematousChanges"
+              [(ngModel)]="model.scaphoideumClassificationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="han_m_040390"
+              label="{{'handMRT.bones.changedShapeWithA.value' | translate}}"
+              name="scaphoideumClassificationType"
+              [value]="scaphoideumClassificationType.ChangedShape"
+              [(ngModel)]="model.scaphoideumClassificationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="han_m_040391"
+              label="{{'handMRT.bones.generalSignalDecreaseOf.value' | translate}}"
+              name="scaphoideumClassificationType"
+              [value]="scaphoideumClassificationType.GeneralDecrease"
+              [(ngModel)]="model.scaphoideumClassificationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="han_m_040392"
+              label="{{'handMRT.bones.fragmentation.value' | translate}}"
+              name="scaphoideumClassificationType"
+              [value]="scaphoideumClassificationType.Fragmentation"
+              [(ngModel)]="model.scaphoideumClassificationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div class="m-t-25 o-radio-list">
+            <p rr-id="han_m_0403234" class="m-b-10">
+              {{'handMRT.bones.grading.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="han_m_0403235"
+              label="{{'handMRT.bones.complete.value' | translate}}"
+              name="scaphoideumGradingType"
+              [value]="scaphoideumGradingType.Complete"
+              [(ngModel)]="model.scaphoideumGradingType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="han_m_0403236"
+              label="{{'handMRT.bones.partial.value' | translate}}"
+              name="scaphoideumGradingType"
+              [value]="scaphoideumGradingType.Partial"
+              [(ngModel)]="model.scaphoideumGradingType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <div *ngIf="model.involvedBonesType.osLunatum" id="detailsOsLunatum">
+          <h2 rr-id="han_m_0403237" class="m-b-10" rrInfoIcon="han_m_04_04">
+            {{'handMRT.bones.osLunatum.value' | translate}}
+          </h2>
+          <p rr-id="han_m_040383" class="m-b-10">
+            {{'handMRT.bones.stagingAccordingToLichtman.value' | translate}}
+          </p>
+          <div class="o-radio-list f-vertical text-break">
+            <p-radioButton
+              rr-id="han_m_040384"
+              label="{{'handMRT.bones.stageI.value' | translate}}"
+              name="lichtmanStagingType"
+              [value]="stagingTypeEnum.StageI"
+              [(ngModel)]="model.lichtmanStagingType"
+              rrContentReset="block1"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="han_m_040385"
+              label="{{'handMRT.bones.stageII.value' | translate}}"
+              name="lichtmanStagingType"
+              [value]="stagingTypeEnum.StageII"
+              [(ngModel)]="model.lichtmanStagingType"
+              rrContentReset="block1"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="han_m_040386"
+              label="{{'handMRT.bones.stageIII.value' | translate}}"
+              name="lichtmanStagingType"
+              [value]="stagingTypeEnum.StageIII"
+              [(ngModel)]="model.lichtmanStagingType"
+              rrContentReset="block1"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <div
+              class="o-radio-list nested-content"
+              [rrDisable]="model.lichtmanStagingType !== stagingTypeEnum.StageIII"
+              id="block1"
+            >
+              <p-radioButton
+                rr-id="han_m_0403238"
+                label="{{'handMRT.bones.a.value' | translate}}"
+                name="lichtmanStagingSubType"
+                [value]="lichtmanStagingSubType.StageIIIA"
+                [(ngModel)]="model.lichtmanStagingSubType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="han_m_0403239"
+                label="{{'handMRT.bones.b.value' | translate}}"
+                name="lichtmanStagingSubType"
+                [value]="lichtmanStagingSubType.StageIIIB"
+                [(ngModel)]="model.lichtmanStagingSubType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="han_m_0403240"
+                label="{{'handMRT.bones.c.value' | translate}}"
+                name="lichtmanStagingSubType"
+                [value]="lichtmanStagingSubType.StageIIIC"
+                [(ngModel)]="model.lichtmanStagingSubType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+            </div>
+            <p-radioButton
+              rr-id="han_m_040387"
+              label="{{'handMRT.bones.stageIV.value' | translate}}"
+              name="lichtmanStagingType"
+              [value]="stagingTypeEnum.StageIV"
+              [(ngModel)]="model.lichtmanStagingType"
+              rrContentReset="block1"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <div *ngIf="showNoFurtherDetailsHeader()">
+          <h2 rr-id="han_m_0403241" class="m-b-10">
+            {{'hand-details.' + getNoFurtherDetailsHeader() | translate}}
+          </h2>
+          <p rr-id="han_m_0403242">
+            {{'handMRT.bones.(NoFurtherDetails.value' | translate }}
+          </p>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="f-horizontal f-center m-t-minus-8"
+    *ngIf="largeLocalizerOpened === supraaorticVesselsLoclizerType.carotidArtery"
+  >
+    <rr-carotid-artery-big-localizer
+      (close)="onLargeLocalizerClosed()"
+      name="internalCarotidArterySegmentsLocation"
+      [(ngModel)]="findingHandler.currentItem.internalCarotidArterySegmentsLocation"
+    >
+    </rr-carotid-artery-big-localizer>
+  </div>
+  <div
+    class="f-horizontal f-center m-t-minus-100"
+    *ngIf="largeLocalizerOpened === supraaorticVesselsLoclizerType.arteriesSegments"
+  >
+    <rr-arteries-segments-big-localizer
+      (close)="onLargeLocalizerClosed()"
+      name="affectedSegmentsOrVesselsLocation"
+      [(ngModel)]="findingHandler.currentItem.affectedSegmentsOrVesselsLocation"
+    >
+    </rr-arteries-segments-big-localizer>
+  </div>
+
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerOpened">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="ang_c_050103">
+        {{'angiographyCT.supraaorticVessels.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical p-l-6">
+        <p-radioButton
+          rr-id="ang_c_050104"
+          label="{{'angiographyCT.supraaorticVessels.normalImagingOfThesupraaortic.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_050105"
+          label="{{'angiographyCT.supraaorticVessels.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [validationName]="'findings'"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(supraaorticVesselsFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(supraaorticVesselsFindingTypeEnum.None)"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad main-height"
+        ></div>
+        <div class="c-col-1 c-pad-l main-height"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(supraaorticVesselsFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="ang_c_050201">
+          {{'angiographyCT.supraaorticVessels.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <rr-anatomic-variants
+        *ngIf="isFindingType(supraaorticVesselsFindingTypeEnum.AnatomicVariants)"
+        [model]="findingHandler.currentItem"
+      ></rr-anatomic-variants>
+      <rr-artery-multi
+        *ngIf="isArteryFindingType()"
+        [model]="findingHandler.currentItem"
+        [isCMYes]="isCMYes"
+      ></rr-artery-multi>
+      <rr-cerebral-veins
+        *ngIf="isFindingType(supraaorticVesselsFindingTypeEnum.CerebralVeinsOrVenousSinuses)"
+        [model]="findingHandler.currentItem"
+      ></rr-cerebral-veins>
+    </div>
+  </div>
+</form>

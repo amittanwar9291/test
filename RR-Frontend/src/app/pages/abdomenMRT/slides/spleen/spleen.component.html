@@ -1,0 +1,97 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="abd_m_050103" class="m-b-17">
+        {{'abdomenMRT.spleen.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="abd_m_050104"
+        class="m-b-14"
+        label="{{ 'abdomenMRT.spleen.normalFinding.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050113"
+        class=""
+        label="{{ 'abdomenMRT.spleen.noDetails.value' | translate }}"
+        name="areFindings"
+        [value]="areFindingsEnum.NoDetails"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050105"
+        class="m-b-17"
+        label="{{'abdomenMRT.spleen.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setDescriptionTypes]="['Mass']"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingsHandlerComponent'"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-start" [class.c-pad-l]="!isFindingWithTabs()">
+      <div [class]="'header'" [class.c-pad-l]="isFindingWithTabs()">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== spleenFindingTypeEnum.None"
+          rr-id="abd_m_050201"
+        >
+          {{'abdomenMRT.spleen.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(spleenFindingTypeEnum.None)"
+          class="f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+        <rr-standard-variants
+          *ngIf="isCurrentItem(spleenFindingTypeEnum.StandardVariants)"
+          [model]="findingHandler.currentItem"
+        ></rr-standard-variants>
+
+        <rr-splenomegaly
+          *ngIf="isCurrentItem(spleenFindingTypeEnum.Splenomegaly)"
+          [model]="findingHandler.currentItem"
+        ></rr-splenomegaly>
+
+        <rr-mass
+          *ngIf="isCurrentItem(spleenFindingTypeEnum.Mass)"
+          [model]="findingHandler.currentItem"
+          [isContrastEnhanced]="isContrastEnhanced"
+          [isDWIInAnySequence]="isDWIInAnySequence"
+        ></rr-mass>
+
+        <rr-splenic-infarction
+          *ngIf="isCurrentItem(spleenFindingTypeEnum.SplenicInfarction)"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-splenic-infarction>
+      </div>
+    </div>
+  </div>
+</form>

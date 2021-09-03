@@ -1,0 +1,408 @@
+<div class="f-vertical col-h-100">
+  <h2 rr-id="nec_m_060202" class="m-b-11" rrInfoIcon="nec_m_06_01">
+    {{ 'neckMRT.softTissues.characterizationCyst.value' | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep o-list">
+      <div class="f-vertical o-radio-list m-b-30">
+        <p-radioButton
+          rr-id="nec_m_060203"
+          [(ngModel)]="model.characterizationCystType"
+          label="{{ 'neckMRT.softTissues.medianNeckCyst.value' | translate }}"
+          [value]="characterizationCystType.MedianNeckCyst"
+          name="characterizationCystType"
+          (onClick)="resetMedianNeckCystGroup()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_060204"
+          [(ngModel)]="model.characterizationCystType"
+          label="{{ 'neckMRT.softTissues.lateralNeckCyst.value' | translate }}"
+          [value]="characterizationCystType.LateralNeckCyst"
+          name="characterizationCystType"
+          (onClick)="resetMedianNeckCystGroup()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_060205"
+          [(ngModel)]="model.characterizationCystType"
+          label="{{ 'neckMRT.softTissues.tornwaldtCyst.value' | translate }}"
+          [value]="characterizationCystType.TornwaldtCyst"
+          name="characterizationCystType"
+          (onClick)="resetMedianNeckCystGroup()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+        ></rr-reference-picture>
+      </div>
+    </div>
+    <div class="c-col-3 f-horizontal c-pad-l">
+      <ng-container [ngSwitch]="model.characterizationCystType">
+        <ng-container *ngSwitchCase="characterizationCystType.None">
+          <div class="c-col-1 c-pad-r c-sep o-list"></div>
+          <div class="c-col-1 c-pad c-sep o-list"></div>
+          <div class="c-col-1 c-pad-l o-list"></div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="characterizationCystType.MedianNeckCyst">
+          <div class="c-col-1 c-pad-r c-sep o-list">
+            <div class="f-vertical o-radio-list">
+              <h2 rr-id="nec_m_060301">
+                {{ 'neckMRT.softTissues.inflammatoryTransformation.value' |
+                translate}}
+              </h2>
+              <p-checkbox
+                rr-id="nec_m_060302"
+                [(ngModel)]="model.isMNCThickeningOfTheCystWall"
+                name="isMNCThickeningOfTheCystWall"
+                label="{{ 'neckMRT.softTissues.thickeningOfTheCyst.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_060303"
+                [(ngModel)]="model.isMNCStreakySignalEnhancementFatSaturatedT2wSequence"
+                name="isMNCStreakySignalEnhancementFatSaturatedT2wSequence"
+                label="{{ 'neckMRT.softTissues.streakySignalEnhancementInfatsaturated.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                [rrDisable]="!isCMReinforced"
+                rr-id="nec_m_060304"
+                [(ngModel)]="model.isMNCStreakyContrastEnhancementPerifocal"
+                name="isMNCStreakyContrastEnhancementPerifocal"
+                label="{{ 'neckMRT.softTissues.streakyContrastEnhancementperifocal.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+            <div class="f-vertical o-radio-list">
+              <h2 rr-id="nec_m_060305">
+                {{ 'neckMRT.softTissues.associatedFindings.value' | translate }}
+              </h2>
+              <p-checkbox
+                rr-id="nec_m_060306"
+                [(ngModel)]="model.isCutaneousFistula"
+                name="isCutaneousFistula"
+                label="{{ 'neckMRT.softTissues.cutaneousFistula.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad c-sep o-list"></div>
+          <div class="c-col-1 c-pad-l o-list"></div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="characterizationCystType.LateralNeckCyst">
+          <div class="c-col-1 c-pad-r c-sep o-list">
+            <div class="f-vertical o-radio-list m-b-30">
+              <h2 rr-id="nec_m_060368">
+                {{ 'neckMRT.softTissues.side.value' | translate }}*
+              </h2>
+              <p-radioButton
+                rr-id="nec_m_060369"
+                [(ngModel)]="model.sideType"
+                name="sideType"
+                label="{{ 'neckMRT.softTissues.right.value' | translate }}"
+                [value]="sideType.Right"
+                rrValidation="sideType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="nec_m_060370"
+                [(ngModel)]="model.sideType"
+                name="sideType"
+                label="{{ 'neckMRT.softTissues.left.value' | translate }}"
+                [value]="sideType.Left"
+                rrValidation="sideType"
+              >
+              </p-radioButton>
+            </div>
+            <div class="f-vertical o-radio-list">
+              <h2 rr-id="nec_m_060371">
+                {{ 'neckMRT.softTissues.localization.value' | translate }}
+              </h2>
+              <p-radioButton
+                rr-id="nec_m_060372"
+                [(ngModel)]="model.localizationType"
+                name="localizationType"
+                label="{{ 'neckMRT.softTissues.periauricular.value' | translate }}"
+                [value]="localizationType.Periauricular"
+                rrUnClickRadio
+                rrContentReset="periauricular-block anterolateral-block"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="nec_m_060373"
+                [(ngModel)]="model.localizationType"
+                name="localizationType"
+                label="{{ 'neckMRT.softTissues.anterolateral.value' | translate }}"
+                [value]="localizationType.Anterolateral"
+                rrUnClickRadio
+                rrContentReset="periauricular-block anterolateral-block"
+              >
+              </p-radioButton>
+              <div
+                id="periauricular-block"
+                *ngIf="model.localizationType === localizationType.Periauricular"
+                class="nested-content o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="nec_m_060307"
+                  [(ngModel)]="model.periauricularType"
+                  name="periauricularType"
+                  label="{{ 'neckMRT.softTissues.typeIPreauricular.value' | translate }}"
+                  [value]="periauricularType.TypeI"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="nec_m_060308"
+                  [(ngModel)]="model.periauricularType"
+                  name="periauricularType"
+                  label="{{ 'neckMRT.softTissues.typeIIAdjacentTo.value' | translate }}"
+                  [value]="periauricularType.TypeII"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+              <div
+                id="anterolateral-block"
+                *ngIf="model.localizationType === localizationType.Anterolateral"
+                class="nested-content o-radio-list"
+              >
+                <h3 rr-id="nec_m_060309">
+                  {{ 'neckMRT.softTissues.ostium.value' | translate }}
+                </h3>
+                <p-radioButton
+                  rr-id="nec_m_060310"
+                  [(ngModel)]="model.anterolateralType"
+                  name="anterolateralType"
+                  label="{{ 'neckMRT.softTissues.supratonsillarFossa.value' | translate }}"
+                  [value]="anterolateralType.SupratonsillarFossa"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="nec_m_060311"
+                  [(ngModel)]="model.anterolateralType"
+                  name="anterolateralType"
+                  label="{{ 'neckMRT.softTissues.piriformSinus.value' | translate }}"
+                  [value]="anterolateralType.PiriformSinus"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad c-sep o-list">
+            <div class="f-vertical o-radio-list m-b-30">
+              <h2 rr-id="nec_m_060401" rrInfoIcon="nec_m_06_02">
+                {{ 'neckMRT.softTissues.type.value' | translate }}
+              </h2>
+              <p-radioButton
+                rr-id="nec_m_060402"
+                [(ngModel)]="model.lateralNeckCystType"
+                name="lateralNeckCystType"
+                label="{{ 'neckMRT.softTissues.cyst.value' | translate }}"
+                [value]="lateralNeckCystType.Cyst"
+                rrUnClickRadio
+                rrContentReset="fistula-block"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="nec_m_060403"
+                [(ngModel)]="model.lateralNeckCystType"
+                name="lateralNeckCystType"
+                label="{{ 'neckMRT.softTissues.sinus.value' | translate }}"
+                [value]="lateralNeckCystType.Sinus"
+                rrUnClickRadio
+                rrContentReset="fistula-block"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="nec_m_060404"
+                [(ngModel)]="model.lateralNeckCystType"
+                name="lateralNeckCystType"
+                label="{{ 'neckMRT.softTissues.fistula.value' | translate }}"
+                [value]="lateralNeckCystType.Fistula"
+                rrUnClickRadio
+                rrContentReset="fistula-block"
+              >
+              </p-radioButton>
+              <div
+                id="fistula-block"
+                class="nested-content o-radio-list"
+                [rrDisable]="model.lateralNeckCystType === lateralNeckCystType.None"
+              >
+                <p-checkbox
+                  rr-id="nec_m_060405"
+                  [(ngModel)]="model.isSuspicionOf"
+                  name="isSuspicionOf"
+                  label="{{ 'neckMRT.softTissues.suspicionOf.value' | translate }}"
+                  binary="true"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+            <div class="f-vertical o-radio-list">
+              <h2 rr-id="nec_m_060406">
+                {{ 'neckMRT.softTissues.inflammatoryTransformation.value' |
+                translate }}
+              </h2>
+              <p-checkbox
+                rr-id="nec_m_060407"
+                [(ngModel)]="model.isLNCThickeningOfTheCystWall"
+                name="isLNCThickeningOfTheCystWall"
+                label="{{ 'neckMRT.softTissues.thickeningOfTheCyst.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_060408"
+                [(ngModel)]="model.isLNCStreakySignalEnhancementFatSaturatedT2wSequence"
+                name="isLNCStreakySignalEnhancementFatSaturatedT2wSequence"
+                label="{{ 'neckMRT.softTissues.streakySignalEnhancementInfatsaturated.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                [rrDisable]="!isCMReinforced"
+                rr-id="nec_m_060409"
+                [(ngModel)]="model.isLNCStreakyContrastEnhancementPerifocal"
+                name="isLNCStreakyContrastEnhancementPerifocal"
+                label="{{ 'neckMRT.softTissues.streakyContrastEnhancementperifocal.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_060410"
+                [(ngModel)]="model.isSuppurativeThyroiditis"
+                name="isSuppurativeThyroiditis"
+                label="{{ 'neckMRT.softTissues.suppurativeThyroiditis.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad-l o-list">
+            <div class="f-vertical o-radio-list c-pad-r">
+              <h2 rr-id="nec_m_060501" class="m-b-5">
+                {{ 'neckMRT.softTissues.differentialDiagnosis.value' | translate
+                }}
+              </h2>
+              <rr-differential-diagnosis-dropdown
+                rrId="nec_m_060502"
+                [diagnosisNumber]="1"
+                name="lncDifferentialDiagnosis"
+                [(ngModel)]="model.lncDifferentialDiagnosis"
+                [options]="lNCDifferentialDiagnosisOptions"
+                (selectionChanged)="resetIsSubordinate()"
+                [parentViewModel]="model"
+              >
+              </rr-differential-diagnosis-dropdown>
+              <p-checkbox
+                [rrDisable]="model.lncDifferentialDiagnosis === lNCDifferentialDiagnosisType.None"
+                rr-id="nec_m_060503"
+                [(ngModel)]="model.isSubordinate"
+                name="isSubordinate"
+                label="{{ 'neckMRT.softTissues.subordinate.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="characterizationCystType.TornwaldtCyst">
+          <div class="c-col-1 c-pad-r c-sep o-list">
+            <div class="f-vertical o-radio-list m-b-40">
+              <h2 rr-id="nec_m_060312">
+                {{ 'neckMRT.softTissues.localization.value' | translate }}
+              </h2>
+              <p-checkbox
+                rr-id="nec_m_060313"
+                [(ngModel)]="model.isMedianToThePosteriorWallOfTheNasopharynx"
+                name="isMedianToThePosteriorWallOfTheNasopharynx"
+                class="checkbox-readonly"
+                label="{{ 'neckMRT.softTissues.medianToTheposteriorWall.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+            <div class="f-vertical o-radio-list">
+              <h2 rr-id="nec_m_060314">
+                {{ 'neckMRT.softTissues.inflammatoryTransformation.value' |
+                translate }}
+              </h2>
+              <p-checkbox
+                rr-id="nec_m_060315"
+                [(ngModel)]="model.isTCThickeningOfTheCystWall"
+                name="isTCThickeningOfTheCystWall"
+                label="{{ 'neckMRT.softTissues.thickeningOfTheCyst.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_060316"
+                [(ngModel)]="model.isTCStreakySignalEnhancementFatSaturatedT2wSequence"
+                name="isTCStreakySignalEnhancementFatSaturatedT2wSequence"
+                label="{{ 'neckMRT.softTissues.streakySignalEnhancementInfatsaturated.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                [rrDisable]="!isCMReinforced"
+                rr-id="nec_m_060317"
+                [(ngModel)]="model.isTCStreakyContrastEnhancementPerifocal"
+                name="isTCStreakyContrastEnhancementPerifocal"
+                label="{{ 'neckMRT.softTissues.streakyContrastEnhancementperifocal.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad c-sep o-list">
+            <div class="f-vertical o-radio-list">
+              <h2 rr-id="nec_m_060411" class="m-b-5">
+                {{ 'neckMRT.softTissues.differentialDiagnosis.value' | translate
+                }}
+              </h2>
+              <rr-differential-diagnosis-dropdown
+                rrId="nec_m_060412"
+                [diagnosisNumber]="1"
+                name="tCDifferentialDiagnosis"
+                [(ngModel)]="model.tcDifferentialDiagnosis"
+                [options]="tCDifferentialDiagnosisOptions"
+                (selectionChanged)="resetIsSubordinate()"
+                [parentViewModel]="model"
+              >
+              </rr-differential-diagnosis-dropdown>
+              <p-checkbox
+                [rrDisable]="model.tcDifferentialDiagnosis === tCDifferentialDiagnosisType.None"
+                rr-id="nec_m_060413"
+                [(ngModel)]="model.isSubordinate"
+                name="isSubordinate"
+                label="{{ 'neckMRT.softTissues.subordinate.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad-l o-list"></div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

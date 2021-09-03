@@ -1,0 +1,156 @@
+<div class="f-vertical">
+  <div class="f-horizontal c-pad-l">
+    <div class="c-col-1 c-pad-r">
+      <h2 rr-id="ang_c_0903108" class="m-t-21">
+        {{'angiographyCT.pelvisLegArteries.localization.value' | translate}}
+      </h2>
+    </div>
+    <div class="c-col-1 c-pad-l">
+      <h2 rr-id="ang_c_0904101" class="m-t-21 m-b-15">
+        {{'angiographyCT.pelvisLegArteries.collateralization.value' |
+        translate}}
+      </h2>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep-l m-l-16 m-t-21"></div>
+  </div>
+  <div class="f-horizontal f-start col-h-100 p-b-10" id="distalRefillingCont">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <p-dropdown
+        rr-id="ang_c_0903109"
+        styleClass="o-width-100 ui-brown-box"
+        name="distalRefillingLocalizationType"
+        rrDropdownClear
+        [(ngModel)]="model.distalRefillingLocalizationType"
+        [options]="ddlW028"
+        (onChange)="checkAndUpdateSideType()"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      ></p-dropdown>
+      <div *ngIf="isDistalRefillingSideDisplayed()" class="o-radio-list">
+        <p rr-id="ang_c_0903131">
+          {{'angiographyCT.pelvisLegArteries.side.value' | translate}}*
+        </p>
+        <p-checkbox
+          label="{{ 'angiographyCT.pelvisLegArteries.right.value' | translate }}"
+          rr-id="ang_c_0903132"
+          name="isRight"
+          binary="true"
+          [(ngModel)]="model.isRight"
+          rrValidation="isRight isLeft"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{ 'angiographyCT.pelvisLegArteries.left.value' | translate }}"
+          rr-id="ang_c_0903133"
+          name="isLeft"
+          binary="true"
+          [(ngModel)]="model.isLeft"
+          rrValidation="isRight isLeft"
+        ></p-checkbox>
+      </div>
+      <div
+        *ngIf="model.distalRefillingLocalizationType === localizationTypeEnum.AbdominalAorta"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h3 rr-id="ang_c_0903110">
+          {{'angiographyCT.pelvisLegArteries.section.value' | translate}}
+        </h3>
+        <div class="f-vertical f-start o-radio-list">
+          <p-checkbox
+            label="{{ 'angiographyCT.pelvisLegArteries.suprarenal.value' | translate }}"
+            rr-id="ang_c_0903111"
+            name="isDistalRefillingSuprarenal"
+            class="text-break"
+            binary="true"
+            [(ngModel)]="model.isDistalRefillingSuprarenal"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{ 'angiographyCT.pelvisLegArteries.infrarenal.value' | translate }}"
+            rr-id="ang_c_0903112"
+            name="isDistalRefillingInfrarenal"
+            class="text-break"
+            binary="true"
+            [(ngModel)]="model.isDistalRefillingInfrarenal"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div
+        *ngIf="model.distalRefillingLocalizationType === localizationTypeEnum.PoplitealArtery"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h3 rr-id="ang_c_0903110">
+          {{'angiographyCT.pelvisLegArteries.section.value' | translate}}
+        </h3>
+        <p-checkbox
+          name="isP1segment"
+          class="text-break2"
+          binary="true"
+          label="{{ 'angiographyCT.pelvisLegArteries.p1segment.value' | translate }}"
+          rr-id="ang_c_0903113"
+          [(ngModel)]="model.isP1Segment"
+        ></p-checkbox>
+        <p-checkbox
+          name="isP2segment"
+          class="text-break2"
+          binary="true"
+          label="{{ 'angiographyCT.pelvisLegArteries.p2segment.value' | translate }}"
+          rr-id="ang_c_0903114"
+          [(ngModel)]="model.isP2Segment"
+        ></p-checkbox>
+        <p-checkbox
+          name="isP3Segment"
+          class="text-break2"
+          binary="true"
+          label="{{ 'angiographyCT.pelvisLegArteries.p3segment.value' | translate }}"
+          rr-id="ang_c_0903115"
+          [(ngModel)]="model.isP3Segment"
+        ></p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <p-checkbox
+        rr-id="ang_c_0904102"
+        label="{{ 'angiographyCT.pelvisLegArteries.collateralsFromadjacentVessels.value' | translate }}"
+        name="isCollateralsFromAdjacentVessels"
+        class="text-break2"
+        binary="true"
+        [(ngModel)]="model.isCollateralsFromAdjacentVessels"
+        rrContentReset="isBoneMarrowEdemaOs-block"
+      ></p-checkbox>
+
+      <div
+        class="nested-content o-radio-list"
+        id="isBoneMarrowEdemaOs-block"
+        [rrDisable]="!model.isCollateralsFromAdjacentVessels"
+      >
+        <h3 rr-id="ang_c_0904103">
+          {{'angiographyCT.pelvisLegArteries.origin.value' | translate}}
+        </h3>
+        <p-checkbox
+          rr-id="ang_c_0904104"
+          label="{{ 'angiographyCT.pelvisLegArteries.profundaFemoralArtery(PFA.value' | translate }}"
+          class="text-break2"
+          name="isProfundaFemoralArtery"
+          binary="true"
+          [(ngModel)]="model.isProfundaFemoralArtery"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="ang_c_0904105"
+          label="{{ 'angiographyCT.pelvisLegArteries.superficialFemoralArterydistalSegment.value' | translate }}"
+          class="text-break2"
+          name="isSuperficialFemoralArteryDistalSegment"
+          binary="true"
+          [(ngModel)]="model.isSuperficialFemoralArteryDistalSegment"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="ang_c_0904106"
+        label="{{ 'angiographyCT.pelvisLegArteries.insufficientcollateralization.value' | translate }}"
+        class="text-break2"
+        name="isInsufficientCollateralization"
+        binary="true"
+        [(ngModel)]="model.isInsufficientCollateralization"
+      ></p-checkbox>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep"></div>
+  </div>
+</div>

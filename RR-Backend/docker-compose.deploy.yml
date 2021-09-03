@@ -1,0 +1,308 @@
+version: '3.4'
+
+services:
+
+  frontend:
+    image: ${DOCKER_REGISTRY}/radioreport_frontend:${VERSION}
+    environment:
+      DOMAIN: ${DOMAIN}
+      EMAIL: alpay.yilmaz@neo-q.de
+      BASE_URL: ${BASE_URL}
+      TRACKING: ${TRACKING}
+      INSTITUTE_ID: ${INSTITUTE_ID}
+    ports:
+      - "81:80"
+    restart: unless-stopped
+
+  ocelotapigateway:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_ocelotapigateway:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      CORS_ALLOW_ALL: ${CORS_ALLOW_ALL}
+    ports:
+      - "80:80"
+
+  vault:
+    image: ${DOCKER_REGISTRY}/radioreport_vault:${VERSION}
+    restart: unless-stopped
+    ports:
+      - "8200:8200"
+ 
+  update-server:
+    image: ${DOCKER_REGISTRY}/radioreport_update-server:${UPDATER_VERSION}
+    restart: unless-stopped
+    ports:
+      - "5080:80"
+
+  zookeeper:
+    restart: unless-stopped
+
+  broker:
+    restart: unless-stopped
+  
+  portainer:
+    restart: always
+    ports:
+      - "9002:9000"
+
+  postgres:
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+
+  minio:
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+
+  redis:
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+
+  seq:
+    restart: unless-stopped
+    ports:
+      - '5341:5341'
+      - '5342:80'
+        
+  browserless:
+    restart: unless-stopped
+
+  radioreport-abdomenmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_abdomenmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-angiographymrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_angiographymrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+      
+  radioreport-angiographyct-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_angiographyct:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-cardiomrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_cardiomrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-elbowmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_elbowmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-feetmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_feetmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-handmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_handmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-hipmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_hipmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-kneemrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_kneemrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-mammamrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_mammamrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-mammamx-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_mammamx:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-pelvismrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_pelvismrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-shouldermrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_shouldermrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-spinect-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_spinect:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-spinemrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_spinemrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-thoraxct-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_thoraxct:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-thoraxmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_thoraxmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-neckmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_neckmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+      
+  radioreport-headct-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_headct:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-headmrt-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_headmrt:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-abdomenct-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_abdomenct:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ACTIVATE_LICENSING: ${LICENSE_ACTIVE}
+
+  radioreport-core-users-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_users:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      INSTITUTE_ID: ${INSTITUTE_ID}
+
+  radioreport-core-reportlist-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_reportlist:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-tracking-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_tracking:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      INSTITUTE_ID: ${INSTITUTE_ID}
+
+  radioreport-core-signalr-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_signalr:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-institutemanager-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_institutemanager:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-patientmanager-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_patientmanager:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      VAULT__ISMOCKED: ${VAULT_IS_MOCKED}
+      VAULT__USERNAME: ${VAULT_USERNAME}
+      VAULT__PASSWORD: ${VAULT_PASSWORD}
+
+  radioreport-core-centerspecificsettings-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_centerspecificsettings:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-fileexposer-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_fileexposer:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-scheduler-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_scheduler:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-exportinterface-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_exportinterface:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-importinterface-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_importinterface:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      
+  radioreport-core-htmlrender-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_htmlrender:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+  radioreport-core-licensemanager-api:
+    restart: unless-stopped
+    image: ${DOCKER_REGISTRY}/radioreport_licensemanager:${VERSION}
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      LICENSE__AUTOLICENSEURL: ${LICENSE_AUTOLICENSEURL}
+      LICENSE__GRACEPERIODDAYS: ${LICENSE_GRACEPERIODDAYS}
+      LICENSE__OVERDRAFTPERCENTAGE: ${LICENSE_OVERDRAFTPERCENTAGE}
+      LICENSE__OVERDRAFTCAP: ${LICENSE_OVERDRAFTCAP}
+      VAULT__ISMOCKED: ${VAULT_IS_MOCKED}
+      VAULT__USERNAME: ${VAULT_USERNAME}
+      VAULT__PASSWORD: ${VAULT_PASSWORD}

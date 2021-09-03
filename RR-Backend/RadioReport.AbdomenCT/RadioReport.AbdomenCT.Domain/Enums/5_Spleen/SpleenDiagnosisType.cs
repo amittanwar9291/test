@@ -1,0 +1,41 @@
+namespace RadioReport.AbdomenCT.Domain.Enums.Spleen
+{
+    public enum SpleenDiagnosisType : byte
+    {
+        None = 0,
+        VascularLesionNotSpecified = 1,
+        LymphogenicLesionNotFurtherSpecified = 2,
+        NonLymphogenicLesionNotFurtherSpecified = 3,
+        DignityUnclear = 4,
+        Hemangioma = 5,
+        Lymphangioma = 6,
+        LittoralCellAngioma = 7,
+        Hemangiothelioma = 8,
+        Hemangiosarcoma = 9,
+        LittoralCellSarcoma = 10,
+        HodgkinsDisease = 11,
+        NHL = 12,
+        Plasmocytoma = 13,
+        CastlemansTumor = 14,
+        InflammatoryPseudotumor = 15,
+        Cyst = 16,
+        PosttraumaticCyst = 17,
+        PancreaticPseudocyst = 18,
+        EchinococcalCyst = 19,
+        Lipoma = 20,
+        Angiomyolipoma = 21,
+        Metastasis = 22,
+        MalignantFibrousHistiocytoma = 23,
+        Fibrosarcoma = 24,
+        Leiomyosarcoma = 25,
+        MalignantTeratoma = 26,
+        KaposisSarcoma = 27,
+        HeartAttack = 28,
+        SubduralHematoma = 29,
+        Abscess = 30,
+        CandidaSepsis = 31,
+        Infection = 32,
+        Immunopathy = 33,
+        GammaGandyBodiesMicroBleeding = 34
+    }
+}

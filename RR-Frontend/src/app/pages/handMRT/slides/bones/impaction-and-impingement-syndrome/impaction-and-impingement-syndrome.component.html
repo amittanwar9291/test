@@ -1,0 +1,46 @@
+<div class="f-vertical f-start main-container lower-columns m-t-90">
+  <h2 rr-id="han_m_040206" class="m-b-10">
+    {{ 'handMRT.bones.localization.value' | translate }}*
+  </h2>
+  <div class="f-horizontal f-fill-available-space">
+    <div class="c-col-1 c-pad-r c-sep">
+      <div class="o-radio-list">
+        <p-radioButton
+          rr-id="han_m_040235"
+          name="impactionImpingementSyndromeType"
+          rrContentReset="mainBlock1 mainBlock2"
+          label="{{ 'handMRT.bones.ulnocarpalImpactionSyndrome.value' | translate }}"
+          [(ngModel)]="model.impactionImpingementSyndromeType"
+          [value]="impactionImpingementSyndromeType.UlnocarpalImpactionSyndrome"
+          rrValidation="impactionImpingementSyndromeType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="han_m_040236"
+          name="impactionImpingementSyndromeType"
+          rrContentReset="mainBlock1 mainBlock2"
+          label="{{ 'handMRT.bones.radioulnarImpingement.value' | translate }}"
+          [(ngModel)]="model.impactionImpingementSyndromeType"
+          [value]="impactionImpingementSyndromeType.RadioulnarImpingement"
+          rrValidation="impactionImpingementSyndromeType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <rr-ulnocarpal-impaction
+      [model]="model"
+      *ngIf="model.impactionImpingementSyndromeType === impactionImpingementSyndromeType.UlnocarpalImpactionSyndrome"
+    >
+    </rr-ulnocarpal-impaction>
+    <rr-radioulnar
+      [model]="model"
+      *ngIf="model.impactionImpingementSyndromeType === impactionImpingementSyndromeType.RadioulnarImpingement"
+    ></rr-radioulnar>
+    <div
+      class="f-horizontal c-col-3"
+      *ngIf="model.impactionImpingementSyndromeType === impactionImpingementSyndromeType.None"
+    >
+      <div class="c-col-1 c-pad c-sep f-vertical"></div>
+      <div class="c-col-1 c-pad c-sep f-vertical"></div>
+      <div class="c-col-1 c-pad c-sep f-vertical"></div>
+    </div>
+  </div>
+</div>

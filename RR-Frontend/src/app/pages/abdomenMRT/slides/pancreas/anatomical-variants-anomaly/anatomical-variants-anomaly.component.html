@@ -1,0 +1,182 @@
+<div class="f-vertical col-h-100">
+  <h2 rr-id="abd_m_060202" class="m-b-10">
+    {{ 'abdomenMRT.pancreas.type.value' | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <p-radioButton
+        rr-id="abd_m_060203"
+        name="anatomicalVariantsAnomalyFindingType"
+        label="{{ 'abdomenMRT.pancreas.pancreasDivisum.value' | translate }}"
+        [(ngModel)]="model.anatomicalVariantsAnomalyFindingType"
+        [value]="anatomicalVariantsAnomalyFindingType.PancreasDivisum"
+        rrContentReset="pancreasAnulareBlock anulareAssociatedFindingsBlock"
+        rrValidation="anatomicalVariantsAnomalyFindingType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_060204"
+        name="anatomicalVariantsAnomalyFindingType"
+        label="{{ 'abdomenMRT.pancreas.pancreasAnulare.value' | translate }}"
+        [(ngModel)]="model.anatomicalVariantsAnomalyFindingType"
+        [value]="anatomicalVariantsAnomalyFindingType.PancreasAnulare"
+        rrContentReset="pancreasDivisumBlock divisumAssociatedFindingsBlock"
+        rrValidation="anatomicalVariantsAnomalyFindingType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-radio-list">
+      <h2
+        rr-id="abd_m_060301"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType !== anatomicalVariantsAnomalyFindingType.None"
+      >
+        {{ "abdomenMRT.pancreas.classification.value" | translate }}
+      </h2>
+      <div
+        id="pancreasDivisumBlock"
+        class="o-radio-list"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType == anatomicalVariantsAnomalyFindingType.PancreasDivisum"
+      >
+        <p-radioButton
+          class="text-break"
+          rr-id="abd_m_060302"
+          name="pancreasDivisumClassificationType"
+          label="{{
+          'abdomenMRT.pancreas.typeNoConnectionbetweenThe.value' | translate
+        }}"
+          [(ngModel)]="model.pancreasDivisumClassificationType"
+          [value]="pancreasDivisumClassificationType.Type1"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_060303"
+          name="pancreasDivisumClassificationType"
+          label="{{
+          'abdomenMRT.pancreas.typeAbsentVentralDuct.value' | translate
+        }}"
+          [(ngModel)]="model.pancreasDivisumClassificationType"
+          [value]="pancreasDivisumClassificationType.Type2"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_060304"
+          name="pancreasDivisumClassificationType"
+          label="{{
+          'abdomenMRT.pancreas.typeFilamentousOrinadequateConnectionbetween.value'
+            | translate
+        }}"
+          [(ngModel)]="model.pancreasDivisumClassificationType"
+          [value]="pancreasDivisumClassificationType.Type3"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div
+        id="pancreasAnulareBlock"
+        class="o-radio-list"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType == anatomicalVariantsAnomalyFindingType.PancreasAnulare"
+      >
+        <p-radioButton
+          rr-id="abd_m_060305"
+          name="pancreasAnulareClassificationType"
+          label="{{ 'abdomenMRT.pancreas.complete.value' | translate }}"
+          [(ngModel)]="model.pancreasAnulareClassificationType"
+          [value]="pancreasAnulareClassificationType.Complete"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_060306"
+          name="pancreasAnulareClassificationType"
+          label="{{ 'abdomenMRT.pancreas.incomplete.value' | translate }}"
+          [(ngModel)]="model.pancreasAnulareClassificationType"
+          [value]="pancreasAnulareClassificationType.Incomplete"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-radio-list">
+      <h2
+        rr-id="abd_m_060401"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType !== anatomicalVariantsAnomalyFindingType.None"
+      >
+        {{ "abdomenMRT.pancreas.associatedFindings.value" | translate }}
+      </h2>
+
+      <div
+        id="divisumAssociatedFindingsBlock"
+        class="o-radio-list"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType === anatomicalVariantsAnomalyFindingType.PancreasDivisum"
+      >
+        <p-checkbox
+          rr-id="abd_m_060402"
+          name="isStenosisOfTheMinor"
+          label="{{ 'abdomenMRT.pancreas.stenosisOfTheMinor.value' | translate }}"
+          [(ngModel)]="model.isStenosisOfTheMinorPapilla"
+          binary="true"
+          rrContentReset="pancreaticDuctDilatationBlock"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content"
+          [class.disabled]="!model.isStenosisOfTheMinorPapilla"
+          id="pancreaticDuctDilatationBlock"
+        >
+          <p>
+            {{ "abdomenMRT.pancreas.pancreaticDuctDilatation.value" | translate
+            }}
+          </p>
+          <rr-number-input
+            name="stenosisOfTheMinor"
+            inputRrId="abd_m_060404"
+            labelRrId="abd_m_060405"
+            label="{{ 'abdomenMRT.pancreas.inMm.value' | translate }}"
+            [config]="{ min: 1, max: 99 }"
+            [(ngModel)]="model.pancreaticDuctDilatation"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div
+        id="anulareAssociatedFindingsBlock"
+        class="o-radio-list"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType === anatomicalVariantsAnomalyFindingType.PancreasAnulare"
+      >
+        <p-checkbox
+          rr-id="abd_m_060406"
+          name="isDuodenalStenosis"
+          label="{{ 'abdomenMRT.pancreas.duodenalStenosis.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isDuodenalStenosis"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060407"
+          name="isObstructionOfPancreatic"
+          label="{{
+          'abdomenMRT.pancreas.obstructionOfTheAbberantPancreatic.value'
+            | translate
+        }}"
+          binary="true"
+          [(ngModel)]="model.isObstructionOfTheAbberantPancreaticDuct"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep">
+      <div
+        class="f-vertical o-radio-list p-r-15"
+        *ngIf="model.anatomicalVariantsAnomalyFindingType !== anatomicalVariantsAnomalyFindingType.None"
+      >
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+        ></rr-reference-picture>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="f-horizontal col-h-100">
+  <div
+    *ngIf="isHyperlordosisOrKyphosis()"
+    class="c-col-2 f-vertical c-pad-r c-sep"
+  >
+    <div class="m-b-20">
+      <ng-container *ngTemplateOutlet="header"></ng-container>
+    </div>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep o-list">
+        <ng-container *ngTemplateOutlet="firstCol"></ng-container>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="nec_m_100305" rrValidation="spineLocations">
+            {{ 'neckMRT.bones.vertex.value' | translate }}*
+          </h2>
+          <rr-spine-simple
+            rr-id="nec_m_100306"
+            [selectionAccessibilityMode]="selectionAccessibilityMode.C0toTH4"
+            [spineLocation]="model.spineLocations"
+            rrValidation="spineLocations"
+            isLocalizer="true"
+            (click)="openLargeLocalizer()"
+          ></rr-spine-simple>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!isHyperlordosisOrKyphosis()">
+    <div class="c-col-1 c-pad-r c-sep o-list">
+      <ng-container *ngTemplateOutlet="header"></ng-container>
+      <ng-container *ngTemplateOutlet="firstCol"></ng-container>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-list"></div>
+  </ng-container>
+
+  <div class="c-col-1 c-pad c-sep o-list"></div>
+  <div class="c-col-1 c-pad-l o-list"></div>
+</div>
+
+<ng-template #firstCol>
+  <div class="f-vertical o-radio-list">
+    <p-radioButton
+      rr-id="nec_m_100209"
+      [(ngModel)]="model.axialDeviationType"
+      name="axialDeviationType"
+      label="{{ 'neckMRT.bones.hyperlordosis.value' | translate }}"
+      [value]="axialDeviationType.Hyperlordosis"
+      rrValidation="axialDeviationType"
+      (onClick)="resetLocalizer()"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_100210"
+      [(ngModel)]="model.axialDeviationType"
+      name="axialDeviationType"
+      label="{{ 'neckMRT.bones.straightening.value' | translate }}"
+      [value]="axialDeviationType.Straightening"
+      rrValidation="axialDeviationType"
+      (onClick)="resetLocalizer()"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_100211"
+      [(ngModel)]="model.axialDeviationType"
+      name="axialDeviationType"
+      label="{{ 'neckMRT.bones.kyphosis.value' | translate }}"
+      [value]="axialDeviationType.Kyphosis"
+      rrValidation="axialDeviationType"
+      (onClick)="resetLocalizer()"
+    ></p-radioButton>
+  </div>
+</ng-template>
+
+<ng-template #header>
+  <h2 rr-id="nec_m_100208">
+    {{ 'neckMRT.bones.axialDeviation.value' | translate }}*
+  </h2>
+</ng-template>

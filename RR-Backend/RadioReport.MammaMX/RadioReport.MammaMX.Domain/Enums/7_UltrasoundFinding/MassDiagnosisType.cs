@@ -1,0 +1,42 @@
+namespace RadioReport.MammaMX.Domain.Enums.UltrasoundFinding
+{
+    public enum MassDiagnosisType : byte
+    {
+        None = 0,
+        BenignLesionNotFurtherDefined = 1,
+        MalignantLesionNotFurtherDefined = 2,
+        DignityUnclear = 3,
+        FibrocysticMastopathy = 4,
+        BreastParenchymaNonSpecific   = 5,
+        Fibroadenoma = 6,
+        IntramammaryLymphNode = 7,
+        SimpleCyst = 8,
+        ClusteredMicrocysts   = 9,
+        RadialScar = 10,
+        Siliconoma = 11,
+        FocalLesionInOrOnTheSkin = 12,
+        InSituCarcinomaDCIS = 13,
+        InSituCarcinomaLCIS = 14,
+        BreastCarcinomaNotFurtherDefined = 15,
+        Mastitis = 16,
+        Abscess = 17,
+        MondorsDisease = 18,
+        BenignPhyllodesTumor   = 19,
+        PASH = 20,
+        Lipoma = 21,
+        Hemangioma = 22,
+        Hamartoma = 23,
+        FattyTissueNecrosis = 24,
+        OilCyst = 25,
+        PostoperativeFluidCollection = 26,
+        Hematoma = 27,
+        AVM = 28,
+        Scar = 29,
+        Papilloma = 30,
+        ADH = 31,
+        ComplicatedCyst = 32,
+        Sarcoma = 33,
+        Lymphoma = 34,
+        MalignantPhyllodesTumor = 35
+    }
+}

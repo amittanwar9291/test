@@ -1,0 +1,213 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list">
+    <h2 rr-id="kne_m_0802301" class="m-t-6">
+      {{ 'kneeMRT.softParts.pathology.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrContentReset="VenousVaricosis-block PoplitealArteryAneurysm-block"
+      [labelStyleClass]="'ui-fat-label'"
+      name="vesselsNervesType"
+      [value]="vesselsNervesTypeEnum.PeripheralNerveSheathTumor"
+      label="{{ 'kneeMRT.softParts.peripheralNerveSheathTumor.value' | translate }}"
+      rr-id="kne_m_0802128"
+      [(ngModel)]="model.vesselsNervesType"
+      rrValidation="vesselsNervesType"
+    ></p-radioButton>
+    <p-radioButton
+      [labelStyleClass]="'ui-fat-label'"
+      rrContentReset="VenousVaricosis-block PeripheralNerveSheathTumor-block"
+      name="vesselsNervesType"
+      [value]="vesselsNervesTypeEnum.PoplitealArteryAneurysm"
+      label="{{ 'kneeMRT.softParts.aPopliteaAneurysma.value' | translate }}"
+      rr-id="kne_m_0802129"
+      [(ngModel)]="model.vesselsNervesType"
+      rrValidation="vesselsNervesType"
+    ></p-radioButton>
+    <div
+      id="PoplitealArteryAneurysm-block"
+      class="nested-content m-b-16"
+      [rrDisable]="model.vesselsNervesType !== vesselsNervesTypeEnum.PoplitealArteryAneurysm"
+    >
+      <rr-number-input
+        inputRrId="kne_m_0802130"
+        labelRrId="kne_m_0802131"
+        labelStyleClass="text-break"
+        name="aPoliteaAneurysmaDiameterInMm"
+        [(ngModel)]="model.aPoliteaAneurysmaDiameterInMm"
+        [label]="'kneeMRT.softParts.maxDiameterInMm.value' | translate"
+        [config]="{placeholder: '--', min: 0, step: 1, max: 80, labelWidth: 130}"
+      >
+      </rr-number-input>
+    </div>
+    <p-radioButton
+      rrContentReset="PoplitealArteryAneurysm-block PeripheralNerveSheathTumor-block"
+      [labelStyleClass]="'ui-fat-label'"
+      name="vesselsNervesType"
+      [value]="vesselsNervesTypeEnum.VenousVaricosis"
+      label="{{ 'kneeMRT.softParts.venousVaricosis.value' | translate }}"
+      rr-id="kne_m_0802132"
+      [(ngModel)]="model.vesselsNervesType"
+      rrValidation="vesselsNervesType"
+    ></p-radioButton>
+    <div
+      id="VenousVaricosis-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [class.disabled]="model.vesselsNervesType !== vesselsNervesTypeEnum.VenousVaricosis"
+    >
+      <p-checkbox
+        name="isSuperficialLegVeins"
+        label="{{ 'kneeMRT.softParts.superficialLegVeins.value' | translate }}"
+        rr-id="kne_m_0802133"
+        binary="true"
+        [(ngModel)]="model.isSuperficialLegVeins"
+      ></p-checkbox>
+      <p-checkbox
+        name="isDeepVeins"
+        label="{{ 'kneeMRT.softParts.deepVeins.value' | translate }}"
+        rr-id="kne_m_0802134"
+        binary="true"
+        [(ngModel)]="model.isDeepVeins"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div
+    id="PeripheralNerveSheathTumor-block"
+    class="f-vertical f-start o-radio-list c-pad c-sep"
+    [rrDisable]="model.vesselsNervesType !== vesselsNervesTypeEnum.PeripheralNerveSheathTumor"
+  >
+    <h2 rr-id="kne_m_0803248" class="text-break m-t-10 m-b-14">
+      {{ 'kneeMRT.softParts.characterizationOfPeripheralNerve.value' | translate
+      }}
+    </h2>
+    <div class="f-horizontal f-start col-h-100">
+      <div class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list">
+        <rr-number-input
+          inputRrId="kne_m_0803223"
+          labelRrId="kne_m_080379"
+          name="kmEnchancementDiameterInMm"
+          class="m-b-18"
+          [(ngModel)]="model.kmEnchancementDiameterInMm"
+          [label]="'kneeMRT.softParts.maxDiameterInMm.value' | translate"
+          [config]="{max: 100, labelWidth: 140}"
+        >
+        </rr-number-input>
+        <p-checkbox
+          name="isSmoothMargins"
+          label="{{ 'kneeMRT.softParts.smoothMargins.value' | translate }}"
+          rr-id="kne_m_080375"
+          binary="true"
+          [(ngModel)]="model.isSmoothMargins"
+        ></p-checkbox>
+        <p-checkbox
+          name="isSpindleShaped"
+          label="{{ 'kneeMRT.softParts.spindleShaped.value' | translate }}"
+          rr-id="kne_m_080376"
+          binary="true"
+          [(ngModel)]="model.isSpindleShaped"
+        ></p-checkbox>
+        <p-checkbox
+          name="isSplitFatSign"
+          label="{{ 'kneeMRT.softParts.edgeFatTissue(splitfat.value' | translate }}"
+          class="text-break m-b-6"
+          rr-id="kne_m_080377"
+          binary="true"
+          [(ngModel)]="model.isSplitFatSign"
+        ></p-checkbox>
+        <p-checkbox
+          name="isT1wIsointensToTheMusculature"
+          label="{{ 'kneeMRT.softParts.t1wIsointensToThe.value' | translate }}"
+          rr-id="kne_m_080378"
+          class="m-b-23"
+          binary="true"
+          [(ngModel)]="model.isT1wIsointensToTheMusculature"
+        ></p-checkbox>
+        <div class="o-radio-list" [rrDisable]="!isCMReinforcedTypeYes">
+          <p rr-id="kne_m_080380">
+            {{ 'kneeMRT.softParts.cMEnhancement.value' | translate }}
+          </p>
+          <p-radioButton
+            rrUnClickRadio
+            name="musculatureCMEnchancementType"
+            [value]="cmEnhancementTypeEnum.No"
+            label="{{ 'kneeMRT.softParts.no.value' | translate }}"
+            rr-id="kne_m_0803220"
+            [(ngModel)]="model.musculatureCMEnchancementType"
+          ></p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            name="musculatureCMEnchancementType"
+            [value]="cmEnhancementTypeEnum.Low"
+            label="{{ 'kneeMRT.softParts.weak.value' | translate }}"
+            rr-id="kne_m_0803221"
+            [(ngModel)]="model.musculatureCMEnchancementType"
+          ></p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            class="m-b-22"
+            name="musculatureCMEnchancementType"
+            [value]="cmEnhancementTypeEnum.Powerful"
+            label="{{ 'kneeMRT.softParts.powerful.value' | translate }}"
+            rr-id="kne_m_0803220"
+            [(ngModel)]="model.musculatureCMEnchancementType"
+          ></p-radioButton>
+        </div>
+        <p rr-id="kne_m_080385">
+          {{ 'kneeMRT.softParts.localization.value' | translate }}
+        </p>
+        <p-radioButton
+          rrUnClickRadio
+          name="vesselsNervesLocalizationType"
+          [value]="vesselsNervesLocalizationTypeEnum.NPeroneus"
+          label="{{ 'kneeMRT.softParts.nPeroneus.value' | translate }}"
+          rr-id="kne_m_080386"
+          [(ngModel)]="model.vesselsNervesLocalizationType"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          name="vesselsNervesLocalizationType"
+          [value]="vesselsNervesLocalizationTypeEnum.NTibialis"
+          label="{{ 'kneeMRT.softParts.nTibialis.value' | translate }}"
+          rr-id="kne_m_080387"
+          [(ngModel)]="model.vesselsNervesLocalizationType"
+        ></p-radioButton>
+      </div>
+      <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l">
+        <p rr-id="kne_m_0804224">
+          {{ 'kneeMRT.softParts.homogeneity.value' | translate }}
+        </p>
+        <p-radioButton
+          rrUnClickRadio
+          rrContentReset="Heterogeneous-block"
+          name="vesselsNervesHomogeneityType"
+          [value]="vesselsNervesHomogeneityTypeEnum.Homogeneous"
+          label="{{ 'kneeMRT.softParts.homogeneous.value' | translate }}"
+          rr-id="kne_m_0804225"
+          [(ngModel)]="model.vesselsNervesHomogeneityType"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rrContentReset="Heterogeneous-block"
+          name="vesselsNervesHomogeneityType"
+          [value]="vesselsNervesHomogeneityTypeEnum.Heterogeneous"
+          label="{{ 'kneeMRT.softParts.heterogeneous.value' | translate }}"
+          rr-id="kne_m_0804226"
+          [(ngModel)]="model.vesselsNervesHomogeneityType"
+        ></p-radioButton>
+        <div
+          id="Heterogeneous-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="model.vesselsNervesHomogeneityType !== vesselsNervesHomogeneityTypeEnum.Heterogeneous"
+        >
+          <p-checkbox
+            name="isMalignantAspect"
+            label="{{ 'kneeMRT.softParts.suspiciousForMalignancy.value' | translate }}"
+            rr-id="kne_m_0804227"
+            binary="true"
+            [(ngModel)]="model.isMalignantAspect"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-r c-sep"></div>
+</div>

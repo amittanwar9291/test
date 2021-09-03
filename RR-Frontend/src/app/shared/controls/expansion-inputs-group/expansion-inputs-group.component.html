@@ -1,0 +1,59 @@
+<h2
+  [attr.rr-id]="config.mainHeaderRrId"
+  class="m-b-10"
+  *ngIf="config.isMainHeader"
+>
+  {{ config.mainHeaderTranslationKey | translate }}
+</h2>
+<div class="f-vertical o-radio-list m-b-10">
+  <h3 [attr.rr-id]="config.size.headerRrId" class="m-b-5">
+    {{ config.size.headerTranslationKey | translate }}{{ config.size.mandatory ?
+    '*' : '' }}
+  </h3>
+  <rr-number-input
+    [inputRrId]="config.size.inputRrId"
+    [labelRrId]="config.size.labelRrId"
+    [name]="config.size.modelName"
+    label="{{ config.size.labelTranslationKey | translate }}"
+    [config]="{ min: config.size.min, max: config.size.max, placeholder: config.size.placeholder }"
+    [(ngModel)]="model[config.size.modelName]"
+    (announceModelChange)="resetBothPlanes()"
+    [rrValidation]="config.size.modelName"
+  >
+  </rr-number-input>
+</div>
+<div
+  class="f-vertical o-radio-list m-b-10"
+  [rrDisable]="!model[config.size.modelName]"
+>
+  <h3 [attr.rr-id]="config.secondPlane.headerRrId" class="m-b-5">
+    {{ config.secondPlane.headerTranslationKey | translate }}
+  </h3>
+  <rr-number-input
+    [inputRrId]="config.secondPlane.inputRrId"
+    [labelRrId]="config.secondPlane.labelRrId"
+    [name]="config.secondPlane.modelName"
+    label="{{ config.secondPlane.labelTranslationKey | translate }}"
+    [config]="{ min: config.secondPlane.min, max: config.secondPlane.max, placeholder: config.secondPlane.placeholder }"
+    [(ngModel)]="model[config.secondPlane.modelName]"
+    (announceModelChange)="resetThirdPlane()"
+  >
+  </rr-number-input>
+</div>
+<div
+  class="f-vertical o-radio-list"
+  [rrDisable]="!model[config.secondPlane.modelName]"
+>
+  <h3 [attr.rr-id]="config.thirdPlane.headerRrId" class="m-b-5">
+    {{ config.thirdPlane.headerTranslationKey | translate }}
+  </h3>
+  <rr-number-input
+    [inputRrId]="config.thirdPlane.inputRrId"
+    [labelRrId]="config.thirdPlane.labelRrId"
+    [name]="config.thirdPlane.modelName"
+    label="{{ config.thirdPlane.labelTranslationKey | translate }}"
+    [config]="{ min: config.thirdPlane.min, max: config.thirdPlane.max, placeholder: config.thirdPlane.placeholder }"
+    [(ngModel)]="model[config.thirdPlane.modelName]"
+  >
+  </rr-number-input>
+</div>

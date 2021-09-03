@@ -1,0 +1,183 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list" [rrDisable]="!isCMYes">
+      <h2 rr-id="hea_m_1102274">
+        {{ "headMRT.facialSkull.contrastEnhancementQuantitative.value" |
+        translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_1102275"
+        label="{{ 'headMRT.facialSkull.no.value' | translate }}"
+        name="contrastEnhancementType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        [(ngModel)]="model.contrastEnhancementType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastDistributionTypeContainer"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_1102276"
+        label="{{ 'headMRT.facialSkull.weak.value' | translate }}"
+        name="contrastEnhancementType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Weak"
+        [(ngModel)]="model.contrastEnhancementType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastDistributionTypeContainer"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_1102277"
+        label="{{ 'headMRT.facialSkull.significant.value' | translate }}"
+        name="contrastEnhancementType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Significant"
+        [(ngModel)]="model.contrastEnhancementType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastDistributionTypeContainer"
+      ></p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="contrastEnhancementHomogeneityTypeContainer"
+        [rrDisable]="!isCMWeakOrSignificant()"
+      >
+        <p-radioButton
+          rr-id="hea_m_1102278"
+          label="{{ 'headMRT.facialSkull.homogeneous.value' | translate }}"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102279"
+          label="{{ 'headMRT.facialSkull.heterogeneous.value' | translate }}"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+
+      <div
+        class="o-radio-list"
+        id="contrastDistributionTypeContainer"
+        [rrDisable]="!isCMWeakOrSignificant()"
+      >
+        <h2 rr-id="hea_m_1102280" class="m-t-30">
+          {{ "headMRT.facialSkull.contrastEnhancementDistribution.value" |
+          translate }}
+        </h2>
+        <p-radioButton
+          rr-id="hea_m_1102281"
+          label="{{ 'headMRT.facialSkull.peripheral.value' | translate }}"
+          name="contrastDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Peripheral"
+          [(ngModel)]="model.contrastDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102282"
+          label="{{ 'headMRT.facialSkull.entireLesion.value' | translate }}"
+          name="contrastDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.EntireLesion"
+          [(ngModel)]="model.contrastDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102283"
+          label="{{ 'headMRT.facialSkull.central.value' | translate }}"
+          name="contrastDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Central"
+          [(ngModel)]="model.contrastDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102284"
+          label="{{ 'headMRT.facialSkull.septal.value' | translate }}"
+          name="contrastDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Septal"
+          [(ngModel)]="model.contrastDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102285"
+          label="{{ 'headMRT.facialSkull.nodular.value' | translate }}"
+          name="contrastDistributionType"
+          [value]="contrastEnhancementDistributionTypeEnum.Nodular"
+          [(ngModel)]="model.contrastDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_1103284">
+        {{ "headMRT.facialSkull.differentialDiagnosis.value" | translate }}
+      </h2>
+      <div
+        class="f-vertical"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+      >
+        <p rr-id="hea_m_1103285">
+          {{ "headMRT.facialSkull.differentialDiagnosis1.value" | translate }}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          class="m-b-10"
+          rrId="hea_m_1103286"
+          [diagnosisNumber]="1"
+          [options]="w058"
+          [(ngModel)]="model.salivaryGlandsDiagnosis1Type"
+          name="salivaryGlandsDiagnosis1Type"
+          [parentViewModel]="model"
+          rrValidation="salivaryGlandsDiagnosis1Type"
+          (selectionChanged)="onSalivaryGlandsDiagnosis1TypeChange()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.salivaryGlandsDiagnosis1Type === salivaryGlandsDiagnosisTypeEnum.None"
+          rr-id="hea_m_1103287"
+          name="isSuspicionOf"
+          label="{{ 'headMRT.facialSkull.suspicionOf.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+        ></p-checkbox>
+      </div>
+      <div
+        class="m-t-20 f-vertical"
+        [rrDisable]="model.salivaryGlandsDiagnosis1Type === salivaryGlandsDiagnosisTypeEnum.None && model.salivaryGlandsDiagnosis1LocalizationType === salivaryGlandsDiagnosisTypeEnum.None"
+      >
+        <p rr-id="hea_m_1103288">
+          {{ "headMRT.facialSkull.differentialDiagnosis2.value" | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          class="m-b-10"
+          rrId="hea_m_1103289"
+          [diagnosisNumber]="2"
+          [options]="w059"
+          [(ngModel)]="model.salivaryGlandsDiagnosis2Type"
+          name="salivaryGlandsDiagnosis2Type"
+          [parentViewModel]="model"
+          (selectionChanged)="onSalivaryGlandsDiagnosis2TypeChange()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.salivaryGlandsDiagnosis2Type === salivaryGlandsDiagnosisTypeEnum.None"
+          rr-id="hea_m_1103290"
+          name="isSubordinate"
+          label="{{ 'headMRT.facialSkull.subordinate.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isSubordinate"
+        ></p-checkbox>
+      </div>
+
+      <p-checkbox
+        class="m-t-30"
+        rr-id="hea_m_1103291"
+        name="isMoreThan1LesionOfTheSameEntity"
+        label="{{ 'headMRT.facialSkull.moreThenOneLesionOfTheSameEntity.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isMoreThan1LesionOfTheSameEntity"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13"></div>
+</div>

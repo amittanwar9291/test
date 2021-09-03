@@ -1,0 +1,379 @@
+<div class="c-col-4 f-horizontal col-h-100">
+  <div
+    class="f-vertical"
+    [ngClass]="{'c-sep': model.longBicepsTendonType !== longBicepsTendonType.PulleyLesion}"
+  >
+    <h2 rr-id="sho_m_060222" class="m-b-26">
+      {{'shoulderMRT.labrumAndRibbons.longBicepsTendon.value' | translate}}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+        <p-radioButton
+          rr-id="sho_m_060223"
+          name="longBicepsTendonType"
+          [value]="longBicepsTendonType.Rupture"
+          label="{{'shoulderMRT.labrumAndRibbons.rupture.value' | translate}}"
+          [(ngModel)]="model.longBicepsTendonType"
+          rrContentReset="degeneration-block tendinitis-block pulley-lesion-block pulley-lesion-block2"
+          rrValidation="longBicepsTendonType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060224"
+          name="longBicepsTendonType"
+          [value]="longBicepsTendonType.Degeneration"
+          label="{{'shoulderMRT.labrumAndRibbons.degeneration.value' | translate}}"
+          [(ngModel)]="model.longBicepsTendonType"
+          rrContentReset="rupture-block tendinitis-block pulley-lesion-block pulley-lesion-block2"
+          rrValidation="longBicepsTendonType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060225"
+          name="longBicepsTendonType"
+          [value]="longBicepsTendonType.Tendinitis"
+          label="{{'shoulderMRT.labrumAndRibbons.tendinitis.value' | translate}}"
+          [(ngModel)]="model.longBicepsTendonType"
+          rrContentReset="rupture-block degeneration-block pulley-lesion-block pulley-lesion-block2"
+          rrValidation="longBicepsTendonType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060226"
+          name="longBicepsTendonType"
+          [value]="longBicepsTendonType.PulleyLesion"
+          label="{{'shoulderMRT.labrumAndRibbons.pulleyLesion.value' | translate}}"
+          [(ngModel)]="model.longBicepsTendonType"
+          rrContentReset="rupture-block degeneration-block tendinitis-block pulley-lesion-block2"
+          rrValidation="longBicepsTendonType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060227"
+          name="longBicepsTendonType"
+          [value]="longBicepsTendonType.SLAPLasionTypeIV"
+          class="m-b-82"
+          label="{{'shoulderMRT.labrumAndRibbons.sLAPLesionTypeIV.value' | translate}}"
+          [(ngModel)]="model.longBicepsTendonType"
+          rrContentReset="rupture-block degeneration-block tendinitis-block pulley-lesion-block pulley-lesion-block2"
+          rrValidation="longBicepsTendonType"
+        >
+        </p-radioButton>
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+          class="m-t-7"
+        ></rr-reference-picture>
+      </div>
+      <div class="c-col-1 c-pad">
+        <div
+          *ngIf="model.longBicepsTendonType === longBicepsTendonType.Rupture"
+          class="f-vertical f-start o-radio-list"
+          id="rupture-block"
+        >
+          <h2 rr-id="sho_m_060322" class="m-b-20">
+            {{'shoulderMRT.labrumAndRibbons.ruptureDetails.value' | translate}}
+          </h2>
+          <rr-number-input
+            inputRrId="sho_m_060323"
+            labelRrId="sho_m_060324"
+            name="retractionInMm"
+            labelStyleClass="text-break"
+            label="{{'shoulderMRT.labrumAndRibbons.retractionInMm.value' | translate}}"
+            [config]="{max: 100}"
+            [(ngModel)]="model.retractionInMm"
+          >
+          </rr-number-input>
+          <p-checkbox
+            rr-id="sho_m_060325"
+            name="isRetractedTendonStumpBicepsAnchor"
+            class="text-break"
+            label="{{'shoulderMRT.labrumAndRibbons.severelyRetractedTendon.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isRetractedTendonStumpBicepsAnchor"
+            rrContentReset="isRetractedTendonStumpBicepsAnchor-block"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isRetractedTendonStumpBicepsAnchor"
+            id="isRetractedTendonStumpBicepsAnchor-block"
+          >
+            <p-checkbox
+              rr-id="sho_m_060326"
+              name="isIntraArticularEntrapment"
+              label="{{'shoulderMRT.labrumAndRibbons.intraarticularEntrapment.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isIntraArticularEntrapment"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div
+          *ngIf="model.longBicepsTendonType === longBicepsTendonType.Degeneration"
+          class="f-vertical f-start o-radio-list"
+          id="degeneration-block"
+        >
+          <h2 rr-id="sho_m_060327" class="m-b-22">
+            {{'shoulderMRT.labrumAndRibbons.degenerationDetails.value' |
+            translate}}
+          </h2>
+          <p-checkbox
+            rr-id="sho_m_060328"
+            name="isThinningOutDegeneration"
+            label="{{'shoulderMRT.labrumAndRibbons.thinning.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isThinningOutDegeneration"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_060329"
+            name="isThickeningMoreThan5Degeneration"
+            label="{{'shoulderMRT.labrumAndRibbons.thickeningMm.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isThickeningMoreThan5Degeneration"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_060330"
+            name="isCystDegeneration"
+            label="{{'shoulderMRT.labrumAndRibbons.subenthesealCyst.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isCystDegeneration"
+            rrContentReset="isCystDegeneration-block"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isCystDegeneration"
+            id="isCystDegeneration-block"
+          >
+            <rr-number-input
+              inputRrId="sho_m_060331"
+              labelRrId="sho_m_060332"
+              name="cystDiameterInMm"
+              labelStyleClass="text-break"
+              class="text-break"
+              label="{{'shoulderMRT.labrumAndRibbons.diameterInMm.value' | translate}}"
+              [(ngModel)]="model.cystDiameterInMm"
+              [config]="{max: 100}"
+            >
+            </rr-number-input>
+          </div>
+          <p-checkbox
+            rr-id="sho_m_060333"
+            name="isIncreasedSignalOnT2wOrPdAndT1w"
+            label="{{'shoulderMRT.labrumAndRibbons.signalIncreaseInT2w.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isIncreasedSignalOnT2wOrPdAndT1w"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="model.longBicepsTendonType === longBicepsTendonType.Tendinitis"
+          class="f-vertical f-start o-radio-list"
+          id="tendinitis-block"
+        >
+          <h2 rr-id="sho_m_060334" class="m-b-23">
+            {{'shoulderMRT.labrumAndRibbons.tendinitisDetails.value' |
+            translate}}
+          </h2>
+          <p-checkbox
+            rr-id="sho_m_060335"
+            name="isTendinitisLiquidInTendonSheath"
+            label="{{'shoulderMRT.labrumAndRibbons.liquidInTendonSheath.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isTendinitisLiquidInTendonSheath"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_060336"
+            name="isTendinitisThickening"
+            label="{{'shoulderMRT.labrumAndRibbons.thickening.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isTendinitisThickening"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_060337"
+            name="isTendinitisThinningOut"
+            label="{{'shoulderMRT.labrumAndRibbons.thinning.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isTendinitisThinningOut"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_060338"
+            name="isTendinitisT2wSignalIncrease"
+            label="{{'shoulderMRT.labrumAndRibbons.t2wSignalIncrease.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isTendinitisT2wSignalIncrease"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="model.longBicepsTendonType === longBicepsTendonType.PulleyLesion"
+          class="f-vertical f-start o-radio-list"
+          id="pulley-lesion-block"
+        >
+          <h2
+            rr-id="sho_m_060339"
+            rrInfoIcon="sho_m_060344"
+            infoIconPdfLandscape="true"
+            class="text-break m-b-16"
+          >
+            {{'shoulderMRT.labrumAndRibbons.pulleyLesionsAccordingTo.value' |
+            translate}}
+          </h2>
+          <p-radioButton
+            rr-id="sho_m_060340"
+            rrUnClickRadio
+            name="pulleyLesionBiceps"
+            class="text-break"
+            [value]="pulleyLesionBiceps.Type1IsolatedSGHLLesion"
+            label="{{'shoulderMRT.labrumAndRibbons.pulleyLesionTypeIsolated.value' | translate}}"
+            [(ngModel)]="model.pulleyLesionBiceps"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_060341"
+            rrUnClickRadio
+            name="pulleyLesionBiceps"
+            [value]="pulleyLesionBiceps.Type2SGHLLesionAndPartialTearOfSSP"
+            label="{{'shoulderMRT.labrumAndRibbons.pulleyLesionTypeRuptureSSP.value' | translate}}"
+            [(ngModel)]="model.pulleyLesionBiceps"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_060342"
+            rrUnClickRadio
+            name="pulleyLesionBiceps"
+            [value]="pulleyLesionBiceps.Type3SGHLLesionAndPartialTearOfSSP"
+            label="{{'shoulderMRT.labrumAndRibbons.pulleyLesionTypeRuptureSSC.value' | translate}}"
+            [(ngModel)]="model.pulleyLesionBiceps"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_060343"
+            rrUnClickRadio
+            name="pulleyLesionBiceps"
+            [value]="pulleyLesionBiceps.Type4CombinationOfPulley"
+            label="{{'shoulderMRT.labrumAndRibbons.pulleyLesionTypeCombination.value' | translate}}"
+            [(ngModel)]="model.pulleyLesionBiceps"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad f-vertical f-start"
+    [ngClass]="model.longBicepsTendonType === longBicepsTendonType.PulleyLesion ? 'c-sep-l m-t-105' : 'c-sep'"
+  >
+    <div
+      *ngIf="model.longBicepsTendonType === longBicepsTendonType.PulleyLesion"
+      class="o-radio-list"
+      id="pulley-lesion-block2"
+    >
+      <h2 rr-id="sho_m_060425" class="m-t-3 m-b-18">
+        {{'shoulderMRT.labrumAndRibbons.dislocationDetails.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="sho_m_060426"
+        rrUnClickRadio
+        name="dislocationDetailsType"
+        class="m-b-7"
+        [value]="dislocationDetailsType.DislocationFromBicipitalGroove"
+        label="{{'shoulderMRT.labrumAndRibbons.dislocationFromBiciptalGroove.value' | translate}}"
+        [(ngModel)]="model.dislocationDetailsType"
+        rrContentReset="dislocationFromSulcus-block"
+        rrValidation="dislocationDetailsType"
+      >
+      </p-radioButton>
+      <div
+        class="f-start o-radio-list nested-content m-b-6"
+        [rrDisable]="model.dislocationDetailsType !== dislocationDetailsType.DislocationFromBicipitalGroove"
+        id="dislocationFromSulcus-block"
+      >
+        <p rr-id="sho_m_060427" class="m-b-8">
+          {{'shoulderMRT.labrumAndRibbons.dislocationDirection.value' |
+          translate}}
+        </p>
+        <p-radioButton
+          rr-id="sho_m_060428"
+          rrUnClickRadio
+          name="dislocationFromSulcusType"
+          [value]="dislocationFromSulcusType.Medial"
+          label="{{'shoulderMRT.labrumAndRibbons.medial.value' | translate}}"
+          [(ngModel)]="model.dislocationFromSulcusType"
+          rrValidation="dislocationFromSulcusType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060429"
+          rrUnClickRadio
+          name="dislocationFromSulcusType"
+          [value]="dislocationFromSulcusType.Lateral"
+          label="{{'shoulderMRT.labrumAndRibbons.lateral.value' | translate}}"
+          [(ngModel)]="model.dislocationFromSulcusType"
+          rrValidation="dislocationFromSulcusType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060430"
+          rrUnClickRadio
+          name="dislocationFromSulcusType"
+          class="m-b-5 text-break"
+          [value]="dislocationFromSulcusType.SSCMidSubstance"
+          label="{{'shoulderMRT.labrumAndRibbons.sscMidSubstance.value' | translate}}"
+          [(ngModel)]="model.dislocationFromSulcusType"
+          rrValidation="dislocationFromSulcusType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_060431"
+          rrInfoIcon="sho_m_060435"
+          rrUnClickRadio
+          name="dislocationFromSulcusType"
+          [value]="dislocationFromSulcusType.Dorsal"
+          label="{{'shoulderMRT.labrumAndRibbons.dorsal.value' | translate}}"
+          [(ngModel)]="model.dislocationFromSulcusType"
+          rrValidation="dislocationFromSulcusType"
+        >
+        </p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="sho_m_060432"
+        rrUnClickRadio
+        name="dislocationDetailsType"
+        class="text-break"
+        [value]="dislocationDetailsType.LongitudinalSplitTypeTearAndIntraarticularDislocation"
+        label="{{'shoulderMRT.labrumAndRibbons.longitudinalSplittingDislocationInto.value' | translate}}"
+        [(ngModel)]="model.dislocationDetailsType"
+        rrContentReset="dislocationFromSulcus-block"
+        rrValidation="dislocationDetailsType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad-l c-sep o-radio-list"
+    [ngClass]="model.longBicepsTendonType === longBicepsTendonType.PulleyLesion ? 'c-sep-l' : 'c-sep'"
+  >
+    <h2 rr-id="sho_m_060516" class="m-b-24">
+      {{'shoulderMRT.labrumAndRibbons.shortBicepsTendon.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="sho_m_060517"
+      name="longBicepsTendonType"
+      label="{{'shoulderMRT.labrumAndRibbons.outline.value' | translate}}"
+      [value]="longBicepsTendonType.Avulsion"
+      [(ngModel)]="model.longBicepsTendonType"
+      rrContentReset="rupture-block degeneration-block tendinitis-block pulley-lesion-block pulley-lesion-block2"
+      rrValidation="longBicepsTendonType"
+    >
+    </p-radioButton>
+  </div>
+</div>

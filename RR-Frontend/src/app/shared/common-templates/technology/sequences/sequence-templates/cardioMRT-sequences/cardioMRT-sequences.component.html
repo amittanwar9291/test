@@ -1,0 +1,114 @@
+<rr-sequences-base-template [itemIndex]="itemIndex" [disabled]="disabled">
+  <ng-container ngProjectAs="firstColumn">
+    <div class="f-vertical o-radio-list m-b-16">
+      <h2 rr-id="car_m_030301" class="m-b-3">
+        {{ 'shared-templates.technology.examinationTechnique.value' | translate
+        }}
+      </h2>
+      <p-dropdown
+        rr-id="car_m_030302"
+        [(ngModel)]="model.examinationTechniqueType"
+        styleClass="o-width-100 ui-brown-box"
+        name="examinationTechniqueType"
+        [options]="examinationTechniques"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      ></p-dropdown>
+    </div>
+    <div class="o-radio-list m-b-16">
+      <h2 rr-id="uni_x_030307" class="m-b-4" rrInfoIcon="uni_x_0303100">
+        {{ 'shared-templates.technology.sequenceType.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="uni_x_030308"
+        [(ngModel)]="model.sequenceType"
+        styleClass="o-width-100 ui-brown-box"
+        name="sequenceType"
+        [options]="sequenceTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      ></p-dropdown>
+    </div>
+    <div class="o-radio-list m-b-16">
+      <h2 rr-id="uni_x_030309" class="m-b-4">
+        {{ 'shared-templates.technology.plane.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="uni_x_030310"
+        styleClass="o-width-100 ui-brown-box"
+        name="orientationType"
+        [options]="orientationTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [(ngModel)]="model.orientationType"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-dropdown>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="uni_x_030313" class="m-b-11">
+        {{ 'shared-templates.technology.additionalFeatures.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="uni_x_030314"
+        [(ngModel)]="model.isSaturatedFat"
+        name="isSaturatedFat"
+        label="{{ 'shared-templates.technology.fatSaturated.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030315"
+        [(ngModel)]="model.is3D"
+        name="is3D"
+        label="{{ 'shared-templates.technology.3D.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_0303101"
+        [(ngModel)]="model.isECGTriggering"
+        name="isECGTriggering"
+        label="{{ 'shared-templates.technology.eCGTriggering.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+    </div>
+  </ng-container>
+  <ng-container ngProjectAs="secondColumn">
+    <div class="o-radio-list" [rrDisable]="isSecondColumnDisabled()">
+      <p-checkbox
+        rr-id="uni_y_030401"
+        [(ngModel)]="model.isPostContrast"
+        labelStyleClass="ui-fat-label"
+        name="isPostContrast"
+        label="{{ 'shared-templates.technology.postContrast.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+        rrContentReset="isPostContrast-block"
+        [explicitFormToReset]="formRef"
+      >
+      </p-checkbox>
+      <div
+        id="isPostContrast-block"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isPostContrast"
+      >
+        <p-checkbox
+          rr-id="uni_x_030419"
+          [(ngModel)]="model.isSubtraction"
+          name="isSubtraction"
+          label="{{ 'shared-templates.technology.subtraction.value' | translate }}"
+          binary="true"
+          (onChange)="emitModelChangeInSubcomponent()"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </ng-container>
+</rr-sequences-base-template>

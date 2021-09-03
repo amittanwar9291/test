@@ -1,0 +1,143 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_100214" class="m-t-2">
+        {{ 'abdomenMRT.peritonealCavity.associatedFindings.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_100215"
+        label="{{ 'abdomenMRT.peritonealCavity.peritonealContrastEnhancement.value' | translate }}"
+        [(ngModel)]="model.isPeritonealContrastEnhancement"
+        binary="true"
+        name="isPeritonealContrastEnhancement"
+        rrContentReset="peritonealContrastEnhancement-block"
+        [rrDisable]="!isContrastEnhanced"
+      ></p-checkbox>
+      <div
+        id="peritonealContrastEnhancement-block"
+        class="nested-content"
+        [rrDisable]="!model.isPeritonealContrastEnhancement"
+      >
+        <p-checkbox
+          rr-id="abd_m_100216"
+          label="{{ 'abdomenMRT.peritonealCavity.concomitantPeritonitis.value' | translate }}"
+          [(ngModel)]="model.isConcomitantPeritonitis"
+          binary="true"
+          name="isConcomitantPeritonitis"
+          [rrDisable]="!isContrastEnhanced"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="abd_m_100217"
+        label="{{ 'abdomenMRT.peritonealCavity.focalGasInclusion.value' | translate }}"
+        [(ngModel)]="model.isFocalGasInclusion"
+        binary="true"
+        name="isFocalGasInclusion"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_100218"
+        label="{{ 'abdomenMRT.peritonealCavity.suspectedAbscess.value' | translate }}"
+        [(ngModel)]="model.isSuspectedAbscess"
+        binary="true"
+        name="isSuspectedAbscess"
+        rrContentReset="suspectedAbscess-block"
+      ></p-checkbox>
+      <div
+        id="suspectedAbscess-block"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isSuspectedAbscess"
+      >
+        <p-checkbox
+          rr-id="abd_m_100219"
+          label="{{ 'abdomenMRT.peritonealCavity.1>finding.value' | translate }}"
+          [(ngModel)]="model.isSuspectedAbscessAboveOneFinding"
+          binary="true"
+          name="isSuspectedAbscessAboveOneFinding"
+          rrContentReset="suspectedAbscessAboveOneFinding-block"
+        ></p-checkbox>
+        <div
+          id="suspectedAbscessAboveOneFinding-block"
+          class="nested-content"
+          [rrDisable]="!model.isSuspectedAbscessAboveOneFinding"
+        >
+          <p-checkbox
+            rr-id="abd_m_100220"
+            label="{{ 'abdomenMRT.peritonealCavity.communicatinglesions.value' | translate }}"
+            [(ngModel)]="model.isCommunicatingLesions"
+            binary="true"
+            name="isCommunicatingLesions"
+            class="text-break"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-b-31">
+      <h2 rr-id="abd_m_100312" class="m-t-2">
+        {{ 'abdomenMRT.peritonealCavity.quantity.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_100313"
+        label="{{ 'abdomenMRT.peritonealCavity.little.value' | translate }}"
+        name="quantityType"
+        [value]="quantityType.Little"
+        [(ngModel)]="model.quantityType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_100314"
+        label="{{ 'abdomenMRT.peritonealCavity.significant.value' | translate }}"
+        name="quantityType"
+        [value]="quantityType.Significant"
+        [(ngModel)]="model.quantityType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div class="o-radio-list m-b-31">
+      <h2 rr-id="abd_m_100315">
+        {{ 'abdomenMRT.peritonealCavity.ascitesQuality.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_100316"
+        label="{{ 'abdomenMRT.peritonealCavity.transsudative.value' | translate }}"
+        name="ascitesQualityType"
+        [value]="ascitesQualityType.Transsudative"
+        [(ngModel)]="model.ascitesQualityType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_100317"
+        label="{{ 'abdomenMRT.peritonealCavity.exudative.value' | translate }}"
+        name="ascitesQualityType"
+        [value]="ascitesQualityType.Exudative"
+        [(ngModel)]="model.ascitesQualityType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_100318"
+        label="{{ 'abdomenMRT.peritonealCavity.hemorrhagic.value' | translate }}"
+        name="ascitesQualityType"
+        [value]="ascitesQualityType.Hemorrhagic"
+        [(ngModel)]="model.ascitesQualityType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_100319"
+        label="{{ 'abdomenMRT.peritonealCavity.chylous.value' | translate }}"
+        name="ascitesQualityType"
+        [value]="ascitesQualityType.Chylous"
+        [(ngModel)]="model.ascitesQualityType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10"></div>
+</div>

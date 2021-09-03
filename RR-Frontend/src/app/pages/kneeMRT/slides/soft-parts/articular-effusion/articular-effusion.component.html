@@ -1,0 +1,150 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list">
+    <h2 class="quantity__header" rr-id="kne_m_080202">
+      {{ 'kneeMRT.softParts.quantity.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="quantityType"
+      [value]="quantityTypeEnum.Minor"
+      label="{{ 'kneeMRT.softParts.minor.value' | translate }}"
+      rr-id="kne_m_080203"
+      [(ngModel)]="model.quantityType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="quantityType"
+      [value]="quantityTypeEnum.Major"
+      label="{{ 'kneeMRT.softParts.major.value' | translate }}"
+      rr-id="kne_m_080204"
+      [(ngModel)]="model.quantityType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="quantityType"
+      [value]="quantityTypeEnum.Extensive"
+      label="{{ 'kneeMRT.softParts.extensive.value' | translate }}"
+      rr-id="kne_m_080205"
+      [(ngModel)]="model.quantityType"
+    >
+    </p-radioButton>
+    <h2 class="quality__header" rr-id="kne_m_080206">
+      {{ 'kneeMRT.softParts.quality.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="qualityType"
+      [value]="qualityTypeEnum.Haemorrhagic"
+      label="{{ 'kneeMRT.softParts.haemorrhagic.value' | translate }}"
+      rrContentReset="Haemorrhagic-block"
+      rr-id="kne_m_080207"
+      [(ngModel)]="model.qualityType"
+    >
+    </p-radioButton>
+    <div
+      id="Haemorrhagic-block"
+      class="nested-content"
+      [rrDisable]="model.qualityType !== qualityTypeEnum.Haemorrhagic"
+    >
+      <p-checkbox
+        name="isSedimentation"
+        label="{{ 'kneeMRT.softParts.sedimentation.value' | translate }}"
+        rr-id="kne_m_080208"
+        binary="true"
+        [(ngModel)]="model.isSedimentation"
+      >
+      </p-checkbox>
+    </div>
+    <p-radioButton
+      rrUnClickRadio
+      name="qualityType"
+      [value]="qualityTypeEnum.Empyema"
+      label="{{ 'kneeMRT.softParts.empyema.value' | translate }}"
+      rr-id="kne_m_0802200"
+      rrContentReset="Haemorrhagic-block"
+      [(ngModel)]="model.qualityType"
+    >
+    </p-radioButton>
+  </div>
+
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list">
+    <h2 class="associated-findings__header" rr-id="kne_m_080301">
+      {{ 'kneeMRT.softParts.associatedFindings.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isBakerCyst"
+      label="{{ 'kneeMRT.softParts.bakerCyst.value' | translate }}"
+      rr-id="kne_m_080302"
+      binary="true"
+      rrContentReset="bakerCyst-block"
+      [(ngModel)]="model.isBakerCyst"
+    >
+    </p-checkbox>
+    <div
+      id="bakerCyst-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isBakerCyst"
+    >
+      <p rr-id="kne_m_080303" class="m-b-8">
+        {{ 'kneeMRT.softParts.size.value' | translate }}
+      </p>
+      <rr-number-input
+        inputRrId="kne_m_080304"
+        labelRrId="kne_m_080305"
+        name="expansivenessMaxDiameterInMm"
+        [(ngModel)]="model.expansivenessMaxDiameterInMm"
+        [label]="'kneeMRT.softParts.maxDiameterInMm.value' | translate"
+        [config]="{max: 120, labelWidth: 130}"
+      >
+      </rr-number-input>
+      <rr-number-input
+        inputRrId="kne_m_080306"
+        labelRrId="kne_m_080307"
+        class="m-b-14"
+        name="expansivenessMaxLinearExpansionInMm"
+        [(ngModel)]="model.expansivenessMaxLinearExpansionInMm"
+        [label]="'kneeMRT.softParts.maxLongitudinalExpansionIn.value' | translate"
+        [config]="{max: 120, labelWidth: 160}"
+      >
+      </rr-number-input>
+      <p-checkbox
+        name="isRuptured"
+        class="m-b-0"
+        label="{{ 'kneeMRT.softParts.torn.value' | translate }}"
+        rr-id="kne_m_080308"
+        binary="true"
+        [(ngModel)]="model.isRuptured"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      name="isSynovialCystProxTibiofibularJoint"
+      class="p-t-7"
+      label="{{ 'kneeMRT.softParts.synovialCystProxTibiofibular.value' | translate }}"
+      rr-id="kne_m_080309"
+      binary="true"
+      rrContentReset="synovialCystProxTibiofibular-block"
+      [(ngModel)]="model.isSynovialCystProxTibiofibularJoint"
+    >
+    </p-checkbox>
+    <div
+      id="synovialCystProxTibiofibular-block"
+      class="nested-content"
+      [rrDisable]="!model.isSynovialCystProxTibiofibularJoint"
+    >
+      <rr-number-input
+        inputRrId="kne_m_080310"
+        labelRrId="kne_m_080311"
+        name="synovialCystProxTibiofibularJointMaxDiameterInMm"
+        [(ngModel)]="model.synovialCystProxTibiofibularJointMaxDiameterInMm"
+        [label]="'kneeMRT.softParts.maxDiameterInMm.value' | translate"
+        [config]="{max: 50, labelWidth: 130}"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list"></div>
+  <div class="f-vertical f-start c-col-1 c-pad-l o-radio-list"></div>
+</div>

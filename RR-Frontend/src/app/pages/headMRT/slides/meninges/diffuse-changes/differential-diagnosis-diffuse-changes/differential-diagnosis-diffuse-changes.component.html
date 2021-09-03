@@ -1,0 +1,56 @@
+<div class="f-horizontal main-container  o-width-100 col-h-100">
+  <div class="c-col-1 c-pad m-t-15 m-b-15 o-radio-list">
+    <div class="m-l-10 m-r-10">
+      <h2 rr-id="hea_m_050266" class="m-b-4">
+        {{ "headMRT.meninges.differentialDiagnosis1.value" | translate }}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="hea_m_050267"
+        [diagnosisNumber]="1"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.diffuseDifferentialDiagnosis1"
+        name="diffuseDifferentialDiagnosis1"
+        [parentViewModel]="model"
+        rrValidation="diffuseDifferentialDiagnosis1"
+        (selectionChanged)="resetDifferentialDiagnosisDependantModel1()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="m-t-10"
+        [rrDisable]="
+            model.diffuseDifferentialDiagnosis1 === meningesDiffuseDiagnosisType.None
+          "
+      >
+        <p-checkbox
+          rr-id="hea_m_050268"
+          class="m-b-10"
+          name="isSuspicionOf"
+          label="{{ 'headMRT.meninges.suspicionOf.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+        ></p-checkbox>
+      </div>
+      <div
+        [rrDisable]="
+          model.diffuseDifferentialDiagnosis1 === meningesDiffuseDiagnosisType.None
+        "
+      >
+        <h2 rr-id="hea_m_050269" class="m-b-4 m-t-25">
+          {{ "headMRT.meninges.differentialDiagnosis2.value" | translate }}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_050270"
+          [diagnosisNumber]="2"
+          [options]="diffDiagnosisOptions"
+          [(ngModel)]="model.diffuseDifferentialDiagnosis2"
+          name="diffuseDifferentialDiagnosis2"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-15 m-b-15 o-radio-list"></div>
+  <div class="c-col-1 c-sep-l c-pad m-t-15 m-b-15 o-radio-list"></div>
+  <div class="c-col-1 c-sep-l c-pad-l m-t-15 m-b-15 o-radio-list"></div>
+</div>

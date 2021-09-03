@@ -1,0 +1,275 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep  c-pad o-radio-list">
+    <h2
+      rr-id="hea_m_0403292"
+      rrInfoIcon="hea_m_04_10"
+      rrValidation="cerebralVenousThrombosisLocations"
+    >
+      {{ 'headMRT.vessels.localization.value' | translate }}*
+    </h2>
+    <rr-cerebral-venous-thrombosis-localizer-simple
+      rr-id="hea_m_040293"
+      (click)="openLargeLocalizer('cerebralVenousThrombosis')"
+      [(ngModel)]="model.cerebralVenousThrombosisLocations"
+      name="cerebralVenousThrombosisLocations"
+      rrValidation="cerebralVenousThrombosisLocations"
+      isLocalizer="true"
+    >
+    </rr-cerebral-venous-thrombosis-localizer-simple>
+  </div>
+  <div class="f-vertical col-h-100 o-list c-sep">
+    <div class="c-pad-l o-radio-list">
+      <h2 rr-id="hea_m_040388">
+        {{ 'headMRT.vessels.morphologicalAspect.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_040389"
+        name="isThrombusDetection"
+        [(ngModel)]="model.isThrombusDetection"
+        binary="true"
+        rrContentReset="thrombusDetectionFirstColumn thrombusDetectionSecondColumn"
+        label="{{ 'headMRT.vessels.thrombusDetection.value' | translate }}"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_040390"
+        name="isCerebralEdema"
+        binary="true"
+        [(ngModel)]="model.isCerebralEdema"
+        label="{{ 'headMRT.vessels.cerebralEdema.value' | translate }}"
+      >
+      </p-checkbox>
+    </div>
+    <div class="o-radio-list col-h-100 f-vertical">
+      <h3 rr-id="hea_m_040391" class="c-pad-l nested-content">
+        {{ 'headMRT.vessels.thrombusDetectionDetails.value' | translate }}
+      </h3>
+      <div class="f-horizontal col-h-100 ">
+        <div class="c-col-1 c-sep c-pad">
+          <div
+            id="thrombusDetectionFirstColumn"
+            [rrDisable]="!model.isThrombusDetection"
+            class="o-radio-list nested-content"
+          >
+            <p-checkbox
+              rr-id="hea_m_040392"
+              name="isMissingFlowVoid"
+              binary="true"
+              [(ngModel)]="model.isMissingFlowVoid"
+              label="{{ 'headMRT.vessels.missingFlowVoid.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_040393"
+              name="isBloomingArtifact"
+              binary="true"
+              [(ngModel)]="model.isBloomingArtifact"
+              label="{{ 'headMRT.vessels.bloomingArtifact.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_040394"
+              class="text-break"
+              binary="true"
+              name="isElongatedthrombusCourse"
+              [(ngModel)]="model.isElongatedthrombusCourse"
+              label="{{ 'headMRT.vessels.elongatedthrombusCourse.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_040395"
+              binary="true"
+              name="isSignalVoidInphaseContrast"
+              [(ngModel)]="model.isSignalVoidInphaseContrast"
+              label="{{ 'headMRT.vessels.signalVoidInphaseContrast.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_040396"
+              binary="true"
+              name="isContrastFillingDefectinMRV"
+              class="text-break"
+              [(ngModel)]="model.isContrastFillingDefectinMRV"
+              [rrDisable]="!isCMYes"
+              label="{{ 'headMRT.vessels.contrastFillingDefectinMRV.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_040397"
+              name="isEmptyDeltaSign"
+              binary="true"
+              rrContentReset="emptyDeltaSignContainer"
+              [(ngModel)]="model.isEmptyDeltaSign"
+              [rrDisable]="!isCMYes"
+              label="{{ 'headMRT.vessels.emptyDeltaSign.value' | translate }}"
+            >
+            </p-checkbox>
+
+            <div
+              id="emptyDeltaSignContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isEmptyDeltaSign"
+            >
+              <p-checkbox
+                rr-id="hea_m_040398"
+                binary="true"
+                name="isDuralEnhancementsurroundingNonenhancingthrombus"
+                [(ngModel)]="model.isDuralEnhancement"
+                label="{{ 'headMRT.vessels.duralEnhancementsurroundingNonenhancingthrombus.value' | translate }}"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad">
+          <div
+            id="thrombusDetectionSecondColumn"
+            [rrDisable]="!model.isThrombusDetection"
+            class="nested-content o-radio-list"
+          >
+            <p rr-id="hea_m_040495">
+              {{ 'headMRT.vessels.gradingOcclusion.value' | translate }}
+            </p>
+            <p-radioButton
+              rr-id="hea_m_040496"
+              name="gradingOcclusionType"
+              [(ngModel)]="model.gradingOcclusionType"
+              [value]="gradingOcclusionTypeEnum.Partial"
+              rrContentReset="gradingOcclusionTypeContainer"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.partial.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040497"
+              name="gradingOcclusionType"
+              [(ngModel)]="model.gradingOcclusionType"
+              [value]="gradingOcclusionTypeEnum.Complete"
+              rrContentReset="gradingOcclusionTypeContainer"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.complete.value' | translate }}"
+            >
+            </p-radioButton>
+            <div
+              id="gradingOcclusionTypeContainer"
+              [rrDisable]="model.gradingOcclusionType === gradingOcclusionTypeEnum.Complete"
+              class="nested-content o-radio-list"
+            >
+              <p rr-id="hea_m_040498" class="text-break">
+                {{ 'headMRT.vessels.minDiameterresidualLumen.value' | translate
+                }}
+              </p>
+              <rr-number-input
+                inputRrId="hea_m_040499"
+                labelRrId="hea_m_0404100"
+                name="minDiameterresidualLumen"
+                [(ngModel)]="model.minDiameterresidualLumen"
+                [label]="'headMRT.vessels.inMm.value' | translate"
+                [config]="{min: 1, max: 9, placeholder: '-'}"
+              ></rr-number-input>
+            </div>
+            <p
+              rr-id="hea_m_0404101"
+              rrInfoIcon="hea_m_04_11"
+              [infoIconPdfLandscape]="true"
+            >
+              {{ 'headMRT.vessels.characterizationThrombus.value' | translate }}
+            </p>
+            <p-radioButton
+              rr-id="hea_m_0404102"
+              name="characterizationThrombusType"
+              [(ngModel)]="model.characterizationThrombusType"
+              [value]="characterizationThrombusTypeEnum.Acute"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.acute.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_0404103"
+              name="characterizationThrombusType"
+              rrUnClickRadio
+              [(ngModel)]="model.characterizationThrombusType"
+              [value]="characterizationThrombusTypeEnum.Subacute"
+              label="{{ 'headMRT.vessels.subacute.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_0404104"
+              name="characterizationThrombusType"
+              [(ngModel)]="model.characterizationThrombusType"
+              [value]="characterizationThrombusTypeEnum.Chronic"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.chronic.value' | translate }}"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="hea_m_040554">
+        {{ 'headMRT.vessels.associatedFindingsCerebral.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_040555"
+        name="isCongestiveHemorrhage"
+        [(ngModel)]="model.isCongestiveHemorrhage"
+        rrContentReset="congestiveHemorrhageContainer"
+        binary="true"
+        label="{{'headMRT.vessels.congestiveHemorrhage.value'| translate}}"
+      ></p-checkbox>
+      <div
+        id="congestiveHemorrhageContainer"
+        [rrDisable]="!model.isCongestiveHemorrhage"
+        class="nested-content o-radio-list"
+      >
+        <p-checkbox
+          rr-id="hea_m_040556"
+          class="text-break"
+          name="isPetechialhemorrhages"
+          [(ngModel)]="model.isPetechialhemorrhages"
+          binary="true"
+          label="{{'headMRT.vessels.petechialhemorrhages.value'| translate}}"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_040557"
+        name="isEctasiaOfTheUpstream"
+        [(ngModel)]="model.isEctasiaOfTheUpstream"
+        binary="true"
+        label="{{'headMRT.vessels.ectasiaOfTheUpstream.value'| translate}}"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_040558"
+        name="isSAH"
+        [(ngModel)]="model.isSAH"
+        binary="true"
+        label="{{'headMRT.vessels.sAH.value'| translate}}"
+      ></p-checkbox>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hea_m_040559" rrInfoIcon="hea_m_04_12">
+        {{ 'headMRT.vessels.differentialDiagnosis.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="hea_m_040560"
+        styleClass="o-width-100 ui-brown-box"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        name="differentialDiagnosisType"
+        [(ngModel)]="model.differentialDiagnosisType"
+        [options]="w013Differentialdiagnose"
+        rrDropdownClear
+      ></p-dropdown>
+    </div>
+    <div>
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      ></rr-reference-picture>
+    </div>
+  </div>
+</div>

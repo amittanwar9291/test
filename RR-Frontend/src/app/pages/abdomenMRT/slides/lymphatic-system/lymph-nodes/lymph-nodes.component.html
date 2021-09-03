@@ -1,0 +1,64 @@
+<p-tabView class="rr-tabView right-edge-tab">
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="abd_m_110202"
+        [rrValidation]="['localizationType', 'lymphNodeStations', 'isInternalMammaryRight isInternalMammaryLeft', 'isDiaphragmaticRight isDiaphragmaticLeft']"
+        [inSecondFinding]="true"
+        ifAny="true"
+        noUpdate="true"
+        allFindings="true"
+      >
+        {{ 'abdomenMRT.lymphaticSystem.localization.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-localization
+      [model]="model"
+      [findingDropdownConfig]="findingDropdownConfig"
+      [findingLymphNodeStationsHandler]="findingLymphNodeStationsHandler"
+    ></rr-localization>
+  </p-tabPanel>
+
+  <p-tabPanel [selected]="closedLocalizer">
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="abd_m_110301"
+        [rrValidation]="['evaluationType', 'spineLocalizer']"
+        ifAny="true"
+      >
+        {{ 'abdomenMRT.lymphaticSystem.characterizationI.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-one
+      [model]="model"
+      [isDWI]="isDWI"
+      [isCM]="isCM"
+      (emitLocalizer)="emitLocalizer.emit($event)"
+    ></rr-characterization-one>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="abd_m_110401">
+        {{ 'abdomenMRT.lymphaticSystem.characterizationII.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-two
+      [model]="model"
+      [isCM]="isCM"
+    ></rr-characterization-two>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="abd_m_110501">
+        {{ 'abdomenMRT.lymphaticSystem.differentialDiagnosis.value' | translate
+        }}
+      </h1>
+    </ng-template>
+    <rr-differential-diagnosis
+      [model]="model"
+      [W085]="W085"
+    ></rr-differential-diagnosis>
+  </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,284 @@
+<div class="c-col-4 f-vertical f-start col-h-100">
+  <ng-container *ngIf="model.capsuleType === capsuleType.None">
+    <div class="c-col-4 f-horizontal f-start col-h-100">
+      <div
+        class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+      >
+        <ng-container *ngTemplateOutlet="capsuleHeader"></ng-container>
+        <ng-container *ngTemplateOutlet="capsuleControls"></ng-container>
+      </div>
+
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad-l"></div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="model.capsuleType !== capsuleType.None">
+    <ng-container *ngTemplateOutlet="capsuleHeader"></ng-container>
+
+    <div class="c-col-4 f-horizontal f-start col-h-100 m-t-14">
+      <div
+        class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+      >
+        <ng-container *ngTemplateOutlet="capsuleControls"></ng-container>
+      </div>
+
+      <ng-container *ngIf="model.capsuleType !== capsuleType.PlicaSyndrome">
+        <div
+          id="capsuleDetails"
+          class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list col-h-100"
+        >
+          <ng-container
+            *ngIf="model.capsuleType === capsuleType.CapsuleRupture"
+          >
+            <ng-container *ngTemplateOutlet="rupture"></ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="model.capsuleType === capsuleType.Arthritis">
+            <ng-container *ngTemplateOutlet="arthritis"></ng-container>
+          </ng-container>
+        </div>
+
+        <div class="c-col-1 c-sep c-pad col-h-100"></div>
+        <div class="c-col-1 c-sep c-pad-l col-h-100"></div>
+      </ng-container>
+
+      <ng-container *ngIf="model.capsuleType === capsuleType.PlicaSyndrome">
+        <div
+          id="capsuleDetails2"
+          class="c-col-3 f-vertical f-start c-pad-l col-h-100"
+        >
+          <ng-container *ngTemplateOutlet="plicasyndromeHeader"></ng-container>
+
+          <div class="c-col-3 f-horizontal f-center col-h-100 m-t-8">
+            <div
+              class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+            >
+              <ng-container *ngTemplateOutlet="plicasyndrome"></ng-container>
+            </div>
+            <div
+              class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list col-h-100"
+            >
+              <ng-container *ngTemplateOutlet="plicasyndrome2"></ng-container>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l col-h-100"></div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #capsuleHeader>
+  <h2 rr-id="elb_m_050221">
+    {{'elbowMRT.cartilage.capsule.value' | translate}}
+  </h2>
+</ng-template>
+
+<ng-template #capsuleControls>
+  <p-radioButton
+    rr-id="elb_m_050218"
+    label="{{'elbowMRT.cartilage.capsuleRupture.value' | translate}}"
+    name="capsuleType"
+    [value]="capsuleType.CapsuleRupture"
+    [(ngModel)]="model.capsuleType"
+    [rrContentReset]="clearCapsuleDetails(capsuleType.CapsuleRupture)"
+    (onClick)="setExtraarticularArticularEffusion()"
+    rrValidation="capsuleType"
+  ></p-radioButton>
+
+  <p-radioButton
+    rr-id="elb_m_050219"
+    label="{{'elbowMRT.cartilage.plicaSyndrome.value' | translate}}"
+    name="capsuleType"
+    [value]="capsuleType.PlicaSyndrome"
+    [(ngModel)]="model.capsuleType"
+    [rrContentReset]="clearCapsuleDetails(capsuleType.PlicaSyndrome)"
+    rrValidation="capsuleType"
+  ></p-radioButton>
+
+  <p-radioButton
+    rr-id="elb_m_050220"
+    label="{{'elbowMRT.cartilage.arthritis.value' | translate}}"
+    name="capsuleType"
+    [value]="capsuleType.Arthritis"
+    [(ngModel)]="model.capsuleType"
+    [rrContentReset]="clearCapsuleDetails(capsuleType.Arthritis)"
+    rrValidation="capsuleType"
+  ></p-radioButton>
+</ng-template>
+
+<ng-template #rupture>
+  <h2 rr-id="elb_m_050335">
+    {{'elbowMRT.cartilage.detailsCapsuleRupture.value' | translate}}
+  </h2>
+
+  <p-checkbox
+    rr-id="elb_m_050336"
+    label="{{'elbowMRT.cartilage.extraarticularJointEffusion.value' | translate}}"
+    binary="true"
+    name="isExtraarticularJointEffusion"
+    [(ngModel)]="model.isExtraarticularJointEffusion"
+    class="checkbox-readonly"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #plicasyndromeHeader>
+  <h2 rr-id="elb_m_050337">
+    {{'elbowMRT.cartilage.detailsPlicasyndrome.value' | translate}}
+  </h2>
+</ng-template>
+
+<ng-template #plicasyndrome>
+  <p-checkbox
+    rr-id="elb_m_050338"
+    label="{{'elbowMRT.cartilage.prominentPlicaHumeroradialis.value' | translate}}"
+    binary="true"
+    name="isProminentPlicaHumeroradialis"
+    [(ngModel)]="model.isProminentPlicaHumeroradialis"
+    (onChange)="clearProminentPlicaHumeroradialis()"
+  ></p-checkbox>
+
+  <div
+    class="f-vertical f-start o-radio-list nested-content"
+    [rrDisable]="!model.isProminentPlicaHumeroradialis"
+  >
+    <p-checkbox
+      rr-id="elb_m_050339"
+      label="{{'elbowMRT.cartilage.thickening.value' | translate}}"
+      binary="true"
+      name="isThickening"
+      [(ngModel)]="model.isThickening"
+      (onChange)="clearThickening()"
+    ></p-checkbox>
+
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isThickening"
+    >
+      <p-checkbox
+        rr-id="elb_m_050340"
+        label="{{'elbowMRT.cartilage.mmMaximumExtension.value' | translate}}"
+        binary="true"
+        name="isMoreThan3MmMaximumExtension"
+        [(ngModel)]="model.isMoreThan3MmMaximumExtension"
+      >
+      </p-checkbox>
+    </div>
+
+    <p-checkbox
+      rr-id="elb_m_050341"
+      label="{{'elbowMRT.cartilage.illdefined.value' | translate}}"
+      binary="true"
+      name="isIllDefined"
+      [(ngModel)]="model.isIllDefined"
+    ></p-checkbox>
+  </div>
+
+  <p rr-id="elb_m_050342" class="m-t-16">
+    {{'elbowMRT.cartilage.localization.value' | translate}}
+  </p>
+
+  <p-checkbox
+    rr-id="elb_m_050343"
+    label="{{'elbowMRT.cartilage.posterolateral.value' | translate}}"
+    binary="true"
+    name="isPosterolateral"
+    [(ngModel)]="model.isPosterolateral"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050344"
+    label="{{'elbowMRT.cartilage.lateral.value' | translate}}"
+    binary="true"
+    name="isLateral"
+    [(ngModel)]="model.isLateral"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050345"
+    label="{{'elbowMRT.cartilage.anterior.value' | translate}}"
+    binary="true"
+    name="isAnterior"
+    [(ngModel)]="model.isAnterior"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #plicasyndrome2>
+  <p rr-id="elb_m_050346">
+    {{'elbowMRT.cartilage.associatedFindings.value' | translate}}
+  </p>
+
+  <p-checkbox
+    rr-id="elb_m_050424"
+    label="{{'elbowMRT.cartilage.jointEffusion.value' | translate}}"
+    binary="true"
+    name="isJointEffusion"
+    [(ngModel)]="model.isJointEffusion"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050427"
+    label="{{'elbowMRT.cartilage.localChondropathy.value' | translate}}"
+    binary="true"
+    name="isLocalChondropathy"
+    [(ngModel)]="model.isLocalChondropathy"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050426"
+    label="{{'elbowMRT.cartilage.localSynovialInflammation.value' | translate}}"
+    binary="true"
+    name="isLocalSynovialInflammation"
+    [(ngModel)]="model.isLocalSynovialInflammation"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #arthritis>
+  <h2 rr-id="elb_m_050350">
+    {{'elbowMRT.cartilage.detailsArthritis.value' | translate}}
+  </h2>
+
+  <p-checkbox
+    rr-id="elb_m_050351"
+    label="{{'elbowMRT.cartilage.synovitisWithPannusFormation.value' | translate}}"
+    binary="true"
+    name="isSynovitisWithPannusFormation"
+    [(ngModel)]="model.isSynovitisWithPannusFormation"
+  ></p-checkbox>
+
+  <p-checkbox
+    [rrDisable]="!isTechnologyCMReinforcedChecked"
+    rr-id="elb_m_050352"
+    label="{{'elbowMRT.cartilage.synovialEnhancement.value' | translate}}"
+    binary="true"
+    name="isSynovialCMEnhancement"
+    [(ngModel)]="model.isSynovialCMEnhancement"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050353"
+    label="{{'elbowMRT.cartilage.boneMarrowEdema.value' | translate}}"
+    binary="true"
+    class="text-break2"
+    name="isBoneMarrowEdema"
+    [(ngModel)]="model.isBoneMarrowEdema"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050354"
+    label="{{'elbowMRT.cartilage.cartilageDestruction.value' | translate}}"
+    binary="true"
+    name="isCartilageDestruction"
+    [(ngModel)]="model.isCartilageDestruction"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050355"
+    label="{{'elbowMRT.cartilage.jointEffusion.value' | translate}}"
+    name="isJointEffusion"
+    binary="true"
+    [(ngModel)]="model.isJointEffusion"
+  ></p-checkbox>
+</ng-template>

@@ -1,0 +1,21 @@
+export enum DifferentialDiagnosisEnum {
+  None = 'None',
+  BenignLOesionNoFurtherSpecified = 'BenignLOesionNoFurtherSpecified',
+  MalignantLesionNotFurtherSpecified = 'Malignant lesion, not further specified',
+  DignityUnclear = 'DignityUnclear',
+  Struma = 'Struma',
+  Thymoma = 'Thymoma',
+  ThymusHyperplasia = 'ThymusHyperplasia',
+  Lipoma = 'Lipoma',
+  CystNotFurtherSpecified = 'CystNotFurtherSpecified',
+  ThymicCyst = 'ThymicCyst',
+  BronchiogenicCyst = 'BronchiogenicCyst',
+  PericardialCyst = 'PericardialCyst',
+  NeurogenicCyst = 'NeurogenicCyst',
+  MalignantLymphoma = 'MalignantLymphoma',
+  ThymicCarcinoma = 'ThymicCarcinoma',
+  ThyroidCarcinoma = 'ThyroidCarcinoma',
+  Neuroblastoma = 'Neuroblastoma',
+  TeratomaGermCellTumor = 'TeratomaGermCellTumor',
+  Metastasis = 'Metastasis'
+}

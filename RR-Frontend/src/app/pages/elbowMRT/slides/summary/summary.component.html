@@ -1,0 +1,159 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-radio-list">
+      <h2 rr-id="elb_m_080103" class="m-b-35">
+        {{'elbowMRT.summary.comparisonToPriorExams.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="elb_m_080106"
+        label="{{'elbowMRT.summary.improvement.value' | translate}}"
+        name="findingsDynamicsType"
+        [value]="comparisonToPriorExamsTypeEnum.Improvement"
+        [(ngModel)]="model.comparisonToPriorExamsType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_080105"
+        label="{{'elbowMRT.summary.noChange.value' | translate}}"
+        name="findingsDynamicsType"
+        [value]="comparisonToPriorExamsTypeEnum.NoChange"
+        [(ngModel)]="model.comparisonToPriorExamsType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_080104"
+        label="{{'elbowMRT.summary.deterioration.value' | translate}}"
+        name="findingsDynamicsType"
+        [value]="comparisonToPriorExamsTypeEnum.Deterioration"
+        [(ngModel)]="model.comparisonToPriorExamsType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-radio-list">
+      <h2 rr-id="elb_m_080201" class="text-break">
+        {{'elbowMRT.summary.recommendationAdditionalDiagnosticImaging.value' |
+        translate}}
+      </h2>
+      <p rr-id="elb_m_080213">
+        {{'elbowMRT.summary.modality.value' | translate}}
+      </p>
+      <p-checkbox
+        name="isXRay"
+        label="{{ 'elbowMRT.summary.xRay.value' | translate }}"
+        [(ngModel)]="model.isXRay"
+        rr-id="elb_m_080202"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        name="isCT"
+        label="{{ 'elbowMRT.summary.CT.value' | translate }}"
+        [(ngModel)]="model.isCT"
+        rr-id="elb_m_080203"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        class="m-t-25"
+        name="isFollowUp"
+        label="{{ 'elbowMRT.summary.followUp.value' | translate }}"
+        [(ngModel)]="model.isFollowUp"
+        rr-id="elb_m_080206"
+        binary="true"
+        rrContentReset="timeTypeContainer"
+      ></p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        id="timeTypeContainer"
+        [rrDisable]="!model.isFollowUp"
+      >
+        <p rr-id="elb_m_080207">
+          {{'elbowMRT.summary.date.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="elb_m_080208"
+          label="{{'elbowMRT.summary.3months.value' | translate}}"
+          name="timeType"
+          [value]="timeTypeEnum.ThreeMonths"
+          [(ngModel)]="model.timeType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_080209"
+          label="{{'elbowMRT.summary.3to6months.value' | translate}}"
+          name="timeType"
+          [value]="timeTypeEnum.FromThreeToSixMonths"
+          [(ngModel)]="model.timeType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_080210"
+          label="{{'elbowMRT.summary.6to12months.value' | translate}}"
+          name="timeType"
+          [value]="timeTypeEnum.FromSixToTwelveMonths"
+          [(ngModel)]="model.timeType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_080211"
+          label="{{'elbowMRT.summary.12months.value' | translate}}"
+          name="timeType"
+          [value]="timeTypeEnum.TwelveMonths"
+          [(ngModel)]="model.timeType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_080212"
+          label="{{'elbowMRT.summary.18to24months.value' | translate}}"
+          name="timeType"
+          [value]="timeTypeEnum.FromEighteenToTwentyFourMonths"
+          [(ngModel)]="model.timeType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        class="m-t-25"
+        name="isBiopsy"
+        label="{{ 'elbowMRT.summary.biopsy.value' | translate }}"
+        [(ngModel)]="model.isBiopsy"
+        rr-id="elb_m_080213"
+        binary="true"
+      ></p-checkbox>
+    </div>
+    <div class="c-col-1 c-pad c-sep">
+      <div class="o-radio-list" [rrDisable]="!thirdColumnEnable">
+        <h2 rr-id="elb_m_080301" class="m-b-30">
+          {{'elbowMRT.summary.staging.value' | translate}}
+        </h2>
+        <p rr-id="elb_m_080302">
+          {{'elbowMRT.summary.tCategory.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="elb_m_080303"
+          label="{{'elbowMRT.summary.t1lowerOrEqual8CmInLargestDimension.value' | translate}}"
+          name="tCategoryTypeEnum"
+          [value]="tCategoryTypeEnum.T1LessOrEqual8CmInLargestDimension"
+          [(ngModel)]="model.tCategoryType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_080304"
+          label="{{'elbowMRT.summary.t2Higher8CmInLargestDimension.value' | translate}}"
+          name="tCategoryTypeEnum"
+          [value]="tCategoryTypeEnum.T2GreaterThan8CmInLargestDimension"
+          [(ngModel)]="model.tCategoryType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          class="text-break"
+          rr-id="elb_m_080305"
+          label="{{'elbowMRT.summary.t3DiscontinuousSpreadWithinPrimarilyAffectedBone.value' | translate}}"
+          name="tCategoryTypeEnum"
+          [value]="tCategoryTypeEnum.T3DiscontinuousSpread"
+          [(ngModel)]="model.tCategoryType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</form>

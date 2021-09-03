@@ -1,0 +1,46 @@
+<div class="tab-view">
+  <p-tabView class="rr-tabView">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="tho_c_040211"
+          [rrValidation]="['isUpperMediastinum isLowerMediastinum','isAnteriorMediastinum isMiddleMediastinum isPosteriorMediastinum','expansionSizeInMm','mainCharacteristicsDifferentialDiagnosis01','limitationType','homogeneityType']"
+          ifAny="true"
+          noUpdate="true"
+        >
+          {{ 'thoraxCT.mediastinum.characterizationI.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-main-characteristics
+        [model]="model"
+        [extendedDiagnosisList]="extendedDifferentialDiagnosis"
+      ></rr-main-characteristics>
+    </p-tabPanel>
+    <p-tabPanel
+      [header]="'thoraxCT.mediastinum.characterizationII.value' | translate"
+      rr-id="tho_c_040350"
+    >
+      <rr-additional-characteristics
+        [model]="model"
+        [additionalData]="additionalData"
+      ></rr-additional-characteristics>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="tho_c_040438"
+          rrValidation="differentialDiagnosis01"
+          noUpdate="true"
+        >
+          {{ 'thoraxCT.mediastinum.differentialDiagnosisTabHeader.value' |
+          translate }}
+        </h1>
+      </ng-template>
+      <rr-differential-diagnosis-tab
+        [model]="model"
+        [diagnosisList]="differentialDiagnosis"
+        [extendedDiagnosisList]="extendedDifferentialDiagnosis"
+      ></rr-differential-diagnosis-tab>
+    </p-tabPanel>
+  </p-tabView>
+</div>

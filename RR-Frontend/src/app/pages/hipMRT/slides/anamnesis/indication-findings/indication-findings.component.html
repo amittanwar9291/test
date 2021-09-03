@@ -1,0 +1,167 @@
+<div class="o-radio-list">
+  <!-- Coxalgia -->
+  <ng-container *ngIf="model.findingType === findingType.Coxalgia">
+    <h2 rr-id="hip_m_020203">
+      {{currentFindingHeader}}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_020204"
+      name="isRight"
+      label="{{'hipMRT.anamnesis.right.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isRight"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_020205"
+      name="isLeft"
+      label="{{'hipMRT.anamnesis.left.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isLeft"
+    >
+    </p-checkbox>
+  </ng-container>
+
+  <!-- Osteoarthrosis, Arthritis, Dysplasia, Impingement, Luxation, AVN, Trauma -->
+  <ng-container *ngIf="isViewSharedBySevenFindings">
+    <h2 *ngIf="model.findingType === findingType.AVN" rr-id="'hip_m_020212'">
+      {{ 'hipMRT.anamnesis.avascularNecrosis.value' | translate }}
+    </h2>
+    <h2
+      *ngIf="model.findingType !== findingType.AVN"
+      [attr.rr-id]="model.findingType === findingType.Trauma ? 'hip_m_020213' : 'hip_m_020206'"
+    >
+      {{ currentFindingHeader }}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_020207"
+      name="isSuspicion"
+      label="{{'hipMRT.anamnesis.suspiciousFor.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSuspicion"
+      class="m-b-13"
+    >
+    </p-checkbox>
+    <p rr-id="hip_m_020208">{{'hipMRT.anamnesis.side.value' | translate}}</p>
+    <p-checkbox
+      rr-id="hip_m_020209"
+      name="isSiteRight"
+      label="{{'hipMRT.anamnesis.right.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSiteRight"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_020210"
+      name="isSiteLeft"
+      label="{{'hipMRT.anamnesis.left.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSiteLeft"
+      class="m-b-22"
+    >
+    </p-checkbox>
+    <rr-month-year-input
+      *ngIf="model.findingType === findingType.Trauma"
+      labelRrId="hip_m_020214"
+      yearRrId="hip_m_020216"
+      monthRrId="hip_m_020215"
+      [(ngModel)]="model.dateOfTrauma"
+      label="{{ 'hipMRT.anamnesis.dateOfTrauma.value' | translate }}"
+      name="dateOfTrauma"
+      customLabelClass="date-label-custom"
+    >
+    </rr-month-year-input>
+  </ng-container>
+
+  <!-- Fracture, Mass -->
+  <ng-container *ngIf="isViewSharedByTwoFindings">
+    <h2
+      [attr.rr-id]="model.findingType === findingType.Fracture ? 'hip_m_020225' : 'hip_m_020226'"
+    >
+      {{ currentFindingHeader }}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_020207"
+      name="isSuspicion"
+      label="{{'hipMRT.anamnesis.suspiciousFor.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSuspicion"
+      class="m-b-13"
+    >
+    </p-checkbox>
+    <p rr-id="hip_m_020217">
+      {{'hipMRT.anamnesis.localization.value' | translate}}
+    </p>
+    <p-checkbox
+      rr-id="hip_m_020218"
+      name="isFemur"
+      label="{{'hipMRT.anamnesis.femur.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isFemur"
+      rrContentReset="femur-block"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isFemur"
+      id="femur-block"
+    >
+      <p-checkbox
+        rr-id="hip_m_020219"
+        name="isFemurRight"
+        label="{{'hipMRT.anamnesis.right.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isFemurRight"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hip_m_020220"
+        name="isFemurLeft"
+        label="{{'hipMRT.anamnesis.left.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isFemurLeft"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_020221"
+      name="isPelvis"
+      label="{{'hipMRT.anamnesis.pelvis.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isPelvis"
+      rrContentReset="pelvis-block"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isPelvis"
+      id="pelvis-block"
+    >
+      <p-checkbox
+        rr-id="hip_m_020222"
+        name="isPelvisRight"
+        label="{{'hipMRT.anamnesis.right.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPelvisRight"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hip_m_020223"
+        name="isPelvisLeft"
+        label="{{'hipMRT.anamnesis.left.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPelvisLeft"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      *ngIf="model.findingType === findingType.Fracture"
+      rr-id="hip_m_020224"
+      name="isSacrum"
+      label="{{'hipMRT.anamnesis.sacrum.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSacrum"
+    >
+    </p-checkbox>
+  </ng-container>
+</div>

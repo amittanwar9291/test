@@ -1,0 +1,215 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="f-vertical f-start o-radio-list">
+      <h2 rr-id="spi_m_100103" class="m-b-27">
+        {{'spineMRT.summary.recommendation.value' | translate}}
+      </h2>
+      <div class="f-horizontal f-start col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+          <h2 rr-id="spi_m_100113">
+            {{'spineMRT.summary.furtherImaging.value' | translate}}
+          </h2>
+          <p-checkbox
+            name="isCT"
+            label="{{'spineMRT.summary.cT.value' | translate}}"
+            [(ngModel)]="model.isCT"
+            binary="true"
+            rr-id="spi_m_100104"
+          ></p-checkbox>
+          <p-checkbox
+            name="isScintigraphy"
+            label="{{'spineMRT.summary.scintigraphy.value' | translate}}"
+            [(ngModel)]="model.isScintigraphy"
+            binary="true"
+            rr-id="spi_m_100105"
+          ></p-checkbox>
+          <p-checkbox
+            name="isSPECTCT"
+            label="{{'spineMRT.summary.sPECTCT.value' | translate}}"
+            [(ngModel)]="model.isSPECTCT"
+            binary="true"
+            rr-id="spi_m_100106"
+          ></p-checkbox>
+          <p-checkbox
+            name="isPETCT"
+            label="{{'spineMRT.summary.pETCT.value' | translate}}"
+            [(ngModel)]="model.isPETCT"
+            binary="true"
+            rr-id="spi_m_100107"
+          ></p-checkbox>
+
+          <h2 rr-id="spi_m_100108" class="m-t-16">
+            {{'spineMRT.summary.consultation.value' | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="spi_m_100109"
+            name="consultationType"
+            label="{{'spineMRT.summary.neurology.value' | translate}}"
+            [(ngModel)]="model.consultationType"
+            [value]="consultationTypeEnum.Neurology"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="spi_m_100110"
+            name="consultationType"
+            label="{{'spineMRT.summary.neurosurgery.value' | translate}}"
+            [(ngModel)]="model.consultationType"
+            [value]="consultationTypeEnum.Neurosurgery"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="spi_m_100111"
+            name="consultationType"
+            label="{{'spineMRT.summary.orthopaedicsOrTraumatology.value' | translate}}"
+            [(ngModel)]="model.consultationType"
+            [value]="consultationTypeEnum.OrthopaedicsOrTraumatology"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="spi_m_100112"
+            name="consultationType"
+            label="{{'spineMRT.summary.painTherapy.value' | translate}}"
+            [(ngModel)]="model.consultationType"
+            [value]="consultationTypeEnum.PainTherapy"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+
+        <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+          <h2 rr-id="spi_m_100200">
+            {{'spineMRT.summary.painTherapy.value' | translate}}
+          </h2>
+          <p-checkbox
+            rr-id="spi_m_100201"
+            class="m-b-26"
+            label="{{'spineMRT.summary.interventional.value' | translate}}"
+            name="isInterventional"
+            [(ngModel)]="model.isInterventional"
+            binary="true"
+            rrContentReset="isInterventional-block"
+          ></p-checkbox>
+
+          <div
+            id="isInterventional-block"
+            class="f-vertical f-start o-radio-list nested-content"
+            [rrDisable]="!model.isInterventional"
+          >
+            <h2 rr-id="spi_m_100202">
+              {{'spineMRT.summary.intervention.value' | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="spi_m_100203"
+              name="interventionType"
+              label="{{'spineMRT.summary.periradicular.value' | translate}}"
+              [(ngModel)]="model.interventionType"
+              [value]="interventionTypeEnum.Periradicular"
+              rrValidation="interventionType"
+              rrContentReset="FacetJointInfiltration-block SIJInfiltration-block"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="spi_m_100204"
+              name="interventionType"
+              label="{{'spineMRT.summary.epidural.value' | translate}}"
+              [(ngModel)]="model.interventionType"
+              [value]="interventionTypeEnum.Epidural"
+              rrValidation="interventionType"
+              rrContentReset="FacetJointInfiltration-block SIJInfiltration-block"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="spi_m_100205"
+              name="interventionType"
+              label="{{'spineMRT.summary.facetJointInfiltration.value' | translate}}"
+              [(ngModel)]="model.interventionType"
+              [value]="interventionTypeEnum.FacetJointInfiltration"
+              rrValidation="interventionType"
+              rrContentReset=" SIJInfiltration-block"
+            ></p-radioButton>
+            <div
+              id="FacetJointInfiltration-block"
+              class="f-vertical f-start o-radio-list nested-content"
+              [rrDisable]="model.interventionType !== interventionTypeEnum.FacetJointInfiltration"
+            >
+              <p rr-id="spi_m_100212" class="m-b-6">
+                {{'spineMRT.summary.side.value' | translate}}
+              </p>
+              <p-checkbox
+                name="isFacetJointInfiltrationRight"
+                label="{{'spineMRT.summary.right.value' | translate}}"
+                [(ngModel)]="model.isFacetJointInfiltrationRight"
+                binary="true"
+                rr-id="spi_m_100206"
+                rrValidation="isFacetJointInfiltrationRight isFacetJointInfiltrationLeft"
+              ></p-checkbox>
+              <p-checkbox
+                name="isFacetJointInfiltrationLeft"
+                label="{{'spineMRT.summary.left.value' | translate}}"
+                [(ngModel)]="model.isFacetJointInfiltrationLeft"
+                binary="true"
+                rr-id="spi_m_100207"
+                rrValidation="isFacetJointInfiltrationRight isFacetJointInfiltrationLeft"
+              ></p-checkbox>
+            </div>
+            <p-radioButton
+              rr-id="spi_m_100208"
+              name="interventionType"
+              label="{{'spineMRT.summary.sijInfiltration.value' | translate}}"
+              [(ngModel)]="model.interventionType"
+              [value]="interventionTypeEnum.SIJInfiltration"
+              rrValidation="interventionType"
+              rrContentReset="FacetJointInfiltration-block"
+            ></p-radioButton>
+            <div
+              id="SIJInfiltration-block"
+              class="f-vertical f-start o-radio-list nested-content"
+              [rrDisable]="model.interventionType !== interventionTypeEnum.SIJInfiltration"
+            >
+              <p rr-id="spi_m_100213" class="m-b-5">
+                {{'spineMRT.summary.side.value' | translate}}
+              </p>
+              <p-checkbox
+                name="isSIJInfiltrationRight"
+                label="{{'spineMRT.summary.right.value' | translate}}"
+                [(ngModel)]="model.isSIJInfiltrationRight"
+                binary="true"
+                rr-id="spi_m_100209"
+                rrValidation="isSIJInfiltrationRight isSIJInfiltrationLeft"
+              ></p-checkbox>
+              <p-checkbox
+                name="isSIJInfiltrationLeft"
+                label="{{'spineMRT.summary.left.value' | translate}}"
+                [(ngModel)]="model.isSIJInfiltrationLeft"
+                binary="true"
+                rr-id="spi_m_100210"
+                rrValidation="isSIJInfiltrationRight isSIJInfiltrationLeft"
+              ></p-checkbox>
+            </div>
+            <p-checkbox
+              name="isRegistrationVia"
+              class="m-t-14"
+              [rrDisable]="true"
+              label="{{'spineMRT.summary.registrationVia.value' | translate}}"
+              [(ngModel)]="model.isRegistrationVia"
+              binary="true"
+              rr-id="spi_m_100211"
+            ></p-checkbox>
+          </div>
+        </div>
+
+        <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+          <h2 rr-id="spi_m_100300">
+            {{'spineMRT.summary.furtherClarification.value' | translate}}
+          </h2>
+          <p-checkbox
+            name="isBiopsy"
+            label="{{'spineMRT.summary.biopsy.value' | translate}}"
+            [(ngModel)]="model.isBiopsy"
+            binary="true"
+            rr-id="spi_m_100301"
+          ></p-checkbox>
+        </div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+    </div>
+  </div>
+</form>

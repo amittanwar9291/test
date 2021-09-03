@@ -1,0 +1,41 @@
+<div
+  class="main-container grid-header-container"
+  [ngClass]="{ 'main-container-frame': !isDialog }"
+>
+  <div class="preset-header preset-header-ct">
+    {{ 'shared.CT' | translate }}
+  </div>
+  <div class="preset-header preset-header-mrt">
+    {{ 'shared.MRI' | translate }}
+  </div>
+  <div class="grid-container-ct">
+    <ng-container *ngFor="let preset of presetsCT">
+      <div
+        class="grid-item grid-item-ct text-break"
+        [ngClass]="{
+          'grid-item-ct--disabled': !preset.isActive,
+          'grid-item-ct--selected': preset.isSelected
+        }"
+        (click)="onPresetSelected(preset)"
+      >
+        {{ preset.displayName }}
+      </div>
+    </ng-container>
+    <div class="grid-item grid-item-ct--empty"></div>
+    <div class="grid-item grid-item-ct--empty"></div>
+  </div>
+  <div class="grid-container-mrt">
+    <ng-container *ngFor="let preset of presetsMRT">
+      <div
+        class="grid-item grid-item-mrt text-break"
+        [ngClass]="{
+          'grid-item-mrt--disabled': !preset.isActive,
+          'grid-item-mrt--selected': preset.isSelected
+        }"
+        (click)="onPresetSelected(preset)"
+      >
+        {{ preset.displayName }}
+      </div>
+    </ng-container>
+  </div>
+</div>

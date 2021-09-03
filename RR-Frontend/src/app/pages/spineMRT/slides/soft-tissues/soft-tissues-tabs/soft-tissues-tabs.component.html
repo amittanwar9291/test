@@ -1,0 +1,47 @@
+<div class="soft-tissues_tab">
+  <p-tabView
+    class="rr-tabView"
+    [activeIndex]="activeTabIndex"
+    (activeIndexChange)="activeTabIndexChange($event)"
+  >
+    <p-tabPanel [selected]="true">
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="spi_m_080202"
+          class="custom-tab-header"
+          [rrValidation]="model.findingType === softTissueFindingTypeEnum.ParaspinalMass
+          ? 'spineLocation1 spineAxialLocation differentialDiagnosis'
+          : 'spineLocationDisks1 differentialDiagnosis'"
+          ifAny="true"
+        >
+          {{'spineMRT.softTissues.characterizationI.value' | translate}}
+        </h1>
+      </ng-template>
+      <rr-spine-mrt-soft-tissues-tab-localization
+        class="f-horizontal"
+        [model]="model"
+        [isCMYes]="isCMYes"
+        (emitLocalizer)="openLargeLocalizer($event)"
+      >
+      </rr-spine-mrt-soft-tissues-tab-localization>
+    </p-tabPanel>
+
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="spi_m_080301"
+          class="custom-tab-header"
+          rrValidation="differentialDiagnosis1"
+        >
+          {{'spineMRT.softTissues.characterizationII.value' | translate}}
+        </h1>
+      </ng-template>
+      <rr-spine-mrt-soft-tissues-tab-diagnosis
+        class="f-horizontal"
+        [model]="model"
+        (emitLocalizer)="openLargeLocalizer($event)"
+      >
+      </rr-spine-mrt-soft-tissues-tab-diagnosis>
+    </p-tabPanel>
+  </p-tabView>
+</div>

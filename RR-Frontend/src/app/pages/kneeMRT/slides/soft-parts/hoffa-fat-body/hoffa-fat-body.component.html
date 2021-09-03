@@ -1,0 +1,188 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list">
+    <p-checkbox
+      name="isEdema"
+      rr-id="kne_m_080220"
+      binary="true"
+      label="{{ 'kneeMRT.softParts.edema.value' | translate }}"
+      [(ngModel)]="model.isEdema"
+      rrContentReset="isEdema-block"
+      labelStyleClass="ui-fat-label"
+      rrValidation="isEdema isFragmentation isFibrosis isHypertrophy isCartilageIsointenserNodulus isThickeningPlicaSynovialisInfrapatellaris"
+    >
+    </p-checkbox>
+    <div
+      id="isEdema-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isEdema"
+    >
+      <p-radioButton
+        rr-id="kne_m_080221"
+        rrUnClickRadio
+        rrContentReset="edemaTypeFocal-block"
+        name="edemaType"
+        [value]="edemaTypeEnum.Focal"
+        label="{{ 'kneeMRT.softParts.focal.value' | translate }}"
+        [(ngModel)]="model.edemaType"
+      >
+      </p-radioButton>
+      <div
+        id="edemaTypeFocal-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.edemaType !== 'Focal'"
+      >
+        <p-checkbox
+          name="isEdemaFocalDistal"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.distal.value' | translate }}"
+          rr-id="kne_m_080222"
+          [(ngModel)]="model.isEdemaFocalDistal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isEdemaFocalDorsal"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.dorsal.value' | translate }}"
+          rr-id="kne_m_080223"
+          [(ngModel)]="model.isEdemaFocalDorsal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isEdemaFocalProximal"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.proximal.value' | translate }}"
+          rr-id="kne_m_080224"
+          [(ngModel)]="model.isEdemaFocalProximal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isEdemaFocalSuperolateral"
+          rr-id="kne_m_080225"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.superolateral.value' | translate }}"
+          rrContentReset="isEdemaFocalSuperolateral-block"
+          [(ngModel)]="model.isEdemaFocalSuperolateral"
+        >
+        </p-checkbox>
+        <div
+          id="isEdemaFocalSuperolateral-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isEdemaFocalSuperolateral"
+        >
+          <p-checkbox
+            name="isEdemaFocalMaltrackingOfThePatella"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.maltrackingOfThePatella.value' | translate }}"
+            rr-id="kne_m_080226"
+            [(ngModel)]="model.isEdemaFocalMaltrackingOfThePatella"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <p-radioButton
+        rr-id="kne_m_080227"
+        rrUnClickRadio
+        name="edemaType"
+        rrContentReset="edemaTypeFocal-block"
+        [value]="edemaTypeEnum.Diffuse"
+        label="{{ 'kneeMRT.softParts.diffuse.value' | translate }}"
+        [(ngModel)]="model.edemaType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list">
+    <p-checkbox
+      name="isFragmentation"
+      binary="true"
+      class="m-b-16"
+      label="{{ 'kneeMRT.softParts.fragmentation.value' | translate }}"
+      labelStyleClass="ui-fat-label"
+      rr-id="kne_m_080321"
+      [(ngModel)]="model.isFragmentation"
+      rrValidation="isEdema isFragmentation isFibrosis isHypertrophy isCartilageIsointenserNodulus isThickeningPlicaSynovialisInfrapatellaris"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isFibrosis"
+      binary="true"
+      label="{{ 'kneeMRT.softParts.fibrosis(cyclopsLesion.value' | translate }}"
+      rrContentReset="fibrosisCyclopsLesionDetails-block"
+      labelStyleClass="ui-fat-label"
+      rr-id="kne_m_080322"
+      [(ngModel)]="model.isFibrosis"
+      rrValidation="isEdema isFragmentation isFibrosis isHypertrophy isCartilageIsointenserNodulus isThickeningPlicaSynovialisInfrapatellaris"
+    >
+    </p-checkbox>
+    <div
+      id="fibrosisCyclopsLesionDetails-block"
+      class="f-vertical f-start o-radio-list nested-content m-b-15"
+      [rrDisable]="!model.isFibrosis"
+    >
+      <p-checkbox
+        name="isLowSIInT1w"
+        binary="true"
+        label="{{ 'kneeMRT.softParts.lowSIInT1w.value' | translate }}"
+        rr-id="kne_m_080323"
+        [(ngModel)]="model.isLowSIInT1w"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isLowSIInT2w"
+        binary="true"
+        label="{{ 'kneeMRT.softParts.lowSIInT2w.value' | translate }}"
+        rr-id="kne_m_080324"
+        [(ngModel)]="model.isLowSIInT2w"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      name="isHypertrophy"
+      binary="true"
+      class="m-b-15"
+      label="{{ 'kneeMRT.softParts.hypertrophy.value' | translate }}"
+      labelStyleClass="ui-fat-label"
+      rr-id="kne_m_080325"
+      [(ngModel)]="model.isHypertrophy"
+      rrValidation="isEdema isFragmentation isFibrosis isHypertrophy isCartilageIsointenserNodulus isThickeningPlicaSynovialisInfrapatellaris"
+    >
+    </p-checkbox>
+    <p-checkbox
+      name="isCartilageIsointenserNodulus"
+      binary="true"
+      label="{{ 'kneeMRT.softParts.cartilageIsointenserNodulus.value' | translate }}"
+      labelStyleClass="ui-fat-label"
+      rr-id="kne_m_080326"
+      rrContentReset="isCartilageIsointenserNodulusGreaterThen1Lesion-block"
+      [(ngModel)]="model.isCartilageIsointenserNodulus"
+      rrValidation="isEdema isFragmentation isFibrosis isHypertrophy isCartilageIsointenserNodulus isThickeningPlicaSynovialisInfrapatellaris"
+    >
+    </p-checkbox>
+    <div
+      id="isCartilageIsointenserNodulusGreaterThen1Lesion-block"
+      class="f-vertical f-start o-radio-list nested-content m-b-15"
+      [rrDisable]="!model.isCartilageIsointenserNodulus"
+    >
+      <p-checkbox
+        name="isCartilageIsointenserNodulusGreaterThen1Lesion"
+        binary="true"
+        label="{{ 'kneeMRT.softParts.lesion.value' | translate }}"
+        rr-id="kne_m_080327"
+        [(ngModel)]="model.isCartilageIsointenserNodulusGreaterThen1Lesion"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      name="isThickeningPlicaSynovialisInfrapatellaris"
+      binary="true"
+      label="{{ 'kneeMRT.softParts.thickeningPlicaSynovialisInfrapatellaris.value' | translate }}"
+      labelStyleClass="ui-fat-label"
+      rr-id="kne_m_080328"
+      [(ngModel)]="model.isThickeningPlicaSynovialisInfrapatellaris"
+      rrValidation="isEdema isFragmentation isFibrosis isHypertrophy isCartilageIsointenserNodulus isThickeningPlicaSynovialisInfrapatellaris"
+    >
+    </p-checkbox>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list"></div>
+  <div class="f-vertical f-start c-col-1 c-pad-l o-radio-list"></div>
+</div>

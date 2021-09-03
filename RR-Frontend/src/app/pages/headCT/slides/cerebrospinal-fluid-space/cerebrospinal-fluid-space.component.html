@@ -1,0 +1,76 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="hea_c_090103">
+        {{ 'headCT.cerebrospinalFluidSpace.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="hea_c_090104"
+        label="{{ 'headCT.cerebrospinalFluidSpace.mediumInterhemisphericSlitRegularWidthOfTheInnerAndOuterCSFSpacesNoCSFCirculationDisturbance.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_090105"
+        label="{{'headCT.cerebrospinalFluidSpace.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+        [setDescriptionTypes]="[cerebrospinalFluidSpaceFindingTypeEnum.Mass]"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="!isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.None)"
+          rr-id="hea_c_090201"
+        >
+          {{ 'headCT.cerebrospinalFluidSpace.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.None)"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-norm-variant-ventricle
+        *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.NormVariantVentricle)"
+        [model]="findingHandler.currentItem"
+      ></rr-norm-variant-ventricle>
+      <rr-ventricle-configuration
+        *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.VentricleConfiguration)"
+        [model]="findingHandler.currentItem"
+      ></rr-ventricle-configuration>
+      <rr-mass
+        *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.Mass)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass>
+      <rr-subarachnoid-hemorrhage
+        *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.SubarachnoidHemorrhage)"
+        [model]="findingHandler.currentItem"
+      ></rr-subarachnoid-hemorrhage>
+    </div>
+  </div>
+</form>

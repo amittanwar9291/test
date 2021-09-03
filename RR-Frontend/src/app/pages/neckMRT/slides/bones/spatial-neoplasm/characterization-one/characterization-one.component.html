@@ -1,0 +1,345 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-14 m-b-13">
+  <div
+    class="f-vertical o-radio-list m-b-23"
+    [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+  >
+    <h2 rr-id="nec_m_100257" class="m-b-11">
+      {{ 'neckMRT.bones.differentialDiagnosis1.value' | translate }}*
+    </h2>
+    <rr-differential-diagnosis-dropdown
+      rrId="nec_m_100258"
+      [diagnosisNumber]="1"
+      [options]="diffDiagnosisOptions"
+      [(ngModel)]="model.mainSpatialNeoplasmDifferentialDiagnosisType1"
+      name="mainSpatialNeoplasmDifferentialDiagnosisType1"
+      group="true"
+      isActiveOnIKnow="true"
+      [parentViewModel]="model"
+      (selectionChanged)="resetDifferentialDiagnosisDependantModel()"
+      rrValidation="mainSpatialNeoplasmDifferentialDiagnosisType1"
+    ></rr-differential-diagnosis-dropdown>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-11"
+    [rrDisable]="model.mainSpatialNeoplasmDifferentialDiagnosisType1 === differentialDiagnosistype.None"
+  >
+    <p-checkbox
+      rr-id="nec_m_100259"
+      [(ngModel)]="model.isHistologyKnown"
+      name="isHistologyKnown"
+      label="{{ 'neckMRT.bones.histologyKnown.value' | translate }}"
+      binary="true"
+      rrContentReset="isHistologyKnown-block"
+    >
+    </p-checkbox>
+    <div
+      id="isHistologyKnown-block"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isHistologyKnown"
+    >
+      <p-radioButton
+        rr-id="nec_m_100260"
+        [(ngModel)]="model.histologyKnownType"
+        name="histologyKnownType"
+        label="{{ 'neckMRT.bones.benign.value' | translate }}"
+        [value]="histologyKnownType.Benign"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_100261"
+        [(ngModel)]="model.histologyKnownType"
+        name="histologyKnownType"
+        label="{{ 'neckMRT.bones.malignant.value' | translate }}"
+        [value]="histologyKnownType.Malignant"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</div>
+<div class="f-vertical c-pad-l">
+  <h2 rr-id="nec_m_100346" class="m-t-10">
+    {{ 'neckMRT.bones.localization.value' | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad-r f-vertical o-list m-t-14 m-b-13">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_100347"
+          [(ngModel)]="model.isSpine"
+          name="isSpine"
+          label="{{ 'neckMRT.bones.spine.value' | translate }}"
+          binary="true"
+          rrValidation="isSpine isFacialSkeleton isCartilage isPosteriorCranialFossa"
+          (onChange)="resetLocalizer()"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100348"
+          [(ngModel)]="model.isFacialSkeleton"
+          name="isFacialSkeleton"
+          label="{{ 'neckMRT.bones.facialSkeleton.value' | translate }}"
+          binary="true"
+          rrContentReset="isFacialSkeleton-block1 isFacialSkeleton-block2"
+          rrValidation="isSpine isFacialSkeleton isCartilage isPosteriorCranialFossa"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100349"
+          [(ngModel)]="model.isCartilage"
+          name="isCartilage"
+          label="{{ 'neckMRT.bones.cartilage.value' | translate }}"
+          binary="true"
+          rrContentReset="isCartilage-block"
+          rrValidation="isSpine isFacialSkeleton isCartilage isPosteriorCranialFossa"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100350"
+          [(ngModel)]="model.isPosteriorCranialFossa"
+          name="isPosteriorCranialFossa"
+          label="{{ 'neckMRT.bones.posteriorCranialFossa.value' | translate }}"
+          binary="true"
+          rrContentReset="isPosteriorCranialFossa-block"
+          rrValidation="isSpine isFacialSkeleton isCartilage isPosteriorCranialFossa"
+        >
+        </p-checkbox>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.isSpine">
+        <h2 rr-id="nec_m_100351">
+          {{ 'neckMRT.bones.spineDetails.value' | translate }}
+        </h2>
+        <rr-spine-simple
+          rr-id="nec_m_100352"
+          [selectionAccessibilityMode]="selectionAccessibilityMode.C0toTH4"
+          [spineLocation]="model.spineLocations"
+          rrValidation="spineLocations"
+          isLocalizer="true"
+          (click)="openLargeLocalizer()"
+        ></rr-spine-simple>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical o-list m-t-14 m-b-13">
+      <div
+        id="isFacialSkeleton-block1"
+        class="f-vertical o-radio-list"
+        [rrDisable]="!model.isFacialSkeleton"
+      >
+        <h2 rr-id="nec_m_100442">
+          {{ 'neckMRT.bones.facialSkeletonDetails.value' | translate }}
+        </h2>
+        <div class="f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="nec_m_100443"
+            [(ngModel)]="model.isOsTemporale"
+            name="isOsTemporale"
+            label="{{ 'neckMRT.bones.osTemporale.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100444"
+            [(ngModel)]="model.isOsSphenoidale"
+            name="isOsSphenoidale"
+            label="{{ 'neckMRT.bones.osSphenoidale.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100445"
+            [(ngModel)]="model.isOsEthmoidale"
+            name="isOsEthmoidale"
+            label="{{ 'neckMRT.bones.osEthmoidale.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100446"
+            [(ngModel)]="model.isMaxilla"
+            name="isMaxilla"
+            label="{{ 'neckMRT.bones.maxilla.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100447"
+            [(ngModel)]="model.isMaxillaPalatineProcess"
+            name="isMaxillaPalatineProcess"
+            label="{{ 'neckMRT.bones.maxillaPalatineProcess.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100448"
+            [(ngModel)]="model.isMaxillaAlveolarProcess"
+            name="isMaxillaAlveolarProcess"
+            label="{{ 'neckMRT.bones.maxillaAlveolarProcess.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100449"
+            [(ngModel)]="model.isOsIncisivum"
+            name="isOsIncisivum"
+            label="{{ 'neckMRT.bones.osIncisivum.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100450"
+            [(ngModel)]="model.isOsPalatinum"
+            name="isOsPalatinum"
+            label="{{ 'neckMRT.bones.osPalatinum.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100451"
+            [(ngModel)]="model.isVomer"
+            name="isVomer"
+            label="{{ 'neckMRT.bones.vomer.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100452"
+            [(ngModel)]="model.isSuperiorNasalConcha"
+            name="isSuperiorNasalConcha"
+            label="{{ 'neckMRT.bones.superiorNasalConcha.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100453"
+            [(ngModel)]="model.isMiddleNasalConcha"
+            name="isMiddleNasalConcha"
+            label="{{ 'neckMRT.bones.middleNasalConcha.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100454"
+            [(ngModel)]="model.isInferiorNasalConcha"
+            name="isInferiorNasalConcha"
+            label="{{ 'neckMRT.bones.inferiorNasalConcha.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_100455"
+            [(ngModel)]="model.isMandible"
+            name="isMandible"
+            label="{{ 'neckMRT.bones.mandible.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l f-vertical o-list m-t-14 m-b-13">
+      <div
+        id="isFacialSkeleton-block2"
+        class="f-vertical o-radio-list"
+        [rrDisable]="!model.isFacialSkeleton"
+      >
+        <p-checkbox
+          rr-id="nec_m_100516"
+          [(ngModel)]="model.isRamusMandibulae"
+          name="isRamusMandibulae"
+          label="{{ 'neckMRT.bones.ramusMandibulae.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100517"
+          [(ngModel)]="model.isCondylarProcess"
+          name="isCondylarProcess"
+          label="{{ 'neckMRT.bones.condylarProcess.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100518"
+          [(ngModel)]="model.isCoronoideusProcess"
+          name="isCoronoideusProcess"
+          label="{{ 'neckMRT.bones.coronoideusProcess.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100519"
+          [(ngModel)]="model.isMandibleAlveolarProcess"
+          name="isMandibleAlveolarProcess"
+          label="{{ 'neckMRT.bones.mandibleAlveolarProcess.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100520"
+          [(ngModel)]="model.isOsHyoideum"
+          name="isOsHyoideum"
+          label="{{ 'neckMRT.bones.osHyoideum.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        id="isCartilage-block"
+        class="f-vertical o-radio-list"
+        [rrDisable]="!model.isCartilage"
+      >
+        <h2 rr-id="nec_m_100521">
+          {{ 'neckMRT.bones.cartilageDetails.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="nec_m_100522"
+          [(ngModel)]="model.isThyroidCartilage"
+          name="isThyroidCartilage"
+          label="{{ 'neckMRT.bones.thyroidCartilage.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100523"
+          [(ngModel)]="model.isCricoidCartilage"
+          name="isCricoidCartilage"
+          label="{{ 'neckMRT.bones.cricoidCartilage.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100524"
+          [(ngModel)]="model.isArytenoidCartilage"
+          name="isArytenoidCartilage"
+          label="{{ 'neckMRT.bones.arytenoidCartilage.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        id="isPosteriorCranialFossa-block"
+        class="f-vertical o-radio-list"
+        [rrDisable]="!model.isPosteriorCranialFossa"
+      >
+        <h2 rr-id="nec_m_100525">
+          {{ 'neckMRT.bones.posteriorCranialFossaDetails.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="nec_m_100526"
+          [(ngModel)]="model.isOsOccipitale"
+          name="isOsOccipitale"
+          label="{{ 'neckMRT.bones.osOccipitale.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_100527"
+          [(ngModel)]="model.isClivus"
+          name="isClivus"
+          label="{{ 'neckMRT.bones.clivus.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

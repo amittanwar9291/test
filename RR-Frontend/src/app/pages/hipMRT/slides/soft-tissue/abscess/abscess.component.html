@@ -1,0 +1,150 @@
+<div class="f-horizontal col-h-100 c-pad-l">
+  <div class="c-col-1 c-pad-r c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080337">
+        {{ 'hipMRT.softTissue.localization.value' | translate }}*
+      </h2>
+      <p-checkbox
+        rr-id="hip_m_080338"
+        label="{{ 'hipMRT.softTissue.pelvis.value' | translate }}"
+        name="isPelvis"
+        binary="true"
+        [(ngModel)]="model.isPelvis"
+        (onChange)="resetLocalizationBlock()"
+        rrValidation="isPelvis isThigh"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hip_m_080339"
+        label="{{ 'hipMRT.softTissue.thigh.value' | translate }}"
+        name="isThigh"
+        binary="true"
+        [(ngModel)]="model.isThigh"
+        (onChange)="resetLocalizationBlock()"
+        rrValidation="isPelvis isThigh"
+      >
+      </p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        [rrDisable]="isLocalizationBlockDisabled()"
+      >
+        <h3 rr-id="hip_m_080340">
+          {{ 'hipMRT.softTissue.localizationAxial.value' | translate}}*
+        </h3>
+        <p-checkbox
+          rr-id="hip_m_080341"
+          label="{{ 'hipMRT.softTissue.ventral.value' | translate }}"
+          name="isVentral"
+          binary="true"
+          [(ngModel)]="model.isVentral"
+          rrValidation="isVentral isMedial isLateral isDorsal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_080342"
+          label="{{ 'hipMRT.softTissue.medial.value' | translate }}"
+          name="isMedial"
+          binary="true"
+          [(ngModel)]="model.isMedial"
+          rrValidation="isVentral isMedial isLateral isDorsal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_080343"
+          label="{{ 'hipMRT.softTissue.lateral.value' | translate }}"
+          name="isLateral"
+          binary="true"
+          [(ngModel)]="model.isLateral"
+          rrValidation="isVentral isMedial isLateral isDorsal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_080344"
+          label="{{ 'hipMRT.softTissue.dorsal.value' | translate }}"
+          name="isDorsal"
+          binary="true"
+          [(ngModel)]="model.isDorsal"
+          rrValidation="isVentral isMedial isLateral isDorsal"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080431">
+        {{ 'hipMRT.softTissue.expansion.value' | translate }}
+      </h2>
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="hip_m_080432">
+          {{ 'hipMRT.softTissue.size.value' | translate }}*
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_080434"
+          labelRrId="hip_m_080433"
+          name="sizeInMm"
+          label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 200, placeholder: '---' }"
+          [(ngModel)]="model.sizeInMm"
+          (announceModelChange)="resetBothPlanes()"
+          rrValidation="sizeInMm"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.sizeInMm">
+        <h3 rr-id="hip_m_080435">
+          {{ 'hipMRT.softTissue.2ndPlane.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_080437"
+          labelRrId="hip_m_080436"
+          name="secondPlaneInMm"
+          label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 200, placeholder: '---' }"
+          [(ngModel)]="model.secondPlaneInMm"
+          (announceModelChange)="resetThirdPlane()"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+        <h3 rr-id="hip_m_080438">
+          {{ 'hipMRT.softTissue.3rdPlane.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_080440"
+          labelRrId="hip_m_080439"
+          name="thirdPlaneInMm"
+          label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 200, placeholder: '---' }"
+          [(ngModel)]="model.thirdPlaneInMm"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_080512" class="m-b-5">
+        {{ 'hipMRT.softTissue.differentialDiagnosis.value' | translate }}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="differentialDiagnosisOptions"
+        name="differentialDiagnosis"
+        rrId="hip_m_080513"
+        [(ngModel)]="model.differentialDiagnosis"
+        [parentViewModel]="model"
+        (selectionChanged)="resetIsSuspected()"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="hip_m_080514"
+        [rrDisable]="model.differentialDiagnosis === differentialDiagnosisType.None"
+        label="{{ 'hipMRT.softTissue.suspected.value' | translate }}"
+        name="isSuspected"
+        binary="true"
+        [(ngModel)]="model.isSuspected"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

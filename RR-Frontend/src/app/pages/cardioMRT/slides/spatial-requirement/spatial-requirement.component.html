@@ -1,0 +1,75 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- First column, with finding column -->
+    <div class="c-col-1 c-pad-r c-sep f-vertical o-list">
+      <h1 rr-id="car_m_080103" class="m-b-18">
+        {{'cardioMRT.spatialRequirement.finding.value' | translate}}*
+      </h1>
+      <div class="f-vertical f-start o-radio-list m-b-15">
+        <p-radioButton
+          name="areFindings"
+          [value]="areFindings.No"
+          label="{{ 'cardioMRT.spatialRequirement.noMass.value' | translate }}"
+          rr-id="car_m_080104"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          [notInFinding]="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          name="areFindings"
+          [value]="areFindings.Yes"
+          label="{{ 'cardioMRT.spatialRequirement.finding.value' | translate }}"
+          rr-id="car_m_080105"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          [notInFinding]="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setDescriptionTypes]="['MassTumor']"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns 2-5 -->
+    <div
+      class="f-vertical col-h-100"
+      [class.c-pad-l]="findingHandler.currentItem.findingType === 'None'"
+    >
+      <div class="finding-header">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== 'None'"
+          class="c-pad-l m-b-24"
+          rr-id="car_m_080201"
+        >
+          {{ 'cardioMRT.spatialRequirement.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <rr-mass-tumor
+        *ngIf="findingHandler.currentItem.findingType === 'MassTumor'"
+        class="col-h-100"
+        [model]="findingHandler.currentItem"
+        [areContrastEnhancementGroupsDisabled]="areContrastEnhancementGroupsDisabled"
+      >
+      </rr-mass-tumor>
+
+      <!-- No finding chosen -->
+      <div
+        *ngIf="findingHandler.currentItem.findingType === 'None'"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-sep c-pad-r"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+    </div>
+  </div>
+</form>

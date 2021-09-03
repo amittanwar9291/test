@@ -1,0 +1,274 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad p-t-10">
+    <h2 rr-id="spi_c_050202" rrValidation="spineLocation">
+      {{'spineCT.disc.localization.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_c_050203"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+
+  <div *ngIf="isBuggingDetailsVisible()" class="f-vertical o-radio-list p-t-10">
+    <h2 rr-id="spi_c_050301" class="p-l-15">
+      {{'spineCT.disc.details.value' | translate}}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad o-radio-list ">
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isNarrowingOfTheIntervertebralDisc"
+          label="{{'spineCT.disc.narrowingOfTheIntervertebralDisc.value'| translate}}"
+          rr-id="spi_c_0503306"
+          name="isNarrowingOfTheIntervertebralDisc"
+        >
+        </p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isDiscCalcification"
+          label="{{'spineCT.disc.discCalcification.value'| translate}}"
+          rr-id="spi_c_0503200"
+          name="isDiscCalcification"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rrInfoIcon="spi_c_05_01"
+          binary="true"
+          [(ngModel)]="model.isBulging"
+          label="{{'spineCT.disc.bulging.value'| translate}}"
+          rr-id="spi_c_050303"
+          name="isBulging"
+          (onChange)="clearDependElements()"
+        >
+        </p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isVacuumPhenomenon"
+          label="{{'spineCT.disc.vacuumPhenomenon.value'| translate}}"
+          rr-id="spi_c_0503201"
+          name="isVacuumPhenomenon"
+        >
+        </p-checkbox>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="spi_c_0504251" class="p-l-15">
+          {{'spineCT.disc.bulgingDetails.value' | translate}}
+        </h2>
+        <div class="f-horizontal col-h-100">
+          <div class="c-col-1 c-sep c-pad o-radio-list">
+            <p-radioButton
+              name="bulgingDetailsType"
+              rr-id="spi_c_0504202"
+              label="{{ 'spineCT.disc.symmetric.value' | translate }}"
+              [value]="bulgingDetailsTypeEnum.Symmetric"
+              [(ngModel)]="model.bulgingDetailsType"
+              rrContentReset="sideTypeContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              name="bulgingDetailsType"
+              rr-id="spi_c_0504203"
+              label="{{ 'spineCT.disc.asymmetric.value' | translate }}"
+              [value]="bulgingDetailsTypeEnum.Asymmetric"
+              [(ngModel)]="model.bulgingDetailsType"
+              rrContentReset="sideTypeContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="sideTypeContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="model.bulgingDetailsType !== bulgingDetailsTypeEnum.Asymmetric"
+            >
+              <p rr-id="spi_c_0504204">
+                {{'spineCT.disc.side.value' | translate}}*
+              </p>
+              <p-radioButton
+                name="sideType"
+                rr-id="spi_c_0504205"
+                label="{{ 'spineCT.disc.right.value' | translate }}"
+                [value]="sideTypeEnum.Right"
+                [(ngModel)]="model.sideType"
+                rrValidation="sideType"
+              ></p-radioButton>
+              <p-radioButton
+                name="sideType"
+                rr-id="spi_c_0504206"
+                label="{{ 'spineCT.disc.left.value' | translate }}"
+                [value]="sideTypeEnum.Left"
+                [(ngModel)]="model.sideType"
+                rrValidation="sideType"
+              ></p-radioButton>
+            </div>
+
+            <p rr-id="spi_c_0504207" class="m-t-25">
+              {{'spineCT.disc.nerveRootAffection.value' | translate}}
+            </p>
+            <p-radioButton
+              name="nerveRootAffectionType"
+              rr-id="spi_c_0504208"
+              label="{{ 'spineCT.disc.contact.value' | translate }}"
+              [value]="nerveRootAffectionTypeEnum.Contact"
+              [(ngModel)]="model.nerveRootAffectionType"
+              rrContentReset="nerveRootAffectionDetailsContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              name="nerveRootAffectionType"
+              rr-id="spi_c_0504209"
+              label="{{ 'spineCT.disc.displacement.value' | translate }}"
+              [value]="nerveRootAffectionTypeEnum.Displacement"
+              [(ngModel)]="model.nerveRootAffectionType"
+              rrContentReset="nerveRootAffectionDetailsContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              name="nerveRootAffectionType"
+              rr-id="spi_c_0504210"
+              label="{{ 'spineCT.disc.compression.value' | translate }}"
+              [value]="nerveRootAffectionTypeEnum.Compression"
+              [(ngModel)]="model.nerveRootAffectionType"
+              rrContentReset="nerveRootAffectionDetailsContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="nerveRootAffectionDetailsContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="model.nerveRootAffectionType === nerveRootAffectionTypeEnum.None"
+            >
+              <p rr-id="spi_c_0504211">
+                {{'spineCT.disc.side.value' | translate}}*
+              </p>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isNerveRootAffectionRight"
+                label="{{'spineCT.disc.right.value'| translate}}"
+                rr-id="spi_c_0504212"
+                rrValidation="isNerveRootAffectionRight isNerveRootAffectionLeft"
+                name="isNerveRootAffectionRight"
+              >
+              </p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isNerveRootAffectionLeft"
+                label="{{'spineCT.disc.left.value'| translate}}"
+                rr-id="spi_c_0504213"
+                rrValidation="isNerveRootAffectionRight isNerveRootAffectionLeft"
+                name="isNerveRootAffectionLeft"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-sep c-pad-l o-radio-list">
+            <p rr-id="spi_c_0505201">
+              {{'spineCT.disc.stenosis.value' | translate}}
+            </p>
+            <p-radioButton
+              name="stenosisType"
+              rr-id="spi_c_0505202"
+              label="{{ 'spineCT.disc.foramen.value' | translate }}"
+              [value]="stenosisTypeEnum.Foramen"
+              [(ngModel)]="model.stenosisType"
+              rrContentReset="stenosisTypeDetailsContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              name="stenosisType"
+              rr-id="spi_c_0505254"
+              label="{{ 'spineCT.disc.recess.value' | translate }}"
+              [value]="stenosisTypeEnum.Recess"
+              [(ngModel)]="model.stenosisType"
+              rrContentReset="stenosisTypeDetailsContainer"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="stenosisTypeDetailsContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="model.stenosisType === stenosisTypeEnum.None"
+            >
+              <p rr-id="spi_c_0505255">
+                {{'spineCT.disc.side.value' | translate}}*
+              </p>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isStenosisRight"
+                label="{{'spineCT.disc.right.value'| translate}}"
+                rr-id="spi_c_0505205"
+                rrValidation="isStenosisRight isStenosisLeft"
+                name="isStenosisRight"
+              >
+              </p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isStenosisLeft"
+                label="{{'spineCT.disc.left.value'| translate}}"
+                rr-id="spi_c_0505206"
+                rrValidation="isStenosisRight isStenosisLeft"
+                name="isStenosisLeft"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!isBuggingDetailsVisible()"
+    class="c-col-1 c-sep c-pad o-radio-list p-t-10"
+  >
+    <h2 rr-id="spi_c_050301">
+      {{'spineCT.disc.details.value' | translate}}
+    </h2>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isNarrowingOfTheIntervertebralDisc"
+      label="{{'spineCT.disc.narrowingOfTheIntervertebralDisc.value'| translate}}"
+      rr-id="spi_c_0503306"
+      name="isNarrowingOfTheIntervertebralDisc"
+    >
+    </p-checkbox>
+
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isDiscCalcification"
+      label="{{'spineCT.disc.discCalcification.value'| translate}}"
+      rr-id="spi_c_0503200"
+      name="isDiscCalcification"
+    >
+    </p-checkbox>
+
+    <p-checkbox
+      rrInfoIcon="spi_c_05_01"
+      binary="true"
+      [(ngModel)]="model.isBulging"
+      label="{{'spineCT.disc.bulging.value'| translate}}"
+      rr-id="spi_c_050303"
+      name="isBulging"
+      (onChange)="clearDependElements()"
+    >
+    </p-checkbox>
+
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isVacuumPhenomenon"
+      label="{{'spineCT.disc.vacuumPhenomenon.value'| translate}}"
+      rr-id="spi_c_0503201"
+      name="isVacuumPhenomenon"
+    >
+    </p-checkbox>
+  </div>
+  <div
+    *ngIf="!isBuggingDetailsVisible()"
+    class="c-col-1 c-sep c-pad p-t-10"
+  ></div>
+  <div
+    *ngIf="!isBuggingDetailsVisible()"
+    class="c-col-1 c-sep c-pad-l p-t-10"
+  ></div>
+</div>

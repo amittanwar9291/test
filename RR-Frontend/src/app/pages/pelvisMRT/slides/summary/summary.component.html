@@ -1,0 +1,699 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="pel_m_120103">
+          {{ 'pelvisMRT.summary.procedure.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.additionalCrosssectionalImaging.value' | translate}}"
+          rr-id="pel_m_120106"
+          name="procedureType"
+          [value]="procedureType.ComplementaryCrossSectionalImaging"
+          [(ngModel)]="model.procedureType"
+          rrUnClickRadio
+          rrContentReset="complementaryCrossSectionalImagingBlock mRIFollowUpBlock"
+        ></p-radioButton>
+        <div
+          id="complementaryCrossSectionalImagingBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="model.procedureType !== procedureType.ComplementaryCrossSectionalImaging"
+        >
+          <p rr-id="pel_m_120107">
+            {{ 'pelvisMRT.summary.imagingModality.value' | translate }}
+          </p>
+          <p-checkbox
+            label="{{'pelvisMRT.summary.cTThorax.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_120108"
+            name="isCtThorax"
+            [(ngModel)]="model.isCtThorax"
+            rrValidation="isSkeletalScintigraphy isSpectCt isPetCt isMriAbdomen isCtAbdomen isCtThorax"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.summary.cTAbdomen.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_120109"
+            name="isCtAbdomen"
+            [(ngModel)]="model.isCtAbdomen"
+            rrValidation="isSkeletalScintigraphy isSpectCt isPetCt isMriAbdomen isCtAbdomen isCtThorax"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.summary.mRIAbdomen.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_120110"
+            name="isMriAbdomen"
+            [(ngModel)]="model.isMriAbdomen"
+            rrValidation="isSkeletalScintigraphy isSpectCt isPetCt isMriAbdomen isCtAbdomen isCtThorax"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.summary.pETCT.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_120111"
+            name="isPetCt"
+            [(ngModel)]="model.isPetCt"
+            rrValidation="isSkeletalScintigraphy isSpectCt isPetCt isMriAbdomen isCtAbdomen isCtThorax"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.summary.sPECTCT.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_120112"
+            name="isSpectCt"
+            [(ngModel)]="model.isSpectCt"
+            rrValidation="isSkeletalScintigraphy isSpectCt isPetCt isMriAbdomen isCtAbdomen isCtThorax"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.summary.skeletalScintigraphy.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_120113"
+            name="isSkeletalScintigraphy"
+            [(ngModel)]="model.isSkeletalScintigraphy"
+            rrValidation="isSkeletalScintigraphy isSpectCt isPetCt isMriAbdomen isCtAbdomen isCtThorax"
+          ></p-checkbox>
+        </div>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.mRIFollowup.value' | translate}}"
+          rr-id="pel_m_120104"
+          name="procedureType"
+          [value]="procedureType.MriFollowUp"
+          [(ngModel)]="model.procedureType"
+          rrContentReset="mRIFollowUpBlock complementaryCrossSectionalImagingBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          id="mRIFollowUpBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="model.procedureType !== procedureType.MriFollowUp"
+        >
+          <p-dropdown
+            styleClass="ui-brown-box o-width-100"
+            [options]="mRIFollowUpOptions"
+            name="mriFollowUpType"
+            rr-id="pel_m_120105"
+            placeholder="{{'shared.pleaseSelect' | translate}}"
+            rrDropdownClear
+            [(ngModel)]="model.mriFollowUpType"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          label="{{'pelvisMRT.summary.biopsyRecommended.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_120114"
+          name="isBiopsyRecommended"
+          rrContentReset="biopsyRecommendedBlock"
+          [(ngModel)]="model.isBiopsyRecommended"
+        ></p-checkbox>
+        <div
+          id="biopsyRecommendedBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isBiopsyRecommended"
+        >
+          <p-radioButton
+            label="{{'pelvisMRT.summary.cTguided.value' | translate}}"
+            rr-id="pel_m_120115"
+            name="biopsyRecommendedType"
+            [value]="biopsyRecommendedType.CtSupported"
+            [(ngModel)]="model.biopsyRecommendedType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.endoscopic.value' | translate}}"
+            rr-id="pel_m_120116"
+            name="biopsyRecommendedType"
+            [value]="biopsyRecommendedType.Endoscopic"
+            [(ngModel)]="model.biopsyRecommendedType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          label="{{'pelvisMRT.summary.evaluationInInterdisciplinaryTumor.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_120117"
+          name="isEvaluationInInterdisciplinaryTumorBoard"
+          [(ngModel)]="model.isEvaluationInInterdisciplinaryTumorBoard"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="pel_m_120201">
+          {{ 'pelvisMRT.summary.dynamicFindings.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.aggravation.value' | translate}}"
+          rr-id="pel_m_120202"
+          name="dynamicsOfFinding"
+          [value]="dynamicsOfFindingType.Deterioration"
+          [(ngModel)]="model.dynamicsOfFinding"
+          rrContentReset="tumorRegressionGradeBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.noChange.value' | translate}}"
+          rr-id="pel_m_120203"
+          name="dynamicsOfFinding"
+          [value]="dynamicsOfFindingType.NoChange"
+          [(ngModel)]="model.dynamicsOfFinding"
+          rrContentReset="tumorRegressionGradeBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.improvement.value' | translate}}"
+          rr-id="pel_m_120204"
+          name="dynamicsOfFinding"
+          [value]="dynamicsOfFindingType.Improvement"
+          [(ngModel)]="model.dynamicsOfFinding"
+          rrContentReset="tumorRegressionGradeBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.detailedAfterChemotherapy.value' | translate}}"
+          rr-id="pel_m_120205"
+          name="dynamicsOfFinding"
+          [value]="dynamicsOfFindingType.DetailedAfterChemotherapy"
+          [(ngModel)]="model.dynamicsOfFinding"
+          rrContentReset="tumorRegressionGradeBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div class="o-radio-list m-t-30">
+          <h2 rr-id="pel_m_120206">
+            {{'pelvisMRT.summary.pIRADSScoreTotal.value' | translate}}
+          </h2>
+          <rr-number-input
+            inputRrId="pel_m_120207"
+            name="piradsScoreTotal"
+            [config]="{labelWidth: 200, readonly: true,placeholder: '-'}"
+            [(ngModel)]="model.piradsScoreTotal"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l o-list m-t-30">
+      <div
+        id="tumorRegressionGradeBlock"
+        class="o-radio-list text-break"
+        [rrDisable]="model.dynamicsOfFinding !== dynamicsOfFindingType.DetailedAfterChemotherapy"
+      >
+        <p rr-id="pel_m_120301">
+          {{ 'pelvisMRT.summary.tumorRegressionGrade(TRG.value' | translate }}
+        </p>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.tRGRadiologicallyCompleteRemission.value' | translate}}"
+          rr-id="pel_m_120302"
+          name="tumorRegressionGradeTRG"
+          [value]="tumorRegressionGradeType.Trg1RadiologicallyCompleteRemissionFibroticScarWithoutTumorSignal"
+          [(ngModel)]="model.tumorRegressionGradeTRG"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.tRGGoodResponseDominance.value' | translate}}"
+          rr-id="pel_m_120303"
+          name="tumorRegressionGradeTRG"
+          [value]="tumorRegressionGradeType.Trg2GoodResponseDominanceOfDenseFibrosisPatternWithLowTumorSignal"
+          [(ngModel)]="model.tumorRegressionGradeTRG"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.tRGModerateResponseSignificant.value' | translate}}"
+          rr-id="pel_m_120304"
+          name="tumorRegressionGradeTRG"
+          [value]="tumorRegressionGradeType.Trg3ModerateResponseSignificantResidualTumorBut50FibrosisOrMucinousChanges"
+          [(ngModel)]="model.tumorRegressionGradeTRG"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.tRGPartialResponseMainly.value' | translate}}"
+          rr-id="pel_m_120305"
+          name="tumorRegressionGradeTRG"
+          [value]="tumorRegressionGradeType.Trg4PartialResponseMainlyTumorWithSmallFibrosisAreasWithLowSignalIntensityOrSmallMucinousChanges"
+          [(ngModel)]="model.tumorRegressionGradeTRG"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.tRGNoResponseTumor.value' | translate}}"
+          rr-id="pel_m_120306"
+          name="tumorRegressionGradeTRG"
+          [value]="tumorRegressionGradeType.Trg5NoResponseTumorUnchangedFromBaselineExamination"
+          [(ngModel)]="model.tumorRegressionGradeTRG"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l o-list">
+      <div class="o-radio-list">
+        <h2
+          rr-id="pel_m_120401"
+          rrInfoIcon="pel_m_12_01"
+          infoIconPdfLandscape="true"
+        >
+          {{ 'pelvisMRT.summary.tNStaging.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.prostateCarcinoma.value' | translate}}"
+          rr-id="pel_m_120402"
+          name="tnStagingType"
+          [rrDisable]="!isProstateCarcinomaEnabled"
+          [value]="tNStagingType.ProstateCarcinoma"
+          [(ngModel)]="model.tnStagingType"
+          rrContentReset="prostateCarcinomaBlock bladderCarcinomaBlock rectalCancerBlock sigmoidColonCancerBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.bladderCarcinoma.value' | translate}}"
+          rr-id="pel_m_120403"
+          name="tnStagingType"
+          [rrDisable]="bladderCarciomaIsDisabled()"
+          [value]="tNStagingType.BladderCarcinoma"
+          [(ngModel)]="model.tnStagingType"
+          rrContentReset="prostateCarcinomaBlock bladderCarcinomaBlock rectalCancerBlock sigmoidColonCancerBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.rectalCancer.value' | translate}}"
+          rr-id="pel_m_120404"
+          name="tnStagingType"
+          [rrDisable]="rectalCancerIsDisabled()"
+          [value]="tNStagingType.RectalCancer"
+          [(ngModel)]="model.tnStagingType"
+          rrContentReset="prostateCarcinomaBlock bladderCarcinomaBlock rectalCancerBlock sigmoidColonCancerBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'pelvisMRT.summary.sigmoidColonCancer.value' | translate}}"
+          rr-id="pel_m_120405"
+          name="tnStagingType"
+          [rrDisable]="sigmoidColonCancerIsDisabled()"
+          [value]="tNStagingType.SigmoidColonCancer"
+          [(ngModel)]="model.tnStagingType"
+          rrContentReset="prostateCarcinomaBlock bladderCarcinomaBlock rectalCancerBlock sigmoidColonCancerBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep-l m-t-32">
+      <div
+        id="prostateCarcinomaBlock"
+        class="o-list"
+        *ngIf="model.tnStagingType === tNStagingType.ProstateCarcinoma"
+      >
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120501">
+            {{ 'pelvisMRT.summary.tStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t2.value' | translate}}"
+            rr-id="pel_m_120502"
+            name="prostateCarcinomaTStageType"
+            [value]="tStageType.T2"
+            [(ngModel)]="model.prostateCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t3.value' | translate}}"
+            rr-id="pel_m_120503"
+            name="prostateCarcinomaTStageType"
+            [value]="tStageType.T3"
+            [(ngModel)]="model.prostateCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t4.value' | translate}}"
+            rr-id="pel_m_120504"
+            name="prostateCarcinomaTStageType"
+            [value]="tStageType.T4"
+            [(ngModel)]="model.prostateCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.tx.value' | translate}}"
+            rr-id="pel_m_120505"
+            name="prostateCarcinomaTStageType"
+            [value]="tStageType.Tx"
+            [(ngModel)]="model.prostateCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120506">
+            {{ 'pelvisMRT.summary.nStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n0.value' | translate}}"
+            rr-id="pel_m_120507"
+            name="prostateCarcinomaNStageType"
+            [value]="nStageType.N0"
+            [(ngModel)]="model.prostateCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n1.value' | translate}}"
+            rr-id="pel_m_120508"
+            name="prostateCarcinomaNStageType"
+            [value]="nStageType.N1"
+            [(ngModel)]="model.prostateCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.nx.value' | translate}}"
+            rr-id="pel_m_120509"
+            name="prostateCarcinomaNStageType"
+            [value]="nStageType.Nx"
+            [(ngModel)]="model.prostateCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120510">
+            {{ 'pelvisMRT.summary.mStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.m1a.value' | translate}}"
+            rr-id="pel_m_120511"
+            name="prostateCarcinomaMStageType"
+            [value]="mStageType.M1a"
+            [(ngModel)]="model.prostateCarcinomaMStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.mx.value' | translate}}"
+            rr-id="pel_m_120512"
+            name="prostateCarcinomaMStageType"
+            [value]="mStageType.Mx"
+            [(ngModel)]="model.prostateCarcinomaMStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        id="bladderCarcinomaBlock"
+        class="o-list"
+        *ngIf="model.tnStagingType === tNStagingType.BladderCarcinoma"
+      >
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120501">
+            {{ 'pelvisMRT.summary.tStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.lessThant2.value' | translate}}"
+            rr-id="pel_m_120513"
+            name="bladderCarcinomaTStageType"
+            [value]="tStageType.LessThanT2"
+            [(ngModel)]="model.bladderCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.moreOrEqualThanT2.value' | translate}}"
+            rr-id="pel_m_120514"
+            name="bladderCarcinomaTStageType"
+            [value]="tStageType.MoreOrEqualT2"
+            [(ngModel)]="model.bladderCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t3b.value' | translate}}"
+            rr-id="pel_m_120515"
+            name="bladderCarcinomaTStageType"
+            [value]="tStageType.MoreOrEqualT3b"
+            [(ngModel)]="model.bladderCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t4.value' | translate}}"
+            rr-id="pel_m_120516"
+            name="bladderCarcinomaTStageType"
+            [value]="tStageType.T4"
+            [(ngModel)]="model.bladderCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.tx.value' | translate}}"
+            rr-id="pel_m_120517"
+            name="bladderCarcinomaTStageType"
+            [value]="tStageType.Tx"
+            [(ngModel)]="model.bladderCarcinomaTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120506">
+            {{ 'pelvisMRT.summary.nStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n0.value' | translate}}"
+            rr-id="pel_m_120518"
+            name="bladderCarcinomaNStageType"
+            [value]="nStageType.N0"
+            [(ngModel)]="model.bladderCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n1.value' | translate}}"
+            rr-id="pel_m_120519"
+            name="bladderCarcinomaNStageType"
+            [value]="nStageType.N1"
+            [(ngModel)]="model.bladderCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n2.value' | translate}}"
+            rr-id="pel_m_120520"
+            name="bladderCarcinomaNStageType"
+            [value]="nStageType.N2"
+            [(ngModel)]="model.bladderCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.nx.value' | translate}}"
+            rr-id="pel_m_120521"
+            name="bladderCarcinomaNStageType"
+            [value]="nStageType.Nx"
+            [(ngModel)]="model.bladderCarcinomaNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        id="rectalCancerBlock"
+        class="o-list"
+        *ngIf="model.tnStagingType === tNStagingType.RectalCancer"
+      >
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120501">
+            {{ 'pelvisMRT.summary.tStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.lessThant2.value' | translate}}"
+            rr-id="pel_m_120522"
+            name="rectalCancerTStageType"
+            [value]="tStageType.LessThanT2"
+            [(ngModel)]="model.rectalCancerTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.moreOrEqualThanT2.value' | translate}}"
+            rr-id="pel_m_120523"
+            name="rectalCancerTStageType"
+            [value]="tStageType.MoreOrEqualT2"
+            [(ngModel)]="model.rectalCancerTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t3.value' | translate}}"
+            rr-id="pel_m_120524"
+            name="rectalCancerTStageType"
+            [value]="tStageType.T3"
+            [(ngModel)]="model.rectalCancerTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t4a.value' | translate}}"
+            rr-id="pel_m_120525"
+            name="rectalCancerTStageType"
+            [value]="tStageType.T4a"
+            [(ngModel)]="model.rectalCancerTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t4b.value' | translate}}"
+            rr-id="pel_m_120526"
+            name="rectalCancerTStageType"
+            [value]="tStageType.T4b"
+            [(ngModel)]="model.rectalCancerTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.tx.value' | translate}}"
+            rr-id="pel_m_120527"
+            name="rectalCancerTStageType"
+            [value]="tStageType.Tx"
+            [(ngModel)]="model.rectalCancerTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120506">
+            {{ 'pelvisMRT.summary.nStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n0.value' | translate}}"
+            rr-id="pel_m_120528"
+            name="rectalCancerNStageType"
+            [value]="nStageType.N0"
+            [(ngModel)]="model.rectalCancerNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n1.value' | translate}}"
+            rr-id="pel_m_120529"
+            name="rectalCancerNStageType"
+            [value]="nStageType.N1"
+            [(ngModel)]="model.rectalCancerNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n2.value' | translate}}"
+            rr-id="pel_m_120530"
+            name="rectalCancerNStageType"
+            [value]="nStageType.N2"
+            [(ngModel)]="model.rectalCancerNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n.value' | translate}}"
+            rr-id="pel_m_120531"
+            name="rectalCancerNStageType"
+            [value]="nStageType.NPlus"
+            [(ngModel)]="model.rectalCancerNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.nx.value' | translate}}"
+            rr-id="pel_m_120532"
+            name="rectalCancerNStageType"
+            [value]="nStageType.Nx"
+            [(ngModel)]="model.rectalCancerNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        id="sigmoidColonCancerBlock"
+        class="o-list"
+        *ngIf="model.tnStagingType === tNStagingType.SigmoidColonCancer"
+      >
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120501">
+            {{ 'pelvisMRT.summary.tStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t1.value' | translate}}"
+            rr-id="pel_m_120533"
+            name="sigmoidColonTStageType"
+            [value]="tStageType.T1"
+            [(ngModel)]="model.sigmoidColonTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t2.value' | translate}}"
+            rr-id="pel_m_120534"
+            name="sigmoidColonTStageType"
+            [value]="tStageType.T2"
+            [(ngModel)]="model.sigmoidColonTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t3.value' | translate}}"
+            rr-id="pel_m_120535"
+            name="sigmoidColonTStageType"
+            [value]="tStageType.T3"
+            [(ngModel)]="model.sigmoidColonTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t4a.value' | translate}}"
+            rr-id="pel_m_120536"
+            name="sigmoidColonTStageType"
+            [value]="tStageType.T4a"
+            [(ngModel)]="model.sigmoidColonTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.t4b.value' | translate}}"
+            rr-id="pel_m_120537"
+            name="sigmoidColonTStageType"
+            [value]="tStageType.T4b"
+            [(ngModel)]="model.sigmoidColonTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.tx.value' | translate}}"
+            rr-id="pel_m_120538"
+            name="sigmoidColonTStageType"
+            [value]="tStageType.Tx"
+            [(ngModel)]="model.sigmoidColonTStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_120506">
+            {{ 'pelvisMRT.summary.nStage.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n0.value' | translate}}"
+            rr-id="pel_m_120539"
+            name="sigmoidColonNStageType"
+            [value]="nStageType.N0"
+            [(ngModel)]="model.sigmoidColonNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n1a.value' | translate}}"
+            rr-id="pel_m_120540"
+            name="sigmoidColonNStageType"
+            [value]="nStageType.N1a"
+            [(ngModel)]="model.sigmoidColonNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n1b.value' | translate}}"
+            rr-id="pel_m_120541"
+            name="sigmoidColonNStageType"
+            [value]="nStageType.N1b"
+            [(ngModel)]="model.sigmoidColonNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n2a.value' | translate}}"
+            rr-id="pel_m_120542"
+            name="sigmoidColonNStageType"
+            [value]="nStageType.N2a"
+            [(ngModel)]="model.sigmoidColonNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.n2b.value' | translate}}"
+            rr-id="pel_m_120543"
+            name="sigmoidColonNStageType"
+            [value]="nStageType.N2b"
+            [(ngModel)]="model.sigmoidColonNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.summary.nx.value' | translate}}"
+            rr-id="pel_m_120544"
+            name="sigmoidColonNStageType"
+            [value]="nStageType.Nx"
+            [(ngModel)]="model.sigmoidColonNStageType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

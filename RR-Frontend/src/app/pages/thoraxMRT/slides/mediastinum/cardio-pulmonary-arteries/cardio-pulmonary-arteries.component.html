@@ -1,0 +1,305 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <p-checkbox
+      rr-id="tho_m_040208"
+      labelStyleClass="ui-fat-label"
+      name="thrombus"
+      [(ngModel)]="model.isThrombus"
+      label="{{'thoraxMRT.mediastinum.thrombus.value' | translate}}"
+      binary="true"
+      (onChange)="clearLocalizer()"
+      rrContentReset="isThrombus-block"
+    ></p-checkbox>
+    <div
+      id="isThrombus-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isThrombus"
+    >
+      <p
+        rr-id="tho_m_040209"
+        class="m-b-3"
+        rrValidation="lungsLocation"
+        noUpdate="true"
+      >
+        {{'thoraxMRT.mediastinum.localizationpulmonaryArtery.value' |
+        translate}}
+      </p>
+      <rr-lungs-simple
+        class="nested-localizer"
+        rr-id="tho_m_040210"
+        name="lungsLocation"
+        rrValidation="lungsLocation"
+        isLocalizer="true"
+        [(ngModel)]="model.lungsLocation"
+        (click)="openLargeLocalizer('lungsLocation')"
+      ></rr-lungs-simple>
+      <p rr-id="tho_m_040211" class="m-t-minus-8">
+        {{'thoraxMRT.mediastinum.localizationWithinVessel.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="tho_m_040212"
+        name="localizationWithinVesselType"
+        class="text-break"
+        rrValidation="localizationWithinVesselType"
+        rrContentReset="isCrumbsBiscuitSign-block"
+        [value]="localizationWithinVesselTypeEnum.FloatingAcute"
+        label="{{'thoraxMRT.mediastinum.floatingacute.value' | translate}}"
+        [(ngModel)]="model.localizationWithinVesselType"
+      ></p-radioButton>
+      <div
+        id="Floating-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.localizationWithinVesselType !== localizationWithinVesselTypeEnum.FloatingAcute"
+      >
+        <p-checkbox
+          rr-id="tho_m_040213"
+          name="isPoloMintSign"
+          [(ngModel)]="model.isPoloMintSign"
+          label="{{'thoraxMRT.mediastinum.poloMintSign.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_m_040214"
+          name="isSaddlePulmonaryEmbolism"
+          [(ngModel)]="model.isSaddlePulmonaryEmbolism"
+          label="{{'thoraxMRT.mediastinum.saddlePulmonaryEmbolism.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="tho_m_040215"
+        name="localizationWithinVesselType"
+        class="text-break"
+        rrContentReset="Floating-block"
+        rrValidation="localizationWithinVesselType"
+        [value]="localizationWithinVesselTypeEnum.MuralChronic"
+        label="{{'thoraxMRT.mediastinum.muralchronic.value' | translate}}"
+        [(ngModel)]="model.localizationWithinVesselType"
+      ></p-radioButton>
+      <p rr-id="tho_m_040216" class="m-t-17 m-b-6">
+        {{'thoraxMRT.mediastinum.associatedFindings.value' | translate}}
+      </p>
+      <p-checkbox
+        rr-id="tho_m_040217"
+        name="isCalcification"
+        label="{{'thoraxMRT.mediastinum.calcification.value' | translate}}"
+        [(ngModel)]="model.isCalcification"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_040314">
+      {{'thoraxMRT.mediastinum.quantitative.value' | translate}}
+    </h2>
+    <rr-number-input
+      inputRrId="tho_m_040315"
+      labelRrId="tho_m_040316"
+      infoIconRrId="tho_m_04_04"
+      name="quantitativeWideCentralPulmonaryArteryInMm"
+      [(ngModel)]="model.quantitativeWideCentralPulmonaryArteryInMm"
+      [label]="'thoraxMRT.mediastinum.diameterCentralpulmonaryArteryIn.value' | translate"
+      [config]="{labelWidth: 170, min: 1, max: 50, hasInfoIcon: true}"
+    >
+    </rr-number-input>
+    <rr-number-input
+      inputRrId="tho_m_040317"
+      labelRrId="tho_m_040318"
+      name="quantitativeRVLVDiameterQuotient"
+      [(ngModel)]="model.quantitativeRVLVDiameterQuotient"
+      [label]="'thoraxMRT.mediastinum.rVLVDiameterquotient.value' | translate"
+      [config]="{labelWidth: 170, min: 0.1, max: 9.9, step: 0.1, placeholder: '-,-'}"
+    >
+    </rr-number-input>
+    <rr-number-input
+      inputRrId="tho_m_040319"
+      labelRrId="tho_m_040320"
+      name="quantitativeRVLVVolumeQuotient"
+      [(ngModel)]="model.quantitativeRVLVVolumeQuotient"
+      [label]="'thoraxMRT.mediastinum.rVLVVolumeQuotient.value' | translate"
+      [config]="{labelWidth: 150, min: 0.1, max: 9.9, step: 0.1, placeholder: '-,-'}"
+    >
+    </rr-number-input>
+    <rr-number-input
+      inputRrId="tho_m_040321"
+      labelRrId="tho_m_040322"
+      name="quantitativePAAADiameterQuotient"
+      [(ngModel)]="model.quantitativePAAADiameterQuotient"
+      [label]="'thoraxMRT.mediastinum.pAAADiameterquotient.value' | translate"
+      [config]="{labelWidth: 170, min: 0.1, max: 9.9, step: 0.1, placeholder: '-,-'}"
+    >
+    </rr-number-input>
+    <p rr-id="tho_m_040323" class="m-t-21 m-b-6">
+      {{'thoraxMRT.mediastinum.curvatureInterventricularSeptum.value' |
+      translate}}
+    </p>
+    <p-radioButton
+      rr-id="tho_m_040324"
+      name="curvatureOfInterventricularSeptumType"
+      [value]="curvatureOfInterventricularSeptumTypeEnum.Normal"
+      label="{{'thoraxMRT.mediastinum.normal.value' | translate}}"
+      [(ngModel)]="model.curvatureOfInterventricularSeptumType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_040325"
+      name="curvatureOfInterventricularSeptumType"
+      [value]="curvatureOfInterventricularSeptumTypeEnum.Abnormal"
+      label="{{'thoraxMRT.mediastinum.abnormal.value' | translate}}"
+      [(ngModel)]="model.curvatureOfInterventricularSeptumType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_040424">
+      {{'thoraxMRT.mediastinum.qualitative.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="tho_m_040425"
+      name="isRemodeling"
+      [(ngModel)]="model.isRemodeling"
+      label="{{'thoraxMRT.mediastinum.remodelling.value' | translate}}"
+      binary="true"
+      rrInfoIcon="tho_m_04_05"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040426"
+      name="isIntravascularBandsAndNets"
+      label="{{'thoraxMRT.mediastinum.intravascularBandsAndWebs.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isIntravascularBandsAndNets"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040427"
+      name="isPouchDefect"
+      label="{{'thoraxMRT.mediastinum.pouchDefect.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isPouchDefect"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040428"
+      name="isAbruptCaliberChange"
+      label="{{'thoraxMRT.mediastinum.abruptCaliberChange.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAbruptCaliberChange"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040429"
+      name="isStrictures"
+      label="{{'thoraxMRT.mediastinum.strictures.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isStrictures"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040430"
+      name="isPoststenoticDilatation"
+      label="{{'thoraxMRT.mediastinum.poststenoticDilatation.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isPoststenoticDilatation"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040431"
+      name="isCollateralSupply"
+      label="{{'thoraxMRT.mediastinum.collateralSupply(bronchialArteries.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isCollateralSupply"
+      class="text-break2"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_040432"
+      name="isMosaicPerfusion"
+      label="{{'thoraxMRT.mediastinum.mosaicPerfusion.value' | translate}}"
+      binary="true"
+      rrContentReset="localizationAtLobeLevel-block"
+      [(ngModel)]="model.isMosaicPerfusion"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-pad-l o-radio-list">
+    <h2 rr-id="tho_m_040512" class="m-b-8">
+      {{'thoraxMRT.mediastinum.differentialDiagnosis.value' | translate}}
+    </h2>
+    <p rr-id="tho_m_040513" class="m-b-1">
+      {{'thoraxMRT.mediastinum.differentialDiagnosis1.value' | translate}}*
+    </p>
+    <rr-differential-diagnosis-dropdown
+      [diagnosisNumber]="1"
+      [options]="ddlW005"
+      [(ngModel)]="model.diagnosisType1"
+      name="diagnosisType1"
+      rrId="tho_m_040514"
+      [parentViewModel]="model"
+      (selectionChanged)="clearDDLCheckboxes()"
+      rrValidation="diagnosisType1"
+    >
+    </rr-differential-diagnosis-dropdown>
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="model.diagnosisType1 === mediastinumDifferentialDiagnosisTypeEnum.None"
+    >
+      <p-checkbox
+        rr-id="tho_m_040515"
+        name="isSuspected"
+        label="{{'thoraxMRT.mediastinum.suspected.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSuspected"
+      ></p-checkbox>
+      <p rr-id="tho_m_040516" class="m-t-3 m-b-1">
+        {{'thoraxMRT.mediastinum.differentialDiagnosis2.value' | translate}}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="ddlW005"
+        [(ngModel)]="model.diagnosisType2"
+        name="diagnosisType2"
+        rrId="tho_m_040517"
+        (selectionChanged)="clearIsSubordinated()"
+        [parentViewModel]="model"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.diagnosisType2 === mediastinumDifferentialDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="tho_m_040518"
+          name="isSubordinated"
+          label="{{'thoraxMRT.mediastinum.subordinate.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSubordinated"
+        ></p-checkbox>
+      </div>
+    </div>
+
+    <div *ngIf="isPulmonaryHypertensionGroup4()" class="o-radio-list">
+      <p rr-id="tho_m_040519" class="text-break w-322-px">
+        {{'thoraxMRT.mediastinum.detailsPulmonaryHypertensionGroupChronic.value'
+        | translate}}
+      </p>
+      <p-radioButton
+        rr-id="tho_m_040520"
+        name="chronicThromboembolicType"
+        [value]="chronicThromboembolicTypeEnum.Type1Central"
+        label="{{'thoraxMRT.mediastinum.typeCentral.value' | translate}}"
+        [(ngModel)]="model.chronicThromboembolicType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_040521"
+        name="chronicThromboembolicType"
+        [value]="chronicThromboembolicTypeEnum.Type2ProximalOfTheSegmentArteries"
+        label="{{'thoraxMRT.mediastinum.typeProximalToThesegmental.value' | translate}}"
+        [(ngModel)]="model.chronicThromboembolicType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_040522"
+        name="chronicThromboembolicType"
+        [value]="chronicThromboembolicTypeEnum.Type3DistalSegmentalSubsegmental"
+        label="{{'thoraxMRT.mediastinum.typeDistalSegmentalsubsegmental.value' | translate}}"
+        [(ngModel)]="model.chronicThromboembolicType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</div>

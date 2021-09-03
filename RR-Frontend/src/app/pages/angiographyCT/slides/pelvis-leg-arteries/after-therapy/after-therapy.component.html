@@ -1,0 +1,435 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-list">
+    <div class="o-radio-list" [rrDisable]="isSideTypeDisabled()">
+      <h2 rr-id="ang_c_0902107">
+        {{'angiographyCT.pelvisLegArteries.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_0902108"
+        label="{{'angiographyCT.pelvisLegArteries.right.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_0902109"
+        label="{{'angiographyCT.pelvisLegArteries.left.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_090225">
+        {{'angiographyCT.pelvisLegArteries.typeOfTherapy.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_090226"
+        label="{{'angiographyCT.pelvisLegArteries.pTA.value' | translate}}"
+        name="afterTherapyType"
+        [value]="afterTherapyTypeEnum.PTA"
+        [(ngModel)]="model.afterTherapyType"
+        rrValidation="afterTherapyType"
+        (click)="resetDistalBypassPort(); resetStentStenose()"
+        rrContentReset="bypassType-block isMultipleStent-block complications-block"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.afterTherapyType !== afterTherapyTypeEnum.PTA"
+        id="isMultiplePTA-block"
+      >
+        <p-checkbox
+          rr-id="ang_c_0902110"
+          label="{{'angiographyCT.pelvisLegArteries.multiple.value' | translate}}"
+          class="text-break"
+          name="isMultiplePTA"
+          [(ngModel)]="model.isMultiplePTA"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="ang_c_090227"
+        label="{{'angiographyCT.pelvisLegArteries.stent.value' | translate}}"
+        name="afterTherapyType"
+        [value]="afterTherapyTypeEnum.Stent"
+        [(ngModel)]="model.afterTherapyType"
+        (click)="resetDistalBypassPort()"
+        rrValidation="afterTherapyType"
+        rrContentReset="bypassType-block isMultiplePTA-block complications-block"
+      ></p-radioButton>
+      <div
+        class="f-vertical f-start o-radio-list nested-content"
+        id="isMultipleStent-block"
+        [rrDisable]="model.afterTherapyType !== afterTherapyTypeEnum.Stent"
+      >
+        <p-checkbox
+          rr-id="ang_c_0902111"
+          label="{{'angiographyCT.pelvisLegArteries.multiple.value' | translate}}"
+          class="text-break"
+          name="isMultipleStent"
+          [(ngModel)]="model.isMultipleStent"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="ang_c_090228"
+        label="{{'angiographyCT.pelvisLegArteries.lysis.value' | translate}}"
+        name="afterTherapyType"
+        [value]="afterTherapyTypeEnum.Lysis"
+        [(ngModel)]="model.afterTherapyType"
+        (click)="resetDistalBypassPort(); resetStentStenose()"
+        rrContentReset="bypassType-block isMultiplePTA-block isMultipleStent-block complications-block "
+        rrValidation="afterTherapyType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090229"
+        label="{{'angiographyCT.pelvisLegArteries.aneurysmSurgery.value' | translate}}"
+        name="afterTherapyType"
+        [value]="afterTherapyTypeEnum.AneurysmSurgery"
+        [(ngModel)]="model.afterTherapyType"
+        (click)="resetDistalBypassPort(); resetStentStenose()"
+        rrContentReset="bypassType-block isMultiplePTA-block isMultipleStent-block"
+        rrValidation="afterTherapyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090230"
+        label="{{'angiographyCT.pelvisLegArteries.bypass.value' | translate}}"
+        name="afterTherapyType"
+        [value]="afterTherapyTypeEnum.Bypass"
+        [(ngModel)]="model.afterTherapyType"
+        (click)="resetStentStenose()"
+        rrValidation="afterTherapyType"
+        rrContentReset="isMultiplePTA-block isMultipleStent-block"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="bypassType-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.afterTherapyType !== afterTherapyTypeEnum.Bypass"
+      >
+        <p-radioButton
+          rr-id="ang_c_090231"
+          label="{{'angiographyCT.pelvisLegArteries.anatomical.value' | translate}}"
+          name="bypassType"
+          [value]="bypassTypeEnum.Anatomical"
+          [(ngModel)]="model.bypassType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090232"
+          label="{{'angiographyCT.pelvisLegArteries.extraanatomical.value' | translate}}"
+          name="bypassType"
+          [value]="bypassTypeEnum.ExtraAnatomical"
+          [(ngModel)]="model.bypassType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-sep-l c-pad o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_090371">
+        {{'angiographyCT.pelvisLegArteries.localization.value' | translate}}*
+      </h2>
+      <p-dropdown
+        rr-id="ang_c_090372"
+        styleClass="o-width-100 ui-brown-box"
+        name="afterTherapyLocalizationType"
+        rrDropdownClear
+        rrValidation="afterTherapyLocalizationType"
+        [(ngModel)]="model.afterTherapyLocalizationType"
+        [options]="ddlW029"
+        (onChange)="checkAndUpdateSideType()"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      ></p-dropdown>
+      <div
+        [rrDisable]="model.afterTherapyLocalizationType !== localizationTypeEnum.AbdominalAorta"
+        class="f-vertical f-start o-radio-list m-b-20"
+      >
+        <h3 rr-id="ang_c_0903119" class="m-t-10">
+          {{'angiographyCT.pelvisLegArteries.section.value' | translate}}
+        </h3>
+        <div class="f-vertical f-start o-radio-list">
+          <p-checkbox
+            label="{{ 'angiographyCT.pelvisLegArteries.suprarenal.value' | translate }}"
+            rr-id="ang_c_0903120"
+            [(ngModel)]="model.isSuprarenal"
+            name="isSuprarenal"
+            binary="true"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{ 'angiographyCT.pelvisLegArteries.infrarenal.value' | translate }}"
+            rr-id="ang_c_0903121"
+            [(ngModel)]="model.isInfrarenal"
+            name="isInfrarenal"
+            binary="true"
+          ></p-checkbox>
+        </div>
+      </div>
+      <h2 rr-id="ang_c_0903122">
+        {{'angiographyCT.pelvisLegArteries.distalBypassPort.value' | translate}}
+      </h2>
+      <p-dropdown
+        rr-id="ang_c_0903123"
+        styleClass="o-width-100 ui-brown-box"
+        name="distalerType"
+        rrDropdownClear
+        [(ngModel)]="model.distalBypassPortType"
+        [options]="ddlW030"
+        (onChange)="resetCrossover()"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [rrDisable]="model.afterTherapyType !== afterTherapyTypeEnum.Bypass"
+      ></p-dropdown>
+      <div
+        [rrDisable]="model.distalBypassPortType === distalBypassPortType.None"
+        class="f-vertical f-start o-radio-list m-b-20"
+      >
+        <h3 rr-id="ang_c_0903124" class="m-t-10">
+          {{'angiographyCT.pelvisLegArteries.details.value' | translate}}
+        </h3>
+        <div class="f-vertical f-start o-radio-list nested-content">
+          <p-checkbox
+            label="{{ 'angiographyCT.pelvisLegArteries.crossover.value' | translate }}"
+            rr-id="ang_c_0903125"
+            [(ngModel)]="model.isCrossover"
+            name="isCrossover"
+            binary="true"
+          ></p-checkbox>
+        </div>
+      </div>
+      <h2 rr-id="ang_c_0903126">
+        {{'angiographyCT.pelvisLegArteries.noStenosis.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_0903127"
+        label="{{'angiographyCT.pelvisLegArteries.intactAndNoStenosis.value' | translate}}"
+        name="noStenosisType"
+        [value]="noStenosisTypeEnum.IntactAndNoStenosis"
+        [(ngModel)]="model.noStenosisType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_0903128"
+        label="{{'angiographyCT.pelvisLegArteries.ReStenosis.value' | translate}}"
+        name="noStenosisType"
+        [value]="noStenosisTypeEnum.ReStenosis"
+        [(ngModel)]="model.noStenosisType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_0903129"
+        label="{{'angiographyCT.pelvisLegArteries.instentStenosis.value' | translate}}"
+        name="noStenosisType"
+        [value]="noStenosisTypeEnum.InStentStenosis"
+        [(ngModel)]="model.noStenosisType"
+        [rrDisable]="model.afterTherapyType !== afterTherapyTypeEnum.Stent"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_0903130"
+        label="{{'angiographyCT.pelvisLegArteries.occlusion.value' | translate}}"
+        name="noStenosisType"
+        [value]="noStenosisTypeEnum.Occlusion"
+        [(ngModel)]="model.noStenosisType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-sep-l c-pad o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_0904110">
+        {{'angiographyCT.pelvisLegArteries.course.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_0904111"
+        label="{{'angiographyCT.pelvisLegArteries.improvement.value' | translate}}"
+        name="courseType"
+        [value]="courseTypeEnum.Improvement"
+        [(ngModel)]="model.courseType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_0904112"
+        label="{{'angiographyCT.pelvisLegArteries.noChange.value' | translate}}"
+        name="courseType"
+        [value]="courseTypeEnum.NoChange"
+        [(ngModel)]="model.courseType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_0904113"
+        label="{{'angiographyCT.pelvisLegArteries.deterioration.value' | translate}}"
+        name="courseType"
+        [value]="courseTypeEnum.Deterioration"
+        [(ngModel)]="model.courseType"
+        rrUnClickRadio
+        class="m-b-20"
+      ></p-radioButton>
+      <div class="o-radio-list">
+        <h2 rr-id="ang_c_0904114">
+          {{'angiographyCT.pelvisLegArteries.complications.value' | translate}}
+        </h2>
+        <p-checkbox
+          name="isAnastomoticAneurysm"
+          binary="true"
+          label="{{ 'angiographyCT.pelvisLegArteries.anastomoticAneurysm.value' | translate }}"
+          rr-id="ang_c_0904115"
+          [(ngModel)]="model.isAnastomoticAneurysm"
+          rrContentReset="isAnastomoticAneurysm-block"
+        ></p-checkbox>
+        <div
+          id="isAnastomoticAneurysm-block"
+          class="f-vertical f-start o-radio-list m-l-39"
+          [rrDisable]="!model.isAnastomoticAneurysm"
+        >
+          <p-radioButton
+            rr-id="ang_c_0904116"
+            label="{{'angiographyCT.pelvisLegArteries.proximal.value' | translate}}"
+            name="anastomoticAneurysmType"
+            [value]="anastomoticAneurysmTypeEnum.Proximal"
+            [(ngModel)]="model.anastomoticAneurysmType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_0904117"
+            label="{{'angiographyCT.pelvisLegArteries.distal.value' | translate}}"
+            name="anastomoticAneurysmType"
+            [value]="anastomoticAneurysmTypeEnum.Distal"
+            [(ngModel)]="model.anastomoticAneurysmType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div id="complications-block">
+          <p-checkbox
+            name="isPeriprostheticFluidCollection"
+            binary="true"
+            class="margin-top-10"
+            [rrDisable]="model.afterTherapyType !== afterTherapyTypeEnum.AneurysmSurgery && model.afterTherapyType !== afterTherapyTypeEnum.Bypass"
+            label="{{ 'angiographyCT.pelvisLegArteries.periprostheticfluidCollection.value' | translate }}"
+            rr-id="ang_c_0904118"
+            rrContentReset="isPeriprostheticFluidCollection-block"
+            [(ngModel)]="model.isPeriprostheticFluidCollection"
+          ></p-checkbox>
+          <div
+            id="isPeriprostheticFluidCollection-block"
+            class="f-vertical f-start o-radio-list m-l-39 m-t-10"
+            [rrDisable]="!model.isPeriprostheticFluidCollection || !isCMYes"
+          >
+            <p-radioButton
+              rr-id="ang_c_0904119"
+              label="{{'angiographyCT.pelvisLegArteries.withContrastEnhancement.value' | translate}}"
+              name="periprostheticFluidCollectionType"
+              class="margin-top-10"
+              [value]="periprostheticFluidCollectionTypeEnum.WithContrastEnhancement"
+              [(ngModel)]="model.periprostheticFluidCollectionType"
+              rrContentReset="WithContrastEnhancement-block WithoutContrastEnhancement-block"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="WithContrastEnhancement-block"
+              class="f-vertical f-start o-radio-list nested-content"
+              [rrDisable]="model.periprostheticFluidCollectionType !== periprostheticFluidCollectionTypeEnum.WithContrastEnhancement"
+            >
+              <p-checkbox
+                name="isEspeciallyPeriprostheticInfection"
+                binary="true"
+                label="{{ 'angiographyCT.pelvisLegArteries.especiallyPeriprostheticinfection.value' | translate }}"
+                rr-id="ang_c_0904120"
+                [(ngModel)]="model.isEspeciallyPeriprostheticInfection"
+              ></p-checkbox>
+            </div>
+            <p-radioButton
+              rr-id="ang_c_0904121"
+              label="{{'angiographyCT.pelvisLegArteries.withoutContrastEnhancement.value' | translate}}"
+              name="periprostheticFluidCollectionType"
+              [value]="periprostheticFluidCollectionTypeEnum.WithoutContrastEnhancement"
+              [(ngModel)]="model.periprostheticFluidCollectionType"
+              rrContentReset="WithContrastEnhancement-block WithoutContrastEnhancement-block"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="WithoutContrastEnhancement-block"
+              class="f-vertical f-start o-radio-list nested-content"
+              [rrDisable]="model.periprostheticFluidCollectionType !== periprostheticFluidCollectionTypeEnum.WithoutContrastEnhancement"
+            >
+              <p-radioButton
+                rr-id="ang_c_0904122"
+                label="{{'angiographyCT.pelvisLegArteries.lymphocele.value' | translate}}"
+                name="withoutContrastEnhancementType"
+                [value]="withoutContrastEnhancementTypeEnum.Lymphocele"
+                [(ngModel)]="model.withoutContrastEnhancementType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="ang_c_0904123"
+                label="{{'angiographyCT.pelvisLegArteries.seroma.value' | translate}}"
+                name="withoutContrastEnhancementType"
+                [value]="withoutContrastEnhancementTypeEnum.Seroma"
+                [(ngModel)]="model.withoutContrastEnhancementType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="fifth-col"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad-l o-list m-t-165"
+  >
+    <div class="o-radio-list">
+      <p-checkbox
+        label="{{ 'angiographyCT.pelvisLegArteries.postoperativeScarringTissueChanges.value' | translate }}"
+        rr-id="ang_c_0905118"
+        binary="true"
+        [(ngModel)]="model.isPostoperativeScarringTissueChanges"
+        name="isPostoperativeScarringTissueChanges"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{ 'angiographyCT.pelvisLegArteries.dissection.value' | translate }}"
+        rr-id="ang_c_0905119"
+        binary="true"
+        [(ngModel)]="model.isDissection"
+        name="isDissection"
+        rrContentReset="dissection-block"
+      ></p-checkbox>
+      <div class="nested-content o-radio-list">
+        <h3 rr-id="ang_c_0905120">
+          {{'angiographyCT.pelvisLegArteries.length.value' | translate}}
+        </h3>
+        <div [rrDisable]="!model.isDissection" id="dissection-block">
+          <rr-number-input
+            name="length"
+            [label]="'angiographyCT.pelvisLegArteries.inMm.value' | translate"
+            inputRrId="ang_c_0905122"
+            labelRrId="ang_c_0905121"
+            [(ngModel)]="model.length"
+            [config]="{labelWidth: 160, min: 1, max: 99, placeholder: '--'}"
+          ></rr-number-input>
+          <div class="o-radio-list m-t-10">
+            <p-radioButton
+              rr-id="ang_c_0905123"
+              label="{{'angiographyCT.pelvisLegArteries.hemodynamicallyRelevant.value' | translate}}"
+              name="dissectionType"
+              [value]="dissectionTypeEnum.HemodynamicallyRelevant"
+              [(ngModel)]="model.dissectionType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0905124"
+              label="{{'angiographyCT.pelvisLegArteries.againstTheFlow.value' | translate}}"
+              name="dissectionType"
+              [value]="dissectionTypeEnum.AgainstTheFlow"
+              [(ngModel)]="model.dissectionType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

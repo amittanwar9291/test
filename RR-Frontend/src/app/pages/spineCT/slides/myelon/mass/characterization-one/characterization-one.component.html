@@ -1,0 +1,239 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-12">
+    <div class="p-l-10 o-radio-list">
+      <h2
+        rr-id="spi_c_070207"
+        class="m-b-12 text-break"
+        rrValidation="localizationTopOrBottomVertebra"
+      >
+        {{ "spineCT.myelonSpinalCanal.localizationtopbottomVertebra.value" |
+        translate }}*
+      </h2>
+      <rr-spine-simple
+        rr-id="spi_c_070208"
+        class="localizer-size"
+        isLocalizer="true"
+        rrValidation="localizationTopOrBottomVertebra"
+        (click)="openLargeLocalizer()"
+        [spineLocation]="model.localizationTopOrBottomVertebra"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      ></rr-spine-simple>
+      <h2 rr-id="spi_c_070234" class="m-b-12 m-t-25">
+        {{ "spineCT.myelonSpinalCanal.positionCompartment.value" | translate }}
+      </h2>
+      <rr-spinal-canal-simple
+        rr-id="spi_c_070235"
+        [(ngModel)]="model.spinalCanalLocation"
+        noExtradural="true"
+        name="spinalCanalLocation"
+      >
+      </rr-spinal-canal-simple>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-12">
+    <div class="p-l-10 o-radio-list">
+      <h2 rr-id="spi_c_070315" class="m-b-12">
+        {{ "spineCT.myelonSpinalCanal.localizationInTheSpinal.value" | translate
+        }}
+      </h2>
+      <p-checkbox
+        rr-id="spi_c_070316"
+        label=" {{ 'spineCT.myelonSpinalCanal.anterior.value' | translate }}"
+        name="isAnterior"
+        [(ngModel)]="model.isAnterior"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_c_070317"
+        label=" {{ 'spineCT.myelonSpinalCanal.posterior.value' | translate }}"
+        name="isPosterior"
+        [(ngModel)]="model.isPosterior"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_c_070318"
+        label=" {{ 'spineCT.myelonSpinalCanal.left.value' | translate }}"
+        name="isSpinalCanalLocalizationLeft"
+        [(ngModel)]="model.isSpinalCanalLocalizationLeft"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_c_070319"
+        label=" {{ 'spineCT.myelonSpinalCanal.right.value' | translate }}"
+        name="isIsSpinalCanalLocalizationRight"
+        [(ngModel)]="model.isIsSpinalCanalLocalizationRight"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_c_070320"
+        class="text-break"
+        label=" {{ 'spineCT.myelonSpinalCanal.intraExtraduralHourglassNeurinoma.value' | translate }}"
+        name="isHourglassNeurinoma"
+        [(ngModel)]="model.isHourglassNeurinoma"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-12">
+    <div class="p-l-10 o-radio-list">
+      <h2 rr-id="spi_c_070415">
+        {{ "spineCT.myelonSpinalCanal.expansion.value" | translate }}
+      </h2>
+      <p rr-id="spi_c_070416" class="m-b-0">
+        {{ "spineCT.myelonSpinalCanal.maxDiameter.value" | translate }}
+      </p>
+      <rr-number-input
+        inputRrId="spi_c_070417"
+        labelRrId="spi_c_070418"
+        name="expansionMaxDiameterInMm"
+        [(ngModel)]="model.expansionMaxDiameterInMm"
+        [config]="{min: 1, max: 999, placeholder: '---'}"
+        [label]=" 'spineCT.myelonSpinalCanal.inMm.value' | translate"
+        (announceModelChange)="clear2ndAnd3rdPlane()"
+      ></rr-number-input>
+
+      <div class="m-t-15" [rrDisable]="!model.expansionMaxDiameterInMm">
+        <p rr-id="spi_c_070419" class="m-b-0">
+          {{ "spineCT.myelonSpinalCanal.2ndPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="spi_c_070420"
+          labelRrId="spi_c_070421"
+          name="expansion2ndPlaneInMm"
+          [(ngModel)]="model.expansion2ndPlaneInMm"
+          [config]="{min: 1, max: 999, placeholder: '---'}"
+          [label]=" 'spineCT.myelonSpinalCanal.inMm.value' | translate"
+          (announceModelChange)="clear3rdPlane()"
+        ></rr-number-input>
+      </div>
+      <div class="m-t-15" [rrDisable]="!model.expansion2ndPlaneInMm">
+        <p rr-id="spi_c_070422" class="m-b-0">
+          {{ "spineCT.myelonSpinalCanal.3rdPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="spi_c_070423"
+          labelRrId="spi_c_070424"
+          name="expansion3rdPlaneInMm"
+          [(ngModel)]="model.expansion3rdPlaneInMm"
+          [config]="{min: 1, max: 999, placeholder: '---'}"
+          [label]=" 'spineCT.myelonSpinalCanal.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+
+      <h2 rr-id="spi_c_070425" class="m-t-35">
+        {{ "spineCT.myelonSpinalCanal.characterization.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_070426"
+        name="characterizationType"
+        [(ngModel)]="model.characterizationType"
+        [value]="characterizationTypeEnum.Solid"
+        rrUnClickRadio
+        label="{{ 'spineCT.myelonSpinalCanal.solid.value' | translate }}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070427"
+        name="characterizationType"
+        [(ngModel)]="model.characterizationType"
+        [value]="characterizationTypeEnum.Liquid"
+        rrUnClickRadio
+        label="{{ 'spineCT.myelonSpinalCanal.liquid.value' | translate }}"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l m-t-15">
+    <div class="p-l-10 o-radio-list">
+      <h2 rr-id="spi_c_070515" rrInfoIcon="spi_c_07_03">
+        {{ "spineCT.myelonSpinalCanal.density.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_070516"
+        name="myelonSpinalCanalDensityType"
+        [(ngModel)]="model.myelonSpinalCanalDensityType"
+        [value]="myelonSpinalCanalDensityTypeEnum.Fat"
+        rrUnClickRadio
+        label="{{ 'spineCT.myelonSpinalCanal.fatDensity.value' | translate }}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070517"
+        name="myelonSpinalCanalDensityType"
+        [(ngModel)]="model.myelonSpinalCanalDensityType"
+        [value]="myelonSpinalCanalDensityTypeEnum.Water"
+        rrUnClickRadio
+        label="{{ 'spineCT.myelonSpinalCanal.waterDensity.value' | translate }}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070518"
+        name="myelonSpinalCanalDensityType"
+        [(ngModel)]="model.myelonSpinalCanalDensityType"
+        [value]="myelonSpinalCanalDensityTypeEnum.Increased"
+        rrUnClickRadio
+        label="{{ 'spineCT.myelonSpinalCanal.increasedDensity.value' | translate }}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070519"
+        name="myelonSpinalCanalDensityType"
+        [(ngModel)]="model.myelonSpinalCanalDensityType"
+        [value]="myelonSpinalCanalDensityTypeEnum.SoftTissue"
+        rrUnClickRadio
+        label="{{ 'spineCT.myelonSpinalCanal.softTissueDensity.value' | translate }}"
+      ></p-radioButton>
+
+      <p-checkbox
+        rr-id="spi_c_070520"
+        class="m-t-25"
+        name="isGasInclusion"
+        [(ngModel)]="model.isGasInclusion"
+        binary="true"
+        label=" {{ 'spineCT.myelonSpinalCanal.gasInclusion.value' | translate }}"
+      ></p-checkbox>
+
+      <p rr-id="spi_c_070521" class="m-t-30 m-b-0">
+        {{ "spineCT.myelonSpinalCanal.measurement.value" | translate }}
+      </p>
+      <rr-number-input
+        inputRrId="spi_c_070522"
+        labelRrId="spi_c_070523"
+        name="measurementInHU"
+        [(ngModel)]="model.measurementInHU"
+        [config]="{min: -1024, max: 3071, placeholder: '----'}"
+        [label]=" 'spineCT.myelonSpinalCanal.inHU.value' | translate"
+      ></rr-number-input>
+      <h2 rr-id="spi_c_070524" class="m-t-35">
+        {{ "spineCT.myelonSpinalCanal.margin.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_070525"
+        label="{{ 'spineCT.myelonSpinalCanal.circumscribed.value' | translate }}"
+        name="marginType"
+        [(ngModel)]="model.marginType"
+        [value]="marginTypeEnum.Circumscribed"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070526"
+        label="{{ 'spineCT.myelonSpinalCanal.noncircumscribed.value' | translate }}"
+        name="marginType"
+        [(ngModel)]="model.marginType"
+        [value]="marginTypeEnum.NonCircumscribed"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070527"
+        label="{{ 'spineCT.myelonSpinalCanal.nodular.value' | translate }}"
+        name="marginType"
+        [(ngModel)]="model.marginType"
+        [value]="marginTypeEnum.Nodular"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_070528"
+        label="{{ 'spineCT.myelonSpinalCanal.multinodular.value' | translate }}"
+        name="marginType"
+        [(ngModel)]="model.marginType"
+        [value]="marginTypeEnum.Multinodular"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</div>

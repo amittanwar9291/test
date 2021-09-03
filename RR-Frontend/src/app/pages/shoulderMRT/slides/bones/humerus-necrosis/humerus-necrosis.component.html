@@ -1,0 +1,52 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r f-vertical">
+    <div class="f-start f-vertical o-list m-t-7">
+      <p-checkbox
+        rr-id="sho_m_040219"
+        [(ngModel)]="model.isHumerusSubchondral"
+        label="{{ 'shoulderMRT.bones.doubleLineSign.value' | translate }}"
+        labelStyleClass="text-break"
+        name="isHumerusSubchondral"
+        binary="true"
+        class="m-b-22"
+        rrContentReset="isHumerusSubchondral-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start f-vertical nested-content"
+        id="isHumerusSubchondral-block"
+        [rrDisable]="!model.isHumerusSubchondral"
+      >
+        <rr-number-input
+          inputRrId="sho_m_040220"
+          [(ngModel)]="model.humerusDiameter"
+          label="{{ 'shoulderMRT.bones.diameter1to40.value' | translate }}"
+          labelRrId="sho_m_040231"
+          name="humerusDiameter"
+          [config]="{ min: 1, max: 40 }"
+          class="m-b-35"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="sho_m_040221"
+        [(ngModel)]="model.isHumerusIntactCortex"
+        label="{{ 'shoulderMRT.bones.intactCortex.value' | translate }}"
+        name="isHumerusIntactCortex"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+      class="m-t-7"
+    ></rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical"></div>
+  <div class="c-col-1 c-pad-l f-vertical"></div>
+</div>

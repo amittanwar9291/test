@@ -1,0 +1,252 @@
+<div class="f-horizontal f-start main o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-30 m-b-10">
+    <div class="m-l-10 o-radio-list f-vertical p-r-10">
+      <h2 rr-id="hea_c_040392">
+        {{'headCT.vessels.severity.value' | translate}}*
+      </h2>
+      <p-dropdown
+        styleClass="ui-brown-box o-width-100"
+        [options]="w013"
+        name="severityType"
+        rr-id="hea_c_0404130"
+        placeholder="{{'shared.pleaseSelect' | translate}}"
+        rrDropdownClear
+        rrValidation="severityType"
+        (onChange)="checkAndClearHemodynamicallyRelevant()"
+        [(ngModel)]="model.severityType"
+      >
+      </p-dropdown>
+      <p-checkbox
+        [rrDisable]="isHemodynamicallyRelevantDisable()"
+        rr-id="hea_c_040394"
+        name="isHemodynamicallyRelevant"
+        label="{{'headCT.vessels.hemodynamicallyRelevant.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isHemodynamicallyRelevant"
+      >
+      </p-checkbox>
+      <p rr-id="hea_c_040395" class="m-t-17 m-b-0">
+        {{ 'headCT.vessels.diameterStenosis.value' | translate}}
+      </p>
+      <rr-number-input
+        [label]="'headCT.vessels.inMm.value' | translate"
+        inputRrId="hea_c_040396"
+        labelRrId="hea_c_040397"
+        name="diameterStenosisInMm"
+        [config]="{min: 1, max: 30}"
+        [(ngModel)]="model.diameterStenosisInMm"
+        (announceModelChange)="calculate()"
+      ></rr-number-input>
+      <p rr-id="hea_c_040398" class="text-break m-b-0">
+        {{ 'headCT.vessels.diameterDiseaseFreePoststenoticSegment.value' |
+        translate}}
+      </p>
+      <rr-number-input
+        [label]="'headCT.vessels.inMm.value' | translate"
+        inputRrId="hea_c_040399"
+        labelRrId="hea_c_0403100"
+        name="diameterDiseaseFreePoststenoticSegmentInMm"
+        [config]="{min: 1, max: 30}"
+        [(ngModel)]="model.diameterDiseaseFreePoststenoticSegmentInMm"
+        (announceModelChange)="calculate()"
+      ></rr-number-input>
+      <p rr-id="hea_c_0403101" class="text-break m-b-0">
+        {{ 'headCT.vessels.degreeOfStenosisCalculatedInNASCET.value' |
+        translate}}
+      </p>
+      <rr-number-input
+        [label]="'headCT.vessels.inPercentage.value' | translate"
+        inputRrId="hea_c_0403102"
+        labelRrId="hea_c_0403103"
+        name="degreeOfStenosisCalculatedInNASCETInPercentage"
+        [config]="{readonly: true}"
+        [(ngModel)]="model.degreeOfStenosisCalculatedInNASCETInPercentage"
+        rrValidation="degreeOfStenosisCalculatedInNASCETInPercentage"
+      ></rr-number-input>
+    </div>
+  </div>
+  <div class="f-vertical m-t-30 m-b-10">
+    <h2 rr-id="hea_c_0404137" class="m-b-10 p-l-25">
+      {{'headCT.vessels.form.value' | translate}}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad">
+        <div class="m-l-10 o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="hea_c_0404138"
+            label="{{'headCT.vessels.concentric.value' | translate}}"
+            name="formType"
+            rrUnClickRadio
+            [value]="formTypeEnum.Concentric"
+            [(ngModel)]="model.formType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_0404139"
+            label="{{'headCT.vessels.eccentric.value' | translate}}"
+            name="formType"
+            rrUnClickRadio
+            [value]="formTypeEnum.Eccentric"
+            [(ngModel)]="model.formType"
+          >
+          </p-radioButton>
+          <h2 rr-id="hea_c_0404140" class="m-t-20">
+            {{'headCT.vessels.longitudinalExpansionThrombus.value' | translate}}
+          </h2>
+          <rr-number-input
+            [label]="'headCT.vessels.inMm.value' | translate"
+            inputRrId="hea_c_0404141"
+            labelRrId="hea_c_0404142"
+            name="longitudinalExpansionThrombusInMm"
+            [config]="{min: 1, max: 150, placeholder: '---'}"
+            [(ngModel)]="model.longitudinalExpansionThrombusInMm"
+            (announceModelChange)="calculate()"
+          ></rr-number-input>
+          <p-checkbox
+            rr-id="hea_c_0404143"
+            name="isShortStenosis"
+            label="{{'headCT.vessels.shortStenosis.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isShortStenosis"
+          >
+          </p-checkbox>
+          <h2 rr-id="hea_c_0404144" class="m-t-25">
+            {{'headCT.vessels.collateralization.value' | translate}}
+          </h2>
+          <p rr-id="hea_c_0404145">
+            {{'headCT.vessels.severity.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="hea_c_0404146"
+            label="{{'headCT.vessels.no.value' | translate}}"
+            name="collateralizationSeverityType"
+            rrUnClickRadio
+            [value]="collateralizationSeverityTypeEnum.No"
+            [(ngModel)]="model.collateralizationSeverityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_0404147"
+            label="{{'headCT.vessels.weak.value' | translate}}"
+            name="collateralizationSeverityType"
+            rrUnClickRadio
+            [value]="collateralizationSeverityTypeEnum.Low"
+            [(ngModel)]="model.collateralizationSeverityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_0404148"
+            label="{{'headCT.vessels.moderate.value' | translate}}"
+            name="collateralizationSeverityType"
+            rrUnClickRadio
+            [value]="collateralizationSeverityTypeEnum.Moderate"
+            [(ngModel)]="model.collateralizationSeverityType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_0404149"
+            label="{{'headCT.vessels.severe.value' | translate}}"
+            name="collateralizationSeverityType"
+            rrUnClickRadio
+            [value]="collateralizationSeverityTypeEnum.Severe"
+            [(ngModel)]="model.collateralizationSeverityType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div class="m-l-10 o-radio-list">
+          <p rr-id="hea_c_040530">
+            {{'headCT.vessels.intracranial.value' | translate}}
+          </p>
+          <p-checkbox
+            rr-id="hea_c_040531"
+            name="isAntCommunicatingArtery"
+            label="{{'headCT.vessels.antCommunicatingArtery.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isAntCommunicatingArtery"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_040532"
+            name="isPostCommunicatingArtery"
+            label="{{'headCT.vessels.postCommunicatingArtery.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isPostCommunicatingArtery"
+          >
+          </p-checkbox>
+          <p rr-id="hea_c_040533" class="m-t-18">
+            {{'headCT.vessels.extracranial.value' | translate}}
+          </p>
+          <p-checkbox
+            labelStyleClass="text-break"
+            rr-id="hea_c_040534"
+            name="isCollateralizationOfTheICAViaECABranches"
+            label="{{'headCT.vessels.collateralizationOfTheICAVaECABranches.value' | translate}}"
+            binary="true"
+            rrContentReset="retrogradePerfusionOfTheOphthalmicArteryContainer"
+            [(ngModel)]="model.isCollateralizationOfTheICAViaECABranches"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content o-radio-list"
+            id="retrogradePerfusionOfTheOphthalmicArteryContainer"
+            [rrDisable]="!model.isCollateralizationOfTheICAViaECABranches"
+          >
+            <p-checkbox
+              labelStyleClass="text-break"
+              rr-id="hea_c_040535"
+              name="isRetrogradePerfusionOfTheOphthalmicArtery"
+              label="{{'headCT.vessels.retrogradePerfusionOfTheOphthalmicArtery.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isRetrogradePerfusionOfTheOphthalmicArtery"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            labelStyleClass="text-break"
+            rr-id="hea_c_040536"
+            name="isPerfusionOfTheICAParsCervicalis"
+            label="{{'headCT.vessels.perfusionOfTheICAParsCervicalis.value' | translate}}"
+            binary="true"
+            rrContentReset="perfusionOfTheICAParsCervicalisDetailsContainer"
+            [(ngModel)]="model.isPerfusionOfTheICAParsCervicalis"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content o-radio-list"
+            id="perfusionOfTheICAParsCervicalisDetailsContainer"
+            [rrDisable]="!model.isPerfusionOfTheICAParsCervicalis"
+          >
+            <p-checkbox
+              labelStyleClass="text-break"
+              rr-id="hea_c_040537"
+              name="isThroughContralateralExternalCarotidArtery"
+              label="{{'headCT.vessels.throughContralateralExternalCarotidArtery.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isThroughContralateralExternalCarotidArtery"
+            >
+            </p-checkbox>
+            <p-checkbox
+              labelStyleClass="text-break"
+              rr-id="hea_c_040538"
+              name="isThroughIpsilateralVertebralArtery"
+              label="{{'headCT.vessels.throughIpsilateralVertebralArtery.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isThroughIpsilateralVertebralArtery"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="hea_c_040539"
+            name="isLeptomeningealCollaterals"
+            label="{{'headCT.vessels.leptomeningealCollaterals.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLeptomeningealCollaterals"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

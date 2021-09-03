@@ -1,0 +1,99 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="ang_m_080205">
+      {{'angiographyMRT.pelvisLegArteries.pathology.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="ang_m_080206"
+      label="{{'angiographyMRT.pelvisLegArteries.vascularStenosis.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.VascularStenosis"
+      [(ngModel)]="model.pathologyType"
+      [rrContentReset]="'vascularPathologyTypeCont chronicAortiliacCont chronicCruropedalCont chronicFemoropoplitealCont'"
+      rrValidation="pathologyType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080207"
+      label="{{'angiographyMRT.pelvisLegArteries.vascularPathologyDiffuseClassificationAccording.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.VascularPathology"
+      [(ngModel)]="model.pathologyType"
+      [rrContentReset]="'vascularStenosisCont'"
+      rrValidation="pathologyType"
+    ></p-radioButton>
+
+    <div
+      *ngIf="model.pathologyType === pathologyTypeEnum.VascularPathology"
+      class="f-vertical f-start o-radio-list"
+      id="vascularPathologyTypeCont"
+    >
+      <h2 rr-id="ang_m_080208" class="m-t-19">
+        {{'angiographyMRT.pelvisLegArteries.classificationAccordingToTASC.value'
+        | translate}}
+      </h2>
+
+      <p-radioButton
+        rr-id="ang_m_080209"
+        class="m-b-14"
+        label="{{'angiographyMRT.pelvisLegArteries.chronicAortoiliacocclusiveDisease.value' | translate}}"
+        name="classificationAccordingToTASCIIType"
+        [value]="classificationAccordingToTASCIITypeEnum.ChronicAortoiliac"
+        [(ngModel)]="model.classificationAccordingToTASCIIType"
+        rrInfoIcon="ang_m_08_02"
+        [rrContentReset]="'chronicCruropedalCont chronicFemoropoplitealCont'"
+        rrValidation="classificationAccordingToTASCIIType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080210"
+        class="m-b-14"
+        label="{{'angiographyMRT.pelvisLegArteries.chronicFemoropoplitealocclusiveDisease.value' | translate}}"
+        name="classificationAccordingToTASCIIType"
+        [value]="classificationAccordingToTASCIITypeEnum.ChronicFemoropopliteal"
+        [(ngModel)]="model.classificationAccordingToTASCIIType"
+        rrInfoIcon="ang_m_08_03"
+        [rrContentReset]="'chronicAortiliacCont chronicCruropedalCont'"
+        rrValidation="classificationAccordingToTASCIIType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080211"
+        label="{{'angiographyMRT.pelvisLegArteries.chronicCruropedalocclusiveDisease.value' | translate}}"
+        name="classificationAccordingToTASCIIType"
+        [value]="classificationAccordingToTASCIITypeEnum.ChronicCruroPedal"
+        [(ngModel)]="model.classificationAccordingToTASCIIType"
+        [rrContentReset]="'chronicAortiliacCont chronicFemoropoplitealCont'"
+        rrValidation="classificationAccordingToTASCIIType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    *ngIf="model.pathologyType !== pathologyTypeEnum.VascularStenosis && model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.None"
+    class="f-horizontal f-start col-h-100 c-pad-l c-sep-l"
+  >
+    <div class="c-col-1  c-sep c-pad-r"></div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+
+  <rr-vascular-stenosis
+    class="m-t-37"
+    *ngIf="model.pathologyType === pathologyTypeEnum.VascularStenosis"
+    [model]="model"
+  ></rr-vascular-stenosis>
+
+  <rr-chronic-aortiliac
+    class="m-t-31"
+    *ngIf="model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.ChronicAortoiliac"
+    [model]="model"
+  ></rr-chronic-aortiliac>
+  <rr-chronic-femoropopliteal
+    class="m-t-31"
+    *ngIf="model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.ChronicFemoropopliteal"
+    [model]="model"
+  ></rr-chronic-femoropopliteal>
+  <rr-chronic-cruropedal
+    class="m-t-31"
+    *ngIf="model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.ChronicCruroPedal"
+    [model]="model"
+  ></rr-chronic-cruropedal>
+</div>

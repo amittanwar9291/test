@@ -1,0 +1,126 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-start f-vertical o-list m-b-15">
+        <h1 rr-id="sho_m_040103" class="m-b-20">
+          {{ 'shoulderMRT.bones.finding.value' | translate }}*
+        </h1>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="sho_m_040104"
+            name="areFindings"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'shoulderMRT.bones.noOsseousFinding.value' | translate }}"
+            [value]="areFindings.No"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_040105"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'shoulderMRT.bones.finding.value' | translate }}"
+            name="areFindings"
+            [value]="areFindings.Yes"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== 'True'"
+        [customLabelCalculator]="getCustomLabel"
+        [setDescriptionTypes]="[{ findingName: findingType.BoneTumor }]"
+        validationName="findings"
+      ></rr-finding-column>
+    </div>
+
+    <div
+      class="f-start f-vertical"
+      [ngClass]="{ 'c-col-4 c-pad-l': !isTabView }"
+    >
+      <div
+        class="c-col-4 f-start f-vertical"
+        [ngClass]="{
+        'm-h-90': !isTabView,
+        'c-pad-l m-h-40': isTabView,
+        'm-b-31': hasRegularMargin,
+        'm-b-23': findingHandler.currentItem.findingType === findingType.BoneMarrowEdema,
+        'm-b-3': findingHandler.currentItem.findingType === findingType.Fracture,
+        'm-b-10': findingHandler.currentItem.findingType === findingType.BoneTumor
+        }"
+      >
+        <h1
+          rr-id="sho_m_040201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          class="o-width-100"
+        >
+          {{ 'shoulderMRT.bones.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+        <p
+          *ngIf="findingHandler.currentItem.findingType === findingType.BoneMarrowEdema"
+          rr-id="sho_m_0402200"
+          class="font-15 text-break m-t-17 l-h-18"
+        >
+          {{ 'shoulderMRT.bones.boneMarrowEdemaDescription.value' | translate }}
+        </p>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <rr-fracture
+          *ngSwitchCase="findingType.Fracture"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-fracture>
+
+        <rr-bone-marrow-edema
+          *ngSwitchCase="findingType.BoneMarrowEdema"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-bone-marrow-edema>
+
+        <rr-post-traumatic
+          *ngSwitchCase="findingType.PostTraumatic"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-post-traumatic>
+
+        <rr-humerus-necrosis
+          *ngSwitchCase="findingType.HumerusNecrosis"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-humerus-necrosis>
+
+        <rr-degeneration
+          *ngSwitchCase="findingType.Degeneration"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-degeneration>
+
+        <rr-tumor
+          *ngSwitchCase="findingType.BoneTumor"
+          [model]="findingHandler.currentItem"
+          [technologyModel]="technologyModel"
+          class="col-h-100"
+        ></rr-tumor>
+
+        <rr-congenital
+          *ngSwitchCase="findingType.Congenital"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-congenital>
+
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

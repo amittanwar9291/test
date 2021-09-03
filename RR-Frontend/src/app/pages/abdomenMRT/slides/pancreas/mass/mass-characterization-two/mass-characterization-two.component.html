@@ -1,0 +1,445 @@
+<div class="c-col-2 f-vertical c-sep c-pad m-t-14 m-b-13">
+  <h2 rr-id="abd_m_060211" class="m-b-10">
+    {{ 'abdomenMRT.pancreas.pancreaticDuct.value' | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep o-list">
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="abd_m_060212">
+          {{ 'abdomenMRT.pancreas.pathology.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_060213"
+          name="pancreaticDuctPathologyType"
+          [(ngModel)]="model.pancreaticDuctPathologyType"
+          [value]="pancreaticDuctPathologyType.Dilatation"
+          label="{{ 'abdomenMRT.pancreas.dilatation.value' | translate }}"
+          (onClick)="resetMeasurementDilatation()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_060214"
+          name="pancreaticDuctPathologyType"
+          [(ngModel)]="model.pancreaticDuctPathologyType"
+          [value]="pancreaticDuctPathologyType.Stenosis"
+          label="{{ 'abdomenMRT.pancreas.stenosis.value' | translate }}"
+          (onClick)="resetMeasurementDilatation()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_060215"
+          name="pancreaticDuctPathologyType"
+          [(ngModel)]="model.pancreaticDuctPathologyType"
+          [value]="pancreaticDuctPathologyType.Abort"
+          label="{{ 'abdomenMRT.pancreas.abort.value' | translate }}"
+          (onClick)="resetMeasurementDilatation()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_060216"
+          name="pancreaticDuctPathologyType"
+          [(ngModel)]="model.pancreaticDuctPathologyType"
+          [value]="pancreaticDuctPathologyType.CaliberVariation"
+          label="{{ 'abdomenMRT.pancreas.caliberVariation.value' | translate }}"
+          (onClick)="resetMeasurementDilatation()"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div
+        *ngIf="model.pancreaticDuctPathologyType === pancreaticDuctPathologyType.Dilatation"
+        class="o-radio-list nested-content"
+      >
+        <h3 rr-id="abd_m_060217">
+          {{ 'abdomenMRT.pancreas.measurementDilatation.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_060218"
+          labelRrId="abd_m_060219"
+          name="measurementDilatation"
+          [(ngModel)]="model.measurementDilatation"
+          label="{{ 'abdomenMRT.pancreas.inMm.value' | translate }}"
+          [config]="{ placeholder: '--', min: 1, max: 99, labelWidth: 140 }"
+        ></rr-number-input>
+      </div>
+      <div
+        *ngIf="showStenosisOrAbortDetails()"
+        class="o-radio-list nested-content"
+      >
+        <h3
+          *ngIf="model.pancreaticDuctPathologyType === pancreaticDuctPathologyType.Stenosis"
+          rr-id="abd_m_060220"
+        >
+          {{ 'abdomenMRT.pancreas.stenosisDetails.value' | translate }}
+        </h3>
+        <h3
+          *ngIf="model.pancreaticDuctPathologyType === pancreaticDuctPathologyType.Abort"
+          rr-id="abd_m_060224"
+        >
+          {{ 'abdomenMRT.pancreas.abortDetails.value' | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_060221"
+          [(ngModel)]="model.isDilationUpstreamDuct"
+          name="isDilationUpstreamDuct"
+          label="{{ 'abdomenMRT.pancreas.dilationUpstreamduct.value' | translate }}"
+          labelStyleClass="text-break"
+          binary="true"
+          rrContentReset="isDilationUpstreamDuct-block"
+        >
+        </p-checkbox>
+        <div
+          id="isDilationUpstreamDuct-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isDilationUpstreamDuct"
+        >
+          <rr-number-input
+            inputRrId="abd_m_060222"
+            labelRrId="abd_m_060223"
+            name="dilationUpstreamDuct"
+            [(ngModel)]="model.dilationUpstreamDuct"
+            label="{{ 'abdomenMRT.pancreas.inMm.value' | translate }}"
+            [config]="{ placeholder: '--', min: 1, max: 99, labelWidth: 140 }"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="abd_m_060238">
+          {{ 'abdomenMRT.pancreas.localization.value' | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_060239"
+          [(ngModel)]="model.isCharacterizationIPancreaticHead"
+          name="isCharacterizationIPancreaticHead"
+          label="{{ 'abdomenMRT.pancreas.pancreaticHead.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060264"
+          [(ngModel)]="model.isCharacterizationIPancreaticCorpus"
+          name="isCharacterizationIPancreaticCorpus"
+          label="{{ 'abdomenMRT.pancreas.pancreaticCorpus.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060265"
+          [(ngModel)]="model.isCharacterizationIPancreaticTail"
+          name="isCharacterizationIPancreaticTail"
+          label="{{ 'abdomenMRT.pancreas.pancreaticTail.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l o-list">
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="abd_m_060361">
+          {{ 'abdomenMRT.pancreas.details.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_060362"
+          [(ngModel)]="model.isIrregularConfiguration"
+          name="isIrregularConfiguration"
+          label="{{ 'abdomenMRT.pancreas.irregularConfiguration.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060363"
+          [(ngModel)]="model.isStringOfPearlsConfiguration"
+          name="isStringOfPearlsConfiguration"
+          label="{{ 'abdomenMRT.pancreas.stringofpearlsConfiguration.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060364"
+          [(ngModel)]="model.isFillingDefects"
+          name="isFillingDefects"
+          label="{{ 'abdomenMRT.pancreas.fillingDefects.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060365"
+          [(ngModel)]="model.isConcretion"
+          name="isConcretion"
+          label="{{ 'abdomenMRT.pancreas.concretion.value' | translate }}"
+          binary="true"
+          rrContentReset="isConcretion-block"
+        >
+        </p-checkbox>
+        <div
+          id="isConcretion-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isConcretion"
+        >
+          <p rr-id="abd_m_060366" class="m-b-7">
+            {{ 'abdomenMRT.pancreas.localization.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="abd_m_060367"
+            [(ngModel)]="model.isPapillaDuodeniMajor"
+            name="isPapillaDuodeniMajor"
+            label="{{ 'abdomenMRT.pancreas.papillaDuodeniMajor.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <div class="o-radio-list">
+            <h3 rr-id="abd_m_060368">
+              {{ 'abdomenMRT.pancreas.diameter.value' | translate }}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_060369"
+              labelRrId="abd_m_060370"
+              name="diameter"
+              [(ngModel)]="model.diameter"
+              label="{{ 'abdomenMRT.pancreas.inMm.value' | translate }}"
+              [config]="{ placeholder: '--', min: 1, max: 99, labelWidth: 140 }"
+            ></rr-number-input>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="abd_m_0603120"
+          [(ngModel)]="model.isIntraductalGas"
+          name="isIntraductalGas"
+          label="{{ 'abdomenMRT.pancreas.intraductalGas.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad m-t-14 m-b-13 o-list">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="abd_m_060442">
+      {{ 'abdomenMRT.pancreas.growthPatterns.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="abd_m_060443"
+      name="growthPatternsType"
+      [(ngModel)]="model.growthPatternsType"
+      [value]="growthPatternsType.Displacement"
+      label="{{ 'abdomenMRT.pancreas.displacement.value' | translate }}"
+      rrUnClickRadio
+      rrContentReset="displacement-block infiltration-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_060444"
+      name="growthPatternsType"
+      [(ngModel)]="model.growthPatternsType"
+      [value]="growthPatternsType.Infiltration"
+      label="{{ 'abdomenMRT.pancreas.infiltration.value' | translate }}"
+      rrUnClickRadio
+      rrContentReset="displacement-block infiltration-block"
+    >
+    </p-radioButton>
+  </div>
+  <div
+    *ngIf="model.growthPatternsType === growthPatternsType.Displacement"
+    id="displacement-block"
+    class="f-vertical o-radio-list nested-content"
+  >
+    <h3 rr-id="abd_m_060445">
+      {{ 'abdomenMRT.pancreas.displacementDetails.value' | translate }}
+    </h3>
+    <p-checkbox
+      rr-id="abd_m_060446"
+      [(ngModel)]="model.isMassEffect"
+      name="isMassEffect"
+      label="{{ 'abdomenMRT.pancreas.massEffect.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+  <div
+    *ngIf="model.growthPatternsType === growthPatternsType.Infiltration"
+    id="infiltration-block"
+    class="f-vertical o-radio-list nested-content"
+  >
+    <h3 rr-id="abd_m_060447">
+      {{ 'abdomenMRT.pancreas.infiltrationDetails.value' | translate }}
+    </h3>
+    <p-checkbox
+      rr-id="abd_m_060448"
+      [(ngModel)]="model.isSpleen"
+      name="isSpleen"
+      label="{{ 'abdomenMRT.pancreas.spleen.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="abd_m_060449"
+      [(ngModel)]="model.isDuodenum"
+      name="isDuodenum"
+      label="{{ 'abdomenMRT.pancreas.duodenum.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="abd_m_060450"
+      [(ngModel)]="model.isMesocolonTransversum"
+      name="isMesocolonTransversum"
+      label="{{ 'abdomenMRT.pancreas.mesocolonTransversum.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="abd_m_060451"
+      [(ngModel)]="model.isStomach"
+      name="isStomach"
+      label="{{ 'abdomenMRT.pancreas.stomach.value' | translate }}"
+      binary="true"
+      rrContentReset="isStomach-block"
+    >
+    </p-checkbox>
+    <div
+      id="isStomach-block"
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isStomach"
+    >
+      <p-checkbox
+        rr-id="abd_m_060452"
+        [(ngModel)]="model.isStomachSuspicionOf"
+        name="isStomachSuspicionOf"
+        label="{{ 'abdomenMRT.pancreas.suspicionOf.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad-l m-t-14 m-b-13 o-list">
+  <div class="f-vertical o-radio-list" [rrDisable]="!isCMReinforced">
+    <h2 rr-id="abd_m_060522">
+      {{ 'abdomenMRT.pancreas.contrastEnhancementQuantitative.value' | translate
+      }}
+    </h2>
+    <p-radioButton
+      rr-id="abd_m_060523"
+      name="contrastEnhancementQuantitative"
+      [(ngModel)]="model.contrastEnhancementQuantitative"
+      [value]="contrastEnhancementQuantitativeType.NoneEnhancement"
+      label="{{ 'abdomenMRT.pancreas.none.value' | translate }}"
+      rrContentReset="contrastEnhancementQuantitative-block1 contrastEnhancementQuantitative-block2"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_060524"
+      name="contrastEnhancementQuantitative"
+      [(ngModel)]="model.contrastEnhancementQuantitative"
+      [value]="contrastEnhancementQuantitativeType.Low"
+      label="{{ 'abdomenMRT.pancreas.low.value' | translate }}"
+      rrContentReset="contrastEnhancementQuantitative-block1 contrastEnhancementQuantitative-block2"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_060526"
+      name="contrastEnhancementQuantitative"
+      [(ngModel)]="model.contrastEnhancementQuantitative"
+      [value]="contrastEnhancementQuantitativeType.Strong"
+      label="{{ 'abdomenMRT.pancreas.strong.value' | translate }}"
+      rrContentReset="contrastEnhancementQuantitative-block1 contrastEnhancementQuantitative-block2"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <div
+      id="contrastEnhancementQuantitative-block1"
+      class="o-radio-list nested-content"
+      [rrDisable]="isSubHomogeneityTypeDisabled()"
+    >
+      <p-radioButton
+        rr-id="abd_m_060527"
+        name="contrastEnhancementHomogeneityType"
+        [(ngModel)]="model.contrastEnhancementHomogeneityType"
+        [value]="homogeneityType.Homogeneous"
+        label="{{ 'abdomenMRT.pancreas.homogeneous.value' | translate }}"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_060528"
+        name="contrastEnhancementHomogeneityType"
+        [(ngModel)]="model.contrastEnhancementHomogeneityType"
+        [value]="homogeneityType.Heterogeneous"
+        label="{{ 'abdomenMRT.pancreas.heterogeneous.value' | translate }}"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h3 rr-id="abd_m_060529">
+      {{ 'abdomenMRT.pancreas.phase.value' | translate }}
+    </h3>
+    <p-radioButton
+      rr-id="abd_m_060530"
+      name="phaseType"
+      [(ngModel)]="model.phaseType"
+      [value]="phaseType.EarlyArterial"
+      label="{{ 'abdomenMRT.pancreas.earlyArterial.value' | translate }}"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_060531"
+      name="phaseType"
+      [(ngModel)]="model.phaseType"
+      [value]="phaseType.PortalVenous"
+      label="{{ 'abdomenMRT.pancreas.portalVenous.value' | translate }}"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_060532"
+      name="phaseType"
+      [(ngModel)]="model.phaseType"
+      [value]="phaseType.LatePhase"
+      label="{{ 'abdomenMRT.pancreas.latephase.value' | translate }}"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div
+    id="contrastEnhancementQuantitative-block2"
+    class="f-vertical o-radio-list p-r-15"
+    [rrDisable]="isSubHomogeneityTypeDisabled()"
+  >
+    <h2 rr-id="abd_m_060533">
+      {{ 'abdomenMRT.pancreas.contrastEnhancementDistribution.value' | translate
+      }}
+    </h2>
+    <p-dropdown
+      rr-id="abd_m_060534"
+      [(ngModel)]="model.contrastEnhancementDistribution"
+      styleClass="o-width-100 ui-brown-box"
+      name="contrastEnhancementDistribution"
+      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      [options]="contrastEnhancementDistributionOptions"
+      rrDropdownClear
+    >
+    </p-dropdown>
+  </div>
+  <div class="f-vertical o-radio-list" [rrDisable]="!isDWI">
+    <h2 rr-id="abd_m_060535" rrInfoIcon="abd_m_06_02">
+      {{ 'abdomenMRT.pancreas.diffusionImaging.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="abd_m_060536"
+      [(ngModel)]="model.isDiffusionRestriction"
+      name="isDiffusionRestriction"
+      label="{{ 'abdomenMRT.pancreas.diffusionRestriction.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="largeLocalizerToByOpened === largeLocalizers.SPINE"
+    style="margin-top: -111px;"
+  >
+    <rr-spine-complex
+      (close)="onLargeLocalizerCosed()"
+      [logicType]="spineLocationLogicTypeEnum.VertebreEach"
+      [(ngModel)]="findingHandler.currentItem.vertebralColumnLocalization"
+      [selectionAccessibilityMode]="selectionAccessibilityMode.C7toL1"
+      localizationDescription="thoraxCT.bones.spineLocalizerDescription.value"
+      name="spineLocation"
+    ></rr-spine-complex>
+  </div>
+  <div
+    *ngIf="largeLocalizerToByOpened === largeLocalizers.RIBS"
+    class="large-localizer"
+  >
+    <rr-ribs-complex
+      [(ngModel)]="findingHandler.currentItem.ribLocation"
+      (close)="onLargeLocalizerCosed()"
+      name="ribLocalization"
+      descriptionRrid="tho_c_0801201"
+    ></rr-ribs-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerToByOpened">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="tho_c_080103">
+        {{'thoraxCT.bones.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="tho_c_080104"
+          label="{{'thoraxCT.bones.bonyStructuresNormal.value' | translate }}"
+          name="areFindingsFalse"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_080105"
+          label="{{'thoraxCT.bones.finding.value' | translate }}"
+          name="areFindingsTrue"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          class="m-t-8"
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [setDescriptionTypes]="descriptionTypes"
+          [customLabelCalculator]="customLabelCalculator"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType('None') ? 'f-end' : 'f-space-between'"
+    >
+      <div *ngIf="isFindingType('None')" class="f-horizontal main-container">
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div *ngIf="!isFindingType('None')" class="c-col-4 c-pad-l f-vertical">
+        <h1 rr-id="tho_c_050201">
+          {{'thoraxCT.bones.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <rr-fracture-clavicula
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.FractureOfClavicle)"
+        [model]="findingHandler.currentItem"
+      ></rr-fracture-clavicula>
+      <rr-fracture-scapula
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.FractureOfScapula)"
+        [model]="findingHandler.currentItem"
+      ></rr-fracture-scapula>
+      <rr-fracture-ribs
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.FractureOfRibs)"
+        [model]="findingHandler.currentItem"
+      ></rr-fracture-ribs>
+      <rr-fracture-sternum
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.FractureOfSternum)"
+        [model]="findingHandler.currentItem"
+      ></rr-fracture-sternum>
+      <rr-fracture-spine
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.FractureOfSpine)"
+        [model]="findingHandler.currentItem"
+      ></rr-fracture-spine>
+      <rr-mass-all
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.MassClavicle)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-all>
+      <rr-mass-all
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.MassScapula)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-all>
+      <rr-mass-all
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.MassRibs)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-all>
+      <rr-mass-all
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.MassSternum)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-all>
+      <rr-mass-all
+        *ngIf="isFindingType(thoraxBonesFindingsTypeEnum.MassSpine)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-all>
+    </div>
+  </div>
+</form>

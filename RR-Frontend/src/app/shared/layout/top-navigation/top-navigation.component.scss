@@ -1,0 +1,142 @@
+/* Colors */
+$rr-blue: #00aec2;
+$rr-blue-shadow: #6ed1dc;
+$rr-background: #999999;
+
+/*
+  Mixins.
+*/
+@mixin box-shadow-none() {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+@mixin box-shadow-inset() {
+  -webkit-box-shadow: inset 0px 0px 0px 4px $rr-blue-shadow;
+  -moz-box-shadow: inset 0px 0px 0px 4px $rr-blue-shadow;
+  box-shadow: inset 0px 0px 0px 4px $rr-blue-shadow;
+}
+
+@mixin content-centered() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+  Component styling.
+*/
+.nav-container {
+  height: 98px;
+
+  .nav_container__main {
+    flex-wrap: wrap;
+  }
+
+  .nav_container__report {
+    width: 35px;
+  }
+
+  .nav_container__main,
+  .nav_container__report {
+    .align-box {
+      height: 5px;
+      width: 35px;
+    }
+
+    .nav-item {
+      align-items: center;
+
+      &:not(.item-separate) {
+        margin-right: 10px;
+      }
+
+      a {
+        @include box-shadow-inset();
+        @include content-centered();
+        font-family: BentonSansBold;
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: $rr-blue;
+        color: $rr-blue-shadow;
+        cursor: pointer;
+      }
+
+      &:hover > a {
+        @include box-shadow-none();
+        background: $rr-background;
+        color: white;
+      }
+
+      &.visited > a {
+        @include box-shadow-none();
+        background: black;
+        color: white;
+      }
+
+      &.visited:hover > a {
+        @include box-shadow-none();
+        background: $rr-background;
+        color: white;
+      }
+
+      &.active > a {
+        @include box-shadow-none();
+        background: white;
+        color: $rr-blue;
+      }
+
+      &.blocked > a {
+        @include box-shadow-none();
+        background: grey;
+        color: white;
+        cursor: default;
+      }
+
+      & > .indicator {
+        content: "";
+        width: 24px;
+        height: 5px;
+        background-color: $rr-blue;
+
+        &.indicator-visible {
+          background-color: white;
+        }
+      }
+
+      &.item {
+        justify-content: flex-end;
+
+        &-top {
+          padding-bottom: 4px;
+        }
+
+        &-separate {
+          padding-bottom: 0;
+        }
+
+        &-top,
+        &-separate {
+          flex-direction: column;
+
+          & > .indicator {
+            margin-bottom: 5px;
+          }
+        }
+
+        &-bottom {
+          padding-top: 4px;
+          flex-direction: column-reverse;
+
+          & > .indicator {
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+}

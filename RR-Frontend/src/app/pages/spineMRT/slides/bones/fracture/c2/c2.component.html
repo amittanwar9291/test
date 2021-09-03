@@ -1,0 +1,257 @@
+<div class="f-horizontal f-start col-h-100 c-pad-l">
+  <div class="c-col-1 f-vertical o-radio-list f-start c-pad-r">
+    <h2 rr-id="spi_m_060301" class="m-b-36">
+      {{ "spineMRT.bones.fracture.value" | translate }}
+    </h2>
+    <p-radioButton
+      [value]="c1c2FractureTypeEnum.C2"
+      [(ngModel)]="model.c1C2FractureType"
+      label="{{ 'spineMRT.bones.c2.value' | translate }}"
+      rr-id="spi_m_060315"
+      name="c1C2FractureType"
+      rrValidation="c1C2FractureType"
+      rrContentReset="c1c2-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="c1c2FractureTypeEnum.C1C2"
+      [(ngModel)]="model.c1C2FractureType"
+      label="{{ 'spineMRT.bones.c1C2.value' | translate }}"
+      rr-id="spi_m_060316"
+      name="c1C2FractureType"
+      rrValidation="c1C2FractureType"
+      rrContentReset="classification-block c2-block"
+    >
+    </p-radioButton>
+  </div>
+
+  <div class="c-col-1 f-vertical o-radio-list f-start c-sep-l c-pad m-t-57">
+    <div
+      id="c2-block"
+      class="f-vertical o-radio-list f-start"
+      *ngIf="model.c1C2FractureType === 'C2'"
+    >
+      <h2 rr-id="spi_m_0604110">
+        {{ "spineMRT.bones.details.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="c2FractureTypeEnum.Dense"
+        [(ngModel)]="model.c2FractureType"
+        rr-id="spi_m_0604104"
+        label="{{ 'spineMRT.bones.dens.value' | translate }}"
+        name="c2FractureType"
+        rrValidation="c2FractureType"
+        rrInfoIcon="spi_m_06_01"
+        rrContentReset="axisArcType-block noSpecType-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c2FractureTypeEnum.Vertebra"
+        [(ngModel)]="model.c2FractureType"
+        rr-id="spi_m_0604105"
+        label="{{ 'spineMRT.bones.vertebra.value' | translate }}"
+        name="c2FractureType"
+        rrValidation="c2FractureType"
+        rrContentReset="densityType-block axisArcType-block noSpecType-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c2FractureTypeEnum.AxisArc"
+        [(ngModel)]="model.c2FractureType"
+        rr-id="spi_m_0604106"
+        label="{{ 'spineMRT.bones.axisArc.value' | translate }}"
+        name="c2FractureType"
+        rrValidation="c2FractureType"
+        rrInfoIcon="spi_m_06_02"
+        rrContentReset="densityType-block noSpecType-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c2FractureTypeEnum.NoSpec"
+        [(ngModel)]="model.c2FractureType"
+        rr-id="spi_m_0604107"
+        label="{{ 'spineMRT.bones.c2FractureNotFurther.value' | translate }}"
+        name="c2FractureType"
+        rrValidation="c2FractureType"
+        rrContentReset="densityType-block axisArcType-block"
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      id="c1c2-block"
+      class="f-vertical o-radio-list f-start"
+      *ngIf="model.c1C2FractureType === 'C1C2'"
+    >
+      <h2 rr-id="spi_m_0604110">
+        {{ "spineMRT.bones.details.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="c1ToC2FractureTypeEnum.SubluxationWithRotation"
+        [(ngModel)]="model.c1ToC2FractureType"
+        label="{{ 'spineMRT.bones.subluxationWithRotation.value' | translate }}"
+        rr-id="spi_m_0604108"
+        rrValidation="c1ToC2FractureType"
+        name="c1ToC2FractureType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c1ToC2FractureTypeEnum.Displacement"
+        [(ngModel)]="model.c1ToC2FractureType"
+        label="{{ 'spineMRT.bones.displacement.value' | translate }}"
+        rr-id="spi_m_0604109"
+        rrValidation="c1ToC2FractureType"
+        name="c1ToC2FractureType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="classification-block"
+    class="c-col-1 f-vertical f-start o-radio-list c-sep-l c-pad-l"
+    [ngClass]="{
+    'm-t-86': model.c1C2FractureType === c1c2FractureTypeEnum.C2,
+    'm-t-58': model.c1C2FractureType === c1c2FractureTypeEnum.C1C2
+    }"
+  >
+    <div
+      id="densityType-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c2FractureType === 'Dense'"
+    >
+      <h2 rr-id="spi_m_060579">
+        {{ "spineMRT.bones.classification.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="densityTypeEnum.Type1"
+        [(ngModel)]="model.densityType"
+        label="{{ 'spineMRT.bones.andersonDAlonzoTypeI.value' | translate }}"
+        rr-id="spi_m_060580"
+        name="densityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="densityTypeEnum.Type2"
+        [(ngModel)]="model.densityType"
+        label="{{ 'spineMRT.bones.andersonDAlonzoTypeII.value' | translate }}"
+        rr-id="spi_m_060568"
+        name="densityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="densityTypeEnum.Type3"
+        [(ngModel)]="model.densityType"
+        label="{{ 'spineMRT.bones.andersonDAlonzoTypeIII.value' | translate }}"
+        rr-id="spi_m_060569"
+        name="densityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div
+      id="axisArcType-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c2FractureType === 'AxisArc'"
+    >
+      <h2 rr-id="spi_m_060579">
+        {{ "spineMRT.bones.classification.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="axisArcTypeEnum.Type1"
+        label="{{ 'spineMRT.bones.effendiLevineType1.value' | translate }}"
+        [(ngModel)]="model.axisArcType"
+        rr-id="spi_m_060575"
+        name="axisArcType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="axisArcTypeEnum.Type2"
+        label="{{ 'spineMRT.bones.effendiLevineType2.value' | translate }}"
+        [(ngModel)]="model.axisArcType"
+        rr-id="spi_m_060576"
+        name="axisArcType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="axisArcTypeEnum.Type2a"
+        label="{{ 'spineMRT.bones.effendiLevineType2a.value' | translate }}"
+        [(ngModel)]="model.axisArcType"
+        rr-id="spi_m_060577"
+        name="axisArcType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="axisArcTypeEnum.Type3"
+        label="{{ 'spineMRT.bones.effendiLevineType3.value' | translate }}"
+        [(ngModel)]="model.axisArcType"
+        rr-id="spi_m_060578"
+        name="axisArcType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div
+      id="noSpecType-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c2FractureType === 'NoSpec'"
+    >
+      <p-radioButton
+        [value]="noSpecTypeEnum.SuspicionOf"
+        [(ngModel)]="model.noSpecType"
+        label="{{ 'spineMRT.bones.suspicionOf.value' | translate }}"
+        rr-id="spi_m_060570"
+        name="noSpecType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="noSpecTypeEnum.AppearanceOfAnOlderFracture"
+        [(ngModel)]="model.noSpecType"
+        label="{{ 'spineMRT.bones.appearanceOfAnOlder.value' | translate }}"
+        rr-id="spi_m_060571"
+        name="noSpecType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isStability"
+        label="{{'spineMRT.bones.stability.value'| translate}}"
+        rr-id="spi_m_060572"
+        name="isStability"
+        rrContentReset="isStability-block"
+      >
+      </p-checkbox>
+      <div
+        id="isStability-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isStability"
+      >
+        <p-radioButton
+          [value]="stabilityTypeEnum.Stable"
+          [(ngModel)]="model.stabilityType"
+          label="{{ 'spineMRT.bones.stable.value' | translate }}"
+          rr-id="spi_m_060573"
+          name="stabilityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          [value]="stabilityTypeEnum.Unstable"
+          [(ngModel)]="model.stabilityType"
+          label="{{ 'spineMRT.bones.unstable.value' | translate }}"
+          rr-id="spi_m_060574"
+          name="stabilityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

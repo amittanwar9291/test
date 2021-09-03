@@ -1,0 +1,216 @@
+<div
+  [hidden]="model.findingType === findingType.None"
+  class="f-start f-vertical c-col-1 col-h-100 o-list"
+>
+  <h2 rr-id="mam_mx_020501">
+    {{ "mammaMX.medicalHistory.procedureTherapy.value" | translate }} ({{
+    model.number }})
+  </h2>
+
+  <div
+    *ngIf="isAugmentationOrReductionOrBET"
+    class="f-space-between f-vertical o-list col-h-100"
+  >
+    <ng-container *ngTemplateOutlet="date"></ng-container>
+    <div class="f-start f-vertical o-radio-list col-h-320">
+      <ng-container
+        *ngTemplateOutlet="multipleSelectionLocalizerHeader"
+      ></ng-container>
+      <ng-container *ngTemplateOutlet="breastSimpleLocalizer"></ng-container>
+      <ng-container *ngIf="model.findingType === findingType.BreastAmputation">
+        <ng-container *ngTemplateOutlet="breastReconstruction"></ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isFineNeedleOrVacuumOrOpenBiopsy"
+    class="f-space-between f-vertical o-list col-h-100"
+  >
+    <ng-container *ngTemplateOutlet="date"></ng-container>
+    <div class="f-start f-vertical o-radio-list col-h-320">
+      <ng-container
+        *ngTemplateOutlet="singleSelectionLocalizerHeader"
+      ></ng-container>
+      <ng-container *ngTemplateOutlet="breastCrossLocalizer"></ng-container>
+    </div>
+  </div>
+
+  <ng-container [ngSwitch]="model.findingType">
+    <div
+      *ngSwitchCase="findingType.PunchBiopsy"
+      class="f-space-between f-vertical o-list col-h-100"
+    >
+      <ng-container *ngTemplateOutlet="date"></ng-container>
+      <div class="f-start f-vertical o-radio-list col-h-320">
+        <ng-container
+          *ngTemplateOutlet="singleSelectionLocalizerHeader"
+        ></ng-container>
+        <ng-container
+          *ngTemplateOutlet="breastSimpleShoulderLocalizer"
+        ></ng-container>
+      </div>
+    </div>
+
+    <div
+      *ngSwitchCase="findingType.Radio"
+      class="f-space-between f-vertical o-list col-h-100"
+    >
+      <div class="f-start f-vertical o-radio-list">
+        <ng-container *ngTemplateOutlet="timeStatus"></ng-container>
+        <ng-container
+          *ngTemplateOutlet="date; context: { isWithoutHeader: true }"
+        ></ng-container>
+      </div>
+      <div class="f-start f-vertical o-radio-list col-h-320">
+        <ng-container
+          *ngTemplateOutlet="singleSelectionLocalizerHeader"
+        ></ng-container>
+        <ng-container
+          *ngTemplateOutlet="breastSimpleLocalizer; context: { isSingleChoice: true }"
+        ></ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+  <div
+    *ngIf="isAntiHormonalOrChemoOrHormonal"
+    class="f-start f-vertical o-list"
+  >
+    <ng-container *ngTemplateOutlet="timeStatus"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="date; context: { isWithoutHeader: true }"
+    ></ng-container>
+  </div>
+</div>
+
+<ng-template #date let-isWithoutHeader="isWithoutHeader">
+  <rr-month-year-input
+    labelRrId="mam_mx_020503"
+    monthRrId="mam_mx_020504"
+    yearRrId="mam_mx_020505"
+    [(ngModel)]="model.monthyear"
+    label="{{ 'mammaMX.medicalHistory.date.value' | translate }}"
+    [rrDisable]="isAntiHormonalOrChemoOrHormonalOrRadio && model.timeStatusType !== timeStatusType.DateUntil"
+    name="monthyear"
+    [customLabelClass]="isWithoutHeader ? 'date-label-display' : ''"
+    class="custom-label-margin m-t-4"
+  >
+  </rr-month-year-input>
+</ng-template>
+
+<ng-template #timeStatus>
+  <div class="f-start f-vertical o-radio-list m-b-8 m-t-8">
+    <p-radioButton
+      rr-id="mam_mx_020520"
+      [(ngModel)]="model.timeStatusType"
+      label="{{ 'mammaMX.medicalHistory.ongoing.value' | translate }}"
+      name="timeStatusType"
+      [value]="timeStatusType.Ongoing"
+      (onClick)="resetDate()"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="mam_mx_020521"
+      [(ngModel)]="model.timeStatusType"
+      label="{{ 'mammaMX.medicalHistory.dateUntil.value' | translate }}"
+      name="timeStatusType"
+      [value]="timeStatusType.DateUntil"
+      (onClick)="resetDate()"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+</ng-template>
+
+<ng-template #multipleSelectionLocalizerHeader>
+  <p
+    rr-id="mam_mx_020516"
+    class="m-b-3"
+    rrValidation="breastLocation"
+    [inSecondFinding]="true"
+    [noUpdate]="true"
+  >
+    {{ "mammaMX.medicalHistory.localizationMultipleSelection.value" | translate
+    }}*
+  </p>
+</ng-template>
+
+<ng-template #singleSelectionLocalizerHeader>
+  <p
+    rr-id="mam_mx_020517"
+    class="m-b-3"
+    rrValidation="breastLocation"
+    [inSecondFinding]="true"
+    [noUpdate]="true"
+  >
+    {{ "mammaMX.medicalHistory.localizationSingleSelection.value" | translate
+    }}*
+  </p>
+</ng-template>
+
+<ng-template #breastSimpleLocalizer let-mode="isSingleChoice">
+  <div class="f-start f-vertical m-b-3">
+    <rr-breast-simple
+      rr-id="mam_mx_020506"
+      [(ngModel)]="model.breastLocation"
+      name="breastLocation"
+      (ngModelChange)="updateReconstruction()"
+      rrValidation="breastLocation"
+      [isSingleChoice]="mode"
+      [inSecondFinding]="true"
+      [isLocalizer]="true"
+      #breastLocation1
+      [elementUpdate]="breastLocation1.announceSelection"
+    ></rr-breast-simple>
+  </div>
+</ng-template>
+
+<ng-template #breastCrossLocalizer>
+  <div class="f-start f-vertical m-b-3">
+    <rr-breast-cross
+      rr-id="mam_mx_020518"
+      [(ngModel)]="model.breastLocation"
+      name="breastLocation"
+      (ngModelChange)="updateReconstruction()"
+      [isSingleChoice]="true"
+      rrValidation="breastLocation"
+      [inSecondFinding]="true"
+      [isLocalizer]="true"
+      #breastLocation2
+      [elementUpdate]="breastLocation2.announceSelection"
+    ></rr-breast-cross>
+  </div>
+</ng-template>
+
+<ng-template #breastSimpleShoulderLocalizer>
+  <div class="f-start f-vertical m-b-3">
+    <rr-breast-simple-shoulder
+      rr-id="mam_mx_020519"
+      [(ngModel)]="model.breastLocation"
+      name="breastLocation"
+      (ngModelChange)="updateReconstruction()"
+      [isSingleChoice]="true"
+      rrValidation="breastLocation"
+      [inSecondFinding]="true"
+      [isLocalizer]="true"
+      #breastLocation3
+      [elementUpdate]="breastLocation3.announceSelection"
+    ></rr-breast-simple-shoulder>
+  </div>
+</ng-template>
+
+<ng-template #breastReconstruction>
+  <div class="f-start f-vertical">
+    <rr-breast-reconstruction
+      [labels]="reconstructionLabels"
+      [(ngModel)]="model.reconstruction"
+      name="reconstruction"
+      [breastLocation]="model.breastLocation"
+      rrValidation="breastLocation"
+      [inSecondFinding]="true"
+      [isLocalizer]="true"
+      rrModulePrefix="mam_mx"
+    >
+    </rr-breast-reconstruction>
+  </div>
+</ng-template>

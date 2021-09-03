@@ -1,0 +1,358 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-14 m-b-12 o-radio-list">
+      <div
+        class="f-vertical o-radio-list m-b-10"
+        [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+      >
+        <h2 rr-id="nec_m_040208" class="m-b-4">
+          {{'neckMRT.pharynx.differentialDiagnosis1.value' | translate}}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="nec_m_040209"
+          [diagnosisNumber]="1"
+          [options]="diffDiagnosisOptions"
+          [(ngModel)]="model.differentialDiagnosis"
+          name="differentialDiagnosis"
+          group="true"
+          isActiveOnIKnow="true"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel()"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical o-radio-list m-b-32"
+        [rrDisable]="model.differentialDiagnosis === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="nec_m_040210"
+          [(ngModel)]="model.isProvenHistology"
+          name="isProvenHistology"
+          label="{{ 'neckMRT.pharynx.provenHistology.value' | translate }}"
+          binary="true"
+          rrContentReset="isProvenHistologyBlock"
+        >
+        </p-checkbox>
+        <div
+          id="isProvenHistologyBlock"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isProvenHistology"
+        >
+          <p-radioButton
+            rr-id="nec_m_040211"
+            [(ngModel)]="model.provenHistologyType"
+            label="{{ 'neckMRT.pharynx.benign.value' | translate }}"
+            [value]="provenHistologyType.Benign"
+            rrUnClickRadio
+            name="provenHistologyType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="nec_m_040212"
+            [(ngModel)]="model.provenHistologyType"
+            label="{{ 'neckMRT.pharynx.malignant.value' | translate }}"
+            [value]="provenHistologyType.Malignant"
+            rrUnClickRadio
+            name="provenHistologyType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      >
+      </rr-reference-picture>
+    </div>
+    <div class="f-vertical c-pad-l m-t-9 m-b-12">
+      <h2
+        rr-id="nec_m_040325"
+        rrInfoIcon="nec_m_04_01"
+        [infoIconPdfLandscape]="true"
+        class="m-t-5 m-b-10"
+      >
+        {{'neckMRT.pharynx.localization.value' | translate}}*
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad-r o-radio-list">
+          <p-checkbox
+            rr-id="nec_m_040326"
+            name="isNasopharynx"
+            label="{{'neckMRT.pharynx.nasopharynx.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isNasopharynx"
+            rrInfoIcon="nec_m_04_02"
+            [infoIconPdfLandscape]="true"
+            rrContentReset="isNasopharynxBlock"
+            rrValidation="isNasopharynx isOropharynx isHypopharynx"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isNasopharynxBlock"
+            [rrDisable]="!model.isNasopharynx"
+          >
+            <h3 rr-id="nec_m_040327" class="m-b-11">
+              {{'neckMRT.pharynx.region.value' | translate}}*
+            </h3>
+            <p-checkbox
+              rr-id="nec_m_040328"
+              name="isRoof"
+              label="{{'neckMRT.pharynx.roof.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isRoof"
+              rrContentReset="isRoofBlock"
+              rrValidation="isRoof isNasopharynxPosteriorWall isNasopharynxLateralWall isInferiorSoftPalate"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isRoofBlock"
+              [rrDisable]="!model.isRoof"
+            >
+              <p-checkbox
+                rr-id="nec_m_040329"
+                name="isPharyngealTonsil"
+                label="{{'neckMRT.pharynx.pharyngealTonsil.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isPharyngealTonsil"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              rr-id="nec_m_040330"
+              name="isNasopharynxPosteriorWall"
+              label="{{'neckMRT.pharynx.posteriorWall.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isNasopharynxPosteriorWall"
+              rrValidation="isRoof isNasopharynxPosteriorWall isNasopharynxLateralWall isInferiorSoftPalate"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="nec_m_040331"
+              name="isNasopharynxLateralWall"
+              label="{{'neckMRT.pharynx.lateralWall.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isNasopharynxLateralWall"
+              rrContentReset="isNasopharynxLateralWallBlock"
+              rrValidation="isRoof isNasopharynxPosteriorWall isNasopharynxLateralWall isInferiorSoftPalate"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isNasopharynxLateralWallBlock"
+              [rrDisable]="!model.isNasopharynxLateralWall"
+            >
+              <p-checkbox
+                rr-id="nec_m_040332"
+                name="isTorusTubarius"
+                label="{{'neckMRT.pharynx.torusTubarius.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isTorusTubarius"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_040333"
+                name="isPharyngealRecess"
+                label="{{'neckMRT.pharynx.pharyngealRecess.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isPharyngealRecess"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              rr-id="nec_m_040334"
+              name="isInferiorSoftPalate"
+              label="{{'neckMRT.pharynx.inferiorSoftPalate.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isInferiorSoftPalate"
+              rrValidation="isRoof isNasopharynxPosteriorWall isNasopharynxLateralWall isInferiorSoftPalate"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="nec_m_040408"
+            rrInfoIcon="nec_m_04_03"
+            [infoIconPdfLandscape]="true"
+            name="isOropharynx"
+            label="{{'neckMRT.pharynx.oropharynx.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isOropharynx"
+            rrContentReset="isOropharynxBlock"
+            rrValidation="isNasopharynx isOropharynx isHypopharynx"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isOropharynxBlock"
+            [rrDisable]="!model.isOropharynx"
+          >
+            <h3 rr-id="nec_m_040409">
+              {{'neckMRT.pharynx.region.value' | translate}}*
+            </h3>
+            <p-checkbox
+              rr-id="nec_m_040410"
+              name="isOropharynxPosteriorWall"
+              label="{{'neckMRT.pharynx.posteriorWall.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isOropharynxPosteriorWall"
+              rrValidation="isOropharynxPosteriorWall isOropharynxLateralWall isInferior"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="nec_m_040411"
+              name="isOropharynxLateralWall"
+              label="{{'neckMRT.pharynx.lateralWall.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isOropharynxLateralWall"
+              rrContentReset="isOropharynxLateralWallBlock"
+              rrValidation="isOropharynxPosteriorWall isOropharynxLateralWall isInferior"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isOropharynxLateralWallBlock"
+              [rrDisable]="!model.isOropharynxLateralWall"
+            >
+              <p-checkbox
+                rr-id="nec_m_040412"
+                name="isTonsilLodge"
+                label="{{'neckMRT.pharynx.tonsilLodge.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isTonsilLodge"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_040413"
+                name="isLateralPharyngealWall"
+                label="{{'neckMRT.pharynx.lateralPharyngealWall.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isLateralPharyngealWall"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              rr-id="nec_m_040414"
+              name="isInferior"
+              label="{{'neckMRT.pharynx.inferior.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isInferior"
+              rrContentReset="isInferiorBlock"
+              rrValidation="isOropharynxPosteriorWall isOropharynxLateralWall isInferior"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isInferiorBlock"
+              [rrDisable]="!model.isInferior"
+            >
+              <p-checkbox
+                rr-id="nec_m_040415"
+                name="isTongueBase"
+                label="{{'neckMRT.pharynx.tongueBase.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isTongueBase"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_040416"
+                name="isInferiorLingualTonsils"
+                label="{{'neckMRT.pharynx.lingualTonsils.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isInferiorLingualTonsils"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_040417"
+                name="isEpiglottisUpperMargin"
+                label="{{'neckMRT.pharynx.epiglottisUpperMargin.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isEpiglottisUpperMargin"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="nec_m_040418"
+                name="isInferiorValleculae"
+                label="{{'neckMRT.pharynx.valleculae.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isInferiorValleculae"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="nec_m_040502"
+            rrInfoIcon="nec_m_04_03"
+            [infoIconPdfLandscape]="true"
+            name="isHypopharynx"
+            label="{{'neckMRT.pharynx.hypopharynx.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isHypopharynx"
+            rrContentReset="isHypopharynxBlock"
+            rrValidation="isNasopharynx isOropharynx isHypopharynx"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isHypopharynxBlock"
+            [rrDisable]="!model.isHypopharynx"
+          >
+            <h3 rr-id="nec_m_040503">
+              {{'neckMRT.pharynx.region.value' | translate}}*
+            </h3>
+            <p-checkbox
+              rr-id="nec_m_040504"
+              name="isHypopharynxPosteriorWall"
+              label="{{'neckMRT.pharynx.posteriorWall.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isHypopharynxPosteriorWall"
+              rrValidation="isHypopharynxPosteriorWall isPiriformSinus isPostcricoidRegion"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="nec_m_040505"
+              name="isPiriformSinus"
+              label="{{'neckMRT.pharynx.piriformSinus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPiriformSinus"
+              rrValidation="isHypopharynxPosteriorWall isPiriformSinus isPostcricoidRegion"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="nec_m_040506"
+              name="isPostcricoidRegion"
+              label="{{'neckMRT.pharynx.postcricoidRegion.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPostcricoidRegion"
+              rrValidation="isHypopharynxPosteriorWall isPiriformSinus isPostcricoidRegion"
+            >
+            </p-checkbox>
+          </div>
+          <h2 rr-id="nec_m_040539" class="m-t-22 m-b-4">
+            {{'neckMRT.pharynx.orientationAxial.value' | translate}}*
+          </h2>
+          <p-dropdown
+            rr-id="nec_m_040540"
+            [(ngModel)]="model.orientationAxialType"
+            styleClass="o-width-100 ui-brown-box"
+            name="orientationAxialType"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="orientationAxialOptions"
+            rrDropdownClear
+            class="c-pad-r"
+            rrValidation="orientationAxialType"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="f-horizontal m-t-14 m-b-13">
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <h2 rr-id="abd_m_070259" class="m-b-9">
+      {{ 'abdomenMRT.kidneys.differentialDiagnosis.value' | translate }}
+    </h2>
+    <div
+      class="f-vertical o-radio-list m-b-16"
+      [rrDisable]="model.descriptionType === descriptionType.IKnow"
+    >
+      <h3 rr-id="abd_m_070260" class="m-b-4">
+        {{ 'abdomenMRT.kidneys.differentialDiagnosis1.value' | translate }}
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_070282"
+        class="m-b-11"
+        [diagnosisNumber]="1"
+        [group]="isDropdownGrouped()"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.kidneysDifferentialDiagnosisType1"
+        name="kidneysDifferentialDiagnosisType1"
+        [parentViewModel]="model"
+        (selectionChanged)="resetDifferentialDiagnosis1DependentModel()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType1 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_070262"
+          [(ngModel)]="model.isSuspicionOf"
+          name="isSuspicionOf"
+          label="{{ 'abdomenMRT.kidneys.suspicionOf.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div
+      class="f-vertical o-radio-list m-b-30"
+      [rrDisable]="model.kidneysDifferentialDiagnosisType1 === differentialDiagnosisType.None"
+    >
+      <h3 rr-id="abd_m_070283" class="m-b-4">
+        {{ 'abdomenMRT.kidneys.differentialDiagnosis2.value' | translate }}
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_070284"
+        [diagnosisNumber]="2"
+        [group]="isDropdownGrouped()"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.kidneysDifferentialDiagnosisType2"
+        name="kidneysDifferentialDiagnosisType2"
+        [parentViewModel]="model"
+        (selectionChanged)="resetDifferentialDiagnosis2DependentModel()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="model.kidneysDifferentialDiagnosisType2 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_070285"
+          [(ngModel)]="model.isSubordinate"
+          name="isSubordinate"
+          label="{{ 'abdomenMRT.kidneys.subordinate.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <rr-reference-picture
+      [(ngModel)]="model.decreasedRenalVolumeReferencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="decreasedRenalVolumeReferencePicture"
+      [elementsRrIds]="decreasedRenalVolumeReferencePictureElementsRrIds"
+      [pictureFileType]="imageFileTypeEnum.DecreasedRenalVolumeImageFile"
+    >
+    </rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list"></div>
+  <div class="c-col-1 c-pad-l f-vertical o-list"></div>
+</div>

@@ -1,0 +1,49 @@
+<div class="f-vertical f-space-between f-fill-available-space">
+  <div class="o-radio-list">
+    <div
+      *ngFor="let item of ngValue.collection | displayActive | paginate: { itemsPerPage: config.itemCount, currentPage: page } ; let i = index"
+    >
+      <rr-multi-value-dropdown
+        *ngIf="!item.isDeleted"
+        (click)="setActiveElement(i)"
+        [dropdownValues]="config.dropdownValues"
+        [selectedValue]="item[config.findingType]"
+        [customLabelInput]="getCustomLabel(calculateIndex(i))"
+        [index]="(calculateIndex(i))"
+        [indexLabel]="(calculateIndex(i + 1))"
+        (componentDeleted)="removeFinding(calculateIndex(i))"
+        (newSelection)="updateFindingName($event)"
+        [placeholder]="config.placeholder"
+        [disabled]="(calculateIndex(i) != ngValue.currentItemIndex) || isDisabled"
+        [attr.rr-id]="getDynamicComponentRRId(calculateIndex(i))"
+        [isItemInvalid]="isElementInvalid(item)"
+      >
+      </rr-multi-value-dropdown>
+      <div class="i-know-selection" *ngIf="isIKnowIDescribeDisplayed(i, item)">
+        <rr-description-type
+          name="mamma.description"
+          [ngModel]="item.descriptionType"
+          (ngModelChange)="descriptionTypeChanged($event, calculateIndex(i))"
+        ></rr-description-type>
+      </div>
+    </div>
+    <rr-dynamic-container [hidden]="true"></rr-dynamic-container>
+    <button
+      type="button"
+      (click)="addFinding()"
+      class="dynamic-component-button"
+      [hidden]="isButtonHidden()"
+      [class.disabled]="disableDynamicComponentButton()"
+      [disabled]="disableDynamicComponentButton()"
+      [attr.rr-id]="config.buttonRRId"
+    >
+      {{config.buttonText}}
+    </button>
+  </div>
+  <pagination-controls
+    (pageChange)="setPage($event)"
+    directionLinks="false"
+    [hidden]="isDisabled"
+  >
+  </pagination-controls>
+</div>

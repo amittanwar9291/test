@@ -1,0 +1,116 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r">
+      <rr-cm-reinforced-card
+        name="cmReinforcedType"
+        [(ngModel)]="model.cmReinforcedType"
+        (click)="activateAcquisitionPanel(false)"
+        (changeInSubcomponent)="onContrastEnhancedChange()"
+        [isDisabled]="isAcquisitionPanelActive"
+        validationObjects="cmSideEffects"
+      ></rr-cm-reinforced-card>
+      <rr-sequences-card
+        name="sequencesType"
+        [(ngModel)]="model.sequencesType"
+        (click)="activateAcquisitionPanel(true)"
+        [mode]="moduleTypes.CT"
+        [isDisabled]="!isAcquisitionPanelActive"
+        [isMandatory]="false"
+        (changeInSubcomponent)="clearAcquisitions($event)"
+      ></rr-sequences-card>
+    </div>
+
+    <ng-container *ngIf="!isAcquisitionPanelActive">
+      <rr-contrast-medium-section [model]="model" [isCTModule]="true">
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="uni_y_030213">
+            {{ 'shared-templates.technology.administration.value' | translate }}
+          </h2>
+          <p-checkbox
+            rr-id="uni_y_030209"
+            name="isIntravenous"
+            styleClass="ui-blue-box"
+            label="{{
+              'shared-templates.technology.intravenous2.value' | translate
+            }}"
+            binary="true"
+            class="checkbox-readonly"
+            [(ngModel)]="model.isIntravenous"
+          >
+          </p-checkbox>
+        </div>
+      </rr-contrast-medium-section>
+    </ng-container>
+
+    <ng-container *ngIf="isAcquisitionPanelActive">
+      <div class="c-col-3 f-horizontal c-pad c-sep">
+        <rr-acquisitions-section
+          [model]="model"
+          [acquisitionHandlerRef]="acquisitionHandler"
+          [cspPreferences]="centerspecificPreferencesData"
+          [findingOptionsTranslationKey]="'shared-templates.technology.thoraxCTAcquisitionsArray.options'"
+          (findingsStructureChanged)="changeAcquisitionTypeToIndividual()"
+          (findingTypeChangedOrActiveFindingChanged)="updateReconstructionsHandler()"
+          (acquisitionsResetted)="resetAcquisitionsActiveTab()"
+        >
+          <rr-thorax-ct-acquisition
+            class="col-h-100"
+            [model]="acquisitionHandler.currentItem"
+            [reconstructionsHandler]="reconstructionHandler"
+            [(activeTabIndex)]="activeAcquisitionsTabIndex"
+            [disabled]="isAcquisitionColumnDisabled()"
+            (changeInSubcomponent)="changeAcquisitionTypeToIndividual()"
+          >
+          </rr-thorax-ct-acquisition>
+        </rr-acquisitions-section>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <div class="f-vertical o-radio-list">
+          <h1 rr-id="uni_x_030508" class="m-b-22">
+            {{ 'shared-templates.technology.limitedQuality.value' | translate }}
+          </h1>
+          <p-checkbox
+            rr-id="uni_x_030509"
+            [(ngModel)]="model.isMotion"
+            name="isMotion"
+            label="{{ 'shared-templates.technology.motion.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030501"
+            binary="true"
+            name="isRespiratoryArtifacts"
+            label="{{ 'shared-templates.technology.respiratoryArtifacts.value' | translate }}"
+            [(ngModel)]="model.isRespiratoryArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030502"
+            binary="true"
+            name="isPulsationArtifacts"
+            label="{{ 'shared-templates.technology.pulsationArtifacts.value' | translate }}"
+            [(ngModel)]="model.isPulsationArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030503"
+            binary="true"
+            name="isMetalArtifacts"
+            label="{{ 'shared-templates.technology.metalArtifacts.value' | translate }}"
+            [(ngModel)]="model.isMetalArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_x_030521"
+            [(ngModel)]="model.isOther"
+            name="isOther"
+            label="{{ 'shared-templates.technology.other.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>

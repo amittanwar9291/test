@@ -1,0 +1,72 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center" *ngIf="!isLargeLocalizerOpened">
+    <div class="c-col-1 c-sep c-pad-r">
+      <div class="o-radio-list f-vertical">
+        <h1 rr-id="spi_m_010103">
+          {{'spineMRT.localization.areaOfExamination.value' | translate}}*
+        </h1>
+        <div class="o-radio-list m-t-15 m-b-35">
+          <p-radioButton
+            rr-id="spi_m_010106"
+            [(ngModel)]="model.scanAreaType"
+            name="scanAreaType"
+            [value]="scanAreaTypesEnum.Spine"
+            label="{{ 'spineMRT.localization.spine.value' | translate }}"
+            rrValidation="scanAreaType"
+            labelStyleClass="ui-fat-label"
+            (onClick)="markPermittedLocalizerSelectionChange()"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="spi_m_010105"
+            [(ngModel)]="model.scanAreaType"
+            name="scanAreaType"
+            [value]="scanAreaTypesEnum.DedicatedSIJScan"
+            label="{{ 'spineMRT.localization.dedicatedISG.value' | translate }}"
+            (onClick)="clearLocalizerAndSetPermitedSpineLocationForOtherPages(); markPermittedLocalizerSelectionChange()"
+            rrValidation="scanAreaType"
+            labelStyleClass="ui-fat-label"
+          ></p-radioButton>
+        </div>
+
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.scanAreaType !== scanAreaTypesEnum.Spine"
+        >
+          <p rr-id="spi_m_010109" rrValidation="spineLocation">
+            {{ 'spineMRT.localization.localization.value' | translate }}
+          </p>
+          <rr-spine-simple
+            [rrDisable]="model.scanAreaType !== scanAreaTypesEnum.Spine"
+            rr-id="spi_m_010104"
+            [spineLocation]="model.spineLocation"
+            [darkRedDisc]="true"
+            (click)="openLargeLocalizer()"
+            rrValidation="spineLocation"
+            isLocalizer="true"
+          ></rr-spine-simple>
+        </div>
+      </div>
+    </div>
+    <div class="c-sep c-pad">
+      <rr-patient-information
+        [model]="model.patientInformation"
+      ></rr-patient-information>
+    </div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-sep c-pad-l"></div>
+  </div>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="isLargeLocalizerOpened"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="model.spineLocation"
+      [logicType]="spineLocationLogicTypeEnum.VertebreAndDiscRange"
+      localizationTitle="spineMRT.localization.areaOfExamination.value"
+      (selectedElement)="setPermittedLocalizerSelectionChangeOnLocalizerChange()"
+      (close)="onLargeLocalizerClosed()"
+      localizationDescription="spineMRT.localization.localizerDescription.value"
+    ></rr-spine-complex>
+  </div>
+</form>

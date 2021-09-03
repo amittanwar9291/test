@@ -1,0 +1,193 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <div [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow">
+        <h2 rr-id="hea_m_1102335" class="m-b-4">
+          {{ "headMRT.facialSkull.differentialDiagnosis1.value" | translate }}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_1102334"
+          [diagnosisNumber]="1"
+          [options]="w060"
+          [(ngModel)]="model.differentialDiagnosis1LocalizationType"
+          name="differentialDiagnosis1LocalizationType"
+          group="true"
+          [parentViewModel]="model"
+          isActiveOnIKnow="true"
+          rrValidation="differentialDiagnosis1LocalizationType"
+          (selectionChanged)="onDifferentialDiagnosis1LocalizationTypeChange()"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <h2 rr-id="hea_m_1102287" class="m-t-35">
+        {{ "headMRT.facialSkull.side.value" | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_1102288"
+        label="{{ 'headMRT.facialSkull.right.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_1102289"
+        label="{{ 'headMRT.facialSkull.left.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_1102290"
+        label="{{ 'headMRT.facialSkull.median.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Median"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_1102291"
+        label="{{ 'headMRT.facialSkull.bothSides.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.BothSides"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <div
+        id="symmetryTypeBlock"
+        class="o-radio-list nested-content"
+        [rrDisable]="model.sideType !== sideTypeEnum.BothSides"
+      >
+        <p-radioButton
+          rr-id="hea_m_1102292"
+          label="{{ 'headMRT.facialSkull.symmetrical.value' | translate }}"
+          name="symmetryType"
+          [value]="symmetryTypeEnum.Symmetrical"
+          [(ngModel)]="model.symmetryType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102293"
+          label="{{ 'headMRT.facialSkull.asymmetrical.value' | translate }}"
+          name="symmetryType"
+          [value]="symmetryTypeEnum.Asymmetrical"
+          [(ngModel)]="model.symmetryType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_1103293">
+        {{ "headMRT.facialSkull.region.value" | translate }}*
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_1103294"
+        name="isFrontal"
+        label="{{ 'headMRT.facialSkull.frontal.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFrontal"
+        rrValidation="isFrontal isParietal isOccipital isTemporal"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_1103295"
+        class="m-b-10"
+        name="isParietal"
+        label="{{ 'headMRT.facialSkull.parietal.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isParietal"
+        rrValidation="isFrontal isParietal isOccipital isTemporal"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_1103296"
+        class="m-b-10"
+        name="isOccipital"
+        label="{{ 'headMRT.facialSkull.occipital.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isOccipital"
+        rrValidation="isFrontal isParietal isOccipital isTemporal"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_1103297"
+        name="isTemporal"
+        label="{{ 'headMRT.facialSkull.temporal.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isTemporal"
+        rrValidation="isFrontal isParietal isOccipital isTemporal"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_1104245">
+        {{ "headMRT.facialSkull.details.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_1104246"
+        name="isSubperiosteal"
+        label="{{ 'headMRT.facialSkull.subperiosteal.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSubperiosteal"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_1105221">
+        {{ "headMRT.facialSkull.extension.value" | translate }}
+      </h2>
+
+      <div>
+        <p rr-id="hea_m_1105222">
+          {{ "headMRT.facialSkull.size.value" | translate }}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.size"
+          (announceModelChange)="onSizeChange()"
+          name="size"
+          labelRrId="hea_m_1105224"
+          inputRrId="hea_m_1105223"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+        >
+        </rr-number-input>
+      </div>
+
+      <div [rrDisable]="!model.size">
+        <p rr-id="hea_m_1105225">
+          {{ "headMRT.facialSkull.2ndPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.size2ndPlane"
+          (announceModelChange)="onSize2ndPlaneChange()"
+          name="size2ndPlane"
+          labelRrId="hea_m_1105227"
+          inputRrId="hea_m_1105226"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+        >
+        </rr-number-input>
+      </div>
+      <div [rrDisable]="!model.size2ndPlane">
+        <p rr-id="hea_m_1105228">
+          {{ "headMRT.facialSkull.3rdPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.size3rdPlane"
+          name="size3rdPlane"
+          labelRrId="hea_m_1105230"
+          inputRrId="hea_m_1105229"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+</div>

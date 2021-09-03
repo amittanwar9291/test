@@ -1,0 +1,108 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    *ngIf="largeLocalizerConfig?.localizerType=== 'standard'"
+    style="margin-top: -100px"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      rr-id="spi_c_0801302"
+      [(ngModel)]="largeLocalizerConfig.model"
+      [logicType]="spineLocationLogicTypeEnum.VertebreEach"
+      (close)="closeLargeLocalizer()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      [localizationDescription]="'spineCT.softTissues.pleaseSelectVertebralBodyMultipleChoice.value'"
+    >
+    </rr-spine-complex>
+  </div>
+
+  <div
+    *ngIf="largeLocalizerConfig?.localizerType=== 'directional'"
+    style="margin-top: -100px"
+  >
+    <rr-spine-directional
+      [localizationDescription]="'spineCT.softTissues.pleaseSelectTheNumberedNerve.value'"
+      [discLocalization]="false"
+      name="spineDirectional"
+      rr-id="spi_c_0801303"
+      [(ngModel)]="findingHandler.currentItem.spineLocationBones"
+      (close)="closeLargeLocalizer()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-directional>
+  </div>
+
+  <div *ngIf="!largeLocalizerConfig" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_c_080103" class="m-b-15">
+        {{ 'spineCT.softTissues.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="spi_c_080104"
+        label="{{ 'spineCT.softTissues.normalImagingOfTheParavertebralSoftTissue.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_080105"
+        label="{{'spineCT.softTissues.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+        [setDescriptionTypes]="[softTissuesFindingTypeEnum.ParaspinalMass]"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="!isCurrentItem(softTissuesFindingTypeEnum.None)"
+          rr-id="spi_c_080201"
+        >
+          {{ 'spineCT.softTissues.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isCurrentItem(softTissuesFindingTypeEnum.None)"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-paraspinal-mass
+        *ngIf="isCurrentItem(softTissuesFindingTypeEnum.ParaspinalMass)"
+        [model]="findingHandler.currentItem"
+      ></rr-paraspinal-mass>
+      <rr-lymph-nodes
+        *ngIf="isCurrentItem(softTissuesFindingTypeEnum.LymphNodes)"
+        [model]="findingHandler.currentItem"
+      ></rr-lymph-nodes>
+      <rr-vessels-ureter
+        *ngIf="isCurrentItem(softTissuesFindingTypeEnum.VesselsUreter)"
+        [model]="findingHandler.currentItem"
+      ></rr-vessels-ureter>
+      <rr-paravertebral-muscles
+        *ngIf="isCurrentItem(softTissuesFindingTypeEnum.ParavertebralMuscles)"
+        [model]="findingHandler.currentItem"
+      ></rr-paravertebral-muscles>
+    </div>
+  </div>
+</form>

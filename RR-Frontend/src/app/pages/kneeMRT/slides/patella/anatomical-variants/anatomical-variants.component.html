@@ -1,0 +1,431 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_070202"
+      [(ngModel)]="model.isAccessoryOssificationCenters"
+      class="m-b-5"
+      binary="true"
+      label="{{ 'kneeMRT.patella.additionalOssificationCenters.value' | translate }}"
+      name="isAccessoryOssificationCenters"
+      labelStyleClass="ui-fat-label"
+      rrContentReset="additionalOssificationType"
+      rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+    ></p-checkbox>
+    <div
+      id="additionalOssificationType"
+      class="f-start f-vertical o-radio-list nested-content"
+      [rrDisable]="!model.isAccessoryOssificationCenters"
+    >
+      <p-radioButton
+        rr-id="kne_m_070203"
+        [(ngModel)]="model.additionalOssificationType"
+        label="{{ 'kneeMRT.patella.patellaBipartita.value' | translate }}"
+        name="additionalOssificationType"
+        [value]="additionalOssificationType.PatellaBipartita"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_070204"
+        [(ngModel)]="model.additionalOssificationType"
+        label="{{ 'kneeMRT.patella.patellaTripartita.value' | translate }}"
+        name="additionalOssificationType"
+        [value]="additionalOssificationType.PatellaTripartita"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+
+    <p-checkbox
+      rr-id="kne_m_070205"
+      [(ngModel)]="model.isVerticalPosition"
+      class="m-b-8"
+      binary="true"
+      label="{{ 'kneeMRT.patella.verticalPosition.value' | translate }}"
+      name="isVerticalPosition"
+      labelStyleClass="ui-fat-label"
+      rrContentReset="verticalPositionDetails"
+      rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+    ></p-checkbox>
+    <div
+      id="verticalPositionDetails"
+      class="f-start f-vertical o-radio-list nested-content"
+      [rrDisable]="!model.isVerticalPosition"
+    >
+      <p-radioButton
+        rr-id="kne_m_070206"
+        [(ngModel)]="model.verticalPositionType"
+        label="{{ 'kneeMRT.patella.visualSelection.value' | translate }}"
+        name="verticalPositionType"
+        [value]="verticalPositionType.VisualSelection"
+        rrContentReset="insallSavatiIndex-block"
+        rrValidation="verticalPositionType"
+      >
+      </p-radioButton>
+      <div
+        id="visualSelection-block"
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="model.verticalPositionType !== verticalPositionType.VisualSelection"
+      >
+        <p-radioButton
+          rr-id="kne_m_070207"
+          [(ngModel)]="model.visualSelectionType"
+          label="{{ 'kneeMRT.patella.patellaAlta.value' | translate }}"
+          name="visualSelectionType"
+          [value]="visualSelectionType.PatellaAlta"
+          rrValidation="visualSelectionType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070208"
+          [(ngModel)]="model.visualSelectionType"
+          label="{{ 'kneeMRT.patella.patellaBaja.value' | translate }}"
+          name="visualSelectionType"
+          [value]="visualSelectionType.PatellaBaja"
+          rrValidation="visualSelectionType"
+        >
+        </p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="kne_m_070210"
+        [(ngModel)]="model.verticalPositionType"
+        class="m-b-7"
+        label="{{ 'kneeMRT.patella.insallSalvatiIndex.value' | translate }}"
+        name="verticalPositionType"
+        [value]="verticalPositionType.InsallSalvatiIndex"
+        rrInfoIcon="kne_m_070209"
+        rrContentReset="visualSelection-block"
+        rrValidation="verticalPositionType"
+      >
+      </p-radioButton>
+      <div
+        id="insallSavatiIndex-block"
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="model.verticalPositionType !== verticalPositionType.InsallSalvatiIndex"
+      >
+        <rr-number-input
+          [(ngModel)]="model.largestVerticalExpansionPatella"
+          label="{{ 'kneeMRT.patella.largestVerticalCcExpansionPatellaPMm.value' | translate }}"
+          inputRrId="kne_m_070211"
+          labelRrId="kne_m_070234"
+          name="largestVerticalExpansionPatella"
+          (ngModelChange)="changeInsallSavatiIndex()"
+          rrValidation="largestVerticalExpansionPatella"
+        ></rr-number-input>
+        <rr-number-input
+          [(ngModel)]="model.lengthPatellae"
+          label="{{ 'kneeMRT.patella.lengthLigPatellaeTMm.value' | translate }}"
+          inputRrId="kne_m_070212"
+          labelRrId="kne_m_070235"
+          name="lengthPatellae"
+          (ngModelChange)="changeInsallSavatiIndex()"
+          rrValidation="lengthPatellae"
+        ></rr-number-input>
+        <rr-number-input
+          [(ngModel)]="model.insallSalvatiIndex"
+          class="m-b-5"
+          label="{{ 'kneeMRT.patella.insallSalvatiIndex.value' | translate }}"
+          inputRrId="kne_m_070213"
+          labelRrId="kne_m_070236"
+          [config]="{ readonly: true, placeholder: '- ,-' }"
+          name="insallSalvatiIndex"
+          (ngModelChange)="changeInsallSavatiIndex()"
+        ></rr-number-input>
+        <p-radioButton
+          rr-id="kne_m_070214"
+          [(ngModel)]="model.insallSalvatiIndexType"
+          label="{{ 'kneeMRT.patella.patellaAlta.value' | translate }}"
+          name="insallSalvatiIndexType"
+          [value]="insallSalvatiIndexType.PatellaAlta"
+          class="radiobutton-readonly"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070215"
+          [(ngModel)]="model.insallSalvatiIndexType"
+          label="{{ 'kneeMRT.patella.noPathologicalFinding.value' | translate }}"
+          name="insallSalvatiIndexType"
+          [value]="insallSalvatiIndexType.NoPathologicalFinding"
+          class="radiobutton-readonly"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070216"
+          [(ngModel)]="model.insallSalvatiIndexType"
+          label="{{ 'kneeMRT.patella.patellaBaja.value' | translate }}"
+          name="insallSalvatiIndexType"
+          [value]="insallSalvatiIndexType.PatellaBaja"
+          class="radiobutton-readonly"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_070301"
+      [(ngModel)]="model.isSulcusAngleTrochlea"
+      binary="true"
+      label="{{ 'kneeMRT.patella.sulcusAngleTrochleaTibiae.value' | translate }}"
+      name="isSulcusAngleTrochlea"
+      rrInfoIcon="kne_m_070302"
+      labelStyleClass="ui-fat-label"
+      rrContentReset="sulcusAngleTrochleaTibiaeDetails"
+      [ngStyle]="{'width.%': 100}"
+      rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+    ></p-checkbox>
+    <div
+      id="sulcusAngleTrochleaTibiaeDetails"
+      class="f-start f-vertical o-radio-list nested-content m-b-32"
+      [rrDisable]="!model.isSulcusAngleTrochlea"
+    >
+      <rr-number-input
+        [(ngModel)]="model.sulcusAngleTrochleaInDegrees"
+        labelStyleClass="text-break"
+        label="{{ 'kneeMRT.patella.valueInDegrees.value' | translate }}*"
+        inputRrId="kne_m_070303"
+        labelRrId="kne_m_070304"
+        [config]="{min: 1, max: 170 }"
+        name="sulcusAngleTrochleaInDegrees"
+        (ngModelChange)="checkSulcusAngleTrochleaValue()"
+        rrValidation="sulcusAngleTrochleaInDegrees"
+      ></rr-number-input>
+      <p-checkbox
+        rr-id="kne_m_070305"
+        [(ngModel)]="model.isTrochleaDysplasia"
+        binary="true"
+        label="{{ 'kneeMRT.patella.trochleaDysplasia.value' | translate }}"
+        name="isTrochleaDysplasia"
+        class="checkbox-readonly"
+      >
+      </p-checkbox>
+    </div>
+    <div class="f-start f-vertical o-radio-list">
+      <div class="f-start f-vertical m-b-8">
+        <p-checkbox
+          rr-id="kne_m_070306"
+          [(ngModel)]="model.isTrochleadysplasia"
+          binary="true"
+          label="{{ 'kneeMRT.patella.trochleadysplasia.value' | translate }}"
+          name="isTrochleadysplasia"
+          rrInfoIcon="kne_m_070307"
+          labelStyleClass="ui-fat-label text-break"
+          rrContentReset="trochleadysplasiaAfterDejourDetails-block"
+          rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+        ></p-checkbox>
+      </div>
+      <div
+        id="trochleadysplasiaAfterDejourDetails-block"
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isTrochleadysplasia"
+      >
+        <p-radioButton
+          rr-id="kne_m_070308"
+          [(ngModel)]="model.trochleadysplasiaType"
+          label="{{ 'kneeMRT.patella.typeAShallowTrochlearGroove.value' | translate }}"
+          name="trochleadysplasiaType"
+          [value]="trochleaDysplasiaType.TypeA"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070309"
+          [(ngModel)]="model.trochleadysplasiaType"
+          label="{{ 'kneeMRT.patella.typeBFlattenedOrConvexTrochlea.value' | translate }}"
+          name="trochleadysplasiaType"
+          [value]="trochleaDysplasiaType.TypeB"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070310"
+          [(ngModel)]="model.trochleadysplasiaType"
+          label="{{ 'kneeMRT.patella.typeCTrochlearFacetAsymmetry.value' | translate }}"
+          name="trochleadysplasiaType"
+          [value]="trochleaDysplasiaType.TypeC"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070311"
+          [(ngModel)]="model.trochleadysplasiaType"
+          label="{{ 'kneeMRT.patella.typeDTypeBCHumplikeBulgeOfTheCentTrochlea.value' | translate }}"
+          name="trochleadysplasiaType"
+          [value]="trochleaDysplasiaType.TypeD"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_070401"
+      [(ngModel)]="model.isTtTgDistance"
+      binary="true"
+      label="{{ 'kneeMRT.patella.tTTGDistance.value' | translate }}"
+      name="isTtTgDistance"
+      [rrContentReset]="'tTTGDistanceDetails'"
+      rrInfoIcon="kne_m_070422"
+      labelStyleClass="ui-fat-label"
+      rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+    ></p-checkbox>
+    <div
+      id="tTTGDistanceDetails"
+      class="f-start f-vertical o-radio-list nested-content"
+      [rrDisable]="!model.isTtTgDistance"
+    >
+      <rr-number-input
+        [(ngModel)]="model.ttTgDistanceInMm"
+        label="{{ 'kneeMRT.patella.distanceInMm.value' | translate }}*"
+        inputRrId="kne_m_070402"
+        labelRrId="kne_m_070403"
+        [config]="{min: 1, max: 40 }"
+        name="ttTgDistanceInMm"
+        rrValidation="ttTgDistanceInMm"
+        (ngModelChange)="checkTtTgDistanceValue()"
+        labelStyleClass="text-break"
+      ></rr-number-input>
+      <p-radioButton
+        rr-id="kne_m_070404"
+        [(ngModel)]="model.ttTgDistanceType"
+        label="{{ 'kneeMRT.patella.mmNormal.value' | translate }}"
+        name="ttTgDistanceType"
+        [value]="ttTgDistanceType.Normal"
+        class="radiobutton-readonly"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_070405"
+        [(ngModel)]="model.ttTgDistanceType"
+        label="{{ 'kneeMRT.patella.mmBorderline.value' | translate }}"
+        name="ttTgDistanceType"
+        [value]="ttTgDistanceType.Borderline"
+        class="radiobutton-readonly"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_070406"
+        [(ngModel)]="model.ttTgDistanceType"
+        label="{{ 'kneeMRT.patella.abnormal.value' | translate }}"
+        name="ttTgDistanceType"
+        [value]="ttTgDistanceType.Abnormal"
+        class="radiobutton-readonly"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_070501"
+      [(ngModel)]="model.isPlicaMediopatellaris"
+      binary="true"
+      label="{{ 'kneeMRT.patella.plicaMediopatellaris.value' | translate }}"
+      name="isPlicaMediopatellaris"
+      labelStyleClass="ui-fat-label"
+      rrContentReset="plicaMediopatellarisDetails"
+      rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+    >
+    </p-checkbox>
+    <div
+      id="plicaMediopatellarisDetails"
+      class="f-start f-vertical o-radio-list nested-content m-b-28"
+      [rrDisable]="!this.model.isPlicaMediopatellaris"
+    >
+      <rr-number-input
+        [(ngModel)]="model.plicaMediopatellarisWidthInMm"
+        class="m-b-8"
+        name="plicaMediopatellarisWidthInMm"
+        inputRrId="kne_m_070502"
+        labelRrId="kne_m_070503"
+        label="{{'kneeMRT.patella.widthInMm.value' | translate}}*"
+        [config]="{min: 1, max: 60}"
+        labelStyleClass="text-break"
+        rrValidation="plicaMediopatellarisWidthInMm"
+      >
+      </rr-number-input>
+      <p-checkbox
+        rr-id="kne_m_070504"
+        [(ngModel)]="model.isExtendingIntoThePrecondylarSpace"
+        binary="true"
+        label="{{ 'kneeMRT.patella.extendingIntoThePrecondylarSpace.value' | translate }}"
+        name="isExtendingIntoThePrecondylarSpace"
+      >
+      </p-checkbox>
+      <p rr-id="kne_m_070505">
+        {{ 'kneeMRT.patella.plicaassozCartilageFindings.value' | translate }}
+      </p>
+      <p-checkbox
+        rr-id="kne_m_070506"
+        [(ngModel)]="model.isMediopatellarisChondropathyMedialPatella"
+        binary="true"
+        label="{{ 'kneeMRT.patella.chondropathyMedialPatellaFacette.value' | translate }}"
+        name="isMediopatellarisChondropathyMedialPatella"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_070507"
+        [(ngModel)]="model.isMediopatellarisChondropathyMedialTrochlearand"
+        binary="true"
+        label="{{ 'kneeMRT.patella.chondropathyMedialTrochlearand.value' | translate }}"
+        name="isMediopatellarisChondropathyMedialTrochlearand"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="kne_m_070508"
+      binary="true"
+      label="{{ 'kneeMRT.patella.plicaLateralisPatellae.value' | translate }}"
+      name="isPlicaLateralisPatellae"
+      [(ngModel)]="model.isPlicaLateralisPatellae"
+      labelStyleClass="ui-fat-label"
+      rrContentReset="plicaLateralisPatellaeDetails"
+      rrValidation="isAccessoryOssificationCenters isVerticalPosition isSulcusAngleTrochlea isTrochleadysplasia isTtTgDistance isPlicaMediopatellaris isPlicaLateralisPatellae"
+    >
+    </p-checkbox>
+    <div
+      id="plicaLateralisPatellaeDetails"
+      class="f-start f-vertical o-radio-list nested-content"
+      [rrDisable]="!this.model.isPlicaLateralisPatellae"
+    >
+      <rr-number-input
+        [(ngModel)]="model.plicaLateralisPatellaeWidthInMm"
+        labelStyleClass="text-break"
+        name="plicaLateralisPatellaeWidthInMm"
+        inputRrId="kne_m_070509"
+        labelRrId="kne_m_070510"
+        label="{{'kneeMRT.patella.widthInMm.value' | translate}}*"
+        [config]="{min: 1, max: 60}"
+        rrValidation="plicaLateralisPatellaeWidthInMm"
+      >
+      </rr-number-input>
+      <p-checkbox
+        rr-id="kne_m_070511"
+        [(ngModel)]="model.isLateralisReachesToPrekondylar"
+        binary="true"
+        label="{{ 'kneeMRT.patella.extendingIntoThePrecondylarSpace.value' | translate }}"
+        name="isLateralisReachesToPrekondylar"
+      >
+      </p-checkbox>
+      <p rr-id="kne_m_070512">
+        {{ 'kneeMRT.patella.plicaassozCartilageFindings.value' | translate }}
+      </p>
+      <p-checkbox
+        rr-id="kne_m_070513"
+        [(ngModel)]="model.isLateralisChondropathyMedialPatella"
+        binary="true"
+        label="{{ 'kneeMRT.patella.chondropathyLateralPatellarFacet.value' | translate }}"
+        name="isLateralisChondropathyMedialPatella"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_070514"
+        [(ngModel)]="model.isLateralisChondropathyMedialTrochlearand"
+        binary="true"
+        label="{{ 'kneeMRT.patella.chondropathyLateralTrochlearRidge.value' | translate }}"
+        name="isLateralisChondropathyMedialTrochlearand"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

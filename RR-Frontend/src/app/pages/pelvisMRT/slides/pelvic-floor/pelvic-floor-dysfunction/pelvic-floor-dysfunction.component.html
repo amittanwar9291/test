@@ -1,0 +1,162 @@
+<div class="f-horizontal h-556">
+  <div class="c-col-1 c-pad c-sep f-start">
+    <div class="o-radio-list" [rrDisable]="!isDynamicOnLocalization">
+      <p-checkbox
+        label="{{'pelvisMRT.pelvicFloor.hiatalExtension.value' | translate}}"
+        rr-id="pel_m_070242"
+        binary="true"
+        name="isHiatalExtension"
+        rrInfoIcon="pel_m_07_14"
+        [(ngModel)]="model.isHiatalExtension"
+        rrContentReset="hiatalExtension"
+        (onChange)="resetGrading()"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="hiatalExtension"
+        [rrDisable]="!model.isHiatalExtension"
+      >
+        <div class="f-start f-horizontal">
+          <rr-number-input
+            rr-id="pel_m_070243"
+            name="hiatalExtensionInMm"
+            class="text-break"
+            [label]="'pelvisMRT.pelvicFloor.inMm.value' | translate"
+            [config]="{min: 1, max: 9999, inputWidth: 90, labelWidth: 200}"
+            [(ngModel)]="model.hiatalExtensionInMm"
+            (announceModelChange)="setGradingHLineLabel()"
+          >
+          </rr-number-input>
+        </div>
+        <div
+          class="o-radio-list"
+          [rrDisable]="!isDynamicOnLocalization || model.hiatalExtensionInMm === null"
+        >
+          <p rr-id="pel_m_070223" class="m-b-5">
+            {{'pelvisMRT.pelvicFloor.phase.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_070224"
+            label="{{'pelvisMRT.pelvicFloor.silenceNoAsterisk.value' | translate}}"
+            name="craniocaudalExtensioToPlcPhaseType"
+            [value]="phaseType.Rest"
+            rrValidation="craniocaudalExtensioToPlcPhaseType"
+            [(ngModel)]="model.craniocaudalExtensioToPlcPhaseType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_070225"
+            label="{{'pelvisMRT.pelvicFloor.defecationNoAsterisk.value' | translate}}"
+            name="craniocaudalExtensioToPlcPhaseType"
+            [value]="phaseType.Defecation"
+            rrValidation="craniocaudalExtensioToPlcPhaseType"
+            [(ngModel)]="model.craniocaudalExtensioToPlcPhaseType"
+          >
+          </p-radioButton>
+          <div
+            [rrDisable]="!(model.hiatalExtensionInMm > 0)"
+            class="nested-content o-radio-list"
+          >
+            <p rr-id="pel_m_070226">
+              {{ 'pelvisMRT.pelvicFloor.grading.value' | translate }}
+            </p>
+            <rr-number-input
+              rr-id="pel_m_070245"
+              name="hLineGradingTranslate"
+              [ngModelOptions]="{standalone: true}"
+              [config]="{readonly: true, inputWidth: 123}"
+              [ngModel]="gradingType.hLineGradingTranslate | translate"
+            ></rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start">
+    <div class="o-radio-list" [rrDisable]="!isDynamicOnLocalization">
+      <p-checkbox
+        label="{{'pelvisMRT.pelvicFloor.pelvicFloorSubsidence.value' | translate}}"
+        rr-id="pel_m_070342"
+        binary="true"
+        name="isDescendingPelvicFloor"
+        rrInfoIcon="pel_m_07_15"
+        [(ngModel)]="model.isDescendingPelvicFloor"
+        rrContentReset="pelvicFloorSubsidence"
+        (onChange)="resetGrading()"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="pelvicFloorSubsidence"
+        [rrDisable]="!model.isDescendingPelvicFloor"
+      >
+        <div class="f-start f-horizontal">
+          <rr-number-input
+            rr-id="pel_m_070343"
+            name="descendingPelvicFloorInMm"
+            class="text-break"
+            [label]="'pelvisMRT.pelvicFloor.inMm.value' | translate"
+            [config]="{min: 1, max: 9999, inputWidth: 90, labelWidth: 200}"
+            [(ngModel)]="model.descendingPelvicFloorInMm"
+            (announceModelChange)="setGradingMLineLabel()"
+          >
+          </rr-number-input>
+        </div>
+        <div
+          class="o-radio-list"
+          [rrDisable]="!isDynamicOnLocalization || model.descendingPelvicFloorInMm === null"
+        >
+          <p rr-id="pel_m_070329" class="m-b-5">
+            {{'pelvisMRT.pelvicFloor.phase.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_070330"
+            label="{{'pelvisMRT.pelvicFloor.silenceNoAsterisk.value' | translate}}"
+            name="craniocaudalExtensionInReferenceToMlpPhaseType"
+            [value]="phaseType.Rest"
+            rrValidation="craniocaudalExtensionInReferenceToMlpPhaseType"
+            [(ngModel)]="model.craniocaudalExtensionInReferenceToMlpPhaseType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_070331"
+            label="{{'pelvisMRT.pelvicFloor.defecationNoAsterisk.value' | translate}}"
+            name="craniocaudalExtensionInReferenceToMlpPhaseType"
+            [value]="phaseType.Defecation"
+            rrValidation="craniocaudalExtensionInReferenceToMlpPhaseType"
+            [(ngModel)]="model.craniocaudalExtensionInReferenceToMlpPhaseType"
+          >
+          </p-radioButton>
+          <div
+            [rrDisable]="!(model.descendingPelvicFloorInMm > 0)"
+            class="nested-content o-radio-list"
+          >
+            <p rr-id="pel_m_0703232">
+              {{ 'pelvisMRT.pelvicFloor.grading.value' | translate }}
+            </p>
+            <rr-number-input
+              rr-id="pel_m_070345"
+              name="mLineGradingTranslate"
+              [ngModelOptions]="{standalone: true}"
+              [config]="{readonly: true, inputWidth: 123}"
+              [ngModel]="gradingType.mLineGradingTranslate | translate"
+            ></rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start">
+    <p-checkbox
+      label="{{'pelvisMRT.pelvicFloor.caudalAngulationOfThe.value' | translate}}"
+      rr-id="pel_m_070434"
+      rrInfoIcon="pel_m_07_05"
+      binary="true"
+      name="isCaudalAngulationOfLevatorPlate"
+      [(ngModel)]="model.isCaudalAngulationOfLevatorPlate"
+    >
+    </p-checkbox>
+  </div>
+  <div class="c-col-1 c-pad-l f-start"></div>
+</div>

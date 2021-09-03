@@ -1,0 +1,94 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad">
+    <div class="p-l-10 p-r-10 o-radio-list">
+      <h2 rr-id="hea_m_070233">
+        {{ "headMRT.basalNuclei.differentialDiagnosis.value" | translate}}
+      </h2>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        <h3 rr-id="hea_m_070234">
+          {{ "headMRT.basalNuclei.differentialDiagnosis1.value" | translate}}
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_070235"
+          name="differentialDiagnosisType1"
+          group="true"
+          [diagnosisNumber]="1"
+          [parentViewModel]="model"
+          [options]="getDDOptions(true)"
+          [(ngModel)]="model.differentialDiagnosisType1"
+          (selectionChanged)="clearDDLCheckboxes()"
+          rrValidation="differentialDiagnosisType1"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="hea_m_070236"
+          name="isSuspicionOf"
+          label="{{'headMRT.basalNuclei.suspicionOf.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="model.differentialDiagnosisType1 === differentialDiagnosisType.None"
+        ></p-checkbox>
+      </div>
+      <div
+        class="f-vertical o-radio-list m-r-15"
+        [rrDisable]="model.differentialDiagnosisLocalizationType === differentialDiagnosisType.None && model.differentialDiagnosisType1 === differentialDiagnosisType.None"
+      >
+        <h3 rr-id="hea_m_070237" class="m-t-10">
+          {{ "headMRT.basalNuclei.differentialDiagnosis2.value" | translate}}
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_070238"
+          name="differentialDiagnosisType2"
+          group="true"
+          [diagnosisNumber]="2"
+          [parentViewModel]="model"
+          [options]="getDDOptions()"
+          [(ngModel)]="model.differentialDiagnosisType2"
+          (selectionChanged)="clearSubordinateCheckbox()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="hea_m_070239"
+          label="{{'headMRT.basalNuclei.subordinate.value' | translate}}"
+          binary="true"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+          [rrDisable]="model.differentialDiagnosisType2 === differentialDiagnosisType.None"
+          class="m-b-10"
+        ></p-checkbox>
+      </div>
+      <div
+        class="o-radio-list"
+        [rrDisable]="model.differentialDiagnosisType2 === differentialDiagnosisType.None"
+      >
+        <h3 rr-id="hea_m_070240" class="m-t-10">
+          {{ "headMRT.basalNuclei.differentialDiagnosis3.value" | translate}}
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_070241"
+          name="differentialDiagnosisType3"
+          group="true"
+          [diagnosisNumber]="3"
+          [parentViewModel]="model"
+          [options]="getDDOptions()"
+          [(ngModel)]="model.differentialDiagnosisType3"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_070242"
+        label="{{'headMRT.basalNuclei.lesionOfTheSame.value' | translate}}"
+        binary="true"
+        name="is1LesionOfTheSamePathology"
+        [(ngModel)]="model.is1LesionOfTheSamePathology"
+        class="m-t-25"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad"></div>
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad"></div>
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad-l;"></div>
+</div>

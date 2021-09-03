@@ -1,0 +1,147 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_090205" class="m-t-21">
+        {{'angiographyCT.pelvisLegArteries.pathology.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_090206"
+        label="{{'angiographyCT.pelvisLegArteries.vascularStenosis.value' | translate}}"
+        name="arterioscleroticPAVKPathologyType"
+        [value]="arterioscleroticPAVKPathologyTypeEnum.VascularStenosis"
+        [(ngModel)]="model.arterioscleroticPAVKPathologyType"
+        [rrContentReset]="'vascularPathologyTypeCont chronicAortiliacCont chronicCruropedalCont chronicFemoropoplitealCont localizationDetailsCont'"
+        rrValidation="arterioscleroticPAVKPathologyType"
+        (onClick)="resetDistalRefilling()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090207"
+        label="{{'angiographyCT.pelvisLegArteries.vascularPathologyDiffuseclassificationAccording.value' | translate}}"
+        name="arterioscleroticPAVKPathologyType"
+        [value]="arterioscleroticPAVKPathologyTypeEnum.VascularPathologyDiffuse"
+        [(ngModel)]="model.arterioscleroticPAVKPathologyType"
+        [rrContentReset]="'localizationDetailsCont vascularStenosisContainer'"
+        rrValidation="arterioscleroticPAVKPathologyType"
+        (onClick)="resetDistalRefilling()"
+      ></p-radioButton>
+      <div
+        *ngIf="model.arterioscleroticPAVKPathologyType === arterioscleroticPAVKPathologyTypeEnum.VascularStenosis"
+        id="vascularStenosisContainer"
+        class="o-radio-list"
+      >
+        <h2 rr-id="ang_c_0902112">
+          {{'angiographyCT.pelvisLegArteries.runOff.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="ang_c_0902113"
+          label="{{'angiographyCT.pelvisLegArteries.normal.value' | translate}}"
+          name="normal"
+          [(ngModel)]="model.normal"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <div
+        *ngIf="model.arterioscleroticPAVKPathologyType === arterioscleroticPAVKPathologyTypeEnum.VascularPathologyDiffuse"
+        class="f-vertical f-start o-radio-list"
+        id="vascularPathologyTypeCont"
+      >
+        <h2 rr-id="ang_c_090208" class="m-t-20 text-break">
+          {{'angiographyCT.pelvisLegArteries.classificationAccordingToTASC.value'|
+          translate}}
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_090209"
+          class="m-b-14 text-break2"
+          label="{{'angiographyCT.pelvisLegArteries.chronicAortoiliaclesions.value' | translate}}"
+          name="classificationAccordingToTASCIIType"
+          [value]="classificationAccordingToTASCIITypeEnum.ChronicAortoiliacLesions"
+          [(ngModel)]="model.classificationAccordingToTASCIIType"
+          rrInfoIcon="ang_c_09_01"
+          [rrContentReset]="'chronicCruropedalCont chronicFemoropoplitealCont'"
+          rrValidation="classificationAccordingToTASCIIType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090210"
+          class="m-b-14 text-break"
+          label="{{'angiographyCT.pelvisLegArteries.chronicFemoropopliteallesions.value' | translate}}"
+          name="classificationAccordingToTASCIIType"
+          [value]="classificationAccordingToTASCIITypeEnum.ChronicFemoropoplitealLesions"
+          [(ngModel)]="model.classificationAccordingToTASCIIType"
+          rrInfoIcon="ang_c_09_02"
+          [rrContentReset]="'chronicAortiliacCont chronicCruropedalCont'"
+          rrValidation="classificationAccordingToTASCIIType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090211"
+          label="{{'angiographyCT.pelvisLegArteries.chronicCruropedalLesions.value' | translate}}"
+          name="classificationAccordingToTASCIIType"
+          [value]="classificationAccordingToTASCIITypeEnum.ChronicCruropedalLesions"
+          [(ngModel)]="model.classificationAccordingToTASCIIType"
+          [rrContentReset]="'chronicAortiliacCont chronicFemoropoplitealCont'"
+          rrValidation="classificationAccordingToTASCIIType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="showProperColumns()"
+    class="f-horizontal f-start col-h-100 c-pad-l c-sep-l"
+  >
+    <div class="c-col-1  c-sep c-pad-r"></div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+
+  <div
+    class="rr-tabView h-575 margin-left-lok"
+    *ngIf="model.arterioscleroticPAVKPathologyType === arterioscleroticPAVKPathologyTypeEnum.VascularStenosis"
+  >
+    <p-tabView class="rr-tabView">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            rr-id="ang_c_0903100"
+            ifAny="true"
+            [rrValidation]='["isRight isLeft", "sideType localizationType arterioscleroticPAVKSeverityType degreeOfStenosisAccordingToNASCET"]'
+            class="margin-margin"
+          >
+            {{ 'angiographyCT.pelvisLegArteries.localizationdetails.value' |
+            translate }}
+          </h1>
+        </ng-template>
+        <rr-localization-details
+          class="f-horizontal col-h-100"
+          [model]="model"
+        ></rr-localization-details>
+      </p-tabPanel>
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1 rr-id="ang_c_0904100">
+            {{ 'angiographyCT.pelvisLegArteries.distalRefilling.value' |
+            translate }}
+          </h1>
+        </ng-template>
+        <rr-distal-refilling
+          class="f-horizontal col-h-100"
+          [model]="model"
+        ></rr-distal-refilling>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <rr-chronic-aortiliac
+    class="m-t-55"
+    *ngIf="model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.ChronicAortoiliacLesions"
+    [model]="model"
+  ></rr-chronic-aortiliac>
+  <rr-chronic-femoropopliteal
+    class="m-t-55"
+    *ngIf="model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.ChronicFemoropoplitealLesions"
+    [model]="model"
+  ></rr-chronic-femoropopliteal>
+  <rr-chronic-cruropedal
+    class="m-t-55"
+    *ngIf="model.classificationAccordingToTASCIIType === classificationAccordingToTASCIITypeEnum.ChronicCruropedalLesions"
+    [model]="model"
+  ></rr-chronic-cruropedal>
+</div>

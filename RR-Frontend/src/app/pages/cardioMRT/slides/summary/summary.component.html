@@ -1,0 +1,363 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 f-vertical c-pad-r c-sep o-radio-list">
+      <h2 rr-id="car_m_100103" class="m-b-9">
+        {{ "cardioMRT.summary.diagnosis1.value" | translate }}*
+      </h2>
+      <p-dropdown
+        rr-id="car_m_100104"
+        styleClass="o-width-100"
+        class="m-b-14"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="diagnosisTypeDropdown1"
+        name="differentialDiagnosis01"
+        group="true"
+        [(ngModel)]="model.differentialDiagnosis01"
+        (onChange)="resetDiffDiagnosis1Column()"
+        rrDropdownClear
+        rrValidation="differentialDiagnosis01"
+      >
+      </p-dropdown>
+      <div
+        class="o-radio-list"
+        [rrDisable]="model.differentialDiagnosis01 === 'None'"
+      >
+        <p-checkbox
+          rr-id="car_m_100105"
+          name="isSuspicionOf"
+          class="m-b-15"
+          label="{{'cardioMRT.summary.suspicionOf.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+        >
+        </p-checkbox>
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.differentialDiagnosis01 !== 'ArrhythmogenicRightVentricularCardiomyopathy'"
+        >
+          <p-checkbox
+            rr-id="car_m_100106"
+            name="isEvaluationARVCAccordingToTaskForceCriteria"
+            class="m-b-5"
+            labelStyleClass="ui-fat-label text-break"
+            label="{{'cardioMRT.summary.evaluationARVCAccordingTo.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isEvaluationARVCAccordingToTaskForceCriteria"
+            (onChange)="applyEvaluationARVCALogic()"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isEvaluationARVCAccordingToTaskForceCriteria"
+          >
+            <p-checkbox
+              rr-id="car_m_100107"
+              name="isMajorCriteria"
+              class="checkbox-readonly"
+              label="{{'cardioMRT.summary.majorCriteria.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMajorCriteria"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="car_m_100108"
+              name="isMinorCriteria"
+              class="checkbox-readonly m-b-16"
+              label="{{'cardioMRT.summary.minorCriteria.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMinorCriteria"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="car_m_100109"
+          name="isDifferentialDiagnosisTo01"
+          labelStyleClass="ui-fat-label"
+          label="{{'cardioMRT.summary.differentialDiagnosis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDifferentialDiagnosisTo01"
+          rrContentReset="isDifferentialDiagnosisTo01Block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          [rrDisable]="!model.isDifferentialDiagnosisTo01"
+          id="isDifferentialDiagnosisTo01Block"
+        >
+          <p-dropdown
+            rr-id="car_m_100110"
+            styleClass="o-width-100"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="diagnosisTypeDropdown2"
+            name="differentialDiagnosisTo01"
+            group="true"
+            [(ngModel)]="model.differentialDiagnosisTo01"
+            rrDropdownClear
+            (onChange)="clearIsSubordinatedAndDD02Dependent()"
+            [rrDropdownExcludedOptions]="[model.differentialDiagnosis01]"
+            rrValidation="differentialDiagnosisTo01"
+          >
+          </p-dropdown>
+          <p-checkbox
+            rr-id="car_m_100111"
+            name="isSubordinated"
+            label="{{'cardioMRT.summary.subordinated.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isSubordinated"
+            [rrDisable]="model.differentialDiagnosisTo01 === 'None'"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-radio-list">
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="car_m_100201"
+          name="isDifferentialDiagnosis02"
+          class="m-b-6"
+          labelStyleClass="ui-fat-label"
+          label="{{'cardioMRT.summary.diagnosis2.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDifferentialDiagnosis02"
+          rrContentReset="isDifferentialDiagnosis02Block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isDifferentialDiagnosis02"
+          id="isDifferentialDiagnosis02Block"
+        >
+          <p-dropdown
+            rr-id="car_m_100202"
+            styleClass="o-width-100"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="diagnosisTypeDropdown2"
+            name="differentialDiagnosis02"
+            group="true"
+            [(ngModel)]="model.differentialDiagnosis02"
+            rrDropdownClear
+            rrValidation="differentialDiagnosis02"
+            [rrDropdownExcludedOptions]="[model.differentialDiagnosis01, model.differentialDiagnosisTo01]"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-2 c-pad c-sep f-vertical">
+      <h2 rr-id="car_m_100301" class="m-b-64">
+        {{ "cardioMRT.summary.recommendationSupplementalDiagnostic.value" |
+        translate }}
+      </h2>
+      <div class="c-col-2 f-horizontal f-end col-h-100">
+        <div class="c-col-1 c-pad-r c-sep col-h-100 o-radio-list">
+          <p-checkbox
+            rr-id="car_m_100302"
+            name="isCoronaryCTAngiography"
+            label="{{ 'cardioMRT.summary.cTCoronaryAngiography.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isCoronaryCTAngiography"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_100303"
+            name="isCTAngiographyThoracicAorta"
+            label="{{
+              'cardioMRT.summary.cTAngiographyOfThoracic.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isCTAngiographyThoracicAorta"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_100312"
+            name="isCTAngiographyOfThePulmonaryArtery"
+            label="{{'cardioMRT.summary.cTAngiographyOfThe.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isCTAngiographyOfThePulmonaryArtery"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_100304"
+            name="isCTThorax"
+            label="{{ 'cardioMRT.summary.cTThorax.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isCTThorax"
+            rrContentReset="isCTThoraxBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isCTThorax"
+            id="isCTThoraxBlock"
+          >
+            <p-checkbox
+              rr-id="car_m_100305"
+              name="isContrastEnhancedThorax"
+              label="{{ 'cardioMRT.summary.contrastEnhanced.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isContrastEnhancedThorax"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="car_m_100306"
+            name="isCTAbdomen"
+            label="{{ 'cardioMRT.summary.cTAbdomen.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isCTAbdomen"
+            rrContentReset="isCTAbdomenBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content m-b-28"
+            [rrDisable]="!model.isCTAbdomen"
+            id="isCTAbdomenBlock"
+          >
+            <p-checkbox
+              rr-id="car_m_100307"
+              name="isContrastEnhancedAbdomen"
+              label="{{ 'cardioMRT.summary.contrastEnhanced.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isContrastEnhancedAbdomen"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="car_m_100313"
+            class="m-b-30"
+            name="isEchocardiography"
+            label="{{ 'cardioMRT.summary.echocardiography.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isEchocardiography"
+          >
+          </p-checkbox>
+          <div [rrDisable]="isPharmaStress">
+            <p-checkbox
+              rr-id="car_m_100308"
+              name="isStressCardiacMRI"
+              label="{{ 'cardioMRT.summary.stressCardiacMRI.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isStressCardiacMRI"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="car_m_100309"
+            name="isMRAngiographyThoracicAorta"
+            label="{{
+              'cardioMRT.summary.mRAngiographyOfThoracic.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isMRAngiographyThoracicAorta"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_100310"
+            name="isMRAbdomen"
+            label="{{ 'cardioMRT.summary.mRAbdomen.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isMRAbdomen"
+            rrContentReset="isMRAbdomenBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isMRAbdomen"
+            id="isMRAbdomenBlock"
+          >
+            <p-checkbox
+              rr-id="car_m_100311"
+              name="isContrastEnhanced"
+              label="{{ 'cardioMRT.summary.contrastEnhanced.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isContrastEnhanced"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l c-sep col-h-100 o-radio-list">
+          <p-checkbox
+            rr-id="car_m_100401"
+            class="text-break"
+            name="isMyocardialScintigraphyMyocardialSPEC"
+            label="{{
+              'cardioMRT.summary.myocardialScintigraphyMyocardialSPECT.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isMyocardialScintigraphyMyocardialSPEC"
+            rrContentReset="isMyocardialScintigraphyMyocardialSPECBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isMyocardialScintigraphyMyocardialSPEC"
+            id="isMyocardialScintigraphyMyocardialSPECBlock"
+          >
+            <p-checkbox
+              rr-id="car_m_100402"
+              class="m-b-15"
+              name="isUnderStress"
+              label="{{ 'cardioMRT.summary.underStress.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isUnderStress"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="car_m_100403"
+            name="isCardailePETCT"
+            label="{{ 'cardioMRT.summary.cardiacPETCT.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isCardailePETCT"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_100404"
+            name="isFollowupCardioMRT"
+            label="{{ 'cardioMRT.summary.followupCardioMRT.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isFollowupCardioMRT"
+            rrContentReset="isFollowupCardioMRTBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isFollowupCardioMRT"
+            id="isFollowupCardioMRTBlock"
+          >
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="car_m_100405"
+              name="followUpTime"
+              [value]="followUpTime.ThreeMonths"
+              label="{{ 'cardioMRT.summary.3Months.value' | translate }}"
+              [(ngModel)]="model.followUpTime"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="car_m_100406"
+              name="followUpTime"
+              [value]="followUpTime.SixMonths"
+              label="{{ 'cardioMRT.summary.6Months.value' | translate }}"
+              [(ngModel)]="model.followUpTime"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="car_m_100407"
+              name="followUpTime"
+              [value]="followUpTime.TwelveMonths"
+              label="{{ 'cardioMRT.summary.12Months.value' | translate }}"
+              [(ngModel)]="model.followUpTime"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep"></div>
+  </div>
+</form>

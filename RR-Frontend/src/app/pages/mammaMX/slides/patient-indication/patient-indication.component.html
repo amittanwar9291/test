@@ -1,0 +1,449 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center col-h-100">
+    <div class="c-col-3 c-pad-r f-start f-vertical c-sep">
+      <div class="c-col-2 c-pad-r f-start f-vertical">
+        <h1 rr-id="uni_01_011">
+          {{'shared-templates.patient-data.patientData.value' | translate}}
+        </h1>
+
+        <rr-bmi-calculator
+          class="m-t-14 m-b-60"
+          [(ngModel)]="model.patientInformation.bmiCalculator"
+          name="bmiCalculator"
+        ></rr-bmi-calculator>
+      </div>
+
+      <div class="c-col-2 f-horizontal m-b-51">
+        <div class="c-col-1 c-pad-r f-start f-vertical">
+          <rr-gender-select
+            [(ngModel)]="model.patientInformation.gender"
+            name="gender"
+          ></rr-gender-select>
+        </div>
+        <div class="c-col-1 c-pad-l f-start f-vertical o-radio-list">
+          <h2 rr-id="uni_01_008">
+            {{ 'shared-templates.patient-data.age.value' | translate }}
+          </h2>
+          <rr-number-input
+            name="age"
+            [(ngModel)]="model.patientInformation.age"
+            label="{{ 'shared-templates.patient-data.years.value' | translate }}"
+            inputRrId="uni_01_009"
+            labelRrId="uni_01_010"
+            [config]="{ readonly: true }"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+
+      <h1 rr-id="mam_mx_010111" class="m-b-11">
+        {{ 'mammaMX.patientIndication.preliminaryExamination.value' | translate
+        }}
+      </h1>
+
+      <div class="c-col-3 f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+          <h2 rr-id="mam_mx_010112" class="m-t-3 m-b-15">
+            {{ 'mammaMX.patientIndication.mammography.value' | translate }}
+          </h2>
+
+          <p-radioButton
+            rr-id="mam_mx_010113"
+            [(ngModel)]="model.mxMammaType"
+            (ngModelChange)="clearMonthYearInput('dateOfLastMX')"
+            name="mxMammaType"
+            [value]="mxMammaType.BaselineExamination"
+            label="{{ 'mammaMX.patientIndication.baselineExamination.value' | translate }}"
+            rrUnClickRadio
+            rrContentReset="mxMammaTypeBlock"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_010114"
+            class="m-b-0"
+            [(ngModel)]="model.mxMammaType"
+            (ngModelChange)="clearMonthYearInput('dateOfLastMX')"
+            name="mxMammaType"
+            [value]="mxMammaType.FollowUpExamination"
+            label="{{ 'mammaMX.patientIndication.followupExamination.value' | translate }}"
+            rrUnClickRadio
+            rrContentReset="mxMammaTypeBlock"
+          ></p-radioButton>
+          <div
+            class="o-radio-list f-vertical"
+            [rrDisable]="model.mxMammaType !== mxMammaType.FollowUpExamination"
+            id="mxMammaTypeBlock"
+          >
+            <rr-month-year-input
+              rr-id="mam_mx_010115"
+              class="m-b-12"
+              [(ngModel)]="model.dateOfLastMX"
+              label="{{ 'mammaMX.patientIndication.dateOfLastMammography.value' | translate }}"
+              name="dateOfLastMX"
+            >
+            </rr-month-year-input>
+            <p-radioButton
+              rr-id="mam_mx_010118"
+              [(ngModel)]="model.mammographyDetails"
+              name="mammographyDetails"
+              [value]="mammographyDetails.NoPathologicFinding"
+              label="{{ 'mammaMX.patientIndication.noPathologicFinding.value' | translate }}"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_010119"
+              [(ngModel)]="model.mammographyDetails"
+              name="mammographyDetails"
+              [value]="mammographyDetails.FindingsInNeedOfClarification"
+              label="{{ 'mammaMX.patientIndication.findingInNeedOf.value' | translate }}"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+
+        <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+          <p-checkbox
+            rr-id="mam_mx_010201"
+            class="m-b-1"
+            [(ngModel)]="model.wasMammography"
+            (click)="clearMonthYearInput('dateOfLastMammography')"
+            name="wasMammography"
+            label="{{ 'mammaMX.patientIndication.mammarySonography.value' | translate }}"
+            binary="true"
+            labelStyleClass="ui-fat-label"
+            rrContentReset="wasMammographyBlock"
+          ></p-checkbox>
+
+          <div
+            class="f-start f-vertical o-radio-list"
+            id="wasMammographyBlock"
+            [rrDisable]="!model.wasMammography"
+          >
+            <rr-month-year-input
+              rr-id="mam_mx_010202"
+              class="m-b-25"
+              [(ngModel)]="model.dateOfLastMammography"
+              label="{{ 'mammaMX.patientIndication.dateOfLastSonography.value' | translate }}"
+              name="dateOfLastMammography"
+            ></rr-month-year-input>
+
+            <p-radioButton
+              rr-id="mam_mx_010205"
+              [(ngModel)]="model.mammasonographyDetails"
+              name="mammasonographyDetails"
+              [value]="mammographyDetails.NoPathologicFinding"
+              label="{{ 'mammaMX.patientIndication.noPathologicFinding.value' | translate }}"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_010206"
+              [(ngModel)]="model.mammasonographyDetails"
+              name="mammasonographyDetails"
+              [value]="mammographyDetails.FindingsInNeedOfClarification"
+              label="{{ 'mammaMX.patientIndication.findingInNeedOf.value' | translate }}"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+
+        <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-radio-list">
+          <p-checkbox
+            class="m-b-1"
+            rr-id="mam_mx_010301"
+            [(ngModel)]="model.wasMammasonography"
+            (click)="clearMonthYearInput('dateOfLastMammosonography')"
+            name="wasMammasonography"
+            label="{{ 'mammaMX.patientIndication.mRIMammography.value' | translate }}"
+            binary="true"
+            labelStyleClass="ui-fat-label"
+            rrContentReset="wasMammosonographyBlock"
+          ></p-checkbox>
+
+          <div
+            class="f-start f-vertical o-radio-list"
+            id="wasMammosonographyBlock"
+            [rrDisable]="!model.wasMammasonography"
+          >
+            <rr-month-year-input
+              rr-id="mam_mx_010302"
+              class="m-b-25"
+              [(ngModel)]="model.dateOfLastMammosonography"
+              label="{{ 'mammaMX.patientIndication.dateOfLastMRI.value' | translate }}"
+              name="dateOfLastMammosonography"
+            ></rr-month-year-input>
+
+            <p-radioButton
+              rr-id="mam_mx_010305"
+              [(ngModel)]="model.mammographyMRTDetails"
+              name="mammographyMRTDetails"
+              [value]="mammographyDetails.NoPathologicFinding"
+              label="{{ 'mammaMX.patientIndication.noPathologicFinding.value' | translate }}"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_010306"
+              [(ngModel)]="model.mammographyMRTDetails"
+              name="mammographyMRTDetails"
+              [value]="mammographyDetails.FindingsInNeedOfClarification"
+              label="{{ 'mammaMX.patientIndication.findingInNeedOf.value' | translate }}"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-end f-vertical">
+      <div class="c-sep-l f-start f-vertical h-513"></div>
+    </div>
+
+    <div class="c-col-2 c-pad-l f-start f-vertical o-list">
+      <div class="c-col-1 c-pad-r f-start f-vertical f-align-start">
+        <h1 rr-id="mam_mx_010401">
+          {{ 'mammaMX.patientIndication.indicationComplaints.value' | translate
+          }}
+        </h1>
+        <img
+          rr-id="mam_mx_010402"
+          src="assets/img/shared/discomfort.svg"
+          alt="Beschwerden"
+          class="p-t-20"
+        />
+      </div>
+      <div class="c-col-2 f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-start f-vertical">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [disabled]="false"
+            [setConfig]="findingDropdownConfig"
+          ></rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-radio-list">
+          <div class="h-182">
+            <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.LumpIndurationDetected"
+                rr-id="mam_mx_010513"
+                class="text-break m-b-110"
+              >
+                {{ 'mammaMX.patientIndication.lumpIndurationDetected.value' |
+                translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.NippleDischarge"
+                rr-id="mam_mx_010515"
+              >
+                {{ 'mammaMX.patientIndication.nippleDischarge.value' | translate
+                }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.Mastodynia"
+                rr-id="mam_mx_010516"
+                class="m-b-96"
+              >
+                {{ 'mammaMX.patientIndication.mastodynia.value' | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.Mastitis"
+                rr-id="mam_mx_010517"
+                class="m-b-130"
+              >
+                {{ 'mammaMX.patientIndication.mastitis.value' | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.AbnormalScreeningMammogramm"
+                rr-id="mam_mx_010519"
+              >
+                {{ 'mammaMX.patientIndication.abnormalScreening.value' |
+                translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.PreoperativeBreastCancerStaging"
+                rr-id="mam_mx_010519"
+              >
+                {{
+                'mammaMX.patientIndication.preoperativeBreastCancerStaging.value'
+                | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.FuCareAfterBreastCancerTreatment"
+                rr-id="mam_mx_010519"
+              >
+                {{
+                'mammaMX.patientIndication.fuCareAfterBreastCancerTreatment.value'
+                | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.BrcaMutationHighRisk"
+                rr-id="mam_mx_010519"
+              >
+                {{ 'mammaMX.patientIndication.brcaMutationHighRisk.value' |
+                translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.BreastImplants"
+                rr-id="mam_mx_010519"
+              >
+                {{ 'mammaMX.patientIndication.breastImplants.value' | translate
+                }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.MonitoringTheResponseOfNeoadjuvantChemotherapy"
+                rr-id="mam_mx_010519"
+              >
+                {{
+                'mammaMX.patientIndication.monitoringNeoadjuvantChemotherapy.value'
+                | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.MetastasisFromCup"
+                rr-id="mam_mx_010519"
+              >
+                {{ 'mammaMX.patientIndication.metastasisFromCUP.value' |
+                translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.ComplementaryExaminationForHighDensityBreast"
+                rr-id="mam_mx_010519"
+              >
+                {{
+                'mammaMX.patientIndication.complementaryExaminationForHighDensityBreast.value'
+                | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.NewNippleSkinLesions"
+                rr-id="mam_mx_010519"
+              >
+                {{ 'mammaMX.patientIndication.newNipple.value' | translate }}
+              </h2>
+              <h2
+                *ngSwitchCase="patientIndicationFindingType.Abscess"
+                rr-id="mam_mx_010518"
+                class="m-b-130"
+              >
+                {{ 'mammaMX.patientIndication.abscess.value' | translate }}
+              </h2>
+            </ng-container>
+
+            <div
+              *ngIf="findingHandler.currentItem.findingType === patientIndicationFindingType.Mastodynia"
+              class="f-start f-vertical o-radio-list m-b-11"
+            >
+              <p-radioButton
+                rr-id="mam_mx_010507"
+                [(ngModel)]="findingHandler.currentItem.chestPainType"
+                name="chestPainType"
+                [value]="mastodyniaType.CycleDependent"
+                label="{{ 'mammaMX.patientIndication.cycledependent.value' | translate }}"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="mam_mx_010508"
+                [(ngModel)]="findingHandler.currentItem.chestPainType"
+                name="chestPainType"
+                [value]="mastodyniaType.Intermittential"
+                label="{{ 'mammaMX.patientIndication.intermittent.value' | translate }}"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+
+            <p-checkbox
+              *ngIf="findingHandler.currentItem.findingType === patientIndicationFindingType.Mastitis || findingHandler.currentItem.findingType === patientIndicationFindingType.Abscess"
+              rr-id="mam_mx_010509"
+              class="m-b-13"
+              [(ngModel)]="findingHandler.currentItem.isAntibiosis"
+              name="isAntibiosis"
+              label="{{ 'mammaMX.patientIndication.antibiosis.value' | translate }}"
+              binary="true"
+            ></p-checkbox>
+
+            <p-checkbox
+              *ngIf="findingHandler.currentItem.findingType === patientIndicationFindingType.LumpIndurationDetected"
+              rr-id="mam_mx_010514"
+              name="isProgressiveFinding"
+              label="{{'mammaMX.patientIndication.progressiveFinding.value' | translate}}"
+              binary="true"
+              [(ngModel)]="findingHandler.currentItem.isProgressiveFinding"
+              class="m-b-9"
+            >
+            </p-checkbox>
+
+            <p rr-id="mam_mx_010510" *ngIf="isNoFurtherDetails" class="m-t-3">
+              {{ 'mammaMX.patientIndication.noFurtherDetails.value' | translate
+              }}
+            </p>
+          </div>
+
+          <div
+            *ngIf="!isNoFurtherDetails && findingHandler.currentItem.findingType !== patientIndicationFindingType.None"
+            class="f-start f-vertical o-radio-list"
+          >
+            <p rr-id="mam_mx_010502" class="m-b-2">
+              {{ 'mammaMX.patientIndication.sinceWhen.value' | translate }}
+            </p>
+            <p-dropdown
+              rr-id="mam_mx_010503"
+              class="m-b-18"
+              [(ngModel)]="findingHandler.currentItem.nippleDischargeSinceWhen"
+              [options]="sinceWhen"
+              styleClass="o-width-100 ui-brown-box"
+              name="nippleDischargeSinceWhen"
+              rrDropdownClear
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            ></p-dropdown>
+
+            <div
+              class="f-start f-vertical o-radio-list m-t-4"
+              *ngIf="findingHandler.currentItem.findingType === patientIndicationFindingType.LumpIndurationDetected; else simpleLocalizer"
+            >
+              <p
+                rr-id="mam_mx_010504"
+                class="m-b-4"
+                rrValidation="nippleDischargeShoulderLocalization"
+                noUpdate="ture"
+              >
+                {{
+                'mammaMX.patientIndication.localizationMultipleSelection.value'
+                | translate }}*
+              </p>
+              <rr-breast-simple-shoulder
+                rr-id="mam_mx_010505"
+                name="nippleDischargeShoulderLocalization"
+                [(ngModel)]="findingHandler.currentItem.nippleDischargeShoulderLocalization"
+                [isSingleChoice]="false"
+                rrValidation="nippleDischargeShoulderLocalization"
+                isLocalizer="true"
+                #nippleDischargeShoulderLocalization
+                [elementUpdate]="nippleDischargeShoulderLocalization.announceSelection"
+              >
+              </rr-breast-simple-shoulder>
+            </div>
+
+            <ng-template #simpleLocalizer>
+              <div class="f-start f-vertical o-radio-list m-t-4">
+                <p
+                  rr-id="mam_mx_010504"
+                  class="m-b-4"
+                  rrValidation="nippleDischargeLocalization"
+                  noUpdate="ture"
+                >
+                  {{'mammaMX.patientIndication.localizationMultipleSelection.value'|translate
+                  }}*
+                </p>
+                <rr-breast-simple
+                  rr-id="mam_mx_010506"
+                  name="nippleDischargeLocalization"
+                  [(ngModel)]="findingHandler.currentItem.nippleDischargeLocalization"
+                  rrValidation="nippleDischargeLocalization"
+                  isLocalizer="true"
+                  #nippleDischargeLocalization
+                  [elementUpdate]="nippleDischargeLocalization.announceSelection"
+                ></rr-breast-simple>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,231 @@
+<div class="f-horizontal col-h-100 w-100 p-t-29 text-break">
+  <div class="c-col-1 c-pad o-list m-b-12">
+    <div class="o-radio-list p-l-8 m-b-26">
+      <h2 rr-id="pel_m_080252">
+        {{ 'pelvisMRT.rectum.localization.value' | translate }}*
+      </h2>
+      <p rr-id="pel_m_080278" class="small m-b-7">
+        {{ 'pelvisMRT.rectum.pleaseSelectAtLeast4.value' | translate }}
+      </p>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.ileum.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080271"
+        name="isIleum"
+        [(ngModel)]="model.isIleum"
+        rrValidation="isIleum isColon isSigmoidColon isRectum"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.colon.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080272"
+        name="isColon"
+        [(ngModel)]="model.isColon"
+        rrValidation="isIleum isColon isSigmoidColon isRectum"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.sigmoidColon.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080273"
+        name="isSigmoidColon"
+        [(ngModel)]="model.isSigmoidColon"
+        rrValidation="isIleum isColon isSigmoidColon isRectum"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.rectum.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080274"
+        name="isRectum"
+        [(ngModel)]="model.isRectum"
+        rrValidation="isIleum isColon isSigmoidColon isRectum"
+      ></p-checkbox>
+    </div>
+    <div class="o-radio-list p-l-8">
+      <h2 rr-id="pel_m_080275" class="m-b-13">
+        {{ 'pelvisMRT.rectum.patternsOfInflammation.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.discontinued.value' | translate}}"
+        rr-id="pel_m_080276"
+        name="patternsOfInflammationType"
+        [value]="patternsOfInflammationType.Discontinued"
+        [(ngModel)]="model.patternsOfInflammationType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.continued.value' | translate}}"
+        rr-id="pel_m_080277"
+        name="patternsOfInflammationType"
+        [value]="patternsOfInflammationType.Continued"
+        [(ngModel)]="model.patternsOfInflammationType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-2 c-sep-l f-vertical c-pad m-b-12">
+    <h2 rr-id="pel_m_080370" class="m-b-10 p-l-8">
+      {{ 'pelvisMRT.rectum.wallAlterations.value' | translate }}
+    </h2>
+    <div class="f-horizontal col-h-100 o-width-100">
+      <div class="c-col-1 c-pad-r o-list">
+        <div class="o-radio-list p-l-8">
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.thickening.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_080371"
+            name="isThickening"
+            [(ngModel)]="model.isThickening"
+            rrContentReset="thickeningBlock"
+          ></p-checkbox>
+          <div
+            id="thickeningBlock"
+            class="o-radio-list p-l-35"
+            [rrDisable]="!model.isThickening"
+          >
+            <div class="m-b-6">
+              <rr-number-input
+                [label]="'pelvisMRT.rectum.inMm.value' | translate"
+                [config]="{min: 0, max: 9999}"
+                [inputRrId]="'pel_m_080372'"
+                [labelRrId]="'pel_m_080373'"
+                name="thickeningSize"
+                [(ngModel)]="model.thickeningSize"
+              ></rr-number-input>
+            </div>
+            <p rr-id="pel_m_080374">
+              {{ 'pelvisMRT.rectum.maxLongitudinalExpansion.value' | translate
+              }}
+            </p>
+            <rr-number-input
+              [label]="'pelvisMRT.rectum.inMm.value' | translate"
+              [config]="{min: 0, max: 9999}"
+              [inputRrId]="'pel_m_080375'"
+              [labelRrId]="'pel_m_080376'"
+              name="maxLongitudinalExpansion"
+              [(ngModel)]="model.maxLongitudinalExpansion"
+            ></rr-number-input>
+          </div>
+          <div class="o-radio-list p-l-8">
+            <p-checkbox
+              label="{{'pelvisMRT.rectum.stratificationlayering.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_080377"
+              name="isStratificationlayering"
+              [(ngModel)]="model.isStratification"
+            ></p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.rectum.lossOfHaustrationBicycle.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_080378"
+              name="isLossHaustration"
+              [(ngModel)]="model.isLossHaustration"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep-l o-list">
+        <div class="o-radio-list p-l-8">
+          <p rr-id="pel_m_080453" class="m-b-10">
+            {{ 'pelvisMRT.rectum.typeOfWallAlterations.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.whiteBowel.value' | translate}}"
+            rr-id="pel_m_080454"
+            name="wallAlterationType"
+            [value]="wallAlterationType.WhiteBowel"
+            [(ngModel)]="model.wallAlterationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.grayBowel.value' | translate}}"
+            rr-id="pel_m_080455"
+            name="wallAlterationType"
+            [value]="wallAlterationType.GrayBowel"
+            [(ngModel)]="model.wallAlterationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.waterHaloSign.value' | translate}}"
+            rr-id="pel_m_080456"
+            name="wallAlterationType"
+            [value]="wallAlterationType.WaterHaloSign"
+            [(ngModel)]="model.wallAlterationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.fatHaloSign.value' | translate}}"
+            rr-id="pel_m_080457"
+            name="wallAlterationType"
+            [value]="wallAlterationType.FatHaloSign"
+            [(ngModel)]="model.wallAlterationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'pelvisMRT.rectum.blackBowel.value' | translate}}"
+            rr-id="pel_m_080458"
+            name="wallAlterationType"
+            [value]="wallAlterationType.BlackBowel"
+            [(ngModel)]="model.wallAlterationType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l o-list m-b-12">
+    <div class="o-radio-list p-l-8">
+      <h2 rr-id="pel_m_080551" class="m-b-10">
+        {{ 'pelvisMRT.rectum.mesentericChange.value' | translate }}
+      </h2>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.lymphadenopathy.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080552"
+        name="isLymphadenopathy"
+        [(ngModel)]="model.isLymphadenopathy"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.strandingOfMesentericFat.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080553"
+        name="isFatTissueStranding"
+        [(ngModel)]="model.isFatTissueStranding"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.proliferationOfAdjacentFat.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080554"
+        name="isFatTissueProliferation"
+        [(ngModel)]="model.isFatTissueProliferation"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.markedVasaRecta.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080556"
+        name="isMarkedVasaRecta"
+        [(ngModel)]="model.isMarkedVasaRecta"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.combSign.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080557"
+        name="isCombSign"
+        [(ngModel)]="model.isCombSign"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.t2wSignalEnhancementIn.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080558"
+        name="isT2wSignalBoostInPerifocal"
+        [(ngModel)]="model.isT2wSignalBoostInPerifocal"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.accompanyingAscites.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080559"
+        name="isAccompanyingAscites"
+        [(ngModel)]="model.isAccompanyingAscites"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

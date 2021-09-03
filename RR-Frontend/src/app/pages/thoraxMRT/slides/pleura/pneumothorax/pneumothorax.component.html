@@ -1,0 +1,171 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_060235">
+      {{ "thoraxMRT.pleura.side.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060236"
+      name="pleuraSiteType"
+      [(ngModel)]="model.pleuraSiteType"
+      [rrDisable]="
+        pleuraHelperService.isSiteDisabled(findings, model, siteTypeEnum.Right)
+      "
+      rrValidation="pleuraSiteType"
+      [value]="siteTypeEnum.Right"
+      label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060237"
+      name="pleuraSiteType"
+      [(ngModel)]="model.pleuraSiteType"
+      [rrDisable]="
+        pleuraHelperService.isSiteDisabled(findings, model, siteTypeEnum.Left)
+      "
+      rrValidation="pleuraSiteType"
+      [value]="siteTypeEnum.Left"
+      label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+    ></p-radioButton>
+
+    <h2 rr-id="tho_m_060238" class="p-t-23">
+      {{ "thoraxMRT.pleura.type.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060239"
+      name="pneumothoraxType"
+      [(ngModel)]="model.pneumothoraxType"
+      rrUnClickRadio
+      [value]="pneumothoraxTypeEnum.ApicalPneumothorax"
+      label="{{ 'thoraxMRT.pleura.apicalPneumothorax.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060240"
+      name="pneumothoraxType"
+      rrUnClickRadio
+      [(ngModel)]="model.pneumothoraxType"
+      [value]="pneumothoraxTypeEnum.AnterolateralPneumothorax"
+      label="{{
+        'thoraxMRT.pleura.anterolateralPneumothorax.value' | translate
+      }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060241"
+      name="pneumothoraxType"
+      rrUnClickRadio
+      [(ngModel)]="model.pneumothoraxType"
+      [value]="pneumothoraxTypeEnum.Seropneumothorax"
+      label="{{ 'thoraxMRT.pleura.seropneumothorax.value' | translate }}"
+    ></p-radioButton>
+
+    <h2 rr-id="tho_m_060242" class="m-t-19">
+      {{ "thoraxMRT.pleura.expansion.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060243"
+      name="extensionType"
+      rrUnClickRadio
+      [(ngModel)]="model.extensionType"
+      [value]="extensionTypeEnum.Small"
+      label="{{ 'thoraxMRT.pleura.small.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060244"
+      name="extensionType"
+      rrUnClickRadio
+      [(ngModel)]="model.extensionType"
+      [value]="extensionTypeEnum.Large"
+      label="{{ 'thoraxMRT.pleura.large.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060245"
+      name="extensionType"
+      rrUnClickRadio
+      [(ngModel)]="model.extensionType"
+      [value]="extensionTypeEnum.Subtotal"
+      label="{{ 'thoraxMRT.pleura.subtotal.value' | translate }}"
+    ></p-radioButton>
+    <p rr-id="tho_m_060246">
+      {{ "thoraxMRT.pleura.maxWidthAxialPlane.value" | translate }}
+    </p>
+    <rr-number-input
+      inputRrId="tho_m_060247"
+      labelRrId="tho_m_060248"
+      name="expansionMaxWidthInMm"
+      [(ngModel)]="model.expansionMaxWidthInMm"
+      [label]="'thoraxMRT.pleura.inMm.value' | translate"
+      [config]="{ min: 1, max: 300, placeholder: '---' }"
+    ></rr-number-input>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_060331">
+      {{ "thoraxMRT.pleura.tensionPneumothorax.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="tho_m_060332"
+      name="isMediastinalshift"
+      rrContentReset="mediastinalshiftBlock"
+      [(ngModel)]="model.isMediastinalshift"
+      label="{{ 'thoraxMRT.pleura.mediastinalShift.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+    <div
+      id="mediastinalshiftBlock"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isMediastinalshift"
+    >
+      <p rr-id="tho_m_060333">
+        {{ "thoraxMRT.pleura.side.value" | translate }}
+      </p>
+      <p-radioButton
+        rr-id="tho_m_060334"
+        name="mediastinalPleuraSiteType"
+        [(ngModel)]="model.mediastinalPleuraSiteType"
+        rrValidation="mediastinalPleuraSiteType"
+        [value]="siteTypeEnum.Right"
+        label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_060335"
+        name="mediastinalPleuraSiteType"
+        [(ngModel)]="model.mediastinalPleuraSiteType"
+        rrValidation="mediastinalPleuraSiteType"
+        [value]="siteTypeEnum.Left"
+        label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+      ></p-radioButton>
+    </div>
+    <h2 rr-id="tho_m_060336" class="m-t-15">
+      {{ "thoraxMRT.pleura.associatedFindings.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="tho_m_060337"
+      name="isAtelectasis"
+      [(ngModel)]="model.isAtelectasis"
+      label="{{ 'thoraxMRT.pleura.atelectasis.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_060338"
+      name="isSoftTissueEmphysema"
+      [(ngModel)]="model.isSoftTissueEmphysema"
+      label="{{ 'thoraxMRT.pleura.softTissueEmphysema.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_060339"
+      name="isPneumopericardium"
+      [(ngModel)]="model.isPneumopericardium"
+      label="{{ 'thoraxMRT.pleura.pneumopericardium.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_060340"
+      name="isPneumomediastinum"
+      [(ngModel)]="model.isPneumomediastinum"
+      label="{{ 'thoraxMRT.pleura.pneumomediastinum.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad"></div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

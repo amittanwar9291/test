@@ -1,0 +1,54 @@
+<div class="disclaimer-dialog-content" [ngStyle]="{'zoom': zoom}">
+  <div class="disclaimer-header">
+    {{ 'layout.disclaimerDialog.disclaimerHeadline' | translate }}
+  </div>
+  <div class="disclaimer-box c-col-2">
+    <div class="disclaimer-prompt">
+      {{ 'layout.disclaimerDialog.disclaimerUpperbody' | translate }}
+      <sup>®</sup>
+      {{ 'layout.disclaimerDialog.disclaimerBody' | translate }}
+    </div>
+    <br />
+    <div class="disclaimer-prompt-body">
+      {{ 'layout.disclaimerDialog.disclaimerLowerBody' | translate }}
+    </div>
+    <div class="disclaimer-header">
+      {{ 'layout.disclaimerDialog.disclaimerReleaseText' | translate }}
+    </div>
+    <div class="approval-box p-col-100">
+      <div class="p-col-100 f-horizontal f-space-between f-align-center">
+        <p-checkbox
+          name="reportExport"
+          label="{{ 'report.finding' | translate }} {{ reportLabel | translate }}"
+          binary="true"
+          [(ngModel)]="isAccepted"
+        ></p-checkbox>
+        <p-dropdown
+          [options]="languages"
+          [(ngModel)]="selectedLang"
+          [style]="{'width':'75px'}"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="selectedLang">
+              {{ selectedLang.toUpperCase() }}
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div style="width: 150px;">{{ lang.label }}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="c-col-2 f-horizontal f-center disclaimer-buttons">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{ 'layout.disclaimerDialog.cancel' | translate }}
+      </button>
+      <button class="btn btn-ok" (click)="confirm()" [disabled]="!isAccepted">
+        {{ 'layout.disclaimerDialog.ok' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="c-col-2 f-horizontal f-end disclaimer-logo">
+    <img src="assets\img\layout\rr-logo-rgb.svg" alt="Radio Report" />
+  </div>
+</div>

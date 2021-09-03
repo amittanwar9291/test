@@ -1,0 +1,252 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_060103" class="m-b-77">
+        {{'mammaMX.ultrasoundMammaryGlands.cutis.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_060104"
+        rrInfoIcon="mam_mx_06_01"
+        rrUnClickRadio
+        name="cutisType"
+        [value]="cutisType.NotThickened"
+        label="{{'mammaMX.ultrasoundMammaryGlands.notThickened.value' | translate}}"
+        [(ngModel)]="model.cutisType"
+        (onClick)="resetCutisLocation()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_060105"
+        rrUnClickRadio
+        name="cutisType"
+        class="m-b-205"
+        [value]="cutisType.Thickened"
+        label="{{'mammaMX.ultrasoundMammaryGlands.thickened.value' | translate}}"
+        [(ngModel)]="model.cutisType"
+        (onClick)="resetCutisLocation()"
+      >
+      </p-radioButton>
+      <div [rrDisable]="model.cutisType !== cutisType.Thickened">
+        <p rr-id="mam_mx_060106" class="m-b-0" rrValidation="cutisLocation">
+          {{'mammaMX.ultrasoundMammaryGlands.localizationMultipleSelection.value'
+          | translate}}*
+        </p>
+        <rr-breast-cross
+          rr-id="mam_mx_060107"
+          [(ngModel)]="model.cutisLocation"
+          name="model.cutisLocation"
+          #cutisLocation
+          [elementUpdate]="cutisLocation.announceSelection"
+          rrValidation="cutisLocation"
+          isLocalizer="true"
+        >
+        </rr-breast-cross>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_060201" class="m-b-76">
+        {{'mammaMX.ultrasoundMammaryGlands.retraction.value' | translate}}
+      </h1>
+      <p rr-id="mam_mx_060202" class="m-b-8">
+        {{'mammaMX.ultrasoundMammaryGlands.nipple.value' | translate}}
+      </p>
+      <p-checkbox
+        rr-id="mam_mx_060203"
+        name="isRightNipple"
+        label="{{'mammaMX.ultrasoundMammaryGlands.right.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isRightNipple"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="mam_mx_060204"
+        name="isLeftNipple"
+        class="m-b-28"
+        label="{{'mammaMX.ultrasoundMammaryGlands.left.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLeftNipple"
+      >
+      </p-checkbox>
+      <p rr-id="mam_mx_060205" class="m-b-7">
+        {{'mammaMX.ultrasoundMammaryGlands.cutis.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="mam_mx_060206"
+        rrUnClickRadio
+        name="cutisRetractionPresence"
+        [value]="cutisRetractionPresence.No"
+        label="{{'mammaMX.ultrasoundMammaryGlands.no.value' | translate}}"
+        [(ngModel)]="model.cutisRetractionPresence"
+        (onClick)="resetRetractionLocation()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_060207"
+        rrUnClickRadio
+        name="cutisRetractionPresence"
+        class="m-b-25"
+        [value]="cutisRetractionPresence.Yes"
+        label="{{'mammaMX.ultrasoundMammaryGlands.yes.value' | translate}}"
+        [(ngModel)]="model.cutisRetractionPresence"
+        (onClick)="resetRetractionLocation()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.cutisRetractionPresence !== cutisRetractionPresence.Yes"
+      >
+        <p
+          rr-id="mam_mx_060208"
+          rrInfoIcon="mam_mx_06_02"
+          class="m-b-0 text-break"
+          rrValidation="retractionLocation"
+        >
+          {{'mammaMX.ultrasoundMammaryGlands.localizationSingleSelectionPer.value'
+          | translate}}*
+        </p>
+        <rr-breast-pizza-slices
+          rr-id="mam_mx_060209"
+          [(ngModel)]="model.retractionLocation"
+          name="model.retractionLocation"
+          #retractionLocation
+          [elementUpdate]="retractionLocation.announceSelection"
+          rrValidation="retractionLocation"
+          isLocalizer="true"
+        ></rr-breast-pizza-slices>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_060301" class="m-b-52" style="min-height: 50px;">
+        {{'mammaMX.ultrasoundMammaryGlands.subcutaneousFatTissue.value' |
+        translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_060302"
+        rrUnClickRadio
+        name="subcutaneousFatTissueType"
+        [value]="subcutaneousFatTissueType.Normal"
+        label="{{'mammaMX.ultrasoundMammaryGlands.normal.value' | translate}}"
+        [(ngModel)]="model.subcutaneousFatTissueType"
+        (onClick)="resetSubcutaneousFatTissueLocation()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_060303"
+        rrUnClickRadio
+        name="subcutaneousFatTissueType"
+        class="m-b-205"
+        [value]="subcutaneousFatTissueType.Obliterated"
+        label="{{'mammaMX.ultrasoundMammaryGlands.obliterated.value' | translate}}"
+        [(ngModel)]="model.subcutaneousFatTissueType"
+        (onClick)="resetSubcutaneousFatTissueLocation()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.subcutaneousFatTissueType !== subcutaneousFatTissueType.Obliterated"
+      >
+        <p
+          rr-id="mam_mx_060304"
+          class="m-b-0"
+          rrValidation="subcutaneousFatTissueLocation"
+        >
+          {{'mammaMX.ultrasoundMammaryGlands.localizationMultipleSelection.value'
+          | translate}}*
+        </p>
+        <rr-breast-cross
+          rr-id="mam_mx_060305"
+          [(ngModel)]="model.subcutaneousFatTissueLocation"
+          name="model.subcutaneousFatTissueLocation"
+          #subcutaneousFatTissueLocation
+          [elementUpdate]="subcutaneousFatTissueLocation.announceSelection"
+          rrValidation="subcutaneousFatTissueLocation"
+          isLocalizer="true"
+        >
+        </rr-breast-cross>
+      </div>
+    </div>
+    <div
+      class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list f-space-between"
+    >
+      <div class="o-radio-list">
+        <h1 rr-id="mam_mx_060401" class="m-b-77">
+          {{'mammaMX.ultrasoundMammaryGlands.pectoralisMuscle.value' |
+          translate}}
+        </h1>
+        <p-radioButton
+          rr-id="mam_mx_060402"
+          rrUnClickRadio
+          name="mPectoralisType"
+          [value]="mPectoralisType.PectoralisMuscleBothSides"
+          label="{{'mammaMX.ultrasoundMammaryGlands.pectoralisCanBeSeparated.value' | translate}}"
+          [(ngModel)]="model.mPectoralisType"
+          (onClick)="resetMPectoralisLocation()"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_mx_060403"
+          rrUnClickRadio
+          name="mPectoralisType"
+          [value]="mPectoralisType.Obscured"
+          label="{{'mammaMX.ultrasoundMammaryGlands.obscured.value' | translate}}"
+          [(ngModel)]="model.mPectoralisType"
+          (onClick)="resetMPectoralisLocation()"
+        >
+        </p-radioButton>
+      </div>
+      <div
+        [rrDisable]="model.mPectoralisType !== mPectoralisType.Obscured"
+        class="m-b-71"
+      >
+        <p
+          rr-id="mam_mx_060404"
+          class="m-b-0"
+          rrValidation="mPectoralisLocation"
+        >
+          {{'mammaMX.ultrasoundMammaryGlands.localizationMultipleSelection.value'
+          | translate}}*
+        </p>
+        <rr-breast-simple
+          rr-id="mam_mx_060405"
+          [(ngModel)]="model.mPectoralisLocation"
+          name="model.mPectoralisLocation"
+          #mPectoralisLocation
+          [elementUpdate]="mPectoralisLocation.announceSelection"
+          rrValidation="mPectoralisLocation"
+          isLocalizer="true"
+        ></rr-breast-simple>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_060501" class="text-break m-b-52">
+        {{'mammaMX.ultrasoundMammaryGlands.parenchymaDensityOnlyFor.value' |
+        translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_060502"
+        rrUnClickRadio
+        name="parenchymaDensityType"
+        [value]="parenchymaDensityType.HomogeneousFattyEchoSignal"
+        label="{{'mammaMX.ultrasoundMammaryGlands.homogeneusFattyEchoUltrasound.value' | translate}}"
+        [(ngModel)]="model.parenchymaDensityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_060503"
+        rrUnClickRadio
+        name="parenchymaDensityType"
+        [value]="parenchymaDensityType.HomogeneousFibroglandularEchoSignal"
+        label="{{'mammaMX.ultrasoundMammaryGlands.homogeneusFibroglandularEchoUltrasound.value' | translate}}"
+        [(ngModel)]="model.parenchymaDensityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_060504"
+        rrUnClickRadio
+        name="parenchymaDensityType"
+        [value]="parenchymaDensityType.HeterogeneousEchoSignal"
+        label="{{'mammaMX.ultrasoundMammaryGlands.heterogeneousEchoUltrasound.value' | translate}}"
+        [(ngModel)]="model.parenchymaDensityType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</form>

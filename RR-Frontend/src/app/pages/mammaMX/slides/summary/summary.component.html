@@ -1,0 +1,347 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_090103" rrInfoIcon="mam_mx_09_01">
+        {{'mammaMX.summary.breastComposition.value' | translate}}
+      </h1>
+      <div class="f-horizontal m-b-38">
+        <div class="f-horizontal f-align-center o-width-173">
+          <div class="parenchyma-density-container" rr-id="mam_mx_090104">
+            {{ model.parenchymaDensityRight }}
+          </div>
+          <p rr-id="mam_mx_090105">
+            {{'mammaMX.summary.right.value' | translate}}
+          </p>
+        </div>
+        <div class="f-horizontal f-align-center o-width-173">
+          <div class="parenchyma-density-container" rr-id="mam_mx_090106">
+            {{ model.parenchymaDensityLeft }}
+          </div>
+          <p rr-id="mam_mx_090107">
+            {{'mammaMX.summary.left.value' | translate}}
+          </p>
+        </div>
+      </div>
+      <rr-bi-rads [model]="model"></rr-bi-rads>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <div [rrDisable]="!areMammographyFindings || !areUltrasoundFindings">
+        <h1 rr-id="mam_mx_090301">
+          {{'mammaMX.summary.correlation.value' | translate}}
+        </h1>
+        <p
+          rr-id="mam_mx_090302"
+          class="font-15 text-break correlation-description m-b-45"
+        >
+          {{'mammaMX.summary.possibleAssignmentOfUltrasoundFindings.value' |
+          translate}}
+        </p>
+        <div class="f-horizontal f-space-between m-b-7">
+          <p rr-id="mam_mx_090303" class="o-width-150">
+            {{'mammaMX.summary.mxFindings.value' | translate}}
+          </p>
+          <p rr-id="mam_mx_090304" class="o-width-150">
+            {{'mammaMX.summary.uSFindings.value' | translate}}
+          </p>
+        </div>
+      </div>
+      <rr-page-correlation
+        [handler]="findingRelationsHandler"
+        [allLeftFindings]="page5AllFindings"
+        [allRightFindings]="page7AllFindings"
+        [noCorrelationTranslation]="noCorrelationTranslation"
+        [translationBits]="procedureFindingTranslationBits"
+        [correlationsPerPage]="9"
+        [findingListsRrIds]="['mam_mx_090305', 'mam_mx_090306']"
+        [triggerAutosaveOnPageEntry]="shouldTriggerSave"
+        [incomingCorrelationFindings]="incomingCorrelationFindings"
+        [pageConnectionPerformed$]="$allConnectionCallbacksPerformed"
+        leftFindingsTranslationBaseKey="mammaMX.mammographyFinding.findingTypes.options"
+        [rrDisable]="!areMammographyFindings || !areUltrasoundFindings"
+      >
+      </rr-page-correlation>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_090401">
+        {{'mammaMX.summary.courseOfDisease.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_090402"
+        rrUnClickRadio
+        name="courseOfDiseaseType"
+        [value]="courseOfDiseaseType.Progression"
+        label="{{'mammaMX.summary.progression.value' | translate}}"
+        [(ngModel)]="model.courseOfDiseaseType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_090403"
+        rrUnClickRadio
+        name="courseOfDiseaseType"
+        [value]="courseOfDiseaseType.NoRelevantChange"
+        label="{{'mammaMX.summary.noRelevantChange.value' | translate}}"
+        [(ngModel)]="model.courseOfDiseaseType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_090404"
+        rrUnClickRadio
+        name="courseOfDiseaseType"
+        [value]="courseOfDiseaseType.Improvement"
+        label="{{'mammaMX.summary.improvement.value' | translate}}"
+        [(ngModel)]="model.courseOfDiseaseType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_090501">
+        {{'mammaMX.summary.procedure.value' | translate}}
+      </h1>
+      <p-dropdown
+        rr-id="mam_mx_090502"
+        [(ngModel)]="model.procedureFindingType"
+        styleClass="o-width-100 ui-brown-box"
+        name="procedureFindingType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="procedureFindingOptions"
+        rrDropdownClear
+        (onChange)="resetProcedureColumn()"
+      >
+        <ng-template let-item pTemplate="selectedItem">
+          <span>{{getCustomLabel(item.value) || item.label}}</span>
+        </ng-template>
+      </p-dropdown>
+      <ng-container
+        *ngIf="model.procedureFindingType === procedureFindingType.Biopsy"
+      >
+        <p rr-id="mam_mx_090503" class="m-t-17">
+          {{'mammaMX.summary.localization.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="mam_mx_090504"
+          rrUnClickRadio
+          name="biopsyLocalizationType"
+          [value]="biopsyLocalizationType.RightBreast"
+          label="{{'mammaMX.summary.rightBreast.value' | translate}}"
+          [(ngModel)]="model.biopsyLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_mx_090505"
+          rrUnClickRadio
+          name="biopsyLocalizationType"
+          [value]="biopsyLocalizationType.LeftBreast"
+          label="{{'mammaMX.summary.leftBreast.value' | translate}}"
+          [(ngModel)]="model.biopsyLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_mx_090506"
+          rrUnClickRadio
+          name="biopsyLocalizationType"
+          [value]="biopsyLocalizationType.LymphNodeRight"
+          label="{{'mammaMX.summary.lymphNodeRight.value' | translate}}"
+          [(ngModel)]="model.biopsyLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_mx_090507"
+          rrUnClickRadio
+          name="biopsyLocalizationType"
+          class="m-b-25"
+          [value]="biopsyLocalizationType.LymphNodeLeft"
+          label="{{'mammaMX.summary.lymphNodeLeft.value' | translate}}"
+          [(ngModel)]="model.biopsyLocalizationType"
+        >
+        </p-radioButton>
+        <p rr-id="mam_mx_090508">
+          {{'mammaMX.summary.modality.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="mam_mx_090509"
+          rrUnClickRadio
+          name="biopsyModalityType"
+          [value]="biopsyModalityType.Ultrasound"
+          label="{{'mammaMX.summary.ultrasound.value' | translate}}"
+          [(ngModel)]="model.biopsyModalityType"
+          rrContentReset="biopsyXray-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="mam_mx_090510"
+          rrUnClickRadio
+          name="biopsyModalityType"
+          [value]="biopsyModalityType.Xray"
+          label="{{'mammaMX.summary.xray.value' | translate}}"
+          [(ngModel)]="model.biopsyModalityType"
+          rrContentReset="biopsyXray-block"
+        >
+        </p-radioButton>
+        <div
+          class="f-start o-radio-list nested-content"
+          id="biopsyXray-block"
+          [rrDisable]="model.biopsyModalityType !== biopsyModalityType.Xray"
+        >
+          <p-checkbox
+            rr-id="mam_mx_090511"
+            name="isStereotactic"
+            label="{{'mammaMX.summary.stereotactic.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isStereotactic"
+            rrContentReset="isStereotactic-block"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isStereotactic-block"
+            [rrDisable]="!model.isStereotactic"
+          >
+            <p-checkbox
+              rr-id="mam_mx_090512"
+              name="isVacuumPunchBiopsy"
+              label="{{'mammaMX.summary.vacuumPunchBiopsy.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isVacuumPunchBiopsy"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <p-radioButton
+          rr-id="mam_mx_090513"
+          rrUnClickRadio
+          name="biopsyModalityType"
+          [value]="biopsyModalityType.MRI"
+          label="{{'mammaMX.summary.mRI.value' | translate}}"
+          [(ngModel)]="model.biopsyModalityType"
+          rrContentReset="biopsyXray-block"
+        >
+        </p-radioButton>
+      </ng-container>
+      <ng-container
+        *ngIf="model.procedureFindingType === procedureFindingType.CheckupModalityTiming"
+      >
+        <p rr-id="mam_mx_090514" class="m-t-18 m-b-8">
+          {{'mammaMX.summary.imagingModalityForFollowUp.value' | translate}}
+        </p>
+        <p-checkbox
+          rr-id="mam_mx_090515"
+          name="isUltrasound"
+          class="m-b-2"
+          label="{{'mammaMX.summary.ultrasound.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isUltrasound"
+          rrContentReset="isUltrasound-block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content f-vertical"
+          id="isUltrasound-block"
+          [rrDisable]="!model.isUltrasound"
+        >
+          <p-dropdown
+            rr-id="mam_mx_090516"
+            [(ngModel)]="model.ultrasoundDate"
+            styleClass="o-width-100 ui-brown-box"
+            name="ultrasoundDate"
+            class="m-b-8"
+            placeholder="{{ 'mammaMX.summary.pleaseSelectTime' | translate }}"
+            [options]="ultrasoundDateOptions"
+            rrDropdownClear
+            (onChange)="clearUltrasoundStrategy()"
+          >
+          </p-dropdown>
+          <div
+            class="o-radio-list m-b-22"
+            [rrDisable]="model.ultrasoundDate === 'None'"
+          >
+            <p rr-id="mam_mx_090517" class="m-b-0">
+              {{'mammaMX.summary.ultrasoundStrategy.value' | translate}}
+            </p>
+            <p-dropdown
+              rr-id="mam_mx_090518"
+              [(ngModel)]="model.ultrasoundStrategy"
+              styleClass="o-width-100 ui-brown-box"
+              name="ultrasoundStrategy"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [options]="ultrasoundStrategyOptions"
+              rrDropdownClear
+            >
+            </p-dropdown>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="mam_mx_090519"
+          name="isMammography"
+          class="m-b-3"
+          label="{{'mammaMX.summary.mammography.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMammography"
+          rrContentReset="isMammography-block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content f-vertical m-b-31"
+          [rrDisable]="!model.isMammography"
+          id="isMammography-block"
+        >
+          <p-dropdown
+            rr-id="mam_mx_090520"
+            [(ngModel)]="model.mammographyDate"
+            styleClass="o-width-100 ui-brown-box"
+            name="mammographyDate"
+            class="m-b-8"
+            placeholder="{{ 'mammaMX.summary.pleaseSelectTime' | translate }}"
+            [options]="mammographyDateOptions"
+            rrDropdownClear
+            (onChange)="clearMammographyStrategy()"
+          >
+          </p-dropdown>
+          <div
+            class="o-radio-list"
+            [rrDisable]="model.mammographyDate === 'None'"
+          >
+            <p rr-id="mam_mx_090521" class="m-b-0">
+              {{'mammaMX.summary.mammographyStrategy.value' | translate}}
+            </p>
+            <p-dropdown
+              rr-id="mam_mx_090522"
+              [(ngModel)]="model.mammographyStrategy"
+              styleClass="o-width-100 ui-brown-box"
+              name="mammographyStrategy"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [options]="mammographyStrategyOptions"
+              rrDropdownClear
+            >
+            </p-dropdown>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="mam_mx_090523"
+          name="isMRI"
+          class="m-b-4"
+          label="{{'mammaMX.summary.mRI.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMRI"
+          rrContentReset="isMRI-block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isMRI"
+          id="isMRI-block"
+        >
+          <p-dropdown
+            rr-id="mam_mx_090524"
+            [(ngModel)]="model.mriDate"
+            styleClass="o-width-100 ui-brown-box"
+            name="mriDate"
+            placeholder="{{ 'mammaMX.summary.pleaseSelectTime' | translate }}"
+            [options]="mammographyDateOptions"
+            rrDropdownClear
+          >
+          </p-dropdown>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

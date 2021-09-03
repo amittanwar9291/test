@@ -1,0 +1,82 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="abd_m_0902147">
+      {{ 'abdomenMRT.gastrointestinal.pathogenesis.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="abd_m_0902148"
+      name="pathogenesisType"
+      [(ngModel)]="model.pathogenesisType"
+      [value]="pathogenesisType.Metabolic"
+      rrUnClickRadio
+      label="{{'abdomenMRT.gastrointestinal.metabolic.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_0902149"
+      name="pathogenesisType"
+      [(ngModel)]="model.pathogenesisType"
+      [value]="pathogenesisType.Reflexive"
+      rrUnClickRadio
+      label="{{'abdomenMRT.gastrointestinal.reflexive.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="abd_m_0902150"
+      name="pathogenesisType"
+      [(ngModel)]="model.pathogenesisType"
+      [value]="pathogenesisType.Toxic"
+      rrUnClickRadio
+      label="{{'abdomenMRT.gastrointestinal.toxic.value' | translate }}"
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <p-checkbox
+      rr-id="abd_m_0903134"
+      binary="true"
+      labelStyleClass="ui-fat-label"
+      name="isGeneralizedUniformGaseousDistensionOfTheLargeAndSmallBowel"
+      [(ngModel)]="model.isGeneralizedUniformGaseousDistensionOfTheLargeAndSmallBowel"
+      rrContentReset="bowelDiameterContainer"
+      label="{{ 'abdomenMRT.gastrointestinal.generalizedUniformGaseousDistension.value' | translate }}"
+    >
+    </p-checkbox>
+    <div
+      class="nested-content o-radio-list"
+      id="bowelDiameterContainer"
+      [rrDisable]="!model.isGeneralizedUniformGaseousDistensionOfTheLargeAndSmallBowel"
+    >
+      <p rr-id="abd_m_0903135">
+        {{ 'abdomenMRT.gastrointestinal.maximumDiameterLargeBowel.value' |
+        translate }}
+      </p>
+      <rr-number-input
+        labelRrId="abd_m_0903137"
+        inputRrId="abd_m_0903136"
+        name="maximumLargeBowelDiameterInMm"
+        [(ngModel)]="model.maximumDiameterLargeBowelInMm"
+        [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+        [config]="{min: 1, max: 999, placeholder: '---'}"
+      ></rr-number-input>
+      <p rr-id="abd_m_0903138">
+        {{ 'abdomenMRT.gastrointestinal.maximumSmallBowelDiameter.value' |
+        translate }}
+      </p>
+      <rr-number-input
+        labelRrId="abd_m_0903140"
+        inputRrId="abd_m_0903139"
+        name="maximumSmallBowelDiameterInMm"
+        [(ngModel)]="model.maximumSmallBowelDiameterInMm"
+        [label]="'abdomenMRT.gastrointestinal.inMm.value' | translate"
+        [config]="{min: 1, max: 999, placeholder: '---'}"
+      ></rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list"></div>
+</div>

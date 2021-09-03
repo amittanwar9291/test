@@ -1,0 +1,334 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class=" f-vertical c-sep m-t-15 m-b-15 o-list">
+    <h2 rr-id="hea_m_060246" class="c-pad-l">
+      {{ "headMRT.cortex.differentialDiagnosis0.value" | translate }}
+    </h2>
+    <div class="c-sep f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad f-vertical o-list">
+        <div
+          class="o-radio-list f-vertical m-r-15"
+          [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+        >
+          <h3 rr-id="hea_m_060247">
+            {{ "headMRT.cortex.differentialDiagnosis.value" | translate }}
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            rrId="hea_m_060286"
+            name="differentialDiagnosisType1"
+            group="true"
+            [diagnosisNumber]="1"
+            [options]="differentialDiagnosisOptions01"
+            [(ngModel)]="model.differentialDiagnosisType1"
+            [parentViewModel]="model"
+            (selectionChanged)="resetDifferentialDiagnosisDependantModel01()"
+            rrValidation="differentialDiagnosisType1"
+          ></rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            rr-id="hea_m_060249"
+            name="isSuspicionOf"
+            label="{{ 'headMRT.cortex.suspicionOf.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOf"
+            [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisEnum.None && model.differentialDiagnosisType1 === differentialDiagnosisEnum.None"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          [rrDisable]="model.differentialDiagnosisType1 !== differentialDiagnosisEnum.Microangiopathy"
+          class="o-radio-list m-r-15 m-t-20"
+        >
+          <h3 rr-id="hea_m_060250" rrInfoIcon="hea_m_06_03" class="text-break">
+            {{ "headMRT.cortex.fazekasScale.value" | translate}}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060251"
+            name="classificationFazekas1"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [(ngModel)]="model.classificationFazekas1"
+            [options]="classificationFazekasOptions"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div
+          *ngIf="model.findingType === findingEnum.Focal"
+          [rrDisable]="!whoConditionFunction(model.differentialDiagnosisType1)"
+          class="o-radio-list m-r-15"
+        >
+          <h3 rr-id="hea_m_060252" rrInfoIcon="hea_m_06_04">
+            {{ "headMRT.cortex.wHOClassification.value" | translate }}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060253"
+            name="classificationWHO1"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="classificationWhoOptions"
+            [(ngModel)]="model.classificationWHO1"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div
+          *ngIf="model.findingType === findingEnum.Diffuse"
+          [rrDisable]="model.differentialDiagnosisType1 !== differentialDiagnosisEnum.DiffuseAxonalInjury"
+          class="o-radio-list m-r-15"
+        >
+          <h3 rr-id="hea_m_060287" class="text-break">
+            {{ "headMRT.cortex.modifiedClassificationAccordingToAdams.value" |
+            translate }}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060288"
+            name="classificationAdams1"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="classificationAdamsOptions"
+            [(ngModel)]="model.classificationAdams1"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad f-vertical o-list">
+        <div
+          class="o-radio-list f-vertical m-r-10"
+          [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisEnum.None && model.differentialDiagnosisType1 === differentialDiagnosisEnum.None"
+        >
+          <h3 rr-id="hea_m_060340">
+            {{ "headMRT.cortex.differentialDiagnosis0.value" | translate }} 2
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            [rrId]="rrIdConditionDifferentialDiagnosisType2()"
+            name="differentialDiagnosisType2"
+            group="true"
+            [diagnosisNumber]="2"
+            [parentViewModel]="model"
+            [options]="differentialDiagnosisValue()"
+            [(ngModel)]="model.differentialDiagnosisType2"
+            (selectionChanged)="resetDifferentialDiagnosisDependantModel02()"
+          ></rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            rr-id="hea_m_060342"
+            name="isSubordinate"
+            label="{{ 'headMRT.cortex.subordinate.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSubordinate"
+            [rrDisable]="model.differentialDiagnosisType2 === differentialDiagnosisEnum.None"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          class="o-radio-list m-t-20 m-r-10"
+          [rrDisable]="model.differentialDiagnosisType2 !== differentialDiagnosisEnum.Microangiopathy"
+        >
+          <h3 rr-id="hea_m_060343" rrInfoIcon="hea_m_06_03" class="text-break">
+            {{ "headMRT.cortex.fazekasScale.value" | translate}}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060344"
+            name="classificationFazekas2"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [(ngModel)]="model.classificationFazekas2"
+            [options]="classificationFazekasOptions"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div
+          *ngIf="model.findingType === findingEnum.Focal"
+          [rrDisable]="!whoConditionFunction(model.differentialDiagnosisType2)"
+          class="o-radio-list m-r-10"
+        >
+          <h3 rr-id="hea_m_060252" rrInfoIcon="hea_m_06_04">
+            {{ "headMRT.cortex.wHOClassification.value" | translate }}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060346"
+            name="classificationWho2"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="classificationWhoOptions"
+            [(ngModel)]="model.classificationWHO2"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div
+          *ngIf="model.findingType === findingEnum.Diffuse"
+          [rrDisable]="model.differentialDiagnosisType2 !== differentialDiagnosisEnum.DiffuseAxonalInjury"
+          class="o-radio-list m-r-15"
+        >
+          <h3 rr-id="hea_m_060378" class="text-break">
+            {{ "headMRT.cortex.modifiedClassificationAccordingToAdams.value" |
+            translate }}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060379"
+            name="classificationAdams2"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="classificationAdamsOptions"
+            [(ngModel)]="model.classificationAdams2"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad f-vertical o-list">
+        <div
+          class="o-radio-list m-r-10"
+          [rrDisable]="model.differentialDiagnosisType2 === differentialDiagnosisEnum.None"
+        >
+          <h3 rr-id="hea_m_060438">
+            {{ "headMRT.cortex.differentialDiagnosis0.value" | translate }} 3
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            [rrId]="rrIdConditionDifferentialDiagnosisType3()"
+            name="differentialDiagnosisType3"
+            group="true"
+            [parentViewModel]="model"
+            [diagnosisNumber]="3"
+            [options]="differentialDiagnosisValue()"
+            [(ngModel)]="model.differentialDiagnosisType3"
+            (selectionChanged)="resetDifferentialDiagnosisDependantModel03()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          class="o-radio-list m-t-55 m-r-10"
+          [rrDisable]="model.differentialDiagnosisType3 !== differentialDiagnosisEnum.Microangiopathy"
+        >
+          <h3 rr-id="hea_m_060440" rrInfoIcon="hea_m_06_03" class="text-break">
+            {{ "headMRT.cortex.fazekasScale.value" | translate}}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060441"
+            name="classificationFazekas3"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [(ngModel)]="model.classificationFazekas3"
+            [options]="classificationFazekasOptions"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div
+          *ngIf="model.findingType === findingEnum.Focal"
+          class="o-radio-list m-r-10"
+          [rrDisable]="!whoConditionFunction(model.differentialDiagnosisType3)"
+        >
+          <h3 rr-id="hea_m_060442" rrInfoIcon="hea_m_06_04">
+            {{ "headMRT.cortex.wHOClassification.value" | translate }}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060443"
+            name="classificationWHO3"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="classificationWhoOptions"
+            [(ngModel)]="model.classificationWHO3"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+        <div
+          *ngIf="model.findingType === findingEnum.Diffuse"
+          [rrDisable]="model.differentialDiagnosisType3 !== differentialDiagnosisEnum.DiffuseAxonalInjury"
+          class="o-radio-list m-r-15"
+        >
+          <h3 rr-id="hea_m_060378" class="text-break">
+            {{ "headMRT.cortex.modifiedClassificationAccordingToAdams.value" |
+            translate }}
+          </h3>
+          <p-dropdown
+            rr-id="hea_m_060475"
+            name="classificationAdams3"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="classificationAdamsOptions"
+            [(ngModel)]="model.classificationAdams3"
+            rrDropdownClear
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l m-t-15 f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="hea_m_060528"
+      label="{{'headMRT.cortex.lesionOfTheSame.value' | translate}}"
+      name="isLesionOfTheSameEntity"
+      binary="true"
+      [(ngModel)]="model.isLesionOfTheSameEntity"
+      rrContentReset="isLesionOfTheSameEntityContainer"
+    >
+    </p-checkbox>
+    <div
+      class="nested-content o-list"
+      [rrDisable]="!model.isLesionOfTheSameEntity"
+      id="isLesionOfTheSameEntityContainer"
+    >
+      <div class="o-radio-list">
+        <h3 rr-id="hea_m_060529">
+          {{ "headMRT.cortex.side.value" | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="hea_m_060530"
+          label="{{'headMRT.cortex.right.value' | translate}}"
+          name="isRight"
+          binary="true"
+          [(ngModel)]="model.isRight"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_060531"
+          label="{{'headMRT.cortex.left.value' | translate}}"
+          name="isLeft"
+          binary="true"
+          [(ngModel)]="model.isLeft"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list">
+        <h3 rr-id="hea_m_060532">
+          {{ "headMRT.cortex.region.value" | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="hea_m_060533"
+          label="{{'headMRT.cortex.frontal.value' | translate}}"
+          name="isFrontal"
+          binary="true"
+          [(ngModel)]="model.isFrontal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_060534"
+          label="{{'headMRT.cortex.temporal.value' | translate}}"
+          name="isTemporal"
+          binary="true"
+          [(ngModel)]="model.isTemporal"
+        >
+        </p-checkbox>
+
+        <p-checkbox
+          rr-id="hea_m_060535"
+          label="{{'headMRT.cortex.parietal.value' | translate}}"
+          name="isParietal"
+          binary="true"
+          [(ngModel)]="model.isParietal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_060536"
+          label="{{'headMRT.cortex.occipital.value' | translate}}"
+          name="isOccipital"
+          binary="true"
+          [(ngModel)]="model.isOccipital"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_060537"
+          label="{{'headMRT.cortex.infratentorial.value' | translate}}"
+          name="isInfratentorial"
+          binary="true"
+          [(ngModel)]="model.isInfratentorial"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

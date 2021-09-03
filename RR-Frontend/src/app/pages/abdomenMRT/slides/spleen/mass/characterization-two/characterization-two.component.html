@@ -1,0 +1,275 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10 o-list sliders-z-index">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050260" class="m-b-0">
+        {{'abdomenMRT.spleen.signalBehaviorT1winComparison.value' | translate}}
+      </h2>
+      <p class="font-15" rr-id="abd_m_050232">
+        {{'abdomenMRT.spleen.inComparison.value' | translate}}
+      </p>
+      <rr-slider-number-triple-input
+        name="t1w"
+        rr-id="abd_m_050233"
+        class="m-b-40"
+        [(ngModel)]="model.t1w"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+    <div class="f-vertical o-radio-list m-b-30">
+      <h2 rr-id="abd_m_050261" class="m-t-15 m-b-0">
+        {{'abdomenMRT.spleen.signalBehaviorT2winComparison.value' | translate}}
+      </h2>
+      <p class="font-15" rr-id="abd_m_050234">
+        {{'abdomenMRT.spleen.inComparison.value' | translate}}
+      </p>
+      <rr-slider-number-triple-input
+        name="t2w"
+        rr-id="abd_m_050235"
+        [(ngModel)]="model.t2w"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+    <div class="f-vertical o-radio-list" [rrDisable]="!isDWIInAnySequence">
+      <h2 rr-id="abd_m_050236" rrInfoIcon="abd_m_05_03">
+        {{'abdomenMRT.spleen.diffusionImaging.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_050237"
+        name="isDiffusionRestriction"
+        [(ngModel)]="model.isDiffusionRestriction"
+        label="{{'abdomenMRT.spleen.diffusionRestriction.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 o-list m-b-10">
+    <div class="f-vertical o-radio-list" [rrDisable]="!isContrastEnhanced">
+      <h2 rr-id="abd_m_050315">
+        {{'abdomenMRT.spleen.cMEnhancementQuantitative.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_050316"
+        rrContentReset="cMEnhancementHomogeneityType-block cMEnhancementDistributionType-block"
+        label="{{'abdomenMRT.spleen.none.value' | translate}}"
+        name="cmEnhancementQuantitativeType"
+        [value]="cmEnhancementTypeEnum.No"
+        [(ngModel)]="model.cmEnhancementQuantitativeType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050317"
+        rrContentReset="cMEnhancementHomogeneityType-block cMEnhancementDistributionType-block"
+        label="{{'abdomenMRT.spleen.low.value' | translate}}"
+        name="cmEnhancementQuantitativeType"
+        [value]="cmEnhancementTypeEnum.Low"
+        [(ngModel)]="model.cmEnhancementQuantitativeType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050318"
+        rrContentReset="cMEnhancementHomogeneityType-block cMEnhancementDistributionType-block"
+        label="{{'abdomenMRT.spleen.strong.value' | translate}}"
+        name="cmEnhancementQuantitativeType"
+        [value]="cmEnhancementTypeEnum.Strong"
+        [(ngModel)]="model.cmEnhancementQuantitativeType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <div
+        id="cMEnhancementHomogeneityType-block"
+        class="o-radio-list nested-content"
+        [rrDisable]="isCMEnhancementQuantitativeTypeNoOrNone"
+      >
+        <p-radioButton
+          rr-id="abd_m_050319"
+          label="{{'abdomenMRT.spleen.homogeneous.value' | translate}}"
+          name="cmEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.cmEnhancementHomogeneityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_050320"
+          label="{{'abdomenMRT.spleen.heterogeneous.value' | translate}}"
+          name="cmEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.cmEnhancementHomogeneityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div
+      class="f-vertical o-radio-list"
+      id="cMEnhancementDistributionType-block"
+      [rrDisable]="!isContrastEnhanced || isCMEnhancementQuantitativeTypeNoOrNone"
+    >
+      <h2 rr-id="abd_m_050321">
+        {{'abdomenMRT.spleen.cMEnhancementDistribution.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_050322"
+        label="{{'abdomenMRT.spleen.peripheral.value' | translate}}"
+        name="cmEnhancementDistributionType"
+        [value]="cmEnhancementDistributionTypeEnum.Peripheral"
+        [(ngModel)]="model.cmEnhancementDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050323"
+        label="{{'abdomenMRT.spleen.totalLesion.value' | translate}}"
+        name="cmEnhancementDistributionType"
+        [value]="cmEnhancementDistributionTypeEnum.TotalLesion"
+        [(ngModel)]="model.cmEnhancementDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050324"
+        label="{{'abdomenMRT.spleen.central.value' | translate}}"
+        name="cmEnhancementDistributionType"
+        [value]="cmEnhancementDistributionTypeEnum.Central"
+        [(ngModel)]="model.cmEnhancementDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050325"
+        label="{{'abdomenMRT.spleen.septal.value' | translate}}"
+        name="cmEnhancementDistributionType"
+        [value]="cmEnhancementDistributionTypeEnum.Septal"
+        [(ngModel)]="model.cmEnhancementDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 o-list m-b-10">
+    <h2 rr-id="abd_m_050409" rrInfoIcon="abd_m_05_02" class="m-b-15">
+      {{'abdomenMRT.spleen.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+    >
+      <h3 rr-id="abd_m_050410" class="m-b-2">
+        {{'abdomenMRT.spleen.differentialDiagnosis1.value' | translate}}*
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="ddlW007"
+        [(ngModel)]="model.differentialDiagnosis1"
+        group="true"
+        name="differentialDiagnosis1"
+        rrId="abd_m_050411"
+        (selectionChanged)="clearDDLCheckboxes()"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis1"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="abd_m_050412"
+        name="isSuspicionOf"
+        class="m-t-4"
+        [(ngModel)]="model.isSuspicionOf"
+        label="{{'abdomenMRT.spleen.suspicionOf.value' | translate}}"
+        binary="true"
+        [rrDisable]="model.differentialDiagnosis1 === spleenDiagnosisTypeEnum.None"
+      ></p-checkbox>
+    </div>
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="
+          model.differentialDiagnosis1 === spleenDiagnosisTypeEnum.None &&
+          model.differentialDiagnosis === spleenDiagnosisTypeEnum.None"
+    >
+      <h3 rr-id="abd_m_050413" class="m-b-3">
+        {{'abdomenMRT.spleen.differentialDiagnosis2.value' | translate}}
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="ddlW008"
+        [(ngModel)]="model.differentialDiagnosis2"
+        group="true"
+        name="differentialDiagnosis2"
+        rrId="abd_m_050414"
+        (selectionChanged)="clearSubordinateCheckbox()"
+        [parentViewModel]="model"
+      ></rr-differential-diagnosis-dropdown>
+      <div
+        [rrDisable]="model.differentialDiagnosis2 === spleenDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="abd_m_050415"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+          label="{{'abdomenMRT.spleen.subordinate.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-30"
+      [rrDisable]="model.differentialDiagnosis2 === spleenDiagnosisTypeEnum.None"
+    >
+      <h3 rr-id="abd_m_050416" class="m-b-3">
+        {{'abdomenMRT.spleen.differentialDiagnosis3.value' | translate}}
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="3"
+        [options]="ddlW008"
+        [(ngModel)]="model.differentialDiagnosis3"
+        group="true"
+        name="differentialDiagnosis3"
+        rrId="abd_m_050417"
+        [parentViewModel]="model"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <p-checkbox
+        rr-id="abd_m_050418"
+        name="isMoreThanOneLesionSamePathology"
+        rrContentReset="isMoreThanOneLesionSamePathology-block"
+        [(ngModel)]="model.isMoreThanOneLesionSamePathology"
+        label="{{'abdomenMRT.spleen.lesionSamePathology.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="isMoreThanOneLesionSamePathology-block"
+        [rrDisable]="!model.isMoreThanOneLesionSamePathology"
+      >
+        <h3 rr-id="abd_m_050419">
+          {{'abdomenMRT.spleen.localization.value' | translate}}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_050420"
+          name="isMoreThanOneLesionParenchymatous"
+          [(ngModel)]="model.isMoreThanOneLesionParenchymatous"
+          label="{{'abdomenMRT.spleen.parenchymatous.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_050421"
+          name="isMoreThanOneLesionSubcapsular"
+          [(ngModel)]="model.isMoreThanOneLesionSubcapsular"
+          label="{{'abdomenMRT.spleen.subcapsular.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 o-list m-b-10">
+    <div class="o-radio-list p-r-10">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      ></rr-reference-picture>
+    </div>
+  </div>
+</div>

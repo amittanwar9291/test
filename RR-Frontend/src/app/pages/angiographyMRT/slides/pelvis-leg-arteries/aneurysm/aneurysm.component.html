@@ -1,0 +1,160 @@
+<div class="f-horizontal f-start col-h-100 p-t-17">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <div class="o-radio-list" [rrDisable]="isSideTypeDisabled()">
+      <h2 rr-id="ang_m_080214">
+        {{'angiographyMRT.pelvisLegArteries.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080215"
+        label="{{'angiographyMRT.pelvisLegArteries.right.value' | translate}}"
+        name="sideType"
+        value="Right"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080216"
+        label="{{'angiographyMRT.pelvisLegArteries.left.value' | translate}}"
+        name="sideType"
+        value="Left"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+    <h2 rr-id="ang_m_080215" class="m-t-22 m-b-14">
+      {{'angiographyMRT.pelvisLegArteries.localization.value' | translate}}
+    </h2>
+    <p-dropdown
+      rr-id="ang_m_080216"
+      styleClass="o-width-100 ui-brown-box"
+      [options]="ddlW019"
+      name="localizationType"
+      rrDropdownClear
+      rrValidation="localizationType"
+      [(ngModel)]="model.localizationType"
+      (onChange)="checkAndUpdateSideType()"
+      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+    ></p-dropdown>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-pad o-radio-list">
+    <h2 rr-id="ang_m_080336">
+      {{'angiographyMRT.pelvisLegArteries.form.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="ang_m_080337"
+      label="{{'angiographyMRT.pelvisLegArteries.saccular.value' | translate}}"
+      name="shapeType"
+      [value]="shapeTypeEnum.Saccular"
+      [(ngModel)]="model.shapeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080338"
+      label="{{'angiographyMRT.pelvisLegArteries.fusiform.value' | translate}}"
+      name="shapeType"
+      [value]="shapeTypeEnum.Fusiform"
+      [(ngModel)]="model.shapeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <h2 rr-id="ang_m_080339" class="m-t-21 m-b-6">
+      {{'angiographyMRT.pelvisLegArteries.maxDiameter.value' | translate}}
+    </h2>
+    <rr-number-input
+      [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+      inputRrId="ang_m_080341"
+      labelRrId="ang_m_080340"
+      name="maxDiameterInMm"
+      [(ngModel)]="model.maxDiameterInMm"
+      [config]="{labelWidth: 160, min: 1, max: 99}"
+    ></rr-number-input>
+    <h2 rr-id="ang_m_080342" class="m-t-21">
+      {{'angiographyMRT.pelvisLegArteries.length.value' | translate}}
+    </h2>
+    <rr-number-input
+      [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+      inputRrId="ang_m_080344"
+      labelRrId="ang_m_080343"
+      name="lengthInMm"
+      [(ngModel)]="model.lengthInMm"
+      [config]="{labelWidth: 160, min: 1, max: 150, placeholder: '---'}"
+    ></rr-number-input>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start o-radio-list c-sep-l c-pad m-t-32">
+    <h2 rr-id="ang_m_080467">
+      {{'angiographyMRT.pelvisLegArteries.characterization.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="ang_m_080468"
+      label="{{'angiographyMRT.pelvisLegArteries.dissecans.value' | translate}}"
+      name="characterizationType"
+      class="m-b-13"
+      [value]="characterizationTypeEnum.Dissecans"
+      [(ngModel)]="model.characterizationType"
+      rrContentReset="isActiveBleedingOrFreshHematoma-block"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080469"
+      label="{{'angiographyMRT.pelvisLegArteries.spurium.value' | translate}}"
+      name="characterizationType"
+      [value]="characterizationTypeEnum.Spurium"
+      [(ngModel)]="model.characterizationType"
+      rrUnClickRadio
+      rrContentReset="isActiveBleedingOrFreshHematoma-block"
+    ></p-radioButton>
+    <div
+      id="isActiveBleedingOrFreshHematoma-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model.characterizationType !== characterizationTypeEnum.Spurium"
+    >
+      <p-checkbox
+        name="isActiveBleedingOrFreshHematoma"
+        class="text-break2"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.activeBleedingfreshHematoma.value' | translate }}"
+        rr-id="ang_m_080470"
+        [(ngModel)]="model.isActiveBleedingOrFreshHematoma"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="ang_m_080471"
+      label="{{'angiographyMRT.pelvisLegArteries.verum.value' | translate}}"
+      name="characterizationType"
+      [value]="characterizationTypeEnum.Verum"
+      [(ngModel)]="model.characterizationType"
+      rrUnClickRadio
+      rrContentReset="isActiveBleedingOrFreshHematoma-block"
+    ></p-radioButton>
+
+    <h2 rr-id="ang_m_080472" class="m-t-19">
+      {{'angiographyMRT.pelvisLegArteries.furtherImageFeatures.value' |
+      translate}}
+    </h2>
+    <p-checkbox
+      name="isPartiallyThrombosed"
+      class="text-break2"
+      binary="true"
+      label="{{ 'angiographyMRT.pelvisLegArteries.partiallyThrombosed.value' | translate }}"
+      rr-id="ang_m_080473"
+      [(ngModel)]="model.isPartiallyThrombosed"
+      rrContentReset="isEccentric-block"
+    ></p-checkbox>
+    <div
+      id="isEccentric-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isPartiallyThrombosed"
+    >
+      <p-checkbox
+        name="isEccentric"
+        class="text-break2"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.eccentric.value' | translate }}"
+        rr-id="ang_m_080474"
+        [(ngModel)]="model.isEccentric"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l"></div>
+</div>

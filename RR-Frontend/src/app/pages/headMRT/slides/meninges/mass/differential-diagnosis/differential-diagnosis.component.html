@@ -1,0 +1,105 @@
+<div class="f-horizontal main-container  o-width-100 col-h-100">
+  <div class="c-col-1 c-pad m-t-15 m-b-15 o-radio-list">
+    <div class="m-l-10">
+      <div [rrDisable]="model.descriptionType !== descriptionType.IDescribe">
+        <h2 rr-id="hea_m_050235" class="m-b-4">
+          {{ "headMRT.meninges.differentialDiagnosis1.value" | translate }}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_050236"
+          [diagnosisNumber]="1"
+          [options]="diffDiagnosisOptions"
+          [(ngModel)]="model.massDifferentialDiagnosis1"
+          name="massDifferentialDiagnosis1"
+          group="true"
+          [parentViewModel]="model"
+          rrValidation="massDifferentialDiagnosis1"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel1()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <div
+          class="c-col-1 c-sep m-t-10"
+          [rrDisable]="
+            model.massDifferentialDiagnosis1 === meningesMassDiagnosisType.None
+          "
+        >
+          <p-checkbox
+            rr-id="hea_m_050237"
+            class="m-b-10"
+            name="isSuspicionOf"
+            label="{{ 'headMRT.meninges.suspicionOf.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOf"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div
+        [rrDisable]="
+          model.massDifferentialDiagnosis1 === meningesMassDiagnosisType.None &&
+          model.massDifferentialDiagnosisLocalization ===
+            meningesMassDiagnosisType.None
+        "
+      >
+        <h2 rr-id="hea_m_050238" class="m-b-4 m-t-25">
+          {{ "headMRT.meninges.differentialDiagnosis2.value" | translate }}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_050239"
+          [diagnosisNumber]="2"
+          [options]="diffDiagnosisOptions2"
+          [(ngModel)]="model.massDifferentialDiagnosis2"
+          name="massDifferentialDiagnosis2"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel2()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <div
+          class="c-col-1 c-sep m-t-10"
+          [rrDisable]="
+            model.massDifferentialDiagnosis2 === meningesMassDiagnosisType.None
+          "
+        >
+          <p-checkbox
+            rr-id="hea_m_050240"
+            name="isSubordinate"
+            class="m-b-10"
+            label="{{ 'headMRT.meninges.subordinate.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSubordinate"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div
+        [rrDisable]="
+          model.massDifferentialDiagnosis2 === meningesMassDiagnosisType.None
+        "
+      >
+        <h2 rr-id="hea_m_050241" class="m-b-4 m-t-20">
+          {{ "headMRT.meninges.differentialDiagnosis3.value" | translate }}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_050242"
+          [diagnosisNumber]="3"
+          [options]="diffDiagnosisOptions2"
+          [(ngModel)]="model.massDifferentialDiagnosis3"
+          name="massDifferentialDiagnosis3"
+          group="true"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_050243"
+        class="m-t-20"
+        name="isLesionOfTheSameEntity"
+        label="{{ 'headMRT.meninges.lesionOfTheSame.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isLesionOfTheSameEntity"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-15 m-b-15 o-radio-list"></div>
+  <div class="c-col-1 c-sep-l c-pad m-t-15 m-b-15 o-radio-list"></div>
+  <div class="c-col-1 c-sep-l c-pad-l m-t-15 m-b-15 o-radio-list"></div>
+</div>

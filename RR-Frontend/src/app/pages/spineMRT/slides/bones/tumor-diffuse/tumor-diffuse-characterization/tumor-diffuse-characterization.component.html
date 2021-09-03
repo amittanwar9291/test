@@ -1,0 +1,288 @@
+<div class="f-horizontal o-width-100 c-pad-l col-h-100">
+  <div
+    class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list bones-tab-column o-list m-t-10"
+  >
+    <h2 rr-id="spi_m_060244" class="m-b-6">
+      {{'spineMRT.bones.localizationNoAsterisk.value' | translate}}
+    </h2>
+    <rr-spine-simple
+      rr-id="spi_m_060237"
+      [spineLocation]="model.spineLocation"
+      (click)="openLargeLocalizer('spineLocation')"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-simple>
+
+    <div
+      [class.disabled]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      class="o-radio-list"
+    >
+      <h2 rr-id="spi_m_060232" class="m-b-5">
+        {{'spineMRT.bones.differentialDiagnosis1.value' | translate}}*
+      </h2>
+      <div class="spine-bones_dropdown">
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          [options]="differentialDiagnosisOptions1"
+          [(ngModel)]="model.mainCharacteristicsDifferentialDiagnosis01"
+          name="mainCharacteristicsDifferentialDiagnosis01"
+          group="true"
+          rrId="spi_m_060233"
+          [parentViewModel]="model"
+          rrValidation="mainCharacteristicsDifferentialDiagnosis01"
+          (selectionChanged)="onDiagnosisChanged()"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+
+      <p-checkbox
+        rr-id="spi_m_060234"
+        label="{{'spineMRT.bones.histologyProven.value' | translate}}"
+        name="isHistologyProven"
+        binary="true"
+        rrContentReset="histologySecuredType-block"
+        [(ngModel)]="model.isHistologyProven"
+        [rrDisable]="model.mainCharacteristicsDifferentialDiagnosis01 === bonesDiagnosisTypeEnum.None"
+      >
+      </p-checkbox>
+      <div
+        id="histologySecuredType-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isHistologyProven"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="spi_m_060235"
+          name="histologySecuredType"
+          label="{{'spineMRT.bones.benign.value' | translate }}"
+          [value]="histologySecuredTypeEnum.Benign"
+          [(ngModel)]="model.histologySecuredType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="spi_m_060236"
+          name="histologySecuredType"
+          label="{{'spineMRT.bones.malignant.value' | translate }}"
+          [value]="histologySecuredTypeEnum.Malignant"
+          [(ngModel)]="model.histologySecuredType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list sliders-z-index bones-tab-column m-t-10"
+  >
+    <h2 rr-id="spi_m_060369" class="m-b-0">
+      {{'spineMRT.bones.t1wSignalreferenceBone.value' | translate}}
+    </h2>
+    <span>
+      {{'spineMRT.bones.comparedTo.value' | translate}}
+    </span>
+    <h2 rr-id="spi_m_060370" class="m-t-23 m-b-15">
+      {{'spineMRT.bones.t1wSignal.value' | translate}}
+    </h2>
+
+    <rr-signal-slider
+      name="t1wSignal"
+      rr-id="spi_m_060377"
+      [(ngModel)]="model.t1wSignal"
+    >
+    </rr-signal-slider>
+    <h2 rr-id="spi_m_060371" class="m-t-27 m-b-17">
+      {{'spineMRT.bones.t2wSignal.value' | translate}}
+    </h2>
+
+    <rr-signal-slider
+      name="t2wSignal"
+      rr-id="spi_m_060378"
+      [(ngModel)]="model.t2wSignal"
+    >
+    </rr-signal-slider>
+    <h2 rr-id="spi_m_060372" class="m-t-8 m-b-14">
+      {{'spineMRT.bones.sTIR.value' | translate}}
+    </h2>
+
+    <rr-signal-slider
+      name="signalSTIR"
+      rr-id="spi_m_060379"
+      [(ngModel)]="model.signalSTIR"
+    >
+    </rr-signal-slider>
+  </div>
+
+  <div
+    class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list bones-tab-column m-t-10"
+  >
+    <h2 rr-id="spi_m_060490">
+      {{'spineMRT.bones.homogeneity.value' | translate}}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="spi_m_060491"
+      name="homogeneityType"
+      label="{{'spineMRT.bones.homogeneous.value' | translate }}"
+      [value]="homogeneityTypeEnum.Homogeneous"
+      [(ngModel)]="model.homogeneityType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="spi_m_060492"
+      name="homogeneityType"
+      label="{{'spineMRT.bones.heterogeneous.value' | translate }}"
+      [value]="homogeneityTypeEnum.Heterogeneous"
+      [(ngModel)]="model.homogeneityType"
+    >
+    </p-radioButton>
+
+    <h2 rr-id="spi_m_060493" class="m-t-15">
+      {{'spineMRT.bones.infiltrationPattern.value' | translate}}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="spi_m_060494"
+      name="infiltrationPatternType"
+      label="{{'spineMRT.bones.focal.value' | translate }}"
+      [value]="infiltrationPatternTypeEnum.Focal"
+      [(ngModel)]="model.infiltrationPatternType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="spi_m_060495"
+      name="infiltrationPatternType"
+      label="{{'spineMRT.bones.diffuseV2.value' | translate }}"
+      [value]="infiltrationPatternTypeEnum.Diffuse"
+      [(ngModel)]="model.infiltrationPatternType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="spi_m_060496"
+      name="infiltrationPatternType"
+      label="{{'spineMRT.bones.saltAndPepperSign.value' | translate }}"
+      [value]="infiltrationPatternTypeEnum.SaltAndPepperSign"
+      [(ngModel)]="model.infiltrationPatternType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="spi_m_060497"
+      name="infiltrationPatternType"
+      label="{{'spineMRT.bones.multipleLesions.value' | translate }}"
+      [value]="infiltrationPatternTypeEnum.MultipleLesions"
+      [(ngModel)]="model.infiltrationPatternType"
+    >
+    </p-radioButton>
+
+    <div class="f-vertical f-start o-radio-list" *ngIf="isCMYes">
+      <h2 rr-id="spi_m_060498" class="m-t-16">
+        {{'spineMRT.bones.contrastEnhancementQuantitative.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_m_060499"
+        name="contrastEnhancementQuantitativeType"
+        label="{{'spineMRT.bones.strong.value' | translate }}"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Strong"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrContentReset="cMEnhancementHomogeneityType-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_m_0604100"
+        name="contrastEnhancementQuantitativeType"
+        label="{{'spineMRT.bones.weak.value' | translate }}"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Weak"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrContentReset="cMEnhancementHomogeneityType-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_m_0604101"
+        name="contrastEnhancementQuantitativeType"
+        label="{{'spineMRT.bones.no.value' | translate }}"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrContentReset="cMEnhancementHomogeneityType-block"
+      >
+      </p-radioButton>
+      <div
+        id="cMEnhancementHomogeneityType-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.contrastEnhancementQuantitativeType === contrastEnhancementQuantitativeTypeEnum.None
+                    || model.contrastEnhancementQuantitativeType === contrastEnhancementQuantitativeTypeEnum.No"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="spi_m_0604102"
+          name="cMEnhancementHomogeneityType"
+          label="{{'spineMRT.bones.homogeneous.value' | translate }}"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.cmEnhancementHomogeneityType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="spi_m_0604103"
+          name="cMEnhancementHomogeneityType"
+          label="{{'spineMRT.bones.heterogeneous.value' | translate }}"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.cmEnhancementHomogeneityType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="c-col-1 c-pad-l f-vertical f-start o-radio-list bones-tab-column m-t-10"
+  >
+    <h2 rr-id="spi_m_060562">
+      {{'spineMRT.bones.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="spi_m_060563"
+      label="{{'spineMRT.bones.pathologicFracture.value' | translate}}"
+      name="isPathologicFracture"
+      binary="true"
+      [(ngModel)]="model.isPathologicFracture"
+      (onChange)="clearLocalizer()"
+    >
+    </p-checkbox>
+    <div
+      class="f-vertical f-start o-radio-list nested-content m-b-0"
+      [rrDisable]="!model.isPathologicFracture"
+    >
+      <p
+        rr-id="spi_m_060564"
+        rrValidation="spineLocation2"
+        noUpdate="true"
+        class="m-b-4"
+      >
+        {{'spineMRT.bones.localization.value' | translate}}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_m_060565"
+        class="scaled-localizer"
+        [spineLocation]="model.spineLocation2"
+        (click)="openLargeLocalizer('spineLocation2')"
+        rrValidation="spineLocation2"
+        isLocalizer="true"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      ></rr-spine-simple>
+    </div>
+    <p-checkbox
+      rr-id="spi_m_060566"
+      label="{{'spineMRT.bones.infiltrationAdjacentsoftTissues.value' | translate}}"
+      name="isInfiltrationAdjacentSoftTissues"
+      binary="true"
+      [(ngModel)]="model.isInfiltrationAdjacentSoftTissues"
+    >
+    </p-checkbox>
+  </div>
+</div>

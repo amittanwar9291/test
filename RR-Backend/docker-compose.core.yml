@@ -1,0 +1,280 @@
+# run me with: docker-compose -f docker-compose.core.yml up
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    depends_on:
+      - seq
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+      
+  ocelotapigateway:
+    depends_on:
+      - seq
+    env_file: config/rr-service.env
+    environment:
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CORS_ALLOW_ALL: "True"
+      ASPNETCORE_ENVIRONMENT: Development
+    image: ${WROC_REGISTRY}/radioreport_ocelotapigateway:${WROC_TAG}
+    ports:
+      - "80:80"
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.3.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - '2181:2181'
+  
+  broker:
+    image: confluentinc/cp-enterprise-kafka:5.3.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_MESSAGE_MAX_BYTES: ${KAFKA_MAXMESSAGEBYTES}
+      KAFKA_LOG_RETENTION_MINUTES: ${KAFKA_LOGRETENTIONMINUTES}
+      CONFLUENT_METRICS_ENABLE: 'false'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: anonymous
+    ports:
+      - '9092:9092'
+      
+  redis:
+    image: redis:6.0.3-alpine
+    ports:
+      - '6379:6379'
+
+  seq:
+    image: datalust/seq:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - memory=1g
+      - memory-swap=1g
+    ports:
+      - '5341:5341'
+      - '5342:80'
+
+  vault:
+    image: ${WROC_REGISTRY}/radioreport_vault:${WROC_TAG}
+    ports:
+      - "8200:8200"
+    volumes:
+      - vault-data:/vault-storage
+      
+  minio:
+    image: ${WROC_REGISTRY}/radioreport_minio:latest
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESSKEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRETKEY}
+    ports:
+      - '9000:9000'
+
+  radioreport-core-users-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_users:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_Users;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+      INSTITUTE_ID: cfdea220-325f-4450-af33-1c462ad38830
+    ports:
+      - "80"
+
+  radioreport-core-reportlist-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - radioreport-core-users-api
+      - radioreport-core-institutemanager-api
+      - radioreport-core-licensemanager-api
+      - radioreport-core-patientmanager-api
+      - radioreport-core-signalr-api
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_reportlist:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_ReportList;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-tracking-api:
+    depends_on:
+      - postgres
+      - redis
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_tracking:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_Tracking;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+      INSTITUTE_ID: cfdea220-325f-4450-af33-1c462ad38830
+    ports:
+      - "80"
+
+  radioreport-core-signalr-api:
+    depends_on:
+      - broker
+      - redis
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_signalr:${WROC_TAG}
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-institutemanager-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - minio
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_institutemanager:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_InstituteManager;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+      
+  radioreport-core-patientmanager-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_patientmanager:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_PatientManager;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+      VAULT__ISMOCKED: ${VAULT_IS_MOCKED}
+      VAULT__USERNAME: ${VAULT_USERNAME}
+      VAULT__PASSWORD: ${VAULT_PASSWORD}
+    ports:
+      - "80"
+
+  radioreport-core-centerspecificsettings-api:
+    depends_on:
+      - postgres
+      - radioreport-core-reportlist-api
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_centerspecificsettings:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_CenterSpecificSettings;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-exportinterface-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - radioreport-core-users-api
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_exportinterface:${WROC_TAG}
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-fileexposer-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - minio
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_fileexposer:${WROC_TAG}
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-importinterface-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - minio
+      - ocelotapigateway
+      - radioreport-core-users-api
+      - radioreport-core-tracking-api
+      - radioreport-core-centerspecificsettings-api
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_importinterface:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_ImportInterface;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-scheduler-api:
+    depends_on:
+      - broker
+      - redis
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_scheduler:${WROC_TAG}
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+                   
+  radioreport-core-htmlrender-api:
+    depends_on:
+      - broker
+      - redis
+      - minio
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_htmlrender:${WROC_TAG}
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      
+  radioreport-core-licensemanager-api:
+    depends_on:
+      - postgres
+      - broker
+      - redis
+      - ocelotapigateway
+    env_file: config/rr-service.env
+    image: ${WROC_REGISTRY}/radioreport_licensemanager:${WROC_TAG}
+    environment:
+      ConnectionStrings__DefaultConnection: Host=${DB_HOST};Database=RadioReport_LicenseManager;User ID=${DB_USER};Password=${DB_PASSWORD};
+      ASPNETCORE_ENVIRONMENT: Development
+      LICENSE__AUTOLICENSEURL: ${LICENSE_AUTOLICENSEURL}
+      LICENSE__GRACEPERIODDAYS: ${LICENSE_GRACEPERIODDAYS}
+      LICENSE__OVERDRAFTPERCENTAGE: ${LICENSE_OVERDRAFTPERCENTAGE}
+      LICENSE__OVERDRAFTCAP: ${LICENSE_OVERDRAFTCAP}
+      VAULT__ISMOCKED: ${VAULT_IS_MOCKED}
+      VAULT__USERNAME: ${VAULT_USERNAME}
+      VAULT__PASSWORD: ${VAULT_PASSWORD}
+    ports:
+      - "80"
+
+volumes:
+  postgres-data:
+  minio-data:
+  vault-data:   

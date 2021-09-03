@@ -1,0 +1,136 @@
+<div class="f-horizontal">
+  <div class="calculator f-horizontal c-col-2 f-space-between">
+    <div class="calculator-measure f-vertical">
+      <h2 rr-id="uni_01_001" class="m-b-17">
+        {{ "shared-templates.patient-data.weight.value" | translate }}
+      </h2>
+      <div class="f-horizontal">
+        <div class="calculator-measure-weight-image">
+          <img src="assets/img/shared/bmi-calculator/weight.svg" />
+        </div>
+        <div rr-id="uni_01_002">
+          <label
+            *ngIf="ngValue.weight == 0"
+            class="number label--color-gray weight-align"
+            >000</label
+          >
+          <label
+            *ngIf="ngValue.weight > 0 && ngValue.weight < 10"
+            class="number label--color-gray weight-align"
+            >00</label
+          >
+          <label
+            *ngIf="ngValue.weight >= 10 && ngValue.weight < 100"
+            class="number label--color-gray weight-align"
+            >0</label
+          >
+          <label
+            class="number"
+            *ngIf="ngValue.weight != 0"
+            [ngClass]="{ 'weight-align': ngValue.weight >= 100 }"
+            >{{ ngValue.weight }}</label
+          >
+          <label class="measure measure-kilograms">kg</label>
+        </div>
+      </div>
+      <rr-slider-input
+        rr-id="uni_01_002"
+        name="ngValue.weight"
+        step="1"
+        max="200"
+        min="0"
+        [initValue]="ngValue.weight"
+        [(ngModel)]="ngValue.weight"
+        (ngModelChange)="changeBMI()"
+        ngDefaultControl
+      ></rr-slider-input>
+    </div>
+
+    <div class="calculator-measure f-vertical">
+      <h2 rr-id="uni_01_012" class="m-b-17">
+        {{ "shared-templates.patient-data.height.value" | translate }}
+      </h2>
+      <div class="f-horizontal">
+        <div class="calculator-measure-height-image">
+          <img src="assets/img/shared/bmi-calculator/height.svg" />
+        </div>
+
+        <div rr-id="uni_01_003">
+          <label
+            *ngIf="ngValue.height < 120"
+            class="number label--color-gray height-align"
+            >000</label
+          >
+          <label
+            *ngIf="ngValue.height >= 120"
+            class="number number-height height-align"
+            >{{ ngValue.height }}</label
+          >
+          <label class="measure measure-centimeters">cm</label>
+        </div>
+      </div>
+
+      <rr-slider-input
+        rr-id="uni_01_003"
+        name="ngValue.height"
+        [step]="1"
+        [max]="240"
+        [min]="119"
+        [initValue]="ngValue.height"
+        [(ngModel)]="ngValue.height"
+        (ngModelChange)="changeBMI()"
+        ngDefaultControl
+      ></rr-slider-input>
+    </div>
+
+    <div class="calculator-result f-vertical">
+      <h2 rr-id="uni_01_013" class="m-b-17 m-l-10">
+        {{ "shared-templates.patient-data.bmi.value" | translate }}
+      </h2>
+      <div class="calculator-result-numbers m-l-6" rr-id="uni_01_004">
+        <label
+          rr-id="cy-calculator-result-l1"
+          *ngIf="ngValue.height < 120 || ngValue.weight == 0"
+          class="number label--color-gray"
+          >000</label
+        >
+        <label
+          rr-id="cy-calculator-result-l2"
+          *ngIf="ngValue.height >= 120 && ngValue.weight != 0"
+          class="number label--color-cyan"
+          >{{ ngValue.bmiResult | number: "1.0-1":"de" }}</label
+        >
+        <label class="measure measure-bmi"
+          >{{ "shared-templates.patient-data.bmi.value" | translate }}</label
+        >
+      </div>
+      <div
+        rr-id="uni_01_014"
+        class="calculator-result--blue-box text-center m-l-15 calculator-result--blue-box__with-text-header"
+      >
+        <p rr-id="cy-current-description-p">
+          {{ currentDescription | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isBSA" class="calculator-result f-vertical bsa-result">
+    <h2 rr-id="car_m_010401" rrInfoIcon="car_m_01_01" class="m-b-17 m-l-10">
+      {{ "cardioMRT.areaOfExamination.bsa.value" | translate }}
+    </h2>
+    <div class="calculator-result-numbers m-l-6" rr-id="car_m_010402">
+      <label
+        rr-id="cy-calculator-result-b1"
+        *ngIf="ngValue.height < 120 || ngValue.weight == 0"
+        class="number label--color-gray"
+        >000</label
+      >
+      <label
+        rr-id="cy-calculator-result-b2"
+        *ngIf="ngValue.height >= 120 && ngValue.weight != 0"
+        class="number label--color-cyan"
+        >{{ bsaModelProperty | number: "1.0-1":"de" }}</label
+      >
+    </div>
+  </div>
+</div>

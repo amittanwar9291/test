@@ -1,0 +1,100 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="largeLocalizerConfig"
+  >
+    <rr-spine-complex
+      name="localizerModel"
+      [(ngModel)]="largeLocalizerConfig.localizerModel"
+      [selectionAccessibilityMode]="largeLocalizerConfig.selectionAccessibilityMode"
+      [localizationTitle]="largeLocalizerConfig.localizerTitle"
+      [localizationDescription]="largeLocalizerConfig.localizerDescription"
+      (close)="onLargeLocalizerClosed()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      [logicType]="largeLocalizerConfig.localizerLogicType"
+    ></rr-spine-complex>
+  </div>
+
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerConfig">
+    <div class="c-col-1 c-pad-r c-sep f-vertical o-radio-list">
+      <h1 rr-id="spi_c_060103">
+        {{ 'spineCT.bones.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="spi_c_060104"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        label="{{ 'spineCT.bones.noPathologicOsseousFindings.value' | translate }}"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_060105"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        label="{{ 'spineCT.bones.finding.value' | translate }}"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+        [attr.name]="'findings'"
+        [setDescriptionTypes]="descriptionTypes"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          rr-id="spi_c_060201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ 'spineCT.bones.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <rr-spine-ct-fracture
+        *ngIf="findingHandler.currentItem.findingType === findingType.Fracture"
+        [model]="findingHandler.currentItem"
+      >
+      </rr-spine-ct-fracture>
+
+      <rr-spine-ct-posttherapeutic-change
+        *ngIf="findingHandler.currentItem.findingType === findingType.PosttherapeuticChange"
+        [model]="findingHandler.currentItem"
+      >
+      </rr-spine-ct-posttherapeutic-change>
+
+      <rr-spine-ct-pathology-of-the-vertebral-arch
+        *ngIf="findingHandler.currentItem.findingType === findingType.PathologyOfTheVertebralArch"
+        [model]="findingHandler.currentItem"
+      >
+      </rr-spine-ct-pathology-of-the-vertebral-arch>
+
+      <rr-spine-ct-mass-spine
+        *ngIf="findingHandler.currentItem.findingType === findingType.MassSpine"
+        [model]="findingHandler.currentItem"
+      >
+      </rr-spine-ct-mass-spine>
+
+      <div
+        class="f-horizontal main"
+        *ngIf="findingHandler.currentItem.findingType === findingType.None"
+      >
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+    </div>
+  </div>
+</form>

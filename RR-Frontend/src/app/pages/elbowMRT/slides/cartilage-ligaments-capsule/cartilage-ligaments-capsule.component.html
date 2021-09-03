@@ -1,0 +1,79 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start findings">
+      <h1 rr-id="elb_m_050103">
+        {{'elbowMRT.cartilage.finding.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="elb_m_050104"
+        label="{{'elbowMRT.cartilage.normalImagingOfThejoint.value' | translate}}"
+        name="areFindings"
+        value="False"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_050105"
+        label="{{'elbowMRT.cartilage.findingXX.value' | translate}}"
+        name="areFindings"
+        value="True"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingHandlerComponent'"
+        [validationName]="'findings'"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between c-pad-l">
+      <div class="header-height f-vertical f-start">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== cartilagFindingTypeEnum.None"
+          rr-id="elb_m_050201"
+        >
+          {{'elbowMRT.cartilage.findingXX.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(cartilagFindingTypeEnum.None)"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-osteochondral-lesion
+          *ngIf="isCurrentItem(cartilagFindingTypeEnum.OsteochondralLesion)"
+          [model]="findingHandler.currentItem"
+        ></rr-osteochondral-lesion>
+        <rr-cartilage-lesion
+          *ngIf="isCurrentItem(cartilagFindingTypeEnum.ChondralLesion)"
+          [model]="findingHandler.currentItem"
+        ></rr-cartilage-lesion>
+        <rr-ligamenta
+          *ngIf="isCurrentItem(cartilagFindingTypeEnum.Ligaments)"
+          [model]="findingHandler.currentItem"
+        ></rr-ligamenta>
+        <rr-capsule
+          *ngIf="isCurrentItem(cartilagFindingTypeEnum.Capsule)"
+          [model]="findingHandler.currentItem"
+          [isTechnologyCMReinforcedChecked]="isTechnologyCMReinforcedChecked"
+        ></rr-capsule>
+      </div>
+    </div>
+  </div>
+</form>

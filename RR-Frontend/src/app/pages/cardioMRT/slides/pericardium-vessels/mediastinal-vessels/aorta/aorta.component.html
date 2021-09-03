@@ -1,0 +1,142 @@
+<div class="f-horizontal col-h-100" id="aorta-block">
+  <div class="c-col-3 c-pad-l c-sep f-start f-vertical">
+    <h2 rr-id="car_m_090304" class="m-b-9 m-t-3">
+      {{ 'cardioMRT.pericardiumVessels.pathology.value' | translate }}*
+    </h2>
+    <div class="c-col-3 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="car_m_090305"
+          [(ngModel)]="model.isExtension"
+          label="{{ 'cardioMRT.pericardiumVessels.extension.value' | translate }}"
+          name="isExtension"
+          binary="true"
+          class="m-b-8"
+          rrValidation="isExtension isStenosis"
+          rrContentReset="isExtension-block"
+        ></p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="isExtension-block"
+          [rrDisable]="!model.isExtension"
+        >
+          <p-radioButton
+            rr-id="car_m_090306"
+            [(ngModel)]="model.extensionType"
+            label="{{ 'cardioMRT.pericardiumVessels.elongation.value' | translate }}"
+            name="extensionType"
+            [value]="extensionType.Elongation"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090307"
+            [(ngModel)]="model.extensionType"
+            label="{{ 'cardioMRT.pericardiumVessels.aneurysm.value' | translate }}"
+            name="extensionType"
+            [value]="extensionType.Aneurysm"
+            class="m-b-19"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p rr-id="car_m_090308" class="m-b-6">
+            {{ 'cardioMRT.pericardiumVessels.localization.value' | translate }}*
+          </p>
+          <p-checkbox
+            rr-id="car_m_090309"
+            [(ngModel)]="model.isAorticRoot"
+            label="{{ 'cardioMRT.pericardiumVessels.aorticRoot.value' | translate }}"
+            name="isAorticRoot"
+            binary="true"
+            (onChange)="resetAortaMaxDiameterInMm()"
+            rrValidation="isAorticRoot isAscendingAorta isAorticArch isDescendingAorta"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="car_m_090310"
+            [(ngModel)]="model.isAscendingAorta"
+            label="{{ 'cardioMRT.pericardiumVessels.ascendingAorta.value' | translate }}"
+            name="isAscendingAorta"
+            binary="true"
+            (onChange)="resetAortaMaxDiameterInMm()"
+            rrValidation="isAorticRoot isAscendingAorta isAorticArch isDescendingAorta"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="car_m_090311"
+            [(ngModel)]="model.isAorticArch"
+            label="{{ 'cardioMRT.pericardiumVessels.aorticArch.value' | translate }}"
+            name="isAorticArch"
+            binary="true"
+            (onChange)="resetAortaMaxDiameterInMm()"
+            rrValidation="isAorticRoot isAscendingAorta isAorticArch isDescendingAorta"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="car_m_090312"
+            [(ngModel)]="model.isDescendingAorta"
+            label="{{ 'cardioMRT.pericardiumVessels.descendingAorta.value' | translate }}"
+            name="isDescendingAorta"
+            binary="true"
+            class="m-b-13"
+            (onChange)="resetAortaMaxDiameterInMm()"
+            rrValidation="isAorticRoot isAscendingAorta isAorticArch isDescendingAorta"
+          ></p-checkbox>
+          <div
+            class="f-start f-vertical o-radio-list nested-content"
+            [rrDisable]="!isAortaMaxDiameterInMmEnabled"
+          >
+            <rr-number-input
+              inputRrId="car_m_090313"
+              labelRrId="car_m_090314"
+              [(ngModel)]="model.aortaMaxDiameterInMm"
+              label="{{ 'cardioMRT.pericardiumVessels.maxDiameterInMm.value' | translate }}"
+              labelStyleClass="text-break"
+              name="aortaMaxDiameterInMm"
+              [config]="{ labelWidth: 170 }"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="car_m_090411"
+          [(ngModel)]="model.isStenosis"
+          label="{{ 'cardioMRT.pericardiumVessels.stenosis.value' | translate }}"
+          name="isStenosis"
+          binary="true"
+          class="m-b-7"
+          rrValidation="isExtension isStenosis"
+          rrContentReset="isStenosis-block"
+        ></p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="isStenosis-block"
+          [rrDisable]="!model.isStenosis"
+        >
+          <p rr-id="car_m_090412" class="m-b-7">
+            {{ 'cardioMRT.pericardiumVessels.localization.value' | translate }}*
+          </p>
+          <p-radioButton
+            rr-id="car_m_090413"
+            [(ngModel)]="model.stenosisType"
+            label="{{ 'cardioMRT.pericardiumVessels.aorticStenosisAorticCoarctation.value' | translate }}"
+            labelStyleClass="text-break"
+            name="stenosisType"
+            [value]="stenosisType.AorticCoarctationStenosis"
+            rrInfoIcon="car_m_09_03"
+            class="l-h-24"
+            rrValidation="stenosisType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090414"
+            [(ngModel)]="model.stenosisType"
+            label="{{ 'cardioMRT.pericardiumVessels.supraValvular.value' | translate }}"
+            name="stenosisType"
+            [value]="stenosisType.Supravalvular"
+            rrValidation="stenosisType"
+          ></p-radioButton>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad-l c-sep"></div>
+    </div>
+  </div>
+</div>

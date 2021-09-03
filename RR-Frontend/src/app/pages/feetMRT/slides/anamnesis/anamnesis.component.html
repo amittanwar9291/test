@@ -1,0 +1,257 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div>
+      <div class="m-b-40">
+        <h1 rr-id="anc_m_020103">
+          {{ 'feetMRT.anamnesis.indication.value' | translate }}
+        </h1>
+        <img
+          rr-id="anc_m_020104"
+          src="assets/img/handMRT/icons/person.svg"
+          alt="person"
+          class="p-t-20"
+        />
+      </div>
+      <div class="f-horizontal smaller-col">
+        <div class="c-col-1 c-pad-r c-sep f-vertical">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [attr.name]="'findingHandlerComponent'"
+            [disabled]="false"
+            [setConfig]="findingDropdownConfig"
+          ></rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l c-sep c-pad-r f-vertical o-radio-list">
+          <div class="h-182">
+            <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Trauma">
+                <h2 rr-id="anc_m_020203" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.trauma.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020204"
+                  class="m-b-20"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+
+                <rr-month-year-input
+                  name="timeOfTrauma"
+                  class="custom-label-margin"
+                  label="{{'feetMRT.anamnesis.timeOfTrauma.value' | translate}}"
+                  [(ngModel)]="findingHandler.currentItem.periodTrauma"
+                  labelRrId="anc_m_020205"
+                  monthRrId="anc_m_020206"
+                  yearRrId="anc_m_020207"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Fracture">
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.fracture.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.OccultFracture"
+              >
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.occultFracture.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Luxation">
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.luxation.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+
+              <div
+                class="o-radio-list"
+                *ngSwitchCase="anamnesisIndicationFindingType.InjuryTendonsLigaments"
+              >
+                <h2 rr-id="anc_m_020208" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.injuryTendonsLigaments.value' |
+                  translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020209"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+                <p rr-id="anc_m_0202010">
+                  {{'feetMRT.anamnesis.details.value' | translate}}
+                </p>
+                <p-radioButton
+                  rr-id="anc_m_020211"
+                  name="lesionType"
+                  [value]="lesionType.AchillesTendon"
+                  label="{{'feetMRT.anamnesis.achillesTendon.value' | translate}}"
+                  [(ngModel)]="findingHandler.currentItem.lesionType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="anc_m_020212"
+                  name="lesionType"
+                  [value]="lesionType.AnkleSprain"
+                  label="{{'feetMRT.anamnesis.ankleSprain.value' | translate}}"
+                  [(ngModel)]="findingHandler.currentItem.lesionType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Instability">
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.instability.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.OsteochondralLesion"
+              >
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.osteochondralLesion.value' | translate
+                  }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Mass">
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.mass.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.InflammatoryChange"
+              >
+                <h2 rr-id="anc_m_020201" class="text-break m-b-10">
+                  {{ 'feetMRT.anamnesis.inflammatoryChange.value' | translate }}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  label="{{'feetMRT.anamnesis.suspected.value' | translate}}"
+                  rr-id="anc_m_020202"
+                  name="isSuspected"
+                  [(ngModel)]="findingHandler.currentItem.isSuspected"
+                ></p-checkbox>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep c-sep-l">
+      <div class="o-radio-list">
+        <h1 rr-id="anc_m_020301" class="m-b-6">
+          {{'feetMRT.anamnesis.priorExams.value' | translate}}
+        </h1>
+        <div rr-id="anc_m_020302" class="m-l-3 m-b-40">
+          <img src="assets/img/handMRT/icons/symbol.svg" alt="symbol" />
+        </div>
+        <p-checkbox
+          binary="true"
+          label="{{'feetMRT.anamnesis.xRay.value' | translate}}"
+          rr-id="anc_m_020307"
+          name="isXRay"
+          class="m-b-5"
+          [(ngModel)]="model.isXRay"
+          (onChange)="resetDate('xRay')"
+        ></p-checkbox>
+        <div class="m-l-35 m-b-20" id="xRayGroup" [rrDisable]="!model.isXRay">
+          <rr-month-year-input
+            class="custom-label-margin"
+            name="xRay"
+            label="{{'feetMRT.anamnesis.date.value' | translate}}"
+            [(ngModel)]="model.xRay"
+          >
+          </rr-month-year-input>
+        </div>
+
+        <p-checkbox
+          binary="true"
+          label="{{'feetMRT.anamnesis.ct.value' | translate}}"
+          rr-id="anc_m_020311"
+          name="isCT"
+          [(ngModel)]="model.isCT"
+          (onChange)="resetDate('ct')"
+        ></p-checkbox>
+        <div class="m-l-35 m-b-20" id="ctGroup" [rrDisable]="!model.isCT">
+          <rr-month-year-input
+            class="custom-label-margin"
+            name="ct"
+            label="{{'feetMRT.anamnesis.date.value' | translate}}"
+            [(ngModel)]="model.ct"
+          >
+          </rr-month-year-input>
+        </div>
+        <p-checkbox
+          binary="true"
+          label="{{'feetMRT.anamnesis.mri.value' | translate}}"
+          rr-id="anc_m_020315"
+          name="isMRI"
+          [(ngModel)]="model.isMRI"
+          (onChange)="resetDate('mri')"
+        ></p-checkbox>
+        <div class="m-l-35 m-b-20" id="mriGroup" [rrDisable]="!model.isMRI">
+          <rr-month-year-input
+            name="mri"
+            class="custom-label-margin"
+            label="{{'feetMRT.anamnesis.date.value' | translate}}"
+            [(ngModel)]="model.mri"
+          >
+          </rr-month-year-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</form>

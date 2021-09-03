@@ -1,0 +1,109 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <h1 rr-id="sho_m_060103">
+        {{ "shoulderMRT.labrumAndRibbons.finding.value" | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="sho_m_060104"
+        label="{{ 'shoulderMRT.labrumAndRibbons.labrumLigaments.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        class="m-b-5"
+        [(ngModel)]="model.areFindings"
+        [value]="areFindings.No"
+        rrValidation="areFindings"
+        [notInFinding]="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="sho_m_060105"
+        label="{{ 'shoulderMRT.labrumAndRibbons.finding.value' | translate }}"
+        name="areFindings"
+        [(ngModel)]="model.areFindings"
+        [value]="areFindings.Yes"
+        rrValidation="areFindings"
+        [notInFinding]="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        name="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setDescriptionTypes]="[findingType.Labrum]"
+        (findingTypeChange)="handleLigGlenohumeraleMediumSelection()"
+        (descriptionChanged)="handleDescriptionTypeChange(); handleLigGlenohumeraleMediumSelection()"
+        validationName="findings"
+        (findingRemoved)="handleLigGlenohumeraleMediumSelection()"
+        (allElementsDeleted)="handleLigGlenohumeraleMediumSelection()"
+      >
+      </rr-finding-column>
+    </div>
+    <div
+      class="col-h-100 f-vertical"
+      [ngClass]="{'c-pad-l' : findingHandler.currentItem.findingType !== findingType.Ligaments}"
+    >
+      <div
+        class="f-start f-vertical"
+        [ngClass]="findingHandler.currentItem.findingType === findingType.Ligaments ? 'c-pad-l m-h-30' : 'm-h-117'"
+      >
+        <h1
+          rr-id="sho_m_060201"
+          [ngClass]="findingHandler.currentItem.findingType === findingType.Ligaments ? 'm-b-24' : 'm-b-15'"
+          [hidden]="findingHandler.currentItem.findingType === 'None'"
+        >
+          {{ 'shoulderMRT.labrumAndRibbons.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+        <p
+          rr-id="sho_m_060229"
+          class="text-break font-15"
+          *ngIf="findingHandler.currentItem.findingType === findingType.BicepsTendon"
+        >
+          {{'shoulderMRT.labrumAndRibbons.pleaseSelectOneFromBicepsTendon.value'
+          | translate}}*
+        </p>
+      </div>
+      <div
+        class="col-h-100"
+        [ngSwitch]="findingHandler.currentItem.findingType"
+      >
+        <!-- None -->
+        <div
+          *ngSwitchCase="findingType.None"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </div>
+
+        <!-- Labrum -->
+        <rr-labrum
+          *ngSwitchCase="findingType.Labrum"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+          [differentialDiagnosisList]="differentialDiagnosisList"
+        >
+        </rr-labrum>
+
+        <!-- Ligamenta -->
+        <rr-ligamenta
+          *ngSwitchCase="findingType.Ligaments"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-ligamenta>
+
+        <!-- Biceps Tendon -->
+        <rr-biceps-tendon
+          *ngSwitchCase="findingType.BicepsTendon"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-biceps-tendon>
+      </div>
+    </div>
+  </div>
+</form>

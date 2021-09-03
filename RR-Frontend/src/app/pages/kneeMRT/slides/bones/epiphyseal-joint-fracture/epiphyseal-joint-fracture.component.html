@@ -1,0 +1,263 @@
+<div *ngIf="!showLargeLocalizer" class="c-col-4 f-vertical height-100">
+  <div class="c-col-4 f-horizontal height-100">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical">
+      <div class="f-start f-vertical o-radio-list m-b-37">
+        <h2 rr-id="kne_m_040280" class="m-b-12">
+          {{ 'kneeMRT.bones.evaluation.value' | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="kne_m_040238"
+          [(ngModel)]="model.epiphysealJointType"
+          label="{{ 'kneeMRT.bones.ageappropriatelyProperRepresentationOf.value' | translate }}"
+          class="text-break"
+          name="epiphysealJointType"
+          [value]="bonesEpiphysealJointType.AgeAppropriately"
+          (onClick)="clearLocalizer()"
+          rrContentReset="pathologyBonesEpiphysealJointType-block fractureBonesEpiphysealJointDetailsType-block chronicTraumaBonesEpiphysealJointDetailsType-block"
+          rrValidation="epiphysealJointType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_040239"
+          [(ngModel)]="model.epiphysealJointType"
+          label="{{ 'kneeMRT.bones.pathology.value' | translate }}"
+          name="epiphysealJointType"
+          [value]="bonesEpiphysealJointType.Pathology"
+          rrValidation="epiphysealJointType"
+        >
+        </p-radioButton>
+      </div>
+      <div
+        class="f-start f-vertical nested-content"
+        [rrDisable]="model.epiphysealJointType !== bonesEpiphysealJointType.Pathology"
+      >
+        <h2 rr-id="kne_m_0402200" rrValidation="kneeLocation">
+          {{ 'kneeMRT.bones.localizationSingleSelection.value' | translate }}*
+        </h2>
+        <rr-knee-details-simple-small
+          rr-id="kne_m_040230"
+          [(ngModel)]="model.kneeLocation"
+          name="kneeLocation"
+          class="nested-localizer"
+          (click)="toggleLocalizer()"
+          rrValidation="kneeLocation"
+          isLocalizer="true"
+        >
+        </rr-knee-details-simple-small>
+      </div>
+    </div>
+    <div class="c-col-3 f-start f-vertical c-pad-l c-sep">
+      <h2
+        rr-id="kne_m_0403123"
+        class="m-b-6"
+        [rrDisable]="model.epiphysealJointType !== bonesEpiphysealJointType.Pathology"
+      >
+        {{ 'kneeMRT.bones.pathologyDetails.value' | translate }}*
+      </h2>
+      <div class="c-col-3 f-horizontal height-100">
+        <div class="c-col-2 f-vertical c-pad-r c-sep">
+          <div
+            class="o-radio-list f-vertical m-b-12"
+            id="pathologyBonesEpiphysealJointType-block"
+            [rrDisable]="model.epiphysealJointType !== bonesEpiphysealJointType.Pathology"
+          >
+            <p-radioButton
+              rr-id="kne_m_0403115"
+              label="{{ 'kneeMRT.bones.chronicTrauma.value' | translate }}"
+              labelStyleClass="ui-fat-label"
+              name="bonesEpiphysealJointDetailsType"
+              [value]="bonesEpiphysealJointDetailsType.ChronicTrauma"
+              [(ngModel)]="model.bonesEpiphysealJointDetailsType"
+              rrContentReset="fractureBonesEpiphysealJointDetailsType-block"
+              rrValidation="bonesEpiphysealJointDetailsType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="kne_m_040366"
+              label="{{ 'kneeMRT.bones.fracture.value' | translate }}"
+              labelStyleClass="ui-fat-label"
+              name="bonesEpiphysealJointDetailsType"
+              [value]="bonesEpiphysealJointDetailsType.Fracture"
+              [(ngModel)]="model.bonesEpiphysealJointDetailsType"
+              rrContentReset="chronicTraumaBonesEpiphysealJointDetailsType-block"
+              rrValidation="bonesEpiphysealJointDetailsType"
+            >
+            </p-radioButton>
+          </div>
+          <div
+            class="c-col-2 f-horizontal height-100"
+            id="fractureBonesEpiphysealJointDetailsType-block"
+          >
+            <div class="c-col-1 c-sep c-pad-r f-vertical">
+              <div
+                class="f-vertical o-list nested-content"
+                [rrDisable]="model.bonesEpiphysealJointDetailsType !== bonesEpiphysealJointDetailsType.Fracture"
+              >
+                <h3 rr-id="kne_m_040367" class="text-break m-b-10">
+                  {{ 'kneeMRT.bones.salterHarrisAitkenClassification.value' |
+                  translate }}*
+                </h3>
+                <div class="f-start f-vertical o-radio-list">
+                  <p-radioButton
+                    rr-id="kne_m_040368"
+                    label="{{ 'kneeMRT.bones.typeAitkenHorizontalFracture.value' | translate }}"
+                    labelStyleClass="text-break2"
+                    name="aitkenClassificationType"
+                    [value]="aitkenClassificationType.Type1"
+                    [(ngModel)]="model.aitkenClassificationType"
+                    rrValidation="aitkenClassificationType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040369"
+                    label="{{ 'kneeMRT.bones.typeAitkenHorizontalFractureEpiphysiolysisWithDetachment.value' | translate }}"
+                    labelStyleClass="text-break2"
+                    name="aitkenClassificationType"
+                    [value]="aitkenClassificationType.Type2"
+                    [(ngModel)]="model.aitkenClassificationType"
+                    rrValidation="aitkenClassificationType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040370"
+                    label="{{ 'kneeMRT.bones.typeAitkenPartialEpiphysiolysis.value' | translate }}"
+                    labelStyleClass="text-break2"
+                    name="aitkenClassificationType"
+                    [value]="aitkenClassificationType.Type3"
+                    [(ngModel)]="model.aitkenClassificationType"
+                    rrValidation="aitkenClassificationType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040371"
+                    label="{{ 'kneeMRT.bones.typeAitkenFractureThrough.value' | translate }}"
+                    labelStyleClass="text-break2"
+                    name="aitkenClassificationType"
+                    [value]="aitkenClassificationType.Type4"
+                    [(ngModel)]="model.aitkenClassificationType"
+                    rrValidation="aitkenClassificationType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040372"
+                    label="{{ 'kneeMRT.bones.typeAitkenCompressionFracture.value' | translate }}"
+                    labelStyleClass="text-break2"
+                    name="aitkenClassificationType"
+                    [value]="aitkenClassificationType.Type5"
+                    [(ngModel)]="model.aitkenClassificationType"
+                    rrValidation="aitkenClassificationType"
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+            </div>
+            <div class="c-col-1 c-pad-l o-list">
+              <ng-container *ngTemplateOutlet="thirdColumn"></ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l o-list p-t-18">
+          <ng-container *ngTemplateOutlet="fourthColumn"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showLargeLocalizer" class="c-col-4 f-horizontal height-100">
+  <div class="c-col-2 c-pad-r c-sep f-vertical">
+    <div class="c-col-2">
+      <rr-knee-details-simple-large
+        rr-id="kne_m_040230"
+        name="kneeLocation"
+        (close)="toggleLocalizer()"
+        [isSingleChoice]="true"
+        [(ngModel)]="model.kneeLocation"
+      >
+      </rr-knee-details-simple-large>
+    </div>
+  </div>
+  <div class="c-col-2 c-pad f-horizontal m-t-45">
+    <div class="c-col-1 c-pad-r c-sep o-list p-t-54">
+      <ng-container *ngTemplateOutlet="thirdColumn"></ng-container>
+    </div>
+    <div class="c-col-1 c-pad-l o-list">
+      <ng-container *ngTemplateOutlet="fourthColumn"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #thirdColumn>
+  <div
+    class="f-start f-vertical o-radio-list"
+    [rrDisable]="model.bonesEpiphysealJointDetailsType !== bonesEpiphysealJointDetailsType.Fracture"
+  >
+    <p-checkbox
+      rr-id="kne_m_040466"
+      label="{{ 'kneeMRT.bones.bonyBridgeFormation.value' | translate }}"
+      name="isBonyBridging"
+      binary="true"
+      rrContentReset="isBonyBridging-block"
+      [(ngModel)]="model.isBonyBridging"
+    >
+    </p-checkbox>
+    <div
+      id="isBonyBridging-block"
+      class="nested-content o-radio-list f-vertical"
+      [rrDisable]="!model.isBonyBridging"
+    >
+      <h3 rr-id="kne_m_040467">
+        {{ 'kneeMRT.bones.quantity.value' | translate }}
+      </h3>
+      <rr-number-input
+        inputRrId="kne_m_040468"
+        name="boneDiameterInPercent"
+        [(ngModel)]="model.boneDiameterInPercent"
+        label="{{ 'kneeMRT.bones.inProzentDesKnochendurchmesser.value' | translate }}"
+        labelRrId="kne_m_040469"
+        [config]="{ max: 100, borderColor: 'blue'}"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #fourthColumn>
+  <div
+    class="f-start f-vertical o-list"
+    id="chronicTraumaBonesEpiphysealJointDetailsType-block"
+    [rrDisable]="model.bonesEpiphysealJointDetailsType !== bonesEpiphysealJointDetailsType.ChronicTrauma"
+  >
+    <div class="o-radio-list f-vertical">
+      <h3 rr-id="kne_m_040514" class="m-b-16">
+        {{ 'kneeMRT.bones.detailsChronicTrauma.value' | translate }}
+      </h3>
+      <p-checkbox
+        rr-id="kne_m_040515"
+        label="{{ 'kneeMRT.bones.increasedSpaceBetweenEpiphysis.value' | translate }}"
+        name="isEpiphysisJointExtension"
+        binary="true"
+        [(ngModel)]="model.isEpiphysisJointExtension"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_040516"
+        labelStyleClass="text-break"
+        label="{{ 'kneeMRT.bones.irregularGrowthPlate.value' | translate }}"
+        name="isIrregularityEpiphysisJoint"
+        binary="true"
+        [(ngModel)]="model.isIrregularityEpiphysisJoint"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_040517"
+        labelStyleClass="text-break"
+        label="{{ 'kneeMRT.bones.boneMarrowEdemaIn.value' | translate }}"
+        name="isBMEInAdjacentMetaphysis"
+        binary="true"
+        [(ngModel)]="model.isBMEInAdjacentMetaphysis"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</ng-template>

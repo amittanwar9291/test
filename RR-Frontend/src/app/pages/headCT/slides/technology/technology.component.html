@@ -1,0 +1,149 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r">
+      <rr-cm-reinforced-card
+        name="cmReinforcedType"
+        [(ngModel)]="model.cmReinforcedType"
+        (click)="activateAcquisitionPanel(false)"
+        (changeInSubcomponent)="onContrastEnhancedChange()"
+        [isDisabled]="isAcquisitionPanelActive"
+        validationObjects="cmSideEffects"
+      ></rr-cm-reinforced-card>
+      <rr-sequences-card
+        name="sequencesType"
+        [(ngModel)]="model.sequencesType"
+        (click)="activateAcquisitionPanel(true)"
+        [mode]="moduleTypes.CT"
+        [isDisabled]="!isAcquisitionPanelActive"
+        [isMandatory]="false"
+        (changeInSubcomponent)="clearAcquisitions($event)"
+      ></rr-sequences-card>
+    </div>
+
+    <ng-container *ngIf="!isAcquisitionPanelActive">
+      <rr-contrast-medium-section [model]="model" [isCTModule]="true">
+        <div class="f-vertical o-radio-list">
+          <h2 rr-id="uni_y_030213">
+            {{ 'shared-templates.technology.administration.value' | translate }}
+          </h2>
+          <p-checkbox
+            rr-id="uni_y_030209"
+            name="isIntravenous"
+            label="{{
+              'shared-templates.technology.intravenous2.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isIntravenous"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030211"
+            name="isIntrathecal"
+            label="{{ 'shared-templates.technology.intrathecal.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isIntrathecal"
+          >
+          </p-checkbox>
+        </div>
+      </rr-contrast-medium-section>
+    </ng-container>
+
+    <ng-container *ngIf="isAcquisitionPanelActive">
+      <div class="c-col-3 f-horizontal c-pad c-sep">
+        <rr-acquisitions-section
+          [model]="model"
+          [acquisitionHandlerRef]="acquisitionHandler"
+          [reconstructionHandlerRef]="reconstructionHandler"
+          [cspPreferences]="centerspecificPreferencesData"
+          [findingOptionsTranslationKey]="'shared-templates.technology.headCTAcquisitionsArray.options'"
+          (findingsStructureChanged)="changeAcquisitionTypeToIndividual()"
+          (findingTypeChangedOrActiveFindingChanged)="updateReconstructionsHandler()"
+          (reset)="reset()"
+        >
+          <rr-head-ct-acquisition
+            class="col-h-100"
+            [model]="acquisitionHandler.currentItem"
+            [reconstructionsHandler]="reconstructionHandler"
+            [(activeTabIndex)]="activeAcquisitionsTabIndex"
+            [disabled]="isAcquisitionColumnDisabled()"
+            (changeInSubcomponent)="changeAcquisitionTypeToIndividual()"
+            [cmReinforcedType]="model.cmReinforcedType"
+          >
+          </rr-head-ct-acquisition>
+        </rr-acquisitions-section>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <div class="f-vertical o-radio-list">
+          <h1 rr-id="uni_x_030508" class="m-b-22">
+            {{ 'shared-templates.technology.limitedQuality.value' | translate }}
+          </h1>
+          <p-checkbox
+            rr-id="uni_x_030509"
+            [(ngModel)]="model.isMotion"
+            name="isMotion"
+            label="{{ 'shared-templates.technology.motion.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030501"
+            binary="true"
+            name="isRespiratoryArtifacts"
+            label="{{ 'shared-templates.technology.respiratoryArtifacts.value' | translate }}"
+            [(ngModel)]="model.isRespiratoryArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030502"
+            binary="true"
+            name="isPulsationArtifacts"
+            label="{{ 'shared-templates.technology.pulsationArtifacts.value' | translate }}"
+            [(ngModel)]="model.isPulsationArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_xc_030503"
+            binary="true"
+            name="isMetalArtifacts"
+            label="{{ 'shared-templates.technology.metalArtifacts.value' | translate }}"
+            [(ngModel)]="model.isMetalArtifacts"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_030501"
+            binary="true"
+            name="isBeamHardeningArtifact"
+            label="{{ 'shared-templates.technology.beamHardeningArtifact.value' | translate }}"
+            [(ngModel)]="model.isBeamHardeningArtifact"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="uni_x_030521"
+            [(ngModel)]="model.isOther"
+            name="isOther"
+            label="{{ 'shared-templates.technology.other.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+        <div class="f-vertical o-radio-list m-b-25">
+          <h1 rr-id="uni_x_030523" class="m-b-20" rrInfoIcon="uni_x_030522">
+            {{ 'shared-templates.technology.imageQuality.value' | translate }}
+          </h1>
+          <rr-slider-number-input
+            rr-id="uni_x_030524"
+            class="image-quality-slider"
+            name="imageQualityType"
+            [step]="1"
+            [max]="4"
+            [min]="0"
+            [(ngModel)]="model.imageQualityType"
+            [customSliderLabels]="descriptionArray"
+            ngDefaultControl
+          >
+          </rr-slider-number-input>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>

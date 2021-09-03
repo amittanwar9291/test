@@ -1,0 +1,42 @@
+namespace RadioReport.HeadMRT.Domain.Enums.FacialSkull
+{
+    public enum OralCavityDiagnosisType : byte
+    {
+        None = 0,
+        BenignLesionNotFurtherSpecified = 1,
+        MalignantLesionNotFurtherSpecified = 2,
+        UnclearEtiology = 3,
+        Osteoma = 4,
+        Dermoid = 5,
+        Carcinoma = 6,
+        SquamousCellCarcinoma = 7,
+        Metastasis = 8,
+        CarcinomaOfTheTongue = 9,
+        CarcinomaOfTheFloorOfTheMouth = 10,
+        AdenoidCysticCarcinoma = 11,
+        Lymphoma = 12,
+        KaposisSarcoma = 13,
+        Abscess = 14,
+        Phlegmon = 15,
+        Inflammation = 16,
+        PostInflammatoryChanges = 17,
+        OralCavityAbscess = 18,
+        SialadenitisStasisCaused = 19,
+        Fasciitis = 20,
+        Myositis = 21,
+        MandibularOsteomyelitis = 22,
+        Ranula = 23,
+        ThyroglossalDuctCyst = 24,
+        InfectedThyroglossalDuctCyst = 25,
+        ExternalLaryngocele = 26,
+        Mucocele = 27,
+        TonsillarHyperplasia = 28,
+        OdontogenicCyst = 29,
+        Keratocyst = 30,
+        RetentionCyst = 31,
+        FibrousDysplasia = 32,
+        UnilateralMuscularAtrophy = 33,
+        EctopicThyroidTissue = 34,
+        VascularMalformation = 35
+    }
+}

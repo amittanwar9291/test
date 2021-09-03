@@ -1,0 +1,497 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-sep">
+      <div class="m-b-40">
+        <h1 rr-id="han_m_020103">
+          {{ 'handMRT.anamnesis.anamnesisIndication.value' | translate }}
+        </h1>
+        <img
+          rr-id="anc_m_020104"
+          src="assets/img/handMRT/icons/person.svg"
+          alt="person"
+          class="p-t-20"
+        />
+      </div>
+      <div class="f-horizontal smaller-col">
+        <div class="c-col-1 c-pad-r c-sep f-vertical">
+          <rr-finding-column
+            [handler]="indicationsHandler"
+            [attr.name]="'findingHandlerComponent'"
+            [disabled]="false"
+            [setConfig]="indicationTypeFindingDropdownConfig"
+          ></rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l c-sep c-pad-r f-vertical o-radio-list">
+          <div class="h-182">
+            <ng-container
+              [ngSwitch]="indicationsHandler.currentItem.findingType"
+            >
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Trauma">
+                <h2 rr-id="han_m_020201" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.trauma.value' | translate }}
+                </h2>
+
+                <rr-month-year-input
+                  monthRrId="han_m_020203"
+                  yearRrId="han_m_020204"
+                  name="periodTrauma"
+                  label="{{'handMRT.anamnesis.timeOfTrauma.value' | translate}}"
+                  [(ngModel)]="indicationsHandler.currentItem.periodTrauma"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Fracture">
+                <h2 rr-id="han_m_020205" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.fracture.value' | translate }}
+                </h2>
+                <div class="o-radio-list">
+                  <p-radioButton
+                    rr-id="han_m_020206"
+                    name="detailsType"
+                    [value]="detailsType.SuspicionOf"
+                    label="{{'handMRT.anamnesis.suspicionOf.value' | translate}}"
+                    [(ngModel)]="indicationsHandler.currentItem.detailsType"
+                    rrUnClickRadio
+                    rrContentReset="fractureGroup"
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="han_m_020207"
+                    name="detailsType"
+                    [value]="detailsType.Exclusion"
+                    label="{{'handMRT.anamnesis.exclusion.value' | translate}}"
+                    [(ngModel)]="indicationsHandler.currentItem.detailsType"
+                    rrUnClickRadio
+                    rrContentReset="fractureGroup"
+                  ></p-radioButton>
+                  <div
+                    class="m-l-35"
+                    id="fractureGroup"
+                    [rrDisable]="indicationsHandler.currentItem.detailsType === 'None'"
+                  >
+                    <p-checkbox
+                      binary="true"
+                      label="{{'handMRT.anamnesis.occult.value' | translate}}"
+                      rr-id="han_m_020208"
+                      name="isOccult"
+                      [(ngModel)]="indicationsHandler.currentItem.isOccult"
+                    ></p-checkbox>
+                  </div>
+                </div>
+
+                <h2 rr-id="han_m_020209" class="text-break m-b-10 m-t-30">
+                  {{ 'handMRT.anamnesis.localization.value' | translate }}
+                </h2>
+
+                <div class="o-radio-list">
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.radius.value' | translate}}"
+                    rr-id="han_m_020210"
+                    name="isRadius"
+                    [(ngModel)]="indicationsHandler.currentItem.isRadius"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.ulna.value' | translate}}"
+                    rr-id="han_m_020211"
+                    name="isUlna"
+                    [(ngModel)]="indicationsHandler.currentItem.isUlna"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.carpalia.value' | translate}}"
+                    rr-id="han_m_020212"
+                    name="isCarpalia"
+                    [(ngModel)]="indicationsHandler.currentItem.isCarpalia"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.metacarpaliaPhalanges.value' | translate}}"
+                    rr-id="han_m_020213"
+                    name="isMetacarpaliaPhalanges"
+                    [(ngModel)]="indicationsHandler.currentItem.isMetacarpaliaPhalanges"
+                  ></p-checkbox>
+                </div>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.LesionOfTendonsLigaments"
+              >
+                <h2 rr-id="han_m_020214" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.lesionOfTendonsligaments.value' |
+                  translate }}
+                </h2>
+
+                <div class="o-radio-list">
+                  <p-radioButton
+                    rr-id="han_m_020215"
+                    name="detailsType"
+                    [value]="detailsType.SuspicionOf"
+                    label="{{'handMRT.anamnesis.suspicionOf.value' | translate}}"
+                    [(ngModel)]="model.detailsType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="han_m_020216"
+                    name="detailsType"
+                    [value]="detailsType.Exclusion"
+                    label="{{'handMRT.anamnesis.exclusion.value' | translate}}"
+                    [(ngModel)]="model.detailsType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+
+                <h2 rr-id="han_m_020217" class="text-break m-b-10 m-t-30">
+                  {{ 'handMRT.anamnesis.typeOfLesion.value' | translate }}
+                </h2>
+                <div class="o-radio-list">
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.tFCCRupturedegeneration.value' | translate}}"
+                    rr-id="han_m_020218"
+                    name="isTfccRuptureDegeneration"
+                    [(ngModel)]="indicationsHandler.currentItem.isTfccRuptureDegeneration"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.sLDissociation.value' | translate}}"
+                    rr-id="han_m_020219"
+                    name="isSlDissociation"
+                    [(ngModel)]="indicationsHandler.currentItem.isSlDissociation"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.lTDissociation.value' | translate}}"
+                    rr-id="han_m_020220"
+                    name="isLtDissociation"
+                    [(ngModel)]="indicationsHandler.currentItem.isLtDissociation"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.ringbandRupture.value' | translate}}"
+                    rr-id="han_m_020221"
+                    name="isRingbandRupture"
+                    [(ngModel)]="indicationsHandler.currentItem.isRingbandRupture"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.tendonRuptureOfThe.value' | translate}}"
+                    rr-id="han_m_020222"
+                    name="isTendonRuptureOfThePhalanges"
+                    [(ngModel)]="indicationsHandler.currentItem.isTendonRuptureOfThePhalanges"
+                  ></p-checkbox>
+                </div>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.TendovaginitisTendinitis"
+              >
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.3.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.LunateNecrosis"
+              >
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.4.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.ScaphoidPseudarthrosis"
+              >
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.5.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.Arthrosis">
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.6.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.RheumaticDisease"
+              >
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.7.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div *ngSwitchCase="anamnesisIndicationFindingType.BoneTumor">
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.8.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.SoftTissueTumor"
+              >
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.9.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+
+              <div
+                *ngSwitchCase="anamnesisIndicationFindingType.NerveCompressionSyndrome"
+              >
+                <h2 rr-id="han_m_020223" class="text-break m-b-10">
+                  {{ 'handMRT.anamnesis.findingTypes1.options.10.label' |
+                  translate }}
+                </h2>
+                <rr-han-details-type
+                  [model]="indicationsHandler.currentItem"
+                ></rr-han-details-type>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-pad-l">
+      <div class="m-b-25">
+        <h1 rr-id="han_m_020301">
+          {{ 'handMRT.anamnesis.previousSurgeries.value' | translate }}
+        </h1>
+        <img
+          rr-id="han_m_020302"
+          src="assets/img/handMRT/icons/doctor.svg"
+          alt="person"
+          class="p-t-20"
+        />
+      </div>
+      <div class="f-horizontal smaller-col">
+        <div class="c-col-1 c-pad-r c-sep f-vertical">
+          <rr-finding-column
+            [handler]="previousSurgeriesHandler"
+            [attr.name]="'findingHandlerComponent'"
+            [disabled]="false"
+            [setConfig]="previousSurgeriesTypeFindingDropdownConfig"
+          ></rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l c-sep c-pad-r f-vertical o-radio-list">
+          <div class="h-182">
+            <ng-container
+              [ngSwitch]="previousSurgeriesHandler.currentItem.findingType"
+            >
+              <div *ngSwitchCase="previousSurgeriesType.RingbandPlastic">
+                <h2 rr-id="han_m_020303" class="text-break m-b-10">
+                  Details {{ 'handMRT.anamnesis.findingTypes2.options.0.label' |
+                  translate }}
+                </h2>
+
+                <rr-month-year-input
+                  name="periodSurgery"
+                  class="custom-label-margin"
+                  label="{{'handMRT.anamnesis.date.value' | translate}}"
+                  [(ngModel)]="previousSurgeriesHandler.currentItem.periodSurgery"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div *ngSwitchCase="previousSurgeriesType.Tendinoplasty">
+                <h2 rr-id="han_m_020303" class="text-break m-b-10">
+                  Details {{ 'handMRT.anamnesis.findingTypes2.options.1.label' |
+                  translate }}
+                </h2>
+
+                <rr-month-year-input
+                  name="periodSurgery"
+                  class="custom-label-margin"
+                  label="{{'handMRT.anamnesis.date.value' | translate}}"
+                  [(ngModel)]="previousSurgeriesHandler.currentItem.periodSurgery"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div *ngSwitchCase="previousSurgeriesType.Arthrodesis">
+                <h2 rr-id="han_m_020303" class="text-break m-b-10">
+                  Details {{ 'handMRT.anamnesis.findingTypes2.options.2.label' |
+                  translate }}
+                </h2>
+
+                <rr-month-year-input
+                  name="periodSurgery"
+                  class="custom-label-margin"
+                  label="{{'handMRT.anamnesis.date.value' | translate}}"
+                  [(ngModel)]="previousSurgeriesHandler.currentItem.periodSurgery"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div
+                *ngSwitchCase="previousSurgeriesType.InsertionOfAnEndoprosthesis"
+              >
+                <h2 rr-id="han_m_020303" class="text-break m-b-10">
+                  Details {{ 'handMRT.anamnesis.findingTypes2.options.3.label' |
+                  translate }}
+                </h2>
+
+                <rr-month-year-input
+                  name="periodSurgery"
+                  class="custom-label-margin"
+                  label="{{'handMRT.anamnesis.date.value' | translate}}"
+                  [(ngModel)]="previousSurgeriesHandler.currentItem.periodSurgery"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div *ngSwitchCase="previousSurgeriesType.Arthroplasty">
+                <h2 rr-id="han_m_020405" class="text-break m-b-10">
+                  Details {{
+                  'handMRT.anamnesis.previousSurgeriesType.options.4.label' |
+                  translate }}
+                </h2>
+
+                <div class="o-radio-list">
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.abductorpollicislongusTendonPlastic.value' | translate}}"
+                    rr-id="han_m_020406"
+                    class="text-break"
+                    name="isAbductorPollicisLongusTendonPlastic"
+                    [(ngModel)]="previousSurgeriesHandler.currentItem.isAbductorPollicisLongusTendonPlastic"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.cartilageTransplantation.value' | translate}}"
+                    rr-id="han_m_020407"
+                    name="isCartilageTransplantation"
+                    [(ngModel)]="previousSurgeriesHandler.currentItem.isCartilageTransplantation"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    label="{{'handMRT.anamnesis.trapezectomy.value' | translate}}"
+                    rr-id="han_m_020408"
+                    name="isTrapezectomy"
+                    [(ngModel)]="previousSurgeriesHandler.currentItem.isTrapezectomy"
+                  ></p-checkbox>
+                </div>
+
+                <rr-month-year-input
+                  name="periodSurgery"
+                  class="custom-label-margin"
+                  label="{{'handMRT.anamnesis.date.value' | translate}}"
+                  [(ngModel)]="previousSurgeriesHandler.currentItem.periodSurgery"
+                >
+                </rr-month-year-input>
+              </div>
+
+              <div *ngSwitchCase="previousSurgeriesType.Osteosynthesis">
+                <h2 rr-id="han_m_020303" class="text-break m-b-10">
+                  Details {{ 'handMRT.anamnesis.findingTypes2.options.5.label' |
+                  translate }}
+                </h2>
+
+                <rr-month-year-input
+                  name="periodSurgery"
+                  class="custom-label-margin"
+                  label="{{'handMRT.anamnesis.date.value' | translate}}"
+                  [(ngModel)]="previousSurgeriesHandler.currentItem.periodSurgery"
+                >
+                </rr-month-year-input>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep c-sep-l">
+      <div class="o-radio-list">
+        <h1 rr-id="han_m_020501" class="m-b-6">
+          {{'handMRT.anamnesis.preliminaryExamination.value' | translate}}
+        </h1>
+        <div rr-id="han_m_020502" class="m-l-3 m-b-40">
+          <img src="assets/img/handMRT/icons/symbol.svg" alt="symbol" />
+        </div>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.anamnesis.xRay.value' | translate}}"
+          rr-id="han_m_020503"
+          name="isXRay"
+          class="m-b-5"
+          [(ngModel)]="model.isXRay"
+          (onChange)="resetDate('xRay')"
+        ></p-checkbox>
+        <div class="m-l-35 m-b-20" id="xRayGroup" [rrDisable]="!model.isXRay">
+          <rr-month-year-input
+            class="custom-label-margin"
+            name="xRay"
+            label="{{'handMRT.anamnesis.date.value' | translate}}"
+            [(ngModel)]="model.xRay"
+          >
+          </rr-month-year-input>
+        </div>
+
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.anamnesis.cT.value' | translate}}"
+          rr-id="han_m_020507"
+          name="isCT"
+          [(ngModel)]="model.isCT"
+          (onChange)="resetDate('ct')"
+        ></p-checkbox>
+        <div class="m-l-35 m-b-20" id="ctGroup" [rrDisable]="!model.isCT">
+          <rr-month-year-input
+            class="custom-label-margin"
+            name="ct"
+            label="{{'handMRT.anamnesis.date.value' | translate}}"
+            [(ngModel)]="model.ct"
+          >
+          </rr-month-year-input>
+        </div>
+        <p-checkbox
+          binary="true"
+          label="{{'handMRT.anamnesis.mRI.value' | translate}}"
+          rr-id="han_m_020511"
+          name="isMRI"
+          [(ngModel)]="model.isMri"
+          (onChange)="resetDate('mri')"
+        ></p-checkbox>
+        <div class="m-l-35 m-b-20" id="mriGroup" [rrDisable]="!model.isMri">
+          <rr-month-year-input
+            name="mri"
+            class="custom-label-margin"
+            label="{{'handMRT.anamnesis.date.value' | translate}}"
+            [(ngModel)]="model.mri"
+          >
+          </rr-month-year-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

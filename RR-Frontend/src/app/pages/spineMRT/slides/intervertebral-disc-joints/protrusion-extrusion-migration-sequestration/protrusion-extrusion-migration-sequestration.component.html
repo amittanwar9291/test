@@ -1,0 +1,867 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad o-radio-list p-t-25">
+    <h2
+      rrValidation="spineLocation"
+      *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Protrusion])"
+      rr-id="spi_m_0502300"
+      rrInfoIcon="spi_m_0502301"
+    >
+      {{'spineMRT.disc.protrusion.value' | translate}}
+    </h2>
+    <h2
+      rrValidation="spineLocation"
+      *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Extrusion])"
+      rr-id="spi_m_0502302"
+      rrInfoIcon="spi_m_0502330"
+    >
+      {{'spineMRT.disc.extrusion.value' | translate}}
+    </h2>
+    <h2
+      rrValidation="spineLocation"
+      *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Migration])"
+      rr-id="spi_m_0502505"
+    >
+      {{'spineMRT.disc.migration.value' | translate}}
+    </h2>
+    <h2
+      rrValidation="spineLocation"
+      *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Sequestration])"
+      rr-id="spi_m_0502506"
+    >
+      {{'spineMRT.disc.sequestration.value' | translate}}
+    </h2>
+    <h2
+      *ngIf="model.findingType !== intervertebralDiscJointsFindingTypesEnum.Sequestration"
+      rrValidation="spineLocation"
+      rr-id="spi_m_050202"
+    >
+      {{'spineMRT.disc.localization.value' | translate}}*
+    </h2>
+    <h2
+      *ngIf="model.findingType === intervertebralDiscJointsFindingTypesEnum.Sequestration"
+      rrValidation="spineLocation"
+      rr-id="spi_m_0502507"
+    >
+      {{'spineMRT.disc.localizationOfTheSequestrum.value' |translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_m_050203"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+  <div>
+    <p-tabView class="rr-tabView">
+      <p-tabPanel [disabled]="!isSingleSelectionOnLocalizer()">
+        <ng-template pTemplate="header">
+          <h1
+            [rrValidation]="['discLocation', 'isNerveRootRight isNerveRootLeft', 'isStenosisRight isStenosisLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Protrusion])"
+            rr-id="spi_m_050308"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.protrusionDetails1.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="['discLocation', 'isNerveRootRight isNerveRootLeft', 'isStenosisRight isStenosisLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Extrusion])"
+            rr-id="spi_m_0503500"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.extrusionDetails1.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="['discLocation', 'isNerveRootRight isNerveRootLeft', 'isStenosisRight isStenosisLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Migration])"
+            rr-id="spi_m_050387"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.migrationDetails1.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="['discLocation', 'isNerveRootRight isNerveRootLeft', 'isStenosisRight isStenosisLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Sequestration])"
+            rr-id="spi_m_050388"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.sequestrationDetails1.value'|translate}}
+          </h1>
+        </ng-template>
+
+        <div
+          class="f-horizontal f-start col-h-100"
+          [rrDisable]="!isSingleSelectionOnLocalizer()"
+        >
+          <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+            <div class="o-radio-list" *ngIf="!isMigrationOrSequestration()">
+              <p-radioButton
+                class="m-l-10"
+                rr-id="spi_m_050309"
+                rrInfoIcon="spi_m_0503307"
+                label="{{ 'spineMRT.disc.localizationAxial.value' | translate }}"
+                name="findingDetailType"
+                rrUnClickRadio
+                rrContentReset="broadBaseContainer1 broadBaseContainer2 broadBaseContainer3"
+                (onClick)="clearDiskSelection()"
+                [value]="findingDetailTypesEnum.Localization"
+                [(ngModel)]="model.findingDetailType"
+              ></p-radioButton>
+              <p-radioButton
+                class="m-l-10"
+                rr-id="spi_m_050310"
+                label="{{ 'spineMRT.disc.broadBased.value' | translate }}"
+                name="findingDetailType"
+                rrUnClickRadio
+                rrContentReset="broadBaseContainer1 broadBaseContainer2 broadBaseContainer3"
+                (onClick)="clearDiskSelection()"
+                [value]="findingDetailTypesEnum.BroadBase"
+                [(ngModel)]="model.findingDetailType"
+              ></p-radioButton>
+            </div>
+            <h2
+              *ngIf="isMigrationOrSequestration()"
+              rr-id="spi_m_050326"
+              rrInfoIcon="spi_m_0503307"
+              class="m-l-10"
+              rrValidation="discLocation"
+            >
+              {{'spineMRT.disc.localizationAxial.value'|translate}}
+            </h2>
+            <div class="m-l-10" [rrDisable]="!showAxialLocalization()">
+              <p
+                *ngIf="!isMigrationOrSequestration()"
+                rr-id="spi_m_0503300"
+                class="font-15 m-b-5 m-t-30"
+                rrValidation="discLocation"
+              >
+                {{'spineMRT.disc.pleaseSelectAtLeastOneAxialLocalizationFromTheGraphicBelow.value'|translate}}*
+              </p>
+              <rr-spine-disc-localizer
+                [(ngModel)]="model.discLocation"
+                name="discLocation"
+                class="p-t-15"
+                rr-id="spi_m_050311"
+                rrValidation="discLocation"
+                isLocalizer="true"
+                (announceSelection)="clearSelectionDetails()"
+              ></rr-spine-disc-localizer>
+            </div>
+          </div>
+          <div
+            class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+            *ngIf="showAxialLocalization()"
+          >
+            <h2
+              *ngIf="getFilteredAndSortedSelectionList().length !== 0"
+              rr-id="spi_m_0504719"
+              class="m-b-10 m-l-10"
+            >
+              {{'spineMRT.disc.selection.value'|translate}}
+            </h2>
+            <div
+              class="selected-part-wrapper"
+              *ngFor="let item of getFilteredAndSortedSelectionList(); let i = index; let f = first"
+              [ngStyle]="{'margin-top': !f ? '8px': ''}"
+            >
+              <div class="selected-part" rr-id="spi_m_050402">
+                {{item.number}} - {{item.translationKey |translate}}
+              </div>
+            </div>
+          </div>
+          <div
+            class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"
+            *ngIf="showAxialLocalization()"
+            id="broadBaseContainer3"
+          >
+            <div class="o-radio-list m-l-10 m-t-3" *ngIf="is1or2or6Selected()">
+              <h2 rr-id="spi_m_050501">
+                {{'spineMRT.disc.expansionReferenceSpinalCanal.value'|translate}}
+              </h2>
+              <p-radioButton
+                rr-id="spi_m_050502"
+                label="{{ 'spineMRT.disc.slight.value' | translate }}"
+                name="expansionType"
+                [value]="expansionTypesEnum.Slight"
+                [(ngModel)]="model.expansionType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050503"
+                label="{{ 'spineMRT.disc.moderate.value' | translate }}"
+                name="expansionType"
+                [value]="expansionTypesEnum.Moderate"
+                [(ngModel)]="model.expansionType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050504"
+                label="{{ 'spineMRT.disc.distinctPronounced.value' | translate }}"
+                name="expansionType"
+                [value]="expansionTypesEnum.Distinct"
+                [(ngModel)]="model.expansionType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <h2
+                rr-id="spi_m_050505"
+                rrInfoIcon="spi_m_0505300"
+                class="m-t-40"
+              >
+                {{'spineMRT.disc.spinalCanalStenosis.value'|translate}}
+              </h2>
+              <p-radioButton
+                [rrDisable]="!isLWS()"
+                rr-id="spi_m_050506"
+                label="{{ 'spineMRT.disc.relative.value' | translate }}"
+                name="spinalCanalStenosisType"
+                [value]="spinalCanalStenosisTypesEnum.Relative"
+                [(ngModel)]="model.spinalCanalStenosisType"
+                rrUnClickRadio
+                rrContentReset="widthOfTheSpinalCanalContainer"
+              ></p-radioButton>
+              <p-radioButton
+                [rrDisable]="!isLWS()"
+                rr-id="spi_m_050507"
+                label="{{ 'spineMRT.disc.absolute.value' | translate }}"
+                name="spinalCanalStenosisType"
+                [value]="spinalCanalStenosisTypesEnum.Absolute"
+                [(ngModel)]="model.spinalCanalStenosisType"
+                rrUnClickRadio
+                rrContentReset="widthOfTheSpinalCanalContainer"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050508"
+                labelStyleClass="text-break"
+                label="{{ 'spineMRT.disc.highGradeCerebrospinalFluidUsedUp.value' | translate }}"
+                name="spinalCanalStenosisType"
+                [value]="spinalCanalStenosisTypesEnum.HighGrade"
+                [(ngModel)]="model.spinalCanalStenosisType"
+                rrUnClickRadio
+                rrContentReset="widthOfTheSpinalCanalContainer"
+              ></p-radioButton>
+              <div
+                id="widthOfTheSpinalCanalContainer"
+                class="nested-content o-radio-list f-vertical"
+                [rrDisable]="model.spinalCanalStenosisType !== spinalCanalStenosisTypesEnum.HighGrade"
+              >
+                <rr-number-input
+                  labelRrId="spi_m_0505302"
+                  inputRrId="spi_m_0505301"
+                  name="widthOfTheSpinalCanalInMm"
+                  [(ngModel)]="model.widthOfTheSpinalCanalInMm"
+                  labelStyleClass="text-break"
+                  [label]="'spineMRT.disc.widthOfSpinalCanalInMmBreak.value' | translate"
+                ></rr-number-input>
+              </div>
+            </div>
+            <div
+              class="o-radio-list m-l-10 m-t-3"
+              *ngIf="is3or4or5or7or8or9Selected()"
+            >
+              <h2 rr-id="spi_m_050509">
+                {{'spineMRT.disc.relationToNerveRoot.value'|translate}}
+              </h2>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_050510"
+                label="{{ 'spineMRT.disc.contact.value' | translate }}"
+                name="nerveRootAffectionType"
+                [value]="nerveRootAffectionTypeEnum.Contact"
+                [(ngModel)]="model.nerveRootAffectionType"
+              ></p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_050511"
+                label="{{ 'spineMRT.disc.displacement.value' | translate }}"
+                name="nerveRootAffectionType"
+                [value]="nerveRootAffectionTypeEnum.Displacement"
+                [(ngModel)]="model.nerveRootAffectionType"
+              ></p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_050512"
+                label="{{ 'spineMRT.disc.compression.value' | translate }}"
+                name="nerveRootAffectionType"
+                [value]="nerveRootAffectionTypeEnum.Compression"
+                [(ngModel)]="model.nerveRootAffectionType"
+              ></p-radioButton>
+
+              <h2 rr-id="spi_m_050516" class="m-t-45">
+                {{'spineMRT.disc.stenosis.value'|translate}}
+              </h2>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_0505203"
+                label="{{ 'spineMRT.disc.foramen.value' | translate }}"
+                name="stenosisType"
+                [value]="stenosisTypesEnum.Foramen"
+                [(ngModel)]="model.stenosisType"
+              ></p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_0505204"
+                label="{{ 'spineMRT.disc.recessus.value' | translate }}"
+                name="stenosisType"
+                [value]="stenosisTypesEnum.Recess"
+                [(ngModel)]="model.stenosisType"
+              ></p-radioButton>
+            </div>
+          </div>
+
+          <div
+            class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+            id="broadBaseContainer1"
+            *ngIf="model.findingDetailType === findingDetailTypesEnum.BroadBase"
+          >
+            <div class="o-radio-list m-l-10">
+              <h2 rr-id="spi_m_050403">
+                {{'spineMRT.disc.expansionReferenceSpinalCanal.value'|translate}}
+              </h2>
+              <p-radioButton
+                rr-id="spi_m_050404"
+                label="{{ 'spineMRT.disc.slight.value' | translate }}"
+                name="expansionType"
+                rrUnClickRadio
+                [value]="expansionTypesEnum.Slight"
+                [(ngModel)]="model.expansionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050405"
+                label="{{ 'spineMRT.disc.moderate.value' | translate }}"
+                name="expansionType"
+                rrUnClickRadio
+                [value]="expansionTypesEnum.Moderate"
+                [(ngModel)]="model.expansionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050406"
+                label="{{ 'spineMRT.disc.distinctPronounced.value' | translate }}"
+                name="expansionType"
+                rrUnClickRadio
+                [value]="expansionTypesEnum.Distinct"
+                [(ngModel)]="model.expansionType"
+              ></p-radioButton>
+
+              <h2
+                rr-id="spi_m_050407"
+                class="m-t-40"
+                rrInfoIcon="spi_m_0504300"
+              >
+                {{'spineMRT.disc.spinalCanalStenosis.value'|translate}}
+              </h2>
+              <p-radioButton
+                [rrDisable]="!isLWS()"
+                rr-id="spi_m_050408"
+                label="{{ 'spineMRT.disc.relative.value' | translate }}"
+                name="spinalCanalStenosisType"
+                rrUnClickRadio
+                [value]="spinalCanalStenosisTypesEnum.Relative"
+                [(ngModel)]="model.spinalCanalStenosisType"
+                rrContentReset="widthOfTheSpinalCanalInMmContainer"
+              ></p-radioButton>
+              <p-radioButton
+                [rrDisable]="!isLWS()"
+                rr-id="spi_m_050409"
+                label="{{ 'spineMRT.disc.absolute.value' | translate }}"
+                name="spinalCanalStenosisType"
+                rrUnClickRadio
+                [value]="spinalCanalStenosisTypesEnum.Absolute"
+                [(ngModel)]="model.spinalCanalStenosisType"
+                rrContentReset="widthOfTheSpinalCanalInMmContainer"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050410"
+                label="{{ 'spineMRT.disc.highGradeCerebrospinalFluidUsedUp.value' | translate }}"
+                name="spinalCanalStenosisType"
+                rrUnClickRadio
+                labelStyleClass="text-break"
+                [value]="spinalCanalStenosisTypesEnum.HighGrade"
+                [(ngModel)]="model.spinalCanalStenosisType"
+                rrContentReset="widthOfTheSpinalCanalInMmContainer"
+              ></p-radioButton>
+              <div
+                id="widthOfTheSpinalCanalInMmContainer"
+                class="nested-content o-radio-list f-vertical"
+                [rrDisable]="model.spinalCanalStenosisType !== spinalCanalStenosisTypesEnum.HighGrade"
+              >
+                <rr-number-input
+                  name="widthOfTheSpinalCanalInMm"
+                  inputRrId="spi_m_0504301"
+                  labelRrId="spi_m_0504302"
+                  label="{{'spineMRT.disc.widthOfSpinalCanalInMmBreak.value'| translate}}"
+                  [(ngModel)]="model.widthOfTheSpinalCanalInMm"
+                >
+                </rr-number-input>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"
+            id="broadBaseContainer2"
+            *ngIf="model.findingDetailType === findingDetailTypesEnum.BroadBase"
+          >
+            <div class="o-radio-list m-t-3 m-l-10">
+              <h2 rr-id="spi_m_050509">
+                {{'spineMRT.disc.relationToNerveRoot.value'| translate}}
+              </h2>
+              <p-radioButton
+                rr-id="spi_m_050510"
+                label="{{ 'spineMRT.disc.contact.value' | translate }}"
+                name="nerveRootAffectionType"
+                rrUnClickRadio
+                [value]="nerveRootAffectionTypeEnum.Contact"
+                rrContentReset="referenceNerveRootSideContainer"
+                [(ngModel)]="model.nerveRootAffectionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050511"
+                label="{{ 'spineMRT.disc.displacement.value' | translate }}"
+                name="nerveRootAffectionType"
+                rrUnClickRadio
+                [value]="nerveRootAffectionTypeEnum.Displacement"
+                rrContentReset="referenceNerveRootSideContainer"
+                [(ngModel)]="model.nerveRootAffectionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="spi_m_050512"
+                label="{{ 'spineMRT.disc.compression.value' | translate }}"
+                name="nerveRootAffectionType"
+                rrUnClickRadio
+                [value]="nerveRootAffectionTypeEnum.Compression"
+                rrContentReset="referenceNerveRootSideContainer"
+                [(ngModel)]="model.nerveRootAffectionType"
+              ></p-radioButton>
+              <div
+                id="referenceNerveRootSideContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="model.nerveRootAffectionType === nerveRootAffectionTypeEnum.None"
+              >
+                <p rr-id="spi_m_0505303">
+                  {{'spineMRT.disc.side.value'| translate}}*
+                </p>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isNerveRootRight"
+                  label="{{'spineMRT.disc.right.value'| translate}}"
+                  rr-id="spi_m_050514"
+                  name="isNerveRootRight"
+                  rrValidation="isNerveRootRight isNerveRootLeft"
+                ></p-checkbox>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isNerveRootLeft"
+                  label="{{'spineMRT.disc.left.value'| translate}}"
+                  rr-id="spi_m_050515"
+                  name="isNerveRootLeft"
+                  rrValidation="isNerveRootRight isNerveRootLeft"
+                ></p-checkbox>
+              </div>
+              <div
+                class="c-col-1 c-sep o-radio-list"
+                *ngIf="model.findingDetailType === findingDetailTypesEnum.BroadBase"
+              >
+                <h2 rr-id="spi_m_050516" class="m-t-25">
+                  {{'spineMRT.disc.stenosis.value'| translate}}
+                </h2>
+                <p-radioButton
+                  rr-id="spi_m_0505203"
+                  label="{{ 'spineMRT.disc.foramen.value' | translate }}"
+                  name="stenosisType"
+                  [value]="stenosisTypesEnum.Foramen"
+                  rrContentReset="stenosisTypeSideContainer"
+                  rrUnClickRadio
+                  [(ngModel)]="model.stenosisType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="spi_m_0505204"
+                  label="{{ 'spineMRT.disc.recessus.value' | translate }}"
+                  name="stenosisType"
+                  [value]="stenosisTypesEnum.Recess"
+                  rrContentReset="stenosisTypeSideContainer"
+                  rrUnClickRadio
+                  [(ngModel)]="model.stenosisType"
+                ></p-radioButton>
+                <div
+                  id="stenosisTypeSideContainer"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="model.stenosisType === stenosisTypesEnum.None"
+                >
+                  <p rr-id="spi_m_0505304">
+                    {{'spineMRT.disc.side.value'| translate}}*
+                  </p>
+                  <p-checkbox
+                    binary="true"
+                    [(ngModel)]="model.isStenosisRight"
+                    label="{{'spineMRT.disc.right.value'| translate}}"
+                    rr-id="spi_m_050517"
+                    name="isStenosisRight"
+                    rrValidation="isStenosisRight isStenosisLeft"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    [(ngModel)]="model.isStenosisLeft"
+                    label="{{'spineMRT.disc.left.value'| translate}}"
+                    rr-id="spi_m_050518"
+                    name="isStenosisLeft"
+                    rrValidation="isStenosisRight isStenosisLeft"
+                  ></p-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+            *ngIf="!isMigrationOrSequestration() && model.findingDetailType === findingDetailTypesEnum.None"
+          ></div>
+          <div
+            class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"
+            *ngIf="!isMigrationOrSequestration() && model.findingDetailType === findingDetailTypesEnum.None"
+          ></div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel [disabled]="!isSingleSelectionOnLocalizer()">
+        <ng-template pTemplate="header">
+          <h1
+            [rrValidation]="['isAccompanyingFacetJointArthrosisLocalizationLeft isAccompanyingFacetJointArthrosisLocalizationRight', 'isSynovialCystRight isSynovialCystLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Protrusion])"
+            rr-id="spi_m_050401"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.protrusionDetails2.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="['isAccompanyingFacetJointArthrosisLocalizationLeft isAccompanyingFacetJointArthrosisLocalizationRight', 'isSynovialCystRight isSynovialCystLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Extrusion])"
+            rr-id="spi_m_050509"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.extrusionDetails2.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="['isAccompanyingFacetJointArthrosisLocalizationLeft isAccompanyingFacetJointArthrosisLocalizationRight', 'isSynovialCystRight isSynovialCystLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Migration])"
+            rr-id="spi_m_050401"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.migrationDetails2.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="['isAccompanyingFacetJointArthrosisLocalizationLeft isAccompanyingFacetJointArthrosisLocalizationRight', 'isSynovialCystRight isSynovialCystLeft']"
+            ifAny="true"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Sequestration])"
+            rr-id="spi_m_050401"
+            class="custom-tab-header"
+          >
+            {{'spineMRT.disc.sequestrationDetails2.value'|translate}}
+          </h1>
+        </ng-template>
+        <div
+          class="f-horizontal f-start col-h-100"
+          [rrDisable]="!isSingleSelectionOnLocalizer()"
+        >
+          <div
+            class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Protrusion, intervertebralDiscJointsFindingTypesEnum.Extrusion])"
+          >
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isOsteophyteFormation"
+              label="{{'spineMRT.disc.osteophyteFormation.value'| translate}}"
+              rr-id="spi_m_050312"
+              name="isOsteophyteFormation"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isAccompanyingOsteochondrosis"
+              label="{{'spineMRT.disc.accompanyingOsteochondrosis.value'| translate}}"
+              rr-id="spi_m_050313"
+              name="isAccompanyingOsteochondrosis"
+              rrContentReset="modicClassificationContainer"
+            ></p-checkbox>
+            <div
+              id="modicClassificationContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isAccompanyingOsteochondrosis"
+            >
+              <p rr-id="spi_m_0503301" rrInfoIcon="spi_m_050302">
+                {{'spineMRT.disc.modicClassification.value'|translate}}
+              </p>
+              <p-radioButton
+                name="modicClassificationType"
+                rr-id="spi_m_050314"
+                label="{{ 'spineMRT.disc.modicType.value' | translate }} I"
+                [value]="modicClassificationTypesEnum.Type1"
+                [(ngModel)]="model.modicClassificationType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                name="modicClassificationType"
+                rr-id="spi_m_050315"
+                label="{{ 'spineMRT.disc.modicType.value' | translate }} II"
+                [value]="modicClassificationTypesEnum.Type2"
+                [(ngModel)]="model.modicClassificationType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                name="modicClassificationType"
+                rr-id="spi_m_050316"
+                label="{{ 'spineMRT.disc.modicType.value' | translate }} III"
+                [value]="modicClassificationTypesEnum.Type3"
+                [(ngModel)]="model.modicClassificationType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+          <div
+            class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+            *ngIf="shouldBeDisplayByFindingType([intervertebralDiscJointsFindingTypesEnum.Migration, intervertebralDiscJointsFindingTypesEnum.Sequestration])"
+          >
+            <div class="o-radio-list m-l-10">
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isOsteophyteFormation"
+                label="{{'spineMRT.disc.osteophyteFormation.value'| translate}}"
+                rr-id="spi_m_050312"
+                name="isOsteophyteFormation"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isDiameterMigrationSequester"
+                label="{{getDiameterTranslation()| translate}}"
+                rr-id="spi_m_050317"
+                name="isDiameterMigrationSequester"
+                rrContentReset="diameterMigrationSequesterContainer"
+              ></p-checkbox>
+              <div
+                id="diameterMigrationSequesterContainer"
+                class="nested-content o-radio-list f-vertical"
+                [rrDisable]="!model.isDiameterMigrationSequester"
+              >
+                <rr-number-input
+                  name="diameterMigrationSequester"
+                  inputRrId="spi_m_050318"
+                  labelRrId="spi_m_050319"
+                  [config]="{max: 30}"
+                  label="{{'spineMRT.disc.inMm.value'| translate}}"
+                  [(ngModel)]="model.diameterMigrationSequester"
+                >
+                </rr-number-input>
+              </div>
+
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isCraniocaudalesLevel"
+                label="{{'spineMRT.disc.craniocaudalLevel.value'| translate}}"
+                rr-id="spi_m_050320"
+                name="isCraniocaudalesLevel"
+                rrContentReset="craniocaudalesLevelTypeContainer"
+              ></p-checkbox>
+              <div
+                id="craniocaudalesLevelTypeContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="!model.isCraniocaudalesLevel"
+              >
+                <p-radioButton
+                  name="craniocaudalesLevelType"
+                  rr-id="spi_m_050321"
+                  label="{{ 'spineMRT.disc.suprapedicular.value' | translate }}"
+                  [value]="craniocaudalesLevelTypesEnum.Suprapedicular"
+                  [(ngModel)]="model.craniocaudalesLevelType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="craniocaudalesLevelType"
+                  rr-id="spi_m_050322"
+                  label="{{ 'spineMRT.disc.pedicular.value' | translate }}"
+                  [value]="craniocaudalesLevelTypesEnum.Pedicular"
+                  [(ngModel)]="model.craniocaudalesLevelType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="craniocaudalesLevelType"
+                  rr-id="spi_m_050323"
+                  label="{{ 'spineMRT.disc.infrapedicular.value' | translate }}"
+                  [value]="craniocaudalesLevelTypesEnum.Infrapedicular"
+                  [(ngModel)]="model.craniocaudalesLevelType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="craniocaudalesLevelType"
+                  rr-id="spi_m_050324"
+                  label="{{ 'spineMRT.disc.intervertebralDiscLevel.value' | translate }}"
+                  [value]="craniocaudalesLevelTypesEnum.Intervertebral"
+                  [(ngModel)]="model.craniocaudalesLevelType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isAccompanyingOsteochondrosis"
+                label="{{'spineMRT.disc.accompanyingOsteochondrosis.value'| translate}}"
+                rr-id="spi_m_050313"
+                name="isAccompanyingOsteochondrosis"
+                rrContentReset="modicClassificationTypeContainer"
+              ></p-checkbox>
+              <div
+                id="modicClassificationTypeContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="!model.isAccompanyingOsteochondrosis"
+              >
+                <p rr-id="spi_m_0503301" rrInfoIcon="spi_m_050302">
+                  {{ 'spineMRT.disc.modicClassification.value'| translate }}
+                </p>
+                <p-radioButton
+                  name="modicClassificationType"
+                  rr-id="spi_m_050314"
+                  label="{{ 'spineMRT.disc.modicType.value' | translate }} I"
+                  [value]="modicClassificationTypesEnum.Type1"
+                  [(ngModel)]="model.modicClassificationType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="modicClassificationType"
+                  rr-id="spi_m_050315"
+                  label="{{ 'spineMRT.disc.modicType.value' | translate }} II"
+                  [value]="modicClassificationTypesEnum.Type2"
+                  [(ngModel)]="model.modicClassificationType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  name="modicClassificationType"
+                  rr-id="spi_m_050316"
+                  label="{{ 'spineMRT.disc.modicType.value' | translate }} III"
+                  [value]="modicClassificationTypesEnum.Type3"
+                  [(ngModel)]="model.modicClassificationType"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad o-radio-list m-t-15 m-b-15">
+            <p-checkbox
+              binary="true"
+              labelStyleClass="text-break ui-fat-label"
+              [(ngModel)]="model.isAccompanyingFacetJointArthrosis"
+              label="{{'spineMRT.disc.accompanyingFacetJointArthrosis.value'| translate}}"
+              rr-id="spi_m_050411"
+              name="isAccompanyingFacetJointArthrosis"
+              rrContentReset="accompanyingFacetJointArthrosisDataContainer"
+            ></p-checkbox>
+            <div
+              id="accompanyingFacetJointArthrosisDataContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isAccompanyingFacetJointArthrosis"
+            >
+              <p rr-id="spi_m_050412">
+                {{'spineMRT.disc.localization.value'|translate}}*
+              </p>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isAccompanyingFacetJointArthrosisLocalizationRight"
+                label="{{'spineMRT.disc.right.value'| translate}}"
+                rr-id="spi_m_050413"
+                name="isAccompanyingFacetJointArthrosisLocalizationRight"
+                rrValidation="isAccompanyingFacetJointArthrosisLocalizationRight isAccompanyingFacetJointArthrosisLocalizationLeft"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isAccompanyingFacetJointArthrosisLocalizationLeft"
+                label="{{'spineMRT.disc.left.value'| translate}}"
+                rr-id="spi_m_050414"
+                name="isAccompanyingFacetJointArthrosisLocalizationLeft"
+                rrValidation="isAccompanyingFacetJointArthrosisLocalizationRight isAccompanyingFacetJointArthrosisLocalizationLeft"
+              ></p-checkbox>
+
+              <p-checkbox
+                class="m-t-25"
+                binary="true"
+                [(ngModel)]="model.isHypertrophy"
+                label="{{'spineMRT.disc.hypertrophy.value'| translate}}"
+                rr-id="spi_m_0504500"
+                name="isHypertrophy"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isJointEffusion"
+                label="{{'spineMRT.disc.articularEffusion.value'| translate}}"
+                rr-id="spi_m_0504501"
+                name="isJointEffusion"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isBoneMarrowEdema"
+                label="{{'spineMRT.disc.boneMarrowEdema.value'| translate}}"
+                rr-id="spi_m_0504502"
+                name="isBoneMarrowEdema"
+              ></p-checkbox>
+              <p-checkbox
+                binary="true"
+                [(ngModel)]="model.isSynovialCyst"
+                label="{{'spineMRT.disc.synovialCyst.value'| translate}}"
+                rr-id="spi_m_0504503"
+                name="isSynovialCyst"
+                rrContentReset="synovialCystSideContainer"
+              ></p-checkbox>
+              <div
+                id="synovialCystSideContainer"
+                class="nested-content o-radio-list"
+                [rrDisable]="!model.isSynovialCyst"
+              >
+                <p rr-id="spi_m_0504504">
+                  {{'spineMRT.disc.side.value' |translate}}*
+                </p>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isSynovialCystRight"
+                  label="{{'spineMRT.disc.right.value'| translate}}"
+                  rr-id="spi_m_0504505"
+                  name="isSynovialCystRight"
+                  rrValidation="isSynovialCystRight isSynovialCystLeft"
+                  (onChange)="checkAndClearMaxDiameter()"
+                ></p-checkbox>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isSynovialCystLeft"
+                  label="{{'spineMRT.disc.left.value'| translate}}"
+                  rr-id="spi_m_0504506"
+                  name="isSynovialCystLeft"
+                  rrValidation="isSynovialCystRight isSynovialCystLeft"
+                  (onChange)="checkAndClearMaxDiameter()"
+                ></p-checkbox>
+                <div
+                  class="nested-content o-radio-list f-vertical"
+                  [rrDisable]="!(model.isSynovialCystRight || model.isSynovialCystLeft)"
+                >
+                  <rr-number-input
+                    name="maxDiameter"
+                    inputRrId="spi_m_0504507"
+                    labelRrId="spi_m_0504508"
+                    [config]="{max: 30}"
+                    labelStyleClass="text-break2"
+                    label="{{'spineMRT.disc.maxDiameterInMmBreak.value'| translate}}"
+                    [(ngModel)]="model.maxDiameter"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad-l m-b-15 c-sep-l m-t-77"></div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

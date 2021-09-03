@@ -1,0 +1,368 @@
+<div class="f-horizontal">
+  <div class="f-vertical c-sep">
+    <h2 rr-id="pel_m_050218" class="m-b-10 p-l-15">
+      {{'pelvisMRT.maleGender.penisSoftTissue.value' | translate}}
+      <rr-info-icon rr-id="pel_m_05_01"></rr-info-icon>
+    </h2>
+    <div class="f-horizontal penis-infection">
+      <div class="c-col-1 c-pad c-sep f-start">
+        <p rr-id="pel_m_0502154">
+          {{'pelvisMRT.maleGender.t2wSignal.value' | translate}}
+        </p>
+        <p rr-id="pel_m_050219" class="m-b-15 small-font">
+          {{'pelvisMRT.maleGender.signalBehaviourT2w2.value' | translate}}
+        </p>
+        <rr-slider-number-triple-input
+          rr-id="pel_m_050220"
+          name="t2wSignalBoost"
+          [(ngModel)]="model.signalBehaviourT2wType"
+        >
+        </rr-slider-number-triple-input>
+        <p rr-id="pel_m_050221" class="m-t-25 m-b-10">
+          {{'pelvisMRT.maleGender.expansion.value' | translate}}
+        </p>
+        <div class="o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_050222"
+            label="{{'pelvisMRT.maleGender.regionalExtension.value' | translate}}"
+            name="expansionType"
+            [value]="expansionType.RegionalExtension"
+            [(ngModel)]="model.expansionType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_050223"
+            label="{{'pelvisMRT.maleGender.atLeastScrotalExpansion.value' | translate}}"
+            name="expansionType"
+            [value]="expansionType.ExtensionToAtLeastScrotal"
+            [(ngModel)]="model.expansionType"
+            class="text-break"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div
+          [rrDisable]="technologyModel.cmReinforcedType !== simpleAnswerType.Yes"
+        >
+          <p rr-id="pel_m_050224" class="m-b-10 m-t-15">
+            {{'pelvisMRT.maleGender.contrastEnhancement.value' | translate}}
+          </p>
+          <div class="o-radio-list">
+            <p-radioButton
+              rr-id="pel_m_050225"
+              label="{{'pelvisMRT.maleGender.strongNoAsterisk.value' | translate}}"
+              name="cmEnhancementType"
+              rrUnClickRadio
+              rrContentReset="homogeneityGroup"
+              [value]="cmEnhancementType.Strong"
+              [(ngModel)]="model.cmEnhancementType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_050226"
+              label="{{'pelvisMRT.maleGender.lowNoAsterisk.value' | translate}}"
+              name="cmEnhancementType"
+              rrUnClickRadio
+              rrContentReset="homogeneityGroup"
+              [value]="cmEnhancementType.Low"
+              [(ngModel)]="model.cmEnhancementType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_050227"
+              label="{{'pelvisMRT.maleGender.no.value' | translate}}"
+              name="cmEnhancementType"
+              rrUnClickRadio
+              [value]="cmEnhancementType.No"
+              rrContentReset="homogeneityGroup"
+              [(ngModel)]="model.cmEnhancementType"
+            ></p-radioButton>
+            <div
+              id="homogeneityGroup"
+              [rrDisable]="model.cmEnhancementType !== 'Strong' && model.cmEnhancementType !== 'Low'"
+              class="o-radio-list left-indent"
+            >
+              <p-checkbox
+                label="{{'pelvisMRT.maleGender.homogeneous.value' | translate}}"
+                binary="true"
+                rr-id="pel_m_050228"
+                name="isHomogeneous"
+                [(ngModel)]="model.isHomogeneous"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{'pelvisMRT.maleGender.heterogeneous.value' | translate}}"
+                binary="true"
+                rr-id="pel_m_050229"
+                name="isHeterogeneous"
+                [(ngModel)]="model.isHeterogeneous"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep">
+        <div class="o-radio-list text-break">
+          <p-checkbox
+            label="{{'pelvisMRT.maleGender.diggingUp.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_050304"
+            name="isDistension"
+            [(ngModel)]="model.isDistension"
+          >
+          </p-checkbox>
+          <div>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.airInclusions.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050305"
+              name="isAirInclusions"
+              [(ngModel)]="model.isAirInclusions"
+            >
+            </p-checkbox>
+            <rr-info-icon
+              rr-id="pel_m_05_03"
+              [applyIconStyle]="true"
+            ></rr-info-icon>
+          </div>
+          <p-checkbox
+            label="{{'pelvisMRT.maleGender.circumscribedFluidAccumulation.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_050307"
+            name="isCircumscribedFluidAccumulation"
+            rrContentReset="isCircumscribedFluidAccumulation"
+            [(ngModel)]="model.isCircumscribedFluidAccumulation"
+          >
+          </p-checkbox>
+          <div
+            id="isCircumscribedFluidAccumulation"
+            [rrDisable]="!model.isCircumscribedFluidAccumulation"
+            class="o-radio-list left-indent m-b-12"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.abscess.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050308"
+              name="isAbscess"
+              [(ngModel)]="model.isAbscess"
+              rrContentReset="expansionInMmContainer"
+            >
+            </p-checkbox>
+            <div
+              class="nested-content"
+              [rrDisable]="!model.isAbscess"
+              id="expansionInMmContainer"
+            >
+              <rr-number-input
+                inputRrId="pel_m_050309"
+                name="expansionInMm"
+                labelRrId="pel_m_050310"
+                [config]="{min: 1, max: 9999, labelWidth: 200}"
+                [(ngModel)]="model.expansionInMm"
+                [label]="'pelvisMRT.maleGender.expansionInMm.value' | translate"
+              ></rr-number-input>
+            </div>
+            <p-checkbox
+              class="m-t-14"
+              label="{{'pelvisMRT.maleGender.scrotalExpansion.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050311"
+              name="isScrotalExpansion"
+              [(ngModel)]="model.isScrotalExpansion"
+            >
+            </p-checkbox>
+          </div>
+
+          <p rr-id="pel_m_0503123" class="m-t-25">
+            {{'pelvisMRT.maleGender.furtherChanges.value' | translate}}
+          </p>
+          <div class="o-radio-list">
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.focalPlaquesOfThe.value' | translate}}"
+              class="text-break"
+              binary="true"
+              rr-id="pel_m_050312"
+              name="isFocalPlaquesOfTheTunicaAlbuginea"
+              rrContentReset="focalPlaquesOfTheTunicaAlbugineaGroup"
+              [(ngModel)]="model.isFocalPlaquesOfTheTunicaAlbuginea"
+            ></p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.fascialThickening.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050313"
+              name="isFascialThickening"
+              [(ngModel)]="model.isFascialThickening"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep">
+        <div
+          *ngIf="model.isFocalPlaquesOfTheTunicaAlbuginea"
+          id="focalPlaquesOfTheTunicaAlbugineaGroup"
+        >
+          <p rr-id="pel_m_050401" class="m-b-10">
+            {{'pelvisMRT.maleGender.detailsOfFocalPlaques.value' | translate}}
+          </p>
+          <div class="o-radio-list">
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.t1wHypointens.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050402"
+              name="isT1wHypointense"
+              [(ngModel)]="model.isT1wHypointense"
+            ></p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.t2wHypointens.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050403"
+              name="isT2wHypointense"
+              [(ngModel)]="model.isT2wHypointense"
+            ></p-checkbox>
+            <rr-number-input
+              inputRrId="pel_m_050404"
+              labelRrId="pel_m_050405"
+              name="exampleThicknessInMm"
+              [config]="{min: 1, max: 9999, labelWidth: 200}"
+              labelStyleClass="text-break"
+              [(ngModel)]="model.exampleThicknessInMm"
+              [label]="'pelvisMRT.maleGender.exampleThicknessInMm.value' | translate"
+            ></rr-number-input>
+          </div>
+          <div class="o-radio-list">
+            <p rr-id="pel_m_050406" class="m-b-10 m-t-15">
+              {{'pelvisMRT.maleGender.localizationOfFokalePlaques.value' |
+              translate}}
+            </p>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.corpusCavernosumRightNoAsterisk.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050407"
+              name="isLocalizationCorpusCavernosumRight"
+              [(ngModel)]="model.isLocalizationCorpusCavernosumRight"
+            ></p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.corpusCavernosumLeftNoAsterisk.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050408"
+              name="isLocalizationCorpusCavernosumLeft"
+              [(ngModel)]="model.isLocalizationCorpusCavernosumLeft"
+            ></p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.corpusSpongiosumNoAsterisk.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050409"
+              name="isLocalizationCorpusSpongiosum"
+              [(ngModel)]="model.isLocalizationCorpusSpongiosum"
+            ></p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            [rrDisable]="technologyModel.cmReinforcedType !== simpleAnswerType.Yes"
+          >
+            <p rr-id="pel_m_050410" class="m-b-10 m-t-15">
+              {{'pelvisMRT.maleGender.contrastEnhancementFocalPlaques.value' |
+              translate}}
+            </p>
+            <p-radioButton
+              rr-id="pel_m_050411"
+              label="{{'pelvisMRT.maleGender.strongNoAsterisk.value' | translate}}"
+              name="cmEnhancementFocalPlaquesType"
+              rrUnClickRadio
+              [value]="cmEnhancementType.Strong"
+              [(ngModel)]="model.cmEnhancementFocalPlaquesType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_050412"
+              label="{{'pelvisMRT.maleGender.lowNoAsterisk.value' | translate}}"
+              name="cmEnhancementFocalPlaquesType"
+              rrUnClickRadio
+              [value]="cmEnhancementType.Low"
+              [(ngModel)]="model.cmEnhancementFocalPlaquesType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_050413"
+              label="{{'pelvisMRT.maleGender.no.value' | translate}}"
+              name="cmEnhancementFocalPlaquesType"
+              rrUnClickRadio
+              [value]="cmEnhancementType.No"
+              [(ngModel)]="model.cmEnhancementFocalPlaquesType"
+            ></p-radioButton>
+            <p-checkbox
+              label="{{'pelvisMRT.maleGender.focalSignalVoids.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_050414"
+              name="isFocalSignalVoids"
+              class="m-t-20"
+              [(ngModel)]="model.isFocalSignalVoids"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l">
+    <h2 rr-id="pel_m_050501" class="m-b-15">
+      {{'pelvisMRT.maleGender.penileProsthesis.value' | translate}}
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        label="{{'pelvisMRT.maleGender.fluidAroundProsthesis.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_050502"
+        name="isFluidAroundProsthesis"
+        [(ngModel)]="model.isFluidAroundProsthesis"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.maleGender.prosthesisDefect.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_050503"
+        name="isProsthesisDefect"
+        [(ngModel)]="model.isProsthesisDefect"
+      ></p-checkbox>
+    </div>
+    <h2 rr-id="pel_m_050504" class="m-b-10 m-t-40">
+      {{'pelvisMRT.maleGender.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div class="f-vertical o-radio-list">
+      <p rr-id="pel_m_050505" class="m-b-0">
+        {{'pelvisMRT.maleGender.differentialDiagnosis1.value' | translate}}*
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="penisInfektionDifferentialDiagnosisType"
+        [(ngModel)]="model.differentialDiagnosisInfection01Type"
+        name="differentialDiagnosisInfection01Type"
+        rrId="pel_m_050506"
+        (selectionChanged)="clearSubordinate()"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosisInfection01Type"
+      ></rr-differential-diagnosis-dropdown>
+      <div [rrDisable]="model.differentialDiagnosisInfection01Type === 'None'">
+        <p rr-id="pel_m_050507" class="m-b-0">
+          {{'pelvisMRT.maleGender.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="penisInfektionDifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosisInfection02Type"
+          name="differentialDiagnosisInfection02Type"
+          rrId="pel_m_050508"
+          (selectionChanged)="clearSubordinate()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="o-radio-list m-t-10"
+          [rrDisable]="model.differentialDiagnosisInfection02Type === 'None'"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.maleGender.subordinate.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_050509"
+            name="isSubordinate"
+            [(ngModel)]="model.isSubordinate"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

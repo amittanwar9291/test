@@ -1,0 +1,141 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center" *ngIf="isLargeLocalizerOpened">
+    <rr-cardio-lung-localizer-large
+      name="lungLocalizer"
+      [(ngModel)]="findingHandler.currentItem.lungLocalizer"
+      (close)="closeLocalizer()"
+      rrValidation="lungLocalizer"
+      #lungLocalizer
+      [elementUpdate]="lungLocalizer.announceSelection"
+    >
+    </rr-cardio-lung-localizer-large>
+  </div>
+  <div class="c-main f-horizontal f-center" [hidden]="isLargeLocalizerOpened">
+    <!-- First column, with dynamic components -->
+    <div class="c-col-1 c-pad c-sep f-start f-vertical o-list">
+      <div class="f-start f-vertical o-list m-b-14">
+        <h1 rr-id="car_m_090103" class="m-b-16 m-t-1">
+          {{ 'cardioMRT.pericardiumVessels.finding.value' | translate }}*
+        </h1>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="car_m_090104"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'cardioMRT.pericardiumVessels.normalAppearance.value' | translate }}"
+            labelStyleClass="text-break"
+            name="areFindings"
+            [value]="areFindingsType.NormalAppearance"
+            class="l-h-24"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090105"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'cardioMRT.pericardiumVessels.noInformation.value' | translate }}"
+            name="areFindings"
+            [value]="areFindingsType.False"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090106"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'cardioMRT.pericardiumVessels.finding.value' | translate }}"
+            name="areFindings"
+            [value]="areFindingsType.True"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingColumnConfig"
+        [disabled]="model.areFindings !== areFindingsType.True"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      ></rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div
+      class="f-start f-vertical"
+      [ngClass]="findingHandler.currentItem.findingType === findingType.MediastinumMass ? 'c-pad-r' : 'c-col-4 c-pad'"
+    >
+      <!-- Finding number -->
+      <div class="m-t-1" [ngClass]="findingMargin">
+        <h1
+          [hidden]="findingHandler.currentItem.findingType === findingType.None"
+          [ngClass]="{ 'c-pad-l': findingHandler.currentItem.findingType === findingType.MediastinumMass }"
+        >
+          {{ 'cardioMRT.pericardiumVessels.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l"></div>
+        </div>
+
+        <rr-pericardium
+          *ngSwitchCase="findingType.Pericardium"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-pericardium>
+
+        <rr-mediastinal-vessels
+          *ngSwitchCase="findingType.MediastinalVessels"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-mediastinal-vessels>
+
+        <rr-lymphadenopathy
+          *ngSwitchCase="findingType.MediastinumLymphadenopathy"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-lymphadenopathy>
+
+        <rr-mass
+          *ngSwitchCase="findingType.MediastinumMass"
+          [model]="findingHandler.currentItem"
+          [technologyModel]="technologyModel"
+          class="col-h-100"
+        ></rr-mass>
+
+        <rr-lung
+          *ngSwitchCase="findingType.Lung"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+          (emitLocalizer)="openLocalizer()"
+        ></rr-lung>
+
+        <rr-upper-abdomen
+          *ngSwitchCase="findingType.UpperAbdomen"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-upper-abdomen>
+
+        <rr-neck
+          *ngSwitchCase="findingType.Neck"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-neck>
+
+        <rr-osseous-lesion
+          *ngSwitchCase="findingType.OsseousLesion"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-osseous-lesion>
+      </ng-container>
+    </div>
+  </div>
+</form>

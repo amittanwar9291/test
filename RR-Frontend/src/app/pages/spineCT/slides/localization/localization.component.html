@@ -1,0 +1,41 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center" *ngIf="!isLargeLocalizerOpened">
+    <div class="c-col-1 c-sep c-pad-r">
+      <div class="o-radio-list f-vertical">
+        <h1 rr-id="spi_c_010103" rrValidation="spineLocation">
+          {{'spineCT.localization.localization.value' | translate}}*
+        </h1>
+        <rr-spine-simple
+          rr-id="spi_c_010104"
+          [spineLocation]="model.spineLocation"
+          [darkRedDisc]="true"
+          (click)="openLargeLocalizer()"
+          rrValidation="spineLocation"
+          isLocalizer="true"
+        ></rr-spine-simple>
+      </div>
+    </div>
+    <div class="c-sep c-pad">
+      <rr-patient-information
+        [model]="model.patientInformation"
+      ></rr-patient-information>
+    </div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-sep c-pad-l"></div>
+  </div>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="isLargeLocalizerOpened"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      rr-id="spi_c_010105"
+      [(ngModel)]="model.spineLocation"
+      [logicType]="spineLocationLogicTypeEnum.VertebreAndDiscRange"
+      localizationTitle="spineCT.localization.localizerTitle.value"
+      (selectedElement)="setPermittedLocalizerSelectionChangeOnLocalizerChange()"
+      (close)="onLargeLocalizerClosed()"
+      localizationDescription="spineCT.localization.localizerDescription.value"
+    ></rr-spine-complex>
+  </div>
+</form>

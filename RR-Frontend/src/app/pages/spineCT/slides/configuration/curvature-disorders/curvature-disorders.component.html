@@ -1,0 +1,247 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep o-radio-list">
+    <p-checkbox
+      rr-id="spi_c_040203"
+      [(ngModel)]="model.isCervicalSpine"
+      binary="true"
+      name="isCervicalSpine"
+      label="{{'spineCT.configuration.cervicalSpine.value' | translate}}"
+      (onChange)="clearCervicalSpineLocation()"
+      rrContentReset="cervicalSpinePathologyTypeContainer"
+      labelStyleClass="ui-fat-label"
+    ></p-checkbox>
+    <div
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isCervicalSpine"
+      id="cervicalSpinePathologyTypeContainer"
+    >
+      <p rr-id="spi_c_0402100">
+        {{'spineCT.configuration.pathology.value' | translate}}*
+      </p>
+      <p-radioButton
+        rr-id="spi_c_040204"
+        [(ngModel)]="model.cervicalSpinePathologyType"
+        name="cervicalSpinePathologyType"
+        [value]="pathologyTypeEnum.Hyperlordosis"
+        label="{{'spineCT.configuration.hyperlordosis.value' | translate}}"
+        (onClick)="clearCervicalSpineLocation()"
+        rrValidation="cervicalSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040205"
+        [(ngModel)]="model.cervicalSpinePathologyType"
+        name="cervicalSpinePathologyType"
+        [value]="pathologyTypeEnum.Straightening"
+        label="{{'spineCT.configuration.straightening.value' | translate}}"
+        (onClick)="clearCervicalSpineLocation()"
+        rrValidation="cervicalSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040206"
+        [(ngModel)]="model.cervicalSpinePathologyType"
+        name="cervicalSpinePathologyType"
+        [value]="pathologyTypeEnum.Kyphosis"
+        label="{{'spineCT.configuration.kyphosis.value' | translate}}"
+        (onClick)="clearCervicalSpineLocation()"
+        rrValidation="cervicalSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040207"
+        [(ngModel)]="model.cervicalSpinePathologyType"
+        name="cervicalSpinePathologyType"
+        [value]="pathologyTypeEnum.Kinking"
+        label="{{'spineCT.configuration.kinking.value' | translate}}"
+        (onClick)="clearCervicalSpineLocation()"
+        rrValidation="cervicalSpinePathologyType"
+      ></p-radioButton>
+    </div>
+    <div *ngIf="activeFirstLocalizer()">
+      <p
+        rr-id="spi_c_040208"
+        class="m-b-5"
+        rrValidation="cervicalSpineLocation"
+        *ngIf="model.cervicalSpinePathologyType == pathologyTypeEnum.Kinking"
+      >
+        {{'spineCT.configuration.localization.value' | translate}}*
+      </p>
+      <p
+        rr-id="spi_c_0402216"
+        class="m-b-5"
+        *ngIf="model.cervicalSpinePathologyType != pathologyTypeEnum.Kinking"
+      >
+        {{'spineCT.configuration.localizationVertex.value' | translate}}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_c_040209"
+        (click)="openLargeLocalizer(selectionAccessibilityModeEnum.C0toTH1)"
+        isLocalizer="true"
+        [spineLocation]="model.cervicalSpineLocation"
+        [selectionAccessibilityMode]="selectionAccessibilityModeEnum.C0toTH1"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        rrValidation="cervicalSpineLocation"
+        name="cervicalSpineLocation"
+      ></rr-spine-simple>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-radio-list">
+    <p-checkbox
+      rr-id="spi_c_040302"
+      [(ngModel)]="model.isThoracicSpine"
+      binary="true"
+      name="isThoracicSpine"
+      label="{{'spineCT.configuration.thoracicSpine.value' | translate}}"
+      (onChange)="clearThoracicSpineLocationLocation()"
+      rrContentReset="thoracicSpinePathologyTypeContainer"
+      labelStyleClass="ui-fat-label"
+    ></p-checkbox>
+    <div
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isThoracicSpine"
+      id="thoracicSpinePathologyTypeContainer"
+    >
+      <p rr-id="spi_c_0403100">
+        {{'spineCT.configuration.pathology.value' | translate}}*
+      </p>
+      <p-radioButton
+        rr-id="spi_c_040303"
+        [(ngModel)]="model.thoracicSpinePathologyType"
+        name="thoracicSpinePathologyType"
+        [value]="pathologyTypeEnum.Lordosis"
+        label="{{'spineCT.configuration.lordosis.value' | translate}}"
+        (onClick)="clearThoracicSpineLocationLocation()"
+        rrValidation="thoracicSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040304"
+        [(ngModel)]="model.thoracicSpinePathologyType"
+        name="thoracicSpinePathologyType"
+        [value]="pathologyTypeEnum.Straightening"
+        label="{{'spineCT.configuration.straightening.value' | translate}}"
+        (onClick)="clearThoracicSpineLocationLocation()"
+        rrValidation="thoracicSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040305"
+        [(ngModel)]="model.thoracicSpinePathologyType"
+        name="thoracicSpinePathologyType"
+        [value]="pathologyTypeEnum.Hyperkyphosis"
+        label="{{'spineCT.configuration.hyperkyphosis.value' | translate}}"
+        (onClick)="clearThoracicSpineLocationLocation()"
+        rrValidation="thoracicSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040306"
+        [(ngModel)]="model.thoracicSpinePathologyType"
+        name="thoracicSpinePathologyType"
+        [value]="pathologyTypeEnum.Kinking"
+        label="{{'spineCT.configuration.kinking.value' | translate}}"
+        (onClick)="clearThoracicSpineLocationLocation()"
+        rrValidation="thoracicSpinePathologyType"
+      ></p-radioButton>
+    </div>
+    <div *ngIf="activeSecondLocalizer()">
+      <p
+        rr-id="spi_c_040307"
+        class="m-b-5"
+        rrValidation="thoracicSpineLocation"
+      >
+        {{'spineCT.configuration.localization.value' | translate}}*
+      </p>
+      <rr-spine-simple
+        rr-id="spi_c_040308"
+        (click)="openLargeLocalizer(selectionAccessibilityModeEnum.TH1toL1)"
+        isLocalizer="true"
+        [spineLocation]="model.thoracicSpineLocation"
+        [selectionAccessibilityMode]="selectionAccessibilityModeEnum.TH1toL1"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        rrValidation="thoracicSpineLocation"
+        name="thoracicSpineLocation"
+      ></rr-spine-simple>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-radio-list">
+    <p-checkbox
+      rr-id="spi_c_040402"
+      [(ngModel)]="model.isLumbarSpine"
+      binary="true"
+      name="isLumbarSpine"
+      label="{{'spineCT.configuration.lumbarSpine.value' | translate}}"
+      (onChange)="clearLumbarSpineLocation()"
+      rrContentReset="lumbarSpinePathologyTypeContainer"
+      labelStyleClass="ui-fat-label"
+    ></p-checkbox>
+    <div
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isLumbarSpine"
+      id="lumbarSpinePathologyTypeContainer"
+    >
+      <p rr-id="spi_c_0404100">
+        {{'spineCT.configuration.pathology.value' | translate}}*
+      </p>
+      <p-radioButton
+        rr-id="spi_c_040403"
+        [(ngModel)]="model.lumbarSpinePathologyType"
+        name="lumbarSpinePathologyType"
+        [value]="pathologyTypeEnum.Hyperlordosis"
+        label="{{'spineCT.configuration.hyperlordosis.value' | translate}}"
+        (onClick)="clearLumbarSpineLocation()"
+        rrValidation="lumbarSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040404"
+        [(ngModel)]="model.lumbarSpinePathologyType"
+        name="lumbarSpinePathologyType"
+        [value]="pathologyTypeEnum.Straightening"
+        label="{{'spineCT.configuration.straightening.value' | translate}}"
+        (onClick)="clearLumbarSpineLocation()"
+        rrValidation="lumbarSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040405"
+        [(ngModel)]="model.lumbarSpinePathologyType"
+        name="lumbarSpinePathologyType"
+        [value]="pathologyTypeEnum.Kyphosis"
+        label="{{'spineCT.configuration.kyphosis.value' | translate}}"
+        (onClick)="clearLumbarSpineLocation()"
+        rrValidation="lumbarSpinePathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_040406"
+        [(ngModel)]="model.lumbarSpinePathologyType"
+        name="lumbarSpinePathologyType"
+        [value]="pathologyTypeEnum.Kinking"
+        label="{{'spineCT.configuration.kinking.value' | translate}}"
+        (onClick)="clearLumbarSpineLocation()"
+        rrValidation="lumbarSpinePathologyType"
+      ></p-radioButton>
+    </div>
+    <div *ngIf="activeThirdLocalizer()">
+      <p
+        rr-id="spi_c_040407"
+        class="m-b-5"
+        *ngIf="model.lumbarSpinePathologyType != pathologyTypeEnum.Kinking"
+      >
+        {{'spineCT.configuration.localizationVertex.value' | translate}}
+      </p>
+      <p
+        rr-id="spi_c_040409"
+        class="m-b-5"
+        *ngIf="model.lumbarSpinePathologyType == pathologyTypeEnum.Kinking"
+        rrValidation="lumbarSpineLocation"
+      >
+        {{'spineCT.configuration.localization.value' | translate}}*
+      </p>
+      <rr-spine-simple
+        rr-id="spi_c_040408"
+        isLocalizer="true"
+        (click)="openLargeLocalizer(selectionAccessibilityModeEnum.L1toOsCoccygis)"
+        [spineLocation]="model.lumbarSpineLocation"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        [selectionAccessibilityMode]="selectionAccessibilityModeEnum.L1toOsCoccygis"
+        rrValidation="lumbarSpineLocation"
+        name="lumbarSpineLocation"
+      ></rr-spine-simple>
+    </div>
+  </div>
+  <div></div>
+</div>

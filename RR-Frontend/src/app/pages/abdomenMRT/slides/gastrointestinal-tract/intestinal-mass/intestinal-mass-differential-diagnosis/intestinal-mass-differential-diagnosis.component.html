@@ -1,0 +1,84 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+      <div class="o-radio-list m-l-10">
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+        >
+          <h2 rr-id="abd_m_090216" class="m-t-2">
+            {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+            translate}}
+          </h2>
+          <p rr-id="abd_m_090217">
+            {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+            translate }} 1*
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_0902100"
+            name="differentialDiagnosis1Type"
+            [(ngModel)]="model.differentialDiagnosis1Type"
+            [diagnosisNumber]="1"
+            rrValidation="differentialDiagnosis1Type"
+            [options]="differentialDiagnosis1Options"
+            [parentViewModel]="model"
+            group="true"
+            (selectionChanged)="reset()"
+          >
+          </rr-differential-diagnosis-dropdown>
+        </div>
+        <p-checkbox
+          class="m-t-10"
+          rr-id="abd_m_090219"
+          name="isSuspicionOf"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="model.differentialDiagnosis1Type === differentialDiagnosis1Type.None"
+          label="{{ 'abdomenMRT.gastrointestinal.suspicionOf.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisType.None && model.differentialDiagnosis1Type === differentialDiagnosis1Type.None"
+        >
+          <p rr-id="abd_m_090220">
+            {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+            translate }} 2
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_0902101"
+            name="differentialDiagnosis2Type"
+            [(ngModel)]="model.differentialDiagnosis2Type"
+            [diagnosisNumber]="2"
+            [options]="differentialDiagnosis2Options"
+            [parentViewModel]="model"
+            group="true"
+            (selectionChanged)="model.isSubordinate = false"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            class="m-t-10"
+            rr-id="abd_m_090222"
+            name="isSubordinate"
+            [rrDisable]="model.differentialDiagnosis2Type === differentialDiagnosis2Type.None"
+            [(ngModel)]="model.isSubordinate"
+            label="{{ 'abdomenMRT.gastrointestinal.subordinate.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15 o-radio-list">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      >
+      </rr-reference-picture>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15"></div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-15"></div>
+  </div>
+</div>

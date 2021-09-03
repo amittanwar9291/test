@@ -1,0 +1,613 @@
+<div class="f-vertical f-start">
+  <h2
+    *ngIf="!isLigamentaType(ligamentaType.None)"
+    rr-id="anc_m_050202"
+    class="c-pad main-header"
+  >
+    {{'feetMRT.ligamentsAndTendons.localization.value' | translate}}*
+  </h2>
+  <div
+    class="f-horizontal f-start main-container"
+    [ngClass]="getMainContainerClass()"
+  >
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list text-break">
+      <h2
+        *ngIf="isLigamentaType(ligamentaType.None)"
+        rr-id="anc_m_050202"
+        class="main-header"
+      >
+        {{'feetMRT.ligamentsAndTendons.localization.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="anc_m_050203"
+        label="{{'feetMRT.ligamentsAndTendons.upperAnkleJoint.value' | translate}}"
+        name="ligamentaType"
+        [value]="ligamentaType.AnkleJoint"
+        rrContentReset="rupturePanBandContainer lesionOfTheTarsalSinusContainer bifurcatumLigamentContainer ruptureOfThePlantarLigamentContainer"
+        [(ngModel)]="model.ligamentaType"
+        rrValidation="ligamentaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_050204"
+        label="{{'feetMRT.ligamentsAndTendons.ruptureOfTheSpring.value' | translate}}"
+        name="ligamentaType"
+        labelStyleClass="text-break"
+        [value]="ligamentaType.TearOfTheSpringLigamentComplex"
+        rrContentReset="OSGContainer lesionOfTheTarsalSinusContainer bifurcatumLigamentContainer ruptureOfThePlantarLigamentContainer"
+        [(ngModel)]="model.ligamentaType"
+        rrInfoIcon="anc_m_05_01"
+        rrValidation="ligamentaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_050205"
+        label="{{'feetMRT.ligamentsAndTendons.lesionOfTheTarsi.value' | translate}}"
+        name="ligamentaType"
+        [value]="ligamentaType.LesionOfTheTarsalSinus"
+        rrContentReset="OSGContainer rupturePanBandContainer bifurcatumLigamentContainer ruptureOfThePlantarLigamentContainer"
+        [(ngModel)]="model.ligamentaType"
+        rrValidation="ligamentaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_050206"
+        label="{{'feetMRT.ligamentsAndTendons.ligBifurcatum.value' | translate}}"
+        name="ligamentaType"
+        [value]="ligamentaType.BifurcateLigament"
+        rrContentReset="OSGContainer rupturePanBandContainer lesionOfTheTarsalSinusContainer ruptureOfThePlantarLigamentContainer"
+        [(ngModel)]="model.ligamentaType"
+        rrValidation="ligamentaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_050207"
+        label="{{'feetMRT.ligamentsAndTendons.ruptureOfTheLig.value' | translate}}"
+        name="ligamentaType"
+        [value]="ligamentaType.TearOfThePlantarLigament"
+        rrContentReset="OSGContainer rupturePanBandContainer lesionOfTheTarsalSinusContainer bifurcatumLigamentContainer"
+        [(ngModel)]="model.ligamentaType"
+        rrValidation="ligamentaType"
+      ></p-radioButton>
+    </div>
+    <div
+      id="OSGContainer"
+      *ngIf="isLigamentaType(ligamentaType.AnkleJoint)"
+      class="f-vertical"
+    >
+      <h2 rr-id="anc_m_050301" class="c-pad triple-col-header">
+        {{ 'feetMRT.ligamentsAndTendons.upperAnkleJointdetails.value' |
+        translate }}*
+      </h2>
+      <div class="f-horizontal triple-col-content">
+        <div class="c-col-1 c-sep c-pad o-radio-list">
+          <p-radioButton
+            rr-id="anc_m_050302"
+            label="{{'feetMRT.ligamentsAndTendons.ruptureSyndesmosisTibiofibularis.value' | translate}}"
+            name="ligamentaLocalizationType"
+            [value]="ligamentaLocalisationTypes.RuptureOfTheTibiofibularSyndesmosis"
+            [rrContentReset]="ruptureOfTheSyndesmosisTibiofibularisToResetIds"
+            [(ngModel)]="model.ligamentaLocalizationType"
+            rrValidation="ligamentaLocalizationType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="anc_m_050303"
+            label="{{'feetMRT.ligamentsAndTendons.ruptureOfLateralCollateral.value' | translate}}"
+            name="ligamentaLocalizationType"
+            [value]="ligamentaLocalisationTypes.RuptureOfLateralLigamentOfTheAnkle"
+            [rrContentReset]="ruptureOfLateralCollateralLigamentsToResetIds"
+            [(ngModel)]="model.ligamentaLocalizationType"
+            rrValidation="ligamentaLocalizationType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="anc_m_050304"
+            label="{{'feetMRT.ligamentsAndTendons.ruptureOfMedialCollateral.value' | translate}}"
+            name="ligamentaLocalizationType"
+            [value]="ligamentaLocalisationTypes.RuptureOfMedialLigamentOfTheAnkle"
+            [rrContentReset]="medialCollateralLigamentRuptureToResetIds"
+            [(ngModel)]="model.ligamentaLocalizationType"
+            rrValidation="ligamentaLocalizationType"
+          ></p-radioButton>
+        </div>
+        <div class="c-col-1 c-sep c-pad">
+          <div
+            id="ruptureOfTheSyndesmosisTibiofibularisContainer"
+            *ngIf="model.ligamentaLocalizationType === ligamentaLocalisationTypes.RuptureOfTheTibiofibularSyndesmosis"
+            class="o-radio-list m-l-10"
+          >
+            <p-checkbox
+              name="isAnteriorTibiofibularLigament"
+              labelStyleClass="text-break"
+              label="{{ 'feetMRT.ligamentsAndTendons.ligTibiofibularAnteriorAnterior.value' | translate }}"
+              rr-id="anc_m_050401"
+              rrInfoIcon="anc_m_05_02"
+              binary="true"
+              [(ngModel)]="model.isAnteriorTibiofibularLigament"
+              rrContentReset="ruptureBlock"
+            ></p-checkbox>
+            <div
+              id="ruptureBlock"
+              class="o-radio-list p-l-35"
+              [rrDisable]="!model.isAnteriorTibiofibularLigament"
+            >
+              <p-radioButton
+                rr-id="anc_m_050425"
+                label="{{'feetMRT.ligamentsAndTendons.partialRupture.value' | translate}}"
+                name="ruptureType"
+                rrUnClickRadio
+                [value]="ruptureType.PartialTear"
+                [(ngModel)]="model.ruptureType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="anc_m_050426"
+                label="{{'feetMRT.ligamentsAndTendons.completeRupture.value' | translate}}"
+                name="ruptureType"
+                rrUnClickRadio
+                [value]="ruptureType.CompleteTear"
+                [(ngModel)]="model.ruptureType"
+              ></p-radioButton>
+            </div>
+            <p-checkbox
+              name="isPosteriorTibiofibularLigament"
+              labelStyleClass="text-break"
+              label="{{ 'feetMRT.ligamentsAndTendons.ligTibiofibularPosteriusPosterior.value' | translate }}"
+              rr-id="anc_m_050402"
+              binary="true"
+              rrContentReset="isTertiusFractureContainer"
+              [(ngModel)]="model.isPosteriorTibiofibularLigament"
+            ></p-checkbox>
+            <div
+              id="isTertiusFractureContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isPosteriorTibiofibularLigament"
+            >
+              <p-checkbox
+                name="isTertiusFracture"
+                labelStyleClass="text-break"
+                label="{{ 'feetMRT.ligamentsAndTendons.bonyFractureOfThe.value' | translate }}"
+                rr-id="anc_m_050403"
+                binary="true"
+                [(ngModel)]="model.isTertiusFracture"
+              ></p-checkbox>
+            </div>
+            <p-checkbox
+              name="isInterosseousTibiofibularLigament"
+              labelStyleClass="text-break"
+              label="{{ 'feetMRT.ligamentsAndTendons.ligTibiofibularInterosseum.value' | translate }}"
+              rr-id="anc_m_050404"
+              binary="true"
+              [(ngModel)]="model.isInterosseousTibiofibularLigament"
+            ></p-checkbox>
+          </div>
+          <div
+            id="ruptureOfLateralCollateralLigamentsContainer"
+            *ngIf="model.ligamentaLocalizationType === ligamentaLocalisationTypes.RuptureOfLateralLigamentOfTheAnkle"
+            class="o-radio-list m-l-10"
+          >
+            <p-checkbox
+              name="isAnteriorTalofibularLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.ligFibulotalareAnterius.value' | translate }}"
+              rr-id="anc_m_050405"
+              binary="true"
+              rrContentReset="fibulotalareAnteriusLigamnetTypeContainer"
+              [(ngModel)]="model.isAnteriorTalofibularLigament"
+            ></p-checkbox>
+            <div
+              id="fibulotalareAnteriusLigamnetTypeContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isAnteriorTalofibularLigament"
+            >
+              <p-radioButton
+                rr-id="anc_m_050406"
+                label="{{'feetMRT.ligamentsAndTendons.partialRupture.value' | translate}}"
+                name="ruptureType"
+                rrUnClickRadio
+                [value]="ruptureType.PartialTear"
+                [(ngModel)]="model.ruptureType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="anc_m_050407"
+                label="{{'feetMRT.ligamentsAndTendons.completeRupture.value' | translate}}"
+                name="ruptureType"
+                rrUnClickRadio
+                [value]="ruptureType.CompleteTear"
+                [(ngModel)]="model.ruptureType"
+              ></p-radioButton>
+            </div>
+            <p-checkbox
+              name="isCalcaneofibularLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.ligFibulocalcaneare.value' | translate }}"
+              rr-id="anc_m_050408"
+              binary="true"
+              [(ngModel)]="model.isCalcaneofibularLigament"
+            ></p-checkbox>
+            <p-checkbox
+              name="isPosteriorTalofibularLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.ligFibulotalarePosterius.value' | translate }}"
+              rr-id="anc_m_050409"
+              binary="true"
+              [(ngModel)]="model.isPosteriorTalofibularLigament"
+            ></p-checkbox>
+          </div>
+          <div
+            id="medialCollateralLigamentRuptureContainer"
+            *ngIf="model.ligamentaLocalizationType === ligamentaLocalisationTypes.RuptureOfMedialLigamentOfTheAnkle"
+            class="o-radio-list m-l-10"
+          >
+            <h2 rr-id="anc_m_050410" class="m-b-15">
+              {{'feetMRT.ligamentsAndTendons.superficial.value' | translate}}
+            </h2>
+            <p-checkbox
+              name="isTibionavicularLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.parsTibionavicularis.value' | translate }}"
+              rr-id="anc_m_050411"
+              binary="true"
+              rrContentReset="parsTibionavicularisBonyAvulsionOnMalleolusMedialis"
+              [(ngModel)]="model.isTibionavicularLigament"
+            ></p-checkbox>
+            <div
+              id="parsTibionavicularisBonyAvulsionOnMalleolusMedialis"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isTibionavicularLigament"
+            >
+              <p-checkbox
+                name="isAvulsionFractureOfTheMedialMalleolus"
+                labelStyleClass="text-break"
+                label="{{ 'feetMRT.ligamentsAndTendons.bonyAvulsionOnThe.value' | translate }}"
+                rr-id="anc_m_050412"
+                binary="true"
+                [(ngModel)]="model.isAvulsionFractureOfTheMedialMalleolus"
+              ></p-checkbox>
+            </div>
+            <p-checkbox
+              name="isTibiocalcanealLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.parsTibiocalcanean.value' | translate }}"
+              rr-id="anc_m_050413"
+              binary="true"
+              rrContentReset="parsTibiocalcaneareBonyAvulsionOnMalleolusMedialis"
+              [(ngModel)]="model.isTibiocalcanealLigament"
+            ></p-checkbox>
+            <div
+              id="parsTibiocalcaneareBonyAvulsionOnMalleolusMedialis"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isTibiocalcanealLigament"
+            >
+              <p-checkbox
+                name="isParsTibiocalcaneareBonyAvulsionOnMalleolusMedialis"
+                labelStyleClass="text-break"
+                label="{{ 'feetMRT.ligamentsAndTendons.bonyAvulsionOnThe.value' | translate }}"
+                rr-id="anc_m_050414"
+                binary="true"
+                [(ngModel)]="model.isParsTibiocalcaneareBonyAvulsionOnMalleolusMedialis"
+              ></p-checkbox>
+            </div>
+            <h2 rr-id="anc_m_050415" class="m-t-20 m-b-15">
+              {{'feetMRT.ligamentsAndTendons.low.value' | translate}}
+            </h2>
+            <p-checkbox
+              name="isAnteriorTibiotalarLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.parsTibiotalarisAnterior.value' | translate }}"
+              rr-id="anc_m_050416"
+              binary="true"
+              [(ngModel)]="model.isAnteriorTibiotalarLigament"
+            ></p-checkbox>
+            <p-checkbox
+              name="isPosteriorTibiotalarLigament"
+              label="{{ 'feetMRT.ligamentsAndTendons.parsTibiotalarisPosterior.value' | translate }}"
+              rr-id="anc_m_050417"
+              binary="true"
+              [(ngModel)]="model.isPosteriorTibiotalarLigament"
+            ></p-checkbox>
+          </div>
+        </div>
+        <div
+          [id]="'ageOfTheLesion' + model.ligamentaLocalizationType + 'Container'"
+          class="c-col-1 c-pad-l"
+        >
+          <div
+            class="o-radio-list m-l-15"
+            *ngIf="model.ligamentaLocalizationType !== ligamentaLocalisationTypes.None"
+          >
+            <h2 rr-id="anc_m_050501" class="m-b-15">
+              {{'feetMRT.ligamentsAndTendons.ageOfTheLesion.value' | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="anc_m_050502"
+              label="{{'feetMRT.ligamentsAndTendons.acute.value' | translate}}"
+              name="ageOfTheLesionType"
+              [value]="ageOfTheLesionType.Acute"
+              rrUnClickRadio
+              rrContentReset="isSoftTissueHematomaContainer isBridgingScarTissueContainer"
+              [(ngModel)]="model.ageOfTheLesionType"
+            ></p-radioButton>
+            <div
+              id="isSoftTissueHematomaContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="model.ageOfTheLesionType !== ageOfTheLesionType.Acute"
+            >
+              <p-checkbox
+                name="isSoftTissueHematoma"
+                label="{{ 'feetMRT.ligamentsAndTendons.softTissueHematoma.value' | translate }}"
+                rr-id="anc_m_050503"
+                binary="true"
+                [(ngModel)]="model.isSoftTissueHematoma"
+              ></p-checkbox>
+            </div>
+            <p-radioButton
+              rr-id="anc_m_050504"
+              label="{{'feetMRT.ligamentsAndTendons.chronic.value' | translate}}"
+              name="ageOfTheLesionType"
+              [value]="ageOfTheLesionType.Chronic"
+              rrUnClickRadio
+              rrContentReset="isSoftTissueHematomaContainer isBridgingScarTissueContainer"
+              [(ngModel)]="model.ageOfTheLesionType"
+            ></p-radioButton>
+            <div
+              id="isBridgingScarTissueContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="model.ageOfTheLesionType !== ageOfTheLesionType.Chronic"
+              *ngIf="model.ligamentaLocalizationType === ligamentaLocalisationTypes.RuptureOfLateralLigamentOfTheAnkle"
+            >
+              <p-checkbox
+                name="isScarTissue"
+                labelStyleClass="text-break"
+                label="{{ 'feetMRT.ligamentsAndTendons.bridgingScarTissue.value' | translate }}"
+                rr-id="anc_m_050505"
+                binary="true"
+                [(ngModel)]="model.isScarTissue"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="rupturePanBandContainer"
+      *ngIf="isLigamentaType(ligamentaType.TearOfTheSpringLigamentComplex)"
+      class="f-horizontal f-start"
+    >
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 rr-id="anc_m_050305" class="m-b-30">
+          {{ 'feetMRT.ligamentsAndTendons.ligamentParts.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isInferoplantarLongitudinalLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.ligInferoplantarLongitudinal.value' | translate }}"
+          rr-id="anc_m_050306"
+          binary="true"
+          [(ngModel)]="model.isInferoplantarLongitudinalLigament"
+        ></p-checkbox>
+        <p-checkbox
+          name="isMedioplantarObliqueLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.ligMedioplanarLongitudinal.value' | translate }}"
+          rr-id="anc_m_050307"
+          binary="true"
+          [(ngModel)]="model.isMedioplantarObliqueLigament"
+        ></p-checkbox>
+        <p-checkbox
+          name="isSuperomedialCalcaneonavicularLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.superomedialCalcaneonavicularLigament.value' | translate }}"
+          rr-id="anc_m_050308"
+          binary="true"
+          [(ngModel)]="model.isSuperomedialCalcaneonavicularLigament"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep c-pad">
+        <div class="o-radio-list m-l-10">
+          <h2 class="m-b-30" rr-id="anc_m_050418">
+            {{ 'feetMRT.ligamentsAndTendons.extentOfRupture.value' | translate
+            }}
+          </h2>
+          <p-radioButton
+            rr-id="anc_m_050419"
+            label="{{'feetMRT.ligamentsAndTendons.partialRupture.value' | translate}}"
+            name="ruptureType"
+            [value]="ruptureType.PartialTear"
+            rrUnClickRadio
+            rrContentReset="partialRuptureContainer isWithProofOfAGapContainer"
+            [(ngModel)]="model.ruptureType"
+          ></p-radioButton>
+          <div
+            id="partialRuptureContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.ruptureType !== ruptureType.PartialTear"
+          >
+            <p-radioButton
+              rr-id="anc_m_050420"
+              label="{{'feetMRT.ligamentsAndTendons.thickeningOfTheLigaments.value' | translate}}"
+              name="partialRuptureType"
+              [value]="partialRuptureType.LigamentThickeningMoreThan5mm"
+              rrUnClickRadio
+              labelStyleClass="text-break"
+              [(ngModel)]="model.partialRuptureType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_050421"
+              label="{{'feetMRT.ligamentsAndTendons.thinningOfTheLigaments.value' | translate}}"
+              name="partialRuptureType"
+              [value]="partialRuptureType.LigamentThinningLessThan2mm"
+              rrUnClickRadio
+              labelStyleClass="text-break"
+              [(ngModel)]="model.partialRuptureType"
+            ></p-radioButton>
+            <p-checkbox
+              name="isIncreasedT2Signal"
+              label="{{ 'feetMRT.ligamentsAndTendons.t2wSignalIncrease.value' | translate }}"
+              rr-id="anc_m_050422"
+              binary="true"
+              [(ngModel)]="model.isIncreasedT2Signal"
+            ></p-checkbox>
+          </div>
+          <p-radioButton
+            rr-id="anc_m_050423"
+            label="{{'feetMRT.ligamentsAndTendons.completeRupture.value' | translate}}"
+            name="ruptureType"
+            [value]="ruptureType.CompleteTear"
+            rrUnClickRadio
+            rrContentReset="partialRuptureContainer isWithProofOfAGapContainer"
+            [(ngModel)]="model.ruptureType"
+          ></p-radioButton>
+          <div
+            id="isWithProofOfAGapContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.ruptureType !== ruptureType.CompleteTear"
+          >
+            <p-checkbox
+              name="isWithRetraction"
+              label="{{ 'feetMRT.ligamentsAndTendons.withProofOfA.value' | translate }}"
+              rr-id="anc_m_050424"
+              binary="true"
+              [(ngModel)]="model.isWithRetraction"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+    <div
+      id="lesionOfTheTarsalSinusContainer"
+      *ngIf="isLigamentaType(ligamentaType.LesionOfTheTarsalSinus)"
+      class="f-horizontal f-start"
+    >
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 rr-id="anc_m_050305" class="m-b-30">
+          {{ 'feetMRT.ligamentsAndTendons.ligamentParts.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isTalocalcanealLigamentRupture"
+          label="{{ 'feetMRT.ligamentsAndTendons.ruptureLigTalocalcaneare.value' | translate }}"
+          rr-id="anc_m_050310"
+          binary="true"
+          [(ngModel)]="model.isTalocalcanealLigamentRupture"
+        ></p-checkbox>
+        <p-checkbox
+          name="isCervicalLigamentRupture"
+          label="{{ 'feetMRT.ligamentsAndTendons.ruptureLigCervicale(LC.value' | translate }}"
+          rr-id="anc_m_050311"
+          binary="true"
+          [(ngModel)]="model.isCervicalLigamentRupture"
+        ></p-checkbox>
+        <p-checkbox
+          name="isTalocalcanealInterosseouseLigamentRupture"
+          label="{{ 'feetMRT.ligamentsAndTendons.ruptureLigTalocalcaneumInterosseum.value' | translate }}"
+          labelStyleClass="text-break"
+          rr-id="anc_m_050312"
+          binary="true"
+          [(ngModel)]="model.isTalocalcanealInterosseouseLigamentRupture"
+        ></p-checkbox>
+        <p-checkbox
+          name="isTarsalSinusFatEdema"
+          label="{{ 'feetMRT.ligamentsAndTendons.edemaOfTheFatty.value' | translate }}"
+          rr-id="anc_m_050313"
+          binary="true"
+          [(ngModel)]="model.isTarsalSinusFatEdema"
+        ></p-checkbox>
+        <p-checkbox
+          name="isGanglion"
+          label="{{ 'feetMRT.ligamentsAndTendons.ganglion.value' | translate }}"
+          rr-id="anc_m_050314"
+          binary="true"
+          rrContentReset="diameterInMmContainer"
+          [(ngModel)]="model.isGanglion"
+        ></p-checkbox>
+        <div
+          id="diameterInMmContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isGanglion"
+        >
+          <rr-number-input
+            name="diameterInMm"
+            inputRrId="anc_m_050315"
+            labelRrId="anc_m_050316"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.diameterInMm"
+            [label]="'feetMRT.ligamentsAndTendons.diameterInMm.value' | translate"
+            [config]="{min: 1, max: 30}"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+    <div
+      id="bifurcatumLigamentContainer"
+      *ngIf="isLigamentaType(ligamentaType.BifurcateLigament)"
+      class="f-horizontal f-start"
+    >
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 rr-id="anc_m_050305" class="m-b-30">
+          {{ 'feetMRT.ligamentsAndTendons.ligamentParts.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isCalcaneonavicularLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.ligCalcaneonaviculare.value' | translate }}"
+          rr-id="anc_m_050317"
+          binary="true"
+          [(ngModel)]="model.isCalcaneonavicularLigament"
+        ></p-checkbox>
+        <p-checkbox
+          name="isCalcaneocuboidalLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.ligCalcaneocuboidale.value' | translate }}"
+          rr-id="anc_m_050318"
+          binary="true"
+          [(ngModel)]="model.isCalcaneocuboidalLigament"
+        ></p-checkbox>
+        <p-checkbox
+          class="m-t-50"
+          name="isOsseousAvulsionFracture"
+          label="{{ 'feetMRT.ligamentsAndTendons.bonyAvulsionFracture.value' | translate }}"
+          rr-id="anc_m_050319"
+          binary="true"
+          [(ngModel)]="model.isOsseousAvulsionFracture"
+          rrContentReset="anteriorCalcanealBlock"
+        ></p-checkbox>
+        <div
+          id="anteriorCalcanealBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isOsseousAvulsionFracture"
+        >
+          <p-checkbox
+            name="isAnteriorProcessOfTheCalcaneus"
+            label="{{ 'feetMRT.ligamentsAndTendons.processusAnteriorCalcanei.value' | translate }}"
+            rr-id="anc_m_050320"
+            binary="true"
+            [(ngModel)]="model.isAnteriorProcessOfTheCalcaneus"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+    <div
+      id="ruptureOfThePlantarLigamentContainer"
+      *ngIf="isLigamentaType(ligamentaType.TearOfThePlantarLigament)"
+      class="f-horizontal f-start"
+    >
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <h2 rr-id="anc_m_050305" class="m-b-30">
+          {{ 'feetMRT.ligamentsAndTendons.ligamentParts.value' | translate }}
+        </h2>
+        <p-checkbox
+          name="isLongPlantarLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.ligPlantareLongum.value' | translate }}"
+          rr-id="anc_m_050321"
+          binary="true"
+          [(ngModel)]="model.isLongPlantarLigament"
+        ></p-checkbox>
+        <p-checkbox
+          name="isShortPlantarLigament"
+          label="{{ 'feetMRT.ligamentsAndTendons.ligPlantareBrevis.value' | translate }}"
+          rr-id="anc_m_050322"
+          binary="true"
+          [(ngModel)]="model.isShortPlantarLigament"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+    <div
+      *ngIf="isLigamentaType(ligamentaType.None)"
+      class="f-horizontal f-start"
+    >
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+  </div>
+</div>

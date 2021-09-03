@@ -1,0 +1,146 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <h2 rr-id="tho_c_0603125">
+        {{'thoraxCT.lungInterstitium.pathology.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="tho_c_0603126"
+        name="isConsolidation"
+        rrContentReset="isConsolidation-block"
+        rrValidation="isPleuralThickening isGroundGlassOpacity isConsolidation"
+        (onChange)="clearLocalizer('lungsFlapsLocation1')"
+        label="{{'thoraxCT.lungInterstitium.consolidation.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isConsolidation"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+
+      <div
+        id="isConsolidation-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isConsolidation"
+      >
+        <p
+          rr-id="tho_c_0603127"
+          rrValidation="lungsFlapsLocation1"
+          noUpdate="true"
+        >
+          {{'thoraxCT.lungInterstitium.distribution.value' | translate}}*
+        </p>
+        <rr-lungs-flaps-simple
+          rr-id="tho_c_0603128"
+          name="lungsFlapsLocation1"
+          rrValidation="lungsFlapsLocation1"
+          isLocalizer="true"
+          (click)="openLargeLocalizer('lungsFlapsLocation1')"
+          [(ngModel)]="model.lungsFlapsLocation1"
+        ></rr-lungs-flaps-simple>
+        <p-checkbox
+          rr-id="tho_c_0603129"
+          name="isPositiveBronchopneumogram"
+          label="{{'thoraxCT.lungInterstitium.positiveBronchopneumogram.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPositiveBronchopneumogram"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-30 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <p-checkbox
+        rr-id="tho_c_0604200"
+        name="isGroundGlassOpacity"
+        rrInfoIcon="tho_c_06_04"
+        class="text-break2"
+        rrContentReset="isGroundGlassOpacity-block"
+        rrValidation="isPleuralThickening isGroundGlassOpacity isConsolidation"
+        label="{{'thoraxCT.lungInterstitium.groundGlassOpacityGGO.value' | translate}}"
+        binary="true"
+        (onChange)="clearLocalizer('lungsFlapsLocation2')"
+        [(ngModel)]="model.isGroundGlassOpacity"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+
+      <div
+        id="isGroundGlassOpacity-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isGroundGlassOpacity"
+      >
+        <p
+          rr-id="tho_c_0604201"
+          class="m-b-5"
+          rrValidation="lungsFlapsLocation2"
+          noUpdate="true"
+        >
+          {{'thoraxCT.lungInterstitium.distribution.value' | translate}}*
+        </p>
+        <rr-lungs-flaps-simple
+          rr-id="tho_c_0604108"
+          class="m-b-12"
+          name="lungsFlapsLocation2"
+          rrValidation="lungsFlapsLocation2"
+          isLocalizer="true"
+          (click)="openLargeLocalizer('lungsFlapsLocation2')"
+          [(ngModel)]="model.lungsFlapsLocation2"
+        ></rr-lungs-flaps-simple>
+        <p rr-id="tho_c_0604109" class="m-b-3">
+          {{'thoraxCT.lungInterstitium.quantity.value' | translate}}
+        </p>
+        <p-dropdown
+          rr-id="tho_c_0604139"
+          styleClass="o-width-100 ui-brown-box"
+          [options]="quantityOptions"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          name="quantityType"
+          [(ngModel)]="model.quantityType"
+          rrDropdownClear
+        >
+        </p-dropdown>
+        <div class="width-270 m-t-8 m-b-2">
+          <p rr-id="tho_c_0604140">
+            {{'thoraxCT.lungInterstitium.ratioReticularChangesOrGroundGlassOpacities.value'
+            | translate}}
+          </p>
+        </div>
+        <p-dropdown
+          rr-id="tho_c_0604141"
+          styleClass="o-width-100 ui-brown-box"
+          [options]="ratioReticularChangesOptions"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          name="ratioReticularChangesType"
+          [(ngModel)]="model.ratioReticularChangesType"
+          rrDropdownClear
+        >
+        </p-dropdown>
+        <p-checkbox
+          rr-id="tho_c_0604142"
+          name="isDarkBronchusSign"
+          label="{{'thoraxCT.lungInterstitium.darkBronchusSign.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDarkBronchusSign"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad-l f-vertical m-t-30 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <p-checkbox
+        rr-id="tho_c_0605114"
+        name="isPleuralThickening"
+        rrValidation="isPleuralThickening isGroundGlassOpacity isConsolidation"
+        label="{{'thoraxCT.lungInterstitium.pleuralThickening.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPleuralThickening"
+        labelStyleClass="ui-fat-label"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

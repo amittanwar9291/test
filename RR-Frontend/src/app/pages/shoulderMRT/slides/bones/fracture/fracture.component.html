@@ -1,0 +1,1240 @@
+<div class="f-start f-vertical col-h-100">
+  <h2 rr-id="sho_m_040203" class="m-b-7">
+    {{ 'shoulderMRT.bones.localization.value' | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-list">
+      <div class="f-start f-vertical o-radio-list m-t-4">
+        <p-radioButton
+          rr-id="sho_m_040202"
+          [(ngModel)]="model.boneType"
+          label="{{ 'shoulderMRT.bones.proximalHumerus.value' | translate }}"
+          name="boneType"
+          [value]="boneType.ProximalHumerus"
+          (onClick)="clearReferencePictureOnBoneTypeClick()"
+          rrContentReset="clavicleBoneType-block scapulaBoneType-block humeralDiaphysisBoneType-block"
+          rrValidation="boneType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_040204"
+          [(ngModel)]="model.boneType"
+          label="{{ 'shoulderMRT.bones.clavicle.value' | translate }}"
+          name="boneType"
+          [value]="boneType.Clavicle"
+          (onClick)="clearReferencePictureOnBoneTypeClick()"
+          rrContentReset="proximalerHumerusBoneType-block scapulaBoneType-block humeralDiaphysisBoneType-block"
+          rrValidation="boneType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_040206"
+          [(ngModel)]="model.boneType"
+          label="{{ 'shoulderMRT.bones.scapula.value' | translate }}"
+          name="boneType"
+          [value]="boneType.Scapula"
+          (onClick)="clearReferencePictureOnBoneTypeClick()"
+          rrContentReset="proximalerHumerusBoneType-block clavicleBoneType-block humeralDiaphysisBoneType-block"
+          rrValidation="boneType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_040207"
+          [(ngModel)]="model.boneType"
+          label="{{ 'shoulderMRT.bones.humeralDiaphysis.value' | translate }}"
+          name="boneType"
+          [value]="boneType.HumeralDiaphysis"
+          (onClick)="clearReferencePictureOnBoneTypeClick()"
+          rrContentReset="proximalerHumerusBoneType-block clavicleBoneType-block scapulaBoneType-block"
+          rrValidation="boneType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+
+    <div class="c-col-3 c-pad-l f-start f-vertical">
+      <div class="f-start f-vertical o-radio-list m-t-7">
+        <h2
+          *ngIf="model.boneType === boneType.ProximalHumerus"
+          rr-id="sho_m_040301"
+        >
+          {{ 'shoulderMRT.bones.classification.value' | translate }}*
+        </h2>
+      </div>
+
+      <ng-container [ngSwitch]="model.boneType">
+        <div
+          *ngSwitchCase="boneType.ProximalHumerus"
+          id="proximalerHumerusBoneType-block"
+          class="c-col-3 f-horizontal col-h-100 m-t-11"
+        >
+          <div
+            class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list m-t-2"
+          >
+            <p-radioButton
+              rr-id="sho_m_040302"
+              [(ngModel)]="model.fractureHumerusClassificationType"
+              label="{{ 'shoulderMRT.bones.aoClassification11.value' | translate }}"
+              labelStyleClass="text-break2"
+              name="fractureHumerusClassificationType"
+              [value]="fractureClassificationType.AO"
+              rrInfoIcon="sho_m_040303"
+              rrContentReset="neerFracHumClassType-block"
+              rrValidation="fractureHumerusClassificationType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="sho_m_040304"
+              [(ngModel)]="model.fractureHumerusClassificationType"
+              label="{{ 'shoulderMRT.bones.neerClassification.value' | translate }}"
+              labelStyleClass="text-break2"
+              name="fractureHumerusClassificationType"
+              [value]="fractureClassificationType.Neer"
+              rrInfoIcon="sho_m_040305"
+              rrContentReset="aoFracHumClassType-block"
+              rrValidation="fractureHumerusClassificationType"
+            >
+            </p-radioButton>
+          </div>
+
+          <ng-container [ngSwitch]="model.fractureHumerusClassificationType">
+            <div
+              *ngSwitchCase="fractureClassificationType.AO"
+              id="aoFracHumClassType-block"
+              class="c-col-2 c-pad-l f-start f-vertical"
+            >
+              <div class="c-col-2 f-horizontal col-h-100">
+                <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-list">
+                  <h2 rr-id="sho_m_040401" class="m-b-15 m-t-2">
+                    {{ 'shoulderMRT.bones.fractureClassification.value' |
+                    translate }}*
+                  </h2>
+                  <div class="f-start f-vertical o-radio-list">
+                    <p-radioButton
+                      rr-id="sho_m_040402"
+                      [(ngModel)]="model.fractureHumerusAoRatingType"
+                      label="{{ 'shoulderMRT.bones.2PartFractureExtraarticular.value' | translate }}"
+                      name="fractureHumerusAoRatingType"
+                      [value]="fractureProximalerAoRatingType.TwoPartFractureExtraarticular"
+                      rrContentReset="threePartFracProxAoRatType-block fourPartFracProxAoRatType-block notSpecifiedFracProxAoRatType-block"
+                      rrValidation="fractureHumerusAoRatingType"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040403"
+                      [(ngModel)]="model.fractureHumerusAoRatingType"
+                      label="{{ 'shoulderMRT.bones.3PartFractureExtraarticular.value' | translate }}"
+                      name="fractureHumerusAoRatingType"
+                      [value]="fractureProximalerAoRatingType.ThreePartFractureExtraarticular"
+                      rrContentReset="twoPartFracProxAoRatType-block fourPartFracProxAoRatType-block notSpecifiedFracProxAoRatType-block"
+                      rrValidation="fractureHumerusAoRatingType"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040404"
+                      [(ngModel)]="model.fractureHumerusAoRatingType"
+                      label="{{ 'shoulderMRT.bones.4PartFractureIntraarticular.value' | translate }}"
+                      name="fractureHumerusAoRatingType"
+                      [value]="fractureProximalerAoRatingType.FourPartFractureExtraarticular"
+                      rrContentReset="twoPartFracProxAoRatType-block threePartFracProxAoRatType-block notSpecifiedFracProxAoRatType-block"
+                      rrValidation="fractureHumerusAoRatingType"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040405"
+                      [(ngModel)]="model.fractureHumerusAoRatingType"
+                      label="{{ 'shoulderMRT.bones.aoNotSpecified.value' | translate }}"
+                      name="fractureHumerusAoRatingType"
+                      [value]="fractureProximalerAoRatingType.NotSpecified"
+                      rrContentReset="twoPartFracProxAoRatType-block threePartFracProxAoRatType-block fourPartFracProxAoRatType-block"
+                      rrValidation="fractureHumerusAoRatingType"
+                    >
+                    </p-radioButton>
+                  </div>
+                </div>
+
+                <div class="c-col-1 c-pad-l f-start f-vertical">
+                  <h2
+                    *ngIf="model.fractureHumerusAoRatingType !== fractureProximalerAoRatingType.None && model.fractureHumerusAoRatingType !== fractureProximalerAoRatingType.NotSpecified"
+                    rr-id="sho_m_040501"
+                    class="m-b-15 m-t-2"
+                  >
+                    {{ 'shoulderMRT.bones.fractureType.value' | translate }}
+                  </h2>
+                  <div
+                    class="f-vertical col-h-100"
+                    [ngClass]="model.fractureHumerusAoRatingType !== fractureProximalerAoRatingType.None ? 'f-space-between' : 'f-end'"
+                  >
+                    <ng-container
+                      [ngSwitch]="model.fractureHumerusAoRatingType"
+                    >
+                      <div
+                        *ngSwitchCase="fractureProximalerAoRatingType.TwoPartFractureExtraarticular"
+                        id="twoPartFracProxAoRatType-block"
+                        class="f-start f-vertical o-radio-list"
+                      >
+                        <p-radioButton
+                          rr-id="sho_m_040502"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.greaterTubercleFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.GreaterTubercleFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_040503"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.lesserTubercleFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.LesserTubercleFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_040504"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.surgicalNeckFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.SurgicalNeckFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                      </div>
+
+                      <div
+                        *ngSwitchCase="fractureProximalerAoRatingType.ThreePartFractureExtraarticular"
+                        id="threePartFracProxAoRatType-block"
+                        class="f-start f-vertical o-radio-list"
+                      >
+                        <p-radioButton
+                          rr-id="sho_m_040505"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.withGreaterTubercleFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.WithGreaterTubercleFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_040506"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.withLesserTubercleFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.WithLesserTubercleFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_040507"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.otherBifocalFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.OtherBifocalFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                      </div>
+
+                      <div
+                        *ngSwitchCase="fractureProximalerAoRatingType.FourPartFractureExtraarticular"
+                        id="fourPartFracProxAoRatType-block"
+                        class="f-start f-vertical o-radio-list"
+                      >
+                        <p-radioButton
+                          rr-id="sho_m_040508"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.anatomicalNeckFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.AnatomicalNeckFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_040509"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.anatomicalNeckFractureWithGreaterTubercle.value' | translate }}"
+                          labelStyleClass="text-break"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.AnatomicalNeckFractureGreaterTubercleAvulsion"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_040510"
+                          [(ngModel)]="model.fractureHumerusAoEvaluationType"
+                          label="{{ 'shoulderMRT.bones.multiFragmentaryFracture.value' | translate }}"
+                          name="fractureHumerusAoEvaluationType"
+                          [value]="fractureProximalerAoEvaluationType.MultiFragmentaryFracture"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                      </div>
+
+                      <div
+                        *ngSwitchCase="fractureProximalerAoRatingType.NotSpecified"
+                        id="notSpecifiedFracProxAoRatType-block"
+                        class="f-start f-vertical o-radio-list m-t-2"
+                      >
+                        <p-radioButton
+                          rr-id="sho_m_0405237"
+                          [(ngModel)]="model.fractureNotSpecifiedType"
+                          label="{{ 'shoulderMRT.bones.remodelling.value' | translate }}"
+                          name="fractureNotSpecifiedType"
+                          [value]="fractureNotSpecifiedType.Remodelling"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                        <p-radioButton
+                          rr-id="sho_m_0405238"
+                          [(ngModel)]="model.fractureNotSpecifiedType"
+                          label="{{ 'shoulderMRT.bones.suspected.value' | translate }}"
+                          name="fractureNotSpecifiedType"
+                          [value]="fractureNotSpecifiedType.Suspected"
+                          rrUnClickRadio
+                        >
+                        </p-radioButton>
+                      </div>
+                      <div class="f-start f-vertical">
+                        <rr-reference-picture
+                          [(ngModel)]="model.referencePicture"
+                          [referenceId]="model.id"
+                          [fileUploadUrl]="fileUploadUrl"
+                          name="referencePicture"
+                          class="m-b-43"
+                        ></rr-reference-picture>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              *ngSwitchCase="fractureClassificationType.Neer"
+              id="neerFracHumClassType-block"
+              class="c-col-2 c-pad-l f-start f-vertical"
+            >
+              <div class="c-col-2 f-horizontal col-h-100">
+                <div
+                  class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list"
+                >
+                  <h2 rr-id="sho_m_0404400">
+                    {{ 'shoulderMRT.bones.neerClassificationHeader.value' |
+                    translate }}*
+                  </h2>
+                  <p-radioButton
+                    rr-id="sho_m_040406"
+                    [(ngModel)]="model.fractureHumerusNeerRatingType"
+                    label="{{ 'shoulderMRT.bones.neerI.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="fractureHumerusNeerRatingType"
+                    [value]="fractureProximalerNeerRatingType.NonDisplaced"
+                    rrContentReset="fractureDisplacedSurgicalNeck-block fractureTubercule-block fractureGlenuhumeralJointDislocation-block"
+                    rrValidation="fractureHumerusNeerRatingType"
+                    class="m-t-4"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_040407"
+                    [(ngModel)]="model.fractureHumerusNeerRatingType"
+                    label="{{ 'shoulderMRT.bones.neerII.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="fractureHumerusNeerRatingType"
+                    [value]="fractureProximalerNeerRatingType.DisplacedAnatomicalNeck"
+                    rrContentReset="fractureNonDisplaced-block fractureDisplacedSurgicalNeck-block fractureTubercule-block fractureGlenuhumeralJointDislocation-block"
+                    rrValidation="fractureHumerusNeerRatingType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_040408"
+                    [(ngModel)]="model.fractureHumerusNeerRatingType"
+                    label="{{ 'shoulderMRT.bones.neerIII.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="fractureHumerusNeerRatingType"
+                    [value]="fractureProximalerNeerRatingType.DisplacedSurgicalNeck"
+                    rrContentReset="fractureNonDisplaced-block fractureTubercule-block fractureGlenuhumeralJointDislocation-block"
+                    rrValidation="fractureHumerusNeerRatingType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_040409"
+                    [(ngModel)]="model.fractureHumerusNeerRatingType"
+                    label="{{ 'shoulderMRT.bones.neerIV.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="fractureHumerusNeerRatingType"
+                    [value]="fractureProximalerNeerRatingType.DisplacedGreaterTubercle"
+                    rrContentReset="fractureNonDisplaced-block fractureDisplacedSurgicalNeck-block fractureGlenuhumeralJointDislocation-block"
+                    rrValidation="fractureHumerusNeerRatingType"
+                    (onClick)="resetFractureTuberculeBlock()"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_040410"
+                    [(ngModel)]="model.fractureHumerusNeerRatingType"
+                    label="{{ 'shoulderMRT.bones.neerV.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="fractureHumerusNeerRatingType"
+                    [value]="fractureProximalerNeerRatingType.DisplacedLesserTubercle"
+                    rrContentReset="fractureNonDisplaced-block fractureDisplacedSurgicalNeck-block fractureGlenuhumeralJointDislocation-block"
+                    rrValidation="fractureHumerusNeerRatingType"
+                    (onClick)="resetFractureTuberculeBlock()"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_040411"
+                    [(ngModel)]="model.fractureHumerusNeerRatingType"
+                    label="{{ 'shoulderMRT.bones.neerVI.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="fractureHumerusNeerRatingType"
+                    [value]="fractureProximalerNeerRatingType.GlenuhumeralJointDislocation"
+                    rrContentReset="fractureNonDisplaced-block fractureDisplacedSurgicalNeck-block fractureTubercule-block"
+                    rrValidation="fractureHumerusNeerRatingType"
+                  >
+                  </p-radioButton>
+                </div>
+
+                <div
+                  class="c-col-1 c-pad-l f-vertical"
+                  [ngClass]="isOnlyReferencePictureIn5thColumn ? 'f-end' : 'f-space-between'"
+                >
+                  <ng-container
+                    [ngSwitch]="model.fractureHumerusNeerRatingType"
+                  >
+                    <div
+                      *ngSwitchCase="fractureProximalerNeerRatingType.NonDisplaced"
+                      class="f-start f-vertical o-list m-t-6"
+                      id="fractureNonDisplaced-block"
+                    >
+                      <h2 rr-id="sho_m_040511" class="m-b-18">
+                        {{ 'shoulderMRT.bones.fragments.value' | translate }}
+                      </h2>
+                      <div class="f-start f-vertical o-radio-list">
+                        <p-checkbox
+                          rr-id="sho_m_040512"
+                          [(ngModel)]="model.isFractureHumerusFragmentsHumeraHead"
+                          label="{{ 'shoulderMRT.bones.humeralHead.value' | translate }}"
+                          name="isFractureHumerusFragmentsHumeraHead"
+                          binary="true"
+                        >
+                        </p-checkbox>
+                        <p-checkbox
+                          rr-id="sho_m_040513"
+                          [(ngModel)]="model.isFractureHumerusFragmentsMajusTubercle"
+                          label="{{ 'shoulderMRT.bones.greaterTubercle.value' | translate }}"
+                          name="isFractureHumerusFragmentsMajusTubercle"
+                          binary="true"
+                        >
+                        </p-checkbox>
+                        <p-checkbox
+                          rr-id="sho_m_040514"
+                          [(ngModel)]="model.isFractureHumerusFragmentsTuberculumMinus"
+                          label="{{ 'shoulderMRT.bones.lesserTubercle.value' | translate }}"
+                          name="isFractureHumerusFragmentsTuberculumMinus"
+                          binary="true"
+                        >
+                        </p-checkbox>
+                        <p-checkbox
+                          rr-id="sho_m_040515"
+                          [(ngModel)]="model.isFractureHumerusFragmentsHumerumShaft"
+                          label="{{ 'shoulderMRT.bones.humerusShaft.value' | translate }}"
+                          name="isFractureHumerusFragmentsHumerumShaft"
+                          binary="true"
+                        >
+                        </p-checkbox>
+                      </div>
+                    </div>
+
+                    <div
+                      *ngSwitchCase="fractureProximalerNeerRatingType.DisplacedSurgicalNeck"
+                      class="f-start f-vertical o-radio-list"
+                      id="fractureDisplacedSurgicalNeck-block"
+                    >
+                      <p-radioButton
+                        rr-id="sho_m_040517"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.varusHeadDeformity.value' | translate }}"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.VarusHeadDeformity"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_040518"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.adLatus.value' | translate }}"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.Latus"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_040519"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.adAxim.value' | translate }}"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.Axim"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+
+                    <div
+                      *ngSwitchCase="model.fractureHumerusNeerRatingType === fractureProximalerNeerRatingType.DisplacedGreaterTubercle
+                || model.fractureHumerusNeerRatingType === fractureProximalerNeerRatingType.DisplacedLesserTubercle
+                ? model.fractureHumerusNeerRatingType : ''"
+                      class="f-start f-vertical o-radio-list"
+                      id="fractureTubercule-block"
+                    >
+                      <p-radioButton
+                        rr-id="sho_m_040520"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.2PartFracture.value' | translate }}"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.TwoPartFracture"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_040521"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.3PartFracture.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.ThreePartFracture"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_040522"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.4PartFracture.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.FourPartFracture"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+
+                    <div
+                      *ngSwitchCase="fractureProximalerNeerRatingType.GlenuhumeralJointDislocation"
+                      class="f-start f-vertical o-radio-list"
+                      id="fractureGlenuhumeralJointDislocation-block"
+                    >
+                      <p-radioButton
+                        rr-id="sho_m_040523"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.anteriorDislocation.value' | translate }}"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.Anterior"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_040524"
+                        [(ngModel)]="model.fractureHumerusNeerDetailsType"
+                        label="{{ 'shoulderMRT.bones.posteriorDislocation.value' | translate }}"
+                        name="fractureHumerusNeerDetailsType"
+                        [value]="fractureHumerusNeerDetailsType.Posterior"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+                  </ng-container>
+                  <div class="f-start f-vertical">
+                    <rr-reference-picture
+                      [(ngModel)]="model.referencePicture"
+                      [referenceId]="model.id"
+                      [fileUploadUrl]="fileUploadUrl"
+                      name="referencePicture"
+                      class="m-b-43"
+                    ></rr-reference-picture>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngSwitchDefault class="c-col-2 c-pad-l f-start f-vertical">
+              <div class="c-col-2 f-horizontal col-h-100">
+                <div class="c-col-1 c-sep c-pad-r"></div>
+                <div class="c-col-1 c-sep c-pad-l f-end f-vertical">
+                  <rr-reference-picture
+                    [(ngModel)]="model.referencePicture"
+                    [referenceId]="model.id"
+                    [fileUploadUrl]="fileUploadUrl"
+                    name="referencePicture"
+                    class="m-b-43"
+                  ></rr-reference-picture>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div
+          *ngSwitchCase="boneType.Clavicle"
+          id="clavicleBoneType-block"
+          class="c-col-3 f-horizontal col-h-100"
+        >
+          <div class="c-col-3 c-sep c-pad-r f-start f-vertical">
+            <h2 rr-id="sho_m_040306">
+              {{ 'shoulderMRT.bones.aoClassification15.value' | translate }}
+            </h2>
+            <div class="c-col-3 f-horizontal col-h-100 m-t-13">
+              <div
+                class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list"
+              >
+                <h2 class="m-b-15 m-t-3" rr-id="sho_m_040307">
+                  {{ 'shoulderMRT.bones.fractureClassification.value' |
+                  translate }}*
+                </h2>
+                <p-radioButton
+                  rr-id="sho_m_040308"
+                  [(ngModel)]="model.fractureClaviculaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.15AClavicle.value' | translate }}"
+                  name="fractureClaviculaEvaluationType"
+                  [value]="fractureClaviculaEvaluationType.SternalEndSegment"
+                  (onClick)="clearClaviculaEvaluationType()"
+                  rrValidation="fractureClaviculaEvaluationType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_040310"
+                  [(ngModel)]="model.fractureClaviculaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.15BClavicle.value' | translate }}"
+                  name="fractureClaviculaEvaluationType"
+                  [value]="fractureClaviculaEvaluationType.BodySegment"
+                  (onClick)="clearClaviculaEvaluationType()"
+                  rrValidation="fractureClaviculaEvaluationType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_040311"
+                  [(ngModel)]="model.fractureClaviculaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.15CClavicle.value' | translate }}"
+                  name="fractureClaviculaEvaluationType"
+                  [value]="fractureClaviculaEvaluationType.AcromialEndSegment"
+                  (onClick)="clearClaviculaEvaluationType()"
+                  rrValidation="fractureClaviculaEvaluationType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_040312"
+                  [(ngModel)]="model.fractureClaviculaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.notFurtherSpecified15.value' | translate }}"
+                  name="fractureClaviculaEvaluationType"
+                  [value]="fractureClaviculaEvaluationType.NotSpecified"
+                  (onClick)="clearClaviculaEvaluationType()"
+                  rrValidation="fractureClaviculaEvaluationType"
+                >
+                </p-radioButton>
+              </div>
+
+              <div class="c-col-1 c-pad c-sep">
+                <div
+                  class="f-start f-vertical o-list"
+                  *ngIf="model.fractureClaviculaEvaluationType !== fractureClaviculaEvaluationType.None"
+                >
+                  <h2 rr-id="sho_m_040413" class="m-t-3 m-b-15">
+                    {{ 'shoulderMRT.bones.fractureType.value' | translate }}
+                  </h2>
+                  <div
+                    class="f-start f-vertical o-radio-list m-b-30"
+                    [rrDisable]="model.fractureClaviculaEvaluationType !== fractureClaviculaEvaluationType.SternalEndSegment"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_040414"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.extraArticularFxEpiphyseal.value' | translate }}"
+                      labelStyleClass="text-break"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.ExtraarticularFxEpiphysealInjury"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040415"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.partialArticular.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.PartialArticular"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040416"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.articularFracture.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.ArticularFracture"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                  <div
+                    class="f-start f-vertical o-radio-list m-b-30"
+                    [rrDisable]="model.fractureClaviculaEvaluationType !== fractureClaviculaEvaluationType.BodySegment"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_040417"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.simpleFracture.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.SimpleFracture"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040418"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.wedgeFracture.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.WedgeFracture"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040419"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.multiFragmentaryFracture.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.MultiFragmentaryFracture"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                  <div
+                    class="f-start f-vertical o-radio-list m-b-30"
+                    [rrDisable]="model.fractureClaviculaEvaluationType !== fractureClaviculaEvaluationType.AcromialEndSegment"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_040420"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.extraArticular.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.ExtraArticular"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040421"
+                      [(ngModel)]="model.fractureClaviculaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.intraArticular.value' | translate }}"
+                      name="fractureClaviculaAoClassificationType"
+                      [value]="fractureClaviculaRatingType.IntraArticular"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                  <div
+                    class="f-start f-vertical o-radio-list"
+                    [rrDisable]="model.fractureClaviculaEvaluationType !== fractureClaviculaEvaluationType.NotSpecified"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_0404208"
+                      [(ngModel)]="model.fractureNotSpecifiedType"
+                      label="{{ 'shoulderMRT.bones.remodelling.value' | translate }}"
+                      name="fractureNotSpecifiedType"
+                      [value]="fractureNotSpecifiedType.Remodelling"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_0404209"
+                      [(ngModel)]="model.fractureNotSpecifiedType"
+                      label="{{ 'shoulderMRT.bones.suspected.value' | translate }}"
+                      name="fractureNotSpecifiedType"
+                      [value]="fractureNotSpecifiedType.Suspected"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-col-1 c-pad-l f-start f-vertical">
+                <rr-reference-picture
+                  [(ngModel)]="model.referencePicture"
+                  [referenceId]="model.id"
+                  [fileUploadUrl]="fileUploadUrl"
+                  name="referencePicture"
+                  class="m-t-1"
+                ></rr-reference-picture>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngSwitchCase="boneType.Scapula"
+          id="scapulaBoneType-block"
+          class="c-col-3 f-horizontal col-h-100"
+        >
+          <div class="c-col-3 c-sep c-pad-r f-start f-vertical">
+            <h2 rr-id="sho_m_040313">
+              {{ 'shoulderMRT.bones.aoClassification14.value' | translate }}
+            </h2>
+            <div class="c-col-3 f-horizontal col-h-100 m-t-13">
+              <div
+                class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list"
+              >
+                <h2 class="m-b-15" rr-id="sho_m_040314">
+                  {{ 'shoulderMRT.bones.fractureClassification.value' |
+                  translate }}*
+                </h2>
+                <p-radioButton
+                  rr-id="sho_m_040315"
+                  [(ngModel)]="model.fractureScapulaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.14AProcess.value' | translate }}"
+                  name="fractureScapulaEvaluationType"
+                  [value]="fractureScapulaEvaluationType.A14Process"
+                  (onClick)="clearScapulaEvaluationType()"
+                  rrValidation="fractureScapulaEvaluationType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_040316"
+                  [(ngModel)]="model.fractureScapulaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.14BBody.value' | translate }}"
+                  name="fractureScapulaEvaluationType"
+                  [value]="fractureScapulaEvaluationType.B14Body"
+                  (onClick)="clearScapulaEvaluationType()"
+                  rrValidation="fractureScapulaEvaluationType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_040317"
+                  [(ngModel)]="model.fractureScapulaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.14FGlenoidFossa.value' | translate }}"
+                  name="fractureScapulaEvaluationType"
+                  [value]="fractureScapulaEvaluationType.F14GlenoidFossa"
+                  (onClick)="clearScapulaEvaluationType()"
+                  rrValidation="fractureScapulaEvaluationType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_040318"
+                  [(ngModel)]="model.fractureScapulaEvaluationType"
+                  label="{{ 'shoulderMRT.bones.notFurtherSpecified14.value' | translate }}"
+                  name="fractureScapulaEvaluationType"
+                  [value]="fractureScapulaEvaluationType.NotSpecified"
+                  (onClick)="clearScapulaEvaluationType()"
+                  rrValidation="fractureScapulaEvaluationType"
+                >
+                </p-radioButton>
+              </div>
+
+              <div class="c-col-1 c-pad c-sep">
+                <div
+                  class="f-start f-vertical o-list"
+                  *ngIf="model.fractureScapulaEvaluationType !== fractureScapulaEvaluationType.None"
+                >
+                  <h2 rr-id="sho_m_040413" class="m-t-3 m-b-15">
+                    {{ 'shoulderMRT.bones.fractureType.value' | translate }}
+                  </h2>
+                  <div
+                    class="f-start f-vertical o-radio-list m-b-30"
+                    [rrDisable]="model.fractureScapulaEvaluationType !== fractureScapulaEvaluationType.A14Process"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_040422"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.coracoidProcess.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.CoracoidProcess"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040423"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.acriomion.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.A14Acromion"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040424"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.scapularSpine.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.A14ScapularSpine"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                  <div
+                    class="f-start f-vertical o-radio-list m-b-30"
+                    [rrDisable]="model.fractureScapulaEvaluationType !== fractureScapulaEvaluationType.B14Body"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_040425"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.2PartHorizontal.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.B14TwoPartHorizontal"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040426"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.2PartVertical.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.B14TwoPartVertical"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040427"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.multiFragmentaryFracture.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.B14MultiFragmentaryFracture"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                  <div
+                    class="f-start f-vertical o-radio-list m-b-30"
+                    [rrDisable]="model.fractureScapulaEvaluationType !== fractureScapulaEvaluationType.F14GlenoidFossa"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_040428"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.anteriorRim.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.F14AnteriorRim"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      rr-id="sho_m_040429"
+                      label="{{ 'shoulderMRT.bones.posteriorRim.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.F14PosteriorRim"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_040430"
+                      [(ngModel)]="model.fractureScapulaAoClassificationType"
+                      label="{{ 'shoulderMRT.bones.multiFragmentaryFracture.value' | translate }}"
+                      name="fractureScapulaAoClassificationType"
+                      [value]="fractureScapulaRatingType.F14MultiFragmentaryFracture"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                  <div
+                    class="f-start f-vertical o-radio-list"
+                    [rrDisable]="model.fractureScapulaEvaluationType !== fractureScapulaEvaluationType.NotSpecified"
+                  >
+                    <p-radioButton
+                      rr-id="sho_m_0404208"
+                      [(ngModel)]="model.fractureNotSpecifiedType"
+                      label="{{ 'shoulderMRT.bones.remodelling.value' | translate }}"
+                      name="fractureNotSpecifiedType"
+                      [value]="fractureNotSpecifiedType.Remodelling"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_0404209"
+                      [(ngModel)]="model.fractureNotSpecifiedType"
+                      label="{{ 'shoulderMRT.bones.suspected.value' | translate }}"
+                      name="fractureNotSpecifiedType"
+                      [value]="fractureNotSpecifiedType.Suspected"
+                      rrUnClickRadio
+                    >
+                    </p-radioButton>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-col-1 c-pad-l f-start f-vertical">
+                <rr-reference-picture
+                  [(ngModel)]="model.referencePicture"
+                  [referenceId]="model.id"
+                  [fileUploadUrl]="fileUploadUrl"
+                  name="referencePicture"
+                  class="m-t-1"
+                ></rr-reference-picture>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngSwitchCase="boneType.HumeralDiaphysis"
+          id="humeralDiaphysisBoneType-block"
+          class="c-col-3 f-start f-vertical col-h-100"
+        >
+          <h2 rr-id="sho_m_0403200">
+            {{ 'shoulderMRT.bones.aoClassification12.value' | translate }}
+          </h2>
+          <div class="c-col-3 f-horizontal col-h-100 m-t-13">
+            <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list">
+              <h2 class="m-b-15" rr-id="sho_m_040314">
+                {{ 'shoulderMRT.bones.fractureClassification.value' | translate
+                }}*
+              </h2>
+              <p-radioButton
+                rr-id="sho_m_0403201"
+                [(ngModel)]="model.aoClassificationAO12Type"
+                label="{{ 'shoulderMRT.bones.simpleFracture12A.value' | translate }}"
+                name="aoClassificationAO12Type"
+                [value]="aoClassificationAo12Type.ASimpleFracture"
+                (onClick)="clearAoClassificationAo12Type()"
+                rrValidation="aoClassificationAO12Type"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_0403202"
+                [(ngModel)]="model.aoClassificationAO12Type"
+                label="{{ 'shoulderMRT.bones.wedgeFracture12B.value' | translate }}"
+                name="aoClassificationAO12Type"
+                [value]="aoClassificationAo12Type.BWedgeFracture"
+                (onClick)="clearAoClassificationAo12Type()"
+                rrValidation="aoClassificationAO12Type"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_0403203"
+                [(ngModel)]="model.aoClassificationAO12Type"
+                label="{{ 'shoulderMRT.bones.multiFragmentaryFracture12C.value' | translate }}"
+                name="aoClassificationAO12Type"
+                [value]="aoClassificationAo12Type.CMultifragmentaryFracture"
+                (onClick)="clearAoClassificationAo12Type()"
+                rrValidation="aoClassificationAO12Type"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_0403204"
+                [(ngModel)]="model.aoClassificationAO12Type"
+                label="{{ 'shoulderMRT.bones.notSpecified12.value' | translate }}"
+                name="aoClassificationAO12Type"
+                [value]="aoClassificationAo12Type.NotSpecified"
+                (onClick)="clearAoClassificationAo12Type()"
+                rrValidation="aoClassificationAO12Type"
+              >
+              </p-radioButton>
+            </div>
+
+            <div class="c-col-1 c-sep c-pad">
+              <div
+                *ngIf="model.aoClassificationAO12Type !== aoClassificationAo12Type.None"
+                class="f-start f-vertical"
+              >
+                <div
+                  class="f-start f-vertical o-radio-list m-t-1 m-b-30"
+                  [rrDisable]="model.aoClassificationAO12Type !== aoClassificationAo12Type.ASimpleFracture"
+                >
+                  <p-radioButton
+                    rr-id="sho_m_0404201"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.spiralFracture12A1.value' | translate }}"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.A1SpiralFracture"
+                    rrContentReset="firstPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0404202"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.obliqueFracture12A2.value' | translate }}"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.A2ObliqueFracture"
+                    rrContentReset="firstPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0404203"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.transverseFracture12A3.value' | translate }}"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.A3TransverseFracture"
+                    rrContentReset="firstPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list m-b-30"
+                  [rrDisable]="model.aoClassificationAO12Type !== aoClassificationAo12Type.BWedgeFracture"
+                >
+                  <p-radioButton
+                    rr-id="sho_m_0404204"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.withIntactWedge12B2.value' | translate }}"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.B2WithIntactWedge"
+                    rrContentReset="firstPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0404205"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.withFragmentedWedge12B3.value' | translate }}"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.B3WithFragmentedWedge"
+                    rrContentReset="firstPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list m-b-25"
+                  [rrDisable]="model.aoClassificationAO12Type !== aoClassificationAo12Type.CMultifragmentaryFracture"
+                >
+                  <p-radioButton
+                    rr-id="sho_m_0404206"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.12C2IntermediateFragmentIntact.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.C2IntermediateFragmentIntact"
+                    rrContentReset="secondPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0404207"
+                    [(ngModel)]="model.aoClassificationFractureType"
+                    label="{{ 'shoulderMRT.bones.12C2IntermediateFragmentComminuted.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="aoClassificationFractureType"
+                    [value]="aoClassificationFractureType.C3IntermediateSegmentComminuted"
+                    rrContentReset="secondPartFracSpecType-block"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list"
+                  [rrDisable]="model.aoClassificationAO12Type !== aoClassificationAo12Type.NotSpecified"
+                >
+                  <p-radioButton
+                    rr-id="sho_m_0404208"
+                    [(ngModel)]="model.fractureNotSpecifiedType"
+                    label="{{ 'shoulderMRT.bones.remodelling.value' | translate }}"
+                    name="fractureNotSpecifiedType"
+                    [value]="fractureNotSpecifiedType.Remodelling"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0404209"
+                    [(ngModel)]="model.fractureNotSpecifiedType"
+                    label="{{ 'shoulderMRT.bones.suspected.value' | translate }}"
+                    name="fractureNotSpecifiedType"
+                    [value]="fractureNotSpecifiedType.Suspected"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="c-col-1 c-pad-l f-vertical"
+              [ngClass]="aoClassificationAO12TypeSpecified? 'f-space-between' : 'f-end'"
+            >
+              <div
+                *ngIf="aoClassificationAO12TypeSpecified"
+                class="f-start f-vertical"
+              >
+                <div
+                  class="f-start f-vertical o-radio-list m-t-3 m-b-31"
+                  id="firstPartFracSpecType-block"
+                  [rrDisable]="isFractureSpecificTypeFirstPartDisabled"
+                >
+                  <p-radioButton
+                    rr-id="sho_m_0405201"
+                    [(ngModel)]="model.fractureSpecificType"
+                    label="{{ 'shoulderMRT.bones.proximalThirdA.value' | translate }}"
+                    name="fractureSpecificType"
+                    [value]="fractureSpecificType.AProximalThird"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0405202"
+                    [(ngModel)]="model.fractureSpecificType"
+                    label="{{ 'shoulderMRT.bones.middleThirdB.value' | translate }}"
+                    name="fractureSpecificType"
+                    [value]="fractureSpecificType.BMiddleThird"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0405203"
+                    [(ngModel)]="model.fractureSpecificType"
+                    label="{{ 'shoulderMRT.bones.distalThirdC.value' | translate }}"
+                    name="fractureSpecificType"
+                    [value]="fractureSpecificType.CDistalThird"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list"
+                  id="secondPartFracSpecType-block"
+                  [rrDisable]="isFractureSpecificTypeSecondPartDisabled"
+                >
+                  <p-radioButton
+                    rr-id="sho_m_0405204"
+                    [(ngModel)]="model.fractureSpecificType"
+                    label="{{ 'shoulderMRT.bones.proximalI.value' | translate }}"
+                    name="fractureSpecificType"
+                    [value]="fractureSpecificType.IProximal"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0405205"
+                    [(ngModel)]="model.fractureSpecificType"
+                    label="{{ 'shoulderMRT.bones.diaphysealOnlyJ.value' | translate }}"
+                    name="fractureSpecificType"
+                    [value]="fractureSpecificType.JDiaphysealOnly"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0405206"
+                    [(ngModel)]="model.fractureSpecificType"
+                    label="{{ 'shoulderMRT.bones.distalDiaphysealMetaphysealK.value' | translate }}"
+                    name="fractureSpecificType"
+                    [value]="fractureSpecificType.KDistalDiaphysealmetaphyseal"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+
+              <rr-reference-picture
+                [(ngModel)]="model.referencePicture"
+                [referenceId]="model.id"
+                [fileUploadUrl]="fileUploadUrl"
+                name="referencePicture"
+                class="m-b-34"
+              ></rr-reference-picture>
+            </div>
+          </div>
+        </div>
+
+        <div *ngSwitchDefault class="c-col-3 f-horizontal col-h-100">
+          <div class="c-col-1 c-sep c-pad-r"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-pad-l"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

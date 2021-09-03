@@ -1,0 +1,177 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center" *ngIf="isLargeLocalizerOpened">
+    <rr-hips-large
+      name="hipLocationLarge"
+      [activeElements]="largeLocalizerActiveElements"
+      [(ngModel)]="findingHandler.currentItem.hipSpecificLocalizations"
+      (close)="closeLocalizer()"
+      [multipleChoiceMode]="isExpansionLocalizer"
+      [isSingleChoice]="!isExpansionLocalizer"
+      rrValidation="hipSpecificLocalizations"
+      #hipLocalizer
+      [elementUpdate]="hipLocalizer.announceSelection"
+      (announceSelection)="resetFemoralNeckDependentInStressFracture()"
+    >
+    </rr-hips-large>
+  </div>
+  <div class="c-main f-horizontal f-center" [hidden]="isLargeLocalizerOpened">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-list m-b-14">
+        <h1 class="m-b-16" rr-id="hip_m_040103">
+          {{ 'hipMRT.bones.finding.value' | translate }}*
+        </h1>
+        <div class="f-vertical o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="hip_m_040104"
+            name="areFindings"
+            [value]="areFindings.No"
+            label="{{ 'hipMRT.bones.noPathologicOsseousFindings.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040105"
+            name="areFindings"
+            [value]="areFindings.Yes"
+            label="{{ 'hipMRT.bones.finding.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setConfig]="findingDropdownConfig"
+        [setDescriptionTypes]="[findingType.MassOrOsteolysis]"
+        (findingTypeChange)="clearSlidersAndReferencePicture()"
+        (descriptionChanged)="clearSlidersAndReferencePicture()"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div
+      class="f-start f-vertical"
+      [ngClass]="{'c-pad-l': findingHandler.currentItem.findingType !== findingType.MassOrOsteolysis}"
+    >
+      <h1
+        *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        [ngClass]="findingHandler.currentItem.findingType === findingType.MassOrOsteolysis ? 'm-b-24 c-pad-l' : 'm-b-90'"
+        rr-id="hip_m_040201"
+      >
+        {{ 'hipMRT.bones.finding.value' | translate }} {{
+        findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+      </h1>
+
+      <div class="f-horizontal col-h-100">
+        <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+          <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+            <div class="c-col-1 c-pad-r c-sep f-horizontal"></div>
+            <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+            <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+            <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+          </div>
+
+          <rr-alignment
+            *ngSwitchCase="findingType.Alignment"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-alignment>
+          <rr-fracture-femoral-shaft
+            *ngSwitchCase="findingType.FractureFemoralShaftAndTrochanter"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-fracture-femoral-shaft>
+          <rr-fracture-femoral-neck
+            *ngSwitchCase="findingType.FractureFemoralNeck"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-fracture-femoral-neck>
+          <rr-fracture-femoral-head
+            *ngSwitchCase="findingType.FractureFemoralHead"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-fracture-femoral-head>
+          <rr-fracture-acetabulum
+            *ngSwitchCase="findingType.FractureAcetabulum"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-fracture-acetabulum>
+
+          <rr-fracture-pelvis
+            *ngSwitchCase="findingType.FracturePelvis"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-fracture-pelvis>
+          <rr-stress-fracture
+            *ngSwitchCase="findingType.StressFracture"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-stress-fracture>
+          <rr-subchondral-insufficiency-fracture
+            *ngSwitchCase="findingType.SubchondralInsufficiencyFracture"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+            [isContrastEnhanced]="isContrastEnhanced"
+          >
+          </rr-subchondral-insufficiency-fracture>
+          <rr-bone-marrow-edema
+            *ngSwitchCase="findingType.BoneMarrowEdema"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-bone-marrow-edema>
+          <rr-transient-bone-marrow-edema
+            *ngSwitchCase="findingType.TransientBoneMarrowEdema"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+          >
+          </rr-transient-bone-marrow-edema>
+
+          <rr-avascular-femoral-head-necrosis
+            *ngSwitchCase="findingType.AvascularFemoralHeadNecrosis"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-avascular-femoral-head-necrosis>
+          <rr-coxarthrosis
+            *ngSwitchCase="findingType.Coxarthrosis"
+            [model]="findingHandler.currentItem"
+            [isContrastEnhanced]="isContrastEnhanced"
+          >
+          </rr-coxarthrosis>
+          <rr-osteomyelitis
+            *ngSwitchCase="findingType.Osteomyelitis"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+            [isContrastEnhanced]="isContrastEnhanced"
+          >
+          </rr-osteomyelitis>
+          <rr-osteitis-pubis
+            *ngSwitchCase="findingType.OsteitisPubis"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-osteitis-pubis>
+          <rr-mass-osteolysis
+            *ngSwitchCase="findingType.MassOrOsteolysis"
+            [model]="findingHandler.currentItem"
+            (emitLocalizer)="openLocalizer($event)"
+            [isContrastEnhanced]="isContrastEnhanced"
+            class="col-h-100"
+          >
+          </rr-mass-osteolysis>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form>

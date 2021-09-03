@@ -1,0 +1,122 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-radio-list">
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="abd_m_040226" class="m-b-11 m-t-2">
+          {{ "abdomenMRT.liver.differentialDiagnosis.value" | translate }}
+        </h2>
+        <div
+          class="f-vertical o-radio-list m-b-11"
+          [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+        >
+          <h3 rr-id="abd_m_040227" class="m-b-4">
+            {{ "abdomenMRT.liver.differentialDiagnosisI.value" | translate }}*
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_040228"
+            [diagnosisNumber]="1"
+            [options]="focalLiverLesionDDOptions1"
+            [(ngModel)]="model.differentialDiagnosis1"
+            name="differentialDiagnosis1"
+            class="m-b-11"
+            [parentViewModel]="model"
+            group="true"
+            rrValidation="differentialDiagnosis1"
+            (selectionChanged)="resetDD1Dependent()"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            rr-id="abd_m_040229"
+            label="{{ 'abdomenMRT.liver.suspicionOf.value' | translate }}"
+            name="isSuspicionOf"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOf"
+            [rrDisable]="
+              model.differentialDiagnosis1 === differentialDiagnosis1.None
+            "
+          >
+          </p-checkbox>
+        </div>
+        <div
+          class="f-vertical o-radio-list m-b-11"
+          [rrDisable]="
+            model.differentialDiagnosis1 === differentialDiagnosis1.None &&
+            model.differentialDiagnosis === differentialDiagnosis.None
+          "
+        >
+          <h3 rr-id="abd_m_040230" class="m-b-4 m-t-5">
+            {{ "abdomenMRT.liver.differentialDiagnosisII.value" | translate }}
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_040231"
+            [diagnosisNumber]="2"
+            [options]="focalLiverLesionDDOptions2"
+            [(ngModel)]="model.differentialDiagnosis2"
+            name="differentialDiagnosis2"
+            [parentViewModel]="model"
+            group="true"
+            (selectionChanged)="resetDD2Dependent()"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            rr-id="abd_m_040232"
+            label="{{ 'abdomenMRT.liver.subordinate.value' | translate }}"
+            name="isSubordinate"
+            binary="true"
+            [(ngModel)]="model.isSubordinate"
+            [rrDisable]="
+              model.differentialDiagnosis2 === differentialDiagnosis2.None
+            "
+          >
+          </p-checkbox>
+        </div>
+
+        <div
+          class="f-vertical o-radio-list"
+          [rrDisable]="
+            model.differentialDiagnosis2 === differentialDiagnosis2.None
+          "
+        >
+          <h3 rr-id="abd_m_040233" class="m-b-4 m-t-6">
+            {{ "abdomenMRT.liver.differentialDiagnosisIII.value" | translate }}
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_040234"
+            [diagnosisNumber]="3"
+            [options]="focalLiverLesionDDOptions2"
+            [(ngModel)]="model.differentialDiagnosis3"
+            name="differentialDiagnosis3"
+            [parentViewModel]="model"
+            group="true"
+          >
+          </rr-differential-diagnosis-dropdown>
+        </div>
+        <p-checkbox
+          rr-id="abd_m_040235"
+          name="isMoreThanOneLesionOfTheSameEntity"
+          label="{{'abdomenMRT.liver.lesionOfTheSameEntity.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMoreThanOneLesionOfTheSameEntity"
+          class="m-t-21"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-radio-list">
+      <div [rrDisable]="!isOneLocalizerSectionOrAnyLobeCheckbox">
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+          class="m-t-7"
+        >
+        </rr-reference-picture>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-radio-list"></div>
+    <div
+      class="c-col-1 c-sep c-pad-l f-vertical m-t-9 m-b-12 o-radio-list"
+    ></div>
+  </div>
+</div>

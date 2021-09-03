@@ -1,0 +1,351 @@
+<div id="tabEntheitis" class="f-vertical f-start o-width-100">
+  <div class="multi-col-header o-radio-list p-l-25">
+    <p-radioButton
+      class="m-t-10"
+      name="entheitisType"
+      rr-id="spi_m_0502200"
+      label="{{ 'spineMRT.disc.florids.value' | translate }}"
+      [value]="entheitisTypesEnum.Floride"
+      [(ngModel)]="model.entheitisType"
+      rrUnClickRadio
+      rrContentReset="florideDataCOntainer chronicDataCOntainer"
+      (onClick)="clearAllImages()"
+    ></p-radioButton>
+    <p-radioButton
+      name="entheitisType"
+      rr-id="spi_m_050210"
+      label="{{ 'spineMRT.disc.chronic.value' | translate }}"
+      [value]="entheitisTypesEnum.Chronic"
+      [(ngModel)]="model.entheitisType"
+      rrUnClickRadio
+      rrContentReset="florideDataCOntainer chronicDataCOntainer"
+      (onClick)="clearAllImages()"
+    ></p-radioButton>
+  </div>
+  <div class="multi-col-content">
+    <div
+      id="florideDataCOntainer"
+      class="f-start f-horizontal col-h-100"
+      *ngIf="model.entheitisType === entheitisTypesEnum.Floride"
+    >
+      <div class="c-col-1 c-sep c-pad o-radio-list m-b-15">
+        <p-checkbox
+          class="m-l-45"
+          binary="true"
+          labelStyleClass="text-break ui-fat-label"
+          [(ngModel)]="model.isSpondylitisAnterior"
+          label="{{'spineMRT.disc.anteriorSpondylitisRomanusLesion.value'| translate}}"
+          rr-id="spi_m_050211"
+          rrContentReset="spondylitisAnteriorDataContainer"
+          name="isSpondylitisAnterior"
+          (onChange)="clearImage(model.isSpondylitisAnterior, imageFileTypeEnum.AnteriorImageFile)"
+        ></p-checkbox>
+        <div
+          id="spondylitisAnteriorDataContainer"
+          class="nested-content o-radio-list m-l-80"
+          [rrDisable]="!model.isSpondylitisAnterior"
+        >
+          <p-checkbox
+            binary="true"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.isAnteriorT1w"
+            label="{{'spineMRT.disc.t1wHypointense.value'| translate}}"
+            rr-id="spi_m_050212"
+            name="isAnteriorT1w"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isAnteriorSTIR"
+            label="{{'spineMRT.disc.STIRHyperintense.value'| translate}}"
+            rr-id="spi_m_050213"
+            name="isAnteriorSTIR"
+          ></p-checkbox>
+          <p-checkbox
+            class="m-b-40"
+            [rrDisable]="!isCMYes"
+            binary="true"
+            [(ngModel)]="model.isAnteriorContrastEnhancement"
+            label="{{'spineMRT.disc.CMEnhancement.value'| translate}}"
+            rr-id="spi_m_050214"
+            name="isAnteriorContrastEnhancement"
+          ></p-checkbox>
+
+          <rr-reference-picture
+            [(ngModel)]="model.anteriorReferencePicture"
+            [referenceId]="model.id"
+            [fileUploadUrl]="fileUploadUrl"
+            [elementsRrIds]="anteriorReferencePictureElementsRrIds"
+            [pictureFileType]="imageFileTypeEnum.AnteriorImageFile"
+            name="anteriorReferencePicture"
+            shortLabels="true"
+          ></rr-reference-picture>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list m-b-15">
+        <p-checkbox
+          class="m-l-45 m-b-35"
+          binary="true"
+          labelStyleClass="ui-fat-label"
+          [(ngModel)]="model.isSpondylitisPosterior"
+          label="{{'spineMRT.disc.posteriorSpondylitis.value'| translate}}"
+          rr-id="spi_m_050348"
+          rrContentReset="spondylitisPosteriorDataContainer"
+          name="isSpondylitisPosterior"
+          (onChange)="clearImage(model.isSpondylitisPosterior, imageFileTypeEnum.PosteriorImageFile)"
+        ></p-checkbox>
+        <div
+          id="spondylitisPosteriorDataContainer"
+          class="nested-content o-radio-list m-l-80"
+          [rrDisable]="!model.isSpondylitisPosterior"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isPosteriorT1w"
+            label="{{'spineMRT.disc.t1wHypointense.value'| translate}}"
+            rr-id="spi_m_050349"
+            name="isPosteriorT1w"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isPosteriorSTIR"
+            label="{{'spineMRT.disc.STIRHyperintense.value'| translate}}"
+            rr-id="spi_m_050350"
+            name="isPosteriorSTIR"
+          ></p-checkbox>
+          <p-checkbox
+            class="m-b-40"
+            [rrDisable]="!isCMYes"
+            binary="true"
+            [(ngModel)]="model.isPosteriorContrastEnhancement"
+            label="{{'spineMRT.disc.CMEnhancement.value'| translate}}"
+            rr-id="spi_m_050351"
+            name="isPosteriorContrastEnhancement"
+          ></p-checkbox>
+
+          <rr-reference-picture
+            [(ngModel)]="model.posteriorReferencePicture"
+            [referenceId]="model.id"
+            [fileUploadUrl]="fileUploadUrl"
+            name="posteriorReferencePicture"
+            [elementsRrIds]="posteriorReferencePictureElementsRrIds"
+            [pictureFileType]="imageFileTypeEnum.PosteriorImageFile"
+            shortLabels="true"
+          ></rr-reference-picture>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list m-b-15">
+        <p-checkbox
+          class="m-l-45"
+          binary="true"
+          labelStyleClass="text-break ui-fat-label"
+          [(ngModel)]="model.isSpondylitisMarginalis"
+          label="{{'spineMRT.disc.spondylitisMarginalisAnteriorPosterior.value'| translate}}"
+          rr-id="spi_m_050442"
+          rrContentReset="spondylitisMarginalisDatContainer"
+          name="isSpondylitisMarginalis"
+          (onChange)="clearImage(model.isSpondylitisMarginalis, imageFileTypeEnum.MarginalisImageFile)"
+        ></p-checkbox>
+        <div
+          id="spondylitisMarginalisDatContainer"
+          class="nested-content o-radio-list m-l-80"
+          [rrDisable]="!model.isSpondylitisMarginalis"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isMarginalisT1w"
+            label="{{'spineMRT.disc.t1wHypointense.value'| translate}}"
+            rr-id="spi_m_050443"
+            name="isMarginalisT1w"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isMarginalisSTIR"
+            label="{{'spineMRT.disc.STIRHyperintense.value'| translate}}"
+            rr-id="spi_m_050444"
+            name="isMarginalisSTIR"
+          ></p-checkbox>
+          <p-checkbox
+            class="m-b-40"
+            [rrDisable]="!isCMYes"
+            binary="true"
+            [(ngModel)]="model.isMarginalisContrastEnhancement"
+            label="{{'spineMRT.disc.CMEnhancement.value'| translate}}"
+            rr-id="spi_m_050445"
+            name="isMarginalisContrastEnhancement"
+          ></p-checkbox>
+
+          <rr-reference-picture
+            [(ngModel)]="model.marginalisReferencePicture"
+            [referenceId]="model.id"
+            [fileUploadUrl]="fileUploadUrl"
+            name="marginalisReferencePicture"
+            [elementsRrIds]="marginalisReferencePictureElementsRrIds"
+            [pictureFileType]="imageFileTypeEnum.MarginalisImageFile"
+            shortLabels="true"
+          ></rr-reference-picture>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l o-radio-list m-b-15">
+        <h2 rr-id="spi_m_0505202" class="m-l-10 m-b-40">
+          {{'spineMRT.disc.spondylitisAmount.value'| translate}}
+        </h2>
+
+        <p-radioButton
+          class="m-l-10"
+          rr-id="spi_m_050529"
+          label="{{'spineMRT.disc.lower3VBLocalizations.value' | translate}}"
+          name="spondylitisNumberType"
+          [value]="spondylitisNumberTypesEnum.SpondylitisNumberLessThan3"
+          [(ngModel)]="model.spondylitisNumberType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          class="m-l-10"
+          rr-id="spi_m_050530"
+          label="{{'spineMRT.disc.higherEqual3VBLocalizations.value' | translate}}"
+          name="spondylitisNumberType"
+          [value]="spondylitisNumberTypesEnum.SpondylitisNumberMoreOrEqual3"
+          [(ngModel)]="model.spondylitisNumberType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+    <div
+      id="chronicDataCOntainer"
+      class="f-start f-horizontal col-h-100"
+      *ngIf="model.entheitisType === entheitisTypesEnum.Chronic"
+    >
+      <div class="c-col-2 c-sep c-pad m-b-15">
+        <div class="o-radio-list m-l-45">
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isSclerosis"
+            label="{{'spineMRT.disc.sclerosisShinyCorners.value'| translate}}"
+            rr-id="spi_m_050220"
+            rrContentReset="sclerosisDataContainer"
+            name="isSclerosis"
+          ></p-checkbox>
+          <div
+            id="sclerosisDataContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isSclerosis"
+          >
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isT1wHyperintensity"
+              label="{{'spineMRT.disc.t1wHyperintense.value'| translate}}"
+              rr-id="spi_m_050221"
+              name="isT1wHyperintensity"
+            ></p-checkbox>
+            <p-checkbox
+              *ngIf="model.pathologyType !== pathologyTypesEnum.PsoriaticArthritis"
+              binary="true"
+              [(ngModel)]="model.isSTIRHypointense"
+              label="{{'spineMRT.disc.STIRHypointense.value'| translate}}"
+              rr-id="spi_m_0502500"
+              name="isSTIRHypointense"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            rrInfoIcon="spi_m_0502501"
+            binary="true"
+            [(ngModel)]="model.isSyndesmophyterose"
+            label="{{'spineMRT.disc.syndesmophyte.value'| translate}}"
+            rr-id="spi_m_050222"
+            name="isSyndesmophyterose"
+          ></p-checkbox>
+          <p-checkbox
+            *ngIf="model.pathologyType === pathologyTypesEnum.PsoriaticArthritis"
+            rrInfoIcon="spi_m_0502501"
+            binary="true"
+            [(ngModel)]="model.isParasyndesmophyte"
+            label="{{'spineMRT.disc.parasyndesmophyte.value'| translate}}"
+            rr-id="spi_m_050250"
+            name="isParasyndesmophyte"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isErosionOfAnteriorVertebraRomanusLesion"
+            label="{{'spineMRT.disc.erosionOfVentralVertebralBodiesRomanusLesion.value'| translate}}"
+            rr-id="spi_m_050223"
+            name="isErosionOfAnteriorVertebraRomanusLesion"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isVertebralBodySquaring"
+            label="{{'spineMRT.disc.increaseInVertebralHeight.value'| translate}}"
+            rr-id="spi_m_050224"
+            name="isVertebralBodySquaring"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isMultisegmAnkylosing"
+            label="{{'spineMRT.disc.multisegmentalAnkylosing.value'| translate}}"
+            rr-id="spi_m_050225"
+            name="isMultisegmAnkylosing"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isLigamentOssification"
+            label="{{'spineMRT.disc.bandOssification.value'| translate}}"
+            rr-id="spi_m_050226"
+            rrContentReset="bendOssificationDataContainer"
+            name="isLigamentOssification"
+          ></p-checkbox>
+          <div
+            id="bendOssificationDataContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isLigamentOssification"
+          >
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isAnteriorLongitudinalLigament"
+              label="{{'spineMRT.disc.anteriorLongitudinalLigament.value'| translate}}"
+              rr-id="spi_m_050227"
+              name="isAnteriorLongitudinalLigament"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isPosteriorLongitudinalLigament"
+              label="{{'spineMRT.disc.posteriorLongitudinalLigament.value'| translate}}"
+              rr-id="spi_m_050228"
+              name="isPosteriorLongitudinalLigament"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isLiggFlava"
+              label="{{'spineMRT.disc.liggFlava.value'| translate}}"
+              rr-id="spi_m_050229"
+              name="isLiggFlava"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isLiggInterspinosa"
+              label="{{'spineMRT.disc.liggInterspinalia.value'| translate}}"
+              rr-id="spi_m_050230"
+              name="isLiggInterspinosa"
+            ></p-checkbox>
+            <p-checkbox
+              binary="true"
+              [(ngModel)]="model.isLiggSupraspinosa"
+              label="{{'spineMRT.disc.ligSupraspinale.value'| translate}}"
+              rr-id="spi_m_050231"
+              name="isLiggSupraspinosa"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad m-b-15"></div>
+      <div class="c-col-1 c-sep c-pad-l m-b-15"></div>
+    </div>
+    <div
+      class="f-start f-horizontal col-h-100"
+      *ngIf="model.entheitisType === entheitisTypesEnum.None"
+    >
+      <div class="c-col-1 c-sep c-pad m-b-15"></div>
+      <div class="c-col-1 c-sep c-pad m-b-15"></div>
+      <div class="c-col-1 c-sep c-pad m-b-15"></div>
+      <div class="c-col-1 c-sep c-pad-l m-b-15"></div>
+    </div>
+  </div>
+</div>

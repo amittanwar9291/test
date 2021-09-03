@@ -1,0 +1,449 @@
+<div class="h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-29 m-b-13 o-list">
+      <h2 rr-id="pel_m_0602148" class="p-l-10 m-b-13">
+        {{'pelvisMRT.femaleGender.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="o-radio-list p-l-10">
+        <div
+          [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+          class="m-b-13"
+        >
+          <p rr-id="pel_m_0602149">
+            {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' |
+            translate}}
+            <span
+              *ngIf="model.descriptionType === descriptionTypeEnum.IDescribe"
+              >*</span
+            >
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0602150"
+            [diagnosisNumber]="1"
+            group="true"
+            [options]="w056DifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosis1"
+            [parentViewModel]="model"
+            name="differentialDiagnosis1"
+            (selectionChanged)="clearDifferentialDiagnosis1DependentFields()"
+            rrValidation="differentialDiagnosis1"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          class="m-b-13"
+          [rrDisable]="model.differentialDiagnosis === femaleGenderDiagnosisTypeEnum.None && model.differentialDiagnosis1 === femaleGenderDiagnosisTypeEnum.None"
+        >
+          <p rr-id="pel_m_0602151">
+            {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' |
+            translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0602152"
+            [diagnosisNumber]="2"
+            group="true"
+            [options]="w056DifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosis2"
+            [parentViewModel]="model"
+            name="differentialDiagnosis2"
+            (selectionChanged)="clearDifferentialDiagnosis2DependentFields()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          [rrDisable]="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.None"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.subordinate.value' | translate}}"
+            rr-id="pel_m_0602153"
+            binary="true"
+            name="isSubordinate"
+            [(ngModel)]="model.isSubordinate"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-29 m-b-13 o-list">
+      <div
+        *ngIf="model.differentialDiagnosis === femaleGenderDiagnosisTypeEnum.CervicalCarcinoma || model.differentialDiagnosis1 === femaleGenderDiagnosisTypeEnum.CervicalCarcinoma"
+        class="p-l-10"
+      >
+        <h2 rr-id="pel_m_0603173" class="m-b-13">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' | translate}}
+        </h2>
+        <div class="o-radio-list text-break">
+          <p rr-id="pel_m_0603174" class="m-b-6">
+            {{'pelvisMRT.femaleGender.fIGO.value' | translate}}*
+          </p>
+          <p-radioButton
+            rr-id="pel_m_0603175"
+            label="{{'pelvisMRT.femaleGender.stageILimitedToTheCervix.value' | translate}}"
+            name="figoStageType1"
+            [value]="figoStageTypeEnum.StageI"
+            [(ngModel)]="model.figoStageType1"
+            rrContentReset="figoStageII1 figoStageIII1 figoStageIV1"
+            rrValidation="figoStageType1"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0603176"
+            label="{{'pelvisMRT.femaleGender.stageIIExtensionBeyond.value' | translate}}"
+            name="figoStageType1"
+            labelStyleClass="text-break"
+            [value]="figoStageTypeEnum.StageII"
+            [(ngModel)]="model.figoStageType1"
+            rrContentReset="figoStageI1 figoStageIII1 figoStageIV1"
+            rrValidation="figoStageType1"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0603177"
+            label="{{'pelvisMRT.femaleGender.stageIIIInvasionOf.value' | translate}}"
+            name="figoStageType1"
+            labelStyleClass="text-break"
+            [value]="figoStageTypeEnum.StageIII"
+            [(ngModel)]="model.figoStageType1"
+            rrContentReset="figoStageI1 figoStageII1 figoStageIV1"
+            rrValidation="figoStageType1"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0603178"
+            label="{{'pelvisMRT.femaleGender.stageIVAdvancedTumor.value' | translate}}"
+            name="figoStageType1"
+            labelStyleClass="text-break"
+            [value]="figoStageTypeEnum.StageIV"
+            [(ngModel)]="model.figoStageType1"
+            rrContentReset="figoStageI1 figoStageII1 figoStageIII1"
+            rrValidation="figoStageType1"
+          >
+          </p-radioButton>
+          <div
+            class="nested-content o-radio-list text-break m-t-27"
+            id="figoStageI1"
+            *ngIf="model.figoStageType1 === figoStageTypeEnum.StageI"
+          >
+            <p rr-id="pel_m_0603465" class="m-b-3">
+              {{'pelvisMRT.femaleGender.detailsStageI.value' | translate}}*
+            </p>
+            <p-checkbox
+              label="{{'pelvisMRT.femaleGender.1BMacroinvasiveLesion.value' | translate}}"
+              rr-id="pel_m_0603179"
+              binary="true"
+              rrInfoIcon="pel_m_06_13"
+              name="is1BMacroinvasiveLesion1"
+              [(ngModel)]="model.is1BMacroinvasiveLesion1"
+              rrContentReset="macroinvasiveLesion01"
+              rrValidation="is1BMacroinvasiveLesion1"
+            >
+            </p-checkbox>
+            <div
+              class="nested-content o-radio-list"
+              id="macroinvasiveLesion01"
+              [rrDisable]="!model.is1BMacroinvasiveLesion1"
+            >
+              <p rr-id="pel_m_0603466" class="m-b-3">
+                {{'pelvisMRT.femaleGender.furtherInformation.value' |
+                translate}}*
+              </p>
+              <p-dropdown
+                styleClass="ui-brown-box o-width-100"
+                [options]="w057stageIDetailsOptions"
+                name="figoStageAdditionalDetailsType1"
+                rr-id="pel_m_0603467"
+                [scrollHeight]="'420px'"
+                placeholder="{{'shared.pleaseSelect' | translate}}"
+                rrDropdownClear
+                [(ngModel)]="model.figoStageAdditionalDetailsType1"
+                rrValidation="figoStageAdditionalDetailsType1"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div
+            class="nested-content o-radio-list m-t-27"
+            id="figoStageII1"
+            *ngIf="model.figoStageType1 === figoStageTypeEnum.StageII"
+          >
+            <p rr-id="pel_m_0603468" rrInfoIcon="pel_m_06_14" class="m-b-3">
+              {{'pelvisMRT.femaleGender.detailsStageII.value' | translate}}*
+            </p>
+            <p-dropdown
+              styleClass="ui-brown-box o-width-100"
+              [options]="w058stageIIDetailsOptions"
+              name="figoStageDetailsType1"
+              rr-id="pel_m_0603469"
+              [scrollHeight]="'420px'"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              rrDropdownClear
+              [(ngModel)]="model.figoStageDetailsType1"
+              rrValidation="figoStageDetailsType1"
+              (onChange)="clearFigoStageAdditionalDetailsType1Field()"
+            >
+            </p-dropdown>
+            <div
+              class="o-radio-list m-t-10"
+              *ngIf="model.figoStageDetailsType1 === figoStageDetailsTypeEnum.IIA"
+            >
+              <p rr-id="pel_m_0603466" class="m-b-3">
+                {{'pelvisMRT.femaleGender.furtherInformation.value' |
+                translate}}*
+              </p>
+              <p-dropdown
+                styleClass="ui-brown-box o-width-100"
+                [options]="w059stageIIFurtherInformationOptions"
+                name="figoStageAdditionalDetailsType1"
+                rr-id="pel_m_0603470"
+                [scrollHeight]="'420px'"
+                placeholder="{{'shared.pleaseSelect' | translate}}"
+                rrDropdownClear
+                [(ngModel)]="model.figoStageAdditionalDetailsType1"
+                rrValidation="figoStageAdditionalDetailsType1"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div
+            class="nested-content o-radio-list m-t-27"
+            id="figoStageIII1"
+            *ngIf="model.figoStageType1 === figoStageTypeEnum.StageIII"
+          >
+            <p rr-id="pel_m_0603471" rrInfoIcon="pel_m_06_15" class="m-b-3">
+              {{'pelvisMRT.femaleGender.detailsStageIII.value' | translate}}*
+            </p>
+            <p-dropdown
+              styleClass="ui-brown-box o-width-100"
+              [options]="w060stageIIIDetailsOptions"
+              name="figoStageDetailsType1"
+              rr-id="pel_m_0603472"
+              [scrollHeight]="'420px'"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              rrDropdownClear
+              [(ngModel)]="model.figoStageDetailsType1"
+              rrValidation="figoStageDetailsType1"
+            >
+            </p-dropdown>
+          </div>
+          <div
+            class="nested-content o-radio-list m-t-27"
+            id="figoStageIV1"
+            *ngIf="model.figoStageType1 === figoStageTypeEnum.StageIV"
+          >
+            <p
+              rr-id="pel_m_060362"
+              rrInfoIcon="pel_m_06_16"
+              infoIconPdfLandscape="true"
+              class="m-b-3"
+            >
+              {{'pelvisMRT.femaleGender.detailsStageIV.value' | translate}}*
+            </p>
+            <p-dropdown
+              styleClass="ui-brown-box o-width-100"
+              [options]="w061stageIVDetailsOptions"
+              name="figoStageDetailsType1"
+              rr-id="pel_m_060363"
+              [scrollHeight]="'420px'"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              rrDropdownClear
+              [(ngModel)]="model.figoStageDetailsType1"
+              rrValidation="figoStageDetailsType1"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-29 m-b-13 o-list">
+      <div
+        *ngIf="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.CervicalCarcinoma"
+        class="p-l-10"
+      >
+        <h2 rr-id="pel_m_0604161" class="m-b-13">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_0604162" class="m-b-6">
+            {{'pelvisMRT.femaleGender.fIGO.value' | translate}}*
+          </p>
+          <p-radioButton
+            rr-id="pel_m_0604163"
+            label="{{'pelvisMRT.femaleGender.stageILimitedToTheCervix.value' | translate}}"
+            name="figoStageType2"
+            [value]="figoStageTypeEnum.StageI"
+            [(ngModel)]="model.figoStageType2"
+            rrContentReset="figoStageII2 figoStageIII2 figoStageIV2"
+            rrValidation="figoStageType2"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0604164"
+            label="{{'pelvisMRT.femaleGender.stageIIExtensionBeyond.value' | translate}}"
+            name="figoStageType2"
+            labelStyleClass="text-break"
+            [value]="figoStageTypeEnum.StageII"
+            [(ngModel)]="model.figoStageType2"
+            rrContentReset="figoStageI2 figoStageIII2 figoStageIV2"
+            rrValidation="figoStageType2"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0604165"
+            label="{{'pelvisMRT.femaleGender.stageIIIInvasionOf.value' | translate}}"
+            name="figoStageType2"
+            labelStyleClass="text-break"
+            [value]="figoStageTypeEnum.StageIII"
+            [(ngModel)]="model.figoStageType2"
+            rrContentReset="figoStageI2 figoStageII2 figoStageIV2"
+            rrValidation="figoStageType2"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0604166"
+            label="{{'pelvisMRT.femaleGender.stageIVAdvancedTumor.value' | translate}}"
+            name="figoStageType2"
+            labelStyleClass="text-break"
+            [value]="figoStageTypeEnum.StageIV"
+            [(ngModel)]="model.figoStageType2"
+            rrContentReset="figoStageI2 figoStageII2 figoStageIII2"
+            rrValidation="figoStageType2"
+          >
+          </p-radioButton>
+          <div
+            class="nested-content o-radio-list text-break m-t-27"
+            id="figoStageI2"
+            *ngIf="model.figoStageType2 === figoStageTypeEnum.StageI"
+          >
+            <p rr-id="pel_m_0604466">
+              {{'pelvisMRT.femaleGender.detailsStageI.value' | translate}}*
+            </p>
+            <p-checkbox
+              label="{{'pelvisMRT.femaleGender.1BMacroinvasiveLesion.value' | translate}}"
+              rr-id="pel_m_0604167"
+              binary="true"
+              rrInfoIcon="pel_m_06_13"
+              name="is1BMacroinvasiveLesion2"
+              [(ngModel)]="model.is1BMacroinvasiveLesion2"
+              rrContentReset="macroinvasiveLesion02"
+              rrValidation="is1BMacroinvasiveLesion2"
+            >
+            </p-checkbox>
+            <div
+              class="nested-content o-radio-list"
+              id="macroinvasiveLesion02"
+              [rrDisable]="!model.is1BMacroinvasiveLesion2"
+            >
+              <p rr-id="pel_m_0604467" class="m-b-3">
+                {{'pelvisMRT.femaleGender.furtherInformation.value' |
+                translate}}*
+              </p>
+              <p-dropdown
+                styleClass="ui-brown-box o-width-100"
+                [options]="w057stageIDetailsOptions"
+                name="figoStageAdditionalDetailsType2"
+                rr-id="pel_m_0604468"
+                [scrollHeight]="'420px'"
+                placeholder="{{'shared.pleaseSelect' | translate}}"
+                rrDropdownClear
+                [(ngModel)]="model.figoStageAdditionalDetailsType2"
+                rrValidation="figoStageAdditionalDetailsType2"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div
+            class="nested-content o-radio-list m-t-27"
+            id="figoStageII2"
+            *ngIf="model.figoStageType2 === figoStageTypeEnum.StageII"
+          >
+            <p rr-id="pel_m_0604469" rrInfoIcon="pel_m_06_14" class="m-b-3">
+              {{'pelvisMRT.femaleGender.detailsStageII.value' | translate}}*
+            </p>
+            <p-dropdown
+              styleClass="ui-brown-box o-width-100"
+              [options]="w058stageIIDetailsOptions"
+              name="figoStageDetailsType2"
+              rr-id="pel_m_0604470"
+              [scrollHeight]="'420px'"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              rrDropdownClear
+              [(ngModel)]="model.figoStageDetailsType2"
+              rrValidation="figoStageDetailsType2"
+              (onChange)="clearFigoStageAdditionalDetailsType2Field()"
+            >
+            </p-dropdown>
+            <div
+              class="o-radio-list m-t-10"
+              *ngIf="model.figoStageDetailsType2 === figoStageDetailsTypeEnum.IIA"
+            >
+              <p rr-id="pel_m_0604467" class="m-b-3">
+                {{'pelvisMRT.femaleGender.furtherInformation.value' |
+                translate}}*
+              </p>
+              <p-dropdown
+                styleClass="ui-brown-box o-width-100"
+                [options]="w059stageIIFurtherInformationOptions"
+                name="figoStageAdditionalDetailsType2"
+                rr-id="pel_m_0604471"
+                [scrollHeight]="'420px'"
+                placeholder="{{'shared.pleaseSelect' | translate}}"
+                rrDropdownClear
+                [(ngModel)]="model.figoStageAdditionalDetailsType2"
+                rrValidation="figoStageAdditionalDetailsType2"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div
+            class="nested-content o-radio-list m-t-27"
+            id="figoStageIII2"
+            *ngIf="model.figoStageType2 === figoStageTypeEnum.StageIII"
+          >
+            <p rr-id="pel_m_0604472" rrInfoIcon="pel_m_06_15" class="m-b-3">
+              {{'pelvisMRT.femaleGender.detailsStageIII.value' | translate}}*
+            </p>
+            <p-dropdown
+              styleClass="ui-brown-box o-width-100"
+              [options]="w060stageIIIDetailsOptions"
+              name="figoStageDetailsType2"
+              rr-id="pel_m_0604473"
+              [scrollHeight]="'420px'"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              rrDropdownClear
+              [(ngModel)]="model.figoStageDetailsType2"
+              rrValidation="figoStageDetailsType2"
+            >
+            </p-dropdown>
+          </div>
+          <div
+            class="nested-content o-radio-list m-t-27"
+            id="figoStageIV2"
+            *ngIf="model.figoStageType2 === figoStageTypeEnum.StageIV"
+          >
+            <p
+              rr-id="pel_m_0604499"
+              rrInfoIcon="pel_m_06_16"
+              infoIconPdfLandscape="true"
+              class="m-b-3"
+            >
+              {{'pelvisMRT.femaleGender.detailsStageIV.value' | translate}}*
+            </p>
+            <p-dropdown
+              styleClass="ui-brown-box o-width-100"
+              [options]="w061stageIVDetailsOptions"
+              name="figoStageDetailsType2"
+              rr-id="pel_m_0604500"
+              [scrollHeight]="'420px'"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              rrDropdownClear
+              [(ngModel)]="model.figoStageDetailsType2"
+              rrValidation="figoStageDetailsType2"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-29 m-b-13 o-list"></div>
+  </div>
+</div>

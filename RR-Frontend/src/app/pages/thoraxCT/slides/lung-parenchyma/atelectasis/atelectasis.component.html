@@ -1,0 +1,207 @@
+<div class="f-horizontal f-start main">
+  <div
+    *ngIf="model.lungSectionType !== lungSectionTypeEnum.SegmentAtelectasis"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  >
+    <h2 rr-id="tho_c_050273">
+      {{'thoraxCT.lungParenchyma.lungSection.value' | translate}}*
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_050274"
+      label="{{'thoraxCT.lungParenchyma.totalatelectasis.value' | translate}}"
+      name="lungSectionType"
+      [value]="lungSectionTypeEnum.TotalAtelectasis"
+      (onClick)="clearFlapsLocalizer(); clearSegmentalLocalizer()"
+      rrContentReset="segmentAtelectasisDetailsContainer"
+      [(ngModel)]="model.lungSectionType"
+      rrValidation="lungSectionType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_050277"
+      label="{{'thoraxCT.lungParenchyma.flapAtelectasis.value' | translate}}"
+      name="lungSectionType"
+      [value]="lungSectionTypeEnum.LobeAtelectasis"
+      (onClick)="clearSegmentalLocalizer()"
+      rrContentReset="sideTypeContainer segmentAtelectasisDetailsContainer"
+      [(ngModel)]="model.lungSectionType"
+      rrValidation="lungSectionType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_050279"
+      label="{{'thoraxCT.lungParenchyma.segmentatelectasis.value' | translate}}"
+      name="lungSectionType"
+      [value]="lungSectionTypeEnum.SegmentAtelectasis"
+      rrContentReset="sideTypeContainer"
+      (onClick)="clearFlapsLocalizer()"
+      [(ngModel)]="model.lungSectionType"
+      rrValidation="lungSectionType"
+    ></p-radioButton>
+    <div
+      id="sideTypeContainer"
+      *ngIf="model.lungSectionType === lungSectionTypeEnum.TotalAtelectasis"
+      class="o-radio-list nested-content"
+    >
+      <h2 rr-id="tho_c_0502304" class="m-t-20">
+        {{'thoraxCT.lungParenchyma.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_0502305"
+        label="{{'thoraxCT.lungParenchyma.right.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0502306"
+        label="{{'thoraxCT.lungParenchyma.left.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+    <div
+      class="nested-content"
+      *ngIf="model.lungSectionType === lungSectionTypeEnum.LobeAtelectasis"
+    >
+      <h2
+        rr-id="tho_c_0503219"
+        class="m-t-20 m-b-10"
+        rrValidation="mainCharacteristicsLungsFlapsLocation"
+      >
+        {{'thoraxCT.lungParenchyma.localizationAtLobeLevel.value' | translate}}*
+      </h2>
+      <rr-lungs-flaps-simple
+        rrValidation="mainCharacteristicsLungsFlapsLocation"
+        isLocalizer="true"
+        rr-id="tho_c_0502302"
+        class="scale-flaps-localizer"
+        name="mainCharacteristicsLungsFlapsLocation"
+        (click)="openLargeLocalizer('flaps', 'mainCharacteristicsLungsFlapsLocation')"
+        [(ngModel)]="model.mainCharacteristicsLungsFlapsLocation"
+      ></rr-lungs-flaps-simple>
+    </div>
+  </div>
+  <div
+    *ngIf="model.lungSectionType !== lungSectionTypeEnum.SegmentAtelectasis"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  ></div>
+
+  <div
+    *ngIf="model.lungSectionType === lungSectionTypeEnum.SegmentAtelectasis"
+    class="f-vertical c-sep"
+  >
+    <div class="o-radio-list c-pad multi-col-header">
+      <h2 rr-id="tho_c_050273">
+        {{'thoraxCT.lungParenchyma.lungSection.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_050274"
+        label="{{'thoraxCT.lungParenchyma.totalatelectasis.value' | translate}}"
+        name="lungSectionType"
+        [value]="lungSectionTypeEnum.TotalAtelectasis"
+        (onClick)="clearFlapsLocalizer(); clearSegmentalLocalizer()"
+        rrContentReset="segmentAtelectasisDetailsContainer"
+        [(ngModel)]="model.lungSectionType"
+        rrValidation="lungSectionType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_050277"
+        label="{{'thoraxCT.lungParenchyma.flapAtelectasis.value' | translate}}"
+        name="lungSectionType"
+        [value]="lungSectionTypeEnum.LobeAtelectasis"
+        (onClick)="clearSegmentalLocalizer()"
+        rrContentReset="sideTypeContainer segmentAtelectasisDetailsContainer"
+        [(ngModel)]="model.lungSectionType"
+        rrValidation="lungSectionType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_050279"
+        label="{{'thoraxCT.lungParenchyma.segmentatelectasis.value' | translate}}"
+        name="lungSectionType"
+        [value]="lungSectionTypeEnum.SegmentAtelectasis"
+        rrContentReset="sideTypeContainer"
+        (onClick)="clearFlapsLocalizer()"
+        [(ngModel)]="model.lungSectionType"
+        rrValidation="lungSectionType"
+      ></p-radioButton>
+    </div>
+    <div class="f-horizontal multi-col-content">
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <div class="nested-content">
+          <h2
+            rr-id="tho_c_0503226"
+            class="text-break m-b-10"
+            rrValidation="mainCharacteristicsLungsSegmentsLocation"
+          >
+            {{'thoraxCT.lungParenchyma.localizationOnSegmentLevel.value' |
+            translate}}*
+          </h2>
+          <rr-lungs-segments-simple
+            rrValidation="mainCharacteristicsLungsSegmentsLocation"
+            isLocalizer="true"
+            rr-id="tho_c_050214"
+            class="scale-segments-localizer"
+            name="mainCharacteristicsLungsSegmentsLocation"
+            (click)="openLargeLocalizer('segments', 'mainCharacteristicsLungsSegmentsLocation')"
+            [(ngModel)]="model.mainCharacteristicsLungsSegmentsLocation"
+          ></rr-lungs-segments-simple>
+        </div>
+      </div>
+      <div id="segmentAtelectasisDetailsContainer" class="c-col-1 c-sep c-pad">
+        <div class="nested-content o-radio-list">
+          <h2 rr-id="tho_c_0504218" class="text-break">
+            {{'thoraxCT.lungParenchyma.expansion.value' | translate}}*
+          </h2>
+          <p-radioButton
+            rr-id="tho_c_0504219"
+            label="{{'thoraxCT.lungParenchyma.segmental.value' | translate}}"
+            name="peculiaritySegmentatelectasisType"
+            [value]="peculiaritySegmentatelectasisTypeEnum.Segmental"
+            [(ngModel)]="model.peculiaritySegmentatelectasisType"
+            rrValidation="peculiaritySegmentatelectasisType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0504220"
+            label="{{'thoraxCT.lungParenchyma.subsegmental.value' | translate}}"
+            name="peculiaritySegmentatelectasisType"
+            [value]="peculiaritySegmentatelectasisTypeEnum.Subsegmenta"
+            [(ngModel)]="model.peculiaritySegmentatelectasisType"
+            rrValidation="peculiaritySegmentatelectasisType"
+          ></p-radioButton>
+
+          <h2 rr-id="tho_c_0504221" class="text-break m-t-25">
+            {{'thoraxCT.lungParenchyma.shape.value' | translate}}*
+          </h2>
+          <p-radioButton
+            rr-id="tho_c_0504222"
+            label="{{'thoraxCT.lungParenchyma.plateAtelectasis.value' | translate}}"
+            name="formType"
+            [value]="lungParenchymaFormTypeEnum.Plateatelectasis"
+            [(ngModel)]="model.formType"
+            rrValidation="formType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0504223"
+            label="{{'thoraxCT.lungParenchyma.roundAtelectasis.value' | translate}}"
+            name="formType"
+            [value]="lungParenchymaFormTypeEnum.RoundAtelectasis"
+            [(ngModel)]="model.formType"
+            rrValidation="formType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0504224"
+            label="{{'thoraxCT.lungParenchyma.dystelectasis.value' | translate}}"
+            name="formType"
+            [value]="lungParenchymaFormTypeEnum.Dystelectasis"
+            [(ngModel)]="model.formType"
+            rrValidation="formType"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list"></div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list"></div>
+</div>

@@ -1,0 +1,225 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep f-start f-vertical">
+    <h2 rr-id="pel_m_100202" class="m-b-30 m-t-5" rrValidation="hipLocalizer">
+      {{ 'pelvisMRT.bones.localization.value' | translate }}*
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+      rrValidation="hipLocalizer"
+      isLocalizer="true"
+    ></rr-hips-small>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start f-vertical">
+    <h2 rr-id="pel_m_100306" class="m-b-30 m-t-5">
+      {{ 'pelvisMRT.bones.localizationLongitudinal.value' | translate }}
+    </h2>
+    <div class="f-start f-vertical o-radio-list">
+      <p-radioButton
+        rr-id="pel_m_100307"
+        [(ngModel)]="model.ffsLocalizationType"
+        label="{{ 'pelvisMRT.bones.aProximalThird.value' | translate }}"
+        [value]="ffsLocalizationType.AProximalThird"
+        name="ffsLocalizationType"
+        rrValidation="ffsLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_100308"
+        [(ngModel)]="model.ffsLocalizationType"
+        label="{{ 'pelvisMRT.bones.bMiddleThird.value' | translate }}"
+        [value]="ffsLocalizationType.BMiddleThird"
+        name="ffsLocalizationType"
+        rrValidation="ffsLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_100309"
+        [(ngModel)]="model.ffsLocalizationType"
+        label="{{ 'pelvisMRT.bones.cDistalThird.value' | translate }}"
+        [value]="ffsLocalizationType.CDistalThird"
+        name="ffsLocalizationType"
+        rrValidation="ffsLocalizationType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div class="f-vertical">
+    <h2 rr-id="pel_m_100401" class="m-b-30 m-t-5 p-l-15">
+      {{ 'pelvisMRT.bones.fractureType.value' | translate }}
+    </h2>
+    <div class="f-horizontal h-100">
+      <div class="c-col-1 c-pad c-sep f-start f-vertical">
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_100415"
+            [(ngModel)]="model.ffsFractureFormType"
+            label="{{ 'pelvisMRT.bones.32ASimpleFracture.value' | translate }}"
+            [value]="ffsFractureFormType.SimpleFracture"
+            name="ffsFractureFormType"
+            rrUnClickRadio
+            rrContentReset="simpleFractureType wedgeFractureType multiFragmentaryFractureType fsfNotFurtherSpecifiedType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100416"
+            [(ngModel)]="model.ffsFractureFormType"
+            label="{{ 'pelvisMRT.bones.32BWedgeFracture.value' | translate }}"
+            [value]="ffsFractureFormType.WedgeFracture"
+            name="ffsFractureFormType"
+            rrUnClickRadio
+            rrContentReset="simpleFractureType wedgeFractureType multiFragmentaryFractureType fsfNotFurtherSpecifiedType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100417"
+            [(ngModel)]="model.ffsFractureFormType"
+            label="{{ 'pelvisMRT.bones.32CMultifragmentaryFracture.value' | translate }}"
+            [value]="ffsFractureFormType.MultiFragmentaryFracture"
+            name="ffsFractureFormType"
+            rrUnClickRadio
+            rrContentReset="simpleFractureType wedgeFractureType multiFragmentaryFractureType fsfNotFurtherSpecifiedType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100418"
+            [(ngModel)]="model.ffsFractureFormType"
+            label="{{ 'pelvisMRT.bones.femoralShaftFractureNot.value' | translate }}"
+            [value]="ffsFractureFormType.FemoralShaftFractureNotSpecified"
+            class="l-h-23"
+            name="ffsFractureFormType"
+            rrUnClickRadio
+            rrContentReset="simpleFractureType wedgeFractureType multiFragmentaryFractureType fsfNotFurtherSpecifiedType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep f-start f-vertical">
+        <div
+          id="simpleFractureType"
+          class="f-start f-vertical o-radio-list"
+          *ngIf="model.ffsFractureFormType === ffsFractureFormType.SimpleFracture"
+        >
+          <p-radioButton
+            rr-id="pel_m_100526"
+            [(ngModel)]="model.simpleFractureType"
+            label="{{ 'pelvisMRT.bones.32A1SpiralFracture.value' | translate }}"
+            [value]="simpleFractureType.SpiralFracture"
+            name="simpleFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100527"
+            [(ngModel)]="model.simpleFractureType"
+            label="{{ 'pelvisMRT.bones.32A2ObliqueFracture.value' | translate }}"
+            [value]="simpleFractureType.ObliqueFracture"
+            name="simpleFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100528"
+            [(ngModel)]="model.simpleFractureType"
+            label="{{ 'pelvisMRT.bones.32A3TransverseFracture.value' | translate }}"
+            class="non-break-label"
+            [value]="simpleFractureType.TransverseFracture"
+            name="simpleFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div
+          id="wedgeFractureType"
+          class="f-start f-vertical o-radio-list"
+          *ngIf="model.ffsFractureFormType === ffsFractureFormType.WedgeFracture"
+        >
+          <p-radioButton
+            rr-id="pel_m_100529"
+            [(ngModel)]="model.wedgeFractureType"
+            label="{{ 'pelvisMRT.bones.32B2WithIntactWedge.value' | translate }}"
+            [value]="wedgeFractureType.WithIntactWedge"
+            name="wedgeFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100530"
+            [(ngModel)]="model.wedgeFractureType"
+            label="{{ 'pelvisMRT.bones.32B3WithFragmentedWedge.value' | translate }}"
+            class="non-break-label"
+            [value]="wedgeFractureType.WithFragmentedWedge"
+            name="wedgeFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div
+          id="multiFragmentaryFractureType"
+          class="f-start f-vertical o-radio-list"
+          *ngIf="model.ffsFractureFormType === ffsFractureFormType.MultiFragmentaryFracture"
+        >
+          <p-radioButton
+            rr-id="pel_m_100531"
+            [(ngModel)]="model.multiFragmentaryFractureType"
+            label="{{ 'pelvisMRT.bones.32C2WithIntactIntermediate.value' | translate }}"
+            [value]="multiFragmentaryFractureType.IntactIntermediate"
+            class="l-h-23"
+            name="multiFragmentaryFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100532"
+            [(ngModel)]="model.multiFragmentaryFractureType"
+            label="{{ 'pelvisMRT.bones.32C3WithFragmentedIntermediate.value' | translate }}"
+            [value]="multiFragmentaryFractureType.FragmentedIntermediate"
+            class="l-h-23"
+            name="multiFragmentaryFractureType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <div
+          id="fsfNotFurtherSpecifiedType"
+          class="f-start f-vertical o-radio-list"
+          *ngIf="model.ffsFractureFormType === ffsFractureFormType.FemoralShaftFractureNotSpecified"
+        >
+          <h2 rr-id="pel_m_100533">
+            {{'pelvisMRT.bones.details.value' | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="pel_m_100534"
+            [(ngModel)]="model.fsfNotFurtherSpecifiedType"
+            label="{{ 'pelvisMRT.bones.suspicionOf.value' | translate }}"
+            [value]="fsfNotFurtherSpecifiedType.SuspicionOf"
+            name="fsfNotFurtherSpecifiedType"
+            rrUnClickRadio
+            rrContentReset="olderNotConsolidatedGroup"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100535"
+            [(ngModel)]="model.fsfNotFurtherSpecifiedType"
+            label="{{ 'pelvisMRT.bones.fractureOlderSigns.value' | translate }}"
+            [value]="fsfNotFurtherSpecifiedType.FractureOlderConsolidated"
+            name="fsfNotFurtherSpecifiedType"
+            rrContentReset="olderNotConsolidatedGroup"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_100536"
+            [(ngModel)]="model.fsfNotFurtherSpecifiedType"
+            label="{{ 'pelvisMRT.bones.fractureOlderNotConsolidated.value' | translate }}"
+            [value]="fsfNotFurtherSpecifiedType.FractureOlderNotConsolidated"
+            name="fsfNotFurtherSpecifiedType"
+            rrContentReset="olderNotConsolidatedGroup"
+            rrUnClickRadio
+          ></p-radioButton>
+          <div
+            class="m-l-35"
+            id="olderNotConsolidatedGroup"
+            [rrDisable]="model.fsfNotFurtherSpecifiedType !== fsfNotFurtherSpecifiedType.FractureOlderNotConsolidated"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.bones.pseudarthrosis.value' | translate}}"
+              rr-id="pel_m_100537"
+              binary="true"
+              name="isPseudarthrosis"
+              [(ngModel)]="model.isPseudarthrosis"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

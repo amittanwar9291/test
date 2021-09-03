@@ -1,0 +1,101 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_m_090103">
+        {{'headMRT.cerebrospinalFluid.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_m_090104"
+          label="{{'headMRT.cerebrospinalFluid.mediuminterhemisphericSlitregularWidthOf.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.MediumInterhemisphericSlit"
+          rrValidation="areFindings"
+          notInFinding="true"
+          class="text-break"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_090113"
+          label="{{'headMRT.cerebrospinalFluid.noDetails.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NoDetails"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_090105"
+          label="{{'headMRT.cerebrospinalFluid.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.True"
+          rrValidation="areFindings"
+          notInFinding="true"
+          rrContentReset="noFindings-block"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+          [setDescriptionTypes]="[cerebrospinalFluidSpaceFindingTypeEnum.Mass]"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div [ngClass]="!isFindingWithTabs() ? 'no-tab-header' : 'm-b-24'">
+        <div
+          *ngIf="!isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.None)"
+          class="c-col-4 c-pad-l f-vertical"
+        >
+          <h1 rr-id="hea_m_090201">
+            {{'headMRT.cerebrospinalFluid.finding.value' | translate }}
+            {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+          </h1>
+        </div>
+      </div>
+
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.None)"
+          class="f-horizontal main-container col-h-100"
+        >
+          <div
+            *ngFor="let empty of [].constructor(3)"
+            class="c-col-1 c-sep c-pad"
+          ></div>
+          <div class="c-col-1 c-pad-l"></div>
+        </div>
+        <rr-norm-variant-ventricle
+          *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.NormVariantVentricle)"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-norm-variant-ventricle>
+        <rr-ventricle-configuration
+          *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.VentricleConfiguration)"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-ventricle-configuration>
+        <rr-mass
+          *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.Mass)"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-mass>
+        <rr-subarachnoid-hemorrhage
+          *ngIf="isFindingType(cerebrospinalFluidSpaceFindingTypeEnum.SubarachnoidHemorrhage)"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-subarachnoid-hemorrhage>
+      </div>
+    </div>
+  </div>
+</form>

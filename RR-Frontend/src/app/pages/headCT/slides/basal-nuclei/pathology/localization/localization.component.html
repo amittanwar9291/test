@@ -1,0 +1,92 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad f-vertical f-start m-t-13 m-b-10">
+    <div
+      class="f-vertical o-radio-list p-l-10 p-r-10"
+      [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+    >
+      <h2 rr-id="hea_c_070203">
+        {{ "headCT.basalNuclei.differentialDiagnosis1.value" | translate}}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="hea_c_070204"
+        name="differentialDiagnosisLocalizationType"
+        group="true"
+        [diagnosisNumber]="1"
+        [parentViewModel]="model"
+        [options]="differentialDiagnosisOptions"
+        [(ngModel)]="model.differentialDiagnosisLocalizationType"
+        (selectionChanged)="resetDifferentialDiagnosis()"
+        rrValidation="differentialDiagnosisLocalizationType"
+        isActiveOnIKnow="true"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.differentialDiagnosisLocalizationType === differentialDiagnosisType.None"
+        rr-id="hea_c_070243"
+        label="{{'headCT.basalNuclei.histologyKnown.value' | translate}}"
+        name="isHistologyKnown"
+        [(ngModel)]="model.isHistologyKnown"
+        rrContentReset="isHistologyKnownBlock"
+        binary="true"
+        class="m-t-10 m-b-10"
+      ></p-checkbox>
+      <div
+        id="isHistologyKnownBlock"
+        [rrDisable]="!model.isHistologyKnown"
+        class="nested-content o-radio-list"
+      >
+        <p-radioButton
+          label="{{'headCT.basalNuclei.benign.value' | translate}}"
+          [value]="knownHistologyType.Benign"
+          name="histologyKnownType"
+          rr-id="hea_c_070244"
+          [(ngModel)]="model.histologyKnownType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          label="{{'headCT.basalNuclei.malignant.value' | translate}}"
+          [value]="knownHistologyType.Malignant"
+          name="histologyKnownType"
+          rr-id="hea_c_070245"
+          [(ngModel)]="model.histologyKnownType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad f-vertical f-start m-t-13 m-b-15 o-radio-list"
+  >
+    <h2 rr-id="hea_c_070329">
+      {{ "headCT.basalNuclei.localizationBasalGanglia.value" | translate}}
+    </h2>
+    <rr-basal-ganglia-locations-simple
+      rr-id="hea_c_070329"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.basalGangliaLocations"
+      name="basalGangliaLocations"
+      isLocalizer="true"
+    >
+    </rr-basal-ganglia-locations-simple>
+    <p rr-id="hea_c_070331">
+      {{ "headCT.basalNuclei.distribution.value" | translate}}
+    </p>
+    <p-radioButton
+      label="{{'headCT.basalNuclei.symmetrical.value' | translate}}"
+      name="distributionType"
+      [value]="distributionType.Symmetrical"
+      [(ngModel)]="model.distributionType"
+      rr-id="hea_c_070332"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      label="{{'headCT.basalNuclei.asymmetric.value' | translate}}"
+      [value]="distributionType.Asymmetric"
+      name="distributionType"
+      [(ngModel)]="model.distributionType"
+      rr-id="hea_c_070333"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start m-t-13 m-b-15"></div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start m-t-13 m-b-15"></div>
+</div>

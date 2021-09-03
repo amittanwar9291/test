@@ -1,0 +1,262 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_040103" class="m-b-75">
+        {{'mammaMX.mammographyParenchymaAnatomy.volume.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_040104"
+        rrUnClickRadio
+        name="volumeType"
+        [value]="volumeType.Isomastia"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.isomastia.value' | translate}}"
+        [(ngModel)]="model.volumeType"
+        (onClick)="resetVolumeLocalization()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_040105"
+        rrUnClickRadio
+        name="volumeType"
+        [value]="volumeType.Anisomastia"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.anisomastiaLocalizationVolumeMINUS.value' | translate}}"
+        [(ngModel)]="model.volumeType"
+        (onClick)="resetVolumeLocalization()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_040106"
+        rrUnClickRadio
+        name="volumeType"
+        class="m-b-130"
+        [value]="volumeType.Ablatio"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.ablatio.value' | translate}}"
+        [(ngModel)]="model.volumeType"
+        (onClick)="resetVolumeLocalization()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.volumeType === volumeType.None || model.volumeType === volumeType.Isomastia"
+      >
+        <p
+          rr-id="mam_mx_040108"
+          class="m-b-2"
+          rrValidation="volumeLocalization"
+        >
+          {{'mammaMX.mammographyParenchymaAnatomy.localizationSingleSelection.value'
+          | translate}}*
+        </p>
+        <rr-breast-simple
+          rr-id="mam_mx_040107"
+          [(ngModel)]="model.volumeLocalization"
+          name="model.volumeLocalization"
+          #volumeLocalization
+          [elementUpdate]="volumeLocalization.announceSelection"
+          rrValidation="volumeLocalization"
+          isLocalizer="true"
+          [isSingleChoice]="true"
+          (ngModelChange)="resetParenchymaDensityBreastComposition()"
+        >
+        </rr-breast-simple>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_040201" class="text-break m-h-91">
+        {{'mammaMX.mammographyParenchymaAnatomy.subcutaneousFattyTissue.value' |
+        translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_040202"
+        rrUnClickRadio
+        name="subcutaneousFattyTissueType"
+        [value]="subcutaneousFattyTissueType.Normal"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.normal.value' | translate}}"
+        [(ngModel)]="model.subcutaneousFattyTissueType"
+        (onClick)="resetSubcutaneousAdiposeTissueLocalization()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_040203"
+        rrUnClickRadio
+        name="subcutaneousFattyTissueType"
+        class="m-b-188"
+        [value]="subcutaneousFattyTissueType.Obliterated"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.obliterated.value' | translate}}"
+        [(ngModel)]="model.subcutaneousFattyTissueType"
+        (onClick)="resetSubcutaneousAdiposeTissueLocalization()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.subcutaneousFattyTissueType !== subcutaneousFattyTissueType.Obliterated"
+      >
+        <p
+          rr-id="mam_mx_040205"
+          class="m-b-2"
+          rrValidation="subcutaneousAdiposeTissueLocalization"
+        >
+          {{'mammaMX.mammographyParenchymaAnatomy.localizationMultipleSelection.value'
+          | translate}}*
+        </p>
+        <rr-breast-cross
+          rr-id="mam_mx_040204"
+          [(ngModel)]="model.subcutaneousAdiposeTissueLocalization"
+          name="model.subcutaneousAdiposeTissueLocalization"
+          #subcutaneousAdiposeTissueLocalization
+          [elementUpdate]="subcutaneousAdiposeTissueLocalization.announceSelection"
+          rrValidation="subcutaneousAdiposeTissueLocalization"
+          isLocalizer="true"
+        >
+        </rr-breast-cross>
+      </div>
+    </div>
+    <div class="c-pad col-h-100 f-vertical c-sep">
+      <h1 rr-id="mam_mx_040301" class="text-break m-b-54">
+        {{'mammaMX.mammographyParenchymaAnatomy.parenchymaDensityBreastComposition.value'
+        | translate}}
+      </h1>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+          <div
+            class="o-radio-list"
+            [rrDisable]="model.volumeLocalization.right && model.volumeType === volumeType.Ablatio"
+          >
+            <h2 rr-id="mam_mx_040302" class="m-b-15">
+              {{'mammaMX.mammographyParenchymaAnatomy.right.value' | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="mam_mx_040303"
+              rrUnClickRadio
+              name="rightParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.EntirelyFatty"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.aPredominantlyLipomatousTissue.value' | translate}}"
+              [(ngModel)]="model.rightParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_040304"
+              rrUnClickRadio
+              name="rightParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.ScatteredAreasOfFibroglandularDensity"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.scatteredAreasOfFibroglandularDensity.value' | translate}}"
+              [(ngModel)]="model.rightParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_040305"
+              rrUnClickRadio
+              name="rightParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.HeterogeneouslyDense"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.cHeterogeneouslyDenseDifficult.value' | translate}}"
+              [(ngModel)]="model.rightParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_040306"
+              rrUnClickRadio
+              name="rightParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.ExtremelyDense"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.dExtremelyDense.value' | translate}}"
+              [(ngModel)]="model.rightParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l c-sep f-vertical f-start">
+          <div
+            class="o-radio-list"
+            [rrDisable]="model.volumeLocalization.left && model.volumeType === volumeType.Ablatio"
+          >
+            <h2 rr-id="mam_mx_040401" class="m-b-15">
+              {{'mammaMX.mammographyParenchymaAnatomy.left.value' | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="mam_mx_040402"
+              rrUnClickRadio
+              name="leftParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.EntirelyFatty"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.aPredominantlyLipomatousTissue.value' | translate}}"
+              [(ngModel)]="model.leftParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_040403"
+              rrUnClickRadio
+              name="leftParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.ScatteredAreasOfFibroglandularDensity"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.scatteredAreasOfFibroglandularDensity.value' | translate}}"
+              [(ngModel)]="model.leftParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_040404"
+              rrUnClickRadio
+              name="leftParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.HeterogeneouslyDense"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.cHeterogeneouslyDenseDifficult.value' | translate}}"
+              [(ngModel)]="model.leftParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_mx_040405"
+              rrUnClickRadio
+              name="leftParenchymaDensityBreastCompositionType"
+              [value]="parenchymaDensityBreastCompositionType.ExtremelyDense"
+              label="{{'mammaMX.mammographyParenchymaAnatomy.dExtremelyDense.value' | translate}}"
+              [(ngModel)]="model.leftParenchymaDensityBreastCompositionType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_040501" class="m-b-77">
+        {{'mammaMX.mammographyParenchymaAnatomy.pectoralisMuscle.value' |
+        translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_040503"
+        rrUnClickRadio
+        name="pectoralisMuscleType"
+        [value]="pectoralisMuscleType.BilateralNormalImaging"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.bilateralNormalImaging.value' | translate}}"
+        [(ngModel)]="model.pectoralisMuscleType"
+        (onClick)="resetPectoralisMuscleLocalization()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_040504"
+        rrUnClickRadio
+        name="pectoralisMuscleType"
+        class="m-b-188"
+        [value]="pectoralisMuscleType.Obscured"
+        label="{{'mammaMX.mammographyParenchymaAnatomy.obscured.value' | translate}}"
+        [(ngModel)]="model.pectoralisMuscleType"
+        (onClick)="resetPectoralisMuscleLocalization()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.pectoralisMuscleType !== pectoralisMuscleType.Obscured"
+      >
+        <p
+          rr-id="mam_mx_040506"
+          class="m-b-2"
+          rrValidation="pectoralisMuscleLocalization"
+        >
+          {{'mammaMX.mammographyParenchymaAnatomy.localizationMultipleSelection.value'
+          | translate}}*
+        </p>
+        <rr-breast-simple
+          rr-id="mam_mx_040505"
+          [(ngModel)]="model.pectoralisMuscleLocalization"
+          name="model.pectoralisMuscleLocalization"
+          #pectoralisMuscleLocalization
+          [elementUpdate]="pectoralisMuscleLocalization.announceSelection"
+          rrValidation="pectoralisMuscleLocalization"
+          isLocalizer="true"
+        >
+        </rr-breast-simple>
+      </div>
+    </div>
+  </div>
+</form>

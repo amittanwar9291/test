@@ -1,0 +1,323 @@
+<div class="f-horizontal f-start main o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-13 m-b-17">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="spi_c_0802306" class="m-t-6">
+        {{'spineCT.softTissues.internalStructure.value' | translate}}
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        label="{{'spineCT.softTissues.calcification.value'| translate}}"
+        rr-id="spi_c_0802307"
+        name="isCalcification"
+        rrContentReset="calcificationTypeContainer"
+      ></p-checkbox>
+      <div
+        id="calcificationTypeContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isCalcification"
+      >
+        <p-radioButton
+          name="calcificationType"
+          rr-id="spi_c_0802308"
+          label="{{ 'spineCT.softTissues.areal.value' | translate }}"
+          [value]="calcificationTypeEnum.Areal"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="calcificationType"
+          rr-id="spi_c_0802309"
+          label="{{ 'spineCT.softTissues.central.value' | translate }}"
+          [value]="calcificationTypeEnum.Central"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="calcificationType"
+          rr-id="spi_c_0802310"
+          label="{{ 'spineCT.softTissues.dystrophy.value' | translate }}"
+          [value]="calcificationTypeEnum.Dystrophy"
+          [(ngModel)]="model.calcificationType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSclerosis"
+        label="{{'spineCT.softTissues.sclerosis.value'| translate}}"
+        rr-id="spi_c_0802311"
+        name="isSclerosis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSepta"
+        label="{{'spineCT.softTissues.septa.value'| translate}}"
+        rr-id="spi_c_0802312"
+        name="isSepta"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isIntralesionalFat"
+        label="{{'spineCT.softTissues.intralesionalFat.value'| translate}}"
+        rr-id="spi_c_0802313"
+        name="isIntralesionalFat"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCystic"
+        label="{{'spineCT.softTissues.cystic.value'| translate}}"
+        rr-id="spi_c_0802314"
+        name="isCystic"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isFluidLevel"
+        label="{{'spineCT.softTissues.fluidLevel.value'| translate}}"
+        rr-id="spi_c_0802315"
+        name="isFluidLevel"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCapsuleOrMembrane"
+        label="{{'spineCT.softTissues.capsuleMembrane.value'| translate}}"
+        rr-id="spi_c_0802316"
+        name="isCapsuleOrMembrane"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-13 m-b-17">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="spi_c_0803311" class="m-t-6">
+        {{'spineCT.softTissues.growthPattern.value' | translate}}
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isMassEffect"
+        label="{{'spineCT.softTissues.massEffect.value'| translate}}"
+        rr-id="spi_c_0803312"
+        name="isMassEffect"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isInfiltration"
+        label="{{'spineCT.softTissues.infiltration.value'| translate}}"
+        rr-id="spi_c_0803313"
+        name="isInfiltration"
+        rrContentReset="infiltrationDetailsContainer"
+        (onChange)="clearLocalizer()"
+      ></p-checkbox>
+      <div
+        id="infiltrationDetailsContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isInfiltration"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isBones"
+          label="{{'spineCT.softTissues.bones.value'| translate}}"
+          rr-id="spi_c_0803314"
+          name="isBones"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isMuscle"
+          label="{{'spineCT.softTissues.muscle.value'| translate}}"
+          rr-id="spi_c_0803315"
+          name="isMuscle"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isNerveRoot"
+          label="{{'spineCT.softTissues.nerveRoot.value'| translate}}"
+          rr-id="spi_c_0803316"
+          name="isNerveRoot"
+          (onChange)="clearLocalizer()"
+        ></p-checkbox>
+        <div
+          class="o-radio-list nested-content m-b-5"
+          [rrDisable]="!model.isNerveRoot"
+        >
+          <p rr-id="spi_c_0803317" class="m-b-0">
+            {{'spineCT.softTissues.localization.value' | translate}}
+          </p>
+          <rr-spine-simple-sides
+            class="scaled-localizer"
+            rr-id="spi_c_0803318"
+            [spineDirectionalLocation]="model.spineLocationBones"
+            [discLocalization]="false"
+            [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+            (click)="openDirectionalSpineLocalizer()"
+          >
+          </rr-spine-simple-sides>
+        </div>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isUrether"
+          label="{{'spineCT.softTissues.urether.value'| translate}}"
+          rr-id="spi_c_0803319"
+          name="isUrether"
+          rrContentReset="uretherSidesContainer"
+        ></p-checkbox>
+        <div
+          id="uretherSidesContainer"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isUrether"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isUretherRight"
+            label="{{'spineCT.softTissues.right.value'| translate}}"
+            rr-id="spi_c_0803320"
+            name="isUretherRight"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isUretherLeft"
+            label="{{'spineCT.softTissues.left.value'| translate}}"
+            rr-id="spi_c_0803321"
+            name="isUretherLeft"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isVessels"
+          label="{{'spineCT.softTissues.vessels.value'| translate}}"
+          rr-id="spi_c_0803322"
+          name="isVessels"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-13 m-b-17">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="spi_c_0804314">
+        {{'spineCT.softTissues.reactionOfSurroundingTissue.value' | translate}}
+      </h2>
+      <p-checkbox
+        labelStyleClass="text-break"
+        binary="true"
+        [(ngModel)]="model.isSurroundinginflammatoryReaction"
+        label="{{'spineCT.softTissues.surroundingInflammatoryReaction.value'| translate}}"
+        rr-id="spi_c_0804315"
+        name="isSurroundinginflammatoryReaction"
+      ></p-checkbox>
+      <p-checkbox
+        labelStyleClass="text-break"
+        binary="true"
+        [(ngModel)]="model.isCommunicationWithTheIntraduralSpace"
+        label="{{'spineCT.softTissues.communicationWithTheIntraduralSpace.value'| translate}}"
+        rr-id="spi_c_0804316"
+        name="isCommunicationWithTheIntraduralSpace"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list m-t-13 m-b-17">
+    <div class="o-radio-list m-l-10" [rrDisable]="!isCMYes">
+      <h2 rr-id="spi_c_0805309">
+        {{'spineCT.softTissues.contrastEnhancementQuantitative.value' |
+        translate}}
+      </h2>
+      <p-radioButton
+        name="contrastEnhancementQuantitativeType"
+        rr-id="spi_c_0805310"
+        label="{{ 'spineCT.softTissues.no.value' | translate }}"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastEnhancementDistributionTypeContainer"
+      ></p-radioButton>
+      <p-radioButton
+        name="contrastEnhancementQuantitativeType"
+        rr-id="spi_c_0805311"
+        label="{{ 'spineCT.softTissues.weak.value' | translate }}"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Weak"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastEnhancementDistributionTypeContainer"
+      ></p-radioButton>
+      <p-radioButton
+        name="contrastEnhancementQuantitativeType"
+        rr-id="spi_c_0805312"
+        label="{{ 'spineCT.softTissues.significant.value' | translate }}"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Significant"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastEnhancementDistributionTypeContainer"
+      ></p-radioButton>
+      <div
+        id="contrastEnhancementHomogeneityTypeContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!isCMWeekOrSignificant()"
+      >
+        <p-radioButton
+          name="contrastEnhancementHomogeneityType"
+          rr-id="spi_c_0805313"
+          label="{{ 'spineCT.softTissues.homogeneous.value' | translate }}"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="contrastEnhancementHomogeneityType"
+          rr-id="spi_c_0805314"
+          label="{{ 'spineCT.softTissues.heterogeneous.value' | translate }}"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+
+      <div
+        id="contrastEnhancementDistributionTypeContainer"
+        class="o-radio-list m-t-35"
+        [rrDisable]="!isCMWeekOrSignificant()"
+      >
+        <h2 rr-id="spi_c_0805315">
+          {{'spineCT.softTissues.contrastEnhancementDistribution.value' |
+          translate}}
+        </h2>
+        <p-radioButton
+          name="contrastEnhancementDistributionType"
+          rr-id="spi_c_0805316"
+          label="{{ 'spineCT.softTissues.peripheral.value' | translate }}"
+          [value]="contrastEnhancementDistributionTypeEnum.Peripheral"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="contrastEnhancementDistributionType"
+          rr-id="spi_c_0805317"
+          label="{{ 'spineCT.softTissues.entireLesion.value' | translate }}"
+          [value]="contrastEnhancementDistributionTypeEnum.EntireLesion"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="contrastEnhancementDistributionType"
+          rr-id="spi_c_0805318"
+          label="{{ 'spineCT.softTissues.central.value' | translate }}"
+          [value]="contrastEnhancementDistributionTypeEnum.Central"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="contrastEnhancementDistributionType"
+          rr-id="spi_c_0805319"
+          label="{{ 'spineCT.softTissues.septal.value' | translate }}"
+          [value]="contrastEnhancementDistributionTypeEnum.Septal"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="contrastEnhancementDistributionType"
+          rr-id="spi_c_0805320"
+          label="{{ 'spineCT.softTissues.nidus.value' | translate }}"
+          [value]="contrastEnhancementDistributionTypeEnum.Nidus"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+<div class="f-vertical f-start o-radio-list col-h-100 p-t-13">
+  <h2 rr-id="tho_c_0702160">
+    {{'thoraxCT.softParts.kidneyAdrenalGlandDetails.value' | translate}}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+      <p-checkbox
+        rr-id="tho_c_0702161"
+        name="isKidney"
+        rrValidation="isKidney isMassAdrenalGland"
+        rrContentReset="isKidney-block col3-block"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{'thoraxCT.softParts.kidney.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isKidney"
+      ></p-checkbox>
+      <div
+        id="isKidney-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isKidney"
+      >
+        <p rr-id="tho_c_0702162" class="m-b-6">
+          {{'thoraxCT.softParts.pathology.value' | translate}}
+        </p>
+        <p-checkbox
+          rr-id="tho_c_0702163"
+          name="isKidneyFocalLesion"
+          rrValidation="isKidneyFocalLesion isUrinaryRetention"
+          rrContentReset="isKidneyFocalLesion-block"
+          label="{{'thoraxCT.softParts.focalLesion.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isKidneyFocalLesion"
+        ></p-checkbox>
+        <div
+          id="isKidneyFocalLesion-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isKidneyFocalLesion"
+        >
+          <p rr-id="tho_c_0702164">
+            {{'thoraxCT.softParts.side.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="tho_c_0702165"
+            name="abdomenLocalizationType"
+            [(ngModel)]="model.abdomenLocalizationType"
+            rrValidation="abdomenLocalizationType"
+            [value]="abdomenLocalizationTypeEnum.Right"
+            label="{{'thoraxCT.softParts.right.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0702166"
+            name="abdomenLocalizationType"
+            [(ngModel)]="model.abdomenLocalizationType"
+            rrValidation="abdomenLocalizationType"
+            [value]="abdomenLocalizationTypeEnum.Left"
+            label="{{'thoraxCT.softParts.left.value' | translate}}"
+          ></p-radioButton>
+
+          <p rr-id="tho_c_0702167" class="m-t-12 m-b-1">
+            {{'thoraxCT.softParts.maxDiameter.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="tho_c_0702168"
+            labelRrId="tho_c_0702169"
+            name="kidneyFocalLesionMaxDiameterInMm"
+            [(ngModel)]="model.kidneyFocalLesionMaxDiameterInMm"
+            [label]="'thoraxCT.softParts.inMm.value' | translate"
+            [config]="{labelWidth: 175, min: 1, max: 999, placeholder: '---'}"
+          ></rr-number-input>
+          <p rr-id="tho_c_0702170" class="m-t-17 m-b-1">
+            {{'thoraxCT.softParts.classification2.value' | translate}}
+          </p>
+          <p-dropdown
+            styleClass="ui-brown-box o-width-100"
+            [options]="classificationTypeOptions"
+            name="abdomenClassificationType"
+            rr-id="tho_c_0702171"
+            [placeholder]="'shared.pleaseSelect' | translate"
+            rrDropdownClear
+            [(ngModel)]="model.abdomenClassificationType"
+          >
+          </p-dropdown>
+          <p-checkbox
+            rr-id="tho_c_0702172"
+            class="m-t-21 text-break"
+            name="isMoreThanOneLesion"
+            label="{{'thoraxCT.softParts.lesionOfTheSame.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isMoreThanOneLesion"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="col3-block"
+      class="c-col-1 f-vertical f-start c-pad c-sep-l o-radio-list m-t-68"
+    >
+      <div
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isKidney"
+      >
+        <p-checkbox
+          rr-id="tho_c_0703139"
+          name="isUrinaryRetention"
+          rrValidation="isKidneyFocalLesion isUrinaryRetention"
+          rrContentReset="isUrinaryRetention-block"
+          label="{{'thoraxCT.softParts.urinaryRetention.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isUrinaryRetention"
+        ></p-checkbox>
+        <div
+          id="isUrinaryRetention-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isUrinaryRetention"
+        >
+          <p rr-id="tho_c_0703140" class="m-b-5">
+            {{'thoraxCT.softParts.side.value' | translate}}
+          </p>
+          <p-checkbox
+            rr-id="tho_c_0703141"
+            rrValidation="isUrinaryRetentionLeft isUrinaryRetentionRight"
+            name="isUrinaryRetentionRight"
+            label="{{'thoraxCT.softParts.right.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isUrinaryRetentionRight"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_c_0703142"
+            rrValidation="isUrinaryRetentionLeft isUrinaryRetentionRight"
+            name="isUrinaryRetentionLeft"
+            label="{{'thoraxCT.softParts.left.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isUrinaryRetentionLeft"
+          ></p-checkbox>
+
+          <p rr-id="tho_c_0703143" class="m-t-17">
+            {{'thoraxCT.softParts.grading(max.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="tho_c_0703144"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade1"
+            label="{{'thoraxCT.softParts.grade.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0703145"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade2"
+            label="{{'thoraxCT.softParts.grade2.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0703146"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade3"
+            label="{{'thoraxCT.softParts.grade3.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_0703147"
+            name="gradingType"
+            [(ngModel)]="model.gradingType"
+            rrUnClickRadio
+            [value]="gradingTypeEnum.Grade4"
+            label="{{'thoraxCT.softParts.grade4.value' | translate}}"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start o-radio-list c-sep-l c-sep c-pad">
+      <p-checkbox
+        rr-id="tho_c_0704112"
+        name="isMassAdrenalGland"
+        labelStyleClass="ui-fat-label"
+        rrValidation="isKidney isMassAdrenalGland"
+        rrContentReset="isMassAdrenalGland-block"
+        label="{{'thoraxCT.softParts.massAdrenalGland.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMassAdrenalGland"
+      ></p-checkbox>
+      <div
+        id="isMassAdrenalGland-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isMassAdrenalGland"
+      >
+        <p rr-id="tho_c_0704113" class="m-b-5">
+          {{'thoraxCT.softParts.side.value' | translate}}
+        </p>
+        <p-checkbox
+          rr-id="tho_c_0704114"
+          rrValidation="isMassAdrenalGlandLeft isMassAdrenalGlandRight"
+          name="isMassAdrenalGlandRight"
+          label="{{'thoraxCT.softParts.right.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMassAdrenalGlandRight"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_c_0704115"
+          rrValidation="isMassAdrenalGlandLeft isMassAdrenalGlandRight"
+          name="isMassAdrenalGlandLeft"
+          label="{{'thoraxCT.softParts.left.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMassAdrenalGlandLeft"
+        ></p-checkbox>
+
+        <p rr-id="tho_c_0704116" class="m-t-18 m-b-2">
+          {{'thoraxCT.softParts.maxDiameter.value' | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="tho_c_0704117"
+          labelRrId="tho_c_0704118"
+          name="massAdrenalGlandMaxDiameterInMm"
+          [(ngModel)]="model.massAdrenalGlandMaxDiameterInMm"
+          [label]="'thoraxCT.softParts.inMm.value' | translate"
+          [config]="{labelWidth: 175, min: 1, max: 999, placeholder: '---'}"
+        ></rr-number-input>
+        <p rr-id="tho_c_0702170" class="m-t-16 m-b-2">
+          {{'thoraxCT.softParts.classification2.value' | translate}}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="massAdrenalGlandClassificationTypeOptions"
+          name="massAdrenalGlandClassificationType"
+          rr-id="tho_c_0702171"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.massAdrenalGlandClassificationType"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

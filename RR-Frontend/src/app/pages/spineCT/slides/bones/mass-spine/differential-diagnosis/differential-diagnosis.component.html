@@ -1,0 +1,100 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-10 m-b-10">
+    <div class="c-col-1 c-sep c-pad">
+      <div class="o-list p-l-10">
+        <div class="o-radio-list">
+          <h2 rr-id="spi_c_0602222" rrInfoIcon="spi_c_06_15">
+            {{ 'spineCT.bones.differentialDiagnosis.value' | translate }}
+          </h2>
+          <div
+            class="f-vertical o-radio-list"
+            [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+          >
+            <p rr-id="spi_c_0602223" class="m-b-0">
+              {{ 'spineCT.bones.differentialDiagnosis1.value' | translate }}*
+            </p>
+            <rr-differential-diagnosis-dropdown
+              rrId="spi_c_0602224"
+              [diagnosisNumber]="1"
+              [options]="differentialDiagnosisW022"
+              [(ngModel)]="model.massSpineDD1"
+              name="massSpineDD1"
+              [parentViewModel]="model"
+              group="true"
+              (selectionChanged)="resetDependDD1Fields()"
+              rrValidation="massSpineDD1"
+            >
+            </rr-differential-diagnosis-dropdown>
+          </div>
+          <div
+            class="f-vertical o-radio-list"
+            [rrDisable]="model.massSpineDD1 === bonesDiagnosisTypeEnum.None && model.bonesDiagnosis1 === bonesDiagnosisTypeEnum.None"
+            id="massSpineDD2Container"
+          >
+            <p-checkbox
+              rr-id="spi_c_0602225"
+              name="isDD1SuspicionOf"
+              label="{{ 'spineCT.bones.suspicionOf.value' | translate }}"
+              [(ngModel)]="model.isDD1SuspicionOf"
+              binary="true"
+              [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+            >
+            </p-checkbox>
+            <p rr-id="spi_c_0602226" class="m-b-0">
+              {{ 'spineCT.bones.differentialDiagnosis2.value' | translate }}
+            </p>
+            <rr-differential-diagnosis-dropdown
+              rrId="spi_c_0602227"
+              [diagnosisNumber]="2"
+              [options]="differentialDiagnosisW023"
+              [(ngModel)]="model.massSpineDD2"
+              name="massSpineDD2"
+              [parentViewModel]="model"
+              group="true"
+              (selectionChanged)="resetDependDD2Fields()"
+            >
+            </rr-differential-diagnosis-dropdown>
+          </div>
+          <div
+            class="f-vertical o-radio-list"
+            [rrDisable]="model.massSpineDD2 === bonesDiagnosisTypeEnum.None"
+            id="massSpineDD3Container"
+          >
+            <p-checkbox
+              rr-id="spi_c_0602228"
+              name="isDD2Subordinate"
+              label="{{ 'spineCT.bones.subordinate.value' | translate }}"
+              [(ngModel)]="model.isDD2Subordinate"
+              binary="true"
+            >
+            </p-checkbox>
+            <p rr-id="spi_c_0602229" class="m-b-0">
+              {{ 'spineCT.bones.differentialDiagnosis3.value' | translate }}
+            </p>
+            <rr-differential-diagnosis-dropdown
+              rrId="spi_c_0602230"
+              [diagnosisNumber]="3"
+              [options]="differentialDiagnosisW023"
+              [(ngModel)]="model.massSpineDD3"
+              name="massSpineDD3"
+              [parentViewModel]="model"
+              group="true"
+            >
+            </rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_0602231"
+          name="isAbove1LesionSameEntity"
+          [(ngModel)]="model.isAbove1LesionSameEntity"
+          label="{{ 'spineCT.bones.lesionSameEntity.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

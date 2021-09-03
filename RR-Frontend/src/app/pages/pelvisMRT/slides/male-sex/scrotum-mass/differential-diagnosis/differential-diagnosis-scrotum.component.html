@@ -1,0 +1,111 @@
+<div class="f-horizontal h-100 w-100">
+  <div class="c-col-1 c-pad c-sep m-t-35 m-b-15">
+    <div class=" p-l-10">
+      <h2 rr-id="pel_m_050259">
+        {{ 'pelvisMRT.maleGender.differentialDiagnosis.value' | translate }}
+      </h2>
+      <div [rrDisable]="model.descriptionType !== 'IDescribe'" class="m-t-13">
+        <p rr-id="pel_m_050260">
+          {{ 'pelvisMRT.maleGender.differentialDiagnosis1.value' | translate }}
+          <span *ngIf="model.descriptionType !== 'IKnow'">*</span>
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_050261"
+          [diagnosisNumber]="1"
+          [options]="scrotumDifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosisScrotumMassType01"
+          name="differentialDiagnosisScrotumMassType01"
+          rrValidation="differentialDiagnosisScrotumMassType01"
+          group="true"
+          [parentViewModel]="model"
+          (selectionChanged)="differentialDiagnosis01Change()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="m-t-13"
+        [rrDisable]="model.differentialDiagnosisScrotumMassType01 === differentialDiagnosisScrotumMassType.None 
+                  && model.differentialDiagnosisScrotumMassType === differentialDiagnosisScrotumMassType.None"
+      >
+        <p rr-id="pel_m_050262">
+          {{ 'pelvisMRT.maleGender.differentialDiagnosis2.value' | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_050263"
+          [diagnosisNumber]="2"
+          [options]="scrotumDifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosisScrotumMassType02"
+          name="differentialDiagnosisScrotumMassType02"
+          [parentViewModel]="model"
+          group="true"
+          (selectionChanged)="differentialDiagnosis02Change()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <p-checkbox
+        class="m-t-10"
+        [rrDisable]="model.differentialDiagnosisScrotumMassType02 === differentialDiagnosisScrotumMassType.None"
+        rr-id="pel_m_050264"
+        name="isSubordinate"
+        binary="true"
+        label="{{'pelvisMRT.maleGender.subordinate.value' | translate}}"
+        [(ngModel)]="model.isSubordinate"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep m-t-30 m-b-15">
+    <div class="o-list">
+      <div class="o-radio-list m-t-40 p-l-10">
+        <p rr-id="pel_m_050379" *ngIf="isDifferentialDiagnosis()">
+          {{ 'pelvisMRT.maleGender.differentialDiagnosis1.value' | translate }}
+        </p>
+        <p-checkbox
+          *ngIf="model.differentialDiagnosisScrotumMassType01 ===  differentialDiagnosisScrotumMassType.Lipoma"
+          rr-id="pel_m_050380"
+          rrInfoIcon="pel_m_05_06"
+          name="isSpermaticCordLipoma01"
+          binary="true"
+          label="{{'pelvisMRT.maleGender.spermaticCordLipoma.value' | translate}}"
+          [(ngModel)]="model.isSpermaticCordLipoma01"
+        >
+        </p-checkbox>
+        <p-checkbox
+          *ngIf="model.differentialDiagnosisScrotumMassType01 === differentialDiagnosisScrotumMassType.FibrousPseudotumour"
+          rr-id="pel_m_050384"
+          name="isScrotalPearl01"
+          binary="true"
+          label="{{ 'pelvisMRT.maleGender.scrotalPearl.value' | translate }}"
+          [(ngModel)]="model.isScrotalPearl01"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep m-t-30 m-b-15">
+    <div class="o-list">
+      <div class="o-radio-list m-t-40 p-l-10">
+        <p rr-id="pel_m_050464" *ngIf="isDifferentialDiagnosis2Visible()">
+          {{ 'pelvisMRT.maleGender.differentialDiagnosis2.value' | translate }}
+        </p>
+        <p-checkbox
+          *ngIf="model.differentialDiagnosisScrotumMassType02 === differentialDiagnosisScrotumMassType.Lipoma"
+          rr-id="pel_m_050465"
+          rrInfoIcon="pel_m_05_06"
+          name="isSpermaticCordLipoma02"
+          binary="true"
+          label="{{'pelvisMRT.maleGender.spermaticCordLipoma.value' | translate}}"
+          [(ngModel)]="model.isSpermaticCordLipoma02"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_050469"
+          *ngIf="model.differentialDiagnosisScrotumMassType02 === differentialDiagnosisScrotumMassType.FibrousPseudotumour"
+          name="isScrotalPearl02"
+          binary="true"
+          label="{{ 'pelvisMRT.maleGender.scrotalPearl.value' | translate }}"
+          [(ngModel)]="model.isScrotalPearl02"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep m-t-30 m-b-15"></div>
+</div>

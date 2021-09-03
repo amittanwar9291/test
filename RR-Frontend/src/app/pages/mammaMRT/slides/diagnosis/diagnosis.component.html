@@ -1,0 +1,94 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- First column, with dynamic components -->
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical f-start o-radio-list m-b-15">
+        <h1 rr-id="mam_m_060103" class="m-b-20">
+          {{ 'mammaMRT.diagnosis.findings.value' | translate }}*
+        </h1>
+        <p-radioButton
+          name="areFindings"
+          [value]="areFindingsType.No"
+          label="{{ 'mammaMRT.diagnosis.noFinding.value' | translate }}"
+          rr-id="mam_m_060104"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          name="areFindings"
+          [value]="areFindingsType.Yes"
+          label="{{ 'mammaMRT.diagnosis.pathologicalFindings.value' | translate }}"
+          rr-id="mam_m_060105"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        name="findingsHandlerComponent"
+        [disabled]="model.areFindings !== 'True'"
+        [setDescriptionTypes]="[{ findingName: findingType.FocalPoint, describeInfoRrId: 'mam_m_060113' }]"
+        [setConfig]="dynamicConfig"
+        [customLabelCalculator]="getCustomLabel"
+        [validationName]="'findings'"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-vertical col-h-100 c-pad-l">
+      <!-- Finding number -->
+      <div class="m-b-38">
+        <h1
+          rr-id="mam_m_060201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ 'mammaMRT.diagnosis.findingXX.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <!-- None -->
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+
+        <!-- FocalPoint -->
+        <rr-focal-point
+          *ngSwitchCase="findingType.FocalPoint"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+          [differentialDiagnosisOptions]="differentialDiagnosisOptions"
+          [differentialDiagnosisRestrictedOptions]="differentialDiagnosisRestrictedOptions"
+          [enhancementsListOptions]="enhancementsList"
+          [cmEnchancementApplied]="cmEnchancementApplied"
+        >
+        </rr-focal-point>
+
+        <!-- Focus -->
+        <rr-focus-foci
+          *ngSwitchCase="findingType.FocusFoci"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-focus-foci>
+
+        <!-- Non spatial requirement -->
+        <rr-non-spatial-requirement
+          *ngSwitchCase="findingType.NonSpatialEnhancement"
+          class="col-h-100"
+          [model]="findingHandler.currentItem"
+          [differentialDiagnosisOptions]="differentialDiagnosisOptions"
+          [differentialDiagnosisRestrictedOptions]="differentialDiagnosisRestrictedOptions"
+        >
+        </rr-non-spatial-requirement>
+      </ng-container>
+    </div>
+  </div>
+</form>

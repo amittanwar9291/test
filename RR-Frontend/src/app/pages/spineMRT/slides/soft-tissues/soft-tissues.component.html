@@ -1,0 +1,126 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="c-main f-horizontal f-center"
+    [hidden]="findingHandler.currentItem.spineLocationShown || findingHandler.currentItem.directionalLocationShown"
+  >
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_m_060103" class="m-b-17">
+        {{ 'spineMRT.softTissues.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="spi_m_060104"
+        name="areFindings"
+        label="{{'spineMRT.softTissues.noPathologicFinding.value' | translate }}"
+        [value]="areFindingsEnum.No"
+        rrValidation="areFindings"
+        notInFinding="true"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="spi_m_060105"
+        class="m-b-17"
+        name="areFindings"
+        label="{{'spineMRT.softTissues.finding.value' | translate }}"
+        [value]="areFindingsEnum.Yes"
+        rrValidation="areFindings"
+        notInFinding="true"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [attr.name]="'findings'"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="isDynamicPartDisabled()"
+        validationName="findings"
+        [setDescriptionTypes]="['ParaspinalMass', 'IntraduralExtramedullaryMass']"
+        (findingChange)="activeTabIndex = 0"
+        (newFindingAdded)="activeTabIndex = 0"
+        (findingTypeChange)="activeTabIndex = 0"
+        (descriptionChanged)="activeTabIndex = 0"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-vertical f-space-between">
+      <div class="c-col-4 c-pad-l f-vertical m-b-25">
+        <h1
+          rr-id="spi_m_080201"
+          *ngIf="!isCurrentItem(softTissueFindingTypeEnum.None)"
+        >
+          {{'spineMRT.softTissues.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 || 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-horizontal">
+        <rr-spine-mrt-soft-tissues-tabs
+          *ngIf="isCurrentItem(softTissueFindingTypeEnum.ParaspinalMass) || isCurrentItem(softTissueFindingTypeEnum.IntraduralExtramedullaryMass)"
+          [model]="findingHandler.currentItem"
+          [isCMYes]="isCMYes"
+          (emitLocalizer)="setLargeLocalizerOpened($event)"
+          [activeTabIndex]="activeTabIndex"
+          (activeTabIndexUpdate)="activeTabIndex = $event"
+        >
+        </rr-spine-mrt-soft-tissues-tabs>
+
+        <rr-lymph-nodes
+          *ngIf="isCurrentItem(softTissueFindingTypeEnum.LymphNodes)"
+          class="f-horizontal"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-lymph-nodes>
+
+        <rr-vessels-ureters
+          *ngIf="isCurrentItem(softTissueFindingTypeEnum.VesselsUreter)"
+          class="f-horizontal"
+          [model]="findingHandler.currentItem"
+        ></rr-vessels-ureters>
+
+        <rr-paravertebral-musculature
+          *ngIf="isCurrentItem(softTissueFindingTypeEnum.ParavertebralMuscles)"
+          class="f-horizontal"
+          [isC0ToC7]="isC0ToC7"
+          [isTH1ToL5]="isTH1ToL5"
+          [model]="findingHandler.currentItem"
+        ></rr-paravertebral-musculature>
+
+        <ng-container *ngIf="isCurrentItem(softTissueFindingTypeEnum.None)">
+          <div
+            *ngFor="let empty of [].constructor(3)"
+            class="c-col-1 c-sep c-pad soft-tissues_column"
+          ></div>
+          <div class="c-col-1 c-pad-l soft-tissues_column"></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="findingHandler.currentItem.spineLocationShown"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="largeLocalizerConfig.localizerModel"
+      [logicType]="largeLocalizerConfig.localizerLogicType"
+      [localizationTitle]="largeLocalizerConfig.localizerTitle"
+      (close)="onLargeLocalizerClosed()"
+      [localizationDescription]="largeLocalizerConfig.localizationDescription"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-complex>
+  </div>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="findingHandler.currentItem.directionalLocationShown"
+  >
+    <rr-spine-directional
+      [localizationDescription]="largeLocalizerConfig.localizationDescription"
+      [discLocalization]="largeLocalizerConfig.discLocalization"
+      name="spineDirectional"
+      [(ngModel)]="largeLocalizerConfig.localizerModel"
+      (close)="closeSpineDirectional()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-directional>
+  </div>
+</form>

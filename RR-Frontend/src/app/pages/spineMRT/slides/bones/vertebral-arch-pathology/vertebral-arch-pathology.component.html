@@ -1,0 +1,245 @@
+<div class="f-horizontal f-start col-h-100 c-pad-l m-t-13">
+  <div class="c-col-1 c-pad-r f-vertical c-sep f-start o-radio-list">
+    <h2
+      rr-id="spi_m_060245"
+      class="m-b-37"
+      rrValidation="spineLocation"
+      noUpdate="true"
+    >
+      {{ "spineMRT.bones.localizationOfVertebra.value" | translate }}
+    </h2>
+    <rr-spine-simple
+      rr-id="spi_m_060204"
+      [spineLocation]="model.spineLocation"
+      (click)="openLargeLocalizer()"
+      rrValidation="spineLocation"
+      class="m-b-50"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+    <h2 rr-id="spi_m_0602100" class="m-b-34">
+      {{ "spineMRT.bones.localizationSide.value" | translate }}
+    </h2>
+    <p-radioButton
+      [value]="localizationSideTypeEnum.Right"
+      [(ngModel)]="model.localizationSideType"
+      label="{{ 'spineMRT.bones.right.value' | translate }}"
+      rr-id="spi_m_0602101"
+      name="localizationSideType"
+      rrValidation="localizationSideType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="localizationSideTypeEnum.Left"
+      [(ngModel)]="model.localizationSideType"
+      label="{{ 'spineMRT.bones.left.value' | translate }}"
+      rr-id="spi_m_0602102"
+      name="localizationSideType"
+      rrValidation="localizationSideType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="localizationSideTypeEnum.Both"
+      [(ngModel)]="model.localizationSideType"
+      label="{{ 'spineMRT.bones.onBothSides.value' | translate }}"
+      rr-id="spi_m_0602103"
+      name="localizationSideType"
+      rrValidation="localizationSideType"
+    >
+    </p-radioButton>
+  </div>
+
+  <div class="f-vertical">
+    <h2 rr-id="spi_m_060332" class="c-pad m-b-36" rrInfoIcon="spi_m_06_04">
+      {{ "spineMRT.bones.localizationInTheVertebral.value" | translate }}
+    </h2>
+    <div class="f-horizontal f-start multi-col-content">
+      <div class="c-col-1 c-pad f-vertical f-start o-radio-list">
+        <p-radioButton
+          [value]="localizationVertebralArchTypeEnum.RetrosomaticInterruption"
+          [(ngModel)]="model.localizationInTheVertebralArchType"
+          label="{{ 'spineMRT.bones.retrosomaticInterruption.value' | translate }}"
+          rr-id="spi_m_060333"
+          name="localizationInTheVertebralArchType"
+          rrContentReset="classification-block classification-Details"
+          rrValidation="localizationInTheVertebralArchType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          [value]="localizationVertebralArchTypeEnum.Pediculolysis"
+          [(ngModel)]="model.localizationInTheVertebralArchType"
+          label="{{ 'spineMRT.bones.pediculolysis.value' | translate }}"
+          rr-id="spi_m_060334"
+          name="localizationInTheVertebralArchType"
+          [rrContentReset]="clearClassification(localizationVertebralArchTypeEnum.Pediculolysis)"
+          rrValidation="localizationInTheVertebralArchType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          [value]="localizationVertebralArchTypeEnum.Spondylolysis"
+          [(ngModel)]="model.localizationInTheVertebralArchType"
+          label="{{ 'spineMRT.bones.spondylolysis.value' | translate }}"
+          rr-id="spi_m_060335"
+          name="localizationInTheVertebralArchType"
+          [rrContentReset]="clearClassification(localizationVertebralArchTypeEnum.Spondylolysis)"
+          rrValidation="localizationInTheVertebralArchType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          [value]="localizationVertebralArchTypeEnum.RetroisthmicInterruption"
+          [(ngModel)]="model.localizationInTheVertebralArchType"
+          label="{{ 'spineMRT.bones.retroisthmicInterruption.value' | translate }}"
+          rr-id="spi_m_060336"
+          name="localizationInTheVertebralArchType"
+          rrContentReset="classification-block classification-Details"
+          rrValidation="localizationInTheVertebralArchType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          [value]="localizationVertebralArchTypeEnum.ParaspinosusInterruption"
+          [(ngModel)]="model.localizationInTheVertebralArchType"
+          label="{{ 'spineMRT.bones.paraspinosusInterruption.value' | translate }}"
+          rr-id="spi_m_060338"
+          name="localizationInTheVertebralArchType"
+          rrContentReset="classification-block classification-Details"
+          rrValidation="localizationInTheVertebralArchType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          [value]="localizationVertebralArchTypeEnum.SpinaBifidaOcculta"
+          [(ngModel)]="model.localizationInTheVertebralArchType"
+          label="{{ 'spineMRT.bones.spinaBifidaOcculta.value' | translate }}"
+          rr-id="spi_m_060339"
+          name="localizationInTheVertebralArchType"
+          rrContentReset="classification-block classification-Details"
+          rrValidation="localizationInTheVertebralArchType"
+        >
+        </p-radioButton>
+      </div>
+
+      <div
+        id="classification-block"
+        class="c-col-1 c-pad f-vertical f-start o-radio-list c-sep-l text-break"
+      >
+        <div
+          *ngIf="isPediculolysisOrSpondylolysis()"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060454' : 'spi_m_060460'"
+          >
+            {{ (isPediculolysis() ?
+            "spineMRT.bones.classificationPediculusarcusVertebraeInjuryto.value"
+            :
+            "spineMRT.bones.classificationParsinterarticularisInjurytoHollenberg.value")
+            | translate }}
+          </h2>
+          <p-radioButton
+            [value]="classificationArcusVertebraeInjuryTypeEnum.Grade0"
+            [(ngModel)]="model.classificationArcusVertebraeInjuryType"
+            label="{{ 'spineMRT.bones.gradeNoBoneMarrow.value' | translate }}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060455' : 'spi_m_060461'"
+            name="classificationArcusVertebraeInjuryType"
+            rrUnClickRadio
+            rrContentReset="classification-Details"
+          >
+          </p-radioButton>
+          <p-radioButton
+            [value]="classificationArcusVertebraeInjuryTypeEnum.Grade1"
+            [(ngModel)]="model.classificationArcusVertebraeInjuryType"
+            label="{{ 'spineMRT.bones.gradeBoneMarrowEdema.value' | translate }}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060456' : 'spi_m_060462'"
+            name="classificationArcusVertebraeInjuryType"
+            rrUnClickRadio
+            rrContentReset="classification-Details"
+          >
+          </p-radioButton>
+          <p-radioButton
+            [value]="classificationArcusVertebraeInjuryTypeEnum.Grade2"
+            [(ngModel)]="model.classificationArcusVertebraeInjuryType"
+            label="{{ 'spineMRT.bones.gradeIncompleteFractureCorticalInterruption.value' | translate }}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060457' : 'spi_m_060463'"
+            name="classificationArcusVertebraeInjuryType"
+            rrUnClickRadio
+            rrContentReset="classification-Details"
+          >
+          </p-radioButton>
+          <p-radioButton
+            [value]="classificationArcusVertebraeInjuryTypeEnum.Grade3"
+            [(ngModel)]="model.classificationArcusVertebraeInjuryType"
+            label="{{ 'spineMRT.bones.gradeCompleteFracturecorticalInterruption.value' | translate }}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060458' : 'spi_m_060464'"
+            name="classificationArcusVertebraeInjuryType"
+            rrUnClickRadio
+            rrContentReset="classification-Details"
+          >
+          </p-radioButton>
+          <p-radioButton
+            [value]="classificationArcusVertebraeInjuryTypeEnum.Grade4"
+            [(ngModel)]="model.classificationArcusVertebraeInjuryType"
+            label="{{ 'spineMRT.bones.gradeCompleteFracturenonunionWithout.value' | translate }}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060459' : 'spi_m_060465'"
+            name="classificationArcusVertebraeInjuryType"
+            rrUnClickRadio
+            rrContentReset="classification-Details"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+
+      <div
+        id="classification-Details"
+        class="c-col-1 c-pad-l f-vertical f-start o-radio-list c-sep-l m-t-77"
+      >
+        <div
+          *ngIf="isGrade(classificationArcusVertebraeInjuryTypeEnum.Grade2)"
+          class="f-vertical f-start o-radio-list"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isLocationInferiorCortex"
+            label="{{'spineMRT.bones.locationInferiorCortex.value'| translate}}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060526' : 'spi_m_060529'"
+            name="isLocationInferiorCortex"
+          >
+          </p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isDeepFractureLine"
+            label="{{'spineMRT.bones.deepFractureLine.value'| translate}}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060567' : 'spi_m_060567'"
+            name="isDeepFractureLine"
+          >
+          </p-checkbox>
+          <div class="f-vertical f-start o-radio-list nested-content">
+            <rr-number-input
+              [(ngModel)]="model.measurementInMmFromTheInferiorCortex"
+              name="measurementInMmFromTheInferiorCortex"
+              label="{{'spineMRT.bones.MeasurementInMmfromThe.value' | translate}}"
+              inputRrId="spi_m_060527"
+              labelRrId="spi_m_060568"
+              class="m-b-15"
+              labelStyleClass="text-break2"
+              [config]="{labelWidth: 134}"
+            ></rr-number-input>
+          </div>
+        </div>
+
+        <div
+          *ngIf="isGrade(classificationArcusVertebraeInjuryTypeEnum.Grade3)"
+          class="f-vertical f-start o-radio-list"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isObliqueSagittalFractureLine"
+            label="{{'spineMRT.bones.obliqueSagittalFractureLine.value'| translate}}"
+            [attr.rr-id]="isPediculolysis() ? 'spi_m_060528' : 'spi_m_060531'"
+            name="isObliqueSagittalFractureLine"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

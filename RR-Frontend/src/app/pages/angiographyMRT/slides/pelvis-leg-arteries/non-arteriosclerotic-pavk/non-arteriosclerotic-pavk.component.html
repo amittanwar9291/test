@@ -1,0 +1,328 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <div class="o-radio-list" [rrDisable]="isSideTypeDisabled()">
+      <h2 rr-id="ang_m_080217" class="m-t-16">
+        {{'angiographyMRT.pelvisLegArteries.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080218"
+        label="{{'angiographyMRT.pelvisLegArteries.right.value' | translate}}"
+        name="sideType"
+        [value]="locationTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080219"
+        label="{{'angiographyMRT.pelvisLegArteries.left.value' | translate}}"
+        name="sideType"
+        [value]="locationTypeEnum.Left"
+        class="m-b-32"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+    <h2 rr-id="ang_m_080220">
+      {{'angiographyMRT.pelvisLegArteries.pathology.value' | translate}}
+    </h2>
+    <p-radioButton
+      [rrContentReset]="clearPathologyDetails(pathologyTypeEnum.Embolism)"
+      rr-id="ang_m_080221"
+      label="{{'angiographyMRT.pelvisLegArteries.embolism.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.Embolism"
+      [(ngModel)]="model.pathologyType"
+      rrValidation="pathologyType"
+    ></p-radioButton>
+    <p-radioButton
+      [rrContentReset]="clearPathologyDetails(pathologyTypeEnum.EntrapmentSyndrome)"
+      rr-id="ang_m_080222"
+      label="{{'angiographyMRT.pelvisLegArteries.entrapmentSyndromeOfthePopliteal.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.EntrapmentSyndrome"
+      class="text-break"
+      [(ngModel)]="model.pathologyType"
+      rrValidation="pathologyType"
+    ></p-radioButton>
+    <p-radioButton
+      [rrContentReset]="clearPathologyDetails(pathologyTypeEnum.CysticAdventitialDegeneration)"
+      rr-id="ang_m_080223"
+      label="{{'angiographyMRT.pelvisLegArteries.cysticAdventitialDegenerationOfthe.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.CysticAdventitialDegeneration"
+      [(ngModel)]="model.pathologyType"
+      rrValidation="pathologyType"
+    ></p-radioButton>
+    <p-radioButton
+      [rrContentReset]="clearPathologyDetails(pathologyTypeEnum.ThrombangiitisObliterans)"
+      rr-id="ang_m_080224"
+      label="{{'angiographyMRT.pelvisLegArteries.thrombangiitisObliterans.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.ThrombangiitisObliterans"
+      [(ngModel)]="model.pathologyType"
+      rrValidation="pathologyType"
+    ></p-radioButton>
+  </div>
+
+  <div
+    id="third-col"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad o-radio-list"
+    [class.m-t-170]="model.pathologyType !== pathologyTypeEnum.None"
+  >
+    <div
+      *ngIf="model.pathologyType === pathologyTypeEnum.Embolism"
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="ang_m_080345">
+        {{'angiographyMRT.pelvisLegArteries.localization.value' | translate}}
+      </h2>
+      <p-dropdown
+        rr-id="ang_m_080346"
+        class="m-r-18"
+        styleClass="o-width-100 ui-brown-box"
+        name="localizationType"
+        rrValidation="localizationType"
+        [(ngModel)]="model.localizationType"
+        rrDropdownClear
+        [options]="ddlW019"
+        (onChange)="checkAndUpdateSideType()"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      ></p-dropdown>
+      <h2 rr-id="ang_m_080347" class="m-t-30">
+        {{'angiographyMRT.pelvisLegArteries.lengthEmbolus.value' | translate}}
+      </h2>
+      <rr-number-input
+        [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+        inputRrId="ang_m_080349"
+        labelRrId="ang_m_080348"
+        name="lengthEmbolusInMm"
+        [(ngModel)]="model.lengthEmbolusInMm"
+        [config]="{labelWidth: 160, min: 1, max: 500, placeholder: '---'}"
+      ></rr-number-input>
+    </div>
+
+    <div
+      *ngIf="model.pathologyType === pathologyTypeEnum.EntrapmentSyndrome"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="ang_m_080350"
+        label="{{'angiographyMRT.pelvisLegArteries.typeIAbnormalCourse.value' | translate}}"
+        name="pathologySubType"
+        [value]="pathologySubTypeEnum.TypeI"
+        [(ngModel)]="model.pathologySubType"
+        rrContentReset="isTypeV-block"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080351"
+        label="{{'angiographyMRT.pelvisLegArteries.typeIIAbnormalPosition.value' | translate}}"
+        name="pathologySubType"
+        [value]="pathologySubTypeEnum.TypeII"
+        [(ngModel)]="model.pathologySubType"
+        rrContentReset="isTypeV-block"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080352"
+        label="{{'angiographyMRT.pelvisLegArteries.typeIIIAccessorySlip.value' | translate}}"
+        name="pathologySubType"
+        [value]="pathologySubTypeEnum.TypeIII"
+        class="text-break2"
+        [(ngModel)]="model.pathologySubType"
+        rrContentReset="isTypeV-block"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080353"
+        label="{{'angiographyMRT.pelvisLegArteries.typeIVPAPasses.value' | translate}}"
+        name="pathologySubType"
+        [value]="pathologySubTypeEnum.TypeIV"
+        [(ngModel)]="model.pathologySubType"
+        rrContentReset="isTypeV-block"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080354"
+        label="{{'angiographyMRT.pelvisLegArteries.typeVIFunctionalEntrapmentcompression.value' | translate}}"
+        name="pathologySubType"
+        [value]="pathologySubTypeEnum.TypeVI"
+        [(ngModel)]="model.pathologySubType"
+        rrContentReset="isTypeV-block"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <div
+      *ngIf="model.pathologyType === pathologyTypeEnum.CysticAdventitialDegeneration"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-checkbox
+        name="isDetectionOfCystsWithinTheVesselWall"
+        class="text-break2"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.detectionOfCystsWithinthe.value' | translate }}"
+        rr-id="ang_m_080355"
+        [(ngModel)]="model.isDetectionOfCystsWithinTheVesselWall"
+      ></p-checkbox>
+      <p-checkbox
+        name="isStenosis"
+        class="text-break2"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.stenosis.value' | translate }}"
+        rr-id="ang_m_080356"
+        [(ngModel)]="model.isStenosis"
+        rrContentReset="isStenosis-block"
+      ></p-checkbox>
+      <div
+        id="isStenosis-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isStenosis"
+      >
+        <p-radioButton
+          rr-id="ang_m_080357"
+          label="{{'angiographyMRT.pelvisLegArteries.hourglassSign.value' | translate}}"
+          name="entrapmentSyndromeType"
+          [value]="stenosisTypeEnum.HourglassSign"
+          [(ngModel)]="model.stenosisType"
+          rrUnClickRadio
+          rrInfoIcon="ang_m_08_04"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_m_080358"
+          label="{{'angiographyMRT.pelvisLegArteries.scimitarSign.value' | translate}}"
+          name="entrapmentSyndromeType"
+          [value]="stenosisTypeEnum.ScimitarSign"
+          [(ngModel)]="model.stenosisType"
+          rrUnClickRadio
+          rrInfoIcon="ang_m_08_05"
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        name="isPeripheralOcclusionsOrStenoses"
+        class="text-break2"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.peripheralOcclusionsstenoses.value' | translate }}"
+        rr-id="ang_m_080359"
+        [(ngModel)]="model.isPeripheralOcclusionsOrStenoses"
+      ></p-checkbox>
+    </div>
+
+    <div
+      *ngIf="model.pathologyType === pathologyTypeEnum.ThrombangiitisObliterans"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-checkbox
+        name="isSeveralShortStretchStenoses"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.severalShortStretchStenoses.value' | translate }}"
+        rr-id="ang_m_080360"
+        [(ngModel)]="model.isSeveralShortStretchStenoses"
+        rrContentReset="isSeveralShortStretchStenoses-block"
+      ></p-checkbox>
+      <div
+        id="isSeveralShortStretchStenoses-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isSeveralShortStretchStenoses"
+      >
+        <p-checkbox
+          name="isConcentricFilumTerminaleSign"
+          class="text-break2"
+          binary="true"
+          label="{{ 'angiographyMRT.pelvisLegArteries.concentricFilumTerminalesign.value' | translate }}"
+          rr-id="ang_m_080361"
+          [(ngModel)]="model.isConcentricFilumTerminaleSign"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        name="isSegmentalOcclusions"
+        binary="true"
+        class="text-break2"
+        label="{{ 'angiographyMRT.pelvisLegArteries.segmentalOcclusionsskipLesions.value' | translate }}"
+        rr-id="ang_m_080362"
+        [(ngModel)]="model.isSegmentalOcclusions"
+      ></p-checkbox>
+      <p-checkbox
+        name="isSuddenChangeInDiameter"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.suddenChangeInDiameter.value' | translate }}"
+        rr-id="ang_m_080363"
+        [(ngModel)]="model.isSuddenChangeInDiameter"
+      ></p-checkbox>
+      <p-checkbox
+        name="isWallThickening"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.wallThickening.value' | translate }}"
+        rr-id="ang_m_080364"
+        [(ngModel)]="model.isWallThickening"
+      ></p-checkbox>
+      <p-checkbox
+        name="isT2wHyperintensityOfVascularWallOrOedema"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.t2wHyperintensityOfVascularWalloedema.value' | translate }}"
+        rr-id="ang_m_080365"
+        [(ngModel)]="model.isT2wHyperintensityOfVascularWallOrOedema"
+      ></p-checkbox>
+      <p-checkbox
+        name="isArterialWallEnhancement"
+        binary="true"
+        [rrDisable]="!isCMYes"
+        class="text-break2"
+        label="{{ 'angiographyMRT.pelvisLegArteries.arterialWallEnhancement.value' | translate }}"
+        rr-id="ang_m_080366"
+        [(ngModel)]="model.isArterialWallEnhancement"
+      ></p-checkbox>
+      <p-checkbox
+        name="isMicroaneurysm"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.microaneurysm.value' | translate }}"
+        rr-id="ang_m_080367"
+        [(ngModel)]="model.isMicroaneurysm"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div
+    id="fourth-col"
+    class="c-col-1 c-sep-l c-pad"
+    [class.m-t-170]="model.pathologyType === pathologyTypeEnum.EntrapmentSyndrome || model.pathologyType === pathologyTypeEnum.ThrombangiitisObliterans"
+  >
+    <div
+      id="isTypeV-block"
+      *ngIf="model.pathologyType === pathologyTypeEnum.EntrapmentSyndrome"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-checkbox
+        name="isTypeV"
+        class="text-break2"
+        binary="true"
+        [rrDisable]="isTypeVLikeTypesDisable()"
+        label="{{ 'angiographyMRT.pelvisLegArteries.typeVWithVenous.value' | translate }}"
+        rr-id="ang_m_080475"
+        [(ngModel)]="model.isTypeV"
+      ></p-checkbox>
+    </div>
+
+    <div
+      *ngIf="model.pathologyType === pathologyTypeEnum.ThrombangiitisObliterans"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-checkbox
+        name="isTortuousCourseOfTheSuperficialFemoralArtery"
+        binary="true"
+        class="text-break2"
+        label="{{ 'angiographyMRT.pelvisLegArteries.tortuousCourseOfThesuperficial.value' | translate }}"
+        rr-id="ang_m_080476"
+        [(ngModel)]="model.isTortuousCourseOfTheSuperficialFemoralArtery"
+      ></p-checkbox>
+      <p-checkbox
+        name="isCorkscrewCollaterals"
+        binary="true"
+        label="{{ 'angiographyMRT.pelvisLegArteries.corkscrewCollaterals.value' | translate }}"
+        rr-id="ang_m_080477"
+        [(ngModel)]="model.isCorkscrewCollaterals"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

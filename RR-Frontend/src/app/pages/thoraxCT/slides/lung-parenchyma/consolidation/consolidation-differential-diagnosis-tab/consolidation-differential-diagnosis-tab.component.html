@@ -1,0 +1,67 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15 f-vertical">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_050230">
+        {{'thoraxCT.lungParenchyma.differentialDiagnosis.value' | translate}}
+      </h2>
+
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        <p rr-id="tho_c_050231" class="m-b-0">
+          {{'thoraxCT.lungParenchyma.differentialDiagnosis1.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          [options]="differentialDiagnosisW024"
+          name="differentialDiagnosis01"
+          (selectionChanged)="dd1Change()"
+          [(ngModel)]="model.differentialDiagnosis01"
+          rrValidation="differentialDiagnosis01"
+          rrId="tho_c_050232"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+
+        <p-checkbox
+          [rrDisable]="model.differentialDiagnosis01 === lungParenchymaDiagnosisTypeEnum.None"
+          rr-id="tho_c_050233"
+          label="{{'thoraxCT.lungParenchyma.suspected.value' | translate}}"
+          name="isSuspected"
+          binary="true"
+          [(ngModel)]="model.isSuspected"
+        ></p-checkbox>
+      </div>
+
+      <div class="o-radio-list f-vertical" [rrDisable]="!dd2Enabled()">
+        <p rr-id="tho_c_050234" class="m-b-0">
+          {{'thoraxCT.lungParenchyma.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          [options]="differentialDiagnosisW025"
+          (selectionChanged)="dd2Change()"
+          name="differentialDiagnosis02"
+          [(ngModel)]="model.differentialDiagnosis02"
+          rrId="tho_c_050235"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="tho_c_050236"
+          label="{{'thoraxCT.lungParenchyma.subordinated.value' | translate}}"
+          name="isSubordinated"
+          binary="true"
+          [(ngModel)]="model.isSubordinated"
+          [rrDisable]="!isSubordinatedEnabled()"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15"></div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"></div>
+</div>

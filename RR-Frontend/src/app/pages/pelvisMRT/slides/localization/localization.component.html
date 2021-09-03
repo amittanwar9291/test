@@ -1,0 +1,103 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-sep c-pad-r">
+      <rr-patient-information
+        [model]="model.patientInformation"
+        [genderMandatory]="true"
+        (genderChange)="genderChange($event)"
+      >
+      </rr-patient-information>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-list">
+      <h1 rr-id="pel_m_010201">
+        {{ 'pelvisMRT.localization.localization.value' | translate }}
+      </h1>
+      <div class="o-radio-list f-vertical">
+        <h2 rr-id="pel_m_010202" class="m-b-15">
+          {{ 'pelvisMRT.localization.investigation.value' | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="pel_m_010203"
+          label="{{ 'pelvisMRT.localization.mRIProstate.value' | translate }}"
+          name="investigationType"
+          [value]="investigationType.MRIProstate"
+          [(ngModel)]="model.investigationType"
+          [rrDisable]="model.patientInformation.gender === genderTypeEnum.Female"
+          rrValidation="investigationType"
+          [rrContentReset]="resetInvestigationType(investigationType.MRIProstate)"
+        >
+        </p-radioButton>
+        <div
+          id="multiparametric"
+          [rrDisable]="model.investigationType !== investigationType.MRIProstate ||
+          model.patientInformation.gender === genderTypeEnum.Female"
+        >
+          <p-checkbox
+            rr-id="pel_m_010204"
+            class="m-l-35"
+            name="isMultiparametric"
+            label="{{'pelvisMRT.localization.multiparametric.value' | translate }}"
+            [(ngModel)]="model.isMultiparametric"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="pel_m_010205"
+          label="{{ 'pelvisMRT.localization.pelvisWholeSoftPart.value' | translate }}"
+          name="investigationType"
+          [(ngModel)]="model.investigationType"
+          [value]="investigationType.PelvisWholeSoftPart"
+          rrValidation="investigationType"
+          [rrContentReset]="resetInvestigationType(investigationType.PelvisWholeSoftPart)"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_010206"
+          label="{{ 'pelvisMRT.localization.mRIRectum.value' | translate }}"
+          name="investigationType"
+          [(ngModel)]="model.investigationType"
+          [value]="investigationType.MRIRectum"
+          rrValidation="investigationType"
+          [rrContentReset]="resetInvestigationType(investigationType.MRIRectum)"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_010207"
+          label="{{ 'pelvisMRT.localization.mRIPelvicFloor.value' | translate }}"
+          name="investigationType"
+          [rrContentReset]="resetInvestigationType(investigationType.MRIPelvicFloor)"
+          [(ngModel)]="model.investigationType"
+          [value]="investigationType.MRIPelvicFloor"
+          rrValidation="investigationType"
+        >
+        </p-radioButton>
+        <div id="isDynamic">
+          <p-checkbox
+            rr-id="pel_m_010208"
+            [rrDisable]="model.investigationType !== investigationType.MRIPelvicFloor"
+            class="m-l-35"
+            name="isDynamic"
+            label="{{'pelvisMRT.localization.dynamic.value' | translate }}"
+            [(ngModel)]="model.isDynamic"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="pel_m_010209"
+          label="{{ 'pelvisMRT.localization.mRIPenisTesticle.value' | translate }}"
+          name="investigationType"
+          [(ngModel)]="model.investigationType"
+          [rrDisable]="model.patientInformation.gender === genderTypeEnum.Female"
+          [value]="investigationType.MRIPenisTesticle"
+          rrValidation="investigationType"
+          [rrContentReset]="resetInvestigationType(investigationType.MRIPenisTesticle)"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</form>

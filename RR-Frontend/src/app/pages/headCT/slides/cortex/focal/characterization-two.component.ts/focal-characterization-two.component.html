@@ -1,0 +1,381 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class=" f-vertical c-sep m-t-15 m-b-15 o-radio-list">
+    <h2 rr-id="hea_c_0602211" class="c-pad">
+      {{'headCT.cortex.details.value' | translate}}
+    </h2>
+    <div class="c-sep f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="hea_c_0602212"
+          label="{{'headCT.cortex.narrowedSulci.value' | translate}}"
+          name="isNarrowedSulci"
+          binary="true"
+          [(ngModel)]="model.isNarrowedSulci"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0602213"
+          label="{{'headCT.cortex.blurringOfWhiteMattergrey.value' | translate}}"
+          labelStyleClass="text-break"
+          name="isBlurringOfWhiteGreyJunction"
+          binary="true"
+          [(ngModel)]="model.isBlurringOfWhiteGreyJunction"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0602214"
+          label="{{'headCT.cortex.perifocalEdema.value' | translate}}"
+          name="isPerifocalEdema"
+          binary="true"
+          [(ngModel)]="model.isPerifocalEdema"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0602215"
+          label="{{'headCT.cortex.descentOfTheCerebellar.value' | translate}}"
+          name="isDescentOfTheCerebellarTonsils"
+          binary="true"
+          [(ngModel)]="model.isDescentOfTheCerebellarTonsils"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0602216"
+          label="{{'headCT.cortex.contactToTheventricularSystem.value' | translate}}"
+          name="isContactToTheventricularSystem"
+          binary="true"
+          [(ngModel)]="model.isContactToTheVentricularSystem"
+          labelStyleClass="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0602217"
+          label="{{'headCT.cortex.hydrocephalus.value' | translate}}"
+          name="isHydrocephalus"
+          binary="true"
+          [(ngModel)]="model.isHydrocephalus"
+        >
+        </p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep  c-pad f-vertical o-list">
+        <p-checkbox
+          rr-id="hea_c_060331"
+          label="{{'headCT.cortex.midlineShiftOne.value' | translate}}"
+          name="isMidlineShift"
+          binary="true"
+          [(ngModel)]="model.isMidlineShift"
+          rrContentReset="isMidlineShiftContainer"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list f-vertical m-r-15"
+          id="isMidlineShiftContainer"
+          [rrDisable]="!model.isMidlineShift"
+        >
+          <h3 rr-id="hea_c_060332" class="m-b-5">
+            {{ 'headCT.cortex.side.value' | translate }}*
+          </h3>
+          <p-dropdown
+            rr-id="hea_c_060333"
+            name="midlineShiftSideType"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [(ngModel)]="model.midlineShiftSideType"
+            [options]="midlineShiftOptions"
+            rrDropdownClear
+            rrValidation="midlineShiftSideType"
+          ></p-dropdown>
+          <h3 rr-id="hea_c_060334" class="m-b-5">
+            {{ 'headCT.cortex.midlineShiftTwo.value' | translate }}
+          </h3>
+          <rr-number-input
+            name="midlineShift"
+            [(ngModel)]="model.midlineShift"
+            inputRrId="hea_c_060335"
+            labelRrId="hea_c_060336"
+            [label]="'headCT.cortex.inMm.value' | translate"
+            [config]="{min: 1, max: 99}"
+          ></rr-number-input>
+        </div>
+        <p-checkbox
+          rr-id="hea_c_060337"
+          label="{{'headCT.cortex.herniation.value' | translate}}"
+          name="isHerniation"
+          binary="true"
+          [(ngModel)]="model.isHerniation"
+          rrContentReset="isHerniationContainer"
+          (onChange)="removeRegionDropDownValue()"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list m-r-15"
+          id="isHerniationContainer"
+          [rrDisable]="!model.isHerniation"
+        >
+          <h3
+            rr-id="hea_c_060338"
+            class="m-b-5"
+            rrInfoIcon="hea_c_06_02"
+            [infoIconPdfLandscape]="true"
+          >
+            {{ 'headCT.cortex.region.value' | translate }}*
+          </h3>
+          <p-dropdown
+            rr-id="hea_c_060339"
+            name="regionType"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [(ngModel)]="model.regionType"
+            [options]="regionOptions"
+            rrDropdownClear
+            rrValidation="regionType"
+            [rrDropdownExcludedOptions]="getExcludedRegionException()"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" f-vertical c-sep m-t-15 m-b-15 o-radio-list">
+    <h2 rr-id="hea_c_060426" class="c-pad">
+      {{'headCT.cortex.associatedFindings.value' | translate}}
+    </h2>
+    <div class="c-sep f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="hea_c_060427"
+          label="{{'headCT.cortex.corticalThinning.value' | translate}}"
+          name="isCorticalThinning"
+          binary="true"
+          [(ngModel)]="model.isCorticalThinning"
+          rrContentReset="isCorticalThinningContainer"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="isCorticalThinningContainer"
+          [rrDisable]="!model.isCorticalThinning"
+        >
+          <p-radioButton
+            rr-id="hea_c_060428"
+            label="{{ 'headCT.cortex.generalized.value' | translate }}"
+            name="corticalThinningType"
+            [(ngModel)]="model.corticalThinningType"
+            [value]="corticalThinningEnum.Generalized"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_060429"
+            label="{{ 'headCT.cortex.regional.value' | translate }}"
+            name="corticalThinningType"
+            [(ngModel)]="model.corticalThinningType"
+            [value]="corticalThinningEnum.Regional"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <p-checkbox
+          rr-id="hea_c_060431"
+          label="{{'headCT.cortex.corticalTuber.value' | translate}}"
+          name="isCorticalTuber"
+          binary="true"
+          [(ngModel)]="model.isCorticalTuber"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_060432"
+          label="{{'headCT.cortex.subependymalNodules.value' | translate}}"
+          name="isSubependymalNodules"
+          binary="true"
+          [(ngModel)]="model.isSubependymalNodules"
+          rrContentReset="isSubependymalNodulesContainer"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="isSubependymalNodulesContainer"
+          [rrDisable]="!model.isSubependymalNodules"
+        >
+          <p-checkbox
+            rr-id="hea_c_060433"
+            label="{{'headCT.cortex.calcified.value' | translate}}"
+            name="isCalcified"
+            binary="true"
+            [(ngModel)]="model.isCalcified"
+          >
+          </p-checkbox>
+        </div>
+
+        <p-checkbox
+          rr-id="hea_c_0604214"
+          label="{{'headCT.cortex.ventricularHerniation.value' | translate}}"
+          name="isVentricularHerniation"
+          binary="true"
+          [(ngModel)]="model.isVentricularHerniation"
+          rrContentReset="isVentricularHerniationContainer"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isVentricularHerniation"
+          id="isVentricularHerniationContainer"
+        >
+          <p-checkbox
+            rr-id="hea_c_0604215"
+            label="{{'headCT.cortex.lateralVentricleRight.value' | translate}}"
+            name="isLateralVentricleRight"
+            binary="true"
+            [(ngModel)]="model.isLateralVentricleRight"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_0604216"
+            label="{{'headCT.cortex.lateralVentricleLeft.value' | translate}}"
+            name="isLateralVentricleLeft"
+            binary="true"
+            [(ngModel)]="model.isLateralVentricleLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_0604217"
+            label="{{'headCT.cortex.3rdVentricle.value' | translate}}"
+            name="is3RdVentricle"
+            binary="true"
+            [(ngModel)]="model.is3RdVentricle"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_0604233"
+            label="{{'headCT.cortex.aqueduct.value' | translate}}"
+            name="isAqueduct"
+            binary="true"
+            [(ngModel)]="model.isAqueduct"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_0604234"
+            label="{{'headCT.cortex.4thVentricle.value' | translate}}"
+            name="is4thVentricle"
+            binary="true"
+            [(ngModel)]="model.is4thVentricle"
+          >
+          </p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="hea_c_0604235"
+          label="{{'headCT.cortex.caputMedusa.value' | translate}}"
+          name="isCaputMedusa"
+          binary="true"
+          [(ngModel)]="model.isCaputMedusa"
+        >
+        </p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep  c-pad-l f-vertical o-list">
+        <div class="o-radio-list">
+          <p-checkbox
+            rr-id="hea_c_0605218"
+            label="{{'headCT.cortex.abscess.value' | translate}}"
+            name="isAbscess"
+            binary="true"
+            [(ngModel)]="model.isAbscess"
+            rrContentReset="isAbscessContainer"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content o-radio-list"
+            id="isAbscessContainer"
+            [rrDisable]="!model.isAbscess"
+          >
+            <h3 rr-id="hea_c_0605219" class="m-b-5">
+              {{ 'headCT.cortex.maxDiameter.value' | translate }}
+            </h3>
+            <rr-number-input
+              name="maxDiameter"
+              [(ngModel)]="model.maxDiameter"
+              inputRrId="hea_c_0605220"
+              labelRrId="hea_c_0605221"
+              [label]="'headCT.cortex.inMm.value' | translate"
+              [config]="{min: 1, max: 99}"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div class="o-radio-list" [rrDisable]="!isContrastEnhanced">
+          <h2 rr-id="hea_c_060515">
+            {{ 'headCT.cortex.contrastEnhancementQuantitative.value' | translate
+            }}
+          </h2>
+
+          <p-radioButton
+            rr-id="hea_c_060516"
+            label="{{ 'headCT.cortex.no.value' | translate }}"
+            name="contrastEnhancementType"
+            [(ngModel)]="model.contrastEnhancementType"
+            [value]="contrastEnhancementQuantitativeEnum.No"
+            rrUnClickRadio
+            rrContentReset="contrastEnhancementQuantitativeSignificantContainerOne contrastEnhancementQuantitativeSignificantContainerTwo"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_060517"
+            label="{{ 'headCT.cortex.weak.value' | translate }}"
+            name="contrastEnhancementType"
+            [(ngModel)]="model.contrastEnhancementType"
+            [value]="contrastEnhancementQuantitativeEnum.Low"
+            rrUnClickRadio
+            rrContentReset="contrastEnhancementQuantitativeSignificantContainerOne contrastEnhancementQuantitativeSignificantContainerTwo"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_c_060518"
+            label="{{ 'headCT.cortex.significant.value' | translate }}"
+            name="contrastEnhancementType"
+            [(ngModel)]="model.contrastEnhancementType"
+            [value]="contrastEnhancementQuantitativeEnum.Strong"
+            rrUnClickRadio
+            rrContentReset="contrastEnhancementQuantitativeSignificantContainerOne contrastEnhancementQuantitativeSignificantContainerTwo"
+          >
+          </p-radioButton>
+          <div
+            class="o-radio-list nested-content"
+            [rrDisable]="!checkIfWeakOrSignificant()"
+            id="contrastEnhancementQuantitativeSignificantContainerOne"
+          >
+            <p-radioButton
+              rr-id="hea_c_060519"
+              label="{{ 'headCT.cortex.homogeneous.value' | translate }}"
+              name="contrastEnhancementHomogeneityType"
+              [(ngModel)]="model.contrastEnhancementHomogeneityType"
+              [value]="contrastEnhancementHomogeneityEnum.Homogeneous"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_c_060520"
+              label="{{ 'headCT.cortex.heterogeneous.value' | translate }}"
+              name="contrastEnhancementHomogeneityType"
+              [(ngModel)]="model.contrastEnhancementHomogeneityType"
+              [value]="contrastEnhancementHomogeneityEnum.Heterogeneous"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+        <div class="o-radio-list" [rrDisable]="!checkIfWeakOrSignificant()">
+          <h2 rr-id="hea_c_0605211">
+            {{ 'headCT.cortex.contrastEnhancementDistribution.value' | translate
+            }}
+          </h2>
+          <p-dropdown
+            rr-id="hea_c_060522"
+            name="contrastEnhancementDistributionType"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            styleClass="o-width-100 ui-brown-box"
+            [options]="contrastEnhancementDistributionOptions"
+            [(ngModel)]="model.contrastEnhancementDistributionType"
+            rrDropdownClear
+            class="p-r-15"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

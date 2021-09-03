@@ -1,0 +1,400 @@
+<div class="f-horizontal f-start col-h-100">
+  <div
+    class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list col-height-555"
+  >
+    <p-checkbox
+      name="isTear"
+      label="{{ 'kneeMRT.softParts.tear.value' | translate }}"
+      rrContentReset="isTearDetails-block"
+      rr-id="kne_m_080240"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isTear"
+      rrValidation="isTear isEnthesiopathy"
+    >
+    </p-checkbox>
+    <div
+      id="isTearDetails-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isTear"
+    >
+      <p rr-id="kne_m_080241" class="m-b-6">
+        {{ 'kneeMRT.softParts.localization.value' | translate }}*
+      </p>
+      <p-radioButton
+        name="tptLocalizationType"
+        [value]="tptLocalizationType.Proximal"
+        rrContentReset="isAvulsionTuberosityTibiae-block"
+        label="{{ 'kneeMRT.softParts.proximal.value' | translate }}"
+        rr-id="kne_m_080242"
+        [(ngModel)]="model.tptLocalizationType"
+        rrValidation="tptLocalizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        name="tptLocalizationType"
+        [value]="tptLocalizationType.Distal"
+        label="{{ 'kneeMRT.softParts.distal.value' | translate }}"
+        rr-id="kne_m_080243"
+        [(ngModel)]="model.tptLocalizationType"
+        rrValidation="tptLocalizationType"
+      >
+      </p-radioButton>
+      <div
+        id="isAvulsionTuberosityTibiae-block"
+        class="f-vertical f-start o-radio-list nested-content m-b-4"
+        [rrDisable]="model.tptLocalizationType !== 'Distal'"
+      >
+        <p-checkbox
+          name="isAvulsionTuberosityTibiae"
+          label="{{ 'kneeMRT.softParts.avulsionTuberositasTibiae.value' | translate }}"
+          rr-id="kne_m_080244"
+          binary="true"
+          [(ngModel)]="model.isAvulsionTuberosityTibiae"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        name="isRetraction"
+        label="{{ 'kneeMRT.softParts.retraction.value' | translate }}"
+        rrContentReset="retractionInMm-block"
+        rr-id="kne_m_080245"
+        binary="true"
+        [(ngModel)]="model.isRetraction"
+      >
+      </p-checkbox>
+      <div
+        id="retractionInMm-block"
+        class="nested-content m-b-23"
+        [rrDisable]="!model.isRetraction"
+      >
+        <rr-number-input
+          rr-id="kne_m_080246"
+          name="retractionInMm"
+          [(ngModel)]="model.retractionInMm"
+          [label]="'kneeMRT.softParts.dimensionInMm.value' | translate"
+          [config]="{placeholder: '--', min: 0, step: 1, max: 80}"
+        >
+        </rr-number-input>
+      </div>
+      <p rr-id="kne_m_080248">
+        {{ 'kneeMRT.softParts.associatedFindings.value' | translate }}
+      </p>
+      <p-checkbox
+        name="isSurroundingHematoma"
+        label="{{ 'kneeMRT.softParts.surroundingHaematoma.value' | translate }}"
+        rr-id="kne_m_080249"
+        binary="true"
+        [(ngModel)]="model.isSurroundingHematoma"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isBoneBruise"
+        label="{{ 'kneeMRT.softParts.boneBruise.value' | translate }}"
+        rr-id="kne_m_080250"
+        binary="true"
+        [(ngModel)]="model.isBoneBruise"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isPatellaAlta"
+        label="{{ 'kneeMRT.softParts.patellaHigh.value' | translate }}"
+        rr-id="kne_m_080251"
+        binary="true"
+        [(ngModel)]="model.isPatellaAlta"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad o-radio-list">
+    <p-checkbox
+      name="isEnthesiopathy"
+      label="{{ 'kneeMRT.softParts.enthesiopathy.value' | translate }}"
+      rrContentReset="Proximal-block Distal-block Distal-block-2"
+      (onChange)="clearEnthesiopathyType()"
+      labelStyleClass="ui-fat-label"
+      rr-id="kne_m_080336"
+      binary="true"
+      [(ngModel)]="model.isEnthesiopathy"
+      rrValidation="isTear isEnthesiopathy"
+    >
+    </p-checkbox>
+    <p-radioButton
+      rrUnClickRadio
+      rrContentReset="Proximal-block Distal-block Distal-block-2"
+      name="softparts.enthesiopathyType"
+      [value]="tptLocalizationType.Proximal"
+      label="{{ 'kneeMRT.softParts.proximal.value' | translate }}"
+      rr-id="kne_m_080337"
+      [rrDisable]="!model.isEnthesiopathy"
+      [(ngModel)]="model.enthesiopathyType"
+    >
+    </p-radioButton>
+    <div
+      id="Proximal-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model.enthesiopathyType !== tptLocalizationType.Proximal"
+    >
+      <p-checkbox
+        name="isSindingLarsenJohanssonSyndrome"
+        label="{{ 'kneeMRT.softParts.sindingLarsenJohanssonSyndrome.value' | translate }}"
+        rr-id="kne_m_080338"
+        binary="true"
+        class="m-b-6"
+        rrInfoIcon="kne_m_0803238"
+        [(ngModel)]="model.isSindingLarsenJohanssonSyndrome"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isThickeningEdemaOfTheProximalLigamentPatellae"
+        label="{{ 'kneeMRT.softParts.thickeningEdemaOfTheDistal.value' | translate }}"
+        rrContentReset="isThickeningEdemaOfTheProximalLigamentPatellaeDetails-block"
+        rr-id="kne_m_080339"
+        binary="true"
+        [(ngModel)]="model.isThickeningEdemaOfTheProximalLigamentPatellae"
+      >
+      </p-checkbox>
+      <div
+        id="isThickeningEdemaOfTheProximalLigamentPatellaeDetails-block"
+        class="f-vertical f-start o-radio-list nested-content m-b-14"
+        [rrDisable]="!model.isThickeningEdemaOfTheProximalLigamentPatellae"
+      >
+        <p rr-id="kne_m_080340" class="m-b-3">
+          {{ 'kneeMRT.softParts.tendonLayer.value' | translate }}
+        </p>
+        <p-checkbox
+          name="isDeep"
+          label="{{ 'kneeMRT.softParts.deep.value' | translate }}"
+          rr-id="kne_m_080341"
+          binary="true"
+          [(ngModel)]="model.isDeep"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="issuperficial"
+          label="{{ 'kneeMRT.softParts.superficial.value' | translate }}"
+          rr-id="kne_m_080342"
+          binary="true"
+          [(ngModel)]="model.issuperficial"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        name="isEdemaOfTheInfrapatellarFattyBody"
+        label="{{ 'kneeMRT.softParts.edemaOfTheInfrapatellar.value' | translate }}"
+        rr-id="kne_m_080343"
+        binary="true"
+        [(ngModel)]="model.isEdemaOfTheInfrapatellarFattyBody"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isBoneMarrowEdemaOfTheCaudalPatellapol"
+        label="{{ 'kneeMRT.softParts.boneMarrowEdemaOf.value' | translate }}"
+        rr-id="kne_m_080344"
+        binary="true"
+        [(ngModel)]="model.isBoneMarrowEdemaOfTheCaudalPatellapol"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div
+    class="f-horizontal f-start c-col-2 c-sep-l c-pad-l m-t-29 col-height-525"
+  >
+    <div class="f-vertical f-start c-col-1 c-pad-r o-radio-list">
+      <p-radioButton
+        rrUnClickRadio
+        rrContentReset="Proximal-block Distal-block Distal-block-2"
+        name="enthesiopathyType"
+        [value]="tptLocalizationType.Distal"
+        label="{{ 'kneeMRT.softParts.distal.value' | translate }}"
+        rr-id="kne_m_080411"
+        [rrDisable]="!model.isEnthesiopathy"
+        [(ngModel)]="model.enthesiopathyType"
+      >
+      </p-radioButton>
+      <div
+        id="Distal-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.enthesiopathyType !== tptLocalizationType.Distal"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rrContentReset="NonSpecificInsertionStenosisDinopathy-block ZnOsgoodSchlatter-block MOsgoodSlatter-block"
+          name="enthesiopathyDistalType"
+          [value]="enthesiopathyDistalType.MOsgoodSlatter"
+          rrInfoIcon="kne_m_080413"
+          label="{{ 'kneeMRT.softParts.mOsgoodSlatter.value' | translate }}"
+          rr-id="kne_m_080412"
+          [(ngModel)]="model.enthesiopathyDistalType"
+        >
+        </p-radioButton>
+        <div
+          id="MOsgoodSlatter-block"
+          class="f-vertical f-start o-patellar-radio-list-7 nested-content"
+          [rrDisable]="model.enthesiopathyDistalType !== enthesiopathyDistalType.MOsgoodSlatter"
+        >
+          <p-checkbox
+            name="isMOsgoodSlatterThickeningEdemaOfTheDistalPatellarLigament"
+            label="{{ 'kneeMRT.softParts.thickeningEdemaOfTheDistal.value' | translate }}"
+            rr-id="kne_m_080414"
+            binary="true"
+            [(ngModel)]="model.isMOsgoodSlatterThickeningEdemaOfTheDistalPatellarLigament"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isMOsgoodSlatterBoneMarrowEdemaOfTuberosity"
+            label="{{ 'kneeMRT.softParts.boneMarrowEdemaOfTuberosity.value' | translate }}"
+            rr-id="kne_m_080415"
+            binary="true"
+            [(ngModel)]="model.isMOsgoodSlatterBoneMarrowEdemaOfTuberosity"
+            [ngStyle]="{'width.%': 102}"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isBuritisInfrapatellarisProfunda"
+            label="{{ 'kneeMRT.softParts.buritisInfrapatellarisProfunda(Knie.value' | translate }}"
+            rr-id="kne_m_080416"
+            binary="true"
+            class="text-break"
+            [(ngModel)]="model.isBuritisInfrapatellarisProfunda"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isEdemaOfTheVentralSoftTissues"
+            label="{{ 'kneeMRT.softParts.edemaOfTheVentral.value' | translate }}"
+            rr-id="kne_m_080417"
+            binary="true"
+            [(ngModel)]="model.isEdemaOfTheVentralSoftTissues"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isHoffaFatPad"
+            label="{{ 'kneeMRT.softParts.uncertaintyOfTheCaudal.value' | translate }}"
+            rr-id="kne_m_080418"
+            binary="true"
+            [(ngModel)]="model.isHoffaFatPad"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isFragmentationOfTuberosity"
+            label="{{ 'kneeMRT.softParts.fragmentationOfTuberosity.value' | translate }}"
+            rr-id="kne_m_080419"
+            binary="true"
+            [(ngModel)]="model.isFragmentationOfTuberosity"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div
+      id="Distal-block-2"
+      class="f-vertical f-start c-col-1 c-pad-l o-radio-list c-sep-l m-t-35"
+      [rrDisable]="model.enthesiopathyType !== tptLocalizationType.Distal"
+    >
+      <div class="f-vertical f-start o-radio-list">
+        <p-radioButton
+          rrUnClickRadio
+          rrContentReset="NonSpecificInsertionStenosisDinopathy-block ZnOsgoodSchlatter-block MOsgoodSlatter-block"
+          name="enthesiopathyDistalType"
+          [value]="enthesiopathyDistalType.ZnOsgoodSchlatter"
+          rrInfoIcon="kne_m_080534"
+          label="{{ 'kneeMRT.softParts.previousMorbus.value' | translate }}"
+          rr-id="kne_m_080516"
+          [(ngModel)]="model.enthesiopathyDistalType"
+        >
+        </p-radioButton>
+        <div
+          id="ZnOsgoodSchlatter-block"
+          class="f-vertical f-start o-radio-list nested-content m-b-8"
+          [rrDisable]="model.enthesiopathyDistalType !== enthesiopathyDistalType.ZnOsgoodSchlatter"
+        >
+          <div class="label-extended-width">
+            <p-checkbox
+              class="text-break"
+              name="isMOsgoodSlatterBursitisInfrapatellarisProfunda"
+              binary="true"
+              label="{{ 'kneeMRT.softParts.bursitisInfrapatellarisProfunda(clergymans.value' | translate }}"
+              rr-id="kne_m_080517"
+              [(ngModel)]="model.isMOsgoodSlatterBursitisInfrapatellarisProfunda"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            name="isIrregularityOfTuberosityTibiae"
+            binary="true"
+            class="m-b-5"
+            label="{{ 'kneeMRT.softParts.irregularityOfTuberosityTibiae.value' | translate }}"
+            rr-id="kne_m_080518"
+            [(ngModel)]="model.isIrregularityOfTuberosityTibiae"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isThickeningEdemaOfTheDistalLigamentPatellae"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.thickeningEdemaOfTheDistal.value' | translate }}"
+            rr-id="kne_m_080519"
+            [(ngModel)]="model.isThickeningEdemaOfTheDistalLigamentPatellae"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rrUnClickRadio
+          rrContentReset="NonSpecificInsertionStenosisDinopathy-block ZnOsgoodSchlatter-block MOsgoodSlatter-block"
+          name="enthesiopathyDistalType"
+          class="m-b-7"
+          [value]="enthesiopathyDistalType.NonSpecificInsertionStenosisDinopathy"
+          label="{{ 'kneeMRT.softParts.nonspecificInsertionStenosisDinopathy.value' | translate }}"
+          rr-id="kne_m_080520"
+          [(ngModel)]="model.enthesiopathyDistalType"
+        >
+        </p-radioButton>
+        <div
+          id="NonSpecificInsertionStenosisDinopathy-block"
+          class="f-vertical f-start o-patellar-radio-list-6 nested-content"
+          [rrDisable]="model.enthesiopathyDistalType !== enthesiopathyDistalType.NonSpecificInsertionStenosisDinopathy"
+        >
+          <p-checkbox
+            name="isThickeningEdemaOfTheDistalPatellarLigament"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.thickeningEdemaOfTheDistal.value' | translate }}"
+            rr-id="kne_m_080521"
+            [(ngModel)]="model.isThickeningEdemaOfTheDistalPatellarLigament"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isBursitisInfrapatellarisProfunda"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.bursitisInfrapatellarisProfunda.value' | translate }}"
+            rr-id="kne_m_080522"
+            [(ngModel)]="model.isBursitisInfrapatellarisProfunda"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isBoneMarrowEdemaOfTuberosity"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.boneMarrowEdemaOfTuberosity.value' | translate }}"
+            rr-id="kne_m_080523"
+            [(ngModel)]="model.isBoneMarrowEdemaOfTuberosity"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isIntratendinousCalcification"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.intratendinousCalcification.value' | translate }}"
+            rr-id="kne_m_080524"
+            [(ngModel)]="model.isIntratendinousCalcification"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isTractionSpur"
+            binary="true"
+            label="{{ 'kneeMRT.softParts.tractionSpur.value' | translate }}"
+            rr-id="kne_m_080525"
+            [(ngModel)]="model.isTractionSpur"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_c_010103">
+        {{ "headCT.examination.examinationArea.value" | translate }}
+      </h1>
+      <div class="f-vertical f-start o-radio-list">
+        <p-checkbox
+          name="isBrainMRI"
+          [(ngModel)]="model.isBrainMRI"
+          label="{{ 'headCT.examination.brainMRI.value' | translate }}"
+          binary="true"
+          rr-id="hea_c_010104"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isBrainstemMRI"
+          [(ngModel)]="model.isBrainstemMRI"
+          label="{{ 'headCT.examination.brainstemMRI.value' | translate }}"
+          binary="true"
+          rr-id="hea_c_010105"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isPituitaryMRI"
+          [(ngModel)]="model.isPituitaryMRI"
+          label="{{ 'headCT.examination.pituitaryMRI.value' | translate }}"
+          binary="true"
+          rr-id="hea_c_010106"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isOrbitaMRI"
+          [(ngModel)]="model.isOrbitaMRI"
+          label="{{ 'headCT.examination.orbitaMRI.value' | translate }}"
+          binary="true"
+          rr-id="hea_c_010107"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isParanasalSinusMRI"
+          [(ngModel)]="model.isParanasalSinusMRI"
+          label="{{ 'headCT.examination.paranasalSinusMRI.value' | translate }}"
+          binary="true"
+          rr-id="hea_c_010108"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isTemporalBone"
+          [(ngModel)]="model.isTemporalBone"
+          label="{{ 'headCT.examination.cTTemporalBone.value' | translate }}"
+          binary="true"
+          rr-id="hea_c_010109"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-2 c-sep c-pad">
+      <rr-patient-information
+        [model]="model.patientInformation"
+      ></rr-patient-information>
+    </div>
+    <div class="double-col f-vertical">
+      <div class="double-col-header p-l-15">
+        <h1 rr-id="hea_c_010401">
+          {{ "headCT.examination.indication.value" | translate }}
+        </h1>
+      </div>
+      <div class="double-col-content f-horizontal">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [disabled]="false"
+            [setConfig]="findingDropdownConfig"
+          >
+          </rr-finding-column>
+        </div>
+        <rr-examination-indication
+          [model]="findingHandler.currentItem"
+          [dropdownW005]="dropdownW005"
+        >
+        </rr-examination-indication>
+      </div>
+    </div>
+  </div>
+</form>

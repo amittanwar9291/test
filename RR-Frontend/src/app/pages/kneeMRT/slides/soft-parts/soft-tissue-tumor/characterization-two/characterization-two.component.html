@@ -1,0 +1,168 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-23 m-b-12">
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="kne_m_0802246" class="m-b-16">
+        {{'kneeMRT.softParts.growthPatterns.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="kne_m_0802247"
+        label="{{'kneeMRT.softParts.subcutaneous.value' | translate}}"
+        binary="true"
+        name="isSubcutaneous"
+        [(ngModel)]="model.isSubcutaneous"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0802248"
+        label="{{'kneeMRT.softParts.noMassEffect.value' | translate}}"
+        binary="true"
+        name="isNoMassEffect"
+        [(ngModel)]="model.isNoMassEffect"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0802249"
+        label="{{'kneeMRT.softParts.alongTendonSheath.value' | translate}}"
+        binary="true"
+        name="isAlongTendonSheath"
+        [(ngModel)]="model.isAlongTendonSheath"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0802250"
+        label="{{'kneeMRT.softParts.infiltration.value' | translate}}"
+        binary="true"
+        name="isInfiltration"
+        class="m-b-46"
+        [(ngModel)]="model.isInfiltration"
+      ></p-checkbox>
+
+      <h2 rr-id="kne_m_0802251" class="m-b-18 m-t-36">
+        {{'kneeMRT.softParts.associatedFindings.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="kne_m_0802252"
+        label="{{'kneeMRT.softParts.cutisThickening.value' | translate}}"
+        binary="true"
+        name="isCutisThickening"
+        [(ngModel)]="model.isCutisThickening"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="kne_m_0802253"
+        label="{{'kneeMRT.softParts.pressureArrosionerosionBone.value' | translate}}"
+        binary="true"
+        name="isPressureCorrosionerosionBone"
+        [(ngModel)]="model.isPressureCorrosionerosionBone"
+      ></p-checkbox>
+    </div>
+
+    <div
+      class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list sliders-z-index"
+    >
+      <h2 rr-id="kne_m_0803234" class="m-b-2">
+        {{'kneeMRT.softParts.signalBehaviourT1w.value' | translate}}
+      </h2>
+      <span>
+        {{'kneeMRT.softParts.referenceMusculature.value' | translate}}
+      </span>
+      <rr-slider-number-triple-input
+        name="t1w"
+        rr-id="kne_m_0803235"
+        [(ngModel)]="model.t1w"
+      >
+      </rr-slider-number-triple-input>
+      <h2 rr-id="kne_m_0803236" class="m-t-9 m-b-1">
+        {{'kneeMRT.softParts.signalBehaviourT2w.value' | translate}}
+      </h2>
+      <span>
+        {{'kneeMRT.softParts.referenceMusculature.value' | translate}}
+      </span>
+      <rr-slider-number-triple-input
+        name="t2w"
+        rr-id="kne_m_0803237"
+        [(ngModel)]="model.t2w"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <div class="o-radio-list" [rrDisable]="!isCMReinforcedTypeYes">
+        <h2 rr-id="kne_m_0804235" class="m-b-27">
+          {{'kneeMRT.softParts.contrastAgentEnhancementQuantitative.value' |
+          translate}}
+        </h2>
+        <p-radioButton
+          rr-id="kne_m_0804236"
+          label="{{'kneeMRT.softParts.powerful.value' | translate}}"
+          name="tissueTumorCMEnhancementType"
+          [value]="cmEnhancementTypeEnum.Powerful"
+          [(ngModel)]="model.tissueTumorCMEnhancementType"
+          rrContentReset="noContrastEnhancementHomogeneity-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_0804237"
+          label="{{'kneeMRT.softParts.weak.value' | translate}}"
+          name="tissueTumorCMEnhancementType"
+          [value]="cmEnhancementTypeEnum.Low"
+          [(ngModel)]="model.tissueTumorCMEnhancementType"
+          rrContentReset="noContrastEnhancementHomogeneity-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_0804238"
+          label="{{'kneeMRT.softParts.no.value' | translate}}"
+          name="tissueTumorCMEnhancementType"
+          [value]="cmEnhancementTypeEnum.No"
+          [(ngModel)]="model.tissueTumorCMEnhancementType"
+          rrContentReset="noContrastEnhancementHomogeneity-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          id="noContrastEnhancementHomogeneity-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="['None', 'No'].includes(model.tissueTumorCMEnhancementType)"
+        >
+          <p-radioButton
+            rr-id="kne_m_0804239"
+            label="{{'kneeMRT.softParts.homogeneous.value' | translate}}"
+            name="quantitativeType"
+            [value]="homogeneityTypeEnum.Homogeneous"
+            [(ngModel)]="model.quantitativeType"
+            rrContentReset="noContrastEnhancementHomogeneityDetails-block"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_0804240"
+            label="{{'kneeMRT.softParts.heterogeneous.value' | translate}}"
+            name="quantitativeType"
+            [value]="homogeneityTypeEnum.Heterogeneous"
+            [(ngModel)]="model.quantitativeType"
+            rrContentReset="noContrastEnhancementHomogeneityDetails-block"
+            rrUnClickRadio
+          ></p-radioButton>
+          <div
+            id="noContrastEnhancementHomogeneityDetails-block"
+            class="f-vertical f-start o-radio-list nested-content"
+            [rrDisable]="model.quantitativeType !== homogeneityTypeEnum.Heterogeneous"
+          >
+            <p-checkbox
+              rr-id="kne_m_0804241"
+              label="{{'kneeMRT.softParts.centrally.value' | translate}}"
+              binary="true"
+              name="isCentrally"
+              [(ngModel)]="model.isCentrally"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="kne_m_0804242"
+              label="{{'kneeMRT.softParts.peripheral.value' | translate}}"
+              binary="true"
+              name="isPeripheral"
+              [(ngModel)]="model.isPeripheral"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list"></div>
+  </div>
+</div>

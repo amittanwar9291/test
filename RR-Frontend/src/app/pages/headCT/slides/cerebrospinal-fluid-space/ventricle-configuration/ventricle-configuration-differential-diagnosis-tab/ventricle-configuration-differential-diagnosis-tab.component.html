@@ -1,0 +1,77 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 p-r-10 o-radio-list f-vertical">
+      <h2 rr-id="hea_c_090230">
+        {{ "headCT.cerebrospinalFluidSpace.differentialDiagnosis.value" |
+        translate }}
+      </h2>
+      <p rr-id="hea_c_090231" class="m-b-0">
+        {{ "headCT.cerebrospinalFluidSpace.differentialDiagnosis1.value" |
+        translate }}*
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="w045"
+        name="ventricleDifferentialDiagnosis1Type"
+        rrId="hea_c_090232"
+        [(ngModel)]="model.ventricleDifferentialDiagnosis1Type"
+        [parentViewModel]="model"
+        rrValidation="ventricleDifferentialDiagnosis1Type"
+        (selectionChanged)="onVentricleDifferentialDiagnosis1TypeChange()"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.ventricleDifferentialDiagnosis1Type === cerebrospinalVentricleDiagnosisTypeEnum.None"
+        label="{{'headCT.cerebrospinalFluidSpace.suspicionOf.value' | translate}}"
+        rr-id="hea_c_090233"
+        binary="true"
+        name="isSuspicionOf"
+        [(ngModel)]="model.isSuspicionOf"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.ventricleDifferentialDiagnosis1Type === cerebrospinalVentricleDiagnosisTypeEnum.None"
+      >
+        <p rr-id="hea_c_090234" class="m-b-0 m-t-10">
+          {{ "headCT.cerebrospinalFluidSpace.differentialDiagnosis2.value" |
+          translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="w045"
+          name="ventricleDifferentialDiagnosis2Type"
+          rrId="hea_c_090235"
+          [(ngModel)]="model.ventricleDifferentialDiagnosis2Type"
+          [parentViewModel]="model"
+          (selectionChanged)="model.isSubordinate = false"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.ventricleDifferentialDiagnosis2Type === cerebrospinalVentricleDiagnosisTypeEnum.None"
+          label="{{'headCT.cerebrospinalFluidSpace.subordinate.value' | translate}}"
+          rr-id="hea_c_090236"
+          binary="true"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 p-r-10">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        [elementsRrIds]="referencePictureElementsRrIds"
+        name="referencePicture"
+      ></rr-reference-picture>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list"></div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list"></div>
+  </div>
+</div>

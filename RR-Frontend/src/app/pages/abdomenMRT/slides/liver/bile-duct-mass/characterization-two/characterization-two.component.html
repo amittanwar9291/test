@@ -1,0 +1,216 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-list">
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_0402128">
+          {{'abdomenMRT.liver.infiltration.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_0402129"
+          name="isCommonHepaticArtery"
+          label="{{'abdomenMRT.liver.commonHepaticArtery.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCommonHepaticArtery"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402130"
+          name="isRightHepaticArtery"
+          label="{{'abdomenMRT.liver.rightHepaticArtery.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isRightHepaticArtery"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402131"
+          name="isLeftHepaticArtery"
+          label="{{'abdomenMRT.liver.leftHepaticArtery.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLeftHepaticArtery"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402132"
+          name="isVPortaeProximal"
+          label="{{'abdomenMRT.liver.vPortaeProximal.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isVPortaeProximal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402133"
+          name="isPortalVeinRightBranch"
+          label="{{'abdomenMRT.liver.portalVeinRightBranch.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPortalVeinRightBranch"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402134"
+          name="isPortalVeinLeftBranch"
+          label="{{'abdomenMRT.liver.portalVeinLeftBranch.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPortalVeinLeftBranch"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402135"
+          name="isInferiorVenaCava"
+          label="{{'abdomenMRT.liver.inferiorVenaCava.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isInferiorVenaCava"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_0402136"
+          name="isLiverCapsule"
+          label="{{'abdomenMRT.liver.liverCapsule.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLiverCapsule"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-list">
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="abd_m_040397" class="m-t-3">
+          {{ "abdomenMRT.liver.differentialDiagnosis.value" | translate }}
+        </h2>
+        <h3 rr-id="abd_m_040398" class="m-b-5">
+          {{ "abdomenMRT.liver.differentialDiagnosisI.value" | translate }}*
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_040399"
+          [diagnosisNumber]="1"
+          [options]="bileDuctMassDDOptions"
+          [(ngModel)]="model.differentialDiagnosis1"
+          name="differentialDiagnosis1"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1"
+          (selectionChanged)="resetDD1Dependent()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="abd_m_0403100"
+          label="{{ 'abdomenMRT.liver.suspicionOf.value' | translate }}"
+          name="isSuspicionOf"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="
+            model.differentialDiagnosis1 === differentialDiagnosis1.None
+          "
+        >
+        </p-checkbox>
+        <div
+          class="f-vertical o-radio-list"
+          [rrDisable]="
+          model.differentialDiagnosis1 === differentialDiagnosis1.None
+        "
+        >
+          <h3 rr-id="abd_m_0403101" class="m-b-5 m-t-6">
+            {{ "abdomenMRT.liver.differentialDiagnosisII.value" | translate }}
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_0403102"
+            [diagnosisNumber]="2"
+            [options]="bileDuctMassDDOptions"
+            [(ngModel)]="model.differentialDiagnosis2"
+            name="differentialDiagnosis2"
+            [parentViewModel]="model"
+            (selectionChanged)="model.isSubordinate = false"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            rr-id="abd_m_0403103"
+            label="{{ 'abdomenMRT.liver.subordinate.value' | translate }}"
+            name="isSubordinate"
+            binary="true"
+            [(ngModel)]="model.isSubordinate"
+            [rrDisable]="
+            model.differentialDiagnosis2 === differentialDiagnosis2.None
+          "
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-list">
+      <div class="o-radio-list" [rrDisable]="!isPerihilarInLocalizerSelected">
+        <h2
+          rr-id="abd_m_040488"
+          rrInfoIcon="abd_m_04_08"
+          class="text-break"
+          infoIconPdfLandscape="true"
+        >
+          {{'abdomenMRT.liver.classificationaccordingToBismuthCorlette.value' |
+          translate}}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_040489"
+          rrUnClickRadio
+          name="classificationCorletteType"
+          [value]="classificationCorletteType.Type1"
+          label="{{'abdomenMRT.liver.type1.value' | translate}}"
+          [(ngModel)]="model.classificationCorletteType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040490"
+          rrUnClickRadio
+          name="classificationCorletteType"
+          [value]="classificationCorletteType.Type2"
+          label="{{'abdomenMRT.liver.type2.value' | translate}}"
+          [(ngModel)]="model.classificationCorletteType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040491"
+          rrUnClickRadio
+          name="classificationCorletteType"
+          [value]="classificationCorletteType.Type3A"
+          label="{{'abdomenMRT.liver.type3a.value' | translate}}"
+          [(ngModel)]="model.classificationCorletteType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040492"
+          rrUnClickRadio
+          name="classificationCorletteType"
+          [value]="classificationCorletteType.Type3B"
+          label="{{'abdomenMRT.liver.type3b.value' | translate}}"
+          [(ngModel)]="model.classificationCorletteType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040493"
+          rrUnClickRadio
+          name="classificationCorletteType"
+          [value]="classificationCorletteType.Type4A"
+          label="{{'abdomenMRT.liver.type4a.value' | translate}}"
+          [(ngModel)]="model.classificationCorletteType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_040494"
+          rrUnClickRadio
+          name="classificationCorletteType"
+          [value]="classificationCorletteType.Type4B"
+          label="{{'abdomenMRT.liver.type4b.value' | translate}}"
+          [(ngModel)]="model.classificationCorletteType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l m-t-9 m-b-12 o-list">
+      <div class="p-r-15">
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+        >
+        </rr-reference-picture>
+      </div>
+    </div>
+  </div>
+</div>

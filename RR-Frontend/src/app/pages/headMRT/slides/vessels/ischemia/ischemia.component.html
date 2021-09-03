@@ -1,0 +1,63 @@
+<div class="main">
+  <p-tabView
+    class="rr-tabView right-edge-tab"
+    [activeIndex]="activeTabIndex"
+    (activeIndexChange)="activeTabIndexChange($event)"
+  >
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="hea_m_040202"
+          ifAny="true"
+          [rrValidation]="localizationValidationGroup"
+        >
+          {{ 'headMRT.vessels.localization.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-localization
+        class="f-horizontal col-h-100"
+        [model]="model"
+      ></rr-localization>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1 rr-id="hea_m_040301">
+          {{ 'headMRT.vessels.ischemicAreaI.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-ischemic-area-one
+        class="f-horizontal col-h-100"
+        [model]="model"
+        [isContrastEnhanced]="isContrastEnhanced"
+        [isDWIInAnySequence]="isDWIInAnySequence"
+      ></rr-ischemic-area-one>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1 rr-id="hea_m_040401" ifAny="true">
+          {{ 'headMRT.vessels.ischemicAreaII.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-ischemic-area-two
+        class="f-horizontal col-h-100"
+        [model]="model"
+        [isCMYes]="isCMYes"
+      ></rr-ischemic-area-two>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="hea_m_040501"
+          ifAny="true"
+          rrValidation="affectedSegmentsOrVesselsLocation"
+        >
+          {{ 'headMRT.vessels.vascularOcclusion.value' | translate }}
+        </h1>
+      </ng-template>
+      <rr-vascular-occlusion
+        [model]="model"
+        [isCMYes]="isCMYes"
+      ></rr-vascular-occlusion>
+    </p-tabPanel>
+  </p-tabView>
+</div>

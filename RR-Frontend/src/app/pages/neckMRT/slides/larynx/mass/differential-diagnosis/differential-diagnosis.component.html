@@ -1,0 +1,88 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <h2 rr-id="nec_m_050216" class="m-b-15" rrInfoIcon="nec_m_05_02">
+    {{ 'neckMRT.larynx.differentialDiagnosis.value' | translate }}
+  </h2>
+  <div
+    class="f-vertical o-radio-list m-b-10"
+    [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+  >
+    <h3 rr-id="nec_m_050217" class="m-b-4">
+      {{ 'neckMRT.larynx.differentialDiagnosis1.value' | translate }}*
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="nec_m_050218"
+      class="m-b-11"
+      [diagnosisNumber]="1"
+      [options]="diffDiagnosisFullOptions"
+      [(ngModel)]="model.differentialDiagnosis1"
+      name="differentialDiagnosis1"
+      group="true"
+      [parentViewModel]="model"
+      rrValidation="differentialDiagnosis1"
+      (selectionChanged)="model.isSuspected = false; model.isSubordinated = false;"
+      class="m-b-0"
+    ></rr-differential-diagnosis-dropdown>
+  </div>
+  <div class="m-b-18" [rrDisable]="model.differentialDiagnosis1 === 'None'">
+    <p-checkbox
+      rr-id="nec_m_050219"
+      [(ngModel)]="model.isSuspected"
+      name="isSuspected"
+      label="{{ 'neckMRT.larynx.suspected.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-30"
+    [rrDisable]="model.differentialDiagnosis === 'None' && model.differentialDiagnosis1 === 'None'"
+  >
+    <h3 rr-id="nec_m_050220" class="m-b-4">
+      {{ 'neckMRT.larynx.differentialDiagnosis2.value' | translate }}
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="nec_m_050221"
+      class="m-b-11"
+      [diagnosisNumber]="2"
+      [options]="diffDiagnosisRestrictedOptions"
+      [(ngModel)]="model.differentialDiagnosis2"
+      name="differentialDiagnosis2"
+      group="true"
+      [parentViewModel]="model"
+      (selectionChanged)="model.isSubordinated = false;"
+    ></rr-differential-diagnosis-dropdown>
+    <div
+      class="o-radio-list m-b-30"
+      [rrDisable]="model.differentialDiagnosis2 === differentialDiagnosisType.None"
+    >
+      <p-checkbox
+        rr-id="nec_m_050222"
+        [(ngModel)]="model.isSubordinated"
+        name="isSubordinated"
+        label="{{ 'neckMRT.larynx.subordinated.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="nec_m_050223"
+      [(ngModel)]="model.isMoreThan1LesionSameEntity"
+      name="isMoreThan1LesionSameEntity"
+      label="{{ 'neckMRT.larynx.lesionSameEntity.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <rr-reference-picture
+    [(ngModel)]="model.referencePicture"
+    [referenceId]="model.id"
+    [fileUploadUrl]="fileUploadUrl"
+    name="referencePicture"
+  ></rr-reference-picture>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13"></div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-10 m-b-13"></div>

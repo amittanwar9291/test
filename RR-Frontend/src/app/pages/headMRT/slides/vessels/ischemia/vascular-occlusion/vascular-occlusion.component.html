@@ -1,0 +1,299 @@
+<div class="f-vertical o-width-100 main-container o-radio-list">
+  <div class="c-pad-l m-t-15 ">
+    <p-checkbox
+      rr-id="hea_m_040229"
+      name="isVascularOcclusion"
+      [(ngModel)]="model.isVascularOcclusion"
+      (click)="resetLocalizer()"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      rrContentReset="informationOnthrombectomyContainer extracranialContainer vascularOcclusionContainerOne vascularOcclusionContainerTwo collateralCirculationContainer"
+      label="{{ 'headMRT.vessels.vascularOcclusion.value' | translate }}"
+    ></p-checkbox>
+  </div>
+  <div
+    class="f-horizontal col-h-100 m-b-15"
+    [rrDisable]="!model.isVascularOcclusion"
+  >
+    <div class="c-col-1 c-sep c-pad" id="vascularOcclusionContainerOne">
+      <div class="nested-content o-radio-list f-vertical">
+        <h2
+          rr-id="hea_m_040230"
+          rrValidation="affectedSegmentsOrVesselsLocation"
+        >
+          {{ 'headMRT.vessels.localization.value' | translate }}*
+        </h2>
+        <rr-arteries-segments-small-localizer
+          class="nested-localizer"
+          rr-id="hea_m_040231"
+          name="affectedSegmentsOrVesselsLocation"
+          [model]="model.affectedSegmentsOrVesselsLocation"
+          (click)="openLargeLocalizer('arteriesSegments')"
+          isLocalizer="true"
+          rrValidation="affectedSegmentsOrVesselsLocation"
+        ></rr-arteries-segments-small-localizer>
+        <p-checkbox
+          class="m-t-minus-35 text-break"
+          rr-id="hea_m_040232"
+          name="isDDArtifactTOFangiography"
+          binary="true"
+          [(ngModel)]="model.isDDArtifactTOFAngiography"
+          label="{{ 'headMRT.vessels.dDArtifactTOFangiography.value' | translate }}"
+        >
+        </p-checkbox>
+        <h2 rr-id="hea_m_040233" class="m-t-10">
+          {{ 'headMRT.vessels.intraarterialThrombus.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="hea_m_040234"
+          name="isBloomingArtifact"
+          binary="true"
+          [(ngModel)]="model.isBloomingArtifact"
+          rrInfoIcon="hea_m_04_09"
+          label="{{ 'headMRT.vessels.bloomingArtifact.value' | translate }}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040235"
+          name="isIntraarterialFLAIRsignalEnhancement"
+          binary="true"
+          [(ngModel)]="model.isIntraarterialFLAIRSignalEnhancement"
+          label="{{ 'headMRT.vessels.intraarterialFLAIRsignalEnhancement.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-checkbox>
+        <h3 rr-id="hea_m_040236">
+          {{ 'headMRT.vessels.longitudinalExpansionOfThrombus.value' | translate
+          }}
+        </h3>
+        <rr-number-input
+          name="longitudinalExpansionOfThrombus"
+          [(ngModel)]="model.longitudinalExpansionOfThrombus"
+          inputRrId="hea_m_040237"
+          labelRrId="hea_m_040238"
+          [label]="'headMRT.vessels.inMm.value' | translate"
+          [config]="{min: 1, max: 99}"
+        ></rr-number-input>
+      </div>
+    </div>
+    <div
+      class=" f-vertical c-sep o-radio-list"
+      id="vascularOcclusionContainerTwo"
+      [rrDisable]="!model.isVascularOcclusion"
+    >
+      <h2 rr-id="hea_m_040320" class="nested-content c-pad-l">
+        {{ 'headMRT.vessels.collateralCirculation.value' | translate }}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div
+          class="c-col-1 c-sep  c-pad o-list"
+          id="collateralCirculationContainer"
+        >
+          <div class="nested-content o-radio-list">
+            <h3 rr-id="hea_m_040321">
+              {{ 'headMRT.vessels.grading.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="hea_m_040322"
+              name="gradingType"
+              [(ngModel)]="model.gradingType"
+              [value]="gradingTypeEnum.No"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.none.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040323"
+              name="gradingType"
+              [(ngModel)]="model.gradingType"
+              [value]="gradingTypeEnum.Low"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.low.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040324"
+              name="gradingType"
+              [(ngModel)]="model.gradingType"
+              [value]="gradingTypeEnum.Moderate"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.moderate.value' | translate }}"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_040325"
+              name="gradingType"
+              [(ngModel)]="model.gradingType"
+              [value]="gradingTypeEnum.Pronounced"
+              rrUnClickRadio
+              label="{{ 'headMRT.vessels.pronounced.value' | translate }}"
+            >
+            </p-radioButton>
+          </div>
+          <div class="o-radio-list nested-content">
+            <h3 rr-id="hea_m_040326">
+              {{ 'headMRT.vessels.intracranial.value' | translate }}
+            </h3>
+            <p-checkbox
+              rr-id="hea_m_040327"
+              name="isAnteriorCommunicatingArtery"
+              binary="true"
+              [(ngModel)]="model.isAnteriorCommunicatingArtery"
+              label="{{ 'headMRT.vessels.anteriorCommunicatingArtery.value' | translate }}"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_040328"
+              name="isPosteriorCommunicatingArtery"
+              binary="true"
+              [(ngModel)]="model.isPosteriorCommunicatingArtery"
+              label="{{ 'headMRT.vessels.posteriorCommunicatingArtery.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad o-list" id="extracranialContainer">
+          <div class="o-radio-list nested-content">
+            <h3 rr-id="hea_m_040432">
+              {{ 'headMRT.vessels.extracranial.value' | translate }}
+            </h3>
+            <p-checkbox
+              rr-id="hea_m_040433"
+              class="text-break"
+              name="isCollateralizationOfTheICAvia"
+              [(ngModel)]="model.isCollateralizationOfTheICAECA"
+              binary="true"
+              rrContentReset="collateralizationOfTheICAviaContainer"
+              label="{{ 'headMRT.vessels.collateralizationOfTheICAvia.value' | translate }}"
+            >
+            </p-checkbox>
+            <div
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isCollateralizationOfTheICAECA"
+              id="collateralizationOfTheICAviaContainer"
+            >
+              <p-checkbox
+                rr-id="hea_m_040434"
+                class="text-break"
+                name="isRetrogradePerfusionofTheOphthalmic"
+                [(ngModel)]="model.isRetrogradePerfusionofTheOphthalmic"
+                binary="true"
+                label="{{ 'headMRT.vessels.retrogradePerfusionofTheOphthalmic.value' | translate }}"
+              >
+              </p-checkbox>
+            </div>
+            <div class="o-radio-list">
+              <p-checkbox
+                rr-id="hea_m_040435"
+                class="text-break"
+                name="isPerfusionOfTheICApars"
+                [(ngModel)]="model.isPerfusionOfTheICAPars"
+                rrContentReset="perfusionOfTheICAparsContainer"
+                binary="true"
+                label="{{ 'headMRT.vessels.perfusionOfTheICApars.value' | translate }}"
+              >
+              </p-checkbox>
+              <div
+                class="nested-content o-radio-list"
+                [rrDisable]="!model.isPerfusionOfTheICAPars"
+                id="perfusionOfTheICAparsContainer"
+              >
+                <p-checkbox
+                  rr-id="hea_m_040436"
+                  class="text-break"
+                  name="isThroughContralateralexternalCarotidArtery"
+                  binary="true"
+                  [(ngModel)]="model.isThroughContralateralexternalCarotidArtery"
+                  label="{{ 'headMRT.vessels.throughContralateralexternalCarotidArtery.value' | translate }}"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="hea_m_040437"
+                  class="text-break"
+                  name="isThroughIpsilateralvertebralArtery"
+                  binary="true"
+                  [(ngModel)]="model.isThroughIpsilateralvertebralArtery"
+                  label="{{ 'headMRT.vessels.throughIpsilateralvertebralArtery.value' | translate }}"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+            <p-checkbox
+              rr-id="hea_m_040438"
+              class="text-break"
+              name="isLeptomeningealcollaterals"
+              binary="true"
+              [(ngModel)]="model.isLeptomeningealcollaterals"
+              label="{{ 'headMRT.vessels.leptomeningealcollaterals.value' | translate }}"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l ">
+      <div
+        id="informationOnthrombectomyContainer"
+        [rrDisable]="!isCMYes"
+        class="nested-content o-radio-list"
+      >
+        <h2 rr-id="hea_m_040514" class="text-break">
+          {{ 'headMRT.vessels.informationOnthrombectomy.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="hea_m_040515"
+          name="isCervicalVesselElongation"
+          binary="true"
+          [(ngModel)]="model.isCervicalVesselElongation"
+          label="{{ 'headMRT.vessels.cervicalVesselElongation.value' | translate }}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040516"
+          name="isHighGradeStenosisupstreamcervicalArtery"
+          binary="true"
+          class="text-break"
+          [(ngModel)]="model.isHighGradeStenosisupstreamcervicalArtery"
+          label="{{ 'headMRT.vessels.highGradeStenosisupstreamcervicalArtery.value' | translate }}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040517"
+          name="isOcclusionOfUpstreamcervicalArtery"
+          binary="true"
+          [(ngModel)]="model.isOcclusionOfUpstreamcervicalArtery"
+          label="{{ 'headMRT.vessels.occlusionOfUpstreamcervicalArtery.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040518"
+          name="isThrombusInUpstreamcervicalArtery"
+          binary="true"
+          [(ngModel)]="model.isThrombusInUpstreamcervicalArtery"
+          label="{{ 'headMRT.vessels.thrombusInUpstreamcervicalArtery.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040519"
+          name="isDissectionOfUpstreamcervicalArtery"
+          binary="true"
+          [(ngModel)]="model.isDissectionOfUpstreamcervicalArtery"
+          label="{{ 'headMRT.vessels.dissectionOfUpstreamcervicalArtery.value' | translate }}"
+          labelStyleClass="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040520"
+          class="text-break"
+          name="isOstialStenosisaffectedVessel"
+          binary="true"
+          [(ngModel)]="model.isOstialStenosisaffectedVessel"
+          label="{{ 'headMRT.vessels.ostialStenosisaffectedVessel.value' | translate }}"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

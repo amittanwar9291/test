@@ -1,0 +1,177 @@
+<div class="h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-pad c-sep m-t-26 m-b-13">
+      <div class="p-l-10">
+        <h2 rr-id="pel_m_0902189" class="m-b-25">
+          {{'pelvisMRT.bladder.alteredInternalStructure.value' | translate}}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.bladder.calcification.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0902154"
+          name="isCalcification"
+          [(ngModel)]="model.isCalcification"
+          rrInfoIcon="pel_m_09_02"
+        ></p-checkbox>
+        <h2 rr-id="pel_m_0902155" class="m-t-55 m-b-25">
+          {{'pelvisMRT.bladder.growthPatterns.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_0902156"
+            label="{{'pelvisMRT.bladder.exophyticGrowth.value' | translate}}"
+            name="growthPatternsType"
+            [value]="growthPatternsTypeEnum.ExophyticGrowth"
+            [(ngModel)]="model.growthPatternsType"
+            rrContentReset="infiltrativeGrowthTypeGroup"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0902157"
+            label="{{'pelvisMRT.bladder.infiltrativeGrowth.value' | translate}}"
+            name="growthPatternsType"
+            [value]="growthPatternsTypeEnum.InfiltrativeGrowth"
+            [(ngModel)]="model.growthPatternsType"
+            rrContentReset="infiltrativeGrowthTypeGroup"
+            rrUnClickRadio
+          ></p-radioButton>
+          <div
+            class="o-radio-list p-l-35 m-t-20"
+            id="infiltrativeGrowthTypeGroup"
+            [rrDisable]="model.growthPatternsType !== growthPatternsTypeEnum.InfiltrativeGrowth"
+          >
+            <p-radioButton
+              rr-id="pel_m_0902158"
+              label="{{'pelvisMRT.bladder.muscularisPropria.value' | translate}}"
+              name="infiltrativeGrowthType"
+              [value]="infiltrativeGrowthTypeEnum.MuscularisPropria"
+              [(ngModel)]="model.infiltrativeGrowthType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0902159"
+              label="{{'pelvisMRT.bladder.perivesicalFatTissue.value' | translate}}"
+              name="infiltrativeGrowthType"
+              [value]="infiltrativeGrowthTypeEnum.PerivesicalFatTissue"
+              [(ngModel)]="model.infiltrativeGrowthType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0902160"
+              label="{{'pelvisMRT.bladder.uterusOvary.value' | translate}}"
+              name="infiltrativeGrowthType"
+              [value]="infiltrativeGrowthTypeEnum.UterusOvary"
+              [rrDisable]="gender !== genderTypeEnum.Female"
+              [(ngModel)]="model.infiltrativeGrowthType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0902161"
+              label="{{'pelvisMRT.bladder.prostateSeminalVesicles.value' | translate}}"
+              name="infiltrativeGrowthType"
+              [rrDisable]="gender !== genderTypeEnum.Male"
+              [value]="infiltrativeGrowthTypeEnum.ProstateSeminalVesicles"
+              [(ngModel)]="model.infiltrativeGrowthType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_0902162"
+              label="{{'pelvisMRT.bladder.pelvicWallAbdominalWall.value' | translate}}"
+              name="infiltrativeGrowthType"
+              [value]="infiltrativeGrowthTypeEnum.PelvicWallAbdominalWall"
+              [(ngModel)]="model.infiltrativeGrowthType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep m-t-26 m-b-13">
+      <div class="p-l-10">
+        <h2 rr-id="pel_m_0903106" class="m-b-25">
+          {{'pelvisMRT.bladder.secondaryWallThickening.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-radioButton
+            class="text-break"
+            rr-id="pel_m_0903107"
+            label="{{'pelvisMRT.bladder.bladderWallInfiltrationThrough.value' | translate}}"
+            name="secondaryWallThickeningType"
+            [value]="secondaryWallThickeningTypeEnum.BladderWallInfiltration"
+            [(ngModel)]="model.secondaryWallThickeningType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903108"
+            label="{{'pelvisMRT.bladder.bladderWallDisplacementDue.value' | translate}}"
+            name="secondaryWallThickeningType"
+            [value]="secondaryWallThickeningTypeEnum.BladderWallDisplacement"
+            [(ngModel)]="model.secondaryWallThickeningType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep m-t-26 m-b-13">
+      <div class="o-list p-l-10 p-r-10">
+        <h2 rr-id="pel_m_0904115">
+          {{'pelvisMRT.bladder.differentialDiagnosis.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_0904116">
+            {{'pelvisMRT.bladder.differentialDiagnosis1.value' | translate}} *
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="1"
+            [options]="w034"
+            [alwaysExcluded]="getAlwaysExcludedOptions()"
+            [(ngModel)]="model.differentialDiagnosis1"
+            name="differentialDiagnosis1"
+            group="true"
+            rrId="pel_m_0904117"
+            [parentViewModel]="model"
+            (selectionChanged)="clearSubordinate()"
+            rrValidation="differentialDiagnosis1"
+          >
+          </rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          class="f-vertical o-radio-list"
+          [rrDisable]="model.differentialDiagnosis1 === bladderDiagnosisTypeEnum.None"
+        >
+          <p rr-id="pel_m_0904118">
+            {{'pelvisMRT.bladder.differentialDiagnosis2.value' | translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="2"
+            [options]="w035"
+            [alwaysExcluded]="getAlwaysExcludedOptions()"
+            [(ngModel)]="model.differentialDiagnosis2"
+            name="differentialDiagnosis2"
+            group="true"
+            rrId="pel_m_0904119"
+            [parentViewModel]="model"
+            (selectionChanged)="clearSubordinate()"
+            rrValidation="differentialDiagnosis2"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.subordinate.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_0904120"
+            [rrDisable]="model.differentialDiagnosis2 === bladderDiagnosisTypeEnum.None"
+            name="isSubordinate"
+            [(ngModel)]="model.isSubordinate"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.bladder.lesionSameEntity.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0904121"
+          name="isMoreThan1Lesion"
+          [(ngModel)]="model.isMoreThan1Lesion"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

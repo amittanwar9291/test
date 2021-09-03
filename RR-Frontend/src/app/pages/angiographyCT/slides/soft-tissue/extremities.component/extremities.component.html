@@ -1,0 +1,361 @@
+<div class="f-vertical f-start main-container">
+  <h2 rr-id="ang_c_100234" class="c-pad-l main-header">
+    {{ "angiographyCT.softTissue.finding.value" | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad o-radio-list">
+      <p-radioButton
+        rr-id="ang_c_100218"
+        name="findingExtremitiesType"
+        [value]="findingExtremitiesType.Mass"
+        label="{{ 'angiographyCT.softTissue.mass.value' | translate }}"
+        [(ngModel)]="model.extremitiesType"
+        rrValidation="extremitiesType"
+        rrContentReset="fractureThirdColumnBlock fractureFourthColumnBlock"
+        (onClick)="clearSideType()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_100219"
+        name="findingExtremitiesType"
+        [value]="findingExtremitiesType.Fracture"
+        label="{{ 'angiographyCT.softTissue.fracture.value' | translate }}"
+        [(ngModel)]="model.extremitiesType"
+        rrValidation="extremitiesType"
+        rrContentReset="massThirdColumnBlock massFourthColumnBlock massFifthColumnBlock"
+        (onClick)="clearSideType()"
+      >
+      </p-radioButton>
+    </div>
+    <div class="c-col-1 c-sep-l c-pad o-radio-list">
+      <div
+        *ngIf="model.extremitiesType === findingExtremitiesType.Mass"
+        id="massThirdColumnBlock"
+      >
+        <h2 rr-id="ang_c_100397" class="m-b-10">
+          {{ "angiographyCT.softTissue.localization.value" | translate }}*
+        </h2>
+        <p-dropdown
+          rr-id="ang_c_100398"
+          name="extremitiesMassLocalizationType"
+          styleClass="ui-brown-box o-width-100"
+          class="p-r-30"
+          [options]="localizationMassTypeOptions"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          group="true"
+          rrDropdownClear
+          rrValidation="extremitiesMassLocalizationType"
+          [(ngModel)]="model.extremitiesMassLocalizationType"
+          (onChange)="clearSideType()"
+        >
+        </p-dropdown>
+        <div
+          *ngIf="model.extremitiesMassLocalizationType !== localizationExtremitiesMassType.None && model.extremitiesMassLocalizationType !== localizationExtremitiesMassType.Pelvis"
+        >
+          <p rr-id="ang_c_100399" class="m-t-10">
+            {{ "angiographyCT.softTissue.side.value" | translate }}*
+          </p>
+          <p-radioButton
+            rr-id="ang_c_1003100"
+            class="m-t-10"
+            name="sideType"
+            [value]="sideType.Right"
+            label="{{ 'angiographyCT.softTissue.right.value' | translate }}"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_1003101"
+            class="m-t-10"
+            name="sideType"
+            [value]="sideType.Left"
+            label="{{ 'angiographyCT.softTissue.left.value' | translate }}"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+          ></p-radioButton>
+        </div>
+        <div
+          *ngIf="model.extremitiesMassLocalizationType === localizationExtremitiesMassType.Pelvis"
+        >
+          <p rr-id="ang_c_1003102" class="m-t-10">
+            {{ "angiographyCT.softTissue.side.value" | translate }}
+            <p-radioButton
+              rr-id="ang_c_1003103"
+              class="m-t-10"
+              name="sideType"
+              [value]="sideType.Right"
+              label="{{ 'angiographyCT.softTissue.right.value' | translate }}"
+              [(ngModel)]="model.sideType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_1003104"
+              class="m-t-10"
+              name="sideType"
+              [value]="sideType.Left"
+              label="{{ 'angiographyCT.softTissue.left.value' | translate }}"
+              [(ngModel)]="model.sideType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </p>
+        </div>
+      </div>
+      <div
+        *ngIf="model.extremitiesType === findingExtremitiesType.Fracture"
+        id="fractureThirdColumnBlock"
+        class="o-radio-list"
+      >
+        <h2 rr-id="ang_c_1003105" class="m-b-10">
+          {{ "angiographyCT.softTissue.localization.value" | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_1003106"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Humerus"
+          label="{{ 'angiographyCT.softTissue.humerus.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003107"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Radius"
+          label="{{ 'angiographyCT.softTissue.radius.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003108"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Ulna"
+          label="{{ 'angiographyCT.softTissue.ulna.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003109"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Carpalia"
+          label="{{ 'angiographyCT.softTissue.carpalia.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003110"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Metacarpalia"
+          label="{{ 'angiographyCT.softTissue.metacarpalia.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003111"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.PhalangesUpperExtremity"
+          label="{{ 'angiographyCT.softTissue.phalangesUpperExtremity.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003112"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Femur"
+          label="{{ 'angiographyCT.softTissue.femur.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003113"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Tibia"
+          label="{{ 'angiographyCT.softTissue.tibia.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003114"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.Fibula"
+          label="{{ 'angiographyCT.softTissue.fibula.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003115"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.TarsalBones"
+          label="{{ 'angiographyCT.softTissue.tarsalBones.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003116"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.MetatarsalBones"
+          label="{{ 'angiographyCT.softTissue.metatarsalBones.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_1003117"
+          name="extremitiesFractureLocalizationType"
+          [value]="localizationExtremitiesFractureType.PhalangesOfTheLowerExtremity"
+          label="{{ 'angiographyCT.softTissue.phalangesOfTheLower.value' | translate }}"
+          [(ngModel)]="model.extremitiesFractureLocalizationType"
+          rrValidation="extremitiesFractureLocalizationType"
+          rrContentReset="fractureFourthColumnBlock"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div
+      class="c-col-1 c-sep-l c-pad o-radio-list"
+      [class.m-t-31]="model.extremitiesType === findingExtremitiesType.Fracture"
+    >
+      <div
+        class="o-radio-list"
+        *ngIf="model.extremitiesType === findingExtremitiesType.Mass"
+        id="massFourthColumnBlock"
+      >
+        <h2 rr-id="ang_c_100465">
+          {{ "angiographyCT.softTissue.compartment.value" | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_100466"
+          name="compartmentType"
+          [value]="compartmentType.SoftTissues"
+          label="{{ 'angiographyCT.softTissue.softTissues.value' | translate }}"
+          [(ngModel)]="model.compartmentType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_100467"
+          name="compartmentType"
+          [value]="compartmentType.Bone"
+          label="{{ 'angiographyCT.softTissue.bone.value' | translate }}"
+          [(ngModel)]="model.compartmentType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <h2 rr-id="ang_c_100426" class="m-b-0 m-t-35">
+          {{'angiographyCT.softTissue.size.value' | translate }}
+        </h2>
+        <p rr-id="ang_c_100427" class="m-b-5 m-t-5">
+          {{'angiographyCT.softTissue.maxDiameter.value' | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="ang_c_100429"
+          inputRrId="ang_c_100428"
+          name="maxDiameter"
+          [(ngModel)]="model.maxDiameter"
+          [label]="'angiographyCT.softTissue.inMm.value' | translate"
+          [config]="{min: 1, max: 999, placeholder: '---'}"
+          (announceModelChange)="resetInput()"
+        ></rr-number-input>
+        <div [rrDisable]="!model.maxDiameter" class="m-t-5">
+          <p rr-id="ang_c_100430" class="m-b-5">
+            {{'angiographyCT.softTissue.2ndPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            labelRrId="ang_c_100432"
+            inputRrId="ang_c_100431"
+            name="secondPlane"
+            [(ngModel)]="model.secondPlane"
+            [label]="'angiographyCT.softTissue.inMm.value' | translate"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+            (announceModelChange)="resetInput()"
+          ></rr-number-input>
+        </div>
+        <div [rrDisable]="!model.secondPlane" class="m-t-5">
+          <p rr-id="ang_c_100433" class="m-b-5">
+            {{'angiographyCT.softTissue.3rdPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            labelRrId="ang_c_100435"
+            inputRrId="ang_c_100434"
+            name="thirdPlane"
+            [(ngModel)]="model.thirdPlane"
+            [label]="'angiographyCT.softTissue.inMm.value' | translate"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div
+        *ngIf="model.extremitiesType === findingExtremitiesType.Fracture"
+        id="fractureFourthColumnBlock"
+        class="o-radio-list"
+        [rrDisable]="model.extremitiesFractureLocalizationType === localizationExtremitiesFractureType.None"
+      >
+        <p rr-id="ang_c_100478">
+          {{ "angiographyCT.softTissue.side.value" | translate }}*
+        </p>
+        <p-radioButton
+          rr-id="ang_c_100479"
+          class="m-t-10"
+          name="sideType"
+          [value]="sideType.Right"
+          label="{{ 'angiographyCT.softTissue.right.value' | translate }}"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_100480"
+          class="m-t-10"
+          name="sideType"
+          [value]="sideType.Left"
+          label="{{ 'angiographyCT.softTissue.left.value' | translate }}"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div
+      class="c-col-1 c-pad-l c-sep-l o-radio-list"
+      [class.m-t-31]="model.extremitiesType === findingExtremitiesType.Fracture"
+    >
+      <div
+        class="o-radio-list"
+        *ngIf="model.extremitiesType === findingExtremitiesType.Mass"
+        id="massFifthColumnBlock"
+      >
+        <h2 rr-id="ang_c_100518" class="main-header m-b-0">
+          {{'angiographyCT.softTissue.dignity.value' | translate }}
+        </h2>
+        <p-dropdown
+          rr-id="ang_c_100519"
+          name="dignityType"
+          styleClass="ui-brown-box o-width-100"
+          class="p-r-30"
+          [options]="dignityTypeOptions"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.dignityType"
+          (onChange)="model.isAbscess = false"
+        >
+        </p-dropdown>
+        <p-checkbox
+          rr-id="ang_c_100520"
+          class="m-t-15"
+          name="isAbscess"
+          label="{{'angiographyCT.softTissue.abscess.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isAbscess"
+          class="m-t-10"
+          [rrDisable]="model.dignityType !== dignityType.Inflammatory"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

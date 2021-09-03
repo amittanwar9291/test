@@ -1,0 +1,390 @@
+<div class="f-vertical col-h-100">
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <div class="o-radio-list m-b-20">
+        <h2 rr-id="nec_m_070206" class="m-b-10 text-break">
+          {{ "neckMRT.thyroid.thyroidectomy.value" | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="nec_m_070207"
+          name="thyroidectomyType"
+          [(ngModel)]="model.thyroidectomyType"
+          label="{{ 'neckMRT.thyroid.statusPostCompleteThyroidectomy.value' | translate }}"
+          [value]="thyroidectomyType.StatusPostCompleteThyroidectomy"
+          rrValidation="thyroidectomyType"
+          rrContentReset="statusPostHemithyroidectomyBlock extensionBlock"
+          (onClick)="resetAutomaticCalculationInMl()"
+        >
+        </p-radioButton>
+        <div
+          [rrDisable]="!(model.thyroidectomyType === thyroidectomyType.StatusPostCompleteThyroidectomy)"
+          class="o-radio-list nested-content"
+          id="statusPostCompleteThyroidectomyBlock"
+        >
+          <p-checkbox
+            rr-id="nec_m_070208"
+            name="isNoThyroidTissue"
+            label="{{ 'neckMRT.thyroid.noThyroidTissue.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isNoThyroidTissue"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="nec_m_070209"
+          name="thyroidectomyType"
+          [(ngModel)]="model.thyroidectomyType"
+          label="{{ 'neckMRT.thyroid.statusPostSubtotalThyroidectomy.value' | translate }}"
+          [value]="thyroidectomyType.StatusPostSubtotalThyroidectomy"
+          rrValidation="thyroidectomyType"
+          rrContentReset="statusPostCompleteThyroidectomyBlock statusPostHemithyroidectomyBlock extensionBlock"
+          (onClick)="resetAutomaticCalculationInMl()"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070210"
+          name="thyroidectomyType"
+          [(ngModel)]="model.thyroidectomyType"
+          label="{{ 'neckMRT.thyroid.statusPostHemithyroidectomy.value' | translate }}"
+          [value]="thyroidectomyType.StatusPostHemithyroidectomy"
+          rrValidation="thyroidectomyType"
+          rrContentReset="statusPostCompleteThyroidectomyBlock statusPostHemithyroidectomyBlock extensionBlock"
+          (onClick)="resetAutomaticCalculationInMl()"
+        >
+        </p-radioButton>
+        <div
+          [rrDisable]="isThyroidectomyTypeNoneOrStatusPostComplete"
+          class="o-radio-list nested-content"
+          id="statusPostHemithyroidectomyBlock"
+        >
+          <p rr-id="nec_m_070211 m-b-10">
+            {{ "neckMRT.thyroid.side.value" | translate }}*
+          </p>
+          <p-radioButton
+            rr-id="nec_m_070212"
+            name="thyroidectomySideType"
+            [(ngModel)]="model.thyroidectomySideType"
+            label="{{ 'neckMRT.thyroid.right.value' | translate }}"
+            [value]="sideType.Right"
+            rrValidation="thyroidectomySideType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="nec_m_070213"
+            name="thyroidectomySideType"
+            [(ngModel)]="model.thyroidectomySideType"
+            label="{{ 'neckMRT.thyroid.left.value' | translate }}"
+            [value]="sideType.Left"
+            rrValidation="thyroidectomySideType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+
+      <div class="o-radio-list">
+        <h2 rr-id="nec_m_070214" class="m-b-11 text-break">
+          {{ 'neckMRT.thyroid.therapy.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="nec_m_070215"
+          name="therapyType"
+          [(ngModel)]="model.therapyType"
+          label="{{ 'neckMRT.thyroid.surgical.value' | translate }}"
+          [value]="therapyType.Surgical"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070216"
+          name="therapyType"
+          [(ngModel)]="model.therapyType"
+          label="{{ 'neckMRT.thyroid.radioiodine.value' | translate }}"
+          [value]="therapyType.Radioiodine"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <div
+        class="o-radio-list"
+        id="extensionBlock"
+        [rrDisable]="isThyroidectomyTypeNoneOrStatusPostComplete"
+      >
+        <h2 rr-id="nec_m_070307" class="m-b-10">
+          {{ 'neckMRT.thyroid.extension.value' | translate }}*
+        </h2>
+        <p rr-id="nec_m_070308" class="m-b-0">
+          {{'neckMRT.thyroid.sizeRightLobe.value' | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="nec_m_070309"
+          labelRrId="nec_m_070310"
+          name="sizeRightLobeInMm"
+          [(ngModel)]="model.sizeRightLobeInMm"
+          [config]="{min: 0, max: 99, step: 0.01, placeholder: '--,--'}"
+          [label]="'neckMRT.thyroid.inCm.value' | translate"
+          (announceModelChange)="resetBothRightPlanes(); calculateTotalVolume();"
+          rrValidation="sizeRightLobeInMm"
+        >
+        </rr-number-input>
+        <div [rrDisable]="inputDisable('sizeRightLobeSecondPlaneInMm')">
+          <p rr-id="nec_m_070311" class="m-b-0">
+            {{'neckMRT.thyroid.2ndPlane.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="nec_m_070312"
+            labelRrId="nec_m_070313"
+            name="sizeRightLobeSecondPlaneInMm"
+            [(ngModel)]="model.sizeRightLobeSecondPlaneInMm"
+            [config]="{min: 0, max: 99, step: 0.01, placeholder: '--,--'}"
+            [label]="'neckMRT.thyroid.inCm.value' | translate"
+            (announceModelChange)="resetThirdRightPlane(); calculateTotalVolume();"
+          >
+          </rr-number-input>
+        </div>
+        <div [rrDisable]="inputDisable('sizeRightLobeThirdPlaneInMm')">
+          <p rr-id="nec_m_070314" class="m-b-0">
+            {{'neckMRT.thyroid.3rdPlane.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="nec_m_070315"
+            labelRrId="nec_m_070316"
+            name="sizeRightLobeThirdPlaneInMm"
+            [(ngModel)]="model.sizeRightLobeThirdPlaneInMm"
+            [config]="{min: 0, max: 99, step: 0.01, placeholder: '--,--'}"
+            [label]="'neckMRT.thyroid.inCm.value' | translate"
+            (announceModelChange)="calculateTotalVolume()"
+          >
+          </rr-number-input>
+        </div>
+        <p rr-id="nec_m_070317" class="m-b-0">
+          {{'neckMRT.thyroid.sizeLeftLobe.value' | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="nec_m_070318"
+          labelRrId="nec_m_070319"
+          name="sizeLeftLobeInMm"
+          [(ngModel)]="model.sizeLeftLobeInMm"
+          [config]="{min: 0, max: 99, step: 0.01, placeholder: '--,--'}"
+          [label]="'neckMRT.thyroid.inCm.value' | translate"
+          (announceModelChange)="resetBothLeftPlanes(); calculateTotalVolume();"
+          rrValidation="sizeLeftLobeInMm"
+        >
+        </rr-number-input>
+        <div [rrDisable]="inputDisable('sizeLeftLobeSecondPlaneInMm')">
+          <p rr-id="nec_m_070320" class="m-b-0">
+            {{'neckMRT.thyroid.2ndPlane.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="nec_m_070321"
+            labelRrId="nec_m_070322"
+            name="sizeLeftLobeSecondPlaneInMm"
+            [(ngModel)]="model.sizeLeftLobeSecondPlaneInMm"
+            [config]="{min: 0, max: 99, step: 0.01, placeholder: '--,--'}"
+            [label]="'neckMRT.thyroid.inCm.value' | translate"
+            (announceModelChange)="resetThirdLeftPlane(); calculateTotalVolume();"
+          >
+          </rr-number-input>
+        </div>
+        <div [rrDisable]="inputDisable('sizeLeftLobeThirdPlaneInMm')">
+          <p rr-id="nec_m_070323" class="m-b-0">
+            {{'neckMRT.thyroid.3rdPlane.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="nec_m_070324"
+            labelRrId="nec_m_070325"
+            name="sizeLeftLobeThirdPlaneInMm"
+            [(ngModel)]="model.sizeLeftLobeThirdPlaneInMm"
+            [config]="{min: 0, max: 99, step: 0.01, placeholder: '--,--'}"
+            [label]="'neckMRT.thyroid.inCm.value' | translate"
+            (announceModelChange)="calculateTotalVolume()"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="nec_m_070401" class="m-b-10">
+        {{ 'neckMRT.thyroid.totalVolume.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="nec_m_070402"
+        name="totalVolumeType"
+        [(ngModel)]="model.totalVolumeType"
+        label="{{ 'neckMRT.thyroid.automaticCalculation.value' | translate }}"
+        [value]="totalVolumeType.AutomaticCalculation"
+        rrContentReset="totalVolumeTypeBlock"
+        rrUnClickRadio
+        (onClick)="calculateTotalVolume()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.totalVolumeType !== totalVolumeType.AutomaticCalculation"
+        class="o-radio-list nested-content"
+      >
+        <rr-number-input
+          inputRrId="nec_m_070403"
+          labelRrId="nec_m_070404"
+          name="automaticCalculationInMl"
+          [(ngModel)]="model.automaticCalculationInMl"
+          [config]="{placeholder: '---', readonly: true}"
+          [label]="'neckMRT.thyroid.inMl.value' | translate"
+        >
+        </rr-number-input>
+      </div>
+      <p-radioButton
+        rr-id="nec_m_070405"
+        name="totalVolumeType"
+        [(ngModel)]="model.totalVolumeType"
+        label="{{ 'neckMRT.thyroid.3DVolumetry.value' | translate }}"
+        [value]="totalVolumeType.ThreeDimensionalVolumetry"
+        rrContentReset="totalVolumeTypeBlock"
+        rrUnClickRadio
+        (onClick)="calculateTotalVolume()"
+      >
+      </p-radioButton>
+      <div
+        [rrDisable]="model.totalVolumeType !== totalVolumeType.ThreeDimensionalVolumetry"
+        class="o-radio-list nested-content"
+        id="totalVolumeTypeBlock"
+      >
+        <p rr-id="nec_m_070406">
+          {{ 'neckMRT.thyroid.measurement.value' | translate }}
+        </p>
+        <rr-number-input
+          inputRrId="nec_m_070407"
+          labelRrId="nec_m_070408"
+          name="measurementInMl"
+          [(ngModel)]="model.measurementInMl"
+          [config]="{min: 1, max: 200, placeholder: '---'}"
+          [label]="'neckMRT.thyroid.inMl.value' | translate"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="nec_m_070501" class="m-b-10">
+        {{ 'neckMRT.thyroid.complications.value' | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-radioButton
+          rr-id="nec_m_070502"
+          name="complicationsType"
+          [(ngModel)]="model.complicationsType"
+          label="{{ 'neckMRT.thyroid.seroma.value' | translate }}"
+          [value]="complicationsType.Seroma"
+          rrContentReset="inflammationBlock"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070503"
+          name="complicationsType"
+          [(ngModel)]="model.complicationsType"
+          label="{{ 'neckMRT.thyroid.hemorrhage.value' | translate }}"
+          [value]="complicationsType.Hemorrhage"
+          rrContentReset="inflammationBlock"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070504"
+          name="complicationsType"
+          [(ngModel)]="model.complicationsType"
+          label="{{ 'neckMRT.thyroid.inflammation.value' | translate }}"
+          [value]="complicationsType.Inflammation"
+          rrContentReset="inflammationBlock"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <div
+          [rrDisable]="model.complicationsType !== complicationsType.Inflammation"
+          class="o-radio-list nested-content"
+          id="inflammationBlock"
+        >
+          <p-checkbox
+            rr-id="nec_m_070505"
+            name="isAbscess"
+            label="{{ 'neckMRT.thyroid.abscess.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isAbscess"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p rr-id="nec_m_070506" class="m-b-10 m-t-10">
+          {{ "neckMRT.thyroid.side.value" | translate }}
+        </p>
+        <p-radioButton
+          rr-id="nec_m_070507"
+          name="sideType"
+          [(ngModel)]="model.sideType"
+          label="{{ 'neckMRT.thyroid.right.value' | translate }}"
+          [value]="sideType.Right"
+          rrValidation="sideType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070508"
+          name="sideType"
+          [(ngModel)]="model.sideType"
+          label="{{ 'neckMRT.thyroid.left.value' | translate }}"
+          [value]="sideType.Left"
+          rrValidation="sideType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <p rr-id="nec_m_070509" class="m-b-10">
+        {{ 'neckMRT.thyroid.extent.value' | translate }}
+      </p>
+      <div class="o-radio-list">
+        <p rr-id="nec_m_070510" class="m-b-0">
+          {{'neckMRT.thyroid.size.value' | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="nec_m_070511"
+          labelRrId="nec_m_070512"
+          name="sizeInMm"
+          [(ngModel)]="model.sizeInMm"
+          [config]="{min: 1, max: 200, placeholder: '---'}"
+          [label]="'neckMRT.thyroid.inMm.value' | translate"
+          (ngModelChange)="resetBothPlanes()"
+        >
+        </rr-number-input>
+        <div [rrDisable]="inputDisable('secondPlaneInMm')">
+          <p rr-id="nec_m_070513" class="m-b-0">
+            {{'neckMRT.thyroid.2ndPlane.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="nec_m_070514"
+            labelRrId="nec_m_070515"
+            name="secondPlaneInMm"
+            [(ngModel)]="model.secondPlaneInMm"
+            [config]="{min: 1, max: 200, placeholder: '---'}"
+            [label]="'neckMRT.thyroid.inMm.value' | translate"
+            (ngModelChange)="resetThirdPlane()"
+          >
+          </rr-number-input>
+        </div>
+        <div [rrDisable]="inputDisable('thirdPlaneInMm')">
+          <p rr-id="nec_m_070516" class="m-b-0">
+            {{'neckMRT.thyroid.3rdPlane.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="nec_m_070517"
+            labelRrId="nec_m_070518"
+            name="thirdPlaneInMm"
+            [(ngModel)]="model.thirdPlaneInMm"
+            [config]="{min: 1, max: 200, placeholder: '---'}"
+            [label]="'neckMRT.thyroid.inMm.value' | translate"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

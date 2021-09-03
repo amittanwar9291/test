@@ -1,0 +1,238 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="o-radio-list c-col-1 c-pad-r c-sep">
+      <h2 rr-id="han_m_090103">
+        {{ "handMRT.evaluation.findingsDynamics.value" | translate }}
+      </h2>
+      <div class="o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="han_m_090106"
+          label="{{ 'handMRT.evaluation.improvement.value' | translate }}"
+          name="findingsDynamicsType"
+          [value]="findingsDynamicsType.Improvement"
+          [(ngModel)]="model.findingsDynamicsType"
+          rrContentReset="deteriorationBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="han_m_090105"
+          label="{{ 'handMRT.evaluation.noChange.value' | translate }}"
+          name="findingsDynamicsType"
+          [value]="findingsDynamicsType.NoChange"
+          [(ngModel)]="model.findingsDynamicsType"
+          rrContentReset="deteriorationBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="han_m_090104"
+          label="{{ 'handMRT.evaluation.deterioration.value' | translate }}"
+          name="findingsDynamicsType"
+          [value]="findingsDynamicsType.Deterioration"
+          [(ngModel)]="model.findingsDynamicsType"
+          rrContentReset="deteriorationBlock"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          id="deteriorationBlock"
+          class="nested-content o-radio-list"
+          [rrDisable]="
+            model.findingsDynamicsType !== findingsDynamicsType.Deterioration
+          "
+        >
+          <p-checkbox
+            label="{{ 'handMRT.evaluation.localRecurrence.value' | translate }}"
+            binary="true"
+            rr-id="han_m_090107"
+            name="isLocalRecurrence"
+            [(ngModel)]="model.isLocalRecurrence"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="o-radio-list c-col-1 c-pad c-sep text-break">
+      <h2 rr-id="han_m_090201" class="m-t-2">
+        {{ "handMRT.evaluation.recommendationSupplementaryDiagnostics.value" |
+        translate }}
+      </h2>
+      <div class="o-radio-list f-vertical">
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.xray.value' | translate }}"
+          binary="true"
+          rr-id="han_m_090202"
+          name="isXray"
+          [(ngModel)]="model.isXray"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{
+            'handMRT.evaluation.xrayScaphoidQuartet.value' | translate
+          }}"
+          binary="true"
+          rr-id="han_m_090203"
+          name="isXrayScaphoidQuartet"
+          [(ngModel)]="model.isXrayScaphoidQuartet"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.cT.value' | translate }}"
+          binary="true"
+          rr-id="han_m_090204"
+          name="isCT"
+          [(ngModel)]="model.isCT"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.cTArthrography.value' | translate }}"
+          binary="true"
+          rr-id="han_m_090205"
+          name="isCTArthrography"
+          [(ngModel)]="model.isCTArthrography"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.mRIContrast.value' | translate }}"
+          binary="true"
+          rr-id="han_m_090214"
+          name="isMRIContrast"
+          [(ngModel)]="model.isMRIContrast"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.mRArthrography.value' | translate }}"
+          binary="true"
+          rr-id="han_m_090206"
+          name="isMRArthrography"
+          [(ngModel)]="model.isMRArthrography"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list f-vertical m-t-32">
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.followup.value' | translate }}"
+          labelStyleClass="ui-fat-label"
+          binary="true"
+          rr-id="han_m_090207"
+          name="isFollowUp"
+          [(ngModel)]="model.isFollowUp"
+          rrContentReset="followUpTypeBlock"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isFollowUp"
+          id="followUpTypeBlock"
+        >
+          <p rr-id="han_m_090208">
+            {{ "handMRT.evaluation.date.value" | translate }}
+          </p>
+          <p-radioButton
+            rr-id="han_m_090209"
+            label="{{ 'handMRT.evaluation.threeMonths.value' | translate }}"
+            name="followUpType"
+            [value]="followUpType.ThreeMonths"
+            [(ngModel)]="model.followUpType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="han_m_090210"
+            label="{{
+              'handMRT.evaluation.threeToSixMonths.value' | translate
+            }}"
+            name="followUpType"
+            [value]="followUpType.ThreeToSixMonths"
+            [(ngModel)]="model.followUpType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="han_m_090211"
+            label="{{
+              'handMRT.evaluation.sixToTwelveMonths.value' | translate
+            }}"
+            name="followUpType"
+            [value]="followUpType.SixToTwelveMonths"
+            [(ngModel)]="model.followUpType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="han_m_090212"
+            label="{{ 'handMRT.evaluation.twelveMonths.value' | translate }}"
+            name="followUpType"
+            [value]="followUpType.TwelveMonths"
+            [(ngModel)]="model.followUpType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="han_m_090213"
+            label="{{
+              'handMRT.evaluation.eighteenToTwentyFourMonths.value' | translate
+            }}"
+            name="followUpType"
+            [value]="followUpType.EighteenToTwentyFourMonths"
+            [(ngModel)]="model.followUpType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-checkbox
+          label="{{ 'handMRT.evaluation.biopsy.value' | translate }}"
+          class="m-t-20"
+          labelStyleClass="ui-fat-label"
+          binary="true"
+          rr-id="han_m_090215"
+          name="isBiopsy"
+          [(ngModel)]="model.isBiopsy"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep">
+      <div class="o-radio-list text-break" *ngIf="thirdColumnEnable">
+        <h2 rr-id="han_m_090301">
+          {{ "handMRT.evaluation.staging.value" | translate }}
+        </h2>
+        <p rr-id="han_m_090302">
+          {{ "handMRT.evaluation.tClassification.value" | translate }}
+        </p>
+        <div class="o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="han_m_090303"
+            label="{{
+              'handMRT.evaluation.t1lowerOrEqual8CmInLargestExtension.value'
+                | translate
+            }}"
+            name="tClassificationType"
+            [value]="tClassificationType.T1LowerOrEqual8CmInLargestExtension"
+            [(ngModel)]="model.tClassificationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="han_m_090304"
+            label="{{
+              'handMRT.evaluation.t2Higher8CmInLargestExtension.value'
+                | translate
+            }}"
+            name="tClassificationType"
+            [value]="tClassificationType.T2HigherThan8CmInLargestExtension"
+            [(ngModel)]="model.tClassificationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="han_m_090305"
+            label="{{
+              'handMRT.evaluation.t3DiscontinuousSpreadInPrimarilyAffectedBone.value'
+                | translate
+            }}"
+            name="tClassificationType"
+            [value]="tClassificationType.T3DiscontinuousSpread"
+            [(ngModel)]="model.tClassificationType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+    <div class="c-col-1 c-pad-l f-horizontal"></div>
+  </div>
+</form>

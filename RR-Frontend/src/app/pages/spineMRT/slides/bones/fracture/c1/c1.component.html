@@ -1,0 +1,163 @@
+<div class="f-horizontal f-start col-h-100 c-pad-l">
+  <div class="c-col-1 f-vertical o-radio-list f-start c-pad-r">
+    <h2 rr-id="spi_m_060301" class="m-b-34">
+      {{ "spineMRT.bones.fractureXX.value" | translate }}C1*
+    </h2>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.Type1"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.anteriorArchGehweilerType.value' | translate }}"
+      rr-id="spi_m_060307"
+      name="gehweilerType"
+      rrValidation="gehweilerType"
+      rrContentReset="sideType-block noSpecTypeC1-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.Type2"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.posteriorArchGehweilerType.value' | translate }}"
+      rr-id="spi_m_060308"
+      name="gehweilerType"
+      rrValidation="gehweilerType"
+      rrContentReset="sideType-block noSpecTypeC1-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.Type3a"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.anteriorPosteriorArchNotdisplaced.value' | translate }}"
+      rr-id="spi_m_060309"
+      name="gehweilerType"
+      rrValidation="gehweilerType"
+      rrContentReset="sideType-block noSpecTypeC1-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.Type3b"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.anteriorPosteriorArchdisplacedGehweiler.value' | translate }}"
+      rr-id="spi_m_060310"
+      name="gehweilerType"
+      rrValidation="gehweilerType"
+      rrContentReset="sideType-block noSpecTypeC1-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.Type4"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.massaLateralisGehweilerType.value' | translate }}"
+      rr-id="spi_m_060311"
+      name="gehweilerType"
+      rrValidation="gehweilerType"
+      rrContentReset="sideType-block noSpecTypeC1-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.Type5"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.processusTransversusGehweilerType.value' | translate }}"
+      rr-id="spi_m_060312"
+      name="gehweilerType"
+      class="text-break"
+      rrValidation="gehweilerType"
+      rrContentReset="noSpecTypeC1-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="gehweilerTypeEnum.NoSpec"
+      [(ngModel)]="model.gehweilerType"
+      label="{{ 'spineMRT.bones.c1FractureNotFurther.value' | translate }}"
+      rr-id="spi_m_060313"
+      name="gehweilerType"
+      rrValidation="gehweilerType"
+      rrContentReset="sideType-block"
+    >
+    </p-radioButton>
+  </div>
+  <div class="c-col-1 f-vertical o-radio-list f-start c-sep-l c-pad m-t-58">
+    <div
+      id="sideType-block"
+      *ngIf="model.gehweilerType === gehweilerTypeEnum.Type5"
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="spi_m_060410">
+        {{ "spineMRT.bones.side.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="locationTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        label="{{ 'spineMRT.bones.right.value' | translate }}"
+        rr-id="spi_m_060411"
+        name="sideType"
+        rrValidation="sideType"
+        rrContentReset="isLeftAVertebralisDelimitable-block"
+      >
+      </p-radioButton>
+      <div
+        id="isRightAVertebralisDelimitable-block"
+        [rrDisable]="model.sideType !== locationTypeEnum.Right"
+        class="f-vertical f-start o-radio-list nested-content"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isRightVertebralArteryDetectable"
+          label="{{'spineMRT.bones.vertebralArteryDetectable.value'| translate}}"
+          rr-id="spi_m_060412"
+          name="isRightAVertebralisDelimitable"
+        >
+        </p-checkbox>
+      </div>
+      <p-radioButton
+        [value]="locationTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        label="{{ 'spineMRT.bones.left.value' | translate }}"
+        rr-id="spi_m_060413"
+        name="sideType"
+        rrValidation="sideType"
+        rrContentReset="isRightAVertebralisDelimitable-block"
+      >
+      </p-radioButton>
+      <div
+        id="isLeftAVertebralisDelimitable-block"
+        [rrDisable]="model.sideType !== locationTypeEnum.Left"
+        class="f-vertical f-start o-radio-list nested-content"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isLeftVertebralArteryDetectable"
+          label="{{'spineMRT.bones.vertebralArteryDetectable.value'| translate}}"
+          rr-id="spi_m_060414"
+          name="isLeftAVertebralisDelimitable"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div
+      id="noSpecTypeC1-block"
+      *ngIf="model.gehweilerType === gehweilerTypeEnum.NoSpec"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        [value]="noSpecTypeEnum.SuspicionOf"
+        [(ngModel)]="model.noSpecType"
+        label="{{ 'spineMRT.bones.suspicionOf.value' | translate }}"
+        rr-id="spi_m_060415"
+        name="noSpecType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="noSpecTypeEnum.AppearanceOfAnOlderFracture"
+        [(ngModel)]="model.noSpecType"
+        label="{{ 'spineMRT.bones.appearanceOfAnOlder.value' | translate }}"
+        rr-id="spi_m_060416"
+        name="noSpecType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l"></div>
+</div>

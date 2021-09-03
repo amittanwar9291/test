@@ -1,0 +1,45 @@
+Given	I'm logged-in with valid credentials
+When I select 'Male' radio button from Page 01 of Pelvic MRI
+And I select any Examination radio button from Page 01 of Pelvic MRI
+And I go to Page 04 of Pelvic MRI
+And I click on 'Finding' tab
+And I click on 'Finding' radio button
+
+When I select 'Lesion TZ' from 'Finding' dropdown menu
+And I select 'Size/PIRADS Score' tab
+Then '< 1,5 cm' radio button is enabled
+And '≥ 1,5 cm' radio button is enabled
+And 'PIRADS-Score TZ' slide bar is enabled
+And 'Yes' radio button is enabled
+And 'No' radio button is enabled
+And 'PIRADS-Score, total' automatically calculated field is enabled
+
+When I move the 'PIRADS-Score TZ' slide bar to '1' or '2'
+And I select 'Yes' radio button
+Then 'PIRADS-Score, total' automatically calculated field is '1' or '2'
+And 'Differential diagnosis 1' dropdown menu is enabled
+
+When I select 'Prostatitis' from 'Differential diagnosis 1' dropdown menu
+Then 'Suspicion of' checkbox is enabled
+And 'Differential diagnosis 2' dropdown menu is enabled
+And 'Granulomatous prostatitis' checkbox is enabled
+
+When I select any diagnosis from 'Differential diagnosis 2' dropdown menu
+Then 'Suspicion of' checkbox is enabled
+
+When I select any diagnosis other than 'Prostatitis' from 'Differential diagnosis 1' dropdown menu
+Then 'Suspicion of' checkbox is enabled
+And 'Differential diagnosis 2' dropdown menu is enabled
+And 'Granulomatous prostatitis' checkbox is removed
+
+When I select 'Prostatitis' from 'Differential diagnosis 2' dropdown menu
+Then 'Suspicion of' checkbox is enabled
+And 'Granulomatous prostatitis' checkbox is enabled
+
+When I move the 'PIRADS-Score TZ' slide bar to '3' or '4' or '5'
+And I select 'Yes' radio button
+Then 'PIRADS-Score, total' automatically calculated field is '3' or '4' or '5'
+And 'Differential diagnosis 1' dropdown menu is disabled
+
+When I select 'No' radio button
+Then 'PIRADS-Score, total' automatically calculated field is '--'

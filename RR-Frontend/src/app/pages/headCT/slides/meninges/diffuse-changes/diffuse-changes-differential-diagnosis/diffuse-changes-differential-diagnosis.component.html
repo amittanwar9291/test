@@ -1,0 +1,56 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list f-vertical">
+      <h2 rr-id="hea_c_050266" class="m-b-8">
+        {{ 'headCT.meninges.differentialDiagnosis1.value' | translate }}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="hea_c_050267"
+        [diagnosisNumber]="1"
+        group="true"
+        [options]="w022"
+        [(ngModel)]="model.differentialDiagnosis1"
+        [parentViewModel]="model"
+        name="differentialDiagnosis1"
+        (selectionChanged)="clearDifferentialDiagnosis1DependentFields()"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.differentialDiagnosis1 === meningesDiagnosisType.None"
+        rr-id="hea_c_050268"
+        name="isSuspicionOf"
+        label="{{ 'headCT.meninges.suspicionOf.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSuspicionOf"
+      ></p-checkbox>
+      <h2
+        rr-id="hea_c_050269"
+        class="m-b-3 m-t-10"
+        [rrDisable]="model.differentialDiagnosis1 === meningesDiagnosisType.None"
+      >
+        {{ 'headCT.meninges.differentialDiagnosis2.value' | translate }}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [rrDisable]="model.differentialDiagnosis1 === meningesDiagnosisType.None"
+        rrId="hea_c_050270"
+        [diagnosisNumber]="2"
+        group="true"
+        [options]="w023"
+        [(ngModel)]="model.differentialDiagnosis2"
+        [parentViewModel]="model"
+        name="differentialDiagnosis2"
+        (selectionChanged)="clearDifferentialDiagnosis2DependentFields()"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.differentialDiagnosis2 === meningesDiagnosisType.None"
+        rr-id="hea_c_0502215"
+        name="isSubordinate"
+        label="{{ 'headCT.meninges.subordinate.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSubordinate"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13"></div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13"></div>
+</div>

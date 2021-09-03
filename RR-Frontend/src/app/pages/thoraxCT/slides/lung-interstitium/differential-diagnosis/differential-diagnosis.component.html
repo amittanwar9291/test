@@ -1,0 +1,333 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10 m-r-10">
+      <h2 rr-id="tho_c_0602112">
+        {{'thoraxCT.lungInterstitium.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+      >
+        <p rr-id="tho_c_0602113" class="m-b-1">
+          {{'thoraxCT.lungInterstitium.differentialDiagnosis1.value' |
+          translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="diagnosisDropDownList"
+          group="true"
+          rrValidation="differentialDiagnosis1"
+          notInFinding="true"
+          [(ngModel)]="model.differentialDiagnosis1"
+          (selectionChanged)="clearDifferentialDiagnosis01();"
+          rrId="tho_c_0602114"
+          [skipOnExclusion]="this.notExcludedOptions"
+          name="differentialDiagnosis1"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis1 === lungInterstitiumDiagnosisTypeEnum.None&& model.differentialDiagnosis === lungInterstitiumDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="tho_c_0602115"
+          name="isSuspected"
+          label="{{'thoraxCT.lungInterstitium.suspected.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSuspected"
+          [rrDisable]="model.differentialDiagnosis1 === lungInterstitiumDiagnosisTypeEnum.None"
+        ></p-checkbox>
+        <p rr-id="tho_c_0602116" class="m-b-0">
+          {{'thoraxCT.lungInterstitium.differentialDiagnosis2.value' |
+          translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="diagnosisDropDownList"
+          [(ngModel)]="model.differentialDiagnosis2"
+          (selectionChanged)="clearDifferentialDiagnosis02();"
+          rrId="tho_c_0602117"
+          [skipOnExclusion]="this.notExcludedOptions"
+          name="differentialDiagnosis2"
+          group="true"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="f-vertical f-start o-radio-list"
+          [rrDisable]="model.differentialDiagnosis2 === 'None'"
+        >
+          <p-checkbox
+            rr-id="tho_c_0602118"
+            name="isSubordinated"
+            label="{{'thoraxCT.lungInterstitium.subordinated.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isSubordinated"
+          ></p-checkbox>
+          <p rr-id="tho_c_0602119" class="m-b-0">
+            {{'thoraxCT.lungInterstitium.differentialDiagnosis3.value' |
+            translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="3"
+            [options]="diagnosisDropDownList"
+            [(ngModel)]="model.differentialDiagnosis3"
+            (selectionChanged)="clearDifferentialDiagnosis03()"
+            rrId="tho_c_0602120"
+            [skipOnExclusion]="this.notExcludedOptions"
+            name="differentialDiagnosis3"
+            group="true"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div
+      class="o-radio-list m-l-10 m-r-10 m-t-35"
+      [rrDisable]="model.differentialDiagnosis === lungInterstitiumDiagnosisTypeEnum.None && model.differentialDiagnosis1 === lungInterstitiumDiagnosisTypeEnum.None"
+    >
+      <h2 rr-id="tho_c_0602119">
+        {{'thoraxCT.lungInterstitium.differentialDiagnosisDetails.value'|translate}}
+      </h2>
+      <ng-container *ngTemplateOutlet="col;context{key: 1}"></ng-container>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div
+      class="o-radio-list m-l-10 m-r-10 m-t-35"
+      [rrDisable]="model.differentialDiagnosis2 === lungInterstitiumDiagnosisTypeEnum.None"
+    >
+      <h2 rr-id="tho_c_0604118">
+        {{'thoraxCT.lungInterstitium.differentialDiagnosisDetails2.value'|translate}}
+      </h2>
+      <ng-container *ngTemplateOutlet="col;context{key: 2}"></ng-container>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-10">
+    <div
+      class="o-radio-list m-l-10 m-r-10 m-t-35"
+      [rrDisable]="model.differentialDiagnosis3 === lungInterstitiumDiagnosisTypeEnum.None"
+    >
+      <h2 rr-id="tho_c_0605118">
+        {{'thoraxCT.lungInterstitium.differentialDiagnosisDetails3.value'
+        |translate}}
+      </h2>
+      <ng-container *ngTemplateOutlet="col;context{key: 3}"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #col let-key="key" class="f-vertical f-start o-radio-list">
+  <div class="f-vertical f-start o-radio-list" *ngIf="noDetails(key)">
+    <p>{{'thoraxCT.lungInterstitium.noFurtherDetails.value' | translate}}</p>
+  </div>
+
+  <div
+    class="f-vertical f-start o-radio-list"
+    *ngIf="getDiagnosisName(key) === lungInterstitiumDiagnosisTypeEnum.ILDKnownOrigin"
+  >
+    <p
+      [attr.rr-id]="('thoraxCT.lungInterstitium.cause.rr-id' | translate)[key-1]"
+      class="m-b-2"
+    >
+      {{'thoraxCT.lungInterstitium.cause.value' | translate}}
+    </p>
+    <p-dropdown
+      styleClass="o-width-100 ui-brown-box"
+      [options]="causeDropdownList"
+      [attr.rr-id]="('thoraxCT.lungInterstitium.w030PlaceholderPleaseSelect.rr-id' | translate)[key-1]"
+      [(ngModel)]="model[getCauseType(key)]"
+      [placeholder]="'shared.pleaseSelect' | translate"
+      (onChange)="clearNextDiagnosisDetails(key)"
+      rrDropdownClear
+      [rrValidation]="getCauseType(key)"
+      notInFinding="true"
+      [name]="getCauseType(key)"
+      [rrDropdownExcludedOptions]="getExcludedDetailsOptions(key)"
+    ></p-dropdown>
+  </div>
+
+  <div
+    class="f-vertical f-start o-radio-list"
+    *ngIf="getDiagnosisName(key) === lungInterstitiumDiagnosisTypeEnum.IdiopathicInterstitialPneumopathy"
+  >
+    <p
+      [attr.rr-id]="('thoraxCT.lungInterstitium.iIPHRCTPattern.rr-id' | translate)[key-1]"
+    >
+      {{'thoraxCT.lungInterstitium.iIPHRCTPattern.value' | translate}}
+    </p>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.usualInterstitialPneumonia(UIP.rr-id' | translate)[key-1]"
+      [name]="getIIPHRCTPatternType(key)"
+      [value]="iiphrctPatternTypeEnum.UIP"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.usualInterstitialPneumonia(UIP.value' | translate}}"
+      [(ngModel)]="model[getIIPHRCTPatternType(key)]"
+    ></p-radioButton>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.probableUIPPattern.rr-id' | translate)[key-1]"
+      [name]="getIIPHRCTPatternType(key)"
+      [value]="iiphrctPatternTypeEnum.ProbableUIP"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.probableUIPPattern.value' | translate}}"
+      [(ngModel)]="model[getIIPHRCTPatternType(key)]"
+    ></p-radioButton>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.possibleUIPPattern.rr-id' | translate)[key-1]"
+      [name]="getIIPHRCTPatternType(key)"
+      [value]="iiphrctPatternTypeEnum.PossibleUIP"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.possibleUIPPattern.value' | translate}}"
+      [(ngModel)]="model[getIIPHRCTPatternType(key)]"
+    ></p-radioButton>
+    <p
+      [attr.rr-id]="('thoraxCT.lungInterstitium.classification.rr-id' | translate)[key-1]"
+      rrInfoIcon="tho_c_06_09"
+    >
+      {{'thoraxCT.lungInterstitium.classification.value' | translate}}
+    </p>
+    <p-dropdown
+      [attr.rr-id]="('thoraxCT.lungInterstitium.w031PlaceholderPleaseSelect.rr-id' | translate)[key-1]"
+      styleClass="o-width-100 ui-brown-box"
+      [options]="classificationDropDownList"
+      group="true"
+      [(ngModel)]="model[getClassificationType(key)]"
+      [placeholder]="'shared.pleaseSelect' | translate"
+      rrDropdownClear
+      (onChange)="clearNextDiagnosisDetails(key)"
+      [name]="getClassificationType(key)"
+      [rrDropdownExcludedOptions]="getExcludedClassifications(key)"
+    ></p-dropdown>
+  </div>
+
+  <div
+    class="f-vertical f-start o-radio-list"
+    *ngIf="getDiagnosisName(key) === lungInterstitiumDiagnosisTypeEnum.ILDGranulomatous"
+  >
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.sarcoidosis.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.Sarcoidosis"
+      rrUnClickRadio
+      (onClick)="clearSarcoidosisType(key)"
+      label="{{'thoraxCT.lungInterstitium.sarcoidosis.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+    ></p-radioButton>
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model[getDifferentialDiagnosisDetailsType(key)] !== differentialDiagnosisDetailsTypeEnum.Sarcoidosis"
+    >
+      <p-radioButton
+        [attr.rr-id]="('thoraxCT.lungInterstitium.stage2HilarOrMediastinalLymphadenopathy.rr-id' | translate)[key-1]"
+        [name]="getSarcoidosisType(key)"
+        [value]="sarcoidosisTypeEnum.Stage2"
+        rrUnClickRadio
+        label="{{'thoraxCT.lungInterstitium.stage2HilarOrMediastinalLymphadenopathy.value' | translate}}"
+        [(ngModel)]="model[getSarcoidosisType(key)]"
+      ></p-radioButton>
+      <p-radioButton
+        [attr.rr-id]="('thoraxCT.lungInterstitium.stageILDWithoutLymphadenopathy.rr-id' | translate)[key-1]"
+        [name]="getSarcoidosisType(key)"
+        [value]="sarcoidosisTypeEnum.Stage3"
+        rrUnClickRadio
+        label="{{'thoraxCT.lungInterstitium.stageILDWithoutLymphadenopathy.value' | translate}}"
+        [(ngModel)]="model[getSarcoidosisType(key)]"
+      ></p-radioButton>
+      <p-radioButton
+        [attr.rr-id]="('thoraxCT.lungInterstitium.stageFibroticLungChanges.rr-id' | translate)[key-1]"
+        [name]="getSarcoidosisType(key)"
+        [value]="sarcoidosisTypeEnum.Stage4"
+        rrUnClickRadio
+        label="{{'thoraxCT.lungInterstitium.stageFibroticLungChanges.value' | translate}}"
+        [(ngModel)]="model[getSarcoidosisType(key)]"
+      ></p-radioButton>
+    </div>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.berylliosis.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.Berylliosis"
+      rrUnClickRadio
+      (onClick)="clearSarcoidosisType(key)"
+      label="{{'thoraxCT.lungInterstitium.berylliosis.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+    ></p-radioButton>
+  </div>
+
+  <div
+    class="f-vertical f-start o-radio-list text-break"
+    *ngIf="getDiagnosisName(key) === lungInterstitiumDiagnosisTypeEnum.ILDOtherTypes"
+  >
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.lymphangioleiomyomatosis(LAM.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.Lymphangioleiomyomatosis"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.lymphangioleiomyomatosisLAM.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+    ></p-radioButton>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.pulmonaryLangerhansCellHistiocytosis.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.PulmonaryLangerhansCellHistiocytosis"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.pulmonaryLangerhansCellHistiocytosis.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+    ></p-radioButton>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.idiopathicEosinophilicPneumonia.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.IdiopathicEosinophilicPneumonia"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.idiopathicEosinophilicPneumonia.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+    ></p-radioButton>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.pulmonaryVasculitis.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.PulmonaryVasculitis"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.pulmonaryVasculitis.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+    ></p-radioButton>
+  </div>
+
+  <div
+    class="f-vertical f-start o-radio-list"
+    *ngIf="getDiagnosisName(key) === lungInterstitiumDiagnosisTypeEnum.Bronchiolitis"
+  >
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.infectious.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.Infectious"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.infectious.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+      rrContentReset="bronchiolitisObliterans"
+    ></p-radioButton>
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      id="bronchiolitisObliterans"
+      [rrDisable]="model[getDifferentialDiagnosisDetailsType(key)] !== differentialDiagnosisDetailsTypeEnum.Infectious"
+    >
+      <p-checkbox
+        [attr.rr-id]="('thoraxCT.lungInterstitium.bronchiolitisObliterans.rr-id' | translate)[key-1]"
+        label="{{'thoraxCT.lungInterstitium.bronchiolitisObliterans.value' | translate}}"
+        binary="true"
+        name="isBronchiolitisObliterans"
+        [(ngModel)]="model.isBronchiolitisObliterans"
+      >
+      </p-checkbox>
+    </div>
+    <p-radioButton
+      [attr.rr-id]="('thoraxCT.lungInterstitium.follicular(FB.rr-id' | translate)[key-1]"
+      [name]="getDifferentialDiagnosisDetailsType(key)"
+      [value]="differentialDiagnosisDetailsTypeEnum.Follicular"
+      rrUnClickRadio
+      label="{{'thoraxCT.lungInterstitium.follicular(FB.value' | translate}}"
+      [(ngModel)]="model[getDifferentialDiagnosisDetailsType(key)]"
+      rrContentReset="bronchiolitisObliterans"
+    ></p-radioButton>
+  </div>
+</ng-template>

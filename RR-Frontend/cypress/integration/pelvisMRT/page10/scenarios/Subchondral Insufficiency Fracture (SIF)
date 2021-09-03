@@ -1,0 +1,34 @@
+Given	I'm logged-in with valid credentials
+And I select 'Yes' radio button from Contrast enhanced box on Page 03
+And I go to Page 10 of Pelvic MRI
+And I select 'Finding' radio button
+
+When I select 'Subchondral Insufficiency Fracture (SIF)' from the dropdown menu
+Then 'Add new finding' button is enabled
+And a single selection localizer is enabled
+And 'Low signal band - irregular/interrupted, parallel to the joint surface' checkbox is enabled
+And 'Low signal area between cortex & band, "Impression of cortical thickening"' checkbox is enabled
+And 'Articular surface collapse/cortical impression' checkbox is enabled
+And 'Liquid-isointense subchondral gap' checkbox is enabled
+And 'Osteochondral fragment' checkbox is enabled
+And 'Contrast enhancement perifocal' checkbox is enabled
+And 'Bone marrow edema' checkbox is enabled
+And 'Transient bone marrow edema ("transient osteoporosis (TBME)")' checkbox is enabled
+
+When I select 'Osteochondral fragment' checkbox
+Then 'Diameter of fragment in mm' input field is enabled
+
+When I select 'Transient bone marrow edema ("transient osteoporosis (TBME)")' checkbox
+Then 'Subordinate' checkbox is enabled
+
+When I enter 20 in 'Diameter of fragment in mm' input field
+Then the value is accepted
+
+When I enter 1 in 'Diameter of fragment in mm' input field
+Then the value is accepted
+
+When I enter 21 in 'Diameter of fragment in mm' input field
+Then the value is rejected and reset
+
+When I enter 0 in 'Diameter of fragment in mm' input field
+Then the value is rejected and reset 

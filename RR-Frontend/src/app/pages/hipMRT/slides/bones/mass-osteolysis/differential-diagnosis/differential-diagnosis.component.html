@@ -1,0 +1,118 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-radio-list">
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType === descriptionType.IKnow"
+      >
+        <h2 rr-id="hip_m_040274" rrInfoIcon="hip_m_04_11">
+          {{'hipMRT.bones.differentialDiagnosis.value' | translate}}
+        </h2>
+        <p rr-id="hip_m_040275" class="m-b-0">
+          {{'hipMRT.bones.differentialDiagnosis1.value' | translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          name="differentialDiagnosis1"
+          [(ngModel)]="model.differentialDiagnosis1"
+          [options]="massOsteolysisDifferentialDiagnosisTypeOptions"
+          group="true"
+          rrId="hip_m_040276"
+          (selectionChanged)="resetDifferentialDiagnosis(1)"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1"
+          class="m-b-12"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="hip_m_040277"
+          name="isSuspected"
+          binary="true"
+          label="{{ 'hipMRT.bones.suspected.value' | translate }}"
+          [(ngModel)]="model.isSuspected"
+          [rrDisable]="model.differentialDiagnosis1 === 'None'"
+        >
+        </p-checkbox>
+      </div>
+
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis1 === 'None'
+                                      && model.mainDiagnosisType === 'None'"
+      >
+        <p rr-id="hip_m_040278" class="m-b-2 m-t-8">
+          {{'hipMRT.bones.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          name="differentialDiagnosis2"
+          [(ngModel)]="model.differentialDiagnosis2"
+          [options]="massOsteolysisDifferentialDiagnosisTypeOptions2"
+          group="true"
+          rrId="hip_m_040279"
+          (selectionChanged)="resetDifferentialDiagnosis(2)"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis2 === 'None'"
+      >
+        <p-checkbox
+          rr-id="hip_m_040280"
+          label="{{'hipMRT.bones.secondary.value' | translate}}"
+          binary="true"
+          class="m-b-21"
+          name="isSecondary"
+          [(ngModel)]="model.isSecondary"
+        >
+        </p-checkbox>
+
+        <p rr-id="hip_m_040281" class="m-b-0">
+          {{'hipMRT.bones.differentialDiagnosis3.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="3"
+          name="differentialDiagnosis3"
+          [(ngModel)]="model.differentialDiagnosis3"
+          [options]="massOsteolysisDifferentialDiagnosisTypeOptions2"
+          group="true"
+          rrId="hip_m_040282"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-9 m-b-12 o-radio-list">
+      <p-checkbox
+        rr-id="hip_m_0403144"
+        name="isOverOneLesionSameEntity"
+        label="{{'hipMRT.bones.lesionSameEntity.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isOverOneLesionSameEntity"
+        rrContentReset="isOverOneLesionSameEntityBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isOverOneLesionSameEntity"
+        id="isOverOneLesionSameEntityBlock"
+      >
+        <p-checkbox
+          rr-id="hip_m_0403145"
+          name="isInThePrimarilyAffected"
+          label="{{'hipMRT.bones.inThePrimarilyAffectedBone.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isInThePrimarilyAffected"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-12 o-radio-list"></div>
+    <div
+      class="c-col-1 c-sep c-pad-l f-vertical m-t-9 m-b-12 o-radio-list"
+    ></div>
+  </div>
+</div>

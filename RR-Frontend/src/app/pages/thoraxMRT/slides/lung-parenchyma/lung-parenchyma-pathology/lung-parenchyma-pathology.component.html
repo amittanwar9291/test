@@ -1,0 +1,148 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_050202" class="m-b-10 m-t-3">
+      {{ "thoraxMRT.lungParenchyma.localization.value" | translate }}*
+    </h2>
+    <p rr-id="tho_m_050203">
+      {{ "thoraxMRT.lungParenchyma.atLobeLevel.value" | translate }}
+    </p>
+    <rr-lungs-flaps-simple
+      class="scaled-localizer"
+      rr-id="tho_m_050210"
+      (click)="openLargeLocalizer('lungParenchymaPathologyLocation')"
+      [(ngModel)]="model.lungParenchymaPathologyLocation"
+      isLocalizer="true"
+      rrValidation="lungParenchymaPathologyLocation"
+      name="lungParenchymaPathologyLocation"
+    >
+    </rr-lungs-flaps-simple>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad o-radio-list"
+    *ngIf="model.suspicionOfType !== suspicionType.Mass"
+  >
+    <h2 rr-id="tho_m_050301" class="m-b-10 m-t-3 w-100">
+      {{ "thoraxMRT.lungParenchyma.suspicionOf.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_050302"
+      label="{{
+        'thoraxMRT.lungParenchyma.consolidationAtelectasis.value'
+          | translate
+      }}"
+      name="suspicionOfType"
+      [(ngModel)]="model.suspicionOfType"
+      [value]="suspicionType.ConsolidationOrAtelectasis"
+      rrValidation="suspicionOfType"
+      rrContentReset="massBlock"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_050303"
+      label="{{ 'thoraxMRT.lungParenchyma.mass.value' | translate }}"
+      name="suspicionOfType"
+      [(ngModel)]="model.suspicionOfType"
+      [value]="suspicionType.Mass"
+      rrValidation="suspicionOfType"
+      rrContentReset="massBlock"
+    >
+    </p-radioButton>
+  </div>
+  <div
+    class="c-col-1 f-vertical f-start c-sep c-pad"
+    *ngIf="model.suspicionOfType !== suspicionType.Mass"
+  ></div>
+  <div
+    *ngIf="model.suspicionOfType === suspicionType.Mass"
+    class="f-vertical c-sep"
+  >
+    <div class="o-radio-list c-pad">
+      <h2 rr-id="tho_m_050301" class="m-b-10 m-t-3 w-100">
+        {{ "thoraxMRT.lungParenchyma.suspicionOf.value" | translate }}
+      </h2>
+    </div>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <p-radioButton
+          rr-id="tho_m_050302"
+          label="{{
+            'thoraxMRT.lungParenchyma.consolidationAtelectasis.value'
+              | translate
+          }}"
+          name="suspicionOfType"
+          [(ngModel)]="model.suspicionOfType"
+          [value]="suspicionType.ConsolidationOrAtelectasis"
+          rrValidation="suspicionOfType"
+          rrContentReset="massBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_050303"
+          label="{{ 'thoraxMRT.lungParenchyma.mass.value' | translate }}"
+          name="suspicionOfType"
+          [(ngModel)]="model.suspicionOfType"
+          [value]="suspicionType.Mass"
+          rrValidation="suspicionOfType"
+          rrContentReset="massBlock"
+        >
+        </p-radioButton>
+      </div>
+      <div id="massBlock" class="c-col-1 c-sep c-pad">
+        <div class="o-radio-list">
+          <h2 rr-id="tho_m_050401" class="m-b-10">
+            {{ "thoraxMRT.lungParenchyma.expansion.value" | translate }}
+          </h2>
+          <div class="o-radio-list f-vertical">
+            <p rr-id="tho_m_050402" class="m-b-0">
+              {{ "thoraxMRT.lungParenchyma.size.value" | translate }}
+            </p>
+            <rr-number-input
+              name="sizeInMm"
+              inputRrId="tho_m_050403"
+              labelRrId="tho_m_050404"
+              [(ngModel)]="model.sizeInMm"
+              [label]="'thoraxMRT.lungParenchyma.inMm.value' | translate"
+              (announceModelChange)="resetInputs()"
+              rrValidation="sizeInMm"
+              [config]="{ min: 1, max: 300, placeholder:'---' }"
+            >
+            </rr-number-input>
+          </div>
+          <div class="o-radio-list f-vertical" [rrDisable]="!model.sizeInMm">
+            <p rr-id="tho_m_050405" class="m-b-0">
+              {{ "thoraxMRT.lungParenchyma.2ndPlane.value" | translate }}
+            </p>
+            <rr-number-input
+              name="secondPlaneInMm"
+              inputRrId="tho_m_050406"
+              labelRrId="tho_m_050407"
+              [(ngModel)]="model.secondPlaneInMm"
+              [label]="'thoraxMRT.lungParenchyma.inMm.value' | translate"
+              (announceModelChange)="resetInputs()"
+              [config]="{ min: 1, max: 300, placeholder:'---' }"
+            >
+            </rr-number-input>
+          </div>
+          <div
+            class="o-radio-list f-vertical"
+            [rrDisable]="!model.secondPlaneInMm"
+          >
+            <p rr-id="tho_m_050408" class="m-b-0">
+              {{ "thoraxMRT.lungParenchyma.3rdPlane.value" | translate }}
+            </p>
+            <rr-number-input
+              name="thirdPlaneInMm"
+              inputRrId="tho_m_050409"
+              labelRrId="tho_m_050410"
+              [(ngModel)]="model.thirdPlaneInMm"
+              [label]="'thoraxMRT.lungParenchyma.inMm.value' | translate"
+              [config]="{ min: 1, max: 300, placeholder:'---' }"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list"></div>
+</div>

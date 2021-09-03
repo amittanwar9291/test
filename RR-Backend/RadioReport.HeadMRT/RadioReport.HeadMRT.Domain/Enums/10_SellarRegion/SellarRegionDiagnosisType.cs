@@ -1,0 +1,43 @@
+namespace RadioReport.HeadMRT.Domain.Enums.SellarRegion
+{
+    public enum SellarRegionDiagnosisType : byte
+    {
+        None = 0,
+        BenignLesionNotSpecified = 1,
+        MalignantLesionNotSpecified = 2,
+        DignityUnclear = 3,
+        PituitaryMicroadenoma = 4,
+        PituitaryMacroadenoma = 5,
+        Meningioma = 6,
+        Craniopharyngioma = 7,
+        GliomaBenign = 8,
+        Hamartoma = 9,
+        TeratomaBenign = 10,
+        Epidermoid = 11,
+        Dermoid = 12,
+        SchwannomaNeurinoma = 13,
+        ParagangliomaBenign = 14,
+        Metastasis = 15,
+        TeratomaMalignant = 16,
+        GliomaMalignant = 17,
+        Germinoma = 18,
+        Lymphoma = 19,
+        ParagangliomaMalignant = 20,
+        Chordoma = 21,
+        EmptySella = 22,
+        RathkeCleftCyst = 23,
+        ArachnoidCyst = 24,
+        Hypophysitis = 25,
+        OpticNeuritis = 26,
+        NeuromyelitisOpticaNMOSD = 27,
+        MultipleSclerosis = 28,
+        Neurosarcoidosis = 29,
+        Tuberculosis = 30,
+        Histiocytosis = 31,
+        EosinophilicGranuloma = 32,
+        Calcification = 33,
+        Hemorrhage = 34,
+        PostoperativeChanges = 35,
+        Aneurysm = 36
+    }
+}

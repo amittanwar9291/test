@@ -1,0 +1,43 @@
+<form #autosaveForm="ngForm" rrBlockForm>
+  <div
+    class="c-main c-main-height f-horizontal f-center pelvis-anamnesis__section anamnesis_tab m-t-60"
+  >
+    <p-tabView class="rr-tabView">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1 class="tab-header" rr-id="pel_m_020103">
+            {{ 'pelvisMRT.anamnesis.medicalHistoryTabHeader.value' | translate
+            }}
+          </h1>
+        </ng-template>
+        <rr-anamnesis-clinic
+          [model]="model"
+          [gender]="localizationGender"
+        ></rr-anamnesis-clinic>
+      </p-tabPanel>
+
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            class="tab-header"
+            rr-id="pel_m_020201"
+            [rrValidation]="['isPressurePainRight isPressurePainLeft', 'isRight isLeft']"
+            inSecondFinding="true"
+            ifAny="true"
+            allFindings="true"
+          >
+            {{ 'pelvisMRT.anamnesis.prevSurgeryTabHeader.value' | translate }}
+          </h1>
+        </ng-template>
+        <rr-previous-eingriffe
+          [model]="model"
+          [localizationGender]="localizationGender"
+          [clinicHandler]="clinicHandler"
+          [clinicDropdownConfig]="clinicDropdownConfig"
+          [previousOperationHandler]="previousOperationHandler"
+          [previousOperationDropdownConfig]="previousOperationDropdownConfig"
+        ></rr-previous-eingriffe>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</form>

@@ -1,0 +1,194 @@
+<div class="f-horizontal f-start main-container">
+  <div class="double-col c-sep f-vertical">
+    <div class="double-col-header c-pad-l p-t-27">
+      <h2 rr-id="ang_m_060202">
+        {{ 'angiographyMRT.aorta.anomalies.value' |translate }}*
+      </h2>
+    </div>
+    <div class="double-col-content f-horizontal">
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <p-radioButton
+          labelStyleClass="text-break"
+          name="anomaliesType"
+          [value]="anomaliesTypeEnum.AorticCoarctationCoA"
+          rrContentReset="KinkingOfTheAorticArchPseudocoarktationContainer CongenitalVascularRingsContainer"
+          label="{{ 'angiographyMRT.aorta.aorticCoarctationCoA.value' | translate }}"
+          rr-id="ang_m_060203"
+          [(ngModel)]="model.anomaliesType"
+          rrValidation="anomaliesType"
+        ></p-radioButton>
+        <p-radioButton
+          labelStyleClass="text-break"
+          name="anomaliesType"
+          [value]="anomaliesTypeEnum.KinkingOfTheAorticArchPseudocoarktation"
+          rrContentReset="AorticCoarctationCoAContainer CongenitalVascularRingsContainer"
+          label="{{ 'angiographyMRT.aorta.kinkingOfTheAorticArchPseudocoarktation.value' | translate }}"
+          rr-id="ang_m_060204"
+          [(ngModel)]="model.anomaliesType"
+          rrValidation="anomaliesType"
+        ></p-radioButton>
+        <p-radioButton
+          labelStyleClass="text-break"
+          name="anomaliesType"
+          [value]="anomaliesTypeEnum.CongenitalVascularRings"
+          rrContentReset="AorticCoarctationCoAContainer KinkingOfTheAorticArchPseudocoarktationContainer"
+          label="{{ 'angiographyMRT.aorta.congenitalVascularRings.value' | translate }}"
+          rr-id="ang_m_060205"
+          [(ngModel)]="model.anomaliesType"
+          rrValidation="anomaliesType"
+        ></p-radioButton>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <div
+          id="AorticCoarctationCoAContainer"
+          class="o-radio-list"
+          *ngIf="model.anomaliesType === anomaliesTypeEnum.AorticCoarctationCoA"
+        >
+          <h2 rr-id="ang_m_060301" class="text-break">
+            {{ 'angiographyMRT.aorta.detailsAorticCoarctation.value' |translate
+            }}
+          </h2>
+          <p-checkbox
+            name="isHypoplasticAorticArch"
+            label="{{ 'angiographyMRT.aorta.hypoplasticAorticArch.value' | translate }}"
+            rr-id="ang_m_060302"
+            binary="true"
+            [(ngModel)]="model.isHypoplasticAorticArch"
+          ></p-checkbox>
+          <p-checkbox
+            name="isPoststenoticDilatation"
+            label="{{ 'angiographyMRT.aorta.poststenoticDilatation.value' | translate }}"
+            rr-id="ang_m_060303"
+            binary="true"
+            [(ngModel)]="model.isPoststenoticDilatation"
+          ></p-checkbox>
+          <p-checkbox
+            name="isPostoperativeResidualStenosis"
+            label="{{ 'angiographyMRT.aorta.postoperativeResidualStenosis.value' | translate }}"
+            rr-id="ang_m_060304"
+            binary="true"
+            [(ngModel)]="model.isPostoperativeResidualStenosis"
+          ></p-checkbox>
+        </div>
+        <div
+          id="KinkingOfTheAorticArchPseudocoarktationContainer"
+          class="o-radio-list"
+          *ngIf="model.anomaliesType === anomaliesTypeEnum.KinkingOfTheAorticArchPseudocoarktation"
+        >
+          <h2 rr-id="ang_m_060305" class="text-break">
+            {{'angiographyMRT.aorta.detailsAorticArchKinkingPseudocoarctation.value'|
+            translate }}
+          </h2>
+          <p-radioButton
+            name="detailsAorticArchKinkingType"
+            [value]="detailsAorticArchKinkingTypeEnum.FunctionalStenosis"
+            rrUnClickRadio
+            label="{{ 'angiographyMRT.aorta.functionalStenosis.value' | translate }}"
+            rr-id="ang_m_060306"
+            [(ngModel)]="model.detailsAorticArchKinkingType"
+          ></p-radioButton>
+          <p-radioButton
+            name="detailsAorticArchKinkingType"
+            [value]="detailsAorticArchKinkingTypeEnum.MorphologicalStenosis"
+            rrUnClickRadio
+            label="{{ 'angiographyMRT.aorta.morphologicalStenosis.value' | translate }}"
+            rr-id="ang_m_060307"
+            [(ngModel)]="model.detailsAorticArchKinkingType"
+          ></p-radioButton>
+        </div>
+        <div
+          id="CongenitalVascularRingsContainer"
+          class="o-radio-list"
+          *ngIf="model.anomaliesType === anomaliesTypeEnum.CongenitalVascularRings"
+        >
+          <h2 rr-id="ang_m_060308">
+            {{ 'angiographyMRT.aorta.detailsCongenitalVascularRings.value'
+            |translate }}*
+          </h2>
+          <p-radioButton
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.CommonOrigin"
+            rrContentReset="AberrantArteriaWithCommerellDiverticulumContainer RightAorticWithCommerellDiverticulumContainer"
+            label="{{ 'angiographyMRT.aorta.commonOriginOfTheBrachiocephalicTrunkAndLeftCommonCarotidArtery.value' | translate }}"
+            rr-id="ang_m_060309"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+          ></p-radioButton>
+          <p-radioButton
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.LeftCommonCarotidArtey"
+            rrContentReset="AberrantArteriaWithCommerellDiverticulumContainer RightAorticWithCommerellDiverticulumContainer"
+            label="{{ 'angiographyMRT.aorta.leftCommonCarotidArteyCCAArisingFromBrachiocephalicTrunk.value' | translate }}"
+            rr-id="ang_m_060310"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+          ></p-radioButton>
+          <p-radioButton
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.LeftVertebralArteryOrigin"
+            rrContentReset="AberrantArteriaWithCommerellDiverticulumContainer RightAorticWithCommerellDiverticulumContainer"
+            label="{{ 'angiographyMRT.aorta.leftVertebralArteryOriginFromAorticArch.value' | translate }}"
+            rr-id="ang_m_060311"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+          ></p-radioButton>
+          <p-radioButton
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.AberrantRightSubclavianArtery"
+            rrContentReset="RightAorticWithCommerellDiverticulumContainer"
+            label="{{ 'angiographyMRT.aorta.aberrantRightSubclavianArteryAARSAaLusoria.value' | translate }}"
+            rr-id="ang_m_060312"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+          ></p-radioButton>
+          <div
+            id="AberrantArteriaWithCommerellDiverticulumContainer"
+            class="o-radio-list nested-content"
+            [rrDisable]="model.detailsCongenitalVascularRingsType !== detailsCongenitalVascularRingsTypeEnum.AberrantRightSubclavianArtery"
+          >
+            <p-checkbox
+              name="isAberrantArteriaWithKommerellDiverticulum"
+              label="{{ 'angiographyMRT.aorta.withKommerellDiverticulum.value' | translate }}"
+              rr-id="ang_m_060313"
+              binary="true"
+              [(ngModel)]="model.isAberrantArteriaWithKommerellDiverticulum"
+            ></p-checkbox>
+          </div>
+          <p-radioButton
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.RightAorticArch"
+            rrContentReset="AberrantArteriaWithCommerellDiverticulumContainer"
+            label="{{ 'angiographyMRT.aorta.rightAorticArchRAAWithAberrantLeftSubclavianArtery.value' | translate }}"
+            rr-id="ang_m_060314"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+          ></p-radioButton>
+          <div
+            id="RightAorticWithCommerellDiverticulumContainer"
+            class="o-radio-list nested-content"
+            [rrDisable]="model.detailsCongenitalVascularRingsType !== detailsCongenitalVascularRingsTypeEnum.RightAorticArch"
+          >
+            <p-checkbox
+              name="isRightAorticWithKommerellDiverticulum"
+              label="{{ 'angiographyMRT.aorta.withKommerellDiverticulum.value' | translate }}"
+              rr-id="ang_m_060315"
+              binary="true"
+              [(ngModel)]="model.isRightAorticWithKommerellDiverticulum"
+            ></p-checkbox>
+          </div>
+          <p-radioButton
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.DoubleAorticArch"
+            rrContentReset="AberrantArteriaWithCommerellDiverticulumContainer RightAorticWithCommerellDiverticulumContainer"
+            label="{{ 'angiographyMRT.aorta.doubleAorticArch.value' | translate }}"
+            rr-id="ang_m_060316"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list"></div>
+  <div class="c-col-1 c-sep c-pad"></div>
+</div>

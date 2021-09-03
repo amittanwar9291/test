@@ -1,0 +1,1370 @@
+<div class="f-horizontal f-start main-container">
+  <!--  SECOND COLUMN-->
+  <div class="c-col-1 c-pad o-radio-list">
+    <div
+      *ngIf="
+        model.findingType === upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="ang_c_0602115">
+        {{ "angiographyCT.upperArteries.pathology.value" | translate }}*
+      </h2>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.StenosisOrOcclusion"
+        [(ngModel)]="model.pathologyType"
+        label="{{
+          'angiographyCT.upperArteries.stenosisocclusion.value' | translate
+        }}"
+        rr-id="ang_c_0602116"
+        [rrContentReset]="
+          clearPathologyDetails(pathologyTypeEnum.StenosisOrOcclusion, true)
+        "
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.Dissection"
+        [(ngModel)]="model.pathologyType"
+        label="{{ 'angiographyCT.upperArteries.dissection.value' | translate }}"
+        rr-id="ang_c_0602117"
+        [rrContentReset]="
+          clearPathologyDetails(pathologyTypeEnum.Dissection, true)
+        "
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.Aneurysm"
+        [(ngModel)]="model.pathologyType"
+        label="{{ 'angiographyCT.upperArteries.aneurysm.value' | translate }}"
+        rr-id="ang_c_0602100"
+        [rrContentReset]="
+          clearPathologyDetails(pathologyTypeEnum.Aneurysm, true)
+        "
+        rrValidation="pathologyType"
+      ></p-radioButton>
+    </div>
+
+    <div
+      *ngIf="
+        model.findingType !== upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="ang_c_060203">
+        {{ "angiographyCT.upperArteries.side.value" | translate }}
+      </h2>
+      <p-radioButton
+        name="sideType"
+        [value]="locationTypeEnum.Right"
+        label="{{ 'angiographyCT.upperArteries.right.value' | translate }}"
+        rr-id="ang_c_060204"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        name="sideType"
+        [value]="locationTypeEnum.Left"
+        label="{{ 'angiographyCT.upperArteries.left.value' | translate }}"
+        rr-id="ang_c_060205"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+
+    <div
+      class="f-vertical f-start o-radio-list"
+      *ngIf="
+        model.findingType === upperArteriesFindingTypeEnum.SubclavianArtery
+      "
+    >
+      <h2 rr-id="ang_c_060206" class="m-t-23">
+        {{ "angiographyCT.upperArteries.localization.value" | translate }}
+      </h2>
+      <p-checkbox
+        name="isProximalAspect"
+        label="{{
+          'angiographyCT.upperArteries.proximalAspect.value' | translate
+        }}"
+        rr-id="ang_c_060207"
+        binary="true"
+        [(ngModel)]="model.isProximalAspect"
+      ></p-checkbox>
+      <p-checkbox
+        name="isMidAspect"
+        label="{{ 'angiographyCT.upperArteries.midAspect.value' | translate }}"
+        rr-id="ang_c_060208"
+        binary="true"
+        [(ngModel)]="model.isMidAspect"
+      ></p-checkbox>
+      <p-checkbox
+        name="isDistalAspect"
+        label="{{
+          'angiographyCT.upperArteries.distalAspect.value' | translate
+        }}"
+        rr-id="ang_c_060210"
+        binary="true"
+        [(ngModel)]="model.isDistalAspect"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <!--  THIRD COLUMN-->
+  <div
+    id="thirdCol"
+    class="c-col-1 c-sep-l c-pad"
+    [class.m-t-31]="
+      model.findingType === upperArteriesFindingTypeEnum.BrachiocephalicTrunk &&
+      model.pathologyType !== pathologyTypeEnum.None
+    "
+  >
+    <div
+      *ngIf="
+        model.findingType === upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+    >
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.StenosisOrOcclusion"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0603100">
+          {{ "angiographyCT.upperArteries.severity.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.Mild,
+              'isHemodynamicallyRelevant-block'
+            )
+          "
+          [value]="severityTypeEnum.Mild"
+          label="{{ 'angiographyCT.upperArteries.mild.value' | translate }}"
+          rr-id="ang_c_0603101"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.Moderate,
+              'isHemodynamicallyRelevant-block'
+            )
+          "
+          [value]="severityTypeEnum.Moderate"
+          label="{{ 'angiographyCT.upperArteries.moderate.value' | translate }}"
+          rr-id="ang_c_0603102"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.Severe,
+              'isHemodynamicallyRelevant-block'
+            )
+          "
+          [value]="severityTypeEnum.Severe"
+          label="{{ 'angiographyCT.upperArteries.severe.value' | translate }}"
+          rr-id="ang_c_0603103"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          class="m-b-15"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.CompleteOcclusion,
+              'isHemodynamicallyRelevant-block'
+            )
+          "
+          [value]="severityTypeEnum.CompleteOcclusion"
+          label="{{
+            'angiographyCT.upperArteries.completeOcclusion.value' | translate
+          }}"
+          rr-id="ang_c_0603104"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <div
+          id="isHemodynamicallyRelevant-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="
+            model.severityType === severityTypeEnum.None ||
+            model.severityType === severityTypeEnum.CompleteOcclusion
+          "
+        >
+          <p-checkbox
+            name="isHemodynamicallyRelevant"
+            label="{{
+              'angiographyCT.upperArteries.hemodynamicallyRelevant.value'
+                | translate
+            }}"
+            rr-id="ang_c_0603105"
+            binary="true"
+            [(ngModel)]="model.isHemodynamicallyRelevant"
+          ></p-checkbox>
+        </div>
+
+        <p rr-id="ang_c_0603106" class="m-t-18 m-b-1">
+          {{ "angiographyCT.upperArteries.diameterStenosis.value" | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0603107"
+          labelRrId="ang_c_0603108"
+          name="diameterStenosis"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          [(ngModel)]="model.diameterStenosis"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="ang_c_0603110" class="m-b-minus-4">
+          {{ "angiographyCT.upperArteries.diameterDiseaseFreePoststenotic.value"
+          | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0603111"
+          labelRrId="ang_c_0603109"
+          name="diameterDiseaseFreePoststenoticSegment"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          class="m-t-5"
+          [(ngModel)]="model.diameterDiseaseFreePoststenoticSegment"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="ang_c_0603112" class="m-b-0">
+          {{ "angiographyCT.upperArteries.degreeOfStenosisAccording.value" |
+          translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.in.value' | translate"
+          inputRrId="ang_c_0603141"
+          labelRrId="ang_c_0603142"
+          name="degreeOfStenosisAccordingToNASCET"
+          [config]="{ readonly: true }"
+          class="m-t-5 m-b-10"
+          [(ngModel)]="model.degreeOfStenosisAccordingToNASCET"
+          rrValidation="degreeOfStenosisAccordingToNASCET"
+        ></rr-number-input>
+      </div>
+
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Dissection"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0603113">
+          {{ "angiographyCT.upperArteries.detailsDissection.value" | translate
+          }}
+        </h2>
+        <p-checkbox
+          name="isWallHematoma"
+          label="{{
+            'angiographyCT.upperArteries.wallHematoma.value' | translate
+          }}"
+          rr-id="ang_c_0603114"
+          binary="true"
+          [(ngModel)]="model.isWallHematoma"
+        ></p-checkbox>
+        <p-checkbox
+          name="isAffectionOfDownstreamVessels"
+          label="{{
+            'angiographyCT.upperArteries.affectionOfDownstreamVessels.value'
+              | translate
+          }}"
+          rr-id="ang_c_060306"
+          binary="true"
+          [(ngModel)]="model.isAffectionOfDownstreamVessels"
+          rrContentReset="isAffectionOfDownstreamVessels-block"
+        ></p-checkbox>
+        <div
+          id="isAffectionOfDownstreamVessels-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isAffectionOfDownstreamVessels"
+        >
+          <p-checkbox
+            name="isCommonCarotidArtery"
+            label="{{
+              'angiographyCT.upperArteries.commonCarotidArtery.value'
+                | translate
+            }}"
+            rr-id="ang_c_060307"
+            binary="true"
+            [(ngModel)]="model.isCommonCarotidArtery"
+          ></p-checkbox>
+          <p-checkbox
+            name="isBrachialArtery"
+            label="{{
+              'angiographyCT.upperArteries.brachialArtery.value' | translate
+            }}"
+            rr-id="ang_c_060308"
+            binary="true"
+            [(ngModel)]="model.isBrachialArtery"
+          ></p-checkbox>
+        </div>
+        <h2 rr-id="ang_c_0603115" class="m-t-20">
+          {{ "angiographyCT.upperArteries.length.value" | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0603117"
+          labelRrId="ang_c_0603116"
+          name="lengthDissection"
+          [config]="{ labelWidth: 160, min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+      </div>
+
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Aneurysm"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0603118" class="m-b-15">
+          {{ "angiographyCT.upperArteries.type.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="shapeType"
+          rrUnClickRadio
+          [value]="shapeTypeEnum.Saccular"
+          label="{{ 'angiographyCT.upperArteries.saccular.value' | translate }}"
+          rr-id="ang_c_0603119"
+          [(ngModel)]="model.shapeType"
+        ></p-radioButton>
+        <p-radioButton
+          name="shapeType"
+          rrUnClickRadio
+          [value]="shapeTypeEnum.Fusiform"
+          label="{{ 'angiographyCT.upperArteries.fusiform.value' | translate }}"
+          rr-id="ang_c_0603120"
+          [(ngModel)]="model.shapeType"
+        ></p-radioButton>
+        <h2 rr-id="ang_c_0603121" class="m-t-18">
+          {{ "angiographyCT.upperArteries.maxDiameter.value" | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0603123"
+          labelRrId="ang_c_0603122"
+          name="maxDiameter"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          [(ngModel)]="model.maxDiameter"
+        ></rr-number-input>
+        <h2 rr-id="ang_c_0603124" class="m-t-22">
+          {{ "angiographyCT.upperArteries.length.value" | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0603126"
+          labelRrId="ang_c_0603125"
+          name="lengthAneurysm"
+          [config]="{ labelWidth: 160, min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+      </div>
+    </div>
+
+    <div
+      class="f-vertical f-start o-radio-list"
+      *ngIf="
+        model.findingType !== upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+    >
+      <h2 rr-id="ang_c_0603127" *ngIf="!isHemodialysisShuntActive()">
+        {{ "angiographyCT.upperArteries.pathology.value" | translate }}*
+      </h2>
+      <h2 rr-id="ang_c_060309" *ngIf="isHemodialysisShuntActive()">
+        {{ "angiographyCT.upperArteries.pathologyhemodialysisShunt.value" |
+        translate }}
+      </h2>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.StenosisOrOcclusion"
+        [(ngModel)]="model.pathologyType"
+        [rrContentReset]="
+          clearPathologyDetails(pathologyTypeEnum.StenosisOrOcclusion)
+        "
+        label="{{
+          'angiographyCT.upperArteries.stenosisocclusion.value' | translate
+        }}"
+        rr-id="ang_c_060301"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.Dissection"
+        [(ngModel)]="model.pathologyType"
+        [rrContentReset]="clearPathologyDetails(pathologyTypeEnum.Dissection)"
+        label="{{ 'angiographyCT.upperArteries.dissection.value' | translate }}"
+        rr-id="ang_c_060302"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.Aneurysm"
+        [(ngModel)]="model.pathologyType"
+        [rrContentReset]="clearPathologyDetails(pathologyTypeEnum.Aneurysm)"
+        label="{{ 'angiographyCT.upperArteries.aneurysm.value' | translate }}"
+        rr-id="ang_c_060303"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.VascularMalformation"
+        [(ngModel)]="model.pathologyType"
+        [rrContentReset]="
+          clearPathologyDetails(pathologyTypeEnum.VascularMalformation)
+        "
+        label="{{
+          'angiographyCT.upperArteries.vascularMalformation.value' | translate
+        }}"
+        rr-id="ang_c_060304"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        [value]="pathologyTypeEnum.HemodialysisShunt"
+        [(ngModel)]="model.pathologyType"
+        [rrContentReset]="
+          clearPathologyDetails(pathologyTypeEnum.HemodialysisShunt)
+        "
+        *ngIf="isHemodialysisShuntActive()"
+        label="{{
+          'angiographyCT.upperArteries.hemodialysisShunt.value' | translate
+        }}"
+        rr-id="ang_c_060305"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="fourthCol"
+    class="c-col-1 c-sep-l c-pad"
+    [class.m-t-31]="model.pathologyType !== pathologyTypeEnum.None"
+  >
+    <!--    TruncusBrachiocephalicus - FOURTH COLUMN-->
+    <div
+      *ngIf="
+        model.findingType === upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+    >
+      <!--      TruncusBrachiocephalicus - STENOSE-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.StenosisOrOcclusion"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0604100">
+          {{ "angiographyCT.upperArteries.type.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="formType"
+          rrUnClickRadio
+          [value]="formTypeEnum.Concentric"
+          label="{{
+            'angiographyCT.upperArteries.concentric.value' | translate
+          }}"
+          rr-id="ang_c_0604101"
+          [(ngModel)]="model.formType"
+        ></p-radioButton>
+        <p-radioButton
+          name="formType"
+          rrUnClickRadio
+          [value]="formTypeEnum.Eccentric"
+          label="{{
+            'angiographyCT.upperArteries.eccentric.value' | translate
+          }}"
+          rr-id="ang_c_0604102"
+          [(ngModel)]="model.formType"
+        ></p-radioButton>
+        <h2 rr-id="ang_c_0604103" class="m-t-21">
+          {{ "angiographyCT.upperArteries.length.value" | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0604105"
+          labelRrId="ang_c_0604104"
+          name="length"
+          [config]="{ labelWidth: 160, min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+        <p-checkbox
+          name="isShortStenosis"
+          label="{{
+            'angiographyCT.upperArteries.shortStenosis.value' | translate
+          }}"
+          rr-id="ang_c_0604106"
+          binary="true"
+          [(ngModel)]="model.isShortStenosis"
+        ></p-checkbox>
+      </div>
+
+      <!--      TruncusBrachiocephalicus - ANEURYSMA-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Aneurysm"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0604107">
+          {{ "angiographyCT.upperArteries.characterization.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="characterizationType"
+          rrUnClickRadio
+          [value]="characterizationTypeEnum.Verum"
+          label="{{
+            'angiographyCT.upperArteries.trueAneurysm.value' | translate
+          }}"
+          rr-id="ang_c_0604110"
+          [(ngModel)]="model.characterizationType"
+        ></p-radioButton>
+        <p-radioButton
+          name="characterizationType"
+          rrUnClickRadio
+          [value]="characterizationTypeEnum.Spurium"
+          label="{{
+            'angiographyCT.upperArteries.falseAneurysm.value' | translate
+          }}"
+          rr-id="ang_c_0604109"
+          [(ngModel)]="model.characterizationType"
+        ></p-radioButton>
+        <p-radioButton
+          name="characterizationType"
+          rrUnClickRadio
+          [value]="characterizationTypeEnum.Dissecans"
+          label="{{
+            'angiographyCT.upperArteries.dissectingAneurysm.value' | translate
+          }}"
+          rr-id="ang_c_0604108"
+          [(ngModel)]="model.characterizationType"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <!--    OTHER - FOURTH COL-->
+    <div
+      *ngIf="
+        model.findingType !== upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+    >
+      <!--      OTHER - STENOSE-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.StenosisOrOcclusion"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0604111">
+          {{ "angiographyCT.upperArteries.severity.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          [value]="severityTypeEnum.Mild"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.Mild,
+              'isHemodynamicallyRelevant-block2'
+            )
+          "
+          label="{{ 'angiographyCT.upperArteries.mild.value' | translate }}"
+          rr-id="ang_c_0604112"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          [value]="severityTypeEnum.Moderate"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.Moderate,
+              'isHemodynamicallyRelevant-block2'
+            )
+          "
+          label="{{ 'angiographyCT.upperArteries.moderate.value' | translate }}"
+          rr-id="ang_c_0604113"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          [value]="severityTypeEnum.Severe"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.Severe,
+              'isHemodynamicallyRelevant-block2'
+            )
+          "
+          label="{{ 'angiographyCT.upperArteries.severe.value' | translate }}"
+          rr-id="ang_c_0604114"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <p-radioButton
+          name="severityType"
+          rrValidation="severityType"
+          class="m-b-15"
+          [value]="severityTypeEnum.CompleteOcclusion"
+          [rrContentReset]="
+            clearIsHemodynamicallyRelevant(
+              severityTypeEnum.CompleteOcclusion,
+              'isHemodynamicallyRelevant-block2'
+            )
+          "
+          label="{{
+            'angiographyCT.upperArteries.completeOcclusion.value' | translate
+          }}"
+          rr-id="ang_c_0604115"
+          [(ngModel)]="model.severityType"
+        ></p-radioButton>
+        <div
+          id="isHemodynamicallyRelevant-block2"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="
+            model.severityType === severityTypeEnum.None ||
+            model.severityType === severityTypeEnum.CompleteOcclusion
+          "
+        >
+          <p-checkbox
+            name="isHemodynamicallyRelevant"
+            label="{{
+              'angiographyCT.upperArteries.hemodynamicallyRelevant.value'
+                | translate
+            }}"
+            rr-id="ang_c_0604116"
+            binary="true"
+            [(ngModel)]="model.isHemodynamicallyRelevant"
+          ></p-checkbox>
+        </div>
+
+        <p rr-id="ang_c_0604117" class="m-t-18 m-b-1">
+          {{ "angiographyCT.upperArteries.diameterStenosis.value" | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0604118"
+          labelRrId="ang_c_0604119"
+          name="diameterStenosis"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          [(ngModel)]="model.diameterStenosis"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="ang_c_0604120" class="m-b-minus-4">
+          {{ "angiographyCT.upperArteries.diameterDiseaseFreePoststenotic.value"
+          | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0604121"
+          labelRrId="ang_c_0604122"
+          name="diameterDiseaseFreePoststenoticSegment"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          class="m-t-5"
+          [(ngModel)]="model.diameterDiseaseFreePoststenoticSegment"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="ang_c_0604123" class="m-b-0">
+          {{ "angiographyCT.upperArteries.degreeOfStenosisAccording.value" |
+          translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.in.value' | translate"
+          inputRrId="ang_c_0604140"
+          labelRrId="ang_c_0604141"
+          name="degreeOfStenosisAccordingToNASCET"
+          [config]="{ readonly: true }"
+          class="m-t-5 m-b-10"
+          [(ngModel)]="model.degreeOfStenosisAccordingToNASCET"
+          rrValidation="degreeOfStenosisAccordingToNASCET"
+        ></rr-number-input>
+      </div>
+
+      <!--      OTHER - DISSEKTION-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Dissection"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0604124">
+          {{ "angiographyCT.upperArteries.detailsDissection.value" | translate
+          }}
+        </h2>
+        <p-checkbox
+          name="isWallHematoma"
+          label="{{
+            'angiographyCT.upperArteries.wallHematoma.value' | translate
+          }}"
+          rr-id="ang_c_060417"
+          binary="true"
+          [(ngModel)]="model.isWallHematoma"
+        ></p-checkbox>
+        <p-checkbox
+          name="isWallHematoma"
+          label="{{
+            'angiographyCT.upperArteries.affectionOfDownstreamVessels.value'
+              | translate
+          }}"
+          rr-id="ang_c_060401"
+          binary="true"
+          [(ngModel)]="model.isAffectionOfDownstreamVessels"
+        ></p-checkbox>
+        <h2 rr-id="ang_c_060416" class="m-t-21">
+          {{ "angiographyCT.upperArteries.length.value" | translate }}
+        </h2>
+        <rr-number-input
+          *ngIf="!isOther2LogicFallowed()"
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_060431"
+          labelRrId="ang_c_060430"
+          name="lengthDissection"
+          [config]="{ labelWidth: 160, min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+        <rr-number-input
+          *ngIf="isOther2LogicFallowed()"
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_060436"
+          labelRrId="ang_c_060430"
+          name="lengthDissection"
+          [config]="{ labelWidth: 160, min: 1, max: 150, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+      </div>
+
+      <!--      OTHER - ANEURYSMA-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Aneurysm"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_060418" class="m-b-15">
+          {{ "angiographyCT.upperArteries.type.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="shapeType"
+          rrUnClickRadio
+          [value]="shapeTypeEnum.Saccular"
+          label="{{ 'angiographyCT.upperArteries.saccular.value' | translate }}"
+          rr-id="ang_c_060419"
+          [(ngModel)]="model.shapeType"
+        ></p-radioButton>
+        <p-radioButton
+          name="shapeType"
+          rrUnClickRadio
+          [value]="shapeTypeEnum.Fusiform"
+          label="{{ 'angiographyCT.upperArteries.fusiform.value' | translate }}"
+          rr-id="ang_c_060420"
+          [(ngModel)]="model.shapeType"
+        ></p-radioButton>
+        <h2 rr-id="ang_c_0604125" class="m-t-18">
+          {{ "angiographyCT.upperArteries.maxDiameter.value" | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_060421"
+          labelRrId="ang_c_060422"
+          name="maxDiameter"
+          [config]="{ labelWidth: 160, min: 1, max: 99, placeholder: '--' }"
+          [(ngModel)]="model.maxDiameter"
+        ></rr-number-input>
+        <h2 rr-id="ang_c_0604126" class="m-t-22">
+          {{ "angiographyCT.upperArteries.length.value" | translate }}
+        </h2>
+        <rr-number-input
+          *ngIf="!isOther2LogicFallowed()"
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0604129"
+          labelRrId="ang_c_0604127"
+          name="lengthAneurysm"
+          [config]="{ labelWidth: 160, min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+        <rr-number-input
+          *ngIf="isOther2LogicFallowed()"
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0604130"
+          labelRrId="ang_c_0604127"
+          name="lengthAneurysm"
+          [config]="{ labelWidth: 160, min: 1, max: 150, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+        <h2 rr-id="ang_c_0604107" class="m-t-22">
+          {{ "angiographyCT.upperArteries.characterization.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="characterizationType"
+          rrUnClickRadio
+          [value]="characterizationTypeEnum.Verum"
+          label="{{
+            'angiographyCT.upperArteries.trueAneurysm.value' | translate
+          }}"
+          rr-id="ang_c_0604110"
+          [(ngModel)]="model.characterizationType"
+        ></p-radioButton>
+        <p-radioButton
+          name="characterizationType"
+          rrUnClickRadio
+          [value]="characterizationTypeEnum.Spurium"
+          label="{{
+            'angiographyCT.upperArteries.falseAneurysm.value' | translate
+          }}"
+          rr-id="ang_c_0604109"
+          [(ngModel)]="model.characterizationType"
+        ></p-radioButton>
+        <p-radioButton
+          name="characterizationType"
+          rrUnClickRadio
+          [value]="characterizationTypeEnum.Dissecans"
+          label="{{
+            'angiographyCT.upperArteries.dissectingAneurysm.value' | translate
+          }}"
+          rr-id="ang_c_0604108"
+          [(ngModel)]="model.characterizationType"
+        ></p-radioButton>
+      </div>
+
+      <!--      OTHER - VASKULARE MALFORMATION-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.VascularMalformation"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0604142">
+          {{ "angiographyCT.upperArteries.detailsVascularMalformation.value" |
+          translate }}
+        </h2>
+        <p-radioButton
+          name="detailsVascularMalformationType"
+          rrUnClickRadio
+          rrContentReset="arteriovenousMalformationType-block"
+          [value]="
+            detailsVascularMalformationTypeEnum.ArteriovenousMalformation
+          "
+          label="{{
+            'angiographyCT.upperArteries.arteriovenousMalformation.value'
+              | translate
+          }}"
+          rr-id="ang_c_060432"
+          [(ngModel)]="model.detailsVascularMalformationType"
+        ></p-radioButton>
+        <div
+          id="arteriovenousMalformationType-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="
+            model.detailsVascularMalformationType !==
+            detailsVascularMalformationTypeEnum.ArteriovenousMalformation
+          "
+        >
+          <p-radioButton
+            name="arteriovenousMalformationType"
+            rrUnClickRadio
+            [value]="arteriovenousMalformationTypeEnum.HighFlowLesion"
+            label="{{
+              'angiographyCT.upperArteries.highflowLesion.value' | translate
+            }}"
+            rr-id="ang_c_060433"
+            [(ngModel)]="model.arteriovenousMalformationType"
+          ></p-radioButton>
+          <p-radioButton
+            name="arteriovenousMalformationType"
+            rrUnClickRadio
+            [value]="arteriovenousMalformationTypeEnum.LowFlowLesion"
+            label="{{
+              'angiographyCT.upperArteries.lowflowLesion.value' | translate
+            }}"
+            rr-id="ang_c_060434"
+            [(ngModel)]="model.arteriovenousMalformationType"
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          name="detailsVascularMalformationType"
+          rrUnClickRadio
+          rrContentReset="arteriovenousMalformationType-block"
+          [value]="detailsVascularMalformationTypeEnum.Hemangioma"
+          label="{{
+            'angiographyCT.upperArteries.hemangioma.value' | translate
+          }}"
+          rr-id="ang_c_060435"
+          [(ngModel)]="model.detailsVascularMalformationType"
+        ></p-radioButton>
+      </div>
+
+      <!--      OTHER - HAMODIALYSE-SHUNT-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.HemodialysisShunt"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_060437" rrInfoIcon="ang_c_06_01">
+          {{ "angiographyCT.upperArteries.typeII.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="hemodialysisShuntType"
+          rrUnClickRadio
+          [value]="hemodialysisShuntTypeEnum.BresciaCiminoFistula"
+          label="{{
+            'angiographyCT.upperArteries.bresciaCiminoFistula.value' | translate
+          }}"
+          rr-id="ang_c_060438"
+          [(ngModel)]="model.hemodialysisShuntType"
+        ></p-radioButton>
+        <p-radioButton
+          name="hemodialysisShuntType"
+          rrUnClickRadio
+          [value]="hemodialysisShuntTypeEnum.FistulaInTheTabatiereRegion"
+          label="{{
+            'angiographyCT.upperArteries.fistulaInTheTabatière.value'
+              | translate
+          }}"
+          rr-id="ang_c_060440"
+          [(ngModel)]="model.hemodialysisShuntType"
+        ></p-radioButton>
+        <p-radioButton
+          name="hemodialysisShuntType"
+          rrUnClickRadio
+          [value]="hemodialysisShuntTypeEnum.BrachiocephalicAVFistula"
+          label="{{
+            'angiographyCT.upperArteries.brachiocephalicAVFistula.value'
+              | translate
+          }}"
+          rr-id="ang_c_060442"
+          [(ngModel)]="model.hemodialysisShuntType"
+        ></p-radioButton>
+        <p-radioButton
+          name="hemodialysisShuntType"
+          rrUnClickRadio
+          [value]="hemodialysisShuntTypeEnum.BrachiobasilicAVFistula"
+          label="{{
+            'angiographyCT.upperArteries.brachiobasilicAVFistula.value'
+              | translate
+          }}"
+          rr-id="ang_c_060443"
+          [(ngModel)]="model.hemodialysisShuntType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="fifthCol"
+    class="c-col-1 c-sep-l c-pad-l"
+    [class.m-t-31]="model.pathologyType !== pathologyTypeEnum.None"
+  >
+    <!--    TruncusBrachiocephalicus - FIFTH COLUMN-->
+    <div
+      *ngIf="
+        model.findingType === upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+    >
+      <!--      TruncusBrachiocephalicus - STENOSE-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.StenosisOrOcclusion"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0605100" class="m-b-13">
+          {{ "angiographyCT.upperArteries.details.value" | translate }}
+        </h2>
+        <p-checkbox
+          name="isThrombusSurroundedByContrastAgent"
+          label="{{
+            'angiographyCT.upperArteries.thrombusSurroundedByContrast.value'
+              | translate
+          }}"
+          rr-id="ang_c_0605101"
+          binary="true"
+          [(ngModel)]="model.isThrombusSurroundedByContrastAgent"
+        ></p-checkbox>
+        <p-checkbox
+          name="isCollateralization"
+          label="{{
+            'angiographyCT.upperArteries.collateralization.value' | translate
+          }}"
+          rr-id="ang_c_0605102"
+          binary="true"
+          [(ngModel)]="model.isCollateralization"
+        ></p-checkbox>
+        <p-checkbox
+          name="isPreStenoticDilatation"
+          label="{{
+            'angiographyCT.upperArteries.prestenoticDilatation.value'
+              | translate
+          }}"
+          rr-id="ang_c_0605103"
+          binary="true"
+          [(ngModel)]="model.isPreStenoticDilatation"
+        ></p-checkbox>
+        <p-checkbox
+          name="isSubclavianStealSyndrome"
+          label="{{
+            'angiographyCT.upperArteries.subclavianStealSyndrome.value'
+              | translate
+          }}"
+          rr-id="ang_c_0605104"
+          binary="true"
+          rrContentReset="isSuspiciousOf-block"
+          [(ngModel)]="model.isSubclavianStealSyndrome"
+        ></p-checkbox>
+        <div
+          id="isSuspiciousOf-block"
+          class="nested-content"
+          [rrDisable]="!model.isSubclavianStealSyndrome"
+        >
+          <p-checkbox
+            name="isSuspiciousOf"
+            label="{{
+              'angiographyCT.upperArteries.suspicionOf.value' | translate
+            }}"
+            rr-id="ang_c_0605105"
+            binary="true"
+            [(ngModel)]="model.isSuspiciousOf"
+          ></p-checkbox>
+        </div>
+      </div>
+      <!--      TruncusBrachiocephalicus - STENOSE-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Aneurysm"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_060501">
+          {{ "angiographyCT.upperArteries.course.value" | translate }}
+        </h2>
+        <p rr-id="ang_c_060502" class="m-b-1">
+          {{ "angiographyCT.upperArteries.maxDiameterInPrevious.value" |
+          translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_060503"
+          labelRrId="ang_c_060504"
+          name="maxDiameterPrevExam"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          [(ngModel)]="model.maxDiameterPrevExam"
+        ></rr-number-input>
+        <p rr-id="ang_c_060505" class="m-t-18 m-b-10">
+          {{ "angiographyCT.upperArteries.impression.value" | translate }}
+        </p>
+        <p-radioButton
+          name="impressionType"
+          rrUnClickRadio
+          [value]="impressionTypeEnum.Progression"
+          label="{{
+            'angiographyCT.upperArteries.progression.value' | translate
+          }}"
+          rr-id="ang_c_060506"
+          [(ngModel)]="model.impressionType"
+        ></p-radioButton>
+        <p-radioButton
+          name="impressionType"
+          rrUnClickRadio
+          [value]="impressionTypeEnum.Stable"
+          label="{{ 'angiographyCT.upperArteries.stable.value' | translate }}"
+          rr-id="ang_c_060507"
+          [(ngModel)]="model.impressionType"
+        ></p-radioButton>
+        <p-radioButton
+          name="impressionType"
+          rrUnClickRadio
+          [value]="impressionTypeEnum.Regression"
+          label="{{
+            'angiographyCT.upperArteries.regredient.value' | translate
+          }}"
+          rr-id="ang_c_060508"
+          [(ngModel)]="model.impressionType"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <!--    OTHER - FIFTH COLUMN-->
+    <div
+      *ngIf="
+        model.findingType !== upperArteriesFindingTypeEnum.BrachiocephalicTrunk
+      "
+    >
+      <!--      OTHER - STENOSE-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.StenosisOrOcclusion"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_0605106">
+          {{ "angiographyCT.upperArteries.type.value" | translate }}
+        </h2>
+        <p-radioButton
+          name="formType"
+          rrUnClickRadio
+          [value]="formTypeEnum.Concentric"
+          label="{{
+            'angiographyCT.upperArteries.concentric.value' | translate
+          }}"
+          rr-id="ang_c_0605107"
+          [(ngModel)]="model.formType"
+        ></p-radioButton>
+        <p-radioButton
+          name="formType"
+          rrUnClickRadio
+          [value]="formTypeEnum.Eccentric"
+          label="{{
+            'angiographyCT.upperArteries.eccentric.value' | translate
+          }}"
+          rr-id="ang_c_0605108"
+          [(ngModel)]="model.formType"
+        ></p-radioButton>
+        <h2 rr-id="ang_c_0605109" class="m-t-24">
+          {{ "angiographyCT.upperArteries.length.value" | translate }}
+        </h2>
+        <rr-number-input
+          *ngIf="!isOther2LogicFallowed()"
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0605119"
+          labelRrId="ang_c_0605110"
+          name="length"
+          [config]="{ labelWidth: 160, min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+        <rr-number-input
+          *ngIf="isOther2LogicFallowed()"
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_0605120"
+          labelRrId="ang_c_0605110"
+          name="length"
+          [config]="{ labelWidth: 160, min: 1, max: 150, placeholder: '---' }"
+          [(ngModel)]="model.length"
+        ></rr-number-input>
+        <p-checkbox
+          name="isShortStenosis"
+          label="{{
+            'angiographyCT.upperArteries.shortStenosis.value' | translate
+          }}"
+          rr-id="ang_c_0605112"
+          binary="true"
+          [(ngModel)]="model.isShortStenosis"
+        ></p-checkbox>
+        <h2 rr-id="ang_c_0605113" class="m-t-22">
+          {{ "angiographyCT.upperArteries.details.value" | translate }}
+        </h2>
+        <p-checkbox
+          name="isThrombusSurroundedByContrastAgent"
+          label="{{
+            'angiographyCT.upperArteries.thrombusSurroundedByContrast.value'
+              | translate
+          }}"
+          rr-id="ang_c_0605114"
+          binary="true"
+          [(ngModel)]="model.isThrombusSurroundedByContrastAgent"
+        ></p-checkbox>
+        <p-checkbox
+          name="isCollateralization"
+          label="{{
+            'angiographyCT.upperArteries.collateralization.value' | translate
+          }}"
+          rr-id="ang_c_0605115"
+          binary="true"
+          [(ngModel)]="model.isCollateralization"
+        ></p-checkbox>
+        <p-checkbox
+          name="isPreStenoticDilatation"
+          label="{{
+            'angiographyCT.upperArteries.prestenoticDilatation.value'
+              | translate
+          }}"
+          rr-id="ang_c_0605116"
+          binary="true"
+          [(ngModel)]="model.isPreStenoticDilatation"
+        ></p-checkbox>
+        <ng-container
+          *ngIf="
+            model.findingType === upperArteriesFindingTypeEnum.SubclavianArtery
+          "
+        >
+          <p-checkbox
+            name="isSubclavianStealSyndrome"
+            label="{{
+              'angiographyCT.upperArteries.subclavianStealSyndrome.value'
+                | translate
+            }}"
+            rr-id="ang_c_0605117"
+            binary="true"
+            rrContentReset="isSuspiciousOf-block2"
+            [(ngModel)]="model.isSubclavianStealSyndrome"
+          ></p-checkbox>
+          <div
+            id="isSuspiciousOf-block2"
+            class="nested-content"
+            [rrDisable]="!model.isSubclavianStealSyndrome"
+          >
+            <p-checkbox
+              name="isSuspiciousOf"
+              label="{{
+                'angiographyCT.upperArteries.suspicionOf.value' | translate
+              }}"
+              rr-id="ang_c_0605118"
+              binary="true"
+              [(ngModel)]="model.isSuspiciousOf"
+            ></p-checkbox>
+          </div>
+        </ng-container>
+      </div>
+
+      <!--      OTHER - ANEURYSMA-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.Aneurysm"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_060501">
+          {{ "angiographyCT.upperArteries.course.value" | translate }}
+        </h2>
+        <p rr-id="ang_c_060502" class="m-b-1">
+          {{ "angiographyCT.upperArteries.maxDiameterInPrevious.value" |
+          translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyCT.upperArteries.inMm.value' | translate"
+          inputRrId="ang_c_060503"
+          labelRrId="ang_c_060504"
+          name="maxDiameterPrevExam"
+          [config]="{ labelWidth: 160, min: 1, max: 99 }"
+          [(ngModel)]="model.maxDiameterPrevExam"
+        ></rr-number-input>
+        <p rr-id="ang_c_060505" class="m-t-18 m-b-10">
+          {{ "angiographyCT.upperArteries.impression.value" | translate }}
+        </p>
+        <p-radioButton
+          name="impressionType"
+          rrUnClickRadio
+          [value]="impressionTypeEnum.Progression"
+          label="{{
+            'angiographyCT.upperArteries.progression.value' | translate
+          }}"
+          rr-id="ang_c_060506"
+          [(ngModel)]="model.impressionType"
+        ></p-radioButton>
+        <p-radioButton
+          name="impressionType"
+          rrUnClickRadio
+          [value]="impressionTypeEnum.Stable"
+          label="{{ 'angiographyCT.upperArteries.stable.value' | translate }}"
+          rr-id="ang_c_060507"
+          [(ngModel)]="model.impressionType"
+        ></p-radioButton>
+        <p-radioButton
+          name="impressionType"
+          rrUnClickRadio
+          [value]="impressionTypeEnum.Regression"
+          label="{{
+            'angiographyCT.upperArteries.regredient.value' | translate
+          }}"
+          rr-id="ang_c_060508"
+          [(ngModel)]="model.impressionType"
+        ></p-radioButton>
+      </div>
+
+      <!--      OTHER - HEMODIALYSIS SHUNT-->
+      <div
+        *ngIf="model.pathologyType === pathologyTypeEnum.HemodialysisShunt"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_c_060509">
+          {{ "angiographyCT.upperArteries.complication.value" | translate }}
+        </h2>
+        <p-checkbox
+          name="isStenosis"
+          label="{{
+          'angiographyCT.upperArteries.stenosis.value'
+            | translate
+        }}"
+          rr-id="ang_c_060510"
+          binary="true"
+          rrContentReset="isSuspicionOfStenosis-block2"
+          [(ngModel)]="model.isStenosis"
+        ></p-checkbox>
+        <div
+          id="isSuspicionOfStenosis-block2"
+          class="nested-content"
+          [rrDisable]="!model.isStenosis"
+        >
+          <p-checkbox
+            name="isSuspicionOfStenosis"
+            label="{{
+            'angiographyCT.upperArteries.suspicionOf.value' | translate
+          }}"
+            rr-id="ang_c_060511"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOfStenosis"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          name="isOcclusion"
+          label="{{
+          'angiographyCT.upperArteries.occlusion.value'
+            | translate
+        }}"
+          rr-id="ang_c_060512"
+          binary="true"
+          rrContentReset="isSuspicionOfOcclusion-block2"
+          [(ngModel)]="model.isOcclusion"
+        ></p-checkbox>
+        <div
+          id="isSuspicionOfOcclusion-block2"
+          class="nested-content"
+          [rrDisable]="!model.isOcclusion"
+        >
+          <p-checkbox
+            name="isSuspicionOfOcclusion"
+            label="{{
+            'angiographyCT.upperArteries.suspicionOf.value' | translate
+          }}"
+            rr-id="ang_c_060513"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOfOcclusion"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          name="isAneurysm"
+          label="{{
+          'angiographyCT.upperArteries.aneurysm.value'
+            | translate
+        }}"
+          rr-id="ang_c_060514"
+          binary="true"
+          rrContentReset="isSuspicionOfAneurysm-block2"
+          [(ngModel)]="model.isAneurysm"
+        ></p-checkbox>
+        <div
+          id="isSuspicionOfAneurysm-block2"
+          class="nested-content"
+          [rrDisable]="!model.isAneurysm"
+        >
+          <p-checkbox
+            name="isSuspicionOfAneurysm"
+            label="{{
+            'angiographyCT.upperArteries.suspicionOf.value' | translate
+          }}"
+            rr-id="ang_c_060515"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOfAneurysm"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          name="isInfection"
+          label="{{
+          'angiographyCT.upperArteries.infection.value'
+            | translate
+        }}"
+          rr-id="ang_c_060516"
+          binary="true"
+          rrContentReset="isSuspicionOfInfection-block2"
+          [(ngModel)]="model.isInfection"
+        ></p-checkbox>
+        <div
+          id="isSuspicionOfInfection-block2"
+          class="nested-content"
+          [rrDisable]="!model.isInfection"
+        >
+          <p-checkbox
+            name="isSuspicionOfInfection"
+            label="{{
+            'angiographyCT.upperArteries.suspicionOf.value' | translate
+          }}"
+            rr-id="ang_c_060517"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOfInfection"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

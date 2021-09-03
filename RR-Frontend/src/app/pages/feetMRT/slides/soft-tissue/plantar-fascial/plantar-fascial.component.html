@@ -1,0 +1,534 @@
+<div class="f-horizontal f-start col-h-100 m-t-10 p-b-10">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2 rr-id="anc_m_060208" rrInfoIcon="anc_m_06_01" class="m-b-22">
+      {{'feetMRT.softTissue.localizationLayer.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="anc_m_060210"
+      label="{{'feetMRT.softTissue.central.value' | translate}}"
+      name="isCentral"
+      [(ngModel)]="model.isCentral"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_060211"
+      label="{{'feetMRT.softTissue.medial.value' | translate}}"
+      name="isMedial"
+      [(ngModel)]="model.isMedial"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_060212"
+      label="{{'feetMRT.softTissue.lateral.value' | translate}}"
+      name="isLateral"
+      [(ngModel)]="model.isLateral"
+      binary="true"
+    ></p-checkbox>
+  </div>
+
+  <div class="c-col-1 c-pad f-vertical f-start o-radio-list">
+    <h2 rr-id="anc_m_060311" class="m-b-23">
+      {{'feetMRT.softTissue.pathology.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="anc_m_060312"
+      label="{{'feetMRT.softTissue.rupture.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.Rupture"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060313"
+      label="{{'feetMRT.softTissue.plantarFasciitis.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.PlantarFasciitis"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060314"
+      label="{{'feetMRT.softTissue.plantarFibromatosisLedderhoseDisease.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      class="text-break"
+      [value]="plantarFasciaDiseaseTypeEnum.PlantarFibromatosisLedderhoseDisease"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+      rrInfoIcon="anc_m_06_02"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060316"
+      label="{{'feetMRT.softTissue.tendonXanthoma.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.TendonXanthoma"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060317"
+      label="{{'feetMRT.softTissue.foreignBodyGranulomatousReaction.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.ForeignBodyGranulomatousReaction"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060318"
+      label="{{'feetMRT.softTissue.plantarVenousThrombosis.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.PlantarVenousThrombosis"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060320"
+      label="{{'feetMRT.softTissue.baxterNeuropathy.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.BaxtersNeuropathy"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060321"
+      label="{{'feetMRT.softTissue.calcanealStressFracture.value' | translate}}"
+      name="plantarFasciaDiseaseType"
+      [value]="plantarFasciaDiseaseTypeEnum.StressFractureCalcaneus"
+      [(ngModel)]="model.plantarFasciaDiseaseType"
+      rrValidation="plantarFasciaDiseaseType"
+      rrContentReset="thirdColumn"
+    ></p-radioButton>
+  </div>
+
+  <div
+    class="c-col-1 c-sep-l c-pad f-vertical f-start o-radio-list text-break m-t-45"
+    id="thirdColumn"
+  >
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.Rupture"
+    >
+      <p-radioButton
+        rr-id="anc_m_060408"
+        label="{{'feetMRT.softTissue.partialTear.value' | translate}}"
+        name="default"
+        [(ngModel)]="model.ruptureType"
+        rrUnClickRadio
+        [value]="ruptureTypeEnum.PartialTear"
+        rrContentReset="isRetraction-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_060409"
+        label="{{'feetMRT.softTissue.completeTear.value' | translate}}"
+        name="default"
+        [(ngModel)]="model.ruptureType"
+        rrUnClickRadio
+        [value]="ruptureTypeEnum.CompleteTear"
+        rrContentReset="isRetraction-block"
+      ></p-radioButton>
+      <div
+        id="isRetraction-block"
+        class="f-vertical f-start o-radio-list nested-content m-b-15"
+        [rrDisable]="model.ruptureType !== ruptureTypeEnum.CompleteTear"
+      >
+        <p-checkbox
+          rr-id="anc_m_060410"
+          label="{{'feetMRT.softTissue.retraction.value' | translate}}"
+          name="isRetraction"
+          [(ngModel)]="model.isRetraction"
+          binary="true"
+        ></p-checkbox>
+        <div class="f-vertical f-start o-radio-list nested-content">
+          <rr-number-input
+            [label]="'feetMRT.softTissue.extentinMm.value' | translate"
+            inputRr="anc_m_060411"
+            labelRr="anc_m_060412"
+            [(ngModel)]="model.retractionDimensionInMm"
+            name="retractionDimensionInMm"
+            [config]="{labelWidth: 60, min: 1, max: 50}"
+          ></rr-number-input>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.PlantarFasciitis"
+    >
+      <p-checkbox
+        rr-id="anc_m_060413"
+        label="{{'feetMRT.softTissue.plantarHeelSpur.value' | translate}}"
+        name="isPlantarHeelSpur"
+        [(ngModel)]="model.isPlantarHeelSpur"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060414"
+        label="{{'feetMRT.softTissue.boneMarrowEdemaOf.value' | translate}}"
+        name="isBoneMarrowEdemaOfTheCalcaneus"
+        [(ngModel)]="model.isBoneMarrowEdemaOfTheCalcaneus"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060415"
+        label="{{'feetMRT.softTissue.fascialThickening.value' | translate}}"
+        name="isThickeningOfTheFascia"
+        [(ngModel)]="model.isThickeningOfTheFascia"
+        rrContentReset="isThickeningOfTheFascia-block2"
+        binary="true"
+        rrInfoIcon="anc_m_06_04"
+      ></p-checkbox>
+      <div
+        id="isThickeningOfTheFascia-block2"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isThickeningOfTheFascia"
+      >
+        <p-checkbox
+          rr-id="anc_m_060417"
+          label="{{'feetMRT.softTissue.fusiformContour.value' | translate}}"
+          name="isSpindleShaped"
+          [(ngModel)]="model.isSpindleShaped"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_060418"
+          label="{{'feetMRT.softTissue.atTheProximalPortion.value' | translate}}"
+          name="isCloseToTheCalcaneus"
+          [(ngModel)]="model.isCloseToTheCalcaneus"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="anc_m_060419"
+        label="{{'feetMRT.softTissue.t1wIncreasedSignalIntensityof.value' | translate}}"
+        name="isT1w"
+        [(ngModel)]="model.isT1wIncreasedSignalIntensityTheFascia"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060420"
+        label="{{'feetMRT.softTissue.t2wIncreasedSignalIntensityof.value' | translate}}"
+        name="isT2w"
+        [(ngModel)]="model.isT2wIncreasedSignalIntensityTheFascia"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060422"
+        label="{{'feetMRT.softTissue.surroundingEdemaperifasciitis.value' | translate}}"
+        name="isSurroundingEdemaOrPerifasciitis"
+        [(ngModel)]="model.isSurroundingEdemaOrPerifasciitis"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060423"
+        label="{{'feetMRT.softTissue.signalElevationOfThe.value' | translate}}"
+        name="isSignalIncreaseOfTheAdjacentMusculature"
+        [(ngModel)]="model.isSignalIncreaseOfTheAdjacentMusculature"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060424"
+        *ngIf="isCMYes"
+        label="{{'feetMRT.softTissue.hypervascularization.value' | translate}}"
+        name="isHypervascularization"
+        [(ngModel)]="model.isHypervascularization"
+        binary="true"
+      ></p-checkbox>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.PlantarFibromatosisLedderhoseDisease"
+    >
+      <p rr-id="anc_m_060425" class="m-b-4">
+        {{'feetMRT.softTissue.localizationAp.value' | translate}}
+      </p>
+      <p-checkbox
+        rr-id="anc_m_060426"
+        label="{{'feetMRT.softTissue.distal.value' | translate}}"
+        name="isDistalLocalization"
+        [(ngModel)]="model.isDistalLocalization"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060427"
+        label="{{'feetMRT.softTissue.proximal.value' | translate}}"
+        name="isProximalLocalization"
+        class="m-b-30"
+        [(ngModel)]="model.isProximalLocalization"
+        binary="true"
+      ></p-checkbox>
+
+      <p rr-id="anc_m_0604149" class="m-b-4">
+        {{'feetMRT.softTissue.characteristics.value' | translate}}
+      </p>
+      <p-checkbox
+        rr-id="anc_m_060428"
+        label="{{'feetMRT.softTissue.nodules.value' | translate}}"
+        name="isNode"
+        rrContentReset="isNode-block"
+        [(ngModel)]="model.isNode"
+        binary="true"
+      ></p-checkbox>
+      <div
+        id="isNode-block"
+        class="f-vertical f-start o-radio-list nested-content m-b-10"
+        [rrDisable]="!model.isNode"
+      >
+        <p-radioButton
+          rr-id="anc_m_060429"
+          label="{{'feetMRT.softTissue.lowT1wT2wSignal.value' | translate}}"
+          name="nodeType"
+          [value]="nodeTypeEnum.SignalArmInT1wOrT2w"
+          [(ngModel)]="model.nodeType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_060430"
+          label="{{'feetMRT.softTissue.lowSignalOnT2w.value' | translate}}"
+          name="nodeType"
+          [value]="nodeTypeEnum.SignalRichInT2w"
+          [(ngModel)]="model.nodeType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        rr-id="anc_m_060431"
+        label="{{'feetMRT.softTissue.fibrom.value' | translate}}"
+        name="isFibroma"
+        rrContentReset="isFibroma-block"
+        [(ngModel)]="model.isFibroma"
+        binary="true"
+      ></p-checkbox>
+      <div
+        id="isFibroma-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isFibroma"
+      >
+        <rr-number-input
+          [label]="'feetMRT.softTissue.maxDiameterInMm.value' | translate"
+          inputRrId="anc_m_060432"
+          labelRrId="anc_m_060433"
+          name="fibromaMaxDiameterInMm"
+          class="m-b-12"
+          [(ngModel)]="model.fibromaMaxDiameterInMm"
+          [config]="{labelWidth: 130, min: 1, max: 300}"
+        ></rr-number-input>
+        <p-checkbox
+          rr-id="anc_m_060434"
+          label="{{'feetMRT.softTissue.lesion.value' | translate}}"
+          name="isMoreThanOneLesion"
+          [(ngModel)]="model.isMoreThanOneLesion"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.TendonXanthoma"
+    >
+      <p-checkbox
+        rr-id="anc_m_060415"
+        label="{{'feetMRT.softTissue.fascialThickening.value' | translate}}"
+        name="isThickeningOfTheFascia"
+        binary="true"
+        [(ngModel)]="model.isThickeningOfTheFascia"
+        rrInfoIcon="anc_m_06_04"
+        rrContentReset="isThickeningOfTheFascia-block"
+      ></p-checkbox>
+      <div
+        id="isThickeningOfTheFascia-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isThickeningOfTheFascia"
+      >
+        <p-checkbox
+          rr-id="anc_m_060417"
+          label="{{'feetMRT.softTissue.fusiformContour.value' | translate}}"
+          name="isSpindleShaped"
+          [(ngModel)]="model.isSpindleShaped"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_060435"
+          label="{{'feetMRT.softTissue.heterogeneousSignalIntensityonT1wT2w.value' | translate}}"
+          name="isHeterogeneousSignalIntensityInT1wOrT2w"
+          [(ngModel)]="model.isHeterogeneousSignalIntensityInT1wOrT2w"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.ForeignBodyGranulomatousReaction"
+    >
+      <rr-number-input
+        [label]="'feetMRT.softTissue.maxDiameterInMm.value' | translate"
+        inputRrId="anc_m_060436"
+        labelRrID="anc_m_060437"
+        labelStyleClass="text-break"
+        name="detailMaxDiameterInMm"
+        [(ngModel)]="model.detailMaxDiameterInMm"
+        [config]="{max: 99, min: 1, labelWidth: 160}"
+      ></rr-number-input>
+      <p-checkbox
+        rr-id="anc_m_060438"
+        label="{{'feetMRT.softTissue.lesion.value' | translate}}"
+        name="isMoreThanOneLesion"
+        [(ngModel)]="model.isMoreThanOneLesion"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060439"
+        class="text-nowrap"
+        label="{{'feetMRT.softTissue.perifocalInflammatoryReaction.value' | translate}}"
+        name="isSurroundingInflammatoryReaction"
+        [(ngModel)]="model.isSurroundingInflammatoryReaction"
+        binary="true"
+      ></p-checkbox>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.PlantarVenousThrombosis"
+    >
+      <p-checkbox
+        rr-id="anc_m_060440"
+        label="{{'feetMRT.softTissue.lowSignalThrombusIndeep.value' | translate}}"
+        name="isLowSignalThrombusInDeepPlantarVein"
+        class="text-break"
+        [(ngModel)]="model.isLowSignalThrombusInDeepPlantarVein"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060441"
+        label="{{'feetMRT.softTissue.dilatedVein.value' | translate}}"
+        name="isDilatedVein"
+        [(ngModel)]="model.isDilatedVein"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060442"
+        *ngIf="isCMYes"
+        label="{{'feetMRT.softTissue.lowSignalThrombusWith.value' | translate}}"
+        name="isLowSignalThrombusWithFillingDefect"
+        [(ngModel)]="model.isLowSignalThrombusWithFillingDefect"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060443"
+        label="{{'feetMRT.softTissue.perivascularEdema.value' | translate}}"
+        name="isPerivascularEdema"
+        [(ngModel)]="model.isPerivascularEdema"
+        binary="true"
+      ></p-checkbox>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.BaxtersNeuropathy"
+    >
+      <p rr-id="anc_m_060444" class="m-b-5">
+        {{'feetMRT.softTissue.affectedMuscles.value' | translate}}
+      </p>
+      <p-checkbox
+        rr-id="anc_m_060445"
+        label="{{'feetMRT.softTissue.abductorDigitiMinimi.value' | translate}}"
+        name="isMAbductorDigitiMinimi"
+        [(ngModel)]="model.isMAbductorDigitiMinimi"
+        binary="true"
+        (onChange)="clearMuscleChangeType()"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060446"
+        label="{{'feetMRT.softTissue.flexorDigitorumBrevis.value' | translate}}"
+        name="isMFlexorDigitorumBrevis"
+        [(ngModel)]="model.isMFlexorDigitorumBrevis"
+        binary="true"
+        (onChange)="clearMuscleChangeType()"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060447"
+        label="{{'feetMRT.softTissue.quadratusPlantae.value' | translate}}"
+        name="isMQuadratusPlantae"
+        [(ngModel)]="model.isMQuadratusPlantae"
+        binary="true"
+        (onChange)="clearMuscleChangeType()"
+      ></p-checkbox>
+
+      <div class="o-radio-list" [rrDisable]="muscleChangeTypeDisabled()">
+        <p rr-id="anc_m_060448" class="m-t-15">
+          {{'feetMRT.softTissue.muscleChanges.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="anc_m_060449"
+          label="{{'feetMRT.softTissue.signalElevation.value' | translate}}"
+          name="muscleChangeType"
+          [(ngModel)]="model.muscleChangeType"
+          [value]="muscleChangeTypeEnum.SignalElevation"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_060450"
+          label="{{'feetMRT.softTissue.fattyDegeneration.value' | translate}}"
+          name="muscleChangeType"
+          [(ngModel)]="model.muscleChangeType"
+          [value]="muscleChangeTypeEnum.FattyDegeneration"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_060451"
+          label="{{'feetMRT.softTissue.muscularAtrophy.value' | translate}}"
+          name="muscleChangeType"
+          [(ngModel)]="model.muscleChangeType"
+          [value]="muscleChangeTypeEnum.MuscularAtrophy"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="model.plantarFasciaDiseaseType === plantarFasciaDiseaseTypeEnum.StressFractureCalcaneus"
+    >
+      <p-checkbox
+        rr-id="anc_m_060452"
+        label="{{'feetMRT.softTissue.linearIntramedullaryT1wHypointensity.value' | translate}}"
+        name="isLinearIntramedullaryT1wHypointensity"
+        class="text-break"
+        [(ngModel)]="model.isLinearIntramedullaryT1wHypointensity"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_060453"
+        label="{{'feetMRT.softTissue.boneMarrowEdema.value' | translate}}"
+        name="isBoneMarrowEdema"
+        [(ngModel)]="model.isBoneMarrowEdema"
+        binary="true"
+      ></p-checkbox>
+    </ng-container>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l f-vertical f-start o-radio-list">
+    <h2 rr-id="anc_m_060502" class="m-b-6">
+      {{'feetMRT.softTissue.differentialDiagnosis.value' | translate}}
+    </h2>
+    <p-dropdown
+      rr-id="anc_m_060503"
+      name="differentialDiagnosis"
+      class="m-b-16 o-width-93"
+      placeholder="{{'shared.pleaseSelect' | translate}}"
+      styleClass="o-width-100 ui-brown-box"
+      [(ngModel)]="model.differentialDiagnosis"
+      rrDropdownClear
+      [options]="differentialDiagnosisBase"
+      [rrDropdownExcludedOptions]="model.plantarFasciaDiseaseType"
+    >
+    </p-dropdown>
+    <p-checkbox
+      rr-id="anc_m_060504"
+      label="{{'feetMRT.softTissue.subordinated.value' | translate}}"
+      name="isSubordinated"
+      [(ngModel)]="model.isSubordinated"
+      binary="true"
+    ></p-checkbox>
+  </div>
+</div>

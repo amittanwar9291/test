@@ -1,0 +1,412 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-sep c-pad f-vertical">
+      <div class="f-vertical m-b-40">
+        <h1 rr-id="mam_m_090103" rrInfoIcon="mam_m_090104">
+          {{ "mammaMRT.rating.aCRDensityIndex.value" | translate }}
+        </h1>
+        <div rr-id="mam_m_090105" class="density-box m-t-9">
+          <div class="density-box__text">{{ model.acrDensityIndex || "-"}}</div>
+        </div>
+      </div>
+      <rr-bi-rads [model]="model"></rr-bi-rads>
+    </div>
+    <div class="c-col-3 c-sep c-pad f-vertical">
+      <h1 class="o-width-100 m-b-84 text-break" rr-id="mam_m_090301">
+        {{ 'mammaMRT.rating.action.value' | translate }}
+      </h1>
+      <div class="c-col-3 f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_090302"
+            name="furtherActionType"
+            [value]="furtherActionType.Biopsy"
+            label="{{ 'mammaMRT.rating.biopsy.value'  |  translate }}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_090303"
+            name="furtherActionType"
+            class="text-break multiple-line-header"
+            [value]="furtherActionType.SubsequentScreening"
+            label="{{ 'mammaMRT.rating.subsequentScreening.value'  |  translate }}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_090306"
+            name="furtherActionType"
+            [value]="furtherActionType.EarlyDetectionForWomanAtHigherRisk"
+            label="{{'mammaMRT.rating.earlyDetectionForWoman.value' | translate}}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_090307"
+            name="furtherActionType"
+            [value]="furtherActionType.SubsequentScreeningAfterTreatment"
+            label="{{'mammaMRT.rating.subsequentScreeningAfterTreatment.value' | translate}}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_090304"
+            name="furtherActionType"
+            [value]="furtherActionType.MagnificationView"
+            label="{{ 'mammaMRT.rating.magnificationView.value'  |  translate }}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_090305"
+            name="furtherActionType"
+            [value]="furtherActionType.Checkup"
+            label="{{ 'mammaMRT.rating.checkup.value'  |  translate }}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_090308"
+            name="furtherActionType"
+            [value]="furtherActionType.Surgery"
+            label="{{'mammaMRT.rating.surgery.value' | translate}}"
+            [(ngModel)]="model.furtherActionType"
+            rrUnClickRadio
+            rrContentReset="surgeryBlock biopsyBlock ultrasoundBlock mammographyAndMRTBlock"
+          >
+          </p-radioButton>
+          <div
+            [rrDisable]="model.furtherActionType !== furtherActionType.Surgery"
+            class="f-start o-radio-list nested-content"
+            id="surgeryBlock"
+          >
+            <p-checkbox
+              rr-id="mam_m_090309"
+              name="isEvaluationInTumorBoard"
+              label="{{'mammaMRT.rating.tumorBoardEvaluation.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isEvaluationInTumorBoard"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_m_090310"
+              name="isBreastSurgeryConsultation"
+              label="{{'mammaMRT.rating.breastSurgeryConsultation.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isBreastSurgeryConsultation"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad c-sep  f-vertical list-spacing-large">
+          <div
+            *ngIf="model.furtherActionType === furtherActionType.Biopsy"
+            class="o-radio-list"
+            id="biopsyBlock"
+          >
+            <p rr-id="mam_m_090404">
+              {{'mammaMRT.rating.localization.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="mam_m_090405"
+              name="biopsyLocalizationType"
+              [value]="biopsyLocalizationType.BreastRight"
+              label="{{'mammaMRT.rating.breastRight.value' | translate}}"
+              [(ngModel)]="model.biopsyLocalizationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_m_090406"
+              name="biopsyLocalizationType"
+              [value]="biopsyLocalizationType.BreastLeft"
+              label="{{'mammaMRT.rating.breastLeft.value' | translate}}"
+              [(ngModel)]="model.biopsyLocalizationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_m_090407"
+              name="biopsyLocalizationType"
+              [value]="biopsyLocalizationType.LymphNodesRight"
+              label="{{'mammaMRT.rating.lymphNodesRight.value' | translate}}"
+              [(ngModel)]="model.biopsyLocalizationType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_m_090408"
+              name="biopsyLocalizationType"
+              [value]="biopsyLocalizationType.LymphNodesLeft"
+              label="{{'mammaMRT.rating.lymphNodesLeft.value' | translate}}"
+              [(ngModel)]="model.biopsyLocalizationType"
+              rrUnClickRadio
+              class="m-b-42"
+            >
+            </p-radioButton>
+            <p rr-id="mam_m_090409">
+              {{'mammaMRT.rating.modality.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="mam_m_090401"
+              name="localization"
+              [value]="biopsyModalityType.Ultrasound"
+              label="{{'mammaMRT.rating.ultrasound.value' | translate}}"
+              [(ngModel)]="model.biopsyModalityType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_m_090402"
+              name="localization"
+              [value]="biopsyModalityType.Mammography"
+              label="{{'mammaMRT.rating.mammography2.value' | translate}}"
+              [(ngModel)]="model.biopsyModalityType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="mam_m_090403"
+              name="localization"
+              [value]="biopsyModalityType.MRI"
+              label="{{'mammaMRT.rating.mRI.value' | translate}}"
+              [(ngModel)]="model.biopsyModalityType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="model.furtherActionType === furtherActionType.Checkup"
+            class="o-radio-list"
+            id="ultrasoundBlock"
+          >
+            <p-checkbox
+              rr-id="mam_m_090418"
+              name="isUltrasound"
+              label="{{'mammaMRT.rating.ultrasound.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isUltrasound"
+              class="m-b-13"
+              rrContentReset="ultrasoundDateTypeBlock"
+            >
+            </p-checkbox>
+            <div
+              [rrDisable]="!model.isUltrasound"
+              class="f-start o-radio-list nested-content"
+              id="ultrasoundDateTypeBlock"
+            >
+              <p-radioButton
+                rr-id="mam_m_090410"
+                name="ultrasoundDateType"
+                [value]="ultrasoundDateType.After3Months"
+                label="{{'mammaMRT.rating.after3Months.value' | translate}}"
+                [(ngModel)]="model.ultrasoundDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090411"
+                name="ultrasoundDateType"
+                [value]="ultrasoundDateType.After6Months"
+                label="{{'mammaMRT.rating.after6Months.value' | translate}}"
+                [(ngModel)]="model.ultrasoundDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090412"
+                name="ultrasoundDateType"
+                [value]="ultrasoundDateType.After12Months"
+                label="{{'mammaMRT.rating.after12Months.value' | translate}}"
+                [(ngModel)]="model.ultrasoundDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090413"
+                name="ultrasoundDateType"
+                [value]="ultrasoundDateType.After24Months"
+                label="{{'mammaMRT.rating.after24Months.value' | translate}}"
+                [(ngModel)]="model.ultrasoundDateType"
+                rrUnClickRadio
+                class="m-b-30"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090414"
+                name="ultrasoundLocationType"
+                [value]="ultrasoundLocationType.Focused"
+                label="{{'mammaMRT.rating.focused.value' | translate}}"
+                [(ngModel)]="model.ultrasoundLocationType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090415"
+                name="ultrasoundLocationType"
+                [value]="ultrasoundLocationType.Right"
+                label="{{'mammaMRT.rating.right.value' | translate}}"
+                [(ngModel)]="model.ultrasoundLocationType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090416"
+                name="ultrasoundLocationType"
+                [value]="ultrasoundLocationType.Left"
+                label="{{'mammaMRT.rating.left.value' | translate}}"
+                [(ngModel)]="model.ultrasoundLocationType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090417"
+                name="ultrasoundLocationType"
+                [value]="ultrasoundLocationType.Bilateral"
+                label="{{'mammaMRT.rating.bilateral.value' | translate}}"
+                [(ngModel)]="model.ultrasoundLocationType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l">
+          <div
+            *ngIf="model.furtherActionType === furtherActionType.Checkup"
+            class="o-radio-list"
+            id="mammographyAndMRTBlock"
+          >
+            <p-checkbox
+              rr-id="mam_m_090501"
+              name="isMammography"
+              label="{{'mammaMRT.rating.mammography.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMammography"
+              class="m-b-13"
+              rrContentReset="mammographyBlock"
+            >
+            </p-checkbox>
+            <div
+              [rrDisable]="!model.isMammography"
+              class="f-start o-radio-list nested-content m-b-50"
+              id="mammographyBlock"
+            >
+              <p-radioButton
+                rr-id="mam_m_090502"
+                name="mammographyDateType"
+                [value]="mammographyDateType.After6Months"
+                label="{{'mammaMRT.rating.after6Months.value' | translate}}"
+                [(ngModel)]="model.mammographyDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090503"
+                name="mammographyDateType"
+                [value]="mammographyDateType.After12Months"
+                label="{{'mammaMRT.rating.after12Months.value' | translate}}"
+                [(ngModel)]="model.mammographyDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090504"
+                name="mammographyDateType"
+                [value]="mammographyDateType.After24Months"
+                label="{{'mammaMRT.rating.after24Months.value' | translate}}"
+                [(ngModel)]="model.mammographyDateType"
+                rrUnClickRadio
+                class="m-b-25"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090505"
+                name="mammographyLocationType"
+                [value]="mammographyLocationType.Right"
+                label="{{'mammaMRT.rating.right.value' | translate}}"
+                [(ngModel)]="model.mammographyLocationType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090506"
+                name="mammographyLocationType"
+                [value]="mammographyLocationType.Left"
+                label="{{'mammaMRT.rating.left.value' | translate}}"
+                [(ngModel)]="model.mammographyLocationType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090507"
+                name="mammographyLocationType"
+                [value]="mammographyLocationType.Bilateral"
+                label="{{'mammaMRT.rating.bilateral.value' | translate}}"
+                [(ngModel)]="model.mammographyLocationType"
+                rrUnClickRadio
+                class="m-b-30"
+              >
+              </p-radioButton>
+            </div>
+            <p-checkbox
+              rr-id="mam_m_090508"
+              name="isMRI"
+              label="{{'mammaMRT.rating.mRI.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMRI"
+              rrContentReset="mrtBlock"
+            >
+            </p-checkbox>
+            <div
+              [rrDisable]="!model.isMRI"
+              class="f-start o-radio-list nested-content"
+              id="mrtBlock"
+            >
+              <p-radioButton
+                rr-id="mam_m_090509"
+                name="mriDateType"
+                [value]="mriDateType.After6Months"
+                label="{{'mammaMRT.rating.after6Months.value' | translate}}"
+                [(ngModel)]="model.mriDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090510"
+                name="mriDateType"
+                [value]="mriDateType.After12Months"
+                label="{{'mammaMRT.rating.after12Months.value' | translate}}"
+                [(ngModel)]="model.mriDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_090511"
+                name="mriDateType"
+                [value]="mriDateType.After24Months"
+                label="{{'mammaMRT.rating.after24Months.value' | translate}}"
+                [(ngModel)]="model.mriDateType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

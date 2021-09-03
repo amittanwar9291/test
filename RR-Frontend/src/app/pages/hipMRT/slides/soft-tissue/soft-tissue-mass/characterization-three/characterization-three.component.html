@@ -1,0 +1,102 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <h2 rr-id="hip_m_080227" class="m-b-15" rrInfoIcon="hip_m_08_04">
+    {{ 'hipMRT.softTissue.differentialDiagnosis.value' | translate }}
+  </h2>
+  <div
+    class="f-vertical o-radio-list m-b-18"
+    [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+  >
+    <h3 rr-id="hip_m_080228" class="m-b-4">
+      {{ 'hipMRT.softTissue.differentialDiagnosis1.value' | translate }}*
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="hip_m_080229"
+      class="m-b-11"
+      [diagnosisNumber]="1"
+      [options]="diffDiagnosisFullOptions"
+      [(ngModel)]="model.differentialDiagnosis1"
+      name="differentialDiagnosis1"
+      group="true"
+      [parentViewModel]="model"
+      rrValidation="differentialDiagnosis1"
+      (selectionChanged)="model.isSuspected = false; model.isSubordinated = false;"
+    ></rr-differential-diagnosis-dropdown>
+    <div
+      class="o-radio-list"
+      [rrDisable]="model.differentialDiagnosis1 === 'None'"
+    >
+      <p-checkbox
+        rr-id="hip_m_080230"
+        [(ngModel)]="model.isSuspected"
+        name="isSuspected"
+        label="{{ 'hipMRT.softTissue.suspected.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-30"
+    [rrDisable]="model.differentialDiagnosis === 'None' && model.differentialDiagnosis1 === 'None'"
+  >
+    <h3 rr-id="hip_m_080231" class="m-b-4">
+      {{ 'hipMRT.softTissue.differentialDiagnosis2.value' | translate }}
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="hip_m_080232"
+      class="m-b-11"
+      [diagnosisNumber]="2"
+      [options]="diffDiagnosisRestrictedOptions"
+      [(ngModel)]="model.differentialDiagnosis2"
+      name="differentialDiagnosis2"
+      group="true"
+      [parentViewModel]="model"
+      (selectionChanged)="model.isSubordinated = false;"
+    ></rr-differential-diagnosis-dropdown>
+    <div
+      class="o-radio-list"
+      [rrDisable]="model.differentialDiagnosis2 === 'None'"
+    >
+      <p-checkbox
+        rr-id="hip_m_080233"
+        [(ngModel)]="model.isSubordinated"
+        name="isSubordinated"
+        label="{{ 'hipMRT.softTissue.subordinated.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-30"
+    [rrDisable]="model.differentialDiagnosis2 === 'None'"
+  >
+    <h3 rr-id="hip_m_080234" class="m-b-4">
+      {{ 'hipMRT.softTissue.differentialDiagnosis3.value' | translate }}
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="hip_m_080235"
+      class="m-b-11"
+      [diagnosisNumber]="3"
+      [options]="diffDiagnosisRestrictedOptions"
+      [(ngModel)]="model.differentialDiagnosis3"
+      name="differentialDiagnosis3"
+      group="true"
+      [parentViewModel]="model"
+    ></rr-differential-diagnosis-dropdown>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="hip_m_080357"
+      [(ngModel)]="model.isMoreThanOneLesionSameEntity"
+      name="isMoreThanOneLesionSameEntity"
+      label="{{ 'hipMRT.softTissue.moreThanOneLesionSameEntity.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13"></div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-10 m-b-13"></div>

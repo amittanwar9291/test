@@ -1,0 +1,225 @@
+<div class="h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-pad m-t-26 m-b-13 o-list">
+      <div class="o-radio-list p-l-10 m-b-31">
+        <h2 rr-id="pel_m_0902164" class="m-b-18">
+          {{ 'pelvisMRT.bladder.localization.value' | translate }}
+        </h2>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="w036"
+          [group]="true"
+          name="softTissueMassLocalizationType"
+          rr-id="pel_m_0902165"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          [(ngModel)]="model.softTissueMassLocalizationType"
+        >
+        </p-dropdown>
+      </div>
+      <div class="o-radio-list p-l-10 m-b-40">
+        <h2 rr-id="pel_m_0902166" class="m-b-21">
+          {{ 'pelvisMRT.bladder.expansion.value' | translate }}
+        </h2>
+        <div class="m-b-10">
+          <rr-number-input
+            inputRrId="pel_m_0902167"
+            labelRrId="pel_m_0902168"
+            labelStyleClass="text-break2"
+            name="maxExpansionInMm"
+            [label]="'pelvisMRT.bladder.maxExpansionInMm.value' | translate"
+            [(ngModel)]="model.maxExpansionInMm"
+            rrValidation="maxExpansionInMm"
+          ></rr-number-input>
+        </div>
+        <div class="m-b-10">
+          <rr-number-input
+            inputRrId="pel_m_0902169"
+            labelRrId="pel_m_0902170"
+            labelStyleClass="text-break2"
+            name="secondPlaneInMm"
+            [label]="'pelvisMRT.bladder.2ndPlaneInMm.value' | translate"
+            [(ngModel)]="model.secondPlaneInMm"
+          ></rr-number-input>
+        </div>
+        <rr-number-input
+          inputRrId="pel_m_0902171"
+          labelRrId="pel_m_0902172"
+          labelStyleClass="text-break2"
+          name="thirdPlaneInMm"
+          [label]="'pelvisMRT.bladder.3rdPlaneInMm.value' | translate"
+          [(ngModel)]="model.thirdPlaneInMm"
+        ></rr-number-input>
+      </div>
+      <div
+        class="o-radio-list p-l-10"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="pel_m_0902173">
+          {{'pelvisMRT.bladder.differentialDiagnosis1.value' | translate}} *
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          [options]="w037"
+          [(ngModel)]="model.differentialDiagnosis"
+          name="differentialDiagnosis"
+          group="true"
+          rrId="pel_m_0902174"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis"
+          (selectionChanged)="clearSubordinate()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l m-t-26 m-b-13 o-list">
+      <div class="o-radio-list p-l-10">
+        <h2 rr-id="pel_m_0903110" class="m-b-12">
+          {{ 'pelvisMRT.bladder.morphology.value' | translate }}
+        </h2>
+        <p rr-id="pel_m_0903111">
+          {{'pelvisMRT.bladder.margin.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="pel_m_0903112"
+          label="{{'pelvisMRT.bladder.circumscribed.value' | translate}}"
+          name="marginType"
+          [value]="marginTypeEnum.Circumscribed"
+          [(ngModel)]="model.marginType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0903113"
+          label="{{'pelvisMRT.bladder.noncircumscribed.value' | translate}}"
+          name="marginType"
+          [value]="marginTypeEnum.NonCircumscribed"
+          [(ngModel)]="model.marginType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <div class="o-radio-list p-l-10">
+        <p rr-id="pel_m_0903114">
+          {{'pelvisMRT.bladder.homogeneity.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="pel_m_0903115"
+          label="{{'pelvisMRT.bladder.homogeneous.value' | translate}}"
+          name="homogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.homogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0903116"
+          label="{{'pelvisMRT.bladder.heterogeneous.value' | translate}}"
+          name="homogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.homogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l m-t-66 m-b-13 o-list">
+      <div class="o-list triple-slider m-b-56 p-r-10">
+        <h2 rr-id="pel_m_0904122" class="m-b-2">
+          {{'pelvisMRT.bladder.t1wSignal.value' | translate}}
+        </h2>
+        <p rr-id="pel_m_0904138" class="m-b-10 font-15">
+          {{'pelvisMRT.bladder.inComparisonToThe.value' | translate}}
+        </p>
+        <rr-slider-number-triple-input
+          name="t1wSignal"
+          rr-id="pel_m_0904123"
+          [(ngModel)]="model.t1wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+      <div class="o-list triple-slider p-r-10">
+        <h2 rr-id="pel_m_0904124" class="m-b-2">
+          {{'pelvisMRT.bladder.t2wSignal.value' | translate}}
+        </h2>
+        <p rr-id="pel_m_0904139" class="m-b-10 font-15">
+          {{'pelvisMRT.bladder.inComparisonToThe.value' | translate}}
+        </p>
+        <rr-slider-number-triple-input
+          name="t2wSignal"
+          rr-id="pel_m_0904125"
+          [(ngModel)]="model.t2wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep-l m-t-26 m-b-13">
+      <div class="o-list p-l-10">
+        <h2 rr-id="pel_m_090519">
+          {{'pelvisMRT.bladder.alteredInternalStructure.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.fat.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090520"
+            name="isFat"
+            [(ngModel)]="model.isFat"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.necrosis.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090521"
+            name="isNecrosis"
+            [(ngModel)]="model.isNecrosis"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.calcification.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090522"
+            name="isCalcification"
+            [(ngModel)]="model.isCalcification"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.capsuleMembrane.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090523"
+            name="isCapsuleMembrane"
+            [(ngModel)]="model.isCapsuleMembrane"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.fluidLevel.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090524"
+            name="isFluidLevel"
+            [(ngModel)]="model.isFluidLevel"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.cysts.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090525"
+            name="isCysts"
+            [(ngModel)]="model.isCysts"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.septa.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090526"
+            name="isSepta"
+            [(ngModel)]="model.isSepta"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.signalVoids.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090527"
+            name="isSignalVoids"
+            [(ngModel)]="model.isSignalVoids"
+          ></p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.bladder.hemorrhage.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_090528"
+            name="isHemorrhage"
+            [(ngModel)]="model.isHemorrhage"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

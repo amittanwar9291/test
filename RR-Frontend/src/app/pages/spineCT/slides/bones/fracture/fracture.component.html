@@ -1,0 +1,72 @@
+<div class="c-col-4 f-vertical main c-pad-l">
+  <div class="c-col-4">
+    <h2 rr-id="spi_c_060202" class="m-b-35" rrValidation="spineLocation">
+      {{'spineCT.bones.localization.value' | translate}}*
+    </h2>
+  </div>
+  <div class="c-col-4 f-horizontal h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-list">
+      <rr-spine-simple
+        rr-id="spi_c_060203"
+        isLocalizer="true"
+        [attr.name]="'spineLocation'"
+        [spineLocation]="model.spineLocation"
+        (click)="openLargeLocalizer()"
+        rrValidation="spineLocation"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple>
+      <p-checkbox
+        label="{{ 'spineCT.bones.trailingEdgeParticipation.value' | translate }}"
+        labelStyleClass="ui-fat-label"
+        class="m-t-10"
+        rr-id="spi_c_0602232"
+        binary="true"
+        [(ngModel)]="model.isTrailingEdgeParticipation"
+        name="isTrailingEdgeParticipation"
+      ></p-checkbox>
+      <h2
+        rr-id="spi_c_0602233"
+        class="m-b-15 m-t-15"
+        rrValidation="spineLocation"
+      >
+        {{'spineCT.bones.minVertebralBodyHeightInMm.value' | translate}}
+      </h2>
+      <rr-number-input
+        inputRrId="spi_c_0602234"
+        labelRrId="spi_c_0602235"
+        name="minVertebralBodyHeightInMm"
+        label="{{'spineCT.bones.inMM.value' | translate}}"
+        [(ngModel)]="model.minVertebralBodyHeightInMm"
+        [config]="{ min: 1, max: 99}"
+      >
+      </rr-number-input>
+    </div>
+    <div [ngSwitch]="checkWhichSelected()">
+      <rr-fracture-c0 *ngSwitchCase="'C0'" [model]="model"></rr-fracture-c0>
+      <rr-fracture-c1 *ngSwitchCase="'C1'" [model]="model"></rr-fracture-c1>
+      <rr-fracture-c2 *ngSwitchCase="'C2'" [model]="model"></rr-fracture-c2>
+      <rr-fracture-other
+        *ngSwitchCase="'other'"
+        [model]="model"
+        [currentSelected]="currentSelected"
+      ></rr-fracture-other>
+      <rr-fracture-os-sacrum
+        *ngSwitchCase="'OS Sacrum'"
+        [model]="model"
+        [currentSelected]="currentSelected"
+      ></rr-fracture-os-sacrum>
+      <rr-fracture-os-coccygis
+        *ngSwitchCase="'OS Coccygis'"
+        [model]="model"
+      ></rr-fracture-os-coccygis>
+      <ng-container *ngSwitchCase="'none'">
+        <div class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

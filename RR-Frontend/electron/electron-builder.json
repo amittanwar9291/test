@@ -1,0 +1,74 @@
+{
+  "appId": "de.neoq.radioreport",
+  "productName": "RadioReport",
+  "publish": [
+    {
+      "provider": "generic",
+      "url": "http://localhost/"
+    }
+  ],
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+    "!**/node_modules/.bin",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!logs/",
+    "!e2e/",
+    "!hooks/",
+    "!angular.json",
+    "!.gitignore",
+    "!config.json",
+    "!electron-builder.json",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tsconfig.app.json",
+    "!tsconfig.electron.json",
+    "!tslint.json",
+    "!clean-all.js",
+    "!clean-electron.js"
+  ],
+  "extraResources": [
+    {
+      "from": "./build/config.json - Shortcut.lnk",
+      "to": "../"
+    },
+    {
+      "from": "./build/bin/windows",
+      "to": "../bin"
+    }
+  ],
+  "win": {
+    "icon": "app/assets/img/favicon.png",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ],
+    "asar": true,
+    "compression": "maximum"
+  },
+  "nsis": {
+    "oneClick": true,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": false,
+    "deleteAppDataOnUninstall": true,
+    "artifactName": "RadioReport Setup ${version}.${ext}",
+    "runAfterFinish": true,
+    "include": "build/installer.nsh",
+    "guid": ""
+  },
+  "mac": {
+    "icon": "dist",
+    "target": ["dmg"]
+  }
+}

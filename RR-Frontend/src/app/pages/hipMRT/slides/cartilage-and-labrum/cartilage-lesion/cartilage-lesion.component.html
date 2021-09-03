@@ -1,0 +1,262 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-list">
+    <rr-side
+      [(ngModel)]="model.sideType"
+      name="sideType"
+      class="m-b-30"
+    ></rr-side>
+
+    <div class="f-start f-vertical o-radio-list">
+      <h2 rr-id="hip_m_050203" class="m-b-11" rrValidation="cartilageLocalizer">
+        {{ "hipMRT.cartilageAndLabrum.localization.value" | translate }}*
+      </h2>
+      <rr-hip-cartilage-small
+        rr-id="hip_m_050204"
+        [(ngModel)]="model.cartilageLocalizer"
+        name="cartilageLocalizer"
+        (click)="openLargeLocalizer()"
+        rrValidation="cartilageLocalizer"
+        [isLocalizer]="true"
+      >
+      </rr-hip-cartilage-small>
+    </div>
+  </div>
+
+  <div class="c-col-3 c-pad-l c-sep f-start f-vertical">
+    <h2 rr-id="hip_m_050336" class="m-b-11">
+      {{ 'hipMRT.cartilageAndLabrum.etiology.value' | translate }}*
+    </h2>
+
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="hip_m_050310"
+          [(ngModel)]="model.etiologyType"
+          label="{{ 'hipMRT.cartilageAndLabrum.traumatic.value' | translate }}"
+          name="etiologyType"
+          [value]="etiologyType.Traumatic"
+          rrValidation="etiologyType"
+          rrContentReset="degenerativeMorphologyTypeBlock1 degenerativeMorphologyTypeBlock2"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_050311"
+          [(ngModel)]="model.etiologyType"
+          label="{{ 'hipMRT.cartilageAndLabrum.degenerative.value' | translate }}"
+          name="etiologyType"
+          [value]="etiologyType.Degenerative"
+          rrValidation="etiologyType"
+          rrContentReset="traumaticMorphologyTypeDetailsBlock"
+        >
+        </p-radioButton>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep f-start f-vertical">
+        <ng-container [ngSwitch]="model.etiologyType">
+          <div
+            *ngSwitchCase="etiologyType.Traumatic"
+            id="traumaticMorphologyTypeDetailsBlock"
+            class="f-start f-vertical o-radio-list"
+          >
+            <h2 rr-id="hip_m_050426" class="m-b-10" rrInfoIcon="hip_m_05_05">
+              {{ 'hipMRT.cartilageAndLabrum.details.value' | translate }}*
+            </h2>
+            <p-radioButton
+              rr-id="hip_m_050427"
+              [(ngModel)]="model.traumaticType"
+              label="{{ 'hipMRT.cartilageAndLabrum.contusion.value' | translate }}"
+              name="traumaticType"
+              [value]="traumaticType.Contusion"
+              rrValidation="traumaticType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050428"
+              [(ngModel)]="model.traumaticType"
+              label="{{ 'hipMRT.cartilageAndLabrum.delamination.value' | translate }}"
+              name="traumaticType"
+              [value]="traumaticType.Delamination"
+              rrValidation="traumaticType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050429"
+              [(ngModel)]="model.traumaticType"
+              label="{{ 'hipMRT.cartilageAndLabrum.cartilageFlap.value' | translate }}"
+              name="traumaticType"
+              [value]="traumaticType.CartilageFlap"
+              rrValidation="traumaticType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050430"
+              [(ngModel)]="model.traumaticType"
+              label="{{ 'hipMRT.cartilageAndLabrum.cartilageFlake.value' | translate }}"
+              name="traumaticType"
+              [value]="traumaticType.CartilageFlake"
+              rrValidation="traumaticType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_050431"
+              [(ngModel)]="model.traumaticType"
+              label="{{ 'hipMRT.cartilageAndLabrum.fissure.value' | translate }}"
+              name="traumaticType"
+              [value]="traumaticType.Fissure"
+              rrValidation="traumaticType"
+            >
+            </p-radioButton>
+          </div>
+
+          <div
+            *ngSwitchCase="etiologyType.Degenerative"
+            id="degenerativeMorphologyTypeBlock1"
+            class="f-start f-vertical o-list"
+          >
+            <div class="f-start f-vertical o-radio-list m-b-30">
+              <h2 rr-id="hip_m_050408" class="m-b-10" rrInfoIcon="hip_m_05_06">
+                {{ "hipMRT.cartilageAndLabrum.outerbridgeClassification.value" |
+                translate }}
+              </h2>
+              <p-radioButton
+                rr-id="hip_m_050410"
+                [(ngModel)]="model.outerbridgeClassificationType"
+                label="{{ 'hipMRT.cartilageAndLabrum.gradeI.value' | translate }}"
+                name="outerbridgeClassificationType"
+                [value]="outerbridgeClassificationType.GradeI"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="hip_m_050411"
+                [(ngModel)]="model.outerbridgeClassificationType"
+                label="{{ 'hipMRT.cartilageAndLabrum.gradeII.value' | translate }}"
+                name="outerbridgeClassificationType"
+                [value]="outerbridgeClassificationType.GradeII"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="hip_m_050412"
+                [(ngModel)]="model.outerbridgeClassificationType"
+                label="{{ 'hipMRT.cartilageAndLabrum.gradeIII.value' | translate }}"
+                name="outerbridgeClassificationType"
+                [value]="outerbridgeClassificationType.GradeIII"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="hip_m_050413"
+                [(ngModel)]="model.outerbridgeClassificationType"
+                label="{{ 'hipMRT.cartilageAndLabrum.gradeIV.value' | translate }}"
+                name="outerbridgeClassificationType"
+                [value]="outerbridgeClassificationType.GradeIV"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+            </div>
+            <div class="f-start f-vertical o-radio-list m-b-31">
+              <h2 rr-id="hip_m_050414" class="m-b-8">
+                {{ "hipMRT.cartilageAndLabrum.length.value" | translate }}
+              </h2>
+              <p rr-id="hip_m_050432" class="m-b-2">
+                {{ "hipMRT.cartilageAndLabrum.maxDiameter.value" | translate }}
+              </p>
+              <rr-number-input
+                inputRrId="hip_m_050415"
+                labelRrId="hip_m_050416"
+                [(ngModel)]="model.lengthMaxDiameterInMm"
+                label="{{ 'hipMRT.cartilageAndLabrum.inMm.value' | translate }}"
+                name="lengthMaxDiameterInMm"
+                [config]="{ min: 1, max: 30 }"
+              >
+              </rr-number-input>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="c-col-1 c-pad-l c-sep f-start f-vertical">
+        <div
+          *ngIf="model.etiologyType === etiologyType.Degenerative"
+          id="degenerativeMorphologyTypeBlock2"
+          class="f-start f-vertical o-list"
+        >
+          <div class="f-start f-vertical o-radio-list m-b-30">
+            <h2 rr-id="hip_m_050521">
+              {{ "hipMRT.cartilageAndLabrum.associatedFindings.value" |
+              translate }}
+            </h2>
+            <p-checkbox
+              rr-id="hip_m_050522"
+              [(ngModel)]="model.isSubchondralCysts"
+              label="{{ 'hipMRT.cartilageAndLabrum.subchondralCysts.value' | translate }}"
+              name="isSubchondralCysts"
+              binary="true"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hip_m_050523"
+              [(ngModel)]="model.isIntraArticularLooseBody"
+              label="{{ 'hipMRT.cartilageAndLabrum.intraArticularLooseBody.value' | translate }}"
+              name="isIntraArticularLooseBody"
+              binary="true"
+              class="m-b-7"
+              rrContentReset="isIntraArticularLooseBodyBlock"
+            >
+            </p-checkbox>
+            <div
+              id="isIntraArticularLooseBodyBlock"
+              class="f-start f-vertical o-radio-list nested-content"
+              [rrDisable]="!model.isIntraArticularLooseBody"
+            >
+              <p rr-id="hip_m_050524" class="m-b-2">
+                {{ 'hipMRT.cartilageAndLabrum.maxDiameter.value' | translate }}
+              </p>
+              <rr-number-input
+                inputRrId="hip_m_050525"
+                labelRrId="hip_m_050526"
+                [(ngModel)]="model.intraArticularLooseBodyMaxDiameterInMm"
+                label="{{ 'hipMRT.cartilageAndLabrum.inMm.value' | translate }}"
+                name="intraArticularLooseBodyMaxDiameterInMm"
+                [config]="{ min: 1, max: 30 }"
+              >
+              </rr-number-input>
+            </div>
+            <p-checkbox
+              rr-id="hip_m_050518"
+              [(ngModel)]="model.isChondrocalcinosis"
+              label="{{ 'hipMRT.cartilageAndLabrum.chondrocalcinosis.value' | translate }}"
+              name="isChondrocalcinosis"
+              binary="true"
+            >
+            </p-checkbox>
+          </div>
+
+          <div class="f-start f-vertical o-radio-list">
+            <h2 rr-id="hip_m_050513" class="m-b-10">
+              {{ "hipMRT.cartilageAndLabrum.articularSurfaces.value" | translate
+              }}
+            </h2>
+            <p-checkbox
+              rr-id="hip_m_050516"
+              [(ngModel)]="model.isAcetabulum"
+              label="{{ 'hipMRT.cartilageAndLabrum.acetabulum.value' | translate }}"
+              name="isAcetabulum"
+              binary="true"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hip_m_050517"
+              [(ngModel)]="model.isFemur"
+              label="{{ 'hipMRT.cartilageAndLabrum.femur.value' | translate }}"
+              name="isFemur"
+              binary="true"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

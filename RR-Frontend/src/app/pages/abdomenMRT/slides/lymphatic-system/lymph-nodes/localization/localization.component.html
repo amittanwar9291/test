@@ -1,0 +1,318 @@
+<div class="column-height">
+  <div class="f-vertical col-h-100 o-width-100">
+    <h2 rr-id="abd_m_110203" class="c-pad-l m-t-10">
+      {{'abdomenMRT.lymphaticSystem.localization.value' | translate}}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad f-vertical m-t-11 o-radio-list">
+        <p-radioButton
+          rr-id="abd_m_110204"
+          label="{{'abdomenMRT.lymphaticSystem.affectedLymphNodeStations.value' | translate}}"
+          [(ngModel)]="model.localizationType"
+          [value]="localizationType.AffectedLymphNodeStations"
+          name="localizationType"
+          rrValidation="localizationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_110205"
+          label="{{'abdomenMRT.lymphaticSystem.multipleLymphNodeInvolvement.value' | translate}}"
+          [(ngModel)]="model.localizationType"
+          [value]="localizationType.MultipleLymphNodeInvolvement"
+          name="localizationType"
+          (ngModelChange)="resetSubfindings(); removeErrors()"
+          rrValidation="localizationType"
+        ></p-radioButton>
+      </div>
+      <ng-container
+        *ngIf="model.localizationType !== localizationType.AffectedLymphNodeStations"
+      >
+        <div class="c-col-1 c-sep c-pad f-vertical m-t-11 o-radio-list"></div>
+        <div class="c-col-1 c-sep c-pad f-vertical m-t-11 o-radio-list"></div>
+        <div class="c-col-1 c-pad-l f-vertical m-t-11 o-radio-list"></div>
+      </ng-container>
+
+      <div
+        class="f-vertical c-sep c-pad-l m-t-11 o-radio-list"
+        *ngIf="model.localizationType === localizationType.AffectedLymphNodeStations"
+      >
+        <h2 rr-id="abd_m_110302">
+          {{'abdomenMRT.lymphaticSystem.lymphNodeStations.value' | translate}}*
+        </h2>
+        <div class="f-horizontal col-h-100">
+          <div class="c-col-1 c-sep c-pad-r o-radio-list">
+            <rr-finding-column
+              [handler]="findingLymphNodeStationsHandler"
+              [disabled]="false"
+              [attr.name]="'lymphNodeStations'"
+              [setConfig]="findingDropdownConfig"
+              validationName="lymphNodeStations"
+              validationSecondFinding="true"
+              [validationParentFindingId]="model.validationId"
+              class="col-h-100"
+            >
+            </rr-finding-column>
+          </div>
+
+          <!-- None -->
+          <div *ngIf="isRest" class="f-horizontal col-h-100">
+            <div class="c-col-1 c-sep c-pad"></div>
+            <div class="c-col-1 c-sep c-pad-l"></div>
+          </div>
+
+          <div *ngIf="isSideFinding" class="f-horizontal col-h-100">
+            <div class="c-col-1 c-sep c-pad m-b-13">
+              <div class="o-radio-list">
+                <p rr-id="abd_m_110402" class="m-b-6">
+                  {{'abdomenMRT.lymphaticSystem.side.value' | translate}}*
+                </p>
+                <p-checkbox
+                  rr-id="abd_m_110403"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isInternalMammaryRight"
+                  binary="true"
+                  name="isInternalMammaryRight"
+                  label="{{'abdomenMRT.lymphaticSystem.right.value' | translate}}"
+                  rrValidation="isInternalMammaryRight isInternalMammaryLeft"
+                  inSecondFinding="true"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110404"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isInternalMammaryLeft"
+                  binary="true"
+                  name="isInternalMammaryLeft"
+                  label="{{'abdomenMRT.lymphaticSystem.left.value' | translate}}"
+                  rrValidation="isInternalMammaryRight isInternalMammaryLeft"
+                  inSecondFinding="true"
+                ></p-checkbox>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l"></div>
+          </div>
+
+          <div *ngIf="isSideDetailsFinding" class="f-horizontal col-h-100">
+            <div class="c-col-1 c-sep c-pad m-b-13">
+              <div class="o-radio-list">
+                <p rr-id="abd_m_110405" class="m-b-6">
+                  {{'abdomenMRT.lymphaticSystem.side.value' | translate}}*
+                </p>
+                <p-checkbox
+                  rr-id="abd_m_110406"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isDiaphragmaticRight"
+                  binary="true"
+                  name="isDiaphragmaticRight"
+                  label="{{'abdomenMRT.lymphaticSystem.right.value' | translate}}"
+                  rrValidation="isDiaphragmaticRight isDiaphragmaticLeft"
+                  inSecondFinding="true"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110407"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isDiaphragmaticLeft"
+                  binary="true"
+                  name="isDiaphragmaticLeft"
+                  label="{{'abdomenMRT.lymphaticSystem.left.value' | translate}}"
+                  rrValidation="isDiaphragmaticRight isDiaphragmaticLeft"
+                  inSecondFinding="true"
+                ></p-checkbox>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l">
+              <div class="o-radio-list">
+                <p rr-id="abd_m_110502" class="m-b-6">
+                  {{'abdomenMRT.lymphaticSystem.details.value' | translate}}
+                </p>
+                <p-checkbox
+                  rr-id="abd_m_110503"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isRetrocrural"
+                  binary="true"
+                  name="isRetrocrural"
+                  label="{{'abdomenMRT.lymphaticSystem.retrocrural.value' | translate}}"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110504"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isInferior"
+                  binary="true"
+                  name="isInferior"
+                  label="{{'abdomenMRT.lymphaticSystem.inferior.value' | translate}}"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110505"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isAnterior"
+                  binary="true"
+                  name="isAnterior"
+                  label="{{'abdomenMRT.lymphaticSystem.anterior.value' | translate}}"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110506"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isMiddle"
+                  binary="true"
+                  name="isMiddle"
+                  label="{{'abdomenMRT.lymphaticSystem.middle.value' | translate}}"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110507"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isGastroesophageal"
+                  binary="true"
+                  name="isGastroesophageal"
+                  label="{{'abdomenMRT.lymphaticSystem.gastroesophageal.value' | translate}}"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="isCurvatureFinding" class="f-horizontal col-h-100">
+            <div class="f-vertical">
+              <p class="c-pad-l m-b-6" rr-id="abd_m_110408">
+                {{'abdomenMRT.lymphaticSystem.curvature.value' | translate}}
+              </p>
+              <div class="f-horizontal col-h-100">
+                <div class="c-col-1 c-sep c-pad m-b-13">
+                  <div class="o-radio-list">
+                    <p-checkbox
+                      rr-id="abd_m_110409"
+                      [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isGreaterCurvature"
+                      binary="true"
+                      name="isGreaterCurvature"
+                      label="{{'abdomenMRT.lymphaticSystem.greaterCurvature.value' | translate}}"
+                      rrContentReset="greaterCurvature-block"
+                      class="m-b-7"
+                    ></p-checkbox>
+                    <div
+                      id="greaterCurvature-block"
+                      class="nested-content o-radio-list"
+                      [rrDisable]="!findingLymphNodeStationsHandler.currentItem.isGreaterCurvature"
+                    >
+                      <p rr-id="abd_m_110410" class="m-b-7">
+                        {{'abdomenMRT.lymphaticSystem.details.value' |
+                        translate}}
+                      </p>
+                      <p-checkbox
+                        rr-id="abd_m_110411"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isGreaterOmentum"
+                        binary="true"
+                        name="isGreaterOmentum"
+                        label="{{'abdomenMRT.lymphaticSystem.greaterOmentum.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110412"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isGastroduodenal"
+                        binary="true"
+                        name="isGastroduodenal"
+                        label="{{'abdomenMRT.lymphaticSystem.gastroduodenal.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110413"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isGastroepiploic"
+                        binary="true"
+                        name="isGastroepiploic"
+                        label="{{'abdomenMRT.lymphaticSystem.gastroepiploic.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110414"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isPyloric"
+                        binary="true"
+                        name="isPyloric"
+                        label="{{'abdomenMRT.lymphaticSystem.pyloric.value' | translate}}"
+                      ></p-checkbox>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-col-1 c-sep c-pad-l">
+                  <div class="o-radio-list">
+                    <p-checkbox
+                      rr-id="abd_m_110508"
+                      [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isLesserCurvature"
+                      binary="true"
+                      name="isLesserCurvature"
+                      label="{{'abdomenMRT.lymphaticSystem.lesserCurvature.value' | translate}}"
+                      rrContentReset="lesserCurvature-block"
+                      class="m-b-7"
+                    ></p-checkbox>
+                    <div
+                      id="lesserCurvature-block"
+                      class="o-radio-list nested-content"
+                      [rrDisable]="!findingLymphNodeStationsHandler.currentItem.isLesserCurvature"
+                    >
+                      <p rr-id="abd_m_110509" class="m-b-7">
+                        {{'abdomenMRT.lymphaticSystem.details.value' |
+                        translate}}
+                      </p>
+                      <p-checkbox
+                        rr-id="abd_m_110510"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isLesserOmentum"
+                        binary="true"
+                        name="isLesserOmentum"
+                        label="{{'abdomenMRT.lymphaticSystem.lesserOmentum.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110511"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isLeftGastric"
+                        binary="true"
+                        name="isLeftGastric"
+                        label="{{'abdomenMRT.lymphaticSystem.leftGastric.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110512"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isCardioesophageal"
+                        binary="true"
+                        name="isCardioesophageal"
+                        label="{{'abdomenMRT.lymphaticSystem.cardioesophageal.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110513"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isCommonHepaticArtery"
+                        binary="true"
+                        name="isCommonHepaticArtery"
+                        label="{{'abdomenMRT.lymphaticSystem.commonHepaticArtery.value' | translate}}"
+                      ></p-checkbox>
+                      <p-checkbox
+                        rr-id="abd_m_110514"
+                        [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isHepatoduodenalLigament"
+                        binary="true"
+                        name="isHepatoduodenalLigament"
+                        label="{{'abdomenMRT.lymphaticSystem.hepatoduodenalLigament.value' | translate}}"
+                      ></p-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="isPancreaticDetailsFinding"
+            class="f-horizontal col-h-100"
+          >
+            <div class="c-col-1 c-sep c-pad m-b-13">
+              <div class="o-radio-list">
+                <p rr-id="abd_m_110415" class="m-b-6">
+                  {{'abdomenMRT.lymphaticSystem.details.value' | translate}}
+                </p>
+                <p-checkbox
+                  rr-id="abd_m_110416"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isPeripancreatic"
+                  binary="true"
+                  name="isPeripancreatic"
+                  label="{{'abdomenMRT.lymphaticSystem.peripancreatic.value' | translate}}"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110417"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isPancreaticolienal"
+                  binary="true"
+                  name="isPancreaticolienal"
+                  label="{{'abdomenMRT.lymphaticSystem.pancreaticolienal.value' | translate}}"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_110418"
+                  [(ngModel)]="findingLymphNodeStationsHandler.currentItem.isPancreaticoduodenal"
+                  binary="true"
+                  name="isPancreaticoduodenal"
+                  label="{{'abdomenMRT.lymphaticSystem.pancreaticoduodenal.value' | translate}}"
+                ></p-checkbox>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

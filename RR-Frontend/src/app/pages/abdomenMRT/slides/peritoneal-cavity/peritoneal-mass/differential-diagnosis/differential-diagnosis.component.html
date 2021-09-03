@@ -1,0 +1,95 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10 o-list">
+    <h2 rr-id="abd_m_100248">
+      {{ 'abdomenMRT.peritonealCavity.differentialDiagnosis.value' | translate
+      }}
+    </h2>
+    <div class="o-radio-list f-vertical">
+      <p rr-id="abd_m_100249">
+        {{ 'abdomenMRT.peritonealCavity.differentialDiagnosis1.value' |
+        translate }}*
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="ddW047"
+        name="differentialDiagnosis1Type"
+        rrId="abd_m_100250"
+        [(ngModel)]="model.differentialDiagnosis1Type"
+        [parentViewModel]="model"
+        (selectionChanged)="resetSuspicionOf(); resetSubordinate()"
+        group="true"
+        rrValidation="differentialDiagnosis1Type"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="abd_m_100251"
+        label="{{ 'abdomenMRT.peritonealCavity.suspicionOf.value' | translate }}"
+        [(ngModel)]="model.isSuspicionOf"
+        binary="true"
+        name="isSuspicionOf"
+        [rrDisable]="model.differentialDiagnosis1Type === peritonealCavityDifferentialDiagnosisType.None"
+      ></p-checkbox>
+    </div>
+    <div
+      class="o-radio-list f-vertical"
+      [rrDisable]="model.differentialDiagnosis1Type === peritonealCavityDifferentialDiagnosisType.None"
+    >
+      <p rr-id="abd_m_100252">
+        {{ 'abdomenMRT.peritonealCavity.differentialDiagnosis2.value' |
+        translate }}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="ddW048"
+        name="differentialDiagnosis2Type"
+        rrId="abd_m_100253"
+        [(ngModel)]="model.differentialDiagnosis2Type"
+        [parentViewModel]="model"
+        (selectionChanged)="resetSubordinate()"
+        group="true"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="abd_m_100254"
+        label="{{ 'abdomenMRT.peritonealCavity.subordinate.value' | translate }}"
+        [(ngModel)]="model.isSubordinate"
+        binary="true"
+        name="isSubordinate"
+        [rrDisable]="model.differentialDiagnosis2Type === peritonealCavityDifferentialDiagnosisType.None"
+      ></p-checkbox>
+    </div>
+    <div
+      class="o-radio-list f-vertical"
+      [rrDisable]="model.differentialDiagnosis2Type === peritonealCavityDifferentialDiagnosisType.None"
+    >
+      <p rr-id="abd_m_100255">
+        {{ 'abdomenMRT.peritonealCavity.differentialDiagnosis3.value' |
+        translate }}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="3"
+        [options]="ddW048"
+        name="differentialDiagnosis3Type"
+        rrId="abd_m_100256"
+        [(ngModel)]="model.differentialDiagnosis3Type"
+        [parentViewModel]="model"
+        group="true"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <p-checkbox
+      rr-id="abd_m_100257"
+      label="{{ 'abdomenMRT.peritonealCavity.lesionOfTheSameEntity.value' | translate }}"
+      [(ngModel)]="model.isAboveOneLesionOfTheSameEntity"
+      binary="true"
+      name="isAboveOneLesionOfTheSameEntity"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10 o-list">
+    <rr-reference-picture
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+    ></rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10"></div>
+</div>

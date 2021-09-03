@@ -1,0 +1,107 @@
+<div class="f-horizontal f-start main o-width-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_040259">
+      {{ "headCT.vessels.vascularMalformation.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_040260"
+      name="isSuspicionOf"
+      label="{{'headCT.vessels.suspicionOf.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSuspicionOf"
+    >
+    </p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_040374">
+      {{ "headCT.vessels.withoutAVShunt.value" | translate }}
+    </h2>
+    <p-radioButton
+      labelStyleClass="text-break"
+      rr-id="hea_c_040375"
+      label="{{'headCT.vessels.developmentalVenousAnomaliesDVA.value' | translate}}"
+      name="withoutAVShuntType"
+      rrUnClickRadio
+      [value]="withoutAVShuntTypeEnum.DevelopmentalVenousanomalies"
+      [(ngModel)]="model.withoutAVShuntType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_040376"
+      label="{{'headCT.vessels.cavernoma.value' | translate}}"
+      name="withoutAVShuntType"
+      rrUnClickRadio
+      [value]="withoutAVShuntTypeEnum.Cavernoma"
+      [(ngModel)]="model.withoutAVShuntType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_040377"
+      label="{{'headCT.vessels.capillaryTelangiectasia.value' | translate}}"
+      name="withoutAVShuntType"
+      rrUnClickRadio
+      [value]="withoutAVShuntTypeEnum.CapillaryTelangiectasia"
+      [(ngModel)]="model.withoutAVShuntType"
+    >
+    </p-radioButton>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_040473">
+      {{ "headCT.vessels.withAVShunt.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_040474"
+      label="{{'headCT.vessels.arteriovenousMalformation.value' | translate}}"
+      name="withAVShuntType"
+      rrUnClickRadio
+      rrContentReset="reverseFlowSuspectedContainer"
+      [value]="withAVShuntTypeEnum.ArteriovenousMalformation"
+      [(ngModel)]="model.withAVShuntType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_040475"
+      label="{{'headCT.vessels.duralAVFistula.value' | translate}}"
+      name="withAVShuntType"
+      rrUnClickRadio
+      rrContentReset="reverseFlowSuspectedContainer"
+      [value]="withAVShuntTypeEnum.DuralAVFistula"
+      [(ngModel)]="model.withAVShuntType"
+    >
+    </p-radioButton>
+    <div
+      class="nested-content o-radio-list"
+      id="reverseFlowSuspectedContainer"
+      [rrDisable]="model.withAVShuntType !== withAVShuntTypeEnum.DuralAVFistula"
+    >
+      <p-checkbox
+        rr-id="hea_c_040476"
+        name="isReverseFlowSuspected"
+        label="{{'headCT.vessels.reverseFlowSuspected.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isReverseFlowSuspected"
+      >
+      </p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="hea_c_040477"
+      label="{{'headCT.vessels.veinOfGalenMalformation.value' | translate}}"
+      name="withAVShuntType"
+      rrUnClickRadio
+      rrContentReset="reverseFlowSuspectedContainer"
+      [value]="withAVShuntTypeEnum.VeinOfGalenMalformation"
+      [(ngModel)]="model.withAVShuntType"
+    >
+    </p-radioButton>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      [elementsRrIds]="referencePictureElementsRrIds"
+      [pictureFileType]="headCTPicturesTypeEnum.ImageFile"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+</div>

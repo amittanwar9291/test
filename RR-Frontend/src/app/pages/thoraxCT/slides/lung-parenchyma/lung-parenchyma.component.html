@@ -1,0 +1,110 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="f-horizontal f-center"
+    *ngIf="largeLocalizerConfig?.type === 'segments'"
+  >
+    <rr-lungs-segments-complex
+      name="lungsSegmentLocation"
+      [isSingleChoice]="largeLocalizerConfig.isSingle"
+      (close)="onLargeLocalizerClosed()"
+      [(ngModel)]="findingHandler.currentItem[largeLocalizerConfig.modelName]"
+    ></rr-lungs-segments-complex>
+  </div>
+  <div
+    class="f-horizontal f-center"
+    *ngIf="largeLocalizerConfig?.type === 'flaps'"
+  >
+    <rr-lungs-flaps-complex
+      descriptionVersion="ver1"
+      name="lungsSegmentLocation"
+      [isSingleChoice]="largeLocalizerConfig.isSingle"
+      (close)="onLargeLocalizerClosed()"
+      [(ngModel)]="findingHandler.currentItem[largeLocalizerConfig.modelName]"
+    ></rr-lungs-flaps-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerConfig">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="tho_c_050103">
+        {{'thoraxCT.lungParenchyma.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="tho_c_050104"
+          label="{{'thoraxCT.lungParenchyma.noConsolidationNoSuspiciousPulmonaryModule.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+          [value]="areFindingsEnum.No"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_050105"
+          label="{{'thoraxCT.lungParenchyma.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+          [value]="areFindingsEnum.Yes"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [setDescriptionTypes]="descriptionTypes"
+          validationName="findings"
+          (findingTypeChange)="onFindingChange()"
+          (findingChange)="onFindingChange()"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(lungParenchymaFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="!isFindingType(lungParenchymaFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="tho_c_050201">
+          {{'thoraxCT.lungParenchyma.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <div
+        *ngIf="isFindingType(lungParenchymaFindingTypeEnum.None)"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad lung-parenchyma_column"
+        ></div>
+        <div class="c-col-1 c-pad-l lung-parenchyma_column"></div>
+      </div>
+
+      <rr-nodule-mass
+        *ngIf="isFindingType(lungParenchymaFindingTypeEnum.Nodule) || isFindingType(lungParenchymaFindingTypeEnum.Mass)"
+        [model]="findingHandler.currentItem"
+      ></rr-nodule-mass>
+
+      <rr-atelectasis
+        *ngIf="isFindingType(lungParenchymaFindingTypeEnum.Atelectasis)"
+        [model]="findingHandler.currentItem"
+      ></rr-atelectasis>
+
+      <rr-consolidation
+        *ngIf="isFindingType(lungParenchymaFindingTypeEnum.Consolidation)"
+        [model]="findingHandler.currentItem"
+      ></rr-consolidation>
+
+      <rr-pulmonary-infarction
+        *ngIf="isFindingType(lungParenchymaFindingTypeEnum.PulmonaryInfarction)"
+        [model]="findingHandler.currentItem"
+      ></rr-pulmonary-infarction>
+    </div>
+  </div>
+</form>

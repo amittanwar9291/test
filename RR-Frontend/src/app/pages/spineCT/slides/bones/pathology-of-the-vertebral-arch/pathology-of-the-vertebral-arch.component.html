@@ -1,0 +1,134 @@
+<div class="f-horizontal main">
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+    <h2 rr-id="spi_c_060245" rrValidation="vertebraSpineLocations">
+      {{ 'spineCT.bones.localizationOfVertebra.value' | translate }}*
+    </h2>
+    <rr-spine-simple
+      rr-id="spi_c_0602202"
+      [spineLocation]="model.vertebraSpineLocations"
+      (click)="openLargeLocalizer()"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      rrValidation="vertebraSpineLocations"
+      name="vertebraSpineLocations"
+      class="m-b-30"
+    ></rr-spine-simple>
+    <h2 rr-id="spi_c_0602100">
+      {{ 'spineCT.bones.localizationSide.value' | translate }}*
+    </h2>
+    <p-radioButton
+      rr-id="spi_c_0602101"
+      [(ngModel)]="model.locationSideType"
+      label="{{ 'spineCT.bones.right.value' | translate }}"
+      [value]="sideTypeEnum.Right"
+      name="locationSideType"
+      rrValidation="locationSideType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_0602102"
+      [(ngModel)]="model.locationSideType"
+      label="{{ 'spineCT.bones.left.value' | translate }}"
+      [value]="sideTypeEnum.Left"
+      name="locationSideType"
+      rrValidation="locationSideType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_0602103"
+      [(ngModel)]="model.locationSideType"
+      label="{{ 'spineCT.bones.onBothSides.value' | translate }}"
+      [value]="sideTypeEnum.OnBothSides"
+      name="locationSideType"
+      rrValidation="locationSideType"
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+    <h2 rr-id="spi_c_060332" rrInfoIcon="spi_c_06_12">
+      {{ 'spineCT.bones.localizationInTheVertebral.value' | translate }}*
+    </h2>
+    <p-radioButton
+      rr-id="spi_c_060333"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.retrosomatic.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.Retrosomatic"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_060334"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.pediculolysis.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.Pediculolysis"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_060335"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.spondylolysis.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.Spondylolysis"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_060336"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.retroisthmic.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.Retroisthmic"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_0603214"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.laminolysis.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.Laminolysis"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_060338"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.paraspinosus.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.Paraspinosus"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_c_060339"
+      [(ngModel)]="model.localizationVertebralArchType"
+      label="{{ 'spineCT.bones.spinaBifidaOcculta.value' | translate }}"
+      [value]="localizationVertebralArchTypeEnum.SpinaBifidaOcculta"
+      name="localizationVertebralArchType"
+      rrValidation="localizationVertebralArchType"
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+    <h2 rr-id="spi_c_0604252" rrInfoIcon="spi_c_06_11">
+      {{ 'spineCT.bones.differentialDiagnosis.value' | translate }}
+    </h2>
+    <p-dropdown
+      [options]="differentialDiagnosis"
+      [(ngModel)]="model.pathologyOfTheVertebralArchBonesDiagnosis"
+      (onChange)="clearIsSuspicionOf()"
+      name="pathologyOfTheVertebralArchBonesDiagnosis"
+      styleClass="ui-brown-box o-width-100"
+      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      rr-id="spi_c_0604253"
+      rrDropdownClear
+      class="m-b-20"
+    >
+    </p-dropdown>
+    <div
+      [rrDisable]="model.pathologyOfTheVertebralArchBonesDiagnosis === bonesDiagnosisTypeEnum.None"
+    >
+      <p-checkbox
+        label="{{ 'spineCT.bones.suspicionOf.value' | translate }}"
+        rr-id="spi_c_0604254"
+        binary="true"
+        [(ngModel)]="model.isSuspicionOf"
+        name="isSuspicionOf"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-start f-vertical"></div>
+</div>

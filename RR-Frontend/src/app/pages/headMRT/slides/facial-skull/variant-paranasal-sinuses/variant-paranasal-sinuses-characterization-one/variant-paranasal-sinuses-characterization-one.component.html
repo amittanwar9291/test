@@ -1,0 +1,316 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <p-checkbox
+        labelStyleClass="ui-fat-label"
+        rr-id="hea_m_1102124"
+        name="isDeviatedNasalSeptum"
+        label="{{ 'headMRT.facialSkull.deviatedNasalSeptum.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isDeviatedNasalSeptum"
+        rrContentReset="sideTypeContainer"
+      ></p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="sideTypeContainer"
+        [rrDisable]="!model.isDeviatedNasalSeptum"
+      >
+        <p rr-id="hea_m_1102125">
+          {{ "headMRT.facialSkull.side.value" | translate }}*
+        </p>
+        <p-radioButton
+          rr-id="hea_m_1102126"
+          label="{{ 'headMRT.facialSkull.toTheRight.value' | translate }}"
+          name="sideType"
+          [value]="sideTypeEnum.ToTheRight"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102127"
+          label="{{ 'headMRT.facialSkull.toTheLeft.value' | translate }}"
+          name="sideType"
+          [value]="sideTypeEnum.ToTheLeft"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <p-checkbox
+        labelStyleClass="ui-fat-label"
+        rr-id="hea_m_1103107"
+        name="isConchaBullosa"
+        label="{{ 'headMRT.facialSkull.conchaBullosa.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isConchaBullosa"
+        rrContentReset="conchaBullosaDetaials"
+      ></p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="conchaBullosaDetaials"
+        [rrDisable]="!model.isConchaBullosa"
+      >
+        <p rr-id="hea_m_1103108">
+          {{ "headMRT.facialSkull.side.value" | translate }}*
+        </p>
+        <p-checkbox
+          rr-id="hea_m_1103109"
+          name="isConchaBullosaRight"
+          label="{{ 'headMRT.facialSkull.right.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isConchaBullosaRight"
+          rrValidation="isConchaBullosaRight isConchaBullosaLeft"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_1103110"
+          name="isConchaBullosaLeft"
+          label="{{ 'headMRT.facialSkull.left.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isConchaBullosaLeft"
+          rrValidation="isConchaBullosaRight isConchaBullosaLeft"
+        ></p-checkbox>
+
+        <p rr-id="hea_m_1103111">
+          {{ "headMRT.facialSkull.level.value" | translate }}*
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="w051"
+          name="levelType"
+          rr-id="hea_m_1103112"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          [(ngModel)]="model.levelType"
+          rrValidation="levelType"
+        >
+        </p-dropdown>
+
+        <p rr-id="hea_m_1103113" class="m-t-20">
+          {{ "headMRT.facialSkull.extension.value" | translate }}
+        </p>
+        <div>
+          <p rr-id="hea_m_1103114">
+            {{ "headMRT.facialSkull.maximumSize.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.conchaBullosaSize"
+            (announceModelChange)="onConchaBullosaSizeChange()"
+            name="conchaBullosaSize"
+            labelRrId="hea_m_1103116"
+            inputRrId="hea_m_1103115"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+
+        <div [rrDisable]="!model.conchaBullosaSize">
+          <p rr-id="hea_m_1103117">
+            {{ "headMRT.facialSkull.2ndPlane.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.conchaBullosa2NdPlane"
+            (announceModelChange)="onConchaBullosa2NdPlaneChange()"
+            name="conchaBullosa2NdPlane"
+            labelRrId="hea_m_1103119"
+            inputRrId="hea_m_1103118"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+        <div [rrDisable]="!model.conchaBullosa2NdPlane">
+          <p rr-id="hea_m_1103120">
+            {{ "headMRT.facialSkull.3rdPlane.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.conchaBullosa3RdPlane"
+            name="conchaBullosa3RdPlane"
+            labelRrId="hea_m_1103122"
+            inputRrId="hea_m_1103121"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <p-checkbox
+        labelStyleClass="ui-fat-label"
+        rr-id="hea_m_110484"
+        name="isInfraorbitalHallerCell"
+        label="{{ 'headMRT.facialSkull.infraorbitalHallerCell.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isInfraorbitalHallerCell"
+        rrContentReset="infraorbitalHallerCellDetailsContainer"
+      ></p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="infraorbitalHallerCellDetailsContainer"
+        [rrDisable]="!model.isInfraorbitalHallerCell"
+      >
+        <p rr-id="hea_m_110485">
+          {{ "headMRT.facialSkull.side.value" | translate }}*
+        </p>
+        <p-checkbox
+          rr-id="hea_m_110486"
+          name="isInfraorbitalHallerRight"
+          label="{{ 'headMRT.facialSkull.right.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isInfraorbitalHallerRight"
+          rrValidation="isInfraorbitalHallerRight isInfraorbitalHallerLeft"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_110487"
+          name="isInfraorbitalHallerLeft"
+          label="{{ 'headMRT.facialSkull.left.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isInfraorbitalHallerLeft"
+          rrValidation="isInfraorbitalHallerRight isInfraorbitalHallerLeft"
+        ></p-checkbox>
+
+        <p rr-id="hea_m_110488" class="m-t-20">
+          {{ "headMRT.facialSkull.extension.value" | translate }}
+        </p>
+        <div>
+          <p rr-id="hea_m_110489">
+            {{ "headMRT.facialSkull.maximumSize.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.infraorbitalHallerCellSize"
+            (announceModelChange)="onInfraorbitalHallerCellSizeChange()"
+            name="infraorbitalHallerCellSize"
+            labelRrId="hea_m_110491"
+            inputRrId="hea_m_110490"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+
+        <div [rrDisable]="!model.infraorbitalHallerCellSize">
+          <p rr-id="hea_m_110492">
+            {{ "headMRT.facialSkull.2ndPlane.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.infraorbitalHallerCell2NdPlane"
+            (announceModelChange)="onInfraorbitalHallerCell2NdPlaneChange()"
+            name="infraorbitalHallerCell2NdPlane"
+            labelRrId="hea_m_110494"
+            inputRrId="hea_m_110493"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+        <div [rrDisable]="!model.infraorbitalHallerCell2NdPlane">
+          <p rr-id="hea_m_110495">
+            {{ "headMRT.facialSkull.3rdPlane.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.infraorbitalHallerCell3RdPlane"
+            name="infraorbitalHallerCell3RdPlane"
+            labelRrId="hea_m_110497"
+            inputRrId="hea_m_110496"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <p-checkbox
+        labelStyleClass="ui-fat-label"
+        rr-id="hea_m_110586"
+        name="isOnodiCells"
+        label="{{ 'headMRT.facialSkull.onodiCells.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isOnodiCells"
+        rrContentReset="onodiCellsDetailsContainer"
+      ></p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        id="onodiCellsDetailsContainer"
+        [rrDisable]="!model.isOnodiCells"
+      >
+        <p rr-id="hea_m_110587">
+          {{ "headMRT.facialSkull.side.value" | translate }}*
+        </p>
+        <p-checkbox
+          rr-id="hea_m_110588"
+          name="isOnodiCellsRight"
+          label="{{ 'headMRT.facialSkull.right.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isOnodiCellsRight"
+          rrValidation="isOnodiCellsRight isOnodiCellsLeft"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_110589"
+          name="isOnodiCellsLeft"
+          label="{{ 'headMRT.facialSkull.left.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isOnodiCellsLeft"
+          rrValidation="isOnodiCellsRight isOnodiCellsLeft"
+        ></p-checkbox>
+
+        <p rr-id="hea_m_110590" class="m-t-20">
+          {{ "headMRT.facialSkull.extension.value" | translate }}
+        </p>
+        <div>
+          <p rr-id="hea_m_110591">
+            {{ "headMRT.facialSkull.maximumSize.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.onodiCellsSize"
+            (announceModelChange)="onOnodiCellsSizeChange()"
+            name="onodiCellsSize"
+            labelRrId="hea_m_110593"
+            inputRrId="hea_m_110592"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+
+        <div [rrDisable]="!model.onodiCellsSize">
+          <p rr-id="hea_m_110594">
+            {{ "headMRT.facialSkull.2ndPlane.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.onodiCells2NdPlane"
+            (announceModelChange)="onOnodiCells2NdPlaneChange()"
+            name="onodiCells2NdPlane"
+            labelRrId="hea_m_110596"
+            inputRrId="hea_m_110595"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+        <div [rrDisable]="!model.onodiCells2NdPlane">
+          <p rr-id="hea_m_110597">
+            {{ "headMRT.facialSkull.3rdPlane.value" | translate }}
+          </p>
+          <rr-number-input
+            [(ngModel)]="model.onodiCells3RdPlane"
+            name="onodiCells3RdPlane"
+            labelRrId="hea_m_110599"
+            inputRrId="hea_m_110598"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'headMRT.facialSkull.inMm.value' | translate }}"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

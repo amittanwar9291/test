@@ -1,0 +1,255 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_0502100" rrInfoIcon="hea_c_05_06">
+      {{ 'headCT.meninges.localization.value' | translate }}
+    </h2>
+
+    <h2 rr-id="hea_c_050289">
+      {{ 'headCT.meninges.side.value' | translate }}*
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_050290"
+      name="isRight"
+      label="{{ 'headCT.meninges.right.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isRight"
+      rrValidation="isRight isLeft isMedian"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050291"
+      name="isLeft"
+      label="{{ 'headCT.meninges.left.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isLeft"
+      rrValidation="isRight isLeft isMedian"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050292"
+      name="isMedian"
+      label="{{ 'headCT.meninges.median.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isMedian"
+      rrValidation="isRight isLeft isMedian"
+    ></p-checkbox>
+
+    <h2 rr-id="hea_c_050293" class="m-t-35">
+      {{ 'headCT.meninges.region.value' | translate }}*
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_050294"
+      name="isFrontal"
+      label="{{ 'headCT.meninges.frontal.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isFrontal"
+      rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050295"
+      name="isTemporal"
+      label="{{ 'headCT.meninges.temporal.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isTemporal"
+      rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050296"
+      name="isParietal"
+      label="{{ 'headCT.meninges.parietal.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isParietal"
+      rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050297"
+      name="isOccipital"
+      label="{{ 'headCT.meninges.occipital.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isOccipital"
+      rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050298"
+      name="isInfratentorial"
+      label="{{ 'headCT.meninges.infratentorial.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isInfratentorial"
+      rrValidation="isFrontal isTemporal isParietal isOccipital isInfratentorial"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list f-vertical">
+    <h2 rr-id="hea_c_0503231">
+      {{ 'headCT.meninges.densityNonEnhanced.value' | translate }}
+    </h2>
+
+    <p rr-id="hea_c_0503232" class="m-b-0">
+      {{ 'headCT.meninges.currentExamination.value' | translate }}
+    </p>
+    <rr-number-input
+      [(ngModel)]="model.currentExaminationInHu"
+      name="currentExaminationInHu"
+      inputRrId="hea_c_0503233"
+      labelRrId="hea_c_0503234"
+      [config]="{ min: -1024, max: 3071, placeholder: '----' }"
+      label="{{ 'headCT.meninges.inHU.value' | translate }}"
+    >
+    </rr-number-input>
+
+    <p rr-id="hea_c_0503235" class="m-b-0">
+      {{ 'headCT.meninges.previousExamination.value' | translate }}
+    </p>
+    <rr-number-input
+      [(ngModel)]="model.previousExaminationInHu"
+      name="previousExaminationInHu"
+      inputRrId="hea_c_0503236"
+      labelRrId="hea_c_0503237"
+      [config]="{ min: -1024, max: 3071, placeholder: '----' }"
+      label="{{ 'headCT.meninges.inHU.value' | translate }}"
+    >
+    </rr-number-input>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_050474">
+      {{ "headCT.meninges.extension.value" | translate }}
+    </h2>
+
+    <div>
+      <p rr-id="hea_c_050475">
+        {{ "headCT.meninges.size.value" | translate }}*
+      </p>
+      <rr-number-input
+        rrValidation="sizeInMm"
+        [(ngModel)]="model.sizeInMm"
+        (announceModelChange)="onSizeInMmChange()"
+        name="sizeInMm"
+        inputRrId="hea_c_050476"
+        labelRrId="hea_c_050477"
+        [config]="{ min: 1, max: 250, placeholder: '---' }"
+        label="{{ 'headCT.meninges.inMm.value' | translate }}"
+      >
+      </rr-number-input>
+    </div>
+
+    <div [rrDisable]="!model.sizeInMm">
+      <p rr-id="hea_c_050478">
+        {{ "headCT.meninges.secondPlane.value" | translate }}
+      </p>
+      <rr-number-input
+        [(ngModel)]="model.secondPlaneInMm"
+        (announceModelChange)="onSecondPlaneInMmChange()"
+        name="secondPlaneInMm"
+        inputRrId="hea_c_050479"
+        labelRrId="hea_c_050480"
+        [config]="{ min: 1, max: 250, placeholder: '---' }"
+        label="{{ 'headCT.meninges.inMm.value' | translate }}"
+      >
+      </rr-number-input>
+    </div>
+
+    <div [rrDisable]="!model.secondPlaneInMm">
+      <p rr-id="hea_c_050481">
+        {{ "headCT.meninges.thirdPlane.value" | translate }}
+      </p>
+      <rr-number-input
+        [(ngModel)]="model.thirdPlaneInMm"
+        name="thirdPlaneInMm"
+        inputRrId="hea_c_050482"
+        labelRrId="hea_c_050483"
+        [config]="{ min: 1, max: 250, placeholder: '---' }"
+        label="{{ 'headCT.meninges.inMm.value' | translate }}"
+      >
+      </rr-number-input>
+    </div>
+
+    <p-checkbox
+      class="m-t-20"
+      rr-id="hea_c_050486"
+      name="isDuralAttachmentCrossed"
+      label="{{ 'headCT.meninges.duralAttachmentCrossed.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isDuralAttachmentCrossed"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050484"
+      name="isSuturesNotCrossed"
+      label="{{ 'headCT.meninges.suturesNotCrossed.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isSuturesNotCrossed"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050485"
+      name="isDuralDisplacementBetweenEDHAndBrain"
+      label="{{ 'headCT.meninges.duralDisplacementBetweenEDHAndBrain.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isDuralDisplacementBetweenEDHAndBrain"
+      labelStyleClass="text-break"
+    ></p-checkbox>
+
+    <h2 rr-id="hea_c_050465" class="m-t-25">
+      {{ 'headCT.meninges.configuration.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_050466"
+      name="isBiconvex"
+      label="{{ 'headCT.meninges.biconvex.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isBiconvex"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list">
+    <h2 rr-id="hea_c_050567">
+      {{ 'headCT.meninges.associatedFindings.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_050568"
+      name="isAssociatedSkullFracture"
+      label="{{ 'headCT.meninges.associatedSkullFracture.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isAssociatedSkullFracture"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_0505232"
+      name="isSwirlSign"
+      label="{{ 'headCT.meninges.swirlSign.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isSwirlSign"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050569"
+      name="isContrecoupSDH"
+      label="{{ 'headCT.meninges.contrecoupSDH.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isContrecoupSDH"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050570"
+      name="isAdjacentContusion"
+      label="{{ 'headCT.meninges.adjacentContusion.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isAdjacentContusion"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050571"
+      name="isConcomitantHydrocephalus"
+      label="{{ 'headCT.meninges.concomitantHydrocephalus.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isConcomitantHydrocephalus"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_050572"
+      name="isAssociatedInfarction"
+      label="{{ 'headCT.meninges.associatedInfarction.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isAssociatedInfarction"
+    ></p-checkbox>
+
+    <div class="m-t-35">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        [elementsRrIds]="referencePictureElementsRrIds"
+        name="referencePicture"
+      ></rr-reference-picture>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<div class="f-horizontal col-h-100" id="originDetails-block">
+  <div class="c-col-2 c-pad-l c-sep f-start f-vertical">
+    <h2 rr-id="car_m_090401" class="m-b-10">
+      {{ 'cardioMRT.pericardiumVessels.detailsOrigin.value' | translate }}*
+    </h2>
+    <div class="c-col-2 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="car_m_090402"
+          [(ngModel)]="model.detailsOriginType"
+          label="{{ 'cardioMRT.pericardiumVessels.highTakeOff.value' | translate }}"
+          name="detailsOriginType"
+          [value]="detailsOriginType.HighTakeOff"
+          rrValidation="detailsOriginType"
+          rrContentReset="rcaLeftOrLMARightCoronalSinus-block distalRCX-block distalLAD-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090403"
+          [(ngModel)]="model.detailsOriginType"
+          label="{{ 'cardioMRT.pericardiumVessels.missingLMASeparatedOstia.value' | translate }}"
+          labelStyleClass="text-break"
+          name="detailsOriginType"
+          [value]="detailsOriginType.MissingLMASeparateOscillators"
+          rrValidation="detailsOriginType"
+          rrContentReset="rcaLeftOrLMARightCoronalSinus-block distalRCX-block distalLAD-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090404"
+          [(ngModel)]="model.detailsOriginType"
+          label="{{ 'cardioMRT.pericardiumVessels.singularCoronaryArtery.value' | translate }}"
+          name="detailsOriginType"
+          [value]="detailsOriginType.SingularCoronaryArtery"
+          rrValidation="detailsOriginType"
+          rrContentReset="rcaLeftOrLMARightCoronalSinus-block distalRCX-block distalLAD-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090405"
+          [(ngModel)]="model.detailsOriginType"
+          label="{{ 'cardioMRT.pericardiumVessels.rCAFromTheLeft.value' | translate }}"
+          name="detailsOriginType"
+          [value]="detailsOriginType.RCALeftCoronarySinus"
+          rrValidation="detailsOriginType"
+          rrContentReset="distalRCX-block distalLAD-block"
+          (onClick)="resetRCALeftOrLMARightCoronalSinus()"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090406"
+          [(ngModel)]="model.detailsOriginType"
+          label="{{ 'cardioMRT.pericardiumVessels.rCXLADFromThe.value' | translate }}"
+          labelStyleClass="text-break"
+          name="detailsOriginType"
+          [value]="detailsOriginType.RCXOrLADRightCoronarySinus"
+          rrValidation="detailsOriginType"
+          rrContentReset="rcaLeftOrLMARightCoronalSinus-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090407"
+          [(ngModel)]="model.detailsOriginType"
+          label="{{ 'cardioMRT.pericardiumVessels.lMAFromRightCoronary.value' | translate }}"
+          labelStyleClass="text-break"
+          name="detailsOriginType"
+          [value]="detailsOriginType.LMARightCoronarySinus"
+          rrInfoIcon="car_m_09_02"
+          rrValidation="detailsOriginType"
+          rrContentReset="distalRCX-block distalLAD-block"
+          (onClick)="resetRCALeftOrLMARightCoronalSinus()"
+        ></p-radioButton>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-list">
+        <div
+          *ngIf="isRCALeftOrLMARightCoronalSinusEnabled"
+          id="rcaLeftOrLMARightCoronalSinus-block"
+          class="f-start f-vertical o-radio-list"
+        >
+          <p-radioButton
+            rr-id="car_m_090501"
+            [(ngModel)]="model.rcaLeftOrLMARightCoronalSinus"
+            label="{{ 'cardioMRT.pericardiumVessels.prepulmonary.value' | translate }}"
+            name="rcaLeftOrLMARightCoronalSinus"
+            [value]="rcaOrRCXLADOrLMAType.Prepulmonary"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090502"
+            [(ngModel)]="model.rcaLeftOrLMARightCoronalSinus"
+            label="{{ 'cardioMRT.pericardiumVessels.interarterial.value' | translate }}"
+            name="rcaLeftOrLMARightCoronalSinus"
+            [value]="rcaOrRCXLADOrLMAType.Interarteriel"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090503"
+            [(ngModel)]="model.rcaLeftOrLMARightCoronalSinus"
+            label="{{ 'cardioMRT.pericardiumVessels.retroaortic.value' | translate }}"
+            name="rcaLeftOrLMARightCoronalSinus"
+            [value]="rcaOrRCXLADOrLMAType.Retroaortal"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090504"
+            [(ngModel)]="model.rcaLeftOrLMARightCoronalSinus"
+            label="{{ 'cardioMRT.pericardiumVessels.septal.value' | translate }}"
+            name="rcaLeftOrLMARightCoronalSinus"
+            [value]="rcaOrRCXLADOrLMAType.Septal"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+
+        <ng-container
+          *ngIf="model.detailsOriginType === detailsOriginType.RCXOrLADRightCoronarySinus"
+        >
+          <div
+            class="f-start f-vertical o-radio-list m-t-4"
+            id="distalRCX-block"
+          >
+            <h2 rr-id="car_m_090505" rrInfoIcon="car_m_09_01">
+              {{ 'cardioMRT.pericardiumVessels.distalRCX.value' | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090506"
+              [(ngModel)]="model.distalRCX"
+              label="{{ 'cardioMRT.pericardiumVessels.prepulmonary.value' | translate }}"
+              name="distalRCX"
+              [value]="rcaOrRCXLADOrLMAType.Prepulmonary"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090507"
+              [(ngModel)]="model.distalRCX"
+              label="{{ 'cardioMRT.pericardiumVessels.interarterial.value' | translate }}"
+              name="distalRCX"
+              [value]="rcaOrRCXLADOrLMAType.Interarteriel"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090508"
+              [(ngModel)]="model.distalRCX"
+              label="{{ 'cardioMRT.pericardiumVessels.retroaortic.value' | translate }}"
+              name="distalRCX"
+              [value]="rcaOrRCXLADOrLMAType.Retroaortal"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090509"
+              [(ngModel)]="model.distalRCX"
+              label="{{ 'cardioMRT.pericardiumVessels.septal.value' | translate }}"
+              name="distalRCX"
+              [value]="rcaOrRCXLADOrLMAType.Septal"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            class="f-start f-vertical o-radio-list m-t-4"
+            id="distalLAD-block"
+          >
+            <h2 rr-id="car_m_090510" rrInfoIcon="car_m_09_01">
+              {{ 'cardioMRT.pericardiumVessels.distalLAD.value' | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090511"
+              [(ngModel)]="model.distalLAD"
+              label="{{ 'cardioMRT.pericardiumVessels.prepulmonary.value' | translate }}"
+              name="distalLAD"
+              [value]="rcaOrRCXLADOrLMAType.Prepulmonary"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090512"
+              [(ngModel)]="model.distalLAD"
+              label="{{ 'cardioMRT.pericardiumVessels.interarterial.value' | translate }}"
+              name="distalLAD"
+              [value]="rcaOrRCXLADOrLMAType.Interarteriel"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090513"
+              [(ngModel)]="model.distalLAD"
+              label="{{ 'cardioMRT.pericardiumVessels.retroaortic.value' | translate }}"
+              name="distalLAD"
+              [value]="rcaOrRCXLADOrLMAType.Retroaortal"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090514"
+              [(ngModel)]="model.distalLAD"
+              label="{{ 'cardioMRT.pericardiumVessels.septal.value' | translate }}"
+              name="distalLAD"
+              [value]="rcaOrRCXLADOrLMAType.Septal"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

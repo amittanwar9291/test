@@ -1,0 +1,241 @@
+<div class="f-horizontal f-start h-100 o-width-100">
+  <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-42 o-list">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120212">
+        {{ "headMRT.summary.side.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120213"
+        [(ngModel)]="model.isRight"
+        name="isRight"
+        label="{{ 'headMRT.summary.right.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120214"
+        [(ngModel)]="model.isLeft"
+        name="isLeft"
+        label="{{ 'headMRT.summary.left.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120215">
+        {{ "headMRT.summary.details.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120216"
+        [(ngModel)]="model.isLocallyFlattenedSulci"
+        name="isLocallyFlattenedSulci"
+        label="{{ 'headMRT.summary.locallyFlattenedSulci.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-42 o-list">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120320" rrInfoIcon="hea_m_12_02">
+        {{ "headMRT.summary.herniation.value" | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="hea_m_1103128"
+        name="herniationType"
+        styleClass="ui-brown-box o-width-100"
+        class="p-r-30"
+        [options]="herniationOptions"
+        [(ngModel)]="model.herniationType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+      >
+      </p-dropdown>
+    </div>
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120322">
+        {{ "headMRT.summary.associatedFindings.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120323"
+        [(ngModel)]="model.isMidlineShift"
+        name="isMidlineShift"
+        label="{{ 'headMRT.summary.midlineShiftOne.value' | translate }}"
+        binary="true"
+        (onChange)="resetIsMidlineShift()"
+      >
+      </p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isMidlineShift"
+      >
+        <h3 rr-id="hea_m_120324">
+          {{ "headMRT.summary.side.value" | translate }}*
+        </h3>
+        <p-radioButton
+          rr-id="hea_m_120325"
+          label="{{'headMRT.summary.toTheRight.value' | translate}}"
+          name="sideType"
+          [value]="sideType.ToTheRight"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_120326"
+          label="{{'headMRT.summary.toTheLeft.value' | translate}}"
+          name="sideType"
+          [value]="sideType.ToTheLeft"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        >
+        </p-radioButton>
+        <h3 rr-id="hea_m_120327">
+          {{ "headMRT.summary.midlineShiftTwo.value" | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="hea_m_120328"
+          [(ngModel)]="model.midlineShiftInMm"
+          labelRrId="hea_m_120329"
+          name="midlineShiftInMm"
+          label="{{ 'headMRT.summary.inMm.value' | translate }}"
+          [config]="{placeholder: '- -', min: 1, max: 99}"
+          labelStyleClass="text-break2"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-42">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120415">
+        {{ "headMRT.summary.additionalFindings.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120416"
+        [(ngModel)]="model.isHydrocephalus"
+        name="isHydrocephalus"
+        label="{{ 'headMRT.summary.hydrocephalus.value' | translate }}"
+        binary="true"
+        rrContentReset="isHydrocephalusContainer"
+      >
+      </p-checkbox>
+      <div
+        class="nested-content"
+        [rrDisable]="!model.isHydrocephalus"
+        id="isHydrocephalusContainer"
+      >
+        <p-checkbox
+          rr-id="hea_m_120417"
+          [(ngModel)]="model.isUnilateral"
+          name="isUnilateral"
+          label="{{ 'headMRT.summary.unilateral.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120418"
+        [(ngModel)]="model.isACAInfarction"
+        name="isACAInfarction"
+        label="{{ 'headMRT.summary.aCAInfarction.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120419"
+        [(ngModel)]="model.isMCAInfarction"
+        name="isMCAInfarction"
+        label="{{ 'headMRT.summary.mCAInfarction.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120420"
+        [(ngModel)]="model.isPCAInfarction"
+        name="isPCAInfarction"
+        label="{{ 'headMRT.summary.pCAInfarction.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+
+      <p-checkbox
+        rr-id="hea_m_120422"
+        [(ngModel)]="model.isObstructiveHydrocephalus"
+        name="isObstructiveHydrocephalus"
+        label="{{ 'headMRT.summary.obstructiveHydrocephalus.value' | translate }}"
+        binary="true"
+        rrContentReset="isObstructiveHydrocephalusContainer"
+      >
+      </p-checkbox>
+
+      <div
+        id="isObstructiveHydrocephalusContainer"
+        class="nested-content"
+        [rrDisable]="!model.isObstructiveHydrocephalus"
+      >
+        <p-checkbox
+          rr-id="hea_m_120423"
+          [(ngModel)]="model.isCompressionOfTheAqueduct"
+          name="isCompressionOfTheAqueduct"
+          label="{{ 'headMRT.summary.compressionOfTheAqueduct.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_120424"
+        [(ngModel)]="model.isTonsillarNecrosis"
+        name="isTonsillarNecrosis"
+        label="{{ 'headMRT.summary.tonsillarNecrosis.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_120421"
+        [(ngModel)]="model.isDuretHemorrhage"
+        name="isDuretHemorrhage"
+        label="{{ 'headMRT.summary.duretHemorrhage.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l m-b-11 m-t-42 o-list">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120508">
+        {{ "headMRT.summary.wedging.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_120509"
+        label="{{'headMRT.summary.starting.value' | translate}}"
+        name="wedgingType"
+        [value]="wedgingType.Starting"
+        [(ngModel)]="model.wedgingType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_120510"
+        label="{{'headMRT.summary.manifest.value' | translate}}"
+        name="wedgingType"
+        [value]="wedgingType.Manifest"
+        [(ngModel)]="model.wedgingType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="hea_m_120511">
+        {{ "headMRT.summary.differentialDiagnosis.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_120512"
+        [(ngModel)]="model.isIntracranialHypotension"
+        name="isIntracranialHypotension"
+        label="{{ 'headMRT.summary.intracranialHypotension.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

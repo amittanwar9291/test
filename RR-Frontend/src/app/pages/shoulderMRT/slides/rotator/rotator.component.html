@@ -1,0 +1,99 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-list">
+      <div class=" f-start f-vertical o-width-100 m-b-31">
+        <div class="f-start f-horizontal o-radio-list-h m-b-15">
+          <h1 rrInfoIcon="sho_m_050104">
+            {{ 'shoulderMRT.rotator.acromionType.value' | translate }}
+          </h1>
+        </div>
+        <p-dropdown
+          rr-id="sho_m_050105"
+          [(ngModel)]="model.acromionType"
+          name="acromionType"
+          [options]="acromionTypes"
+          placeholder="{{ 'shoulderMRT.rotator.placeholder' | translate }}"
+          styleClass="ui-brown-box o-width-100"
+          class="m-b-15"
+          rrDropdownClear
+        >
+        </p-dropdown>
+        <p-checkbox
+          rr-id="sho_m_050106"
+          [(ngModel)]="model.isOsAcromiale"
+          name="isOsAcromiale"
+          label="{{ 'shoulderMRT.rotator.osAcromiale.value' | translate }}"
+          labelStyleClass="ui-fat-label"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <div class="f-start f-vertical o-list">
+        <h1 rr-id="sho_m_050107">
+          {{ 'shoulderMRT.rotator.finding.value' | translate }}*
+        </h1>
+        <div class="f-vertical f-start o-radio-list">
+          <p-radioButton
+            rr-id="sho_m_050108"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'shoulderMRT.rotator.rotatorCuffAndACJointRegular.value' | translate }}"
+            name="areFindings"
+            [value]="areFindings.No"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+            labelStyleClass="text-break"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_050109"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'shoulderMRT.rotator.patholgicFinding.value' | translate }}"
+            name="areFindings"
+            [value]="areFindings.Yes"
+            rrValidation="areFindings"
+            [notInFinding]="true"
+          ></p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="c-pad-l c-sep f-start f-vertical">
+      <div class="f-start f-vertical m-h-100 m-b-16">
+        <h1
+          rr-id="sho_m_050201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          class="c-col-4 o-width-100"
+        >
+          {{ 'shoulderMRT.rotator.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <rr-ac-joint
+          *ngSwitchCase="findingType.ACJoint"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-ac-joint>
+        <rr-rotator-cuff
+          *ngSwitchCase="findingType.RotatorCuff"
+          [model]="findingHandler.currentItem"
+          [localizationPatteVersion]="localizationPatteVersion"
+          class="col-h-100"
+        ></rr-rotator-cuff>
+        <div *ngSwitchDefault class="f-horizontal col-h-100">
+          <div class="c-col-1 c-sep c-pad-r"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

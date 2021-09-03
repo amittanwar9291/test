@@ -1,0 +1,95 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10 f-vertical">
+      <h2 rr-id="hea_m_090263" class="m-b-10">
+        {{'headMRT.cerebrospinalFluid.differentialDiagnosis.value' | translate}}
+      </h2>
+      <p
+        rr-id="hea_m_090264"
+        class="m-b-2"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        {{'headMRT.cerebrospinalFluid.differentialDiagnosis1.value' |
+        translate}}*
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="ddlW042"
+        [(ngModel)]="model.massDifferentialDiagnosisIDescribe1Type"
+        group="true"
+        name="massDifferentialDiagnosisIDescribe1Type"
+        rrId="hea_m_090265"
+        (selectionChanged)="clearDDLCheckboxes()"
+        [parentViewModel]="model"
+        rrValidation="massDifferentialDiagnosisIDescribe1Type"
+        class="m-r-10"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.massDifferentialDiagnosisIDescribe1Type === diagnosisTypeEnum.None"
+        rr-id="hea_m_090266"
+        name="isSuspicionOf"
+        [(ngModel)]="model.isSuspicionOf"
+        label="{{'headMRT.cerebrospinalFluid.suspicionOf.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <div
+        class="f-vertical f-start o-radio-list m-r-12"
+        [rrDisable]="model.massDifferentialDiagnosisIKnow1Type === diagnosisTypeEnum.None
+      && model.massDifferentialDiagnosisIDescribe1Type === diagnosisTypeEnum.None"
+      >
+        <p rr-id="hea_m_090267" class="m-b-3 m-t-6">
+          {{'headMRT.cerebrospinalFluid.differentialDiagnosis2.value' |
+          translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="ddlW043"
+          [(ngModel)]="model.massDifferentialDiagnosis2Type"
+          group="true"
+          name="massDifferentialDiagnosis2Type"
+          rrId="hea_m_090268"
+          (selectionChanged)="clearSubordinateCheckbox()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="f-vertical f-start o-radio-list"
+          [rrDisable]="model.massDifferentialDiagnosis2Type === diagnosisTypeEnum.None"
+        >
+          <p-checkbox
+            rr-id="hea_m_090269"
+            name="isSubordinate"
+            class="m-b-13"
+            [(ngModel)]="model.isSubordinate"
+            label="{{'headMRT.cerebrospinalFluid.subordinate.value' | translate}}"
+            binary="true"
+          ></p-checkbox>
+          <p rr-id="hea_m_090270" class="m-b-3 m-t-6">
+            {{'headMRT.cerebrospinalFluid.differentialDiagnosis3.value' |
+            translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="3"
+            [options]="ddlW043"
+            [(ngModel)]="model.massDifferentialDiagnosis3Type"
+            group="true"
+            name="massDifferentialDiagnosis3Type"
+            rrId="hea_m_090271"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_090272"
+        name="is1LesionOfTheSameEntity"
+        class="m-t-25"
+        [(ngModel)]="model.is1LesionOfTheSameEntity"
+        label="{{'headMRT.cerebrospinalFluid.lesionOfTheSame.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10"></div>
+</div>

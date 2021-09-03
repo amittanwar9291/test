@@ -1,0 +1,138 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="f-horizontal f-center m-t-79 m-l-18"
+    *ngIf="complexLocalizerShouldBeOpen(complexLocalizersTypes.bigFootBonesLocalizer)"
+  >
+    <rr-foot-big-bones-complex
+      name="threeDimensionalLocalization"
+      (close)="onLargeLocalizerClose()"
+      (selectedElement)="onNewLocalizerSelection()"
+      [side]="side"
+      [selectionMode]="largeLocalizerOpenType.selectionMode"
+      [dictionaryType]="largeLocalizerOpenType.dictionaryType"
+      [isComplex]="largeLocalizerOpenType.isComplex"
+      [isMalleoli]="largeLocalizerOpenType.isMalleoli"
+      [(ngModel)]="findingHandler.currentItem.threeDimensionalLocalization"
+    ></rr-foot-big-bones-complex>
+  </div>
+  <div
+    class="f-horizontal f-center m-t-70"
+    *ngIf="complexLocalizerShouldBeOpen(complexLocalizersTypes.bigFootJointsLocalizer)"
+  >
+    <rr-foot-big-joints-complex
+      name="threeDimensionalLocalization"
+      (close)="onLargeLocalizerClose()"
+      [side]="side"
+      [selectionMode]="largeLocalizerOpenType.selectionMode"
+      [(ngModel)]="findingHandler.currentItem.threeDimensionalLocalization"
+    ></rr-foot-big-joints-complex>
+  </div>
+  <div
+    class="f-horizontal f-center m-t-89 m-l-15"
+    *ngIf="complexLocalizerShouldBeOpen(complexLocalizersTypes.threeSidesLocalizer)"
+  >
+    <rr-feet-three-sides-view-complex
+      name="footThreeSidesLocalization"
+      (closed)="onLargeLocalizerClose()"
+      [(ngModel)]="findingHandler.currentItem.footThreeSidesLocalization"
+    ></rr-feet-three-sides-view-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" [hidden]="largeLocalizerOpenType">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="anc_m_040103" class="m-b-15">
+        {{ 'feetMRT.bones.findings.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="anc_m_040104"
+        label="{{ 'feetMRT.bones.noOsseousPathology.value' | translate }}"
+        rrUnClickRadio
+        name="areFindings"
+        value="False"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040105"
+        label="{{'feetMRT.bones.finding.value' | translate}}"
+        rrUnClickRadio
+        name="areFindings"
+        value="True"
+        class="m-b-19"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingHandlerComponent'"
+        [validationName]="'findings'"
+        [customLabelCalculator]="getCustomLabel"
+        [setDescriptionTypes]="[bonesFindingsTypes.MassOsteolysis]"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== 'None'"
+          rr-id="anc_m_040201"
+        >
+          {{ 'feetMRT.bones.findings.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isCurrentItem('None')"
+        class="f-horizontal f-start main-container"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-standard-variant
+        *ngIf="isCurrentItem(bonesFindingsTypes.NormalVariantOrAnomaly)"
+        [model]="findingHandler.currentItem"
+      ></rr-standard-variant>
+      <rr-fracture
+        *ngIf="isCurrentItem(bonesFindingsTypes.Fracture)"
+        [model]="findingHandler.currentItem"
+      ></rr-fracture>
+      <rr-bone-marrow-edema
+        *ngIf="isCurrentItem(bonesFindingsTypes.BoneMarrowEdema)"
+        [model]="findingHandler.currentItem"
+      ></rr-bone-marrow-edema>
+      <rr-dislocation
+        *ngIf="isCurrentItem(bonesFindingsTypes.Dislocation)"
+        [model]="findingHandler.currentItem"
+      ></rr-dislocation>
+      <rr-osteochondral-lesion
+        *ngIf="isCurrentItem(bonesFindingsTypes.OsteochondralLesion)"
+        [model]="findingHandler.currentItem"
+      ></rr-osteochondral-lesion>
+      <rr-osteoarthrosis
+        *ngIf="isCurrentItem(bonesFindingsTypes.Osteoarthritis)"
+        [model]="findingHandler.currentItem"
+      ></rr-osteoarthrosis>
+      <rr-arthritis
+        *ngIf="isCurrentItem(bonesFindingsTypes.Arthritis)"
+        [model]="findingHandler.currentItem"
+      ></rr-arthritis>
+      <rr-osteomyelitis
+        *ngIf="isCurrentItem(bonesFindingsTypes.Osteomyelitis)"
+        [model]="findingHandler.currentItem"
+      ></rr-osteomyelitis>
+      <rr-mass-osteolysis
+        *ngIf="isCurrentItem(bonesFindingsTypes.MassOsteolysis)"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-osteolysis>
+    </div>
+  </div>
+</form>

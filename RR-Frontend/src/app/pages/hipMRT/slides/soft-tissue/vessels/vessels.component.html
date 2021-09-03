@@ -1,0 +1,142 @@
+<div class="f-horizontal col-h-100 c-pad-l">
+  <div class="c-col-2 f-vertical c-pad-r c-sep o-list">
+    <h2 rr-id="hip_m_080324">
+      {{ 'hipMRT.softTissue.pathology.value' | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep o-list">
+        <div class="f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="hip_m_080325"
+            [(ngModel)]="model.vesselsPathologyType"
+            label="{{ 'hipMRT.softTissue.aneurysm.value' | translate }}"
+            [value]="vesselsPathologyType.Aneurysm"
+            name="vesselsPathologyType"
+            (onClick)="resetVaricosisGroup()"
+            rrValidation="vesselsPathologyType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_080326"
+            [(ngModel)]="model.vesselsPathologyType"
+            label="{{ 'hipMRT.softTissue.varicosis.value' | translate }}"
+            [value]="vesselsPathologyType.Varicosis"
+            name="vesselsPathologyType"
+            (onClick)="resetAneurysmGroup()"
+            rrValidation="vesselsPathologyType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <ng-container
+          *ngIf="model.vesselsPathologyType === vesselsPathologyType.Aneurysm"
+        >
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="hip_m_080411">
+              {{ 'hipMRT.softTissue.localization.value' | translate }}*
+            </h2>
+            <p-radioButton
+              rr-id="hip_m_080412"
+              [(ngModel)]="model.vesselsLocalizationType"
+              label="{{ 'hipMRT.softTissue.commonIliacArtery.value' | translate }}"
+              [value]="vesselsLocalizationType.CommonIliacArtery"
+              name="vesselsLocalizationType"
+              rrValidation="vesselsLocalizationType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_080413"
+              [(ngModel)]="model.vesselsLocalizationType"
+              label="{{ 'hipMRT.softTissue.externalIliacArtery.value' | translate }}"
+              [value]="vesselsLocalizationType.ExternalIliacArtery"
+              name="vesselsLocalizationType"
+              rrValidation="vesselsLocalizationType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_080414"
+              [(ngModel)]="model.vesselsLocalizationType"
+              label="{{ 'hipMRT.softTissue.internalIliacArtery.value' | translate }}"
+              [value]="vesselsLocalizationType.InternalIliacArtery"
+              name="vesselsLocalizationType"
+              rrValidation="vesselsLocalizationType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_080415"
+              [(ngModel)]="model.vesselsLocalizationType"
+              label="{{ 'hipMRT.softTissue.commonFemoralArtery.value' | translate }}"
+              [value]="vesselsLocalizationType.CommonFemoralArtery"
+              name="vesselsLocalizationType"
+              rrValidation="vesselsLocalizationType"
+            >
+            </p-radioButton>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="hip_m_080416">
+              {{ 'hipMRT.softTissue.maxAxialDiameter.value' | translate }}
+            </h2>
+            <rr-number-input
+              inputRrId="hip_m_080418"
+              labelRrId="hip_m_080417"
+              name="maxAxialDiameterInMm"
+              label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 50, placeholder: '--' }"
+              [(ngModel)]="model.maxAxialDiameterInMm"
+            >
+            </rr-number-input>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="hip_m_080419">
+              {{ 'hipMRT.softTissue.craniocaudalExtension.value' | translate }}
+            </h2>
+            <rr-number-input
+              inputRrId="hip_m_080421"
+              labelRrId="hip_m_080420"
+              name="craniocaudalExtensionInMm"
+              label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 50, placeholder: '--' }"
+              [(ngModel)]="model.craniocaudalExtensionInMm"
+            >
+            </rr-number-input>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.vesselsPathologyType === vesselsPathologyType.Varicosis"
+        >
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="hip_m_080411">
+              {{ 'hipMRT.softTissue.localization.value' | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="hip_m_080422"
+              binary="true"
+              name="isIliacVeins"
+              label="{{ 'hipMRT.softTissue.iliacVeins.value' | translate }}"
+              [(ngModel)]="model.isIliacVeins"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hip_m_080423"
+              binary="true"
+              name="isSuperficialLegVeins"
+              label="{{ 'hipMRT.softTissue.superficialLegVeins.value' | translate }}"
+              [(ngModel)]="model.isSuperficialLegVeins"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hip_m_080424"
+              binary="true"
+              name="isDeepLegVeins"
+              label="{{ 'hipMRT.softTissue.deepLegVeins.value' | translate }}"
+              [(ngModel)]="model.isDeepLegVeins"
+            >
+            </p-checkbox>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

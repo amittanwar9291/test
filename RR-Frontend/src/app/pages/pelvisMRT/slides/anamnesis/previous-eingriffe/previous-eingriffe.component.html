@@ -1,0 +1,604 @@
+<div class="o-width-100 height-100 f-horizontal" style="width: 1680px">
+  <div class="c-col-2 c-sep c-pad-r f-vertical f-start m-t-27 m-b-13 m-l-15">
+    <div class="p-l-10">
+      <h1 rr-id="pel_m_020116" class="m-b-20 m-t-10">
+        {{'pelvisMRT.anamnesis.clinic.value' | translate}}
+      </h1>
+      <div rr-id="pel_m_020117" class="m-b-16">
+        <img src="assets/img/handMRT/icons/person.svg" alt="person" />
+      </div>
+    </div>
+
+    <div class="f-horizontal pain-column m-t-10">
+      <div
+        class="c-col-1 c-pad-r c-sep f-start f-vertical f-fill-available-space"
+      >
+        <rr-finding-column
+          [handler]="clinicHandler"
+          [disabled]="false"
+          [setConfig]="clinicDropdownConfig"
+          [validationName]="'isPressurePainRight isPressurePainLeft'"
+        >
+        </rr-finding-column>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l anamnesis-column-second-tab m-t-5">
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.Pain"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020213" class="m-b-6">
+            {{'pelvisMRT.anamnesis.pain.value' | translate}}
+          </h2>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.digitalRectalExam.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020214"
+            name="isDigitalRectalExam"
+            [(ngModel)]="clinicHandler.currentItem.isDigitalRectalExam"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.pressurePainLowerAbdomen.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020215"
+            name="isPressurePainLowerAbdomen"
+            [(ngModel)]="clinicHandler.currentItem.isPressurePainLowerAbdomen"
+            rrContentReset="pressurePainLowerAbdomenBlock"
+          >
+          </p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            [rrDisable]="!clinicHandler.currentItem.isPressurePainLowerAbdomen"
+            id="pressurePainLowerAbdomenBlock"
+          >
+            <p
+              rr-id="pel_m_020216"
+              class="m-b-6"
+              rrValidation="isPressurePainRight isPressurePainLeft"
+            >
+              {{'pelvisMRT.anamnesis.side.value' | translate}}
+            </p>
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.right.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020217"
+              name="isPressurePainRight"
+              [(ngModel)]="clinicHandler.currentItem.isPressurePainRight"
+              rrValidation="isPressurePainRight isPressurePainLeft"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.left.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020218"
+              name="isPressurePainLeft"
+              [(ngModel)]="clinicHandler.currentItem.isPressurePainLeft"
+              rrValidation="isPressurePainLeft isPressurePainRight"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.bonePain.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020219"
+            name="isBonePain"
+            [(ngModel)]="clinicHandler.currentItem.isBonePain"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.VaginalDischarge
+                  && localizationGender === localizationGenderType.Female"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020220" class="m-b-6">
+            {{'pelvisMRT.anamnesis.vaginalDischarge.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020221">
+            {{'pelvisMRT.anamnesis.noFurtherDetails.value' | translate}}
+          </p>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.Dysuria"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020220" class="m-b-6">
+            {{'pelvisMRT.anamnesis.dysuria.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020221">
+            {{'pelvisMRT.anamnesis.noFurtherDetails.value' | translate}}
+          </p>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.Hematuria"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020220" class="m-b-6">
+            {{'pelvisMRT.anamnesis.hematuria.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020221">
+            {{'pelvisMRT.anamnesis.noFurtherDetails.value' | translate}}
+          </p>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.PencilShapedStool"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020220" class="m-b-6">
+            {{'pelvisMRT.anamnesis.pencilShapedStool.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020221">
+            {{'pelvisMRT.anamnesis.noFurtherDetails.value' | translate}}
+          </p>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.Constipation"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020220" class="m-b-6">
+            {{'pelvisMRT.anamnesis.constipation.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020221">
+            {{'pelvisMRT.anamnesis.noFurtherDetails.value' | translate}}
+          </p>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.UrinaryIncontinence"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020222" class="m-b-6">
+            {{'pelvisMRT.anamnesis.urinaryincontinence.value' | translate}}
+          </h2>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.stressIncontinence.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020223"
+            name="isStressIncontinence"
+            [(ngModel)]="clinicHandler.currentItem.isStressIncontinence"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.urgeincontinence.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020224"
+            name="isUrgeIncontinence"
+            [(ngModel)]="clinicHandler.currentItem.isUrgeIncontinence"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.Diarrhea"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020225" class="m-b-6">
+            {{'pelvisMRT.anamnesis.diarrhea.value' | translate}}
+          </h2>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.paradoxical.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020226"
+            name="isParadoxical"
+            [(ngModel)]="clinicHandler.currentItem.isParadoxical"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="this.clinicHandler.currentItem.findingType == clinicType.BloodyStool"
+          class="p-l-10 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020227" class="m-b-6">
+            {{'pelvisMRT.anamnesis.bloodyStool.value' | translate}}
+          </h2>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.anemiaDueToBleeding.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020228"
+            name="isAnemiaDueToBleeding"
+            [(ngModel)]="clinicHandler.currentItem.isAnemiaDueToBleeding"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-2 c-sep c-pad f-vertical f-start m-t-27 m-b-13">
+    <div class="p-l-10 m-t-10">
+      <h1 rr-id="pel_m_020309" class="m-b-6">
+        {{'pelvisMRT.anamnesis.previousOperation.value' | translate}}
+      </h1>
+      <div rr-id="pel_m_020310" class="m-b-26">
+        <img src="assets/img/pelvisMRT/icons/2-3.svg" alt="preOperation" />
+      </div>
+    </div>
+
+    <div class="f-horizontal f-fill-available-space">
+      <div
+        class="c-col-1 c-pad-r c-sep f-start f-vertical f-fill-available-space"
+      >
+        <rr-finding-column
+          [handler]="previousOperationHandler"
+          [disabled]="false"
+          [setConfig]="previousOperationDropdownConfig"
+          [validationSecondFinding]="true"
+          [validationName]="'isRight isLeft'"
+        >
+        </rr-finding-column>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Prostatectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.prostatectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Conisation"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.conisation.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.RadicalTrachelectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.radicaltrachelectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.LocalRectalExcision"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.localRectalExcision.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.SigmaResection"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.sigmaResection.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Appendectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.appendectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Cystectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020410" class="m-b-6">
+            {{'pelvisMRT.anamnesis.cystectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Vesiculectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020414" class="m-b-6">
+            {{'pelvisMRT.anamnesis.vesiculectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+          <p rr-id="pel_m_020415" class="m-b-6 m-t-15">
+            {{'pelvisMRT.anamnesis.side.value' | translate}}
+          </p>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.right.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020416"
+            name="isRight"
+            [(ngModel)]="previousOperationHandler.currentItem.isRight"
+            rrContentReset="isRightVesiculectomyBlock"
+            rrValidation="isRight isLeft"
+            inSecondFinding="true"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content"
+            [rrDisable]="!previousOperationHandler.currentItem.isRight"
+            id="isRightVesiculectomyBlock"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.partial.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020417"
+              name="isRightPartial"
+              [(ngModel)]="previousOperationHandler.currentItem.isRightPartial"
+            >
+            </p-checkbox>
+          </div>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.left.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020418"
+            name="isLeft"
+            [(ngModel)]="previousOperationHandler.currentItem.isLeft"
+            rrContentReset="isLeftVesiculectomyBlock"
+            rrValidation="isLeft isRight"
+            inSecondFinding="true"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content"
+            [rrDisable]="!previousOperationHandler.currentItem.isLeft"
+            id="isLeftVesiculectomyBlock"
+          >
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.partial.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020419"
+              name="isLeftPartial"
+              [(ngModel)]="previousOperationHandler.currentItem.isLeftPartial"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Hemiorchiectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020420" class="m-b-6">
+            {{'pelvisMRT.anamnesis.hemiorchiectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+          <p
+            rr-id="pel_m_020415"
+            class="m-b-6 m-t-15"
+            rrValidation="isLeft isRight"
+            inSecondFinding="true"
+          >
+            {{'pelvisMRT.anamnesis.side.value' | translate}}
+          </p>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.right.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020416"
+            name="isRight"
+            [(ngModel)]="previousOperationHandler.currentItem.isRight"
+            rrValidation="isLeft isRight"
+            inSecondFinding="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            label="{{'pelvisMRT.anamnesis.left.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020418"
+            name="isLeft"
+            [(ngModel)]="previousOperationHandler.currentItem.isLeft"
+            rrValidation="isRight isLeft"
+            inSecondFinding="true"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.Hysterectomy"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020421" class="m-b-6">
+            {{'pelvisMRT.anamnesis.hysterectomy.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+          <p-checkbox
+            class="m-t-10"
+            label="{{'pelvisMRT.anamnesis.radical.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_020422"
+            name="isRadical"
+            [(ngModel)]="previousOperationHandler.currentItem.isRadical"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          *ngIf="this.previousOperationHandler.currentItem.findingType == previousOperationType.RectalResection"
+          class="p-l-5 o-radio-list"
+        >
+          <h2 rr-id="pel_m_020423" class="m-b-6">
+            {{'pelvisMRT.anamnesis.rectalResection.value' | translate}}
+          </h2>
+          <p rr-id="pel_m_020411" class="m-b-6">
+            {{'pelvisMRT.anamnesis.date.value' | translate}}
+          </p>
+          <rr-month-year-input
+            monthRrId="pel_m_020412"
+            yearRrId="pel_m_020413"
+            name="date"
+            class="o-width-100 m-b-6"
+            [(ngModel)]="previousOperationHandler.currentItem.date"
+          ></rr-month-year-input>
+          <p rr-id="pel_m_020424" class="m-b-6 m-t-25">
+            {{'pelvisMRT.anamnesis.surgicalProcedures.value' | translate}}
+          </p>
+          <div class="o-radio-list">
+            <p-radioButton
+              label="{{ 'pelvisMRT.anamnesis.anterior.value' | translate }}"
+              [value]="surgicalProcedureType.Anterior"
+              name="sugicalProceduresType"
+              rr-id="pel_m_020425"
+              [(ngModel)]="previousOperationHandler.currentItem.sugicalProceduresType"
+              rrUnClickRadio
+              rrContentReset="deepRectalResectionBlock"
+            ></p-radioButton>
+            <div
+              class="nested-content"
+              [rrDisable]="previousOperationHandler.currentItem.sugicalProceduresType != surgicalProcedureType.Anterior"
+              id="deepRectalResectionBlock"
+            >
+              <p-checkbox
+                label="{{'pelvisMRT.anamnesis.deep.value' | translate}}"
+                binary="true"
+                rr-id="pel_m_020426"
+                name="isDeep"
+                [(ngModel)]="previousOperationHandler.currentItem.isDeep"
+              >
+              </p-checkbox>
+            </div>
+            <p-radioButton
+              label="{{ 'pelvisMRT.anamnesis.abdominoperineal.value' | translate }}"
+              [value]="surgicalProcedureType.AdbominoPerineal"
+              name="sugicalProceduresType"
+              rr-id="pel_m_020427"
+              [(ngModel)]="previousOperationHandler.currentItem.sugicalProceduresType"
+              rrUnClickRadio
+              rrContentReset="deepRectalResectionBlock"
+            ></p-radioButton>
+          </div>
+          <p rr-id="pel_m_020428" class="m-b-6 m-t-30">
+            {{'pelvisMRT.anamnesis.postSurgicalSitus.value' | translate}}
+          </p>
+          <div class="o-radio-list">
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.anusPraeter.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020429"
+              name="isAnusPraeter"
+              [(ngModel)]="previousOperationHandler.currentItem.isAnusPraeter"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.hartmannsRectalStump.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020430"
+              name="isHartmannsRectalStump"
+              [(ngModel)]="previousOperationHandler.currentItem.isHartmannsRectalStump"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'pelvisMRT.anamnesis.pouchReconstruction.value' | translate}}"
+              binary="true"
+              rr-id="pel_m_020431"
+              name="isPouchReconstruction"
+              [(ngModel)]="previousOperationHandler.currentItem.isPouchReconstruction"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad-l f-horizontal m-t-27 m-b-13">
+    <div class="m-t-10 o-width-100">
+      <h1 rr-id="pel_m_020507" class="m-b-10">
+        {{'pelvisMRT.anamnesis.mRIPrevExamination.value' | translate}}
+      </h1>
+      <div rr-id="pel_m_020508" class="m-l-3 m-b-20">
+        <img src="assets/img/handMRT/icons/symbol.svg" alt="symbol" />
+      </div>
+      <rr-month-year-input
+        monthRrId="pel_m_020509"
+        yearRrId="pel_m_020510"
+        name="prevExaminationDate"
+        class="preliminary-investigation-date"
+        [(ngModel)]="model.prevExaminationDate"
+      ></rr-month-year-input>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1128 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r">
+    <div class="f-start f-vertical o-radio-list m-t-1">
+      <h2 rr-id="sho_m_050212" class="m-b-13">
+        {{ 'shoulderMRT.rotator.classification.value' | translate }}*
+      </h2>
+      <div class="f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="sho_m_050209"
+          [(ngModel)]="model.lesionType"
+          label="{{ 'shoulderMRT.rotator.complete.value' | translate }}"
+          labelStyleClass="text-break2"
+          name="lesionType"
+          [value]="lesionType.Complete"
+          rrContentReset="partialLesionDetails-block partLesionSuprLocAndLength-block partLesionSuprExpansiveAndClass-block lafosseClassification-block partLesionInfra-block partLesionTeres-block partLesionSubscap-block degenerationTendonPartType-block"
+          rrValidation="lesionType"
+          rrContentReset="lesionPartial-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_050210"
+          [(ngModel)]="model.lesionType"
+          label="{{ 'shoulderMRT.rotator.partialLesions.value' | translate }}"
+          name="lesionType"
+          [value]="lesionType.PartialLesions"
+          rrContentReset="patteClassification-block tendonRetraction-block atrophy-block"
+          rrValidation="lesionType"
+          rrContentReset="lesionComplete-block"
+        >
+        </p-radioButton>
+      </div>
+      <div class="c-sep f-vertical m-t-97">
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="referencePicture"
+          class="m-t-7"
+        ></rr-reference-picture>
+      </div>
+    </div>
+  </div>
+  <ng-container [ngSwitch]="model.lesionType">
+    <div
+      class="f-horizontal col-h-100"
+      id="lesionComplete-block"
+      *ngSwitchCase="lesionType.Complete"
+    >
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+        <h2 rr-id="sho_m_050310" class="m-t-13 m-b-20">
+          {{ 'shoulderMRT.rotator.localizationPatteClassification.value' |
+          translate }}*
+        </h2>
+        <img
+          [src]="'assets/img/shoulderMRT/LocalizationPatte-'+ localizationPatteVersion +'.png'"
+          alt="localizationPatteClassification"
+          class="m-b-0 m-t-7"
+        />
+        <p rr-id="sho_m_0503213" class="m-b-23">
+          {{ 'shoulderMRT.rotator.infoImage.value' | translate }}
+        </p>
+        <p-radioButton
+          rr-id="sho_m_050312"
+          [(ngModel)]="model.patteClassificationType"
+          label="{{ 'shoulderMRT.rotator.segment1.value' | translate }}"
+          name="patteClassificationType"
+          [value]="patteClassificationType.Segment1"
+          rrValidation="patteClassificationType"
+          (onClick)="clearTendonReactionAndAtrophyBlock();"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_050313"
+          [(ngModel)]="model.patteClassificationType"
+          label="{{ 'shoulderMRT.rotator.segment2.value' | translate }}"
+          class="text-break2"
+          name="patteClassificationType"
+          [value]="patteClassificationType.Segment2"
+          rrValidation="patteClassificationType"
+          (onClick)="clearTendonReactionAndAtrophyBlock();"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_050314"
+          [(ngModel)]="model.patteClassificationType"
+          label="{{ 'shoulderMRT.rotator.segment3.value' | translate }}"
+          name="patteClassificationType"
+          [value]="patteClassificationType.Segment3"
+          rrValidation="patteClassificationType"
+          (onClick)="clearTendonReactionAndAtrophyBlock();"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_050315"
+          [(ngModel)]="model.patteClassificationType"
+          label="{{ 'shoulderMRT.rotator.segment4.value' | translate }}"
+          class="text-break2"
+          name="patteClassificationType"
+          [value]="patteClassificationType.Segment4"
+          rrValidation="patteClassificationType"
+          (onClick)="clearTendonReactionAndAtrophyBlock();"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_050316"
+          [(ngModel)]="model.patteClassificationType"
+          label="{{ 'shoulderMRT.rotator.segment5.value' | translate }}"
+          name="patteClassificationType"
+          [value]="patteClassificationType.Segment5"
+          rrValidation="patteClassificationType"
+          (onClick)="clearTendonReactionAndAtrophyBlock();"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_050317"
+          [(ngModel)]="model.patteClassificationType"
+          label="{{ 'shoulderMRT.rotator.segment6.value' | translate }}"
+          name="patteClassificationType5"
+          [value]="patteClassificationType.Segment6"
+          rrValidation="patteClassificationType"
+          (onClick)="clearTendonReactionAndAtrophyBlock();"
+        >
+        </p-radioButton>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+        <ng-container
+          *ngIf="model.patteClassificationType !== patteClassificationType.None"
+        >
+          <p-checkbox
+            rr-id="sho_m_050414"
+            [(ngModel)]="model.isTendonRetraction"
+            class="m-b-18 m-t-10"
+            label="{{ 'shoulderMRT.rotator.tendonRetraction.value' | translate }}"
+            labelStyleClass="ui-fat-label"
+            name="isTendonRetraction"
+            binary="true"
+            rrContentReset="isTendonRetraction-block"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isTendonRetraction-block"
+            [rrDisable]="!model.isTendonRetraction"
+          >
+            <h2 rr-id="sho_m_0504201" class="m-b-8">
+              {{ 'shoulderMRT.rotator.classification.value' | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="sho_m_0504225"
+              name="isAccordingToBayneAndBateman"
+              label="{{'shoulderMRT.rotator.bayneAndBattermannClassification.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAccordingToBayneAndBateman"
+              rrContentReset="bayneClassificationType-block"
+              *ngIf="isPatteClassSegmentOneToFourSelected"
+            >
+            </p-checkbox>
+            <ng-container *ngIf="isPatteClassSegmentFiveToSixSelected">
+              <p-radioButton
+                rr-id="sho_m_050415"
+                rrUnClickRadio
+                name="tendonRetractionClassificationType"
+                [value]="tendonRetractionClassificationType.AccordingToBayneAndBateman"
+                label="{{'shoulderMRT.rotator.bayneAndBattermannClassification.value' | translate}}"
+                [(ngModel)]="model.tendonRetractionClassificationType"
+                rrContentReset="bayneClassificationType-block retractionClassificationType-block"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050420"
+                rrUnClickRadio
+                name="tendonRetractionClassificationType"
+                class="m-b-14"
+                [value]="tendonRetractionClassificationType.AccordingToPatte"
+                label="{{'shoulderMRT.rotator.classificationByPatent.value' | translate}}"
+                [(ngModel)]="model.tendonRetractionClassificationType"
+                rrContentReset="bayneClassificationType-block retractionClassificationType-block"
+              >
+              </p-radioButton>
+            </ng-container>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="bayneClassificationType-block"
+              [rrDisable]="!model.isAccordingToBayneAndBateman && model.tendonRetractionClassificationType !== tendonRetractionClassificationType.AccordingToBayneAndBateman"
+              *ngIf="model.tendonRetractionClassificationType === tendonRetractionClassificationType.AccordingToBayneAndBateman || isPatteClassSegmentOneToFourSelected"
+            >
+              <p rr-id="sho_m_0504218" class="m-b-7">
+                {{'shoulderMRT.rotator.grading.value' | translate}}*
+              </p>
+              <p-radioButton
+                rr-id="sho_m_050416"
+                [(ngModel)]="model.tendonRetractionBayneClassificationType"
+                label="{{ 'shoulderMRT.rotator.BBgrade1.value' | translate }}"
+                name="tendonRetractionBayneClassificationType"
+                [value]="tendonRetractionBayneClassificationType.GradeI"
+                (onClick)="clearClassificationValidationErrors()"
+                rrValidation="tendonRetractionBayneClassificationType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050417"
+                [(ngModel)]="model.tendonRetractionBayneClassificationType"
+                label="{{ 'shoulderMRT.rotator.BBgrade2.value' | translate }}"
+                name="tendonRetractionBayneClassificationType"
+                [value]="tendonRetractionBayneClassificationType.GradeII"
+                (onClick)="clearClassificationValidationErrors()"
+                rrValidation="tendonRetractionBayneClassificationType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050418"
+                [(ngModel)]="model.tendonRetractionBayneClassificationType"
+                label="{{ 'shoulderMRT.rotator.BBgrade3.value' | translate }}"
+                name="tendonRetractionBayneClassificationType"
+                [value]="tendonRetractionBayneClassificationType.GradeIII"
+                (onClick)="clearClassificationValidationErrors()"
+                rrValidation="tendonRetractionBayneClassificationType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050419"
+                [(ngModel)]="model.tendonRetractionBayneClassificationType"
+                label="{{ 'shoulderMRT.rotator.BBgrade4.value' | translate }}"
+                name="tendonRetractionBayneClassificationType"
+                [value]="tendonRetractionBayneClassificationType.GradeIV"
+                (onClick)="clearClassificationValidationErrors()"
+                rrValidation="tendonRetractionBayneClassificationType"
+              >
+              </p-radioButton>
+            </div>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="retractionClassificationType-block"
+              *ngIf="model.tendonRetractionClassificationType === tendonRetractionClassificationType.AccordingToPatte"
+            >
+              <p rr-id="sho_m_0504226">
+                {{'shoulderMRT.rotator.stage.value' | translate}}
+              </p>
+              <p-radioButton
+                rr-id="sho_m_050421"
+                name="tendonRetractionClassificationByPatentType"
+                [value]="tendonRetractionClassificationByPatentType.StageI"
+                label="{{'shoulderMRT.rotator.stageI.value' | translate}}"
+                [(ngModel)]="model.tendonRetractionClassificationByPatentType"
+                rrValidation="tendonRetractionClassificationByPatentType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050422"
+                name="tendonRetractionClassificationByPatentType"
+                [value]="tendonRetractionClassificationByPatentType.StageII"
+                label="{{'shoulderMRT.rotator.stageII.value' | translate}}"
+                [(ngModel)]="model.tendonRetractionClassificationByPatentType"
+                rrValidation="tendonRetractionClassificationByPatentType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050423"
+                name="tendonRetractionClassificationByPatentType"
+                [value]="tendonRetractionClassificationByPatentType.StageIII"
+                label="{{'shoulderMRT.rotator.stageIII.value' | translate}}"
+                [(ngModel)]="model.tendonRetractionClassificationByPatentType"
+                rrValidation="tendonRetractionClassificationByPatentType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+        <ng-container
+          *ngIf="model.patteClassificationType !== patteClassificationType.None"
+        >
+          <p-checkbox
+            rr-id="sho_m_050501"
+            name="isAtrophy"
+            class="m-t-10 m-b-17"
+            label="{{'shoulderMRT.rotator.atrophy.value' | translate}}"
+            labelStyleClass="ui-fat-label"
+            binary="true"
+            [(ngModel)]="model.isAtrophy"
+            rrContentReset="isAtrophy-block"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isAtrophy-block"
+            [rrDisable]="!model.isAtrophy"
+          >
+            <h2 rr-id="sho_m_0504201" rrInfoIcon="sho_m_0505202" class="m-b-10">
+              {{ 'shoulderMRT.rotator.classification.value' | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="sho_m_050525"
+              name="isAccordingToGoutallier"
+              label="{{'shoulderMRT.rotator.accordingToGoutallier.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAccordingToGoutallier"
+              rrContentReset="accordingToGoutallier-block"
+              *ngIf="isPatteClassSegmentOneToFourSelected"
+            >
+            </p-checkbox>
+            <ng-container *ngIf="isPatteClassSegmentFiveToSixSelected">
+              <p-radioButton
+                rr-id="sho_m_050502"
+                rrUnClickRadio
+                name="atrophyClassificationType"
+                [value]="atrophyClassificationType.AccordingToGoutallier"
+                label="{{'shoulderMRT.rotator.classificationAccGoutallier.value' | translate}}"
+                [(ngModel)]="model.atrophyClassificationType"
+                rrContentReset="accordingToGoutallier-block accodringToZanetti-block"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050507"
+                rrUnClickRadio
+                name="atrophyClassificationType"
+                class="m-b-14"
+                [value]="atrophyClassificationType.AccordingToZanetti"
+                label="{{'shoulderMRT.rotator.classificationAccZanetti.value' | translate}}"
+                [(ngModel)]="model.atrophyClassificationType"
+                rrContentReset="accordingToGoutallier-block accodringToZanetti-block"
+              >
+              </p-radioButton>
+            </ng-container>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="accordingToGoutallier-block"
+              [rrDisable]="!model.isAccordingToGoutallier && model.atrophyClassificationType !== atrophyClassificationType.AccordingToGoutallier"
+              *ngIf="model.atrophyClassificationType === atrophyClassificationType.AccordingToGoutallier || isPatteClassSegmentOneToFourSelected"
+            >
+              <p rr-id="sho_m_050523" class="m-b-6">
+                {{'shoulderMRT.rotator.grading.value' | translate}}*
+              </p>
+              <p-radioButton
+                rr-id="sho_m_050503"
+                name="classificationAccGoutallierType"
+                [value]="classificationAccGoutallierType.GradeI"
+                label="{{'shoulderMRT.rotator.gGradeI.value' | translate}}"
+                [(ngModel)]="model.classificationAccGoutallierType"
+                rrValidation="classificationAccGoutallierType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050504"
+                name="classificationAccGoutallierType"
+                [value]="classificationAccGoutallierType.GradeII"
+                label="{{'shoulderMRT.rotator.gGradeII.value' | translate}}"
+                [(ngModel)]="model.classificationAccGoutallierType"
+                rrValidation="classificationAccGoutallierType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050505"
+                name="classificationAccGoutallierType"
+                [value]="classificationAccGoutallierType.GradeIII"
+                label="{{'shoulderMRT.rotator.gGradeIII.value' | translate}}"
+                [(ngModel)]="model.classificationAccGoutallierType"
+                rrValidation="classificationAccGoutallierType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050506"
+                name="classificationAccGoutallierType"
+                [value]="classificationAccGoutallierType.GradeIV"
+                label="{{'shoulderMRT.rotator.gGradeIV.value' | translate}}"
+                [(ngModel)]="model.classificationAccGoutallierType"
+                rrValidation="classificationAccGoutallierType"
+              >
+              </p-radioButton>
+            </div>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="accodringToZanetti-block"
+              *ngIf="model.atrophyClassificationType === atrophyClassificationType.AccordingToZanetti"
+            >
+              <p rr-id="sho_m_050524">
+                {{'shoulderMRT.rotator.tangentSign.value' | translate}}*
+              </p>
+              <p-radioButton
+                rr-id="sho_m_050508"
+                name="classificationAccZanettiType"
+                [value]="classificationAccZanettiType.PositiveTangentSign"
+                label="{{'shoulderMRT.rotator.positiveTangentSign.value' | translate}}"
+                [(ngModel)]="model.classificationAccZanettiType"
+                rrValidation="classificationAccZanettiType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050509"
+                name="classificationAccZanettiType"
+                [value]="classificationAccZanettiType.NegativeTangentSign"
+                label="{{'shoulderMRT.rotator.negative.value' | translate}}"
+                [(ngModel)]="model.classificationAccZanettiType"
+                rrValidation="classificationAccZanettiType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div
+      class="f-horizontal col-h-100"
+      id="lesionPartial-block"
+      *ngSwitchCase="lesionType.PartialLesions"
+    >
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+        <h2 rr-id="sho_m_0503201">
+          {{'shoulderMRT.rotator.partialLesionsDetails.value' | translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="sho_m_0503202"
+          name="partialLesionLocationType"
+          [value]="partialLesionLocationType.Supraspinatus"
+          label="{{'shoulderMRT.rotator.supraspinatus.value' | translate}}"
+          [(ngModel)]="model.partialLesionLocationType"
+          rrValidation="partialLesionLocationType"
+          rrContentReset="lafosseClassification-block partLesionInfra-block partLesionTeres-block partLesionSubscap-block partLesionSuprLocAndLength-block partLesionSuprExpansiveAndClass-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_0503203"
+          name="partialLesionLocationType"
+          [value]="partialLesionLocationType.Subscapularis"
+          label="{{'shoulderMRT.rotator.subscapularis.value' | translate}}"
+          [(ngModel)]="model.partialLesionLocationType"
+          (onClick)="clearPartialRuptureType()"
+          rrValidation="partialLesionLocationType"
+          rrContentReset="partLesionSuprLocAndLength-block partLesionSuprExpansiveAndClass-block partLesionInfra-block partLesionTeres-block partLesionSubscap-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_0503204"
+          name="partialLesionLocationType"
+          [value]="partialLesionLocationType.Infraspinatus"
+          label="{{'shoulderMRT.rotator.infraspinatus.value' | translate}}"
+          [(ngModel)]="model.partialLesionLocationType"
+          (onClick)="clearPartialRuptureType()"
+          rrValidation="partialLesionLocationType"
+          rrContentReset="partLesionSuprLocAndLength-block partLesionSuprExpansiveAndClass-block lafosseClassification-block partLesionTeres-block partLesionSubscap-block partLesionInfra-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_0503205"
+          name="partialLesionLocationType"
+          [value]="partialLesionLocationType.TeresMinor"
+          label="{{'shoulderMRT.rotator.teresminor.value' | translate}}"
+          [(ngModel)]="model.partialLesionLocationType"
+          (onClick)="clearPartialRuptureType()"
+          rrValidation="partialLesionLocationType"
+          rrContentReset="partLesionSuprLocAndLength-block partLesionSuprExpansiveAndClass-block lafosseClassification-block partLesionInfra-block"
+        >
+        </p-radioButton>
+        <h2 rr-id="sho_m_0503206">
+          {{'shoulderMRT.rotator.partialLesion.value' | translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="sho_m_0503207"
+          name="tendonPartType"
+          [value]="tendonPartType.PartialThicknessTear"
+          label="{{'shoulderMRT.rotator.partialThicknessTear.value' | translate}}"
+          [(ngModel)]="model.tendonPartType"
+          rrContentReset="degenerationTendonPartType-block"
+          rrValidation="tendonPartType"
+        >
+        </p-radioButton>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="model.tendonPartType !== tendonPartType.PartialThicknessTear"
+          id="tendondPartialThicknessTear-block"
+        >
+          <p rr-id="sho_m_0503208">
+            {{'shoulderMRT.rotator.tendonPart.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="sho_m_0503209"
+            rrUnClickRadio
+            name="partialRuptureType"
+            [value]="partialRuptureType.Ventral"
+            label="{{'shoulderMRT.rotator.ventral.value' | translate}}"
+            [(ngModel)]="model.partialRuptureType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_0503210"
+            rrUnClickRadio
+            name="partialRuptureType"
+            [value]="partialRuptureType.Centred"
+            label="{{'shoulderMRT.rotator.centred.value' | translate}}"
+            [(ngModel)]="model.partialRuptureType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_0503211"
+            rrUnClickRadio
+            name="partialRuptureType"
+            [value]="partialRuptureType.Dorsal"
+            label="{{'shoulderMRT.rotator.dorsal.value' | translate}}"
+            [(ngModel)]="model.partialRuptureType"
+          >
+          </p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="sho_m_0503212"
+          name="tendonPartType"
+          [value]="tendonPartType.Degeneration"
+          label="{{'shoulderMRT.rotator.degeneration.value' | translate}}"
+          [(ngModel)]="model.tendonPartType"
+          rrContentReset="tendondPartialThicknessTear-block partialRuptureType-block partLesionSuprLocAndLength-block partLesionSuprExpansiveAndClass-block lafosseClassification-block partLesionInfra-block partLesionTeres-block partLesionSubscap-block"
+          rrValidation="tendonPartType"
+        >
+        </p-radioButton>
+      </div>
+      <ng-container [ngSwitch]="model.tendonPartType">
+        <ng-container *ngSwitchCase="tendonPartType.Degeneration">
+          <div
+            class="c-col-1 c-sep c-pad o-list"
+            id="degenerationTendonPartType-block"
+          >
+            <h2 rr-id="sho_m_0504236" class="m-t-13 m-b-18">
+              {{ 'shoulderMRT.rotator.morphology.value' | translate }}
+            </h2>
+            <div class="f-start f-vertical o-radio-list m-b-59">
+              <p-radioButton
+                rr-id="sho_m_0504237"
+                [(ngModel)]="model.morphologyType"
+                label="{{ 'shoulderMRT.rotator.thinning.value' | translate }}"
+                name="morphologyType"
+                [value]="morphologyType.Thinning"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_0504238"
+                [(ngModel)]="model.morphologyType"
+                label="{{ 'shoulderMRT.rotator.thickening.value' | translate }}"
+                name="morphologyType"
+                [value]="morphologyType.Thickening"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-checkbox
+                rr-id="sho_m_0504239"
+                [(ngModel)]="model.isSignalIncreaseInPDAndT1w"
+                label="{{ 'shoulderMRT.rotator.signalIncreaseInPDAndT1w.value' | translate }}"
+                name="isSignalIncreaseInPDAndT1w"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+            <div class="f-start f-vertical o-radio-list">
+              <p-checkbox
+                rr-id="sho_m_0504240"
+                [(ngModel)]="model.areHumeralHeadCysts"
+                label="{{ 'shoulderMRT.rotator.humeralHeadCysts.value' | translate }}"
+                name="areCystsAtTheHeadOfTheHumerus"
+                binary="true"
+                rrContentReset="areCystsAtTheHeadOfTheHumerus-block"
+              >
+              </p-checkbox>
+              <div
+                class="f-start f-vertical o-radio-list nested-content m-b-20"
+                id="areCystsAtTheHeadOfTheHumerus-block"
+                [rrDisable]="!model.areHumeralHeadCysts"
+              >
+                <rr-number-input
+                  inputRrId="sho_m_0504241"
+                  [(ngModel)]="model.cystsAtTheHeadOfTheHumerusLargestAxialDiameter"
+                  label="{{ 'shoulderMRT.rotator.largestDiameterInMm.value' | translate }}"
+                  labelRrId="sho_m_0504242"
+                  name="cystsAtTheHeadOfTheHumerusLargestAxialDiameter"
+                  labelStyleClass="text-break"
+                  [config]="{ labelWidth: 180, max: 30 }"
+                >
+                </rr-number-input>
+              </div>
+            </div>
+            <div class="f-start f-vertical o-radio-list">
+              <p-checkbox
+                rr-id="sho_m_0504243"
+                [(ngModel)]="model.calcificationOrTendinitisCalcarea"
+                label="{{ 'shoulderMRT.rotator.calcificationTendinitisCalcarea.value' | translate }}"
+                name="isLimeOrTendinitisCalcarea"
+                binary="true"
+                rrContentReset="isLimeOrTendinitisCalcarea-block"
+              >
+              </p-checkbox>
+              <div
+                class="f-start f-vertical o-radio-list nested-content"
+                id="isLimeOrTendinitisCalcarea-block"
+                [rrDisable]="!model.calcificationOrTendinitisCalcarea"
+              >
+                <rr-number-input
+                  inputRrId="sho_m_0504244"
+                  [(ngModel)]="model.limeOrTendinitisCalcareaLargestAxialDiameter"
+                  label="{{ 'shoulderMRT.rotator.largestDiameterInMm.value' | translate }}"
+                  labelRrId="sho_m_0504245"
+                  class="m-b-10"
+                  labelStyleClass="text-break"
+                  name="limeOrTendinitisCalcareaLargestAxialDiameter"
+                  [config]="{ labelWidth: 180, max: 60 }"
+                >
+                </rr-number-input>
+                <p-checkbox
+                  rr-id="sho_m_0504246"
+                  [(ngModel)]="model.isOsteitis"
+                  label="{{ 'shoulderMRT.rotator.osteitis.value' | translate }}"
+                  name="isOsteitis"
+                  binary="true"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </ng-container>
+        <ng-container
+          *ngSwitchDefault
+          [ngSwitch]="model.partialLesionLocationType"
+        >
+          <ng-container *ngSwitchCase="partialLesionLocationType.Supraspinatus">
+            <div class="c-col-1 c-sep c-pad">
+              <div
+                id="partLesionSuprLocAndLength-block"
+                class="f-start f-vertical o-list m-t-12"
+              >
+                <h2 rr-id="sho_m_0504202" class="m-b-24">
+                  {{ 'shoulderMRT.rotator.localization.value' | translate }}
+                </h2>
+                <div class="f-start f-vertical o-radio-list m-b-19">
+                  <h2 rr-id="sho_m_0504203" class="m-b-12">
+                    {{ 'shoulderMRT.rotator.transversal.value' | translate }}
+                  </h2>
+                  <div class="f-start f-vertical o-radio-list">
+                    <p-radioButton
+                      rr-id="sho_m_0504204"
+                      rrInfoIcon="sho_m_0504205"
+                      infoIconPdfLandscape="true"
+                      [(ngModel)]="model.crossType"
+                      label="{{ 'shoulderMRT.rotator.articularSided.value' | translate }}"
+                      name="crossType"
+                      [value]="crossType.SnyderA"
+                      rrUnClickRadio
+                      rrContentReset="jointSideCrossType-block insertionOrFootprintLengthwiseType-block"
+                    >
+                    </p-radioButton>
+                    <div
+                      class="f-start o-radio-list nested-content"
+                      id="jointSideCrossType-block"
+                      [rrDisable]="model.crossType !== crossType.SnyderA"
+                    >
+                      <p-radioButton
+                        rr-id="sho_m_0504206"
+                        [(ngModel)]="model.bursaSideType"
+                        label="{{ 'shoulderMRT.rotator.crossWithsGHLPulleyType2.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="bursaSideType"
+                        [value]="bursaSideType.PulleyType2"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_0504207"
+                        [(ngModel)]="model.bursaSideType"
+                        label="{{ 'shoulderMRT.rotator.crossWithsGHLPulleyType4.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="bursaSideType"
+                        [value]="bursaSideType.PulleyType4"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+                    <p-radioButton
+                      rr-id="sho_m_0504208"
+                      [(ngModel)]="model.crossType"
+                      label="{{ 'shoulderMRT.rotator.bursaSided.value' | translate }}"
+                      name="crossType"
+                      [value]="crossType.SnyderB"
+                      rrUnClickRadio
+                      rrContentReset="jointSideCrossType-block insertionOrFootprintLengthwiseType-block"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_0504209"
+                      [(ngModel)]="model.crossType"
+                      label="{{ 'shoulderMRT.rotator.interstitiell.value' | translate }}"
+                      name="crossType"
+                      [value]="crossType.Interstitiell"
+                      rrUnClickRadio
+                      rrContentReset="jointSideCrossType-block insertionOrFootprintLengthwiseType-block"
+                    >
+                    </p-radioButton>
+                  </div>
+                </div>
+                <div class="f-start f-vertical o-radio-list">
+                  <h2 rr-id="sho_m_0502210" class="m-b-16">
+                    {{
+                    'shoulderMRT.rotator.parallelOrientationToTendonFibers.value'
+                    | translate }}
+                  </h2>
+                  <div class="f-start f-vertical o-radio-list">
+                    <p-radioButton
+                      rr-id="sho_m_0502211"
+                      [(ngModel)]="model.lengthwise"
+                      label="{{ 'shoulderMRT.rotator.myotendinousJunction.value' | translate }}"
+                      name="lengthwiseType"
+                      [value]="lengthwiseType.MyotendinousJunction"
+                      rrUnClickRadio
+                      rrContentReset="insertionOrFootprintLengthwiseType-block"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_0502212"
+                      [(ngModel)]="model.lengthwise"
+                      label="{{ 'shoulderMRT.rotator.proximal.value' | translate }}"
+                      name="lengthwiseType"
+                      [value]="lengthwiseType.Proximal"
+                      rrUnClickRadio
+                      rrContentReset="insertionOrFootprintLengthwiseType-block"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="sho_m_0502213"
+                      [(ngModel)]="model.lengthwise"
+                      label="{{ 'shoulderMRT.rotator.insertionOrFootprint.value' | translate }}"
+                      name="lengthwiseType"
+                      [value]="lengthwiseType.InsertionOrFootprint"
+                      rrUnClickRadio
+                      rrContentReset="insertionOrFootprintLengthwiseType-block"
+                    >
+                    </p-radioButton>
+                    <div
+                      class="f-start f-vertical o-radio-list nested-content"
+                      id="insertionOrFootprintLengthwiseType-block"
+                      [rrDisable]="isInsertionOrFootprintTypeDisabled"
+                    >
+                      <p-radioButton
+                        rr-id="sho_m_0504215"
+                        [(ngModel)]="model.insertionOrFootprintType"
+                        label="{{ 'shoulderMRT.rotator.pastaLesion.value' | translate }}"
+                        name="insertionOrFootprintType"
+                        [value]="insertionOrFootprintType.LesionPASTA"
+                        rrInfoIcon="sho_m_0504214"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_0504217"
+                        [(ngModel)]="model.insertionOrFootprintType"
+                        label="{{ 'shoulderMRT.rotator.reversedPasta.value' | translate }}"
+                        name="insertionOrFootprintType"
+                        [value]="insertionOrFootprintType.ReversedPASTA"
+                        rrInfoIcon="sho_m_0504214"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="c-col-1 c-sep c-pad-l">
+              <div
+                id="partLesionSuprExpansiveAndClass-block"
+                class="f-start f-vertical o-radio-list m-t-12"
+              >
+                <h2 rr-id="sho_m_0505202">
+                  {{ 'shoulderMRT.rotator.extension.value' | translate }}
+                </h2>
+                <div class="f-start f-vertical o-radio-list m-b-19">
+                  <rr-number-input
+                    inputRrId="sho_m_0505203"
+                    [(ngModel)]="model.expansivenessLengthInMM"
+                    label="{{ 'shoulderMRT.rotator.lengthInMM.value' | translate }}"
+                    labelRrId="sho_m_0505204"
+                    labelStyleClass="text-break2"
+                    name="expansivenessLengthInMM"
+                    [config]="{ min: 1, max: 30 }"
+                  >
+                  </rr-number-input>
+                  <rr-number-input
+                    inputRrId="sho_m_0505205"
+                    [(ngModel)]="model.expansivenessDepthInMM"
+                    label="{{ 'shoulderMRT.rotator.depthInMM.value' | translate }}"
+                    labelRrId="sho_m_0505206"
+                    labelStyleClass="text-break2"
+                    name="expansivenessDepthInMM"
+                    [config]="{ min: 1, max: 15 }"
+                  >
+                  </rr-number-input>
+                </div>
+
+                <h2 rr-id="sho_m_050510" class="m-b-16">
+                  {{ 'shoulderMRT.rotator.classification.value' | translate }}
+                </h2>
+                <div class="f-start f-vertical o-radio-list">
+                  <p-radioButton
+                    rr-id="sho_m_050511"
+                    [(ngModel)]="model.rotatorCuffClassificationType"
+                    label="{{ 'shoulderMRT.rotator.bayneAndBatermann.value' | translate }}"
+                    name="rotatorCuffClassificationType"
+                    [value]="rotatorCuffClassificationType.BayneAndBatermann"
+                    rrUnClickRadio
+                    rrContentReset="BayneAndBatermannRotCuffClassType-block SnyderRotCuffClassType-block"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_050512"
+                    [(ngModel)]="model.rotatorCuffClassificationType"
+                    label="{{ 'shoulderMRT.rotator.snyder.value' | translate }}"
+                    name="rotatorCuffClassificationType"
+                    class="m-b-7"
+                    [value]="rotatorCuffClassificationType.Snyder"
+                    rrUnClickRadio
+                    rrContentReset="BayneAndBatermannRotCuffClassType-block SnyderRotCuffClassType-block"
+                  >
+                  </p-radioButton>
+                  <ng-container
+                    [ngSwitch]="model.rotatorCuffClassificationType"
+                  >
+                    <div
+                      *ngSwitchCase="rotatorCuffClassificationType.BayneAndBatermann"
+                      class="f-start o-radio-list nested-content"
+                      id="BayneAndBatermannRotCuffClassType-block"
+                    >
+                      <p rr-id="sho_m_050526" class="m-b-3">
+                        {{ 'shoulderMRT.rotator.typeOfInjury.value' | translate
+                        }}*
+                      </p>
+                      <p-radioButton
+                        rr-id="sho_m_050514"
+                        [(ngModel)]="model.classificationBayneClassificationType"
+                        label="{{ 'shoulderMRT.rotator.BBgrade1.value' | translate }}"
+                        name="classificationBayneClassificationType"
+                        [value]="bayneClassificationType.GradeI"
+                        rrValidation="classificationBayneClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050515"
+                        [(ngModel)]="model.classificationBayneClassificationType"
+                        label="{{ 'shoulderMRT.rotator.BBgrade2.value' | translate }}"
+                        name="classificationBayneClassificationType"
+                        [value]="bayneClassificationType.GradeII"
+                        rrValidation="classificationBayneClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050516"
+                        [(ngModel)]="model.classificationBayneClassificationType"
+                        label="{{ 'shoulderMRT.rotator.BBgrade3.value' | translate }}"
+                        name="classificationBayneClassificationType"
+                        [value]="bayneClassificationType.GradeIII"
+                        rrValidation="classificationBayneClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050517"
+                        [(ngModel)]="model.classificationBayneClassificationType"
+                        label="{{ 'shoulderMRT.rotator.BBgrade4.value' | translate }}"
+                        name="classificationBayneClassificationType"
+                        [value]="bayneClassificationType.GradeIV"
+                        rrValidation="classificationBayneClassificationType"
+                      >
+                      </p-radioButton>
+                    </div>
+
+                    <div
+                      *ngSwitchCase="rotatorCuffClassificationType.Snyder"
+                      class="f-start f-vertical o-radio-list nested-content"
+                      id="SnyderRotCuffClassType-block"
+                    >
+                      <p rr-id="sho_m_050526" class="m-b-3">
+                        {{ 'shoulderMRT.rotator.typeOfInjury.value' | translate
+                        }}*
+                      </p>
+                      <p-radioButton
+                        rr-id="sho_m_050518"
+                        [(ngModel)]="model.classificationSnyderClassificationType"
+                        label="{{ 'shoulderMRT.rotator.sGrade0.value' | translate }}"
+                        class="text-break"
+                        name="classificationSnyderClassificationType"
+                        [value]="snyderClassificationType.Grade0"
+                        rrValidation="classificationSnyderClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050519"
+                        [(ngModel)]="model.classificationSnyderClassificationType"
+                        label="{{ 'shoulderMRT.rotator.sGradeI.value' | translate }}"
+                        name="classificationSnyderClassificationType"
+                        [value]="snyderClassificationType.GradeI"
+                        rrValidation="classificationSnyderClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050520"
+                        [(ngModel)]="model.classificationSnyderClassificationType"
+                        label="{{ 'shoulderMRT.rotator.sGradeII.value' | translate }}"
+                        class="text-break2"
+                        name="classificationSnyderClassificationType"
+                        [value]="snyderClassificationType.GradeII"
+                        rrValidation="classificationSnyderClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050521"
+                        [(ngModel)]="model.classificationSnyderClassificationType"
+                        label="{{ 'shoulderMRT.rotator.sGradeIII.value' | translate }}"
+                        class="nowrap"
+                        name="classificationSnyderClassificationType"
+                        [value]="snyderClassificationType.GradeIII"
+                        rrValidation="classificationSnyderClassificationType"
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="sho_m_050522"
+                        [(ngModel)]="model.classificationSnyderClassificationType"
+                        label="{{ 'shoulderMRT.rotator.sGradeIV.value' | translate }}"
+                        name="classificationSnyderClassificationType"
+                        [value]="snyderClassificationType.GradeIV"
+                        rrValidation="classificationSnyderClassificationType"
+                        labelStyleClass="text-break2"
+                      >
+                      </p-radioButton>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="partialLesionLocationType.Subscapularis">
+            <div id="partLesionSubscap-block">
+              <ng-container
+                *ngTemplateOutlet="infraspinatusAndTeresMinorSection"
+              >
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="partialLesionLocationType.Infraspinatus">
+            <div class="c-col-1 c-sep c-pad" id="partLesionInfra-block">
+              <div class="f-start f-vertical o-list m-t-12 m-b-35">
+                <h2 rr-id="sho_m_0504227">
+                  {{ 'shoulderMRT.rotator.localization.value' | translate }}
+                </h2>
+                <div class="f-start f-vertical o-radio-list m-b-29">
+                  <p-radioButton
+                    rr-id="sho_m_0504228"
+                    [(ngModel)]="model.localizationType"
+                    label="{{ 'shoulderMRT.rotator.myotendinousJunction.value' | translate }}"
+                    name="localizationType"
+                    [value]="lengthwiseType.MyotendinousJunction"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0504229"
+                    [(ngModel)]="model.localizationType"
+                    label="{{ 'shoulderMRT.rotator.proximal.value' | translate }}"
+                    name="localizationType"
+                    [value]="lengthwiseType.Proximal"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="sho_m_0504230"
+                    [(ngModel)]="model.localizationType"
+                    label="{{ 'shoulderMRT.rotator.insertionOrFootprint.value' | translate }}"
+                    name="localizationType"
+                    [value]="lengthwiseType.InsertionOrFootprint"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+
+                <h2 rr-id="sho_m_0504231">
+                  {{ 'shoulderMRT.rotator.extension.value' | translate }}
+                </h2>
+                <div class="f-start f-vertical o-radio-list">
+                  <rr-number-input
+                    inputRrId="sho_m_0504232"
+                    [(ngModel)]="model.expansivenessLengthInMM"
+                    label="{{ 'shoulderMRT.rotator.lengthInMM.value' | translate }}"
+                    labelRrId="sho_m_0504233"
+                    labelStyleClass="text-break"
+                    name="expansivenessLengthInMM"
+                    [config]="{ min: 1, max: 30 }"
+                  >
+                  </rr-number-input>
+                  <rr-number-input
+                    inputRrId="sho_m_0504234"
+                    [(ngModel)]="model.expansivenessDepthInMM"
+                    label="{{ 'shoulderMRT.rotator.depthInMM.value' | translate }}"
+                    labelRrId="sho_m_0504235"
+                    labelStyleClass="text-break"
+                    name="expansivenessDepthInMM"
+                    [config]="{ min: 1, max: 15 }"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l"></div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="partialLesionLocationType.TeresMinor">
+            <div id="partLesionTeres-block">
+              <ng-container
+                *ngTemplateOutlet="infraspinatusAndTeresMinorSection"
+              >
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <div class="c-col-1 c-sep c-pad"></div>
+            <div class="c-col-1 c-sep c-pad-l"></div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="f-horizontal col-h-100" *ngSwitchDefault>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list"></div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list"></div>
+      <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list"></div>
+    </div>
+  </ng-container>
+</div>
+<ng-template #infraspinatusAndTeresMinorSection>
+  <div class="c-col-2 c-sep c-pad-l f-start f-vertical col-h-100">
+    <h2 rr-id="sho_m_0504247" class="m-t-10 m-b-100" rrInfoIcon="sho_m_0504219">
+      {{ 'shoulderMRT.rotator.lafosseClassification.value' | translate }}
+    </h2>
+    <div class="f-horizontal col-h-100 m-t-27" id="lafosseClassification-block">
+      <div class="c-col-1 c-sep c-pad-r o-radio-list">
+        <p-radioButton
+          rr-id="sho_m_0504220"
+          [(ngModel)]="model.lafosseClassificationType"
+          label="{{ 'shoulderMRT.rotator.type1.value' | translate }}"
+          labelStyleClass="text-break"
+          name="lafosseClassificationType"
+          [value]="lafosseClassificationType.Type1"
+          rrUnClickRadio
+          rrContentReset="type1LaffosseClassificationType-block"
+        >
+        </p-radioButton>
+        <div
+          class="f-vertical f-start o-radio-list nested-content"
+          id="type1LaffosseClassificationType-block"
+          [rrDisable]="model.lafosseClassificationType !== 'Type1'"
+        >
+          <p-radioButton
+            rr-id="sho_m_0504221"
+            [(ngModel)]="model.partialLesionUpperThirdType"
+            label="{{ 'shoulderMRT.rotator.lafosseWithsGHLPulleyType3.value' | translate }}"
+            labelStyleClass="text-break"
+            name="partialLesionUpperThirdType"
+            [value]="partialLesionUpperThirdType.PulleyType3Lesion"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_0504222"
+            [(ngModel)]="model.partialLesionUpperThirdType"
+            label="{{ 'shoulderMRT.rotator.lafosseWithsGHLPulleyType4.value' | translate }}"
+            labelStyleClass="text-break"
+            name="partialLesionUpperThirdType"
+            [value]="partialLesionUpperThirdType.PulleyType4Lesion"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="sho_m_0504223"
+          [(ngModel)]="model.lafosseClassificationType"
+          label="{{ 'shoulderMRT.rotator.type2.value' | translate }}"
+          labelStyleClass="text-break"
+          name="lafosseClassificationType"
+          [value]="lafosseClassificationType.Type2"
+          rrUnClickRadio
+          rrContentReset="type1LaffosseClassificationType-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_0504224"
+          [(ngModel)]="model.lafosseClassificationType"
+          label="{{ 'shoulderMRT.rotator.type3.value' | translate }}"
+          labelStyleClass="text-break"
+          name="lafosseClassificationType"
+          [value]="lafosseClassificationType.Type3"
+          rrUnClickRadio
+          rrContentReset="type1LaffosseClassificationType-block"
+        >
+        </p-radioButton>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l o-radio-list">
+        <p-radioButton
+          rr-id="sho_m_0505207"
+          [(ngModel)]="model.lafosseClassificationType"
+          label="{{ 'shoulderMRT.rotator.type4.value' | translate }}"
+          labelStyleClass="text-break"
+          name="lafosseClassificationType"
+          [value]="lafosseClassificationType.Type4"
+          rrUnClickRadio
+          rrContentReset="type1LaffosseClassificationType-block"
+          rrInfoIcon="sho_m_0505209"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_0505208"
+          [(ngModel)]="model.lafosseClassificationType"
+          label="{{ 'shoulderMRT.rotator.type5.value' | translate }}"
+          labelStyleClass="text-break"
+          name="lafosseClassificationType"
+          [value]="lafosseClassificationType.Type5"
+          rrUnClickRadio
+          rrContentReset="type1LaffosseClassificationType-block"
+          rrInfoIcon="sho_m_0505209"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</ng-template>

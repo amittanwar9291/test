@@ -1,0 +1,299 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <div
+    class="f-vertical o-radio-list m-b-23"
+    [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+  >
+    <h3 rr-id="hip_m_060213" class="m-b-4">
+      {{ 'hipMRT.capsuleAndLigaments.differentialDiagnosis1.value' | translate
+      }}*
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="hip_m_060214"
+      [diagnosisNumber]="1"
+      isActiveOnIKnow="true"
+      [options]="diffDiagnosisFullOptions"
+      [(ngModel)]="model.synoviaDifferentialDiagnosis"
+      name="synoviaDifferentialDiagnosis"
+      group="true"
+      [parentViewModel]="model"
+      rrValidation="synoviaDifferentialDiagnosis"
+      (selectionChanged)="model.isSubordinated = false;"
+    ></rr-differential-diagnosis-dropdown>
+  </div>
+  <div class="f-vertical o-radio-list m-b-30">
+    <h2 rr-id="hip_m_060215" class="m-b-15">
+      {{ 'hipMRT.capsuleAndLigaments.side.value' | translate }}*
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_060216"
+      [(ngModel)]="model.sideType"
+      label="{{ 'hipMRT.capsuleAndLigaments.right.value' | translate }}"
+      [value]="sideType.Right"
+      name="sideType"
+      rrValidation="sideType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060217"
+      [(ngModel)]="model.sideType"
+      label="{{ 'hipMRT.capsuleAndLigaments.left.value' | translate }}"
+      [value]="sideType.Left"
+      name="sideType"
+      rrValidation="sideType"
+    ></p-radioButton>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="hip_m_060218" class="m-b-15">
+      {{ 'hipMRT.capsuleAndLigaments.growthPatterns.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_060219"
+      [(ngModel)]="model.growthPatternsType"
+      label="{{ 'hipMRT.capsuleAndLigaments.diffuse.value' | translate }}"
+      [value]="distributionPatternType.Diffuse"
+      name="growthPatternsType"
+      rrUnClickRadio
+      rrContentReset="radioFocalDetailsBlock"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060220"
+      [(ngModel)]="model.growthPatternsType"
+      label="{{ 'hipMRT.capsuleAndLigaments.focal.value' | translate }}"
+      [value]="distributionPatternType.Focal"
+      name="growthPatternsType"
+      rrUnClickRadio
+      rrContentReset="radioFocalDetailsBlock"
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="hip_m_060309" class="m-b-13">
+      {{ 'hipMRT.capsuleAndLigaments.extension.value' | translate }}
+    </h2>
+    <div class="f-vertical o-radio-list m-b-13">
+      <h3 rr-id="hip_m_060310" class="m-b-5">
+        {{ 'hipMRT.capsuleAndLigaments.size.value' | translate }}*
+      </h3>
+      <rr-number-input
+        inputRrId="hip_m_060311"
+        labelRrId="hip_m_060312"
+        name="extensionSizeInMm"
+        label="{{ 'hipMRT.capsuleAndLigaments.inMm.value' | translate }}"
+        [(ngModel)]="model.extensionSizeInMm"
+        [config]="{ min: 1, max: 100, placeholder: '---' }"
+        rrValidation="extensionSizeInMm"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-vertical o-radio-list m-b-13">
+      <h3 rr-id="hip_m_060313" class="m-b-5">
+        {{ 'hipMRT.capsuleAndLigaments.2ndPlane.value' | translate }}
+      </h3>
+      <rr-number-input
+        inputRrId="hip_m_060314"
+        labelRrId="hip_m_060315"
+        name="extension2ndPlaneInMm"
+        label="{{ 'hipMRT.capsuleAndLigaments.inMm.value' | translate }}"
+        [(ngModel)]="model.extension2ndPlaneInMm"
+        [config]="{ min: 1, max: 100, placeholder: '---' }"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-vertical o-radio-list m-b-31">
+      <h3 rr-id="hip_m_060316" class="m-b-5">
+        {{ 'hipMRT.capsuleAndLigaments.3rdPlane.value' | translate }}
+      </h3>
+      <rr-number-input
+        inputRrId="hip_m_060317"
+        labelRrId="hip_m_060318"
+        name="extension3rdPlaneInMm"
+        label="{{ 'hipMRT.capsuleAndLigaments.inMm.value' | translate }}"
+        [(ngModel)]="model.extension3rdPlaneInMm"
+        [config]="{ min: 1, max: 100, placeholder: '---' }"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-vertical o-radio-list m-b-30">
+      <h2 rr-id="hip_m_060319" class="m-b-11">
+        {{ 'hipMRT.capsuleAndLigaments.margin.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hip_m_060320"
+        [(ngModel)]="model.marginType"
+        name="marginType"
+        label="{{ 'hipMRT.capsuleAndLigaments.sharp.value' | translate }}"
+        [value]="marginType.Sharp"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_060321"
+        [(ngModel)]="model.marginType"
+        name="marginType"
+        label="{{ 'hipMRT.capsuleAndLigaments.illDefined.value' | translate }}"
+        [value]="marginType.IllDefined"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="hip_m_060322" class="m-b-12">
+        {{ 'hipMRT.capsuleAndLigaments.homogeneity.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hip_m_060323"
+        [(ngModel)]="model.characterizationIIHomogeneityType"
+        name="characterizationIIHomogeneityType"
+        label="{{ 'hipMRT.capsuleAndLigaments.homogeneous.value' | translate }}"
+        [value]="characterizationIIHomogeneityType.Homogeneous"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_060324"
+        [(ngModel)]="model.characterizationIIHomogeneityType"
+        name="characterizationIIHomogeneityType"
+        label="{{ 'hipMRT.capsuleAndLigaments.heterogeneous.value' | translate }}"
+        [value]="characterizationIIHomogeneityType.Heterogeneous"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</div>
+<div
+  class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13 sliders-z-index"
+>
+  <div class="f-vertical o-radio-list m-b-34">
+    <h2 rr-id="hip_m_060407" class="m-b-12">
+      {{ 'hipMRT.capsuleAndLigaments.shape.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_060408"
+      [(ngModel)]="model.shapeType"
+      name="shapeType"
+      label="{{ 'hipMRT.capsuleAndLigaments.round.value' | translate }}"
+      [value]="shapeType.Round"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060409"
+      [(ngModel)]="model.shapeType"
+      name="shapeType"
+      label="{{ 'hipMRT.capsuleAndLigaments.lobulated.value' | translate }}"
+      [value]="shapeType.Lobulated"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060410"
+      [(ngModel)]="model.shapeType"
+      name="shapeType"
+      label="{{ 'hipMRT.capsuleAndLigaments.multilobulated.value' | translate }}"
+      [value]="shapeType.Multilobulated"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="f-vertical o-radio-list m-b-34">
+    <h2 rr-id="hip_m_060411" class="m-b-0">
+      {{ 'hipMRT.capsuleAndLigaments.t1wSignal.value' | translate }}
+    </h2>
+    <p rr-id="hip_m_060412" class="slider-sub-caption m-b-12">
+      {{ 'hipMRT.capsuleAndLigaments.comparedToBoneMarrow.value' | translate }}
+    </p>
+    <rr-signal-slider
+      name="t1wSignal"
+      rr-id="hip_m_060413"
+      [(ngModel)]="model.t1wSignal"
+    >
+    </rr-signal-slider>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="hip_m_060414" class="m-b-0">
+      {{ 'hipMRT.capsuleAndLigaments.t2wSignal.value' | translate }}
+    </h2>
+    <p rr-id="hip_m_060415" class="slider-sub-caption m-b-12">
+      {{ 'hipMRT.capsuleAndLigaments.comparedToBoneMarrow.value' | translate }}
+    </p>
+    <rr-signal-slider
+      name="t2wSignal"
+      rr-id="hip_m_060416"
+      [(ngModel)]="model.t2wSignal"
+    >
+    </rr-signal-slider>
+  </div>
+</div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-10 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="hip_m_060501" class="m-b-11">
+      {{ 'hipMRT.capsuleAndLigaments.architecturalChanges.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_060502"
+      [(ngModel)]="model.isNecrosis"
+      name="isNecrosis"
+      label="{{ 'hipMRT.capsuleAndLigaments.necrosis.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_060503"
+      [(ngModel)]="model.isSusceptibilityArtifacts"
+      name="isSusceptibilityArtifacts"
+      label="{{ 'hipMRT.capsuleAndLigaments.susceptibilityArtifacts.value' | translate }}"
+      binary="true"
+      rrContentReset="isSusceptibilityArtifacts-block"
+    >
+    </p-checkbox>
+    <div
+      id="isSusceptibilityArtifacts-block"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isSusceptibilityArtifacts"
+    >
+      <p-checkbox
+        rr-id="hip_m_060504"
+        [(ngModel)]="model.isBloomingArtifact"
+        name="isBloomingArtifact"
+        label="{{ 'hipMRT.capsuleAndLigaments.bloomingArtifact.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_060505"
+      [(ngModel)]="model.isSynovialnodulus"
+      name="isSynovialnodulus"
+      label="{{ 'hipMRT.capsuleAndLigaments.synovialNodulus.value' | translate }}"
+      binary="true"
+      rrContentReset="isSynovialnodulus-block"
+    >
+    </p-checkbox>
+    <div
+      id="isSynovialnodulus-block"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isSynovialnodulus"
+    >
+      <p-checkbox
+        rr-id="hip_m_060506"
+        [(ngModel)]="model.isAbove1LesionSamePathology"
+        name="isAbove1LesionSamePathology"
+        labelStyleClass="text-break"
+        label="{{ 'hipMRT.capsuleAndLigaments.MoreThanOneLesionSamePathology.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_060507"
+      [(ngModel)]="model.isSynovialProliferations"
+      name="isSynovialProliferations"
+      label="{{ 'hipMRT.capsuleAndLigaments.synovialProliferations.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>

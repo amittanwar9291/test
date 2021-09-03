@@ -1,0 +1,120 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div *ngIf="!isLargeLocalizerOpened()" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_m_070103" class="m-b-15">
+        {{ 'spineMRT.spinalCanal.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        label="{{ 'spineMRT.spinalCanal.noMyelopathyRegularWidth.value' | translate }}"
+        [value]="areFindingsEnum.No"
+        name="areFindings"
+        rr-id="spi_m_070104"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        label="{{ 'spineMRT.spinalCanal.finding.value' | translate }}"
+        [value]="areFindingsEnum.Yes"
+        name="areFindings"
+        rr-id="spi_m_070105"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingColumnConfig"
+        [setDescriptionTypes]="descriptionTypes"
+        [customLabelCalculator]="getCustomLabel"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [attr.name]="'findings'"
+        validationName="findings"
+        (findingChange)="activeTabIndex = 0"
+        (newFindingAdded)="activeTabIndex = 0"
+        (findingTypeChange)="activeTabIndex = 0"
+        (descriptionChanged)="activeTabIndex = 0"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          rr-id="spi_m_070201"
+          *ngIf="findingHandler.currentItem.findingType !== spinalCanalFindingTypeEnum.None"
+        >
+          {{ 'spineMRT.spinalCanal.finding.value' | translate }}
+          {{findingHandler.currentItem.number | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div [ngSwitch]="findingHandler.currentItem.findingType">
+        <rr-spinalkanalstenose
+          *ngSwitchCase="spinalCanalFindingTypeEnum.SpinalCanalStenosis"
+          [model]="findingHandler.currentItem"
+          (emitLocalizer)="setSpineComplexLocalizerOpened($event)"
+        ></rr-spinalkanalstenose>
+        <rr-development-disorder
+          *ngSwitchCase="spinalCanalFindingTypeEnum.DevelopmentalDisorderOrMalformation"
+          [model]="findingHandler.currentItem"
+          (emitLocalizer)="setSpineComplexLocalizerOpened($event)"
+        ></rr-development-disorder>
+        <rr-mass-effect
+          *ngSwitchCase="spinalCanalFindingTypeEnum.MassEffect"
+          [model]="findingHandler.currentItem"
+          [differentialDiagnosisSpaceDemandingIntramedullaryOptions1]="differentialDiagnosisSpaceDemandingIntramedullaryOptions1"
+          [differentialDiagnosisSpaceDemandingIntramedullaryOptions2]="differentialDiagnosisSpaceDemandingIntramedullaryOptions2"
+          [differentialDiagnosisSpaceDemandingExtramedullaryOptions1]="differentialDiagnosisSpaceDemandingExtramedullaryOptions1"
+          [differentialDiagnosisSpaceDemandingExtramedullaryOptions2]="differentialDiagnosisSpaceDemandingExtramedullaryOptions2"
+          [differentialDiagnosisSpaceDemandingEpiduralOptions1]="differentialDiagnosisSpaceDemandingEpiduralOptions1"
+          [differentialDiagnosisSpaceDemandingEpiduralOptions2]="differentialDiagnosisSpaceDemandingEpiduralOptions2"
+          [differentialDiagnosisSpaceDemandingExtraduralOptions1]="differentialDiagnosisSpaceDemandingExtraduralOptions1"
+          [differentialDiagnosisSpaceDemandingExtraduralOptions2]="differentialDiagnosisSpaceDemandingExtraduralOptions2"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+          (emitSpineComplexLocalizer)="setSpineComplexLocalizerOpened($event)"
+          (emitSpineDirectionalLocalizer)="setSpineDirectionalLocalizerOpened($event)"
+          [activeTabIndex]="activeTabIndex"
+          (activeTabIndexUpdate)="activeTabIndex = $event"
+        ></rr-mass-effect>
+        <rr-no-mass-effect
+          *ngSwitchCase="spinalCanalFindingTypeEnum.NoMassEffect"
+          [model]="findingHandler.currentItem"
+          [diffDiagnosisNonSpaceDemandingOptions1]="diffDiagnosisNonSpaceDemandingOptions1"
+          [diffDiagnosisNonSpaceDemandingOptions2]="diffDiagnosisNonSpaceDemandingOptions2"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+          (emitLocalizer)="setSpineComplexLocalizerOpened($event)"
+          [activeTabIndex]="activeTabIndex"
+          (activeTabIndexUpdate)="activeTabIndex = $event"
+        ></rr-no-mass-effect>
+        <div *ngSwitchDefault class="f-horizontal default-height">
+          <div
+            *ngFor="let emptyCol of [].constructor(3)"
+            class="c-col-1 c-pad c-sep"
+          ></div>
+          <div class="c-col-1 c-pad-l"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLargeLocalizerOpened()" class="large-localizer-margin">
+    <rr-spine-complex
+      *ngIf="isSpineComplexLocalizerOpened"
+      name="spineLocation"
+      [(ngModel)]="isSpineComplexLocalizerNonTarget ? findingHandler.currentItem.spineLocationNonTarget : findingHandler.currentItem.spineLocation"
+      [logicType]="spineComplexLocalizerLogicType"
+      [localizationTitle]="spineComplexLocalizerLocalizerTitle"
+      [localizationDescription]="localizationDescription"
+      (close)="onLargeLocalizerClosed()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-complex>
+    <rr-spine-directional
+      *ngIf="isSpineDirectionalLocalizerOpened"
+      name="spineLocationBones"
+      [(ngModel)]="isSpineDirectionalLocalizerDiscs ? findingHandler.currentItem.spineLocationDisks : findingHandler.currentItem.spineLocationBones"
+      [discLocalization]="isSpineDirectionalLocalizerDiscs"
+      [localizationDescription]="spineDirectionalLocalizerLocalizationDescription"
+      (close)="onLargeDirectionalLocalizerClosed()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-directional>
+  </div>
+</form>

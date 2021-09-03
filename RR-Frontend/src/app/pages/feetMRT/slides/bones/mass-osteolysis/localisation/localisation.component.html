@@ -1,0 +1,142 @@
+<div class="f-horizontal h-530">
+  <div class="c-col-1 c-pad f-start">
+    <h2
+      rr-id="anc_m_0402200"
+      [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+    >
+      {{'feetMRT.bones.differentialDiagnosis1.value' | translate}}*
+    </h2>
+    <rr-differential-diagnosis-dropdown
+      [diagnosisNumber]="1"
+      isActiveOnIKnow="true"
+      [options]="differentialDiagnosis"
+      [(ngModel)]="model.spaceRequirementDifferentialDiagnosis"
+      group="true"
+      name="spaceRequirementDifferentialDiagnosis"
+      rrId="anc_m_0402201"
+      (selectionChanged)="clearDifferentialDiagnosis01()"
+      [parentViewModel]="model"
+      rrValidation="spaceRequirementDifferentialDiagnosis"
+      [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+      rrMetaKeyBlock
+    >
+    </rr-differential-diagnosis-dropdown>
+    <div
+      class="nested-content o-radio-list m-t-10 p-l-10"
+      [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+    >
+      <p rr-id="anc_m_0402204">
+        {{'feetMRT.bones.histologyKnown.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="anc_m_0402205"
+        label="{{'feetMRT.bones.benign.value' | translate}}"
+        name="histologyType"
+        [value]="histologyTypeEnum.Benign"
+        [(ngModel)]="model.histologyType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0402206"
+        label="{{'feetMRT.bones.malignant.value' | translate}}"
+        name="histologyType"
+        [value]="histologyTypeEnum.Malignant"
+        [(ngModel)]="model.histologyType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-radio-list p-l-10 m-t-50">
+      <h2 rr-id="anc_m_040207" rrValidation="threeDimensionalLocalization">
+        {{'feetMRT.bones.localization.value' | translate}}*
+      </h2>
+      <rr-foot-big-bones-simple
+        [side]="feetSide"
+        [model]="model.threeDimensionalLocalization"
+        [noComplex]="true"
+        [noMal]="true"
+        (click)="openLargeLocalizer()"
+        class="localizer-size"
+        rrValidation="threeDimensionalLocalization"
+        isLocalizer="true"
+      ></rr-foot-big-bones-simple>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start">
+    <h2 rr-id="anc_m_0403233">
+      {{'feetMRT.bones.boneSection.value' | translate}}
+    </h2>
+    <div class="o-radio-list m-t-10">
+      <p-checkbox
+        name="isEpiphyseal"
+        label="{{ 'feetMRT.bones.epiphyseal.value' | translate }}"
+        rr-id="anc_m_0403234"
+        binary="true"
+        [(ngModel)]="model.isEpiphyseal"
+      ></p-checkbox>
+      <p-checkbox
+        name="isMetaphyseal"
+        label="{{ 'feetMRT.bones.metaphyseal.value' | translate }}"
+        rr-id="anc_m_0403235"
+        binary="true"
+        [(ngModel)]="model.isMetaphyseal"
+      ></p-checkbox>
+      <p-checkbox
+        name="isDiaphyseal"
+        label="{{ 'feetMRT.bones.diaphyseal.value' | translate }}"
+        rr-id="anc_m_0403236"
+        binary="true"
+        [(ngModel)]="model.isDiaphyseal"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start">
+    <h2 rr-id="anc_m_0404206" class="p-l-10">
+      {{ 'feetMRT.bones.extension.value' | translate }}*
+    </h2>
+    <div class="o-radio-list p-l-10 m-t-10">
+      <p rr-id="anc_m_0404207" class="m-b-5">
+        {{ 'feetMRT.bones.size.value' | translate }}*
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0404208'"
+        [labelRrId]="'anc_m_0404209'"
+        [config]="{min: 1, max: 500}"
+        name="sizeInMm"
+        [(ngModel)]="model.sizeInMm"
+        (ngModelChange)="clearSizeInMm()"
+        rrValidation="sizeInMm"
+      ></rr-number-input>
+
+      <div class="m-b-5 m-t-5" [rrDisable]="model.sizeInMm === null">
+        <p rr-id="anc_m_0404210">
+          {{ 'feetMRT.bones.2ndPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'feetMRT.bones.inMm.value' | translate"
+          [inputRrId]="'anc_m_0404211'"
+          [labelRrId]="'anc_m_0404212'"
+          [config]="{min: 1, max: 500}"
+          name="secondPlaneInMm"
+          [(ngModel)]="model.secondPlaneInMm"
+          (ngModelChange)="clearSecondLevelInMm()"
+        ></rr-number-input>
+      </div>
+
+      <div class="m-b-5 m-t-5" [rrDisable]="model.secondPlaneInMm === null">
+        <p rr-id="anc_m_0404213">
+          {{ 'feetMRT.bones.3rdPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'feetMRT.bones.inMm.value' | translate"
+          [inputRrId]="'anc_m_0404214'"
+          [labelRrId]="'anc_m_0404215'"
+          [config]="{min: 1, max: 500}"
+          name="thirdPlaneInMm"
+          [(ngModel)]="model.thirdPlaneInMm"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l f-start"></div>
+</div>

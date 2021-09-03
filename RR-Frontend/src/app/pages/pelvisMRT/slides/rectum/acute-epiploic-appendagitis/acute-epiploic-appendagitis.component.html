@@ -1,0 +1,130 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep o-list f-horizontal">
+    <div class="o-radio-list">
+      <h2 rr-id="pel_m_080252">
+        {{ 'pelvisMRT.rectum.localization.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.lowerRightQuadrant.value' | translate}}"
+        rr-id="pel_m_0802107"
+        name="epiploicAppendagitisLocalizationType"
+        [value]="epiploicAppendagitisLocalizationType.Right"
+        [(ngModel)]="model.epiploicAppendagitisLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.leftLowerQuadrant.value' | translate}}"
+        rr-id="pel_m_0802108"
+        name="epiploicAppendagitisLocalizationType"
+        [value]="epiploicAppendagitisLocalizationType.Left"
+        [(ngModel)]="model.epiploicAppendagitisLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list f-horizontal">
+    <div class="o-radio-list">
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.fatEquivalentMass.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_0803133"
+        class="m-b-8"
+        name="isFatEquivalentMass"
+        [(ngModel)]="model.isFatEquivalentMass"
+        rrContentReset="diameterBlock"
+      ></p-checkbox>
+      <div
+        id="diameterBlock"
+        class="o-radio-list p-l-35 m-b-24"
+        [rrDisable]="!model.isFatEquivalentMass"
+      >
+        <div class="m-b-10">
+          <p rr-id="pel_m_0803134" class="m-b-8">
+            {{ 'pelvisMRT.rectum.diameter.value' | translate }}
+          </p>
+          <rr-number-input
+            [label]="'pelvisMRT.rectum.inMm.value' | translate"
+            [config]="{min: 0, max: 9999}"
+            [inputRrId]="'pel_m_0803135'"
+            [labelRrId]="'pel_m_0803136'"
+            name="epiploicAppendagitisDiameterInMm"
+            [(ngModel)]="model.epiploicAppendagitisDiameterInMm"
+          ></rr-number-input>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.thickeningVisceralPeritoneum.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0803137"
+          name="isThickeningAdjacentToPeritoneum"
+          [(ngModel)]="model.isThickeningAdjacentToPeritoneum"
+        ></p-checkbox>
+      </div>
+      <p rr-id="pel_m_0803138">
+        {{'pelvisMRT.rectum.associatedFindings.value' | translate}}
+      </p>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.adjacentSoftTissueEdema.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_0803139"
+        name="isAdjacentSoftTissueEdema"
+        [(ngModel)]="model.isAdjacentSoftTissueEdema"
+      ></p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.thickeningOfAdjacentWall.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_0803140"
+        name="isThickeningAdjacentToWall"
+        [(ngModel)]="model.isThickeningAdjacentToWall"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list f-horizontal">
+    <div class="o-radio-list">
+      <h2 rr-id="pel_m_080472">
+        {{ 'pelvisMRT.rectum.differentialDiagnosis.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.diverticulitis.value' | translate}}"
+        rr-id="pel_m_080473"
+        name="epiploicAppendagitisDifferentialDiagnosisType"
+        [value]="epiploicAppendagitisDifferentialDiagnosisType.Diverticulitis"
+        [(ngModel)]="model.epiploicAppendagitisDifferentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="subordinatedBlock"
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.appendicitis.value' | translate}}"
+        rr-id="pel_m_080474"
+        name="epiploicAppendagitisDifferentialDiagnosisType"
+        [value]="epiploicAppendagitisDifferentialDiagnosisType.Appendicitis"
+        [(ngModel)]="model.epiploicAppendagitisDifferentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="subordinatedBlock"
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.mesentericPanniculitis.value' | translate}}"
+        rr-id="pel_m_080475"
+        class="m-b-20"
+        name="epiploicAppendagitisDifferentialDiagnosisType"
+        [value]="epiploicAppendagitisDifferentialDiagnosisType.MesentericPanniculitis"
+        [(ngModel)]="model.epiploicAppendagitisDifferentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="subordinatedBlock"
+      ></p-radioButton>
+      <div
+        id="subordinatedBlock"
+        class="o-radio-list"
+        [rrDisable]="model.epiploicAppendagitisDifferentialDiagnosisType === epiploicAppendagitisDifferentialDiagnosisType.None"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.subordinate.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080476"
+          name="isSubordinated"
+          [(ngModel)]="model.isSubordinated"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+</div>

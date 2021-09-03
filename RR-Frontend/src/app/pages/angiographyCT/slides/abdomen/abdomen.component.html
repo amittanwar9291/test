@@ -1,0 +1,92 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list">
+        <h1 rr-id="ang_c_080103" class="m-b-16">
+          {{ 'angiographyCT.abdomen.finding.value' | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="ang_c_080104"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindings.False"
+          label="{{'angiographyCT.abdomen.noAbnormalFindingsIn.value' | translate }}"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_080105"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindings.True"
+          label="{{'angiographyCT.abdomen.finding.value' | translate }}"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDropdownDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+        (findingChange)="activeTabIndex = 0"
+        (newFindingAdded)="activeTabIndex = 0"
+        (findingTypeChange)="activeTabIndex = 0"
+        (descriptionChanged)="activeTabIndex = 0"
+        [customLabelCalculator]="customLabelCalculator"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-vertical col-h-100 c-pad-l">
+      <div class="m-h-123">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="ang_c_080201"
+        >
+          {{ 'angiographyCT.abdomen.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === findingType.None; else findings"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-pad-r c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+      <ng-template #findings>
+        <div class="f-horizontal col-h-100">
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <rr-renal-artery
+              class="h-575"
+              [model]="findingHandler.currentItem"
+              *ngSwitchCase="findingType.RenalArtery"
+            >
+            </rr-renal-artery>
+            <rr-renal-vein
+              class="h-575"
+              [model]="findingHandler.currentItem"
+              *ngSwitchCase="findingType.RenalVein"
+            >
+            </rr-renal-vein>
+            <rr-mesenteric-vessels
+              class="h-575"
+              [model]="findingHandler.currentItem"
+              *ngSwitchCase="findingType.MesentericVessels"
+            >
+            </rr-mesenteric-vessels>
+            <rr-liver-veins
+              class="h-575"
+              [model]="findingHandler.currentItem"
+              *ngSwitchCase="findingType.LiverVeins"
+            >
+            </rr-liver-veins>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

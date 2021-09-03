@@ -1,0 +1,667 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-list">
+    <div class="f-start f-vertical o-list">
+      <div class="f-start f-vertical o-radio-list m-b-30">
+        <h2 rr-id="hip_m_070202">
+          {{ 'hipMRT.musclesAndTendons.side.value' | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="hip_m_070203"
+          [(ngModel)]="model.sideType"
+          label="{{ 'hipMRT.musclesAndTendons.right.value' | translate }}"
+          name="sideType"
+          [value]="sideType.Right"
+          rrValidation="sideType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070204"
+          [(ngModel)]="model.sideType"
+          label="{{ 'hipMRT.musclesAndTendons.left.value' | translate }}"
+          name="sideType"
+          [value]="sideType.Left"
+          rrValidation="sideType"
+        >
+        </p-radioButton>
+      </div>
+
+      <div class="f-start f-vertical o-radio-list m-b-30">
+        <h2
+          rr-id="hip_m_070205"
+          rrInfoIcon="hip_m_07_02"
+          infoIconPdfLandscape="true"
+        >
+          {{ 'hipMRT.musclesAndTendons.localization.value' | translate }}*
+        </h2>
+        <p-dropdown
+          rr-id="hip_m_070206"
+          [(ngModel)]="model.musculatureLocalizationType"
+          styleClass="o-width-100 ui-brown-box"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="musculatureLocalizationOptions"
+          [group]="true"
+          name="musculatureLocalizationType"
+          rrDropdownClear
+          rrValidation="musculatureLocalizationType"
+        >
+        </p-dropdown>
+      </div>
+
+      <div class="f-start f-vertical o-radio-list">
+        <h2 rr-id="hip_m_070207" class="text-break l-h-24 m-b-9">
+          {{ 'hipMRT.musclesAndTendons.intramuscularLocalization.value' |
+          translate }}
+        </h2>
+        <p-radioButton
+          rr-id="hip_m_070208"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.proximalEnthesis.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.ProximalEnthesis"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070209"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.proxMyotendinousJunction.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.ProxMyotendinousJunction"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070210"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.proximalThird.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.ProximalThird"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070211"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.middleThird.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.MiddleThird"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070212"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.distalThird.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.DistalThird"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070213"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.distMyotendinousJunction.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.DistMyotendinousJunction"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070214"
+          [(ngModel)]="model.intramuscularLocalizationType"
+          label="{{ 'hipMRT.musclesAndTendons.distalEnthesis.value' | translate }}"
+          name="intramuscularLocalizationType"
+          [value]="intramuscularLocalizationType.DistEnthesis"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="c-sep f-start f-vertical"
+    [ngClass]="isLastEmptyColumnVisible ? 'c-col-2 c-pad' : 'c-col-3 c-pad-l'"
+  >
+    <div *ngIf="model.pathologyType !== pathologyType.None" class="m-b-10">
+      <ng-container *ngTemplateOutlet="patholohyHeader"></ng-container>
+    </div>
+
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <div *ngIf="model.pathologyType === pathologyType.None" class="m-b-10">
+          <ng-container *ngTemplateOutlet="patholohyHeader"></ng-container>
+        </div>
+        <p-radioButton
+          rr-id="hip_m_070302"
+          [(ngModel)]="model.pathologyType"
+          label="{{ 'hipMRT.musclesAndTendons.muscleLesion.value' | translate }}"
+          name="pathologyType"
+          [value]="pathologyType.MuscleLesion"
+          rrContentReset="haematomaPathologyBlock furtherFindingsPathologyBlock"
+          rrValidation="pathologyType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070303"
+          [(ngModel)]="model.pathologyType"
+          label="{{ 'hipMRT.musclesAndTendons.haematoma.value' | translate }}"
+          name="pathologyType"
+          [value]="pathologyType.Haematoma"
+          rrContentReset="muscleLesionPathologyBlock1 muscleLesionPathologyBlock2 furtherFindingsPathologyBlock"
+          rrValidation="pathologyType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_070304"
+          [(ngModel)]="model.pathologyType"
+          label="{{ 'hipMRT.musclesAndTendons.furtherFindings.value' | translate }}"
+          name="pathologyType"
+          [value]="pathologyType.FurtherFindings"
+          rrContentReset="muscleLesionPathologyBlock1 muscleLesionPathologyBlock2 haematomaPathologyBlock"
+          rrValidation="pathologyType"
+        >
+        </p-radioButton>
+      </div>
+
+      <div
+        class="c-pad-l c-sep f-start f-vertical"
+        [ngClass]="isLastEmptyColumnVisible ? 'c-col-1' : 'c-col-2'"
+      >
+        <ng-container [ngSwitch]="model.pathologyType">
+          <div
+            *ngSwitchCase="pathologyType.MuscleLesion"
+            id="muscleLesionPathologyBlock1"
+            class="f-start f-vertical o-radio-list col-h-100"
+          >
+            <h2
+              rr-id="hip_m_070401"
+              rrInfoIcon="hip_m_07_03"
+              class="text-break l-h-22"
+            >
+              {{ 'hipMRT.musclesAndTendons.classificationMunichConsensus.value'
+              | translate }}*
+            </h2>
+
+            <div class="f-horizontal col-h-100">
+              <div
+                class="c-col-1 c-sep f-start f-vertical o-radio-list"
+                [ngClass]="isLastEmptyColumnForClassMCStatementVisible ? '' : 'c-pad-r'"
+              >
+                <p-radioButton
+                  rr-id="hip_m_070402"
+                  [(ngModel)]="model.classificationMCStatement"
+                  label="{{ 'hipMRT.musclesAndTendons.muscularEdema.value' | translate }}"
+                  name="classificationMCStatement"
+                  [value]="classificationMCStatement.MuscularEdema"
+                  rrContentReset="muscleFiberRuptureClassMCBlock tornMuscleBundleClassMCBlock tornMuscleOrTendonClassMCBlock"
+                  rrValidation="classificationMCStatement"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hip_m_070403"
+                  [(ngModel)]="model.classificationMCStatement"
+                  label="{{ 'hipMRT.musclesAndTendons.muscleFiberRuptureType.value' | translate }}"
+                  name="classificationMCStatement"
+                  [value]="classificationMCStatement.MuscleFiberRuptureTypeIIIa"
+                  rrContentReset="tornMuscleBundleClassMCBlock tornMuscleOrTendonClassMCBlock"
+                  rrValidation="classificationMCStatement"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hip_m_070404"
+                  [(ngModel)]="model.classificationMCStatement"
+                  label="{{ 'hipMRT.musclesAndTendons.tornMuscleBundleType.value' | translate }}"
+                  name="classificationMCStatement"
+                  [value]="classificationMCStatement.TornMuscleBundleTypeIIIb"
+                  rrContentReset="muscleFiberRuptureClassMCBlock tornMuscleOrTendonClassMCBlock"
+                  rrValidation="classificationMCStatement"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hip_m_070405"
+                  [(ngModel)]="model.classificationMCStatement"
+                  label="{{ 'hipMRT.musclesAndTendons.tornMuscleTendonRuptureType.value' | translate }}"
+                  labelStyleClass="text-break"
+                  class="l-h-24"
+                  name="classificationMCStatement"
+                  [value]="classificationMCStatement.TornMuscleOrTendonRuptureTypeIV"
+                  rrContentReset="muscleFiberRuptureClassMCBlock tornMuscleBundleClassMCBlock"
+                  rrValidation="classificationMCStatement"
+                >
+                </p-radioButton>
+              </div>
+
+              <div
+                *ngIf="!isLastEmptyColumnForClassMCStatementVisible"
+                id="muscleLesionPathologyBlock2"
+                class="c-col-1 c-pad-l c-sep f-start f-vertical"
+              >
+                <ng-container [ngSwitch]="model.classificationMCStatement">
+                  <div
+                    *ngSwitchCase="classificationMCStatement.MuscleFiberRuptureTypeIIIa"
+                    id="muscleFiberRuptureClassMCBlock"
+                    class="f-start f-vertical o-radio-list"
+                  >
+                    <p-checkbox
+                      rr-id="hip_m_070501"
+                      [(ngModel)]="model.isMaximumDiameterOfRuptureBelow5Mm"
+                      label="{{ 'hipMRT.musclesAndTendons.maximumDiameterOfTheRuptureBelow5.value' | translate }}"
+                      labelStyleClass="text-break"
+                      class="l-h-24 m-t-1"
+                      name="isMaximumDiameterOfRuptureBelow5Mm"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                  </div>
+
+                  <div
+                    *ngSwitchCase="classificationMCStatement.TornMuscleBundleTypeIIIb"
+                    id="tornMuscleBundleClassMCBlock"
+                    class="f-start f-vertical o-radio-list"
+                  >
+                    <p-checkbox
+                      rr-id="hip_m_070502"
+                      [(ngModel)]="model.isMaximumDiameterOfRuptureAboveOrEqual5Mm"
+                      label="{{ 'hipMRT.musclesAndTendons.maximumDiameterOfTheRuptureAbove5.value' | translate }}"
+                      labelStyleClass="text-break"
+                      class="l-h-24 m-t-1"
+                      name="isMaximumDiameterOfRuptureAboveOrEqual5Mm"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                  </div>
+
+                  <div
+                    *ngSwitchCase="classificationMCStatement.TornMuscleOrTendonRuptureTypeIV"
+                    id="tornMuscleOrTendonClassMCBlock"
+                    class="f-start f-vertical o-radio-list"
+                  >
+                    <p rr-id="hip_m_070503" class="m-b-5 l-h-22 m-t-1">
+                      {{ 'hipMRT.musclesAndTendons.retraction.value' | translate
+                      }}
+                    </p>
+                    <rr-number-input
+                      inputRrId="hip_m_070505"
+                      labelRrId="hip_m_070504"
+                      [(ngModel)]="model.retractionInMm"
+                      label="{{ 'hipMRT.musclesAndTendons.inMm.value' | translate }}"
+                      class="m-b-20"
+                      name="retractionInMm"
+                      [config]="{ min: 1, max: 200, placeholder: '---' }"
+                    >
+                    </rr-number-input>
+                    <p-checkbox
+                      rr-id="hip_m_070506"
+                      [(ngModel)]="model.isWavyCourseOfTheFibers"
+                      label="{{ 'hipMRT.musclesAndTendons.wavyCourse.value' | translate }}"
+                      name="isWavyCourseOfTheFibers"
+                      binary="true"
+                      class="m-b-20"
+                    >
+                    </p-checkbox>
+                    <p-checkbox
+                      rr-id="hip_m_070507"
+                      [(ngModel)]="model.isBonyAvulsion"
+                      label="{{ 'hipMRT.musclesAndTendons.bonyAvulsion.value' | translate }}"
+                      name="isBonyAvulsion"
+                      class="m-b-7"
+                      binary="true"
+                      rrContentReset="isBonyAvulsionBlock"
+                    >
+                    </p-checkbox>
+                    <div
+                      id="isBonyAvulsionBlock"
+                      class="f-start f-vertical o-radio-list nested-content"
+                      [rrDisable]="!model.isBonyAvulsion"
+                    >
+                      <p-radioButton
+                        rr-id="hip_m_070508"
+                        [(ngModel)]="model.bonyAvulsionType"
+                        label="{{ 'hipMRT.musclesAndTendons.anteriorSuperiorIliacSpine.value' | translate }}"
+                        name="bonyAvulsionType"
+                        [value]="bonyAvulsionType.AnteriorSuperiorIliacSpine"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="hip_m_070509"
+                        [(ngModel)]="model.bonyAvulsionType"
+                        label="{{ 'hipMRT.musclesAndTendons.anteriorInferiorIliacSpine.value' | translate }}"
+                        name="bonyAvulsionType"
+                        [value]="bonyAvulsionType.AnteriorInferiorIliacSpine"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="hip_m_070510"
+                        [(ngModel)]="model.bonyAvulsionType"
+                        label="{{ 'hipMRT.musclesAndTendons.ischialTuberosity.value' | translate }}"
+                        name="bonyAvulsionType"
+                        [value]="bonyAvulsionType.IschialTuberosity"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="hip_m_070511"
+                        [(ngModel)]="model.bonyAvulsionType"
+                        label="{{ 'hipMRT.musclesAndTendons.lesserTrochanter.value' | translate }}"
+                        name="bonyAvulsionType"
+                        [value]="bonyAvulsionType.LesserTrochanter"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="hip_m_070512"
+                        [(ngModel)]="model.bonyAvulsionType"
+                        label="{{ 'hipMRT.musclesAndTendons.posteriorFemoralDiaphysis.value' | translate }}"
+                        class="m-b-10"
+                        name="bonyAvulsionType"
+                        [value]="bonyAvulsionType.PosteriorFemoralDiaphysis"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+                    <p-checkbox
+                      rr-id="hip_m_070513"
+                      [(ngModel)]="model.isIntracorticalEdema"
+                      label="{{ 'hipMRT.musclesAndTendons.intracorticalEdema.value' | translate }}"
+                      name="isIntracorticalEdema"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngSwitchCase="pathologyType.Haematoma"
+            id="haematomaPathologyBlock"
+            class="f-start f-vertical o-list col-h-100"
+          >
+            <div class="f-horizontal col-h-100">
+              <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-list">
+                <div class="f-start f-vertical o-radio-list m-b-30">
+                  <h2 rr-id="hip_m_070406">
+                    {{ 'hipMRT.musclesAndTendons.localization.value' | translate
+                    }}*
+                  </h2>
+                  <p-checkbox
+                    rr-id="hip_m_070407"
+                    [(ngModel)]="model.isIntramuscular"
+                    label="{{ 'hipMRT.musclesAndTendons.intramuscular.value' | translate }}"
+                    name="isIntramuscular"
+                    binary="true"
+                    rrValidation="isIntramuscular isIntermuscular"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="hip_m_070408"
+                    [(ngModel)]="model.isIntermuscular"
+                    label="{{ 'hipMRT.musclesAndTendons.intermuscular.value' | translate }}"
+                    name="isIntermuscular"
+                    binary="true"
+                    rrValidation="isIntramuscular isIntermuscular"
+                  >
+                  </p-checkbox>
+                </div>
+
+                <div class="f-start f-vertical o-radio-list m-b-18">
+                  <h2 rr-id="hip_m_070409" class="m-b-0 l-h-22">
+                    {{ 'hipMRT.musclesAndTendons.t1wSignal.value' | translate }}
+                  </h2>
+                  <p rr-id="hip_m_070410" class="font-15 m-b-11">
+                    {{ 'hipMRT.musclesAndTendons.twSignalDescription.value' |
+                    translate }}
+                  </p>
+                  <rr-slider-number-triple-input
+                    rr-id="hip_m_070411"
+                    [(ngModel)]="model.t1wSignalCharacteristics"
+                    name="t1wSignalCharacteristics"
+                  >
+                  </rr-slider-number-triple-input>
+                </div>
+
+                <div class="f-start f-vertical o-radio-list">
+                  <h2 rr-id="hip_m_070412" class="m-b-0">
+                    {{ 'hipMRT.musclesAndTendons.t2wSignal.value' | translate }}
+                  </h2>
+                  <p rr-id="hip_m_070413" class="font-15 m-b-11">
+                    {{ 'hipMRT.musclesAndTendons.twSignalDescription.value' |
+                    translate }}
+                  </p>
+                  <rr-slider-number-triple-input
+                    rr-id="hip_m_070414"
+                    [(ngModel)]="model.t2wSignalCharacteristics"
+                    name="t2wSignalCharacteristics"
+                  >
+                  </rr-slider-number-triple-input>
+                </div>
+              </div>
+
+              <div
+                class="c-col-1 c-sep c-pad-l f-start f-vertical o-radio-list"
+              >
+                <h2 rr-id="hip_m_070514" rrInfoIcon="hip_m_07_04" class="m-t-1">
+                  {{ 'hipMRT.musclesAndTendons.characterizationHaematoma.value'
+                  | translate }}
+                </h2>
+                <p-radioButton
+                  rr-id="hip_m_070515"
+                  [(ngModel)]="model.characterizationHaematomaType"
+                  label="{{ 'hipMRT.musclesAndTendons.hyperacute.value' | translate }}"
+                  name="characterizationHaematomaType"
+                  [value]="characterizationHaematomaType.Hyperacute"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hip_m_070516"
+                  [(ngModel)]="model.characterizationHaematomaType"
+                  label="{{ 'hipMRT.musclesAndTendons.acute.value' | translate }}"
+                  name="characterizationHaematomaType"
+                  [value]="characterizationHaematomaType.Acute"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hip_m_070517"
+                  [(ngModel)]="model.characterizationHaematomaType"
+                  label="{{ 'hipMRT.musclesAndTendons.subacute.value' | translate }}"
+                  name="characterizationHaematomaType"
+                  [value]="characterizationHaematomaType.Subacute"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hip_m_070518"
+                  [(ngModel)]="model.characterizationHaematomaType"
+                  label="{{ 'hipMRT.musclesAndTendons.chronicOrganized.value' | translate }}"
+                  name="characterizationHaematomaType"
+                  [value]="characterizationHaematomaType.ChronicOrganized"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngSwitchCase="pathologyType.FurtherFindings"
+            id="furtherFindingsPathologyBlock"
+            class="f-start f-vertical o-radio-list col-h-100"
+          >
+            <h2 rr-id="hip_m_070415" class="m-b-10 m-t-1">
+              {{ 'hipMRT.musclesAndTendons.details.value' | translate }}*
+            </h2>
+            <div class="f-horizontal col-h-100">
+              <div
+                class="c-col-1 c-sep c-pad-r f-start f-vertical o-radio-list"
+              >
+                <p-checkbox
+                  rr-id="hip_m_070416"
+                  [(ngModel)]="model.isEdemaLikeSignalIntensity"
+                  label="{{ 'hipMRT.musclesAndTendons.edemaLikeSignalIntensity.value' | translate }}"
+                  labelStyleClass="text-break"
+                  class="l-h-24"
+                  name="isEdemaLikeSignalIntensity"
+                  binary="true"
+                  rrContentReset="isEdemaLikeSignalIntensityBlock"
+                  [rrValidation]="furtherFindingsPathologyValidationFields"
+                >
+                </p-checkbox>
+                <div
+                  id="isEdemaLikeSignalIntensityBlock"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [rrDisable]="!model.isEdemaLikeSignalIntensity"
+                >
+                  <p-radioButton
+                    rr-id="hip_m_070417"
+                    [(ngModel)]="model.edemaLikeSignalIntensityType"
+                    label="{{ 'hipMRT.musclesAndTendons.epimysealPeripheral.value' | translate }}"
+                    name="edemaLikeSignalIntensityType"
+                    [value]="edemaLikeSignalIntensityType.EpimysealPeripheral"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="hip_m_070418"
+                    [(ngModel)]="model.edemaLikeSignalIntensityType"
+                    label="{{ 'hipMRT.musclesAndTendons.myotendinousCentral.value' | translate }}"
+                    name="edemaLikeSignalIntensityType"
+                    [value]="edemaLikeSignalIntensityType.MyotendinousCentral"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+                <p-checkbox
+                  rr-id="hip_m_070419"
+                  [(ngModel)]="model.isFattyDegeneration"
+                  label="{{ 'hipMRT.musclesAndTendons.fattyDegeneration.value' | translate }}"
+                  name="isFattyDegeneration"
+                  binary="true"
+                  [rrValidation]="furtherFindingsPathologyValidationFields"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="hip_m_070420"
+                  [(ngModel)]="model.isMuscularAtrophy"
+                  label="{{ 'hipMRT.musclesAndTendons.muscularAtrophy.value' | translate }}"
+                  name="isMuscularAtrophy"
+                  binary="true"
+                  rrContentReset="isMuscularAtrophyBlock"
+                  [rrValidation]="furtherFindingsPathologyValidationFields"
+                >
+                </p-checkbox>
+                <div
+                  id="isMuscularAtrophyBlock"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [rrDisable]="!model.isMuscularAtrophy"
+                >
+                  <p-radioButton
+                    rr-id="hip_m_070421"
+                    [(ngModel)]="model.muscularAtrophyType"
+                    label="{{ 'hipMRT.musclesAndTendons.moderate.value' | translate }}"
+                    name="muscularAtrophyType"
+                    [value]="muscularAtrophyType.Moderate"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="hip_m_070422"
+                    [(ngModel)]="model.muscularAtrophyType"
+                    label="{{ 'hipMRT.musclesAndTendons.advanced.value' | translate }}"
+                    name="muscularAtrophyType"
+                    [value]="muscularAtrophyType.Advanced"
+                    rrUnClickRadio
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+
+              <div
+                class="c-col-1 c-sep c-pad-l f-start f-vertical o-radio-list"
+              >
+                <p-checkbox
+                  rr-id="hip_m_070519"
+                  [(ngModel)]="model.isApophysitis"
+                  label="{{ 'hipMRT.musclesAndTendons.apophysitis.value' | translate }}"
+                  name="isApophysitis"
+                  binary="true"
+                  [rrValidation]="furtherFindingsPathologyValidationFields"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="hip_m_070520"
+                  [(ngModel)]="model.isFascialTear"
+                  label="{{ 'hipMRT.musclesAndTendons.fascialTear.value' | translate }}"
+                  name="isFascialTear"
+                  binary="true"
+                  rrContentReset="isFascialTearBlock"
+                  [rrValidation]="furtherFindingsPathologyValidationFields"
+                >
+                </p-checkbox>
+                <div
+                  id="isFascialTearBlock"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [rrDisable]="!model.isFascialTear"
+                >
+                  <p-checkbox
+                    rr-id="hip_m_070521"
+                    [(ngModel)]="model.isMuscleHerniation"
+                    label="{{ 'hipMRT.musclesAndTendons.muscleHerniation.value' | translate }}"
+                    name="isMuscleHerniation"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-checkbox
+                  rr-id="hip_m_070522"
+                  [(ngModel)]="model.isReducedIschiofemoralDistance"
+                  label="{{ 'hipMRT.musclesAndTendons.reducedIschiofemoralDistance.value' | translate }}"
+                  labelStyleClass="text-break"
+                  class="l-h-24 m-b-7"
+                  name="isReducedIschiofemoralDistance"
+                  binary="true"
+                  rrInfoIcon="hip_m_07_05"
+                  rrContentReset="isReducedIschiofemoralDistanceBlock"
+                  [rrValidation]="furtherFindingsPathologyValidationFields"
+                >
+                </p-checkbox>
+                <div
+                  id="isReducedIschiofemoralDistanceBlock"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [rrDisable]="!model.isReducedIschiofemoralDistance"
+                >
+                  <p rr-id="hip_m_070523" class="m-b-4 l-h-22">
+                    {{ 'hipMRT.musclesAndTendons.minimumDistance.value' |
+                    translate }}
+                  </p>
+                  <rr-number-input
+                    inputRrId="hip_m_070525"
+                    labelRrId="hip_m_070524"
+                    [(ngModel)]="model.reducedIschiofemoralMinimumDistanceInMm"
+                    label="{{ 'hipMRT.musclesAndTendons.inMm.value' | translate }}"
+                    name="reducedIschiofemoralMinimumDistanceInMm"
+                    [config]="{ min: 10, max: 50 }"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLastEmptyColumnVisible" class="c-col-1 c-pad-l c-sep"></div>
+</div>
+
+<ng-template #patholohyHeader>
+  <h2 rr-id="hip_m_070301">
+    {{ 'hipMRT.musclesAndTendons.pathology.value' | translate }}*
+  </h2>
+</ng-template>

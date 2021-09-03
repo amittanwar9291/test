@@ -1,0 +1,114 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="large-localizer f-horizontal f-center" *ngIf="largeLocalizerOpen">
+    <rr-spine-complex
+      *ngIf="largeLocalizerOpen === 'spine'"
+      class="large-localizer"
+      (close)="onLargeLocalizerClosed()"
+      [localizationTitle]="'angiographyCT.softTissue.localization.value'"
+      [(ngModel)]="findingHandler.currentItem.spineLocations"
+      [logicType]="spineLocationLogicTypeEnum.VertebreEach"
+      [selectionAccessibilityMode]="spineLocalizerCondition()"
+      localizationDescription="angiographyCT.softTissue.pleaseSelectCorrespondingVertebral.value"
+      name="spineLocations"
+    >
+    </rr-spine-complex>
+    <rr-ribs-complex
+      class="large-localizer"
+      *ngIf="largeLocalizerOpen === 'rib'"
+      (close)="onLargeLocalizerClosed()"
+      [(ngModel)]="findingHandler.currentItem.ribLocations"
+      name="ribLocations"
+      descriptionRrid="ang_c_100112"
+    >
+    </rr-ribs-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerOpen">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="ang_c_100103">
+        {{'angiographyCT.softTissue.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical p-l-6">
+        <p-radioButton
+          rr-id="ang_c_100104"
+          label="{{'angiographyCT.softTissue.normalImagingOfBonesparenchymatous.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_100105"
+          label="{{'angiographyCT.softTissue.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          rr-id="ang_c_100106"
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(softTissueFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(softTissueFindingTypeEnum.None)"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad main-height"
+        ></div>
+        <div class="c-col-1 c-pad-l main-height"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(softTissueFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="ang_c_100201">
+          {{'angiographyCT.softTissue.findingXX.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <rr-supraaortic
+        *ngIf="isFindingType(softTissueFindingTypeEnum.Supraaortic)"
+        [model]="findingHandler.currentItem"
+        [dignityTypeOptions]="dignityTypeOptions"
+      ></rr-supraaortic>
+      <rr-thoracic
+        *ngIf="isFindingType(softTissueFindingTypeEnum.Thoracic)"
+        [model]="findingHandler.currentItem"
+        [dignityTypeOptions]="dignityTypeOptions"
+        [diagnosisTypeOptions]="diagnosisTypeOptions"
+      ></rr-thoracic>
+      <rr-abdominal
+        *ngIf="isFindingType(softTissueFindingTypeEnum.Abdominal)"
+        [model]="findingHandler.currentItem"
+        [findingTypeOptions]="findingTypeOptions"
+        [dignityTypeOptions]="dignityTypeOptions"
+      ></rr-abdominal>
+      <rr-extremities
+        *ngIf="isFindingType(softTissueFindingTypeEnum.Extremities)"
+        [model]="findingHandler.currentItem"
+        [localizationMassTypeOptions]="localizationMassTypeOptions"
+        [dignityTypeOptions]="dignityTypeOptions"
+      ></rr-extremities>
+      <rr-lymphadenopathy
+        *ngIf="isFindingType(softTissueFindingTypeEnum.Lymphadenopathy)"
+        [model]="findingHandler.currentItem"
+      ></rr-lymphadenopathy>
+    </div>
+  </div>
+</form>

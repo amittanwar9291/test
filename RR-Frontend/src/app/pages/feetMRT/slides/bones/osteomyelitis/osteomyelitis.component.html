@@ -1,0 +1,324 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="anc_m_040207" class="m-b-10">
+      {{ 'feetMRT.bones.localization.value' | translate }}
+    </h2>
+    <rr-foot-big-bones-simple
+      [model]="model.threeDimensionalLocalization"
+      rr-id="anc_m_040210"
+      [side]="side"
+      [noComplex]="true"
+      (click)="openLargeLocalizer()"
+      rrValidation="threeDimensionalLocalization"
+      isLocalizer="true"
+    ></rr-foot-big-bones-simple>
+
+    <div class="m-t-35 o-radio-list">
+      <h2 rr-id="anc_m_0402240">
+        {{ 'feetMRT.bones.stadium.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="anc_m_0402241"
+        label="{{ 'feetMRT.bones.acute.value' | translate }}"
+        name="stageType"
+        [value]="stageTypeEnum.Acute"
+        [(ngModel)]="model.stageType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0402242"
+        label="{{ 'feetMRT.bones.chronic.value' | translate }}"
+        name="stageType"
+        [value]="stageTypeEnum.Chronic"
+        [(ngModel)]="model.stageType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <div class="m-t-25 o-radio-list">
+      <h2 rr-id="anc_m_0402243">
+        {{ 'feetMRT.bones.corticalBone.value' | translate }}
+      </h2>
+      <p-checkbox
+        name="isDestruction"
+        label="{{ 'feetMRT.bones.destruction.value' | translate }}"
+        rr-id="anc_m_0402244"
+        binary="true"
+        [(ngModel)]="model.isDestruction"
+      ></p-checkbox>
+      <p-checkbox
+        name="isThinning"
+        label="{{ 'feetMRT.bones.thinningScalopping.value' | translate }}"
+        rr-id="anc_m_0402245"
+        binary="true"
+        [(ngModel)]="model.isThinning"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="anc_m_0403257">
+      {{ 'feetMRT.bones.cancellousBone.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isBoneMarrowEdema"
+      label="{{ 'feetMRT.bones.boneMarrowEdema.value' | translate }}"
+      rr-id="anc_m_0403258"
+      binary="true"
+      [(ngModel)]="model.isBoneMarrowEdema"
+    ></p-checkbox>
+    <p-checkbox
+      class="m-t-20 m-b-5"
+      name="isIntraosseousAbscess"
+      labelStyleClass="text-break"
+      label="{{ 'feetMRT.bones.intraosseousAbscess.value' | translate }}"
+      rr-id="anc_m_0403259"
+      binary="true"
+      rrContentReset="intraosseousAbscessBlock intraosseousAbscessBlock2"
+      [(ngModel)]="model.isIntraosseousAbscess"
+    ></p-checkbox>
+    <div
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isIntraosseousAbscess"
+      id="intraosseousAbscessBlock"
+    >
+      <p rr-id="anc_m_0403260" class="m-b-5">
+        {{ 'feetMRT.bones.size.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0403261'"
+        [labelRrId]="'anc_m_0403272'"
+        [config]="{min: 1, max: 99}"
+        name="intrabonyAbscessSizeInMm"
+        [(ngModel)]="model.intrabonyAbscessSizeInMm"
+      ></rr-number-input>
+
+      <p rr-id="anc_m_0403262" class="m-b-5 m-t-5">
+        {{ 'feetMRT.bones.2ndPlane.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0403264'"
+        [labelRrId]="'anc_m_0403263'"
+        [config]="{min: 1, max: 99}"
+        name="intraosseousAbscessSecondPlaneInMm"
+        [(ngModel)]="model.intraosseousAbscessSecondPlaneInMm"
+      ></rr-number-input>
+
+      <p rr-id="anc_m_0403265" class="m-b-5 m-t-5">
+        {{ 'feetMRT.bones.3rdPlane.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0403267'"
+        [labelRrId]="'anc_m_0403266'"
+        [config]="{min: 1, max: 99}"
+        name="intraosseousAbscessThirdPlaneInMm"
+        [(ngModel)]="model.intraosseousAbscessThirdPlaneInMm"
+      ></rr-number-input>
+    </div>
+    <div
+      class="nested-content o-radio-list m-t-15"
+      [rrDisable]="!model.isIntraosseousAbscess"
+      id="intraosseousAbscessBlock2"
+    >
+      <p rr-id="anc_m_0403268">
+        {{ 'feetMRT.bones.details.value' | translate }}
+      </p>
+      <p-checkbox
+        name="isPenumbraSign"
+        label="{{ 'feetMRT.bones.penumbraSign.value' | translate }}"
+        class="m-t-10"
+        rr-id="anc_m_0403269"
+        binary="true"
+        [(ngModel)]="model.isPenumbraSign"
+      ></p-checkbox>
+      <p-checkbox
+        [rrDisable]="!isCmYes"
+        name="isPeripheralContrastEnhancement"
+        label="{{ 'feetMRT.bones.peripheralContrastEnhancement.value' | translate }}"
+        class="m-t-10"
+        rr-id="anc_m_0403270"
+        binary="true"
+        [(ngModel)]="model.isPeripheralContrastEnhancement"
+      ></p-checkbox>
+      <p-checkbox
+        class="m-t-30"
+        name="isIntraossalAbscessMoreThanOneLesion"
+        label="{{ 'feetMRT.bones.lesionSameEntity.value' | translate }}"
+        rr-id="anc_m_0403271"
+        binary="true"
+        [(ngModel)]="model.isIntraossalAbscessMoreThanOneLesion"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-30">
+    <p-checkbox
+      name="isSequestrum"
+      label="{{ 'feetMRT.bones.sequester.value' | translate }}"
+      rr-id="anc_m_0404250"
+      binary="true"
+      [(ngModel)]="model.isSequestrum"
+      rrContentReset="sequestrumBlock"
+    ></p-checkbox>
+    <div
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isSequestrum"
+      id="sequestrumBlock"
+    >
+      <p rr-id="anc_m_0404238" class="m-b-5">
+        {{ 'feetMRT.bones.size.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0404240'"
+        [labelRrId]="'anc_m_0404239'"
+        [config]="{min: 1, max: 99}"
+        name="sequestrumSizeInMm"
+        [(ngModel)]="model.sequestrumSizeInMm"
+      ></rr-number-input>
+
+      <p rr-id="anc_m_0404241" class="m-b-5 m-t-5">
+        {{ 'feetMRT.bones.2ndPlane.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0404243'"
+        [labelRrId]="'anc_m_0404242'"
+        [config]="{min: 1, max: 99}"
+        name="sequesterSecondPlaneInMm"
+        [(ngModel)]="model.sequesterSecondPlaneInMm"
+      ></rr-number-input>
+
+      <p rr-id="anc_m_0404244" class="m-b-5 m-t-5">
+        {{ 'feetMRT.bones.3rdPlane.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0404246'"
+        [labelRrId]="'anc_m_0404245'"
+        [config]="{min: 1, max: 99}"
+        name="sequesterThirdPlaneInMm"
+        [(ngModel)]="model.sequesterThirdPlaneInMm"
+      ></rr-number-input>
+
+      <p rr-id="anc_m_0404247" class="m-t-10">
+        {{ 'feetMRT.bones.details.value' | translate }}
+      </p>
+      <p-checkbox
+        [rrDisable]="!isCmYes"
+        name="isSequesterNoContrastEnhancement"
+        label="{{ 'feetMRT.bones.noContrastEnhancement.value' | translate }}"
+        class="m-t-10"
+        rr-id="anc_m_0404248"
+        binary="true"
+        [(ngModel)]="model.isSequesterNoContrastEnhancement"
+      ></p-checkbox>
+      <p-checkbox
+        name="isSequestrumMoreThanOneLesion"
+        label="{{ 'feetMRT.bones.lesionSameEntity.value' | translate }}"
+        rr-id="anc_m_0404249"
+        binary="true"
+        [(ngModel)]="model.isSequestrumMoreThanOneLesion"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list">
+    <h2 rr-id="anc_m_0405216">
+      {{ 'feetMRT.bones.associatedFindings.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isOsteolysis"
+      label="{{ 'feetMRT.bones.osteolysis.value' | translate }}"
+      rr-id="anc_m_0405217"
+      binary="true"
+      [(ngModel)]="model.isOsteolysis"
+    ></p-checkbox>
+    <p-checkbox
+      name="isBoneApposition"
+      label="{{ 'feetMRT.bones.boneApposition.value' | translate }}"
+      rr-id="anc_m_0405218"
+      binary="true"
+      [(ngModel)]="model.isBoneApposition"
+    ></p-checkbox>
+    <p-checkbox
+      name="isPeriostealThickening"
+      label="{{ 'feetMRT.bones.periostealThickening.value' | translate }}"
+      rr-id="anc_m_0405219"
+      binary="true"
+      [(ngModel)]="model.isPeriostealThickening"
+    ></p-checkbox>
+    <p-checkbox
+      name="isPeriostealRupture"
+      label="{{ 'feetMRT.bones.periostealRupture.value' | translate }}"
+      rr-id="anc_m_0405220"
+      binary="true"
+      [(ngModel)]="model.isPeriostealRupture"
+    ></p-checkbox>
+    <p-checkbox
+      name="isSubperiostealAbscess"
+      label="{{ 'feetMRT.bones.subperiostealAbscess.value' | translate }}"
+      rr-id="anc_m_0405221"
+      binary="true"
+      [(ngModel)]="model.isSubperiostealAbscess"
+      rrContentReset="subperiostealAbscessBlock"
+    ></p-checkbox>
+    <div
+      class="nested-content"
+      id="subperiostealAbscessBlock"
+      [rrDisable]="!model.isSubperiostealAbscess"
+    >
+      <p rr-id="anc_m_0405222">{{ 'feetMRT.bones.size.value' | translate }}</p>
+      <rr-number-input
+        [label]="'feetMRT.bones.inMm.value' | translate"
+        [inputRrId]="'anc_m_0405224'"
+        [labelRrId]="'anc_m_0405223'"
+        [config]="{min: 1, max: 99}"
+        name="subperiostealAbscessSizeInMm"
+        [(ngModel)]="model.subperiostealAbscessSizeInMm"
+      ></rr-number-input>
+    </div>
+    <p-checkbox
+      name="isSoftTissueEdema"
+      label="{{ 'feetMRT.bones.softTissueEdema.value' | translate }}"
+      rr-id="anc_m_0405225"
+      binary="true"
+      [(ngModel)]="model.isSoftTissueEdema"
+      class="m-t-15"
+    ></p-checkbox>
+
+    <h2 rr-id="anc_m_0405226" class="m-t-30">
+      {{ 'feetMRT.bones.differentialDiagnosis.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="anc_m_0405227"
+      label="{{ 'feetMRT.bones.ewingSarcoma.value' | translate }}"
+      name="osteomyelitisDifferentialDiagnosisType"
+      [value]="osteomyelitisDifferentialDiagnosisTypeEnum.EwingSarcoma"
+      [(ngModel)]="model.osteomyelitisDifferentialDiagnosisType"
+      rrUnClickRadio
+      rrContentReset="SubordinatedContainer"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_0405228"
+      label="{{ 'feetMRT.bones.chondroblastoma.value' | translate }}"
+      name="osteomyelitisDifferentialDiagnosisType"
+      [value]="osteomyelitisDifferentialDiagnosisTypeEnum.Chondroblastoma"
+      [(ngModel)]="model.osteomyelitisDifferentialDiagnosisType"
+      rrUnClickRadio
+      rrContentReset="SubordinatedContainer"
+    ></p-radioButton>
+    <div
+      id="SubordinatedContainer"
+      [rrDisable]="model.osteomyelitisDifferentialDiagnosisType === osteomyelitisDifferentialDiagnosisTypeEnum.None"
+    >
+      <p-checkbox
+        name="isSubordinated"
+        label="{{ 'feetMRT.bones.subordinated.value' | translate }}"
+        rr-id="anc_m_0405229"
+        binary="true"
+        [(ngModel)]="model.isSubordinated"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

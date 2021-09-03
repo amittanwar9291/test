@@ -1,0 +1,327 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2 rr-id="elb_m_050202">
+      {{'elbowMRT.cartilage.localization.value' | translate}}*
+    </h2>
+
+    <p-checkbox
+      rr-id="elb_m_050204"
+      label="{{'elbowMRT.cartilage.anteriorHumeralCapitulum.value' | translate}}"
+      binary="true"
+      name="cartilageLocation.anteriorHumeralCapitulum"
+      [(ngModel)]="model.cartilageLocation.anteriorHumeralCapitulum"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050205"
+      label="{{'elbowMRT.cartilage.posteriorHumeralCapitulum.value' | translate}}"
+      binary="true"
+      name="cartilageLocation.posteriorHumeralCapitulum"
+      [(ngModel)]="model.cartilageLocation.posteriorHumeralCapitulum"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050206"
+      label="{{'elbowMRT.cartilage.anteriorHumeralTrochlea.value' | translate}}"
+      binary="true"
+      name="cartilageLocation.anteriorHumeralTrochlea"
+      [(ngModel)]="model.cartilageLocation.anteriorHumeralTrochlea"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050207"
+      label="{{'elbowMRT.cartilage.posteriorHumeralTrochlea.value' | translate}}"
+      binary="true"
+      name="cartilageLocation.posteriorHumeralTrochlea"
+      [(ngModel)]="model.cartilageLocation.posteriorHumeralTrochlea"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050208"
+      label="{{'elbowMRT.cartilage.ulnaTrochlearNotch.value' | translate}}"
+      binary="true"
+      name="cartilageLocation.ulnaTrochlearNotch"
+      [(ngModel)]="model.cartilageLocation.ulnaTrochlearNotch"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050209"
+      label="{{'elbowMRT.cartilage.ulnaRadialNotch.value' | translate}}"
+      binary="true"
+      name="cartilageLocation.ulnaRadialNotch"
+      [(ngModel)]="model.cartilageLocation.ulnaRadialNotch"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050210"
+      label="{{'elbowMRT.cartilage.radiusFoveaCapitis.value' | translate}}"
+      binary="true"
+      name="radiusFoveaCapitis"
+      [(ngModel)]="model.cartilageLocation.radiusFoveaCapitis"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050211"
+      label="{{'elbowMRT.cartilage.radiusCircumferentiaRadii.value' | translate}}"
+      binary="true"
+      name="radiusCircumferentiaRadii"
+      [(ngModel)]="model.cartilageLocation.radiusCircumferentiaRadii"
+      [rrValidation]="localizationValidationString"
+    ></p-checkbox>
+  </div>
+
+  <ng-container [ngSwitch]="model.etiologyType">
+    <ng-container *ngSwitchCase="etiologyType.Traumatic">
+      <div class="c-col-2 f-vertical f-start c-sep c-pad o-radio-list">
+        <ng-container *ngTemplateOutlet="etiologyHeader"></ng-container>
+        <div class="c-col-2 f-horizontal f-center col-h-100 m-t-3">
+          <div
+            class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+          >
+            <ng-container *ngTemplateOutlet="etiologyControls"></ng-container>
+          </div>
+          <div
+            class="c-col-1 f-vertical f-start c-sep c-pad-l o-radio-list col-h-100"
+          >
+            <ng-container *ngTemplateOutlet="traumaticDetails"></ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 f-vertical f-start c-sep c-pad-l"></div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="etiologyType.Degenerative">
+      <div class="c-col-3 f-vertical f-start c-sep c-pad-l o-radio-list">
+        <ng-container *ngTemplateOutlet="etiologyHeader"></ng-container>
+        <div class="c-col-3 f-horizontal f-center col-h-100 m-t-3">
+          <div
+            class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+          >
+            <ng-container *ngTemplateOutlet="etiologyControls"></ng-container>
+          </div>
+          <div
+            class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list col-h-100"
+          >
+            <ng-container
+              *ngTemplateOutlet="degenerativeDetails"
+            ></ng-container>
+          </div>
+          <div
+            class="c-col-1 f-vertical f-start c-sep c-pad-l o-radio-list col-h-100"
+          >
+            <ng-container
+              *ngTemplateOutlet="otherPictureCharacteristicsTemplate"
+            ></ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <div
+        class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list col-h-100"
+      >
+        <ng-container *ngTemplateOutlet="etiologyHeader"></ng-container>
+        <ng-container *ngTemplateOutlet="etiologyControls"></ng-container>
+      </div>
+      <div class="c-col-1 f-vertical f-start c-sep c-pad"></div>
+      <div class="c-col-1 f-vertical f-start c-sep c-pad-l"></div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #etiologyHeader>
+  <h2 rr-id="elb_m_050202">
+    {{'elbowMRT.cartilage.etiology.value' | translate}}
+  </h2>
+</ng-template>
+
+<ng-template #etiologyControls>
+  <div class="f-vertical f-start o-radio-list">
+    <p-radioButton
+      rr-id="elb_m_050311"
+      label="{{'elbowMRT.cartilage.traumatic.value' | translate}}"
+      name="etiologyType"
+      [value]="etiologyType.Traumatic"
+      [(ngModel)]="model.etiologyType"
+      (onClick)="clearDegenerativeEtiology()"
+      rrValidation="etiologyType"
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050312"
+      label="{{'elbowMRT.cartilage.degenerative.value' | translate}}"
+      name="etiologyType"
+      [value]="etiologyType.Degenerative"
+      [(ngModel)]="model.etiologyType"
+      (onClick)="clearTraumaticEtiology()"
+      rrValidation="etiologyType"
+    ></p-radioButton>
+  </div>
+</ng-template>
+
+<ng-template #traumaticDetails>
+  <h2 rr-id="elb_m_050410" rrInfoIcon="elb_m_05_03">
+    {{ 'elbowMRT.cartilage.details.value' | translate }}
+  </h2>
+  <p-radioButton
+    rr-id="elb_m_050411"
+    label="{{'elbowMRT.cartilage.contusion.value' | translate}}"
+    name="detailsType"
+    [value]="detailsType.Contusion"
+    [(ngModel)]="model.detailsType"
+    rrValidation="detailsType"
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050413"
+    label="{{'elbowMRT.cartilage.delamination.value' | translate}}"
+    name="detailsType"
+    [value]="detailsType.Delamination"
+    [(ngModel)]="model.detailsType"
+    rrValidation="detailsType"
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050414"
+    label="{{'elbowMRT.cartilage.cartilageFlap.value' | translate}}"
+    name="detailsType"
+    [value]="detailsType.CartilageFlap"
+    [(ngModel)]="model.detailsType"
+    rrValidation="detailsType"
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050415"
+    label="{{'elbowMRT.cartilage.cartilageFlake.value' | translate}}"
+    name="detailsType"
+    [value]="detailsType.CartilageFlake"
+    [(ngModel)]="model.detailsType"
+    rrValidation="detailsType"
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050416"
+    label="{{'elbowMRT.cartilage.chondralFissure.value' | translate}}"
+    name="detailsType"
+    [value]="detailsType.ChondralFissure"
+    [(ngModel)]="model.detailsType"
+    rrValidation="detailsType"
+  ></p-radioButton>
+</ng-template>
+
+<ng-template #degenerativeDetails>
+  <h2 rr-id="elb_m_050418" rrInfoIcon="elb_m_05_04">
+    {{'elbowMRT.cartilage.outerbridgeClassification.value' | translate}}
+  </h2>
+  <p-radioButton
+    rr-id="elb_m_050420"
+    label="{{'elbowMRT.cartilage.gradeI.value' | translate}}"
+    name="outerbridgeClassificationType"
+    [value]="outerbridgeClassificationType.GradeI"
+    [(ngModel)]="model.outerbridgeClassificationType"
+    rrUnClickRadio
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050421"
+    label="{{'elbowMRT.cartilage.gradeII.value' | translate}}"
+    name="outerbridgeClassificationType"
+    [value]="outerbridgeClassificationType.GradeII"
+    [(ngModel)]="model.outerbridgeClassificationType"
+    rrUnClickRadio
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050422"
+    label="{{'elbowMRT.cartilage.gradeIII.value' | translate}}"
+    name="outerbridgeClassificationType"
+    [value]="outerbridgeClassificationType.GradeIII"
+    [(ngModel)]="model.outerbridgeClassificationType"
+    rrUnClickRadio
+  ></p-radioButton>
+  <p-radioButton
+    rr-id="elb_m_050423"
+    label="{{'elbowMRT.cartilage.gradeIV.value' | translate}}"
+    name="outerbridgeClassificationType"
+    [value]="outerbridgeClassificationType.GradeIV"
+    [(ngModel)]="model.outerbridgeClassificationType"
+    rrUnClickRadio
+  ></p-radioButton>
+
+  <h2 class="m-t-21 m-b-7">
+    {{'elbowMRT.cartilage.extension.value' | translate}}
+  </h2>
+
+  <div class="f-vertical f-start extension">
+    <p rr-id="elb_m_0504109">
+      {{ 'elbowMRT.cartilage.size.value' | translate }}
+    </p>
+
+    <rr-number-input
+      inputRrId="elb_m_050425"
+      labelRrId="elb_m_050426"
+      name="sizeInMm"
+      [label]="'elbowMRT.cartilage.inMm.value' | translate"
+      [(ngModel)]="model.sizeInMm"
+      [config]="{ labelWidth: 140, min: 1, max: 99 }"
+    ></rr-number-input>
+
+    <p rr-id="elb_m_0504110">
+      {{ 'elbowMRT.cartilage.2ndPlane.value' | translate }}
+    </p>
+
+    <rr-number-input
+      inputRrId="elb_m_0504111"
+      labelRrId="elb_m_0504112"
+      name="secondPlaneInMm"
+      [label]="'elbowMRT.cartilage.inMm.value' | translate"
+      [(ngModel)]="model.secondPlaneInMm"
+      [config]="{ labelWidth: 140, min: 1, max: 99 }"
+    ></rr-number-input>
+
+    <p rr-id="elb_m_0504113">
+      {{ 'elbowMRT.cartilage.3rdPlane.value' | translate }}
+    </p>
+
+    <rr-number-input
+      inputRrId="elb_m_0504114"
+      labelRrId="elb_m_0504115"
+      name="thirdPlaneInMm"
+      [label]="'elbowMRT.cartilage.inMm.value' | translate"
+      [(ngModel)]="model.thirdPlaneInMm"
+      [config]="{ labelWidth: 140, min: 1, max: 99 }"
+    ></rr-number-input>
+  </div>
+</ng-template>
+
+<ng-template #otherPictureCharacteristicsTemplate>
+  <h2 rr-id="elb_m_050510">
+    {{'elbowMRT.cartilage.furtherFeatures.value' | translate}}
+  </h2>
+
+  <p-checkbox
+    rr-id="elb_m_050511"
+    label="{{'elbowMRT.cartilage.subchondralCysts.value' | translate}}"
+    binary="true"
+    name="isSubchondralCysts"
+    [(ngModel)]="model.isSubchondralCysts"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050512"
+    label="{{'elbowMRT.cartilage.looseBody.value' | translate}}"
+    binary="true"
+    name="isLooseBody"
+    [(ngModel)]="model.isLooseBody"
+  ></p-checkbox>
+
+  <p-checkbox
+    rr-id="elb_m_050513"
+    label="{{'elbowMRT.cartilage.chondrocalcinosis.value' | translate}}"
+    binary="true"
+    name="isChondrocalcinosis"
+    [(ngModel)]="model.isChondrocalcinosis"
+  ></p-checkbox>
+</ng-template>

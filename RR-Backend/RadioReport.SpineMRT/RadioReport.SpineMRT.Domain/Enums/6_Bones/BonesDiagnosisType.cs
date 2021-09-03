@@ -1,0 +1,40 @@
+namespace RadioReport.SpineMRT.Domain.Enums
+{
+    public enum BonesDiagnosisType : byte
+    {
+        None = 0,
+        BenignLesionNotFurtherClassified = 1,
+        MalignantLesionNotFurtherClassified = 2,
+        DignityUnclear = 3,
+        VertebralHemangioma = 4,
+        ExtensiveVertebralHemangioma = 5,
+        BoneIslandEnostosis = 6,
+        AneurysmaticBoneCyst = 7,
+        OsteoidOsteoma = 8,
+        Osteoblastoma = 9,
+        Osteochondroma = 10,
+        Chondroblastoma = 11,
+        FibrousDysplasia = 12,
+        Enchondroma = 13,
+        IntraosseousLipoma = 14,
+        IntraosseousCyst = 15,
+        BoneInfarction = 16,
+        Chordoma = 17,
+        MultipleMyeloma = 18,
+        Lymphoma = 19,
+        Metastasis = 20,
+        Chondrosarcoma = 21,
+        GiantCellTumor = 22,
+        Osteosarcoma = 23,
+        EwingsSarcoma = 24,
+        Osteomyelitis = 25,
+        SchmorlNodes = 26,
+        FatMarkConversion = 27,
+        Mastocytosis = 28,
+        Leukaemia = 29,
+        MyelodysplasticSyndrome = 30,
+        Myelofibrosis = 31,
+        MGaucher = 32,
+        BoneMarrowConversion = 33
+    }
+}

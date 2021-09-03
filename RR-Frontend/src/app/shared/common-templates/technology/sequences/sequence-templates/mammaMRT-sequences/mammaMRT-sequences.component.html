@@ -1,0 +1,132 @@
+<rr-sequences-base-template [disabled]="disabled" [itemIndex]="itemIndex">
+  <ng-container ngProjectAs="firstColumn">
+    <div class="o-radio-list m-b-16">
+      <h2 rr-id="uni_x_030307" rrInfoIcon="uni_x_0303100" class="m-b-3">
+        {{ 'shared-templates.technology.sequenceType.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="uni_x_030308"
+        [(ngModel)]="model.sequenceType"
+        styleClass="o-width-100 ui-brown-box"
+        name="sequenceType"
+        [options]="sequenceTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      ></p-dropdown>
+    </div>
+    <div class="o-radio-list m-b-17">
+      <h2 rr-id="uni_x_030309" class="m-b-4">
+        {{ 'shared-templates.technology.plane.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="uni_x_030310"
+        styleClass="o-width-100 ui-brown-box"
+        name="orientationType"
+        [options]="orientationTypes"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [(ngModel)]="model.orientationType"
+        rrDropdownClear
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-dropdown>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="uni_x_030313">
+        {{ 'shared-templates.technology.additionalFeatures.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="uni_x_030314"
+        [(ngModel)]="model.isSaturatedFat"
+        name="isSaturatedFat"
+        label="{{ 'shared-templates.technology.fatSaturated.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030315"
+        [(ngModel)]="model.is3D"
+        name="is3D"
+        label="{{ 'shared-templates.technology.3D.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030316"
+        [(ngModel)]="model.isParallelImaging"
+        name="isParallelImaging"
+        label="{{ 'shared-templates.technology.parallelImaging.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030319"
+        [(ngModel)]="model.siliconeSensitive"
+        name="siliconeSensitive"
+        label="{{ 'shared-templates.technology.siliconeSensitive.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030318"
+        [(ngModel)]="model.siliconeSuppressing"
+        class="last-checkbox"
+        name="siliconeSuppressing"
+        label="{{ 'shared-templates.technology.siliconeSuppressing.value' | translate }}"
+        binary="true"
+        (onChange)="emitModelChangeInSubcomponent()"
+      >
+      </p-checkbox>
+    </div>
+  </ng-container>
+  <ng-container ngProjectAs="secondColumn">
+    <div class="o-radio-list" [rrDisable]="isSecondColumnDisabled()">
+      <h2 rr-id="uni_x_030414">
+        {{ 'shared-templates.technology.postContrast2.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="uni_x_030415"
+        labelStyleClass="ui-thin-label"
+        name="isDynamicsFollowingGdApplication"
+        [(ngModel)]="model.isDynamicsFollowingGdApplication"
+        label="{{ 'shared-templates.technology.dynamicsAfterCMInjection.value' | translate }}"
+        binary="true"
+        class="text-break"
+        rrContentReset="isDynamicsFollowingGdApplicationBlock"
+        (onChange)="emitModelChangeInSubcomponent()"
+        [explicitFormToReset]="formRef"
+      >
+      </p-checkbox>
+      <div
+        class="f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isDynamicsFollowingGdApplication"
+        id="isDynamicsFollowingGdApplicationBlock"
+      >
+        <p-checkbox
+          rr-id="uni_x_030419"
+          labelStyleClass="ui-thin-label"
+          name="isSubtraction"
+          [(ngModel)]="model.isSubtraction"
+          (onChange)="emitModelChangeInSubcomponent()"
+          label="{{ 'shared-templates.technology.subtraction.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="uni_x_030420"
+        labelStyleClass="ui-thin-label"
+        name="isLateStage"
+        [(ngModel)]="model.isLateStage"
+        (onChange)="emitModelChangeInSubcomponent()"
+        label="{{ 'shared-templates.technology.lateStage.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </ng-container>
+</rr-sequences-base-template>

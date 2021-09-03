@@ -1,0 +1,100 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- Column 1 -->
+    <div class="c-col-1 c-sep c-pad-r f-vertical o-list">
+      <h1 rr-id="elb_m_060103" class="m-b-15">
+        {{ 'elbowMRT.tendonsAndMuscles.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="elb_m_060104"
+        label="{{ 'elbowMRT.tendonsAndMuscles.tendonsAndMusclesAre.value' | translate }}"
+        class="m-b-15"
+        rrUnClickRadio
+        name="areFindings"
+        [value]="areFindingsType.No"
+        labelStyleClass="text-break"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_060105"
+        class="m-b-19"
+        label="{{ 'elbowMRT.tendonsAndMuscles.finding.value' | translate }}"
+        rrUnClickRadio
+        name="areFindings"
+        [value]="areFindingsType.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns 2-5 -->
+    <div
+      class="f-vertical"
+      [ngClass]="{'c-pad-l' : findingHandler.currentItem.findingType !== findingType.Musculature}"
+    >
+      <div
+        [ngClass]="findingHandler.currentItem.findingType === findingType.Musculature ? 'm-h-49': 'm-h-80'"
+      >
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="elb_m_060201"
+          [ngClass]="{ 'c-pad-l' : findingHandler.currentItem.findingType === findingType.Musculature}"
+        >
+          {{ 'elbowMRT.tendonsAndMuscles.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <!-- Finding Epicondylitis -->
+        <rr-epicondylitis
+          *ngSwitchCase="findingType.Epicondylitis"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-epicondylitis>
+
+        <!-- Finding LesionOfTheDistalBicepsTendon -->
+        <rr-lesion-distal-biceps-tendon
+          *ngSwitchCase="findingType.LesionOfTheDistalBicepsTendon"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-lesion-distal-biceps-tendon>
+
+        <!-- Finding LesionOfTheTricepsTendon -->
+        <rr-lesion-triceps-tendon
+          *ngSwitchCase="findingType.LesionOfTheTricepsTendon"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-lesion-triceps-tendon>
+
+        <!-- Finding Musculature -->
+        <rr-musculature
+          *ngSwitchCase="findingType.Musculature"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-musculature>
+
+        <!-- No finding chosen -->
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,407 @@
+<div class="f-vertical f-start main-container">
+  <div class="col-h-100 f-horizontal">
+    <div class="f-vertical c-sep">
+      <div class="p-l-15">
+        <h2 class="m-b-10" rr-id="ang_c_040206">
+          {{ "angiographyCT.coronaryArteries.coronaryAnomaly.value" | translate
+          }}
+        </h2>
+      </div>
+      <div class="col-h-100 f-horizontal">
+        <div class="c-col-1 c-sep c-pad o-radio-list">
+          <p-dropdown
+            styleClass="ui-brown-box o-width-100"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="w010"
+            [(ngModel)]="model.coronaryAnomalyType"
+            name="coronaryAnomalyType"
+            rr-id="ang_m_060545"
+            group="true"
+            rrDropdownClear
+            rrValidation="coronaryAnomalyType"
+            (onChange)="clearThirdColumn()"
+          >
+          </p-dropdown>
+        </div>
+        <div class="c-col-1 c-sep c-pad">
+          <div class="o-radio-list text-break" *ngIf="displayNoDetails()">
+            <h2 rr-id="ang_c_040302">
+              {{ ("angiographyCT.coronaryArteries." + model.coronaryAnomalyType)
+              | translate }}
+            </h2>
+            <p rr-id="ang_c_040303">
+              {{ "angiographyCT.coronaryArteries.noFurtherDetails.value" |
+              translate }}
+            </p>
+          </div>
+
+          <div
+            class="o-radio-list text-break"
+            *ngIf="model.coronaryAnomalyType === coronaryAnomalyTypeEnum.OriginCoronaryArteryFromPulmonaryArtery"
+          >
+            <h2 rr-id="ang_c_040304">
+              {{
+              "angiographyCT.coronaryArteries.originCoronaryArteryFrompulmonary.value"
+              | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="ang_c_040305"
+              binary="true"
+              name="isIntravenous"
+              label="{{ 'angiographyCT.coronaryArteries.blandWhiteGarlandSyndrome.value' | translate }}"
+              [(ngModel)]="model.isBlandWhiteGarlandSyndrome"
+              rrInfoIcon="ang_c_04_03"
+            >
+            </p-checkbox>
+          </div>
+
+          <div
+            class="o-radio-list"
+            *ngIf="model.coronaryAnomalyType === coronaryAnomalyTypeEnum.RcaFromLeftCoronarySinus"
+          >
+            <h2 rr-id="ang_c_040306">
+              {{ "angiographyCT.coronaryArteries.rCAFromLeftCoronary.value" |
+              translate }}
+            </h2>
+
+            <p-radioButton
+              rr-id="ang_c_040307"
+              label="{{'angiographyCT.coronaryArteries.prepulmonary.value' | translate}}"
+              name="rcaFromLeftCoronarySinusType"
+              [value]="courseTypeEnum.Prepulmonary"
+              [(ngModel)]="model.rcaFromLeftCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <p-radioButton
+              rr-id="ang_c_040308"
+              label="{{'angiographyCT.coronaryArteries.interarterial.value' | translate}}"
+              name="rcaFromLeftCoronarySinusType"
+              [value]="courseTypeEnum.Interarterial"
+              [(ngModel)]="model.rcaFromLeftCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <p-radioButton
+              rr-id="ang_c_040309"
+              label="{{'angiographyCT.coronaryArteries.retroaortic.value' | translate}}"
+              name="rcaFromLeftCoronarySinusType"
+              [value]="courseTypeEnum.Retroaortic"
+              [(ngModel)]="model.rcaFromLeftCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <p-radioButton
+              rr-id="ang_c_040310"
+              label="{{'angiographyCT.coronaryArteries.septal.value' | translate}}"
+              name="rcaFromLeftCoronarySinusType"
+              [value]="courseTypeEnum.Septal"
+              [(ngModel)]="model.rcaFromLeftCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            *ngIf="model.coronaryAnomalyType === coronaryAnomalyTypeEnum.RcxRivaFromRightCoronarySinus"
+          >
+            <h2 class="m-b-10" rr-id="ang_c_040364">
+              {{ "angiographyCT.coronaryArteries.rCXRIVAFromTheRight.value" |
+              translate }}
+            </h2>
+
+            <p rr-id="ang_c_040311" rrInfoIcon="ang_c_04_04" class="m-b-10">
+              {{ "angiographyCT.coronaryArteries.courseRCX.value" | translate }}
+            </p>
+
+            <div class="o-radio-list">
+              <p-radioButton
+                rr-id="ang_c_040312"
+                label="{{'angiographyCT.coronaryArteries.prepulmonary.value' | translate}}"
+                name="courseRcxType"
+                [value]="courseTypeEnum.Prepulmonary"
+                [(ngModel)]="model.courseRcxType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040313"
+                label="{{'angiographyCT.coronaryArteries.interarterial.value' | translate}}"
+                name="courseRcxType"
+                [value]="courseTypeEnum.Interarterial"
+                [(ngModel)]="model.courseRcxType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040314"
+                label="{{'angiographyCT.coronaryArteries.retroaortic.value' | translate}}"
+                name="courseRcxType"
+                [value]="courseTypeEnum.Retroaortic"
+                [(ngModel)]="model.courseRcxType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040315"
+                label="{{'angiographyCT.coronaryArteries.septal.value' | translate}}"
+                name="courseRcxType"
+                [value]="courseTypeEnum.Septal"
+                [(ngModel)]="model.courseRcxType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+
+            <p
+              rr-id="ang_c_040316"
+              rrInfoIcon="ang_c_04_05"
+              class="m-t-25 m-b-10"
+            >
+              {{ "angiographyCT.coronaryArteries.courseRIVA.value" | translate
+              }}
+            </p>
+
+            <div class="o-radio-list">
+              <p-radioButton
+                rr-id="ang_c_040317"
+                label="{{'angiographyCT.coronaryArteries.prepulmonary.value' | translate}}"
+                name="courseRivaType"
+                [value]="courseTypeEnum.Prepulmonary"
+                [(ngModel)]="model.courseRivaType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040318"
+                label="{{'angiographyCT.coronaryArteries.interarterial.value' | translate}}"
+                name="courseRivaType"
+                [value]="courseTypeEnum.Interarterial"
+                [(ngModel)]="model.courseRivaType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040319"
+                label="{{'angiographyCT.coronaryArteries.retroaortic.value' | translate}}"
+                name="courseRivaType"
+                [value]="courseTypeEnum.Retroaortic"
+                [(ngModel)]="model.courseRivaType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040320"
+                label="{{'angiographyCT.coronaryArteries.septal.value' | translate}}"
+                name="courseRivaType"
+                [value]="courseTypeEnum.Septal"
+                [(ngModel)]="model.courseRivaType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+
+          <div
+            class="o-radio-list"
+            *ngIf="model.coronaryAnomalyType === coronaryAnomalyTypeEnum.LcaFromRightCoronarySinus"
+          >
+            <h2
+              class="m-b-10 w-320"
+              rr-id="ang_c_040321"
+              rrInfoIcon="ang_c_04_06"
+            >
+              {{ "angiographyCT.coronaryArteries.lCAFromRightCoronary.value" |
+              translate }}
+            </h2>
+
+            <p-radioButton
+              rr-id="ang_c_040322"
+              label="{{'angiographyCT.coronaryArteries.prepulmonary.value' | translate}}"
+              name="lcaFromRightCoronarySinusType"
+              [value]="courseTypeEnum.Prepulmonary"
+              [(ngModel)]="model.lcaFromRightCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <p-radioButton
+              rr-id="ang_c_040323"
+              label="{{'angiographyCT.coronaryArteries.interarterial.value' | translate}}"
+              name="lcaFromRightCoronarySinusType"
+              [value]="courseTypeEnum.Interarterial"
+              [(ngModel)]="model.lcaFromRightCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <p-radioButton
+              rr-id="ang_c_040324"
+              label="{{'angiographyCT.coronaryArteries.retroaortic.value' | translate}}"
+              name="lcaFromRightCoronarySinusType"
+              [value]="courseTypeEnum.Retroaortic"
+              [(ngModel)]="model.lcaFromRightCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <p-radioButton
+              rr-id="ang_c_040325"
+              label="{{'angiographyCT.coronaryArteries.septal.value' | translate}}"
+              name="lcaFromRightCoronarySinusType"
+              [value]="courseTypeEnum.Septal"
+              [(ngModel)]="model.lcaFromRightCoronarySinusType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            *ngIf="model.coronaryAnomalyType === coronaryAnomalyTypeEnum.ArterioVenousCoronaryFistula"
+          >
+            <h2 class="m-b-10" rr-id="ang_c_040326">
+              {{
+              "angiographyCT.coronaryArteries.arteriovenousCoronaryFistula.value"
+              | translate }}
+            </h2>
+
+            <p rr-id="ang_c_040327" class="m-b-5">
+              {{ "angiographyCT.coronaryArteries.righttoleftShunt.value" |
+              translate }}
+            </p>
+
+            <div class="o-radio-list">
+              <p-radioButton
+                rr-id="ang_c_040328"
+                label="{{'angiographyCT.coronaryArteries.rightVentricle.value' | translate}}"
+                name="rightToLeftShuntType"
+                [value]="rightToLeftShuntTypeEnum.RightVentricle"
+                [(ngModel)]="model.rightToLeftShuntType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040329"
+                label="{{'angiographyCT.coronaryArteries.rightAtrium.value' | translate}}"
+                name="rightToLeftShuntType"
+                [value]="rightToLeftShuntTypeEnum.RightAtrium"
+                [(ngModel)]="model.rightToLeftShuntType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040330"
+                label="{{'angiographyCT.coronaryArteries.coronarySinus.value' | translate}}"
+                name="rightToLeftShuntType"
+                [value]="rightToLeftShuntTypeEnum.CoronarySinus"
+                [(ngModel)]="model.rightToLeftShuntType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040331"
+                label="{{'angiographyCT.coronaryArteries.cardiacVein.value' | translate}}"
+                name="rightToLeftShuntType"
+                [value]="rightToLeftShuntTypeEnum.CardiacVein"
+                [(ngModel)]="model.rightToLeftShuntType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040332"
+                label="{{'angiographyCT.coronaryArteries.pulmonaryVein.value' | translate}}"
+                name="rightToLeftShuntType"
+                [value]="rightToLeftShuntTypeEnum.PulmonaryVein"
+                [(ngModel)]="model.rightToLeftShuntType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+
+            <p rr-id="ang_c_040333" class="m-t-15 m-b-10">
+              {{ "angiographyCT.coronaryArteries.otherDrainage.value" |
+              translate }}
+            </p>
+
+            <div class="o-radio-list">
+              <p-radioButton
+                rr-id="ang_c_040334"
+                label="{{'angiographyCT.coronaryArteries.leftVentricle.value' | translate}}"
+                name="otherDrainageType"
+                [value]="otherDrainageTypeEnum.LeftVentricle"
+                [(ngModel)]="model.otherDrainageType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040335"
+                label="{{'angiographyCT.coronaryArteries.leftAtrium.value' | translate}}"
+                name="otherDrainageType"
+                [value]="otherDrainageTypeEnum.LeftAtrium"
+                [(ngModel)]="model.otherDrainageType"
+                rrUnClickRadio
+              ></p-radioButton>
+
+              <p-radioButton
+                rr-id="ang_c_040336"
+                label="{{'angiographyCT.coronaryArteries.pulmonaryArtery.value' | translate}}"
+                name="otherDrainageType"
+                [value]="otherDrainageTypeEnum.PulmonaryArtery"
+                [(ngModel)]="model.otherDrainageType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+
+          <div
+            class="o-radio-list"
+            *ngIf="model.coronaryAnomalyType === coronaryAnomalyTypeEnum.MyocardialBridging || model.coronaryAnomalyType === coronaryAnomalyTypeEnum.EctasiaAneurysm"
+          >
+            <h2 class="m-b-10" rr-id="ang_c_040365">
+              {{ "angiographyCT.coronaryArteries." + model.coronaryAnomalyType |
+              translate }}
+            </h2>
+
+            <p class="m-b-5" rr-id="ang_c_040337">
+              {{ "angiographyCT.coronaryArteries.vessel.value" | translate }}*
+            </p>
+
+            <p-checkbox
+              rr-id="ang_c_040338"
+              binary="true"
+              name="isRca"
+              label="{{ 'angiographyCT.coronaryArteries.rCA.value' | translate }}"
+              [(ngModel)]="model.isRca"
+              rrValidation="isRca isLca isRiva isRcx"
+            >
+            </p-checkbox>
+
+            <p-checkbox
+              rr-id="ang_c_040339"
+              binary="true"
+              name="isLca"
+              label="{{ 'angiographyCT.coronaryArteries.lCA.value' | translate }}"
+              [(ngModel)]="model.isLca"
+              rrValidation="isRca isLca isRiva isRcx"
+            >
+            </p-checkbox>
+
+            <p-checkbox
+              rr-id="ang_c_040340"
+              binary="true"
+              name="isRiva"
+              label="{{ 'angiographyCT.coronaryArteries.rIVA.value' | translate }}"
+              [(ngModel)]="model.isRiva"
+              rrValidation="isRca isLca isRiva isRcx"
+            >
+            </p-checkbox>
+
+            <p-checkbox
+              rr-id="ang_c_040341"
+              binary="true"
+              name="isRcx"
+              label="{{ 'angiographyCT.coronaryArteries.rCX.value' | translate }}"
+              [(ngModel)]="model.isRcx"
+              rrValidation="isRca isLca isRiva isRcx"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="f-vertical c-col-1 c-sep c-pad"></div>
+    <div class="f-vertical c-col-1 c-sep c-pad-l"></div>
+  </div>
+</div>

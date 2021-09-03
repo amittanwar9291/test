@@ -1,0 +1,71 @@
+<div class="endometriosis-mass-height f-horizontal w-100">
+  <div class="c-col-1 c-sep c-pad m-t-30 m-b-13 o-list">
+    <h2 rr-id="pel_m_0602181" class="p-l-10 m-b-13">
+      {{'pelvisMRT.femaleGender.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div class="o-radio-list p-l-10">
+      <div class="m-b-13">
+        <p rr-id="pel_m_0602182">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' | translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_0602460"
+          [diagnosisNumber]="1"
+          group="true"
+          [isActiveOnIKnow]="model.descriptionType === descriptionTypeEnum.IKnow"
+          [options]="w068DifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosis1"
+          [parentViewModel]="model"
+          name="differentialDiagnosis1"
+          (selectionChanged)="clearIsSubordinete()"
+          rrValidation="differentialDiagnosis1"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="m-b-13"
+        [rrDisable]="model.differentialDiagnosis1 === femaleGenderDiagnosisTypeEnum.None"
+      >
+        <p rr-id="pel_m_0602184">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' | translate}}
+        </p>
+
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_0602461"
+          [diagnosisNumber]="2"
+          group="true"
+          [options]="w068DifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosis2"
+          [parentViewModel]="model"
+          name="differentialDiagnosis2"
+          (selectionChanged)="clearIsSubordinete()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.subordinate.value' | translate}}"
+          rr-id="pel_m_0602186"
+          binary="true"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-30 m-b-13 o-list">
+    <div class="o-radio-list p-l-10">
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.lesionSamePathology.value' | translate}}"
+        rr-id="pel_m_0603491"
+        binary="true"
+        name="isMoreThan1LesionSamePathology"
+        [(ngModel)]="model.isMoreThan1LesionSamePathology"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-30 m-b-13 o-list"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-30 m-b-13 o-list"></div>
+</div>

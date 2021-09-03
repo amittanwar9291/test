@@ -1,0 +1,134 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-pad-r c-sep f-start f-vertical o-radio-list">
+      <h1 rr-id="elb_m_020103" class="m-b-19">
+        {{ 'elbowMRT.anamnesis.indication.value' | translate }}
+      </h1>
+      <div rr-id="elb_m_020104" class="m-b-41">
+        <img src="assets/img/elbowMRT/icons/person.svg" alt="person" />
+      </div>
+
+      <div class="f-start f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [setConfig]="findingDropdownConfig"
+            [disabled]="false"
+          ></rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l c-sep">
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <ng-container *ngSwitchCase="findingType.None"></ng-container>
+
+            <rr-trauma-indication
+              *ngSwitchCase="findingType.Trauma"
+              [model]="findingHandler.currentItem"
+              [header]="selectedFindingName"
+            ></rr-trauma-indication>
+
+            <rr-lesion-of-tendons-indication
+              *ngSwitchCase="findingType.LesionOfTendonsLigaments"
+              [model]="findingHandler.currentItem"
+              [header]="selectedFindingName"
+            ></rr-lesion-of-tendons-indication>
+
+            <rr-simple-indication
+              *ngSwitchDefault
+              [model]="findingHandler.currentItem"
+              [header]="selectedFindingName"
+              headerRrId="elb_m_0202100"
+            ></rr-simple-indication>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-start f-vertical o-list">
+      <h1 rr-id="elb_m_0203100" class="m-b-6">
+        {{ 'elbowMRT.anamnesis.priorExams.value' | translate }}
+      </h1>
+      <div rr-id="elb_m_0203101" class="m-l-3 m-b-38">
+        <img src="assets/img/elbowMRT/icons/symbol.svg" alt="symbol" />
+      </div>
+
+      <p-checkbox
+        rr-id="elb_m_0203102"
+        [(ngModel)]="model.isXRay"
+        label="{{ 'elbowMRT.anamnesis.xRay.value' | translate }}"
+        name="isXRay"
+        binary="true"
+        class="m-b-0"
+        (onChange)="resetXRayDate()"
+      ></p-checkbox>
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isXRay"
+      >
+        <rr-month-year-input
+          labelRrId="elb_m_0203114"
+          monthRrId="elb_m_0203103"
+          yearRrId="elb_m_0203104"
+          [(ngModel)]="model.xRayDate"
+          label="{{ 'elbowMRT.anamnesis.date.value' | translate }}"
+          name="xRayDate"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+
+      <p-checkbox
+        rr-id="elb_m_0203105"
+        [(ngModel)]="model.isCT"
+        label="{{ 'elbowMRT.anamnesis.ct.value' | translate }}"
+        name="isCT"
+        binary="true"
+        class="m-b-0"
+        (onChange)="resetCTDate()"
+      ></p-checkbox>
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isCT"
+      >
+        <rr-month-year-input
+          labelRrId="elb_m_0203115"
+          monthRrId="elb_m_0203106"
+          yearRrId="elb_m_0203107"
+          [(ngModel)]="model.ctDate"
+          label="{{ 'elbowMRT.anamnesis.date.value' | translate }}"
+          name="ctDate"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+
+      <p-checkbox
+        rr-id="elb_m_0203108"
+        [(ngModel)]="model.isMRI"
+        label="{{ 'elbowMRT.anamnesis.mri.value' | translate }}"
+        name="isMRI"
+        binary="true"
+        class="m-b-0"
+        (onChange)="resetMRIDate()"
+      ></p-checkbox>
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isMRI"
+      >
+        <rr-month-year-input
+          labelRrId="elb_m_0203116"
+          monthRrId="elb_m_0203109"
+          yearRrId="elb_m_0203110"
+          [(ngModel)]="model.mriDate"
+          label="{{ 'elbowMRT.anamnesis.date.value' | translate }}"
+          name="mriDate"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</form>

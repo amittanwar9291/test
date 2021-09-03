@@ -1,0 +1,49 @@
+<div class="f-vertical o-radio-list">
+  <p-radioButton
+    name="radioName"
+    *ngFor="let radio of [findingsAttr.radio[0]['value'], findingsAttr.radio[1]['value']]; let i = index"
+    [attr.rr-id]="findingsAttr.radio[i]['rr-id']"
+    [value]="radio"
+    label="{{findingsAttr.radio[i].translationKey | translate}}"
+    [(ngModel)]="model[findingsName]"
+    (click)="resetFindings()"
+  >
+  </p-radioButton>
+  <div>
+    <div class="overflow-section">
+      <div
+        [class.disabled]="model[findingsName] === findingsAttr.radio[0]['value'] || model[findingsName] === 'None'"
+      >
+        <div
+          class="overflow-section__dynamic-component"
+          *ngFor="let item of findingHandler.collection; let i = index"
+          (click)="setDisabledAttribute(i)"
+        >
+          <rr-multi-value-dropdown
+            *ngIf="!item.isDeleted"
+            [dropdownValues]="dropdownValues"
+            [attr.rr-id]="findingsAttr.dropdown['rr-id']"
+            [index]="i"
+            [indexLabel]="i+1"
+            (componentDeleted)="removeFinding($event)"
+            [selectedValue]="findingHandler.collection[i].findingType"
+            [disabled]="((i !== findingHandler.currentItemIndex && model[findingsName] === findingsAttr.radio[1]['value']))"
+            (newSelection)="updateFinding($event)"
+            [placeholder]="findingsAttr.dropdown.placeholderKey | translate"
+          >
+          </rr-multi-value-dropdown>
+          <rr-dynamic-container [hidden]="true"></rr-dynamic-container>
+        </div>
+      </div>
+      <ng-content></ng-content>
+      <button
+        type="button"
+        [attr.rr-id]="findingsAttr.button['rr-id']"
+        (click)="addFinding($event)"
+        [class.disabled]="isButtonActive()"
+      >
+        {{ findingsAttr.button.translationKey | translate }}
+      </button>
+    </div>
+  </div>
+</div>

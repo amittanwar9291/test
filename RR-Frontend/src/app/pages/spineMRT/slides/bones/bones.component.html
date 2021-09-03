@@ -1,0 +1,218 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerConfig">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-list">
+      <h1 rr-id="spi_m_060103" class="m-b-17">
+        {{ 'spineMRT.bones.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical text-break">
+        <p-radioButton
+          rr-id="spi_m_060104"
+          name="areFindings"
+          label="{{'spineMRT.bones.noPathologicOsseousFindings.value' | translate }}"
+          [value]="areFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+          [(ngModel)]="model.areFindings"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="spi_m_060105"
+          class="m-b-17"
+          name="areFindings"
+          label="{{'spineMRT.bones.finding.value' | translate }}"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+          [(ngModel)]="model.areFindings"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          name="findingHandler"
+          [setConfig]="findingDropdownConfig"
+          [disabled]="isDynamicPartDisabled()"
+          validationName="findings"
+          [setDescriptionTypes]="['FocalTumor', 'DiffuseTumor']"
+          (findingChange)="activeTabIndex = 0"
+          (newFindingAdded)="activeTabIndex = 0"
+          (findingTypeChange)="activeTabIndex = 0"
+          (descriptionChanged)="activeTabIndex = 0"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <div class="f-vertical f-start">
+      <div class="c-pad-l header">
+        <h1
+          rr-id="spi_m_060201"
+          *ngIf="findingHandler.currentItem.findingType !== bonesFindingTypeEnum.None"
+        >
+          {{'spineMRT.bones.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <div
+        *ngIf="isCurrentItem(bonesFindingTypeEnum.None)"
+        class="f-horizontal f-start col-h-100"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-spine-mrt-bones-fracture
+        *ngIf="isCurrentItem(bonesFindingTypeEnum.Fracture)"
+        [model]="findingHandler.currentItem"
+        class="col-h-100"
+        name="fracture"
+      >
+      </rr-spine-mrt-bones-fracture>
+
+      <rr-bone-marrow-edema
+        class="col-h-100"
+        *ngIf="isCurrentItem(bonesFindingTypeEnum.BoneMarrowEdema)"
+        [model]="findingHandler.currentItem"
+      >
+      </rr-bone-marrow-edema>
+
+      <rr-vertebral-arch-pathology
+        class="col-h-100"
+        *ngIf="isCurrentItem(bonesFindingTypeEnum.PathologyOfTheVertebralArch)"
+        [model]="findingHandler.currentItem"
+      >
+      </rr-vertebral-arch-pathology>
+
+      <rr-posttherapeutic-change
+        class="col-h-100"
+        *ngIf="isCurrentItem(bonesFindingTypeEnum.PosttherapeuticChange)"
+        [model]="findingHandler.currentItem"
+      ></rr-posttherapeutic-change>
+
+      <div *ngIf="isCurrentItem(bonesFindingTypeEnum.FocalTumor)">
+        <div class="tumor-focal-other_tab">
+          <p-tabView
+            class="rr-tabView"
+            [activeIndex]="activeTabIndex"
+            (activeIndexChange)="activeTabIndex = $event"
+          >
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <h1
+                  rr-id="spi_m_060209"
+                  class="custom-tab-header"
+                  rrValidation="spineLocation traumaLocation size limitationType corticalisType"
+                  ifAny="true"
+                >
+                  {{'spineMRT.bones.characterizationI.value' | translate}}
+                </h1>
+              </ng-template>
+              <rr-focal-tumor-characteristics-one
+                [isCMYes]="isCMYes"
+                [model]="findingHandler.currentItem"
+                [differentialDiagnosisOptions1]="differentialDiagnosisOptions1"
+              >
+              </rr-focal-tumor-characteristics-one>
+            </p-tabPanel>
+            <p-tabPanel
+              rr-id="spi_m_060371"
+              header="{{'spineMRT.bones.characterizationII.value' | translate}}"
+            >
+              <rr-focal-tumor-characteristics-two
+                [model]="findingHandler.currentItem"
+              >
+              </rr-focal-tumor-characteristics-two>
+            </p-tabPanel>
+            <p-tabPanel
+              rr-id="spi_m_060371"
+              header="{{'spineMRT.bones.characterizationIII.value' | translate}}"
+            >
+              <rr-focal-tumor-characteristics-three
+                [model]="findingHandler.currentItem"
+              >
+              </rr-focal-tumor-characteristics-three>
+            </p-tabPanel>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <h1
+                  rr-id="spi_m_060427"
+                  class="custom-tab-header"
+                  rrValidation="differentialDiagnosis01"
+                  ifAny="true"
+                >
+                  {{'spineMRT.bones.differentialDiagnosisTabHeader.value' |
+                  translate}}
+                </h1>
+              </ng-template>
+              <rr-focal-tumor-differential-diagnosis
+                [model]="findingHandler.currentItem"
+              >
+              </rr-focal-tumor-differential-diagnosis>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+
+      <div *ngIf="isCurrentItem(bonesFindingTypeEnum.DiffuseTumor)">
+        <div class="tumor-focal-other_tab">
+          <p-tabView
+            class="rr-tabView"
+            [activeIndex]="activeTabIndex"
+            (activeIndexChange)="activeTabIndex = $event"
+          >
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <h1
+                  rr-id="spi_m_060209"
+                  class="custom-tab-header"
+                  rrValidation="mainCharacteristicsDifferentialDiagnosis01 spineLocation2"
+                  ifAny="true"
+                >
+                  {{'spineMRT.bones.characterization.value' | translate}}
+                </h1>
+              </ng-template>
+              <rr-tumor-diffuse-characterization
+                [isCMYes]="isCMYes"
+                [model]="findingHandler.currentItem"
+              >
+              </rr-tumor-diffuse-characterization>
+            </p-tabPanel>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <h1
+                  rr-id="spi_m_060380"
+                  class="custom-tab-header"
+                  rrValidation="differentialDiagnosis01"
+                  ifAny="true"
+                >
+                  {{'spineMRT.bones.differentialDiagnosisTabHeader.value' |
+                  translate}}
+                </h1>
+              </ng-template>
+              <rr-tumor-diffuse-differential-diagnosis
+                [model]="findingHandler.currentItem"
+              >
+              </rr-tumor-diffuse-differential-diagnosis>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="largeLocalizerConfig"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="findingHandler.currentItem[largeLocalizerConfig.localizerModelPropName]"
+      [logicType]="largeLocalizerConfig.logicType"
+      [selectionAccessibilityMode]="largeLocalizerConfig.selectionAccessibilityMode"
+      (close)="onLargeLocalizerClosed()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      [localizationDescription]="largeLocalizerConfig.localizationDescription"
+    ></rr-spine-complex>
+  </div>
+</form>

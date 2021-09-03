@@ -1,0 +1,52 @@
+<div class="top-header f-horizontal f-space-between f-align-center">
+  <div class="left-part f-horizontal f-start f-align-center">
+    <i class="pi pi-bars hamburger" (click)="sidebarClick()"></i>
+    <div class="logo-space f-horizontal f-space-between f-align-start">
+      <img class="radio-logo" src="assets/img/layout/rr-logo.svg" />
+      <div class="vertical-line"></div>
+      <img
+        *ngIf="customerLogo; else versionLogo"
+        class="customer-logo"
+        [src]="customerLogo"
+      />
+      <ng-template #versionLogo
+        ><img class="version-logo" src="assets/img/layout/Logo-1.3.svg"
+      /></ng-template>
+    </div>
+  </div>
+
+  <div class="middle-part f-horizontal f-center f-align-center"></div>
+
+  <div class="right-part f-horizontal f-end f-align-center">
+    <div class="f-vertical" *ngIf="isReport">
+      <div class="f-horizontal">
+        <p class="patient-name">
+          {{ patientData.lastName }}, {{ patientData.firstName }}
+        </p>
+        <p class="module-name">
+          | {{ moduleNames[reportData.examinationType] }}
+        </p>
+      </div>
+      <p
+        *ngIf="isOnDevelopmentEnviroment()"
+        class="module-name"
+        style="font-size: 10px; color: grey;"
+      >
+        {{ reportData.id }}
+      </p>
+    </div>
+
+    <div class="user-name f-horizontal f-center f-align-center">
+      <p class="user-name__label">{{ userInitials }}</p>
+    </div>
+
+    <div class="logout-btn-space f-horizontal f-center f-align-center">
+      <div
+        (click)="logout()"
+        class="logout-btn f-horizontal f-center f-align-center"
+      >
+        <p class="logout-btn__label">LOGOUT</p>
+      </div>
+    </div>
+  </div>
+</div>

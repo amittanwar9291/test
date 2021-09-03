@@ -1,0 +1,382 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-14 m-b-13">
+  <div
+    class="f-vertical o-radio-list m-b-23"
+    [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+  >
+    <h2 rr-id="nec_m_060207" class="m-b-11">
+      {{ 'neckMRT.softTissues.differentialDiagnosis1.value' | translate }}*
+    </h2>
+    <rr-differential-diagnosis-dropdown
+      rrId="nec_m_060208"
+      [diagnosisNumber]="1"
+      [options]="diffDiagnosisOptions"
+      [(ngModel)]="model.characterizationIDifferentialDiagnosis"
+      name="characterizationIDifferentialDiagnosis"
+      group="true"
+      isActiveOnIKnow="true"
+      [parentViewModel]="model"
+      (selectionChanged)="resetDifferentialDiagnosisDependantModel()"
+      rrValidation="characterizationIDifferentialDiagnosis"
+    ></rr-differential-diagnosis-dropdown>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-11"
+    [rrDisable]="model.characterizationIDifferentialDiagnosis === differentialDiagnosistype.None"
+  >
+    <p-checkbox
+      rr-id="nec_m_060209"
+      [(ngModel)]="model.isHistologyProven"
+      name="isHistologyProven"
+      label="{{ 'neckMRT.softTissues.histologyProven.value' | translate }}"
+      binary="true"
+      rrContentReset="isHistologyProven-block"
+    >
+    </p-checkbox>
+    <div
+      id="isHistologyProven-block"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isHistologyProven"
+    >
+      <p-radioButton
+        rr-id="nec_m_060210"
+        [(ngModel)]="model.histologyProvenType"
+        name="histologyProvenType"
+        label="{{ 'neckMRT.softTissues.benign.value' | translate }}"
+        [value]="histologyProvenType.Benign"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_060211"
+        [(ngModel)]="model.histologyProvenType"
+        name="histologyProvenType"
+        label="{{ 'neckMRT.softTissues.malignant.value' | translate }}"
+        [value]="histologyProvenType.Malignant"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_060212" rrValidation="localizationReferenceVertebra">
+      {{ 'neckMRT.softTissues.localizationReferenceVertebra.value' | translate
+      }}*
+    </h2>
+    <rr-spine-simple
+      rr-id="nec_m_060213"
+      [spineLocation]="model.localizationReferenceVertebra"
+      (click)="openLargeLocalizer()"
+      [selectionAccessibilityMode]="selectionAccessibilityModeEnum.C1toTH4"
+      isLocalizer="true"
+      rrValidation="localizationReferenceVertebra"
+    >
+    </rr-spine-simple>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_060214" class="m-b-2">
+      {{ 'neckMRT.softTissues.orientationAxial.value' | translate }}
+    </h2>
+    <p-dropdown
+      rr-id="nec_m_060215"
+      styleClass="ui-brown-box o-width-100"
+      [(ngModel)]="model.orientationAxialType"
+      name="orientationAxialType"
+      [options]="orientationAxialOptions"
+      placeholder="{{'shared.pleaseSelect' | translate}}"
+      rrDropdownClear
+    >
+    </p-dropdown>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-14 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_060319" rrInfoIcon="nec_m_06_03" class="text-break">
+      {{ 'neckMRT.softTissues.fasciaSpacessupraAndInfrahyoidal.value' |
+      translate }}
+    </h2>
+    <p-checkbox
+      rr-id="nec_m_060320"
+      [(ngModel)]="model.isPharyngealMucosalSpacePMS"
+      name="isPharyngealMucosalSpacePMS"
+      label="{{ 'neckMRT.softTissues.pharyngealMucosalSpacePMS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060321"
+      [(ngModel)]="model.isParapharyngealSpacePPS"
+      name="isParapharyngealSpacePPS"
+      label="{{ 'neckMRT.softTissues.parapharyngealSpacePPS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060322"
+      [(ngModel)]="model.isMastatorSpaceMS"
+      name="isMastatorSpaceMS"
+      label="{{ 'neckMRT.softTissues.mastatorSpaceMS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060323"
+      [(ngModel)]="model.isBuccalSpaceBS"
+      name="isBuccalSpaceBS"
+      label="{{ 'neckMRT.softTissues.buccalSpaceBS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060324"
+      [(ngModel)]="model.isParotidSpacePS"
+      name="isParotidSpacePS"
+      label="{{ 'neckMRT.softTissues.parotidSpacePS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060325"
+      [(ngModel)]="model.isCarotidSpaceCS"
+      name="isCarotidSpaceCS"
+      label="{{ 'neckMRT.softTissues.carotidSpaceCS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060326"
+      [(ngModel)]="model.isRetropharyngealSpaceRPSAndDangerSpace"
+      name="isRetropharyngealSpaceRPSAndDangerSpace"
+      label="{{ 'neckMRT.softTissues.retropharyngealSpaceRPSandDanger.value' | translate }}"
+      binary="true"
+      labelStyleClass="text-break"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060327"
+      [(ngModel)]="model.isPerivertebralSpacePVSPrevertebral"
+      name="isPerivertebralSpacePVSPrevertebral"
+      label="{{ 'neckMRT.softTissues.perivertebralSpacePVSprevertebral.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060328"
+      [(ngModel)]="model.isPerivertebralSpacePVSParaspinal"
+      name="isPerivertebralSpacePVSParaspinal"
+      label="{{ 'neckMRT.softTissues.perivertebralSpacePVSparaspinal.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060329"
+      [(ngModel)]="model.isVisceralSpaceVS"
+      name="isVisceralSpaceVS"
+      label="{{ 'neckMRT.softTissues.visceralSpaceVS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060330"
+      [(ngModel)]="model.isAnteriorCervicalSpaceACS"
+      name="isAnteriorCervicalSpaceACS"
+      label="{{ 'neckMRT.softTissues.anteriorCervicalSpaceACS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060331"
+      [(ngModel)]="model.isPosteriorCervicalSpacePCS"
+      name="isPosteriorCervicalSpacePCS"
+      label="{{ 'neckMRT.softTissues.posteriorCervicalSpacePCS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-14 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_060415" rrInfoIcon="nec_m_06_04">
+      {{ 'neckMRT.softTissues.fasciaSpacesoralCavityoropharynx.value' |
+      translate }}
+    </h2>
+    <p-checkbox
+      rr-id="nec_m_060416"
+      [(ngModel)]="model.isOralMucosalSpaceOMS"
+      name="isOralMucosalSpaceOMS"
+      label="{{ 'neckMRT.softTissues.oralMucosalSpaceOMS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060417"
+      [(ngModel)]="model.isSublingualSpaceSLS"
+      name="isSublingualSpaceSLS"
+      label="{{ 'neckMRT.softTissues.sublingualSpaceSLS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060418"
+      [(ngModel)]="model.isSubmandibularSpaceSMS"
+      name="isSubmandibularSpaceSMS"
+      label="{{ 'neckMRT.softTissues.submandibularSpaceSMS.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060419"
+      [(ngModel)]="model.isApexLinguae"
+      name="isApexLinguae"
+      label="{{ 'neckMRT.softTissues.apexLinguae.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060420"
+      [(ngModel)]="model.isCorpusLinguae"
+      name="isCorpusLinguae"
+      label="{{ 'neckMRT.softTissues.corpusLinguae.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060421"
+      [(ngModel)]="model.isRadixLinguae"
+      name="isRadixLinguae"
+      label="{{ 'neckMRT.softTissues.radixLinguae.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060422"
+      [(ngModel)]="model.isTongueBaseTonsil"
+      name="isTongueBaseTonsil"
+      label="{{ 'neckMRT.softTissues.tongueBaseTonsil.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060423"
+      [(ngModel)]="model.isValleculae"
+      name="isValleculae"
+      label="{{ 'neckMRT.softTissues.valleculae.value' | translate }}"
+      binary="true"
+      (onChange)="checkTransspatialSpread()"
+    >
+    </p-checkbox>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="nec_m_060424"
+      [(ngModel)]="model.isTransspatialSpread"
+      name="isTransspatialSpread"
+      label="{{ 'neckMRT.softTissues.transspatialSpread.value' | translate }}"
+      binary="true"
+      class="checkbox-readonly"
+    >
+    </p-checkbox>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_060425">
+      {{ 'neckMRT.softTissues.referenceToVascularNerve.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="nec_m_060426"
+      [(ngModel)]="model.vascularNerveSheathType"
+      name="vascularNerveSheathType"
+      label="{{ 'neckMRT.softTissues.lateral.value' | translate }}"
+      [value]="vascularNerveSheathTypeEnum.Lateral"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_060427"
+      [(ngModel)]="model.vascularNerveSheathType"
+      name="vascularNerveSheathType"
+      label="{{ 'neckMRT.softTissues.medial.value' | translate }}"
+      [value]="vascularNerveSheathTypeEnum.Medial"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+</div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-14 m-b-13">
+  <div class="f-vertical o-radio-list c-pad-r">
+    <h2 rr-id="nec_m_060505">
+      {{ 'neckMRT.softTissues.cutis.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="nec_m_060506"
+      [(ngModel)]="model.isRegioParotideomasseterica"
+      name="isRegioParotideomasseterica"
+      label="{{ 'neckMRT.softTissues.regioParotideomasseterica.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060507"
+      [(ngModel)]="model.isBuccalRegion"
+      name="isBuccalRegion"
+      label="{{ 'neckMRT.softTissues.buccalRegion.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060508"
+      [(ngModel)]="model.isOralRegion"
+      name="isOralRegion"
+      label="{{ 'neckMRT.softTissues.oralRegion.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060509"
+      [(ngModel)]="model.isMentalRegion"
+      name="isMentalRegion"
+      label="{{ 'neckMRT.softTissues.mentalRegion.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060510"
+      [(ngModel)]="model.isSubmental"
+      name="isSubmental"
+      label="{{ 'neckMRT.softTissues.submental.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060511"
+      [(ngModel)]="model.isUpperLip"
+      name="isUpperLip"
+      label="{{ 'neckMRT.softTissues.upperLip.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_060512"
+      [(ngModel)]="model.isLowerLip"
+      name="isLowerLip"
+      label="{{ 'neckMRT.softTissues.lowerLip.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>

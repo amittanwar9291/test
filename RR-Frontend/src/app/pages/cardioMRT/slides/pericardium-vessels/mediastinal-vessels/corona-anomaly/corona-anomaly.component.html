@@ -1,0 +1,51 @@
+<div class="f-horizontal col-h-100" id="coronaAnomaly-block">
+  <div class="c-col-3 c-pad-l c-sep f-start f-vertical">
+    <h2 rr-id="car_m_090301" class="m-t-3 m-b-10">
+      {{ 'cardioMRT.pericardiumVessels.coronaryAnomaly.value' | translate }}*
+    </h2>
+    <div class="c-col-3 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="car_m_090302"
+          [(ngModel)]="model.coronaryAnomalyType"
+          label="{{ 'cardioMRT.pericardiumVessels.origin.value' | translate }}"
+          name="coronaryAnomalyType"
+          [value]="coronaryAnomalyType.Origin"
+          rrValidation="coronaryAnomalyType"
+          rrContentReset="distalDetails-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_090303"
+          [(ngModel)]="model.coronaryAnomalyType"
+          label="{{ 'cardioMRT.pericardiumVessels.distal.value' | translate }}"
+          name="coronaryAnomalyType"
+          [value]="coronaryAnomalyType.Distal"
+          rrValidation="coronaryAnomalyType"
+          rrContentReset="originDetails-block"
+        ></p-radioButton>
+      </div>
+
+      <ng-container [ngSwitch]="model.coronaryAnomalyType">
+        <rr-origin-details
+          *ngSwitchCase="coronaryAnomalyType.Origin"
+          [model]="model"
+          class="col-h-100"
+        ></rr-origin-details>
+
+        <rr-distal-details
+          *ngSwitchCase="coronaryAnomalyType.Distal"
+          [model]="model"
+          class="col-h-100"
+        ></rr-distal-details>
+
+        <div
+          *ngSwitchCase="coronaryAnomalyType.None"
+          class="f-horizontal col-h-100"
+        >
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,325 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-22 m-b-12">
+    <div class="f-vertical f-start o-radio-list c-sep c-pad">
+      <p-checkbox
+        name="isIntramuscularHaematoma"
+        (onChange)="resetSliders()"
+        labelStyleClass="ui-fat-label"
+        class="m-b-30"
+        label="{{ 'kneeMRT.softParts.intramuscularHaematoma.value' | translate }}"
+        rr-id="kne_m_0802219"
+        rrContentReset="isIntramuscularHaematoma-block"
+        binary="true"
+        [(ngModel)]="model.isIntramuscularHaematoma"
+        rrValidation="isIntramuscularHaematoma isMuscleLesion isFurtherFindingsMusculature"
+      >
+      </p-checkbox>
+      <div id="isIntramuscularHaematoma-block" class="f-horizontal col-h-100">
+        <div
+          class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list"
+          [rrDisable]="!model.isIntramuscularHaematoma"
+        >
+          <h2 rr-id="kne_m_0802220">
+            {{ 'kneeMRT.softParts.localization.value' | translate }}*
+          </h2>
+          <p-checkbox
+            name="isIntramuscular"
+            label="{{ 'kneeMRT.softParts.intramuscular.value' | translate }}"
+            rr-id="kne_m_0802221"
+            binary="true"
+            [(ngModel)]="model.isIntramuscular"
+            rrValidation="isIntramuscular isInterfacial isIntermuscular"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isInterfacial"
+            label="{{ 'kneeMRT.softParts.interfacial.value' | translate }}"
+            rr-id="kne_m_0802222"
+            binary="true"
+            [(ngModel)]="model.isInterfacial"
+            rrValidation="isIntramuscular isInterfacial isIntermuscular"
+          >
+          </p-checkbox>
+          <p-checkbox
+            name="isIntermuscular"
+            label="{{ 'kneeMRT.softParts.intermuscular.value' | translate }}"
+            rr-id="kne_m_0802223"
+            binary="true"
+            class="m-b-39"
+            [(ngModel)]="model.isIntermuscular"
+            rrValidation="isIntramuscular isInterfacial isIntermuscular"
+          >
+          </p-checkbox>
+          <div class="f-vertical f-start o-radio-list sliders-z-index">
+            <h2 rr-id="kne_m_0803234" class="m-b-0">
+              {{'kneeMRT.softParts.signalBehaviourT1w.value' | translate}}
+            </h2>
+            <p>
+              {{'kneeMRT.softParts.referenceMuscle.value' | translate}}
+            </p>
+            <rr-slider-number-triple-input
+              name="t1w"
+              rr-id="kne_m_0803235"
+              [(ngModel)]="model.t1w"
+            >
+            </rr-slider-number-triple-input>
+            <h2 rr-id="kne_m_0803236" class="m-b-0 m-t-30">
+              {{'kneeMRT.softParts.signalBehaviourT2w.value' | translate}}
+            </h2>
+            <p class="m-b-2">
+              {{'kneeMRT.softParts.referenceMuscle.value' | translate}}
+            </p>
+            <rr-slider-number-triple-input
+              name="t2w"
+              rr-id="kne_m_0803237"
+              [(ngModel)]="model.t2w"
+            >
+            </rr-slider-number-triple-input>
+          </div>
+        </div>
+        <div
+          class="c-col-1 c-pad-l f-vertical f-start o-radio-list"
+          [rrDisable]="!model.isIntramuscularHaematoma"
+        >
+          <h2 rr-id="kne_m_0803214" rrInfoIcon="kne_m_0803219">
+            {{ 'kneeMRT.softParts.age.value' | translate }}
+          </h2>
+          <p-radioButton
+            rrUnClickRadio
+            name="intramuscularHaematomaType"
+            [value]="intramuscularHaematomaTypeEnum.Hyperacute"
+            label="{{ 'kneeMRT.softParts.hyperacute.value' | translate }}"
+            rr-id="kne_m_0803215"
+            [(ngModel)]="model.intramuscularHaematomaType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            name="intramuscularHaematomaType"
+            [value]="intramuscularHaematomaTypeEnum.Acute"
+            label="{{ 'kneeMRT.softParts.acute.value' | translate }}"
+            rr-id="kne_m_0803216"
+            [(ngModel)]="model.intramuscularHaematomaType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            name="intramuscularHaematomaType"
+            [value]="intramuscularHaematomaTypeEnum.Subacute"
+            label="{{ 'kneeMRT.softParts.subacute.value' | translate }}"
+            rr-id="kne_m_0803217"
+            [(ngModel)]="model.intramuscularHaematomaType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            name="intramuscularHaematomaType"
+            [value]="intramuscularHaematomaTypeEnum.ChronicOrganized"
+            label="{{ 'kneeMRT.softParts.chronicOrganized.value' | translate }}"
+            rr-id="kne_m_0803218"
+            [(ngModel)]="model.intramuscularHaematomaType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start o-radio-list c-pad">
+      <p-checkbox
+        name="isMuscleLesion"
+        labelStyleClass="ui-fat-label"
+        label="{{ 'kneeMRT.softParts.muscleLesion.value' | translate }}"
+        rr-id="kne_m_0804212"
+        class="m-b-2"
+        rrContentReset="isMuscleLesion-block TornMuscleOrTendonRuptureTypeIV-block2"
+        binary="true"
+        [(ngModel)]="model.isMuscleLesion"
+        rrValidation="isIntramuscularHaematoma isMuscleLesion isFurtherFindingsMusculature"
+      >
+      </p-checkbox>
+      <div
+        id="isMuscleLesion-block"
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="!model.isMuscleLesion"
+      >
+        <p
+          rr-id="kne_m_0804213"
+          rrInfoIcon="kne_m_0804214"
+          class="text-break m-b-8"
+        >
+          {{ 'kneeMRT.softParts.classificationMunichConsensus.value' | translate
+          }}
+        </p>
+        <p-radioButton
+          name="classificationMunichConsensusType"
+          [value]="classificationMunichConsensusTypeEnum.MuscularEdema"
+          label="{{ 'kneeMRT.softParts.muscularEdema.value' | translate }}"
+          rrContentReset="MuscleFibreRuptureTypeIIIA-block TornMuscleBundleTypeIIIB-block TornMuscleOrTendonRuptureTypeIV-block TornMuscleOrTendonRuptureTypeIV-block2"
+          rr-id="kne_m_0804215"
+          [(ngModel)]="model.classificationMunichConsensusType"
+          rrValidation="classificationMunichConsensusType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          name="classificationMunichConsensusType"
+          rrContentReset="TornMuscleBundleTypeIIIB-block TornMuscleOrTendonRuptureTypeIV-block TornMuscleOrTendonRuptureTypeIV-block2"
+          [value]="classificationMunichConsensusTypeEnum.MuscleFibreRuptureTypeIIIA"
+          label="{{ 'kneeMRT.softParts.muscleFibreRupture(type.value' | translate }}"
+          rr-id="kne_m_0804216"
+          [(ngModel)]="model.classificationMunichConsensusType"
+          rrValidation="classificationMunichConsensusType"
+        >
+        </p-radioButton>
+        <div
+          id="MuscleFibreRuptureTypeIIIA-block"
+          class="f-vertical f-start o-radio-list nested-content m-b-0"
+          [rrDisable]="model.classificationMunichConsensusType !== classificationMunichConsensusTypeEnum.MuscleFibreRuptureTypeIIIA"
+        >
+          <p-checkbox
+            name="isCrossDiameterRuptureBelow5Mm"
+            label="{{ 'kneeMRT.softParts.crossDiameterOfThe.value' | translate }}"
+            rr-id="kne_m_0804217"
+            binary="true"
+            class="text-break"
+            [(ngModel)]="model.isCrossDiameterRuptureBelow5Mm"
+          ></p-checkbox>
+        </div>
+        <p-radioButton
+          name="classificationMunichConsensusType"
+          rrContentReset="MuscleFibreRuptureTypeIIIA-block TornMuscleOrTendonRuptureTypeIV-block TornMuscleOrTendonRuptureTypeIV-block2"
+          [value]="classificationMunichConsensusTypeEnum.TornMuscleBundleTypeIIIB"
+          label="{{ 'kneeMRT.softParts.tornMuscleBundle(type.value' | translate }}"
+          rr-id="kne_m_0804218"
+          [(ngModel)]="model.classificationMunichConsensusType"
+          rrValidation="classificationMunichConsensusType"
+        >
+        </p-radioButton>
+        <div
+          id="TornMuscleBundleTypeIIIB-block"
+          class="f-vertical f-start o-radio-list nested-content m-b-6"
+          [rrDisable]="model.classificationMunichConsensusType !== classificationMunichConsensusTypeEnum.TornMuscleBundleTypeIIIB"
+        >
+          <p-checkbox
+            name="isCrossDiameterRuptureOver5Mm"
+            label="{{ 'kneeMRT.softParts.crossDiameterOfTheOver.value' | translate }}"
+            rr-id="kne_m_0804219"
+            binary="true"
+            class="text-break"
+            [(ngModel)]="model.isCrossDiameterRuptureOver5Mm"
+          ></p-checkbox>
+        </div>
+
+        <p-radioButton
+          name="classificationMunichConsensusType"
+          rrContentReset="MuscleFibreRuptureTypeIIIA-block TornMuscleBundleTypeIIIB-block"
+          class="text-break"
+          [value]="classificationMunichConsensusTypeEnum.TornMuscleOrTendonRuptureTypeIV"
+          label="{{ 'kneeMRT.softParts.tornMuscletendonRupture(type.value' | translate }}"
+          rr-id="kne_m_0804220"
+          [(ngModel)]="model.classificationMunichConsensusType"
+          rrValidation="classificationMunichConsensusType"
+        >
+        </p-radioButton>
+        <div
+          id="TornMuscleOrTendonRuptureTypeIV-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="model.classificationMunichConsensusType !== classificationMunichConsensusTypeEnum.TornMuscleOrTendonRuptureTypeIV"
+        >
+          <rr-number-input
+            rr-id="kne_m_080333"
+            name="tornMuscleOrTendonRetractionInMm"
+            inputRrId="kne_m_0804221"
+            labelRrId="kne_m_0804222"
+            [(ngModel)]="model.tornMuscleOrTendonRetractionInMm"
+            [label]="'kneeMRT.softParts.retractionInMm.value' | translate"
+            [config]="{placeholder: '--', min: 0, step: 1, max: 50}"
+          >
+          </rr-number-input>
+          <p-checkbox
+            name="isWavyAppearanceOfTheFibers"
+            label="{{ 'kneeMRT.softParts.wavyCourseOfThe.value' | translate }}"
+            rr-id="kne_m_0804223"
+            binary="true"
+            [(ngModel)]="model.isWavyAppearanceOfTheFibers"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div
+      id="TornMuscleOrTendonRuptureTypeIV-block2"
+      class="c-col-1 c-pad-l f-vertical f-start o-radio-list c-sep-l m-t-285"
+    >
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.classificationMunichConsensusType !== classificationMunichConsensusTypeEnum.TornMuscleOrTendonRuptureTypeIV"
+      >
+        <p-checkbox
+          name="isBonyAvulsionFracture"
+          label="{{ 'kneeMRT.softParts.osseousAvulsion.value' | translate }}"
+          rr-id="kne_m_0805201"
+          rrContentReset="isBonyAvulsionFracture-block"
+          binary="true"
+          [(ngModel)]="model.isBonyAvulsionFracture"
+        ></p-checkbox>
+        <div
+          id="isBonyAvulsionFracture-block"
+          class="f-vertical f-start o-musculature-radio-list nested-content"
+          [rrDisable]="!model.isBonyAvulsionFracture"
+        >
+          <p-radioButton
+            name="osseousAvulsionType"
+            rrUnClickRadio
+            [value]="osseousAvulsionTypeEnum.SpinaIliacaAnteriorSuperior"
+            label="{{ 'kneeMRT.softParts.spinaIliacaAnteriorSuperior.value' | translate }}"
+            rr-id="kne_m_0805202"
+            [(ngModel)]="model.osseousAvulsionType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            name="osseousAvulsionType"
+            rrUnClickRadio
+            [value]="osseousAvulsionTypeEnum.SpinaIliacaAnteriorInferior"
+            label="{{ 'kneeMRT.softParts.spinaIliacaAnteriorInferior.value' | translate }}"
+            rr-id="kne_m_0805203"
+            [(ngModel)]="model.osseousAvulsionType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            name="osseousAvulsionType"
+            rrUnClickRadio
+            [value]="osseousAvulsionTypeEnum.SciaticTuber"
+            label="{{ 'kneeMRT.softParts.sciaticTuber.value' | translate }}"
+            rr-id="kne_m_0805204"
+            [(ngModel)]="model.osseousAvulsionType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            name="osseousAvulsionType"
+            rrUnClickRadio
+            [value]="osseousAvulsionTypeEnum.LesserTrochanter"
+            label="{{ 'kneeMRT.softParts.lesserTrochanter.value' | translate }}"
+            rr-id="kne_m_0805205"
+            [(ngModel)]="model.osseousAvulsionType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            name="osseousAvulsionType"
+            rrUnClickRadio
+            [value]="osseousAvulsionTypeEnum.FemoralDiaphysisPosterior"
+            label="{{ 'kneeMRT.softParts.femoralDiaphysisPosterior.value' | translate }}"
+            rr-id="kne_m_0805206"
+            [(ngModel)]="model.osseousAvulsionType"
+          >
+          </p-radioButton>
+        </div>
+        <p-checkbox
+          name="isIntracorticalOedema"
+          label="{{ 'kneeMRT.softParts.intracorticalOedema.value' | translate }}"
+          rr-id="kne_m_0805207"
+          binary="true"
+          [(ngModel)]="model.isIntracorticalOedema"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

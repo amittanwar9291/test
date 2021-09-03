@@ -1,0 +1,209 @@
+<div class="f-horizontal main-container  o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_050283">
+        {{ "headMRT.meninges.internalStructure.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050284"
+        name="isSeptations"
+        label="{{ 'headMRT.meninges.septations.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSeptations"
+        rrContentReset="isSeptationsBlock"
+      ></p-checkbox>
+      <div
+        id="isSeptationsBlock"
+        [rrDisable]="!(model.isSeptations && isContrastEnhanced)"
+        class="o-radio-list nested-content"
+      >
+        <p-checkbox
+          rr-id="hea_m_050285"
+          rrInfoIcon="hea_m_05_03"
+          class="text-break"
+          name="isContrastEnhancementMembrane"
+          label="{{ 'headMRT.meninges.contrastEnhancementmembrane.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isContrastEnhancementMembrane"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_050287"
+        name="isFluid"
+        label="{{ 'headMRT.meninges.fluid.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFluid"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050288"
+        name="isFluidLevel"
+        label="{{ 'headMRT.meninges.fluidLevel.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFluidLevel"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_050358">
+        {{ "headMRT.meninges.associatedFindings.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050359"
+        labelStyleClass="text-break"
+        name="isBridgeVeinDisplacementInward"
+        label="{{ 'headMRT.meninges.bridgeVeinDisplacementinward.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isBridgeVeinDisplacementInward"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_050360"
+        name="isDuralThickening"
+        label="{{ 'headMRT.meninges.duralThickening.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isDuralThickening"
+        rrContentReset="isDuralThickeningBlock"
+      ></p-checkbox>
+      <div
+        id="isDuralThickeningBlock"
+        [rrDisable]="!(model.isDuralThickening && isContrastEnhanced)"
+        class="o-radio-list nested-content"
+      >
+        <p-checkbox
+          rr-id="hea_m_050361"
+          labelStyleClass="text-break"
+          name="isContrastEnhancement"
+          label="{{ 'headMRT.meninges.contrastEnhancement.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isContrastEnhancement"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_050362"
+        name="isMidlineShift"
+        label="{{ 'headMRT.meninges.midlineShift.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isMidlineShift"
+        rrContentReset="isMidlineShiftBlock"
+      ></p-checkbox>
+      <div
+        id="isMidlineShiftBlock"
+        [rrDisable]="!model.isMidlineShift"
+        class="o-radio-list nested-content"
+      >
+        <p rr-id="hea_m_050363" class="m-b-5 m-t-5">
+          {{ "headMRT.meninges.side.value" | translate }}*
+        </p>
+        <p-radioButton
+          rr-id="hea_m_050364"
+          label="{{ 'headMRT.meninges.toTheRight.value' | translate }}"
+          name="sideType"
+          [value]="sideType.ToTheRight"
+          [(ngModel)]="model.sideType"
+          rrUnClickRadio
+          rrValidation="sideType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_050365"
+          label="{{ 'headMRT.meninges.toTheLeft.value' | translate }}"
+          name="sideType"
+          [value]="sideType.ToTheLeft"
+          [(ngModel)]="model.sideType"
+          rrUnClickRadio
+          rrValidation="sideType"
+        ></p-radioButton>
+        <p rr-id="hea_m_050366" class="m-t-10 m-b-5">
+          {{ "headMRT.meninges.midlineShiftText.value" | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="hea_m_050368"
+          inputRrId="hea_m_050367"
+          name="midlineDeviation"
+          [(ngModel)]="model.midlineDeviation"
+          [config]="{ min: 1, max: 99, placeholder: '--' }"
+          [label]="'headMRT.meninges.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_050369"
+        name="isHerniation"
+        label="{{ 'headMRT.meninges.herniation.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isHerniation"
+        rrContentReset="isHerniationBlock"
+      ></p-checkbox>
+      <div
+        id="isHerniationBlock"
+        [rrDisable]="!model.isHerniation"
+        class="o-radio-list nested-content"
+      >
+        <p rr-id="hea_m_050370" class="m-b-5" rrInfoIcon="hea_m_05_04">
+          {{ "headMRT.meninges.region.value" | translate }}*
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="regionTypeOptions"
+          name="regionType"
+          rr-id="hea_m_050371"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.regionType"
+          rrValidation="regionType"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_050458" rrInfoIcon="hea_m_05_05">
+        {{ "headMRT.meninges.characterizationHematoma.value" | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_050459"
+        label="{{ 'headMRT.meninges.acute.value' | translate }}"
+        name="characterizationHematomaType"
+        [value]="characterizationHematomaType.Acute"
+        [(ngModel)]="model.characterizationHematomaType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_050460"
+        label="{{ 'headMRT.meninges.subacute.value' | translate }}"
+        name="characterizationHematomaType"
+        [value]="characterizationHematomaType.Subacute"
+        [(ngModel)]="model.characterizationHematomaType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_050461"
+        label="{{ 'headMRT.meninges.chronic.value' | translate }}"
+        name="characterizationHematomaType"
+        [value]="characterizationHematomaType.Chronic"
+        [(ngModel)]="model.characterizationHematomaType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_050462"
+        label="{{ 'headMRT.meninges.olderWithFreshParts.value' | translate }}"
+        name="characterizationHematomaType"
+        [value]="characterizationHematomaType.OlderWithFreshParts"
+        [(ngModel)]="model.characterizationHematomaType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <h2 rr-id="hea_m_050463" class="m-t-35">
+        {{ "headMRT.meninges.differentialDiagnosis.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050464"
+        label="{{
+          'headMRT.meninges.subduralHygroma.value' | translate
+        }}"
+        name="isSubduralHygroma"
+        binary="true"
+        [(ngModel)]="model.isSubduralHygroma"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l m-t-15 m-b-15"></div>
+</div>

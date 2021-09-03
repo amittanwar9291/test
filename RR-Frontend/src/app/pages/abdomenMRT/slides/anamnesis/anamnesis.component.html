@@ -1,0 +1,173 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center" *ngIf="isLargeLocalizerOpened">
+    <rr-liver-segments-big-localizer
+      name="liverSegmentsLocalizationType"
+      [(ngModel)]="indicationFindingHandler.currentItem.liverSegmentsLocalizationType"
+      (close)="closeLocalizer()"
+      rrValidation="liverSegmentsLocalizationType"
+    >
+    </rr-liver-segments-big-localizer>
+  </div>
+  <div class="c-main f-horizontal f-center" [hidden]="isLargeLocalizerOpened">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="abd_m_020105">
+        {{'abdomenMRT.anamnesis.clinic.value' | translate}}
+      </h1>
+      <img
+        class="column-icon"
+        alt="Anamnesis"
+        rr-id="ang_m_020104"
+        src="assets/img/abdomenMRT/icons/2-1.svg"
+      />
+      <rr-finding-column
+        [handler]="clinicFindingHandler"
+        [disabled]="false"
+        [setConfig]="clinicFindingDropdownConfig"
+        [attr.name]="'clinicType'"
+        [customLabelCalculator]="getCustomLabel"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="c-sep c-pad-l f-vertical f-start o-radio-list">
+      <h1 rr-id="abd_m_020213">
+        {{'abdomenMRT.anamnesis.indication.value' | translate}}
+      </h1>
+      <img
+        class="column-icon m-b-24"
+        alt="Anamnesis"
+        rr-id="abd_m_020214"
+        src="assets/img/abdomenMRT/icons/2-2.svg"
+      />
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+          <rr-finding-column
+            [handler]="indicationFindingHandler"
+            [disabled]="false"
+            [setConfig]="indicationFindingDropdownConfig"
+            [attr.name]="'indications'"
+            validationName="indications"
+            [validationSecondFinding]="true"
+          >
+          </rr-finding-column>
+        </div>
+        <rr-indication-finding
+          [model]="indicationFindingHandler.currentItem"
+          [organRegionOptions1]="organRegionOptions1"
+          [organRegionOptions2]="organRegionOptions2"
+          (emitLocalizer)="openLocalizer()"
+          [indicationFindingHeaderLabel]="indicationFindingHeaderLabel"
+        >
+        </rr-indication-finding>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l o-radio-list">
+      <h1 rr-id="abd_m_020501" class="m-b-15">
+        {{'abdomenMRT.anamnesis.preliminaryExamination.value' | translate}}
+      </h1>
+      <img
+        class="column-icon"
+        alt="Anamnesis"
+        rr-id="abd_m_020502"
+        src="assets/img/abdomenMRT/icons/2-3.svg"
+      />
+      <p-checkbox
+        rr-id="abd_m_020503"
+        name="isMRIAbdomen"
+        label="{{'abdomenMRT.anamnesis.mRIAbdomen.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMRIAbdomen"
+        (ngModelChange)="clearMonthYearInput('dateOfMRI')"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content f-vertical"
+        [rrDisable]="!model.isMRIAbdomen"
+      >
+        <h3 rr-id="abd_m_020504">
+          {{'abdomenMRT.anamnesis.date.value' | translate}}
+        </h3>
+        <rr-month-year-input
+          monthRrId="abd_m_020505"
+          yearRrId="abd_m_020506"
+          [(ngModel)]="model.dateOfMRI"
+          name="dateOfMRI"
+        >
+        </rr-month-year-input>
+      </div>
+
+      <p-checkbox
+        rr-id="abd_m_020507"
+        name="isCTAbdomen"
+        label="{{'abdomenMRT.anamnesis.cTAbdomen.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCTAbdomen"
+        (ngModelChange)="clearMonthYearInput('dateOfCT')"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content f-vertical"
+        [rrDisable]="!model.isCTAbdomen"
+      >
+        <h3 rr-id="abd_m_020508">
+          {{'abdomenMRT.anamnesis.date.value' | translate}}
+        </h3>
+        <rr-month-year-input
+          monthRrId="abd_m_020509"
+          yearRrId="abd_m_020510"
+          [(ngModel)]="model.dateOfCT"
+          name="dateOfCT"
+        >
+        </rr-month-year-input>
+      </div>
+
+      <p-checkbox
+        rr-id="abd_m_020511"
+        name="isSonographyAbdomen"
+        label="{{'abdomenMRT.anamnesis.sonographyAbdomen.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSonographyAbdomen"
+        (ngModelChange)="clearMonthYearInput('dateOfSonography')"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content f-vertical"
+        [rrDisable]="!model.isSonographyAbdomen"
+      >
+        <h3 rr-id="abd_m_020512">
+          {{'abdomenMRT.anamnesis.date.value' | translate}}
+        </h3>
+        <rr-month-year-input
+          monthRrId="abd_m_020513"
+          yearRrId="abd_m_020514"
+          [(ngModel)]="model.dateOfSonography"
+          name="dateOfSonography"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        rr-id="abd_m_020515"
+        name="isPetCT"
+        label="{{'abdomenMRT.anamnesis.pETCT.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPetCT"
+        (ngModelChange)="clearMonthYearInput('dateOfPetCT')"
+      >
+      </p-checkbox>
+      <div
+        class="f-start nested-content f-vertical"
+        [rrDisable]="!model.isPetCT"
+      >
+        <h3 rr-id="abd_m_020516">
+          {{'abdomenMRT.anamnesis.date.value' | translate}}
+        </h3>
+        <rr-month-year-input
+          monthRrId="abd_m_020517"
+          yearRrId="abd_m_020518"
+          [(ngModel)]="model.dateOfPetCT"
+          name="dateOfPetCT"
+        >
+        </rr-month-year-input>
+      </div>
+    </div>
+  </div>
+</form>

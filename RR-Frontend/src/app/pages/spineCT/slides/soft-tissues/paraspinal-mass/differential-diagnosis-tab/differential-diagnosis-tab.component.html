@@ -1,0 +1,111 @@
+<div class="f-horizontal f-start main o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-13 m-b-15">
+    <div class="o-radio-list m-l-10 f-vertical p-r-5">
+      <h2 rr-id="spi_c_0802317" class="m-t-5">
+        {{'spineCT.softTissues.differentialDiagnosis.value' | translate}}
+      </h2>
+      <p
+        rr-id="spi_c_0802318"
+        class="m-b-0"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        {{'spineCT.softTissues.differentialDiagnosis1.value' | translate}}*
+      </p>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="w030DifferentialDiagnose1"
+        [(ngModel)]="model.differentialDiagnosis1"
+        group="true"
+        name="differentialDiagnosis1"
+        rrId="spi_c_0802319"
+        (selectionChanged)="onDifferentialDiagnosis01Change()"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis1"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+        rrMetaKeyBlock
+      >
+      </rr-differential-diagnosis-dropdown>
+
+      <p-checkbox
+        [rrDisable]="model.differentialDiagnosis1 === softTissuesDiagnosisTypeEnum.None"
+        binary="true"
+        [(ngModel)]="model.isSuspicionOf"
+        label="{{'spineCT.softTissues.suspicionOf.value'| translate}}"
+        rr-id="spi_c_0802320"
+        name="isSuspicionOf"
+      ></p-checkbox>
+
+      <p rr-id="spi_c_0802321" class="m-b-0 m-t-10">
+        {{'spineCT.softTissues.differentialDiagnosis2.value' | translate}}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="w031DifferentialDiagnose2"
+        [(ngModel)]="model.differentialDiagnosis2"
+        group="true"
+        name="differentialDiagnosis2"
+        rrId="spi_c_0802322"
+        (selectionChanged)="onDifferentialDiagnosis02Change()"
+        [parentViewModel]="model"
+        [rrDisable]="model.differentialDiagnosis === softTissuesDiagnosisTypeEnum.None && model.differentialDiagnosis1 === softTissuesDiagnosisTypeEnum.None"
+        rrMetaKeyBlock
+      >
+      </rr-differential-diagnosis-dropdown>
+
+      <p-checkbox
+        [rrDisable]="model.differentialDiagnosis2 === softTissuesDiagnosisTypeEnum.None"
+        binary="true"
+        [(ngModel)]="model.isSubordinate"
+        label="{{'spineCT.softTissues.subordinate.value'| translate}}"
+        rr-id="spi_c_0802323"
+        name="isSubordinate"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-13 m-b-15">
+    <div class="o-radio-list m-l-10 p-r-5">
+      <p-checkbox
+        class="m-t-5"
+        labelStyleClass="ui-fat-label"
+        binary="true"
+        [(ngModel)]="model.isMoreThanOneLesion"
+        label="{{'spineCT.softTissues.moreThen1LesionOfTheSameEntity.value'| translate}}"
+        rr-id="spi_c_0803323"
+        name="isMoreThanOneLesion"
+        (onChange)="clearLocalizer()"
+      ></p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isMoreThanOneLesion"
+      >
+        <p rr-id="spi_c_0803324">
+          {{'spineCT.softTissues.localizationReferenceVertebra.value' |
+          translate}}
+        </p>
+        <rr-spine-simple
+          [spineLocation]="model.moreThanOneLesionSpineLocation"
+          (click)="openSpineLocalizer()"
+          rr-id="spi_c_0802325"
+          [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        >
+        </rr-spine-simple>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-13 m-b-15">
+    <div
+      class="o-radio-list m-l-10 p-r-5"
+      [rrDisable]="!isSingleChoiceOnTabOneLocalizer()"
+    >
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      >
+      </rr-reference-picture>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list m-t-13 m-b-15"></div>
+</div>

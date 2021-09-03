@@ -1,0 +1,172 @@
+<div class="f-vertical o-radio-list c-pad-l col-h-100">
+  <h2 rr-id="car_m_040317" class="m-b-9">
+    {{'cardioMRT.flaps.aorticValve.value' | translate}}
+  </h2>
+  <p rr-id="car_m_040318" class="m-b-7">
+    {{'cardioMRT.flaps.pathology.value' | translate}}*
+  </p>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <p-checkbox
+        rr-id="car_m_040319"
+        name="isStenosis"
+        class="m-b-5"
+        label="{{'cardioMRT.flaps.stenosis.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isStenosis"
+        rrContentReset="isStenosisBlock"
+        rrValidation="isStenosis isInsufficiency isCalcification"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isStenosis"
+        id="isStenosisBlock"
+      >
+        <p rr-id="car_m_040320">
+          {{'cardioMRT.flaps.quantification.value' | translate}}
+        </p>
+        <p-dropdown
+          rr-id="car_m_040321"
+          name="stenosisType"
+          styleClass="ui-brown-box o-width-100"
+          [options]="stenosisTypeList"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.stenosisType"
+        >
+          <ng-template let-item pTemplate="selectedItem">
+            <span
+              >{{getCustomLabel(item.value,
+              'stenosisTypeTranslationBits')}}</span
+            >
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="car_m_040322"
+        name="isInsufficiency"
+        class="m-b-5"
+        label="{{'cardioMRT.flaps.insufficiency.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isInsufficiency"
+        rrContentReset="isInsufficiencyBlock"
+        rrValidation="isStenosis isInsufficiency isCalcification"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isInsufficiency"
+        id="isInsufficiencyBlock"
+      >
+        <p rr-id="car_m_040323">
+          {{'cardioMRT.flaps.quantification.value' | translate}}
+        </p>
+        <p-dropdown
+          rr-id="car_m_040324"
+          name="insufficiencyType"
+          styleClass="ui-brown-box o-width-100"
+          [options]="insufficiencyTypeList"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.insufficiencyType"
+        >
+          <ng-template let-item pTemplate="selectedItem">
+            <span
+              >{{getCustomLabel(item.value,
+              'insufficiencyTypeTranslationBits')}}</span
+            >
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="car_m_040325"
+        name="isCalcification"
+        label="{{'cardioMRT.flaps.calcification.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        rrValidation="isStenosis isInsufficiency isCalcification"
+      >
+      </p-checkbox>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+      <p-checkbox
+        rr-id="car_m_040417"
+        name="isVariant"
+        label="{{'cardioMRT.flaps.variant.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isVariant"
+        rrContentReset="isVariantBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isVariant"
+        id="isVariantBlock"
+      >
+        <p-radioButton
+          rr-id="car_m_040418"
+          rrUnClickRadio
+          name="variantType"
+          [value]="variantType.QuadricuspidValve"
+          label="{{'cardioMRT.flaps.quadricuspidvalve.value' | translate}}"
+          [(ngModel)]="model.variantType"
+          rrContentReset="bicuspidValveBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040419"
+          rrUnClickRadio
+          name="variantType"
+          class="m-b-31"
+          [value]="variantType.BicuspidValve"
+          label="{{'cardioMRT.flaps.bicuspidvalve.value' | translate}}"
+          [(ngModel)]="model.variantType"
+          rrContentReset="bicuspidValveBlock"
+        >
+        </p-radioButton>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="model.variantType !== variantType.BicuspidValve"
+          id="bicuspidValveBlock"
+        >
+          <h2 class="m-b-8" rr-id="car_m_040420" rrInfoIcon="car_m_04_01">
+            {{'cardioMRT.flaps.classification.value' | translate}}
+          </h2>
+          <p rr-id="car_m_040421">
+            {{'cardioMRT.flaps.type.value' | translate}}
+          </p>
+          <p-dropdown
+            rr-id="car_m_040422"
+            name="classificationType"
+            styleClass="ui-brown-box o-width-100"
+            [options]="classificationTypeList"
+            [placeholder]="'shared.pleaseSelect' | translate"
+            rrDropdownClear
+            [(ngModel)]="model.classificationType"
+          >
+          </p-dropdown>
+          <p rr-id="car_m_040423" class="m-t-5">
+            {{'cardioMRT.flaps.phenotype.value' | translate}}
+          </p>
+          <p-dropdown
+            rr-id="car_m_040424"
+            name="classificationPhenotype"
+            styleClass="ui-brown-box o-width-100"
+            [options]="classificationPhenotypeList"
+            [placeholder]="'shared.pleaseSelect' | translate"
+            rrDropdownClear
+            [(ngModel)]="model.classificationPhenotype"
+          >
+            <ng-template let-item pTemplate="selectedItem">
+              <span
+                >{{getCustomLabel(item.value,
+                'classificationPhenotypeTranslationBits')}}</span
+              >
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div [ngStyle]="{ 'zoom': zoom }">
+  <img
+    src="assets/img/shared/icon-close.svg"
+    (click)="close()"
+    class="dialog__close-button"
+  />
+  <div class="dialog__container f-vertical">
+    <div class="dialog__header">
+      <p class="dialog__title">
+        {{'mammaMRT.diagnosis.differentialDiagnosis.value' | translate}}
+      </p>
+    </div>
+    <div class="dialog__content f-vertical">
+      <p class="dialog__subtitle">{{'shared.clickDesiredLink' | translate}}</p>
+      <div class="f-horizontal col-h-100 f-space-between">
+        <div class="dialog__left-column">
+          <p class="dialog__column-header">{{diagnosisList[0].label}}</p>
+          <ul class="dialog__list" *ngFor="let item of diagnosisList[0].items;">
+            <li class="dialog__element" (click)="openPdf(item.infoRrId)">
+              {{item.label}}
+            </li>
+          </ul>
+        </div>
+        <div class="dialog__right-column">
+          <p class="dialog__column-header">{{diagnosisList[1].label}}</p>
+          <ul class="dialog__list" *ngFor="let item of diagnosisList[1].items;">
+            <li class="dialog__element" (click)="openPdf(item.infoRrId)">
+              {{item.label}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="dialog__footer f-horizontal f-space-between">
+      <div class="f-vertical">
+        <p
+          *ngFor="let item of diffDiagnosisArticleListRrIds;"
+          class="dialog__footer-paragraph"
+        >
+          {{item}}
+        </p>
+      </div>
+      <img class="dialog__logo" src="assets/img/layout/rr-logo.svg" />
+    </div>
+  </div>
+</div>

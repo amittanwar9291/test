@@ -1,0 +1,169 @@
+<div class="f-horizontal col-h-100 c-pad-l">
+  <div class="c-col-3 f-vertical">
+    <h2 rr-id="hip_m_080358" class="m-b-20">
+      {{ 'hipMRT.softTissue.pathology.value' | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep o-list">
+        <div class="f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="hip_m_080359"
+            [(ngModel)]="model.pathologyType"
+            label="{{ 'hipMRT.softTissue.intrapelvinAscites.value' | translate }}"
+            [value]="pathologyType.IntrapelvinAscites"
+            name="pathologyType"
+            rrContentReset="inguinal-block iliacal-block"
+            rrValidation="pathologyType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_080360"
+            [(ngModel)]="model.pathologyType"
+            label="{{ 'hipMRT.softTissue.suspectLymphNodes.value' | translate }}"
+            [value]="pathologyType.SuspectLymphNodes"
+            name="pathologyType"
+            rrValidation="pathologyType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_080361"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.pathologyType"
+            label="{{ 'hipMRT.softTissue.notSpecifiedIntrapelvicMassNeedOfAdditionalDiagnostics.value' | translate }}"
+            [value]="pathologyType.NotSpecifiedIntrapelvicMassNeedOfAdditionalDiagnostics"
+            name="pathologyType"
+            rrContentReset="inguinal-block iliacal-block"
+            rrValidation="pathologyType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-2 f-vertical c-pad-l">
+        <div
+          [rrDisable]="model.pathologyType !== pathologyType.SuspectLymphNodes"
+        >
+          <h2 rr-id="hip_m_080458" class="m-b-20">
+            {{ 'hipMRT.softTissue.localization.value' | translate }}*
+          </h2>
+        </div>
+
+        <div class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep">
+            <div
+              id="inguinal-block"
+              class="o-list"
+              [rrDisable]="model.pathologyType !== pathologyType.SuspectLymphNodes"
+            >
+              <div class="f-vertical o-radio-list">
+                <p-checkbox
+                  rr-id="hip_m_080459"
+                  label="{{ 'hipMRT.softTissue.inguinal.value' | translate }}"
+                  name="isInguinal"
+                  binary="true"
+                  [(ngModel)]="model.isInguinal"
+                  rrContentReset="isInguinal-block"
+                  rrValidation="isInguinal isIliacal"
+                >
+                </p-checkbox>
+                <div
+                  id="isInguinal-block"
+                  class="f-vertical nested-content o-list"
+                  [rrDisable]="!model.isInguinal"
+                >
+                  <div class="o-radio-list">
+                    <h3 rr-id="hip_m_080460">
+                      {{ 'hipMRT.softTissue.maxShortAxisDiameter.value' |
+                      translate }}
+                    </h3>
+                    <rr-number-input
+                      inputRrId="hip_m_080462"
+                      labelRrId="hip_m_080461"
+                      name="inguinalMaxShortAxisDiameterInMm"
+                      label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+                      [config]="{ min: 1, max: 150, placeholder: '---' }"
+                      [(ngModel)]="model.inguinalMaxShortAxisDiameterInMm"
+                    >
+                    </rr-number-input>
+                  </div>
+
+                  <div class="o-radio-list">
+                    <h3 rr-id="hip_m_080463">
+                      {{ 'hipMRT.softTissue.quantity.value' | translate }}
+                    </h3>
+                    <p-dropdown
+                      rr-id="hip_m_080464"
+                      [(ngModel)]="model.inguinalDifferentialDiagnosisType"
+                      styleClass="o-width-100 ui-brown-box"
+                      name="inguinalDifferentialDiagnosisType"
+                      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                      [options]="inguinalAndIliacalDifferentialDiagnosisOptions"
+                      rrDropdownClear
+                    >
+                    </p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-pad-l">
+            <div
+              id="iliacal-block"
+              class="o-list"
+              [rrDisable]="model.pathologyType !== pathologyType.SuspectLymphNodes"
+            >
+              <div class="f-vertical o-radio-list">
+                <p-checkbox
+                  rr-id="hip_m_080533"
+                  label="{{ 'hipMRT.softTissue.iliacal.value' | translate }}"
+                  name="isIliacal"
+                  binary="true"
+                  [(ngModel)]="model.isIliacal"
+                  rrContentReset="isIliacal-block"
+                  rrValidation="isInguinal isIliacal"
+                >
+                </p-checkbox>
+                <div
+                  id="isIliacal-block"
+                  class="f-vertical nested-content o-list"
+                  [rrDisable]="!model.isIliacal"
+                >
+                  <div class="o-radio-list">
+                    <h3 rr-id="hip_m_080534">
+                      {{ 'hipMRT.softTissue.maxShortAxisDiameter.value' |
+                      translate }}
+                    </h3>
+                    <rr-number-input
+                      inputRrId="hip_m_080536"
+                      labelRrId="hip_m_080535"
+                      name="iliacalMaxShortAxisDiameterInMm"
+                      label="{{ 'hipMRT.softTissue.inMm.value' | translate }}"
+                      [config]="{ min: 1, max: 150, placeholder: '---' }"
+                      [(ngModel)]="model.iliacalMaxShortAxisDiameterInMm"
+                    >
+                    </rr-number-input>
+                  </div>
+
+                  <div class="o-radio-list">
+                    <h3 rr-id="hip_m_080537">
+                      {{ 'hipMRT.softTissue.quantity.value' | translate }}
+                    </h3>
+                    <p-dropdown
+                      rr-id="hip_m_080538"
+                      [(ngModel)]="model.iliacalDifferentialDiagnosisType"
+                      styleClass="o-width-100 ui-brown-box"
+                      name="iliacalDifferentialDiagnosisType"
+                      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                      [options]="inguinalAndIliacalDifferentialDiagnosisOptions"
+                      rrDropdownClear
+                    >
+                    </p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="f-horizontal f-space-between score-result">
+  <div [attr.rr-id]="resultRrId">
+    <label
+      *ngIf="score === 0"
+      class="score-result__number score-result__number--cyan"
+      >{{ equalEdge ? '&#8804;' : '&#60;' }}</label
+    >
+    <label
+      *ngIf="score >= limit"
+      class="score-result__number score-result__number--cyan"
+      >{{ equalEdge ? '&#8805;' : '&#62;' }}</label
+    >
+    <label
+      *ngIf="score === null"
+      class="score-result__number score-result__number--grey"
+      >000</label
+    >
+    <label
+      *ngIf="!isFloat && score > 0 && score < 10"
+      class="score-result__number score-result__number--grey"
+      >00</label
+    >
+    <label
+      *ngIf="isFloat ? (score !== null && score < 10) : ((score >= 10 && score < 100) || score === 0)"
+      class="score-result__number score-result__number--grey"
+      >0</label
+    >
+    <label
+      *ngIf="score === 0"
+      class="score-result__number score-result__number--cyan"
+      >1</label
+    >
+    <label
+      *ngIf="score > 0"
+      class="score-result__number score-result__number--cyan"
+      >{{ score >= limit ? limit : score | number: digitsInfo }}</label
+    >
+  </div>
+  <label [attr.rr-id]="measureRrId" class="score-result__measure">%</label>
+</div>

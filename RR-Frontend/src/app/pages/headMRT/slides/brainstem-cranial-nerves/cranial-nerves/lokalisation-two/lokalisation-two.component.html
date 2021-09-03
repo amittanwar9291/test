@@ -1,0 +1,349 @@
+<div class="f-horizontal main-container ng-star-inserted o-width-100">
+  <div class="c-sep f-vertical m-b-15 m-t-15">
+    <div
+      class="c-col-1 m-b-15 c-pad"
+      [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+    >
+      <div class="m-l-10 m-r-10">
+        <h2 rr-id="hea_m_080203" class="m-b-5">
+          {{ 'headMRT.brainstemCranialNerves.differentialDiagnosis1.value' |
+          translate }}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_080204"
+          [options]="differentialDiagnosisW064"
+          [diagnosisNumber]="1"
+          group="true"
+          name="differentialDiagnosis"
+          [(ngModel)]="model.differentialDiagnosis"
+          rrValidation="differentialDiagnosis"
+          isActiveOnIKnow="true"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="model.differentialDiagnosis === differentialDiagnosisType.None"
+          rr-id="hea_m_080253"
+          label="{{'headMRT.brainstemCranialNerves.histologyKnown.value' | translate}}"
+          name="isHistologyKnown"
+          [(ngModel)]="model.isHistologyKnown"
+          rrContentReset="isHistologyKnownBlock"
+          binary="true"
+          class="m-t-10 m-b-10"
+        ></p-checkbox>
+        <div
+          id="isHistologyKnownBlock"
+          [rrDisable]="!model.isHistologyKnown"
+          class="nested-content o-radio-list"
+        >
+          <p-radioButton
+            label="{{'headMRT.brainstemCranialNerves.benign.value' | translate}}"
+            [value]="knownHistologyType.Benign"
+            name="histologyKnownType"
+            rr-id="hea_m_080254"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'headMRT.brainstemCranialNerves.malignant.value' | translate}}"
+            [value]="knownHistologyType.Malignant"
+            name="histologyKnownType"
+            rr-id="hea_m_080255"
+            [(ngModel)]="model.histologyKnownType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="f-vertical c-pad-l m-t-15 m-b-15">
+    <h2
+      class="m-b-10 m-l-5"
+      rr-id="hea_m_080347"
+      rrInfoIcon="hea_m_08_03"
+      [infoIconPdfLandscape]="true"
+    >
+      {{ 'headMRT.brainstemCranialNerves.localization.value' | translate }}*
+    </h2>
+    <div class="c-col-3 f-horizontal h-100 c-sep">
+      <div class="c-col-1 c-sep c-pad-r">
+        <div class="m-l-5 o-radio-list">
+          <p rr-id="hea_m_080348">
+            {{ 'headMRT.brainstemCranialNerves.side.value' | translate }}
+          </p>
+          <p-radioButton
+            label="{{'headMRT.brainstemCranialNerves.right.value' | translate}}"
+            [value]="sideType.Right"
+            name="sideType"
+            rr-id="hea_m_080349"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+          ></p-radioButton>
+          <p-radioButton
+            label="{{'headMRT.brainstemCranialNerves.left.value' | translate}}"
+            [value]="sideType.Left"
+            name="sideType"
+            rr-id="hea_m_080350"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="f-vertical c-pad-l">
+        <p class="m-b-10 m-l-5" rr-id="hea_m_080442">
+          {{ 'headMRT.brainstemCranialNerves.cranialNerve.value' | translate }}
+        </p>
+        <div class="c-col-2 f-horizontal h-100 c-sep">
+          <div class="c-col-1 c-sep c-pad-r">
+            <div class="m-l-5 o-radio-list">
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.iOlfactoryNerve.value' | translate}}"
+                [value]="cranialNerveType.IOlfactoryNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080443"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.iIOpticNerve.value' | translate}}"
+                [value]="cranialNerveType.IIOpticNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080444"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.iIIOculomotorNerve.value' | translate}}"
+                [value]="cranialNerveType.IIIOculomotorNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080445"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.iVTrochlearNerve.value' | translate}}"
+                [value]="cranialNerveType.IVTrochlearNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080446"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.vTrigeminalNerve.value' | translate}}"
+                [value]="cranialNerveType.VTrigeminalNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080447"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.vIAbducensNerve.value' | translate}}"
+                [value]="cranialNerveType.VIAbducensNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080448"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.vIIFacialNerve.value' | translate}}"
+                [value]="cranialNerveType.VIIFacialNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080449"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.vIIIVestibulocochlearNerve.value' | translate}}"
+                [value]="cranialNerveType.VIIIVestibulocochlearNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080450"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.iXGlossopharyngealNerve.value' | translate}}"
+                [value]="cranialNerveType.IXGlossopharyngealNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080451"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.xVagusNerve.value' | translate}}"
+                [value]="cranialNerveType.XVagusNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080452"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.xIAccessoryNerve.value' | translate}}"
+                [value]="cranialNerveType.XIAccessoryNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080453"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+              <p-radioButton
+                label="{{'headMRT.brainstemCranialNerves.xIIHypoglossalNerve.value' | translate}}"
+                [value]="cranialNerveType.XIIHypoglossalNerve"
+                name="cranialNerveType"
+                rr-id="hea_m_080454"
+                [(ngModel)]="model.cranialNerveType"
+                (click)="resetOpticGliomaDiagnosis()"
+                rrContentReset="lastColumn"
+                rrValidation="cranialNerveType"
+              ></p-radioButton>
+            </div>
+          </div>
+          <div id="lastColumn" class="c-col-1 c-sep c-pad-l">
+            <div
+              *ngIf="model.cranialNerveType === cranialNerveType.VTrigeminalNerve"
+            >
+              <p-checkbox
+                rr-id="hea_m_080534"
+                label="{{'headMRT.brainstemCranialNerves.rootEntryZone.value' | translate}}"
+                name="isRootEntryZone"
+                [(ngModel)]="model.isRootEntryZone"
+                binary="true"
+              ></p-checkbox>
+            </div>
+            <div
+              *ngIf="model.cranialNerveType === cranialNerveType.VIIFacialNerve"
+              class="o-radio-list"
+            >
+              <p rr-id="hea_m_080535">
+                {{ 'headMRT.brainstemCranialNerves.courseFrom.value' | translate
+                }}
+              </p>
+              <p-checkbox
+                rr-id="hea_m_080536"
+                label="{{'headMRT.brainstemCranialNerves.geniculumOfTheFacial.value' | translate}}"
+                name="isGeniculumOfTheFacialNerve"
+                [(ngModel)]="model.isGeniculumOfTheFacialNerve"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080537"
+                label="{{'headMRT.brainstemCranialNerves.meatusAcusticusInternus.value' | translate}}"
+                name="isMeatusAcusticusInternus"
+                [(ngModel)]="model.isMeatusAcusticusInternus"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080538"
+                label="{{'headMRT.brainstemCranialNerves.facialisCanal.value' | translate}}"
+                name="isFacialisCanal"
+                [(ngModel)]="model.isFacialisCanal"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080539"
+                label="{{'headMRT.brainstemCranialNerves.foramenStylomastoid.value' | translate}}"
+                name="isForamenStylomastoid"
+                [(ngModel)]="model.isForamenStylomastoid"
+                binary="true"
+              ></p-checkbox>
+            </div>
+            <div
+              *ngIf="model.cranialNerveType === cranialNerveType.VIIIVestibulocochlearNerve"
+              class="o-radio-list"
+            >
+              <p-checkbox
+                rr-id="hea_m_080540"
+                label="{{'headMRT.brainstemCranialNerves.vestibularNerve.value' | translate}}"
+                name="isVestibularNerve"
+                [(ngModel)]="model.isVestibularNerve"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080541"
+                label="{{'headMRT.brainstemCranialNerves.cochlearNerve.value' | translate}}"
+                name="isCochlearNerve"
+                [(ngModel)]="model.isCochlearNerve"
+                binary="true"
+              ></p-checkbox>
+            </div>
+            <div
+              *ngIf="model.cranialNerveType === cranialNerveType.IXGlossopharyngealNerve"
+              class="o-radio-list"
+            >
+              <p-checkbox
+                rr-id="hea_m_080542"
+                label="{{'headMRT.brainstemCranialNerves.superciliaryGanglion.value' | translate}}"
+                name="isSuperciliaryGanglion"
+                [(ngModel)]="model.isSuperciliaryGanglion"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080543"
+                label="{{'headMRT.brainstemCranialNerves.fossulaPetrosa.value' | translate}}"
+                name="isFossulaPetrosa"
+                [(ngModel)]="model.isFossulaPetrosa"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080544"
+                label="{{'headMRT.brainstemCranialNerves.ganglionInferius.value' | translate}}"
+                name="isGanglionInferius"
+                [(ngModel)]="model.isGanglionInferius"
+                binary="true"
+              ></p-checkbox>
+            </div>
+            <div
+              *ngIf="model.cranialNerveType === cranialNerveType.XVagusNerve"
+              class="o-radio-list"
+            >
+              <p-checkbox
+                rr-id="hea_m_080545"
+                label="{{'headMRT.brainstemCranialNerves.sulcusLateralisPosterior.value' | translate}}"
+                name="isSuperciliaryGanglion"
+                [(ngModel)]="model.isSulcusLateralisPosterior"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_080546"
+                label="{{'headMRT.brainstemCranialNerves.trigonumNerviVagi.value' | translate}}"
+                name="isTrigonumNerviVagi"
+                [(ngModel)]="model.isTrigonumNerviVagi"
+                binary="true"
+              ></p-checkbox>
+            </div>
+            <div
+              *ngIf="model.cranialNerveType === cranialNerveType.XIIHypoglossalNerve"
+            >
+              <p-checkbox
+                rr-id="hea_m_080547"
+                label="{{'headMRT.brainstemCranialNerves.canalisHypoglossi.value' | translate}}"
+                name="isSuperciliaryGanglion"
+                [(ngModel)]="model.isCanalisHypoglossi"
+                binary="true"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

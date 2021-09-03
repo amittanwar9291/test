@@ -1,0 +1,165 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    *ngIf="isLargeLocalizerOpen"
+    class="large-localizer f-horizontal f-center"
+  >
+    <rr-spine-complex
+      name="spondylodesisSpineLocations"
+      [(ngModel)]="largeLocalizerConfig.localizerModel"
+      [logicType]="largeLocalizerConfig.localizerLogicType"
+      [selectionAccessibilityMode]="largeLocalizerConfig.selectionAccessibilityMode"
+      [localizationTitle]="largeLocalizerConfig.localizerTitle"
+      [localizationDescription]="largeLocalizerConfig.localizerDescription"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      (close)="onLocalizerClose()"
+    ></rr-spine-complex>
+  </div>
+  <div *ngIf="!isLargeLocalizerOpen" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list">
+        <h1 class="m-b-16" rr-id="nec_m_100103">
+          {{ 'neckMRT.bones.finding.value' | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="nec_m_100104"
+          name="areFindings"
+          labelStyleClass="text-break"
+          [value]="areFindings.No"
+          label="{{ 'neckMRT.bones.osseousStructuresWithoutPathologic.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_100105"
+          name="areFindings"
+          [value]="areFindings.Yes"
+          label="{{ 'neckMRT.bones.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setDescriptionTypes]="[findingType.SpatialNeoplasm]"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-vertical col-h-100" [class.c-pad-l]="!isFindingWithTabs()">
+      <div [ngClass]="isFindingWithTabs() ? 'm-h-48' : 'm-h-123'">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="nec_m_100201"
+          [class.c-pad-l]="isFindingWithTabs()"
+        >
+          {{ 'neckMRT.bones.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === findingType.None; else findings"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-pad-r c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+
+      <ng-template #findings>
+        <div class="f-horizontal col-h-100">
+          <!-- The first column - common for all findings but OtherPathologies -->
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <!-- ExternalMaterial -->
+            <rr-external-material
+              *ngSwitchCase="findingType.ExternalMaterial"
+              [model]="findingHandler.currentItem"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-external-material>
+
+            <!-- AxisDeviation -->
+            <rr-axis-deviation
+              *ngSwitchCase="findingType.AxisDeviation"
+              [model]="findingHandler.currentItem"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-axis-deviation>
+
+            <!-- IntervertebralDisc -->
+            <rr-intervertebral-disc
+              *ngSwitchCase="findingType.IntervertebralDisc"
+              [model]="findingHandler.currentItem"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-intervertebral-disc>
+
+            <!-- ErosiveOsteochondrosis -->
+            <rr-erosive-osteochondrosis
+              *ngSwitchCase="findingType.ErosiveOsteochondrosis"
+              [model]="findingHandler.currentItem"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-erosive-osteochondrosis>
+
+            <!-- Spondylodiscitis -->
+            <rr-spondylodiscitis
+              *ngSwitchCase="findingType.Spondylodiscitis"
+              [model]="findingHandler.currentItem"
+              [isCMReinforced]="isCMReinforced"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-spondylodiscitis>
+
+            <!-- Myelon -->
+            <rr-myelon
+              *ngSwitchCase="findingType.Myelon"
+              [model]="findingHandler.currentItem"
+              [differentialDiagnosisOptions]="myelonDifferentialDiagnosisOptions"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-myelon>
+
+            <!-- BoneMarrowEdema -->
+            <rr-bone-marrow-edema
+              *ngSwitchCase="findingType.BoneMarrowEdema"
+              [model]="findingHandler.currentItem"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-bone-marrow-edema>
+
+            <!-- Osteomyelitis -->
+            <rr-osteomyelitis
+              *ngSwitchCase="findingType.Osteomyelitis"
+              [model]="findingHandler.currentItem"
+              [differentialDiagnosisOptions]="osteomyelitisDifferentialDiagnosisOptions"
+              [isCMReinforced]="isCMReinforced"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-osteomyelitis>
+
+            <!-- SpatialNeoplasm -->
+            <rr-spatial-neoplasm
+              *ngSwitchCase="findingType.SpatialNeoplasm"
+              [model]="findingHandler.currentItem"
+              [differentialDiagnosisOptions]="differentialDiagnosisOptions"
+              [differentialDiagnosisRestrictedOptions]="differentialDiagnosisRestrictedOptions"
+              [isCMReinforced]="isCMReinforced"
+              [activeTabIndex]="activeTabIndex"
+              (emitLocalizer)="onLocalizerOpen($event)"
+            >
+            </rr-spatial-neoplasm>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

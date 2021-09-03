@@ -1,0 +1,41 @@
+namespace RadioReport.ThoraxCT.Domain.Enums
+{
+	public enum SoftPartsDiagnosisType : byte
+	{
+		None = 0,
+        BenignLesionNotFurtherSpecified = 1,
+        MalignantLesionNotFurtherSpecified = 2,
+        DignityUnclear = 3,
+        Lipoma = 4,
+        FibrousPleuralTumor = 5,
+        Metastasis = 6,
+        Mesothelioma = 7,
+        Lymphoma = 8,
+        PseudotumorNotFurtherSpecified = 9,
+        PleuralPlaque = 10,
+        PleuralFibrosis = 11,
+        PleuralSplenosis = 12,
+        EndometriosisThoracic = 13,
+        PleuralEffusionTrapped = 14,
+        HematomaExtrapleural = 15,
+        ErdheimChesterDisease = 16,
+        PulmonaryLymphangiectasia = 17,
+        Fibrothorax = 18,
+        Pleurisy = 19,
+        PancoastTumor = 20, 
+        Hemangioma = 21,
+        Lymphangioma = 22,
+        NeurogenicTumorNotFurtherSpecified = 23,
+        SchwannomaNeurinoma = 24,
+        Neurofibroma = 25,
+        EpidermalCyst = 26,
+        Elastofibroma = 27,
+        Pilomatricoma = 28,
+        SarcomaNotFurtherSpecified = 29,
+        Angiosarcoma = 30,
+        Liposarcoma = 31,
+        UndifferentiatedPleomorpheSarcoma = 32,
+        DermatofibrosarcomaProtuberans = 33,
+        MalignantPeripheralNerveSheathTumor = 34
+    }
+}

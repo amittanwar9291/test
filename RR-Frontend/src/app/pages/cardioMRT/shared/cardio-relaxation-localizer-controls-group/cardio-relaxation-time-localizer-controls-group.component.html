@@ -1,0 +1,200 @@
+<p-tabView>
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <span
+        [attr.rr-id]="controlsConfig.evaluationRRID"
+        rrValidation="{{name}}.measureType {{name}}.qualitativeType {{name}}.severityType {{name}}.valueMyocardiumInMs"
+        ifAny="true"
+        noUpdate="true"
+      >
+        {{ 'cardioMRT.leftVentricle.evaluation.value' | translate }}*
+      </span>
+    </ng-template>
+    <div class="f-horizontal">
+      <div class="f-vertical o-radio-list c-sep c-pad-r">
+        <p-radioButton
+          label="{{ 'cardioMRT.leftVentricle.qualitative.value' | translate }}"
+          [(ngModel)]="model.measureType"
+          [value]="measureType.Qualitative"
+          name="{{name}}MeasureType"
+          [attr.rr-id]="controlsConfig.qualitativeRRID"
+          (onClick)="update()"
+          (ngModelChange)="quantitativeGroupReset(); update(name + 'MeasureType')"
+          rrValidation="{{name}}.measureType"
+        ></p-radioButton>
+        <p-radioButton
+          label="{{ 'cardioMRT.leftVentricle.quantitative.value' | translate }}"
+          [(ngModel)]="model.measureType"
+          [value]="measureType.Quantitative"
+          name="{{name}}MeasureType"
+          [attr.rr-id]="controlsConfig.quantitativelyRRID"
+          (onClick)="update()"
+          (ngModelChange)="qualitativeGroupReset(); update(name + 'MeasureType')"
+          rrValidation="{{name}}.measureType"
+        ></p-radioButton>
+      </div>
+      <div [ngSwitch]="model.measureType">
+        <div
+          *ngSwitchCase="measureType.Qualitative"
+          class="f-vertical o-radio-list c-pad-l pathology-pad"
+        >
+          <h3 [attr.rr-id]="controlsConfig.pathologyDistributionRRID">
+            {{ 'cardioMRT.leftVentricle.pathologyDistribution.value' | translate
+            }}*
+          </h3>
+          <p-radioButton
+            label="{{ 'cardioMRT.leftVentricle.diffuse.value' | translate }}"
+            [(ngModel)]="model.qualitativeType"
+            [value]="relaxationType.Diffuse"
+            name="{{name}}QualitativeType"
+            [attr.rr-id]="controlsConfig.diffuseRRID"
+            (ngModelChange)="measureGroupReset(); update(name + 'QualitativeType')"
+            rrValidation="{{name}}.qualitativeType"
+          ></p-radioButton>
+          <p-radioButton
+            label="{{ 'cardioMRT.leftVentricle.focal.value' | translate }}"
+            [(ngModel)]="model.qualitativeType"
+            [value]="relaxationType.Focal"
+            name="{{name}}QualitativeType"
+            [attr.rr-id]="controlsConfig.focalRRID"
+            (ngModelChange)="update(name + 'QualitativeType')"
+            rrValidation="{{name}}.qualitativeType"
+          ></p-radioButton>
+          <h3 [attr.rr-id]="controlsConfig.severityRRID" class="m-t-21">
+            {{ 'cardioMRT.leftVentricle.severity.value' | translate }}*
+          </h3>
+          <p-dropdown
+            [attr.rr-id]="controlsConfig.severityDDLRRID"
+            [(ngModel)]="model.severityType"
+            styleClass="o-width-100 ui-brown-box"
+            name="{{name}}SeverityType"
+            [options]="severityTypeOptions"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            rrDropdownClear
+            (ngModelChange)="update()"
+            rrValidation="{{name}}.severityType"
+          >
+          </p-dropdown>
+        </div>
+        <div
+          *ngSwitchCase="measureType.Quantitative"
+          class="f-vertical o-radio-list c-pad-l"
+        >
+          <div class="o-list">
+            <div class="f-vertical o-radio-list m-b-11">
+              <h3
+                [attr.rr-id]="controlsConfig.valueMyocardiumRRID"
+                class="m-b-4"
+              >
+                {{ 'cardioMRT.leftVentricle.valueMyocardium.value' | translate
+                }}*
+              </h3>
+              <div class="f-horizontal">
+                <rr-number-input
+                  [class.invalid]="isNegativeResultError"
+                  [(ngModel)]="model.valueMyocardiumInMs"
+                  (announceModelChange)="update(name + 'QuantitativelyValue')"
+                  name="{{name}}ValueMyocardiumInMs"
+                  [labelRrId]="controlsConfig.labelInputValueMyocardiumRRID"
+                  [inputRrId]="controlsConfig.inputValueMyocardiumRRID"
+                  [config]="{ inputWidth: 47, labelWidth: 50, min: 1, max: 2500, placeholder: '----' }"
+                  label="{{ 'cardioMRT.leftVentricle.inMs.value' | translate }}"
+                  rrValidation="{{name}}.valueMyocardiumInMs"
+                >
+                </rr-number-input>
+              </div>
+            </div>
+            <div class="f-vertical o-radio-list m-b-10">
+              <h3
+                [attr.rr-id]="controlsConfig.referenceValueMyocardiumRRID"
+                class="m-b-5"
+              >
+                {{ 'cardioMRT.leftVentricle.referenceValue.value' | translate }}
+              </h3>
+              <rr-number-input
+                [(ngModel)]="model.referenceValueMyocardiumInMs"
+                (announceModelChange)="update()"
+                name="{{name}}ReferenceValueMyocardiumInMs"
+                [labelRrId]="controlsConfig.labelInputReferenceValueMyocardiumRRID"
+                [inputRrId]="controlsConfig.inputReferenceValueMyocardiumRRID"
+                [labelStyleClass]="'text-break'"
+                [config]="{ inputWidth: 47, min: 1, max: 2500, placeholder: '----' }"
+                label="{{ 'cardioMRT.leftVentricle.inMs.value' | translate }}"
+              >
+              </rr-number-input>
+            </div>
+            <div *ngIf="!isT2" class="f-vertical o-radio-list">
+              <h3 [attr.rr-id]="controlsConfig.valueBloodRRID" class="m-b-5">
+                {{ 'cardioMRT.leftVentricle.valueBlood.value' | translate }}
+              </h3>
+              <div class="f-horizontal">
+                <rr-number-input
+                  [class.invalid]="isDividingByZeroError || isNegativeResultError"
+                  [(ngModel)]="model.valueBloodInMs"
+                  (announceModelChange)="update(name + 'ValueBlood');"
+                  name="{{name}}ValueBloodInMS"
+                  [labelRrId]="controlsConfig.labelInputValueBloodRRID"
+                  [inputRrId]="controlsConfig.inputValueBloodRRID"
+                  [config]="{ inputWidth: 47, labelWidth: 50, min: 1, max: 2500, placeholder: '----' }"
+                  label="{{ 'cardioMRT.leftVentricle.inMs.value' | translate }}"
+                  rrValidation="{{name}}.valueBloodInMS"
+                >
+                </rr-number-input>
+                <rr-number-input
+                  *ngIf="isT1Gd"
+                  [(ngModel)]="model.ecv"
+                  name="ecv"
+                  [labelRrId]="'car_m_0603208'"
+                  [inputRrId]="'car_m_0603207'"
+                  [config]="{ inputWidth: 47, labelWidth: 100, readonly: true }"
+                  [labelStyleClass]="'text-break'"
+                  label="{{ 'cardioMRT.leftVentricle.eCVIn.value' | translate }}"
+                >
+                </rr-number-input>
+              </div>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list c-pad-l" *ngSwitchDefault></div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <span [attr.rr-id]="controlsConfig.referencePictureRRID">
+        {{ 'cardioMRT.leftVentricle.referenceImage.value' | translate }}
+      </span>
+    </ng-template>
+    <div class="f-vertical o-width-75">
+      <rr-reference-picture
+        [referenceId]="pageId"
+        [(ngModel)]="referencePicture"
+        [fileUploadUrl]="fileUploadUrl"
+        [isHeader]="false"
+        [elementsRrIds]="controlsConfig.referencePictureObjectRRID"
+        [pictureFileType]="imageFileType"
+        (serialNumberEvent)="update()"
+        (pictureNumberEvent)="update()"
+        (fileDeleteEvent)="update()"
+        (fileUploadEvent)="update()"
+        name="{{name}}ReferencePicture"
+      ></rr-reference-picture>
+    </div>
+  </p-tabPanel>
+</p-tabView>
+<div
+  class="f-vertical o-radio-list m-b-17 m-t-16 c-pad-l"
+  [class.disabled]="model.qualitativeType !== relaxationType.Focal && model.measureType !== measureType.Quantitative"
+>
+  <h3 [attr.rr-id]="controlsConfig.localizationAHASegmentRRID">
+    {{ 'cardioMRT.leftVentricle.localizationAHASegment.value' | translate }}
+  </h3>
+  <p-checkbox
+    label="{{ 'cardioMRT.leftVentricle.lvTotal.value' | translate }}"
+    [(ngModel)]="model.isLVTotal"
+    name="{{name}}IsLVTotal"
+    binary="true"
+    [attr.rr-id]="controlsConfig.lvTotalRRID"
+    (ngModelChange)="removeLocalizerError(); update(); storeOrRetreivePreviousLocalizerModel()"
+  ></p-checkbox>
+</div>

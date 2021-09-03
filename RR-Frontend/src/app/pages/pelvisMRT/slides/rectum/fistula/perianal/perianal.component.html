@@ -1,0 +1,228 @@
+<div class="f-horizontal col-h-100 w-100">
+  <div class="c-col-1 c-pad c-sep">
+    <div class="o-radio-list">
+      <h2 rr-id="pel_m_0803141">
+        {{ 'pelvisMRT.rectum.localizationOfMucosalSinusfistula.value' |
+        translate }}
+      </h2>
+      <p-dropdown
+        styleClass="ui-brown-box o-width-100 m-b-29"
+        [options]="fistulaLocalizationSSLTypeDropdownOptions"
+        name="fistulaLocalizationSSLType"
+        rr-id="pel_m_0803142"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [(ngModel)]="model.fistulaLocalizationSSLType"
+        rrDropdownClear
+      >
+      </p-dropdown>
+      <h2 rr-id="pel_m_0803143" class="m-b-10">
+        {{ 'pelvisMRT.rectum.locationOfDistalSinusfistula.value' | translate }}
+      </h2>
+      <p
+        rr-id="pel_m_0803144"
+        class="font-15 m-b-10"
+        rrValidation="fistulaLocalizer"
+      >
+        {{ 'pelvisMRT.rectum.pleaseSelectTheAffected.value' | translate }}
+      </p>
+      <rr-rectum-small
+        rr-id="pel_m_0803145"
+        [rectum]="model.fistulaLocalizer"
+        (click)="openLargeLocaliserFn()"
+      >
+      </rr-rectum-small>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="o-radio-list m-b-34">
+      <h2 rr-id="pel_m_0804760">
+        {{ 'pelvisMRT.rectum.type.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.blindEndingPerianalSinus.value' | translate}}"
+        rr-id="pel_m_080477"
+        name="fistulaEndType"
+        [value]="fistulaEndType.BlindEndingPerianalSinusTract"
+        [(ngModel)]="model.fistulaEndType"
+        rrContentReset="fistulaBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.fistula.value' | translate}}"
+        rr-id="pel_m_080478"
+        name="fistulaEndType"
+        [value]="fistulaEndType.Fistula"
+        [(ngModel)]="model.fistulaEndType"
+        rrContentReset="fistulaBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="fistulaBlock"
+        class="p-l-35 o-radio-list"
+        [rrDisable]="model.fistulaEndType !== fistulaEndType.Fistula"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.additionalSmallerFistulaBranches.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080479"
+          name="isAdditionalFistulaBranches"
+          [(ngModel)]="model.isAdditionalFistulaBranches"
+          rrContentReset="BlindEndingBlock"
+        ></p-checkbox>
+        <div
+          id="BlindEndingBlock"
+          class="p-l-35 o-radio-list"
+          [rrDisable]="!model.isAdditionalFistulaBranches"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.blindEnding.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_080480"
+            name="isBlindEnding"
+            [(ngModel)]="model.isBlindEnding"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="o-radio-list m-b-25">
+      <h2
+        rr-id="pel_m_080482"
+        rrInfoIcon="pel_m_08_16"
+        infoIconPdfLandscape="true"
+      >
+        {{ 'pelvisMRT.rectum.stJamesClassification.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.iSimpleIntersphinctericFistula.value' | translate}}"
+        rr-id="pel_m_080484"
+        name="stJamesClassificationType"
+        [value]="stJamesClassificationType.SimplyIntersphincteric"
+        [(ngModel)]="model.stJamesClassificationType"
+        rrContentReset="abscessBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.iIIntersphinctericWithAbscess.value' | translate}}"
+        rr-id="pel_m_080485"
+        name="stJamesClassificationType"
+        [value]="stJamesClassificationType.IntersphinctericWithAbscess"
+        [(ngModel)]="model.stJamesClassificationType"
+        rrContentReset="abscessBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.iIITranssphincteric.value' | translate}}"
+        rr-id="pel_m_080486"
+        name="stJamesClassificationType"
+        [value]="stJamesClassificationType.Transsphincteric"
+        [(ngModel)]="model.stJamesClassificationType"
+        rrContentReset="abscessBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.iVTranssphinctericWithAbscess.value' | translate}}"
+        rr-id="pel_m_080487"
+        name="stJamesClassificationType"
+        class="non-break-label"
+        [value]="stJamesClassificationType.TranssphinctericWithAbscess"
+        [(ngModel)]="model.stJamesClassificationType"
+        rrContentReset="abscessBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.vSupralevatoric.value' | translate}}"
+        rr-id="pel_m_080488"
+        name="stJamesClassificationType"
+        [value]="stJamesClassificationType.Supralevatoric"
+        [(ngModel)]="model.stJamesClassificationType"
+        rrContentReset="abscessBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.vIExtrasphincteric.value' | translate}}"
+        rr-id="pel_m_080489"
+        name="stJamesClassificationType"
+        [value]="stJamesClassificationType.Extrasphincteric"
+        [(ngModel)]="model.stJamesClassificationType"
+        rrContentReset="abscessBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div
+      id="abscessBlock"
+      class="o-radio-list"
+      [rrDisable]="isAbscessDisabled()"
+    >
+      <p rr-id="pel_m_080490">
+        {{ 'pelvisMRT.rectum.maximumDiameterOfAbscess.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'pelvisMRT.rectum.inMm.value' | translate"
+        [config]="{min: 0, max: 9999}"
+        [inputRrId]="'pel_m_080492'"
+        [labelRrId]="'pel_m_080493'"
+        name="maxAbscessDiameter"
+        [(ngModel)]="model.maxAbscessDiameter"
+      ></rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep o-list">
+    <div class="o-radio-list m-b-26">
+      <h2 rr-id="pel_m_080571">
+        {{ 'pelvisMRT.rectum.lengthOfFistula.value' | translate }}
+      </h2>
+      <rr-number-input
+        [label]="'pelvisMRT.rectum.inMm.value' | translate"
+        [config]="{min: 0, max: 9999}"
+        [inputRrId]="'pel_m_080572'"
+        [labelRrId]="'pel_m_080573'"
+        name="lengthOfTheFistula"
+        [(ngModel)]="model.lengthOfTheFistula"
+      ></rr-number-input>
+    </div>
+    <div
+      class="o-radio-list m-b-32"
+      [rrDisable]="technologyModel && technologyModel.cmReinforcedType !== cmReinforcedType.Yes"
+    >
+      <h2 rr-id="pel_m_080574">
+        {{ 'pelvisMRT.rectum.cMEnhancementQuantitative.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.strong.value' | translate}}"
+        rr-id="pel_m_080575"
+        name="fistulaKMEnhancementType"
+        [value]="kMEnhancementType.Strong"
+        [(ngModel)]="model.fistulaKMEnhancementType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.low.value' | translate}}"
+        rr-id="pel_m_080576"
+        name="fistulaKMEnhancementType"
+        [value]="kMEnhancementType.Low"
+        [(ngModel)]="model.fistulaKMEnhancementType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.none.value' | translate}}"
+        rr-id="pel_m_080577"
+        name="fistulaKMEnhancementType"
+        [value]="kMEnhancementType.No"
+        [(ngModel)]="model.fistulaKMEnhancementType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="pel_m_080578">
+        {{'pelvisMRT.rectum.reactionOfSurroundingTissue.value' | translate}}
+      </h2>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.t2wSignalElevationAdjacent.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080579"
+        name="isT2wSignalElevation"
+        [(ngModel)]="model.isT2wSignalElevation"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

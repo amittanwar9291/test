@@ -1,0 +1,205 @@
+<div class="main">
+  <p-tabView class="rr-tabView">
+    <!--    localizationPathology - same for all cases-->
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="spi_m_050208"
+          rrValidation="spineLocation pathologyType"
+          ifAny="true"
+        >
+          {{'spineMRT.disc.localizationPathology.value'|translate}}
+        </h1>
+      </ng-template>
+      <rr-tab-localization-pathology
+        [model]="model"
+      ></rr-tab-localization-pathology>
+    </p-tabPanel>
+
+    <p-tabPanel
+      [disabled]="true"
+      *ngIf="shouldBeShown([pathologyTypesEnum.None])"
+    >
+      <ng-template pTemplate="header">
+        <h1 rr-id="spi_m_0503509">
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel
+      [disabled]="true"
+      *ngIf="shouldBeShown([pathologyTypesEnum.None])"
+    >
+      <ng-template pTemplate="header">
+        <h1 rr-id="spi_m_0504705">
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+      </ng-template>
+    </p-tabPanel>
+
+    <!--    details Enthesitis-->
+    <p-tabPanel
+      *ngIf="shouldBeShown([pathologyTypesEnum.SpondyliltisAnkylosane, pathologyTypesEnum.PsoriaticArthritis])"
+      [disabled]="!model.isEntheitis"
+    >
+      <ng-template pTemplate="header">
+        <h1 *ngIf="!model.isEntheitis" rr-id="spi_m_0503509">
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+        <h1 *ngIf="model.isEntheitis" rr-id="spi_m_050343">
+          {{'spineMRT.disc.detailsEnthesitisTabHeader.value'|translate}}
+        </h1>
+      </ng-template>
+      <rr-tab-enthsitis [model]="model"></rr-tab-enthsitis>
+    </p-tabPanel>
+
+    <!--    detailsArthritis-->
+    <p-tabPanel
+      *ngIf="shouldBeShown(pathologyTypesEnum.RheumatoidArthritis)"
+      [disabled]="!model.isArthritis"
+    >
+      <ng-template pTemplate="header">
+        <h1 *ngIf="!model.isArthritis" rr-id="spi_m_0503509">
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+        <h1 *ngIf="model.isArthritis" rr-id="spi_m_050352">
+          {{'spineMRT.disc.detailsArthritis.value' |translate}}
+        </h1>
+      </ng-template>
+      <rr-tab-arthritis [model]="model"></rr-tab-arthritis>
+    </p-tabPanel>
+
+    <!--    detailsPeriostitis-->
+    <p-tabPanel
+      *ngIf="shouldBeShown(pathologyTypesEnum.RheumatoidArthritis)"
+      [disabled]="!model.isPeriostitis"
+    >
+      <ng-template pTemplate="header">
+        <h1 *ngIf="!model.isPeriostitis" rr-id="spi_m_0504705">
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+        <h1 *ngIf="model.isPeriostitis" rr-id="spi_m_050450">
+          {{'spineMRT.disc.detailsPeriostitis.value' |translate}}
+        </h1>
+      </ng-template>
+      <rr-tab-periastitis [model]="model"></rr-tab-periastitis>
+    </p-tabPanel>
+
+    <!--    detailsDiscitisArthritis-->
+    <p-tabPanel
+      *ngIf="shouldBeShown([pathologyTypesEnum.SpondyliltisAnkylosane, pathologyTypesEnum.PsoriaticArthritis])"
+      [disabled]="!model.isArthritis && !model.isDiscitis"
+    >
+      <ng-template pTemplate="header">
+        <h1
+          *ngIf="!model.isArthritis && !model.isDiscitis"
+          rr-id="spi_m_0504705"
+        >
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+
+        <h1 *ngIf="model.isArthritis || model.isDiscitis" rr-id="spi_m_050437">
+          <span
+            >{{'spineMRT.disc.detailsDiscitisArthritis.value.part1'|translate}}</span
+          >
+          <span
+            [ngClass]="{'text-inactive': !model.isDiscitis && model.isArthritis}"
+            >{{'spineMRT.disc.detailsDiscitisArthritis.value.part2'|translate}}</span
+          >
+          <span
+            [ngClass]="{'text-inactive': (!model.isDiscitis && model.isArthritis) || (!model.isArthritis && model.isDiscitis)}"
+            >/</span
+          >
+          <span
+            [ngClass]="{'text-inactive': !model.isArthritis && model.isDiscitis}"
+            >{{'spineMRT.disc.detailsDiscitisArthritis.value.part3'|translate}}</span
+          >
+        </h1>
+      </ng-template>
+      <rr-tab-discitis-arthritis [model]="model"></rr-tab-discitis-arthritis>
+    </p-tabPanel>
+
+    <!--    detailsEnthesitisDiscitis-->
+    <p-tabPanel
+      *ngIf="shouldBeShown(pathologyTypesEnum.RheumatoidDisease)"
+      [disabled]="!model.isEntheitis && !model.isDiscitis"
+    >
+      <ng-template pTemplate="header">
+        <h1
+          *ngIf="!model.isEntheitis && !model.isDiscitis"
+          rr-id="spi_m_0503509"
+        >
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+        <h1 *ngIf="model.isEntheitis || model.isDiscitis" rr-id="spi_m_050378">
+          <span
+            >{{'spineMRT.disc.detailsEnthesitisDiscitis.value.part1'|translate}}</span
+          >
+          <span
+            [ngClass]="{'text-inactive': !model.isEntheitis && model.isDiscitis}"
+            >{{'spineMRT.disc.detailsEnthesitisDiscitis.value.part2'|translate}}</span
+          >
+          <span
+            [ngClass]="{'text-inactive': (!model.isDiscitis && model.isEntheitis) || (!model.isEntheitis && model.isDiscitis)}"
+            >/</span
+          >
+          <span
+            [ngClass]="{'text-inactive': !model.isDiscitis && model.isEntheitis}"
+            >{{'spineMRT.disc.detailsEnthesitisDiscitis.value.part3'|translate}}</span
+          >
+        </h1>
+      </ng-template>
+      <rr-tab-enthsitis-discitis [model]="model"></rr-tab-enthsitis-discitis>
+    </p-tabPanel>
+
+    <!--    detailsArthritisPeriostitis-->
+    <p-tabPanel
+      *ngIf="shouldBeShown(pathologyTypesEnum.RheumatoidDisease)"
+      [disabled]="!model.isArthritis && !model.isPeriostitis"
+    >
+      <ng-template pTemplate="header">
+        <h1
+          *ngIf="!model.isArthritis && !model.isPeriostitis"
+          rr-id="spi_m_0504705"
+        >
+          {{'spineMRT.disc.details.value'|translate}}
+        </h1>
+        <h1
+          *ngIf="model.isArthritis || model.isPeriostitis"
+          rr-id="spi_m_050456"
+        >
+          <span
+            >{{'spineMRT.disc.detailsArthritisPeriostitis.value.part1'|translate}}</span
+          >
+          <span
+            [ngClass]="{'text-inactive': model.isPeriostitis && !model.isArthritis}"
+            >{{'spineMRT.disc.detailsArthritisPeriostitis.value.part2'|translate}}</span
+          >
+          <span
+            [ngClass]="{'text-inactive': (!model.isPeriostitis && model.isArthritis) || (!model.isArthritis && model.isPeriostitis)}"
+            >/</span
+          >
+          <span
+            [ngClass]="{'text-inactive': model.isArthritis && !model.isPeriostitis}"
+            >{{'spineMRT.disc.detailsArthritisPeriostitis.value.part3'|translate}}</span
+          >
+        </h1>
+      </ng-template>
+      <rr-tab-arthritis-periostitis
+        [model]="model"
+      ></rr-tab-arthritis-periostitis>
+    </p-tabPanel>
+
+    <!--    differentialDiagnosis-->
+    <p-tabPanel [disabled]="model.pathologyType === pathologyTypesEnum.None">
+      <ng-template pTemplate="header">
+        <h1 rr-id="spi_m_050527">
+          {{'spineMRT.disc.differentialDiagnosisTabHeader.value'|translate}}
+        </h1>
+      </ng-template>
+      <rr-tab-differential-diagnosis
+        [model]="model"
+      ></rr-tab-differential-diagnosis>
+    </p-tabPanel>
+  </p-tabView>
+</div>

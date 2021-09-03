@@ -1,0 +1,73 @@
+import { FindingBase } from '@models/shared/finding/finding.base';
+import { FemaleGenderFindingTypeEnum } from '@enums/pelvisMRT/female-sex/female-gender-finding-type.enum';
+import { FemaleGenderDiagnosisTypeEnum } from '@enums/pelvisMRT/female-sex/female-gender-diagnosis-type.enum';
+import { HomogenityTypeEnum } from '@enums/pelvisMRT/female-sex/homogenity-type.enum';
+import { ContrastEnhancementTypeEnum } from '@enums/pelvisMRT/female-sex/contrast-enhancement-type.enum';
+import { HeterogeneousTypeEnum } from '@enums/pelvisMRT/female-sex/heterogeneous-type.enum';
+import { MarginTypeEnum } from '@enums/pelvisMRT/female-sex/margin-type.enum';
+import { FormTypeEnum } from '@enums/pelvisMRT/female-sex/form-type.enum';
+import { TransitionZoneTypeEnum } from '@enums/pelvisMRT/female-sex/corpus-uteri-mass/transition-zone-type.enum';
+import { DegenerationTypeEnum } from '@enums/pelvisMRT/female-sex/corpus-uteri-mass/degeneration-type.enum';
+
+export class FemaleSexFindingBaseApiModel extends FindingBase {
+  findingType: FemaleGenderFindingTypeEnum;
+  differentialDiagnosis: FemaleGenderDiagnosisTypeEnum;
+  t1wSignal: string;
+  t2wSignal: string;
+  additionalT1wSignal: string;
+  homogenityType: HomogenityTypeEnum;
+  contrastEnhancementType1: ContrastEnhancementTypeEnum;
+  contrastEnhancementHomogenityType1: HomogenityTypeEnum;
+  heterogeneousType: HeterogeneousTypeEnum;
+  detailsT2wSignalHomogenityType: HomogenityTypeEnum;
+  marginType: MarginTypeEnum;
+  isFocalSignalVoids: boolean;
+  isNecrosis: boolean;
+  isComplexCystic: boolean;
+  isSepta: boolean;
+  isSeptaNodularParts: boolean;
+  isFocalThickening: boolean;
+  isDiffusionRestriction: boolean;
+  formType: FormTypeEnum;
+  isHemorrhage: boolean;
+  isCapsuleOrPseudoCapsule: boolean;
+  isT2wIncrease: boolean;
+  transitionZoneType: TransitionZoneTypeEnum;
+  isClawSign: boolean;
+  isBridgingVesselSign: boolean;
+  isHydrosalpinx: boolean;
+  isCalcification: boolean;
+  degenerationType1: DegenerationTypeEnum;
+
+  constructor() {
+    super();
+    this.findingType = FemaleGenderFindingTypeEnum.None;
+    this.differentialDiagnosis = FemaleGenderDiagnosisTypeEnum.None;
+    this.t1wSignal = 'None';
+    this.t2wSignal = 'None';
+    this.additionalT1wSignal = 'None';
+    this.homogenityType = HomogenityTypeEnum.None;
+    this.contrastEnhancementType1 = ContrastEnhancementTypeEnum.None;
+    this.contrastEnhancementHomogenityType1 = HomogenityTypeEnum.None;
+    this.heterogeneousType = HeterogeneousTypeEnum.None;
+    this.detailsT2wSignalHomogenityType = HomogenityTypeEnum.None;
+    this.marginType = MarginTypeEnum.None;
+    this.isFocalSignalVoids = false;
+    this.isNecrosis = false;
+    this.isComplexCystic = false;
+    this.isSepta = false;
+    this.isSeptaNodularParts = false;
+    this.isFocalThickening = false;
+    this.isDiffusionRestriction = false;
+    this.formType = FormTypeEnum.None;
+    this.isHemorrhage = false;
+    this.isCapsuleOrPseudoCapsule = false;
+    this.isT2wIncrease = false;
+    this.transitionZoneType = TransitionZoneTypeEnum.None;
+    this.isClawSign = false;
+    this.isBridgingVesselSign = false;
+    this.isHydrosalpinx = false;
+    this.isCalcification = false;
+    this.degenerationType1 = DegenerationTypeEnum.None;
+  }
+}

@@ -1,0 +1,448 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-4 c-pad-r c-sep f-start f-vertical">
+    <h2 rr-id="car_m_0902179" class="m-b-10">
+      {{ 'cardioMRT.pericardiumVessels.pathology.value' | translate }}*
+    </h2>
+    <div class="c-col-4 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="car_m_0902180"
+          [(ngModel)]="model.lungPathologyType"
+          label="{{ 'cardioMRT.pericardiumVessels.consolidation.value' | translate }}"
+          name="lungPathologyType"
+          [value]="lungPathologyType.Consolidation"
+          (onClick)="resetLocalizationAndDiffDiagnosis()"
+          rrValidation="lungPathologyType"
+          rrContentReset="manifestationAndForm-block maximumDiameterAxialInMm-block pulmonaryNoduleMaximumDiameterAxialInMm-block atelectasisDiffDiag-block pulmonaryNoduleDiffDiag-block massInfiltration-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902181"
+          [(ngModel)]="model.lungPathologyType"
+          label="{{ 'cardioMRT.pericardiumVessels.pleuralEffusion.value' | translate }}"
+          name="lungPathologyType"
+          [value]="lungPathologyType.PleuralEffusion"
+          (onClick)="resetLocalizationAndDiffDiagnosis()"
+          rrValidation="lungPathologyType"
+          rrContentReset="distribution-block manifestationAndForm-block maximumDiameterAxialInMm-block pulmonaryNoduleMaximumDiameterAxialInMm-block consolidationDiffDiag-block atelectasisDiffDiag-block pulmonaryNoduleDiffDiag-block massInfiltration-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902182"
+          [(ngModel)]="model.lungPathologyType"
+          label="{{ 'cardioMRT.pericardiumVessels.atelectasis.value' | translate }}"
+          name="lungPathologyType"
+          [value]="lungPathologyType.Atelectasis"
+          (onClick)="resetLocalizationAndDiffDiagnosis()"
+          rrValidation="lungPathologyType"
+          rrContentReset="distribution-block maximumDiameterAxialInMm-block pulmonaryNoduleMaximumDiameterAxialInMm-block consolidationDiffDiag-block pulmonaryNoduleDiffDiag-block massInfiltration-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902183"
+          [(ngModel)]="model.lungPathologyType"
+          label="{{ 'cardioMRT.pericardiumVessels.pulmonaryNodule.value' | translate }}"
+          name="lungPathologyType"
+          [value]="lungPathologyType.PulmonaryNodule"
+          rrInfoIcon="car_m_09_08"
+          (onClick)="resetLocalizationAndDiffDiagnosis()"
+          rrValidation="lungPathologyType"
+          rrContentReset="distribution-block manifestationAndForm-block pulmonaryNoduleMaximumDiameterAxialInMm-block consolidationDiffDiag-block atelectasisDiffDiag-block massInfiltration-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902184"
+          [(ngModel)]="model.lungPathologyType"
+          label="{{ 'cardioMRT.pericardiumVessels.mass.value' | translate }}"
+          name="lungPathologyType"
+          [value]="lungPathologyType.Mass"
+          rrInfoIcon="car_m_09_09"
+          (onClick)="resetLocalizationAndDiffDiagnosis()"
+          rrValidation="lungPathologyType"
+          rrContentReset="distribution-block manifestationAndForm-block maximumDiameterAxialInMm-block consolidationDiffDiag-block atelectasisDiffDiag-block pulmonaryNoduleDiffDiag-block"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902185"
+          [(ngModel)]="model.lungPathologyType"
+          label="{{ 'cardioMRT.pericardiumVessels.pneumothorax.value' | translate }}"
+          name="lungPathologyType"
+          [value]="lungPathologyType.Pneumothorax"
+          (onClick)="resetLocalizationAndDiffDiagnosis()"
+          rrValidation="lungPathologyType"
+          rrContentReset="distribution-block manifestationAndForm-block maximumDiameterAxialInMm-block pulmonaryNoduleMaximumDiameterAxialInMm-block consolidationDiffDiag-block atelectasisDiffDiag-block pulmonaryNoduleDiffDiag-block massInfiltration-block"
+        ></p-radioButton>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+        <h2
+          *ngIf="model.lungPathologyType !== lungPathologyType.None"
+          rr-id="car_m_090353"
+          rrValidation="lungLocalizer"
+        >
+          {{ 'cardioMRT.pericardiumVessels.localization.value' | translate }}*
+        </h2>
+        <rr-cardio-lung-localizer-small
+          *ngIf="isLocalizationByLungLocalizer; else regularLocalization"
+          rr-id="car_m_090354"
+          [(ngModel)]="model.lungLocalizer"
+          name="lungLocalizer"
+          (click)="openLargeLocalizer()"
+          rrValidation="lungLocalizer"
+          [isLocalizer]="true"
+        >
+        </rr-cardio-lung-localizer-small>
+
+        <ng-template #regularLocalization>
+          <div
+            *ngIf="model.lungPathologyType !== lungPathologyType.None"
+            class="f-start f-vertical o-radio-list"
+          >
+            <p-checkbox
+              rr-id="car_m_090355"
+              [(ngModel)]="model.isLocalizationRight"
+              label="{{ 'cardioMRT.pericardiumVessels.right.value' | translate }}"
+              name="isLocalizationRight"
+              binary="true"
+              rrContentReset="isLocalizationRight-block"
+              rrValidation="isLocalizationRight isLocalizationLeft"
+            ></p-checkbox>
+            <div
+              class="f-start f-vertical o-radio-list nested-content m-b-15"
+              id="isLocalizationRight-block"
+              [rrDisable]="!model.isLocalizationRight"
+            >
+              <p-radioButton
+                rr-id="car_m_090356"
+                [(ngModel)]="model.localizationRightType"
+                label="{{ 'cardioMRT.pericardiumVessels.low.value' | translate }}"
+                name="localizationRightType"
+                [value]="localizationType.Low"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="car_m_090357"
+                [(ngModel)]="model.localizationRightType"
+                label="{{ 'cardioMRT.pericardiumVessels.distinct.value' | translate }}"
+                name="localizationRightType"
+                [value]="localizationType.Distinct"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+            <p-checkbox
+              rr-id="car_m_090358"
+              [(ngModel)]="model.isLocalizationLeft"
+              label="{{ 'cardioMRT.pericardiumVessels.left.value' | translate }}"
+              name="isLocalizationLeft"
+              binary="true"
+              rrContentReset="isLocalizationLeft-block"
+              rrValidation="isLocalizationRight isLocalizationLeft"
+            ></p-checkbox>
+            <div
+              class="f-start f-vertical o-radio-list nested-content"
+              id="isLocalizationLeft-block"
+              [rrDisable]="!model.isLocalizationLeft"
+            >
+              <p-radioButton
+                rr-id="car_m_090359"
+                [(ngModel)]="model.localizationLeftType"
+                label="{{ 'cardioMRT.pericardiumVessels.low.value' | translate }}"
+                name="localizationLeftType"
+                [value]="localizationType.Low"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="car_m_090360"
+                [(ngModel)]="model.localizationLeftType"
+                label="{{ 'cardioMRT.pericardiumVessels.distinct.value' | translate }}"
+                name="localizationLeftType"
+                [value]="localizationType.Distinct"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+        <ng-container [ngSwitch]="model.lungPathologyType">
+          <div
+            *ngSwitchCase="lungPathologyType.Consolidation"
+            id="distribution-block"
+            class="f-start f-vertical o-radio-list"
+          >
+            <h2 rr-id="car_m_090436">
+              {{ 'cardioMRT.pericardiumVessels.distribution.value' | translate
+              }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090437"
+              [(ngModel)]="model.distributionType"
+              label="{{ 'cardioMRT.pericardiumVessels.lobar.value' | translate }}"
+              name="distributionType"
+              [value]="distributionType.Lobar"
+              rrUnClickRadio
+              rrContentReset="atypical-block"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090438"
+              [(ngModel)]="model.distributionType"
+              label="{{ 'cardioMRT.pericardiumVessels.atypical.value' | translate }}"
+              name="distributionType"
+              [value]="distributionType.Atypical"
+              rrUnClickRadio
+              rrContentReset="atypical-block"
+            ></p-radioButton>
+            <div
+              class="f-start f-vertical o-radio-list nested-content"
+              id="atypical-block"
+              [rrDisable]="model.distributionType !== distributionType.Atypical"
+            >
+              <p-radioButton
+                rr-id="car_m_090439"
+                [(ngModel)]="model.atypicalType"
+                label="{{ 'cardioMRT.pericardiumVessels.diffuse.value' | translate }}"
+                name="atypicalType"
+                [value]="atypicalType.Diffuse"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="car_m_090440"
+                [(ngModel)]="model.atypicalType"
+                label="{{ 'cardioMRT.pericardiumVessels.multifocal.value' | translate }}"
+                name="atypicalType"
+                [value]="atypicalType.Multifocal"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+
+          <div
+            *ngSwitchCase="lungPathologyType.Atelectasis"
+            class="f-start f-vertical o-radio-list"
+            id="manifestationAndForm-block"
+          >
+            <h2 rr-id="car_m_090441">
+              {{ 'cardioMRT.pericardiumVessels.manifestation.value' | translate
+              }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090442"
+              [(ngModel)]="model.peculiarityType"
+              label="{{ 'cardioMRT.pericardiumVessels.subSegmental.value' | translate }}"
+              name="peculiarityType"
+              [value]="peculiarityType.Subsegmental"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090443"
+              [(ngModel)]="model.peculiarityType"
+              label="{{ 'cardioMRT.pericardiumVessels.segmental.value' | translate }}"
+              name="peculiarityType"
+              [value]="peculiarityType.Segmental"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090444"
+              [(ngModel)]="model.peculiarityType"
+              label="{{ 'cardioMRT.pericardiumVessels.lobar.value' | translate }}"
+              name="peculiarityType"
+              [value]="peculiarityType.Lobar"
+              class="m-b-40"
+              rrUnClickRadio
+            ></p-radioButton>
+            <h2 rr-id="car_m_090445">
+              {{ 'cardioMRT.pericardiumVessels.form.value' | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090446"
+              [(ngModel)]="model.formType"
+              label="{{ 'cardioMRT.pericardiumVessels.triangular.value' | translate }}"
+              name="formType"
+              [value]="formType.Triangular"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090447"
+              [(ngModel)]="model.formType"
+              label="{{ 'cardioMRT.pericardiumVessels.stringShaped.value' | translate }}"
+              name="formType"
+              [value]="formType.StringShaped"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090448"
+              [(ngModel)]="model.formType"
+              label="{{ 'cardioMRT.pericardiumVessels.round.value' | translate }}"
+              name="formType"
+              [value]="formType.Round"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <h2 *ngIf="isMaximumDiameterAxialEnabled" rr-id="car_m_090449">
+            {{ 'cardioMRT.pericardiumVessels.maximumDiameterAxial.value' |
+            translate }}
+          </h2>
+
+          <div
+            *ngSwitchCase="lungPathologyType.PulmonaryNodule"
+            class="f-start f-vertical o-radio-list"
+            id="maximumDiameterAxialInMm-block"
+          >
+            <rr-number-input
+              inputRrId="car_m_090450"
+              labelRrId="car_m_090451"
+              [(ngModel)]="model.maximumDiameterAxialInMm"
+              label="{{ 'cardioMRT.pericardiumVessels.inMm.value' | translate }}"
+              name="maximumDiameterAxialInMm"
+              [config]="{ min: 1, max: 29 }"
+            >
+            </rr-number-input>
+          </div>
+
+          <div
+            *ngSwitchCase="lungPathologyType.Mass"
+            class="f-start f-vertical o-radio-list"
+            id="pulmonaryNoduleMaximumDiameterAxialInMm-block"
+          >
+            <rr-number-input
+              inputRrId="car_m_090452"
+              labelRrId="car_m_090451"
+              [(ngModel)]="model.massMaximumDiameterAxialInMm"
+              label="{{ 'cardioMRT.pericardiumVessels.inMm.value' | translate }}"
+              name="massMaximumDiameterAxialInMm"
+            >
+            </rr-number-input>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-list">
+        <ng-container [ngSwitch]="model.lungPathologyType">
+          <div
+            *ngSwitchCase="lungPathologyType.Consolidation"
+            class="f-start f-vertical o-radio-list"
+            id="consolidationDiffDiag-block"
+          >
+            <h2 rr-id="car_m_090532">
+              {{ 'cardioMRT.pericardiumVessels.differentialDiagnosis.value' |
+              translate }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090533"
+              [(ngModel)]="model.consolidationDiffDiagnosis"
+              label="{{ 'cardioMRT.pericardiumVessels.atelectasis.value' | translate }}"
+              name="consolidationDiffDiagnosis"
+              [value]="lungDiffDiagnosisType.Atelectasis"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090534"
+              [(ngModel)]="model.consolidationDiffDiagnosis"
+              label="{{ 'cardioMRT.pericardiumVessels.dystelectasis.value' | translate }}"
+              name="consolidationDiffDiagnosis"
+              [value]="lungDiffDiagnosisType.Dystelectasis"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090535"
+              [(ngModel)]="model.consolidationDiffDiagnosis"
+              label="{{ 'cardioMRT.pericardiumVessels.mass.value' | translate }}"
+              name="consolidationDiffDiagnosis"
+              [value]="lungDiffDiagnosisType.Mass"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            *ngIf="isConsolidationDiffDiagnosisEnabled"
+            class="f-start f-vertical o-radio-list"
+          >
+            <h2 rr-id="car_m_090536">
+              {{ 'cardioMRT.pericardiumVessels.differentialDiagnosis.value' |
+              translate }}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_090537"
+              [(ngModel)]="model.atelePulmNoduleDiffDiagnosis"
+              label="{{ 'cardioMRT.pericardiumVessels.consolidation.value' | translate }}"
+              name="atelePulmNoduleDiffDiagnosis"
+              [value]="lungDiffDiagnosisType.Consolidation"
+              rrUnClickRadio
+            ></p-radioButton>
+
+            <div
+              *ngSwitchCase="lungPathologyType.Atelectasis"
+              class="f-start f-vertical o-radio-list"
+              id="atelectasisDiffDiag-block"
+            >
+              <p-radioButton
+                rr-id="car_m_090538"
+                [(ngModel)]="model.atelePulmNoduleDiffDiagnosis"
+                label="{{ 'cardioMRT.pericardiumVessels.mass.value' | translate }}"
+                name="atelePulmNoduleDiffDiagnosis"
+                [value]="lungDiffDiagnosisType.Mass"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+            <div
+              *ngSwitchCase="lungPathologyType.PulmonaryNodule"
+              class="f-start f-vertical o-radio-list"
+              id="pulmonaryNoduleDiffDiag-block"
+            >
+              <p-radioButton
+                rr-id="car_m_090539"
+                [(ngModel)]="model.atelePulmNoduleDiffDiagnosis"
+                label="{{ 'cardioMRT.pericardiumVessels.atelectasis.value' | translate }}"
+                name="atelePulmNoduleDiffDiagnosis"
+                [value]="lungDiffDiagnosisType.Atelectasis"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+
+          <div
+            *ngSwitchCase="lungPathologyType.Mass"
+            class="f-start f-vertical o-radio-list"
+            id="massInfiltration-block"
+          >
+            <h2 rr-id="car_m_090540">
+              {{ 'cardioMRT.pericardiumVessels.infiltration.value' | translate
+              }}
+            </h2>
+            <p-checkbox
+              rr-id="car_m_090541"
+              [(ngModel)]="model.isPleura"
+              label="{{ 'cardioMRT.pericardiumVessels.pleura.value' | translate }}"
+              name="isPleura"
+              binary="true"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="car_m_090542"
+              [(ngModel)]="model.isPericardium"
+              label="{{ 'cardioMRT.pericardiumVessels.pericardium.value' | translate }}"
+              name="isPericardium"
+              binary="true"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="car_m_090543"
+              [(ngModel)]="model.isBone"
+              label="{{ 'cardioMRT.pericardiumVessels.bone.value' | translate }}"
+              name="isBone"
+              binary="true"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="car_m_090544"
+              [(ngModel)]="model.isMediastinum"
+              label="{{ 'cardioMRT.pericardiumVessels.mediastinum.value' | translate }}"
+              name="isMediastinum"
+              binary="true"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="car_m_090545"
+              [(ngModel)]="model.isSuspicionOf"
+              label="{{ 'cardioMRT.pericardiumVessels.suspicionOf.value' | translate }}"
+              name="isSuspicionOf"
+              binary="true"
+            ></p-checkbox>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

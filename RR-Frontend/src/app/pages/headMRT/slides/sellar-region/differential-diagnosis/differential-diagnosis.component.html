@@ -1,0 +1,92 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-13">
+    <div class="f-vertical m-l-10">
+      <h2 rr-id="hea_m_100231" class="m-b-8">
+        {{ 'headMRT.sellarRegion.differentialDiagnosis.value' | translate }}
+      </h2>
+      <div [rrDisable]="model.descriptionType === descriptionType.IKnow">
+        <p rr-id="hea_m_100232" class="m-b-4">
+          {{ 'headMRT.sellarRegion.differentialDiagnosis1.value' | translate }}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_100233"
+          [diagnosisNumber]="1"
+          name="sellarRegionDiagnosis1Type"
+          group="true"
+          [parentViewModel]="model"
+          [options]="differentialDiagnoseW38"
+          [(ngModel)]="model.sellarRegionDiagnosis1Type"
+          (selectionChanged)="dd1Change()"
+          rrValidation="sellarRegionDiagnosis1Type"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="hea_m_100234"
+          [(ngModel)]="model.isSuspicionOf"
+          name="isSuspicionOf"
+          class="m-t-10"
+          label="{{ 'headMRT.sellarRegion.suspicionOf.value' | translate }}"
+          binary="true"
+          [rrDisable]="model.sellarRegionDiagnosis1Type === sellarRegionDiagnosisType.None"
+        >
+        </p-checkbox>
+      </div>
+      <div [rrDisable]="disable2DD()">
+        <p rr-id="hea_m_100235" class="m-b-4 m-t-15">
+          {{ 'headMRT.sellarRegion.differentialDiagnosis2.value' | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_100236"
+          [diagnosisNumber]="2"
+          name="sellarRegionDiagnosis2Type"
+          group="true"
+          [parentViewModel]="model"
+          [options]="differentialDiagnoseW39"
+          [(ngModel)]="model.sellarRegionDiagnosis2Type"
+          (selectionChanged)="dd2Change()"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="hea_m_100237"
+          [(ngModel)]="model.isSubordinate"
+          name="isSubordinate"
+          class="m-t-10"
+          label="{{ 'headMRT.sellarRegion.subordinate.value' | translate }}"
+          binary="true"
+          [rrDisable]="model.sellarRegionDiagnosis2Type === 'None'"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        [rrDisable]="model.sellarRegionDiagnosis2Type === sellarRegionDiagnosisType.None"
+      >
+        <p rr-id="hea_m_100238" class="m-b-4 m-t-15">
+          {{ 'headMRT.sellarRegion.differentialDiagnosis3.value' | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_100239"
+          [diagnosisNumber]="3"
+          name="sellarRegionDiagnosis3Type"
+          group="true"
+          [parentViewModel]="model"
+          [options]="differentialDiagnoseW39"
+          [(ngModel)]="model.sellarRegionDiagnosis3Type"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_100240"
+        [(ngModel)]="model.is1LesionOfTheSameEntity"
+        name="is1LesionOfTheSameEntity"
+        class="m-t-30"
+        label="{{ 'headMRT.sellarRegion.lesionOfTheSame.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+
+  <div
+    *ngFor="let empty of [].constructor(2)"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-13"
+  ></div>
+
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13"></div>
+</div>

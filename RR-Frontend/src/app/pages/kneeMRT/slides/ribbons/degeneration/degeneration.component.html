@@ -1,0 +1,447 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start c-col-2 c-pad-r c-sep o-radio-list">
+    <div class="f-horizontal f-align-center m-t-5">
+      <h2
+        rr-id="kne_m_050202"
+        rrInfoIcon="kne_m_050225"
+        rrValidation="meniscusLocalization1"
+      >
+        {{ "kneeMRT.ribbons.localizationMultipleSelection.value" | translate }}
+      </h2>
+    </div>
+    <div class="f-horizontal f-start col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+        <rr-knee-cross
+          class="p-b-27"
+          name="meniscusLocalization1"
+          [attr.rr-id]="
+            model.findingType === findingType.InnerMeniscusDegeneration
+              ? 'kne_m_050203_im'
+              : 'kne_m_050203_am'
+          "
+          class="scaled-knee-cross-localizer--to-left"
+          [(ngModel)]="model.meniscusLocalization1"
+          rrValidation="meniscusLocalization1"
+          isLocalizer="true"
+          [activePart]="getActivePart()"
+        ></rr-knee-cross>
+        <h2
+          rr-id="kne_m_050204"
+          rrInfoIcon="kne_m_050226"
+          rrValidation="gradeClassification"
+          class="m-t-10"
+        >
+          {{ "kneeMRT.ribbons.classification.value" | translate }}*
+        </h2>
+        <rr-classification-knee
+          name="gradeClassification"
+          rr-id="kne_m_050205"
+          (click)="clearLocalizerBasedColumn()"
+          isSingleChoice="true"
+          [(ngModel)]="model.gradeClassification"
+          rrValidation="gradeClassification"
+          isLocalizer="true"
+        ></rr-classification-knee>
+      </div>
+      <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+        <div
+          [hidden]="!model.gradeClassification.grade2b"
+          class="f-vertical f-start o-radio-list"
+        >
+          <rr-reference-picture
+            [(ngModel)]="model.referencePicture"
+            [referenceId]="model.id"
+            [fileUploadUrl]="fileUploadUrl"
+            name="referencePicture"
+          ></rr-reference-picture>
+        </div>
+        <div
+          *ngIf="!model.gradeClassification.grade2b"
+          [class.disabled]="!model.gradeClassification.grade3"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rrInfoIcon="kne_m_050307" infoIconPdfLandscape="true">
+            {{ "kneeMRT.ribbons.classification.value" | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="kne_m_050308"
+            rrUnClickRadio
+            name="tearClassification"
+            label="{{ 'kneeMRT.ribbons.horizontalTear.value' | translate }}"
+            [value]="tearClassification.HorizontalTear"
+            [(ngModel)]="model.tearClassification"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_050309"
+            rrUnClickRadio
+            name="tearClassification"
+            label="{{
+              'kneeMRT.ribbons.verticalTear.value'
+                | translate
+            }}"
+            [value]="tearClassification.VerticalTear"
+            [(ngModel)]="model.tearClassification"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_050310"
+            rrUnClickRadio
+            name="tearClassification"
+            label="{{ 'kneeMRT.ribbons.radialTear.value' | translate }}"
+            [value]="tearClassification.RadialTear"
+            [(ngModel)]="model.tearClassification"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_050311"
+            rrUnClickRadio
+            name="tearClassification"
+            label="{{ 'kneeMRT.ribbons.complexTear.value' | translate }}"
+            [value]="tearClassification.ComplexTear"
+            [(ngModel)]="model.tearClassification"
+            class="m-b-16"
+          ></p-radioButton>
+          <h2 rr-id="kne_m_050312">
+            {{ "kneeMRT.ribbons.contact.value" | translate }}
+          </h2>
+          <p-checkbox
+            name="isSuperiorArticularSurface"
+            rr-id="kne_m_050313"
+            label="{{ 'kneeMRT.ribbons.surface.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuperiorArticularSurface"
+          ></p-checkbox>
+          <p-checkbox
+            name="isInferiorArticularSurface"
+            rr-id="kne_m_050314"
+            label="{{ 'kneeMRT.ribbons.inferiorArticularSurface.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isInferiorArticularSurface"
+            class="m-b-20"
+          ></p-checkbox>
+          <h2 rr-id="kne_m_050315">
+            {{ "kneeMRT.ribbons.dislocation.value" | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="kne_m_050316"
+            label="{{ 'kneeMRT.ribbons.flapTear.value' | translate }}"
+            rrUnClickRadio
+            rrContentReset="flapTearDislocationType-block basketCrackDislocationType-block"
+            name="dislocation"
+            [value]="dislocation.FlapCrack"
+            [(ngModel)]="model.dislocation"
+          ></p-radioButton>
+          <div
+            id="flapTearDislocationType-block"
+            class="f-vertical f-start nested-content o-radio-list"
+            [rrDisable]="this.model.dislocation !== dislocation.FlapCrack"
+          >
+            <p-radioButton
+              rr-id="kne_m_050317"
+              label="{{
+                'kneeMRT.ribbons.paratibialRecess.value' | translate
+              }}"
+              rrUnClickRadio
+              name="flapTearType"
+              [value]="flapTearType.ParatibialRecess"
+              [(ngModel)]="model.flapTearType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="kne_m_050318"
+              label="{{
+                'kneeMRT.ribbons.parafemoralRecess.value' | translate
+              }}"
+              rrUnClickRadio
+              name="flapTearType"
+              [value]="flapTearType.ParafemoralRecess"
+              [(ngModel)]="model.flapTearType"
+            ></p-radioButton>
+          </div>
+          <p-radioButton
+            rr-id="kne_m_050319"
+            label="{{ 'kneeMRT.ribbons.bucketHandleTear.value' | translate }}"
+            rrUnClickRadio
+            rrContentReset="flapTearDislocationType-block basketCrackDislocationType-block"
+            name="dislocation"
+            [value]="dislocation.BucketHandleTear"
+            [(ngModel)]="model.dislocation"
+          ></p-radioButton>
+          <div
+            id="basketCrackDislocationType-block"
+            class="f-vertical f-start nested-content o-radio-list"
+            [rrDisable]="model.dislocation !== dislocation.BucketHandleTear"
+          >
+            <p-radioButton
+              rr-id="kne_m_050320"
+              label="{{ 'kneeMRT.ribbons.doublePCLSign.value' | translate }}"
+              rrUnClickRadio
+              name="bucketHandleTear"
+              [(ngModel)]="model.bucketHandleTear"
+              [value]="bucketHandleTear.DoublePCLSign"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="kne_m_050321"
+              label="{{
+                'kneeMRT.ribbons.flippedMeniscusSign.value' | translate
+              }}"
+              rrUnClickRadio
+              name="bucketHandleTear"
+              [(ngModel)]="model.bucketHandleTear"
+              [value]="bucketHandleTear.FlippedMeniscusSign"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <h2 class="m-t-5" rr-id="kne_m_050401">
+      {{ "kneeMRT.ribbons.associatedFindings.value" | translate }}
+    </h2>
+    <p-checkbox
+      class="m-t-4"
+      name="isChondropathyAssociated"
+      rr-id="kne_m_050402"
+      label="{{ 'kneeMRT.ribbons.chondropathy.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isChondropathyAssociated"
+      rrContentReset="isChondropathyAssociated-block"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start nested-content o-radio-list m-b-15"
+      id="isChondropathyAssociated-block"
+      [rrDisable]="!model.isChondropathyAssociated"
+    >
+      <p rr-id="kne_m_0504100">
+        {{ 'kneeMRT.ribbons.localization.value' | translate }}*
+      </p>
+      <p-checkbox
+        name="isChondropathyTibial"
+        rr-id="kne_m_050403"
+        label="{{ 'kneeMRT.ribbons.tibial.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isChondropathyTibial"
+        rrValidation="isChondropathyTibial isChondropathyFemoral"
+      ></p-checkbox>
+      <p-checkbox
+        name="isChondropathyFemoral"
+        rr-id="kne_m_050404"
+        label="{{ 'kneeMRT.ribbons.femoral.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isChondropathyFemoral"
+        rrValidation="isChondropathyTibial isChondropathyFemoral"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      name="isCMOedemaSubchondralAssociated"
+      rr-id="kne_m_050405"
+      label="{{
+        'kneeMRT.ribbons.boneMarrowEdemaSubchondral.value' | translate
+      }}"
+      binary="true"
+      [(ngModel)]="model.isCMOedemaSubchondralAssociated"
+      rrContentReset="isCMOedemaSubchondralAssociated-block"
+      class="m-b-5 text-break"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start nested-content o-radio-list m-b-15"
+      id="isCMOedemaSubchondralAssociated-block"
+      [rrDisable]="!model.isCMOedemaSubchondralAssociated"
+    >
+      <p rr-id="kne_m_0504101">
+        {{ 'kneeMRT.ribbons.localization.value' | translate }}*
+      </p>
+      <p-checkbox
+        name="isCMOedemaTibial"
+        rr-id="kne_m_050406"
+        label="{{ 'kneeMRT.ribbons.tibial.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isCMOedemaTibial"
+        rrValidation="isCMOedemaTibial isCMOedemaFemoral"
+      ></p-checkbox>
+      <p-checkbox
+        name="isCMOedemaFemoral"
+        rr-id="kne_m_050407"
+        label="{{ 'kneeMRT.ribbons.femoral.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isCMOedemaFemoral"
+        rrValidation="isCMOedemaTibial isCMOedemaFemoral"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      name="isSubchondralSclerosisAssociated"
+      rr-id="kne_m_050408"
+      label="{{ 'kneeMRT.ribbons.subchondralSclerosis.value' | translate }}"
+      binary="true"
+      labelStyleClass="text-break"
+      [(ngModel)]="model.isSubchondralSclerosisAssociated"
+      rrContentReset="isSubchondralSclerosisAssociated-block"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start nested-content o-radio-list"
+      id="isSubchondralSclerosisAssociated-block"
+      [rrDisable]="!model.isSubchondralSclerosisAssociated"
+    >
+      <p rr-id="kne_m_0504103">
+        {{ 'kneeMRT.ribbons.localization.value' | translate }}*
+      </p>
+      <p-checkbox
+        name="isSubchondralTibial"
+        rr-id="kne_m_050409"
+        label="{{ 'kneeMRT.ribbons.tibial.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSubchondralTibial"
+        rrValidation="isSubchondralTibial isSubchondralFemoral"
+      ></p-checkbox>
+      <p-checkbox
+        name="isSubchondralFemoral"
+        rr-id="kne_m_050410"
+        label="{{ 'kneeMRT.ribbons.femoral.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSubchondralFemoral"
+        rrValidation="isSubchondralTibial isSubchondralFemoral"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      name="isMeniscalExtrusionSubluxation"
+      rr-id="kne_m_050411"
+      label="{{
+        'kneeMRT.ribbons.meniscusExtrusionsubluxation.value' | translate
+      }}"
+      binary="true"
+      labelStyleClass="text-break"
+      [(ngModel)]="model.isMeniscalExtrusionSubluxation"
+      class="m-b-4"
+    ></p-checkbox>
+  </div>
+
+  <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+    <p-checkbox
+      name="isDegenerationRearAttachment"
+      rr-id="kne_m_0505100"
+      label="{{
+        'kneeMRT.ribbons.degenerationRearAttachment.value' | translate
+      }}"
+      binary="true"
+      labelStyleClass="text-break"
+      [(ngModel)]="model.isDegenerationRearAttachment"
+    ></p-checkbox>
+    <p-checkbox
+      name="isMeniscalCyst"
+      rr-id="kne_m_050501"
+      label="{{ 'kneeMRT.ribbons.meniscalCyst.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isMeniscalCyst"
+      rrContentReset="isMeniscalCyst-block"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start nested-content o-radio-list"
+      [ngClass]="{'m-b-42': model.findingType === findingType.InnerMeniscusDegeneration}"
+      id="isMeniscalCyst-block"
+      [rrDisable]="!model.isMeniscalCyst"
+    >
+      <rr-number-input
+        labelRrId="kne_m_050502"
+        inputRrId="kne_m_050503"
+        name="meniscusDiameterMM"
+        [(ngModel)]="model.meniscusDiameterMM"
+        [label]="'kneeMRT.ribbons.maxDiameterInMm.value' | translate"
+        [config]="{ placeholder: '--', max: 99 }"
+        class="m-b-8"
+      >
+      </rr-number-input>
+      <p rr-id="kne_m_050504" class="m-b-8">
+        {{ "kneeMRT.ribbons.measurement.value" | translate }}
+      </p>
+      <div class="o-radio-list" [rrDisable]="!isMeniscusGreaterThanZero()">
+        <p-radioButton
+          rr-id="kne_m_050505"
+          name="measurement"
+          rrUnClickRadio
+          label="{{ 'kneeMRT.ribbons.axial.value' | translate }}"
+          [value]="measurement.Axial"
+          [(ngModel)]="model.measurement"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_050506"
+          name="measurement"
+          rrUnClickRadio
+          label="{{ 'kneeMRT.ribbons.coronary.value' | translate }}"
+          [value]="measurement.Coronal"
+          [(ngModel)]="model.measurement"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_050507"
+          name="measurement"
+          rrUnClickRadio
+          label="{{ 'kneeMRT.ribbons.sagittal.value' | translate }}"
+          [value]="measurement.Sagittal"
+          [(ngModel)]="model.measurement"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <p-checkbox
+      class="m-t-24 m-b-7"
+      name="isMeniscocapsularSeparation"
+      rr-id="kne_m_050508"
+      label="{{
+        'kneeMRT.ribbons.meniscocapsularSeparation.value' | translate
+      }}"
+      binary="true"
+      [(ngModel)]="model.isMeniscocapsularSeparation"
+      rrContentReset="isMeniscocapsularSeparation-block1 isMeniscocapsularSeparation-block2"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start nested-content o-radio-list"
+      id="isMeniscocapsularSeparation-block1"
+      [rrDisable]="!model.isMeniscocapsularSeparation"
+    >
+      <p rr-id="kne_m_050509" class="m-b-2">
+        {{ "kneeMRT.ribbons.ruptureMeniscocapsularLigament.value" | translate }}
+      </p>
+      <ng-container
+        *ngIf="model.findingType === findingType.InnerMeniscusDegeneration"
+      >
+        <p-checkbox
+          name="isLigmeniskotibial"
+          rr-id="kne_m_050510"
+          label="{{ 'kneeMRT.ribbons.ligMeniskotibiale.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isLigmeniskotibial"
+        ></p-checkbox>
+        <p-checkbox
+          name="isMeniscofemoralFascicle"
+          rr-id="kne_m_050511"
+          label="{{ 'kneeMRT.ribbons.meniscofemoralFascicle.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isMeniscofemoralFascicle"
+        ></p-checkbox>
+      </ng-container>
+      <ng-container
+        *ngIf="model.findingType === findingType.OuterMeniscusDegeneration"
+      >
+        <p-checkbox
+          name="isMeniscPosterLigamWrisberg"
+          rr-id="kne_m_050514"
+          label="{{ 'kneeMRT.ribbons.ligMeniscofemoralPosteriusLigWrisberg.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isMeniscPosterLigamWrisberg"
+        ></p-checkbox>
+        <p-checkbox
+          name="isMeniscAnteriusLigamHumphry"
+          rr-id="kne_m_050515"
+          label="{{ 'kneeMRT.ribbons.ligMeniscofemoralAnteriorLigHumphry.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isMeniscAnteriusLigamHumphry"
+        ></p-checkbox>
+        <p-checkbox
+          name="meniscotibialLigamentum"
+          rr-id="kne_m_050516"
+          label="{{ 'kneeMRT.ribbons.ligMeniscotibial.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.meniscotibialLigamentum"
+        ></p-checkbox>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,274 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start">
+      <h1 rr-id="mam_m_040103" class="m-h-60 m-b-40">
+        {{ 'mammaMRT.anatomy.volume.value' | translate }}
+      </h1>
+      <div class="f-start f-vertical f-space-between col-h-100 o-list">
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_040104"
+            label="{{ 'mammaMRT.anatomy.isomastia.value' | translate }}"
+            name="volume"
+            [value]="volumeType.Isomastia"
+            [(ngModel)]="model.volume"
+            (click)="clearVolume()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_040105"
+            label="{{ 'mammaMRT.anatomy.anisomastia.value' | translate }}"
+            labelStyleClass="text-break"
+            name="volume"
+            [value]="volumeType.Anisomastia"
+            [(ngModel)]="model.volume"
+            (click)="clearVolume()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_040106"
+            label="{{ 'mammaMRT.anatomy.ablatio.value' | translate }}"
+            name="volume"
+            [value]="volumeType.Ablatio"
+            [(ngModel)]="model.volume"
+            (click)="clearVolume()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="m-b-87"
+          [rrDisable]="model.volume === volumeType.None || model.volume === volumeType.Isomastia"
+        >
+          <h3
+            rr-id="mam_m_040108"
+            class="m-b-5"
+            rrValidation="volumeLocation"
+            noUpdate="ture"
+          >
+            {{ 'mammaMRT.anatomy.localizationSingleChoice.value' | translate }}
+          </h3>
+          <rr-breast-simple
+            rr-id="mam_m_040107"
+            name="volumeLocation"
+            [isSingleChoice]="true"
+            [(ngModel)]="model.volumeLocation"
+            rrValidation="volumeLocation"
+            #volumeLocation
+            isLocalizer="true"
+            [elementUpdate]="volumeLocation.selectionChange"
+          >
+          </rr-breast-simple>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <h1 rr-id="mam_m_040201" class="m-h-60 m-b-40">
+        {{ 'mammaMRT.anatomy.cutis.value' | translate }}
+      </h1>
+      <div class="f-start f-vertical f-space-between col-h-100 o-list">
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_040202"
+            label="{{ 'mammaMRT.anatomy.notThickened.value' | translate }}"
+            name="cutisThickness"
+            [value]="cutisThicknessType.NotThickened"
+            [(ngModel)]="model.cutisThickness"
+            (click)="clearCutisThickness()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_040203"
+            label="{{ 'mammaMRT.anatomy.thickened.value' | translate }}"
+            name="cutisThickness"
+            [value]="cutisThicknessType.Thickened"
+            [(ngModel)]="model.cutisThickness"
+            (click)="clearCutisThickness()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="m-b-87"
+          [rrDisable]="model.cutisThickness !== cutisThicknessType.Thickened"
+        >
+          <h3
+            rr-id="mam_m_040205"
+            class="m-b-5"
+            rrValidation="cutisThicknessLocation"
+            noUpdate="ture"
+          >
+            {{ 'mammaMRT.anatomy.localizationMultipleChoice.value' | translate
+            }}
+          </h3>
+          <rr-breast-cross
+            rr-id="mam_m_040204"
+            name="cutisThicknessLocation"
+            [(ngModel)]="model.cutisThicknessLocation"
+            rrValidation="cutisThicknessLocation"
+            isLocalizer="true"
+          >
+          </rr-breast-cross>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <h1 rr-id="mam_m_040301" class="m-h-60 m-b-40">
+        {{ 'mammaMRT.anatomy.skinRetraction.value' | translate }}
+      </h1>
+      <div class="f-start f-vertical f-space-between col-h-100 o-list">
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_040302"
+            label="{{ 'mammaMRT.anatomy.no.value' | translate }}"
+            name="cutisRetraction"
+            [value]="simpleAnswerType.No"
+            [(ngModel)]="model.cutisRetraction"
+            (click)="clearCutisRetraction()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_040303"
+            label="{{ 'mammaMRT.anatomy.yes.value' | translate }}"
+            name="cutisRetraction"
+            [value]="simpleAnswerType.Yes"
+            [(ngModel)]="model.cutisRetraction"
+            (click)="clearCutisRetraction()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="m-b-87"
+          [rrDisable]="model.cutisRetraction !== simpleAnswerType.Yes"
+        >
+          <h3
+            rr-id="mam_m_040305"
+            class="m-b-5"
+            rrValidation="cutisRetractionLocation"
+            noUpdate="ture"
+          >
+            {{ 'mammaMRT.anatomy.localizationMultipleChoice.value' | translate
+            }}
+          </h3>
+          <rr-breast-cross
+            rr-id="mam_m_040304"
+            name="cutisRetractionLocation"
+            [(ngModel)]="model.cutisRetractionLocation"
+            rrValidation="cutisRetractionLocation"
+            isLocalizer="true"
+          >
+          </rr-breast-cross>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <h1 rr-id="mam_m_040401" class="m-h-60 m-b-40">
+        {{ 'mammaMRT.anatomy.subcutaneousTissue.value' | translate }}
+      </h1>
+      <div class="f-start f-vertical f-space-between col-h-100 o-list">
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_040402"
+            label="{{ 'mammaMRT.anatomy.unremarkable.value' | translate }}"
+            name="subcutaneousTissueType"
+            [value]="subcutaneousTissueSpaceType.Unremarkable"
+            [(ngModel)]="model.subcutaneousTissueType"
+            (click)="clearSubcutaneousTissueType()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_040403"
+            label="{{ 'mammaMRT.anatomy.condensed.value' | translate }}"
+            name="subcutaneousTissueType"
+            [value]="subcutaneousTissueSpaceType.Condensed"
+            [(ngModel)]="model.subcutaneousTissueType"
+            (click)="clearSubcutaneousTissueType()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="m-b-87"
+          [rrDisable]="model.subcutaneousTissueType !== subcutaneousTissueSpaceType.Condensed"
+        >
+          <h3
+            rr-id="mam_m_040405"
+            class="m-b-5"
+            rrValidation="subcutaneousFatSpaceLocation"
+            noUpdate="ture"
+          >
+            {{ 'mammaMRT.anatomy.localizationMultipleChoice.value' | translate
+            }}
+          </h3>
+          <rr-breast-cross
+            rr-id="mam_m_040404"
+            name="subcutaneousFatSpaceLocation"
+            [(ngModel)]="model.subcutaneousFatSpaceLocation"
+            rrValidation="subcutaneousFatSpaceLocation"
+            isLocalizer="true"
+          >
+          </rr-breast-cross>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start">
+      <h1 rr-id="mam_m_040501" class="m-h-60 m-b-40">
+        {{ 'mammaMRT.anatomy.pectoralisMuscle.value' | translate }}
+      </h1>
+      <div class="f-start f-vertical f-space-between col-h-100 o-list">
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="mam_m_040503"
+            label="{{ 'mammaMRT.anatomy.bilaterallyCirumscribedMargin.value' | translate }}"
+            name="pectoralisMuscle"
+            [value]="pectoralisMuscleType.BilaterallyCirumscribedMargin"
+            [(ngModel)]="model.pectoralisMuscle"
+            (click)="clearPectoralisMuscle()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_040504"
+            label="{{ 'mammaMRT.anatomy.muscleInvasion.value' | translate }}"
+            name="pectoralisMuscle"
+            [value]="pectoralisMuscleType.MuscleInvasion"
+            [(ngModel)]="model.pectoralisMuscle"
+            (click)="clearPectoralisMuscle()"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="m-b-87"
+          [rrDisable]="model.pectoralisMuscle !== pectoralisMuscleType.MuscleInvasion"
+        >
+          <h3
+            rr-id="mam_m_040506"
+            class="m-b-5"
+            rrValidation="pectoralisMuscleLocation"
+            noUpdate="ture"
+          >
+            {{ 'mammaMRT.anatomy.localizationMultipleChoice.value' | translate
+            }}
+          </h3>
+          <rr-breast-simple
+            rr-id="mam_m_040505"
+            name="pectoralisMuscleLocation"
+            [(ngModel)]="model.pectoralisMuscleLocation"
+            rrValidation="pectoralisMuscleLocation"
+            isLocalizer="true"
+            #pectoralisMuscleLocation
+            [elementUpdate]="pectoralisMuscleLocation.selectionChange"
+          >
+          </rr-breast-simple>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

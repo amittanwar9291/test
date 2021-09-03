@@ -1,0 +1,275 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="f-vertical c-sep c-pad-r">
+      <h1 rr-id="mam_mx_030103" class="m-b-3">
+        {{'mammaMX.technology.examination.value' | translate}}
+      </h1>
+      <p rr-id="mam_mx_030104" class="font-15 m-b-19">
+        {{'mammaMX.technology.pleaseSelectAtLeast.value' | translate}}
+      </p>
+      <div class="f-horizontal col-h-100">
+        <div class="f-vertical c-sep c-pad-r">
+          <p-checkbox
+            rr-id="mam_mx_030105"
+            name="isMammography"
+            label="{{'mammaMX.technology.mammography.value' | translate}}"
+            binary="true"
+            labelStyleClass="ui-fat-label"
+            class="m-b-31"
+            [(ngModel)]="model.isMammography"
+            (onChange)="clearMammographyLocalizers()"
+            rrContentReset="isMammographyBlock1 isMammographyBlock2 isMammographyBlock3 isMammographyBlock4"
+            rrValidation="isMammography isUltrasound"
+            notInFinding="true"
+          >
+          </p-checkbox>
+          <div class="f-horizontal c-sep col-h-100">
+            <div class="c-col-1 c-sep c-pad-r">
+              <div
+                class="o-radio-list"
+                [rrDisable]="!model.isMammography"
+                id="isMammographyBlock1"
+              >
+                <h2
+                  rr-id="mam_mx_030107"
+                  class="m-b-12"
+                  rrValidation="breastLocationCC"
+                  notInFinding="true"
+                >
+                  {{'mammaMX.technology.localizationMultipleSelection.value' |
+                  translate}}*
+                </h2>
+                <h3 rr-id="mam_mx_030106" class="m-b-11">
+                  {{'mammaMX.technology.craniocaudalCC.value' | translate}}
+                </h3>
+                <rr-breast-simple
+                  rr-id="mam_mx_030108"
+                  name="breastLocationCC"
+                  isLocalizer="true"
+                  #breastLocationCC
+                  [elementUpdate]="breastLocationCC.announceSelection"
+                  (announceSelection)="handleLocalizerValidationError('breastLocationMLO')"
+                  [(ngModel)]="model.breastLocationCC"
+                  rrValidation="breastLocationCC"
+                  notInFinding="true"
+                >
+                </rr-breast-simple>
+                <p rr-id="mam_mx_030109" class="m-t-22 m-b-5">
+                  {{'mammaMX.technology.mediolateralObliqueMLO.value' |
+                  translate}}
+                </p>
+                <rr-breast-simple
+                  rr-id="mam_mx_030111"
+                  name="breastLocationMLO"
+                  isLocalizer="true"
+                  #breastLocationMLO
+                  [elementUpdate]="breastLocationMLO.announceSelection"
+                  (announceSelection)="handleLocalizerValidationError('breastLocationCC')"
+                  [(ngModel)]="model.breastLocationMLO"
+                  rrValidation="breastLocationMLO"
+                  notInFinding="true"
+                >
+                </rr-breast-simple>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad">
+              <div
+                class="f-vertical o-radio-list col-h-100"
+                id="isMammographyBlock2"
+              >
+                <h2 rr-id="mam_mx_030201" [rrDisable]="!model.isMammography">
+                  {{'mammaMX.technology.furtherSettings.value' | translate}}
+                </h2>
+                <rr-finding-column
+                  [handler]="technologyFindingHandler"
+                  [setConfig]="technologyFindingConfig"
+                  [disabled]="!model.isMammography"
+                >
+                </rr-finding-column>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l">
+              <div
+                class="o-radio-list"
+                *ngIf="technologyFindingHandler.currentItem.findingType !== findingType.None"
+                [rrDisable]="isNeitherGalactographySideSelected"
+                id="isMammographyBlock3"
+              >
+                <p-checkbox
+                  rr-id="mam_mx_030301"
+                  name="isContrastAgentForGalactography"
+                  class="text-break m-b-6"
+                  label="{{'mammaMX.technology.contrastAgentForGalactography.value' | translate}}"
+                  binary="true"
+                  [(ngModel)]="technologyFindingHandler.currentItem.isContrastAgentForGalactography"
+                  rrContentReset="isContrastAgentForGalactographyBlock"
+                >
+                </p-checkbox>
+                <div
+                  class="f-start o-radio-list nested-content"
+                  [rrDisable]="!technologyFindingHandler.currentItem.isContrastAgentForGalactography"
+                  id="isContrastAgentForGalactographyBlock"
+                >
+                  <rr-number-input
+                    inputRrId="mam_mx_030302"
+                    labelRrId="mam_mx_030303"
+                    name="contrastVolumeInMl"
+                    labelStyleClass="text-break"
+                    label="{{'mammaMX.technology.volumeInMl.value' | translate}}"
+                    [config]="{placeholder: '-,-', min: 0, max: 5, step: 0.1}"
+                    [(ngModel)]="technologyFindingHandler.currentItem.contrastVolumeInMl"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l o-radio-list">
+          <p-checkbox
+            rr-id="mam_mx_030401"
+            name="isUltrasound"
+            class="m-b-22"
+            labelStyleClass="ui-fat-label"
+            label="{{'mammaMX.technology.ultrasound.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isUltrasound"
+            (onChange)="clearSonographyLocalizers()"
+            rrContentReset="isUltrasoundBlock"
+            rrValidation="isMammography isUltrasound"
+            notInFinding="true"
+          >
+          </p-checkbox>
+          <div
+            class="o-radio-list f-vertical"
+            [rrDisable]="!model.isUltrasound"
+            id="isUltrasoundBlock"
+          >
+            <p
+              rr-id="mam_mx_030402"
+              class="m-b-2"
+              rrValidation="breastLocationSonography"
+              notInFinding="true"
+            >
+              {{'mammaMX.technology.localizationMultipleSelection.value' |
+              translate}}*
+            </p>
+            <rr-breast-simple
+              rr-id="mam_mx_030403"
+              name="breastLocationSonography"
+              class="m-b-34"
+              isLocalizer="true"
+              #breastLocationSonography
+              [elementUpdate]="breastLocationSonography.announceSelection"
+              [(ngModel)]="model.breastLocationSonography"
+              rrValidation="breastLocationSonography"
+              notInFinding="true"
+            >
+            </rr-breast-simple>
+            <p-checkbox
+              rr-id="mam_mx_030404"
+              name="isColorCodedDopplerUltrasound"
+              class="text-break"
+              label="{{'mammaMX.technology.colorcodedDopplerUltrasound.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isColorCodedDopplerUltrasound"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_mx_030405"
+              name="isElastography"
+              label="{{'mammaMX.technology.elastography.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isElastography"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_mx_030406"
+              name="isUltrasoundGuidedBreastBiopsy"
+              class="m-b-3"
+              label="{{'mammaMX.technology.ultrasoundGuidedPunchBiopsy.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isUltrasoundGuidedBreastBiopsy"
+              rrContentReset="isUltrasoundGuidedBreastBiopsyBlock"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              [rrDisable]="!model.isUltrasoundGuidedBreastBiopsy"
+              id="isUltrasoundGuidedBreastBiopsyBlock"
+            >
+              <p-checkbox
+                rr-id="mam_mx_030407"
+                name="isPunchBiopsyRight"
+                label="{{'mammaMX.technology.right.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isPunchBiopsyRight"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="mam_mx_030408"
+                name="isPunchBiopsyLeft"
+                label="{{'mammaMX.technology.left.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isPunchBiopsyLeft"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l">
+      <div
+        class="o-radio-list"
+        [rrDisable]="!model.isMammography"
+        id="isMammographyBlock4"
+      >
+        <h2 rr-id="mam_mx_030501" class="text-break m-t-3 m-b-20">
+          {{'mammaMX.technology.limitedQualityOfMammography.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="mam_mx_030502"
+          name="isVeryDenseParenchyma"
+          label="{{'mammaMX.technology.veryDenseParenchyma.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isVeryDenseParenchyma"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="mam_mx_030503"
+          name="isParenchymaNotCompletelyVisible"
+          label="{{'mammaMX.technology.parenchymaNotCompletelyVisible.value' | translate}}"
+          class="text-break"
+          binary="true"
+          [(ngModel)]="model.isParenchymaNotCompletelyVisible"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="mam_mx_030504"
+          name="isProjectionError"
+          label="{{'mammaMX.technology.projectionError.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isProjectionError"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="mam_mx_030505"
+          name="isArtifact"
+          label="{{'mammaMX.technology.artifact.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isArtifact"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="mam_mx_030506"
+          name="isOther"
+          label="{{'mammaMX.technology.other.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isOther"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,293 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="c-col-1 c-pad c-sep-l m-t-10 m-b-10">
+    <div class="o-list p-l-10 p-r-10">
+      <div
+        class="o-radio-list m-b-25"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="spi_m_0703201" class="m-b-5">
+          {{ 'spineMRT.spinalCanal.differentialDiagnosis1.value' | translate }}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          [options]="diagnosisOptions"
+          [(ngModel)]="model.spinalCanalDifferentialDiagnosisType"
+          name="spinalCanalDifferentialDiagnosisType"
+          group="true"
+          rrId="spi_m_0703202"
+          [parentViewModel]="model"
+          (selectionChanged)="clearSubordinated()"
+          rrValidation="spinalCanalDifferentialDiagnosisType"
+          [presetHttpParams]="getPresetParams()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div class="o-radio-list m-b-25">
+        <h2 rr-id="spi_m_070328">
+          {{'spineMRT.spinalCanal.sizeAxial.value' | translate}}
+        </h2>
+        <rr-number-input
+          inputRrId="spi_m_070329"
+          labelRrId="spi_m_070330"
+          name="sizeAxial"
+          [(ngModel)]="model.sizeAxial"
+          label="{{ 'spineMRT.spinalCanal.largestDiameterInMm.value' | translate }}"
+          [config]="{labelWidth: 160, max: 40}"
+        >
+        </rr-number-input>
+      </div>
+      <div class="o-radio-list m-b-35">
+        <h2 rr-id="spi_m_070331">
+          {{'spineMRT.spinalCanal.sizeCraniocaudal.value' | translate}}
+        </h2>
+        <rr-number-input
+          inputRrId="spi_m_070332"
+          labelRrId="spi_m_070333"
+          name="sizeCraniocaudal"
+          [(ngModel)]="model.sizeCraniocaudal"
+          label="{{ 'spineMRT.spinalCanal.largestDiameterInMm.value' | translate }}"
+          [config]="{labelWidth: 160, max: 120}"
+        >
+        </rr-number-input>
+      </div>
+      <div
+        class="o-radio-list"
+        *ngIf="model.spinalCanalLocation.extradural || model.spinalCanalLocation.epidural"
+      >
+        <h2 rr-id="spi_m_070368">
+          {{ 'spineMRT.spinalCanal.localizationInTheSpinalCanal.value' |
+          translate }}
+        </h2>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.ventral.value' | translate}}"
+          [(ngModel)]="model.localizationInTheSpinalCanalType"
+          [value]="localizationInTheSpinalCanalTypeEnum.Anterior"
+          name="localizationInTheSpinalCanalType"
+          rr-id="spi_m_070369"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.dorsal.value' | translate}}"
+          [(ngModel)]="model.localizationInTheSpinalCanalType"
+          [value]="localizationInTheSpinalCanalTypeEnum.Posterior"
+          name="localizationInTheSpinalCanalType"
+          rr-id="spi_m_070370"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.left.value' | translate}}"
+          [(ngModel)]="model.localizationInTheSpinalCanalType"
+          [value]="localizationInTheSpinalCanalTypeEnum.Left"
+          name="localizationInTheSpinalCanalType"
+          rr-id="spi_m_070371"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.right.value' | translate}}"
+          [(ngModel)]="model.localizationInTheSpinalCanalType"
+          [value]="localizationInTheSpinalCanalTypeEnum.Right"
+          name="localizationInTheSpinalCanalType"
+          rr-id="spi_m_070372"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep-l m-t-10 m-b-10">
+    <div
+      class="o-radio-list text-break p-l-10 p-r-10"
+      *ngIf="model.spinalCanalLocation.extramedullary"
+    >
+      <h2 rr-id="spi_m_070435">
+        {{ 'spineMRT.spinalCanal.localizationInTheSpinalCanal.value' | translate
+        }}
+      </h2>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.ventral.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isAnterior"
+        rr-id="spi_m_070436"
+        name="isAnterior"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.dorsal.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPosterior"
+        rr-id="spi_m_070437"
+        name="isPosterior"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.left.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLeft"
+        rr-id="spi_m_070438"
+        name="isLeft"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.right.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isRight"
+        rr-id="spi_m_070439"
+        name="isRight"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{ 'spineMRT.spinalCanal.intraExtraduralHourglassNeurinoma.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isIntraAndExtradural"
+        rr-id="spi_m_070440"
+        name="isIntraAndExtradural"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      class="o-list p-l-10 p-r-10"
+      *ngIf="model.spinalCanalLocation.extradural || model.spinalCanalLocation.epidural"
+    >
+      <div class="o-radio-list m-b-27">
+        <h2 rr-id="spi_m_070451">
+          {{ 'spineMRT.spinalCanal.limitation.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.sharp.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Sharp"
+          name="marginType"
+          rr-id="spi_m_070452"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.fuzzy.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Unsharp"
+          name="marginType"
+          rr-id="spi_m_070453"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.nodular.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Nodular"
+          name="marginType"
+          rr-id="spi_m_070454"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.multinodular.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Multinodular"
+          name="marginType"
+          rr-id="spi_m_070455"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="spi_m_070456">
+          {{ 'spineMRT.spinalCanal.homogeneity.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.homogeneous.value' | translate}}"
+          [(ngModel)]="model.homogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          name="homogeneityType"
+          rr-id="spi_m_070457"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.heterogeneous.value' | translate}}"
+          [(ngModel)]="model.homogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          name="homogeneityType"
+          rr-id="spi_m_070458"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad-l c-sep-l m-t-10 m-b-10">
+    <div
+      class="o-list p-l-10 p-r-10"
+      *ngIf="model.spinalCanalLocation.extramedullary"
+    >
+      <div class="o-radio-list m-b-27">
+        <h2 rr-id="spi_m_070534">
+          {{ 'spineMRT.spinalCanal.limitation.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.sharp.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Sharp"
+          name="marginType"
+          rr-id="spi_m_070535"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.fuzzy.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Unsharp"
+          name="marginType"
+          rr-id="spi_m_070536"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.nodular.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Nodular"
+          name="marginType"
+          rr-id="spi_m_070537"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.multinodular.value' | translate}}"
+          [(ngModel)]="model.marginType"
+          [value]="marginTypeEnum.Multinodular"
+          name="marginType"
+          rr-id="spi_m_070538"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="spi_m_070539">
+          {{ 'spineMRT.spinalCanal.homogeneity.value' | translate }}
+        </h2>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.homogeneous.value' | translate}}"
+          [(ngModel)]="model.homogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          name="homogeneityType"
+          rr-id="spi_m_070540"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          label="{{'spineMRT.spinalCanal.heterogeneous.value' | translate}}"
+          [(ngModel)]="model.homogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          name="homogeneityType"
+          rr-id="spi_m_070541"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,438 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="double-col f-vertical c-sep">
+      <div class="double-col-header c-pad">
+        <h1 rr-id="tho_m_020103">
+          {{ "thoraxMRT.anamnesis.indication.value" | translate }}
+        </h1>
+        <img
+          class="m-t-10"
+          rr-id="tho_m_020104"
+          src="assets/img/thoraxCT/icons/2-1.svg"
+          alt="Indication"
+        />
+      </div>
+      <div class="double-col-content f-horizontal">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="indicationFindingHandler"
+            [disabled]="false"
+            [setConfig]="indicationFindingDropdownConfig"
+            [attr.name]="'indicationFindingHandler'"
+            validationName="indicationFindings"
+          ></rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <div
+            *ngIf="isIndicationFindingType([indicationTypeEnum.Mass])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020201">
+              {{ "thoraxMRT.anamnesis.mass.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="tho_m_020202"
+              label="{{ 'thoraxMRT.anamnesis.chestWall.value' | translate }}"
+              name="chestWallType"
+              [value]="chestWallTypeEnum.ChestWall"
+              [(ngModel)]="indicationFindingHandler.currentItem.chestWallType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_m_020203"
+              label="{{ 'thoraxMRT.anamnesis.mediastinal.value' | translate }}"
+              name="chestWallType"
+              [value]="chestWallTypeEnum.Mediastinal"
+              [(ngModel)]="indicationFindingHandler.currentItem.chestWallType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_m_020204"
+              label="{{ 'thoraxMRT.anamnesis.intrapulmonary.value' | translate }}"
+              name="chestWallType"
+              [value]="chestWallTypeEnum.Intrapulmonary"
+              [(ngModel)]="indicationFindingHandler.currentItem.chestWallType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p rr-id="tho_m_020205" class="p-t-15">
+              {{ "thoraxMRT.anamnesis.details.value" | translate }}
+            </p>
+            <p-radioButton
+              rr-id="tho_m_020206"
+              label="{{ 'thoraxMRT.anamnesis.followUp.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.FollowUp"
+              [(ngModel)]="indicationFindingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_m_020207"
+              label="{{ 'thoraxMRT.anamnesis.suspicionOf.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.SuspicionOf"
+              [(ngModel)]="indicationFindingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            *ngIf="
+              !isIndicationFindingType([
+                indicationTypeEnum.Mass,
+                indicationTypeEnum.Arthralgia,
+                indicationTypeEnum.None
+              ])
+            "
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020208">
+              {{ "thoraxMRT.anamnesis.indicationDynamicFindingLabel.value." +
+              indicationFindingHandler.currentItem.indicationFindingType |
+              translate }}
+            </h2>
+            <p rr-id="tho_m_020205">
+              {{ "thoraxMRT.anamnesis.details.value" | translate }}
+            </p>
+            <p-radioButton
+              rr-id="tho_m_020206"
+              label="{{ 'thoraxMRT.anamnesis.followUp.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.FollowUp"
+              [(ngModel)]="indicationFindingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_m_020207"
+              label="{{ 'thoraxMRT.anamnesis.suspicionOf.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.SuspicionOf"
+              [(ngModel)]="indicationFindingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            *ngIf="isIndicationFindingType([indicationTypeEnum.Arthralgia])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020212">
+              {{ "thoraxMRT.anamnesis.arthralgia.value" | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="tho_m_020213"
+              binary="true"
+              class="m-t-9"
+              [(ngModel)]="
+                indicationFindingHandler.currentItem.isSternoclavicularJoint
+              "
+              name="isSternoclavicularJoint"
+              rrContentReset="sternoclavicularJointContainer"
+              label="{{
+                'thoraxMRT.anamnesis.sternoclavicularJoint.value' | translate
+              }}"
+            ></p-checkbox>
+            <div
+              id="sternoclavicularJointContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="
+                !indicationFindingHandler.currentItem.isSternoclavicularJoint
+              "
+            >
+              <p rr-id="tho_m_020214" rrValidation="isRight isLeft">
+                {{ "thoraxMRT.anamnesis.side.value" | translate }}*
+              </p>
+              <p-checkbox
+                rr-id="tho_m_020215"
+                binary="true"
+                [(ngModel)]="indicationFindingHandler.currentItem.isRight"
+                name="isRight"
+                rrValidation="isRight isLeft"
+                label="{{ 'thoraxMRT.anamnesis.right.value' | translate }}"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="tho_m_020216"
+                binary="true"
+                [(ngModel)]="indicationFindingHandler.currentItem.isLeft"
+                name="isLeft"
+                rrValidation="isRight isLeft"
+                label="{{ 'thoraxMRT.anamnesis.left.value' | translate }}"
+              >
+              </p-checkbox>
+            </div>
+            <p rr-id="tho_m_020217" class="p-t-15">
+              {{ "thoraxMRT.anamnesis.details.value" | translate }}
+            </p>
+            <p-radioButton
+              rr-id="tho_m_020218"
+              label="{{ 'thoraxMRT.anamnesis.followUp.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.FollowUp"
+              [(ngModel)]="indicationFindingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_m_020219"
+              label="{{ 'thoraxMRT.anamnesis.suspicionOf.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.SuspicionOf"
+              [(ngModel)]="indicationFindingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="double-col f-vertical c-sep">
+      <div class="double-col-header c-pad">
+        <h1 rr-id="tho_m_020301">
+          {{ "thoraxMRT.anamnesis.anamnesisPreviousOperations.value" | translate
+          }}
+        </h1>
+        <img
+          class="m-t-10"
+          rr-id="tho_m_020302"
+          src="assets/img/thoraxCT/icons/2-2.svg"
+          alt="Anamnesis Previous Operations"
+        />
+      </div>
+      <div class="double-col-content f-horizontal">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="anamnesisFindingHandler"
+            [disabled]="false"
+            [setConfig]="anamnesisFindingDropdownConfig"
+            [attr.name]="'anamnesisFindings'"
+            validationName="anamnesisFindings"
+            [validationSecondFinding]="true"
+          ></rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <div
+            *ngIf="
+              isAnamnesisFindingType([anamnesisFindingTypeEnum.NicotineAbuse])
+            "
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020401">
+              {{ "thoraxMRT.anamnesis.nicotineAbuse.value" | translate }}
+            </h2>
+            <p rr-id="tho_m_020402" rrInfoIcon="tho_m_02_01" class="m-b-0">
+              {{ "thoraxMRT.anamnesis.packYears.value" | translate }}
+            </p>
+            <rr-number-input
+              [(ngModel)]="
+                anamnesisFindingHandler.currentItem.cigarettePacksPerDay
+              "
+              name="cigarettePacksPerDay"
+              [label]="
+                'thoraxMRT.anamnesis.packsOfCigarettesSmokedPerDayXSmokingYears.value'
+                  | translate
+              "
+              inputRrId="tho_m_020403"
+              labelRrId="tho_m_020404"
+              [config]="{ labelWidth: 200, min: 1, max: 140, placeholder: '---' }"
+            >
+            </rr-number-input>
+          </div>
+
+          <div
+            *ngIf="isAnamnesisFindingWithNoFurtherDetails()"
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020405" class="text-break">
+              {{ "thoraxMRT.anamnesis.anamnesisDynamicFindingLabel.value." +
+              anamnesisFindingHandler.currentItem.anamnesisFindingType |
+              translate }}
+            </h2>
+            <p rr-id="tho_m_020406">
+              {{ "thoraxMRT.anamnesis.noFurtherDetails.value" | translate }}
+            </p>
+          </div>
+
+          <div
+            *ngIf="isAnamnesisFindingType([anamnesisFindingTypeEnum.Stent])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020407">
+              {{ "thoraxMRT.anamnesis.stent.value" | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="tho_m_020408"
+              binary="true"
+              [(ngModel)]="
+                anamnesisFindingHandler.currentItem.isAorticValveTavi
+              "
+              name="isAorticValveTavi"
+              label="{{
+                'thoraxMRT.anamnesis.aorticValveTAVI.value' | translate
+              }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="tho_m_020409"
+              binary="true"
+              [(ngModel)]="anamnesisFindingHandler.currentItem.isCoronary"
+              name="isCoronary"
+              label="{{ 'thoraxMRT.anamnesis.coronary.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="tho_m_020410"
+              binary="true"
+              [(ngModel)]="
+                anamnesisFindingHandler.currentItem.isThoracicAortaTevar
+              "
+              name="isThoracicAortaTevar"
+              label="{{
+                'thoraxMRT.anamnesis.thoracicAortaTEVAR.value' | translate
+              }}"
+            ></p-checkbox>
+          </div>
+
+          <div
+            *ngIf="
+              isAnamnesisFindingType([
+                anamnesisFindingTypeEnum.TrachealTubeMalposition
+              ])
+            "
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020411">
+              {{ "thoraxMRT.anamnesis.trachealTubeMalposition.value" | translate
+              }}
+            </h2>
+            <p rr-id="tho_m_020412" rrInfoIcon="tho_m_02_02">
+              {{ "thoraxMRT.anamnesis.side.value" | translate }}
+            </p>
+            <p-radioButton
+              rr-id="tho_m_020413"
+              label="{{
+                'thoraxMRT.anamnesis.rightMainBronchus.value' | translate
+              }}"
+              name="sideType"
+              [value]="sideTypeEnum.RightMainBronchus"
+              [(ngModel)]="anamnesisFindingHandler.currentItem.sideType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_m_020414"
+              label="{{
+                'thoraxMRT.anamnesis.leftMainBronchus.value' | translate
+              }}"
+              name="sideType"
+              [value]="sideTypeEnum.LeftMainBronchus"
+              [(ngModel)]="anamnesisFindingHandler.currentItem.sideType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+
+          <div
+            *ngIf="
+              isAnamnesisFindingType([
+                anamnesisFindingTypeEnum.HistoryOfPartialLungResection
+              ])
+            "
+            class="o-radio-list"
+          >
+            <h2 rr-id="tho_m_020415">
+              {{ "thoraxMRT.anamnesis.historyOfPartialLungResection.value" |
+              translate }}
+            </h2>
+            <p
+              rr-id="tho_m_020416"
+              rrValidation="isAfterPartialLungResectionRight isAfterPartialLungResectionLeft"
+              inSecondFinding="true"
+            >
+              {{ "thoraxMRT.anamnesis.localization.value" | translate }}*
+            </p>
+            <p-checkbox
+              rr-id="tho_m_020417"
+              binary="true"
+              [(ngModel)]="
+                anamnesisFindingHandler.currentItem
+                  .isAfterPartialLungResectionRight
+              "
+              name="isAfterPartialLungResectionRight"
+              rrValidation="isAfterPartialLungResectionRight isAfterPartialLungResectionLeft"
+              inSecondFinding="true"
+              label="{{ 'thoraxMRT.anamnesis.right.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="tho_m_020418"
+              binary="true"
+              [(ngModel)]="
+                anamnesisFindingHandler.currentItem
+                  .isAfterPartialLungResectionLeft
+              "
+              name="isAfterPartialLungResectionLeft"
+              rrValidation="isAfterPartialLungResectionRight isAfterPartialLungResectionLeft"
+              inSecondFinding="true"
+              label="{{ 'thoraxMRT.anamnesis.left.value' | translate }}"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad o-radio-list">
+      <h1 rr-id="tho_m_020501">
+        {{ "thoraxMRT.anamnesis.preliminaryExamination.value" | translate }}
+      </h1>
+      <img
+        class="m-t-10"
+        rr-id="tho_m_020502"
+        src="assets/img/thoraxCT/icons/2-3.svg"
+        alt="Preliminary Examinations"
+      />
+      <p-checkbox
+        class="m-t-15"
+        rr-id="tho_m_020503"
+        binary="true"
+        [(ngModel)]="model.isMRIPreliminaryExamination"
+        name="isMRIPreliminaryExamination"
+        (onChange)="clearMRIDate()"
+        label="{{ 'thoraxMRT.anamnesis.MRI.value' | translate }}"
+      ></p-checkbox>
+      <div
+        class="nested-content"
+        [rrDisable]="!model.isMRIPreliminaryExamination"
+      >
+        <rr-month-year-input
+          [label]="'thoraxMRT.anamnesis.date.value' | translate"
+          customLabelClass="m-b-0"
+          yearRrId="tho_m_020506"
+          monthRrId="tho_m_020505"
+          labelRrId="tho_m_020504"
+          nested="true"
+          name="mRIPreliminaryExaminationDate"
+          class="o-width-100"
+          [(ngModel)]="model.mriPreliminaryExaminationDate"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        class="m-t-30"
+        rr-id="tho_m_020507"
+        binary="true"
+        [(ngModel)]="model.isCTPreliminaryExamination"
+        name="isCTPreliminaryExamination"
+        (onChange)="clearCTDate()"
+        label="{{ 'thoraxMRT.anamnesis.CT.value' | translate }}"
+      ></p-checkbox>
+      <div
+        class="nested-content"
+        [rrDisable]="!model.isCTPreliminaryExamination"
+      >
+        <rr-month-year-input
+          [label]="'thoraxMRT.anamnesis.date.value' | translate"
+          customLabelClass="m-b-0"
+          nested="true"
+          name="cTPreliminaryExaminationDate"
+          class="o-width-100"
+          monthRrId="tho_m_020509"
+          yearRrId="tho_m_020510"
+          labelRrId="tho_m_020508"
+          [(ngModel)]="model.ctPreliminaryExaminationDate"
+        >
+        </rr-month-year-input>
+      </div>
+    </div>
+  </div>
+</form>

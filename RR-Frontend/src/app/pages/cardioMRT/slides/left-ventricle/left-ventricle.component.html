@@ -1,0 +1,450 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-space-between">
+      <div class="f-vertical">
+        <h1 rr-id="car_m_060103" class="morphology-header">
+          {{ 'cardioMRT.leftVentricle.morphologyMyocardium.value' | translate }}
+        </h1>
+        <div class="o-radio-list f-vertical">
+          <p-dropdown
+            rr-id="car_m_060104"
+            [class.bold-label]="model.myocardialEdemaType !== myocardialEdemaType.None"
+            styleClass="o-width-100 ui-brown-box"
+            name="myocardialEdemaType"
+            rrDropdownClear
+            [options]="myocardialEdemaTypeDropdown"
+            (onChange)="resetMyocardialEdemaLocalizer();"
+            [(ngModel)]="model.myocardialEdemaType"
+            placeholder="{{ 'cardioMRT.leftVentricle.myocardialEdemaPlaceholder.value' | translate }}"
+          >
+          </p-dropdown>
+          <p-dropdown
+            rr-id="car_m_060105"
+            [class.bold-label]="model.wallThickeningType !== wallThickeningType.None"
+            styleClass="o-width-100 ui-brown-box"
+            name="wallThickeningType"
+            rrDropdownClear
+            [options]="wallThickeningTypeDropdown"
+            (onChange)="resetWallThickeningLocalizer();"
+            [(ngModel)]="model.wallThickeningType"
+            placeholder="{{ 'cardioMRT.leftVentricle.wallThickeningPlaceholder.value' | translate }}"
+          >
+          </p-dropdown>
+          <p-dropdown
+            rr-id="car_m_060106"
+            [class.bold-label]="model.wallThinningType !== wallThinningType.None"
+            styleClass="o-width-100 ui-brown-box"
+            name="wallThinningType"
+            rrDropdownClear
+            [options]="wallThinningTypeDropdown"
+            (onChange)="resetWallThinningLocalizer();"
+            [(ngModel)]="model.wallThinningType"
+            placeholder="{{ 'cardioMRT.leftVentricle.wallThinningPlaceholder.value' | translate }}"
+          >
+          </p-dropdown>
+          <p-dropdown
+            rr-id="car_m_060107"
+            [class.bold-label]="model.hypointensMyokType !== hypointensMyokType.None"
+            styleClass="o-width-100 ui-brown-box"
+            name="hypointensMyokType"
+            rrDropdownClear
+            [options]="hypointensMyokTypeDropdown"
+            (onChange)="resetReducedMyocardialSignalT1wT2wLocalizer();"
+            [(ngModel)]="model.hypointensMyokType"
+            placeholder="{{ 'cardioMRT.leftVentricle.hypointensityPlaceholder.value' | translate }}"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+      <div [class.loc-group-disabled]="areMorphologyLocalizersDisabled()">
+        <h2
+          rr-id="car_m_060108"
+          [rrValidation]="validationErrorsInMorphologyLocalizers"
+          ifAny="true"
+        >
+          {{ 'cardioMRT.leftVentricle.localization.value' | translate }}*
+        </h2>
+        <rr-cardio-four-circles
+          class="clickable-area"
+          [model]="model"
+          (click)="openMorphologyEditDialog()"
+          [rrValidation]="validationErrorsInMorphologyLocalizers"
+          isLocalizer="true"
+          ifAny="true"
+        >
+        </rr-cardio-four-circles>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-space-between o-list">
+      <div class="f-vertical">
+        <p-checkbox
+          rr-id="car_m_060201"
+          label="{{ 'cardioMRT.leftVentricle.function.value' | translate }}"
+          name="isFunction"
+          class="m-b-15"
+          labelStyleClass="ui-header-label"
+          binary="true"
+          rrContentReset="isFunction-block"
+          (onChange)="resetKineticDisorderLocalizer()"
+          [(ngModel)]="model.isFunction"
+        >
+        </p-checkbox>
+        <div
+          id="isFunction-block"
+          class="nested-content f-vertical o-radio-list"
+          [rrDisable]="!model.isFunction"
+        >
+          <h3 rr-id="car_m_060202">
+            {{ 'cardioMRT.leftVentricle.pathology.value' | translate }}*
+          </h3>
+          <p-checkbox
+            rr-id="car_m_060203"
+            label="{{ 'cardioMRT.leftVentricle.kineticDisorder.value' | translate }}"
+            name="isKineticDisorder"
+            (onChange)="resetKineticDisorderLocalizer()"
+            binary="true"
+            [(ngModel)]="model.isKineticDisorder"
+            rrValidation="isKineticDisorder isMidVentricularWallMovementDisorder isApicalBallooning isAneurysm"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_060204"
+            label="{{ 'cardioMRT.leftVentricle.midventricularWallMovementDisorder.value' | translate }}"
+            class="text-break"
+            name="isMidVentricularWallMovementDisorder"
+            binary="true"
+            [(ngModel)]="model.isMidVentricularWallMovementDisorder"
+            rrValidation="isKineticDisorder isMidVentricularWallMovementDisorder isApicalBallooning isAneurysm"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_060205"
+            label="{{ 'cardioMRT.leftVentricle.apicalBallooning.value' | translate }}"
+            name="isApicalBallooning"
+            binary="true"
+            [(ngModel)]="model.isApicalBallooning"
+            rrValidation="isKineticDisorder isMidVentricularWallMovementDisorder isApicalBallooning isAneurysm"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_060206"
+            label="{{ 'cardioMRT.leftVentricle.aneurysm.value' | translate }}"
+            name="isAneurysm"
+            rrContentReset="functionTypeDropdown"
+            binary="true"
+            [(ngModel)]="model.isAneurysm"
+            rrValidation="isKineticDisorder isMidVentricularWallMovementDisorder isApicalBallooning isAneurysm"
+          >
+          </p-checkbox>
+          <div
+            id="functionTypeDropdown"
+            class="f-vertical o-radio-list nested-content"
+            [rrDisable]="!model.isAneurysm"
+          >
+            <p-dropdown
+              rr-id="car_m_060207"
+              styleClass="o-width-100 ui-brown-box"
+              name="functionType"
+              [options]="functionTypeDropdown"
+              [(ngModel)]="model.functionType"
+              rrDropdownClear
+              placeholder="{{ 'cardioMRT.leftVentricle.localizationPlaceholder.value' | translate }}"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div [rrDisable]="!model.isKineticDisorder">
+        <h2
+          rr-id="car_m_060108"
+          class="m-b-20"
+          rrValidation="kineticDisorderLocalizer"
+          ifAny="true"
+        >
+          {{ 'cardioMRT.leftVentricle.localization.value' | translate }}*
+        </h2>
+        <rr-cardio-circle-static-multicolor-localizer
+          rr-id="car_m_060210"
+          class="clickable-area"
+          [localizerModel]="model.kineticDisorderLocalizer"
+          [localizerConfig]="KINETIC_LOCALIZER_EDITOR_CONFIG"
+          (click)="openKineticDisorderEditDialog()"
+          rrValidation="kineticDisorderLocalizer"
+          isLocalizer="true"
+        >
+        </rr-cardio-circle-static-multicolor-localizer>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-space-between o-list">
+      <div class="f-vertical o-list">
+        <p-checkbox
+          rr-id="car_m_060301"
+          label="{{ 'cardioMRT.leftVentricle.perfusion.value' | translate }}"
+          class="m-b-14"
+          labelStyleClass="ui-header-label"
+          (onChange)="resetPerfusionDefectLocalizer()"
+          rrContentReset="isPerfusion-block"
+          name="isDeficit"
+          binary="true"
+          [(ngModel)]="model.isPerfusion"
+        >
+        </p-checkbox>
+        <div
+          id="isPerfusion-block"
+          class="f-vertical o-radio-list"
+          [rrDisable]="!model.isPerfusion"
+        >
+          <div class="nested-content f-vertical o-radio-list">
+            <h3 rr-id="car_m_060302">
+              {{ 'cardioMRT.leftVentricle.result.value' | translate }}*
+            </h3>
+            <p-radioButton
+              rr-id="car_m_0603101"
+              label="{{ 'cardioMRT.leftVentricle.noDefect.value' | translate }}"
+              name="perfusionType"
+              [value]="perfusionType.NoDefect"
+              rrContentReset="nonSegmentalBlock lgeFocalTypeDropdown"
+              (onClick)="resetPerfusionDefectLocalizer()"
+              [(ngModel)]="model.perfusionType"
+              rrValidation="perfusionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_0603102"
+              label="{{ 'cardioMRT.leftVentricle.defect.value' | translate }}"
+              name="perfusionType"
+              [value]="perfusionType.Defect"
+              rrContentReset="nonSegmentalBlock lgeFocalTypeDropdown"
+              [(ngModel)]="model.perfusionType"
+              rrValidation="perfusionType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div [rrDisable]="model.perfusionType !== perfusionType.Defect">
+        <h2 class="m-b-20" rrValidation="perfusionDefectLocalizer">
+          {{ 'cardioMRT.leftVentricle.localization.value' | translate }}*
+        </h2>
+        <rr-cardio-circle-static-multicolor-localizer
+          rr-id="car_m_060305"
+          class="clickable-area"
+          [localizerModel]="model.perfusionDefectLocalizer"
+          [localizerConfig]="PERFUSION_LOCALIZER_EDITOR_CONFIG"
+          (click)="openPerfusionDefectEditDialog()"
+          rrValidation="perfusionDefectLocalizer"
+          isLocalizer="true"
+        >
+        </rr-cardio-circle-static-multicolor-localizer>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-space-between o-list">
+      <div class="f-vertical o-list">
+        <p-checkbox
+          rr-id="car_m_060401"
+          label="{{ 'cardioMRT.leftVentricle.lateGdEnhancementLGE.value' | translate }}"
+          class="m-b-11"
+          labelStyleClass="ui-header-label"
+          name="isLGE"
+          binary="true"
+          [(ngModel)]="model.isLGE"
+          (onChange)="resetTabsContent()"
+        >
+        </p-checkbox>
+        <div [rrDisable]="!model.isLGE">
+          <p-tabView>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <span
+                  rr-id="car_m_0604200"
+                  rrValidation="lgeType distributionType"
+                  ifAny="true"
+                  noUpdate="true"
+                >
+                  {{ 'cardioMRT.leftVentricle.finding.value' | translate }}
+                </span>
+              </ng-template>
+              <div class="o-list f-vertical">
+                <div class="o-radio-list m-b-13">
+                  <h2 rr-id="car_m_0604202">
+                    {{ 'cardioMRT.leftVentricle.lateGdEnhancement.value' |
+                    translate }}
+                  </h2>
+                  <h3 rr-id="car_m_060402" class="m-b-4">
+                    {{ 'cardioMRT.leftVentricle.result.value' | translate }}*
+                  </h3>
+                  <p-dropdown
+                    rr-id="car_m_060403"
+                    styleClass="o-width-100 ui-brown-box"
+                    name="lgeType"
+                    [options]="lgeTypeDropdown"
+                    [(ngModel)]="model.lgeType"
+                    (onChange)="resetDistributionType(); resetLGELocalizer(); setLGEType()"
+                    rrDropdownClear
+                    placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                    rrValidation="lgeType"
+                  >
+                  </p-dropdown>
+                </div>
+                <div
+                  class="o-radio-list"
+                  [rrDisable]="model.lgeType !== 'NonSegmental'"
+                >
+                  <h3 rr-id="car_m_060404" class="m-b-2">
+                    {{ 'cardioMRT.leftVentricle.distribution.value' | translate
+                    }}*
+                  </h3>
+                  <p-dropdown
+                    rr-id="car_m_060405"
+                    styleClass="o-width-100 ui-brown-box"
+                    name="distributionType"
+                    [options]="distributionTypeDropdown"
+                    [(ngModel)]="model.distributionType"
+                    (onChange)="resetLGELocalizer(); setLGEType()"
+                    rrDropdownClear
+                    placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                    rrValidation="distributionType"
+                  >
+                  </p-dropdown>
+                </div>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <span rr-id="car_m_0604201">
+                  {{ 'cardioMRT.leftVentricle.referenceImage.value' | translate
+                  }}
+                </span>
+              </ng-template>
+              <div class="o-list f-vertical">
+                <rr-reference-picture
+                  [referenceId]="model.id"
+                  [(ngModel)]="model.lgeReferencePicture"
+                  [fileUploadUrl]="fileUploadUrl"
+                  name="referencePicture"
+                  [pictureFileType]="imageFileType.LGEImageFile"
+                  [elementsRrIds]="referencePictureLGERRID"
+                ></rr-reference-picture>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+      <div [rrDisable]="isLGELocalizerDisabled()">
+        <h2 class="m-b-17" rrValidation="lgeSegmentalLocalizer">
+          {{ 'cardioMRT.leftVentricle.localization.value' | translate }}*
+        </h2>
+        <rr-cardio-circle-static-multicolor-localizer
+          rr-id="car_m_060409"
+          class="clickable-area"
+          [localizerModel]="model.lgeSegmentalLocalizer"
+          [localizerConfig]="LGE_NOT_SEGMENTAL_LOCALIZER_EDITOR_CONFIG"
+          (click)="openLGEEditDialog()"
+          rrValidation="lgeSegmentalLocalizer"
+          isLocalizer="true"
+        >
+        </rr-cardio-circle-static-multicolor-localizer>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-space-between">
+      <div class="f-vertical">
+        <h1 rr-id="car_m_060501" class="text-break m-b-13">
+          {{ 'cardioMRT.leftVentricle.mappingRelaxationTime.value' | translate
+          }}
+        </h1>
+        <div
+          class="f-vertical o-radio-list"
+          [rrDisable]="isRelaxationTimeColumnDisabled"
+        >
+          <p-checkbox
+            rr-id="car_m_060502"
+            label="{{ 'cardioMRT.leftVentricle.t1.value' | translate }}"
+            name="isT1"
+            binary="true"
+            (onChange)="resetT1Localizer()"
+            [(ngModel)]="model.isT1"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_060503"
+            label="{{ 'cardioMRT.leftVentricle.t2.value' | translate }}"
+            name="isT2"
+            binary="true"
+            (onChange)="resetT2Localizer()"
+            [(ngModel)]="model.isT2"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_060504"
+            label="{{ 'cardioMRT.leftVentricle.t1Gd.value' | translate }}"
+            name="isT1Gd"
+            binary="true"
+            (onChange)="resetT1GdLocalizer()"
+            [(ngModel)]="model.isT1Gd"
+          >
+          </p-checkbox>
+
+          <!-- The asterisk in this checkbox's label is a part of the medical terminology - it's not a mandatory checkbox! -->
+          <p-checkbox
+            rr-id="car_m_0605101"
+            label="{{ 'cardioMRT.leftVentricle.t2Asterisk.value' | translate }}"
+            name="isT2Asterisk"
+            binary="true"
+            rrContentReset="isT2Asterisk-block"
+            [(ngModel)]="model.isT2Asterisk"
+          >
+          </p-checkbox>
+          <div
+            id="isT2Asterisk-block"
+            class="f-vertical nested-content o-radio-list"
+            [rrDisable]="!model.isT2Asterisk"
+          >
+            <h3 rr-id="car_m_0605102">
+              {{ 'cardioMRT.leftVentricle.quantitativeInTheSeptum.value' |
+              translate }}*
+            </h3>
+            <rr-number-input
+              [(ngModel)]="model.valueMyocardiumInMs"
+              name="valueMyocardiumInMs"
+              labelRrId="car_m_0605104"
+              inputRrId="car_m_0605103"
+              [labelStyleClass]="'text-break'"
+              [config]="{ inputWidth: 47, labelWidth: 200 }"
+              rrValidation="valueMyocardiumInMs"
+              label="{{ 'cardioMRT.leftVentricle.valueMyocardiumInMs.value' | translate }}"
+            >
+            </rr-number-input>
+            <rr-number-input
+              [(ngModel)]="model.referenceValueOfMyocardiumInMs"
+              name="referenceValueOfMyocardiumInMs"
+              labelRrId="car_m_0605106"
+              inputRrId="car_m_0605105"
+              [labelStyleClass]="'text-break'"
+              [config]="{ inputWidth: 47, labelWidth: 200 }"
+              rrValidation="referenceValueOfMyocardiumInMs"
+              label="{{ 'cardioMRT.leftVentricle.referenceValueOfMyocardium.value' | translate }}"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+      <div [class.loc-group-disabled]="areRelaxationTimeLocalizersDisabled()">
+        <h2
+          rr-id="car_m_060505"
+          [rrValidation]="validationErrorsInRelaxationTimeLocalizers"
+        >
+          {{ 'cardioMRT.leftVentricle.localization.value' | translate }}*
+        </h2>
+        <rr-cardio-three-circles
+          class="clickable-area"
+          [model]="model"
+          (click)="openRelaxationTimeEditDialog()"
+          [rrValidation]="validationErrorsInRelaxationTimeLocalizers"
+          isLocalizer="true"
+          ifAny="true"
+        >
+        </rr-cardio-three-circles>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,259 @@
+<div class="reportlist-row reportlist-body-row">
+  <!--  add button-->
+  <div class="reportlist-cell clonereport-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <img src="assets/img/shared/report-list/plus.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient name-->
+  <div class="reportlist-cell reportlist-cell--bold">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <div *ngIf="isPatientEditable()" class="patient-name-edit-container">
+            <p-autoComplete
+              name="firstName"
+              [placeholder]="'reportlist.patientFirstName' | translate"
+              [inputStyleClass]="'reportlist-body-row-input'"
+              [(ngModel)]="editModel.patientFirstName"
+              [suggestions]="patientSuggestions"
+              [scrollHeight]="'300px'"
+              (completeMethod)="searchFirstNameBySubString($event)"
+              [maxlength]="40"
+              (onSelect)="selectPatientSuggestion($event)"
+              [delay]="700"
+              [minLength]="autocompleteMinLength"
+              field="display"
+            ></p-autoComplete>
+            <p-autoComplete
+              name="lastName"
+              [placeholder]="'reportlist.patientLastName' | translate"
+              [inputStyleClass]="'reportlist-body-row-input'"
+              [(ngModel)]="editModel.patientLastName"
+              [suggestions]="patientSuggestions"
+              [scrollHeight]="'300px'"
+              (completeMethod)="searchLastNameBySubString($event)"
+              [maxlength]="40"
+              (onSelect)="selectPatientSuggestion($event)"
+              [delay]="700"
+              [minLength]="autocompleteMinLength"
+              field="display"
+            ></p-autoComplete>
+          </div>
+          <div
+            *ngIf="!isPatientEditable()"
+            class="patient-name-display-container"
+          >
+            <span>{{ editModel.patientName }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient gender-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <p-dropdown
+            *ngIf="isPatientEditable()"
+            [styleClass]="'reportlist-row-dropdown'"
+            [placeholder]="getDropdownPlaceholder('reportlist.patientGender')"
+            [options]="genders"
+            [(ngModel)]="editModel.patientGender"
+          ></p-dropdown>
+          <span *ngIf="!isPatientEditable()" translate
+            >reportlist.genderEnum.{{ editModel.patientGender }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient birthdate-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <rr-calendar-input
+            *ngIf="isPatientEditable()"
+            [(ngModel)]="editModel.patientBirthDate"
+            [maxDate]="birthDateMaxDate"
+            [dateFormat]="calendarDateFormat"
+            (ngModelChange)="!isSearch() && setPatientAge()"
+            placeholderData="{{ dateFormatPlaceholder }}"
+            name="patientBirthDateDate"
+          ></rr-calendar-input>
+          <span *ngIf="!isPatientEditable() && editModel.patientBirthDate"
+            >{{ editModel.patientBirthDate | date: dateFormat }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  patient age-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <input
+            class="age-input"
+            *ngIf="isSearch() && isPatientEditable()"
+            type="number"
+            min="0"
+            name="age"
+            placeholder="-"
+            [(ngModel)]="editModel.patientAge"
+          />
+          <span *ngIf="!isSearch() || !isPatientEditable()"
+            >{{ editModel.patientBirthDate ? editModel.patientAge : "-" }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  freefield-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  status-->
+  <div
+    class="reportlist-cell status-cell"
+    [ngClass]="{
+      'status-cell--open': editModel.status === reportStatuses.Open,
+      'status-cell--inprogress': editModel.status === reportStatuses.InProgress,
+      'status-cell--completed': editModel.status === reportStatuses.Completed,
+      'status-cell--exported': editModel.status === reportStatuses.Exported,
+      'status-cell--canceled': editModel.status === reportStatuses.Canceled,
+      'status-cell--approved': editModel.status === reportStatuses.Approved,
+      'status-cell--generated': editModel.status === reportStatuses.Generated
+    }"
+  >
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <p-dropdown
+            *ngIf="isSearch()"
+            [styleClass]="'reportlist-row-dropdown'"
+            [placeholder]="getDropdownPlaceholder('reportlist.status')"
+            [options]="statuses"
+            [(ngModel)]="editModel.status"
+          ></p-dropdown>
+          <span *ngIf="!isSearch()" translate
+            >reportlist.statusEnum.{{ editModel.status }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  examination type-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <p-dropdown
+            [styleClass]="
+              'reportlist-row-dropdown reportlist-row-dropdown--large reportlist-row-dropdown--long'
+            "
+            [placeholder]="getDropdownPlaceholder('reportlist.examination')"
+            [options]="examinations"
+            [(ngModel)]="editModel.examinationType"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  examination date-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <rr-calendar-input
+            [(ngModel)]="editModel.examinationDate"
+            [dateFormat]="calendarDateFormat"
+            placeholderData="{{ dateFormatPlaceholder }}"
+            name="examinationDate"
+          ></rr-calendar-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  user label-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <p-dropdown
+            *ngIf="isSearch()"
+            [styleClass]="'reportlist-row-dropdown'"
+            [placeholder]="getDropdownPlaceholder('reportlist.doctor')"
+            [options]="users"
+            [(ngModel)]="editModel.userId"
+          ></p-dropdown>
+          <span *ngIf="!isSearch()">{{ editModel.userLabel }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  creation date-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <rr-calendar-input
+            [(ngModel)]="editModel.findingsDate"
+            [dateFormat]="calendarDateFormat"
+            placeholderData="{{ dateFormatPlaceholder }}"
+            name="findingsDate"
+          ></rr-calendar-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  freefield-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  freefield-->
+  <div class="reportlist-cell">
+    <div class="reportlist-cell-hitarea">
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <span>-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  enter button-->
+  <div
+    class="reportlist-cell reportlist-cell--center openreport-cell"
+    [ngClass]="{ 'openreport-cell--active': isModelValid() }"
+  >
+    <div
+      class="reportlist-cell-hitarea"
+      [ngClass]="{ 'reportlist-cell-hitarea--clickable': isModelValid() }"
+      (click)="onFinishEdit()"
+    >
+      <div class="reportlist-cell-interior">
+        <div class="reportlist-cell-content-wrapper">
+          <img src="assets/img/layout/rr-arrow-right.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_050207"
+      label="{{'kneeMRT.ribbons.discoidMeniscus.value' | translate}}"
+      name="isDiscoidMeniscus"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isDiscoidMeniscus"
+      rrContentReset="isDiscoidMeniscus-block"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+      class="m-b-13"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isDiscoidMeniscus"
+      id="isDiscoidMeniscus-block"
+    >
+      <p rr-id="kne_m_050208" class="m-b-7">
+        {{'kneeMRT.ribbons.classificationAccordingToWatanabe.value' |
+        translate}}
+      </p>
+      <p-radioButton
+        name="discoidMeniscusType"
+        rr-id="kne_m_050209"
+        rrUnClickRadio
+        rrContentReset="wrisbergVariant-block"
+        label="{{'kneeMRT.ribbons.typeComplete.value' | translate}}"
+        [value]="discoidMeniscusType.Complete"
+        [(ngModel)]="model.discoidMeniscusType"
+      ></p-radioButton>
+      <p-radioButton
+        name="discoidMeniscusType"
+        rr-id="kne_m_050210"
+        rrUnClickRadio
+        rrContentReset="wrisbergVariant-block"
+        label="{{'kneeMRT.ribbons.typeIncomplete.value' | translate}}"
+        [value]="discoidMeniscusType.Incomplete"
+        [(ngModel)]="model.discoidMeniscusType"
+      ></p-radioButton>
+      <p-radioButton
+        name="discoidMeniscusType"
+        rr-id="kne_m_050211"
+        rrUnClickRadio
+        rrContentReset="wrisbergVariant-block"
+        label="{{'kneeMRT.ribbons.typeWrisbergVariant.value' | translate}}"
+        [value]="discoidMeniscusType.WrisbergVariant"
+        [(ngModel)]="model.discoidMeniscusType"
+      ></p-radioButton>
+      <div
+        id="wrisbergVariant-block"
+        class="f-vertical f-start nested-content o-radio-list"
+        [rrDisable]="model.discoidMeniscusType !== 'WrisbergVariant' && model.isDiscoidMeniscus"
+      >
+        <p-checkbox
+          name="isDislocated"
+          rr-id="kne_m_050212"
+          label="{{'kneeMRT.ribbons.dislocation.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDislocated"
+        ></p-checkbox>
+        <p-checkbox
+          name="isThickeningLigMeniscofemoralPosterius"
+          rr-id="kne_m_050213"
+          label="{{'kneeMRT.ribbons.thickeningLigMeniscofemoralPosterius.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isThickeningLigMeniscofemoralPosterius"
+          class="text-break"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <p-checkbox
+      name="isParsIntermediaWavyRepresentation"
+      rr-id="kne_m_050322"
+      label="{{'kneeMRT.ribbons.parsIntermediaWavyRepresentation.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isParsIntermediaWavyRepresentation"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+      class="m-b-15"
+    ></p-checkbox>
+    <p-checkbox
+      name="isPhysiologicalT2Hyperintensity"
+      rr-id="kne_m_050323"
+      label="{{'kneeMRT.ribbons.physiologicalT2wHyperintensityAtMeniscusBase.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      (onChange)="clearPhysiologicalT2wLocalization()"
+      binary="true"
+      [(ngModel)]="model.isPhysiologicalT2Hyperintensity"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+      class="m-b-3"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isPhysiologicalT2Hyperintensity"
+    >
+      <p
+        class="text-break"
+        rr-id="kne_m_050324"
+        rrInfoIcon="kne_m_0503200"
+        rrValidation="meniscusLocalization1"
+      >
+        {{'kneeMRT.ribbons.localizationMultipleSelection.value' | translate}}
+      </p>
+      <rr-knee-cross
+        name="meniscusLocalization1"
+        [attr.rr-id]="model.findingType === findingType.InnerMeniscusVarian ? 'kne_m_050325_im' : 'kne_m_050325_am'"
+        [(ngModel)]="model.meniscusLocalization1"
+        rrValidation="meniscusLocalization1"
+        isLocalizer="true"
+        [activePart]="getActivePart()"
+      ></rr-knee-cross>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_050413"
+      name="isMeniscalOssile"
+      label="{{'kneeMRT.ribbons.meniscalOssile.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      (onChange)="clearMeniscusLocalization()"
+      binary="true"
+      [(ngModel)]="model.isMeniscalOssile"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+      class="m-b-8"
+    ></p-checkbox>
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isMeniscalOssile"
+    >
+      <p
+        rr-id="kne_m_050414"
+        rrInfoIcon="kne_m_0504200"
+        rrValidation="meniscusLocalization2"
+        class="m-b-7 text-break"
+      >
+        {{'kneeMRT.ribbons.localizationMultipleSelection.value' | translate}}
+      </p>
+
+      <rr-knee-cross
+        name="meniscusLocalization2"
+        [attr.rr-id]="model.findingType === findingType.InnerMeniscusVarian ? 'kne_m_050415_im' : 'kne_m_050415_am'"
+        [(ngModel)]="model.meniscusLocalization2"
+        rrValidation="meniscusLocalization2"
+        isLocalizer="true"
+        [activePart]="getActivePart()"
+      ></rr-knee-cross>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+    <p-checkbox
+      rr-id="kne_m_050512"
+      name="isAbsentMeniscus"
+      label="{{'kneeMRT.ribbons.absentMeniscus.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isAbsentMeniscus"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+      class="m-b-16"
+    ></p-checkbox>
+    <p-checkbox
+      *ngIf="model.findingType === findingType.InnerMeniscusVarian"
+      rr-id="kne_m_050513"
+      name="isSignificantVolumeDeclineIM"
+      label="{{'kneeMRT.ribbons.markedVolumeReductionOfTheMedialMeniscus.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isSignificantVolumeDeclineIM"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+    ></p-checkbox>
+    <p-checkbox
+      *ngIf="model.findingType === findingType.OuterMeniscusVariant"
+      rr-id="kne_m_050517"
+      name="isSignificantVolumeDeclineEM"
+      label="{{'kneeMRT.ribbons.significantVolumeMinusExternalMinus.value' | translate}}"
+      labelStyleClass="ui-fat-label"
+      binary="true"
+      [(ngModel)]="model.isSignificantVolumeDeclineEM"
+      rrValidation="isDiscoidMeniscus isParsIntermediaWavyRepresentation isPhysiologicalT2Hyperintensity isMeniscalOssile isAbsentMeniscus isSignificantVolumeDeclineIM"
+    ></p-checkbox>
+  </div>
+</div>

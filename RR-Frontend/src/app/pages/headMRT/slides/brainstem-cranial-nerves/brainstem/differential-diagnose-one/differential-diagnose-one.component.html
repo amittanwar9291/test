@@ -1,0 +1,96 @@
+<div class="f-horizontal main-container ng-star-inserted o-width-100 ">
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15  c-pad">
+    <div class="p-l-10 p-r-10 o-radio-list">
+      <h2 rr-id="hea_m_080232">
+        {{ 'headMRT.brainstemCranialNerves.differentialDiagnosis.value' |
+        translate }}
+      </h2>
+      <div
+        [rrDisable]="model.descriptionType === descriptionType.IKnow"
+        class="o-radio-list f-vertical"
+      >
+        <p rr-id="hea_m_080233" class="m-b-5">
+          {{ 'headMRT.brainstemCranialNerves.differentialDiagnosis1.value' |
+          translate }}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_080234"
+          [options]="differentialDiagnosisW036"
+          rrValidation="differentialDiagnosis1"
+          [diagnosisNumber]="1"
+          group="true"
+          name="differentialDiagnosis1"
+          [(ngModel)]="model.differentialDiagnosis1"
+          (selectionChanged)="clearDDLCheckboxes()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          label="{{'headMRT.brainstemCranialNerves.suspicionOf.value' | translate}}"
+          binary="true"
+          rr-id="hea_m_080235"
+          name="isSuspicionOf"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="model.differentialDiagnosis1 === diagnosisTypeEnum.None"
+          class="o-radio-list"
+        ></p-checkbox>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis1 === diagnosisTypeEnum.None && model.differentialDiagnosis === diagnosisTypeEnum.None"
+        class="o-radio-list f-vertical"
+      >
+        <p rr-id="hea_m_080236" class="m-b-5">
+          {{ 'headMRT.brainstemCranialNerves.differentialDiagnosis2.value' |
+          translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_080237"
+          [options]="differentialDiagnosisW037"
+          [diagnosisNumber]="2"
+          group="true"
+          name="differentialDiagnosis2"
+          [(ngModel)]="model.differentialDiagnosis2"
+          (selectionChanged)="clearSubordinateCheckbox()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis2 === diagnosisTypeEnum.None"
+        class="o-radio-list f-vertical"
+      >
+        <p-checkbox
+          rr-id="hea_m_080238"
+          label="{{'headMRT.brainstemCranialNerves.subordinate.value' | translate}}"
+          binary="true"
+          class="o-radio-list"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+        ></p-checkbox>
+        <p rr-id="hea_m_080239" class="m-b-5">
+          {{ 'headMRT.brainstemCranialNerves.differentialDiagnosis3.value' |
+          translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_080240"
+          [options]="differentialDiagnosisW037"
+          rrValidation=""
+          [diagnosisNumber]="3"
+          group="true"
+          name="differentialDiagnosis3"
+          [(ngModel)]="model.differentialDiagnosis3"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_080241"
+        label="{{'headMRT.brainstemCranialNerves.lesionOfTheSame.value' | translate}}"
+        binary="true"
+        name="isMoreThan1Lesion"
+        [(ngModel)]="model.isMoreThan1Lesion"
+        class="m-t-20"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad"></div>
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad"></div>
+  <div class="c-col-1 c-sep f-vertical f-start m-t-15 m-b-15 c-pad-l"></div>
+</div>

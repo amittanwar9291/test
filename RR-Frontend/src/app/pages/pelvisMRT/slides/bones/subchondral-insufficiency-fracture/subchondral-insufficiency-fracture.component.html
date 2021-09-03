@@ -1,0 +1,126 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 rr-id="pel_m_100202" class="m-b-27 m-t-3" rrValidation="hipLocalizer">
+      {{ "pelvisMRT.bones.localization.value" | translate }}*
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+      rrValidation="hipLocalizer"
+      isLocalizer="true"
+    >
+    </rr-hips-small>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 class="m-b-18 m-t-3" rr-id="pel_m_100334">
+      {{ "pelvisMRT.bones.characterization.value" | translate }}
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="pel_m_100335"
+        labelStyleClass="text-break"
+        label="{{
+          'pelvisMRT.bones.lowSignalBandIrregularinterrupted.value' | translate
+        }}"
+        [(ngModel)]="model.isLowSignalLine"
+        binary="true"
+        name="isLowSignalLine"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_100336"
+        label="{{ 'pelvisMRT.bones.lowSignalAreaBetween.value' | translate }}"
+        [(ngModel)]="model.isLowSignalArea"
+        binary="true"
+        name="isLowSignalArea"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_100337"
+        label="{{
+          'pelvisMRT.bones.articularSurfaceCollapseCortical.value' | translate
+        }}"
+        [(ngModel)]="model.isArticularSurfaceCollapseCortical"
+        binary="true"
+        name="isArticularSurfaceCollapseCortical"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_100338"
+        label="{{
+          'pelvisMRT.bones.liquidIsointenseSubchondralGap.value' | translate
+        }}"
+        [(ngModel)]="model.isLiquidFilledSubchondralGap"
+        binary="true"
+        name="isLiquidFilledSubchondralGap"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_100339"
+        label="{{ 'pelvisMRT.bones.osteochondralFragment.value' | translate }}"
+        [(ngModel)]="model.isOsteochondralFragment"
+        binary="true"
+        name="isOsteochondralFragment"
+        rrContentReset="osteochondralFragmentBlock"
+      ></p-checkbox>
+      <div
+        id="osteochondralFragmentBlock"
+        class="left-indent"
+        [rrDisable]="!model.isOsteochondralFragment"
+      >
+        <rr-number-input
+          rr-id="pel_m_100340"
+          label="{{ 'pelvisMRT.bones.diameterOfFragmentIn.value' | translate }}"
+          [(ngModel)]="model.osteochondralFragmentInMm"
+          [config]="{placeholder: '--', min: 1, max: 20, step: 1}"
+          name="osteochondralFragmentInMm"
+        ></rr-number-input>
+      </div>
+      <div
+        [rrDisable]="technologyModel && technologyModel.cmReinforcedType !== simpleAnswer.Yes"
+      >
+        <p-checkbox
+          rr-id="pel_m_100342"
+          label="{{ 'pelvisMRT.bones.contrastEnhancementPerifocal.value' | translate }}"
+          [(ngModel)]="model.isCMEnhancementPerifocal"
+          binary="true"
+          name="isCMEnhancementPerifocal"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="pel_m_1003200"
+        label="{{ 'pelvisMRT.bones.boneMarrowEdema.value' | translate }}"
+        [(ngModel)]="model.isBoneMarrowEdema"
+        binary="true"
+        name="isBoneMarrowEdema"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertica">
+    <h2 class="m-b-18 m-t-3" rr-id="pel_m_100470">
+      {{ "pelvisMRT.bones.differentialDiagnosis.value" | translate }}
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="pel_m_100471"
+        label="{{ 'pelvisMRT.bones.transientBoneMarrowEdema.value' | translate }}"
+        [(ngModel)]="model.isTransientBoneMarrowEdema"
+        binary="true"
+        name="isTransientBoneMarrowEdema"
+        rrContentReset="transientBoneMarrowEdemaBlock"
+      ></p-checkbox>
+      <div
+        class="left-indent"
+        id="transientBoneMarrowEdemaBlock"
+        [rrDisable]="!model.isTransientBoneMarrowEdema"
+      >
+        <p-checkbox
+          rr-id="pel_m_100472"
+          label="{{ 'pelvisMRT.bones.subordinate.value' | translate }}"
+          [(ngModel)]="model.isSubordinated"
+          binary="true"
+          name="isSubordinated"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical"></div>
+</div>

@@ -1,0 +1,41 @@
+<div
+  class="info-dialog-container"
+  [ngStyle]="{'zoom': zoom, 'max-width': pdfLandscape ? '1412px' : '706px'}"
+  *ngIf="isVisible"
+>
+  <span class="info-dialog-buttons-container">
+    <img
+      src="assets/img/shared/icon-close.svg"
+      (click)="close()"
+      style="margin-left: 10px"
+      class="info-dialog-close"
+    />
+    <img
+      src="assets/img/shared/icon-plus.svg"
+      (click)="zoomIn()"
+      style="margin-left: 20px"
+      class="info-dialog-zoomIn"
+    />
+    <img
+      src="assets/img/shared/icon-minus.svg"
+      (click)="zoomOut()"
+      style="margin-left: 5px"
+      class="info-dialog-zoomOut"
+    />
+    <!--    todo print button and printing functionality currently disabled due to problem with printing on electron-->
+    <!--    <img src="assets/img/shared/icon-print.svg" (click)="print()" style="margin-left: 20px" class="info-dialog-print"/>-->
+  </span>
+  <div
+    class="info-dialog-content"
+    [ngStyle]="{'width': pdfLandscape ? '1412px' : '706px'}"
+  >
+    <pdf-viewer
+      [src]="pdfSRC"
+      style="display: block; height: 998px;"
+      [show-all]="true"
+      [render-text]="true"
+      [zoom]="zoomPdf"
+      [fit-to-page]="true"
+    ></pdf-viewer>
+  </div>
+</div>

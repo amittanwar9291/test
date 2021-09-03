@@ -1,0 +1,89 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- First column, with dynamic components -->
+    <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-list">
+      <div class="f-start f-vertical o-list">
+        <h1 class="m-b-16" rr-id="hip_m_070103">
+          {{ 'hipMRT.musclesAndTendons.finding.value' | translate }}*
+        </h1>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="hip_m_070104"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'hipMRT.musclesAndTendons.normalImagingOfMuscles.value' | translate }}"
+            labelStyleClass="text-break"
+            name="areFindings"
+            [value]="areFindings.No"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_070105"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'hipMRT.musclesAndTendons.finding.value' | translate }}"
+            name="areFindings"
+            [value]="areFindings.Yes"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled"
+        [setConfig]="findingDropdownConfig"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-start f-vertical">
+      <!-- Finding number -->
+      <div class="c-col-4 f-vertical">
+        <h1
+          rr-id="hip_m_040201"
+          class="c-pad-l m-b-94"
+          [ngClass]="{ 'hidden' : findingHandler.currentItem.findingType === findingType.None }"
+        >
+          {{ 'hipMRT.muscles-and-tendons.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div class="f-horizontal col-h-100">
+        <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+          <rr-musculature
+            *ngSwitchCase="findingType.Musculature"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-musculature>
+
+          <rr-tendons
+            *ngSwitchCase="findingType.Tendons"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-tendons>
+
+          <rr-bursitis
+            *ngSwitchCase="findingType.Bursitis"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-bursitis>
+
+          <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+            <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+            <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+            <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+            <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form>

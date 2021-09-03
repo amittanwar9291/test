@@ -1,0 +1,205 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 class="m-b-20" rr-id="tho_c_080202">
+      {{ "thoraxCT.bones.side.value" | translate }}*
+    </h2>
+    <p-radioButton
+      [(ngModel)]="model.sideType"
+      name="sideType"
+      rrValidation="sideType"
+      [value]="locationType.Right"
+      label="{{ 'thoraxCT.bones.right.value' | translate }}"
+      rr-id="tho_c_080204"
+    ></p-radioButton>
+    <p-radioButton
+      [(ngModel)]="model.sideType"
+      name="sideType"
+      rrValidation="sideType"
+      [value]="locationType.Left"
+      label="{{ 'thoraxCT.bones.left.value' | translate }}"
+      rr-id="tho_c_080203"
+    ></p-radioButton>
+  </div>
+  <div class="double-col f-vertical c-sep">
+    <div class="double-col-header o-radio-list c-pad-l">
+      <h2 class="m-b-10 text-break" rr-id="tho_c_080311">
+        {{ "thoraxCT.bones.characterizationAOClassificationAO14.value" |
+        translate }}*
+      </h2>
+    </div>
+    <div class="double-col-content f-horizontal">
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <p-radioButton
+          name="scapulaFractureType"
+          [value]="scapulaFractureType.FourteenAProcess"
+          label="{{ 'thoraxCT.bones.14AProcess.value' | translate }}"
+          rr-id="tho_c_080313"
+          [(ngModel)]="model.scapulaFractureType"
+          rrValidation="scapulaFractureType"
+          rrContentReset="bodyTypeContainer glenoidFossaTypeContainer notFurtherDefinedClassificationTypeContainer"
+        ></p-radioButton>
+        <div
+          id="processTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="
+            model.scapulaFractureType !== scapulaFractureType.FourteenAProcess
+          "
+        >
+          <p rr-id="tho_c_0803213">
+            {{ "thoraxCT.bones.fractureType.value" | translate }}
+          </p>
+          <p-radioButton
+            name="processType"
+            [value]="processType.FourteenA1CoracoidProcess"
+            label="{{ 'thoraxCT.bones.14A1CoracoidProcess.value' | translate }}"
+            rr-id="tho_c_080314"
+            [(ngModel)]="model.processType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="processType"
+            [value]="processType.FourteenA2Acromion"
+            label="{{ 'thoraxCT.bones.14A2Acromion.value' | translate }}"
+            rr-id="tho_c_080315"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.processType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="processType"
+            [value]="processType.FourteenA3Spine"
+            label="{{ 'thoraxCT.bones.14A3Spine.value' | translate }}"
+            rr-id="tho_c_080316"
+            [(ngModel)]="model.processType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          name="scapulaFractureType"
+          [value]="scapulaFractureType.FourteenBBody"
+          label="{{ 'thoraxCT.bones.14BBody.value' | translate }}"
+          rr-id="tho_c_080317"
+          [(ngModel)]="model.scapulaFractureType"
+          rrValidation="scapulaFractureType"
+          rrContentReset="processTypeContainer glenoidFossaTypeContainer notFurtherDefinedClassificationTypeContainer"
+        ></p-radioButton>
+        <div
+          id="bodyTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.scapulaFractureType !== scapulaFractureType.FourteenBBody"
+        >
+          <p rr-id="tho_c_0803214">
+            {{ "thoraxCT.bones.fractureType.value" | translate }}
+          </p>
+          <p-radioButton
+            name="bodyType"
+            [value]="bodyType.FourteenB1ExitsTheBodyAt2OrLessPoints"
+            label="{{
+              'thoraxCT.bones.14B1ExitsTheBodyAt2OrLessPoints.value' | translate
+            }}"
+            rr-id="tho_c_080318"
+            [(ngModel)]="model.bodyType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="bodyType"
+            [value]="bodyType.FourteenB2ExitsTheBodyAt3OrMorePoints"
+            label="{{
+              'thoraxCT.bones.14B2ExitsTheBodyAt3OrMorePoints.value' | translate
+            }}"
+            rr-id="tho_c_080319"
+            [(ngModel)]="model.bodyType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad o-radio-list">
+        <p-radioButton
+          name="scapulaFractureType"
+          [value]="scapulaFractureType.FourteenFGlenoidFossa"
+          label="{{ 'thoraxCT.bones.14FGlenoidFossa.value' | translate }}"
+          rr-id="tho_c_080406"
+          [(ngModel)]="model.scapulaFractureType"
+          rrValidation="scapulaFractureType"
+          rrContentReset="processTypeContainer bodyTypeContainer notFurtherDefinedClassificationTypeContainer"
+        ></p-radioButton>
+        <div
+          id="glenoidFossaTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="
+            model.scapulaFractureType !== scapulaFractureType.FourteenFGlenoidFossa
+          "
+        >
+          <p rr-id="tho_c_0804206">
+            {{ "thoraxCT.bones.fractureType.value" | translate }}
+          </p>
+          <p-radioButton
+            name="glenoidFossaType"
+            [value]="glenoidFossaType.FourteenF0Extraarticular"
+            label="{{ 'thoraxCT.bones.14F0Extraarticular.value' | translate }}"
+            rr-id="tho_c_080407"
+            [(ngModel)]="model.glenoidFossaType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="glenoidFossaType"
+            [value]="glenoidFossaType.FourteenF1SimpleArticular"
+            label="{{
+              'thoraxCT.bones.14F1SimpleAarticular.value' | translate
+            }}"
+            rr-id="tho_c_080408"
+            [(ngModel)]="model.glenoidFossaType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="glenoidFossaType"
+            [value]="glenoidFossaType.FourteenF2MultifragmentaryArticular"
+            label="{{
+              'thoraxCT.bones.14F2MultifragmentaryAarticular.value' | translate
+            }}"
+            rr-id="tho_c_080409"
+            [(ngModel)]="model.glenoidFossaType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          name="scapulaFractureType"
+          [value]="scapulaFractureType.FourteenNotFurtherSpecified"
+          label="{{ 'thoraxCT.bones.14NotFurtherDefined.value' | translate }}"
+          rr-id="tho_c_080410"
+          [(ngModel)]="model.scapulaFractureType"
+          rrValidation="scapulaFractureType"
+          rrContentReset="processTypeContainer bodyTypeContainer glenoidFossaTypeContainer"
+        ></p-radioButton>
+        <div
+          id="notFurtherDefinedClassificationTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="
+            model.scapulaFractureType !==
+            scapulaFractureType.FourteenNotFurtherSpecified
+          "
+        >
+          <p-radioButton
+            name="notFurtherDefinedClassificationType"
+            [value]="notFurtherDefinedClassificationType.FractureOlderRemodeled"
+            label="{{
+              'thoraxCT.bones.fractureOlderRemodeled.value' | translate
+            }}"
+            rr-id="tho_c_080411"
+            [(ngModel)]="model.notFurtherDefinedClassificationType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="notFurtherDefinedClassificationType"
+            [value]="notFurtherDefinedClassificationType.Suspected"
+            label="{{ 'thoraxCT.bones.suspected.value' | translate }}"
+            rr-id="tho_c_0804233"
+            [(ngModel)]="model.notFurtherDefinedClassificationType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

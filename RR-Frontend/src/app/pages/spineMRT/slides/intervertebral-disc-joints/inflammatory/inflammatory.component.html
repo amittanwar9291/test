@@ -1,0 +1,222 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="spi_m_0502303" rrValidation="spineLocation">
+      {{'spineMRT.disc.localizationSegmental.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      rr-id="spi_m_050209"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="spi_m_050331" rrInfoIcon="spi_m_0503303" class="text-break">
+      {{'spineMRT.disc.inflammatorySpondylodiscitisDetails.value' | translate}}
+    </h2>
+    <p-checkbox
+      class="m-t-35"
+      binary="true"
+      [(ngModel)]="model.isIncreasedSizeOfTheDisc"
+      label="{{'spineMRT.disc.increasedSizeOfTheDisc.value'| translate}}"
+      rr-id="spi_m_050332"
+      name="isIncreasedSizeOfTheDisc"
+    ></p-checkbox>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isT2wHyperintensityOfTheDisc"
+      label="{{'spineMRT.disc.t2wHyperintensityOfTheDisc.value'| translate}}"
+      rr-id="spi_m_050333"
+      name="isT2wHyperintensityOfTheDisc"
+    ></p-checkbox>
+    <p-checkbox
+      [rrDisable]="!isCMYes"
+      binary="true"
+      [(ngModel)]="model.isContrastEnhancementOfTheDisc"
+      label="{{'spineMRT.disc.contrastEnhancementOfTheDisc.value'| translate}}"
+      rr-id="spi_m_050334"
+      name="isContrastEnhancementOfTheDisc"
+    ></p-checkbox>
+    <p-checkbox
+      class="m-t-35"
+      binary="true"
+      [(ngModel)]="model.isEpiduralInflammationOrAbscess"
+      label="{{'spineMRT.disc.epiduralInflammationAbscess.value'| translate}}"
+      rr-id="spi_m_050335"
+      rrContentReset="expansionZDirectionContainer"
+      name="isEpiduralInflammationOrAbscess"
+    ></p-checkbox>
+    <div
+      id="expansionZDirectionContainer"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isEpiduralInflammationOrAbscess"
+    >
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isExpansionInZDimension"
+        label="{{'spineMRT.disc.expansionInZdirection.value'| translate}}"
+        rr-id="spi_m_050336"
+        rrContentReset="zDirectionDiameterContainer"
+        name="isExpansionInZDimension"
+      ></p-checkbox>
+      <div
+        id="zDirectionDiameterContainer"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isExpansionInZDimension"
+      >
+        <rr-number-input
+          [(ngModel)]="model.expansionInZDimensionInMm"
+          name="expansionInZDimensionInMm"
+          labelRrId="spi_m_050338"
+          inputRrId="spi_m_050337"
+          label="{{ 'spineMRT.disc.inMm.value' | translate }}"
+          [config]="{max: 999}"
+        ></rr-number-input>
+      </div>
+    </div>
+    <p-checkbox
+      binary="true"
+      [rrDisable]="!isCMYes"
+      [(ngModel)]="model.isEpiduralContrastEnhancement"
+      label="{{'spineMRT.disc.epiduralContrastEnhancement.value'| translate}}"
+      rr-id="spi_m_050339"
+      name="isEpiduralContrastEnhancement"
+    ></p-checkbox>
+  </div>
+
+  <div class="f-start f-vertical">
+    <div class="multi-col-header o-radio-list c-pad">
+      <h2 rr-id="spi_m_0504303">
+        {{'spineMRT.disc.surroundingTissueReaction.value' | translate}}
+      </h2>
+      <h2 rr-id="spi_m_050202" rrValidation="spineAxialLocation" class="m-t-20">
+        <span
+          >{{'spineMRT.disc.localizationAxialMultipleSelectionsPossible.value.part1'
+          | translate}}</span
+        ><br />
+        <span style="font-family: BentonSansLight"
+          >{{'spineMRT.disc.localizationAxialMultipleSelectionsPossible.value.part2'
+          | translate}}*</span
+        >
+      </h2>
+    </div>
+    <div class="f-start f-horizontal multi-col-content">
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <rr-axial-localizer
+          rr-id="spi_m_0504304"
+          [(ngModel)]="model.spineAxialLocation"
+          rrValidation="spineAxialLocation"
+          isLocalizer="true"
+          name="spineAxialLocation"
+        ></rr-axial-localizer>
+
+        <p-checkbox
+          class="m-t-40"
+          binary="true"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.isParavertebralInflammatoryResponse"
+          label="{{'spineMRT.disc.paravertebralInflammatoryResponse.value'| translate}}"
+          rr-id="spi_m_0504305"
+          name="isParavertebralInflammatoryResponse"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isSoftTissueEdema"
+          label="{{'spineMRT.disc.softTissuEdema.value'| translate}}"
+          rr-id="spi_m_0504306"
+          name="isSoftTissueEdema"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l o-radio-list">
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isAbscess"
+          label="{{'spineMRT.disc.abscess.value'| translate}}"
+          rr-id="spi_m_0505306"
+          rrContentReset="abzessContainer"
+          name="isAbscess"
+        ></p-checkbox>
+        <div
+          id="abzessContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isAbscess"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isEpidural"
+            label="{{'spineMRT.disc.epidural.value'| translate}}"
+            rr-id="spi_m_0505307"
+            rrContentReset="largestDiameterEpiduralContainer"
+            name="isEpidural"
+          ></p-checkbox>
+          <div
+            id="largestDiameterEpiduralContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isEpidural"
+          >
+            <rr-number-input
+              [(ngModel)]="model.largestDiameterEpidural"
+              name="largestDiameterEpidural"
+              [labelRrId]="'spi_m_0505309'"
+              [inputRrId]="'spi_m_0505308'"
+              labelStyleClass="text-break"
+              [config]="{ max: 60 }"
+              label="{{ 'spineMRT.disc.largestDiameterInMm.value' | translate }}"
+            ></rr-number-input>
+          </div>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isIntraspinal"
+            label="{{'spineMRT.disc.intraspinal.value'| translate}}"
+            rr-id="spi_m_0505310"
+            rrContentReset="largestDiameterIntraspinalCOntainer"
+            name="isIntraspinal"
+          ></p-checkbox>
+          <div
+            id="largestDiameterIntraspinalCOntainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isIntraspinal"
+          >
+            <rr-number-input
+              [(ngModel)]="model.largestDiameterIntraspinal"
+              name="largestDiameterIntraspinal"
+              [labelRrId]="'spi_m_0505312'"
+              [inputRrId]="'spi_m_0505311'"
+              labelStyleClass="text-break"
+              [config]="{ max: 60 }"
+              label="{{ 'spineMRT.disc.largestDiameterInMm.value' | translate }}"
+            ></rr-number-input>
+          </div>
+        </div>
+
+        <h2 rr-id="spi_m_0505313" class="m-t-30">
+          {{'spineMRT.disc.differentialDiagnosis.value' | translate}}
+        </h2>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isActiveDiscitis"
+          label="{{'spineMRT.disc.activeDiscitis.value'| translate}}"
+          rr-id="spi_m_0505314"
+          rrContentReset="isSubordinatedContainer"
+          name="isActiveDiscitis"
+        ></p-checkbox>
+        <div
+          id="isSubordinatedContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isActiveDiscitis"
+        >
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isSecondary"
+            label="{{'spineMRT.disc.secondary.value'| translate}}"
+            rr-id="spi_m_0505315"
+            name="isSecondary"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

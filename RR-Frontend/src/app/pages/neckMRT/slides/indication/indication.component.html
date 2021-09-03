@@ -1,0 +1,157 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="f-vertical c-sep">
+      <div class="c-pad">
+        <h1 rr-id="nec_m_020103">
+          {{ "neckMRT.indication.anamnesisIndication.value" | translate }}
+        </h1>
+        <img
+          class="m-t-10"
+          rr-id="nec_m_020104"
+          src="assets/img/neckMRT/icons/2-1.svg"
+          alt="Indication"
+        />
+      </div>
+      <div class="col-h-100 f-horizontal m-t-22">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="indicationFindingHandler"
+            [disabled]="false"
+            [setConfig]="indicationFindingDropdownConfig"
+            [attr.name]="'indicationFindings'"
+          >
+          </rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <rr-indication-fiding
+            [model]="indicationFindingHandler.currentItem"
+            [header]="selectedIndicationFindingName"
+          >
+          </rr-indication-fiding>
+        </div>
+      </div>
+    </div>
+    <div class="f-vertical c-sep">
+      <div class="c-pad">
+        <h1 rr-id="nec_m_020301" class="text-break">
+          {{ "neckMRT.indication.previousInterventionstherapies.value" |
+          translate }}
+        </h1>
+        <img
+          class="m-t-13 m-b-4"
+          rr-id="nec_m_020302"
+          src="assets/img/neckMRT/icons/2-2.svg"
+          alt="Previous Operations"
+        />
+      </div>
+      <div class="col-h-100 c-sep f-horizontal m-t-5">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="previousTherapyHandler"
+            [disabled]="false"
+            [setConfig]="previousTherapyDropdownConfig"
+            [attr.name]="'previousTherapies'"
+            validationName="previousTherapies"
+            [validationSecondFinding]="true"
+          ></rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <rr-previous-therapies
+            [model]="previousTherapyHandler.currentItem"
+            [header]="selectedPreviousTherapyName"
+          >
+          </rr-previous-therapies>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad o-radio-list">
+      <h1 rr-id="nec_m_020501" class="m-b-13">
+        {{'neckMRT.indication.previousExamination.value' | translate}}
+      </h1>
+      <img
+        rr-id="nec_m_020502"
+        class="m-b-31"
+        src="assets/img/neckMRT/icons/2-3.svg"
+        alt="Preliminary Examinations"
+      />
+      <p-checkbox
+        rr-id="nec_m_020503"
+        name="isMRI"
+        label="{{'neckMRT.indication.mRI.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMRI"
+        (onChange)="clearMRIDate()"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content m-b-17"
+        [rrDisable]="!model.isMRI"
+      >
+        <rr-month-year-input
+          [label]="'neckMRT.indication.date.value' | translate"
+          customLabelClass="m-b-0"
+          yearRrId="neck_m_020506"
+          monthRrId="neck_m_020505"
+          labelRrId="neck_m_020504"
+          nested="true"
+          name="dateOfMRI"
+          class="o-width-100"
+          [(ngModel)]="model.dateOfMRI"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        rr-id="nec_m_020507"
+        name="isCT"
+        label="{{'neckMRT.indication.cT.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCT"
+        (onChange)="clearCTDate()"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content m-b-20"
+        [rrDisable]="!model.isCT"
+      >
+        <rr-month-year-input
+          [label]="'neckMRT.indication.date.value' | translate"
+          customLabelClass="m-b-0"
+          yearRrId="nec_m_020510"
+          monthRrId="nec_m_020509"
+          labelRrId="nec_m_020508"
+          nested="true"
+          name="dateOfCT"
+          class="o-width-100"
+          [(ngModel)]="model.dateOfCT"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        rr-id="nec_m_020511"
+        name="isSonography"
+        label="{{'neckMRT.indication.sonography.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSonography"
+        (onChange)="clearSonographyDate()"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isSonography"
+      >
+        <rr-month-year-input
+          [label]="'neckMRT.indication.date.value' | translate"
+          customLabelClass="m-b-0"
+          yearRrId="nec_m_020514"
+          monthRrId="nec_m_020513"
+          labelRrId="nec_m_020512"
+          nested="true"
+          name="dateOfSonography"
+          class="o-width-100"
+          [(ngModel)]="model.dateOfSonography"
+        >
+        </rr-month-year-input>
+      </div>
+    </div>
+  </div>
+</form>

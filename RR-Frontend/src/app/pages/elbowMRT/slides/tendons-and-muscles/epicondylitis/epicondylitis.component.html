@@ -1,0 +1,476 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-3 f-vertical c-sep c-pad-r col-h-100">
+    <h2 rr-id="elb_m_060202" class="m-b-12">
+      {{ 'elbowMRT.tendonsAndMuscles.localization.value' | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 f-vertical c-pad-r c-sep o-list">
+        <div class="o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="elb_m_060203"
+            label="{{ 'elbowMRT.tendonsAndMuscles.lateralEpicondylitis.value' | translate }}"
+            name="localizationType"
+            [value]="localizationType.LateralEpicondylitis"
+            [(ngModel)]="model.localizationType"
+            rrContentReset="medialEpicondylitis_block1 medialEpicondylitis_block2"
+            rrValidation="localizationType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="elb_m_060205"
+            label="{{ 'elbowMRT.tendonsAndMuscles.medialEpicondylitis.value' | translate }}"
+            name="localizationType"
+            [value]="localizationType.MedialEpicondylitis"
+            [(ngModel)]="model.localizationType"
+            rrContentReset="lateralEpicondylitis-block1 lateralEpicondylitis-block2"
+            rrValidation="localizationType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-2 c-pad-l f-vertical">
+        <h2
+          *ngIf="model.localizationType !== localizationType.None"
+          rr-id="elb_m_060301"
+          class="m-b-11"
+        >
+          {{ 'elbowMRT.tendonsAndMuscles.details.value' | translate }}
+        </h2>
+        <div class="f-horizontal col-h-100">
+          <div class="c-col-1 f-vertical c-pad-r c-sep">
+            <ng-container
+              *ngIf="model.localizationType === localizationType.LateralEpicondylitis"
+            >
+              <div id="lateralEpicondylitis-block1" class="o-list">
+                <div class="o-radio-list m-b-7">
+                  <p-checkbox
+                    rr-id="elb_m_0603100"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.lateralJointCapsuleThickening.value' | translate }}"
+                    name="isLateralJointCapsuleThickening"
+                    [(ngModel)]="model.isLateralJointCapsuleThickening"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="elb_m_060302"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.enthesiopathyDeepextensorTendons.value' | translate }}"
+                    name="isEnthesiopathyDeepExtensorTendons"
+                    [(ngModel)]="model.isEnthesiopathyDeepExtensorTendons"
+                    binary="true"
+                    rrContentReset="isEnthesiopathyDeepExtensorTendons-block"
+                  >
+                  </p-checkbox>
+                  <div
+                    id="isEnthesiopathyDeepExtensorTendons-block"
+                    class="nested-content o-radio-list"
+                    [rrDisable]="!model.isEnthesiopathyDeepExtensorTendons"
+                  >
+                    <p-checkbox
+                      rr-id="elb_m_060303"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.t2wHyperintensity.value' | translate }}"
+                      [(ngModel)]="model.isT2wHyperintensity"
+                      name="isT2wHyperintensity"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                    <p-checkbox
+                      rr-id="elb_m_060304"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.thickening.value' | translate }}"
+                      [(ngModel)]="model.isDetailsThickening"
+                      name="isDetailsThickening"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                    <h3 rr-id="elb_m_0603101">
+                      {{ 'elbowMRT.tendonsAndMuscles.details.value' | translate
+                      }}
+                    </h3>
+                    <p-checkbox
+                      rr-id="elb_m_060305"
+                      class="text-break"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.restrictedToMExtensor.value' | translate }}"
+                      [(ngModel)]="model.isEnthesiopathyRestrictedTendonExtensorCarpiRadialisBrevisMuscle"
+                      name="isEnthesiopathyRestrictedTendonExtensorCarpiRadialisBrevisMuscle"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                  </div>
+                </div>
+                <p-checkbox
+                  rr-id="elb_m_060306"
+                  label="{{ 'elbowMRT.tendonsAndMuscles.ruptureOfDeepExtensor.value' | translate }}"
+                  [(ngModel)]="model.isRuptureDeepExtensorTendons"
+                  name="isRuptureDeepExtensorTendons"
+                  binary="true"
+                  rrContentReset="isRuptureDeepExtensorTendons-block"
+                >
+                </p-checkbox>
+                <div
+                  id="isRuptureDeepExtensorTendons-block"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isRuptureDeepExtensorTendons"
+                >
+                  <p-radioButton
+                    rr-id="elb_m_060307"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.partialTear.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="tearOfDeepExtensorType"
+                    [(ngModel)]="model.tearOfDeepExtensorType"
+                    [value]="tearType.PartialTear"
+                    rrUnClickRadio
+                    rrContentReset="completeTear-block"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="elb_m_060308"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.completeTear.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="tearOfDeepExtensorType"
+                    [(ngModel)]="model.tearOfDeepExtensorType"
+                    [value]="tearType.CompleteTear"
+                    rrUnClickRadio
+                    rrContentReset="completeTear-block"
+                  >
+                  </p-radioButton>
+                  <div
+                    id="completeTear-block"
+                    class="nested-content o-radio-list"
+                    [rrDisable]="model.tearOfDeepExtensorType !== tearType.CompleteTear"
+                  >
+                    <p-checkbox
+                      rr-id="elb_m_060309"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.retraction.value' | translate }}"
+                      [(ngModel)]="model.isRetraction"
+                      name="isRetraction"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                  </div>
+                  <div class="o-radio-list">
+                    <h3 rr-id="elb_m_0603102">
+                      {{ 'elbowMRT.tendonsAndMuscles.details.value' | translate
+                      }}
+                    </h3>
+                    <p-checkbox
+                      rr-id="elb_m_060310"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.restrictedToMExtensor.value' | translate }}"
+                      [(ngModel)]="model.isRuptureRestrictedTendonExtensorCarpiRadialisBrevisMuscle"
+                      name="isRuptureRestrictedTendonExtensorCarpiRadialisBrevisMuscle"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container
+              *ngIf="model.localizationType === localizationType.MedialEpicondylitis"
+            >
+              <div id="medialEpicondylitis_block1" class="o-list">
+                <div class="o-radio-list">
+                  <p-checkbox
+                    rr-id="elb_m_0603103"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.thickeningJointCapsuleMedial.value' | translate }}"
+                    [(ngModel)]="model.isThickeningJointCapsuleMedial"
+                    name="isThickeningJointCapsuleMedial"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="elb_m_0603104"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.ulnarNerveNeuritis.value' | translate }}"
+                    [(ngModel)]="model.isUlnarNerveNeuritis"
+                    name="isUlnarNerveNeuritis"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="elb_m_060312"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.enthesiopathyFlexorOrPronatorTendons.value' | translate }}"
+                    [(ngModel)]="model.isEnthesiopathyFlexorOrPronatorTendons"
+                    name="isEnthesiopathyFlexorOrPronatorTendons"
+                    binary="true"
+                    rrContentReset="isEnthesiopathyFlexorOrPronatorTendons-block"
+                  >
+                  </p-checkbox>
+                  <div
+                    id="isEnthesiopathyFlexorOrPronatorTendons-block"
+                    class="nested-content o-radio-list"
+                    [rrDisable]="!model.isEnthesiopathyFlexorOrPronatorTendons"
+                  >
+                    <p-checkbox
+                      rr-id="elb_m_060313"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.t2wHyperintensity.value' | translate }}"
+                      [(ngModel)]="model.isT2wHyperintensity"
+                      name="isT2wHyperintensity"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                    <p-checkbox
+                      rr-id="elb_m_060314"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.thickening.value' | translate }}"
+                      [(ngModel)]="model.isDetailsThickening"
+                      name="isDetailsThickening"
+                      binary="true"
+                    >
+                    </p-checkbox>
+                    <div class="o-radio-list">
+                      <h3 rr-id="elb_m_0603105" class="m-b-3">
+                        {{ 'elbowMRT.tendonsAndMuscles.details.value' |
+                        translate }}
+                      </h3>
+                      <p-radioButton
+                        rr-id="elb_m_060315"
+                        label="{{ 'elbowMRT.tendonsAndMuscles.restrictedMPronatorTeresTendon.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="tendinopathyPronatorThickeningType"
+                        [(ngModel)]="model.tendinopathyPronatorThickeningType"
+                        [value]="tendinopathyPronatorThickeningType.RestrictedToPronatorTeresTendon"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="elb_m_060316"
+                        label="{{ 'elbowMRT.tendonsAndMuscles.restrictedFlexorCarpiRadialisTendon2.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="tendinopathyPronatorThickeningType"
+                        [(ngModel)]="model.tendinopathyPronatorThickeningType"
+                        [value]="tendinopathyPronatorThickeningType.RestrictedFlexorCarpiRadialisTendon"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="c-col-1 f-vertical c-pad-l">
+            <ng-container
+              *ngIf="model.localizationType === localizationType.LateralEpicondylitis"
+            >
+              <div id="lateralEpicondylitis-block2" class="o-list">
+                <div class="o-radio-list m-b-32">
+                  <h2 rr-id="elb_m_060401" class="m-b-14">
+                    {{
+                    'elbowMRT.tendonsAndMuscles.lateralUlnarCollateralLigament.value'
+                    | translate }}
+                  </h2>
+                  <p-checkbox
+                    rr-id="elb_m_060402"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.thickening.value' | translate }}"
+                    [(ngModel)]="model.isLigamentThickening"
+                    name="isLigamentThickening"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="elb_m_060403"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.rupture.value' | translate }}"
+                    [(ngModel)]="model.isRupture"
+                    name="isRupture"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                </div>
+                <div class="o-radio-list">
+                  <h2 rr-id="elb_m_060404">
+                    {{
+                    'elbowMRT.tendonsAndMuscles.radialCollateralLigamentRCL.value'
+                    | translate }}
+                  </h2>
+                  <p-checkbox
+                    rr-id="elb_m_060405"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.thickening.value' | translate }}"
+                    [(ngModel)]="model.isRadialCollateralLigamentThickening"
+                    name="isRadialCollateralLigamentThickening"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="elb_m_060406"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.rupture.value' | translate }}"
+                    [(ngModel)]="model.isRadialCollateralLigamentRupture"
+                    name="isRadialCollateralLigamentRupture"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container
+              *ngIf="model.localizationType === localizationType.MedialEpicondylitis"
+            >
+              <div id="medialEpicondylitis_block2" class="o-list">
+                <div class="o-radio-list m-b-24">
+                  <p-checkbox
+                    rr-id="elb_m_0604100"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.tendonTear.value' | translate }}"
+                    [(ngModel)]="model.isTendonTear"
+                    name="isTendonTear"
+                    binary="true"
+                    rrContentReset="isTendonTear-block"
+                  >
+                  </p-checkbox>
+                  <div
+                    id="isTendonTear-block"
+                    class="nested-content o-radio-list"
+                    [rrDisable]="!model.isTendonTear"
+                  >
+                    <p-radioButton
+                      rr-id="elb_m_0604101"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.partialTear.value' | translate }}"
+                      labelStyleClass="text-break"
+                      name="tendonTearType"
+                      [(ngModel)]="model.tendonTearType"
+                      [value]="tearType.PartialTear"
+                      rrUnClickRadio
+                      rrContentReset="completeTear2-block"
+                    >
+                    </p-radioButton>
+                    <p-radioButton
+                      rr-id="elb_m_0604102"
+                      label="{{ 'elbowMRT.tendonsAndMuscles.completeTear.value' | translate }}"
+                      labelStyleClass="text-break"
+                      name="tendonTearType"
+                      [(ngModel)]="model.tendonTearType"
+                      [value]="tearType.CompleteTear"
+                      rrUnClickRadio
+                      rrContentReset="completeTear2-block"
+                    >
+                    </p-radioButton>
+                    <div
+                      id="completeTear2-block"
+                      class="nested-content o-radio-list"
+                      [rrDisable]="model.tendonTearType !== tearType.CompleteTear"
+                    >
+                      <p-checkbox
+                        rr-id="elb_m_0604103"
+                        label="{{ 'elbowMRT.tendonsAndMuscles.retraction.value' | translate }}"
+                        [(ngModel)]="model.isCompleteRuptureRetraction"
+                        name="isCompleteRuptureRetraction"
+                        binary="true"
+                      >
+                      </p-checkbox>
+                    </div>
+                    <div class="o-radio-list">
+                      <h3 rr-id="elb_m_0604104">
+                        {{ 'elbowMRT.tendonsAndMuscles.details.value' |
+                        translate }}
+                      </h3>
+                      <p-radioButton
+                        rr-id="elb_m_0604105"
+                        label="{{ 'elbowMRT.tendonsAndMuscles.restrictedPronatorTeresTendon.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="completeRuptureRetractionType"
+                        [(ngModel)]="model.completeRuptureRetractionType"
+                        [value]="completeRuptureRetractionType.RestrictedPronatorTeresTendon"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                      <p-radioButton
+                        rr-id="elb_m_0604106"
+                        label="{{ 'elbowMRT.tendonsAndMuscles.restrictedFlexorCarpiRadialisTendon.value' | translate }}"
+                        labelStyleClass="text-break"
+                        name="completeRuptureRetractionType"
+                        [(ngModel)]="model.completeRuptureRetractionType"
+                        [value]="completeRuptureRetractionType.RestrictedFlexorCarpiRadialisTendon"
+                        rrUnClickRadio
+                      >
+                      </p-radioButton>
+                    </div>
+                  </div>
+                </div>
+                <div class="o-radio-list">
+                  <h2 rr-id="elb_m_060408" class="text-break m-b-13">
+                    {{
+                    'elbowMRT.tendonsAndMuscles.medialCollateralLigamentLig.value'
+                    | translate }}
+                  </h2>
+                  <p-checkbox
+                    rr-id="elb_m_060409"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.thickening.value' | translate }}"
+                    [(ngModel)]="model.isThickening"
+                    name="isThickening"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="elb_m_060410"
+                    label="{{ 'elbowMRT.tendonsAndMuscles.rupture.value' | translate }}"
+                    [(ngModel)]="model.isMCLRupture"
+                    name="isMCLRupture"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 f-vertical c-pad-l o-list">
+    <div class="o-radio-list f-vertical">
+      <h2 rr-id="elb_m_060501">
+        {{ 'elbowMRT.tendonsAndMuscles.otherFeatures.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="elb_m_060502"
+        label="{{ 'elbowMRT.tendonsAndMuscles.focalBoneMarrowEdema.value' | translate }}"
+        [(ngModel)]="model.isFocalBoneMarrowEdema"
+        name="isFocalBoneMarrowEdema"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060503"
+        label="{{ 'elbowMRT.tendonsAndMuscles.bonyErosion.value' | translate }}"
+        [(ngModel)]="model.isBonyErosion"
+        name="isBonyErosion"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060504"
+        label="{{ 'elbowMRT.tendonsAndMuscles.enthesiophytes.value' | translate }}"
+        [(ngModel)]="model.isEnthesiophytes"
+        name="isEnthesiophytes"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060505"
+        label="{{ 'elbowMRT.tendonsAndMuscles.peritendinousEdema.value' | translate }}"
+        [(ngModel)]="model.isPeritendinousEdema"
+        name="isPeritendinousEdema"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060506"
+        label="{{ 'elbowMRT.tendonsAndMuscles.vascularization.value' | translate }}"
+        [(ngModel)]="model.isVascularization"
+        name="isVascularization"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060507"
+        label="{{ 'elbowMRT.tendonsAndMuscles.articularEffusion.value' | translate }}"
+        [(ngModel)]="model.isArticularEffusion"
+        name="isArticularEffusion"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060508"
+        label="{{ 'elbowMRT.tendonsAndMuscles.bursitis.value' | translate }}"
+        [(ngModel)]="model.isBursitis"
+        name="isBursitis"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_060509"
+        label="{{ 'elbowMRT.tendonsAndMuscles.necrosisSign.value' | translate }}"
+        [(ngModel)]="model.isNecrosisSign"
+        name="isNecrosisSign"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

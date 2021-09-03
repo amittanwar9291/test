@@ -1,0 +1,104 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2 rr-id="tho_c_040242">
+      {{'thoraxCT.mediastinum.pathology.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="tho_c_040243"
+      name="isVasosclerosis"
+      [(ngModel)]="model.isVasosclerosis"
+      rrValidation="isVasosclerosis isVascularDilatation"
+      label="{{'thoraxCT.mediastinum.vasosclerosis.value' | translate}}"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_c_040244"
+      name="isVascularDilatation"
+      rrContentReset="isVascularDilatation-block"
+      [(ngModel)]="model.isVascularDilatation"
+      rrValidation="isVasosclerosis isVascularDilatation"
+      rrInfoIcon="tho_c_04_07"
+      class="m-b-29"
+      label="{{'thoraxCT.mediastinum.vascularDilatation.value' | translate}}"
+      binary="true"
+    ></p-checkbox>
+    <div
+      id="isVascularDilatation-block"
+      class="nested-content f-vertical f-start o-radio-list"
+      [rrDisable]="!model.isVascularDilatation"
+    >
+      <p rr-id="tho_c_040245">
+        {{'thoraxCT.mediastinum.extentMandatory.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="tho_c_040246"
+        name="vascularExtentType"
+        [value]="vascularExtentTypeEnum.Ectasia"
+        rrValidation="vascularExtentType"
+        label="{{'thoraxCT.mediastinum.ectasia.value' | translate}}"
+        [(ngModel)]="model.vascularExtentType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040247"
+        name="vascularExtentType"
+        [value]="vascularExtentTypeEnum.Aneurysm"
+        rrValidation="vascularExtentType"
+        label="{{'thoraxCT.mediastinum.aneurysm.value' | translate}}"
+        [(ngModel)]="model.vascularExtentType"
+        class="m-b-24"
+      ></p-radioButton>
+      <p rr-id="tho_c_040248">
+        {{'thoraxCT.mediastinum.localization.value' | translate}}*
+      </p>
+      <p-checkbox
+        rr-id="tho_c_040249"
+        name="isAorticRoot"
+        [(ngModel)]="model.isAorticRoot"
+        rrValidation="isAorticRoot isAortaAscendens isAorticArch isAortaDescendens"
+        label="{{'thoraxCT.mediastinum.aorticRoot.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_040250"
+        name="isAortaAscendens"
+        rrValidation="isAorticRoot isAortaAscendens isAorticArch isAortaDescendens"
+        [(ngModel)]="model.isAortaAscendens"
+        label="{{'thoraxCT.mediastinum.ascendingAorta.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_040251"
+        name="isAorticArch"
+        rrValidation="isAorticRoot isAortaAscendens isAorticArch isAortaDescendens"
+        [(ngModel)]="model.isAorticArch"
+        label="{{'thoraxCT.mediastinum.aorticArch.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_040252"
+        name="isAortaDescendens"
+        rrValidation="isAorticRoot isAortaAscendens isAorticArch isAortaDescendens"
+        [(ngModel)]="model.isAortaDescendens"
+        label="{{'thoraxCT.mediastinum.descendingAorta.value' | translate}}"
+        binary="true"
+        class="m-b-25"
+      ></p-checkbox>
+
+      <p rr-id="tho_c_040253">
+        {{'thoraxCT.mediastinum.maximumDiameter.value' | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="tho_c_040254"
+        labelRrId="tho_c_040255"
+        name="sizeDiameterMaxInMm"
+        [(ngModel)]="model.sizeDiameterMaxInMm"
+        [label]="'thoraxCT.mediastinum.inMm.value' | translate"
+        [config]="{labelWidth: 170, min: 1, max: 99}"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list"></div>
+  <div class="c-col-1 f-vertical f-start c-sep c-pad"></div>
+  <div class="c-col-1 f-vertical f-start c-pad-l"></div>
+</div>

@@ -1,0 +1,137 @@
+<div class="f-horizontal f-start col-h-100 c-pad-l">
+  <div class="c-col-1 c-pad-r f-vertical f-start o-radio-list">
+    <h2 rr-id="spi_m_040213" class="m-t-5 m-b-33 text-break">
+      {{'spineMRT.configuration.transitionalVertebraDetails.value' | translate}}
+    </h2>
+    <p-checkbox
+      label="{{'spineMRT.configuration.cervical.value' | translate}}"
+      binary="true"
+      rr-id="spi_m_040214"
+      name="isCervical"
+      rrValidation="isCervical isThoracolumbar isLumbosacral"
+      rrContentReset="isC7NeckRib-block"
+      [(ngModel)]="model.isCervical"
+    >
+    </p-checkbox>
+    <div
+      id="isC7NeckRib-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isCervical"
+    >
+      <p-checkbox
+        label="{{'spineMRT.configuration.c7NeckRib.value' | translate}}"
+        name="isC7NeckRib"
+        rr-id="spi_m_040215"
+        binary="true"
+        [(ngModel)]="model.isC7NeckRib"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      label="{{'spineMRT.configuration.thoracolumbar.value' | translate}}"
+      binary="true"
+      rrContentReset="isLumbalizedTH12-block"
+      rr-id="spi_m_040216"
+      name="isThoracolumbar"
+      rrValidation="isCervical isThoracolumbar isLumbosacral"
+      [(ngModel)]="model.isThoracolumbar"
+    >
+    </p-checkbox>
+    <div
+      id="isLumbalizedTH12-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isThoracolumbar"
+    >
+      <p-checkbox
+        label="{{'spineMRT.configuration.lumbalizedTH.value' | translate}}"
+        name="isLumbalizedTH12"
+        rr-id="spi_m_040217"
+        binary="true"
+        [(ngModel)]="model.isLumbalizedTH12"
+      >
+      </p-checkbox>
+    </div>
+
+    <p-checkbox
+      label="{{'spineMRT.configuration.lumbocasctal.value' | translate}}"
+      binary="true"
+      rr-id="spi_m_040218"
+      name="isLumbosacral"
+      rrValidation="isCervical isThoracolumbar isLumbosacral"
+      [(ngModel)]="model.isLumbosacral"
+      rrContentReset="isLumbosacral-block SacralizedL5-block"
+    >
+    </p-checkbox>
+    <div
+      id="isLumbosacral-block"
+      [rrDisable]="!model.isLumbosacral"
+      class="f-vertical f-start nested-content o-radio-list"
+    >
+      <p-radioButton
+        label="{{'spineMRT.configuration.lumbalizedS1.value' | translate}}"
+        rr-id="spi_m_040219"
+        [value]="lumbosacralTypeEnum.LumbalizedS1"
+        name="lumbosacralType"
+        rrUnClickRadio
+        rrContentReset="SacralizedL5-block"
+        [(ngModel)]="model.lumbosacralType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'spineMRT.configuration.sacralizedL5.value' | translate}}"
+        rr-id="spi_m_040220"
+        [value]="lumbosacralTypeEnum.SacralizedL5"
+        name="lumbosacralType"
+        rrUnClickRadio
+        rrContentReset="SacralizedL5-block"
+        [(ngModel)]="model.lumbosacralType"
+      >
+      </p-radioButton>
+    </div>
+    <div
+      id="SacralizedL5-block"
+      [rrDisable]="model.lumbosacralType !== lumbosacralTypeEnum.SacralizedL5"
+      class="radio-left-padding o-radio-list"
+    >
+      <p-radioButton
+        rrUnClickRadio
+        label="{{'spineMRT.configuration.complete.value' | translate}}"
+        [value]="sacralizedL5TypeEnum.Complete"
+        name="sacralizedL5Type"
+        rr-id="spi_m_040221"
+        [(ngModel)]="model.sacralizedL5Type"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        label="{{'spineMRT.configuration.incomplete.value' | translate}}"
+        [value]="sacralizedL5TypeEnum.Incomplete"
+        name="sacralizedL5Type"
+        rr-id="spi_m_040222"
+        [(ngModel)]="model.sacralizedL5Type"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        label="{{'spineMRT.configuration.mixed.value' | translate}}"
+        [value]="sacralizedL5TypeEnum.Mixed"
+        name="sacralizedL5Type"
+        rr-id="spi_m_040223"
+        [(ngModel)]="model.sacralizedL5Type"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        label="{{'spineMRT.configuration.incipient.value' | translate}}"
+        [value]="sacralizedL5TypeEnum.Incipient"
+        name="sacralizedL5Type"
+        rr-id="spi_m_040224"
+        [(ngModel)]="model.sacralizedL5Type"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-77"></div>
+  <div class="c-col-1 c-sep-l c-sep c-pad configurations-column"></div>
+  <div class="c-col-1 c-pad-l configurations-column"></div>
+</div>

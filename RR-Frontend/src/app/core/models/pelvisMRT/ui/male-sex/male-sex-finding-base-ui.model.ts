@@ -1,0 +1,181 @@
+import { FindingBase } from '@models/shared/finding/finding.base';
+import { CMEnhancementTypeEnum } from '@enums/shared/cm-enhancement-type.enum';
+import { MainFeaturesLocalizationTypeEnum } from '@enums/pelvisMRT/male-sex/main-features-localization-type.enum';
+import { UrethraTypeEnum } from '@enums/pelvisMRT/male-sex/urethra-type.enum';
+import { MarginTypeEnum } from '@enums/pelvisMRT/male-sex/margin-type.enum';
+import { FormTypeEnum } from '@enums/pelvisMRT/male-sex/form-type.enum';
+import { HomogeneityTypeEnum } from '@enums/pelvisMRT/male-sex/homogeneity-type.enum';
+import { DirectionTypeEnum } from '@enums/shared/direction-type.enum';
+import { FatTypeEnum } from '@enums/pelvisMRT/male-sex/fat-type.enum';
+import { SeptationsTypeEnum } from '@enums/pelvisMRT/male-sex/septations-type.enum';
+import { SignalLossFlowVoidTypeEnum } from '@enums/pelvisMRT/male-sex/signal-loss-flow-void-type.enum';
+import { DifferentialDiagnosisScrotumMassTypeEnum } from '@enums/pelvisMRT/male-sex/differential-diagnosis-scrotum-mass-type.enum';
+import { ScrotumMassInternalChangeLocalizationTypeEnum } from '@enums/pelvisMRT/male-sex/scrotum-mass-internal-change-localization-type.enum';
+import { NodularComponentsTypeEnum } from '@enums/pelvisMRT/male-sex/nodular-components-type.enum';
+import { MaleGenderFindingType } from '@enums/pelvisMRT/male-sex/male-sex-finding-types.enum';
+
+export class MaleSexFindingBaseUiModel extends FindingBase {
+  // Common
+  findingType: MaleGenderFindingType;
+  isSignalLossFlowVoid: boolean;
+  signalLossFlowVoidType: SignalLossFlowVoidTypeEnum;
+  isMarginalCMEnhancement: boolean;
+  isEpididymis: boolean;
+  isDiffusionRestriction: boolean;
+  mainFeaturesLocalizationType: MainFeaturesLocalizationTypeEnum;
+  urethraType: UrethraTypeEnum;
+  septationsType: SeptationsTypeEnum;
+  isSubordinate: boolean;
+  secondPlaneInMm: number;
+  thirdPlaneInMm: number;
+  isNecrosis: boolean;
+  isTunicaAlbuginea: boolean;
+  isTesticles: boolean;
+  marginType: MarginTypeEnum;
+  formType: FormTypeEnum;
+  directionType: DirectionTypeEnum;
+
+  // PenisMass
+  signalT1wSliderType: number;
+  signalT2wSliderType: number;
+  penisMassCMEnhancementType: CMEnhancementTypeEnum;
+  isAdjacentTo: boolean;
+  penisMassHomogeneity02Type: HomogeneityTypeEnum;
+  penisMassHomogeneity01Type: HomogeneityTypeEnum;
+  isAdjacentStructuresCorpusSpongiosum: boolean;
+  isAdjacentStructuresCorpusCavernosum: boolean;
+  corpusCavernosumRight: boolean;
+  corpusCavernosumLeft: boolean;
+  isUrethra: boolean;
+  isExulceration: boolean;
+  isScrotum: boolean;
+  differentialDiagnosisPenisMass01Type: string;
+  differentialDiagnosisPenisMass02Type: string;
+
+  // ScrotumMass
+  scrotumMassLocalizationType: string;
+  scrotumMassSignalT1wSliderType: number;
+  scrotumMassSignalT2wSliderType: number;
+  isSeptations: boolean;
+  isLiquidLevel: boolean;
+  isCysticChanges: boolean;
+  isCentralNidus: boolean;
+  isVascularAccumulation: boolean;
+  scrotumMassCMEnhancementType: CMEnhancementTypeEnum;
+  scrotumMassHomogeneity01Type: HomogeneityTypeEnum;
+  scrotumMassHomogeneity02Type: HomogeneityTypeEnum;
+  isVasDeferens: boolean;
+  isPerifocalEdema: boolean;
+  isDuctusDeferensRight: boolean;
+  isDuctusDeferensLeft: boolean;
+  isEnlargedTesticle: boolean;
+  isEnlargedTesticleRight: boolean;
+  isEnlargedTesticleLeft: boolean;
+  isEnlargedEpididymis: boolean;
+  isEnlargedEpididymisRight: boolean;
+  isEnlargedEpididymisLeft: boolean;
+  scrotumMassInternalChangeLocalizationType: ScrotumMassInternalChangeLocalizationTypeEnum;
+  isLooseBody: boolean;
+  isFat: boolean;
+  fatType: FatTypeEnum;
+  isLobulated: boolean;
+  isWashout: boolean;
+  isEarlyArterialCmEnhancement: boolean;
+  isTunicaVaginalis: boolean;
+  isCremasterMuscle: boolean;
+  isTesticularArtery: boolean;
+  isTesticularArteryRight: boolean;
+  isTesticularArteryLeft: boolean;
+  isPampiniformPlexus: boolean;
+  differentialDiagnosisScrotumMassType01: DifferentialDiagnosisScrotumMassTypeEnum;
+  differentialDiagnosisScrotumMassType02: DifferentialDiagnosisScrotumMassTypeEnum;
+  isSpermaticCordLipoma01: boolean;
+  isSpermaticCordLipoma02: boolean;
+  isScrotalPearl01: boolean;
+  isScrotalPearl02: boolean;
+  nodularComponentsType: NodularComponentsTypeEnum;
+
+  constructor() {
+    super();
+
+    // Common
+    this.findingType = MaleGenderFindingType.None;
+    this.isSignalLossFlowVoid = false;
+    this.signalLossFlowVoidType = SignalLossFlowVoidTypeEnum.None;
+    this.isMarginalCMEnhancement = false;
+    this.isEpididymis = false;
+    this.isDiffusionRestriction = false;
+    this.mainFeaturesLocalizationType = MainFeaturesLocalizationTypeEnum.None;
+    this.urethraType = UrethraTypeEnum.None;
+    this.septationsType = SeptationsTypeEnum.None;
+    this.isSubordinate = false;
+    this.secondPlaneInMm = null;
+    this.thirdPlaneInMm = null;
+    this.isNecrosis = false;
+    this.isTunicaAlbuginea = false;
+    this.isTesticles = false;
+    this.marginType = MarginTypeEnum.None;
+    this.formType = FormTypeEnum.None;
+    this.directionType = DirectionTypeEnum.None;
+
+    // PenisMass
+    this.signalT1wSliderType = 0;
+    this.signalT2wSliderType = 0;
+    this.penisMassCMEnhancementType = CMEnhancementTypeEnum.None;
+    this.isAdjacentTo = false;
+    this.penisMassHomogeneity02Type = HomogeneityTypeEnum.None;
+    this.penisMassHomogeneity01Type = HomogeneityTypeEnum.None;
+    this.isAdjacentStructuresCorpusSpongiosum = false;
+    this.isAdjacentStructuresCorpusCavernosum = false;
+    this.corpusCavernosumRight = false;
+    this.corpusCavernosumLeft = false;
+    this.isUrethra = false;
+    this.isExulceration = false;
+    this.isScrotum = false;
+    this.differentialDiagnosisPenisMass01Type = 'None';
+    this.differentialDiagnosisPenisMass02Type = 'None';
+
+    // ScrotumMass
+    this.scrotumMassLocalizationType = 'None';
+    this.scrotumMassSignalT1wSliderType = 0;
+    this.scrotumMassSignalT2wSliderType = 0;
+    this.isSeptations = false;
+    this.isLiquidLevel = false;
+    this.isCysticChanges = false;
+    this.isCentralNidus = false;
+    this.isVascularAccumulation = false;
+    this.scrotumMassCMEnhancementType = CMEnhancementTypeEnum.None;
+    this.scrotumMassHomogeneity01Type = HomogeneityTypeEnum.None;
+    this.scrotumMassHomogeneity02Type = HomogeneityTypeEnum.None;
+    this.isVasDeferens = false;
+    this.isPerifocalEdema = false;
+    this.isDuctusDeferensRight = false;
+    this.isDuctusDeferensLeft = false;
+    this.isEnlargedTesticle = false;
+    this.isEnlargedTesticleRight = false;
+    this.isEnlargedTesticleLeft = false;
+    this.isEnlargedEpididymis = false;
+    this.isEnlargedEpididymisRight = false;
+    this.isEnlargedEpididymisLeft = false;
+    this.scrotumMassInternalChangeLocalizationType = ScrotumMassInternalChangeLocalizationTypeEnum.None;
+    this.isLooseBody = false;
+    this.isFat = false;
+    this.fatType = FatTypeEnum.None;
+    this.isLobulated = false;
+    this.isWashout = false;
+    this.isEarlyArterialCmEnhancement = false;
+    this.isTunicaVaginalis = false;
+    this.isCremasterMuscle = false;
+    this.isTesticularArtery = false;
+    this.isTesticularArteryRight = false;
+    this.isTesticularArteryLeft = false;
+    this.isPampiniformPlexus = false;
+    this.differentialDiagnosisScrotumMassType01 = DifferentialDiagnosisScrotumMassTypeEnum.None;
+    this.differentialDiagnosisScrotumMassType02 = DifferentialDiagnosisScrotumMassTypeEnum.None;
+    this.isSpermaticCordLipoma01 = false;
+    this.isSpermaticCordLipoma02 = false;
+    this.isScrotalPearl01 = false;
+    this.isScrotalPearl02 = false;
+    this.nodularComponentsType = NodularComponentsTypeEnum.None;
+  }
+}

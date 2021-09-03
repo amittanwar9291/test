@@ -1,0 +1,93 @@
+<div
+  class="main-container"
+  [formGroup]="loginFormGroup"
+  [ngStyle]="{ zoom: zoom }"
+>
+  <div class="login-content-container">
+    <div class="users-container" *ngIf="showShortcutBubbles">
+      <div
+        class="bubble user"
+        [ngClass]="{
+          'bubble-transparency': shouldBeTransparent(user),
+          admin: isAdmin(user)
+        }"
+        *ngFor="let user of users"
+        (click)="selectUser(user)"
+      >
+        {{ user.initial }}
+      </div>
+      <div class="bubble add" (click)="showUsername()">
+        <i *ngIf="!showUsernameInput" class="pi pi-plus"></i>
+        <i *ngIf="showUsernameInput" class="pi pi-times"></i>
+      </div>
+    </div>
+    <div
+      class="data-container"
+      [ngStyle]="{ marginTop: !showShortcutBubbles ? '61px' : '0' }"
+    >
+      <div class="username-container" *ngIf="showUsernameInput">
+        <input
+          type="text"
+          [formControlName]="loginForm.userName"
+          placeholder="• Username"
+          class="data-input username-input"
+          name="username"
+        />
+      </div>
+      <div class="password-container">
+        <div class="ui-inputgroup password-group">
+          <input
+            type="password"
+            [formControlName]="loginForm.password"
+            #passwordInput
+            (keypress)="submitOnEnter($event)"
+            placeholder="• Password"
+            pPassword
+            [feedback]="false"
+            [showPassword]="passwordVisible"
+            name="password"
+            class="data-input password-input"
+          />
+          <span class="ui-inputgroup-addon show-icon-container">
+            <i
+              class="pi pi-eye show-icon"
+              (mousedown)="showPassword()"
+              (mouseup)="hidePassword()"
+              [ngStyle]="{ color: !passwordVisible ? '#b2e7ed' : '#00aec2' }"
+            ></i>
+          </span>
+        </div>
+        <button type="button" class="login-btn" (click)="submitForm()">
+          OK
+        </button>
+      </div>
+      <div class="remember-me-container">
+        <p-checkbox
+          [formControlName]="loginForm.rememberMe"
+          label="Anmeldeinformationen speichern"
+          name="rememberMe"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="configuration-container">
+    <div
+      class="configuration-space f-horizontal f-space-between f-align-center"
+    >
+      <img
+        class="configuration-svg"
+        (click)="openInstituteConfigurationDialog()"
+        src="assets/img/shared/settings-icon.svg"
+      />
+      <div class="m-l-10">Konfiguration</div>
+    </div>
+  </div>
+  <div class="logo-container">
+    <div class="logo-space f-horizontal f-space-between f-align-center">
+      <img class="radio-logo" src="assets/img/layout/rr-logo.svg" />
+      <div class="vertical-line"></div>
+      <img *ngIf="customerLogo" class="customer-logo" [src]="customerLogo" />
+    </div>
+  </div>
+</div>

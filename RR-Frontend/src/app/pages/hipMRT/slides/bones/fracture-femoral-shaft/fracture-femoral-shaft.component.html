@@ -1,0 +1,383 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="hip_m_040204" rrValidation="hipSpecificLocalizations">
+      {{'hipMRT.bones.localization.value' | translate}}*
+    </h2>
+    <rr-hips-small
+      rr-id="hip_m_040205"
+      name="hipSpecificLocalizations"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipSpecificLocalizations"
+      rrValidation="hipSpecificLocalizations"
+      isLocalizer="true"
+    >
+    </rr-hips-small>
+  </div>
+  <div
+    class="c-col-1 c-pad f-vertical f-start o-radio-list"
+    [ngClass]="{'c-sep': !isFemoralShaftOrTrochantericRegion}"
+  >
+    <h2 rr-id="hip_m_040308" class="m-t-4">
+      {{'hipMRT.bones.aOClassificationAO31A.value' | translate}}
+    </h2>
+    <h3 rr-id="hip_m_040309" class="m-b-6">
+      {{'hipMRT.bones.fractureClassification.value' | translate}}
+    </h3>
+    <p-radioButton
+      rr-id="hip_m_040310"
+      rrUnClickRadio
+      name="fractureClassificationType"
+      [value]="fractureClassificationType.FemoralShaft"
+      label="{{'hipMRT.bones.femoralShaft.value' | translate}}"
+      [(ngModel)]="model.fractureClassificationType"
+      rrContentReset="fractureClassificationTypeBlock fractureTypeBlock"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_040311"
+      rrUnClickRadio
+      name="fractureClassificationType"
+      [value]="fractureClassificationType.TrochantericRegion"
+      label="{{'hipMRT.bones.31ATrochantericRegion.value' | translate}}"
+      [(ngModel)]="model.fractureClassificationType"
+      rrContentReset="fractureClassificationTypeBlock fractureTypeBlock"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_040312"
+      rrUnClickRadio
+      name="fractureClassificationType"
+      [value]="fractureClassificationType.FemoralShaftNotSpecified"
+      label="{{'hipMRT.bones.femoralShaftNotFurtherSpecified.value' | translate}}"
+      [(ngModel)]="model.fractureClassificationType"
+      rrContentReset="fractureClassificationTypeBlock fractureTypeBlock"
+      class="text-break"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_040313"
+      rrUnClickRadio
+      name="fractureClassificationType"
+      [value]="fractureClassificationType.TrochantericRegionNotSpecified"
+      label="{{'hipMRT.bones.31ATrochantericRegionNotFurther.value' | translate}}"
+      [(ngModel)]="model.fractureClassificationType"
+      rrContentReset="fractureClassificationTypeBlock fractureTypeBlock"
+      class="text-break m-b-7"
+    >
+    </p-radioButton>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="isFemoralShaftOrTrochantericRegion || this.model.fractureClassificationType === fractureClassificationType.None"
+      id="fractureClassificationTypeBlock"
+    >
+      <p-radioButton
+        rr-id="hip_m_040314"
+        rrUnClickRadio
+        name="fractureSpecificationType"
+        [value]="fractureSpecificationType.FractureOlderConsolidated"
+        label="{{'hipMRT.bones.consolidatedFracture.value' | translate}}"
+        [(ngModel)]="model.fractureSpecificationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_040315"
+        rrUnClickRadio
+        name="fractureSpecificationType"
+        [value]="fractureSpecificationType.SuspicionOn"
+        label="{{'hipMRT.bones.suspected.value' | translate}}"
+        [(ngModel)]="model.fractureSpecificationType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div
+    class="f-horizontal"
+    id="fractureTypeBlock"
+    [ngClass]="{'c-sep-l m-t-68': isFemoralShaftOrTrochantericRegion}"
+  >
+    <div
+      class="c-col-1 c-pad f-vertical f-start o-radio-list"
+      [ngClass]="{'c-sep': !isFemoralShaftOrTrochantericRegion}"
+    >
+      <h2
+        *ngIf="isFemoralShaftOrTrochantericRegion"
+        rr-id="hip_m_040408"
+        class="m-b-12"
+      >
+        {{'hipMRT.bones.fractureType.value' | translate}}
+      </h2>
+      <ng-container
+        *ngIf="model.fractureClassificationType === fractureClassificationType.FemoralShaft"
+      >
+        <p-radioButton
+          rr-id="hip_m_040409"
+          rrUnClickRadio
+          name="fracture32Type"
+          [value]="fracture32Type.SimpleFracture"
+          label="{{'hipMRT.bones.32ASimpleFracture.value' | translate}}"
+          [(ngModel)]="model.fracture32Type"
+          rrContentReset="simpleFractureBlock wedgeFractureBlock multifragmentaryFractureBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040410"
+          rrUnClickRadio
+          name="fracture32Type"
+          [value]="fracture32Type.WedgeFracture"
+          label="{{'hipMRT.bones.32BWedgeFracture.value' | translate}}"
+          [(ngModel)]="model.fracture32Type"
+          rrContentReset="simpleFractureBlock wedgeFractureBlock multifragmentaryFractureBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040411"
+          rrUnClickRadio
+          name="fracture32Type"
+          [value]="fracture32Type.MultifragmentaryFracture"
+          label="{{'hipMRT.bones.32CMultifragmentaryFracture.value' | translate}}"
+          [(ngModel)]="model.fracture32Type"
+          rrContentReset="simpleFractureBlock wedgeFractureBlock multifragmentaryFractureBlock"
+        >
+        </p-radioButton>
+      </ng-container>
+      <ng-container
+        *ngIf="model.fractureClassificationType === fractureClassificationType.TrochantericRegion"
+      >
+        <p-radioButton
+          rr-id="hip_m_040412"
+          rrUnClickRadio
+          name="fracture31AType"
+          [value]="fracture31AType.SimplePertrochanteric"
+          label="{{'hipMRT.bones.31A1SimplePertrochanteric.value' | translate}}"
+          [(ngModel)]="model.fracture31AType"
+          rrContentReset="simplePertrochantericBlock multifragmentaryPertrochantericBlock intertrochantericBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040413"
+          rrUnClickRadio
+          name="fracture31AType"
+          [value]="fracture31AType.MultifragmentaryPertrochantericLateral"
+          label="{{'hipMRT.bones.31A2MultifragmentaryPertrochantericLateralWall.value' | translate}}"
+          [(ngModel)]="model.fracture31AType"
+          rrContentReset="simplePertrochantericBlock multifragmentaryPertrochantericBlock intertrochantericBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040414"
+          rrUnClickRadio
+          name="fracture31AType"
+          [value]="fracture31AType.Intertrochanteric"
+          label="{{'hipMRT.bones.31A3Intertrochanteric.value' | translate}}"
+          [(ngModel)]="model.fracture31AType"
+          rrContentReset="simplePertrochantericBlock multifragmentaryPertrochantericBlock intertrochantericBlock"
+        >
+        </p-radioButton>
+      </ng-container>
+    </div>
+    <div
+      class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list"
+      [ngClass]="{'c-sep-l': isFemoralShaftOrTrochantericRegion, 'm-t-31': isFemoralShaftOrTrochantericRegion && !isFracture32NoneAndFracture31ANone, 'm-t-0': isFracture32NoneAndFracture31ANone}"
+    >
+      <div
+        class="o-radio-list"
+        id="simpleFractureBlock"
+        *ngIf="model.fracture32Type === fracture32Type.SimpleFracture"
+      >
+        <p-radioButton
+          rr-id="hip_m_040508"
+          rrUnClickRadio
+          name="fracture32AType"
+          [value]="fracture32AType.SpiralFracture"
+          label="{{'hipMRT.bones.32A1SpiralFracture.value' | translate}}"
+          [(ngModel)]="model.fracture32AType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040509"
+          rrUnClickRadio
+          name="fracture32AType"
+          [value]="fracture32AType.ObliqueFracture"
+          label="{{'hipMRT.bones.32A2ObliqueFracture.value' | translate}}"
+          [(ngModel)]="model.fracture32AType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040510"
+          rrUnClickRadio
+          name="fracture32AType"
+          [value]="fracture32AType.TransverseFracture"
+          label="{{'hipMRT.bones.32A3TransverseFracture.value' | translate}}"
+          [(ngModel)]="model.fracture32AType"
+        >
+        </p-radioButton>
+      </div>
+      <div
+        class="o-radio-list"
+        id="wedgeFractureBlock"
+        *ngIf="model.fracture32Type === fracture32Type.WedgeFracture"
+      >
+        <p-radioButton
+          rr-id="hip_m_040511"
+          rrUnClickRadio
+          name="fracture32BType"
+          [value]="fracture32BType.WithIntactWedge"
+          label="{{'hipMRT.bones.32B2WithIntactWedge.value' | translate}}"
+          [(ngModel)]="model.fracture32BType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040512"
+          rrUnClickRadio
+          name="fracture32BType"
+          [value]="fracture32BType.WithFragmentedWedge"
+          label="{{'hipMRT.bones.32B3WithFragmentedWedge.value' | translate}}"
+          [(ngModel)]="model.fracture32BType"
+        >
+        </p-radioButton>
+      </div>
+      <div
+        class="o-radio-list"
+        id="multifragmentaryFractureBlock"
+        *ngIf="model.fracture32Type === fracture32Type.MultifragmentaryFracture"
+      >
+        <p-radioButton
+          rr-id="hip_m_040513"
+          rrUnClickRadio
+          name="fracture32CType"
+          [value]="fracture32CType.WithIntactIntermediate"
+          label="{{'hipMRT.bones.32C2WithIntactIntermediateSegment.value' | translate}}"
+          [(ngModel)]="model.fracture32CType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040514"
+          rrUnClickRadio
+          name="fracture32CType"
+          [value]="fracture32CType.WithFragmentedIntermediate"
+          label="{{'hipMRT.bones.32C3WithFragmentedIntermediateSegment.value' | translate}}"
+          [(ngModel)]="model.fracture32CType"
+        >
+        </p-radioButton>
+      </div>
+
+      <div
+        class="o-radio-list"
+        id="simplePertrochantericBlock"
+        *ngIf="model.fracture31AType === fracture31AType.SimplePertrochanteric"
+      >
+        <p-radioButton
+          rr-id="hip_m_040515"
+          rrUnClickRadio
+          name="fracture31A1Type"
+          [value]="fracture31A1Type.TrochantericAvulsionTear"
+          label="{{'hipMRT.bones.31A11TrochantericAvulsionTear.value' | translate}}"
+          [(ngModel)]="model.fracture31A1Type"
+          rrContentReset="trochantericAvulsionTearBlock"
+        >
+        </p-radioButton>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="model.fracture31A1Type !== fracture31A1Type.TrochantericAvulsionTear"
+          id="trochantericAvulsionTearBlock"
+        >
+          <p-radioButton
+            rr-id="hip_m_040516"
+            rrUnClickRadio
+            name="trochantericAvulsionTearType"
+            [value]="trochantericAvulsionTearType.NGreaterTrochanter"
+            label="{{'hipMRT.bones.nGreaterTrochanter.value' | translate}}"
+            [(ngModel)]="model.trochantericAvulsionTearType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040517"
+            rrUnClickRadio
+            name="trochantericAvulsionTearType"
+            [value]="trochantericAvulsionTearType.OLesserTrochanter"
+            label="{{'hipMRT.bones.oLesserTrochanter.value' | translate}}"
+            [(ngModel)]="model.trochantericAvulsionTearType"
+          >
+          </p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="hip_m_040518"
+          rrUnClickRadio
+          name="fracture31A1Type"
+          [value]="fracture31A1Type.FragmentFracture"
+          label="{{'hipMRT.bones.31A122fragmentFracture.value' | translate}}"
+          [(ngModel)]="model.fracture31A1Type"
+          rrContentReset="trochantericAvulsionTearBlock"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040519"
+          rrUnClickRadio
+          name="fracture31A1Type"
+          [value]="fracture31A1Type.FractureWithIntact"
+          label="{{'hipMRT.bones.31A13FractureWithIntactLateral.value' | translate}}"
+          [(ngModel)]="model.fracture31A1Type"
+          rrContentReset="trochantericAvulsionTearBlock"
+        >
+        </p-radioButton>
+      </div>
+      <div
+        class="o-radio-list"
+        id="multifragmentaryPertrochantericBlock"
+        *ngIf="model.fracture31AType === fracture31AType.MultifragmentaryPertrochantericLateral"
+      >
+        <p-radioButton
+          rr-id="hip_m_040520"
+          rrUnClickRadio
+          name="fracture31A2Type"
+          [value]="fracture31A2Type.AnIntermediateFragment"
+          label="{{'hipMRT.bones.31A22AnIntermediateFragment.value' | translate}}"
+          [(ngModel)]="model.fracture31A2Type"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040521"
+          rrUnClickRadio
+          name="fracture31A2Type"
+          [value]="fracture31A2Type.Intermediate"
+          label="{{'hipMRT.bones.31A23IntermediateFragments.value' | translate}}"
+          [(ngModel)]="model.fracture31A2Type"
+        >
+        </p-radioButton>
+      </div>
+      <div
+        class="o-radio-list"
+        id="intertrochantericBlock"
+        *ngIf="model.fracture31AType === fracture31AType.Intertrochanteric"
+      >
+        <p-radioButton
+          rr-id="hip_m_040522"
+          rrUnClickRadio
+          name="fracture31A3Type"
+          [value]="fracture31A3Type.SimpleObliqueFracture"
+          label="{{'hipMRT.bones.31A31SimpleObliqueFracture.value' | translate}}"
+          [(ngModel)]="model.fracture31A3Type"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040523"
+          rrUnClickRadio
+          name="fracture31A3Type"
+          [value]="fracture31A3Type.SimpleTransverseFracture"
+          label="{{'hipMRT.bones.31A32SimpleTransverseFracture.value' | translate}}"
+          [(ngModel)]="model.fracture31A3Type"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040524"
+          rrUnClickRadio
+          name="fracture31A3Type"
+          [value]="fracture31A3Type.WedgemultifragmentaryFracture"
+          label="{{'hipMRT.bones.31A33WedgemultifragmentaryFracture.value' | translate}}"
+          [(ngModel)]="model.fracture31A3Type"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

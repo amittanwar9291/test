@@ -1,0 +1,100 @@
+<div
+  class="dialog-container f-vertical f-space-between"
+  [ngStyle]="{ zoom: zoom }"
+>
+  <div class="dialog-content">
+    <div class="dialog-prompt dialog-title">
+      {{ "layout.reportRequiredFieldsDialog.title" | translate }}
+    </div>
+    <div class="dialog-prompt dialog-text">
+      {{ "layout.reportRequiredFieldsDialog.text" | translate }}
+    </div>
+    <div class="required-fields-container f-start f-vertical">
+      <div class="input-container f-start f-vertical">
+        <h2>
+          {{ "layout.reportRequiredFieldsDialog.patientNameLabel" | translate }}
+        </h2>
+        <div>
+          <input
+            id="patientName"
+            class="ui-brown-box text-input"
+            name="patientName"
+            type="text"
+            maxlength="100"
+            placeholder="{{
+              'layout.reportRequiredFieldsDialog.patientNamePlaceholder'
+                | translate
+            }}"
+            [(ngModel)]="data.patientName"
+          />
+        </div>
+      </div>
+      <div class="input-container f-start f-vertical">
+        <h2>
+          {{ "layout.reportRequiredFieldsDialog.patientGenderLabel" | translate
+          }}
+        </h2>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            label="{{
+              'shared-templates.patient-data.female.value' | translate
+            }}"
+            name="patientSex"
+            [(ngModel)]="data.gender"
+            [value]="1"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{ 'shared-templates.patient-data.male.value' | translate }}"
+            name="patientSex"
+            [(ngModel)]="data.gender"
+            [value]="2"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="input-container f-start f-vertical">
+        <h2>
+          {{ "layout.reportRequiredFieldsDialog.patientBirthdayLabel" |
+          translate }}
+        </h2>
+        <div>
+          <rr-calendar-input
+            [(ngModel)]="data.patientBirthDate"
+            name="patientBirthDate"
+            placeholderData="{{
+              'layout.reportRequiredFieldsDialog.patientBirthdayPlaceholder'
+                | translate
+            }}"
+          ></rr-calendar-input>
+        </div>
+      </div>
+      <div class="input-container f-start f-vertical">
+        <h2>
+          {{ "layout.reportRequiredFieldsDialog.studyDateLabel" | translate }}
+        </h2>
+        <div>
+          <rr-calendar-input
+            [(ngModel)]="data.studyDate"
+            name="studyDate"
+            placeholderData="{{
+              'layout.reportRequiredFieldsDialog.studyDatePlaceholder'
+                | translate
+            }}"
+          ></rr-calendar-input>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-buttons f-horizontal f-center">
+      <button class="dialog-button dialog-button-cancel" (click)="cancel()">
+        {{ "layout.reportRequiredFieldsDialog.cancel" | translate }}
+      </button>
+      <button class="dialog-button dialog-button-confirm" (click)="confirm()">
+        {{ "layout.reportRequiredFieldsDialog.ok" | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="dialog-footer">
+    <img src="assets/img/layout/rr-logo.svg" />
+  </div>
+</div>

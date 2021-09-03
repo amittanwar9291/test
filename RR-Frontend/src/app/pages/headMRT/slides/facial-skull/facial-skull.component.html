@@ -1,0 +1,110 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_m_110103">
+        {{ "headMRT.facialSkull.finding.value" | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_m_110104"
+          name="areFindings"
+          labelStyleClass="text-break"
+          [value]="facialSkullAreFindingsEnum.NormalImagingOfFacialAndSkullBones"
+          label="{{'headMRT.facialSkull.normalImagingOfFacialAndSkullBones.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_110113"
+          name="areFindings"
+          [value]="facialSkullAreFindingsEnum.NoDetails"
+          label="{{ 'headMRT.facialSkull.noDetails.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_110105"
+          name="areFindings"
+          [value]="facialSkullAreFindingsEnum.True"
+          label="{{ 'headMRT.facialSkull.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="model.areFindings !== facialSkullAreFindingsEnum.True"
+          [setDescriptionTypes]="descriptionTypes"
+          [setConfig]="findingDropdownConfig"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <div
+      class="f-vertical col-h-100"
+      [ngClass]="isFindingType(facialSkullFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.None)"
+        class="f-horizontal main-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(facialSkullFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="hea_m_110201">
+          {{'headMRT.facialSkull.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <rr-skull-base
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.SkullBase)"
+        [model]="findingHandler.currentItem"
+      ></rr-skull-base>
+      <rr-temporal-bone
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.TemporalBone)"
+        [model]="findingHandler.currentItem"
+      ></rr-temporal-bone>
+      <rr-orbita
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.Orbita)"
+        [model]="findingHandler.currentItem"
+      ></rr-orbita>
+      <rr-variant-paranasal-sinuses
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.ParanasalSinusesVariant)"
+        [model]="findingHandler.currentItem"
+      ></rr-variant-paranasal-sinuses>
+      <rr-paranasal-sinuses
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.ParanasalSinuses)"
+        [model]="findingHandler.currentItem"
+      ></rr-paranasal-sinuses>
+      <rr-oral-cavity
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.OralCavity)"
+        [model]="findingHandler.currentItem"
+      ></rr-oral-cavity>
+      <rr-jaw-teeth
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.JawTeeth)"
+        [model]="findingHandler.currentItem"
+      ></rr-jaw-teeth>
+      <rr-salivary-glands
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.SalivaryGlands)"
+        [model]="findingHandler.currentItem"
+      ></rr-salivary-glands>
+      <rr-skull
+        *ngIf="isFindingType(facialSkullFindingTypeEnum.Skull)"
+        [model]="findingHandler.currentItem"
+      ></rr-skull>
+    </div>
+  </div>
+</form>

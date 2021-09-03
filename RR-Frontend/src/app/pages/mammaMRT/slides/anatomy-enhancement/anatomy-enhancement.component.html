@@ -1,0 +1,891 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-radio-list">
+      <h1 rr-id="mam_m_050103" class="m-b-36">
+        {{'mammaMRT.anatomyEnhancement.birads.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050104"
+        class="p-r-10"
+        label="{{'mammaMRT.anatomyEnhancement.birads40.value' | translate}}"
+        name="birads"
+        [value]="birads.BIRADS40"
+        [(ngModel)]="model.birads"
+        rrContentReset="levelParenchymalesSideBlock onBothSidesBlock asymmetricBlock"
+        rrValidation="birads"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050105"
+        label="{{'mammaMRT.anatomyEnhancement.birads50.value' | translate}}"
+        name="birads"
+        [value]="birads.BIRADS50"
+        [(ngModel)]="model.birads"
+        rrContentReset="glandParenchymaContrastMediaBlock"
+        class="m-b-19"
+        rrValidation="birads"
+      >
+      </p-radioButton>
+      <h1 rr-id="mam_m_050106" class="m-b-9">
+        {{'mammaMRT.anatomyEnhancement.glandularBody.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050107"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.1AlmostEntirelyFat.value' | translate}}"
+        name="glandularBody"
+        [value]="glandularBody.AlmostEntirelyFat"
+        [(ngModel)]="model.glandularBody"
+        rrValidation="glandularBody"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050108"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.2ScatteredFibroglandularTissue.value' | translate}}"
+        name="glandularBody"
+        [value]="glandularBody.ScatteredFibroglandularTissue"
+        [(ngModel)]="model.glandularBody"
+        rrValidation="glandularBody"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050109"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.3HeterogeneousFibroglandularTissue.value' | translate}}"
+        name="glandularBody"
+        [value]="glandularBody.HeterogeneousFibroglandularTissue"
+        [(ngModel)]="model.glandularBody"
+        rrValidation="glandularBody"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050110"
+        class="text-break l-h-22 m-b-17"
+        label="{{'mammaMRT.anatomyEnhancement.4ExtremeFibroglandularTissue.value' | translate}}"
+        name="glandularBody"
+        [value]="glandularBody.ExtremeFibroglandularTissue"
+        [(ngModel)]="model.glandularBody"
+        rrValidation="glandularBody"
+      >
+      </p-radioButton>
+      <h1 rr-id="mam_m_050111" class="m-b-9">
+        {{'mammaMRT.anatomyEnhancement.parenchyma.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050112"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.bothSidesUnremarkable.value' | translate}}"
+        name="parenchymaType"
+        [value]="parenchymaType.UnremarkableInT1wAndT2w"
+        [(ngModel)]="model.parenchymaType"
+        rrValidation="parenchymaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050113"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.onT2wSmallestCysts.value' | translate}}"
+        name="parenchymaType"
+        [value]="parenchymaType.OnT2wSmallestBilateralCystsWithDiameterLess5Mm"
+        [(ngModel)]="model.parenchymaType"
+        rrValidation="parenchymaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050114"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.onT2wSeveralTypical.value' | translate}}"
+        name="parenchymaType"
+        [value]="parenchymaType.OnT2wSeveralTypicalCystsWithDiameterLess10mm"
+        [(ngModel)]="model.parenchymaType"
+        rrValidation="parenchymaType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050115"
+        class="text-break l-h-22"
+        label="{{'mammaMRT.anatomyEnhancement.findingsCompatibleWithFibrous.value' | translate}}"
+        name="parenchymaType"
+        [value]="parenchymaType.FindingsCompatibleWithFibrousCysticMastopathy"
+        [(ngModel)]="model.parenchymaType"
+        rrValidation="parenchymaType"
+      ></p-radioButton>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical o-list">
+      <h1 rr-id="mam_m_050201" class="m-b-36">
+        {{'mammaMRT.anatomyEnhancement.artefact.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050202"
+        label="{{'mammaMRT.anatomyEnhancement.no.value' | translate}}"
+        name="artefact"
+        [value]="artefact.No"
+        [(ngModel)]="model.artefact"
+        class="m-b-47 m-l-13"
+        (onClick)="resetBothArtefactTabs()"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div [rrDisable]="model.artefact === artefact.No">
+        <p-tabView>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <span
+                rr-id="mam_m_050203-1"
+                rrValidation="artefactFinding1Location"
+                noUpdate="true"
+                >{{'mammaMRT.anatomyEnhancement.right.value' | translate}}</span
+              >
+            </ng-template>
+            <div class="f-vertical p-t-10">
+              <div class="c-pad o-radio-list f-vertical m-h-242">
+                <p-radioButton
+                  rr-id="mam_m_050204-1"
+                  label="{{'mammaMRT.anatomyEnhancement.marker.value' | translate}}"
+                  name="artefactFinding1"
+                  [value]="artefactFinding1.Marker"
+                  [(ngModel)]="model.artefactFinding1"
+                  (onClick)="resetRightArtefactLocalizer()"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050205-1"
+                  label="{{'mammaMRT.anatomyEnhancement.postoperativ.value' | translate}}"
+                  name="artefactFinding1"
+                  [value]="artefactFinding1.Postoperativ"
+                  [(ngModel)]="model.artefactFinding1"
+                  (onClick)="resetRightArtefactLocalizer()"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <div class="localizer-block">
+                <p
+                  class="p-b-4 p-t-13"
+                  rr-id="mam_m_050207-1"
+                  rrValidation="artefactFinding1Location"
+                  noUpdate="true"
+                  [rrDisable]="model.artefactFinding1 === artefactFinding1.None"
+                >
+                  {{'mammaMRT.anatomyEnhancement.localizationMultipleSelection.value'
+                  | translate }}
+                </p>
+                <rr-breast-segment-shoulder
+                  name="artefaktFinding1.location"
+                  rr-id="mam_m_050206-1"
+                  [(ngModel)]="model.artefactFinding1Location"
+                  breastToDisable="left"
+                  [rrDisable]="model.artefactFinding1 === artefactFinding1.None"
+                  rrValidation="artefactFinding1Location"
+                  isLocalizer="true"
+                >
+                </rr-breast-segment-shoulder>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <span
+                rr-id="mam_m_050203-2"
+                rrValidation="artefactFinding2Location"
+                noUpdate="true"
+              >
+                {{'mammaMRT.anatomyEnhancement.left.value' | translate}}
+              </span>
+            </ng-template>
+            <div class="o-width-100 f-vertical p-t-10">
+              <div class="c-pad o-radio-list f-vertical m-h-242">
+                <p-radioButton
+                  rr-id="mam_m_050204-2"
+                  label="{{'mammaMRT.anatomyEnhancement.marker.value' | translate}}"
+                  name="artefactFinding2"
+                  [value]="artefactFinding2.Marker"
+                  [(ngModel)]="model.artefactFinding2"
+                  (onClick)="resetLeftArtefactLocalizer()"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050205-2"
+                  label="{{'mammaMRT.anatomyEnhancement.postoperativ.value' | translate}}"
+                  name="artefactFinding2"
+                  [value]="artefactFinding2.Postoperativ"
+                  [(ngModel)]="model.artefactFinding2"
+                  (onClick)="resetLeftArtefactLocalizer()"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <div class="localizer-block">
+                <p
+                  class="p-b-4 p-t-13"
+                  rr-id="mam_m_050207-2"
+                  rrValidation="artefactFinding2Location"
+                  noUpdate="true"
+                  [rrDisable]="model.artefactFinding2 === artefactFinding2.None"
+                >
+                  {{'mammaMRT.anatomyEnhancement.localizationMultipleSelection.value'
+                  | translate }}
+                </p>
+                <rr-breast-segment-shoulder
+                  name="artefaktFinding2.location"
+                  rr-id="mam_m_050206-2"
+                  [(ngModel)]="model.artefactFinding2Location"
+                  breastToDisable="right"
+                  [rrDisable]="model.artefactFinding2 === artefactFinding2.None"
+                  rrValidation="artefactFinding2Location"
+                  isLocalizer="true"
+                >
+                </rr-breast-segment-shoulder>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical o-list">
+      <h1 rr-id="mam_m_050301" class="m-b-36">
+        {{'mammaMRT.anatomyEnhancement.siliconeImplants.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050302"
+        label="{{'mammaMRT.anatomyEnhancement.no.value' | translate}}"
+        name="siliconeImplant"
+        [value]="siliconeImplant.No"
+        [(ngModel)]="model.siliconeImplant"
+        (onClick)="resetBothSiliconeFindings()"
+        rrUnClickRadio
+        class="m-b-12 m-l-13"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050303"
+        label="{{'mammaMRT.anatomyEnhancement.intactBilateralImplants.value' | translate}}"
+        name="siliconeImplant"
+        [value]="siliconeImplant.IntactBilateralImplants"
+        [(ngModel)]="model.siliconeImplant"
+        (onClick)="resetBothSiliconeFindings()"
+        rrUnClickRadio
+        class="m-b-10 m-l-13"
+      ></p-radioButton>
+      <div [rrDisable]="model.siliconeImplant !== siliconeImplant.None">
+        <p-tabView>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <span
+                rr-id="mam_m_050304-1"
+                rrValidation="siliconeImplantFinding1.location"
+                noUpdate="true"
+              >
+                {{'mammaMRT.anatomyEnhancement.right.value' | translate}}
+              </span>
+            </ng-template>
+            <div class="f-vertical p-t-10">
+              <div class="c-pad o-radio-list f-vertical m-h-242">
+                <p-radioButton
+                  rr-id="mam_m_050305-1"
+                  label="{{'mammaMRT.anatomyEnhancement.capsulitis.value' | translate}}"
+                  name="siliconeImplantFinding1.siliconeImplantType"
+                  [value]="siliconeImplantType.Capsulitis"
+                  [(ngModel)]="model.siliconeImplantFinding1.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding1AndSaveID(siliconeImplantType.Capsulitis)"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050306-1"
+                  label="{{'mammaMRT.anatomyEnhancement.capsularFibrosis.value' | translate}}"
+                  name="siliconeImplantFinding1.siliconeImplantType"
+                  [value]="siliconeImplantType.CapsularFibrosis"
+                  [(ngModel)]="model.siliconeImplantFinding1.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding1AndSaveID(siliconeImplantType.CapsularFibrosis)"
+                  rrInfoIcon="mam_m_0503131"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050307-1"
+                  label="{{'mammaMRT.anatomyEnhancement.rupture.value' | translate}}"
+                  name="siliconeImplantFinding1.siliconeImplantType"
+                  [value]="siliconeImplantType.Rupture"
+                  [(ngModel)]="model.siliconeImplantFinding1.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding1AndSaveID(siliconeImplantType.Rupture)"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050308-1"
+                  label="{{'mammaMRT.anatomyEnhancement.siliconoma.value' | translate}}"
+                  name="siliconeImplantFinding1.siliconeImplantType"
+                  [value]="siliconeImplantType.Siliconom"
+                  [(ngModel)]="model.siliconeImplantFinding1.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding1AndSaveID(siliconeImplantType.Siliconom)"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <div
+                  [rrDisable]="disableDropdowns1IfSiliconomOrCapsulitisOrNone()"
+                  class="dropdown"
+                >
+                  <p-dropdown
+                    rr-id="mam_m_050309-1"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    *ngIf="disableDropdowns1IfSiliconomOrCapsulitisOrNone()"
+                    name="kapselfibrosisDropdownEmpty1"
+                    styleClass="o-width-100 ui-brown-box"
+                    rrDropdownClear
+                  ></p-dropdown>
+                  <p-dropdown
+                    rr-id="mam_m_050309-1"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    [options]="grade"
+                    [(ngModel)]="model.siliconeImplantFinding1.capsularFibrosisType"
+                    *ngIf="model.siliconeImplantFinding1.siliconeImplantType === siliconeImplantType.CapsularFibrosis"
+                    name="capsularFibrosisType1"
+                    styleClass="o-width-100 ui-brown-box"
+                    rrDropdownClear
+                  ></p-dropdown>
+                  <p-dropdown
+                    rr-id="mam_m_050309-1"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    [options]="rupture"
+                    [(ngModel)]="model.siliconeImplantFinding1.ruptureType"
+                    *ngIf="model.siliconeImplantFinding1.siliconeImplantType === siliconeImplantType.Rupture"
+                    name="ruptureDropdown1"
+                    styleClass="o-width-100 ui-brown-box"
+                    rrDropdownClear
+                  ></p-dropdown>
+                </div>
+                <rr-number-input
+                  inputRrId="mam_m_050310-1"
+                  labelRrId="mam_m_050314-1"
+                  [rrDisable]="model.siliconeImplantFinding1.siliconeImplantType !== siliconeImplantType.Siliconom"
+                  [config]="{max: 100 , labelWidth: 150 }"
+                  name="longestExtent1"
+                  label="{{'mammaMRT.anatomyEnhancement.largestDimensionInMm.value' | translate}}"
+                  [(ngModel)]="model.siliconeImplantFinding1.longestExtent"
+                >
+                </rr-number-input>
+              </div>
+              <div class="localizer-block">
+                <p
+                  rr-id="mam_m_050312-1"
+                  class="m-b-4 m-t-13"
+                  rrValidation="siliconeImplantFinding1.location"
+                  noUpdate="true"
+                  [rrDisable]="model.siliconeImplantFinding1.siliconeImplantType === siliconeImplantType.None"
+                >
+                  {{'mammaMRT.anatomyEnhancement.localizationMultipleSelection.value'
+                  | translate}}
+                </p>
+                <rr-breast-simple-shoulder
+                  name="siliconImplantFinding1.localizer"
+                  rr-id="mam_m_050311-1"
+                  [(ngModel)]="model.siliconeImplantFinding1.location"
+                  breastToDisable="left"
+                  [rrDisable]="model.siliconeImplantFinding1.siliconeImplantType === siliconeImplantType.None"
+                  rrValidation="siliconeImplantFinding1.location"
+                  isLocalizer="true"
+                  #siliconeImplantFinding1Location
+                  [elementUpdate]="siliconeImplantFinding1Location.announceSelection"
+                >
+                </rr-breast-simple-shoulder>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <span
+                rr-id="mam_m_050304-2"
+                rrValidation="siliconeImplantFinding2.location"
+                noUpdate="true"
+              >
+                {{'mammaMRT.anatomyEnhancement.left.value' | translate}}
+              </span>
+            </ng-template>
+            <div class="o-width-100 f-vertical p-t-10">
+              <div class="c-pad o-radio-list f-vertical m-h-242">
+                <p-radioButton
+                  rr-id="mam_m_050305-2"
+                  label="{{'mammaMRT.anatomyEnhancement.capsulitis.value' | translate}}"
+                  name="siliconeImplantFinding2.siliconeImplantType"
+                  [value]="siliconeImplantType.Capsulitis"
+                  [(ngModel)]="model.siliconeImplantFinding2.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding2AndSaveID(siliconeImplantType.Capsulitis)"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050306-2"
+                  label="{{'mammaMRT.anatomyEnhancement.capsularFibrosis.value' | translate}}"
+                  name="siliconeImplantFinding2.siliconeImplantType"
+                  [value]="siliconeImplantType.CapsularFibrosis"
+                  [(ngModel)]="model.siliconeImplantFinding2.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding2AndSaveID(siliconeImplantType.CapsularFibrosis)"
+                  rrInfoIcon="mam_m_0503131"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050307-2"
+                  label="{{'mammaMRT.anatomyEnhancement.rupture.value' | translate}}"
+                  name="siliconeImplantFinding2.siliconeImplantType"
+                  [value]="siliconeImplantType.Rupture"
+                  [(ngModel)]="model.siliconeImplantFinding2.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding2AndSaveID(siliconeImplantType.Rupture)"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050308-2"
+                  label="{{'mammaMRT.anatomyEnhancement.siliconoma.value' | translate}}"
+                  name="siliconeImplantFinding2.siliconeImplantType"
+                  [value]="siliconeImplantType.Siliconom"
+                  [(ngModel)]="model.siliconeImplantFinding2.siliconeImplantType"
+                  (onClick)="resetSiliconeFinding2AndSaveID(siliconeImplantType.Siliconom)"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <div
+                  [rrDisable]="disableDropdowns2IfSiliconomOrCapsulitisOrNone()"
+                  class="dropdown"
+                >
+                  <p-dropdown
+                    rr-id="mam_m_050309-2"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    *ngIf="disableDropdowns2IfSiliconomOrCapsulitisOrNone()"
+                    name="kapselfibrosisDropdownEmpty2"
+                    styleClass="o-width-100 ui-brown-box"
+                    rrDropdownClear
+                  ></p-dropdown>
+                  <p-dropdown
+                    rr-id="mam_m_050309-2"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    [options]="grade"
+                    [(ngModel)]="model.siliconeImplantFinding2.capsularFibrosisType"
+                    *ngIf="model.siliconeImplantFinding2.siliconeImplantType === siliconeImplantType.CapsularFibrosis"
+                    name="capsularFibrosisType2"
+                    styleClass="o-width-100 ui-brown-box"
+                    rrDropdownClear
+                  ></p-dropdown>
+                  <p-dropdown
+                    rr-id="mam_m_050309-2"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    [options]="rupture"
+                    [(ngModel)]="model.siliconeImplantFinding2.ruptureType"
+                    *ngIf="model.siliconeImplantFinding2.siliconeImplantType === siliconeImplantType.Rupture"
+                    name="ruptureDropdown2"
+                    styleClass="o-width-100 ui-brown-box"
+                    rrDropdownClear
+                  ></p-dropdown>
+                </div>
+                <rr-number-input
+                  inputRrId="mam_m_050310-2"
+                  labelRrId="mam_m_050314-2"
+                  [rrDisable]="model.siliconeImplantFinding2.siliconeImplantType !== siliconeImplantType.Siliconom"
+                  class="m-b-10"
+                  [config]="{max: 100 , labelWidth: 150 }"
+                  name="longestExtent2"
+                  label="{{'mammaMRT.anatomyEnhancement.largestDimensionInMm.value' | translate}}"
+                  [(ngModel)]="model.siliconeImplantFinding2.longestExtent"
+                >
+                </rr-number-input>
+              </div>
+              <div class="localizer-block">
+                <p
+                  rr-id="mam_m_050312-2"
+                  class="p-b-4 p-t-13"
+                  rrValidation="siliconeImplantFinding2.location"
+                  noUpdate="true"
+                  [rrDisable]="model.siliconeImplantFinding2.siliconeImplantType === siliconeImplantType.None"
+                >
+                  {{'mammaMRT.anatomyEnhancement.localizationMultipleSelection.value'
+                  | translate}}
+                </p>
+                <rr-breast-simple-shoulder
+                  name="siliconImplantFinding2.localizer"
+                  rr-id="mam_m_050311-2"
+                  [(ngModel)]="model.siliconeImplantFinding2.location"
+                  breastToDisable="right"
+                  [rrDisable]="model.siliconeImplantFinding2.siliconeImplantType === siliconeImplantType.None"
+                  rrValidation="siliconeImplantFinding2.location"
+                  isLocalizer="true"
+                  #siliconeImplantFinding2Location
+                  [elementUpdate]="siliconeImplantFinding2Location.announceSelection"
+                >
+                </rr-breast-simple-shoulder>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical">
+      <h1 rr-id="mam_m_050401" class="m-b-36">
+        {{'mammaMRT.anatomyEnhancement.nipple.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050402"
+        label="{{'mammaMRT.anatomyEnhancement.bilateralUnremarkable.value' | translate}}"
+        name="mamille"
+        [value]="mamille.BilateralUnremarkable"
+        [(ngModel)]="model.mamille"
+        (onClick)="resetBothMamillaFindings()"
+        rrUnClickRadio
+        class="m-b-48 m-l-13"
+      >
+      </p-radioButton>
+      <div [rrDisable]="model.mamille === mamille.BilateralUnremarkable">
+        <p-tabView>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <span
+                rr-id="mam_m_050403-1"
+                rrValidation="mamillaFinding1.mamillaFindingLocation"
+                noUpdate="true"
+              >
+                {{'mammaMRT.anatomyEnhancement.right.value' | translate}}
+              </span>
+            </ng-template>
+            <div class="f-vertical p-t-10">
+              <div class="c-pad o-radio-list f-vertical m-h-242">
+                <p-checkbox
+                  rr-id="mam_m_050404-1"
+                  name="mamillaFinding1.isRetraction"
+                  label="{{'mammaMRT.anatomyEnhancement.retraction.value' | translate}}"
+                  binary="true"
+                  [(ngModel)]="model.mamillaFinding1.isRetraction"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="mam_m_050405-1"
+                  name="mamillaFinding1.isInvasion"
+                  label="{{'mammaMRT.anatomyEnhancement.invasion.value' | translate}}"
+                  [(ngModel)]="model.mamillaFinding1.isInvasion"
+                  binary="true"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <span
+                rr-id="mam_m_050403-2"
+                rrValidation="mamillaFinding2.mamillaFindingLocation"
+                noUpdate="true"
+              >
+                {{'mammaMRT.anatomyEnhancement.left.value' | translate}}
+              </span>
+            </ng-template>
+            <div class="o-width-100 f-vertical p-t-10">
+              <div class="c-pad o-radio-list f-vertical m-h-242">
+                <p-checkbox
+                  rr-id="mam_m_050404-2"
+                  name="mamillaFinding2.isRetraction"
+                  label="{{'mammaMRT.anatomyEnhancement.retraction.value' | translate}}"
+                  binary="true"
+                  [(ngModel)]="model.mamillaFinding2.isRetraction"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="mam_m_050405-2"
+                  name="mamillaFinding2.isInvasion"
+                  label="{{'mammaMRT.anatomyEnhancement.invasion.value' | translate}}"
+                  [(ngModel)]="model.mamillaFinding2.isInvasion"
+                  binary="true"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical">
+      <div
+        class="f-vertical o-radio-list"
+        *ngIf="model.birads === birads.BIRADS40"
+        id="glandParenchymaContrastMediaBlock"
+        [rrDisable]="cmEnchancementApplied !== cmEnchancement.Yes"
+      >
+        <h1 rr-id="mam_m_050501-1">
+          {{'mammaMRT.anatomyEnhancement.parenchymaDynamicContrast.value' |
+          translate}}
+        </h1>
+        <p-radioButton
+          rr-id="mam_m_050502-1"
+          class="text-break l-h-22"
+          label="{{'mammaMRT.anatomyEnhancement.parenchymaMinimalContrast.value' | translate}}"
+          name="parenchymaDynamicContrastType"
+          [value]="parenchymaDynamicContrastType.ParenchymaWithMinimalCE"
+          [(ngModel)]="model.parenchymaDynamicContrastType"
+          rrValidation="parenchymaDynamicContrastType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_050503-1"
+          class="text-break2 l-h-22"
+          label="{{'mammaMRT.anatomyEnhancement.parenchymaMildContrast.value' | translate}}"
+          name="parenchymaDynamicContrastType"
+          [value]="parenchymaDynamicContrastType.ParenchymaWithMildCEOrSpottedAccordingToFischer"
+          [(ngModel)]="model.parenchymaDynamicContrastType"
+          rrValidation="parenchymaDynamicContrastType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_050504-1"
+          class="text-break l-h-22"
+          label="{{'mammaMRT.anatomyEnhancement.moderateSometimesPatchy.value' | translate}}"
+          name="parenchymaDynamicContrastType"
+          [value]="parenchymaDynamicContrastType.ModerateAndSometimesPatchyAndProtractedCE"
+          [(ngModel)]="model.parenchymaDynamicContrastType"
+          rrValidation="parenchymaDynamicContrastType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_050505-1"
+          class="text-break l-h-22"
+          label="{{'mammaMRT.anatomyEnhancement.markedParenchymaEnhancement.value' | translate}}"
+          name="parenchymaDynamicContrastType"
+          [value]="parenchymaDynamicContrastType.MarkedParenchymaEnhancementInitiallyNodularPatternSecondaryConfluentApperance"
+          [(ngModel)]="model.parenchymaDynamicContrastType"
+          rrValidation="parenchymaDynamicContrastType"
+        ></p-radioButton>
+      </div>
+      <div class="o-list f-vertical">
+        <div
+          class="o-radio-list f-vertical"
+          *ngIf="model.birads === birads.BIRADS50"
+          id="levelParenchymalesSideBlock"
+          [rrDisable]="cmEnchancementApplied !== cmEnchancement.Yes"
+        >
+          <h1 rr-id="mam_m_050501-2" class="m-b-13">
+            {{'mammaMRT.anatomyEnhancement.intensityBackgroundParenchymal.value'
+            | translate}}
+          </h1>
+          <p-radioButton
+            rr-id="mam_m_050502-2"
+            class="text-break"
+            label="{{'mammaMRT.anatomyEnhancement.symmetric.value' | translate}}"
+            name="levelParenchymalesSide"
+            [value]="levelParenchymalesSide.Symmetric"
+            [(ngModel)]="model.levelParenchymalesSide"
+            rrUnClickRadio
+            rrContentReset="onBothSidesBlock asymmetricBlock"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_050503-2"
+            class="text-break"
+            label="{{'mammaMRT.anatomyEnhancement.asymmetric.value' | translate}}"
+            name="levelParenchymalesSide"
+            [value]="levelParenchymalesSide.Asymmetric"
+            [(ngModel)]="model.levelParenchymalesSide"
+            rrUnClickRadio
+            rrContentReset="onBothSidesBlock asymmetricBlock"
+          ></p-radioButton>
+        </div>
+        <div class="options-background__location">
+          <div
+            class="o-list f-vertical"
+            *ngIf="(model.levelParenchymalesSide === levelParenchymalesSide.Symmetric)"
+          >
+            <h2 rr-id="mam_m_050504-2">
+              {{'mammaMRT.anatomyEnhancement.bilateral.value' | translate}}
+            </h2>
+            <div class="o-radio-list f-vertical" id="onBothSidesBlock">
+              <p-radioButton
+                rr-id="mam_m_050505-2"
+                label="{{'mammaMRT.anatomyEnhancement.minimal.value' | translate}}"
+                name="onBothSides"
+                [value]="onBothSides.Minimal"
+                [(ngModel)]="model.onBothSides"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_050506-2"
+                label="{{'mammaMRT.anatomyEnhancement.mild.value' | translate}}"
+                name="onBothSides"
+                [value]="onBothSides.Mild"
+                [(ngModel)]="model.onBothSides"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_050507-2"
+                label="{{'mammaMRT.anatomyEnhancement.moderate.value' | translate}}"
+                name="onBothSides"
+                [value]="onBothSides.Moderate"
+                [(ngModel)]="model.onBothSides"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="mam_m_050508-2"
+                label="{{'mammaMRT.anatomyEnhancement.marked.value' | translate}}"
+                name="onBothSides"
+                [value]="onBothSides.Marked"
+                [(ngModel)]="model.onBothSides"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+            </div>
+          </div>
+          <div
+            class="f-horizontal"
+            id="asymmetricBlock"
+            *ngIf="(model.levelParenchymalesSide === levelParenchymalesSide.Asymmetric)"
+          >
+            <div class="o-list f-vertical p-r-80">
+              <h2
+                rr-id="mam_m_050504-3"
+                class="location-asymmetrical-right__header"
+              >
+                {{'mammaMRT.anatomyEnhancement.right.value' | translate}}
+              </h2>
+              <div class="o-radio-list f-vertical">
+                <p-radioButton
+                  rr-id="mam_m_050505-3"
+                  label="{{'mammaMRT.anatomyEnhancement.minimal.value' | translate}}"
+                  name="asymm_right"
+                  [value]="onBothSides.Minimal"
+                  [(ngModel)]="model.right"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050506-3"
+                  label="{{'mammaMRT.anatomyEnhancement.mild.value' | translate}}"
+                  name="asymm_right"
+                  [value]="onBothSides.Mild"
+                  [(ngModel)]="model.right"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050507-3"
+                  label="{{'mammaMRT.anatomyEnhancement.moderate.value' | translate}}"
+                  name="asymm_right"
+                  [value]="onBothSides.Moderate"
+                  [(ngModel)]="model.right"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050508-3"
+                  label="{{'mammaMRT.anatomyEnhancement.marked.value' | translate}}"
+                  name="asymm_right"
+                  [value]="onBothSides.Marked"
+                  [(ngModel)]="model.right"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="o-list f-vertical">
+              <h2
+                rr-id="mam_m_050504-4"
+                class="location-asymmetrical-right__header"
+              >
+                {{'mammaMRT.anatomyEnhancement.left.value' | translate}}
+              </h2>
+              <div class="o-radio-list f-vertical">
+                <p-radioButton
+                  rr-id="mam_m_050505-4"
+                  label="{{'mammaMRT.anatomyEnhancement.minimal.value' | translate}}"
+                  name="asymm_left"
+                  [value]="onBothSides.Minimal"
+                  [(ngModel)]="model.left"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050506-4"
+                  label="{{'mammaMRT.anatomyEnhancement.mild.value' | translate}}"
+                  name="asymm_left"
+                  [value]="onBothSides.Mild"
+                  [(ngModel)]="model.left"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050507-4"
+                  label="{{'mammaMRT.anatomyEnhancement.moderate.value' | translate}}"
+                  name="asymm_left"
+                  [value]="onBothSides.Moderate"
+                  [(ngModel)]="model.left"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="mam_m_050508-4"
+                  label="{{'mammaMRT.anatomyEnhancement.marked.value' | translate}}"
+                  name="asymm_left"
+                  [value]="onBothSides.Marked"
+                  [(ngModel)]="model.left"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="f-vertical f-end o-radio-list col-h-100">
+        <h1 rr-id="mam_m_050509" class="f-horizontal f-start m-b-5">
+          {{'mammaMRT.anatomyEnhancement.nonEnhancingFindings.value' |
+          translate}}
+        </h1>
+        <p-radioButton
+          rr-id="mam_m_050510"
+          class="text-break"
+          label="{{'mammaMRT.anatomyEnhancement.highNativeIntraDuctalSignal.value' | translate}}"
+          name="nonEnhancingFindingsType"
+          [value]="nonEnhancingFindingsType.HighNativeIntraDuctalSignalInT1w"
+          [(ngModel)]="model.nonEnhancingFindingsType"
+          (onClick)="resetFindingsWithoutEnhancementLocalization()"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_050511"
+          class="text-break"
+          label="{{'mammaMRT.anatomyEnhancement.postSurgicalFluidCollections.value' | translate}}"
+          name="nonEnhancingFindingsType"
+          [value]="nonEnhancingFindingsType.PostSurgicalFluidCollections"
+          [(ngModel)]="model.nonEnhancingFindingsType"
+          (onClick)="resetFindingsWithoutEnhancementLocalization()"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_050512"
+          class="text-break"
+          label="{{'mammaMRT.anatomyEnhancement.posttherapeuticTrabecularThickening.value' | translate}}"
+          name="nonEnhancingFindingsType"
+          [value]="nonEnhancingFindingsType.PosttherapeuticTrabecularThickening"
+          [(ngModel)]="model.nonEnhancingFindingsType"
+          (onClick)="resetFindingsWithoutEnhancementLocalization()"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="mam_m_050513"
+          class="text-break"
+          label="{{'mammaMRT.anatomyEnhancement.architecturalDistorsion.value' | translate}}"
+          name="nonEnhancingFindingsType"
+          class="m-b-21"
+          [value]="nonEnhancingFindingsType.ArchitecturalDistorsion"
+          [(ngModel)]="model.nonEnhancingFindingsType"
+          (onClick)="resetFindingsWithoutEnhancementLocalization()"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          [rrDisable]="model.nonEnhancingFindingsType === nonEnhancingFindingsType.None"
+        >
+          <p rr-id="mam_m_050514" class="m-b-3">
+            {{ 'mammaMRT.anatomyEnhancement.lokalisation.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="mam_m_050515"
+            [(ngModel)]="model.isFindingsLocalizationRight"
+            label="{{ 'mammaMRT.anatomyEnhancement.right.value' | translate }}"
+            name="isFindingsLocalizationRight"
+            binary="true"
+            rrValidation="isFindingsLocalizationRight isFindingsLocalizationLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="mam_m_050516"
+            [(ngModel)]="model.isFindingsLocalizationLeft"
+            label="{{ 'mammaMRT.anatomyEnhancement.left.value' | translate }}"
+            name="isFindingsLocalizationLeft"
+            binary="true"
+            rrValidation="isFindingsLocalizationRight isFindingsLocalizationLeft"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

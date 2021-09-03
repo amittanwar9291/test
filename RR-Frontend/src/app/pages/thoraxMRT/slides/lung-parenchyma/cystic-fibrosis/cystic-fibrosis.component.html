@@ -1,0 +1,590 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical c-sep">
+    <ng-container
+      *ngIf="model.cysticFibrosisType !== cysticFibrosisType.Descriptive"
+    >
+      <div class="o-radio-list c-pad">
+        <h2 rr-id="tho_m_050204" class="m-b-10">
+          {{ "thoraxMRT.lungParenchyma.cysticFibrosis.value" | translate }}
+        </h2>
+      </div>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad o-radio-list">
+          <p-radioButton
+            rr-id="tho_m_050205"
+            label="{{
+              'thoraxMRT.lungParenchyma.quantitativeEichingerScore.value'
+                | translate
+            }}"
+            name="cysticFibrosisType"
+            [(ngModel)]="model.cysticFibrosisType"
+            (ngModelChange)="resetValues()"
+            [value]="cysticFibrosisType.QuantitativeEichingerScore"
+            rrValidation="cysticFibrosisType"
+            rrInfoIcon="tho_m_05_01"
+            rrContentReset="morphologyIBlock morphologyIIContainer"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_050206"
+            label="{{
+              'thoraxMRT.lungParenchyma.descriptive.value' | translate
+            }}"
+            name="cysticFibrosisType"
+            [(ngModel)]="model.cysticFibrosisType"
+            (ngModelChange)="resetValues()"
+            [value]="cysticFibrosisType.Descriptive"
+            rrValidation="cysticFibrosisType"
+          >
+          </p-radioButton>
+          <div
+            *ngIf="
+              model.cysticFibrosisType ===
+              cysticFibrosisType.QuantitativeEichingerScore
+            "
+            class="m-t-30"
+          >
+            <h2 rr-id="tho_m_050207" class="m-b-10">
+              {{ "thoraxMRT.lungParenchyma.applicationNote.value" | translate }}
+            </h2>
+            <p rr-id="tho_m_050208">
+              {{ "thoraxMRT.lungParenchyma.pleaseDetermineTheSeverityof.value" |
+              translate }}
+            </p>
+            <h2 rr-id="tho_m_050209" class="m-b-10 m-t-30">
+              {{ "thoraxMRT.lungParenchyma.score.value" | translate }}
+            </h2>
+            <rr-number-input
+              name="score"
+              [(ngModel)]="model.score"
+              rr-id="tho_m_0502116"
+              [config]="{ readonly: true, min: 1, max: 72 }"
+            ></rr-number-input>
+          </div>
+        </div>
+        <ng-container
+          *ngIf="model.cysticFibrosisType ===cysticFibrosisType.QuantitativeEichingerScore"
+        >
+          <div class="f-vertical c-sep">
+            <div class="o-radio-list c-pad">
+              <h2
+                rr-id="tho_m_050304"
+                class="m-b-10 m-t-3"
+                [rrValidation]="morphologyQuantitativeLocalizersValidationProps"
+                ifAny="true"
+              >
+                {{ "thoraxMRT.lungParenchyma.parameter.value" | translate}}
+              </h2>
+            </div>
+            <div class="f-horizontal col-h-100">
+              <div class="c-col-1 c-sep c-pad o-radio-list">
+                <p rr-id="tho_m_050305">
+                  {{"thoraxMRT.lungParenchyma.bronchiectasisWallThickening.value"|
+                  translate }}
+                </p>
+                <rr-morphology-simple
+                  rr-id="tho_m_050306"
+                  class="m-l-30"
+                  (click)=" openDialog(morphologyQuantitativeLocalizers.bronchiectasisOrWallThickeningLocalizer)"
+                  [model]="model.bronchiectasisOrWallThickeningLocalizer"
+                ></rr-morphology-simple>
+                <p rr-id="tho_m_050307" class="m-t-25">
+                  {{ "thoraxMRT.lungParenchyma.mucusPlaque.value" |translate }}
+                </p>
+                <rr-morphology-simple
+                  rr-id="tho_m_050308"
+                  class="m-l-30"
+                  (click)="openDialog(morphologyQuantitativeLocalizers.mucusPlaqueLocalizer)"
+                  [model]="model.mucusPlaqueLocalizer"
+                ></rr-morphology-simple>
+              </div>
+              <div class="c-col-1 c-sep c-pad o-radio-list">
+                <p rr-id="tho_m_050411">
+                  {{ "thoraxMRT.lungParenchyma.sacculationabscess.value"
+                  |translate }}
+                </p>
+                <rr-morphology-simple
+                  rr-id="tho_m_050412"
+                  class="m-l-30"
+                  (click)="openDialog(morphologyQuantitativeLocalizers.sacculationOrAbscessLocalizer)"
+                  [model]="model.sacculationOrAbscessLocalizer"
+                ></rr-morphology-simple>
+                <p rr-id="tho_m_050413" class="m-t-25">
+                  {{ "thoraxMRT.lungParenchyma.consolidation.value" |translate
+                  }}
+                </p>
+                <rr-morphology-simple
+                  rr-id="tho_m_050414"
+                  class="m-l-30"
+                  (click)="openDialog(morphologyQuantitativeLocalizers.consolidationLocalizer)"
+                  [model]="model.consolidationLocalizer"
+                ></rr-morphology-simple>
+              </div>
+              <div class="c-col-1 c-sep c-pad-l o-radio-list">
+                <p rr-id="tho_m_050501" rrInfoIcon="tho_m_05_02">
+                  {{ "thoraxMRT.lungParenchyma.otherAbnormality.value"
+                  |translate }}
+                </p>
+                <rr-morphology-simple
+                  rr-id="tho_m_050502"
+                  class="m-l-30"
+                  (click)="openDialog(morphologyQuantitativeLocalizers.otherAbnormalityLocalizer)"
+                  [model]="model.otherAbnormalityLocalizer"
+                ></rr-morphology-simple>
+                <div class="o-radio-list" [rrDisable]="!isCMYes">
+                  <p rr-id="tho_m_050503" class="m-t-25">
+                    {{"thoraxMRT.lungParenchyma.function(perfusionDisorder.value"|
+                    translate }}
+                  </p>
+                  <rr-morphology-simple
+                    rr-id="tho_m_050504"
+                    class="m-l-30"
+                    (click)="openDialog(morphologyQuantitativeLocalizers.functionLocalizer)"
+                    [model]="model.functionLocalizer"
+                  ></rr-morphology-simple>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.cysticFibrosisType === cysticFibrosisType.None"
+        >
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="model.cysticFibrosisType === cysticFibrosisType.Descriptive"
+    >
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad o-radio-list">
+          <h2 rr-id="tho_m_050204" class="m-b-10">
+            {{ "thoraxMRT.lungParenchyma.cysticFibrosis.value" | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="tho_m_050205"
+            label="{{'thoraxMRT.lungParenchyma.quantitativeEichingerScore.value'| translate}}"
+            name="cysticFibrosisType"
+            [(ngModel)]="model.cysticFibrosisType"
+            [value]="cysticFibrosisType.QuantitativeEichingerScore"
+            rrValidation="cysticFibrosisType"
+            rrInfoIcon="tho_m_05_01"
+            (ngModelChange)="resetValues()"
+            rrContentReset="morphologyIBlock morphologyIIContainer"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_050206"
+            label="{{'thoraxMRT.lungParenchyma.descriptive.value' | translate}}"
+            name="cysticFibrosisType"
+            [(ngModel)]="model.cysticFibrosisType"
+            (ngModelChange)="resetValues()"
+            [value]="cysticFibrosisType.Descriptive"
+            rrValidation="cysticFibrosisType"
+          >
+          </p-radioButton>
+        </div>
+        <ng-container
+          *ngIf="model.cysticFibrosisType === cysticFibrosisType.Descriptive"
+        >
+          <div class="finding-tab-view">
+            <p-tabView class="rr-tabView">
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <h1 rr-id="tho_m_050309">
+                    {{ "thoraxMRT.lungParenchyma.morphologyI.value" |translate
+                    }}
+                  </h1>
+                </ng-template>
+                <div
+                  class="c-col-2 f-horizontal f-center col-h-100 tab-border"
+                  id="morphologyIBlock"
+                >
+                  <div
+                    class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list"
+                  >
+                    <div class="f-vertical f-start o-radio-list m-t-10">
+                      <div class="f-vertical f-start o-radio-list">
+                        <p-checkbox
+                          rr-id="tho_m_050310"
+                          name="isBronchiectasisOrWallThickening"
+                          rrContentReset="bronchiectasisOrWallThickeningBlock"
+                          [(ngModel)]="model.isBronchiectasisOrWallThickening"
+                          label="{{'thoraxMRT.lungParenchyma.bronchiectasisWallThickening.value'| translate}}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                          (click)="clearDescriptiveLocalizer(morphologyDescriptiveLocalizers.bronchiectasisOrWallThickeningLocation)"
+                        ></p-checkbox>
+                        <div
+                          id="bronchiectasisOrWallThickeningBlock"
+                          class="nested-content o-radio-list"
+                          [rrDisable]="!model.isBronchiectasisOrWallThickening"
+                        >
+                          <p rr-id="tho_m_050311">
+                            {{"thoraxMRT.lungParenchyma.localization.value"
+                            |translate }}
+                          </p>
+                          <rr-lungs-flaps-simple
+                            rr-id="tho_m_050312"
+                            (click)="openLargeLocalizer(morphologyDescriptiveLocalizers.bronchiectasisOrWallThickeningLocation)"
+                            [(ngModel)]="model.bronchiectasisOrWallThickeningLocation"
+                            name="bronchiectasisOrWallThickeningLocation"
+                          ></rr-lungs-flaps-simple>
+                        </div>
+                        <p-checkbox
+                          rr-id="tho_m_050313"
+                          class="m-t-10"
+                          name="isMucusPlaque"
+                          rrContentReset="mucusPlaqueBlock"
+                          [(ngModel)]="model.isMucusPlaque"
+                          label="{{'thoraxMRT.lungParenchyma.mucusPlaque.value'| translate}}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                          (click)="clearDescriptiveLocalizer(morphologyDescriptiveLocalizers.mucusPlaqueLocation)"
+                        ></p-checkbox>
+                        <div
+                          id="mucusPlaqueBlock"
+                          class="nested-content o-radio-list"
+                          [rrDisable]="!model.isMucusPlaque"
+                        >
+                          <p rr-id="tho_m_050314">
+                            {{"thoraxMRT.lungParenchyma.localization.value"
+                            |translate }}
+                          </p>
+                          <rr-lungs-flaps-simple
+                            rr-id="tho_m_050330"
+                            (click)="openLargeLocalizer(morphologyDescriptiveLocalizers.mucusPlaqueLocation)"
+                            [(ngModel)]="model.mucusPlaqueLocation"
+                            name="mucusPlaqueLocation"
+                          ></rr-lungs-flaps-simple>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list"
+                  >
+                    <div class="f-vertical f-start o-radio-list m-t-10">
+                      <div class="f-vertical f-start o-radio-list">
+                        <p-checkbox
+                          rr-id="tho_m_050416"
+                          name="isSacculationOrAbscess"
+                          rrContentReset="sacculationOrAbscessBlock"
+                          [(ngModel)]="model.isSacculationOrAbscess"
+                          label="{{'thoraxMRT.lungParenchyma.sacculationabscess.value'| translate}}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                          (click)="clearDescriptiveLocalizer(morphologyDescriptiveLocalizers.sacculationOrAbscessLocation)"
+                        ></p-checkbox>
+                        <div
+                          id="sacculationOrAbscessBlock"
+                          class="nested-content o-radio-list"
+                          [rrDisable]="!model.isSacculationOrAbscess"
+                        >
+                          <p rr-id="tho_m_050417">
+                            {{"thoraxMRT.lungParenchyma.localization.value"
+                            |translate }}
+                          </p>
+                          <rr-lungs-flaps-simple
+                            rr-id="tho_m_050330"
+                            (click)="openLargeLocalizer(morphologyDescriptiveLocalizers.sacculationOrAbscessLocation)"
+                            [(ngModel)]="model.sacculationOrAbscessLocation"
+                            name="sacculationOrAbscessLocation"
+                          ></rr-lungs-flaps-simple>
+                        </div>
+                        <p-checkbox
+                          rr-id="tho_m_050419"
+                          class="m-t-10"
+                          name="isConsolidation"
+                          rrContentReset="consolidationBlock"
+                          [(ngModel)]="model.isConsolidation"
+                          label="{{'thoraxMRT.lungParenchyma.consolidation.value'| translate}}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                          (click)="clearDescriptiveLocalizer(morphologyDescriptiveLocalizers.consolidationLocation)"
+                        ></p-checkbox>
+                        <div
+                          id="consolidationBlock"
+                          class="nested-content o-radio-list"
+                          [rrDisable]="!model.isConsolidation"
+                        >
+                          <p rr-id="tho_m_050420">
+                            {{"thoraxMRT.lungParenchyma.localization.value"
+                            |translate }}
+                          </p>
+                          <rr-lungs-flaps-simple
+                            rr-id="tho_m_050430"
+                            (click)="openLargeLocalizer(morphologyDescriptiveLocalizers.consolidationLocation)"
+                            [(ngModel)]="model.consolidationLocation"
+                            name="consolidationLocation"
+                          ></rr-lungs-flaps-simple>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <h1
+                    rr-id="tho_m_050415"
+                    ifAny="true"
+                    noUpdate="true"
+                    rrValidation="sideType"
+                  >
+                    {{ "thoraxMRT.lungParenchyma.morphologyII.value" | translate
+                    }}
+                  </h1>
+                </ng-template>
+                <div
+                  class="c-col-2 f-horizontal f-center col-h-100 tab-border"
+                  id="morphologyIIContainer"
+                >
+                  <div
+                    class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list"
+                  >
+                    <div class="f-vertical f-start o-radio-list p-l-10">
+                      <div class="f-vertical f-start o-radio-list">
+                        <p-checkbox
+                          rr-id="tho_m_050315"
+                          name="isPleuritis"
+                          rrContentReset="pleuritisBlock"
+                          [(ngModel)]="model.isPleuritis"
+                          label="{{
+                            'thoraxMRT.lungParenchyma.pleuritis.value'
+                              | translate
+                          }}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                        ></p-checkbox>
+                        <div
+                          id="pleuritisBlock"
+                          class="nested-content o-radio-list m-t-10"
+                          [rrDisable]="!model.isPleuritis"
+                        >
+                          <p rr-id="tho_m_050316">
+                            {{ "thoraxMRT.lungParenchyma.side.value" | translate
+                            }}
+                          </p>
+                          <p-checkbox
+                            rr-id="tho_m_050317"
+                            name="isPleuritisRight"
+                            [(ngModel)]="model.isPleuritisRight"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.right.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                          <p-checkbox
+                            rr-id="tho_m_050318"
+                            name="isPleuritisLeft"
+                            [(ngModel)]="model.isPleuritisLeft"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.left.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                        </div>
+                        <p-checkbox
+                          rr-id="tho_m_050319"
+                          class="m-t-25"
+                          name="isPleuralEffusion"
+                          rrContentReset="pleuralEffusionBlock"
+                          [(ngModel)]="model.isPleuralEffusion"
+                          label="{{
+                            'thoraxMRT.lungParenchyma.pleuralEffusion.value'
+                              | translate
+                          }}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                        ></p-checkbox>
+                        <div
+                          id="pleuralEffusionBlock"
+                          class="nested-content o-radio-list m-t-10"
+                          [rrDisable]="!model.isPleuralEffusion"
+                        >
+                          <p rr-id="tho_m_050320">
+                            {{ "thoraxMRT.lungParenchyma.side.value" | translate
+                            }}
+                          </p>
+                          <p-checkbox
+                            rr-id="tho_m_050321"
+                            name="isPleuralEffusionRight"
+                            [(ngModel)]="model.isPleuralEffusionRight"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.right.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                          <p-checkbox
+                            rr-id="tho_m_050322"
+                            name="isPleuralEffusionLeft"
+                            [(ngModel)]="model.isPleuralEffusionLeft"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.left.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                          <rr-number-input
+                            inputRrId="tho_m_050323"
+                            labelRrId="tho_m_050324"
+                            name="pleuralEffusionInMm"
+                            class="text-break"
+                            [label]="
+                              'thoraxMRT.lungParenchyma.inMm.value'
+                                | translate
+                            "
+                            [config]="{ min: 1, max: 300, labelWidth: 200, placeholder: '---'}"
+                            [(ngModel)]="model.pleuralEffusionInMm"
+                          >
+                          </rr-number-input>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="c-col-1 f-vertical f-start c-sep c-pad-l o-radio-list"
+                  >
+                    <div class="f-vertical f-start o-radio-list p-l-10">
+                      <div class="f-vertical f-start o-radio-list">
+                        <p-checkbox
+                          rr-id="tho_m_050421"
+                          name="isPneumothorax"
+                          rrContentReset="pneumothoraxBlock"
+                          [(ngModel)]="model.isPneumothorax"
+                          label="{{
+                            'thoraxMRT.lungParenchyma.pneumothorax.value'
+                              | translate
+                          }}"
+                          binary="true"
+                          labelStyleClass="ui-fat-label"
+                        ></p-checkbox>
+                        <div
+                          id="pneumothoraxBlock"
+                          class="nested-content o-radio-list m-t-10"
+                          [rrDisable]="!model.isPneumothorax"
+                        >
+                          <p rr-id="tho_m_050422">
+                            {{ "thoraxMRT.lungParenchyma.side.value" | translate
+                            }}
+                          </p>
+                          <p-checkbox
+                            rr-id="tho_m_050423"
+                            name="isPneumothoraxRight"
+                            [(ngModel)]="model.isPneumothoraxRight"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.right.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                          <p-checkbox
+                            rr-id="tho_m_050424"
+                            name="isPneumothoraxLeft"
+                            [(ngModel)]="model.isPneumothoraxLeft"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.left.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                          <p-checkbox
+                            rr-id="tho_m_050425"
+                            class="m-t-25"
+                            name="isMediastinalShift"
+                            rrContentReset="mediastinalShiftBlock"
+                            [(ngModel)]="model.isMediastinalShift"
+                            label="{{
+                              'thoraxMRT.lungParenchyma.mediastinalShift.value'
+                                | translate
+                            }}"
+                            binary="true"
+                          ></p-checkbox>
+                          <div
+                            id="mediastinalShiftBlock"
+                            class="nested-content o-radio-list"
+                            [rrDisable]="!model.isMediastinalShift"
+                          >
+                            <p rr-id="tho_m_050426">
+                              {{ "thoraxMRT.lungParenchyma.side.value" |
+                              translate }}*
+                            </p>
+                            <p-radioButton
+                              rr-id="tho_m_050427"
+                              label="{{
+                                'thoraxMRT.lungParenchyma.right.value'
+                                  | translate
+                              }}"
+                              name="sideType"
+                              [(ngModel)]="model.sideType"
+                              [value]="directionType.Right"
+                              rrValidation="sideType"
+                              rrUnClickRadio
+                            >
+                            </p-radioButton>
+                            <p-radioButton
+                              rr-id="tho_m_050428"
+                              label="{{
+                                'thoraxMRT.lungParenchyma.left.value'
+                                  | translate
+                              }}"
+                              name="sideType"
+                              [(ngModel)]="model.sideType"
+                              [value]="directionType.Left"
+                              rrValidation="sideType"
+                              rrUnClickRadio
+                            >
+                            </p-radioButton>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+          <div class="c-col-1 c-sep c-pad-l">
+            <div class="o-radio-list c-pad-l m-t-15" [rrDisable]="!isCMYes">
+              <h2 rr-id="tho_m_050505" class="m-b-10 m-t-3">
+                {{ "thoraxMRT.lungParenchyma.function.value" | translate }}
+              </h2>
+              <p-checkbox
+                rr-id="tho_m_050506"
+                name="isPerfusionDisorder"
+                rrContentReset="perfusionDisorderBlock"
+                [(ngModel)]="model.isPerfusionDisorder"
+                label="{{'thoraxMRT.lungParenchyma.perfusionDisorder.value'| translate}}"
+                binary="true"
+                (click)="clearDescriptiveLocalizer(morphologyDescriptiveLocalizers.perfusionDisorderLocation)"
+              ></p-checkbox>
+              <div
+                id="perfusionDisorderBlock"
+                class="nested-content o-radio-list"
+                [rrDisable]="!model.isPerfusionDisorder"
+              >
+                <p rr-id="tho_m_050508">
+                  {{ "thoraxMRT.lungParenchyma.localization.value" |translate }}
+                </p>
+                <rr-lungs-flaps-simple
+                  class="scaled-localizer"
+                  rr-id="tho_m_050509"
+                  (click)="openLargeLocalizer(morphologyDescriptiveLocalizers.perfusionDisorderLocation)"
+                  [(ngModel)]="model.perfusionDisorderLocation"
+                  name="perfusionDisorderLocation"
+                ></rr-lungs-flaps-simple>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>

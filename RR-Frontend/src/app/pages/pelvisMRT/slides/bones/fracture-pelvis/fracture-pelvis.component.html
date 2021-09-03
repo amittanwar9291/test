@@ -1,0 +1,495 @@
+<div class="f-horizontal col-h-100 text-break">
+  <div class="c-col-1 c-pad c-sep f-start f-vertical ">
+    <h2 rr-id="pel_m_100220" class="m-b-27 m-t-3">
+      {{ 'pelvisMRT.bones.localization.value' | translate }}
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+    ></rr-hips-small>
+  </div>
+  <div class="c-col-3 c-pad-l f-start f-vertical c-sep col-h-100">
+    <h2 rr-id="pel_m_100310" class="m-b-27 m-t-3">
+      {{ 'pelvisMRT.bones.classificationNoAsterisk.value' | translate }}
+      <rr-info-icon rr-id="pel_m_10_01"></rr-info-icon>
+    </h2>
+    <div class="c-col-3 c-sep f-start f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="pel_m_100315"
+          [(ngModel)]="model.fbClassificationType"
+          label="{{ 'pelvisMRT.bones.61AIntactPosteriorPelvic.value' | translate }}"
+          [value]="fbClassificationType.IntactPosteriorPelvic"
+          name="fbClassificationType"
+          rrUnClickRadio
+          rrContentReset="pelvicFractureNotFurtherSpecifiedType column4 column5"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100316"
+          [(ngModel)]="model.fbClassificationType"
+          label="{{ 'pelvisMRT.bones.61BPartialInterruptionOf.value' | translate }}"
+          [value]="fbClassificationType.PartialInterruptionPosteriorPelvicRing"
+          name="fbClassificationType"
+          rrUnClickRadio
+          rrContentReset="pelvicFractureNotFurtherSpecifiedType column4 column5"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100317"
+          [(ngModel)]="model.fbClassificationType"
+          label="{{ 'pelvisMRT.bones.61CCompleteInterruptionOf.value' | translate }}"
+          [value]="fbClassificationType.CompleteInterruptionPosteriorPelvicRing"
+          name="fbClassificationType"
+          rrUnClickRadio
+          rrContentReset="pelvicFractureNotFurtherSpecifiedType column4 column5"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100318"
+          [(ngModel)]="model.fbClassificationType"
+          label="{{ 'pelvisMRT.bones.pelvicFractureNotSpecified.value' | translate }}"
+          [value]="fbClassificationType.PelvicFractureNotFurther"
+          name="fbClassificationType"
+          rrUnClickRadio
+          rrContentReset="pelvicFractureNotFurtherSpecifiedType column4 column5"
+        ></p-radioButton>
+      </div>
+      <div class="c-col-2 c-pad-l f-start f-vertical c-sep col-h-100">
+        <h2
+          *ngIf="isFractureFormAvailable()"
+          rr-id="pel_m_100401"
+          class="m-b-10"
+        >
+          {{ 'pelvisMRT.bones.fractureType.value' | translate }}
+        </h2>
+        <h2
+          *ngIf="model.fbClassificationType === fbClassificationType.PelvicFractureNotFurther"
+          rr-id="pel_m_100410"
+          class="m-b-10"
+        >
+          {{ 'pelvisMRT.bones.details.value' | translate }}
+        </h2>
+        <div class="c-col-2 c-sep f-start f-horizontal col-h-100">
+          <div id="column4" class="c-col-1 c-pad-r c-sep f-start f-vertical">
+            <ng-container [ngSwitch]="model.fbClassificationType">
+              <div
+                *ngSwitchCase="fbClassificationType.IntactPosteriorPelvic"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100428"
+                  [(ngModel)]="model.fbFractureFormAType"
+                  label="{{ 'pelvisMRT.bones.61A1PelvicEdgeInjuries.value' | translate }}"
+                  [value]="fbFractureFormAType.PelvicEdgeInjuries"
+                  name="fbFractureFormAType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100429"
+                  [(ngModel)]="model.fbFractureFormAType"
+                  label="{{ 'pelvisMRT.bones.61A2IliacWingFracture.value' | translate }}"
+                  [value]="fbFractureFormAType.IliacWingFracture"
+                  name="fbFractureFormAType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100430"
+                  [(ngModel)]="model.fbFractureFormAType"
+                  label="{{ 'pelvisMRT.bones.61A3TransverseFracturesOf.value' | translate }}"
+                  [value]="fbFractureFormAType.TransverseFractures"
+                  name="fbFractureFormAType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="fbClassificationType.PartialInterruptionPosteriorPelvicRing"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100431"
+                  [(ngModel)]="model.fbFractureFormBType"
+                  label="{{ 'pelvisMRT.bones.61B1ComminutedLateralCompression.value' | translate }}"
+                  [value]="fbFractureFormBType.ImmersedLateralCompression"
+                  name="fbFractureFormBType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100432"
+                  [(ngModel)]="model.fbFractureFormBType"
+                  label="{{ 'pelvisMRT.bones.61B2OnesidedPartialInterruption.value' | translate }}"
+                  [value]="fbFractureFormBType.OnesidedPartialInterruption"
+                  name="fbFractureFormBType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100433"
+                  [(ngModel)]="model.fbFractureFormBType"
+                  label="{{ 'pelvisMRT.bones.61B3BilateralPartialInterruption.value' | translate }}"
+                  [value]="fbFractureFormBType.BilateralPartialInterruption"
+                  name="fbFractureFormBType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="fbClassificationType.CompleteInterruptionPosteriorPelvicRing"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100434"
+                  [(ngModel)]="model.fbFractureFormCType"
+                  label="{{ 'pelvisMRT.bones.61C1UnilateralCompleteInterruption.value' | translate }}"
+                  [value]="fbFractureFormCType.UnilateralCompleteInterruption"
+                  name="fbFractureFormCType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100435"
+                  [(ngModel)]="model.fbFractureFormCType"
+                  label="{{ 'pelvisMRT.bones.61C2UnilateralCompleteAnd.value' | translate }}"
+                  [value]="fbFractureFormCType.UnilateralCompleteAndContralateralPartialInterruption"
+                  name="fbFractureFormCType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100436"
+                  [(ngModel)]="model.fbFractureFormCType"
+                  label="{{ 'pelvisMRT.bones.61C3BilateralCompleteInterruption.value' | translate }}"
+                  [value]="fbFractureFormCType.BilateralCompleteInterruption"
+                  name="fbFractureFormCType"
+                  rrUnClickRadio
+                  rrContentReset="column5"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="fbClassificationType.PelvicFractureNotFurther"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100411"
+                  [(ngModel)]="model.pelvicFractureNotFurtherSpecifiedType"
+                  label="{{ 'pelvisMRT.bones.suspicionOf.value' | translate }}"
+                  [value]="pelvicFractureNotFurtherSpecifiedType.SuspicionOf"
+                  name="pelvicFractureNotFurtherSpecifiedType"
+                  rrContentReset="pseudarthrosisBlock"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100412"
+                  [(ngModel)]="model.pelvicFractureNotFurtherSpecifiedType"
+                  label="{{ 'pelvisMRT.bones.fractureOlderSigns.value' | translate }}"
+                  [value]="pelvicFractureNotFurtherSpecifiedType.FractureOlderConsolidated"
+                  name="pelvicFractureNotFurtherSpecifiedType"
+                  rrContentReset="pseudarthrosisBlock"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100413"
+                  [(ngModel)]="model.pelvicFractureNotFurtherSpecifiedType"
+                  label="{{ 'pelvisMRT.bones.fractureOlderNotConsolidated.value' | translate }}"
+                  [value]="pelvicFractureNotFurtherSpecifiedType.FractureOlderNotConsolidated"
+                  name="pelvicFractureNotFurtherSpecifiedType"
+                  rrContentReset="pseudarthrosisBlock"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <div
+                  id="pseudarthrosisBlock"
+                  class="o-radio-list p-l-35"
+                  [rrDisable]="model.pelvicFractureNotFurtherSpecifiedType !== pelvicFractureNotFurtherSpecifiedType.FractureOlderNotConsolidated"
+                >
+                  <p-checkbox
+                    rr-id="pel_m_100414"
+                    label="{{ 'pelvisMRT.bones.pseudarthrosis.value' | translate }}"
+                    binary="true"
+                    name="isPseudarthrosis"
+                    [(ngModel)]="model.isPseudarthrosis"
+                  ></p-checkbox>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div id="column5" class="c-col-1 c-pad-l c-sep f-start f-vertical">
+            <ng-container [ngSwitch]="model.fbClassificationType">
+              <div
+                *ngSwitchCase="fbClassificationType.IntactPosteriorPelvic"
+                class="f-start f-vertical col-h-100 o-radio-list"
+              >
+                <div
+                  class="f-start f-vertical o-radio-list m-b-20"
+                  *ngIf="model.fbFractureFormAType === fbFractureFormAType.PelvicEdgeInjuries"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100538"
+                    [(ngModel)]="model.fbFractureFormA1SubType"
+                    label="{{ 'pelvisMRT.bones.61A11AnteriorSuperiorIliac.value' | translate }}"
+                    [value]="fbFractureFormA1SubType.FractureSpinaIliacaAnteriorSuperior"
+                    name="fbFractureFormA1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100539"
+                    [(ngModel)]="model.fbFractureFormA1SubType"
+                    label="{{ 'pelvisMRT.bones.61A12AnteriorInferiorIliac.value' | translate }}"
+                    [value]="fbFractureFormA1SubType.FractureSpinaIliacaAnteriorInferior"
+                    name="fbFractureFormA1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100540"
+                    [(ngModel)]="model.fbFractureFormA1SubType"
+                    label="{{ 'pelvisMRT.bones.61A13FractureOfIschial.value' | translate }}"
+                    [value]="fbFractureFormA1SubType.FractureIschialTuberosity"
+                    name="fbFractureFormA1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list m-b-20"
+                  *ngIf="model.fbFractureFormAType === fbFractureFormAType.IliacWingFracture"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100541"
+                    [(ngModel)]="model.fbFractureFormA2SubType"
+                    label="{{ 'pelvisMRT.bones.61A21IliacCrestFracture.value' | translate }}"
+                    [value]="fbFractureFormA2SubType.FractureOfIliacCrest"
+                    name="fbFractureFormA2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100542"
+                    [(ngModel)]="model.fbFractureFormA2SubType"
+                    label="{{ 'pelvisMRT.bones.61A22UnilateralFractureOf.value' | translate }}"
+                    [value]="fbFractureFormA2SubType.UnilateralFractureAnteriorPelvicRing"
+                    name="fbFractureFormA2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100592"
+                    [(ngModel)]="model.fbFractureFormA2SubType"
+                    label="{{ 'pelvisMRT.bones.61A23BilateralFractureOf.value' | translate }}"
+                    [value]="fbFractureFormA2SubType.BilateralFractureAnteriorPelvicRing"
+                    name="fbFractureFormA2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list"
+                  *ngIf="model.fbFractureFormAType === fbFractureFormAType.TransverseFractures"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100593"
+                    [(ngModel)]="model.fbFractureFormA3SubType"
+                    label="{{ 'pelvisMRT.bones.61A31SacrococcygealDislocation.value' | translate }}"
+                    [value]="fbFractureFormA3SubType.SacrococcygealDislocation"
+                    name="fbFractureFormA3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100594"
+                    [(ngModel)]="model.fbFractureFormA3SubType"
+                    label="{{ 'pelvisMRT.bones.61A32NondisplacedFractureOs.value' | translate }}"
+                    [value]="fbFractureFormA3SubType.NonDisplacedFractureOsSacrum"
+                    name="fbFractureFormA3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100595"
+                    [(ngModel)]="model.fbFractureFormA3SubType"
+                    label="{{ 'pelvisMRT.bones.61A33DisplacedFractureOf.value' | translate }}"
+                    [value]="fbFractureFormA3SubType.DisplacedFractureOsSacrum"
+                    name="fbFractureFormA3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+              </div>
+              <div
+                *ngSwitchCase="fbClassificationType.PartialInterruptionPosteriorPelvicRing"
+                class="f-start f-vertical o-radio-list"
+              >
+                <div
+                  class="f-start f-vertical o-radio-list m-b-25"
+                  *ngIf="model.fbFractureFormBType === fbFractureFormBType.ImmersedLateralCompression"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100596"
+                    [(ngModel)]="model.fbFractureFormB1SubType"
+                    label="{{ 'pelvisMRT.bones.61B11LateralCompressionFracture.value' | translate }}"
+                    [value]="fbFractureFormB1SubType.LateralCompressionFracture"
+                    name="fbFractureFormB1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100597"
+                    [(ngModel)]="model.fbFractureFormB1SubType"
+                    label="{{ 'pelvisMRT.bones.61B12UnilateralFractureOfThe.value' | translate }}"
+                    [value]="fbFractureFormB1SubType.FractureOsSacrum"
+                    name="fbFractureFormB1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list m-b-30"
+                  *ngIf="model.fbFractureFormBType === fbFractureFormBType.OnesidedPartialInterruption"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100598"
+                    [(ngModel)]="model.fbFractureFormB2SubType"
+                    label="{{ 'pelvisMRT.bones.61B21LateralCompressionFracture.value' | translate }}"
+                    [value]="fbFractureFormB2SubType.InternalRotationLateralCompressionFractureOsSacrum"
+                    name="fbFractureFormB2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100599"
+                    [(ngModel)]="model.fbFractureFormB2SubType"
+                    label="{{ 'pelvisMRT.bones.61B22LateralCompressionFracture.value' | translate }}"
+                    [value]="fbFractureFormB2SubType.InternalRotationLateralCompressionFractureOsIlium"
+                    name="fbFractureFormB2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005100"
+                    [(ngModel)]="model.fbFractureFormB2SubType"
+                    label="{{ 'pelvisMRT.bones.61B23OpenBookExternalRotationally.value' | translate }}"
+                    [value]="fbFractureFormB2SubType.OpenBook"
+                    name="fbFractureFormB2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  class="f-start f-vertical o-radio-list"
+                  *ngIf="model.fbFractureFormBType === fbFractureFormBType.BilateralPartialInterruption"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_1005101"
+                    [(ngModel)]="model.fbFractureFormB3SubType"
+                    label="{{ 'pelvisMRT.bones.61B3161B21AndContralateral.value' | translate }}"
+                    [value]="fbFractureFormB3SubType.B21AndContralateralB22"
+                    name="fbFractureFormB3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005102"
+                    [(ngModel)]="model.fbFractureFormB3SubType"
+                    label="{{ 'pelvisMRT.bones.61B32Bilateral61B21.value' | translate }}"
+                    [value]="fbFractureFormB3SubType.B32BilateralB21"
+                    name="fbFractureFormB3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005103"
+                    [(ngModel)]="model.fbFractureFormB3SubType"
+                    label="{{ 'pelvisMRT.bones.61B33Bilaterals61B23.value' | translate }}"
+                    [value]="fbFractureFormB3SubType.B33BilateralsB23"
+                    name="fbFractureFormB3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+              </div>
+              <ng-container
+                [ngSwitch]="model.fbFractureFormCType"
+                *ngIf="fbClassificationType.CompleteInterruptionPosteriorPelvicRing"
+              >
+                <div
+                  *ngIf="model.fbFractureFormCType === fbFractureFormCType.UnilateralCompleteInterruption"
+                  class="f-start f-vertical o-radio-list text-break"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_1005104"
+                    [(ngModel)]="model.fbFractureFormC1SubType"
+                    label="{{ 'pelvisMRT.bones.61C11SymphysealDisruptionAnd.value' | translate }}"
+                    [value]="fbFractureFormC1SubType.SymphysealDisruptionAndFractureOsIlium"
+                    name="fbFractureFormC1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005105"
+                    [(ngModel)]="model.fbFractureFormC1SubType"
+                    label="{{ 'pelvisMRT.bones.61C12SymphysealDisruptionAnd.value' | translate }}"
+                    [value]="fbFractureFormC1SubType.SymphysealDisruptionAndIsJoint"
+                    name="fbFractureFormC1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005106"
+                    [(ngModel)]="model.fbFractureFormC1SubType"
+                    label="{{ 'pelvisMRT.bones.61C13SymphysealDisruptionAnd.value' | translate }}"
+                    [value]="fbFractureFormC1SubType.SymphysealDisruptionAndFractureOsSacrum"
+                    name="fbFractureFormC1SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  *ngIf="model.fbFractureFormCType === fbFractureFormCType.UnilateralCompleteAndContralateralPartialInterruption"
+                  class="f-start f-vertical o-radio-list"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_1005107"
+                    [(ngModel)]="model.fbFractureFormC2SubType"
+                    label="{{ 'pelvisMRT.bones.61C21SymphysealDisruptionUnilateral.value' | translate }}"
+                    [value]="fbFractureFormC2SubType.SymphysealDisruptionUnilateralOsIlium"
+                    name="fbFractureFormC2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005108"
+                    [(ngModel)]="model.fbFractureFormC2SubType"
+                    label="{{ 'pelvisMRT.bones.61C22SymphysealDisruptionUnilateralComplete.value' | translate }}"
+                    [value]="fbFractureFormC2SubType.SymphysealDisruptionOnesidedBlasting"
+                    name="fbFractureFormC2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005109"
+                    [(ngModel)]="model.fbFractureFormC2SubType"
+                    label="{{ 'pelvisMRT.bones.61C23SymphysealDisruptionUnilateral.value' | translate }}"
+                    [value]="fbFractureFormC2SubType.SymphysealDisruptionUnilateralOsSacrum"
+                    name="fbFractureFormC2SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <div
+                  *ngIf="model.fbFractureFormCType === fbFractureFormCType.BilateralCompleteInterruption"
+                  class="f-start f-vertical o-radio-list text-break"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_1005110"
+                    [(ngModel)]="model.fbFractureFormC3SubType"
+                    label="{{ 'pelvisMRT.bones.61C31ExtrasacralFractureBilateral.value' | translate }}"
+                    [value]="fbFractureFormC3SubType.ExtrasacralFractureBilateral"
+                    name="fbFractureFormC3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005111"
+                    labelStyleClass="text-break"
+                    [(ngModel)]="model.fbFractureFormC3SubType"
+                    label="{{ 'pelvisMRT.bones.61C32UnilateralFractureOs.value' | translate }}"
+                    [value]="fbFractureFormC3SubType.UnilateralFractureOsSacrum"
+                    name="fbFractureFormC3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_1005112"
+                    [(ngModel)]="model.fbFractureFormC3SubType"
+                    label="{{ 'pelvisMRT.bones.61C33BilateralOsSacrum.value' | translate }}"
+                    [value]="fbFractureFormC3SubType.FractureOsSacrum"
+                    name="fbFractureFormC3SubType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

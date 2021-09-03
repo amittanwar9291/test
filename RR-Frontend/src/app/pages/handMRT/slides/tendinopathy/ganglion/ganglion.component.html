@@ -1,0 +1,183 @@
+<div class="f-horizontal col-h-100 text-break ganglion">
+  <div class="c-col-1 c-pad-r c-sep">
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_060227">
+        {{ 'handMRT.tendinopathy.localization.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="han_m_060228"
+        label="{{ 'handMRT.tendinopathy.flexorTendons.value' | translate }}"
+        [value]="localizationTypeEnum.FlexorTendons"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        rrUnClickRadio
+        rrValidation="localizationType"
+        (onClick)="clearDropdowns()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_060229"
+        label="{{ 'handMRT.tendinopathy.extensorTendons.value' | translate }}"
+        [value]="localizationTypeEnum.ExtensorTendons"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        class="m-b-30"
+        rrUnClickRadio
+        rrValidation="localizationType"
+        (onClick)="clearDropdowns()"
+      ></p-radioButton>
+
+      <div
+        *ngIf="model.localizationType === localizationTypeEnum.FlexorTendons"
+      >
+        <p rr-id="han_m_060230" rrInfoIcon="han_m_06_01">
+          {{ 'handMRT.tendinopathy.detailsFlexorTendons.value' | translate }}
+        </p>
+        <p-dropdown
+          styleClass="o-width-100 ui-brown-box"
+          [options]="flexorTypes"
+          rr-id="han_m_060231"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          [(ngModel)]="model.localizationDetailsType"
+          name="flexorTypes"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+
+      <div
+        *ngIf="model.localizationType === localizationTypeEnum.ExtensorTendons"
+      >
+        <p rr-id="han_m_060232" rrInfoIcon="han_m_06_03">
+          {{ 'handMRT.tendinopathy.detailsExtensorTendons.value' | translate }}
+        </p>
+        <p-dropdown
+          styleClass="o-width-100 ui-brown-box"
+          [options]="extensorTypes"
+          rr-id="han_m_060233"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          [(ngModel)]="model.localizationDetailsType"
+          name="extensorTypes"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <h2 rr-id="han_m_060306" class="m-b-10">
+      {{ 'handMRT.tendinopathy.expansion.value' | translate }}
+    </h2>
+
+    <p rr-id="han_m_060307">
+      {{ 'handMRT.tendinopathy.size.value' | translate }}
+    </p>
+    <rr-number-input
+      [label]="'handMRT.tendinopathy.inMm.value' | translate"
+      inputRr="han_m_060308"
+      labelRr="han_m_060309"
+      name="size"
+      [(ngModel)]="model.size"
+      [config]="{labelWidth: 140, min: 1, max: 50}"
+      rrValidation="size"
+      (change)="clear2ndPlane()"
+    ></rr-number-input>
+
+    <div [rrDisable]="!model.size && model.size !== 0" class="m-t-10">
+      <p rr-id="han_m_060310">
+        {{ 'handMRT.tendinopathy.2ndPlane.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'handMRT.tendinopathy.inMm.value' | translate"
+        inputRr="han_m_060311"
+        labelRr="han_m_060312"
+        name="secondPlane"
+        [(ngModel)]="model.secondPlane"
+        [config]="{labelWidth: 140, min: 1, max: 50}"
+        (change)="clear3rdPlane()"
+      ></rr-number-input>
+    </div>
+
+    <div
+      [rrDisable]="!model.secondPlane && model.secondPlane !== 0"
+      class="m-t-10 m-b-30"
+    >
+      <p rr-id="han_m_060313">
+        {{ 'handMRT.tendinopathy.3rdPlane.value' | translate }}
+      </p>
+      <rr-number-input
+        [label]="'handMRT.tendinopathy.inMm.value' | translate"
+        inputRr="han_m_060314"
+        labelRr="han_m_060315"
+        name="thirdPlane"
+        [(ngModel)]="model.thirdPlane"
+        [config]="{labelWidth: 140, min: 1, max: 50}"
+      ></rr-number-input>
+    </div>
+
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_060316">
+        {{ 'handMRT.tendinopathy.tendonInvolvement.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="han_m_060317"
+        label="{{ 'handMRT.tendinopathy.intratendinous.value' | translate }}"
+        [value]="tendonInvolvementTypeEnum.Intratendinous"
+        [(ngModel)]="model.tendonInvolvementType"
+        name="tendonInvolvementType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_060318"
+        label="{{ 'handMRT.tendinopathy.peritendinous.value' | translate }}"
+        [value]="tendonInvolvementTypeEnum.Peritendinous"
+        [(ngModel)]="model.tendonInvolvementType"
+        name="tendonInvolvementType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <h2 rr-id="han_m_060433" class="m-b-15">
+      {{ 'handMRT.tendinopathy.signalCharacteristicsT1w.value' | translate }}
+    </h2>
+    <rr-slider-number-triple-input
+      name="signalTypeT1w"
+      rr-id="han_m_060435"
+      [(ngModel)]="model.signalTypeT1w"
+    >
+    </rr-slider-number-triple-input>
+
+    <h2 rr-id="han_m_060436" class="m-t-40 m-b-10">
+      {{ 'handMRT.tendinopathy.signalCharacteristicsT2w.value' | translate }}
+    </h2>
+    <rr-slider-number-triple-input
+      name="signalTypeT2w"
+      rr-id="han_m_060438"
+      [(ngModel)]="model.signalTypeT2w"
+    >
+    </rr-slider-number-triple-input>
+
+    <div class="o-radio-list m-t-25">
+      <h2 rr-id="han_m_060439">
+        {{ 'handMRT.tendinopathy.internalStructure.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="han_m_060440"
+        label="{{ 'handMRT.tendinopathy.homogeneous.value' | translate }}"
+        [value]="internalStructureTypeEnum.Homogeneous"
+        [(ngModel)]="model.internalStructureType"
+        name="internalStructureType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_060441"
+        label="{{ 'handMRT.tendinopathy.septated.value' | translate }}"
+        [value]="internalStructureTypeEnum.Septated"
+        [(ngModel)]="model.internalStructureType"
+        name="internalStructureType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep"></div>
+</div>

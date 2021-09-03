@@ -1,0 +1,452 @@
+<div class="f-vertical f-start main-container">
+  <h2 rr-id="ang_c_100205" class="c-pad-l main-header">
+    {{'angiographyCT.softTissue.finding.value' | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad o-list">
+      <div class="o-radio-list f-vertical">
+        <p-dropdown
+          rr-id="ang_c_100216"
+          name="findingTypeOptions"
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          [options]="findingTypeOptions"
+          [(ngModel)]="model.abdominalType"
+          rrDropdownClear
+          (onChange)="resetabdominalType()"
+          rrValidation="abdominalType"
+        >
+        </p-dropdown>
+        <p-checkbox
+          name="isSuspicionOf"
+          label="{{ 'angiographyCT.softTissue.suspicionOf.value' | translate }}"
+          rr-id="ang_c_100217"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="model.abdominalType === findingAbdominalTypeEnum.None"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="col-h-100 f-horizontal"
+      *ngIf="model.abdominalType !== findingAbdominalTypeEnum.Mass && model.abdominalType !== findingAbdominalTypeEnum.Fracture"
+    >
+      <div class="c-col-1 c-sep c-pad">
+        <div
+          *ngIf="model.abdominalType === findingAbdominalTypeEnum.Ascites"
+          class="o-radio-list"
+        >
+          <h2 rr-id="ang_c_100388">
+            {{'angiographyCT.softTissue.details.value' | translate }}
+          </h2>
+          <p-checkbox
+            name="isAscitesHemoperitoneum"
+            label="{{ 'angiographyCT.softTissue.hemoperitoneum.value' | translate }}"
+            rr-id="ang_c_100389"
+            binary="true"
+            [(ngModel)]="model.isAscitesHemoperitoneum"
+          ></p-checkbox>
+          <p-checkbox
+            name="isAscitesSignificant"
+            label="{{ 'angiographyCT.softTissue.significant.value' | translate }}"
+            rr-id="ang_c_100390"
+            binary="true"
+            [(ngModel)]="model.isAscitesSignificant"
+          ></p-checkbox>
+        </div>
+        <div
+          *ngIf="model.abdominalType === findingAbdominalTypeEnum.UrinaryRetention"
+          class="o-radio-list"
+        >
+          <h2 rr-id="ang_c_100391">
+            {{'angiographyCT.softTissue.side.value' | translate }}
+          </h2>
+          <p-checkbox
+            name="isRight"
+            label="{{ 'angiographyCT.softTissue.right.value' | translate }}"
+            rr-id="ang_c_100392"
+            binary="true"
+            [(ngModel)]="model.isRight"
+          ></p-checkbox>
+          <p-checkbox
+            name="isLeft"
+            label="{{ 'angiographyCT.softTissue.left.value' | translate }}"
+            rr-id="ang_c_1003132"
+            binary="true"
+            [(ngModel)]="model.isLeft"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+
+    <div
+      class="col-h-100 f-horizontal"
+      *ngIf="model.abdominalType === findingAbdominalTypeEnum.Mass"
+    >
+      <div class="col-h-100 f-vertical c-sep o-radio-list">
+        <h2 rr-id="ang_c_100374" class="c-pad-l">
+          {{'angiographyCT.softTissue.localization.value' | translate }}*
+        </h2>
+        <div class="col-h-100 f-horizontal ">
+          <div class="c-col-1 c-sep c-pad o-radio-list">
+            <p-radioButton
+              rr-id="ang_c_100375"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Liver"
+              label="{{'angiographyCT.softTissue.liver.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100376"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Spleen"
+              label="{{'angiographyCT.softTissue.spleen.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100377"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.AdrenalGlands"
+              label="{{'angiographyCT.softTissue.adrenalGlands.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100378"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Kidneys"
+              label="{{'angiographyCT.softTissue.kidneys.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100379"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Pancreas"
+              label="{{'angiographyCT.softTissue.pancreas.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100380"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Peritoneum"
+              label="{{'angiographyCT.softTissue.peritoneum.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100381"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Retroperitoneum"
+              label="{{'angiographyCT.softTissue.retroperitoneum.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100382"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.AbdominalWall"
+              label="{{'angiographyCT.softTissue.abdominalWall.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100383"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Spine"
+              label="{{'angiographyCT.softTissue.spine.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100384"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Uterus"
+              label="{{'angiographyCT.softTissue.uterus.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100385"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Ovaries"
+              label="{{'angiographyCT.softTissue.ovaries.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100386"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.Prostate"
+              label="{{'angiographyCT.softTissue.prostate.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100387"
+              name="abdominalLocalizationType"
+              [value]="abdominalLocalizationType.UrinaryBladder"
+              label="{{'angiographyCT.softTissue.urinaryBladder.value' | translate}}"
+              [(ngModel)]="model.abdominalLocalizationType"
+              rrValidation="abdominalLocalizationType"
+              (onClick)="removeErrorFromSideType()"
+            >
+            </p-radioButton>
+          </div>
+          <div class="c-col-1 c-sep c-pad">
+            <div
+              *ngIf="model.abdominalLocalizationType === abdominalLocalizationType.AdrenalGlands ||
+              model.abdominalLocalizationType === abdominalLocalizationType.Kidneys ||
+              model.abdominalLocalizationType === abdominalLocalizationType.Ovaries
+"
+              class="o-radio-list"
+            >
+              <h3 rr-id="ang_c_100454">
+                {{'angiographyCT.softTissue.side.value' | translate }}*
+              </h3>
+              <p-radioButton
+                rr-id="ang_c_100455"
+                name="sideType"
+                [value]="sideTypeEnum.Right"
+                label="{{'angiographyCT.softTissue.right.value' | translate}}"
+                [(ngModel)]="model.sideType"
+                rrValidation="sideType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="ang_c_100456"
+                name="sideType"
+                [value]="sideTypeEnum.Left"
+                label="{{'angiographyCT.softTissue.left.value' | translate}}"
+                [(ngModel)]="model.sideType"
+                rrValidation="sideType"
+              >
+              </p-radioButton>
+            </div>
+            <div
+              *ngIf="model.abdominalLocalizationType === abdominalLocalizationType.Retroperitoneum"
+              class="o-radio-list"
+            >
+              <h3 rr-id="ang_c_100457">
+                {{'angiographyCT.softTissue.side.value' | translate }}
+              </h3>
+              <p-radioButton
+                rr-id="ang_c_100458"
+                name="sideType"
+                [value]="sideTypeEnum.Right"
+                label="{{'angiographyCT.softTissue.right.value' | translate}}"
+                [(ngModel)]="model.sideType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="ang_c_100459"
+                name="sideType"
+                [value]="sideTypeEnum.Left"
+                label="{{'angiographyCT.softTissue.left.value' | translate}}"
+                [(ngModel)]="model.sideType"
+                rrUnClickRadio
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <div class="o-radio-list f-vertical">
+          <h2 rr-id="ang_c_100522">
+            {{'angiographyCT.softTissue.extent.value' | translate }}
+          </h2>
+          <h3 rr-id="ang_c_100523">
+            {{'angiographyCT.softTissue.maxDiameter.value' | translate }}
+          </h3>
+          <rr-number-input
+            name="maxDiameter"
+            inputRrId="ang_c_100524"
+            labelRrId="ang_c_100525"
+            [label]="'angiographyCT.softTissue.inMm.value' | translate"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+            [(ngModel)]="model.maxDiameter"
+            (announceModelChange)="resetInput()"
+          ></rr-number-input>
+        </div>
+        <div class="o-radio-list f-vertical" [rrDisable]="!model.maxDiameter">
+          <h3 rr-id="ang_c_100526">
+            {{'angiographyCT.softTissue.2ndPlane.value' | translate }}
+          </h3>
+          <rr-number-input
+            name="secondPlane"
+            inputRrId="ang_c_100527"
+            labelRrId="ang_c_100528"
+            [label]="'angiographyCT.softTissue.inMm.value' | translate"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+            [(ngModel)]="model.secondPlane"
+            (announceModelChange)="resetInput()"
+          ></rr-number-input>
+        </div>
+        <div class="o-radio-list f-vertical" [rrDisable]="!model.secondPlane">
+          <h3 rr-id="ang_c_100529">
+            {{'angiographyCT.softTissue.3rdPlane.value' | translate }}
+          </h3>
+          <rr-number-input
+            name="thirdPlane"
+            inputRrId="ang_c_100530"
+            labelRrId="ang_c_100531"
+            [label]="'angiographyCT.softTissue.inMm.value' | translate"
+            [config]="{min: 1, max: 999, placeholder: '---'}"
+            [(ngModel)]="model.thirdPlane"
+          ></rr-number-input>
+        </div>
+        <div class="o-radio-list f-vertical">
+          <h2 rr-id="ang_c_100518">
+            {{'angiographyCT.softTissue.dignity.value' | translate }}
+          </h2>
+          <p-dropdown
+            rr-id="ang_c_100519"
+            name="dignityType"
+            styleClass="ui-brown-box o-width-100"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="dignityTypeOptions"
+            [(ngModel)]="model.dignityType"
+            (onChange)="model.isAbscess = false"
+            rrDropdownClear
+          >
+          </p-dropdown>
+          <p-checkbox
+            name="isAbscess"
+            label="{{ 'angiographyCT.softTissue.abscess.value' | translate }}"
+            rr-id="ang_c_100520"
+            binary="true"
+            [(ngModel)]="model.isAbscess"
+            [rrDisable]="model.dignityType !== dignityTypeEnum.Inflammatory"
+            dis
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="col-h-100 f-horizontal"
+      *ngIf="model.abdominalType === findingAbdominalTypeEnum.Fracture"
+    >
+      <div class="col-h-100 f-vertical c-sep o-radio-list">
+        <h2 rr-id="ang_c_100393" class="c-pad-l">
+          {{'angiographyCT.softTissue.localization.value' | translate }}
+        </h2>
+        <div class="col-h-100 f-horizontal ">
+          <div class="c-col-1 c-sep c-pad o-radio-list">
+            <p-radioButton
+              rr-id="ang_c_100394"
+              name="fractureLocalizationType"
+              [value]="fractureLocalizationTypeEnum.Spine"
+              label="{{'angiographyCT.softTissue.spine.value' | translate}}"
+              [(ngModel)]="model.fractureLocalizationType"
+              rrUnClickRadio
+              (onClick)="resetLocalizationColumn()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100395"
+              name="fractureLocalizationType"
+              [value]="fractureLocalizationTypeEnum.Pelvis"
+              label="{{'angiographyCT.softTissue.pelvis.value' | translate}}"
+              [(ngModel)]="model.fractureLocalizationType"
+              rrUnClickRadio
+              (onClick)="resetLocalizationColumn()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_100396"
+              name="fractureLocalizationType"
+              [value]="fractureLocalizationTypeEnum.Ribs"
+              label="{{'angiographyCT.softTissue.ribs.value' | translate}}"
+              [(ngModel)]="model.fractureLocalizationType"
+              rrUnClickRadio
+              (onClick)="resetLocalizationColumn()"
+            >
+            </p-radioButton>
+          </div>
+          <div class="c-col-1 c-sep c-pad">
+            <div
+              *ngIf="model.fractureLocalizationType !== fractureLocalizationTypeEnum.None"
+              class="o-radio-list f-vertical"
+            >
+              <h2
+                rr-id="ang_c_100460"
+                rrValidation="spineLocations"
+                *ngIf="model.fractureLocalizationType === fractureLocalizationTypeEnum.Spine"
+              >
+                {{'angiographyCT.softTissue.localization.value' | translate }}*
+              </h2>
+              <rr-spine-simple
+                *ngIf="model.fractureLocalizationType === fractureLocalizationTypeEnum.Spine"
+                rr-id="ang_c_100461"
+                [selectionAccessibilityMode]="spineLocationDisablePartEnum.L1toL5"
+                [spineLocation]="model.spineLocations"
+                (click)="openLargeLocalizer('spine')"
+                isLocalizer="true"
+                rrValidation="spineLocations"
+              >
+              </rr-spine-simple>
+              <h2
+                rr-id="ang_c_100463"
+                rrValidation="ribLocations"
+                *ngIf="model.fractureLocalizationType === fractureLocalizationTypeEnum.Ribs"
+              >
+                {{'angiographyCT.softTissue.localization.value' | translate }}*
+              </h2>
+              <rr-ribs-simple
+                *ngIf="model.fractureLocalizationType === fractureLocalizationTypeEnum.Ribs"
+                isLocalizer="true"
+                name="ribLocations"
+                [model]="model.ribLocations"
+                rr-id="ang_c_100453"
+                (click)="openLargeLocalizer('rib')"
+                rrValidation="ribLocations"
+              ></rr-ribs-simple>
+              <p-checkbox
+                *ngIf="model.fractureLocalizationType !== fractureLocalizationTypeEnum.Pelvis"
+                name="isStatusPost"
+                [attr.rr-id]="model.fractureLocalizationType === fractureLocalizationTypeEnum.Ribs ? 'ang_c_100464': 'ang_c_100462'"
+                label="{{ 'angiographyCT.softTissue.statusPost.value' | translate }}"
+                binary="true"
+                [(ngModel)]="model.isStatusPost"
+                [rrDisable]="!disableCondition()"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+  </div>
+</div>

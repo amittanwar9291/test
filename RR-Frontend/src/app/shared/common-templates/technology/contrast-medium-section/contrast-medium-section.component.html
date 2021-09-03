@@ -1,0 +1,224 @@
+<div class="c-col-4 c-pad-l f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r">
+    <div [rrDisable]="model.cmReinforcedType !== simpleAnswerType.Yes">
+      <div class="m-b-25">
+        <h1 rr-id="uni_x_030201">
+          {{ 'shared-templates.technology.contrastMedium.value' | translate }}
+        </h1>
+        <img
+          rr-id="uni_x_030202"
+          src="assets/img/technology/rr-contrast.svg"
+          class="m-t-45"
+        />
+      </div>
+      <ng-container *ngIf="!isCTModule">
+        <div
+          class="f-vertical o-radio-list"
+          [ngClass]="isHandMRT ? 'm-b-22' : 'm-b-32'"
+        >
+          <h2 rr-id="uni_x_030213">
+            {{ 'shared-templates.technology.activeSubstance.value' | translate
+            }}
+          </h2>
+          <p-dropdown
+            rr-id="uni_x_030203"
+            styleClass="o-width-100 ui-brown-box"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="activeSubstanceOptions"
+            name="contrastMediumType"
+            [scrollHeight]="scrollHeight"
+            [(ngModel)]="model.contrastMediumType"
+            rrDropdownClear
+          >
+          </p-dropdown>
+        </div>
+        <div
+          class="f-vertical o-radio-list"
+          [ngClass]="isHandMRT ? 'm-b-22' : 'm-b-30'"
+        >
+          <h2 rr-id="uni_x_030214">
+            {{ 'shared-templates.technology.quantityOfContrastMedium.value' |
+            translate }}
+          </h2>
+          <rr-number-input
+            inputRrId="uni_x_030204"
+            labelRrId="uni_x_030205"
+            name="contrastQuantity"
+            [(ngModel)]="model.contrastQuantity"
+            label="{{ 'shared-templates.technology.inMl.value' | translate }}"
+            [config]="{placeholder: '--,-', min: 0.1, max: 50, step: 0.1 }"
+          ></rr-number-input>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="isCTModule">
+        <div
+          class="f-vertical o-radio-list"
+          [ngClass]="isHandMRT ? 'm-b-22' : 'm-b-32'"
+        >
+          <h2 rr-id="uni_xc_030201" class="text-break">
+            {{ 'shared-templates.technology.iodineConcentration.value' |
+            translate }}
+          </h2>
+          <p-dropdown
+            rr-id="uni_xc_030202"
+            styleClass="ui-brown-box o-width-100"
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            [options]="contrastMediumConcentration"
+            name="iodineConcentrationType"
+            [(ngModel)]="model.iodineConcentrationType"
+            rrDropdownClear
+            scrollHeight
+          >
+          </p-dropdown>
+        </div>
+        <div
+          class="f-vertical o-radio-list"
+          [ngClass]="isHandMRT ? 'm-b-22' : 'm-b-30'"
+        >
+          <h2 rr-id="uni_xc_030203">
+            {{ 'shared-templates.technology.contrastVolume.value' | translate }}
+          </h2>
+          <rr-number-input
+            inputRrId="uni_xc_030204"
+            labelRrId="uni_xc_030205"
+            name="contrastVolumeInMl"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.contrastVolumeInMl"
+            label="{{ 'shared-templates.technology.inMl2.value' | translate }}"
+            [config]="{ labelWidth: 185, placeholder: '---', min: 1, max: 500 }"
+          ></rr-number-input>
+        </div>
+      </ng-container>
+
+      <!-- Here the custom (module-specific) controls template is projected using the Angular's content projection pattern -->
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="c-col-2 c-sep c-pad f-vertical">
+    <div
+      class="m-b-18"
+      [rrDisable]="model.cmReinforcedType !== simpleAnswerType.Yes"
+    >
+      <p-checkbox
+        rr-id="uni_x_030301"
+        labelStyleClass="ui-header-label text-break"
+        label="{{ 'shared-templates.technology.cMSideEffect.value' | translate }}"
+        binary="true"
+        name="isCMSideEffect"
+        [(ngModel)]="model.isCMSideEffect"
+        (onChange)="clearSideEffectAndTherapySections()"
+      >
+      </p-checkbox>
+      <img
+        rr-id="uni_x_030302"
+        [rrDisable]="!model.isCMSideEffect"
+        class="m-t-45"
+        src="assets/img/technology/rr-sweaty-man.svg"
+      />
+    </div>
+    <div class="c-col-2 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical">
+        <rr-side-effects-finding-column
+          [handler]="sideEffectsHandlerRef"
+          [disabled]="!model.isCMSideEffect"
+        ></rr-side-effects-finding-column>
+      </div>
+      <div class="c-col-1 c-pad-l o-radio-list">
+        <rr-side-effect
+          *ngIf="!isSideEffectsColumnDisabled()"
+          class="col-h-100"
+          [model]="sideEffectsHandlerRef.currentItem"
+          [itemIndex]="sideEffectsHandlerRef.currentItemIndex"
+        ></rr-side-effect>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l f-vertical" [rrDisable]="!model.isCMSideEffect">
+    <div class="m-b-16">
+      <h1 rr-id="uni_x_030501">
+        {{ 'shared-templates.technology.therapy.value' | translate }}
+      </h1>
+      <img
+        rr-id="uni_x_030502"
+        src="assets/img/technology/rr-therapie.svg"
+        class="m-t-38"
+      />
+    </div>
+    <div class="f-vertical o-radio-list m-b-50">
+      <h2 rr-id="uni_x_030513">
+        {{ 'shared-templates.technology.medication.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="uni_x_030514"
+        label="{{ 'shared-templates.technology.h1BlockerIv.value' | translate }}"
+        binary="true"
+        name="isH1BlockerIV"
+        [(ngModel)]="model.isH1BlockerIV"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030515"
+        label="{{ 'shared-templates.technology.h2BlockerIv.value' | translate }}"
+        binary="true"
+        name="isH2BlockerIV"
+        [(ngModel)]="model.isH2BlockerIV"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030516"
+        label="{{ 'shared-templates.technology.cortisoneIV.value' | translate }}"
+        binary="true"
+        name="isCortisoneIV"
+        [(ngModel)]="model.isCortisoneIV"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030517"
+        label="{{ 'shared-templates.technology.o2Administration.value' | translate }}"
+        binary="true"
+        name="isO2Administration"
+        [(ngModel)]="model.isO2Administration"
+        rrSafeHtmlTags
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030518"
+        label="{{ 'shared-templates.technology.subcutaneousEpinephrine.value' | translate }}"
+        binary="true"
+        name="isSubcutaneousEpinephrine"
+        [(ngModel)]="model.isSubcutaneousEpinephrine"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="uni_x_030519"
+        label="{{ 'shared-templates.technology.notFurtherSpecified.value' | translate }}"
+        binary="true"
+        name="isNotFurtherSpecified"
+        [(ngModel)]="model.isNotFurtherSpecified"
+      >
+      </p-checkbox>
+    </div>
+    <div class="m-b-14">
+      <img
+        rr-id="uni_x_030505"
+        src="assets/img/technology/rr-barcode.svg"
+        class="technology__image barcode__image"
+      />
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="uni_x_030506">
+        {{ 'shared-templates.technology.barcodeCMCharge.value' | translate }}
+      </h2>
+      <input
+        rr-id="uni_x_030507"
+        class="ui-brown-box barcode-input"
+        name="barcodeCMCharge"
+        type="text"
+        maxlength="25"
+        placeholder="{{ 'shared-templates.technology.barcodeCmChargePlaceholder.value' | translate }}"
+        [(ngModel)]="model.barcodeCMCharge"
+      />
+    </div>
+  </div>
+</div>

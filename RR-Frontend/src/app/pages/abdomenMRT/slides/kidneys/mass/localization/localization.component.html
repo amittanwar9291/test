@@ -1,0 +1,272 @@
+<div class="f-horizontal m-t-14 m-b-13">
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <div
+      class="f-vertical o-radio-list m-b-10"
+      [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+    >
+      <h2 rr-id="abd_m_070229" class="m-b-3">
+        {{ 'abdomenMRT.kidneys.differentialDiagnosis1.value' | translate }}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_070230"
+        [diagnosisNumber]="1"
+        [options]="diffDiagnosisOptions"
+        [(ngModel)]="model.kidneysDifferentialDiagnosisType"
+        name="kidneysDifferentialDiagnosisType"
+        hasPresets="true"
+        [parentViewModel]="model"
+        (selectionChanged)="resetDifferentialDiagnosisDependantModel()"
+        group="true"
+        isActiveOnIKnow="true"
+        rrValidation="kidneysDifferentialDiagnosisType"
+      >
+      </rr-differential-diagnosis-dropdown>
+    </div>
+    <div
+      class="f-vertical o-radio-list m-b-11"
+      [rrDisable]="model.descriptionType === descriptionType.IDescribe || model.kidneysDifferentialDiagnosisType === differentialDiagnosistype.None"
+    >
+      <p-checkbox
+        rr-id="abd_m_070231"
+        [(ngModel)]="model.isHistologyKnown"
+        name="isHistologyKnown"
+        label="{{ 'abdomenMRT.kidneys.histologyKnown.value' | translate }}"
+        binary="true"
+        rrContentReset="isHistologyKnown-block"
+      >
+      </p-checkbox>
+      <div
+        id="isHistologyKnown-block"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isHistologyKnown"
+      >
+        <p-radioButton
+          rr-id="abd_m_070232"
+          [(ngModel)]="model.histologyKnownType"
+          name="histologyKnownType"
+          label="{{ 'abdomenMRT.kidneys.benign.value' | translate }}"
+          [value]="histologyKnownType.Benign"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070233"
+          [(ngModel)]="model.histologyKnownType"
+          name="histologyKnownType"
+          label="{{ 'abdomenMRT.kidneys.malignant.value' | translate }}"
+          [value]="histologyKnownType.Malignant"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <h2 rr-id="abd_m_070319" class="m-b-10">
+      {{ 'abdomenMRT.kidneys.localization.value' | translate }}
+    </h2>
+    <div class="f-vertical o-radio-list m-b-30">
+      <h3 rr-id="abd_m_070320">
+        {{ 'abdomenMRT.kidneys.side.value' | translate }}*
+      </h3>
+      <p-radioButton
+        rr-id="abd_m_070321"
+        [(ngModel)]="model.massSideType"
+        name="massSideType"
+        label="{{ 'abdomenMRT.kidneys.right.value' | translate }}"
+        [value]="sideType.Right"
+        rrValidation="massSideType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070322"
+        [(ngModel)]="model.massSideType"
+        name="massSideType"
+        label="{{ 'abdomenMRT.kidneys.left.value' | translate }}"
+        [value]="sideType.Left"
+        rrValidation="massSideType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list m-b-31">
+      <h3 rr-id="abd_m_070323">
+        {{ 'abdomenMRT.kidneys.localization.value' | translate }}
+      </h3>
+      <p-radioButton
+        rr-id="abd_m_070324"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        label="{{ 'abdomenMRT.kidneys.upperPoleOfTheKidney.value' | translate }}"
+        [value]="localizationType.UpperPoleOfTheKidney"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070325"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        label="{{ 'abdomenMRT.kidneys.cranialThird.value' | translate }}"
+        [value]="localizationType.CranialThird"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070326"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        label="{{ 'abdomenMRT.kidneys.middleThird.value' | translate }}"
+        [value]="localizationType.MiddleThird"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070327"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        label="{{ 'abdomenMRT.kidneys.lowerThird.value' | translate }}"
+        [value]="localizationType.LowerThird"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070328"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        label="{{ 'abdomenMRT.kidneys.lowerPoleOfTheKidney.value' | translate }}"
+        [value]="localizationType.LowerPoleOfTheKidney"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070329"
+        [(ngModel)]="model.localizationType"
+        name="localizationType"
+        label="{{ 'abdomenMRT.kidneys.renalHilus.value' | translate }}"
+        [value]="localizationType.RenalHilus"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h3 rr-id="abd_m_070330">
+        {{ 'abdomenMRT.kidneys.details.value' | translate }}
+      </h3>
+      <p-checkbox
+        rr-id="abd_m_070331"
+        [(ngModel)]="model.isCompletelyIntrarenal"
+        name="isCompletelyIntrarenal"
+        label="{{ 'abdomenMRT.kidneys.completelyIntrarenal.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <div class="o-radio-list">
+      <rr-expansion-inputs-group
+        [model]="model"
+        [config]="expansionGroupConfig"
+      >
+      </rr-expansion-inputs-group>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_070442">
+        {{'abdomenMRT.kidneys.margin.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070443"
+        rrUnClickRadio
+        name="marginType"
+        [value]="marginType.Circumscribed"
+        label="{{'abdomenMRT.kidneys.circumscribed.value' | translate}}"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070444"
+        rrUnClickRadio
+        name="marginType"
+        [value]="marginType.NonCircumscribed"
+        label="{{'abdomenMRT.kidneys.noncircumscribed.value' | translate}}"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_070439">
+        {{'abdomenMRT.kidneys.homogeneity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070440"
+        rrUnClickRadio
+        name="contrastEnhancementQuantitativeStrongType"
+        [value]="homogeneityType.Homogeneous"
+        label="{{'abdomenMRT.kidneys.homogeneous.value' | translate}}"
+        [(ngModel)]="model.contrastEnhancementQuantitativeStrongType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070441"
+        rrUnClickRadio
+        name="contrastEnhancementQuantitativeStrongType"
+        [value]="homogeneityType.Heterogeneous"
+        label="{{'abdomenMRT.kidneys.heterogeneous.value' | translate}}"
+        [(ngModel)]="model.contrastEnhancementQuantitativeStrongType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_070591">
+        {{'abdomenMRT.kidneys.form.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070592"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Round"
+        label="{{'abdomenMRT.kidneys.round.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070593"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Oval"
+        label="{{'abdomenMRT.kidneys.oval.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070594"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Irregular"
+        label="{{'abdomenMRT.kidneys.irregular.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_070529">
+        {{'abdomenMRT.liver.t1wSignal.value' | translate}}
+      </h2>
+      <rr-signal-slider
+        name="t1wSignal"
+        rr-id="abd_m_070530"
+        [(ngModel)]="model.t1wSignal"
+        class="m-b-35"
+      >
+      </rr-signal-slider>
+      <h2 rr-id="abd_m_070531">
+        {{'abdomenMRT.liver.t2wSignal.value' | translate}}
+      </h2>
+      <rr-signal-slider
+        name="t2wSignal"
+        rr-id="abd_m_070532"
+        [(ngModel)]="model.t2wSignal"
+      >
+      </rr-signal-slider>
+    </div>
+  </div>
+</div>

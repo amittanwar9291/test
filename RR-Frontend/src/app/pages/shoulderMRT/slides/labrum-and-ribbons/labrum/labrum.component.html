@@ -1,0 +1,304 @@
+<div class="c-col-4 f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="sho_m_060202" rrValidation="labrumLocation">
+      {{'shoulderMRT.labrumAndRibbons.extensionLabralPathology.value' |
+      translate}}
+    </h2>
+    <p rr-id="sho_m_060203" class="m-b-23 font-15 text-break">
+      {{'shoulderMRT.labrumAndRibbons.pleaseSelectAtLeastOneSegment.value' |
+      translate}}*
+    </p>
+    <rr-localization-labrum-pathology
+      name="labrumLocation"
+      rr-id="sho_m_060204"
+      [(ngModel)]="model.labrumLocation"
+      (announceSelection)="onLocationChange()"
+      rrValidation="labrumLocation"
+      isLocalizer="true"
+    >
+    </rr-localization-labrum-pathology>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical o-radio-list">
+    <div
+      class="o-radio-list m-b-32"
+      [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+    >
+      <h2
+        rr-id="sho_m_060301"
+        rrInfoIcon="sho_m_060303"
+        infoIconPdfLandscape="true"
+      >
+        {{'shoulderMRT.labrumAndRibbons.differentialDiagnosis1.value' |
+        translate}}*
+      </h2>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        isActiveOnIKnow="true"
+        [options]="getDiagnosisListOptions()"
+        [(ngModel)]="model.extensionLabrumPathologyDiagnosis1"
+        name="extensionLabrumPathologyDiagnosis1"
+        rrId="sho_m_060302"
+        [parentViewModel]="model"
+        rrValidation="extensionLabrumPathologyDiagnosis1"
+        [presetHttpParams]="getDiagnosisPresetParams()"
+        (selectionChanged)="onSelectionChanged()"
+      >
+      </rr-differential-diagnosis-dropdown>
+    </div>
+    <rr-reference-picture
+      [rrDisable]="localizerHasAllFalseValues"
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+      class="m-t-0"
+    ></rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="sho_m_060401" class="m-b-30">
+      {{'shoulderMRT.labrumAndRibbons.labrumMorphology.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="sho_m_060402"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.Absent"
+      label="{{'shoulderMRT.labrumAndRibbons.absent.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+      [rrDisable]="isNotAnterosuperiorChecked()"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060403"
+      rrInfoIcon="sho_m_060404"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.Foramen"
+      label="{{'shoulderMRT.labrumAndRibbons.foramen.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+      [rrDisable]="isNotAnterosuperiorChecked()"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060405"
+      rrInfoIcon="sho_m_060406"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.Recessus"
+      label="{{'shoulderMRT.labrumAndRibbons.recess.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060407"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.Fraying"
+      label="{{'shoulderMRT.labrumAndRibbons.fraying.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060408"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.Detachment"
+      label="{{'shoulderMRT.labrumAndRibbons.outline.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060409"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.DetachmentWithFlap"
+      label="{{'shoulderMRT.labrumAndRibbons.avulsionWithFlap.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060410"
+      name="labrumMorphologyResultType"
+      [value]="labrumMorphologyResultType.DetachmentWithRotation"
+      label="{{'shoulderMRT.labrumAndRibbons.avulsionWithRotation.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrContentReset="tearInTheBasket-block"
+      rrValidation="labrumMorphologyResultType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060411"
+      name="labrumMorphologyResultType"
+      class="m-b-6"
+      [value]="labrumMorphologyResultType.BucketHandleTear"
+      label="{{'shoulderMRT.labrumAndRibbons.bucketHandleTear.value' | translate}}"
+      [(ngModel)]="model.labrumMorphologyResultType"
+      rrValidation="labrumMorphologyResultType"
+    >
+    </p-radioButton>
+    <div
+      class="f-start o-radio-list nested-content m-b-7"
+      [rrDisable]="model.labrumMorphologyResultType !== labrumMorphologyResultType.BucketHandleTear"
+      id="tearInTheBasket-block"
+    >
+      <p-checkbox
+        rr-id="sho_m_060412"
+        name="isExtensionToLongBicepsTendon"
+        class="m-b-5"
+        label="{{'shoulderMRT.labrumAndRibbons.extensionToLongBiceps.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isExtensionToLongBicepsTendon"
+        rrContentReset="isExtensionToLongBicepsTendon-block"
+        [rrDisable]="!model.labrumLocation.superior"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isExtensionToLongBicepsTendon"
+        id="isExtensionToLongBicepsTendon-block"
+      >
+        <p-checkbox
+          rr-id="sho_m_060433"
+          name="longitudinalSplittingDislocationInto"
+          class="text-break"
+          label="{{'shoulderMRT.labrumAndRibbons.intraarticularDislocation.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDislocationIntoJointSpace"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="sho_m_060434"
+          name="longitudinalSplitting"
+          label="{{'shoulderMRT.labrumAndRibbons.longitudinalSplitting.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLongitudinalSplitting"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <p-checkbox
+      rr-id="sho_m_060413"
+      rrInfoIcon="sho_m_060414"
+      name="isLabrumCyst"
+      label="{{'shoulderMRT.labrumAndRibbons.labralCyst.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isLabrumCyst"
+      rrContentReset="isLabrumCyst-block"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      [rrDisable]="!model.isLabrumCyst"
+      id="isLabrumCyst-block"
+    >
+      <rr-number-input
+        inputRrId="sho_m_060415"
+        labelRrId="sho_m_060416"
+        labelStyleClass="text-break"
+        name="diameterInMm"
+        label="{{'shoulderMRT.labrumAndRibbons.diameterInMm.value' | translate}}"
+        [(ngModel)]="model.diameterInMm"
+        [config]="{min: 1, max:100}"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="sho_m_060501" class="m-t-3 m-b-30">
+      {{'shoulderMRT.labrumAndRibbons.glenoidInvolved.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="sho_m_060503"
+      rrUnClickRadio
+      name="detailsType"
+      class="text-break"
+      [value]="detailsType.TearingShearingOfCartilage"
+      label="{{'shoulderMRT.labrumAndRibbons.tearingShearingOfCartilage.value' | translate}}"
+      [(ngModel)]="model.detailsType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060504"
+      rrUnClickRadio
+      name="detailsType"
+      [value]="detailsType.PeriostalDetachment"
+      label="{{'shoulderMRT.labrumAndRibbons.periostalDetachment.value' | translate}}"
+      [(ngModel)]="model.detailsType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="sho_m_060505"
+      rrUnClickRadio
+      class="m-b-46"
+      name="detailsType"
+      [value]="detailsType.BonyAvulsionWithCapsularLigamentLesion"
+      label="{{'shoulderMRT.labrumAndRibbons.bonyAvulsionWithCapsularLigamentLesion.value' | translate}}"
+      [(ngModel)]="model.detailsType"
+    >
+    </p-radioButton>
+    <div
+      class="o-radio-list m-b-19"
+      [rrDisable]="model.descriptionType === descriptionType.IKnow"
+    >
+      <h2
+        rr-id="sho_m_060506"
+        rrInfoIcon="sho_m_060507"
+        infoIconPdfLandscape="true"
+        class="m-b-30"
+      >
+        {{'shoulderMRT.labrumAndRibbons.differentialDiagnosis.value' |
+        translate}}
+      </h2>
+      <p rr-id="sho_m_060508" class="m-b-3">
+        {{'shoulderMRT.labrumAndRibbons.differentialDiagnosis1.value' |
+        translate}}*
+      </p>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="getDiagnosisListOptions()"
+        [(ngModel)]="model.diagnosis1"
+        name="diagnosis1"
+        rrId="sho_m_060509"
+        [parentViewModel]="model"
+        (selectionChanged)="clearSubordinate()"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div
+      class="o-radio-list"
+      [rrDisable]="model.diagnosis1 === 'None' && model.extensionLabrumPathologyDiagnosis1 === 'None'"
+    >
+      <p rr-id="sho_m_060510" class="m-b-3">
+        {{'shoulderMRT.labrumAndRibbons.differentialDiagnosis2.value' |
+        translate}}
+      </p>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="getDiagnosisListOptions()"
+        [(ngModel)]="model.diagnosis2"
+        name="diagnosis2"
+        rrId="sho_m_060511"
+        [parentViewModel]="model"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="sho_m_060512"
+        name="isSubordinate"
+        label="{{'shoulderMRT.labrumAndRibbons.subordinated.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSubordinate"
+        [rrDisable]="model.diagnosis2 === 'None'"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

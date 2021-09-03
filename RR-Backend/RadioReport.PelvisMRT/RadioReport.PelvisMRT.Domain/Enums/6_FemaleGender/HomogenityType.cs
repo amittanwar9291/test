@@ -1,0 +1,78 @@
+using RadioReport.Common.Logic.Attributes;
+using RadioReport.PelvisMRT.Domain.Models;
+
+namespace RadioReport.PelvisMRT.Domain.Enums.FemaleGender
+{
+    public enum HomogenityType : byte
+	{
+		None = 0,
+
+		[RadioReportId("pel_m_060310", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.OvaryMass))]
+        [RadioReportId("pel_m_060216", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.OvaryMass))]
+        [RadioReportId("pel_m_060334", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.OvaryInflammation))]
+        [RadioReportId("pel_m_060442", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.OvaryInflammation))]
+        [RadioReportId("pel_m_060462", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeMass))]
+        [RadioReportId("pel_m_0603429", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeMass))]
+        [RadioReportId("pel_m_060442", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeInflammation))]
+        [RadioReportId("pel_m_0605225", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeInflammation))]
+        [RadioReportId("pel_m_060310", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriMass))]
+        [RadioReportId("pel_m_0604436", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriMass))]
+        [RadioReportId("pel_m_0603429", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriMass))]
+        [RadioReportId("pel_m_0602440", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriInflammation))]
+        [RadioReportId("pel_m_060442", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriInflammation))]
+        [RadioReportId("pel_m_0603143", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriInflammation))]
+        [RadioReportId("pel_m_060310", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_0603156", InstanceName = nameof(FemaleGenderFinding.IntactCervicalStromaRingHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_0604436", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_060216", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_0602440", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriInflammation))]
+        [RadioReportId("pel_m_060442", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriInflammation))]
+        [RadioReportId("pel_m_0603143", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriInflammation))]
+        [RadioReportId("pel_m_0604199", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VaginaMass))]
+        [RadioReportId("pel_m_0605257", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VaginaMass))]
+        [RadioReportId("pel_m_0603429", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.VaginaMass))]
+        [RadioReportId("pel_m_0604199", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VulvaMass))]
+        [RadioReportId("pel_m_0605257", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VulvaMass))]
+        [RadioReportId("pel_m_0603429", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.VulvaMass))]
+        [RadioReportId("pel_m_060310", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VulvaInflammation))]
+        [RadioReportId("pel_m_0605271", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.VulvaInflammation))]
+        [RadioReportId("pel_m_060310", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.Endometriosis))]
+        [RadioReportId("pel_m_0603488", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.Endometriosis))]
+        [RadioReportId("pel_m_0603257", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.Endometriosis))]
+        Homogeneous = 1,
+
+		[RadioReportId("pel_m_060311", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.OvaryMass))]
+        [RadioReportId("pel_m_060217", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.OvaryMass))]
+        [RadioReportId("pel_m_060335", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.OvaryInflammation))]
+        [RadioReportId("pel_m_060443", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.OvaryInflammation))]
+        [RadioReportId("pel_m_060463", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeMass))]
+        [RadioReportId("pel_m_0603430", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeMass))]
+        [RadioReportId("pel_m_060443", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeInflammation))]
+        [RadioReportId("pel_m_0605226", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.UterineTubeInflammation))]
+        [RadioReportId("pel_m_060311", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriMass))]
+        [RadioReportId("pel_m_0604437", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriMass))]
+        [RadioReportId("pel_m_0603430", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriMass))]
+        [RadioReportId("pel_m_0602441", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriInflammation))]
+        [RadioReportId("pel_m_060443", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriInflammation))]
+        [RadioReportId("pel_m_0603144", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.CorpusUteriInflammation))]
+        [RadioReportId("pel_m_060311", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_0603157", InstanceName = nameof(FemaleGenderFinding.IntactCervicalStromaRingHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_0604437", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_060217", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriMass))]
+        [RadioReportId("pel_m_0602441", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriInflammation))]
+        [RadioReportId("pel_m_060443", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriInflammation))]
+        [RadioReportId("pel_m_0603144", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType2), CustomConditionName = nameof(FemaleGenderFindingType.CervixUteriInflammation))]
+        [RadioReportId("pel_m_0604200", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VaginaMass))]
+        [RadioReportId("pel_m_0605258", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VaginaMass))]
+        [RadioReportId("pel_m_0603430", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.VaginaMass))]
+        [RadioReportId("pel_m_0604200", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VulvaMass))]
+        [RadioReportId("pel_m_0605258", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VulvaMass))]
+        [RadioReportId("pel_m_0603430", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.VulvaMass))]
+        [RadioReportId("pel_m_060311", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.VulvaInflammation))]
+        [RadioReportId("pel_m_0605272", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.VulvaInflammation))]
+        [RadioReportId("pel_m_060311", InstanceName = nameof(FemaleGenderFinding.HomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.Endometriosis))]
+        [RadioReportId("pel_m_0603489", InstanceName = nameof(FemaleGenderFinding.DetailsT2wSignalHomogenityType), CustomConditionName = nameof(FemaleGenderFindingType.Endometriosis))]
+        [RadioReportId("pel_m_0603258", InstanceName = nameof(FemaleGenderFinding.ContrastEnhancementHomogenityType1), CustomConditionName = nameof(FemaleGenderFindingType.Endometriosis))]
+        Heterogeneous = 2
+	}
+}

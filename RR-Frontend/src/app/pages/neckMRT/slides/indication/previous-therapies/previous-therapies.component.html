@@ -1,0 +1,233 @@
+<ng-container [ngSwitch]="model.previousTherapyType">
+  <!-- Tonsillectomy, Laryngectomy, Laryngostoma, TracheostomyTube -->
+  <div
+    *ngIf="isTonsillectomyOrLaryngectomyOrLaryngostomaOrTracheostomyTube"
+    class="o-radio-list"
+  >
+    <h2 rr-id="nec_m_020401">{{header | translate}}</h2>
+    <rr-month-year-input
+      [label]="'neckMRT.indication.date.value' | translate"
+      yearRrId="nec_m_020404"
+      monthRrId="nec_m_020403"
+      labelRrId="nec_m_020402"
+      nested="true"
+      name="dateOfPreviousTherapy"
+      class="o-width-100"
+      [(ngModel)]="model.dateOfPreviousTherapy"
+    >
+    </rr-month-year-input>
+  </div>
+  <!-- Thryoidectomy -->
+  <div *ngSwitchCase="previousTherapyType.Thryoidectomy" class="o-radio-list">
+    <h2 rr-id="nec_m_020405">{{header | translate}}</h2>
+    <p-radioButton
+      rr-id="nec_m_020406"
+      rrUnClickRadio
+      name="thryoidectomyType"
+      [value]="thryoidectomyType.CompleteThyroidectomy"
+      label="{{'neckMRT.indication.completeThyroidectomy.value' | translate}}"
+      [(ngModel)]="model.thryoidectomyType"
+      rrContentReset="thryoidectomyHemithyroidectomyBlock"
+      (onClick)="removeSideTypeValidationError()"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_020407"
+      rrUnClickRadio
+      name="thryoidectomyType"
+      [value]="thryoidectomyType.SubtotalThyroidectomy"
+      label="{{'neckMRT.indication.subtotalThyroidectomy.value' | translate}}"
+      [(ngModel)]="model.thryoidectomyType"
+      rrContentReset="thryoidectomyHemithyroidectomyBlock"
+      (onClick)="removeSideTypeValidationError()"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_020408"
+      rrUnClickRadio
+      name="thryoidectomyType"
+      [value]="thryoidectomyType.Hemithyroidectomy"
+      label="{{'neckMRT.indication.hemithyroidectomy.value' | translate}}"
+      [(ngModel)]="model.thryoidectomyType"
+      rrContentReset="thryoidectomyHemithyroidectomyBlock"
+      (onClick)="removeSideTypeValidationError()"
+    >
+    </p-radioButton>
+    <div
+      class="f-start o-radio-list nested-content"
+      id="thryoidectomyHemithyroidectomyBlock"
+      [rrDisable]="model.thryoidectomyType !== thryoidectomyType.Hemithyroidectomy"
+    >
+      <p rr-id="nec_m_020409">
+        {{'neckMRT.indication.side.value' | translate}}*
+      </p>
+      <p-radioButton
+        rr-id="nec_m_020410"
+        name="sideType"
+        [value]="sideType.Right"
+        label="{{'neckMRT.indication.right.value' | translate}}"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+        inSecondFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020411"
+        name="sideType"
+        [value]="sideType.Left"
+        label="{{'neckMRT.indication.left.value' | translate}}"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+        inSecondFinding="true"
+      >
+      </p-radioButton>
+    </div>
+    <p-radioButton
+      rr-id="nec_m_020412"
+      rrUnClickRadio
+      name="thryoidectomyType"
+      [value]="thryoidectomyType.RadioiodineTherapy"
+      label="{{'neckMRT.indication.radioiodineTherapy.value' | translate}}"
+      [(ngModel)]="model.thryoidectomyType"
+      rrContentReset="thryoidectomyHemithyroidectomyBlock"
+      (onClick)="removeSideTypeValidationError()"
+      class="m-b-23"
+    >
+    </p-radioButton>
+    <rr-month-year-input
+      [label]="'neckMRT.indication.date.value' | translate"
+      yearRrId="nec_m_020415"
+      monthRrId="nec_m_020414"
+      labelRrId="nec_m_020413"
+      nested="true"
+      name="dateOfPreviousTherapy"
+      class="o-width-100"
+      [(ngModel)]="model.dateOfPreviousTherapy"
+    >
+    </rr-month-year-input>
+  </div>
+  <!-- Neck Dissection -->
+  <div *ngSwitchCase="previousTherapyType.NeckDissection" class="o-radio-list">
+    <h2 rr-id="nec_m_020416">{{header | translate}}</h2>
+    <p rr-id="nec_m_020417" class="m-b-6">
+      {{'neckMRT.indication.side.value' | translate}}*
+    </p>
+    <p-checkbox
+      rr-id="nec_m_020418"
+      name="isNeckDissectionRight"
+      label="{{'neckMRT.indication.right.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isNeckDissectionRight"
+      rrContentReset="neckDissectionRightBlock"
+      rrValidation="isNeckDissectionRight isNeckDissectionLeft"
+      inSecondFinding="true"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content"
+      id="neckDissectionRightBlock"
+      [rrDisable]="!model.isNeckDissectionRight"
+    >
+      <p-radioButton
+        rr-id="nec_m_020419"
+        rrUnClickRadio
+        name="neckDissectionTypeRight"
+        [value]="neckDissectionType.Radical"
+        label="{{'neckMRT.indication.radical.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeRight"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020420"
+        rrUnClickRadio
+        name="neckDissectionTypeRight"
+        [value]="neckDissectionType.Functional"
+        label="{{'neckMRT.indication.functional.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeRight"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020421"
+        rrUnClickRadio
+        name="neckDissectionTypeRight"
+        [value]="neckDissectionType.Suprahyoidal"
+        label="{{'neckMRT.indication.suprahyoidal.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeRight"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020422"
+        rrUnClickRadio
+        name="neckDissectionTypeRight"
+        [value]="neckDissectionType.Selective"
+        label="{{'neckMRT.indication.selective.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeRight"
+      >
+      </p-radioButton>
+    </div>
+    <p-checkbox
+      rr-id="nec_m_020423"
+      name="isNeckDissectionLeft"
+      label="{{'neckMRT.indication.left.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isNeckDissectionLeft"
+      rrContentReset="neckDissectionLeftBlock"
+      rrValidation="isNeckDissectionRight isNeckDissectionLeft"
+      inSecondFinding="true"
+    >
+    </p-checkbox>
+    <div
+      class="f-start o-radio-list nested-content m-b-27"
+      id="neckDissectionLeftBlock"
+      [rrDisable]="!model.isNeckDissectionLeft"
+    >
+      <p-radioButton
+        rr-id="nec_m_020424"
+        rrUnClickRadio
+        name="neckDissectionTypeLeft"
+        [value]="neckDissectionType.Radical"
+        label="{{'neckMRT.indication.radical.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeLeft"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020425"
+        rrUnClickRadio
+        name="neckDissectionTypeLeft"
+        [value]="neckDissectionType.Functional"
+        label="{{'neckMRT.indication.functional.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeLeft"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020426"
+        rrUnClickRadio
+        name="neckDissectionTypeLeft"
+        [value]="neckDissectionType.Suprahyoidal"
+        label="{{'neckMRT.indication.suprahyoidal.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeLeft"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_020427"
+        rrUnClickRadio
+        name="neckDissectionTypeLeft"
+        [value]="neckDissectionType.Selective"
+        label="{{'neckMRT.indication.selective.value' | translate}}"
+        [(ngModel)]="model.neckDissectionTypeLeft"
+      >
+      </p-radioButton>
+    </div>
+    <rr-month-year-input
+      [label]="'neckMRT.indication.date.value' | translate"
+      yearRrId="nec_m_020430"
+      monthRrId="nec_m_020429"
+      labelRrId="nec_m_020428"
+      nested="true"
+      name="dateOfPreviousTherapy"
+      class="o-width-100"
+      [(ngModel)]="model.dateOfPreviousTherapy"
+    >
+    </rr-month-year-input>
+  </div>
+</ng-container>

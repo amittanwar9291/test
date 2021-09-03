@@ -1,0 +1,168 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="f-horizontal f-center m-t-79 m-l-18"
+    *ngIf="complexLocalizerShouldBeOpen(complexLocalizersTypes.bigFootBonesLocalizer)"
+  >
+    <rr-foot-big-bones-complex
+      name="threeDimensionalLocalization"
+      (close)="onLargeLocalizerClose()"
+      [side]="side"
+      [selectionMode]="largeLocalizerOpenType.selectionMode"
+      [dictionaryType]="largeLocalizerOpenType.dictionaryType"
+      [isComplex]="largeLocalizerOpenType.isComplex"
+      [isMalleoli]="largeLocalizerOpenType.isMalleoli"
+      [(ngModel)]="findingHandler.currentItem.threeDimensionalLocalization"
+      [headerKeys]="largeLocalizerOpenType.headerKeys"
+    ></rr-foot-big-bones-complex>
+  </div>
+  <div
+    class="f-horizontal f-center m-t-70"
+    *ngIf="complexLocalizerShouldBeOpen(complexLocalizersTypes.bigFootJointsLocalizer)"
+  >
+    <rr-foot-big-joints-complex
+      name="threeDimensionalLocalization"
+      (close)="onLargeLocalizerClose()"
+      [(ngModel)]="findingHandler.currentItem.threeDimensionalLocalization"
+      [side]="side"
+      [selectionMode]="largeLocalizerOpenType.selectionMode"
+    ></rr-foot-big-joints-complex>
+  </div>
+  <div
+    class="f-horizontal f-center m-t-100 m-l-25"
+    *ngIf="complexLocalizerShouldBeOpen(complexLocalizersTypes.bigFootTendonsLocalizer)"
+  >
+    <rr-foot-big-tendons-complex
+      name="tendonsLocalization"
+      (closed)="onLargeLocalizerClose()"
+      [isExtended]="true"
+      [(ngModel)]="findingHandler.currentItem.tendonsLocalization"
+      [side]="side"
+      [infoIcons]="footBigTendonsLocalizerInfoIcons"
+    ></rr-foot-big-tendons-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" [hidden]="largeLocalizerOpenType">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="anc_m_060103" class="p-b-7">
+        {{'feetMRT.softTissue.findings.value' | translate}}
+      </h1>
+      <p-radioButton
+        rr-id="anc_m_060104"
+        label="{{'feetMRT.softTissue.noJointEffusionNormalImaging.value' | translate}}"
+        name="areFindings"
+        class="m-b-6"
+        [value]="areFindingsEnum.No"
+        labelStyleClass="text-break"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_060105"
+        label="{{'feetMRT.softTissue.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        class="m-b-18"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        name="findingsHandlerComponent"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="isDynamicPartDisabled()"
+        (descriptionChanged)="clearSliders()"
+        [setDescriptionTypes]="[findingType.SoftTissueTumor, findingType.DiseaseOfTheSynoviaFocalMass]"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div
+      class="f-vertical f-start"
+      [ngClass]="isViewWithTabs() ? '' : 'c-pad-l'"
+    >
+      <div [ngClass]="isViewWithTabs() ? 'c-pad-l tabView-header' : 'header'">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="anc_m_060201"
+        >
+          {{'feetMRT.softTissue.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="col-h-100">
+        <div
+          *ngIf="findingHandler.currentItem.findingType === findingType.None"
+          class="f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-effusion
+          *ngIf="isCurrentItem(findingType.Effusion)"
+          [model]="findingHandler.currentItem"
+        ></rr-effusion>
+
+        <rr-hematoma
+          *ngIf="isCurrentItem(findingType.Hematoma)"
+          [model]="findingHandler.currentItem"
+        ></rr-hematoma>
+
+        <rr-plantar-fascial
+          *ngIf="isCurrentItem(findingType.PlantarFasciaDisease)"
+          [model]="findingHandler.currentItem"
+        ></rr-plantar-fascial>
+
+        <rr-diseases-of-mtp
+          *ngIf="isCurrentItem(findingType.DiseasesOfTheMTP)"
+          [model]="findingHandler.currentItem"
+        ></rr-diseases-of-mtp>
+
+        <rr-bursitis
+          *ngIf="isCurrentItem(findingType.Burisitis)"
+          [model]="findingHandler.currentItem"
+        ></rr-bursitis>
+
+        <rr-soft-tissue-tumor
+          *ngIf="isCurrentItem(findingType.SoftTissueTumor)"
+          [model]="findingHandler.currentItem"
+        ></rr-soft-tissue-tumor>
+
+        <rr-disease-synovia-synovitis
+          *ngIf="isCurrentItem(findingType.DiseaseOfTheSynoviaSynovitis)"
+          [model]="findingHandler.currentItem"
+        ></rr-disease-synovia-synovitis>
+
+        <rr-disease-synovia-focal-mass
+          *ngIf="isCurrentItem(findingType.DiseaseOfTheSynoviaFocalMass)"
+          [model]="findingHandler.currentItem"
+        ></rr-disease-synovia-focal-mass>
+
+        <rr-muscle-lesion
+          *ngIf="isCurrentItem(findingType.MuscleLesion)"
+          [model]="findingHandler.currentItem"
+        ></rr-muscle-lesion>
+
+        <rr-tibial-stress-syndrome
+          *ngIf="isCurrentItem(findingType.TibialStressSyndromeTSS)"
+          [model]="findingHandler.currentItem"
+        ></rr-tibial-stress-syndrome>
+
+        <rr-charcot-foot
+          *ngIf="isCurrentItem(findingType.CharcotFoot)"
+          [model]="findingHandler.currentItem"
+        ></rr-charcot-foot>
+
+        <rr-abscess
+          *ngIf="isCurrentItem(findingType.Abscess)"
+          [model]="findingHandler.currentItem"
+        ></rr-abscess>
+      </div>
+    </div>
+  </div>
+</form>

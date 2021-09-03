@@ -1,0 +1,94 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-start f-vertical">
+      <h1 rr-id="kne_m_070103">
+        {{ 'kneeMRT.patella.finding.value' | translate }}*
+      </h1>
+      <div class="f-start f-vertical o-radio-list col-h-100">
+        <p-radioButton
+          rr-id="kne_m_070104"
+          [(ngModel)]="model.areFindings"
+          label="{{ 'kneeMRT.patella.normalImagingOfTheFemoropatellarJoint.value' | translate }}"
+          name="areFindings"
+          [value]="areFindings.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_070105"
+          [(ngModel)]="model.areFindings"
+          label="{{ 'kneeMRT.patella.patholgicFinding.value' | translate }}"
+          name="areFindings"
+          [value]="areFindings.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [setConfig]="findingDropdownConfig"
+          [disabled]="isDropdownDisabled()"
+          validationName="findings"
+        ></rr-finding-column>
+      </div>
+    </div>
+    <div class="c-col-4 c-sep c-pad-l f-vertical">
+      <div class="f-start f-vertical m-h-117">
+        <h1
+          rr-id="kne_m_070201"
+          class="m-b-24"
+          [hidden]="isFindingHeaderDisabled()"
+        >
+          {{ 'kneeMRT.patella.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+        <!-- prettier-ignore -->
+        <p
+          rr-id="kne_m_070236"
+          *ngIf="isFindingType(patellaFindingType.AnatomicalVariants)"
+          class="annotation text-break2"
+        >{{ 'kneeMRT.patella.annotation.value' | translate }}</p>
+      </div>
+
+      <!-- 'None' finding -->
+      <div
+        *ngIf="isFindingType(patellaFindingType.None)"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-sep c-pad-r"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad-l"></div>
+      </div>
+
+      <!-- AnatomicalVariants finding -->
+      <rr-anatomical-variants
+        *ngIf="isFindingType(patellaFindingType.AnatomicalVariants)"
+        class="col-h-100"
+        [model]="findingHandler.currentItem"
+      ></rr-anatomical-variants>
+
+      <!-- RetropatellarChondropathy finding -->
+      <rr-retropatellar-chondropathy
+        *ngIf="isFindingType(patellaFindingType.RetropatellarChondropathy)"
+        class="col-h-100"
+        [model]="findingHandler.currentItem"
+      ></rr-retropatellar-chondropathy>
+
+      <!-- RuptureMedialRetinaculum finding -->
+      <rr-rupture-medial-retinaculum
+        *ngIf="isFindingType(patellaFindingType.RuptureMedialRetinaculum)"
+        class="col-h-100"
+        [model]="findingHandler.currentItem"
+      ></rr-rupture-medial-retinaculum>
+
+      <!-- OsteochondrosisDissecans finding -->
+      <rr-osteochondrosis-dissecans
+        *ngIf="isFindingType(patellaFindingType.OsteochondrosisDissecans)"
+        class="col-h-100"
+        [model]="findingHandler.currentItem"
+      ></rr-osteochondrosis-dissecans>
+    </div>
+  </div>
+</form>

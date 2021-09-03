@@ -1,0 +1,384 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 f-vertical o-list">
+    <div class=" o-radio-list f-vertical">
+      <h2 rr-id="hea_c_060216">
+        {{ 'headCT.cortex.extension.value' | translate }}
+      </h2>
+      <h3 rr-id="hea_c_060217">
+        {{ 'headCT.cortex.size.value' | translate }}*
+      </h3>
+      <rr-number-input
+        name="size"
+        [(ngModel)]="model.size"
+        inputRrId="hea_c_060218"
+        labelRrId="hea_c_060219"
+        (announceModelChange)="resetSizeInput()"
+        [label]="'headCT.cortex.inMm.value' | translate"
+        [config]="{min: 1, max: 99}"
+        rrValidation="size"
+      ></rr-number-input>
+      <div [rrDisable]="!model.size">
+        <p rr-id="hea_c_060220">
+          {{ 'headCT.cortex.2ndPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          name="size2ndPlane"
+          [(ngModel)]="model.size2ndPlane"
+          inputRrId="hea_c_060221"
+          labelRrId="hea_c_060222"
+          (announceModelChange)="resetSizeInput()"
+          [label]="'headCT.cortex.inMm.value' | translate"
+          [config]="{min: 1, max: 99}"
+        ></rr-number-input>
+      </div>
+      <div [rrDisable]="!model.size2ndPlane">
+        <p rr-id="hea_c_060223">
+          {{ 'headCT.cortex.3rdPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          name="size3rdPlane"
+          [(ngModel)]="model.size3rdPlane"
+          inputRrId="hea_c_060224"
+          labelRrId="hea_c_060225"
+          [label]="'headCT.cortex.inMm.value' | translate"
+          [config]="{min: 1, max: 99}"
+        ></rr-number-input>
+      </div>
+    </div>
+
+    <div class=" o-radio-list f-vertical" [rrDisable]="!isExaminationArea">
+      <h2 rr-id="hea_c_0602201">
+        {{ 'headCT.cortex.followUp.value' | translate }}
+      </h2>
+      <h3 rr-id="hea_c_0602202">
+        {{ 'headCT.cortex.maxSizeInPrevious.value' | translate }}
+      </h3>
+      <rr-number-input
+        name="maxSizeInPrevious"
+        [(ngModel)]="model.maxSizeInPreviousExamination"
+        inputRrId="hea_c_0602203"
+        labelRrId="hea_c_0602204"
+        (announceModelChange)="resetMaxSizeInPreviousInput()"
+        [label]="'headCT.cortex.inMm.value' | translate"
+        [config]="{min: 1, max: 99}"
+      ></rr-number-input>
+      <div [rrDisable]="!model.maxSizeInPreviousExamination">
+        <p rr-id="hea_c_0602205">
+          {{ 'headCT.cortex.2ndPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          name="maxSizeInPrevious2ndPlane"
+          [(ngModel)]="model.secondPlane"
+          inputRrId="hea_c_0602206"
+          labelRrId="hea_c_0602207"
+          (announceModelChange)="resetMaxSizeInPreviousInput()"
+          [label]="'headCT.cortex.inMm.value' | translate"
+          [config]="{min: 1, max: 99}"
+        ></rr-number-input>
+      </div>
+      <div [rrDisable]="!model.secondPlane">
+        <p rr-id="hea_c_0602208">
+          {{ 'headCT.cortex.3rdPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          name="maxSizeInPrevious3rdPlane"
+          [(ngModel)]="model.thirdPlane"
+          inputRrId="hea_c_0602209"
+          labelRrId="hea_c_0602210"
+          [label]="'headCT.cortex.inMm.value' | translate"
+          [config]="{min: 1, max: 99}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0603202">
+        {{ 'headCT.cortex.margin.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0603203"
+        label="{{ 'headCT.cortex.circumscribed.value' | translate }}"
+        name="marginType"
+        [(ngModel)]="model.marginType"
+        [value]="marginEnum.Circumscribed"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0603204"
+        label="{{ 'headCT.cortex.noncircumscribed.value' | translate }}"
+        name="marginType"
+        [(ngModel)]="model.marginType"
+        [value]="marginEnum.NonCircumscribed"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0603205">
+        {{ 'headCT.cortex.configuration.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0603206"
+        label="{{ 'headCT.cortex.nodular.value' | translate }}"
+        name="configurationType"
+        [(ngModel)]="model.configurationMarginType"
+        [value]="configurationEnum.Nodular"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0603207"
+        label="{{ 'headCT.cortex.multinodular.value' | translate }}"
+        name="configurationType"
+        [(ngModel)]="model.configurationMarginType"
+        [value]="configurationEnum.Multinodular"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0603208">
+        {{ 'headCT.cortex.densityNonenhanced.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0603209"
+        label="{{ 'headCT.cortex.fattyDensityApproxHU.value' | translate }}"
+        name="densityNonenhancedType"
+        [(ngModel)]="model.densityType"
+        [value]="densityNonenhancedeEnum.FattyDensity"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0603210"
+        label="{{ 'headCT.cortex.liquidDensityHU.value' | translate }}"
+        name="densityNonenhancedType"
+        [(ngModel)]="model.densityType"
+        [value]="densityNonenhancedeEnum.LiquidDensity"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0603211"
+        label="{{ 'headCT.cortex.softTissueDensity.value' | translate }}"
+        name="densityNonenhancedType"
+        [(ngModel)]="model.densityType"
+        [value]="densityNonenhancedeEnum.SoftTissueDensity"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p rr-id="hea_c_0603212">
+        {{ 'headCT.cortex.quantitative.value' | translate }}
+      </p>
+      <rr-number-input
+        name="quantitative"
+        [(ngModel)]="model.quantitative"
+        inputRrId="hea_c_0603213"
+        labelRrId="hea_c_0603214"
+        [label]="'headCT.cortex.inHU.value' | translate"
+        [config]="{min: -1024, max: 3071, placeholder: '----'}"
+      ></rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0604222">
+        {{ 'headCT.cortex.homogeneity.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0604223"
+        label="{{ 'headCT.cortex.homogeneous.value' | translate }}"
+        name="homogeneityType"
+        [(ngModel)]="model.homogeneityType"
+        [value]="homogeneityEnum.Homogeneous"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604224"
+        label="{{ 'headCT.cortex.heterogeneous.value' | translate }}"
+        name="homogeneityType"
+        [(ngModel)]="model.homogeneityType"
+        [value]="homogeneityEnum.Heterogeneous"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0604225">
+        {{ 'headCT.cortex.shape.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0604226"
+        label="{{ 'headCT.cortex.round.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Round"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604227"
+        label="{{ 'headCT.cortex.oval.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Oval"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604228"
+        label="{{ 'headCT.cortex.patchy.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Patchy"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604229"
+        label="{{ 'headCT.cortex.lobulated.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Lobulated"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604230"
+        label="{{ 'headCT.cortex.triangular.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Triangular"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604231"
+        label="{{ 'headCT.cortex.tubular.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Tubular"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0604232"
+        label="{{ 'headCT.cortex.areal.value' | translate }}"
+        name="shapeType"
+        [(ngModel)]="model.shapeType"
+        [value]="shapeEnum.Areal"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-15 f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0605231">
+        {{ 'headCT.cortex.internalStructure.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_c_0605216"
+        label="{{'headCT.cortex.cysticParts.value' | translate}}"
+        name="isCysticParts"
+        binary="true"
+        [(ngModel)]="model.isCysticParts"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605217"
+        label="{{'headCT.cortex.solidParts.value' | translate}}"
+        name="isSolidParts"
+        binary="true"
+        [(ngModel)]="model.isSolidParts"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605232"
+        label="{{'headCT.cortex.hemorrhage.value' | translate}}"
+        name="isHemorrhage"
+        binary="true"
+        [(ngModel)]="model.isHemorrhage"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605233"
+        label="{{'headCT.cortex.necrosis.value' | translate}}"
+        name="isNecrosis"
+        binary="true"
+        [(ngModel)]="model.isNecrosis"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605234"
+        label="{{'headCT.cortex.calcification.value' | translate}}"
+        name="isCalcification"
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605235"
+        label="{{'headCT.cortex.fat.value' | translate}}"
+        name="isFat"
+        binary="true"
+        [(ngModel)]="model.isFat"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605236"
+        label="{{'headCT.cortex.capsule.value' | translate}}"
+        name="isCapsule"
+        binary="true"
+        [(ngModel)]="model.isCapsule"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605237"
+        label="{{'headCT.cortex.septa.value' | translate}}"
+        name="isSepta"
+        binary="true"
+        [(ngModel)]="model.isSepta"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_0605238"
+        label="{{'headCT.cortex.fluidLevel.value' | translate}}"
+        name="isFluidLevel"
+        binary="true"
+        [(ngModel)]="model.isFluidLevel"
+      >
+      </p-checkbox>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hea_c_0605239">
+        {{ 'headCT.cortex.growthPattern.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_c_060240"
+        label="{{'headCT.cortex.confluent.value' | translate}}"
+        name="isConfluent"
+        binary="true"
+        [(ngModel)]="model.isConfluent"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_060241"
+        label="{{'headCT.cortex.massEffect.value' | translate}}"
+        name="isMassEffect"
+        binary="true"
+        [(ngModel)]="model.isMassEffect"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_060242"
+        label="{{'headCT.cortex.infiltration.value' | translate}}"
+        name="isInfiltration"
+        binary="true"
+        [(ngModel)]="model.isInfiltration"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

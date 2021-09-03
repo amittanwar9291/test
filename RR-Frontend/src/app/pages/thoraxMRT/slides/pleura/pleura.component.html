@@ -1,0 +1,161 @@
+<form #autosaveForm="ngForm" rrBlockForm>
+  <div class="f-horizontal f-center" *ngIf="largeLocalizerOpen">
+    <rr-spine-complex
+      *ngIf="largeLocalizerOpen === 'spine'"
+      class="large-localizer"
+      (close)="onLargeLocalizerClosed()"
+      [localizationTitle]="'thoraxMRT.pleura.localization.value'"
+      [logicType]="spineLocationLogicTypeEnum.OneVertebre"
+      [(ngModel)]="findingHandler.currentItem.spineLocations"
+      [selectionAccessibilityMode]="spineLocationDisablePartEnum.C7toL1"
+      localizationDescription="thoraxMRT.pleura.indicateTheCraniocaudalLocation.value"
+      name="spineLocations"
+    >
+    </rr-spine-complex>
+    <rr-ribs-complex
+      *ngIf="largeLocalizerOpen === 'rib'"
+      class="large-localizer"
+      (close)="onLargeLocalizerClosed()"
+      [(ngModel)]="findingHandler.currentItem.ribLocations"
+      [isSingleChoice]="true"
+      localizationDescription="thoraxMRT.pleura.indicateTheRibLocation.value"
+      descriptionRrid="tho_m_060116"
+      name="ribLocations"
+    >
+    </rr-ribs-complex>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerOpen">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <div class="f-vertical f-start o-radio-list col-h-100">
+        <h1 rr-id="tho_m_060103" class="m-b-12">
+          {{ "thoraxMRT.pleura.finding.value" | translate }}*
+        </h1>
+        <div class="no-findings-wrapper">
+          <p-radioButton
+            rr-id="tho_m_060104"
+            label="{{
+              'thoraxMRT.pleura.bilateralNormalImagingOf.value' | translate
+            }}"
+            rrValidation="areFindings"
+            notInFinding="true"
+            name="areFindings"
+            class="text-break p-t-6"
+            [value]="areFindingsEnum.No"
+            [(ngModel)]="model.areFindings"
+            labelStyleClass="text-break"
+          >
+          </p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="tho_m_060105"
+          label="{{ 'thoraxMRT.pleura.finding.value' | translate }}"
+          rrValidation="areFindings"
+          notInFinding="true"
+          name="areFindings"
+          [value]="areFindingsEnum.Yes"
+          [(ngModel)]="model.areFindings"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          class="p-t-4"
+          validationName="findings"
+          name="findingType"
+          [disabled]="isDynamicPartDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [customLabelCalculator]="getCustomLabel"
+          [setDescriptionTypes]="[
+            pleuraFindingTypeEnum.PleuralThickeningMass,
+            pleuraFindingTypeEnum.ChestWallSoftTissueMass
+          ]"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <div
+      class="f-vertical"
+      [ngClass]="
+        isCurrentItem(pleuraFindingTypeEnum.None) ? 'f-end' : 'f-space-between'
+      "
+    >
+      <div class="header-height c-pad-l">
+        <h1
+          *ngIf="!isCurrentItem(pleuraFindingTypeEnum.None)"
+          rr-id="tho_m_060201"
+        >
+          {{ "thoraxMRT.pleura.finding.value" | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.None)"
+          class="f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-pleural-effusion
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.PleuralEffusion)"
+          [model]="findingHandler.currentItem"
+          [findings]="model.findings"
+        ></rr-pleural-effusion>
+        <rr-pleural-thickening-mass
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.PleuralThickeningMass)"
+          [model]="findingHandler.currentItem"
+          [findings]="model.findings"
+        ></rr-pleural-thickening-mass>
+        <rr-pneumothorax
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.Pneumothorax)"
+          [model]="findingHandler.currentItem"
+          [findings]="model.findings"
+        ></rr-pneumothorax>
+        <rr-lymph-nodes
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.LymphNodesAxilla)"
+          [model]="findingHandler.currentItem"
+        ></rr-lymph-nodes>
+        <rr-liver-gall-bladder
+          *ngIf="
+            isCurrentItem(pleuraFindingTypeEnum.UpperAbdomenLiverGallBladder)
+          "
+          [model]="findingHandler.currentItem"
+        ></rr-liver-gall-bladder>
+        <rr-pancreas
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.UpperAbdomenPancreas)"
+          [model]="findingHandler.currentItem"
+        ></rr-pancreas>
+        <rr-kidney-adrenal-gland
+          *ngIf="
+            isCurrentItem(pleuraFindingTypeEnum.UpperAbdomenKidneyAdrenalGland)
+          "
+          [model]="findingHandler.currentItem"
+        ></rr-kidney-adrenal-gland>
+        <rr-spleen-lymphnodes-hiatushernia
+          *ngIf="
+            isCurrentItem(
+              pleuraFindingTypeEnum.UpperAbdomenSpleenLymphNodesHernia
+            )
+          "
+          [model]="findingHandler.currentItem"
+        ></rr-spleen-lymphnodes-hiatushernia>
+        <rr-ascites
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.UpperAbdomenAscites)"
+          [model]="findingHandler.currentItem"
+        ></rr-ascites>
+        <rr-mamma
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.Mamma)"
+          [model]="findingHandler.currentItem"
+          [isDWISelected]="isDWI"
+        ></rr-mamma>
+        <rr-chest-wall
+          *ngIf="isCurrentItem(pleuraFindingTypeEnum.ChestWallSoftTissueMass)"
+          [model]="findingHandler.currentItem"
+        ></rr-chest-wall>
+      </div>
+    </div>
+  </div>
+</form>

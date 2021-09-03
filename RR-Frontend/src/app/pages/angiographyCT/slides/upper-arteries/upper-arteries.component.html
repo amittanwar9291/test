@@ -1,0 +1,74 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="ang_c_060103">
+        {{'angiographyCT.upperArteries.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="ang_c_060104"
+          class="text-break m-b-5"
+          label="{{'angiographyCT.upperArteries.noFindingsInTheupper.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_060105"
+          label="{{'angiographyCT.upperArteries.finding.value' | translate }}"
+          name="areFindings"
+          class="m-b-17"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [validationName]="'findings'"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(upperArteriesFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(upperArteriesFindingTypeEnum.None)"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          style="height: 554px"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l" style="height: 554px"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(upperArteriesFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="ang_c_060201">
+          {{'angiographyCT.upperArteries.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <rr-upper-arteries-multi
+        *ngIf="isNotDiffuseVascularPathology()"
+        [model]="findingHandler.currentItem"
+      ></rr-upper-arteries-multi>
+      <rr-diffuse-vascular-pathology
+        *ngIf="isFindingType(upperArteriesFindingTypeEnum.DiffuseVascularPathology)"
+        [model]="findingHandler.currentItem"
+      ></rr-diffuse-vascular-pathology>
+    </div>
+  </div>
+</form>

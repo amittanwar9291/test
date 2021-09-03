@@ -1,0 +1,173 @@
+<div class="column-height">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="f-vertical c-sep c-pad  m-t-10 m-b-15 ">
+      <h2 rr-id="abd_m_110206" class="m-b-11">
+        {{'abdomenMRT.lymphaticSystem.size.value' | translate}}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad-r f-vertical">
+          <div class="o-radio-list">
+            <p rr-id="abd_m_110207" class="text-break">
+              {{'abdomenMRT.lymphaticSystem.maxShortAxisDiameterSAD.value' |
+              translate}}
+            </p>
+            <rr-number-input
+              inputRrId="abd_m_110209"
+              labelRrId="abd_m_110208"
+              name="maxShortAxisDiameterSad"
+              [(ngModel)]="model.maxShortAxisDiameterSad"
+              [label]="'abdomenMRT.lymphaticSystem.inMm.value' | translate"
+              [config]="{ min: 1, max: 99}"
+              rrValidation="maxShortAxisDiameterSad"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l f-vertical">
+          <p-checkbox
+            rr-id="abd_m_110320"
+            label="{{'abdomenMRT.lymphaticSystem.lymphNodeBulk.value' | translate}}"
+            [(ngModel)]="model.isLymphNodeBulk"
+            binary="true"
+            name="isLymphNodeBulk"
+            rrContentReset="lymphNodeBulk"
+            (onChange)="resetLymphNodeBulk(); resetLocalizer()"
+          ></p-checkbox>
+          <div class="nested-content" [rrDisable]="!model.isLymphNodeBulk">
+            <rr-expansion-inputs-group
+              [model]="model"
+              [config]="expansionGroupConfig"
+            ></rr-expansion-inputs-group>
+            <p rr-id="abd_m_110314" class="text-break m-t-10 m-b-8">
+              {{'abdomenMRT.lymphaticSystem.craniocaudalExtension.value' |
+              translate}}
+            </p>
+            <div class="m-r-25">
+              <rr-spine-simple
+                rr-id="abd_m_110315"
+                isLocalizer="true"
+                (click)="openLargeLocalizer()"
+                [spineLocation]="model.spineLocation"
+                [selectionAccessibilityMode]="selectionAccessibilityModeEnum.TH1toOsCoccygis"
+                rrValidation="spineLocalizer"
+              ></rr-spine-simple>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+      <h2 rr-id="abd_m_110434" class="m-b-11">
+        {{'abdomenMRT.lymphaticSystem.evaluation.value' | translate}}*
+      </h2>
+      <div class="o-radio-list">
+        <p-radioButton
+          rr-id="abd_m_110419"
+          label="{{'abdomenMRT.lymphaticSystem.pathological.value' | translate}}"
+          [(ngModel)]="model.evaluationType"
+          [value]="evaluationType.Pathological"
+          name="evaluationType"
+          rrContentReset="borderlinesized-block"
+          rrValidation="evaluationType"
+        ></p-radioButton>
+        <div
+          id="pathological-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="model.evaluationType !== evaluationType.Pathological"
+        >
+          <p rr-id="abd_m_110420" rrInfoIcon="abd_m_11_01">
+            {{'abdomenMRT.lymphaticSystem.criteria.value' | translate}}
+          </p>
+          <p-checkbox
+            rr-id="abd_m_110421"
+            label="{{'abdomenMRT.lymphaticSystem.size.value' | translate}}"
+            [(ngModel)]="model.isSize"
+            binary="true"
+            name="isSize"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_110422"
+            label="{{'abdomenMRT.lymphaticSystem.diffusionRestriction.value' | translate}}"
+            [(ngModel)]="model.isDiffusionRestriction"
+            binary="true"
+            name="isDiffusionRestriction"
+            [rrDisable]="!isDWI"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_110423"
+            label="{{'abdomenMRT.lymphaticSystem.contrastEnhancement.value' | translate}}"
+            [(ngModel)]="model.isContrastEnhancement"
+            binary="true"
+            name="isContrastEnhancement"
+            [rrDisable]="!isCM"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_110424"
+            label="{{'abdomenMRT.lymphaticSystem.location.value' | translate}}"
+            [(ngModel)]="model.isLocation"
+            binary="true"
+            name="isLocation"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_110425"
+            label="{{'abdomenMRT.lymphaticSystem.number.value' | translate}}"
+            [(ngModel)]="model.isNumber"
+            binary="true"
+            name="isNumber"
+          ></p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="abd_m_110426"
+          label="{{'abdomenMRT.lymphaticSystem.borderlinesized.value' | translate}}"
+          [(ngModel)]="model.evaluationType"
+          [value]="evaluationType.BorderlineSized"
+          name="evaluationType"
+          rrContentReset="pathological-block"
+          rrValidation="evaluationType"
+        ></p-radioButton>
+        <div
+          id="borderlinesized-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="model.evaluationType !== evaluationType.BorderlineSized"
+        >
+          <p-checkbox
+            rr-id="abd_m_110427"
+            label="{{'abdomenMRT.lymphaticSystem.fattyHilum.value' | translate}}"
+            [(ngModel)]="model.isFattyHilum"
+            binary="true"
+            name="isFattyHilum"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_110428"
+            label="{{'abdomenMRT.lymphaticSystem.increased.value' | translate}}"
+            [(ngModel)]="model.isIncreased"
+            binary="true"
+            name="isIncreased"
+          ></p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="abd_m_110429"
+          label="{{'abdomenMRT.lymphaticSystem.increased.value' | translate}}"
+          [(ngModel)]="model.evaluationType"
+          [value]="evaluationType.Increased"
+          name="evaluationType"
+          rrContentReset="borderlinesized-block pathological-block"
+          rrValidation="evaluationType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-15">
+      <div class="o-radio-list" [rrDisable]="!isDWI">
+        <h2 rr-id="abd_m_110515" rrInfoIcon="abd_m_11_01">
+          {{'abdomenMRT.lymphaticSystem.diffusionImaging.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_110516"
+          label="{{'abdomenMRT.lymphaticSystem.diffusionRestriction.value' | translate}}"
+          [(ngModel)]="model.isPathologicDiffusionRestriction"
+          binary="true"
+          name="isPathologicDiffusionRestriction"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,389 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-radio-list m-t-10 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_050232">
+      {{ 'neckMRT.larynx.softTissueInjury.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="nec_m_050233"
+      [(ngModel)]="model.isSoftTissueSwelling"
+      name="isSoftTissueSwelling"
+      label="{{ 'neckMRT.larynx.softTissueSwelling.value' | translate }}"
+      rrContentReset="isSoftTissueSwelling-block1 isSoftTissueSwelling-block2"
+      binary="true"
+    >
+    </p-checkbox>
+    <div
+      id="isSoftTissueSwelling-block1"
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isSoftTissueSwelling"
+    >
+      <h3 rr-id="nec_m_050234">
+        {{ 'neckMRT.larynx.localizationAxial.value' | translate }}*
+      </h3>
+      <p-dropdown
+        rr-id="nec_m_050235"
+        [options]="softTissueLocalizationOptions"
+        [(ngModel)]="model.softTissueLocalizationType"
+        rrDropdownClear
+        styleClass="ui-brown-box o-width-100"
+        name="softTissueLocalizationType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        rrValidation="softTissueLocalizationType"
+      ></p-dropdown>
+    </div>
+    <div
+      id="isSoftTissueSwelling-block2"
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isSoftTissueSwelling"
+    >
+      <h2 rr-id="nec_m_050236">
+        {{ 'neckMRT.larynx.entity.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="nec_m_050237"
+        [(ngModel)]="model.entityType"
+        name="entityType"
+        label="{{ 'neckMRT.larynx.hematoma.value' | translate }}"
+        [value]="entityType.Hematoma"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_050238"
+        [(ngModel)]="model.entityType"
+        name="entityType"
+        label="{{ 'neckMRT.larynx.edema.value' | translate }}"
+        [value]="entityType.Edema"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="nec_m_050239"
+      [(ngModel)]="model.isEpiglotticDisruption"
+      name="isEpiglotticDisruption"
+      label="{{ 'neckMRT.larynx.epiglotticDisruption.value' | translate }}"
+      binary="true"
+      rrContentReset="isEpiglotticDisruption-block1 isEpiglotticDisruption-block2"
+    >
+    </p-checkbox>
+    <div
+      id="isEpiglotticDisruption-block1"
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isEpiglotticDisruption"
+    >
+      <p-checkbox
+        rr-id="nec_m_050240"
+        [(ngModel)]="model.isRuptureAtLevelOfPetiole"
+        name="isRuptureAtLevelOfPetiole"
+        label="{{ 'neckMRT.larynx.ruptureAtLevelOf.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="nec_m_050241"
+        [(ngModel)]="model.isMucosalTearsOfTheAryepiglotticFolds"
+        labelStyleClass="text-break"
+        name="isMucosalTearsOfTheAryepiglotticFolds"
+        label="{{ 'neckMRT.larynx.mucosalTearsOfThearyepiglottic.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      id="isEpiglotticDisruption-block2"
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isEpiglotticDisruption"
+    >
+      <h3 rr-id="nec_m_050242">
+        {{ 'neckMRT.larynx.classification.value' | translate }}
+      </h3>
+      <p-radioButton
+        rr-id="nec_m_050243"
+        [(ngModel)]="model.classificationType"
+        label="{{ 'neckMRT.larynx.partialAvulsion.value' | translate }}"
+        [value]="classificationType.PartialAvulsion"
+        rrUnClickRadio
+        name="classificationType"
+        rrContentReset="completeAvulsion-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_050244"
+        [(ngModel)]="model.classificationType"
+        label="{{ 'neckMRT.larynx.completeAvulsion.value' | translate }}"
+        [value]="classificationType.CompleteAvulsion"
+        rrUnClickRadio
+        name="classificationType"
+        rrContentReset="completeAvulsion-block"
+      ></p-radioButton>
+      <div
+        id="completeAvulsion-block"
+        class="o-radio-list nested-content"
+        [rrDisable]="model.classificationType !== classificationType.CompleteAvulsion"
+      >
+        <p-checkbox
+          rr-id="nec_m_050245"
+          [(ngModel)]="model.isDislocation"
+          name="isDislocation"
+          label="{{ 'neckMRT.larynx.dislocation.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-col-2 c-sep c-pad f-vertical o-radio-list m-t-10 m-b-13">
+  <h2 rr-id="nec_m_050334">
+    {{ 'neckMRT.larynx.injuriesOfTheLaryngeal.value' | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 o-radio-list c-pad-r c-sep">
+      <p-checkbox
+        rr-id="nec_m_050335"
+        [(ngModel)]="model.isFracture"
+        name="isFracture"
+        label="{{ 'neckMRT.larynx.fracture.value' | translate }}"
+        rrContentReset="isFracture-block1 isFracture-block2"
+        binary="true"
+      >
+      </p-checkbox>
+      <div
+        id="isFracture-block1"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isFracture"
+      >
+        <h3 rr-id="nec_m_050336">
+          {{ 'neckMRT.larynx.localization.value' | translate }}
+        </h3>
+        <p-radioButton
+          rr-id="nec_m_050337"
+          [(ngModel)]="model.fractureLocalizationType"
+          name="fractureLocalizationType"
+          label="{{ 'neckMRT.larynx.thyroidCartilage.value' | translate }}"
+          [value]="fractureLocalizationType.ThyroidCartilage"
+          rrContentReset="arytaenoidCartilage-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050338"
+          [(ngModel)]="model.fractureLocalizationType"
+          name="fractureLocalizationType"
+          label="{{ 'neckMRT.larynx.cricoidCartilage.value' | translate }}"
+          [value]="fractureLocalizationType.CricoidCartilage"
+          rrContentReset="arytaenoidCartilage-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050339"
+          [(ngModel)]="model.fractureLocalizationType"
+          name="fractureLocalizationType"
+          label="{{ 'neckMRT.larynx.arytaenoidCartilage.value' | translate }}"
+          [value]="fractureLocalizationType.ArytaenoidCartilage"
+          rrContentReset="arytaenoidCartilage-block"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          id="arytaenoidCartilage-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="model.fractureLocalizationType !== fractureLocalizationType.ArytaenoidCartilage"
+        >
+          <h3 rr-id="nec_m_050340">
+            {{ 'neckMRT.larynx.side.value' | translate }}*
+          </h3>
+          <p-checkbox
+            rr-id="nec_m_050341"
+            [(ngModel)]="model.isArytaenoidCartilageRight"
+            name="isArytaenoidCartilageRight"
+            label="{{ 'neckMRT.larynx.right.value' | translate }}"
+            binary="true"
+            rrValidation="isArytaenoidCartilageRight isArytaenoidCartilageLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050342"
+            [(ngModel)]="model.isArytaenoidCartilageLeft"
+            name="isArytaenoidCartilageLeft"
+            label="{{ 'neckMRT.larynx.left.value' | translate }}"
+            binary="true"
+            rrValidation="isArytaenoidCartilageRight isArytaenoidCartilageLeft"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div
+        id="isFracture-block2"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isFracture"
+      >
+        <h3 rr-id="nec_m_050343">
+          {{ 'neckMRT.larynx.fractureOrientation.value' | translate }}
+        </h3>
+        <p-radioButton
+          rr-id="nec_m_050344"
+          [(ngModel)]="model.fractureOrientationType"
+          label="{{ 'neckMRT.larynx.horizontal.value' | translate }}"
+          [value]="fractureOrientationType.Horizontal"
+          rrUnClickRadio
+          name="fractureOrientationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050345"
+          [(ngModel)]="model.fractureOrientationType"
+          label="{{ 'neckMRT.larynx.vertical.value' | translate }}"
+          [value]="fractureOrientationType.Vertical"
+          rrUnClickRadio
+          name="fractureOrientationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050346"
+          [(ngModel)]="model.fractureOrientationType"
+          label="{{ 'neckMRT.larynx.oblique.value' | translate }}"
+          [value]="fractureOrientationType.Oblique"
+          rrUnClickRadio
+          name="fractureOrientationType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 o-radio-list c-pad-l">
+      <p-checkbox
+        rr-id="nec_m_050422"
+        [(ngModel)]="model.isLuxationSubluxation"
+        name="isLuxationSubluxation"
+        label="{{ 'neckMRT.larynx.luxationSubluxation.value' | translate }}"
+        rrContentReset="isLuxationSubluxation-block"
+        binary="true"
+      >
+      </p-checkbox>
+      <div
+        id="isLuxationSubluxation-block"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isLuxationSubluxation"
+      >
+        <h3 rr-id="nec_m_050423">
+          {{'neckMRT.larynx.localization.value' | translate}}
+        </h3>
+        <p-radioButton
+          rr-id="nec_m_050424"
+          [(ngModel)]="model.luxationLocalizationType"
+          label="{{ 'neckMRT.larynx.cricothyroidalJoint.value' | translate }}"
+          [value]="luxationLocalizationType.CricothyroidalJoint"
+          rrUnClickRadio
+          rrContentReset="cricothyroidalJoint-block cartilagoArytaenoidea-block"
+          name="luxationLocalizationType"
+        ></p-radioButton>
+        <div
+          id="cricothyroidalJoint-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="model.luxationLocalizationType !== luxationLocalizationType.CricothyroidalJoint"
+        >
+          <h3 rr-id="nec_m_050425">
+            {{ 'neckMRT.larynx.side.value' | translate }}*
+          </h3>
+          <p-checkbox
+            rr-id="nec_m_050426"
+            [(ngModel)]="model.isCricothyroidalJointRight"
+            name="isCricothyroidalJointRight"
+            label="{{ 'neckMRT.larynx.right.value' | translate }}"
+            binary="true"
+            rrValidation="isCricothyroidalJointRight isCricothyroidalJointLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050427"
+            [(ngModel)]="model.isCricothyroidalJointLeft"
+            name="isCricothyroidalJointLeft"
+            label="{{ 'neckMRT.larynx.left.value' | translate }}"
+            binary="true"
+            rrValidation="isCricothyroidalJointRight isCricothyroidalJointLeft"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="nec_m_050428"
+          [(ngModel)]="model.luxationLocalizationType"
+          label="{{ 'neckMRT.larynx.cartilagoArytaenoidea.value' | translate }}"
+          [value]="luxationLocalizationType.CartilagoArytaenoidea"
+          rrUnClickRadio
+          rrContentReset="cricothyroidalJoint-block cartilagoArytaenoidea-block"
+          name="luxationLocalizationType"
+        ></p-radioButton>
+        <div
+          id="cartilagoArytaenoidea-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="model.luxationLocalizationType !== luxationLocalizationType.CartilagoArytaenoidea"
+        >
+          <h3 rr-id="nec_m_050429">
+            {{ 'neckMRT.larynx.side.value' | translate }}*
+          </h3>
+          <p-checkbox
+            rr-id="nec_m_050430"
+            [(ngModel)]="model.isCartilagoArytaenoideaRight"
+            name="isCartilagoArytaenoideaRight"
+            label="{{ 'neckMRT.larynx.right.value' | translate }}"
+            binary="true"
+            rrValidation="isCartilagoArytaenoideaRight isCartilagoArytaenoideaLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050431"
+            [(ngModel)]="model.isCartilagoArytaenoideaLeft"
+            name="isCartilagoArytaenoideaLeft"
+            label="{{ 'neckMRT.larynx.left.value' | translate }}"
+            binary="true"
+            rrValidation="isCartilagoArytaenoideaRight isCartilagoArytaenoideaLeft"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-pad-l f-vertical o-radio-list m-t-10 m-b-13">
+  <h2 rr-id="nec_m_050532" class="text-break">
+    {{ 'neckMRT.larynx.cricothyroidcricotrachealRupture.value' | translate }}
+  </h2>
+  <div class="f-vertical o-radio-list">
+    <h3 rr-id="nec_m_050533">
+      {{ 'neckMRT.larynx.classification.value' | translate }}
+    </h3>
+    <p-radioButton
+      rr-id="nec_m_050534"
+      [(ngModel)]="model.cricothyroidClassificationType"
+      label="{{ 'neckMRT.larynx.partialRupture.value' | translate }}"
+      [value]="cricothyroidClassificationType.PartialRupture"
+      rrUnClickRadio
+      name="cricothyroidClassificationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_050535"
+      [(ngModel)]="model.cricothyroidClassificationType"
+      label="{{ 'neckMRT.larynx.completeRupture.value' | translate }}"
+      [value]="cricothyroidClassificationType.CompleteRupture"
+      rrUnClickRadio
+      name="cricothyroidClassificationType"
+    ></p-radioButton>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h3 rr-id="nec_m_050536">
+      {{ 'neckMRT.larynx.associatedFindings.value' | translate }}
+    </h3>
+    <p-checkbox
+      rr-id="nec_m_050537"
+      [(ngModel)]="model.isPronouncedSubcutaneousEdema"
+      name="isPronouncedSubcutaneousEdema"
+      labelStyleClass="text-break"
+      label="{{ 'neckMRT.larynx.pronouncedSubcutaneousEdema.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_050538"
+      [(ngModel)]="model.isRetractionOfRupture"
+      name="isRetractionOfRupture"
+      label="{{ 'neckMRT.larynx.retractionOfRupture.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>

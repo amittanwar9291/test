@@ -1,0 +1,130 @@
+<div
+  class="f-vertical f-space-between col-h-100 localizer-dialog-large"
+  rrBlockForm
+  [ngStyle]="{ 'zoom': zoom }"
+>
+  <div class="f-vertical m-b-18">
+    <div class="f-horizontal f-space-between">
+      <h1 rr-id="car_m_060122" class="header-text">
+        {{ 'cardioMRT.leftVentricle.mappingRelaxationTimeEditor.value' |
+        translate }}
+      </h1>
+      <rr-close-button class="close-button" (buttonPressed)="close()">
+      </rr-close-button>
+    </div>
+    <p rr-id="car_m_060123" class="instruction-text text-break">
+      {{ 'cardioMRT.leftVentricle.pleaseClickOnThe.value' | translate }}
+    </p>
+  </div>
+
+  <div class="f-horizontal f-start m-b-29">
+    <div
+      class="f-vertical relaxation-localizer-group"
+      [class.disabled]="!model.isT1"
+    >
+      <rr-cardio-localizer-positioner-header
+        [activePosition]="localizerPosition.UL"
+        [labelRRID]="'car_m_060124'"
+        [positionerRRID]="'car_m_060222'"
+        [threeCirclesMode]="true"
+        [caption]="'cardioMRT.leftVentricle.t1.value'"
+      >
+      </rr-cardio-localizer-positioner-header>
+      <rr-cardio-relaxation-localizer-controls-group
+        [model]="model.t1Localizer"
+        [name]="'t1Localizer'"
+        [controlsConfig]="t1ControlsConfig"
+        [isDividingByZeroError]="dividingByZeroError"
+        [isNegativeResultError]="negativeValueError"
+        (dataUpdated)="onDataUpdate($event)"
+        [referencePicture]="model.t1ReferencePicture"
+        [pageId]="model.id"
+        [imageFileType]="imageFileType.T1ImageFile"
+      >
+      </rr-cardio-relaxation-localizer-controls-group>
+      <rr-cardio-circle-editable-singlecolor-localizer
+        [disabled]="localizerDisableConditions('t1Localizer')"
+        [caption]="'cardioMRT.leftVentricle.t1.value'"
+        [checkedColor]="colors.purple"
+        (announceSelection)="onDataUpdate()"
+        [(ngModel)]="model.t1Localizer.localizer"
+        rrValidation="t1Localizer.localizer"
+        isLocalizer="true"
+      >
+      </rr-cardio-circle-editable-singlecolor-localizer>
+    </div>
+
+    <div
+      class="f-vertical relaxation-localizer-group"
+      [class.disabled]="!model.isT2"
+    >
+      <rr-cardio-localizer-positioner-header
+        [activePosition]="localizerPosition.UR"
+        [labelRRID]="'car_m_060223'"
+        [positionerRRID]="'car_m_060224'"
+        [threeCirclesMode]="true"
+        [caption]="'cardioMRT.leftVentricle.t2.value'"
+      >
+      </rr-cardio-localizer-positioner-header>
+      <rr-cardio-relaxation-localizer-controls-group
+        [model]="model.t2Localizer"
+        [isT2]="true"
+        [name]="'t2Localizer'"
+        [controlsConfig]="t2ControlsConfig"
+        [referencePicture]="model.t2ReferencePicture"
+        [pageId]="model.id"
+        [imageFileType]="imageFileType.T2ImageFile"
+        (dataUpdated)="onDataUpdate($event)"
+      >
+      </rr-cardio-relaxation-localizer-controls-group>
+      <rr-cardio-circle-editable-singlecolor-localizer
+        [disabled]="localizerDisableConditions('t2Localizer')"
+        [caption]="'cardioMRT.leftVentricle.t2.value'"
+        [checkedColor]="colors.turquoise"
+        (announceSelection)="onDataUpdate()"
+        [(ngModel)]="model.t2Localizer.localizer"
+        rrValidation="t2Localizer.localizer"
+        isLocalizer="true"
+      >
+      </rr-cardio-circle-editable-singlecolor-localizer>
+    </div>
+
+    <div
+      class="f-vertical relaxation-localizer-group"
+      [class.disabled]="!model.isT1Gd"
+    >
+      <rr-cardio-localizer-positioner-header
+        [activePosition]="localizerPosition.LL"
+        [labelRRID]="'car_m_060310'"
+        [positionerRRID]="'car_m_060435'"
+        [threeCirclesMode]="true"
+        [caption]="'cardioMRT.leftVentricle.t1Gd.value'"
+      >
+      </rr-cardio-localizer-positioner-header>
+      <rr-cardio-relaxation-localizer-controls-group
+        [model]="model.t1GdLocalizer"
+        [name]="'t1GdLocalizer'"
+        [controlsConfig]="t1GdControlsConfig"
+        [isDividingByZeroError]="dividingByZeroError"
+        [isNegativeResultError]="negativeValueError"
+        [isT1Gd]="true"
+        (dataUpdated)="onDataUpdate($event)"
+        [referencePicture]="model.t1GdReferencePicture"
+        [pageId]="model.id"
+        [imageFileType]="imageFileType.T1GdImageFile"
+      >
+      </rr-cardio-relaxation-localizer-controls-group>
+      <rr-cardio-circle-editable-singlecolor-localizer
+        [disabled]="localizerDisableConditions('t1GdLocalizer')"
+        [caption]="'cardioMRT.leftVentricle.t1Gd.value'"
+        name="localizer"
+        [checkedColor]="colors.blue"
+        (announceSelection)="onDataUpdate()"
+        [(ngModel)]="model.t1GdLocalizer.localizer"
+        rrValidation="t1GdLocalizer.localizer"
+        isLocalizer="true"
+      >
+      </rr-cardio-circle-editable-singlecolor-localizer>
+    </div>
+  </div>
+</div>

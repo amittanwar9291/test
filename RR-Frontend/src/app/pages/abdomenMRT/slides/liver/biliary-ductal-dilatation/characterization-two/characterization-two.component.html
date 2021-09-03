@@ -1,0 +1,260 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="f-vertical c-sep c-pad-l m-t-9 m-b-12">
+      <h2 rr-id="abd_m_040297" class="m-b-10">
+        {{'abdomenMRT.liver.associatedFindings.value' | translate}}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad-r o-list">
+          <div class="o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_040298"
+              name="isIntrahepaticStone"
+              label="{{'abdomenMRT.liver.intrahepaticStone.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isIntrahepaticStone"
+              rrContentReset="isIntrahepaticStoneBlock"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-list nested-content"
+              id="isIntrahepaticStoneBlock"
+              [rrDisable]="!model.isIntrahepaticStone"
+            >
+              <div class="o-radio-list">
+                <h3 rr-id="abd_m_040299">
+                  {{'abdomenMRT.liver.details.value' | translate}}
+                </h3>
+                <p-checkbox
+                  rr-id="abd_m_0402100"
+                  name="isIntrahepatic"
+                  label="{{'abdomenMRT.liver.intrahepatic.value' | translate}}"
+                  binary="true"
+                  [(ngModel)]="model.isIntrahepatic"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_0402101"
+                  name="isIntraductal"
+                  label="{{'abdomenMRT.liver.intraductal.value' | translate}}"
+                  binary="true"
+                  [(ngModel)]="model.isIntraductal"
+                >
+                </p-checkbox>
+              </div>
+              <div class="o-radio-list">
+                <h3 rr-id="abd_m_0402102">
+                  {{'abdomenMRT.liver.size.value' | translate}}
+                </h3>
+                <rr-number-input
+                  inputRrId="abd_m_0402103"
+                  labelRrId="abd_m_0402104"
+                  name="sizeInMm"
+                  label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+                  [config]="{ min: 1, max: 99, placeholder: '--' }"
+                  [(ngModel)]="model.sizeInMm"
+                >
+                </rr-number-input>
+              </div>
+            </div>
+            <p-checkbox
+              rr-id="abd_m_0402105"
+              name="isCholangitis"
+              label="{{'abdomenMRT.liver.cholangitis.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isCholangitis"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_0402144"
+              name="isPusInTheBileDuct"
+              label="{{'abdomenMRT.liver.pusInTheBileDuct.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPusInTheBileDuct"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="abd_m_0402106"
+              name="isAbscess"
+              label="{{'abdomenMRT.liver.abscess.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAbscess"
+              rrContentReset="isAbscessBlock"
+            >
+            </p-checkbox>
+            <div
+              class="f-start o-radio-list nested-content"
+              id="isAbscessBlock"
+              [rrDisable]="!model.isAbscess"
+            >
+              <h3 rr-id="abd_m_0402107">
+                {{'abdomenMRT.liver.extension.value' | translate}}
+              </h3>
+              <rr-number-input
+                inputRrId="abd_m_0402108"
+                labelRrId="abd_m_0402109"
+                name="extensionInMm"
+                label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+                [config]="{ min: 1, max: 99, placeholder: '--' }"
+                [(ngModel)]="model.extensionInMm"
+              >
+              </rr-number-input>
+            </div>
+            <p-checkbox
+              rr-id="abd_m_0402145"
+              name="isAerobilia"
+              label="{{'abdomenMRT.liver.aerobilia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAerobilia"
+              rrInfoIcon="abd_m_04_07"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad o-list">
+          <div class="o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_0403109"
+              name="isStricture"
+              label="{{'abdomenMRT.liver.stricture.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isStricture"
+              rrContentReset="isStrictureBlock"
+              (click)="resetLiverSegmentsLocalizer()"
+            >
+            </p-checkbox>
+            <h3
+              rr-id="abd_m_040369"
+              [rrDisable]="!model.isStricture"
+              rrValidation="liverPathologyLocations2"
+            >
+              {{'abdomenMRT.liver.localizationOfTheStricture.value' |
+              translate}}*
+            </h3>
+            <rr-liver-pathology-small-localizer
+              rr-id="abd_m_0403110"
+              [rrDisable]="!model.isStricture"
+              name="liverPathologyLocations2"
+              [(ngModel)]="model.liverPathologyLocations2"
+              rrValidation="liverPathologyLocations2"
+              [isLocalizer]="true"
+              (click)="openLargeLocalizer2()"
+            >
+            </rr-liver-pathology-small-localizer>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad o-list">
+          <div
+            class="o-list"
+            id="isStrictureBlock"
+            [rrDisable]="!model.isStricture"
+          >
+            <div class="o-radio-list">
+              <h3 rr-id="abd_m_040467">
+                {{'abdomenMRT.liver.lengthOfStricture.value' | translate}}
+              </h3>
+              <rr-number-input
+                inputRrId="abd_m_040468"
+                labelRrId="abd_m_040469"
+                name="lengthOfStrictureInMm"
+                label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+                [config]="{ min: 1, max: 99, placeholder: '--' }"
+                [(ngModel)]="model.lengthOfStrictureInMm"
+              >
+              </rr-number-input>
+            </div>
+            <div class="o-radio-list">
+              <p-checkbox
+                rr-id="abd_m_040470"
+                name="isPseudostricture"
+                label="{{'abdomenMRT.liver.pseudostricture.value' | translate}}"
+                binary="true"
+                [(ngModel)]="model.isPseudostricture"
+                class="m-t-20"
+                rrContentReset="isPseudostrictureBlock"
+              >
+              </p-checkbox>
+              <div
+                class="f-start o-radio-list nested-content"
+                id="isPseudostrictureBlock"
+                [rrDisable]="!model.isPseudostricture"
+              >
+                <p-checkbox
+                  rr-id="abd_m_040471"
+                  name="isPseudostrictureSuspicionOf"
+                  label="{{'abdomenMRT.liver.suspicionOf.value' | translate}}"
+                  binary="true"
+                  [(ngModel)]="model.isPseudostrictureSuspicionOf"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l m-t-9 m-b-12 o-list">
+      <div class="o-radio-list f-vertical c-pad-r">
+        <h2 rr-id="abd_m_040539" class="m-t-3">
+          {{ "abdomenMRT.liver.differentialDiagnosis.value" | translate }}
+        </h2>
+        <h3 rr-id="abd_m_040540" class="m-b-4">
+          {{ "abdomenMRT.liver.differentialDiagnosisI.value" | translate }}*
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_040546"
+          [diagnosisNumber]="1"
+          [options]="biliaryDuctalDilatationDDOptions"
+          [(ngModel)]="model.differentialDiagnosis1"
+          name="differentialDiagnosis1"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDD1Dependent()"
+          rrValidation="differentialDiagnosis1"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="abd_m_040542"
+          label="{{ 'abdomenMRT.liver.suspicionOf.value' | translate }}"
+          name="isSuspicionOf"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+          [rrDisable]="
+            model.differentialDiagnosis1 === differentialDiagnosis1.None
+          "
+        >
+        </p-checkbox>
+        <div
+          class="o-radio-list f-vertical"
+          [rrDisable]="
+            model.differentialDiagnosis1 === differentialDiagnosis1.None
+          "
+        >
+          <h3 rr-id="abd_m_040543" class="m-b-4 m-t-7">
+            {{ "abdomenMRT.liver.differentialDiagnosisII.value" | translate }}
+          </h3>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_040547"
+            [diagnosisNumber]="2"
+            [options]="biliaryDuctalDilatationDDOptions"
+            [(ngModel)]="model.differentialDiagnosis2"
+            name="differentialDiagnosis2"
+            [parentViewModel]="model"
+            (selectionChanged)="model.isSubordinate = false"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <p-checkbox
+            rr-id="abd_m_040545"
+            label="{{ 'abdomenMRT.liver.subordinate.value' | translate }}"
+            name="isSubordinate"
+            binary="true"
+            [(ngModel)]="model.isSubordinate"
+            [rrDisable]="
+              model.differentialDiagnosis2 === differentialDiagnosis2.None
+            "
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

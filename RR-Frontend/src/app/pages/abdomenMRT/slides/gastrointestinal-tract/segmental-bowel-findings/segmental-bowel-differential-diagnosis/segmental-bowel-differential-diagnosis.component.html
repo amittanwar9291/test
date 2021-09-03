@@ -1,0 +1,247 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15 o-list">
+      <div [rrDisable]="!isCMReinforced" class="o-radio-list m-b-12 m-l-10">
+        <h2 rr-id="abd_m_090260" class="m-t-2">
+          {{ 'abdomenMRT.gastrointestinal.contrastEnhancementQuantitative.value'
+          | translate}}
+        </h2>
+
+        <p-radioButton
+          rr-id="abd_m_090261"
+          name="contrastEnhancementQuantitativeType"
+          [(ngModel)]="model.contrastEnhancementQuantitativeType"
+          [value]="contrastEnhancementQuantitativeType.No"
+          label="{{'abdomenMRT.gastrointestinal.none.value' | translate }}"
+          rrUnClickRadio
+          rrContentReset="homogeneityTypeBlock contrastEnhancementDistributionTypeBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090262"
+          name="contrastEnhancementQuantitativeType"
+          [(ngModel)]="model.contrastEnhancementQuantitativeType"
+          [value]="contrastEnhancementQuantitativeType.Low"
+          label="{{'abdomenMRT.gastrointestinal.low.value' | translate }}"
+          rrUnClickRadio
+          rrContentReset="homogeneityTypeBlock contrastEnhancementDistributionTypeBlock"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090263"
+          name="contrastEnhancementQuantitativeType"
+          [(ngModel)]="model.contrastEnhancementQuantitativeType"
+          [value]="contrastEnhancementQuantitativeType.Strong"
+          label="{{'abdomenMRT.gastrointestinal.strong.value' | translate }}"
+          rrUnClickRadio
+          rrContentReset="homogeneityTypeBlock contrastEnhancementDistributionTypeBlock"
+        ></p-radioButton>
+        <div
+          class="nested-content o-radio-list"
+          id="homogeneityTypeBlock"
+          [rrDisable]="model.contrastEnhancementQuantitativeType === contrastEnhancementQuantitativeType.No || model.contrastEnhancementQuantitativeType === contrastEnhancementQuantitativeType.None"
+        >
+          <p-radioButton
+            rr-id="abd_m_090264"
+            name="cmEnhancementHomogeneityType"
+            [(ngModel)]="model.cmEnhancementHomogeneityType"
+            [value]="cmEnhancementHomogeneityType.Homogeneous"
+            label="{{'abdomenMRT.gastrointestinal.homogeneous.value' | translate }}"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_090265"
+            name="cmEnhancementHomogeneityType"
+            [(ngModel)]="model.cmEnhancementHomogeneityType"
+            [value]="cmEnhancementHomogeneityType.Heterogeneous"
+            label="{{'abdomenMRT.gastrointestinal.heterogeneous.value' | translate }}"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        [rrDisable]="model.contrastEnhancementQuantitativeType === contrastEnhancementQuantitativeType.No || model.contrastEnhancementQuantitativeType === contrastEnhancementQuantitativeType.None"
+        class="o-radio-list m-l-10"
+        id="contrastEnhancementDistributionTypeBlock"
+      >
+        <h2 rr-id="abd_m_090266" class="m-t-2">
+          {{ 'abdomenMRT.gastrointestinal.contrastEnhancementDistribution.value'
+          | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_090267"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionType.Marginal"
+          label="{{'abdomenMRT.gastrointestinal.marginal.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090268"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionType.Mucosal"
+          label="{{'abdomenMRT.gastrointestinal.mucosal.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090269"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionType.EntireWall"
+          label="{{'abdomenMRT.gastrointestinal.entireWall.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_090270"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          [value]="contrastEnhancementDistributionType.TargetSign"
+          label="{{'abdomenMRT.gastrointestinal.targetsign.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad f-vertical m-t-10 m-b-15">
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_090365" class="m-t-2 m-l-10">
+          {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+          translate}}
+        </h2>
+        <div class="o-radio-list m-l-10">
+          <p rr-id="abd_m_090366">
+            {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+            translate }} 1*
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="abd_m_090367"
+            name="differentialDiagnosis1Type"
+            [diagnosisNumber]="1"
+            [options]="differentialDiagnosisOptions"
+            [(ngModel)]="model.differentialDiagnosis1Type"
+            rrValidation="differentialDiagnosis1Type"
+            [parentViewModel]="model"
+            (selectionChanged)="resetDropdown1();"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <div
+            class="o-radio-list"
+            [rrDisable]="model.differentialDiagnosis1Type === differentialDiagnosis1Type.None"
+          >
+            <p-checkbox
+              class="m-t-10"
+              rr-id="abd_m_090368"
+              label="{{ 'abdomenMRT.gastrointestinal.suspicionOf.value' | translate }}"
+              binary="true"
+              name="isSuspicionOf"
+              [(ngModel)]="model.isSuspicionOf"
+            >
+            </p-checkbox>
+          </div>
+          <div *ngIf="areEvaluationAndExtension1DropdownsHidden()">
+            <p rr-id="abd_m_090369" class="m-t-30">
+              {{ 'abdomenMRT.gastrointestinal.evaluation.value' | translate }}
+            </p>
+            <p-dropdown
+              rr-id="abd_m_090370"
+              styleClass="o-width-100 ui-brown-box"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              name="evaluation1Type"
+              [(ngModel)]="model.evaluationType"
+              [options]="w038Evaluation"
+              rrDropdownClear
+            >
+            </p-dropdown>
+            <p rr-id="abd_m_090371" class="m-t-10">
+              {{ 'abdomenMRT.gastrointestinal.extensionSegmentalBowel.value' |
+              translate }}
+            </p>
+            <p-dropdown
+              rr-id="abd_m_090372"
+              styleClass="o-width-100 ui-brown-box"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              name="extension1Type"
+              [(ngModel)]="model.extensionType"
+              [options]="w039Extension"
+              rrDropdownClear
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep-l f-vertical m-t-45 m-b-15">
+      <div
+        [rrDisable]="model.differentialDiagnosis1Type === differentialDiagnosis1Type.None"
+        class="o-radio-list m-l-10"
+      >
+        <p rr-id="abd_m_090439">
+          {{ 'abdomenMRT.gastrointestinal.differentialDiagnosis.value' |
+          translate }} 2
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_090440"
+          name="differentialDiagnosis2Type"
+          [diagnosisNumber]="2"
+          [options]="differentialDiagnosisOptions"
+          [(ngModel)]="model.differentialDiagnosis2Type"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDropdwon2();"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis2Type === differentialDiagnosis2Type.None"
+        class="o-radio-list m-l-10"
+      >
+        <p-checkbox
+          rr-id="abd_m_090441"
+          class="m-t-10"
+          binary="true"
+          label="{{ 'abdomenMRT.gastrointestinal.subordinate.value' | translate }}"
+          name="isSubordinate"
+          [(ngModel)]="model.isSubordinate"
+        >
+        </p-checkbox>
+      </div>
+      <div *ngIf="areEvaluationAndExtension2DropdownsHidden()">
+        <p rr-id="abd_m_090442" class="m-t-30">
+          {{ 'abdomenMRT.gastrointestinal.evaluation.value' | translate }}
+        </p>
+        <p-dropdown
+          rr-id="abd_m_090443"
+          styleClass="o-width-100 ui-brown-box"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          name="evaluation2Type"
+          [(ngModel)]="model.evaluationType"
+          [options]="w038Evaluation"
+          rrDropdownClear
+        >
+        </p-dropdown>
+        <p rr-id="abd_m_090444" class="m-t-10">
+          {{ 'abdomenMRT.gastrointestinal.extension.value' | translate }}
+        </p>
+        <p-dropdown
+          rr-id="abd_m_090445"
+          styleClass="o-width-100 ui-brown-box"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          name="extension2Type"
+          [(ngModel)]="model.extensionType"
+          [options]="w039Extension"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep-l c-pad-l f-vertical m-t-10 m-b-15">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      >
+      </rr-reference-picture>
+    </div>
+  </div>
+</div>

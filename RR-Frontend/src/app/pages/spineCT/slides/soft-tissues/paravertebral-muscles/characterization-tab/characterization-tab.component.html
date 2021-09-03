@@ -1,0 +1,122 @@
+<div class="f-horizontal f-start main o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-18 m-b-15">
+    <div class="o-radio-list m-l-10">
+      <p-checkbox
+        binary="true"
+        labelStyleClass="ui-fat-label"
+        [(ngModel)]="model.isHematoma"
+        label="{{'spineCT.softTissues.hematoma.value'| translate}}"
+        rr-id="spi_c_080263"
+        name="isHematoma"
+        rrContentReset="locaizationContainer"
+      ></p-checkbox>
+      <div
+        id="locaizationContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isHematoma"
+      >
+        <p rr-id="spi_c_080264">
+          {{'spineCT.softTissues.localization.value' | translate}}
+        </p>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isIntramuscular"
+          label="{{'spineCT.softTissues.intramuscular.value'| translate}}"
+          rr-id="spi_c_080265"
+          name="isIntramuscular"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isInterfascial"
+          label="{{'spineCT.softTissues.interfascial.value'| translate}}"
+          rr-id="spi_c_080266"
+          name="isInterfascial"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isIntermuscular"
+          label="{{'spineCT.softTissues.intermuscular.value'| translate}}"
+          rr-id="spi_c_080267"
+          name="isIntermuscular"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-18 m-b-15">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="spi_c_0803389">
+        {{'spineCT.softTissues.furtherImageFeatures.value' | translate}}
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isFattyDegeneration"
+        label="{{'spineCT.softTissues.fattyDegeneration.value'| translate}}"
+        rr-id="spi_c_0803390"
+        name="isFattyDegeneration"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isMuscularHypotrophy"
+        label="{{'spineCT.softTissues.muscularHypotrophy.value'| translate}}"
+        rr-id="spi_c_0803391"
+        name="isMuscularHypotrophy"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isMuscularAtrophy"
+        label="{{'spineCT.softTissues.muscularAtrophy.value'| translate}}"
+        rr-id="spi_c_0803392"
+        name="isMuscularAtrophy"
+        rrContentReset="muscularAtrophyTypeContainer"
+      ></p-checkbox>
+      <div
+        id="muscularAtrophyTypeContainer"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isMuscularAtrophy"
+      >
+        <p-radioButton
+          name="muscularAtrophyType"
+          rr-id="spi_c_0803393"
+          label="{{ 'spineCT.softTissues.complete.value' | translate }}"
+          [value]="muscularAtrophyTypeEnum.Complete"
+          [(ngModel)]="model.muscularAtrophyType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          name="muscularAtrophyType"
+          rr-id="spi_c_0803394"
+          label="{{ 'spineCT.softTissues.partial.value' | translate }}"
+          [value]="muscularAtrophyTypeEnum.Partial"
+          [(ngModel)]="model.muscularAtrophyType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        label="{{'spineCT.softTissues.calcification.value'| translate}}"
+        rr-id="spi_c_0803395"
+        name="isCalcification"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSuperinfection"
+        label="{{'spineCT.softTissues.superinfection.value'| translate}}"
+        rr-id="spi_c_0803396"
+        name="isSuperinfection"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-18 m-b-15">
+    <div class="o-radio-list m-l-10" [rrDisable]="!isCheckboxesSingleSelect()">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      >
+      </rr-reference-picture>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list"></div>
+</div>

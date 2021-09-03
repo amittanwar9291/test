@@ -1,0 +1,716 @@
+<p-tabView class="rr-tabView">
+  <!-- Tab panel 1 -->
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="car_m_080202"
+        rrValidation="differentialDiagnosis01 diameterMaxAxialInMm mainTumorLocalizer"
+        ifAny="true"
+      >
+        {{ 'cardioMRT.spatialRequirement.characterizationI.value' | translate }}
+      </h1>
+    </ng-template>
+    <div class="f-vertical p-b-10 col-h-100">
+      <div class="f-horizontal c-pad-l col-h-100 m-t-10">
+        <!-- tabPanel column 1 -->
+        <div class="c-col-1 c-pad-r c-sep o-list">
+          <div class="f-vertical o-radio-list m-b-28">
+            <h2
+              rr-id="car_m_080203"
+              class="m-b-5"
+              rrValidation="mainTumorLocalizer"
+            >
+              {{ 'cardioMRT.spatialRequirement.localization.value' | translate
+              }}*
+            </h2>
+            <rr-cardio-localization-lesion-pathology
+              rr-id="car_m_080204"
+              [(ngModel)]="model.mainTumorLocalizer"
+              name="mainTumorLocalizer"
+              rrValidation="mainTumorLocalizer"
+              isLocalizer="true"
+            >
+            </rr-cardio-localization-lesion-pathology>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="car_m_080205">
+              {{ 'cardioMRT.spatialRequirement.diameterMaxAxial.value' |
+              translate }}*
+            </h2>
+            <rr-number-input
+              name="diameterMaxAxialInMm"
+              [inputRrId]="'car_m_080206'"
+              [labelRrId]="'car_m_080207'"
+              [(ngModel)]="model.diameterMaxAxialInMm"
+              class="m-l-10"
+              label="{{ 'cardioMRT.spatialRequirement.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99 }"
+              rrValidation="diameterMaxAxialInMm"
+            ></rr-number-input>
+          </div>
+        </div>
+
+        <!-- tabPanel column 2 -->
+        <div class="c-col-1 c-pad c-sep f-vertical f-start o-list">
+          <div
+            class="f-vertical o-radio-list m-b-37"
+            [rrDisable]="!checkIfIKnow()"
+          >
+            <h2 rr-id="car_m_080302" class="m-b-5">
+              {{'cardioMRT.spatialRequirement.differentialDiagnosis1.value' |
+              translate}}*
+            </h2>
+            <rr-differential-diagnosis-dropdown
+              rrId="car_m_080303"
+              [diagnosisNumber]="1"
+              isActiveOnIKnow="true"
+              [options]="differentialDiagnosis1Dropdown"
+              [(ngModel)]="model.differentialDiagnosis01"
+              name="differentialDiagnosis01"
+              group="true"
+              [parentViewModel]="model"
+              (selectionChanged)="clearIsSubordinate();"
+              rrValidation="differentialDiagnosis01"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+
+          <div class="f-vertical o-radio-list sliders-z-index">
+            <h2 rr-id="car_m_080321" class="m-b-2">
+              {{ 'cardioMRT.spatialRequirement.signalCharacteristicsT1w.value' |
+              translate }}
+            </h2>
+            <span rr-id="car_m_080304"
+              >{{ 'cardioMRT.spatialRequirement.comparedToTheMyocardium.value' |
+              translate}}</span
+            >
+            <rr-slider-number-triple-input
+              name="signalT1wCharacteristics"
+              rr-id="car_m_080305"
+              [(ngModel)]="model.signalT1wCharacteristics"
+            >
+            </rr-slider-number-triple-input>
+          </div>
+
+          <div class="f-vertical o-radio-list sliders-z-index">
+            <h2 rr-id="car_m_080322" class="m-b-2">
+              {{ 'cardioMRT.spatialRequirement.signalCharacteristicsT2w.value' |
+              translate}}
+            </h2>
+            <span rr-id="car_m_080306"
+              >{{ 'cardioMRT.spatialRequirement.comparedToTheMyocardium.value' |
+              translate}}</span
+            >
+            <rr-slider-number-triple-input
+              name="signalT2wCharacteristics"
+              rr-id="car_m_080307"
+              [(ngModel)]="model.signalT2wCharacteristics"
+            >
+            </rr-slider-number-triple-input>
+          </div>
+        </div>
+
+        <!-- tabPanel column 3 -->
+        <div class="c-col-1 c-pad c-sep f-vertical f-start o-list">
+          <div class="f-vertical o-radio-list m-b-40">
+            <h2 rr-id="car_m_080405" class="m-b-10">
+              {{ 'cardioMRT.spatialRequirement.margin.value' | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_080406"
+              label="{{ 'cardioMRT.spatialRequirement.wellDefined.value' | translate }}"
+              name="marginType"
+              [value]="marginType.WellDefined"
+              [(ngModel)]="model.marginType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080407"
+              label="{{ 'cardioMRT.spatialRequirement.illDefined.value' | translate }}"
+              name="marginType"
+              [value]="marginType.IllDefined"
+              [(ngModel)]="model.marginType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080408"
+              label="{{ 'cardioMRT.spatialRequirement.irregular.value' | translate }}"
+              name="marginType"
+              [value]="marginType.Irregular"
+              [(ngModel)]="model.marginType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="car_m_080402">
+              {{'cardioMRT.spatialRequirement.homogeneity.value' | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_080403"
+              label="{{ 'cardioMRT.spatialRequirement.homogeneous.value' | translate }}"
+              name="homogeneityType"
+              [value]="homogeneityType.Homogeneous"
+              [(ngModel)]="model.homogeneityType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080404"
+              label="{{ 'cardioMRT.spatialRequirement.heterogeneous.value' | translate }}"
+              name="homogeneityType"
+              [value]="homogeneityType.Inhomogeneous"
+              [(ngModel)]="model.homogeneityType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+
+        <!-- tabPanel column 4 -->
+        <div class="c-col-1 c-pad-l f-vertical f-start o-list">
+          <div
+            class="f-vertical o-radio-list m-b-13"
+            [rrDisable]="areContrastEnhancementGroupsDisabled"
+          >
+            <h2 rr-id="car_m_080501" class="m-b-10">
+              {{
+              'cardioMRT.spatialRequirement.contrastEnhancementPerfusion.value'
+              | translate}}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_080502"
+              label="{{ 'cardioMRT.spatialRequirement.yes.value' | translate }}"
+              name="contrastEnhancementPerfusionType"
+              [value]="simpleAnswerType.Yes"
+              [(ngModel)]="model.contrastEnhancementPerfusionType"
+              rrContentReset="contrastEnhancementIntensityType-block contrastEnhancementQualityPerfusionType-block"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080503"
+              label="{{ 'cardioMRT.spatialRequirement.no.value' | translate }}"
+              name="contrastEnhancementPerfusionType"
+              [value]="simpleAnswerType.No"
+              [(ngModel)]="model.contrastEnhancementPerfusionType"
+              rrContentReset="contrastEnhancementIntensityType-block contrastEnhancementQualityPerfusionType-block"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            id="contrastEnhancementIntensityType-block"
+            class="nested-content f-vertical o-radio-list m-b-13"
+            [rrDisable]="model.contrastEnhancementPerfusionType !== simpleAnswerType.Yes"
+          >
+            <h3 class="car_m_080504">
+              {{ 'cardioMRT.spatialRequirement.intensity.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="car_m_080505"
+              label="{{ 'cardioMRT.spatialRequirement.marked.value' | translate }}"
+              name="contrastEnhancementIntensityPerfusionType"
+              [value]="enhancementIntensityType.Marked"
+              [(ngModel)]="model.contrastEnhancementIntensityPerfusionType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080506"
+              label="{{ 'cardioMRT.spatialRequirement.mild.value' | translate }}"
+              name="contrastEnhancementIntensityPerfusionType"
+              [value]="enhancementIntensityType.Mild"
+              [(ngModel)]="model.contrastEnhancementIntensityPerfusionType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            id="contrastEnhancementQualityPerfusionType-block"
+            class="nested-content f-vertical o-radio-list"
+            [rrDisable]="model.contrastEnhancementPerfusionType !== simpleAnswerType.Yes"
+          >
+            <h3 rr-id="car_m_080507">
+              {{ 'cardioMRT.spatialRequirement.quality.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="car_m_080508"
+              label="{{ 'cardioMRT.spatialRequirement.homogeneous.value' | translate }}"
+              name="contrastEnhancementQualityPerfusionType"
+              [value]="homogeneityType.Homogeneous"
+              [(ngModel)]="model.contrastEnhancementQualityPerfusionType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080509"
+              label="{{ 'cardioMRT.spatialRequirement.heterogeneous.value' | translate }}"
+              name="contrastEnhancementQualityPerfusionType"
+              [value]="homogeneityType.Inhomogeneous"
+              [(ngModel)]="model.contrastEnhancementQualityPerfusionType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <!-- Tab panel 2 -->
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="car_m_080301">
+        {{ 'cardioMRT.spatialRequirement.characterizationII.value' | translate
+        }}
+      </h1>
+    </ng-template>
+    <div class="f-vertical p-b-10 col-h-100">
+      <div class="f-horizontal c-pad-l col-h-100 m-t-10">
+        <!-- tabPanel column 1 -->
+        <div class="c-col-1 c-pad-r c-sep f-vertical o-list">
+          <div
+            class="f-vertical o-radio-list m-b-13"
+            [rrDisable]="areContrastEnhancementGroupsDisabled"
+          >
+            <h2 rr-id="car_m_080208" class="m-b-10">
+              {{ 'cardioMRT.spatialRequirement.earlyGdEnhancementEGE.value' |
+              translate}}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_080209"
+              label="{{ 'cardioMRT.spatialRequirement.yes.value' | translate }}"
+              name="gdEnhancementEGEType"
+              [value]="simpleAnswerType.Yes"
+              [(ngModel)]="model.gdEnhancementEGEType"
+              rrContentReset="gdEnhancementIntensityEGEType-block gdEnhancementQualityEGEType-block"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080210"
+              label="{{ 'cardioMRT.spatialRequirement.no.value' | translate }}"
+              name="gdEnhancementEGEType"
+              [value]="simpleAnswerType.No"
+              [(ngModel)]="model.gdEnhancementEGEType"
+              rrContentReset="gdEnhancementIntensityEGEType-block gdEnhancementQualityEGEType-block"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            id="gdEnhancementIntensityEGEType-block"
+            class="nested-content f-vertical o-radio-list m-b-13"
+            [rrDisable]="model.gdEnhancementEGEType !== simpleAnswerType.Yes"
+          >
+            <h3 class="car_m_080211">
+              {{ 'cardioMRT.spatialRequirement.intensity.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="car_m_080212"
+              label="{{ 'cardioMRT.spatialRequirement.marked.value' | translate }}"
+              name="gdEnhancementIntensityEGEType"
+              [value]="enhancementIntensityType.Marked"
+              [(ngModel)]="model.gdEnhancementIntensityEGEType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080213"
+              label="{{ 'cardioMRT.spatialRequirement.mild.value' | translate }}"
+              name="gdEnhancementIntensityEGEType"
+              [value]="enhancementIntensityType.Mild"
+              [(ngModel)]="model.gdEnhancementIntensityEGEType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            id="gdEnhancementQualityEGEType-block"
+            class="nested-content f-vertical o-radio-list"
+            [rrDisable]="model.gdEnhancementEGEType !== simpleAnswerType.Yes"
+          >
+            <h3 rr-id="car_m_080222">
+              {{ 'cardioMRT.spatialRequirement.quality.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="car_m_080223"
+              label="{{ 'cardioMRT.spatialRequirement.homogeneous.value' | translate }}"
+              name="gdEnhancementQualityEGEType"
+              [value]="homogeneityType.Homogeneous"
+              [(ngModel)]="model.gdEnhancementQualityEGEType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080224"
+              label="{{ 'cardioMRT.spatialRequirement.heterogeneous.value' | translate }}"
+              name="gdEnhancementQualityEGEType"
+              [value]="homogeneityType.Inhomogeneous"
+              [(ngModel)]="model.gdEnhancementQualityEGEType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+
+        <!-- tabPanel column 2 -->
+        <div class="c-col-1 c-pad c-sep f-vertical o-list">
+          <div
+            class="f-vertical o-radio-list m-b-13"
+            [rrDisable]="areContrastEnhancementGroupsDisabled"
+          >
+            <h2 rr-id="car_m_080309" class="m-b-10">
+              {{ 'cardioMRT.spatialRequirement.lateGdEnhancement(LGE.value' |
+              translate}}
+            </h2>
+            <p-radioButton
+              rr-id="car_m_080310"
+              label="{{ 'cardioMRT.spatialRequirement.yes.value' | translate }}"
+              name="gdEnhancementLGEType"
+              [value]="simpleAnswerType.Yes"
+              [(ngModel)]="model.gdEnhancementLGEType"
+              rrContentReset="gdEnhancementIntensityLGEType-block gdEnhancementQualityLGEType-block"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080311"
+              label="{{ 'cardioMRT.spatialRequirement.no.value' | translate }}"
+              name="gdEnhancementLGEType"
+              [value]="simpleAnswerType.No"
+              [(ngModel)]="model.gdEnhancementLGEType"
+              rrContentReset="gdEnhancementIntensityLGEType-block gdEnhancementQualityLGEType-block"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            id="gdEnhancementIntensityLGEType-block"
+            class="nested-content f-vertical o-radio-list m-b-13"
+            [rrDisable]="model.gdEnhancementLGEType !== simpleAnswerType.Yes"
+          >
+            <h3 class="car_m_080312">
+              {{ 'cardioMRT.spatialRequirement.intensity.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="car_m_080313"
+              label="{{ 'cardioMRT.spatialRequirement.marked.value' | translate }}"
+              name="gdEnhancementIntensityLGEType"
+              [value]="enhancementIntensityType.Marked"
+              [(ngModel)]="model.gdEnhancementIntensityLGEType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080314"
+              label="{{ 'cardioMRT.spatialRequirement.mild.value' | translate }}"
+              name="gdEnhancementIntensityLGEType"
+              [value]="enhancementIntensityType.Mild"
+              [(ngModel)]="model.gdEnhancementIntensityLGEType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            id="gdEnhancementQualityLGEType-block"
+            class="nested-content f-vertical o-radio-list"
+            [rrDisable]="model.gdEnhancementLGEType !== simpleAnswerType.Yes"
+          >
+            <h3 rr-id="car_m_080315">
+              {{ 'cardioMRT.spatialRequirement.quality.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="car_m_080316"
+              label="{{ 'cardioMRT.spatialRequirement.homogeneous.value' | translate }}"
+              name="gdEnhancementQualityLGEType"
+              [value]="homogeneityType.Homogeneous"
+              [(ngModel)]="model.gdEnhancementQualityLGEType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_080317"
+              label="{{ 'cardioMRT.spatialRequirement.heterogeneous.value' | translate }}"
+              name="gdEnhancementQualityLGEType"
+              [value]="homogeneityType.Inhomogeneous"
+              [(ngModel)]="model.gdEnhancementQualityLGEType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+        </div>
+
+        <!-- tabPanel column 3 -->
+        <div class="c-col-1 c-pad c-sep f-vertical o-list">
+          <div class="f-vertical o-radio-list m-b-44">
+            <h2 rr-id="car_m_080409" class="m-b-10">
+              {{ 'cardioMRT.spatialRequirement.internalChange.value' | translate
+              }}
+            </h2>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.bleeding.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080410"
+              name="isBleeding"
+              [(ngModel)]="model.isBleeding"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.necrosis.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080411"
+              name="isNecrosis"
+              [(ngModel)]="model.isNecrosis"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.calcification.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080412"
+              name="isCalcification"
+              [(ngModel)]="model.isCalcification"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.fatSignal.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080413"
+              name="isFatSignal"
+              [(ngModel)]="model.isFatSignal"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.hyperintensityInSTIR.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080414"
+              name="isHyperIntensitySTIR"
+              [(ngModel)]="model.isHyperIntensitySTIR"
+            >
+            </p-checkbox>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="car_m_080415">
+              {{ 'cardioMRT.spatialRequirement.growthPattern.value' | translate
+              }}
+            </h2>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.valveAssociated.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080416"
+              name="isValveAssociated"
+              [(ngModel)]="model.isValveAssociated"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.infiltrationThroughDifferentTissue.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080417"
+              class="text-break"
+              name="isInfiltrationThroughDifferentTissue"
+              [(ngModel)]="model.isInfiltrationThroughDifferentTissue"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+
+        <!-- tabPanel column 4 -->
+        <div class="c-col-1 c-pad-l f-vertical o-list">
+          <div class="f-vertical o-radio-list m-b-53">
+            <h2 rr-id="car_m_080510" class="m-b-10">
+              {{ 'cardioMRT.spatialRequirement.associatedFindings.value' |
+              translate }}
+            </h2>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.pericardialEffusion.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080511"
+              name="isPericardialEffusion"
+              [(ngModel)]="model.isPericardialEffusion"
+              [rrContentReset]="'isPericardialEffusion-block'"
+            >
+            </p-checkbox>
+            <div
+              id="isPericardialEffusion-block"
+              class="nested-content f-vertical o-radio-list"
+            >
+              <p-checkbox
+                label="{{ 'cardioMRT.spatialRequirement.haemorrhagic.value' | translate}}"
+                binary="true"
+                rr-id="car_m_080512"
+                name="isHaemorrhage"
+                [(ngModel)]="model.isHaemorrhage"
+                [rrDisable]="!model.isPericardialEffusion"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.pleuralEffusion.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080513"
+              name="isPleuralEffusion"
+              [(ngModel)]="model.isPleuralEffusion"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{ 'cardioMRT.spatialRequirement.superimposedThrombus.value' | translate}}"
+              binary="true"
+              rr-id="car_m_080514"
+              name="isSuperimposedThrombus"
+              [(ngModel)]="model.isSuperimposedThrombus"
+            >
+            </p-checkbox>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <h2 rr-id="car_m_080515">
+              {{ 'cardioMRT.spatialRequirement.mobility.value' | translate }}
+            </h2>
+            <div class="f-vertical f-start o-radio-list">
+              <p-radioButton
+                rr-id="car_m_080516"
+                label="{{ 'cardioMRT.spatialRequirement.none.value' | translate }}"
+                name="mobilityType"
+                [value]="mobilityType.No"
+                [(ngModel)]="model.mobilityType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="car_m_080517"
+                label="{{ 'cardioMRT.spatialRequirement.mild.value' | translate }}"
+                name="mobilityType"
+                [value]="mobilityType.Mild"
+                [(ngModel)]="model.mobilityType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="car_m_080518"
+                label="{{ 'cardioMRT.spatialRequirement.high.value' | translate }}"
+                name="mobilityType"
+                [value]="mobilityType.High"
+                [(ngModel)]="model.mobilityType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <!-- Tab panel 3 -->
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="car_m_080401" rrValidation="differentialDiagnosis1">
+        {{ 'cardioMRT.spatialRequirement.characterizationIII.value' | translate
+        }}
+      </h1>
+    </ng-template>
+    <div class="f-vertical p-b-10 col-h-100">
+      <div class="f-horizontal c-pad-l col-h-100 m-t-10">
+        <!-- tabPanel column 1 -->
+        <div class="c-col-1 c-pad-r c-sep o-list">
+          <h2 rr-id="car_m_080214" class="m-b-16">
+            {{ 'cardioMRT.spatialRequirement.differentialDiagnosis.value' |
+            translate }}
+          </h2>
+          <div
+            class="f-vertical o-radio-list m-b-11"
+            [rrDisable]="checkIfIKnow()"
+          >
+            <h3 rr-id="car_m_080215" class="m-b-4">
+              {{ 'cardioMRT.spatialRequirement.differentialDiagnosis1.value' |
+              translate }}*
+            </h3>
+            <rr-differential-diagnosis-dropdown
+              rrId="car_m_080216"
+              [diagnosisNumber]="1"
+              [options]="differentialDiagnosis1Dropdown"
+              [(ngModel)]="model.differentialDiagnosis1"
+              name="differentialDiagnosis1"
+              group="true"
+              [parentViewModel]="model"
+              (selectionChanged)="clearIsSubordinate()"
+              rrValidation="differentialDiagnosis1"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+
+          <div
+            class="f-vertical o-radio-list m-b-11"
+            [rrDisable]="isDiagnosisDisabled(2)"
+          >
+            <h3 rr-id="car_m_080217" class="m-b-4">
+              {{ 'cardioMRT.spatialRequirement.differentialDiagnosis2.value' |
+              translate }}
+            </h3>
+            <rr-differential-diagnosis-dropdown
+              rrId="car_m_080218"
+              [diagnosisNumber]="2"
+              [options]="differentialDiagnosis2and3Dropdown"
+              [(ngModel)]="model.differentialDiagnosis2"
+              name="differentialDiagnosis2"
+              group="true"
+              [parentViewModel]="model"
+              (selectionChanged)="clearIsSubordinate()"
+            ></rr-differential-diagnosis-dropdown>
+            <p-checkbox
+              rr-id="car_m_080219"
+              label="{{ 'cardioMRT.spatialRequirement.subordinate.value' | translate }}"
+              name="isSubordinate"
+              binary="true"
+              [(ngModel)]="model.isSubordinate"
+              [rrDisable]="model.differentialDiagnosis2 === 'None'"
+            ></p-checkbox>
+          </div>
+
+          <div
+            class="f-vertical o-radio-list"
+            [rrDisable]="isDiagnosisDisabled(3)"
+          >
+            <h3 rr-id="car_m_080220" class="m-b-4">
+              {{ 'cardioMRT.spatialRequirement.differentialDiagnosis3.value' |
+              translate }}
+            </h3>
+            <rr-differential-diagnosis-dropdown
+              rrId="car_m_080221"
+              [diagnosisNumber]="3"
+              [options]="differentialDiagnosis2and3Dropdown"
+              [(ngModel)]="model.differentialDiagnosis3"
+              name="differentialDiagnosis3"
+              group="true"
+              [parentViewModel]="model"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+
+        <!-- tabPanel column 2 -->
+        <div class="c-col-1 c-pad c-sep o-list">
+          <p-checkbox
+            rr-id="car_m_080318"
+            class="m-b-11"
+            label="{{ 'cardioMRT.spatialRequirement.lesionSamePathology.value' | translate }}"
+            name="isLesionSame"
+            binary="true"
+            [(ngModel)]="model.isLesionSame"
+            (onChange)="resetNonTargetLesionLocalizer()"
+          >
+          </p-checkbox>
+          <div
+            class="f-vertical o-radio-list"
+            [rrDisable]="!model.isLesionSame"
+          >
+            <h2 rr-id="car_m_080319" class="text-break">
+              {{
+              'cardioMRT.spatialRequirement.localizationNontargetLesions.value'
+              | translate }}
+            </h2>
+            <rr-cardio-localization-lesion-pathology
+              rr-id="car_m_080320"
+              [isSingleChoice]="false"
+              [(ngModel)]="model.nonTargetLesionLocalizer"
+              name="nonTargetLesionLocalizer"
+            >
+            </rr-cardio-localization-lesion-pathology>
+          </div>
+        </div>
+
+        <!-- tabPanel column 3 -->
+        <div class="c-col-1 c-pad c-sep f-vertical"></div>
+
+        <!-- tabPanel column 4 -->
+        <div class="c-col-1 c-pad-l">
+          <rr-reference-picture
+            [(ngModel)]="model.referencePicture"
+            [referenceId]="model.id"
+            [fileUploadUrl]="fileUploadUrl"
+            name="referencePicture"
+          ></rr-reference-picture>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

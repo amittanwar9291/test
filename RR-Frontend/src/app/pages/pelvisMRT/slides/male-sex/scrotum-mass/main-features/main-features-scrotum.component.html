@@ -1,0 +1,340 @@
+<div class="f-horizontal h-100 w-100">
+  <div class="c-col-1 c-pad c-sep m-t-10 m-b-15">
+    <div class="o-radio-list p-l-10">
+      <h2 rr-id="pel_m_050231" rrInfoIcon="pel_m_05_01">
+        {{ 'pelvisMRT.maleGender.localization.value' | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-radioButton
+          rr-id="pel_m_0502108"
+          name="scrotumMassLocalizationType"
+          label="{{ 'pelvisMRT.maleGender.intratesticularNoAsterisk.value' | translate }}"
+          [(ngModel)]="model.scrotumMassLocalizationType"
+          [value]="scrotumMassInternalChangeLocalizationType.Intratesticular"
+          [rrContentReset]="model.scrotumMassLocalizationType !== scrotumMassInternalChangeLocalizationType.Intratesticular ? 'directionTypeContainer': ''"
+          rrValidation="scrotumMassLocalizationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0502109"
+          name="scrotumMassLocalizationType"
+          label="{{ 'pelvisMRT.maleGender.extratesticularNoAsterisk.value' | translate }}"
+          [(ngModel)]="model.scrotumMassLocalizationType"
+          [value]="scrotumMassInternalChangeLocalizationType.Extratesticular"
+          rrValidation="scrotumMassLocalizationType"
+          [rrContentReset]="model.scrotumMassLocalizationType !== scrotumMassInternalChangeLocalizationType.Extratesticular ? 'directionTypeContainer': ''"
+        ></p-radioButton>
+        <div
+          id="directionTypeContainer"
+          class="o-radio-list left-indent"
+          [rrDisable]="model.scrotumMassLocalizationType === scrotumMassInternalChangeLocalizationType.None"
+        >
+          <p rr-id="pel_m_0502110">
+            {{ 'pelvisMRT.maleGender.side.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_0502111"
+            name="directionType"
+            label="{{ 'pelvisMRT.maleGender.rightNoAsterisk.value' | translate }}"
+            [(ngModel)]="model.directionType"
+            [value]="directionType.Right"
+            rrValidation="directionType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0502112"
+            name="directionType"
+            label="{{ 'pelvisMRT.maleGender.leftNoAsterisk.value' | translate }}"
+            [(ngModel)]="model.directionType"
+            [value]="directionType.Left"
+            rrValidation="directionType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <h2 rr-id="pel_m_0502113" class="m-t-30">
+        {{ 'pelvisMRT.maleGender.expansion.value' | translate }}
+      </h2>
+      <div class="o-radio-list m-t-20">
+        <div>
+          <p rr-id="pel_m_0502114">
+            {{ 'pelvisMRT.maleGender.size.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="pel_m_0502115"
+            name="sizeInMm"
+            class="text-break"
+            labelRrId="pel_m_0502116"
+            [label]="'pelvisMRT.maleGender.inMm.value' | translate"
+            [config]="{min: 1, max: 9999, labelWidth: 200}"
+            [(ngModel)]="model.sizeInMm"
+            rrValidation="sizeInMm"
+          >
+          </rr-number-input>
+        </div>
+        <div>
+          <p rr-id="pel_m_0502117">
+            {{ 'pelvisMRT.maleGender.2ndPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="pel_m_0502118"
+            name="secondPlaneInMm"
+            labelRrId="pel_m_0502119"
+            label="{{ 'pelvisMRT.maleGender.inMm.value' | translate }}"
+            [config]="{min: 1, max: 9999, labelWidth: 200}"
+            [(ngModel)]="model.secondPlaneInMm"
+          >
+          </rr-number-input>
+        </div>
+        <div>
+          <p rr-id="pel_m_0502120">
+            {{ 'pelvisMRT.maleGender.3rdPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="pel_m_0502121"
+            name="thirdPlaneInMm"
+            labelRrId="pel_m_0502122"
+            label="{{ 'pelvisMRT.maleGender.inMm.value' | translate }}"
+            [(ngModel)]="model.thirdPlaneInMm"
+            [config]="{min: 1, max: 9999, labelWidth: 200}"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep m-t-10 m-b-15">
+    <div class="o-list p-l-10">
+      <div class="o-radio-list">
+        <h2 rr-id="pel_m_050364">
+          {{ 'pelvisMRT.maleGender.organSize.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="pel_m_050365"
+          name="isEnlargedTesticle"
+          label="{{ 'pelvisMRT.maleGender.enlargedTesticle.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isEnlargedTesticle"
+          [rrContentReset]="'enlargedtesticleBlock'"
+        ></p-checkbox>
+        <div
+          class="o-radio-list left-indent"
+          [rrDisable]="!model.isEnlargedTesticle"
+          id="enlargedtesticleBlock"
+        >
+          <p rr-id="pel_m_050366">
+            {{ 'pelvisMRT.maleGender.side.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="pel_m_050367"
+            name="isEnlargedTesticleRight"
+            label="{{ 'pelvisMRT.maleGender.rightNoAsterisk.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isEnlargedTesticleRight"
+            rrValidation="isEnlargedTesticleRight isEnlargedTesticleLeft"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="pel_m_050368"
+            name="isEnlargedTesticleLeft"
+            label="{{ 'pelvisMRT.maleGender.leftNoAsterisk.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isEnlargedTesticleLeft"
+            rrValidation="isEnlargedTesticleRight isEnlargedTesticleLeft"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="pel_m_050369"
+          name="isEnlargedEpididymis"
+          label="{{ 'pelvisMRT.maleGender.enlargedEpididymis.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isEnlargedEpididymis"
+          [rrContentReset]="'enlargedepididymisBlock'"
+        ></p-checkbox>
+        <div
+          class="o-radio-list left-indent"
+          [rrDisable]="!model.isEnlargedEpididymis"
+          id="enlargedepididymisBlock"
+        >
+          <p rr-id="pel_m_050370">
+            {{ 'pelvisMRT.maleGender.side.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="pel_m_050356"
+            name="isEnlargedEpididymisRight"
+            label="{{ 'pelvisMRT.maleGender.rightNoAsterisk.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isEnlargedEpididymisRight"
+            rrValidation="isEnlargedEpididymisRight isEnlargedEpididymisLeft"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="pel_m_050357"
+            name="isEnlargedEpididymisLeft"
+            label="{{ 'pelvisMRT.maleGender.leftNoAsterisk.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isEnlargedEpididymisLeft"
+            rrValidation="isEnlargedEpididymisRight isEnlargedEpididymisLeft"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="f-vertical m-t-10 m-b-15">
+    <div
+      class="c-col-1 c-pad-l o-list m-b-10"
+      [rrDisable]="model.descriptionType !== 'IKnow'"
+    >
+      <div class="f-vertical o-radio-list p-l-10">
+        <h3 rr-id="pel_m_050450">
+          {{ 'pelvisMRT.maleGender.differentialDiagnosis1.value' | translate }}
+          <span *ngIf="model.descriptionType !== 'IDescribe'">*</span>
+        </h3>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_050451"
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          group="true"
+          [options]="scrotumDifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosisScrotumMassType"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosisScrotumMassType"
+          name="differentialDiagnosisScrotumMassType"
+          (selectionChanged)="resetDifferentialDiagnosis()"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          *ngIf="model.differentialDiagnosisScrotumMassType ===  differentialDiagnosisScrotumMassType.Lipoma"
+          rr-id="pel_m_050490"
+          rrInfoIcon="pel_m_05_06"
+          name="isSpermaticCordLipoma01"
+          binary="true"
+          label="{{'pelvisMRT.maleGender.spermaticCordLipoma.value' | translate}}"
+          [(ngModel)]="model.isSpermaticCordLipoma01"
+        >
+        </p-checkbox>
+        <p-checkbox
+          *ngIf="model.differentialDiagnosisScrotumMassType === differentialDiagnosisScrotumMassType.FibrousPseudotumour"
+          rr-id="pel_m_050491"
+          name="isScrotalPearl01"
+          binary="true"
+          label="{{ 'pelvisMRT.maleGender.scrotalPearl.value' | translate }}"
+          [(ngModel)]="model.isScrotalPearl01"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-2 c-pad-l o-list m-b-10 m-t-15">
+      <h2 rr-id="pel_m_050415" class="p-l-10">
+        {{ 'pelvisMRT.maleGender.morphology.value' | translate }}
+      </h2>
+    </div>
+    <div class="f-horizontal h-100">
+      <div class="c-col-1 c-pad c-sep">
+        <div class="o-radio-list p-l-10">
+          <div class="o-radio-list">
+            <p rr-id="pel_m_050416">
+              {{ 'pelvisMRT.maleGender.margin.value' | translate }}*
+            </p>
+            <p-radioButton
+              rr-id="pel_m_050417"
+              name="marginType"
+              label="{{ 'pelvisMRT.maleGender.circumscribed.value' | translate }}"
+              [(ngModel)]="model.marginType"
+              [value]="marginType.Circumscribed"
+              rrValidation="marginType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_050418"
+              name="marginType"
+              label="{{ 'pelvisMRT.maleGender.nonCircumscribed.value' | translate }}"
+              [(ngModel)]="model.marginType"
+              [value]="marginType.NonCircumscribed"
+              rrValidation="marginType"
+            ></p-radioButton>
+          </div>
+          <div class="o-radio-list">
+            <p rr-id="pel_m_050460">
+              {{ 'pelvisMRT.maleGender.form.value' | translate }}
+            </p>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="pel_m_050420"
+              name="formType"
+              label="{{ 'pelvisMRT.maleGender.oval.value' | translate }}"
+              [(ngModel)]="model.formType"
+              [value]="formType.Oval"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="pel_m_050421"
+              name="formType"
+              label="{{ 'pelvisMRT.maleGender.around.value' | translate }}"
+              [(ngModel)]="model.formType"
+              [value]="formType.Around"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="pel_m_050422"
+              name="formType"
+              label="{{ 'pelvisMRT.maleGender.irregular.value' | translate }}"
+              [(ngModel)]="model.formType"
+              [value]="formType.Irregular"
+            ></p-radioButton>
+          </div>
+          <div class="o-radio-list">
+            <p rr-id="pel_m_050423">
+              {{ 'pelvisMRT.maleGender.homogeneity.value' | translate }}*
+            </p>
+            <p-radioButton
+              rr-id="pel_m_050424"
+              name="scrotumMassHomogeneity01Type"
+              label="{{ 'pelvisMRT.maleGender.homogen.value' | translate }}"
+              [(ngModel)]="model.scrotumMassHomogeneity01Type"
+              [value]="homogeneityType.Homogeneous"
+              rrValidation="scrotumMassHomogeneity01Type"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_050425"
+              name="scrotumMassHomogeneity01Type"
+              label="{{ 'pelvisMRT.maleGender.heterogen.value' | translate }}"
+              [(ngModel)]="model.scrotumMassHomogeneity01Type"
+              [value]="homogeneityType.Heterogeneous"
+              rrValidation="scrotumMassHomogeneity01Type"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep o-list">
+        <div class="o-radio-list p-l-10 p-r-15">
+          <div class="o-list triple-slider m-b-20">
+            <h2 rr-id="pel_m_050537" class="m-b-2">
+              {{ 'pelvisMRT.maleGender.t1wSignal.value' | translate }}
+            </h2>
+            <p rr-id="pel_m_050510" class="font-15 m-b-15">
+              {{ 'pelvisMRT.maleGender.comparedToTheMuscle.value' | translate }}
+            </p>
+            <rr-slider-number-triple-input
+              name="scrotumMassSignalT1wSliderType"
+              rr-id="pel_m_050511"
+              [(ngModel)]="model.scrotumMassSignalT1wSliderType"
+            >
+            </rr-slider-number-triple-input>
+          </div>
+          <div class="o-list triple-slider">
+            <h2 rr-id="pel_m_050538" class="m-b-2">
+              {{ 'pelvisMRT.maleGender.t2wSignal.value' | translate }}
+            </h2>
+            <p rr-id="pel_m_050512" class="font-15 m-b-15">
+              {{ 'pelvisMRT.maleGender.comparedToTheMuscle.value' | translate }}
+            </p>
+            <rr-slider-number-triple-input
+              name="scrotumMassSignalT2wSliderType"
+              rr-id="pel_m_050513"
+              [(ngModel)]="model.scrotumMassSignalT2wSliderType"
+            >
+            </rr-slider-number-triple-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

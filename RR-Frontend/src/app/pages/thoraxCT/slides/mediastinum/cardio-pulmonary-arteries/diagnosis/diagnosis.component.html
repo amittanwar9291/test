@@ -1,0 +1,170 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="f-vertical f-start c-sep m-t-10 m-b-10 o-radio-list">
+    <h2 rr-id="tho_c_040223" class="p-l-25">
+      {{'thoraxCT.mediastinum.diagnosis.value' | translate}}*
+    </h2>
+    <div class="f-horizontal multi-col">
+      <div class="c-col-1 c-sep c-pad">
+        <div class="o-radio-list m-l-10">
+          <p-radioButton
+            rr-id="tho_c_040224"
+            name="diagnosisType"
+            [value]="cardiovascularPulmonaryDiagnosisTypeEnum.AcutePulmonaryEmbolism"
+            rrValidation="diagnosisType"
+            rrContentReset="detailsPulmonaryHypertensionType-block detailsGroup-block"
+            label="{{'thoraxCT.mediastinum.acutePulmonaryEmbolism.value' | translate}}"
+            [(ngModel)]="model.diagnosisType"
+          ></p-radioButton>
+          <div
+            id="RightHeartoverload-block"
+            class="nested-content f-vertical f-start o-radio-list"
+            [rrDisable]="model.diagnosisType !== cardiovascularPulmonaryDiagnosisTypeEnum.AcutePulmonaryEmbolism"
+          >
+            <p rr-id="tho_c_040225">
+              {{'thoraxCT.mediastinum.rightHeartStrain.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="tho_c_040226"
+              name="rightHeartStrainType"
+              [value]="rightHeartStrainType.Without"
+              rrUnClickRadio
+              label="{{'thoraxCT.mediastinum.without.value' | translate}}"
+              [(ngModel)]="model.rightHeartStrainType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_c_040227"
+              name="rightHeartStrainType"
+              [value]="rightHeartStrainType.With"
+              rrUnClickRadio
+              label="{{'thoraxCT.mediastinum.with.value' | translate}}"
+              [(ngModel)]="model.rightHeartStrainType"
+            ></p-radioButton>
+          </div>
+          <p-radioButton
+            rr-id="tho_c_040228"
+            name="diagnosisType"
+            [value]="cardiovascularPulmonaryDiagnosisTypeEnum.ChronicPulmonaryEmbolism"
+            rrValidation="diagnosisType"
+            rrContentReset="RightHeartoverload-block detailsPulmonaryHypertensionType-block detailsGroup-block"
+            label="{{'thoraxCT.mediastinum.chronicPulmonaryEmbolism.value' | translate}}"
+            [(ngModel)]="model.diagnosisType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_c_040229"
+            name="diagnosisType"
+            [value]="cardiovascularPulmonaryDiagnosisTypeEnum.PulmonaryHypertension"
+            rrValidation="diagnosisType"
+            rrContentReset="RightHeartoverload-block"
+            label="{{'thoraxCT.mediastinum.pulmonaryHypertension.value' | translate}}"
+            [(ngModel)]="model.diagnosisType"
+          ></p-radioButton>
+          <p-checkbox
+            rr-id="tho_c_040230"
+            name="isSuspected"
+            class="m-t-16"
+            label="{{'thoraxCT.mediastinum.suspected.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isSuspected"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="f-vertical f-start o-radio-list">
+        <p rr-id="tho_c_040330" class="m-b-6 p-l-25">
+          {{'thoraxCT.mediastinum.classificationPulmonaryHypertension.value'
+          |translate}}
+        </p>
+        <div class="f-horizontal multi-col">
+          <div class="c-col-1 c-sep c-pad">
+            <div
+              id="detailsPulmonaryHypertensionType-block"
+              *ngIf="model.diagnosisType === cardiovascularPulmonaryDiagnosisTypeEnum.PulmonaryHypertension"
+              class="f-vertical f-start o-radio-list m-l-10"
+            >
+              <p-radioButton
+                rr-id="tho_c_040331"
+                name="detailsPulmonaryHypertensionType"
+                class="text-break"
+                [value]="detailsPulmonaryHypertensionType.Group1PulmonaryArterialHypertension"
+                rrUnClickRadio
+                rrContentReset="detailsGroup-block"
+                label="{{'thoraxCT.mediastinum.groupPulmonaryArterialHypertension.value' | translate}}"
+                [(ngModel)]="model.detailsPulmonaryHypertensionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="tho_c_040332"
+                name="detailsPulmonaryHypertensionType2"
+                class="text-break"
+                [value]="detailsPulmonaryHypertensionType.Group2DueToLeftHeartDisease"
+                rrUnClickRadio
+                rrContentReset="detailsGroup-block"
+                label="{{'thoraxCT.mediastinum.groupDueToLeft.value' | translate}}"
+                [(ngModel)]="model.detailsPulmonaryHypertensionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="tho_c_040333"
+                name="detailsPulmonaryHypertensionType3"
+                class="text-break"
+                [value]="detailsPulmonaryHypertensionType.Group2DueToLungDiseasesAndOrHypoxia"
+                rrUnClickRadio
+                rrContentReset="detailsGroup-block"
+                label="{{'thoraxCT.mediastinum.groupDueToLung.value' | translate}}"
+                [(ngModel)]="model.detailsPulmonaryHypertensionType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="tho_c_040334"
+                class="text-break"
+                [value]="detailsPulmonaryHypertensionType.GroupChronicThromboembolic"
+                rrUnClickRadio
+                rrContentReset="detailsGroup-block"
+                name="detailsPulmonaryHypertensionType4"
+                label="{{'thoraxCT.mediastinum.groupChronicThromboembolicCTEPH.value' | translate}}"
+                [(ngModel)]="model.detailsPulmonaryHypertensionType"
+              ></p-radioButton>
+            </div>
+          </div>
+          <div
+            *ngIf="model.detailsPulmonaryHypertensionType === detailsPulmonaryHypertensionType.GroupChronicThromboembolic"
+            class="c-col-1 c-sep c-pad"
+          >
+            <div class="o-radio-list m-l-10">
+              <p rr-id="tho_c_040434">
+                {{'thoraxCT.mediastinum.detailsGroup.value' | translate}}
+              </p>
+              <p-radioButton
+                rr-id="tho_c_040435"
+                name="chronicThromboembolicType"
+                [value]="chronicThromboembolicType.Type1Central"
+                rrUnClickRadio
+                label="{{'thoraxCT.mediastinum.typeCentral.value' | translate}}"
+                [(ngModel)]="model.chronicThromboembolicType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="tho_c_040436"
+                name="chronicThromboembolicType2"
+                [value]="chronicThromboembolicType.Type2ProximalOfTheSegmentArteries"
+                rrUnClickRadio
+                class="text-break"
+                label="{{'thoraxCT.mediastinum.typeProximalToThe.value' | translate}}"
+                [(ngModel)]="model.chronicThromboembolicType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="tho_c_040437"
+                name="chronicThromboembolicType3"
+                [value]="chronicThromboembolicType.Type3DistalSegmentalSubsegmental"
+                rrUnClickRadio
+                class="text-break"
+                label="{{'thoraxCT.mediastinum.typeDistalSegmentalsubsegmental.value' | translate}}"
+                [(ngModel)]="model.chronicThromboembolicType"
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="model.detailsPulmonaryHypertensionType !== detailsPulmonaryHypertensionType.GroupChronicThromboembolic"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-10"
+  ></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10"></div>
+</div>

@@ -1,0 +1,76 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-list">
+        <h1 rr-id="han_m_040103">
+          {{ 'handMRT.tendinopathy.finding.value' | translate }}*
+        </h1>
+        <div class="f-vertical o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="han_m_060104"
+            name="areFindings"
+            value="False"
+            label="{{ 'handMRT.tendinopathy.normalImagingOfThe.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="han_m_060105"
+            name="areFindings"
+            value="True"
+            label="{{ 'handMRT.tendinopathy.finding.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [attr.name]="'findingHandlerComponent'"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-vertical f-space-between c-pad-l">
+      <div *ngIf="findingHandler.currentItem.findingType !== 'None'">
+        <h1 rr-id="han_m_060201">
+          {{ 'handMRT.tendinopathy.findingXX.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <rr-flexor-tendons
+        *ngIf="findingHandler.currentItem.findingType === 'FlexorTendons'"
+        [model]="findingHandler.currentItem"
+        [differentialDiagnoseFlexorTendon]="differentialDiagnoseFlexorTendon"
+      ></rr-flexor-tendons>
+      <rr-extensor-tendons
+        *ngIf="findingHandler.currentItem.findingType === 'ExtensorTendons'"
+        [model]="findingHandler.currentItem"
+        [differentialDiagnoseExtensorTendon]="differentialDiagnoseExtensorTendon"
+      ></rr-extensor-tendons>
+      <rr-ganglion
+        *ngIf="findingHandler.currentItem.findingType === 'Ganglion'"
+        [model]="findingHandler.currentItem"
+        [extensorTypes]="extensorTypes"
+        [flexorTypes]="flexorTypes"
+      ></rr-ganglion>
+      <div
+        class="f-horizontal tendinopathy"
+        *ngIf="findingHandler.currentItem.findingType === 'None'"
+      >
+        <div class="f-horizontal">
+          <div class="c-col-1 c-pad-r c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

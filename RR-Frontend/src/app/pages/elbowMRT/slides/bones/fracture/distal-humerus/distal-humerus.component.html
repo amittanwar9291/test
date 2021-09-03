@@ -1,0 +1,598 @@
+<div class="f-horizontal f-start  col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep-l c-pad o-radio-list m-t-34">
+    <h2 rr-id="elb_m_0403101">
+      {{'elbowMRT.bones.assessmentOfFractureClassification.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="elb_m_0403124"
+      label="{{'elbowMRT.bones.13AExtraarticular.value' | translate}}"
+      name="aoClassificationType"
+      [(ngModel)]="model.aoClassificationType"
+      [rrContentReset]="clearAOClassificationTypeDetails(aoClassificationTypeEnum.Extraarticular)"
+      [value]="aoClassificationTypeEnum.Extraarticular"
+      rrValidation="aoClassificationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="elb_m_0403125"
+      label="{{'elbowMRT.bones.13BPartiallyArticularmonocondylar.value' | translate}}"
+      name="aoClassificationType"
+      [(ngModel)]="model.aoClassificationType"
+      [rrContentReset]="clearAOClassificationTypeDetails(aoClassificationTypeEnum.PartialArticular)"
+      [value]="aoClassificationTypeEnum.PartialArticular"
+      rrValidation="aoClassificationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="elb_m_0403126"
+      label="{{'elbowMRT.bones.13CArticularBicondylar.value' | translate}}"
+      name="aoClassificationType"
+      [(ngModel)]="model.aoClassificationType"
+      [rrContentReset]="clearAOClassificationTypeDetails(aoClassificationTypeEnum.Articular)"
+      [value]="aoClassificationTypeEnum.Articular"
+      rrValidation="aoClassificationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="elb_m_0403127"
+      class="text-break2"
+      label="{{'elbowMRT.bones.distalHumeralFractureNot.value' | translate}}"
+      name="aoClassificationType"
+      [(ngModel)]="model.aoClassificationType"
+      [rrContentReset]="clearAOClassificationTypeDetails(aoClassificationTypeEnum.DistalHumeralFractureNotFurtherSpecified)"
+      [value]="aoClassificationTypeEnum.DistalHumeralFractureNotFurtherSpecified"
+      rrValidation="aoClassificationType"
+    ></p-radioButton>
+
+    <div
+      id="DistalHumeralFractureNotFurtherSpecified-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model.aoClassificationType !== aoClassificationTypeEnum.DistalHumeralFractureNotFurtherSpecified"
+    >
+      <p-radioButton
+        rr-id="elb_m_0403128"
+        label="{{'elbowMRT.bones.fractureOlderConsolidated.value' | translate}}"
+        name="notFurtherSpecifiedType"
+        rrUnClickRadio
+        [(ngModel)]="model.notFurtherSpecifiedType"
+        [value]="notFurtherSpecifiedTypeEnum.FractureOlderRemodeled"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0403129"
+        label="{{'elbowMRT.bones.suspectedDiagnosis.value' | translate}}"
+        name="notFurtherSpecifiedType"
+        rrUnClickRadio
+        [(ngModel)]="model.notFurtherSpecifiedType"
+        [value]="notFurtherSpecifiedTypeEnum.SuspectedDiagnosis"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="aoClassificationTypeDetails-block"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad o-radio-list m-t-65"
+  >
+    <h2
+      *ngIf="model.aoClassificationType !== aoClassificationTypeEnum.None && model.aoClassificationType !== aoClassificationTypeEnum.DistalHumeralFractureNotFurtherSpecified"
+      rr-id="elb_m_040401"
+    >
+      {{'elbowMRT.bones.fractureType.value' | translate}}
+    </h2>
+    <div
+      *ngIf="model.aoClassificationType === aoClassificationTypeEnum.Extraarticular"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_040418"
+        label="{{'elbowMRT.bones.13A1Avulsion.value' | translate}}"
+        name="fractureFormType"
+        rrUnClickRadio
+        rrContentReset="Avulsion-block SimpleExtraarticularFx-block MultifragmentaryExtraarticularFx-block"
+        [(ngModel)]="model.fractureFormType"
+        [value]="fractureFormTypeEnum.Avulsion"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040419"
+        label="{{'elbowMRT.bones.13A2SimpleExtraarticularFx.value' | translate}}"
+        name="fractureFormType"
+        rrUnClickRadio
+        rrContentReset="Avulsion-block SimpleExtraarticularFx-block MultifragmentaryExtraarticularFx-block"
+        [(ngModel)]="model.fractureFormType"
+        [value]="fractureFormTypeEnum.SimpleExtraarticularFx"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040420"
+        label="{{'elbowMRT.bones.13A3MultifragmentaryextraarticularFx.value' | translate}}"
+        name="fractureFormType"
+        rrUnClickRadio
+        rrContentReset="Avulsion-block SimpleExtraarticularFx-block MultifragmentaryExtraarticularFx-block"
+        [(ngModel)]="model.fractureFormType"
+        [value]="fractureFormTypeEnum.MultifragmentaryExtraarticularFx"
+      ></p-radioButton>
+    </div>
+
+    <div
+      *ngIf="model.aoClassificationType === aoClassificationTypeEnum.PartialArticular"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_040421"
+        label="{{'elbowMRT.bones.13B1LateralSagittalFracture.value' | translate}}"
+        name="fractureFormType"
+        rrUnClickRadio
+        rrContentReset="LateralSagittalFracture-block MedialSagittalFracture-block CoronalPlaneFracture-block"
+        [(ngModel)]="model.fractureFormType"
+        [value]="fractureFormTypeEnum.LateralSagittalFracture"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040422"
+        label="{{'elbowMRT.bones.13B2MedialSagittalFracture.value' | translate}}"
+        name="fractureFormType"
+        rrUnClickRadio
+        rrContentReset="LateralSagittalFracture-block MedialSagittalFracture-block CoronalPlaneFracture-block"
+        [(ngModel)]="model.fractureFormType"
+        [value]="fractureFormTypeEnum.MedialSagittalFracture"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040423"
+        label="{{'elbowMRT.bones.13B3CoronalPlaneFracture.value' | translate}}"
+        name="fractureFormType"
+        rrUnClickRadio
+        rrContentReset="LateralSagittalFracture-block MedialSagittalFracture-block CoronalPlaneFracture-block"
+        [(ngModel)]="model.fractureFormType"
+        [value]="fractureFormTypeEnum.CoronalPlaneFracture"
+      ></p-radioButton>
+    </div>
+
+    <div
+      *ngIf="model.aoClassificationType === aoClassificationTypeEnum.Articular"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_040424"
+        label="{{'elbowMRT.bones.13C1ArticularSimplemetaphyseal.value' | translate}}"
+        name="fractureFormType"
+        [(ngModel)]="model.fractureFormType"
+        rrUnClickRadio
+        rrContentReset="ArticularSimpleMetaphysealSimple-block SimpleArticularWedgeOrMultifragmentary-block ArticularMultifragmentary-block"
+        [value]="fractureFormTypeEnum.ArticularSimpleMetaphysealSimple"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040425"
+        label="{{'elbowMRT.bones.13C2SimpleArticularWedge.value' | translate}}"
+        name="fractureFormType"
+        [(ngModel)]="model.fractureFormType"
+        rrUnClickRadio
+        rrContentReset="ArticularSimpleMetaphysealSimple-block SimpleArticularWedgeOrMultifragmentary-block ArticularMultifragmentary-block"
+        [value]="fractureFormTypeEnum.SimpleArticularWedgeOrMultifragmentary"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040426"
+        label="{{'elbowMRT.bones.articularMultifragmentary.value' | translate}}"
+        name="fractureFormType"
+        [(ngModel)]="model.fractureFormType"
+        rrUnClickRadio
+        rrContentReset="ArticularSimpleMetaphysealSimple-block SimpleArticularWedgeOrMultifragmentary-block ArticularMultifragmentary-block"
+        [value]="fractureFormTypeEnum.ArticularMultifragmentary"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="fractureFormSubType-block"
+    class="c-col-1 f-vertical f-start o-radio-list c-sep-l c-pad-l"
+    [class.m-t-96]="model.fractureFormType !== fractureFormTypeEnum.None"
+  >
+    <div
+      id="Avulsion-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.Avulsion"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405100"
+        label="{{'elbowMRT.bones.lateralEpicondyle.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.LateralEpicondyle"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405101"
+        label="{{'elbowMRT.bones.medialEpicondyle.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.MedialEpcondyle"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="SimpleExtraarticularFx-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.SimpleExtraarticularFx"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405102"
+        label="{{'elbowMRT.bones.13A21SpiralFracture.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.SpiralFracture"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405103"
+        label="{{'elbowMRT.bones.13A22ObliqueFracture.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.ObliqueFracture"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405104"
+        label="{{'elbowMRT.bones.13A23TransverseFracture.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.TransverseFracture"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="MultifragmentaryExtraarticularFx-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.MultifragmentaryExtraarticularFx"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405105"
+        label="{{'elbowMRT.bones.13A31WithAnIntact.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="ComminutedFractureMetaphyseal-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.WithAnIntactSupracondylarWedge"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405106"
+        label="{{'elbowMRT.bones.13A32WithAFragmented.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="ComminutedFractureMetaphyseal-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.WithAFragmentedSupracondylarWedge"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405107"
+        label="{{'elbowMRT.bones.13A33ComminutedFracturemetaphyseal.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="ComminutedFractureMetaphyseal-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.ComminutedFractureMetaphyseal"
+      ></p-radioButton>
+      <div
+        id="ComminutedFractureMetaphyseal-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureFormSubType === fractureFormSubTypeEnum.ComminutedFractureMetaphyseal || model.fractureFormSubType === fractureFormSubTypeEnum.None"
+      >
+        <p-radioButton
+          rr-id="elb_m_0405108"
+          label="{{'elbowMRT.bones.fLateral.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.FLateral"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405109"
+          label="{{'elbowMRT.bones.hMedial.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.HMedia"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <!--    13B-->
+    <div
+      id="LateralSagittalFracture-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.LateralSagittalFracture"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_040525"
+        label="{{'elbowMRT.bones.13B11Transtrochlear.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="CapitulumHumeri-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.Transtrochlear"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040526"
+        label="{{'elbowMRT.bones.13B12CapitulumHumeri.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="CapitulumHumeri-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.CapitulumHumeri"
+      ></p-radioButton>
+      <div
+        id="CapitulumHumeri-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureFormSubType !== fractureFormSubTypeEnum.CapitulumHumeri"
+      >
+        <p-radioButton
+          rr-id="elb_m_040519"
+          rrUnClickRadio
+          label="{{'elbowMRT.bones.qTranscapitellar.value' | translate}}"
+          name="classificationAccordingToMasonType"
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.QTranscapitellar"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_040520"
+          rrUnClickRadio
+          label="{{'elbowMRT.bones.rBetweenCapitulumand.value' | translate}}"
+          name="classificationAccordingToMasonType"
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.RBetweenCapitulumAndTrochlea"
+        ></p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="elb_m_040527"
+        rrUnClickRadio
+        rrContentReset="CapitulumHumeri-block"
+        label="{{'elbowMRT.bones.13B13FragmentedtranstrochlearFracture.value' | translate}}"
+        name="fractureFormSubType"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.FragmentedTranstrochlearFracture"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="MedialSagittalFracture-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.MedialSagittalFracture"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405110"
+        label="{{'elbowMRT.bones.transtrochlearSimpleThroughTrochlearSulcus.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.TranstrochlearSimpleThroughTrochlearSulcus"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405111"
+        label="{{'elbowMRT.bones.13B22TranstrochlearSimplethrough.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.TranstrochlearSimpleThroughMedialArticularSurface"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405112"
+        label="{{'elbowMRT.bones.13B23FragmentedtranstrochlearFracture.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.FragmentedTranstrochlearFracture"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="CoronalPlaneFracture-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.CoronalPlaneFracture"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405150"
+        label="{{'elbowMRT.bones.13B31Capitulum.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.Capitulum"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405151"
+        label="{{'elbowMRT.bones.13B32Trochlea.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.Trochlea"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405152"
+        label="{{'elbowMRT.bones.13B33CapitulumAndTrochlea.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.CapitulumAndTrochlea"
+      ></p-radioButton>
+    </div>
+
+    <!--    C1-->
+    <div
+      id="ArticularSimpleMetaphysealSimple-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.ArticularSimpleMetaphysealSimple"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405113"
+        label="{{'elbowMRT.bones.13C11AboveThetranscondylar.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.AboveTheTranscondylarAxis"
+        class="text-break2"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405114"
+        label="{{'elbowMRT.bones.13C13ThroughOrBelow.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.BelowOrThroughTranscondylarAxis"
+        class="text-break2"
+      ></p-radioButton>
+    </div>
+
+    <!--    C2     -->
+    <div
+      id="SimpleArticularWedgeOrMultifragmentary-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.SimpleArticularWedgeOrMultifragmentary"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405115"
+        label="{{'elbowMRT.bones.13C21WithIntactsupracondylar.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="ComplexMultifragmentary-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.WithAnIntactSupracondylarWedge"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405116"
+        label="{{'elbowMRT.bones.13C22WithFragmentedSupracondylar.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="ComplexMultifragmentary-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.WithAFragmentedSupracondylarWedge"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0405117"
+        label="{{'elbowMRT.bones.13C23Complexmultifragmentary.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="ComplexMultifragmentary-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.ComplexMultifragmentary"
+      ></p-radioButton>
+      <div
+        id="ComplexMultifragmentary-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureFormSubType === fractureFormSubTypeEnum.ComplexMultifragmentary || model.fractureFormSubType === fractureFormSubTypeEnum.None"
+      >
+        <p-radioButton
+          rr-id="elb_m_0405118"
+          label="{{'elbowMRT.bones.fLateral.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.FLateral"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405119"
+          label="{{'elbowMRT.bones.hMedial.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.HMedia"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405120"
+          label="{{'elbowMRT.bones.uIntactWedge.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.UIntactWedge"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <!--    C3     -->
+    <div
+      id="ArticularMultifragmentary-block"
+      *ngIf="model.fractureFormType === fractureFormTypeEnum.ArticularMultifragmentary"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="elb_m_0405121"
+        label="{{'elbowMRT.bones.13C31MetaphysealSimple.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="MetaphysealSimple-block WithMetaphysealFractureWedge-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.MetaphysealSimple"
+      ></p-radioButton>
+      <div
+        id="MetaphysealSimple-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureFormSubType !== fractureFormSubTypeEnum.MetaphysealSimple"
+      >
+        <p-radioButton
+          rr-id="elb_m_0405122"
+          label="{{'elbowMRT.bones.sProximalToThe.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.SProximalToTheTranscodylarAxis"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405123"
+          label="{{'elbowMRT.bones.tDistalOfThe.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.TDistalToTheTranscodylarAxis"
+        ></p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="elb_m_0405124"
+        label="{{'elbowMRT.bones.13C32WithMetaphysealWedge.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="MetaphysealSimple-block WithMetaphysealFractureWedge-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.WithMetaphysealFractureWedge"
+      ></p-radioButton>
+      <div
+        id="WithMetaphysealFractureWedge-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureFormSubType !== fractureFormSubTypeEnum.WithMetaphysealFractureWedge"
+      >
+        <p-radioButton
+          rr-id="elb_m_0405125"
+          label="{{'elbowMRT.bones.fLateral.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.FLateral"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405126"
+          label="{{'elbowMRT.bones.hMedial.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.HMedia"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405127"
+          label="{{'elbowMRT.bones.lFragmented.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.LFragmented"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="elb_m_0405128"
+          label="{{'elbowMRT.bones.uIntactWedge.value' | translate}}"
+          name="fractureFormDetailsType"
+          rrUnClickRadio
+          [(ngModel)]="model.fractureFormDetailsType"
+          [value]="fractureFormDetailsTypeEnum.UIntactWedge"
+        ></p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="elb_m_0405129"
+        label="{{'elbowMRT.bones.13C33MetaphysealComplexmultifragmentary.value' | translate}}"
+        name="fractureFormSubType"
+        rrUnClickRadio
+        rrContentReset="MetaphysealSimple-block WithMetaphysealFractureWedge-block"
+        [(ngModel)]="model.fractureFormSubType"
+        [value]="fractureFormSubTypeEnum.MetaphysealComplexOrMultiFragmentary"
+      ></p-radioButton>
+    </div>
+  </div>
+</div>

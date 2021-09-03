@@ -1,0 +1,317 @@
+<!--1-->
+<div
+  class="c-col-1 c-sep c-pad f-vertical f-start soft-tissues_characterization-two-column o-list tab-column-characterization-two"
+>
+  <div
+    *ngIf="model.findingType === softTissueFindingTypeEnum.ParaspinalMass"
+    class="f-vertical f-start o-radio-list"
+  >
+    <h2 rr-id="spi_m_080211" class="m-t-3">
+      {{'spineMRT.softTissues.perifocalTissueReaction.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="spi_m_080212"
+      label="{{'spineMRT.softTissues.surroundingInflammatoryReaction.value' | translate}}"
+      name="isSurroundingInflammatoryReaction"
+      [(ngModel)]="model.isSurroundingInflammatoryReaction"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="spi_m_080213"
+      label="{{'spineMRT.softTissues.communicationWithTheIntradural.value' | translate}}"
+      name="isCommunicationWithIntraduralSpace"
+      [(ngModel)]="model.isCommunicationWithIntraduralSpace"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="spi_m_080214"
+      label="{{'spineMRT.softTissues.infiltration.value' | translate}}"
+      name="isInfiltration"
+      [(ngModel)]="model.isInfiltration"
+      binary="true"
+      (onChange)="clearLocalizer('isInfiltration', 'spineLocationBones')"
+      rrContentReset="isInfiltration-block"
+    >
+    </p-checkbox>
+
+    <div
+      id="isInfiltration-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isInfiltration"
+    >
+      <p-checkbox
+        rr-id="spi_m_080215"
+        label="{{'spineMRT.softTissues.bones.value' | translate}}"
+        name="isBones"
+        [(ngModel)]="model.isBones"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="spi_m_080216"
+        label="{{'spineMRT.softTissues.muscle.value' | translate}}"
+        name="isMuscle"
+        [(ngModel)]="model.isMuscle"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="spi_m_080217"
+        label="{{'spineMRT.softTissues.nerveRoot.value' | translate}}"
+        name="isNerveRoot"
+        (onChange)="clearLocalizer('isNerveRoot', 'spineLocationBones')"
+        [(ngModel)]="model.isNerveRoot"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isNerveRoot"
+    >
+      <p rr-id="spi_m_080218" class="m-t-12">
+        {{'spineMRT.softTissues.localization.value' | translate}}
+      </p>
+      <rr-spine-simple-sides
+        rr-id="spi_m_080219"
+        class="scaled-localizer"
+        [spineDirectionalLocation]="model.spineLocationBones"
+        [discLocalization]="false"
+        (click)="openLargeLocalizer(true, model.spineLocationBones, 'spineLocationBones', false)"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple-sides>
+    </div>
+  </div>
+
+  <div
+    *ngIf="model.findingType === softTissueFindingTypeEnum.IntraduralExtramedullaryMass"
+    class="f-vertical f-start o-radio-list"
+  >
+    <h2 rr-id="spi_m_080222">
+      {{'spineMRT.softTissues.secondaryOsseousChanges.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="spi_m_080223"
+      label="{{'spineMRT.softTissues.extensionOsseousNeuralForamen.value' | translate}}"
+      name="isExtensionOsseousNeuralForamen"
+      (onChange)="clearLocalizer('isExtensionOsseousNeuralForamen', 'spineLocationDisks2')"
+      [(ngModel)]="model.isExtensionOsseousNeuralForamen"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="spi_m_080224"
+      label="{{'spineMRT.softTissues.scalloping.value' | translate}}"
+      name="isScalloping"
+      [(ngModel)]="model.isScalloping"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="spi_m_080225"
+      label="{{'spineMRT.softTissues.osteolysis.value' | translate}}"
+      name="isOsteolysis"
+      [(ngModel)]="model.isOsteolysis"
+      binary="true"
+    >
+    </p-checkbox>
+
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isExtensionOsseousNeuralForamen"
+    >
+      <p rr-id="spi_m_080218">
+        {{'spineMRT.softTissues.localization.value' | translate}}
+      </p>
+      <rr-spine-simple-sides
+        rr-id="spi_m_080221"
+        class="scaled-localizer"
+        [spineDirectionalLocation]="model.spineLocationDisks2"
+        [discLocalization]="true"
+        (click)="openLargeLocalizer(true, model.spineLocationDisks2, 'spineLocationDisks2', true)"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple-sides>
+    </div>
+  </div>
+</div>
+
+<!--2-->
+<div
+  class="c-col-1 c-sep c-pad  soft-tissues_characterization-two-column tab-column-characterization-two"
+>
+  <div class="f-vertical f-start o-list diagnosis-width">
+    <h2 rr-id="spi_m_0803301" class="m-b-12">
+      {{'spineMRT.softTissues.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div class="o-radio-list">
+      <div [rrDisable]="disabledDiagnosis()" class="m-b-7">
+        <p rr-id="spi_m_0803302" class="m-b-2">
+          {{'spineMRT.softTissues.differentialDiagnosis1.value' | translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="getDiagnosisType()"
+          [(ngModel)]="model.differentialDiagnosis1"
+          name="differentialDiagnosis1"
+          rrId="spi_m_0803303"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1"
+          (selectionChanged)="clearDifferentialDiagnosis()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+
+      <div
+        [rrDisable]="model.differentialDiagnosis1 === softTissueDiagnosisTypeEnum.None && model.differentialDiagnosis === softTissueDiagnosisTypeEnum.None"
+        class="o-radio-list"
+      >
+        <p rr-id="spi_m_0803304" class="m-b-2">
+          {{'spineMRT.softTissues.differentialDiagnosis2.value' | translate}}
+        </p>
+        <div class="spine-bones_dropdown">
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="2"
+            [options]="getDiagnosisType()"
+            [(ngModel)]="model.differentialDiagnosis2"
+            name="differentialDiagnosis2"
+            rrId="spi_m_0803305"
+            [parentViewModel]="model"
+            (selectionChanged)="clearDifferentialDiagnosis()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis2 === softTissueDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="spi_m_0803306"
+          class="m-b-15"
+          label="{{'spineMRT.softTissues.secondary.value' | translate}}"
+          name="isSecondary"
+          [(ngModel)]="model.isSecondary"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<!--3-->
+<div
+  class="c-col-1 c-sep c-pad soft-tissues_characterization-two-column tab-column-characterization-two"
+>
+  <div
+    *ngIf="model.findingType === softTissueFindingTypeEnum.ParaspinalMass"
+    class="f-vertical f-start o-radio-list"
+  >
+    <p-checkbox
+      rr-id="spi_m_080410"
+      labelStyleClass="ui-fat-label"
+      label="{{'spineMRT.softTissues.lesionSamePathology.value' | translate}}"
+      name="isMoreThanOneLesion"
+      (onChange)="clearLocalizer('isMoreThanOneLesion', 'spineLocation2', true)"
+      [(ngModel)]="model.isMoreThanOneLesion"
+      binary="true"
+    >
+    </p-checkbox>
+
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isMoreThanOneLesion"
+    >
+      <p rr-id="spi_m_080411" class="text-break m-t-9">
+        {{'spineMRT.softTissues.localizationNontargetLesions.value' |
+        translate}}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_m_080412"
+        [spineLocation]="model.spineLocation2"
+        (click)="openLargeLocalizer(false)"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple>
+    </div>
+  </div>
+
+  <div
+    *ngIf="model.findingType === softTissueFindingTypeEnum.IntraduralExtramedullaryMass"
+    class="f-vertical f-start o-radio-list"
+  >
+    <p-checkbox
+      rr-id="spi_m_080410"
+      labelStyleClass="ui-fat-label"
+      label="{{'spineMRT.softTissues.lesionSamePathology.value' | translate}}"
+      name="isMoreThanOneLesion"
+      class="m-b-16"
+      (onChange)="clearLocalizer('isMoreThanOneLesion', 'spineLocationDisks3')"
+      [(ngModel)]="model.isMoreThanOneLesion"
+      rrContentReset="MoreThanOneLesionDataContainer"
+      binary="true"
+    >
+    </p-checkbox>
+    <div
+      id="MoreThanOneLesionDataContainer"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isMoreThanOneLesion"
+    >
+      <p rr-id="spi_m_0804301" class="text-break">
+        {{'spineMRT.softTissues.localizationNontargetLesions.value' |
+        translate}}
+      </p>
+      <rr-spine-simple-sides
+        rr-id="spi_m_0804302"
+        class="scaled-localizer-small"
+        [spineDirectionalLocation]="model.spineLocationDisks3"
+        [discLocalization]="true"
+        (click)="openLargeLocalizer(true, model.spineLocationDisks3, 'spineLocationDisks3', true)"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple-sides>
+
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_m_080423"
+        name="neurofibromatosisType"
+        class="text-break neurofibromatosis-margin"
+        label="{{'spineMRT.softTissues.neurofibromatosisTypeMRecklinghausen.value' | translate }}"
+        [value]="neurofibromatosisTypeEnum.Type1"
+        [(ngModel)]="model.neurofibromatosisType"
+        rrContentReset="isSuspicionOf-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_m_080424"
+        name="neurofibromatosisType"
+        class="text-break"
+        label="{{'spineMRT.softTissues.neurofibromatosisType.value' | translate }}"
+        [value]="neurofibromatosisTypeEnum.Type2"
+        [(ngModel)]="model.neurofibromatosisType"
+        rrContentReset="isSuspicionOf-block"
+      >
+      </p-radioButton>
+      <div
+        id="isSuspicionOf-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.neurofibromatosisType === neurofibromatosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="spi_m_080425"
+          label="{{'spineMRT.softTissues.suspicionOf.value' | translate}}"
+          name="isSuspicionOf"
+          [(ngModel)]="model.isSuspicionOf"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<!--4-->
+<div
+  class="c-col-1 c-sep c-pad-l soft-tissues_characterization-two-column tab-column-characterization-two"
+></div>

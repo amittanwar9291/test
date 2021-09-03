@@ -1,0 +1,103 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_060276">
+        {{ "thoraxMRT.pleura.differentialDiagnosis.value" | translate }}
+      </h2>
+      <div
+        class="f-vertical f-start o-radio-list m-r-12 p-b-1"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+      >
+        <p class="m-b-2" rr-id="tho_m_060277">
+          {{ "thoraxMRT.pleura.differentialDiagnosis1.value" | translate }}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="ddlW024"
+          [(ngModel)]="model.differentialDiagnosis1"
+          group="true"
+          name="differentialDiagnosis1"
+          rrId="tho_m_060278"
+          (selectionChanged)="clearDDLCheckboxes()"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis1"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list m-r-12"
+        [rrDisable]="
+          model.differentialDiagnosis1 === pleuraDiagnosisTypeEnum.None
+        "
+      >
+        <p-checkbox
+          rr-id="tho_m_060279"
+          name="isSuspicionOf"
+          [(ngModel)]="model.isSuspicionOf"
+          label="{{ 'thoraxMRT.pleura.suspicionOf.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <p class="m-b-3" rr-id="tho_m_060280">
+          {{ "thoraxMRT.pleura.differentialDiagnosis2.value" | translate }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="ddlW025"
+          [(ngModel)]="model.differentialDiagnosis2"
+          group="true"
+          name="differentialDiagnosis2"
+          rrId="tho_m_060281"
+          (selectionChanged)="clearSubordinateCheckbox()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="f-vertical f-start o-radio-list"
+          [rrDisable]="
+            model.differentialDiagnosis2 === pleuraDiagnosisTypeEnum.None
+          "
+        >
+          <p-checkbox
+            rr-id="tho_m_060282"
+            name="isSubordinate"
+            [(ngModel)]="model.isSubordinate"
+            label="{{ 'thoraxMRT.pleura.subordinate.value' | translate }}"
+            binary="true"
+          ></p-checkbox>
+          <p class="m-b-3" rr-id="tho_m_060283">
+            {{ "thoraxMRT.pleura.differentialDiagnosis3.value" | translate }}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="3"
+            [options]="ddlW025"
+            [(ngModel)]="model.differentialDiagnosis3"
+            group="true"
+            name="differentialDiagnosis3"
+            rrId="tho_m_060284"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+      </div>
+      <p-checkbox
+        class="m-t-17"
+        rr-id="tho_m_060285"
+        name="isMoreThan1Lesion"
+        [(ngModel)]="model.isMoreThan1Lesion"
+        label="{{ 'thoraxMRT.pleura.lesionSamePathology.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10 f-vertical">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        pictureFileType="uploadedImageFile"
+        name="referencePicture"
+        [elementsRrIds]="referencePictureRrIds"
+      ></rr-reference-picture>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+  <div class="c-col-1 c-pad-l m-t-10 m-b-10"></div>
+</div>

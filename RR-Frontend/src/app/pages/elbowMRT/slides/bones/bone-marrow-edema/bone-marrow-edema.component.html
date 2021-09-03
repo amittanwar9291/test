@@ -1,0 +1,140 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2 rr-id="elb_m_040211" class="m-b-14" rrInfoIcon="elb_m_04_05">
+      {{'elbowMRT.bones.extension.value' | translate}}*
+    </h2>
+    <p-checkbox
+      rr-id="elb_m_040213"
+      label="{{'elbowMRT.bones.humerusLateralEpicondyle.value' | translate}}"
+      name="isHumerusLateralEpicondyle"
+      rrValidation="isHumerusLateralEpicondyle isHumerusMedialEpicondyle isRadialHead isUlnaProximal isOlecranon"
+      binary="true"
+      [(ngModel)]="model.isHumerusLateralEpicondyle"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="elb_m_040214"
+      rrContentReset="isApophysitis-block"
+      label="{{'elbowMRT.bones.humerusMedialEpicondyle.value' | translate}}"
+      name="isHumerusMedialEpicondyle"
+      rrValidation="isHumerusLateralEpicondyle isHumerusMedialEpicondyle isRadialHead isUlnaProximal isOlecranon"
+      binary="true"
+      [(ngModel)]="model.isHumerusMedialEpicondyle"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="elb_m_040215"
+      label="{{'elbowMRT.bones.radialHead.value' | translate}}"
+      name="isRadialHead"
+      rrValidation="isHumerusLateralEpicondyle isHumerusMedialEpicondyle isRadialHead isUlnaProximal isOlecranon"
+      binary="true"
+      [(ngModel)]="model.isRadialHead"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="elb_m_040216"
+      label="{{'elbowMRT.bones.ulnaProximal.value' | translate}}"
+      name="isUlnaProximal"
+      rrValidation="isHumerusLateralEpicondyle isHumerusMedialEpicondyle isRadialHead isUlnaProximal isOlecranon"
+      binary="true"
+      [(ngModel)]="model.isUlnaProximal"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="elb_m_0402152"
+      label="{{'elbowMRT.bones.olecranon.value' | translate}}"
+      name="isOlecranon"
+      rrValidation="isHumerusLateralEpicondyle isHumerusMedialEpicondyle isRadialHead isUlnaProximal isOlecranon"
+      binary="true"
+      [(ngModel)]="model.isOlecranon"
+    ></p-checkbox>
+
+    <h2 rr-id="elb_m_040217" class="m-t-21">
+      {{'elbowMRT.bones.distribution.value' | translate}}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      [(ngModel)]="model.distributionType"
+      name="distributionType"
+      [value]="distributionTypeEnum.Subchondral"
+      label="{{ 'elbowMRT.bones.subchondral.value' | translate }}"
+      rr-id="elb_m_040218"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      [(ngModel)]="model.distributionType"
+      name="distributionType"
+      [value]="distributionTypeEnum.Circumscribed"
+      label="{{ 'elbowMRT.bones.focal.value' | translate }}"
+      rr-id="elb_m_040219"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      [(ngModel)]="model.distributionType"
+      name="distributionType"
+      [value]="distributionTypeEnum.Diffuse"
+      label="{{ 'elbowMRT.bones.diffuse.value' | translate }}"
+      rr-id="elb_m_040220"
+    ></p-radioButton>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start o-radio-list c-sep c-pad ">
+    <h2 rr-id="elb_m_0403176" class="m-b-14">
+      {{'elbowMRT.bones.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="elb_m_0403177"
+      label="{{'elbowMRT.bones.subchondralFracture.value' | translate}}"
+      name="isSubchondralFracture"
+      binary="true"
+      [(ngModel)]="model.isSubchondralFracture"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="elb_m_0403178"
+      label="{{'elbowMRT.bones.impaction.value' | translate}}"
+      name="isImpaction"
+      binary="true"
+      [(ngModel)]="model.isImpaction"
+    ></p-checkbox>
+    <div
+      id="isApophysitis-block"
+      [rrDisable]="!isLessThan18YearsOld || !model.isHumerusMedialEpicondyle"
+    >
+      <p-checkbox
+        rr-id="elb_m_0403179"
+        label="{{'elbowMRT.bones.apophysitis.value' | translate}}"
+        name="isApophysitis"
+        binary="true"
+        [(ngModel)]="model.isApophysitis"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="elb_m_0403180"
+      label="{{'elbowMRT.bones.epicondylitisHumeri.value' | translate}}"
+      name="isEpicondylitisHumeri"
+      binary="true"
+      rrContentReset="isEpicondylitisHumeri-block"
+      [(ngModel)]="model.isEpicondylitisHumeri"
+    ></p-checkbox>
+    <div
+      id="isEpicondylitisHumeri-block"
+      [rrDisable]="!model.isEpicondylitisHumeri"
+      class="f-vertical f-start o-radio-list nested-content"
+    >
+      <p-checkbox
+        rr-id="elb_m_0403181"
+        label="{{'elbowMRT.bones.radial.value' | translate}}"
+        name="isRadial"
+        binary="true"
+        [(ngModel)]="model.isRadial"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_0403182"
+        label="{{'elbowMRT.bones.ulnar.value' | translate}}"
+        name="isUlnar"
+        binary="true"
+        [(ngModel)]="model.isUlnar"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad"></div>
+
+  <div class="c-col-1 c-pad-l"></div>
+</div>

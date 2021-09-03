@@ -1,0 +1,158 @@
+<div class="f-vertical f-start o-radio-list col-h-100 p-t-14">
+  <h2 rr-id="tho_c_0702155">
+    {{'thoraxCT.softParts.liverDetails.value' | translate}}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+      <p-checkbox
+        rr-id="tho_c_0702103"
+        name="isFocalLiverLesion"
+        rrValidation="isFocalLiverLesion isDiffuseLiverLesion"
+        rrContentReset="isFocalLiverLesion-block"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{'thoraxCT.softParts.focalLiverLesion.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isFocalLiverLesion"
+      ></p-checkbox>
+      <div
+        id="isFocalLiverLesion-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isFocalLiverLesion"
+      >
+        <p rr-id="tho_c_0702104" class="m-b-3">
+          {{'thoraxCT.softParts.localizationLiverLobes.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="tho_c_0702105"
+          name="abdomenLocalizationType"
+          [(ngModel)]="model.abdomenLocalizationType"
+          rrUnClickRadio
+          [value]="abdomenLocalizationTypeEnum.Right"
+          label="{{'thoraxCT.softParts.right.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0702106"
+          name="abdomenLocalizationType"
+          [(ngModel)]="model.abdomenLocalizationType"
+          rrUnClickRadio
+          [value]="abdomenLocalizationTypeEnum.Left"
+          label="{{'thoraxCT.softParts.left.value' | translate}}"
+        ></p-radioButton>
+        <p rr-id="tho_c_0702156" class="m-t-19 m-b-2">
+          {{'thoraxCT.softParts.size.value' | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="tho_c_0702107"
+          labelRrId="tho_c_0702108"
+          name="focalLiverLesionMaxDiameterAxialInMm"
+          rrValidation="focalLiverLesionMaxDiameterAxialInMm"
+          [(ngModel)]="model.focalLiverLesionMaxDiameterAxialInMm"
+          [label]="'thoraxCT.softParts.maxDiameterAxialInMm.value' | translate"
+          [config]="{labelWidth: 175, min: 1, max: 999, placeholder: '---'}"
+        ></rr-number-input>
+        <p rr-id="tho_c_0702109" class="m-t-17 m-b-1">
+          {{'thoraxCT.softParts.classification2.value' | translate}}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="classificationTypeOptions"
+          name="abdomenClassificationType"
+          rr-id="tho_c_0702110"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.abdomenClassificationType"
+        >
+        </p-dropdown>
+        <p-checkbox
+          rr-id="tho_c_0702117"
+          name="isMoreThanOneLesion"
+          class="m-t-21"
+          label="{{'thoraxCT.softParts.lesionOfTheSame.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMoreThanOneLesion"
+        ></p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+      <p-checkbox
+        rr-id="tho_c_070391"
+        name="isDiffuseLiverLesion"
+        rrValidation="isFocalLiverLesion isDiffuseLiverLesion"
+        [labelStyleClass]="'ui-fat-label'"
+        rrContentReset="isDiffuseLiverLesion-block"
+        label="{{'thoraxCT.softParts.diffuseLiverLesion.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isDiffuseLiverLesion"
+      ></p-checkbox>
+      <div
+        id="isDiffuseLiverLesion-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isDiffuseLiverLesion"
+      >
+        <p-radioButton
+          rr-id="tho_c_070392"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.SteatosisHepatis"
+          label="{{'thoraxCT.softParts.steatosisHepatis.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_070393"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.CirrhosisOfTheLiver"
+          label="{{'thoraxCT.softParts.cirrhosisOfTheLiver.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_070395"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.Hemosiderosis"
+          label="{{'thoraxCT.softParts.hemosiderosis.value' | translate}}"
+        ></p-radioButton>
+        <div
+          id="Hemosiderosis-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="model.diffuseLesionType === diffuseLesionTypeEnum.SteatosisHepatis || model.diffuseLesionType === diffuseLesionTypeEnum.None"
+        >
+          <p-checkbox
+            rr-id="tho_c_070394"
+            name="isSuspected"
+            label="{{'thoraxCT.softParts.suspected.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isSuspected"
+          ></p-checkbox>
+        </div>
+      </div>
+      <p-checkbox
+        rr-id="tho_c_070396"
+        name="isCholecystolithiasis"
+        class="m-t-20 m-b-30"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{'thoraxCT.softParts.cholecystolithiasis.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCholecystolithiasis"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_070397"
+        class="text-break"
+        name="isWallThickeningOfTheGallBladder"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{'thoraxCT.softParts.wallThickeningOfThe.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isWallThickeningOfTheGallBladder"
+      ></p-checkbox>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad"></div>
+
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

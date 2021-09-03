@@ -1,0 +1,269 @@
+<div class="f-horizontal h-550 w-100">
+  <div class="c-col-1 c-pad f-horizontal m-t-30 m-b-15">
+    <div
+      class="o-list p-l-10"
+      [rrDisable]="isAddidtionalCorpusUteriMassFinding()"
+    >
+      <h2 rr-id="pel_m_060291">
+        {{ 'pelvisMRT.femaleGender.uterus.value' | translate }}
+      </h2>
+      <p rr-id="pel_m_0602429" class="font-15 text-break">
+        {{ 'pelvisMRT.femaleGender.theCorpusUteriCan.value' | translate }}
+      </p>
+      <h2 rr-id="pel_m_060292" class="m-b-18">
+        {{ 'pelvisMRT.femaleGender.orientation.value' | translate }}
+      </h2>
+      <rr-uterus-orientation-small
+        rr-id="pel_m_060293"
+        [uterusOrientation]="model.uterusLocation"
+        (click)="openUterusLocalizer()"
+      >
+      </rr-uterus-orientation-small>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-horizontal m-t-72 m-b-15">
+    <div
+      class="o-list p-l-10"
+      [rrDisable]="isAddidtionalCorpusUteriMassFinding()"
+    >
+      <h2 rr-id="pel_m_060377" class="m-b-10">
+        {{ 'pelvisMRT.femaleGender.sizeUterus.value' | translate }}
+      </h2>
+      <div class="m-b-15">
+        <p rr-id="pel_m_0603442">
+          {{ 'pelvisMRT.femaleGender.axial.value' | translate }}*
+        </p>
+        <rr-number-input
+          inputRrId="pel_m_060378"
+          labelRrId="pel_m_060379"
+          name="sizeUterusAxialInMm"
+          [config]="{min: 1, max: 200, labelWidth: 200, inputWidth: 100}"
+          [label]="'pelvisMRT.femaleGender.inMm.value' | translate"
+          [(ngModel)]="model.sizeUterusAxialInMm"
+          rrValidation="sizeUterusAxialInMm"
+          (ngModelChange)="onSizeUterusAxialInMmChange()"
+        ></rr-number-input>
+      </div>
+      <div class="m-b-15" [rrDisable]="model.sizeUterusAxialInMm === null">
+        <rr-number-input
+          inputRrId="pel_m_060380"
+          labelRrId="pel_m_060381"
+          name="secondPlaneOrthogonalInMm"
+          labelStyleClass="text-break2"
+          [config]="{min: 1, max: 200, labelWidth: 200, inputWidth: 100}"
+          [label]="'pelvisMRT.femaleGender.2ndPlaneOrthogonalIn.value' | translate"
+          [(ngModel)]="model.secondPlaneOrthogonalInMm"
+          (ngModelChange)="onSecondPlaneOrthogonalInMmChange()"
+        ></rr-number-input>
+      </div>
+      <div
+        class="m-b-40"
+        [rrDisable]="model.secondPlaneOrthogonalInMm === null"
+      >
+        <rr-number-input
+          inputRrId="pel_m_060382"
+          labelRrId="pel_m_060383"
+          name="craniocaudalInMm"
+          [config]="{min: 1, max: 200, labelWidth: 95, inputWidth: 100}"
+          [label]="'pelvisMRT.femaleGender.craniocaudalInMm.value' | translate"
+          [(ngModel)]="model.craniocaudalInMm"
+        ></rr-number-input>
+      </div>
+      <div class="m-b-10">
+        <h2 rr-id="pel_m_0603443">
+          {{ 'pelvisMRT.femaleGender.endometrium.value' | translate }}
+        </h2>
+        <p rr-id="pel_m_0603444">
+          {{ 'pelvisMRT.femaleGender.diameterOfTheEndometrium.value' | translate
+          }}
+        </p>
+        <rr-number-input
+          inputRrId="pel_m_060384"
+          labelRrId="pel_m_060385"
+          name="diameterOfTheEndometriumInMm"
+          [config]="{min: 1, max: 200, labelWidth: 200, inputWidth: 100}"
+          [label]="'pelvisMRT.femaleGender.inMm.value' | translate"
+          [(ngModel)]="model.diameterOfTheEndometriumInMm"
+        ></rr-number-input>
+      </div>
+      <div class="m-b-10 text-break">
+        <p rr-id="pel_m_0603445">
+          {{ 'pelvisMRT.femaleGender.diameterOfEndometrialMyometrial.value' |
+          translate }}
+        </p>
+        <rr-number-input
+          inputRrId="pel_m_060386"
+          labelRrId="pel_m_060387"
+          name="diameterOfEndometrialMyometrialZoneInMm"
+          [config]="{min: 1, max: 200, labelWidth: 200, inputWidth: 100}"
+          [label]="'pelvisMRT.femaleGender.inMm.value' | translate"
+          [(ngModel)]="model.diameterOfEndometrialMyometrialZoneInMm"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l m-t-30 m-b-15">
+    <div class="o-list p-l-10 p-r-10">
+      <div [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow">
+        <h2 rr-id="pel_m_0604429" class="m-b-10">
+          {{ 'pelvisMRT.femaleGender.differentialDiagnosis1.value' | translate
+          }}
+          <span *ngIf="model.descriptionType === descriptionTypeEnum.IKnow"
+            >*</span
+          >
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_0604430"
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          group="true"
+          [options]="w048corpusUteriDifferentialDiagnosis01"
+          [(ngModel)]="model.differentialDiagnosis"
+          [parentViewModel]="model"
+          name="differentialDiagnosis"
+          rrValidation="differentialDiagnosis"
+          (selectionChanged)="clearDifferentialDiagnosisDependentFields()"
+        ></rr-differential-diagnosis-dropdown>
+        <p
+          *ngIf="model.differentialDiagnosis === femaleGenderDiagnosisTypeEnum.EndometrialCarcinoma || model.differentialDiagnosis === femaleGenderDiagnosisTypeEnum.Leiomyoma"
+          class="font-15 text-break"
+          rr-id="pel_m_0604700"
+        >
+          {{'pelvisMRT.femaleGender.pleaseNoteFurtherInformation.value' |
+          translate}}
+        </p>
+      </div>
+
+      <h2 rr-id="pel_m_060497" class="m-b-10 m-t-30 text-break">
+        {{ 'pelvisMRT.femaleGender.localizationOfMass.value' | translate }}*
+      </h2>
+      <div class="o-radio-list m-b-25">
+        <p-radioButton
+          rr-id="pel_m_060498"
+          label="{{'pelvisMRT.femaleGender.fundusUteri.value' | translate}}"
+          name="localizationOfMassType"
+          [value]="localizationOfMassTypeEnum.FundusUteri"
+          [(ngModel)]="model.localizationOfMassType"
+          rrValidation="localizationOfMassType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_060499"
+          label="{{'pelvisMRT.femaleGender.corpusUteri.value' | translate}}"
+          name="localizationOfMassType"
+          [value]="localizationOfMassTypeEnum.CorpusUteri"
+          [(ngModel)]="model.localizationOfMassType"
+          rrValidation="localizationOfMassType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0604100"
+          label="{{'pelvisMRT.femaleGender.isthmusUteri.value' | translate}}"
+          name="localizationOfMassType"
+          [value]="localizationOfMassTypeEnum.IsthmusUteri"
+          [(ngModel)]="model.localizationOfMassType"
+          rrValidation="localizationOfMassType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l f-horizontal m-t-30 m-b-15">
+    <div class="o-list p-l-10 p-r-10 w-100">
+      <div class="o-radio-list m-b-29">
+        <h2 rr-id="pel_m_060531" class="m-b-12 text-break">
+          {{ 'pelvisMRT.femaleGender.localizationOfMassAxial.value' | translate
+          }}
+        </h2>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.mucosalsubmucosal.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_060532"
+          rrContentReset="mucosalSubmucosalBlock"
+          name="isMucosalOrSubmucosal"
+          [(ngModel)]="model.isMucosalOrSubmucosal"
+        >
+        </p-checkbox>
+        <div
+          id="mucosalSubmucosalBlock"
+          class="o-radio-list m-l-35"
+          [rrDisable]="!model.isMucosalOrSubmucosal"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.pedunculated.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_060533"
+            name="isMucosalOrSubmucosalPedunculated"
+            [(ngModel)]="model.isMucosalOrSubmucosalPedunculated"
+            rrContentReset="lengthBlock"
+          ></p-checkbox>
+          <div
+            id="lengthBlock"
+            class="o-radio-list m-l-35"
+            [rrDisable]="!model.isMucosalOrSubmucosalPedunculated"
+          >
+            <rr-number-input
+              inputRrId="pel_m_060534"
+              labelRrId="pel_m_060535"
+              labelStyleClass="text-break2"
+              name="mucosalOrSubmucosalLengthInMm"
+              [config]="{min: 1, max: 200, labelWidth: 200, inputWidth: 100}"
+              [label]="'pelvisMRT.femaleGender.lengthInMm.value' | translate"
+              [(ngModel)]="model.mucosalOrSubmucosalLengthInMm"
+            ></rr-number-input>
+          </div>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.intramural.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_060536"
+          name="isIntramural"
+          [(ngModel)]="model.isIntramural"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.subserous.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0604107"
+          name="isSubserous"
+          rrContentReset="subserousBlock"
+          [(ngModel)]="model.isSubserous"
+        >
+        </p-checkbox>
+        <div
+          id="subserousBlock"
+          class="o-radio-list m-l-35 text-break"
+          [rrDisable]="!model.isSubserous"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.pedunculated.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_0604108"
+            name="isSubserousPedunculated"
+            [(ngModel)]="model.isSubserousPedunculated"
+            rrContentReset="storedLengthBlock"
+          ></p-checkbox>
+          <div
+            id="storedLengthBlock"
+            class="o-radio-list p-l-35 m-b-10"
+            [rrDisable]="!model.isSubserousPedunculated"
+          >
+            <rr-number-input
+              inputRrId="pel_m_0604109"
+              labelRrId="pel_m_0604110"
+              name="subserousLengthInMm"
+              labelStyleClass="text-break2"
+              [config]="{min: 1, max: 200, labelWidth: 200, inputWidth: 100}"
+              [label]="'pelvisMRT.femaleGender.lengthInMm.value' | translate"
+              [(ngModel)]="model.subserousLengthInMm"
+            ></rr-number-input>
+          </div>
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.extensionIntoTheLigamentum.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_0604111"
+            name="isExtensionIntoTheLigamentumLatumUteri"
+            [(ngModel)]="model.isExtensionIntoTheLigamentumLatumUteri"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

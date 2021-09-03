@@ -1,0 +1,435 @@
+<div
+  class="f-horizontal f-start col-h-100 o-width-100"
+  [rrDisable]="!helperService.isSingleSelectOnLocalizer(model)"
+>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+    <div
+      class="o-radio-list"
+      *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion, discFindingTypeEnum.Extrusion], model)"
+    >
+      <p-radioButton
+        class="m-l-10"
+        rr-id="spi_c_050309"
+        rrInfoIcon="spi_c_05_03"
+        label="{{ 'spineCT.disc.localizationAxial.value' | translate }}"
+        name="protrusionExtrusionDetailsType"
+        rrUnClickRadio
+        rrContentReset="broadBaseContainer1 broadBaseContainer2 broadBaseContainer3"
+        (onClick)="clearDiskSelection()"
+        [value]="protrusionExtrusionDetailsTypeEnum.LocalizationAxial"
+        [(ngModel)]="model.protrusionExtrusionDetailsType"
+      ></p-radioButton>
+      <p-radioButton
+        class="m-l-10"
+        rr-id="spi_c_050310"
+        label="{{ 'spineCT.disc.broadBased.value' | translate }}"
+        name="protrusionExtrusionDetailsType"
+        rrUnClickRadio
+        rrContentReset="broadBaseContainer1 broadBaseContainer2 broadBaseContainer3"
+        (onClick)="clearDiskSelection()"
+        [value]="protrusionExtrusionDetailsTypeEnum.BroadBased"
+        [(ngModel)]="model.protrusionExtrusionDetailsType"
+      ></p-radioButton>
+    </div>
+    <h2
+      *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Migration], model)"
+      rr-id="spi_c_050326"
+      rrInfoIcon="spi_c_05_03"
+      class="m-l-10"
+    >
+      {{'spineCT.disc.localizationAxial.value'|translate}}
+    </h2>
+    <div class="m-l-10" [rrDisable]="!showAxialLocalization()">
+      <p
+        *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion, discFindingTypeEnum.Extrusion], model)"
+        rr-id="spi_c_0503300"
+        class="font-15 m-b-5 m-t-30"
+        rrValidation="discLocation"
+      >
+        {{'spineCT.disc.pleaseSelectAtLeastOneAxialLocalizationFromTheGraphicBelow.value'|translate}}*
+      </p>
+      <rr-spine-disc-localizer
+        [(ngModel)]="model.discLocation"
+        name="discLocation"
+        class="p-t-15"
+        rr-id="spi_c_050311"
+        rrValidation="discLocation"
+        isLocalizer="true"
+        (announceSelection)="clearSelectionDetails()"
+      ></rr-spine-disc-localizer>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+    *ngIf="showAxialLocalization()"
+  >
+    <h2
+      *ngIf="getFilteredAndSortedSelectionList().length !== 0"
+      rr-id="spi_c_0504719"
+      class="m-b-10 m-l-10"
+    >
+      {{'spineCT.disc.selection.value'|translate}}
+    </h2>
+    <div
+      class="selected-part-wrapper"
+      *ngFor="let item of getFilteredAndSortedSelectionList(); let i = index; let f = first"
+      [ngStyle]="{'margin-top': !f ? '8px': ''}"
+    >
+      <div class="selected-part" rr-id="spi_m_050402">
+        {{item.number}} - {{item.translationKey |translate}}
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"
+    *ngIf="showAxialLocalization()"
+    id="broadBaseContainer3"
+  >
+    <div class="o-radio-list m-l-10 m-t-3" *ngIf="is1or2or6Selected()">
+      <h2 rr-id="spi_c_050501" class="p-r-15">
+        {{'spineCT.disc.expansionIntoSpinalCanal.value'|translate}}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_050502"
+        label="{{ 'spineCT.disc.slight.value' | translate }}"
+        name="expansionIntoSpinalCanalType"
+        [value]="expansionIntoSpinalCanalTypeEnum.Slight"
+        [(ngModel)]="model.expansionIntoSpinalCanalType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050503"
+        label="{{ 'spineCT.disc.moderate.value' | translate }}"
+        name="expansionIntoSpinalCanalType"
+        [value]="expansionIntoSpinalCanalTypeEnum.Moderate"
+        [(ngModel)]="model.expansionIntoSpinalCanalType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050504"
+        label="{{ 'spineCT.disc.distinct.value' | translate }}"
+        name="expansionIntoSpinalCanalType"
+        [value]="expansionIntoSpinalCanalTypeEnum.Distinct"
+        [(ngModel)]="model.expansionIntoSpinalCanalType"
+        rrUnClickRadio
+      ></p-radioButton>
+
+      <p-checkbox
+        class="m-t-40"
+        labelStyleClass="ui-fat-label"
+        binary="true"
+        [(ngModel)]="model.isSpinalCanalStenosis"
+        label="{{'spineCT.disc.spinalCanalStenosis.value'| translate}}"
+        rr-id="spi_c_050505"
+        name="isSpinalCanalStenosis"
+        rrInfoIcon="spi_c_05_04"
+        rrContentReset="spinalCanalStenosisDetailsContainer"
+      ></p-checkbox>
+
+      <div
+        class="nested-content o-radio-list p-r-15 f-vertical"
+        id="spinalCanalStenosisDetailsContainer"
+        [rrDisable]="!model.isSpinalCanalStenosis"
+      >
+        <p rr-id="spi_c_0505207" class="m-b-2">
+          {{'spineCT.disc.grade.value'|translate}}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="w027DropdownOptions"
+          name="gradeType"
+          rr-id="pel_m_0605255"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          [scrollHeight]="'420px'"
+          [(ngModel)]="model.gradeType"
+          [rrDropdownExcludedOptions]="getGradeTypeExcludedOptions()"
+        >
+        </p-dropdown>
+
+        <p rr-id="spi_c_0505209" class="m-b-2">
+          {{'spineCT.disc.sagittalDiameter.value'|translate}}
+        </p>
+        <rr-number-input
+          labelRrId="spi_c_0505211"
+          inputRrId="spi_c_0505210"
+          name="sagittalDiameterInMm"
+          [config]="{min: 1, max: 25}"
+          [(ngModel)]="model.sagittalDiameterInMm"
+          [label]="'spineCT.disc.inMm.value' | translate"
+        ></rr-number-input>
+
+        <p rr-id="spi_c_0505212" class="text-break m-b-2">
+          {{'spineCT.disc.transverseDiameterSpinalCanalWidth.value'|translate}}
+        </p>
+        <rr-number-input
+          labelRrId="spi_c_0505214"
+          inputRrId="spi_c_0505213"
+          name="transverseDiameterSpinalCanalWidthInMm"
+          [config]="{min: 1, max: 50}"
+          [(ngModel)]="model.transverseDiameterSpinalCanalWidthInMm"
+          [label]="'spineCT.disc.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+    </div>
+    <div class="o-radio-list m-l-10 m-t-3" *ngIf="is3or4or5or7or8or9Selected()">
+      <h2 rr-id="spi_c_050509">
+        {{ 'spineCT.disc.nerveRootAffection.value' | translate }}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_c_050510"
+        label="{{ 'spineCT.disc.contact.value' | translate }}"
+        name="nerveRootAffectionType"
+        [value]="nerveRootAffectionTypeEnum.Contact"
+        [(ngModel)]="model.nerveRootAffectionType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_c_050511"
+        label="{{ 'spineCT.disc.displacement.value' | translate }}"
+        name="nerveRootAffectionType"
+        [value]="nerveRootAffectionTypeEnum.Displacement"
+        [(ngModel)]="model.nerveRootAffectionType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_c_050512"
+        label="{{ 'spineCT.disc.compression.value' | translate }}"
+        name="nerveRootAffectionType"
+        [value]="nerveRootAffectionTypeEnum.Compression"
+        [(ngModel)]="model.nerveRootAffectionType"
+      ></p-radioButton>
+
+      <h2 rr-id="spi_c_050516" class="m-t-45">
+        {{'spineCT.disc.stenosis.value'|translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_c_0505203"
+        label="{{ 'spineCT.disc.foramen.value' | translate }}"
+        name="stenosisType"
+        [value]="stenosisTypeEnum.Foramen"
+        [(ngModel)]="model.stenosisType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="spi_c_0505204"
+        label="{{ 'spineCT.disc.recess.value' | translate }}"
+        name="stenosisType"
+        [value]="stenosisTypeEnum.Recess"
+        [(ngModel)]="model.stenosisType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+    id="broadBaseContainer1"
+    *ngIf="model.protrusionExtrusionDetailsType === protrusionExtrusionDetailsTypeEnum.BroadBased"
+  >
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="spi_c_050403">
+        {{'spineCT.disc.expansionIntoSpinalCanal.value'|translate}}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_050404"
+        label="{{ 'spineCT.disc.slight.value' | translate }}"
+        name="expansionIntoSpinalCanalType"
+        rrUnClickRadio
+        [value]="expansionIntoSpinalCanalTypeEnum.Slight"
+        [(ngModel)]="model.expansionIntoSpinalCanalType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050405"
+        label="{{ 'spineCT.disc.moderate.value' | translate }}"
+        name="expansionIntoSpinalCanalType"
+        rrUnClickRadio
+        [value]="expansionIntoSpinalCanalTypeEnum.Moderate"
+        [(ngModel)]="model.expansionIntoSpinalCanalType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050406"
+        label="{{ 'spineCT.disc.distinct.value' | translate }}"
+        name="expansionIntoSpinalCanalType"
+        rrUnClickRadio
+        [value]="expansionIntoSpinalCanalTypeEnum.Distinct"
+        [(ngModel)]="model.expansionIntoSpinalCanalType"
+      ></p-radioButton>
+
+      <p-checkbox
+        class="m-t-40"
+        labelStyleClass="ui-fat-label"
+        binary="true"
+        [(ngModel)]="model.isSpinalCanalStenosis"
+        label="{{'spineCT.disc.spinalCanalStenosis.value'| translate}}"
+        rr-id="spi_c_050407"
+        name="isSpinalCanalStenosis"
+        rrInfoIcon="spi_c_05_04"
+        rrContentReset="spinalCanalStenosisDetailsContainer2"
+      ></p-checkbox>
+
+      <div
+        class="nested-content o-radio-list f-vertical"
+        id="spinalCanalStenosisDetailsContainer2"
+        [rrDisable]="!model.isSpinalCanalStenosis"
+      >
+        <p rr-id="spi_c_0504214" class="m-b-2">
+          {{'spineCT.disc.grade.value'|translate}}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="w027DropdownOptions"
+          name="gradeType"
+          rr-id="spi_c_0504215"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          [scrollHeight]="'420px'"
+          [(ngModel)]="model.gradeType"
+          [rrDropdownExcludedOptions]="getGradeTypeExcludedOptions()"
+        >
+        </p-dropdown>
+
+        <p rr-id="spi_c_0504216" class="m-b-2">
+          {{'spineCT.disc.sagittalDiameter.value'|translate}}
+        </p>
+        <rr-number-input
+          labelRrId="spi_c_0504218"
+          inputRrId="spi_c_0504217"
+          name="sagittalDiameterInMm"
+          [config]="{min: 1, max: 25}"
+          [(ngModel)]="model.sagittalDiameterInMm"
+          [label]="'spineCT.disc.inMm.value' | translate"
+        ></rr-number-input>
+
+        <p rr-id="spi_c_0504219" class="text-break m-b-2">
+          {{'spineCT.disc.transverseDiameterSpinalCanalWidth.value'|translate}}
+        </p>
+        <rr-number-input
+          labelRrId="spi_c_0504221"
+          inputRrId="spi_c_0504220"
+          name="transverseDiameterSpinalCanalWidthInMm"
+          [config]="{min: 1, max: 50}"
+          [(ngModel)]="model.transverseDiameterSpinalCanalWidthInMm"
+          [label]="'spineCT.disc.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"
+    id="broadBaseContainer2"
+    *ngIf="model.protrusionExtrusionDetailsType === protrusionExtrusionDetailsTypeEnum.BroadBased"
+  >
+    <div class="o-radio-list m-t-3 m-l-10">
+      <h2 rr-id="spi_c_050509">
+        {{'spineCT.disc.nerveRootAffection.value'|translate}}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_050510"
+        label="{{ 'spineCT.disc.contact.value' | translate }}"
+        name="nerveRootAffectionType"
+        rrUnClickRadio
+        [value]="nerveRootAffectionTypeEnum.Contact"
+        rrContentReset="referenceNerveRootSideContainer"
+        [(ngModel)]="model.nerveRootAffectionType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050511"
+        label="{{ 'spineCT.disc.displacement.value' | translate }}"
+        name="nerveRootAffectionType"
+        rrUnClickRadio
+        [value]="nerveRootAffectionTypeEnum.Displacement"
+        rrContentReset="referenceNerveRootSideContainer"
+        [(ngModel)]="model.nerveRootAffectionType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050512"
+        label="{{ 'spineCT.disc.compression.value' | translate }}"
+        name="nerveRootAffectionType"
+        rrUnClickRadio
+        [value]="nerveRootAffectionTypeEnum.Compression"
+        rrContentReset="referenceNerveRootSideContainer"
+        [(ngModel)]="model.nerveRootAffectionType"
+      ></p-radioButton>
+      <div
+        id="referenceNerveRootSideContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="model.nerveRootAffectionType === nerveRootAffectionTypeEnum.None"
+      >
+        <p rr-id="spi_c_0505303">{{'spineCT.disc.side.value'| translate}}*</p>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isNerveRootAffectionRight"
+          label="{{'spineCT.disc.right.value'| translate}}"
+          rr-id="spi_c_050514"
+          name="isNerveRootAffectionRight"
+          rrValidation="isNerveRootAffectionRight isNerveRootAffectionLeft"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isNerveRootAffectionLeft"
+          label="{{'spineCT.disc.left.value'| translate}}"
+          rr-id="spi_c_050515"
+          name="isNerveRootAffectionLeft"
+          rrValidation="isNerveRootAffectionRight isNerveRootAffectionLeft"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-sep o-radio-list">
+        <h2 rr-id="spi_c_050516" class="m-t-25">
+          {{'spineCT.disc.stenosis.value'| translate}}
+        </h2>
+        <p-radioButton
+          rr-id="spi_c_0505203"
+          label="{{ 'spineCT.disc.foramen.value' | translate }}"
+          name="stenosisType"
+          [value]="stenosisTypeEnum.Foramen"
+          rrContentReset="stenosisTypeSideContainer"
+          rrUnClickRadio
+          [(ngModel)]="model.stenosisType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_0505204"
+          label="{{ 'spineCT.disc.recess.value' | translate }}"
+          name="stenosisType"
+          [value]="stenosisTypeEnum.Recess"
+          rrContentReset="stenosisTypeSideContainer"
+          rrUnClickRadio
+          [(ngModel)]="model.stenosisType"
+        ></p-radioButton>
+        <div
+          id="stenosisTypeSideContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.stenosisType === stenosisTypeEnum.None"
+        >
+          <p rr-id="spi_c_0505304">{{'spineCT.disc.side.value'| translate}}*</p>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isStenosisRight"
+            label="{{'spineCT.disc.right.value'| translate}}"
+            rr-id="spi_c_050517"
+            name="isStenosisRight"
+            rrValidation="isStenosisRight isStenosisLeft"
+          ></p-checkbox>
+          <p-checkbox
+            binary="true"
+            [(ngModel)]="model.isStenosisLeft"
+            label="{{'spineCT.disc.left.value'| translate}}"
+            rr-id="spi_c_050518"
+            name="isStenosisLeft"
+            rrValidation="isStenosisRight isStenosisLeft"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+    *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion, discFindingTypeEnum.Extrusion], model) && model.protrusionExtrusionDetailsType === protrusionExtrusionDetailsTypeEnum.None"
+  ></div>
+  <div
+    class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"
+    *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion, discFindingTypeEnum.Extrusion], model) && model.protrusionExtrusionDetailsType === protrusionExtrusionDetailsTypeEnum.None"
+  ></div>
+</div>

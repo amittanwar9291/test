@@ -1,0 +1,47 @@
+<div *ngIf="isVisible">
+  <input
+    type="file"
+    #file
+    placeholder="Choose file"
+    (change)="onFileUpload(file)"
+    [accept]="uploaderConfig.acceptedFormats"
+    style="display:none;"
+  />
+  <div class="uploader-container">
+    <div *ngIf="!fileModel" class="label-bullet">•</div>
+    <div *ngIf="!fileModel; else fileUploaded" class="uploader-label">
+      {{ inputPlaceholder }}
+    </div>
+    <ng-template #fileUploaded>
+      <div class="file-name">{{ fileModel.fileName }}</div>
+    </ng-template>
+    <div class="uploader-action-icons">
+      <div
+        *ngIf="!fileModel"
+        (click)="onUploaderOpen(file)"
+        class="block-click"
+      >
+        <img src="assets/img/shared/file-uploader/add.svg" alt="Add file" />
+      </div>
+      <div
+        *ngIf="fileModel && uploaderConfig.isPreviewable"
+        (click)="onFilePreview()"
+      >
+        <img
+          src="assets/img/shared/file-uploader/preview.svg"
+          alt="Preview file"
+        />
+      </div>
+      <div
+        class="block-click"
+        *ngIf="fileModel && uploaderConfig.isDeletable"
+        (click)="onFileDelete()"
+      >
+        <img
+          src="assets/img/shared/file-uploader/delete.svg"
+          alt="Delete file"
+        />
+      </div>
+    </div>
+  </div>
+</div>

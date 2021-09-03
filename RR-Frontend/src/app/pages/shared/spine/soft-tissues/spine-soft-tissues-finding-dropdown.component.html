@@ -1,0 +1,31 @@
+<div class="f-start f-vertical o-radio-list text-break">
+  <h1 [attr.rr-id]="titleRRId" class="m-b-15">
+    {{ title | translate }}
+  </h1>
+  <p-radioButton
+    [attr.rr-id]="areNotFindingsRadioRRId"
+    label="{{ areNotFindingsTitle | translate }}"
+    name="areFindings"
+    value="False"
+    [(ngModel)]="areFindings"
+  >
+  </p-radioButton>
+  <p-radioButton
+    [attr.rr-id]="areFindingsRadioRRId"
+    class="m-b-15"
+    label="{{ areFindingsTitle | translate }}"
+    name="areFindings"
+    value="True"
+    [(ngModel)]="areFindings"
+  >
+  </p-radioButton>
+  <rr-dynamic-component-wrapper
+    [(ngModel)]="ngValue"
+    name="findingHandler"
+    [setConfig]="findingDropdownConfig"
+    [disabled]="areFindings !== 'True'"
+    [customLabelCalculator]="getCustomLabel"
+    [setDescriptionTypes]="descriptionTypes"
+  >
+  </rr-dynamic-component-wrapper>
+</div>

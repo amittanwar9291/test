@@ -1,0 +1,217 @@
+<div class="tuba-uterina-height">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-pad c-sep f-horizontal m-t-32 m-b-15">
+      <div class="o-list p-l-10">
+        <h2 rr-id="pel_m_060259" class="m-b-10">
+          {{ 'pelvisMRT.femaleGender.localization.value' | translate }}*
+        </h2>
+        <div class="o-radio-list m-b-29">
+          <p-radioButton
+            rr-id="pel_m_060261"
+            label="{{'pelvisMRT.femaleGender.right.value' | translate}}"
+            name="sideType"
+            [value]="sideTypeEnum.Right"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+            [rrContentReset]="model.sideType !== sideTypeEnum.Right ? 'leftBlock' : ''"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_060260"
+            label="{{'pelvisMRT.femaleGender.left.value' | translate}}"
+            name="sideType"
+            [value]="sideTypeEnum.Left"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+            [rrContentReset]="model.sideType !== sideTypeEnum.Left ? 'leftBlock' : ''"
+          ></p-radioButton>
+          <div
+            id="leftBlock"
+            class="o-radio-list nested-content"
+            [rrDisable]="model.sideType === sideTypeEnum.None"
+          >
+            <p-radioButton
+              rr-id="pel_m_060262"
+              label="{{'pelvisMRT.femaleGender.intramural.value' | translate}}"
+              name="sideSubType"
+              [value]="sideSubTypeEnum.Intramural"
+              rrUnClickRadio
+              [(ngModel)]="model.sideSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_060263"
+              label="{{'pelvisMRT.femaleGender.isthmus.value' | translate}}"
+              name="sideSubType"
+              [value]="sideSubTypeEnum.Isthmus"
+              rrUnClickRadio
+              [(ngModel)]="model.sideSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_060264"
+              label="{{'pelvisMRT.femaleGender.ampulla.value' | translate}}"
+              name="sideSubType"
+              [value]="sideSubTypeEnum.Ampulla"
+              rrUnClickRadio
+              [(ngModel)]="model.sideSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_060265"
+              label="{{'pelvisMRT.femaleGender.infundibulum.value' | translate}}"
+              name="sideSubType"
+              [value]="sideSubTypeEnum.Infundibulum"
+              rrUnClickRadio
+              [(ngModel)]="model.sideSubType"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical m-t-32 m-b-15 tuba-uterina">
+      <div class="o-list p-l-10">
+        <h2 rr-id="pel_m_0603414" class="m-b-5">
+          {{ 'pelvisMRT.femaleGender.expansion.value' | translate }}
+        </h2>
+        <div class="m-b-10">
+          <p rr-id="pel_m_0603415">
+            {{ 'pelvisMRT.femaleGender.size.value' | translate }}*
+          </p>
+          <rr-number-input
+            inputRrId="pel_m_0603416"
+            labelRrId="pel_m_0603417"
+            name="sizeInMm"
+            [config]="{min: 1, max: 150, labelWidth: 200, inputWidth: 100}"
+            [label]="'pelvisMRT.femaleGender.inMm.value' | translate"
+            [(ngModel)]="model.sizeInMm"
+            rrValidation="sizeInMm"
+          ></rr-number-input>
+        </div>
+        <div class="m-b-10">
+          <p rr-id="pel_m_0603418">
+            {{ 'pelvisMRT.femaleGender.2ndPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="pel_m_0603419"
+            labelRrId="pel_m_0603420"
+            name="secondPlaneInMm"
+            [config]="{min: 1, max: 150, labelWidth: 200, inputWidth: 100}"
+            [label]="'pelvisMRT.femaleGender.inMm.value' | translate"
+            [(ngModel)]="model.secondPlaneInMm"
+          ></rr-number-input>
+        </div>
+        <div>
+          <p rr-id="pel_m_0603421">
+            {{ 'pelvisMRT.femaleGender.3rdPlane.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="pel_m_0603422"
+            labelRrId="pel_m_0603423"
+            name="thirdPlaneInMm"
+            [config]="{min: 1, max: 150, labelWidth: 200, inputWidth: 100}"
+            [label]="'pelvisMRT.femaleGender.inMm.value' | translate"
+            [(ngModel)]="model.thirdPlaneInMm"
+          ></rr-number-input>
+        </div>
+      </div>
+      <div
+        class="m-t-25 p-l-10"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="pel_m_060353">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' | translate}}
+          <span *ngIf="model.descriptionType === descriptionTypeEnum.IKnow"
+            >*</span
+          >
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_0603424"
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          group="true"
+          [options]="w045DifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosis"
+          [parentViewModel]="model"
+          name="differentialDiagnosis"
+          (selectionChanged)="clearDifferentialDiagnose()"
+          rrValidation="differentialDiagnosis"
+          [propertiesToSkipInPresetsClearing]="propertiesToSkipInPresetsClearing"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-horizontal m-t-32 m-b-15 tuba-uterina">
+      <div class="o-list p-l-8">
+        <h2 rr-id="pel_m_060455" class="m-b-10">
+          {{ 'pelvisMRT.femaleGender.morphology.value' | translate }}
+        </h2>
+        <div class="o-radio-list m-b-25">
+          <p rr-id="pel_m_060456" class="m-b-5">
+            {{ 'pelvisMRT.femaleGender.margin.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_060457"
+            label="{{'pelvisMRT.femaleGender.circumscribed.value' | translate}}"
+            name="marginType"
+            [value]="marginTypeEnum.Circumscribed"
+            rrUnClickRadio
+            [(ngModel)]="model.marginType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_060458"
+            label="{{'pelvisMRT.femaleGender.noncircumscribed.value' | translate}}"
+            name="marginType"
+            [value]="marginTypeEnum.NonCircumscribed"
+            rrUnClickRadio
+            [(ngModel)]="model.marginType"
+          ></p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="pel_m_0604409">
+            {{ 'pelvisMRT.femaleGender.homogeneity.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_060462"
+            label="{{'pelvisMRT.femaleGender.homogeneous.value' | translate}}"
+            name="homogenityType"
+            [value]="homogenityTypeEnum.Homogeneous"
+            rrUnClickRadio
+            [(ngModel)]="model.homogenityType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_060463"
+            label="{{'pelvisMRT.femaleGender.heterogeneous.value' | translate}}"
+            name="homogenityType"
+            [value]="homogenityTypeEnum.Heterogeneous"
+            rrUnClickRadio
+            [(ngModel)]="model.homogenityType"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-horizontal m-t-65 m-b-15 tuba-uterina">
+      <div class="p-l-8 sliders-z-index w-100">
+        <h2 rr-id="pel_m_0605201">
+          {{ 'pelvisMRT.femaleGender.t1wSignal.value' | translate }}
+        </h2>
+        <p rr-id="pel_m_0605201" class="small-text m-b-10">
+          {{ 'pelvisMRT.femaleGender.inComparisonTo.value' | translate }}
+        </p>
+        <rr-slider-number-triple-input
+          rr-id="pel_m_0605202"
+          name="t1wSignal"
+          [(ngModel)]="model.t1wSignal"
+        >
+        </rr-slider-number-triple-input>
+        <h2 rr-id="pel_m_0605203" class="m-t-15">
+          {{ 'pelvisMRT.femaleGender.t2wSignal.value' | translate }}
+        </h2>
+        <p rr-id="pel_m_0605203" class="small-text m-b-10">
+          {{ 'pelvisMRT.femaleGender.inComparisonTo.value' | translate }}
+        </p>
+        <rr-slider-number-triple-input
+          rr-id="pel_m_0605204"
+          name="t2wSignal"
+          [(ngModel)]="model.t2wSignal"
+        >
+        </rr-slider-number-triple-input>
+      </div>
+    </div>
+  </div>
+</div>

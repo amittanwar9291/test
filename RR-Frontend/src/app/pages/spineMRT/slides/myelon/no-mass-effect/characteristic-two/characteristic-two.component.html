@@ -1,0 +1,222 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="c-col-1 c-pad m-t-10 m-b-10">
+    <div class="o-list p-l-10">
+      <div class="o-radio-list m-b-45">
+        <h2 rr-id="spi_m_070239">
+          {{'spineMRT.spinalCanal.shapeMyelon.value' | translate}}
+        </h2>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.aberrantCourse.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isAberrantCourse"
+          rrContentReset="aberrantProgressionBlock"
+          rr-id="spi_m_070240"
+          name="isAberrantCourse"
+        >
+        </p-checkbox>
+        <div
+          id="aberrantProgressionBlock"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isAberrantCourse"
+        >
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.kink.value' | translate}}"
+            [value]="aberrantCourseTypeEnum.Kinking"
+            name="aberrantCourseType"
+            [(ngModel)]="model.aberrantCourseType"
+            rr-id="spi_m_070241"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.sheet.value' | translate}}"
+            [value]="aberrantCourseTypeEnum.Bending"
+            name="aberrantCourseType"
+            [(ngModel)]="model.aberrantCourseType"
+            rr-id="spi_m_070242"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.diggingUp.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSwelling"
+          rr-id="spi_m_070243"
+          name="isSwelling"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="spi_m_070244">
+          {{'spineMRT.spinalCanal.associatedFindings.value' | translate}}
+        </h2>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.arachnoidDiverticula.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isArachnoidDiverticula"
+          rr-id="spi_m_070245"
+          name="isArachnoidDiverticula"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.serpiginousVascularStructures.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSerpiginousVascularStructures"
+          rr-id="spi_m_070246"
+          name="isSerpiginousVascularStructures"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.flowVoids.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isFlowVoids"
+          rr-id="spi_m_070247"
+          name="isFlowVoids"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.clottedNerveRoots.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isClottedNerveRoots"
+          rr-id="spi_m_070248"
+          name="isClottedNerveRoots"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.emptyDuralSac.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isEmptyDuralSac"
+          rr-id="spi_m_070249"
+          name="isEmptyDuralSac"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{ 'spineMRT.spinalCanal.septingInSubarachnoidSpace.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSeptationInTheSubarachnoidSpace"
+          rr-id="spi_m_070250"
+          name="isSeptationInTheSubarachnoidSpace"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep-l m-t-10 m-b-10">
+    <div class="o-list p-l-10">
+      <p-checkbox
+        class="m-b-22"
+        [labelStyleClass]="'ui-fat-label'"
+        rr-id="spi_m_070389"
+        binary="true"
+        name="isMoreThanOneLesion"
+        [(ngModel)]="model.isMoreThanOneLesion"
+        (onChange)="resetLocalizer()"
+        label="{{ 'spineMRT.spinalCanal.lesionSamePathology.value' | translate}}"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content p-r-10"
+        [rrDisable]="!model.isMoreThanOneLesion"
+      >
+        <h2 rr-id="spi_m_070390" class="text-break">
+          {{ 'spineMRT.spinalCanal.localizationNonTargetLesionsBroken.value' |
+          translate}}
+        </h2>
+        <rr-spine-simple
+          rr-id="spi_m_070320"
+          (click)="openLargeLocalizer()"
+          [spineLocation]="model.spineLocationNonTarget"
+          [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        >
+        </rr-spine-simple>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep-l m-t-12 m-b-10">
+    <div class="o-radio-list p-l-10 p-r-10">
+      <h2 rr-id="spi_m_070474">
+        {{'spineMRT.spinalCanal.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="o-radio-list">
+        <p rr-id="spi_m_070475" class="m-b-3">
+          {{ 'spineMRT.spinalCanal.differentialDiagnosis1.value' | translate }}*
+        </p>
+        <div
+          class="m-b-7"
+          [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+        >
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="1"
+            [options]="getDiagnosisOptions(1)"
+            [(ngModel)]="model.differentialDiagnosis01"
+            name="differentialDiagnosis01"
+            group="true"
+            rrId="spi_m_0704509"
+            [parentViewModel]="model"
+            (selectionChanged)="clearSubordinated()"
+            rrValidation="differentialDiagnosis01"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.differentialDiagnosis01 === spinalCanalDifferentialDiagnosisTypeEnum.None &&
+          model.spinalCanalDifferentialDiagnosisType === spinalCanalDifferentialDiagnosisTypeEnum.None"
+        >
+          <p rr-id="spi_m_070477" class="m-b-3">
+            {{ 'spineMRT.spinalCanal.differentialDiagnosis2.value' | translate
+            }}
+          </p>
+          <div>
+            <rr-differential-diagnosis-dropdown
+              [diagnosisNumber]="2"
+              [options]="getDiagnosisOptions(2)"
+              [(ngModel)]="model.differentialDiagnosis02"
+              name="differentialDiagnosis02"
+              group="true"
+              rrId="spi_m_0704510"
+              [parentViewModel]="model"
+              (selectionChanged)="clearSubordinated()"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+          <div
+            [rrDisable]="model.differentialDiagnosis02 === spinalCanalDifferentialDiagnosisTypeEnum.None"
+          >
+            <p-checkbox
+              label="{{ 'spineMRT.spinalCanal.subordinate.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070479"
+              [(ngModel)]="model.isSecondary"
+              name="isSubordinated"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.differentialDiagnosis02 === spinalCanalDifferentialDiagnosisTypeEnum.None"
+        >
+          <p rr-id="spi_m_070480" class="m-b-3">
+            {{ 'spineMRT.spinalCanal.differentialDiagnosis3.value' | translate
+            }}
+          </p>
+          <div>
+            <rr-differential-diagnosis-dropdown
+              [diagnosisNumber]="3"
+              [options]="getDiagnosisOptions(2)"
+              [(ngModel)]="model.differentialDiagnosis03"
+              name="differentialDiagnosis03"
+              group="true"
+              rrId="spi_m_0704511"
+              [parentViewModel]="model"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad-l c-sep-l m-t-10 m-b-10"></div>
+</div>

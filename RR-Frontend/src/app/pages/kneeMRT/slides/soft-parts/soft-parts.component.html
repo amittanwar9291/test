@@ -1,0 +1,185 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+      <h1 class="p-b-7">{{'kneeMRT.softParts.finding.value' | translate}}*</h1>
+      <p-radioButton
+        rr-id="kne_m_080104"
+        label="{{'kneeMRT.softParts.noArticularEffusionPeriarticular.value' | translate}}"
+        name="areFindings"
+        value="False"
+        labelStyleClass="text-break"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_080105"
+        label="{{'kneeMRT.softParts.finding.value' | translate}}"
+        name="areFindings"
+        value="True"
+        class="p-b-3"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        name="findingsHandlerComponent"
+        [setConfig]="findingDropdownConfig"
+        [setDescriptionTypes]="[findingType.SynoviaFocal, findingType.SoftTissueTumor]"
+        [disabled]="isDynamicPartDisabled()"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div
+      class="f-vertical f-start"
+      [ngClass]="['Musculature', 'SoftTissueTumor'].includes(findingHandler.currentItem.findingType) ? 'c-pad-r' : 'c-pad'"
+    >
+      <div
+        [ngClass]="['Musculature', 'SoftTissueTumor'].includes(findingHandler.currentItem.findingType) ? 'c-pad-l tabView-header' : 'header'"
+      >
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="kne_m_050201"
+        >
+          {{'kneeMRT.softParts.findingsXX.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+
+        <p
+          *ngIf="[
+          'HoffaFatBody',
+          'TendonsPatellarTendon',
+          'TendonsQuadricepsTendon',
+          'TendonsBicepsFemorisTendon',
+          'TendonsPopliteusTendon',
+          'TendonsTractusIliotibialis',
+          'TendonsPesAnserinus'
+          ].includes(findingHandler.currentItem.findingType)"
+          class="text-break sub-header__font p-t-21"
+          [attr.rr-id]="findingHandler.currentItem.findingType === 'HoffaFatBody' ? 'kne_m_0802300' : 'kne_m_0802214'"
+        >
+          {{'kneeMRT.softParts.pleaseSelectAtLeast.value' | translate}}
+        </p>
+
+        <p
+          rr-id="kne_m_0802213"
+          class="text-break sub-header__font p-t-22"
+          *ngIf="findingHandler.currentItem.findingType === findingType.Bursitis"
+        >
+          {{'kneeMRT.softParts.pleaseSelectBursa.value' | translate}}
+        </p>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="findingHandler.currentItem.findingType === findingType.None"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-articular-effusion
+          name="articular-effusion"
+          *ngIf="isCurrentItem(findingType.ArticularEffusion)"
+          [model]="findingHandler.currentItem"
+        ></rr-articular-effusion>
+
+        <rr-synovia-diffus
+          name="synovia"
+          *ngIf="isCurrentItem(findingType.SynoviaDiffuse)"
+          [model]="findingHandler.currentItem"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+        ></rr-synovia-diffus>
+
+        <rr-synovia
+          name="synovia"
+          *ngIf="isCurrentItem(findingType.SynoviaFocal)"
+          [model]="findingHandler.currentItem"
+          [diagnosisList]="synoviaDifferentialDiagnosisOptions"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+        ></rr-synovia>
+
+        <rr-hoffa-fat-body
+          name="hoffa-fat-body"
+          *ngIf="isCurrentItem(findingType.HoffaFatBody)"
+          [model]="findingHandler.currentItem"
+        ></rr-hoffa-fat-body>
+
+        <rr-bursitis
+          name="bursitis"
+          *ngIf="isCurrentItem(findingType.Bursitis)"
+          [model]="findingHandler.currentItem"
+        ></rr-bursitis>
+
+        <rr-patellar-tendon
+          name="patellar-tendon"
+          *ngIf="isCurrentItem(findingType.TendonsPatellarTendon)"
+          [model]="findingHandler.currentItem"
+        ></rr-patellar-tendon>
+
+        <rr-quadriceps-tendon
+          name="quadriceps-tendon"
+          *ngIf="isCurrentItem(findingType.TendonsQuadricepsTendon)"
+          [model]="findingHandler.currentItem"
+        ></rr-quadriceps-tendon>
+
+        <rr-biceps-femoris-tendon
+          name="biceps-femoris-tendon"
+          *ngIf="isCurrentItem(findingType.TendonsBicepsFemorisTendon)"
+          [model]="findingHandler.currentItem"
+        ></rr-biceps-femoris-tendon>
+
+        <rr-popliteal-tendon
+          name="popliteal-tendon"
+          *ngIf="isCurrentItem(findingType.TendonsPopliteusTendon)"
+          [model]="findingHandler.currentItem"
+        ></rr-popliteal-tendon>
+
+        <rr-tractus-ilotibialis-tendon
+          name="tractus-ilotibialis-tendon"
+          *ngIf="isCurrentItem(findingType.TendonsTractusIliotibialis)"
+          [model]="findingHandler.currentItem"
+        ></rr-tractus-ilotibialis-tendon>
+
+        <rr-pes-anserinus-tendon
+          name="pes-anserinus-tendon"
+          *ngIf="isCurrentItem(findingType.TendonsPesAnserinus)"
+          [model]="findingHandler.currentItem"
+        ></rr-pes-anserinus-tendon>
+
+        <rr-muskulatur-tendon
+          name="muskulatur-tendon"
+          *ngIf="isCurrentItem(findingType.Musculature)"
+          [model]="findingHandler.currentItem"
+        ></rr-muskulatur-tendon>
+
+        <rr-vessels-nerves-tendon
+          name="vessels-nerves-tendon"
+          *ngIf="isCurrentItem(findingType.VesselsNerves)"
+          [model]="findingHandler.currentItem"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+        ></rr-vessels-nerves-tendon>
+
+        <rr-soft-parts-finding
+          name="soft-parts-finding"
+          *ngIf="isCurrentItem(findingType.SoftParts)"
+          [model]="findingHandler.currentItem"
+        ></rr-soft-parts-finding>
+
+        <rr-soft-tissue-tumor
+          name="soft-parts-finding"
+          *ngIf="isCurrentItem(findingType.SoftTissueTumor)"
+          [model]="findingHandler.currentItem"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+        ></rr-soft-tissue-tumor>
+      </div>
+    </div>
+  </div>
+</form>

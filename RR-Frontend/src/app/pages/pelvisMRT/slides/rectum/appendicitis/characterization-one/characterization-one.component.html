@@ -1,0 +1,253 @@
+<div class="f-horizontal col-h-100 w-100 p-t-29 m-b-20">
+  <div class="c-col-1 c-pad o-list">
+    <div class="o-radio-list p-l-10">
+      <div class="m-b-10">
+        <h2 rr_id="pel_m_080289" class="m-b-10">
+          {{'pelvisMRT.rectum.morphology.value' | translate}}
+        </h2>
+        <p rr_id="pel_m_080290" class="m-b-0">
+          {{'pelvisMRT.rectum.diameterOfTheAppendix.value' | translate}}
+        </p>
+        <div class="f-start f-horizontal text-break m-t-5">
+          <rr-number-input
+            inputRrId="pel_m_080291"
+            labelRrId="pel_m_080292"
+            name="diameterOfTheAppendix"
+            label="{{'pelvisMRT.rectum.inMm.value' | translate}}"
+            [(ngModel)]="model.diameterOfTheAppendix"
+            [config]="{min: 0, max: 9999}"
+            (ngModelChange)="resetLengthOfTheAppendix()"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+
+      <div
+        class="o-radio-list m-b-20"
+        [rrDisable]="model.diameterOfTheAppendix === null"
+      >
+        <p rr_id="pel_m_080293" class="m-b-0">
+          {{'pelvisMRT.rectum.lengthOfTheAppendix.value' | translate}}
+        </p>
+        <div class="f-start f-horizontal text-break">
+          <rr-number-input
+            inputRrId="pel_m_080294"
+            labelRrId="pel_m_080295"
+            name="lengthOfTheAppendix"
+            label="{{'pelvisMRT.rectum.inMm.value' | translate}}"
+            [(ngModel)]="model.lengthOfTheAppendix"
+            [config]="{min: 0, max: 9999}"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+
+      <p rr_id="pel_m_080296" class="m-b-0">
+        {{'pelvisMRT.rectum.wallThickening.value' | translate}}
+      </p>
+      <div class="f-start f-horizontal text-break">
+        <rr-number-input
+          inputRrId="pel_m_080297"
+          labelRrId="pel_m_080298"
+          name="wallThickening"
+          label="{{'pelvisMRT.rectum.inMm.value' | translate}}"
+          [(ngModel)]="model.wallThickening"
+          [config]="{min: 0, max: 9999}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l o-list m-b-20 m-t-30">
+    <div class="o-radio-list p-l-10">
+      <p-checkbox
+        rr-id="pel_m_080392"
+        name="isT2wSignalBoostOfIntestinalWall"
+        label="{{'pelvisMRT.rectum.t2wSignalElevationOf.value' | translate}}"
+        [(ngModel)]="model.isT2wSignalBoostOfIntestinalWall"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_080393"
+        name="isIntraluminalFluid"
+        label="{{'pelvisMRT.rectum.intraluminalFluid.value' | translate}}"
+        [(ngModel)]="model.isIntraluminalFluid"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_080394"
+        name="isCecalWallThickening"
+        label="{{'pelvisMRT.rectum.cecalWallThickening.value' | translate}}"
+        [(ngModel)]="model.isCecalWallThickening"
+        binary="true"
+        rrContentReset="isCecalWallThickeningDetails"
+      >
+      </p-checkbox>
+      <div
+        class="m-l-35 o-radio-list"
+        [rrDisable]="!model.isCecalWallThickening || !technologyModel.isOralContrast"
+        id="isCecalWallThickeningDetails"
+      >
+        <p-checkbox
+          rr-id="pel_m_080395"
+          name="isArrowheadSign"
+          label="{{'pelvisMRT.rectum.arrowheadSign.value' | translate}}"
+          [(ngModel)]="model.isArrowheadSign"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_080396"
+          name="isCecalBarSign"
+          label="{{'pelvisMRT.rectum.cecalBarSign.value' | translate}}"
+          [(ngModel)]="model.isCecalBarSign"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="pel_m_080397"
+        name="isWallEdemaOfIntestinalSegments"
+        label="{{'pelvisMRT.rectum.wallEdemaOf.value' | translate}}"
+        [(ngModel)]="model.isWallEdemaOfIntestinalSegments"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_080398"
+        name="isAppendicolith"
+        label="{{'pelvisMRT.rectum.appendicolith.value' | translate}}"
+        [(ngModel)]="model.isAppendicolith"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l o-list m-b-20">
+    <h2 rr_id="pel_m_080467" class="m-b-10 p-l-10">
+      {{'pelvisMRT.rectum.reactionOfSurroundingTissue.value' | translate}}
+    </h2>
+    <div class="o-radio-list p-l-10">
+      <p-checkbox
+        rr-id="pel_m_080468"
+        name="isObliterationOfSurroundingTissue"
+        label="{{'pelvisMRT.rectum.obliterationOfFatTissue.value' | translate}}"
+        [(ngModel)]="model.isObliterationOfSurroundingTissue"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_080469"
+        name="isThickenedMesoappendix"
+        label="{{'pelvisMRT.rectum.thickenedMesoappendix.value' | translate}}"
+        [(ngModel)]="model.isThickenedMesoappendix"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_080473"
+        name="isEdema"
+        label="{{'pelvisMRT.rectum.edema.value' | translate}}"
+        [(ngModel)]="model.isEdema"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l o-list m-b-20">
+    <div class="o-list">
+      <h2 rr_id="pel_m_080560" class="m-b-10 p-l-10">
+        {{'pelvisMRT.rectum.complications.value' | translate}}
+      </h2>
+      <div class="o-radio-list text-break p-l-10">
+        <p-checkbox
+          rr-id="pel_m_080561"
+          name="isPerforation"
+          label="{{'pelvisMRT.rectum.perforation.value' | translate}}"
+          [(ngModel)]="model.isPerforation"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_080562"
+          name="isPerityphliticAbscess"
+          class="m-b-5"
+          label="{{'pelvisMRT.rectum.perityphliticAbscess.value' | translate}}"
+          [(ngModel)]="model.isPerityphliticAbscess"
+          binary="true"
+          rrContentReset="maximumDiameter"
+        >
+        </p-checkbox>
+        <div
+          [rrDisable]="!model.isPerityphliticAbscess"
+          id="maximumDiameter"
+          class="m-l-35 o-radio-list m-b-20"
+        >
+          <p rr_id="pel_m_080563" class="m-b-0">
+            {{'pelvisMRT.rectum.maximumDiameter.value' | translate}}
+          </p>
+          <div class="f-start f-horizontal text-break">
+            <rr-number-input
+              inputRrId="pel_m_080564"
+              labelRrId="pel_m_080565"
+              name="maximumDiameterInMm"
+              label="{{'pelvisMRT.rectum.inMm.value' | translate}}"
+              [(ngModel)]="model.maximumDiameterInMm"
+              [config]="{min: 0, max: 9999}"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+        <p-checkbox
+          rr-id="pel_m_080566"
+          name="isPeritonealInvolvement"
+          label="{{'pelvisMRT.rectum.peritonealInvolvement.value' | translate}}"
+          [(ngModel)]="model.isPeritonealInvolvement"
+          binary="true"
+          rrContentReset="isPeritonealInvolvementDetails"
+        >
+        </p-checkbox>
+        <div
+          class="o-radio-list m-l-35"
+          [rrDisable]="!model.isPeritonealInvolvement"
+          id="isPeritonealInvolvementDetails"
+        >
+          <p-checkbox
+            rr-id="pel_m_080567"
+            name="isAdhesions"
+            label="{{'pelvisMRT.rectum.adhesions.value' | translate}}"
+            [(ngModel)]="model.isAdhesions"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="pel_m_080568"
+            name="isPeritonitis"
+            label="{{'pelvisMRT.rectum.peritonitis.value' | translate}}"
+            [(ngModel)]="model.isPeritonitis"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="pel_m_080569"
+          name="isIleus"
+          label="{{'pelvisMRT.rectum.ileus.value' | translate}}"
+          [(ngModel)]="model.isIleus"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_080570"
+          name="isAccompanyingInflammatoryPsoas"
+          label="{{'pelvisMRT.rectum.accompanyingInflammatoryPsoas.value' | translate}}"
+          [(ngModel)]="model.isAccompanyingInflammatoryPsoas"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

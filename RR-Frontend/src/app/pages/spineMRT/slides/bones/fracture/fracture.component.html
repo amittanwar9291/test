@@ -1,0 +1,66 @@
+<div class="f-vertical f-start o-radio-list c-pad-l col-h-100">
+  <h2
+    rr-id="spi_m_060202"
+    class="m-t-16 m-b-35"
+    rrValidation="spineLocation"
+    noUpdate="true"
+  >
+    {{ "spineMRT.bones.localization.value" | translate }}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div
+      class="c-col-1 f-vertical f-start c-pad-r"
+      [class.c-sep]="checkWhichLocationSelected() !== 'Os sacrum' && checkWhichLocationSelected() !== 'Os coccygis'"
+    >
+      <rr-spine-simple
+        rr-id="spi_m_060203"
+        [spineLocation]="model.spineLocation"
+        (click)="openLargeLocalizer()"
+        rrValidation="spineLocation"
+        isLocalizer="true"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple>
+    </div>
+
+    <rr-c0
+      *ngIf="checkWhichLocationSelected() === 'C0'"
+      [model]="model"
+    ></rr-c0>
+
+    <rr-c1
+      *ngIf="checkWhichLocationSelected() === 'C1'"
+      [model]="model"
+    ></rr-c1>
+
+    <rr-c2
+      *ngIf="checkWhichLocationSelected() === 'C2'"
+      [model]="model"
+    ></rr-c2>
+
+    <rr-other-parts
+      *ngIf="checkWhichLocationSelected() === 'other'"
+      [currentSelected]="currentSelected"
+      [model]="model"
+    ></rr-other-parts>
+
+    <rr-os-sacrum
+      *ngIf="checkWhichLocationSelected() === 'Os sacrum'"
+      [model]="model"
+    ></rr-os-sacrum>
+
+    <rr-os-coccygis
+      *ngIf="checkWhichLocationSelected() === 'Os coccygis'"
+      [model]="model"
+    ></rr-os-coccygis>
+
+    <div
+      *ngIf="checkWhichLocationSelected() === 'none'"
+      class="f-horizontal f-start col-h-100 c-pad-l"
+    >
+      <div class="c-col-1 c-pad-r"></div>
+      <div class="c-col-1 c-sep-l c-pad"></div>
+      <div class="c-col-1 c-sep-l c-pad-l"></div>
+    </div>
+  </div>
+</div>

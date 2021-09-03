@@ -1,0 +1,73 @@
+<div class="f-fill-available-space f-vertical f-space-between">
+  <div>
+    <h2 rr-id="mam_m_020219" class="m-b-3">
+      {{ "mammaMRT.anamnesis.ownAnamnesis.value" | translate }}
+    </h2>
+    <h2 rr-id="mam_m_020219">
+      {{selectedAnamnesis}}
+    </h2>
+    <rr-month-year-input
+      label="{{ 'mammaMRT.anamnesis.date.value' | translate }}"
+      class="m-b-12 custom-label-margin"
+      rr-id="mam_m_020306"
+      name="ownAnamnesisDate"
+      [(ngModel)]="model.ownAnamnesisDate"
+    >
+    </rr-month-year-input>
+  </div>
+  <div
+    class="o-radio-list"
+    [hidden]="model.findingType !== ownFamilyAnamnesisType.BreastCarcinoma"
+  >
+    <h2 rr-id="mam_m_020213">
+      {{ "mammaMRT.anamnesis.menopauseRelation.value" | translate }}
+    </h2>
+    <p-radioButton
+      name="menopauseRelation"
+      [value]="menopauseType.Premenopausal"
+      label="{{'mammaMRT.anamnesis.premenopausal.value' | translate}}"
+      rr-id="mam_m_020214"
+      [(ngModel)]="model.menopauseType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      name="menopauseRelation"
+      [value]="menopauseType.Perimenopausal"
+      label="{{ 'mammaMRT.anamnesis.perimenopausal.value' | translate }}"
+      rr-id="mam_m_020215"
+      [(ngModel)]="model.menopauseType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+    <p-radioButton
+      name="menopauseRelation"
+      [value]="menopauseType.Postmenopausal"
+      label="{{ 'mammaMRT.anamnesis.postmenopausal.value' | translate }}"
+      rr-id="mam_m_020216"
+      [(ngModel)]="model.menopauseType"
+      rrUnClickRadio
+    >
+    </p-radioButton>
+  </div>
+  <div class="localizer-bottom-fix">
+    <p
+      rr-id="mam_m_020217"
+      class="m-b-5"
+      rrValidation="breastLocation"
+      noUpdate="true"
+    >
+      {{ 'mammaMRT.anamnesis.localizationMulti.value' | translate }}*
+    </p>
+    <rr-breast-simple
+      rr-id="mam_m_020218"
+      name="model.previousProcedure1.location"
+      [(ngModel)]="model.breastLocation"
+      rrValidation="breastLocation"
+      isLocalizer="true"
+      #breastLocation
+      [elementUpdate]="breastLocation.selectionChange"
+    >
+    </rr-breast-simple>
+  </div>
+</div>

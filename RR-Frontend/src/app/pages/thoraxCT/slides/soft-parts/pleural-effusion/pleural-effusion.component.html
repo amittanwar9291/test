@@ -1,0 +1,228 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2 rr-id="tho_c_070202">
+      {{'thoraxCT.softParts.side.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_070203"
+      name="siteType"
+      [rrDisable]="softPartsHelperService.isSiteDisabled(findings, model, softPartsSiteTypeEnum.Right)"
+      [rrContentReset]="clearSiteTypeDetails(softPartsSiteTypeEnum.Right)"
+      [(ngModel)]="model.siteType"
+      rrValidation="siteType"
+      [value]="softPartsSiteTypeEnum.Right"
+      label="{{'thoraxCT.softParts.right.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070204"
+      name="siteType"
+      [rrDisable]="softPartsHelperService.isSiteDisabled(findings, model, softPartsSiteTypeEnum.Left)"
+      [rrContentReset]="clearSiteTypeDetails(softPartsSiteTypeEnum.Left)"
+      [(ngModel)]="model.siteType"
+      rrValidation="siteType"
+      [value]="softPartsSiteTypeEnum.Left"
+      label="{{'thoraxCT.softParts.left.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_0702130"
+      name="siteType"
+      [rrContentReset]="clearSiteTypeDetails(softPartsSiteTypeEnum.Bilateral)"
+      [(ngModel)]="model.siteType"
+      rrValidation="siteType"
+      [value]="softPartsSiteTypeEnum.Bilateral"
+      label="{{'thoraxCT.softParts.bilateral.value' | translate}}"
+    ></p-radioButton>
+
+    <div
+      id="siteMaxWidthInMm-block"
+      class="nested-content"
+      [rrDisable]="!leftOrRightSelected()"
+    >
+      <rr-number-input
+        inputRrId="tho_c_070205"
+        labelRrId="tho_c_070206"
+        name="maxWidthInMm"
+        [(ngModel)]="model.siteMaxWidthInMm"
+        [label]="'thoraxCT.softParts.maxWidthInMm.value' | translate"
+        [config]="{labelWidth: 80, min: 1, max: 999, placeholder: '---'}"
+      ></rr-number-input>
+    </div>
+
+    <p rr-id="tho_c_0702131" class="m-t-20 m-b-0">
+      {{'thoraxCT.softParts.averageDensity.value' | translate}}
+    </p>
+    <rr-number-input
+      inputRrId="tho_c_070207"
+      labelRrId="tho_c_070208"
+      name="averageDensityInHU"
+      [label]="'thoraxCT.softParts.inHU.value' | translate"
+      [(ngModel)]="model.averageDensityInHU"
+      [config]="{labelWidth: 130, min: 1, placeholder: '----'}"
+    ></rr-number-input>
+  </div>
+
+  <div
+    id="col3-block"
+    class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list"
+    [rrDisable]="model.siteType !== softPartsSiteTypeEnum.Left &&
+      model.siteType !== softPartsSiteTypeEnum.Right"
+  >
+    <h2 rr-id="tho_c_070301">
+      {{'thoraxCT.softParts.form.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_070302"
+      name="formType"
+      [(ngModel)]="model.formType"
+      rrUnClickRadio
+      [value]="formType.Biconvex"
+      label="{{'thoraxCT.softParts.biconvex.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070303"
+      name="formType"
+      [(ngModel)]="model.formType"
+      rrUnClickRadio
+      [value]="formType.Concave"
+      label="{{'thoraxCT.softParts.concave.value' | translate}}"
+    ></p-radioButton>
+
+    <h2 rr-id="tho_c_070304" class="m-t-26">
+      {{'thoraxCT.softParts.distribution.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_070305"
+      name="distributionType"
+      [(ngModel)]="model.distributionType"
+      rrUnClickRadio
+      [value]="distributionTypeEnum.FreeFlow"
+      label="{{'thoraxCT.softParts.freeFlow.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070306"
+      name="distributionType"
+      [(ngModel)]="model.distributionType"
+      rrUnClickRadio
+      [value]="distributionTypeEnum.Interlobal"
+      label="{{'thoraxCT.softParts.interlobal.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070307"
+      name="distributionType"
+      [(ngModel)]="model.distributionType"
+      rrUnClickRadio
+      [value]="distributionTypeEnum.Encapsulated"
+      label="{{'thoraxCT.softParts.encapsulated.value' | translate}}"
+    ></p-radioButton>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_c_070401" rrInfoIcon="tho_c_07_01">
+      {{'thoraxCT.softParts.quality.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_070402"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Transudate"
+      label="{{'thoraxCT.softParts.transudate.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070403"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Exsudate"
+      label="{{'thoraxCT.softParts.exsudate.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070404"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Hematothorax"
+      label="{{'thoraxCT.softParts.hematothorax.value' | translate}}"
+    ></p-radioButton>
+    <div
+      id="Hematothorax-block"
+      class="nested-content"
+      [rrDisable]="model.qualityType !== qualityTypeEnum.Hematothorax"
+    >
+      <p-checkbox
+        rr-id="tho_c_070405"
+        name="isCoagulum"
+        [(ngModel)]="model.isCoagulum"
+        label="{{'thoraxCT.softParts.coagulum.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="tho_c_070406"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Chylothorax"
+      label="{{'thoraxCT.softParts.chylothorax.value' | translate}}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_070407"
+      name="qualityType"
+      rrContentReset="Hematothorax-block Empyema-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Empyema"
+      label="{{'thoraxCT.softParts.empyema.value' | translate}}"
+    ></p-radioButton>
+    <div
+      id="Empyema-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model.qualityType !== 'Empyema'"
+    >
+      <p-checkbox
+        rr-id="tho_c_070408"
+        name="isGasInclusions"
+        [(ngModel)]="model.isGasInclusions"
+        label="{{'thoraxCT.softParts.gasInclusions.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_070409"
+        [rrDisable]="!isCMYes"
+        name="isCMEnrichingCapsule"
+        [(ngModel)]="model.isCMEnrichingCapsule"
+        label="{{'thoraxCT.softParts.cMenrichingCapsule.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div
+    id="col5-block"
+    class="c-col-1 f-vertical f-start c-pad-l o-radio-list"
+    [rrDisable]="model.siteType !== softPartsSiteTypeEnum.Left &&
+      model.siteType !== softPartsSiteTypeEnum.Right"
+  >
+    <h2 rr-id="tho_c_070501">
+      {{'thoraxCT.softParts.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="tho_c_070502"
+      name="isSedimentation"
+      [(ngModel)]="model.isSedimentation"
+      label="{{'thoraxCT.softParts.sedimentation.value' | translate}}"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_c_070503"
+      name="isSplitPleuraSign"
+      [(ngModel)]="model.isSplitPleuraSign"
+      label="{{'thoraxCT.softParts.splitPleuraSign.value' | translate}}"
+      binary="true"
+    ></p-checkbox>
+  </div>
+</div>

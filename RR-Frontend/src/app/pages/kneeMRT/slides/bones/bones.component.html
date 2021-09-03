@@ -1,0 +1,144 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- Column 1 -->
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <h1 rr-id="kne_m_040103">
+        {{ 'kneeMRT.bones.finding.value' | translate }}*
+      </h1>
+      <div class="height-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="kne_m_040104"
+          label="{{ 'kneeMRT.bones.noOsseousFindings.value' | translate }}"
+          name="areFindings"
+          value="False"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_040105"
+          label="{{ 'kneeMRT.bones.finding.value' | translate }}"
+          name="areFindings"
+          value="True"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [setDescriptionTypes]="[findingType.BonesTumor]"
+          [customLabelCalculator]="getCustomLabel"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <!-- Columns 2-5 -->
+    <div
+      class="col-h-100 f-vertical"
+      [ngClass]="{'f-end' : isFindingHeaderDisabled(), 'c-pad-l' : findingHandler.currentItem.findingType !== findingType.BonesTumor}"
+      [ngSwitch]="findingHandler.currentItem.findingType"
+    >
+      <h1
+        rr-id="kne_m_040201"
+        class="finding-header"
+        [ngClass]="{'m-b-24 c-pad-l': findingHandler.currentItem.findingType === findingType.BonesTumor,
+                    'm-b-94': findingHandler.currentItem.findingType === findingType.EpiphysealJointFracture,
+                    'm-b-93': isMarginBottom93Px(),
+                    'm-b-96': findingHandler.currentItem.findingType === findingType.StandardVariant}"
+        [hidden]="isFindingHeaderDisabled()"
+      >
+        {{ 'kneeMRT.bones.finding.value' | translate}}
+        {{findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+      </h1>
+
+      <!-- No finding chosen -->
+      <div
+        *ngSwitchCase="findingType.None"
+        class="finding-options f-horizontal"
+      >
+        <div class="c-col-1 c-sep c-pad-r"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <div
+        *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        class="height-100"
+      >
+        <!-- Finding "FractureDistalFemur" chosen -->
+        <rr-fracture-distal-femur
+          *ngSwitchCase="findingType.FractureDistalFemur"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-fracture-distal-femur>
+
+        <!-- Finding "FractureTibiaProximal" chosen -->
+        <rr-fracture-tibia-proximal
+          *ngSwitchCase="findingType.FractureTibiaProximal"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-fracture-tibia-proximal>
+
+        <!-- Finding "FractureFibulaProximal" chosen -->
+        <rr-fibula-proximal
+          *ngSwitchCase="findingType.FractureFibulaProximal"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-fibula-proximal>
+
+        <!-- Finding "FracturePatella" chosen -->
+        <rr-fracture-patella
+          *ngSwitchCase="findingType.FracturePatella"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-fracture-patella>
+
+        <!-- Finding "BoneMarrowEdema" chosen -->
+        <rr-bone-marrow-edema
+          *ngSwitchCase="findingType.BoneMarrowEdema"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-bone-marrow-edema>
+
+        <!-- Finding "BonesTumor" chosen -->
+        <rr-bones-tumor
+          class="col-h-100"
+          *ngSwitchCase="findingType.BonesTumor"
+          [model]="findingHandler.currentItem"
+          [descriptionArray]="descriptionArray"
+          [isCMYes]="isCMYes"
+        >
+        </rr-bones-tumor>
+
+        <!-- Finding 'Osteomyelitis' chosen -->
+        <rr-osteomyelitis
+          *ngSwitchCase="findingType.Osteomyelitis"
+          [model]="findingHandler.currentItem"
+          [isCMYes]="isCMYes"
+        >
+        </rr-osteomyelitis>
+
+        <!-- Finding 'StandardVariant' chosen -->
+        <rr-standard-variant
+          *ngSwitchCase="findingType.StandardVariant"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-standard-variant>
+
+        <!-- Finding 'EpiphysealJointFracture' chosen -->
+        <rr-epiphyseal-joint-fracture
+          *ngSwitchCase="findingType.EpiphysealJointFracture"
+          [model]="findingHandler.currentItem"
+        >
+        </rr-epiphyseal-joint-fracture>
+      </div>
+    </div>
+  </div>
+</form>

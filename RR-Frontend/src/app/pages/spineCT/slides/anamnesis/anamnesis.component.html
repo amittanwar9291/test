@@ -1,0 +1,155 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div *ngIf="isAnyLocalizerOpen" class="large-localizer f-horizontal f-center">
+    <rr-spine-directional
+      *ngIf="isDirectionalLocalizerOpen"
+      name="spineLocation"
+      [(ngModel)]="indicationFindingHandler.currentItem.spineLocationBones"
+      localizationTitle="spineCT.anamnesis.localization.value"
+      (close)="closeLocalizer()"
+      localizationDescription="spineCT.anamnesis.pleaseSelectTheNumberedNerve.value"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-directional>
+    <rr-spine-complex
+      *ngIf="isIndicationComplexLocalizerOpen"
+      name="spineLocation"
+      [(ngModel)]="indicationFindingHandler.currentItem.spineLocation"
+      [logicType]="spineLocationLogicTypeEnum.VertebreEach"
+      [selectionAccessibilityMode]="spineSelectionAccessibilityMode.C1toL5"
+      localizationTitle="spineCT.anamnesis.localization.value"
+      (close)="closeLocalizer()"
+      localizationDescription="spineCT.anamnesis.pleaseSelectVertebralBodyMultipleChoice.value"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-complex>
+    <rr-spine-complex
+      *ngIf="isInterventionComplexLocalizerOpen"
+      name="spineLocation"
+      [(ngModel)]="interventionFindingHandler.currentItem.spineLocation"
+      [logicType]="logicType"
+      [selectionAccessibilityMode]="selectionAccessibility"
+      localizationTitle="spineCT.anamnesis.localization.value"
+      (close)="closeLocalizer()"
+      [localizationDescription]="description"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-complex>
+  </div>
+  <div *ngIf="!isAnyLocalizerOpen" class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-pad c-sep f-vertical">
+      <div class="double-col-header o-radio-list m-b-30">
+        <h1 rr-id="spi_c_020103">
+          {{ "spineCT.anamnesis.anamnesisIndication.value" | translate }}
+        </h1>
+        <img rr-id="spi_c_020104" src="assets/img/shared/person.svg" />
+      </div>
+      <div class="f-horizontal col-h-100">
+        <div class="col-h-100 c-col-1 c-sep c-pad-r o-radio-list f-vertical">
+          <rr-finding-column
+            [handler]="indicationFindingHandler"
+            [disabled]="false"
+            [setConfig]="indicationFindingDropdownConfig"
+            [attr.name]="'findingHandlerComponent'"
+          >
+          </rr-finding-column>
+        </div>
+        <rr-anamnesis-indications
+          [model]="indicationFindingHandler.currentItem"
+          [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+          (emitDirectionalLocalizer)="openDirectionalLocalizer()"
+          (emitComplexLocalizer)="openIndicationComplexLocalizer()"
+        >
+        </rr-anamnesis-indications>
+      </div>
+    </div>
+    <div class="c-col-2 c-pad c-sep f-vertical">
+      <div class="double-col-header o-radio-list m-b-30">
+        <h1 rr-id="spi_c_020301">
+          {{ "spineCT.anamnesis.previousInterventions.value" | translate }}
+        </h1>
+        <img rr-id="spi_c_020302" src="assets/img/shared/doctor.svg" />
+      </div>
+      <div class="f-horizontal col-h-100">
+        <div class="col-h-100 c-col-1 c-sep c-pad-r o-radio-list f-vertical">
+          <rr-finding-column
+            [handler]="interventionFindingHandler"
+            [disabled]="false"
+            [setConfig]="interventionFindingDropdownConfig"
+            [attr.name]="'findingHandlerComponent'"
+          >
+          </rr-finding-column>
+        </div>
+        <rr-previous-interventions
+          [model]="interventionFindingHandler.currentItem"
+          [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+          (emitLocalizer)="openInterventionComplexLocalizer()"
+        >
+        </rr-previous-interventions>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical">
+      <div class="double-col-header o-radio-list m-b-30">
+        <h1 rr-id="spi_c_020501">
+          {{ "spineCT.anamnesis.previousExaminations.value" | translate }}
+        </h1>
+        <img rr-id="spi_c_020502" src="assets/img/shared/examination.svg" />
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="spi_c_020503"
+          [(ngModel)]="model.isCT"
+          name="isCT"
+          binary="true"
+          label="{{ 'spineCT.anamnesis.cT.value' | translate }}"
+          (ngModelChange)="resetDate(model.dateOfCT)"
+        ></p-checkbox>
+        <div class="nested-content" [rrDisable]="!model.isCT">
+          <rr-month-year-input
+            labelRrId="spi_c_020504"
+            monthRrId="spi_c_020505"
+            yearRrId="spi_c_020506"
+            name="dateOfCT"
+            [label]="'spineCT.anamnesis.date.value' | translate"
+            class="o-width-100"
+            [(ngModel)]="model.dateOfCT"
+          ></rr-month-year-input>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_020507"
+          [(ngModel)]="model.isMRI"
+          name="isMRI"
+          binary="true"
+          label="{{ 'spineCT.anamnesis.mRI.value' | translate }}"
+          (ngModelChange)="resetDate(model.dateOfMRI)"
+        ></p-checkbox>
+        <div class="nested-content" [rrDisable]="!model.isMRI">
+          <rr-month-year-input
+            labelRrId="spi_c_020508"
+            monthRrId="spi_c_020509"
+            yearRrId="spi_c_0205010"
+            name="dateOfMRI"
+            [label]="'spineCT.anamnesis.date.value' | translate"
+            class="o-width-100"
+            [(ngModel)]="model.dateOfMRI"
+          ></rr-month-year-input>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_020511"
+          [(ngModel)]="model.isXRay"
+          name="isXRay"
+          binary="true"
+          label="{{ 'spineCT.anamnesis.xray.value' | translate }}"
+          (ngModelChange)="resetDate(model.dateOfXRay)"
+        ></p-checkbox>
+        <div class="nested-content" [rrDisable]="!model.isXRay">
+          <rr-month-year-input
+            labelRrId="spi_c_020512"
+            monthRrId="spi_c_020513"
+            yearRrId="spi_c_020514"
+            name="dateOfXRay"
+            [label]="'spineCT.anamnesis.date.value' | translate"
+            class="o-width-100"
+            [(ngModel)]="model.dateOfXRay"
+          ></rr-month-year-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

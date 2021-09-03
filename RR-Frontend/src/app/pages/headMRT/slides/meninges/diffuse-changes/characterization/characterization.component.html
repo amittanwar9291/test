@@ -1,0 +1,219 @@
+<div class="f-horizontal main-container  o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 sliders-z-index">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_050255">
+        {{ "headMRT.meninges.meningealThickening.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050256"
+        label="{{ 'headMRT.meninges.thickening.value' | translate }}"
+        name="isThickening"
+        binary="true"
+        [(ngModel)]="model.isThickening"
+        rrContentReset="isThickeningBlock"
+      ></p-checkbox>
+      <div
+        class="nested-content m-t-10"
+        [rrDisable]="!model.isThickening"
+        id="isThickeningBlock"
+      >
+        <p rr-id="hea_m_050257">
+          {{ "headMRT.meninges.meningesWidth.value" | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="hea_m_050259"
+          inputRrId="hea_m_050258"
+          name="meningesWidth"
+          [(ngModel)]="model.meningesWidth"
+          [config]="{ min: 1, max: 20, placeholder: '--' }"
+          [label]="'headMRT.meninges.inMm.value' | translate"
+        ></rr-number-input>
+      </div>
+      <h2 rr-id="hea_m_050260" class="m-b-10 m-t-50">
+        {{ "headMRT.meninges.t1wSignal.value" | translate }}
+      </h2>
+      <rr-slider-number-triple-input
+        name="t1WSignalDiffuse"
+        rr-id="hea_m_050262"
+        [(ngModel)]="model.t1WSignalDiffuse"
+      >
+      </rr-slider-number-triple-input>
+      <h2 rr-id="hea_m_050263" class="m-b-8 m-t-45">
+        {{ "headMRT.meninges.t2wSignal.value" | translate }}
+      </h2>
+      <rr-slider-number-triple-input
+        name="t2WSignalDiffuse"
+        rr-id="hea_m_050265"
+        [(ngModel)]="model.t2WSignalDiffuse"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <div [rrDisable]="!isDWIInAnySequence">
+        <h2 rr-id="hea_m_050340" class="m-b-10">
+          {{ "headMRT.meninges.diffusionImaging.value" | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="hea_m_050341"
+          label="{{
+            'headMRT.meninges.diffusionRestriction.value' | translate
+          }}"
+          name="isDiffusionRestriction"
+          binary="true"
+          [(ngModel)]="model.isDiffusionRestriction"
+          rrInfoIcon="hea_m_05_01"
+        ></p-checkbox>
+      </div>
+      <h2 rr-id="hea_m_050342" class="m-t-30">
+        {{ "headMRT.meninges.internalStructure.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_050343"
+        label="{{ 'headMRT.meninges.signalVoids.value' | translate }}"
+        name="isSignalVoids"
+        binary="true"
+        [(ngModel)]="model.isSignalVoids"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_0504206">
+        {{ "headMRT.meninges.complications.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_0504207"
+        label="{{ 'headMRT.meninges.abscess.value' | translate }}"
+        name="isAbscess"
+        binary="true"
+        [(ngModel)]="model.isAbscess"
+        rrContentReset="isAbscessBlock"
+      ></p-checkbox>
+      <div
+        class="nested-content f-vertical"
+        [rrDisable]="!model.isAbscess"
+        id="isAbscessBlock"
+      >
+        <p rr-id="hea_m_0504208">
+          {{ "headMRT.meninges.maxExtension.value" | translate }}*
+        </p>
+        <rr-number-input
+          class="m-b-10"
+          labelRrId="hea_m_0504210"
+          inputRrId="hea_m_0504209"
+          name="maxExtension"
+          [(ngModel)]="model.maxExtension"
+          [config]="{ min: 1, max: 99, placeholder: '--' }"
+          [label]="'headMRT.meninges.inMm.value' | translate"
+          rrValidation="maxExtension"
+        ></rr-number-input>
+        <p-checkbox
+          rr-id="hea_m_0504211"
+          label="{{ 'headMRT.meninges.capsule.value' | translate }}"
+          name="isCapsule"
+          binary="true"
+          [(ngModel)]="model.isCapsule"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="hea_m_0504212"
+        label="{{ 'headMRT.meninges.empyema.value' | translate }}"
+        name="isEmpyema"
+        binary="true"
+        [(ngModel)]="model.isEmpyema"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_0504213"
+        label="{{ 'headMRT.meninges.hydrocephalus.value' | translate }}"
+        name="isHydrocephalus"
+        binary="true"
+        [(ngModel)]="model.isHydrocephalus"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list" [rrDisable]="!isContrastEnhanced">
+      <h2 rr-id="hea_m_0505210">
+        {{ "headMRT.meninges.contrastEnhancementQuantitative.value" |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_0505211"
+        label="{{ 'headMRT.meninges.no.value' | translate }}"
+        name="contrastEnhancementQuantitativeType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.No"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastEnhancementQuantitativeContainer"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_0505212"
+        label="{{ 'headMRT.meninges.weak.value' | translate }}"
+        name="contrastEnhancementQuantitativeType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Weak"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastEnhancementQuantitativeContainer"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_0505213"
+        label="{{ 'headMRT.meninges.significant.value' | translate }}"
+        name="contrastEnhancementQuantitativeType"
+        [value]="contrastEnhancementQuantitativeTypeEnum.Significant"
+        [(ngModel)]="model.contrastEnhancementQuantitativeType"
+        rrUnClickRadio
+        rrContentReset="contrastEnhancementHomogeneityTypeContainer contrastEnhancementQuantitativeContainer"
+      ></p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="contrastEnhancementHomogeneityTypeContainer"
+        [rrDisable]="!isWeakOrSignificant()"
+      >
+        <p-radioButton
+          rr-id="hea_m_0505214"
+          label="{{ 'headMRT.meninges.homogeneous.value' | translate }}"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Homogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_0505215"
+          label="{{ 'headMRT.meninges.heterogeneous.value' | translate }}"
+          name="contrastEnhancementHomogeneityType"
+          [value]="homogeneityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <div
+        class="o-radio-list m-t-30"
+        id="contrastEnhancementQuantitativeContainer"
+        [rrDisable]="!isWeakOrSignificant()"
+      >
+        <h2 rr-id="hea_m_0505216">
+          {{ "headMRT.meninges.contrastEnhancementDistribution.value" |
+          translate}}
+        </h2>
+        <p-checkbox
+          rr-id="hea_m_0505217"
+          name="isPachymeninges"
+          label="{{'headMRT.meninges.pachymeninges.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPachymeninges"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_0505218"
+          name="isLeptomeninges"
+          label="{{'headMRT.meninges.leptomeninges.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLeptomeninges"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

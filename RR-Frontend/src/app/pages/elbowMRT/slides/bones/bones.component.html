@@ -1,0 +1,95 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1
+        rr-id="elb_m_040103"
+        class="m-b-15"
+        rrInfoIcon="elb_m_04_01"
+        infoIconPdfLandscape="true"
+      >
+        {{ 'elbowMRT.bones.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="elb_m_040104"
+        label="{{ 'elbowMRT.bones.noOsseousFinding.value' | translate }}"
+        name="areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_040105"
+        label="{{'elbowMRT.bones.finding.value' | translate}}"
+        name="areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        [value]="areFindingsEnum.Yes"
+        class="m-b-19"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingHandlerComponent'"
+        [setDescriptionTypes]="descriptionTypes"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-start" [class.c-pad-l]="!isFindingWithTabs()">
+      <div class="header" [class.c-pad-l]="isFindingWithTabs()">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== 'None'"
+          rr-id="elb_m_040201"
+        >
+          {{'elbowMRT.bones.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.None)"
+          class="f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+        <rr-standard-variant
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.StandardVariantOrMalformation)"
+          [model]="findingHandler.currentItem"
+        ></rr-standard-variant>
+        <rr-fracture
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.Fracture)"
+          [model]="findingHandler.currentItem"
+        ></rr-fracture>
+
+        <rr-bone-marrow-edema
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.BoneMarrowEdema)"
+          [model]="findingHandler.currentItem"
+        ></rr-bone-marrow-edema>
+        <rr-dislocation
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.Luxation)"
+          [model]="findingHandler.currentItem"
+        ></rr-dislocation>
+        <rr-arthrosis
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.Arthrosis)"
+          [model]="findingHandler.currentItem"
+        ></rr-arthrosis>
+        <rr-osteomyelitis
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.Osteomyelitis)"
+          [model]="findingHandler.currentItem"
+        ></rr-osteomyelitis>
+        <rr-tumour
+          *ngIf="isCurrentItem(bonesFindingTypeEnum.Mass)"
+          [model]="findingHandler.currentItem"
+        ></rr-tumour>
+      </div>
+    </div>
+  </div>
+</form>

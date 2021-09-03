@@ -1,0 +1,95 @@
+<div class="main-container">
+  <p-scrollPanel [style]="{width: '100%', height: '600px'}" styleClass="custom">
+    <table class="users-list">
+      <thead>
+        <tr class="marker-row">
+          <th
+            *ngFor="let elem of tableHeader"
+            [ngStyle]="{'backgroundColor': sortedBy === elem.field ? '#00aec2' : 'transparent'}"
+          ></th>
+        </tr>
+        <tr class="header-row">
+          <th *ngFor="let elem of tableHeader" (click)="sort(elem.field)">
+            {{elem.translateKey | translate}}
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of usersDisplay">
+          <td rr-id="fra_080103">
+            <div class="overflow--wrap-words">
+              {{item.firstName}} {{item.surname}}
+            </div>
+          </td>
+          <td rr-id="fra_080104">
+            <div class="overflow--wrap-words">
+              <span *ngIf="item.title !== 'None'"
+                >{{'users.list.enums.titles.' + item.title | translate}}</span
+              >
+            </div>
+          </td>
+          <td rr-id="fra_080201">{{item.initial}}</td>
+          <td rr-id="fra_080202">
+            <span *ngIf="item.role !== 'None'"
+              >{{'users.list.enums.userRoles.' + item.role | translate}}</span
+            >
+          </td>
+          <td rr-id="fra_080203">{{item.externalId}}</td>
+          <td rr-id="fra_080301">
+            <span *ngIf="item.approvalLevel !== 'None'"
+              >{{'users.list.enums.approvalLevels.' + item.approvalLevel |
+              translate}}</span
+            >
+          </td>
+          <td rr-id="fra_080302">••••••••••••••</td>
+          <td rr-id="fra_080401">
+            <span *ngIf="item.position !== 'None'"
+              >{{'users.list.enums.positions.' + item.position |
+              translate}}</span
+            >
+          </td>
+          <td rr-id="fra_080402">
+            <span *ngIf="item.languageOfProgram !== 'None'"
+              >{{item.languageOfProgram}}</span
+            >
+          </td>
+          <td rr-id="fra_080502">
+            <span *ngIf="item.languageDoctorFindings !== 'None'"
+              >{{item.languageDoctorFindings}}</span
+            >
+          </td>
+          <td rr-id="fra_080503">
+            <span *ngIf="item.languagePatientFindings !== 'None'"
+              >{{item.languagePatientFindings}}</span
+            >
+          </td>
+          <td rr-id="fra_080504">
+            <div
+              class="status-switch"
+              (click)="switchStatus(item.id,item.isActive)"
+            >
+              <div class="status-input">
+                <p-inputSwitch
+                  rr-id="fra_080505"
+                  [(ngModel)]="item.isActive"
+                ></p-inputSwitch>
+              </div>
+              <div class="status-label label--on" *ngIf="item.isActive">On</div>
+              <div class="status-label label--off" *ngIf="!item.isActive">
+                Off
+              </div>
+            </div>
+          </td>
+          <td
+            rr-id="fra_080506"
+            (click)="showUser(item.id)"
+            style="cursor:pointer"
+          >
+            <img src="assets/img/layout/rr-arrow-right.svg" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </p-scrollPanel>
+</div>

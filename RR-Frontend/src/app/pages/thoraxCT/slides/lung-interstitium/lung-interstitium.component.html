@@ -1,0 +1,208 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="f-horizontal f-center"
+    *ngIf="localizerConfig && localizerConfig.type === 'segments'"
+  >
+    <rr-lungs-segments-complex
+      [name]="localizerConfig.modelName"
+      [isSingleChoice]="localizerConfig.isSingle"
+      [(ngModel)]="findingHandler.currentItem[localizerConfig.modelName]"
+      (close)="onLargeLocalizerClosed()"
+    ></rr-lungs-segments-complex>
+  </div>
+
+  <div
+    class="f-horizontal f-center"
+    *ngIf="localizerConfig && localizerConfig.type === 'flaps'"
+  >
+    <rr-lungs-flaps-complex
+      descriptionVersion="ver1"
+      [name]="localizerConfig.modelName"
+      [isSingleChoice]="localizerConfig.isSingle"
+      [(ngModel)]="localizerConfig.isFinding
+      ? findingHandler.currentItem[localizerConfig.modelName]
+      : model[localizerConfig.modelName]"
+      (close)="onLargeLocalizerClosed()"
+    ></rr-lungs-flaps-complex>
+  </div>
+
+  <!-- Page contents -->
+  <div class="c-main f-horizontal f-center" [hidden]="localizerConfig !== null">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="tho_c_0601100" class="m-b-17">
+        {{'thoraxCT.lungInterstitium.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="tho_c_0601101"
+        rrValidation="areFindings"
+        notInFinding="true"
+        label="{{'thoraxCT.lungInterstitium.pulmonaryInterstitiumNormal.value' | translate}}"
+        name="areFindings"
+        (onClick)="clearModelAndValidationErrors()"
+        [value]="lungInterstitiumAreFindingsEnum.PulmonaryInterstitiumNormal"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0601102"
+        rrValidation="areFindings"
+        notInFinding="true"
+        label="{{'thoraxCT.lungInterstitium.notSpecified.value' | translate}}"
+        name="areFindings"
+        (onClick)="clearModelAndValidationErrors()"
+        [value]="lungInterstitiumAreFindingsEnum.NotSpecified"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0601103"
+        rrValidation="areFindings"
+        notInFinding="true"
+        label="{{'thoraxCT.lungInterstitium.finding.value' | translate}}"
+        name="areFindings"
+        class="m-b-20"
+        (onClick)="setIDescribe()"
+        [value]="lungInterstitiumAreFindingsEnum.Finding"
+        [(ngModel)]="model.areFindings"
+      >
+      </p-radioButton>
+      <rr-description-type
+        name="descriptionType"
+        [disabled]="isMainContentDisabled()"
+        (descriptionTypeChanged)="onDescriptionChanged($event)"
+        [iDescribeLabelRRId]="findingDropdownConfig.findingColumnIds.iDescribeLabelRRId"
+        [iKnowLabelRRId]="findingDropdownConfig.findingColumnIds.iKnowLabelRRId"
+        [iDescribeRadioRRId]="findingDropdownConfig.findingColumnIds.iDescribeRadioRRId"
+        [iKnowRadioRRId]="findingDropdownConfig.findingColumnIds.iKnowRadioRRId"
+        [(ngModel)]="model.descriptionType"
+      ></rr-description-type>
+    </div>
+
+    <div class="f-horizontal f-start col-h-100" *ngIf="isMainContentDisabled()">
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad"></div>
+      <div class="c-col-1 c-sep c-pad-l"></div>
+    </div>
+
+    <div class="f-vertical f-space-between" *ngIf="!isMainContentDisabled()">
+      <!--space title -->
+      <div class="c-pad-l f-vertical contents-header">
+        <h1 rr-id="tho_c_0602100">
+          {{'thoraxCT.lungInterstitium.finding.value' | translate}}
+        </h1>
+      </div>
+
+      <!-- Tabs -->
+
+      <div class="finding-tab-view">
+        <p-tabView class="rr-tabView">
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                rr-id="tho_c_0602101"
+                class="custom-tab-header"
+                rrValidation="differentialDiagnosis dominantPatternType localizationCraniocaudalType asymmetricalType"
+                ifAny="true"
+                notInFinding="true"
+                noUpdate="true"
+              >
+                {{ 'thoraxCT.lungInterstitium.localizationTabHeader.value' |
+                translate}}
+              </h1>
+            </ng-template>
+            <rr-localization [model]="model"></rr-localization>
+          </p-tabPanel>
+
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                rr-id="tho_c_0603100"
+                class="custom-tab-header"
+                [rrValidation]="['distributionSecondaryPulmonaryLobuleType', 'localizationType', 'isConsolidation isGroundGlassOpacity isPleuralThickening', 'lungsFlapsLocation1', 'lungsFlapsLocation2', 'reducedParenchymaDensityPatternType', 'lungsSegmentsLocation']"
+                ifAny="true"
+                allFindings="true"
+              >
+                {{ 'thoraxCT.lungInterstitium.characterization.value' |
+                translate }}
+              </h1>
+            </ng-template>
+            <div class="f-horizontal f-start col-h-100 o-width-100">
+              <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+                <div class="f-vertical o-radio-list p-r-10 p-l-10 col-h-100">
+                  <h2 rr-id="tho_c_0602109" rrInfoIcon="tho_c_06_07">
+                    {{'thoraxCT.lungInterstitium.finding.value' | translate}}
+                  </h2>
+                  <rr-finding-column
+                    [handler]="findingHandler"
+                    [disabled]="false"
+                    [setConfig]="findingDropdownConfig"
+                    [attr.name]="'findingsHandlerComponent'"
+                    validationName="findings"
+                  >
+                  </rr-finding-column>
+                </div>
+              </div>
+              <div
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.None)"
+                class="f-horizontal f-start col-h-100"
+              >
+                <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+                <div class="c-col-1 c-sep c-pad m-t-10 m-b-10"></div>
+                <div class="c-col-1 c-pad-l m-t-10 m-b-10"></div>
+              </div>
+              <rr-nodular-changes
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.NodularChanges)"
+                [model]="findingHandler.currentItem"
+              ></rr-nodular-changes>
+              <rr-reticulations
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.Reticulations)"
+                [model]="findingHandler.currentItem"
+              ></rr-reticulations>
+              <rr-increased-parenchymal-density
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.IncreasedParenchymalDensity)"
+                [model]="findingHandler.currentItem"
+              ></rr-increased-parenchymal-density>
+              <rr-decreased-parenchymal-density
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.DecreasedParenchymalDensity)"
+                [model]="findingHandler.currentItem"
+              ></rr-decreased-parenchymal-density>
+              <rr-other-parenchymal-patterns
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.OtherParenchymalPatterns)"
+                [model]="findingHandler.currentItem"
+              ></rr-other-parenchymal-patterns>
+              <rr-emphysema
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.Emphysema)"
+                [model]="findingHandler.currentItem"
+              ></rr-emphysema>
+              <rr-bronchial-tubes
+                *ngIf="isCurrentItem(lungInterstitiumFindingTypeEnum.BronchialTubes)"
+                [model]="findingHandler.currentItem"
+              ></rr-bronchial-tubes>
+            </div>
+          </p-tabPanel>
+
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                rr-id="tho_c_0604100"
+                class="custom-tab-header"
+                rrValidation="differentialDiagnosis1 causeType1 causeType2 causeType3"
+                ifAny="true"
+                notInFinding="true"
+                noUpdate="true"
+              >
+                {{
+                'thoraxCT.lungInterstitium.differentialDiagnosisTabHeader.value'
+                | translate }}
+              </h1>
+            </ng-template>
+            <rr-differential-diagnosis-tab
+              [model]="model"
+            ></rr-differential-diagnosis-tab>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</form>

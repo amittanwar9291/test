@@ -1,0 +1,106 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div *ngIf="spineLocalizerConfig" style="margin-top: -100px">
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="findingHandler.currentItem.spineLocalization"
+      [logicType]="spineLocalizerConfig.logicType"
+      [selectionAccessibilityMode]="spineLocalizerConfig.selectionAccessibilityMode"
+      (close)="onSpineLargeLocalizerClosed()"
+      [localizationDescription]="spineLocalizerConfig.localizationDescription"
+    >
+    </rr-spine-complex>
+  </div>
+  <div *ngIf="ribsLocalizerConfig" style="margin-top: -100px">
+    <rr-ribs-complex
+      [isSingleChoice]="ribsLocalizerConfig.isSingleSelect"
+      [(ngModel)]="findingHandler.currentItem.ribLocalization"
+      (close)="onRibsLargeLocalizerClosed()"
+      name="ribLocalization"
+      [descriptionRrid]="ribsLocalizerConfig.descriptionRrid"
+    ></rr-ribs-complex>
+  </div>
+
+  <div
+    *ngIf="!spineLocalizerConfig && !ribsLocalizerConfig"
+    class="c-main f-horizontal f-center"
+  >
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="tho_m_070103" class="m-b-15">
+        {{ 'thoraxMRT.bones.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="tho_m_070104"
+        label="{{ 'thoraxMRT.bones.noOsseousFinding.value' | translate }}"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070105"
+        label="{{'thoraxMRT.bones.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        class="m-b-20"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="dynamicConfig"
+        [attr.name]="'findings'"
+        [setDescriptionTypes]="descriptionTypes"
+        validationName="findings"
+        [customLabelCalculator]="customLabelCalculator"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1 *ngIf="!isCurrentItem([findingTypeEnum.None])" rr-id="spi_m_050201">
+          {{ 'thoraxMRT.bones.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isCurrentItem([findingTypeEnum.None])"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-clavicle-fracture
+        *ngIf="isCurrentItem([findingTypeEnum.ClavicleFracture])"
+        [model]="findingHandler.currentItem"
+      ></rr-clavicle-fracture>
+      <rr-scapular-fracture
+        *ngIf="isCurrentItem([findingTypeEnum.ScapularFracture])"
+        [model]="findingHandler.currentItem"
+      ></rr-scapular-fracture>
+      <rr-rib-fracture
+        *ngIf="isCurrentItem([findingTypeEnum.RibFracture])"
+        [model]="findingHandler.currentItem"
+      ></rr-rib-fracture>
+      <rr-sternal-fracture
+        *ngIf="isCurrentItem([findingTypeEnum.SternalFracture])"
+        [model]="findingHandler.currentItem"
+      ></rr-sternal-fracture>
+      <rr-spinal-fracture
+        *ngIf="isCurrentItem([findingTypeEnum.SpinalFracture])"
+        [model]="findingHandler.currentItem"
+      ></rr-spinal-fracture>
+      <rr-mass-tabs
+        *ngIf="isCurrentItemMass()"
+        [model]="findingHandler.currentItem"
+      ></rr-mass-tabs>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,89 @@
+<div class="f-vertical f-start o-radio-list col-h-100 p-t-13">
+  <h2 rr-id="tho_c_0702173" class="text-break">
+    {{'thoraxCT.softParts.spleenLymphNodeHiatusHerniaDetails.value' |
+    translate}}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+      <p-checkbox
+        rr-id="tho_c_0702192"
+        name="isSplenomegaly"
+        rrValidation="isSplenomegaly isEnlargedAbdominalLymphNodes isPathologicalHiatusHernia"
+        labelStyleClass="ui-fat-label"
+        label="{{'thoraxCT.softParts.splenomegaly.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSplenomegaly"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0702174"
+        class="m-t-21"
+        name="isEnlargedAbdominalLymphNodes"
+        rrValidation="isSplenomegaly isEnlargedAbdominalLymphNodes isPathologicalHiatusHernia"
+        rrContentReset="isEnlargedAbdominalLymphNodes-block"
+        labelStyleClass="ui-fat-label"
+        label="{{'thoraxCT.softParts.enlargedAbdominalLymphNodes.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isEnlargedAbdominalLymphNodes"
+      ></p-checkbox>
+      <div
+        id="isEnlargedAbdominalLymphNodes-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isEnlargedAbdominalLymphNodes"
+      >
+        <rr-number-input
+          inputRrId="tho_c_0702175"
+          labelRrId="tho_c_0702176"
+          name="diameterSADInMm"
+          [(ngModel)]="model.diameterSADInMm"
+          [label]="'thoraxCT.softParts.diameterSADInMm.value' | translate"
+          [config]="{labelWidth: 140, min: 1, max: 99}"
+        ></rr-number-input>
+        <p-checkbox
+          rr-id="tho_c_0702177"
+          name="isPathological"
+          rrContentReset="isPathological-block"
+          label="{{'thoraxCT.softParts.pathological.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPathological"
+        ></p-checkbox>
+        <div
+          id="isPathological-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="!model.isPathological"
+        >
+          <p-checkbox
+            rr-id="tho_c_0702178"
+            name="isPathologicalMultiple"
+            label="{{'thoraxCT.softParts.multiple.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isPathologicalMultiple"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_c_0702179"
+            name="isPathologicalConglomerate"
+            label="{{'thoraxCT.softParts.conglomerate.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isPathologicalConglomerate"
+          ></p-checkbox>
+        </div>
+      </div>
+
+      <p-checkbox
+        rr-id="tho_c_0702180"
+        class="m-t-19"
+        name="isPathologicalHiatusHernia"
+        rrValidation="isSplenomegaly isEnlargedAbdominalLymphNodes isPathologicalHiatusHernia"
+        labelStyleClass="ui-fat-label"
+        label="{{'thoraxCT.softParts.hiatusHernia.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPathologicalHiatusHernia"
+      ></p-checkbox>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep"></div>
+
+    <div class="c-col-1 c-sep c-pad"></div>
+
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

@@ -1,0 +1,237 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep c-pad o-radio-list f-vertical">
+    <h2 rr-id="ang_c_070206" rrValidation="aortaLocations1">
+      {{ 'angiographyCT.aorta.localization.value' | translate }}
+    </h2>
+    <rr-aortic-arch-small-ct-localizer
+      class="scaled-localizer"
+      [aorticArch]="model.aortaLocations1"
+      [isArcusAortaeDivided]="false"
+      (click)="openLargeLocalizer()"
+      rrValidation="aortaLocations1"
+      isLocalizer="true"
+      rr-id="ang_c_070228"
+    >
+    </rr-aortic-arch-small-ct-localizer>
+    <h2 rr-id="ang_c_070229" class="m-t-20">
+      {{ 'angiographyCT.aorta.characterization.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="characterizationType"
+      [value]="characterizationTypeEnum.Ectasia"
+      label="{{ 'angiographyCT.aorta.ectasia.value' | translate }}"
+      rr-id="ang_c_070230"
+      [(ngModel)]="model.characterizationType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="characterizationType"
+      [value]="characterizationTypeEnum.Aneurysm"
+      label="{{ 'angiographyCT.aorta.aneurysm.value' | translate }}"
+      rr-id="ang_c_070231"
+      [(ngModel)]="model.characterizationType"
+    ></p-radioButton>
+    <h2 rr-id="ang_c_070209" class="m-t-20">
+      {{ 'angiographyCT.aorta.typeForm.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="formType"
+      [value]="formTypeEnum.Saccular"
+      label="{{ 'angiographyCT.aorta.saccular.value' | translate }}"
+      rr-id="ang_c_070210"
+      [(ngModel)]="model.shapeType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="formType"
+      [value]="formTypeEnum.Fusiform"
+      label="{{ 'angiographyCT.aorta.fusiform.value' | translate }}"
+      rr-id="ang_c_070211"
+      [(ngModel)]="model.shapeType"
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list f-vertical">
+    <h2
+      rr-id="ang_c_070317"
+      rrInfoIcon="ang_c_07_02"
+      infoIconPdfLandscape="true"
+    >
+      {{ 'angiographyCT.aorta.length.value' | translate }}
+    </h2>
+    <p rr-id="ang_c_070318" class="m-b-0">
+      {{ 'angiographyCT.aorta.maxAxialDiameter.value' | translate }}*
+    </p>
+    <rr-number-input
+      [label]="'angiographyCT.aorta.inMm.value' | translate"
+      [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+      inputRrId="ang_c_070320"
+      labelRrId="ang_c_070319"
+      name="maxAxialDiameterInMm"
+      [(ngModel)]="model.maxAxialDiameterInMm"
+      rrValidation="maxAxialDiameterInMm"
+    ></rr-number-input>
+    <p rr-id="ang_c_070321" class="m-b-0">
+      {{ 'angiographyCT.aorta.craniodualLength.value' | translate }}
+    </p>
+    <rr-number-input
+      [label]="'angiographyCT.aorta.inMm.value' | translate"
+      [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+      inputRrId="ang_c_070323"
+      labelRrId="ang_c_070322"
+      name="craniodualLengthInMm"
+      [(ngModel)]="model.craniodualLengthInMm"
+      rrValidation="craniodualLengthInMm"
+    ></rr-number-input>
+    <p rr-id="ang_c_070324" class="m-b-0">
+      {{ 'angiographyCT.aorta.proximalAneurysmaticNeckDiameter.value' |
+      translate }}
+    </p>
+    <rr-number-input
+      labelStyleClass="text-break"
+      [label]="'angiographyCT.aorta.inMm.value' | translate"
+      [config]="{min: 1, max: 150, labelWidth: 180, placeholder: '---'}"
+      inputRrId="ang_c_070326"
+      labelRrId="ang_c_070325"
+      name="proximalNeckLengthInMm"
+      [(ngModel)]="model.proximalNeckLengthInMm"
+      rrValidation="proximalNeckLengthInMm"
+    ></rr-number-input>
+    <p
+      [rrDisable]="!model.aortaLocations1.infrarenalAbdominalAorta"
+      rr-id="ang_c_070327"
+      class="m-b-0 text-break"
+    >
+      {{ 'angiographyCT.aorta.proximalNeckLength.value' | translate }}
+    </p>
+    <rr-number-input
+      [rrDisable]="!model.aortaLocations1.infrarenalAbdominalAorta"
+      labelStyleClass="text-break"
+      [label]="'angiographyCT.aorta.inMm.value' | translate"
+      [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+      inputRrId="ang_c_070329"
+      labelRrId="ang_c_070328"
+      name="proximalAneurysmaticNeckDiameterInMm"
+      [(ngModel)]="model.proximalAneurysmaticNeckDiameterInMm"
+      rrValidation="proximalAneurysmaticNeckDiameterInMm"
+    ></rr-number-input>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="ang_c_070400">
+      {{ 'angiographyCT.aorta.details.value' | translate }}
+    </h2>
+    <p-checkbox
+      name="isEccentricPartialThrombus"
+      label="{{ 'angiographyCT.aorta.eccentricPartialThrombus.value' | translate }}"
+      rr-id="ang_c_070401"
+      binary="true"
+      [(ngModel)]="model.isEccentricPartialThrombus"
+    ></p-checkbox>
+    <p-checkbox
+      name="isWallCalcifications"
+      label="{{ 'angiographyCT.aorta.wallCalcifications.value' | translate }}"
+      rr-id="ang_c_070446"
+      binary="true"
+      [(ngModel)]="model.isWallCalcifications"
+    ></p-checkbox>
+
+    <h2 rr-id="ang_c_070447" class="m-t-30">
+      {{ 'angiographyCT.aorta.type.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="typeType"
+      [value]="typeType.AneurysmVerum"
+      label="{{ 'angiographyCT.aorta.aneurysmVerum.value' | translate }}"
+      rr-id="ang_c_070448"
+      [(ngModel)]="model.typeType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="typeType"
+      [value]="typeType.AneurysmSpurium"
+      label="{{ 'angiographyCT.aorta.aneurysmSpurium.value' | translate }}"
+      rr-id="ang_c_070449"
+      [(ngModel)]="model.typeType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="typeType"
+      [value]="typeType.AneurysmDissecans"
+      label="{{ 'angiographyCT.aorta.aneurysmDissecans.value' | translate }}"
+      rr-id="ang_c_070450"
+      [(ngModel)]="model.typeType"
+    ></p-radioButton>
+
+    <h2 rr-id="ang_c_070402" class="m-t-30">
+      {{ 'angiographyCT.aorta.followup.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="followUpType"
+      [value]="followUpTypeEnum.Progression"
+      label="{{ 'angiographyCT.aorta.progression.value' | translate }}"
+      rr-id="ang_c_070403"
+      [(ngModel)]="model.followUpType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="followUpType"
+      [value]="followUpTypeEnum.NoChange"
+      label="{{ 'angiographyCT.aorta.noChange.value' | translate }}"
+      rr-id="ang_c_070404"
+      [(ngModel)]="model.followUpType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="followUpType"
+      [value]="followUpTypeEnum.Regression"
+      label="{{ 'angiographyCT.aorta.regression.value' | translate }}"
+      rr-id="ang_c_070405"
+      [(ngModel)]="model.followUpType"
+    ></p-radioButton>
+
+    <p rr-id="ang_c_070406" class="m-b-0 m-t-15">
+      {{ 'angiographyCT.aorta.maxAxialDiameterpreviousExamination.value' |
+      translate }}
+    </p>
+    <rr-number-input
+      labelStyleClass="text-break"
+      [label]="'angiographyCT.aorta.inMm.value' | translate"
+      [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+      inputRrId="ang_c_070408"
+      labelRrId="ang_c_070407"
+      name="maxDiameterPreviousExaminationInMm"
+      [(ngModel)]="model.maxDiameterPreviousExaminationInMm"
+    ></rr-number-input>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="ang_c_070500">
+      {{ 'angiographyCT.aorta.differentialDiagnosis.value' | translate }}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      name="dilatationDifferentialDiagnosisType"
+      [value]="dilatationDifferentialDiagnosisType.BicuspidAorticValve"
+      label="{{ 'angiographyCT.aorta.bicuspidAorticValve.value' | translate }}"
+      rr-id="ang_c_070501"
+      [(ngModel)]="model.dilatationDifferentialDiagnosisType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      name="dilatationDifferentialDiagnosisType"
+      [value]="dilatationDifferentialDiagnosisType.MarfanSyndrome"
+      label="{{ 'angiographyCT.aorta.marfanSyndrome.value' | translate }}"
+      rr-id="ang_c_070502"
+      [(ngModel)]="model.dilatationDifferentialDiagnosisType"
+    ></p-radioButton>
+    <p-checkbox
+      name="IsSuspicionOf"
+      label="{{ 'angiographyCT.aorta.suspicionOf.value' | translate }}"
+      rr-id="ang_c_070503"
+      binary="true"
+      [(ngModel)]="model.isSuspicionOf"
+    ></p-checkbox>
+  </div>
+</div>

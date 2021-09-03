@@ -1,0 +1,133 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 f-vertical c-sep c-pad f-start o-radio-list">
+      <h1 rr-id="kne_m_050103">
+        {{'kneeMRT.ribbons.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="mam_m_050104"
+        class="p-t-5"
+        label="{{'kneeMRT.ribbons.regularDisplayOfMenisciCrossAnd.value' | translate}}"
+        name="areFindings"
+        [value]="areFindings.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_m_050105"
+        class="p-b-5"
+        label="{{'kneeMRT.ribbons.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindings.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="c-col-4 c-pad f-vertical f-start">
+      <div class="header">
+        <h1
+          rr-id="'kne_m_050201'"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{'kneeMRT.ribbons.finding.value' | translate}} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+        <p
+          *ngIf="findingHandler.currentItem.findingType === findingType.InnerMeniscusVarian"
+          rr-id="kne_m_0502225"
+          class="text-break header__description m-t-22"
+        >
+          {{'kneeMRT.ribbons.pleaseSelectAtLeastOneStandard.value' | translate}}
+        </p>
+        <p
+          *ngIf="findingHandler.currentItem.findingType === findingType.OuterMeniscusVariant"
+          rr-id="kne_m_0502225"
+          class="text-break header__description m-t-22"
+        >
+          {{'kneeMRT.ribbons.pleaseSelectAtLeastOnePathological.value' |
+          translate}}
+        </p>
+      </div>
+      <div
+        class="col-h-100"
+        [ngSwitch]="findingHandler.currentItem.findingType"
+      >
+        <div
+          *ngSwitchCase="findingType.None"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </div>
+
+        <!-- Inner meniscus degeneration -->
+        <rr-degeneration
+          *ngSwitchCase="findingType.InnerMeniscusDegeneration"
+          [aussmeniscus]="false"
+          [model]="findingHandler.currentItem"
+        ></rr-degeneration>
+
+        <!-- Inner meniscus variant AND outer meniscus variant -->
+        <rr-variant
+          *ngSwitchCase="findingType.InnerMeniscusVarian"
+          [model]="findingHandler.currentItem"
+        ></rr-variant>
+
+        <!-- Outer meniscus degeneration -->
+        <rr-degeneration
+          *ngSwitchCase="findingType.OuterMeniscusDegeneration"
+          [aussmeniscus]="true"
+          [model]="findingHandler.currentItem"
+        ></rr-degeneration>
+
+        <!-- Outer meniscus variant -->
+        <rr-variant
+          *ngSwitchCase="findingType.OuterMeniscusVariant"
+          [model]="findingHandler.currentItem"
+        ></rr-variant>
+
+        <!-- Medial collateral ligaments -->
+        <rr-collateral-ligaments
+          *ngSwitchCase="findingType.MedialCollateralLigaments"
+          [model]="findingHandler.currentItem"
+          [isMedial]="true"
+        ></rr-collateral-ligaments>
+
+        <!-- Lateral collateral ligaments  -->
+        <rr-collateral-ligaments
+          *ngSwitchCase="findingType.LateralCollateralLigaments"
+          [model]="findingHandler.currentItem"
+          [isMedial]="false"
+        ></rr-collateral-ligaments>
+
+        <!-- Anterior cruciate ligament (ACL) -->
+        <rr-cruciate-ligament
+          *ngSwitchCase="findingType.AnteriorCruciateLigamentACL"
+          [model]="findingHandler.currentItem"
+          cruciateLigamentType="anterior"
+        ></rr-cruciate-ligament>
+
+        <!-- Posterior cruciate ligament (PCL) -->
+        <rr-cruciate-ligament
+          *ngSwitchCase="findingType.PosteriorCruciateLigamentPCL"
+          [model]="findingHandler.currentItem"
+          cruciateLigamentType="posterior"
+        ></rr-cruciate-ligament>
+      </div>
+    </div>
+  </div>
+</form>

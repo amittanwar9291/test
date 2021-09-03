@@ -1,0 +1,187 @@
+<div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+  <div class="p-l-10 o-list">
+    <div [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe">
+      <h2 rr-id="han_m_0402110" class="m-b-10">
+        {{'handMRT.bones.differentialDiagnosis1.value' | translate}}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="tumorDifferentialDiagnoseType"
+        [(ngModel)]="model.tumorDifferentialDiagnosisType"
+        group="true"
+        name="tumorDifferentialDiagnosisType"
+        rrId="han_m_0402111"
+        [parentViewModel]="model"
+        rrValidation="tumorDifferentialDiagnosisType"
+        isActiveOnIKnow="true"
+        (selectionChanged)="resetDependenciesDifferentialDiagnose()"
+      ></rr-differential-diagnosis-dropdown>
+
+      <div
+        class="o-radio-list m-t-15"
+        [rrDisable]="model.tumorDifferentialDiagnosisType === differentialDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          label="{{'handMRT.bones.histologyKnown.value' | translate}}"
+          rr-id="han_m_0402112"
+          binary="true"
+          name="isHistologyKnown"
+          [(ngModel)]="model.isHistologyKnown"
+          rrContentReset="histologyKnownContainer"
+        >
+        </p-checkbox>
+        <div
+          class="o-radio-list nested-content"
+          id="histologyKnownContainer"
+          [rrDisable]="!model.isHistologyKnown"
+        >
+          <p-radioButton
+            rr-id="han_m_0402113"
+            label="{{'handMRT.bones.benign.value' | translate}}"
+            name="knownHistologyMalignancyType"
+            [value]="histologyTypeEnum.Benign"
+            [(ngModel)]="model.knownHistologyMalignancyType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="han_m_0402114"
+            label="{{'handMRT.bones.malignant.value' | translate}}"
+            name="knownHistologyMalignancyType"
+            [value]="histologyTypeEnum.Malignant"
+            [(ngModel)]="model.knownHistologyMalignancyType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <h2
+      rr-id="han_m_040258"
+      class="m-t-35 m-b-15"
+      rrValidation="involvedBonesLocalizer"
+    >
+      {{'handMRT.bones.localization.value' | translate}}*
+    </h2>
+    <rr-hand-details-small
+      name="involvedBonesLocalizer"
+      rr-id="han_m_0402103"
+      [isInsightTab]="true"
+      [side]="side"
+      [isComplex]="false"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.involvedBonesLocalizer"
+      rrValidation="involvedBonesLocalizer"
+      isLocalizer="true"
+    ></rr-hand-details-small>
+  </div>
+</div>
+
+<div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15">
+  <div class="p-l-10">
+    <h2 rr-id="han_m_0403173" class="m-b-15">
+      {{'handMRT.bones.bonePart.value' | translate}}
+    </h2>
+
+    <div class="o-radio-list">
+      <p-checkbox
+        label="{{'handMRT.bones.epiphyseal.value' | translate}}"
+        rr-id="han_m_0403174"
+        binary="true"
+        name="isEpiphyseal"
+        [(ngModel)]="model.isEpiphyseal"
+      >
+      </p-checkbox>
+
+      <p-checkbox
+        label="{{'handMRT.bones.metaphyseal.value' | translate}}"
+        rr-id="han_m_0403175"
+        binary="true"
+        name="isMetaphyseal"
+        [(ngModel)]="model.isMetaphyseal"
+      >
+      </p-checkbox>
+
+      <p-checkbox
+        label="{{'handMRT.bones.diaphyseal.value' | translate}}"
+        rr-id="han_m_0403176"
+        binary="true"
+        name="isDiaphyseal"
+        [(ngModel)]="model.isDiaphyseal"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>
+
+<!--        col 3-->
+<div class="c-col-1 c-sep c-pad m-t-10 m-b-15">
+  <div class="p-l-10">
+    <h2 rr-id="han_m_0404145" class="m-b-10">
+      {{'handMRT.bones.extension.value' | translate}}
+    </h2>
+
+    <p rr-id="han_m_0404146">
+      {{'handMRT.bones.size.value' | translate}}*
+    </p>
+
+    <rr-number-input
+      inputRrId="han_m_0404147"
+      labelRrId="han_m_0404148"
+      name="extensionSize"
+      [(ngModel)]="model.extensionSize"
+      [label]="'handMRT.bones.inMm.value' | translate"
+      [config]="{min: 1, max: 60, labelWidth: 200}"
+      rrValidation="extensionSize"
+      (change)="reset2ndPlane()"
+    >
+    </rr-number-input>
+
+    <div class="m-t-10" [rrDisable]="!model.extensionSize">
+      <p rr-id="han_m_0404149">
+        {{'handMRT.bones.2ndPlane.value' | translate}}
+      </p>
+
+      <rr-number-input
+        inputRrId="han_m_0404150"
+        labelRrId="han_m_0404151"
+        name="extension2ndPlaneSize"
+        [(ngModel)]="model.extension2ndPlaneSize"
+        [label]="'handMRT.bones.inMm.value' | translate"
+        [config]="{min: 1, max: 60, labelWidth: 200}"
+        (change)="reset3rdPlane()"
+      >
+      </rr-number-input>
+
+      <div class="m-t-10" [rrDisable]="!model.extension2ndPlaneSize">
+        <p rr-id="han_m_0404152">
+          {{'handMRT.bones.3rdPlane.value' | translate}}
+        </p>
+
+        <rr-number-input
+          inputRrId="han_m_0404153"
+          labelRrId="han_m_0404154"
+          name="extension3rdPlaneSize"
+          [(ngModel)]="model.extension3rdPlaneSize"
+          [label]="'handMRT.bones.inMm.value' | translate"
+          [config]="{min: 1, max: 60, labelWidth: 200}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--        col 4-->
+<div class="c-col-1 c-pad-l m-t-10 m-b-15">
+  <div class="p-l-10 p-r-10">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+      class="m-t-7"
+    ></rr-reference-picture>
+  </div>
+</div>

@@ -1,0 +1,390 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-2 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2
+      *ngIf="isMedial"
+      rr-id="kne_m_050214"
+      rrInfoIcon="kne_m_050215"
+      infoIconPdfLandscape="true"
+      class="m-t-3 m-b-15"
+    >
+      {{'kneeMRT.ribbons.classification.value' | translate}}*
+    </h2>
+    <h2
+      *ngIf="!isMedial"
+      rr-id="kne_m_050214"
+      rrInfoIcon="kne_m_050221"
+      class="m-t-3 m-b-15"
+    >
+      {{'kneeMRT.ribbons.classification.value' | translate}}*
+    </h2>
+    <div class="c-col-2 f-horizontal f-start col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="kne_m_050216"
+          name="detail"
+          [value]="detail.SprainGradeOneInjury"
+          label="{{'kneeMRT.ribbons.sprainGradeOneInjury.value' | translate}}"
+          [(ngModel)]="model.detail"
+          (onClick)="clearCollateralLigament(detail.SprainGradeOneInjury)"
+          rrValidation="detail"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_050217"
+          name="detail"
+          [value]="detail.PartialTearGradeTwoInjury"
+          label="{{'kneeMRT.ribbons.partialTearGradeTwoInjury.value' | translate}}"
+          [(ngModel)]="model.detail"
+          (onClick)="clearCollateralLigament(detail.PartialTearGradeTwoInjury)"
+          rrValidation="detail"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_050218"
+          name="detail"
+          [value]="detail.CompleteRuptureGradeThreeInjury"
+          labelStyleClass="text-break"
+          label="{{'kneeMRT.ribbons.completeTearGrade3Injury.value' | translate}}"
+          [(ngModel)]="model.detail"
+          (onClick)="clearCollateralLigament(detail.CompleteRuptureGradeThreeInjury)"
+          rrValidation="detail"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_050219"
+          *ngIf="isMedial"
+          name="detail"
+          [value]="detail.BursitisBetweenDeepAndMiddleLayers"
+          label="{{'kneeMRT.ribbons.bursitisBetweenDeepAndMiddleLayers.value' | translate}}"
+          [(ngModel)]="model.detail"
+          (onClick)="clearCollateralLigament(detail.BursitisBetweenDeepAndMiddleLayers)"
+          rrValidation="detail"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_050222"
+          *ngIf="!isMedial"
+          name="detail"
+          [value]="detail.BonyLigamentRupture"
+          label="{{'kneeMRT.ribbons.avulsionFractureClassification.value' | translate}}"
+          [(ngModel)]="model.detail"
+          (onClick)="clearCollateralLigament(detail.BonyLigamentRupture)"
+          rrValidation="detail"
+        ></p-radioButton>
+      </div>
+      <div class="c-col-1 c-pad-l f-vertical o-radio-list">
+        <div
+          *ngIf="model.detail === detail.SprainGradeOneInjury && isMedial"
+          class="c-col-1 f-vertical o-radio-list"
+        >
+          <p rr-id="kne_m_050326" class="m-b-5">
+            {{'kneeMRT.ribbons.differentialDiagnosis.value' | translate}}
+          </p>
+          <p-checkbox
+            name="isBursitisBetweenDeepAndMidLayers"
+            rr-id="kne_m_050327"
+            label="{{'kneeMRT.ribbons.bursitisBetweenDeepAndMiddleLayers.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isBursitisBetweenDeepAndMidLayers"
+          ></p-checkbox>
+        </div>
+
+        <div
+          *ngIf="model.detail === detail.PartialTearGradeTwoInjury && this.isMedial"
+          class="c-col-1 f-vertical o-radio-list"
+        >
+          <p rr-id="kne_m_050328" class="m-b-5">
+            {{'kneeMRT.ribbons.bandPortion.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="kne_m_050329"
+            name="bandPortion"
+            label="{{'kneeMRT.ribbons.ruptureSuperficialLayer.value' | translate}}"
+            rrUnClickRadio
+            [value]="bandPortion.RuptureSuperficialLayer"
+            [(ngModel)]="model.bandPortion"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_050330"
+            name="bandPortion"
+            label="{{'kneeMRT.ribbons.ruptureDeepLayer.value' | translate}}"
+            rrUnClickRadio
+            [value]="bandPortion.RuptureDeepLayer"
+            [(ngModel)]="model.bandPortion"
+          ></p-radioButton>
+          <p rr-id="kne_m_050331">
+            {{'kneeMRT.ribbons.localization.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="kne_m_050332"
+            name="detailLocalization"
+            label="{{'kneeMRT.ribbons.proximal.value' | translate}}"
+            [value]="detailLocalization.Proximal"
+            rrUnClickRadio
+            [(ngModel)]="model.detailLocalization"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_050333"
+            name="detailLocalization"
+            class="m-b-25"
+            label="{{'kneeMRT.ribbons.distal.value' | translate}}"
+            rrUnClickRadio
+            [value]="detailLocalization.Distal"
+            [(ngModel)]="model.detailLocalization"
+          ></p-radioButton>
+          <p-checkbox
+            name="isRetracted"
+            rr-id="kne_m_050334"
+            label="{{'kneeMRT.ribbons.retraction.value' | translate}}"
+            binary="true"
+            rrContentReset="dimensionGrad2-block"
+            [(ngModel)]="model.isRetracted"
+            class="m-b-15"
+          ></p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isRetracted"
+            id="dimensionGrad2-block"
+          >
+            <rr-number-input
+              inputRrId="kne_m_0503102"
+              labelRrId="kne_m_0503101"
+              name="dimensionGrad2"
+              class="text-break"
+              label="{{'kneeMRT.ribbons.dimensionInMm.value' | translate}}"
+              [config]="{max: 60}"
+              [(ngModel)]="model.dimensionGrad2"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+
+        <div
+          *ngIf="model.detail===detail.CompleteRuptureGradeThreeInjury"
+          class="c-col-1 f-vertical o-radio-list"
+        >
+          <p
+            [attr.rr-id]="isMedial ? 'kne_m_050335' : 'kne_m_050353'"
+            class="m-b-5"
+          >
+            {{'kneeMRT.ribbons.localization.value' | translate}}
+          </p>
+          <p-radioButton
+            [attr.rr-id]="isMedial ? 'kne_m_050336' : 'kne_m_050354'"
+            name="detailLocalization"
+            label="{{'kneeMRT.ribbons.proximal.value' | translate}}"
+            [value]="detailLocalization.Proximal"
+            rrUnClickRadio
+            [(ngModel)]="model.detailLocalization"
+          ></p-radioButton>
+          <p-radioButton
+            [attr.rr-id]="isMedial ? 'kne_m_050337': 'kne_m_050355'"
+            name="detailLocalization"
+            label="{{'kneeMRT.ribbons.distal.value' | translate}}"
+            rrUnClickRadio
+            [value]="detailLocalization.Distal"
+            [(ngModel)]="model.detailLocalization"
+            class="m-b-25"
+          ></p-radioButton>
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              name="isRetracted"
+              [attr.rr-id]="isMedial ? 'kne_m_050338': 'kne_m_050356'"
+              label="{{'kneeMRT.ribbons.retraction.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isRetracted"
+              rrContentReset="dimensionGrad3-block"
+            ></p-checkbox>
+            <div
+              class="f-start o-radio-list"
+              [ngClass]="{'nested-content': model.findingType === findingType.MedialCollateralLigaments}"
+              [rrDisable]="!model.isRetracted"
+              id="dimensionGrad3-block"
+            >
+              <rr-number-input
+                [attr.rr-id]="isMedial ? 'kne_m_050339': 'kne_m_050357'"
+                name="dimensionGrad3"
+                [(ngModel)]="model.dimensionGrad3"
+                label="{{'kneeMRT.ribbons.dimensionInMm.value' | translate}}"
+                [config]="{placeholder: '--', min: 0, max: 60}"
+              >
+              </rr-number-input>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="model.detail === detail.BursitisBetweenDeepAndMiddleLayers"
+          class="c-col-1 f-vertical o-radio-list"
+        >
+          <p rr-id="kne_m_050341" class="m-b-4">
+            {{'kneeMRT.ribbons.differentialDiagnosis.value' | translate}}
+          </p>
+          <p-checkbox
+            name="isDistortionGrade1Injury"
+            rr-id="kne_m_050342"
+            label="{{'kneeMRT.ribbons.sprainGradeOneInjury.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isDistortionGrade1Injury"
+          ></p-checkbox>
+        </div>
+
+        <div
+          *ngIf="model.detail === detail.PartialTearGradeTwoInjury && !this.isMedial"
+          class="c-col-1 f-vertical o-radio-list"
+        >
+          <p rr-id="kne_m_050343" class="m-b-5">
+            {{'kneeMRT.ribbons.ruptureAnatomicalStructure.value' | translate}}
+          </p>
+          <p-checkbox
+            name="isLateralCollateralLigament"
+            rr-id="kne_m_050344"
+            label="{{'kneeMRT.ribbons.lateralCollateralLigament.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLateralCollateralLigament"
+          ></p-checkbox>
+          <p-checkbox
+            name="isTractusIliotibialis"
+            rr-id="kne_m_050345"
+            label="{{'kneeMRT.ribbons.tractusIliotibialis.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isTractusIliotibialis"
+          ></p-checkbox>
+          <p-checkbox
+            name="isBicepsFemorisTendon"
+            rr-id="kne_m_050346"
+            label="{{'kneeMRT.ribbons.mBicepsFemorisTendon.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isBicepsFemorisTendon"
+          ></p-checkbox>
+          <p-checkbox
+            name="isLiggPopliteofibulare"
+            rr-id="kne_m_050347"
+            label="{{'kneeMRT.ribbons.ligPopliteofibular.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLiggPopliteofibulare"
+          ></p-checkbox>
+          <p-checkbox
+            name="isLigMeniscopliteale"
+            rr-id="kne_m_050348"
+            label="{{'kneeMRT.ribbons.ligMeniscopliteale.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLigMeniscopliteale"
+            class="m-b-16"
+          ></p-checkbox>
+          <p rr-id="kne_m_050349">
+            {{'kneeMRT.ribbons.localization.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="kne_m_050350"
+            name="detailLocalization"
+            label="{{'kneeMRT.ribbons.proximal.value' | translate}}"
+            [value]="detailLocalization.Proximal"
+            rrUnClickRadio
+            [(ngModel)]="model.detailLocalization"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_050351"
+            name="detailLocalization"
+            label="{{'kneeMRT.ribbons.distal.value' | translate}}"
+            rrUnClickRadio
+            [value]="detailLocalization.Distal"
+            [(ngModel)]="model.detailLocalization"
+          ></p-radioButton>
+          <p-checkbox
+            name="isRetracted"
+            rr-id="kne_m_050352"
+            class="m-t-10"
+            rrContentReset="dimensionGrad2-block"
+            label="{{'kneeMRT.ribbons.retraction.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isRetracted"
+          ></p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            [rrDisable]="!model.isRetracted"
+            id="dimensionGrad2-block"
+          >
+            <rr-number-input
+              inputRrId="kne_m_0503102"
+              labelRrId="kne_m_0503101"
+              name="dimensionGrad2"
+              class="text-break"
+              label="{{'kneeMRT.ribbons.dimensionInMm.value' | translate}}"
+              [config]="{max: 60}"
+              [(ngModel)]="model.dimensionGrad2"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+
+        <div
+          *ngIf="model.detail === detail.BonyLigamentRupture"
+          class="c-col-1 f-vertical o-radio-list"
+        >
+          <p-checkbox
+            name="isSegondFracture"
+            rr-id="kne_m_050359"
+            label="{{'kneeMRT.ribbons.segondFracture.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isSegondFracture"
+            rrContentReset="segondFractureType-block"
+          ></p-checkbox>
+          <div
+            id="segondFractureType-block"
+            class="f-vertical f-start o-radio-list nested-content m-b-15"
+            [rrDisable]="!model.isSegondFracture"
+          >
+            <p-checkbox
+              name="isAvulsionTibia"
+              rr-id="kne_m_050360"
+              label="{{'kneeMRT.ribbons.avulsionTibia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAvulsionTibia"
+            ></p-checkbox>
+            <p-checkbox
+              name="isRuptureOfAnteriorCruciateLigament"
+              rr-id="kne_m_050361"
+              label="{{'kneeMRT.ribbons.ruptureOfAnteriorCruciateLigament.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isRuptureOfAnteriorCruciateLigament"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            name="isArcuateSign"
+            rr-id="kne_m_050362"
+            label="{{'kneeMRT.ribbons.arcuateSign.value' | translate}}"
+            binary="true"
+            rrContentReset="arcuateSignType-block"
+            [(ngModel)]="model.isArcuateSign"
+          ></p-checkbox>
+          <div
+            id="arcuateSignType-block"
+            class="f-vertical f-start o-radio-list nested-content"
+            [rrDisable]="!model.isArcuateSign"
+          >
+            <p-checkbox
+              name="isAvulsionFrakturFibula"
+              rr-id="kne_m_050363"
+              label="{{'kneeMRT.ribbons.avulsionFractureProximalFibula.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isAvulsionFrakturFibula"
+            ></p-checkbox>
+            <p-checkbox
+              name="isPullOutPosterolateralCapsule"
+              rr-id="kne_m_050364"
+              label="{{'kneeMRT.ribbons.rupturePosterolateralCapsule.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPullOutPosterolateralCapsule"
+            ></p-checkbox>
+            <p-checkbox
+              name="isPosteriorCruciateLigament"
+              rr-id="kne_m_050365"
+              label="{{'kneeMRT.ribbons.ruptureOfThePosteriorCruciateLigament.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPosteriorCruciateLigament"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep"></div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

@@ -1,0 +1,211 @@
+<div class="f-horizontal f-center h-510">
+  <div class="c-col-1 c-pad c-sep o-list f-vertical">
+    <div class="p-l-10">
+      <h2 rr-id="pel_m_040232">
+        {{'pelvisMRT.prostata.size.value' | translate}}
+      </h2>
+      <div class="o-radio-list m-t-14 m-b-56">
+        <p-radioButton
+          rr-id="pel_m_040234"
+          label="{{'pelvisMRT.prostata.lessThan15.value' | translate}}"
+          name="piradsScoreSizeType"
+          [value]="sizeType.LessThan1Dot5cm"
+          [(ngModel)]="model.piradsScoreSizeType"
+          rrValidation="piradsScoreSizeType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_040235"
+          label="{{'pelvisMRT.prostata.moreEqualThan15.value' | translate}}"
+          name="piradsScoreSizeType"
+          [value]="sizeType.MoreEqualThan1Dot5cm"
+          [(ngModel)]="model.piradsScoreSizeType"
+          rrValidation="piradsScoreSizeType"
+        ></p-radioButton>
+      </div>
+
+      <h2
+        *ngIf="model.findingType === findingType.TransitionZoneTZ"
+        rr-id="pel_m_040236"
+        rrInfoIcon="pel_m_04_05"
+        infoIconPdfLandscape="true"
+        class="m-b-21"
+      >
+        {{ 'pelvisMRT.prostata.pIRADSScoreTZ.value' | translate }}
+      </h2>
+      <h2
+        *ngIf="model.findingType === findingType.PeripheralZonePZ"
+        rr-id="pel_m_040236"
+        rrInfoIcon="pel_m_04_07"
+        infoIconPdfLandscape="true"
+        class="m-b-21"
+      >
+        {{ 'pelvisMRT.prostata.pIRADSScorePZ.value' | translate }}
+      </h2>
+      <div class="slider-input m-b-37">
+        <rr-slider-number-input
+          class="size-pirdas-slider"
+          name="signalType"
+          [step]="1"
+          [max]="5"
+          [min]="1"
+          rr-id="pel_m_040238"
+          ngDefaultControl
+          [(ngModel)]="model.sliderPiradasScoreType"
+          (change)="onSliderPiradasScoreTypeChanged()"
+        >
+        </rr-slider-number-input>
+      </div>
+
+      <h2 rr-id="pel_m_040239" rrInfoIcon="pel_m_04_06">
+        {{'pelvisMRT.prostata.indexLesion.value' | translate}}
+      </h2>
+      <p rr-id="pel_m_0402101" class="m-t-10 index-lession-details">
+        {{'pelvisMRT.prostata.indexLesionDetails.value' | translate}}
+      </p>
+      <div class="o-radio-list m-t-15">
+        <p-radioButton
+          rr-id="pel_m_040241"
+          label="{{'pelvisMRT.prostata.yes.value' | translate}}"
+          name="indexLesionType"
+          [value]="indexLesionType.Yes"
+          [(ngModel)]="model.indexLesionType"
+          (onClick)="onIndexLesionTypeClicked()"
+          rrValidation="indexLesionType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_040242"
+          label="{{'pelvisMRT.prostata.no.value' | translate}}"
+          name="indexLesionType"
+          [value]="indexLesionType.No"
+          [(ngModel)]="model.indexLesionType"
+          (onClick)="onIndexLesionTypeClicked()"
+          rrValidation="indexLesionType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep o-list f-vertical">
+    <div class="p-l-10 o-radio-list">
+      <h2 rr-id="pel_m_040329" class="m-t-5 m-b-24">
+        {{'pelvisMRT.prostata.pIRADSScoreTotal.value' | translate}}
+      </h2>
+      <div class="f-start f-horizontal size-pirads-input">
+        <rr-number-input
+          rr-id="pel_m_040330"
+          name="piradsScoreTotal"
+          class="text-break"
+          [config]="{labelWidth: 200, readonly: true}"
+          [(ngModel)]="model.piradsScoreTotal"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep o-list f-vertical">
+    <div
+      class="p-l-10 o-radio-list"
+      [rrDisable]="![1, 2].includes(model.piradsScoreTotal)"
+    >
+      <h2 rr-id="pel_m_040443" class="m-t-5">
+        {{'pelvisMRT.prostata.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="m-b-13">
+        <p rr-id="pel_m_040445">
+          {{'pelvisMRT.prostata.differentialDiagnosis1.value' | translate}}*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_040446"
+          [diagnosisNumber]="1"
+          [options]="w026DifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosis01"
+          name="differentialDiagnosis01"
+          rrValidation="differentialDiagnosis01"
+          [parentViewModel]="model"
+          (selectionChanged)="clearDifferentialDiagnose01()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis01 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.prostata.suspicionOf.value' | translate}}"
+          rr-id="pel_m_040447"
+          binary="true"
+          name="isSuspicionOf01"
+          [(ngModel)]="model.isSuspicionOf01"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="m-b-13"
+        [rrDisable]="model.differentialDiagnosis01 === differentialDiagnosisType.None"
+      >
+        <p rr-id="pel_m_040448">
+          {{'pelvisMRT.prostata.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          rrId="pel_m_040449"
+          [diagnosisNumber]="2"
+          [options]="w026DifferentialDiagnosisType"
+          [(ngModel)]="model.differentialDiagnosis02"
+          name="differentialDiagnosis02"
+          [parentViewModel]="model"
+          (selectionChanged)="clearDifferentialDiagnose02()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        [rrDisable]="model.differentialDiagnosis02 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.prostata.suspicionOf.value' | translate}}"
+          rr-id="pel_m_040450"
+          binary="true"
+          name="isSuspicionOf02"
+          [(ngModel)]="model.isSuspicionOf02"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad-l o-list f-vertical">
+    <div class="p-l-10 prostatitis-position">
+      <div
+        class="o-radio-list m-t-32 m-b-55"
+        *ngIf="model.differentialDiagnosis01 === differentialDiagnosisType.Prostatitis"
+      >
+        <p rr-id="pel_m_040535">
+          {{'pelvisMRT.prostata.detailsDifferentialDiagnosis1.value' |
+          translate}}
+        </p>
+        <p-checkbox
+          label="{{'pelvisMRT.prostata.granulomatousProstatitis.value' | translate}}"
+          rr-id="pel_m_040536"
+          binary="true"
+          name="granulomatousProstatitis1"
+          [(ngModel)]="model.isDifferentialDiagnosis01GranulomatousProstatitis"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="o-radio-list granulomatous-prostatitis-position"
+        *ngIf="model.differentialDiagnosis02 === differentialDiagnosisType.Prostatitis"
+      >
+        <p rr-id="pel_m_040537">
+          {{'pelvisMRT.prostata.detailsDifferentialDiagnosis2.value' |
+          translate}}
+        </p>
+        <p-checkbox
+          label="{{'pelvisMRT.prostata.granulomatousProstatitis.value' | translate}}"
+          rr-id="pel_m_040538"
+          binary="true"
+          name="granulomatousProstatitis2"
+          [(ngModel)]="model.isDifferentialDiagnosis02GranulomatousProstatitis"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

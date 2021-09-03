@@ -1,0 +1,265 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-14 m-b-12 o-radio-list">
+      <h2 rr-id="nec_m_070280" class="m-b-10">
+        {{ "neckMRT.thyroid.internalStructure.value" | translate }}
+      </h2>
+      <div class="o-radio-list m-b-10">
+        <p-checkbox
+          rr-id="nec_m_070281"
+          name="isCyst"
+          label="{{ 'neckMRT.thyroid.cyst.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isCyst"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_070282"
+          name="isCalcifications"
+          label="{{ 'neckMRT.thyroid.calcifications.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isCalcifications"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_070283"
+          name="isFibrosis"
+          label="{{ 'neckMRT.thyroid.fibrosis.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isFibrosis"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="nec_m_070284"
+          name="isHemorrhage"
+          label="{{ 'neckMRT.thyroid.hemorrhage2.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isHemorrhage"
+        >
+        </p-checkbox>
+      </div>
+      <div class="f-vertical o-radio-list m-b-32"></div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-14 m-b-12 o-radio-list">
+      <h2 rr-id="nec_m_070390" class="m-b-10">
+        {{ "neckMRT.thyroid.growthPatterns.value" | translate }}
+      </h2>
+      <div class="o-radio-list m-b-10">
+        <p-checkbox
+          rr-id="nec_m_070391"
+          name="isDisplacement"
+          label="{{ 'neckMRT.thyroid.displacement.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isDisplacement"
+          rrContentReset="isDisplacementBlock"
+        >
+        </p-checkbox>
+        <div
+          [rrDisable]="!model.isDisplacement"
+          class="o-radio-list nested-content"
+          id="isDisplacementBlock"
+        >
+          <p-checkbox
+            rr-id="nec_m_070392"
+            name="isTrachealCompression"
+            label="{{
+              'neckMRT.thyroid.trachealCompression.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isTrachealCompression"
+            rrContentReset="isTrachealCompressionBlock"
+            rrInfoIcon="nec_m_07_03"
+          >
+          </p-checkbox>
+          <div
+            [rrDisable]="!model.isTrachealCompression"
+            class="o-radio-list nested-content"
+            id="isTrachealCompressionBlock"
+          >
+            <h3 rr-id="nec_m_070393" class="text-break">
+              {{ 'neckMRT.thyroid.minInnerDiameteraxial.value' | translate }}
+            </h3>
+            <rr-number-input
+              inputRrId="nec_m_070394"
+              labelRrId="nec_m_070395"
+              name="minInnerDiameterAxialInMm"
+              [(ngModel)]="model.minInnerDiameterAxialInMm"
+              [config]="{ min: 1, max: 35, placeholder: '--' }"
+              [label]="'neckMRT.thyroid.inMm.value' | translate"
+              (ngModelChange)="inputChange()"
+            >
+            </rr-number-input>
+            <div [rrDisable]="model.minInnerDiameterAxialInMm === null">
+              <h3 rr-id="nec_m_070396">
+                {{ 'neckMRT.thyroid.sagittal.value' | translate }}
+              </h3>
+              <rr-number-input
+                inputRrId="nec_m_070397"
+                labelRrId="nec_m_070398"
+                name="sagittalInMm"
+                [(ngModel)]="model.sagittalInMm"
+                [config]="{ min: 1, max: 35, placeholder: '--' }"
+                [label]="'neckMRT.thyroid.inMm.value' | translate"
+                (ngModelChange)="inputChange()"
+              >
+              </rr-number-input>
+            </div>
+            <div
+              [rrDisable]="
+                model.minInnerDiameterAxialInMm === null ||
+                model.sagittalInMm === null
+              "
+            >
+              <h3 rr-id="nec_m_070399">
+                {{ 'neckMRT.thyroid.coronal.value' | translate }}
+              </h3>
+              <rr-number-input
+                inputRrId="nec_m_0703100"
+                labelRrId="nec_m_0703101"
+                name="coronal"
+                [(ngModel)]="model.coronal"
+                [config]="{ min: 1, max: 35, placeholder: '--' }"
+                [label]="'neckMRT.thyroid.inMm.value' | translate"
+                (ngModelChange)="inputChange()"
+              >
+              </rr-number-input>
+            </div>
+          </div>
+          <p-checkbox
+            rr-id="nec_m_0703102"
+            name="isVascularCompressionRight"
+            label="{{
+              'neckMRT.thyroid.vascularCompressionRight.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isVascularCompressionRight"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_0703103"
+            name="isVascularCompressionLeft"
+            label="{{
+              'neckMRT.thyroid.vascularCompressionLeft.value' | translate
+            }}"
+            binary="true"
+            [(ngModel)]="model.isVascularCompressionLeft"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="f-vertical o-radio-list m-b-32"></div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-14 m-b-12 o-radio-list">
+      <div class="o-radio-list m-b-20" [rrDisable]="!isCMReinforced">
+        <h2 rr-id="nec_m_070458" class="m-b-10">
+          {{ 'neckMRT.thyroid.contrastEnhancementQuantitative.value' | translate
+          }}
+        </h2>
+        <p-radioButton
+          rr-id="nec_m_070459"
+          name="contrastEnhancementQuantitativeType"
+          [(ngModel)]="model.contrastEnhancementQuantitativeType"
+          label="{{ 'neckMRT.thyroid.no.value' | translate }}"
+          [value]="contrastEnhancementQuantitativeType.No"
+          rrContentReset="homogeneityType-block contrastEnhancementDistributionType-block"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070460"
+          name="contrastEnhancementQuantitativeType"
+          [(ngModel)]="model.contrastEnhancementQuantitativeType"
+          label="{{ 'neckMRT.thyroid.weak.value' | translate }}"
+          [value]="contrastEnhancementQuantitativeType.Weak"
+          rrContentReset="homogeneityType-block contrastEnhancementDistributionType-block"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070461"
+          name="contrastEnhancementQuantitativeType"
+          [(ngModel)]="model.contrastEnhancementQuantitativeType"
+          label="{{ 'neckMRT.thyroid.strong.value' | translate }}"
+          [value]="contrastEnhancementQuantitativeType.Strong"
+          rrContentReset="homogeneityType-block contrastEnhancementDistributionType-block"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <div
+          [rrDisable]="model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Strong
+          && model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Weak"
+          class="o-radio-list nested-content"
+          id="homogeneityType-block"
+        >
+          <p-radioButton
+            rr-id="nec_m_070462"
+            name="cmHomogeneityType"
+            [(ngModel)]="model.cmHomogeneityType"
+            label="{{ 'neckMRT.thyroid.homogeneous.value' | translate }}"
+            [value]="cmHomogeneityType.Homogeneous"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="nec_m_070463"
+            name="cmHomogeneityType"
+            [(ngModel)]="model.cmHomogeneityType"
+            label="{{ 'neckMRT.thyroid.heterogeneous.value' | translate }}"
+            [value]="cmHomogeneityType.Heterogeneous"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+
+      <div
+        id="contrastEnhancementDistributionType-block"
+        class="o-radio-list"
+        [rrDisable]="model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Strong
+          && model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Weak"
+      >
+        <h2 rr-id="nec_m_070464" class="m-b-10">
+          {{ 'neckMRT.thyroid.contrastEnhancementDistribution.value' | translate
+          }}
+        </h2>
+        <p-radioButton
+          rr-id="nec_m_070465"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          label="{{ 'neckMRT.thyroid.peripheral.value' | translate }}"
+          [value]="contrastEnhancementDistributionType.Peripheral"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070466"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          label="{{ 'neckMRT.thyroid.entireLesion.value' | translate }}"
+          [value]="contrastEnhancementDistributionType.EntireLesion"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070467"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          label="{{ 'neckMRT.thyroid.central.value' | translate }}"
+          [value]="contrastEnhancementDistributionType.Central"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_070468"
+          name="contrastEnhancementDistributionType"
+          [(ngModel)]="model.contrastEnhancementDistributionType"
+          label="{{ 'neckMRT.thyroid.septal.value' | translate }}"
+          [value]="contrastEnhancementDistributionType.Septal"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l m-t-14 m-b-12"></div>
+  </div>
+</div>

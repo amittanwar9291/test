@@ -1,0 +1,190 @@
+<div class="f-vertical f-start o-radio-list col-h-100 c-pad-l">
+  <h2 rr-id="anc_m_040333">
+    {{'feetMRT.bones.aOClassificationAO82.value' | translate}}
+  </h2>
+  <p rr-id="anc_m_0403203" class="m-b-5">
+    {{'feetMRT.bones.evaluationFracture.value' | translate}}
+  </p>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+      <p-radioButton
+        rr-id="anc_m_040334"
+        label="{{'feetMRT.bones.82AExtraarticular.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.ExtraArticular82A"
+        rrContentReset="fractureFormDetails distalTibiaFractureType"
+        (onClick)="clearFractureForm()"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040335"
+        label="{{'feetMRT.bones.82BTongueTypeFractureExitingIntoPosteriorFacet.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.TongueTypeFractureExitingIntoPosteriorFacet82B"
+        class="m-b-3"
+        rrContentReset="fractureFormDetails distalTibiaFractureType"
+        (onClick)="clearFractureForm()"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040336"
+        label="{{'feetMRT.bones.82CArticularFractureJointofTongue.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.IntraArticularFractureJoint82C"
+        rrContentReset="fractureFormDetails distalTibiaFractureType"
+        (onClick)="clearFractureForm()"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0403208"
+        label="{{'feetMRT.bones.82NotFurtherSpecified.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.CalcaneusFractureNotFurtherSpecified"
+        class="text-break"
+        [(ngModel)]="model.fractureClassificationType"
+        (onClick)="clearFractureForm()"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <div
+        id="distalTibiaFractureType"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureClassificationType !== 'CalcaneusFractureNotFurtherSpecified'"
+      >
+        <p-radioButton
+          rr-id="anc_m_0403209"
+          label="{{'feetMRT.bones.consolidatedFracture.value' | translate}}"
+          name="distalTibiaFractureType"
+          [value]="distalTibiaFractureType.FractureConsolidation"
+          [(ngModel)]="model.distalTibiaFractureType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_0403210"
+          label="{{'feetMRT.bones.suspicionOf.value' | translate}}"
+          name="distalTibiaFractureType"
+          [value]="distalTibiaFractureType.SuspicionOf"
+          [(ngModel)]="model.distalTibiaFractureType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div
+      id="fractureFormDetails"
+      class="f-vertical f-start o-radio-list col-h-100 c-sep c-pad-l"
+    >
+      <p
+        *ngIf="![fractureClassificationType.CalcaneusFractureNotFurtherSpecified, fractureClassificationType.None].includes(model.fractureClassificationType)"
+        rr-id="anc_m_040407"
+      >
+        {{'feetMRT.bones.fractureType.value' | translate}}
+      </p>
+      <div class="f-horizontal f-start col-h-100">
+        <ng-container
+          *ngIf="model.fractureClassificationType === fractureClassificationType.ExtraArticular82A"
+        >
+          <ng-container *ngTemplateOutlet="ExtraArticular82A"></ng-container>
+        </ng-container>
+        <ng-container
+          *ngIf="model.fractureClassificationType === fractureClassificationType.TongueTypeFractureExitingIntoPosteriorFacet82B"
+        >
+          <ng-container *ngTemplateOutlet="HorizontalTongue82B"></ng-container>
+        </ng-container>
+        <ng-container
+          *ngIf="model.fractureClassificationType === fractureClassificationType.IntraArticularFractureJoint82C"
+        >
+          <ng-container
+            *ngTemplateOutlet="IntraArticularFractureJoint82C"
+          ></ng-container>
+        </ng-container>
+        <ng-container
+          *ngIf="[fractureClassificationType.CalcaneusFractureNotFurtherSpecified, fractureClassificationType.None].includes(model.fractureClassificationType)"
+        >
+          <div
+            class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r"
+          ></div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l"></div>
+  </div>
+</div>
+
+<ng-template #ExtraArticular82A>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r m-t-5">
+    <p-radioButton
+      rr-id="anc_m_040435"
+      label="{{'feetMRT.bones.82A1AvulsionPosteriorTuberosityFractureOrExtraarticularTongueFracture.value' | translate}}"
+      name="fractureTypeType"
+      class="m-b-3 text-break"
+      [value]="fractureTypeType.AvulsionPosteriorTuberosityFractureOrExtraarticularTongueFracture82A1"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040436"
+      label="{{'feetMRT.bones.82A2BodyFracture.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.BodyFracture82A2"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+</ng-template>
+
+<ng-template #HorizontalTongue82B>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+    <p-radioButton
+      rr-id="anc_m_040437"
+      label="{{'feetMRT.bones.82B1TongueTypeSimple.value' | translate}}"
+      name="fractureTypeType"
+      [value]="fractureTypeType.TongueTypeSimple82B1"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040439"
+      label="{{'feetMRT.bones.82B3Multifragmentary.value' | translate}}"
+      name="fractureTypeType"
+      class="m-b-5"
+      [value]="fractureTypeType.Multifragmentary82B3"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+</ng-template>
+
+<ng-template #IntraArticularFractureJoint82C>
+  <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+    <p-radioButton
+      rr-id="anc_m_040440"
+      label="{{'feetMRT.bones.82C1WithJointDepressionSanders2.value' | translate}}"
+      class="text-break"
+      name="fractureTypeType"
+      [value]="fractureTypeType.WithJointDepressionSanders282C1"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040441"
+      label="{{'feetMRT.bones.82C2WithJointDepressionSanders3.value' | translate}}"
+      class="text-break"
+      name="fractureTypeType"
+      [value]="fractureTypeType.WithJointDepressionSanders382C2"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_040442"
+      label="{{'feetMRT.bones.82C3MultifragmentaryFractureSanders4.value' | translate}}"
+      class="text-break"
+      name="fractureTypeType"
+      [value]="fractureTypeType.MultifragmentaryFractureSanders482C3"
+      [(ngModel)]="model.fractureTypeType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+</ng-template>

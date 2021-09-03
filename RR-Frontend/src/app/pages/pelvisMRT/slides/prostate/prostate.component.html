@@ -1,0 +1,149 @@
+<form
+  #autosaveForm="ngForm"
+  [hidden]="!modelInitialized"
+  rrBlockForm
+  [excludedIds]="['buttonPatientInformation', 'buttonFindings']"
+>
+  <div class="c-main f-horizontal f-center" [hidden]="largeLocaliserOpen">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <button
+        rr-id="pel_m_040103"
+        type="button"
+        class="patient-information-button m-b-10 no-block-click"
+        [class.grayButton]="!isPatientInformation"
+        (click)="isPatientInformation = true"
+        [class.blueButton]="isPatientInformation"
+        id="buttonPatientInformation"
+      >
+        {{ "pelvisMRT.prostata.prostateSize.value" | translate }}
+      </button>
+      <button
+        rr-id="pel_m_040104"
+        type="button"
+        class="patient-information-button no-block-click"
+        [class.grayButton]="isPatientInformation"
+        [class.blueButton]="!isPatientInformation"
+        (click)="isPatientInformation = false"
+        [rrValidation]="validationGroup"
+        ifAny="true"
+        [notInFinding]="checkIfFinding()"
+        [allFindings]="isAllFindings"
+        id="buttonFindings"
+      >
+        {{ "pelvisMRT.prostata.findingTabHeader.value" | translate }}
+      </button>
+      <div *ngIf="!isPatientInformation">
+        <h1 class="m-b-16 m-t-10" rr-id="pel_m_040120">
+          {{ 'pelvisMRT.prostata.dynamicFinding.value' | translate }}
+        </h1>
+        <div class="f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_040121"
+            name="areFindings"
+            [value]="areFindings.No"
+            label="{{ 'pelvisMRT.prostata.regularRepresentationOfThe.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            (onClick)="resetErrorValidation()"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040122"
+            name="areFindings"
+            [value]="areFindings.Yes"
+            label="{{ 'pelvisMRT.prostata.finding.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [attr.name]="'findingHandlerComponent'"
+        [setConfig]="findingDropdownConfig"
+        [setDescriptionTypes]="[]"
+        [hidden]="isPatientInformation"
+        [customLabelCalculator]="getCustomLabel"
+        (findingTypeChange)="onFindingTypeChange()"
+        (findingRemoved)="onFindingRemoved()"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div
+        *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        class="c-pad-l"
+      >
+        <h1 rr-id="pel_m_040221" *ngIf="!isPatientInformation">
+          {{ 'pelvisMRT.prostata.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div *ngIf="!isPatientInformation">
+        <rr-residual-hemorrhage
+          *ngIf="findingHandler.currentItem.findingType === findingType.ResidualHemorrhage"
+          [model]="findingHandler.currentItem"
+          (openLargeLocaliser)="openLargeLocalizer($event)"
+        ></rr-residual-hemorrhage>
+        <rr-transitional-zone
+          *ngIf="findingHandler.currentItem.findingType === findingType.TransitionZoneTZ"
+          [model]="findingHandler.currentItem"
+          [technologyModel]="technologyModel"
+          (openLargeLocaliser)="openLargeLocalizer($event)"
+          [w026DifferentialDiagnosisType]="w026DifferentialDiagnosisType"
+        ></rr-transitional-zone>
+        <rr-central-zone
+          *ngIf="findingHandler.currentItem.findingType === findingType.CentralZoneCZ"
+          [model]="findingHandler.currentItem"
+          [technologyModel]="technologyModel"
+          (openLargeLocaliser)="openLargeLocalizer($event)"
+        ></rr-central-zone>
+        <rr-peripheral-zone
+          *ngIf="findingHandler.currentItem.findingType === findingType.PeripheralZonePZ"
+          [model]="findingHandler.currentItem"
+          [technologyModel]="technologyModel"
+          (openLargeLocaliser)="openLargeLocalizer($event)"
+          [w026DifferentialDiagnosisType]="w026DifferentialDiagnosisType"
+        ></rr-peripheral-zone>
+      </div>
+      <rr-patient-information
+        [model]="model"
+        [anamnesisModel]="anamnesisModel"
+        *ngIf="isPatientInformation && anamnesisModel"
+      ></rr-patient-information>
+      <div
+        class="f-horizontal col-h-100"
+        *ngIf="findingHandler.currentItem.findingType === findingType.None && !isPatientInformation"
+      >
+        <div class="f-horizontal">
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <rr-three-cross-section-big
+    name="threeCrossSectionBig"
+    [zone]="localiserZone"
+    *ngIf="largeLocaliserOpen && localiserZone !== 'Central'"
+    [(ngModel)]="localiserZone === 'Peripheral' ? findingHandler.currentItem.peripheralZonePZLocalizerType :
+      localiserZone === 'Transitional' ? findingHandler.currentItem.transitionaZoneTZLocalizerType :
+      findingHandler.currentItem.localizationT1wSignalEnhancementType"
+    (close)="closeLargeLocalizer(localiserZone)"
+  ></rr-three-cross-section-big>
+  <rr-one-cross-section-big
+    name="oneCrossSectionBig"
+    *ngIf="largeLocaliserOpen && localiserZone === 'Central'"
+    [(ngModel)]="findingHandler.currentItem.centralZoneCZLocalizerType"
+    (close)="closeLargeLocalizer(localiserZone)"
+  >
+  </rr-one-cross-section-big>
+</form>

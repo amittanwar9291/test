@@ -1,0 +1,82 @@
+<div class="f-vertical o-width-100 col-h-100">
+  <h2 rr-id="car_m_040220" class="c-pad-l m-t-14 m-b-26">
+    {{ "cardioMRT.flaps.pathology.value" | translate }}
+  </h2>
+  <div class="f-horizontal c-col-4 c-sep c-pad-l col-h-100 m-b-12">
+    <div class="f-vertical" [ngClass]="{ 'c-sep': !oneChamberHeartSelected }">
+      <h2 rr-id="car_m_040225" class="m-b-12">
+        {{ "cardioMRT.flaps.congenitalheartdisease.value" | translate }}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start">
+          <rr-finding-column
+            [handler]="congenitalHeartDiseasesFindingsHandler"
+            [disabled]="model.areFindings !== areFindings.Yes"
+            [setConfig]="congenitalHeartDiseaseFindinsConfig"
+            attr.name="findingType"
+            validationName="congenitalHeartDiseases"
+            validationSecondFinding="true"
+          >
+          </rr-finding-column>
+        </div>
+        <ng-container
+          [ngSwitch]="
+            congenitalHeartDiseasesFindingsHandler.currentItem.findingType
+          "
+        >
+          <!-- AtrialSeptalDefect -->
+          <rr-atrial-septal-defect
+            *ngSwitchCase="findingType.AtrialSeptalDefect"
+            [model]="congenitalHeartDiseasesFindingsHandler.currentItem"
+          >
+          </rr-atrial-septal-defect>
+
+          <!-- VentricleSeptalDefect -->
+          <rr-ventricle-septal-defect
+            *ngSwitchCase="findingType.VentricleSeptalDefect"
+            [model]="congenitalHeartDiseasesFindingsHandler.currentItem"
+          >
+          </rr-ventricle-septal-defect>
+
+          <!-- TetralogyOfFallot -->
+          <rr-tetralogy-of-fallot
+            *ngSwitchCase="findingType.TetralogyOfFallot"
+            [model]="congenitalHeartDiseasesFindingsHandler.currentItem"
+          >
+          </rr-tetralogy-of-fallot>
+
+          <!-- TranspositionOfTheGreatArteries -->
+          <rr-transposition-of-the-great-arteries
+            *ngSwitchCase="findingType.TranspositionOfTheGreatArteries"
+            [model]="congenitalHeartDiseasesFindingsHandler.currentItem"
+          >
+          </rr-transposition-of-the-great-arteries>
+
+          <!-- OneChamberHeart -->
+          <rr-one-chamber-heart
+            *ngSwitchCase="findingType.OneChamberHeart"
+            [model]="congenitalHeartDiseasesFindingsHandler.currentItem"
+            [oneChamberHeartSelected]="oneChamberHeartSelected"
+          >
+          </rr-one-chamber-heart>
+
+          <!-- EbsteinsAnomaly -->
+          <rr-ebsteins-anomaly
+            *ngSwitchCase="findingType.EbsteinsAnomaly"
+            [model]="congenitalHeartDiseasesFindingsHandler.currentItem"
+          >
+          </rr-ebsteins-anomaly>
+
+          <ng-container *ngSwitchDefault>
+            <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+            <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div
+      class="c-col-1 c-pad-l c-sep f-vertical f-start"
+      *ngIf="!oneChamberHeartSelected"
+    ></div>
+  </div>
+</div>

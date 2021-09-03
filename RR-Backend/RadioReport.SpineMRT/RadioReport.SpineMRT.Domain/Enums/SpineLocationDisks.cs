@@ -1,0 +1,58 @@
+﻿using System;
+
+namespace RadioReport.SpineMRT.Domain.Enums
+{
+    [Flags]
+    public enum SpineLocationDisks : ulong
+    {
+        None = 0,
+        C1d_L = 1uL << 0,
+        C1d_R = 1uL << 1,
+        C2d_L = 1uL << 2,
+        C2d_R = 1uL << 3,
+        C3d_L = 1uL << 4,
+        C3d_R = 1uL << 5,
+        C4d_L = 1uL << 6,
+        C4d_R = 1uL << 7,
+        C5d_L = 1uL << 8,
+        C5d_R = 1uL << 9,
+        C6d_L = 1uL << 10,
+        C6d_R = 1uL << 11,
+        C7d_L = 1uL << 12,
+        C7d_R = 1uL << 13,
+        T1d_L = 1uL << 14,
+        T1d_R = 1uL << 15,
+        T2d_L = 1uL << 16,
+        T2d_R = 1uL << 17,
+        T3d_L = 1uL << 18,
+        T3d_R = 1uL << 19,
+        T4d_L = 1uL << 20,
+        T4d_R = 1uL << 21,
+        T5d_L = 1uL << 22,
+        T5d_R = 1uL << 23,
+        T6d_L = 1uL << 24,
+        T6d_R = 1uL << 25,
+        T7d_L = 1uL << 26,
+        T7d_R = 1uL << 27,
+        T8d_L = 1uL << 28,
+        T8d_R = 1uL << 29,
+        T9d_L = 1uL << 30,
+        T9d_R = 1uL << 31,
+        T10d_L = 1uL << 32,
+        T10d_R = 1uL << 33,
+        T11d_L = 1uL << 34,
+        T11d_R = 1uL << 35,
+        T12d_L = 1uL << 36,
+        T12d_R = 1uL << 37,
+        L1d_L = 1uL << 38,
+        L1d_R = 1uL << 39,
+        L2d_L = 1uL << 40,
+        L2d_R = 1uL << 41,
+        L3d_L = 1uL << 42,
+        L3d_R = 1uL << 43,
+        L4d_L = 1uL << 44,
+        L4d_R = 1uL << 45,
+        L5d_L = 1uL << 46,
+        L5d_R = 1uL << 47
+    }
+}

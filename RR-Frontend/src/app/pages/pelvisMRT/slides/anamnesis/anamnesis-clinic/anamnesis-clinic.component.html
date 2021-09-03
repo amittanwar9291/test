@@ -1,0 +1,441 @@
+<div class="o-width-100 height-100 f-horizontal" style="width: 1680px">
+  <div class="f-vertical o-width-100">
+    <div class="f-vertical m-b-12 p-l-10">
+      <h1 rr-id="pel_m_020104" class="m-b-18 p-l-10 m-t-35">
+        {{ "pelvisMRT.anamnesis.medicalHistory.value" | translate }}
+      </h1>
+      <div rr-id="pel_m_020105" class="m-b-18 p-l-10">
+        <img src="assets/img/pelvisMRT/icons/2-1.svg" alt="anamnesis" />
+      </div>
+    </div>
+
+    <div class="f-horizontal m-l-15">
+      <div class="c-col-2 c-sep c-pad-r f-vertical f-start m-b-13">
+        <h2 rr-id="pel_m_020106" class="p-l-5">
+          {{ "pelvisMRT.anamnesis.prostate.value" | translate }}
+        </h2>
+        <div class="f-horizontal height-100 m-t-5">
+          <div class="c-col-1 c-sep c-pad-r anamnesis-column-icon">
+            <div class="o-radio-list p-l-10">
+              <div
+                class="o-radio-list"
+                [rrDisable]="gender == genderType.Female"
+              >
+                <p rr-id="pel_m_020107">
+                  {{ "pelvisMRT.anamnesis.pSALevel.value" | translate }}
+                </p>
+                <div class="f-start f-horizontal m-b-8 text-break">
+                  <rr-number-input
+                    inputRrId="pel_m_020108"
+                    labelRrId="pel_m_020109"
+                    name="inNgml"
+                    [config]="{ placeholder: '--,-', max: 50, step: 0.1, labelWidth: 200 }"
+                    [label]="'pelvisMRT.anamnesis.inNgml.value' | translate"
+                    [(ngModel)]="model.psaLevel"
+                    (change)="clearPsaDate()"
+                  ></rr-number-input>
+                </div>
+                <div class="o-radio-list m-b-28">
+                  <div
+                    class="o-radio-list"
+                    [rrDisable]="model.psaLevel == null"
+                  >
+                    <p rr-id="pel_m_020110">
+                      {{ "pelvisMRT.anamnesis.dateOfPSALevel.value" | translate
+                      }}
+                    </p>
+                    <rr-month-year-input
+                      monthRrId="pel_m_020111"
+                      yearRrId="pel_m_020112"
+                      name="psaLevelTestData"
+                      class="o-width-100"
+                      [(ngModel)]="model.psaLevelTestData"
+                    ></rr-month-year-input>
+                  </div>
+                  <div class="o-radio-list m-t-20">
+                    <p rr-id="pel_m_020113">
+                      {{ "pelvisMRT.anamnesis.biopsy.value" | translate }}
+                    </p>
+                    <rr-month-year-input
+                      monthRrId="pel_m_020114"
+                      yearRrId="pel_m_020115"
+                      name="biopsyDate"
+                      class="o-width-100"
+                      [(ngModel)]="model.biopsyDate"
+                    ></rr-month-year-input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="c-col-1 c-sep c-pad-l anamnesis-column-icon o-radio-list">
+            <div class="o-radio-list m-b-16 p-l-10">
+              <p-checkbox
+                label="{{ 'pelvisMRT.anamnesis.therapy.value' | translate }}"
+                binary="true"
+                rr-id="pel_m_020202"
+                name="isTherapy"
+                [(ngModel)]="model.isTherapy"
+                [rrContentReset]="'isTherapyBlock isTherapyTwoBlock'"
+                (onChange)="clearTherapieDates()"
+              >
+              </p-checkbox>
+              <div
+                class="o-radio-list nested-content"
+                [rrDisable]="!model.isTherapy"
+                id="isTherapyBlock"
+              >
+                <p-checkbox
+                  label="{{
+                    'pelvisMRT.anamnesis.radiotherapy.value' | translate
+                  }}"
+                  binary="true"
+                  rr-id="pel_m_020203"
+                  name="isRadiotherapy"
+                  [(ngModel)]="model.isRadiotherapy"
+                  rrContentReset="isRadiotherapyBlock"
+                  (onChange)="clearRadiotherapyDate()"
+                >
+                </p-checkbox>
+                <div
+                  class="o-radio-list nested-content"
+                  [rrDisable]="!model.isRadiotherapy"
+                  id="isRadiotherapyBlock"
+                >
+                  <p-radioButton
+                    label="{{
+                      'pelvisMRT.anamnesis.continuous.value' | translate
+                    }}"
+                    [value]="therapieContinueType.Continuous"
+                    name="radiotherapyContinueType"
+                    rr-id="pel_m_020204"
+                    [(ngModel)]="model.radiotherapyContinueType"
+                    rrContentReset="radiotherapyDateBlock"
+                    (onClick)="clearRadiotherapyDate()"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    label="{{
+                      'pelvisMRT.anamnesis.dateUntil.value' | translate
+                    }}"
+                    [value]="therapieContinueType.DateUntil"
+                    name="radiotherapyContinueType"
+                    rr-id="pel_m_020205"
+                    [(ngModel)]="model.radiotherapyContinueType"
+                    rrContentReset="radiotherapyDateBlock"
+                    (click)="clearRadiotherapyDate()"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <div
+                    [rrDisable]="model.radiotherapyContinueType !== therapieContinueType.DateUntil"
+                    id="radiotherapyDateBlock"
+                    class="nested-content m-b-10"
+                  >
+                    <rr-month-year-input
+                      monthRrId="pel_m_020206"
+                      yearRrId="pel_m_020207"
+                      name="radiotherapyData"
+                      class="o-width-100 small-date"
+                      [(ngModel)]="model.radiotherapyData"
+                    ></rr-month-year-input>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="o-radio-list nested-content"
+                [rrDisable]="!model.isTherapy"
+                id="isTherapyTwoBlock"
+              >
+                <p-checkbox
+                  label="{{
+                    'pelvisMRT.anamnesis.hormoneAblative.value' | translate
+                  }}"
+                  binary="true"
+                  rr-id="pel_m_020208"
+                  name="hormoneAblative"
+                  [(ngModel)]="model.isHormoneAblative"
+                  rrContentReset="isHormoneAblativeBlock"
+                  (onChange)="clearHormoneAblativeDate()"
+                >
+                </p-checkbox>
+                <div
+                  class="o-radio-list nested-content"
+                  [rrDisable]="!model.isHormoneAblative"
+                  id="isHormoneAblativeBlock"
+                >
+                  <p-radioButton
+                    label="{{
+                      'pelvisMRT.anamnesis.continuous.value' | translate
+                    }}"
+                    [value]="therapieContinueType.Continuous"
+                    name="hormoneAblativeContinueType"
+                    rr-id="pel_m_020209"
+                    [(ngModel)]="model.hormoneAblativeContinueType"
+                    rrUnClickRadio
+                    (click)="clearHormoneAblativeDate()"
+                  ></p-radioButton>
+                  <p-radioButton
+                    label="{{
+                      'pelvisMRT.anamnesis.dateUntil.value' | translate
+                    }}"
+                    [value]="therapieContinueType.DateUntil"
+                    name="hormoneAblativeContinueType"
+                    rr-id="pel_m_020210"
+                    [(ngModel)]="model.hormoneAblativeContinueType"
+                    rrUnClickRadio
+                    (click)="clearHormoneAblativeDate()"
+                  ></p-radioButton>
+                  <div
+                    [rrDisable]="model.hormoneAblativeContinueType !== therapieContinueType.DateUntil"
+                    class="nested-content"
+                  >
+                    <rr-month-year-input
+                      monthRrId="pel_m_020211"
+                      yearRrId="pel_m_020212"
+                      name="dateMRT"
+                      class="o-width-100 small-date"
+                      [(ngModel)]="model.hormoneAblativeDate"
+                    ></rr-month-year-input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-col-3 c-sep c-pad-l f-vertical f-start m-b-13">
+        <div class="f-horizontal height-100">
+          <div class="c-col-1 c-sep c-pad-r anamnesis-column o-radio-list">
+            <div class="o-radio-list p-l-10">
+              <h2 rr-id="pel_m_020301">
+                {{ "pelvisMRT.anamnesis.rectalCarcinoma.value" | translate }}
+              </h2>
+              <p-checkbox
+                label="{{
+                  'pelvisMRT.anamnesis.neoadjuvantTherapy.value' | translate
+                }}"
+                binary="true"
+                rr-id="pel_m_020302"
+                name="isNeoadjuvantTherapy"
+                [(ngModel)]="model.isNeoadjuvantTherapy"
+                rrContentReset="isNeoadjuvantTherapyContinueBlock isNeoadjuvantRadiotherapyBlock"
+                (onChange)="clearNeoadjuvantTherapyDate()"
+              >
+              </p-checkbox>
+              <div
+                class="nested-content o-radio-list"
+                [rrDisable]="!model.isNeoadjuvantTherapy"
+                id="isNeoadjuvantTherapyContinueBlock"
+              >
+                <p-radioButton
+                  label="{{
+                    'pelvisMRT.anamnesis.continuous.value' | translate
+                  }}"
+                  [value]="therapieContinueType.Continuous"
+                  name="neoadjuvantTherapyContinueType"
+                  rr-id="pel_m_020303"
+                  [(ngModel)]="model.neoadjuvantTherapyContinueType"
+                  (click)="clearNeoadjuvantTherapyDate()"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  label="{{
+                    'pelvisMRT.anamnesis.dateUntil.value' | translate
+                  }}"
+                  [value]="therapieContinueType.DateUntil"
+                  name="neoadjuvantTherapyContinueType"
+                  rr-id="pel_m_020304"
+                  [(ngModel)]="model.neoadjuvantTherapyContinueType"
+                  (click)="clearNeoadjuvantTherapyDate()"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <div
+                  [rrDisable]="model.neoadjuvantTherapyContinueType !== therapieContinueType.DateUntil"
+                  class="nested-content m-b-30 m-r-35"
+                >
+                  <rr-month-year-input
+                    monthRrId="pel_m_020305"
+                    yearRrId="pel_m_020306"
+                    name="neoadjuvantTherapyDate"
+                    class="o-width-100 small-date"
+                    [(ngModel)]="model.neoadjuvantTherapyDate"
+                  ></rr-month-year-input>
+                </div>
+              </div>
+            </div>
+            <div
+              class="o-radio-list p-l-45"
+              [rrDisable]="!model.isNeoadjuvantTherapy"
+              id="isNeoadjuvantRadiotherapyBlock"
+            >
+              <p-checkbox
+                label="{{
+                  'pelvisMRT.anamnesis.radiotherapy.value' | translate
+                }}"
+                binary="true"
+                rr-id="pel_m_020307"
+                name="isNeoadjuvantTherapyRadiotherapy"
+                [(ngModel)]="model.isNeoadjuvantTherapyRadiotherapy"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{
+                  'pelvisMRT.anamnesis.chemotherapy.value' | translate
+                }}"
+                binary="true"
+                rr-id="pel_m_020308"
+                name="chemotherapy"
+                [(ngModel)]="model.isNeoadjuvantTherapyChemotherapy"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-sep c-pad anamnesis-column">
+            <div
+              class="o-radio-list p-l-10"
+              [rrDisable]="gender !== genderType.Female"
+            >
+              <h2 rr-id="pel_m_020401">
+                {{ "pelvisMRT.anamnesis.parity.value" | translate }}
+              </h2>
+              <p-radioButton
+                label="{{ 'pelvisMRT.anamnesis.nullipara.value' | translate }}"
+                [value]="parityType.Nullipara"
+                name="parityType"
+                rr-id="pel_m_020402"
+                [(ngModel)]="model.parityType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                label="{{ 'pelvisMRT.anamnesis.primipara.value' | translate }}"
+                [value]="parityType.Primipara"
+                name="parityType"
+                rr-id="pel_m_020403"
+                [(ngModel)]="model.parityType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                label="{{ 'pelvisMRT.anamnesis.bipara.value' | translate }}"
+                [value]="parityType.Bipara"
+                name="parityType"
+                rr-id="pel_m_020404"
+                [(ngModel)]="model.parityType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                label="{{ 'pelvisMRT.anamnesis.multipara.value' | translate }}"
+                [value]="parityType.Multipara"
+                name="parityType"
+                rr-id="pel_m_020405"
+                [(ngModel)]="model.parityType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+            <div
+              class="o-radio-list p-l-10 m-t-30"
+              [rrDisable]="gender !== genderType.Female"
+            >
+              <h2 rr-id="pel_m_020406">
+                {{ "pelvisMRT.anamnesis.cycleAnomalies.value" | translate }}
+              </h2>
+              <p-checkbox
+                label="{{
+                  'pelvisMRT.anamnesis.hypermenorrhea.value' | translate
+                }}"
+                binary="true"
+                rr-id="pel_m_020407"
+                name="isHypermenorrhea"
+                [(ngModel)]="model.isHypermenorrhea"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{
+                  'pelvisMRT.anamnesis.menorrhagia.value' | translate
+                }}"
+                binary="true"
+                rr-id="pel_m_020408"
+                name="isMenorrhagia"
+                [(ngModel)]="model.isMenorrhagia"
+              >
+              </p-checkbox>
+              <p-checkbox
+                label="{{
+                  'pelvisMRT.anamnesis.metrorrhagia.value' | translate
+                }}"
+                binary="true"
+                rr-id="pel_m_020409"
+                name="isMetrorrhagia"
+                [(ngModel)]="model.isMetrorrhagia"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="c-col-1 c-sep c-pad-l anamnesis-column">
+            <div class="o-radio-list p-l-10">
+              <div
+                class="o-radio-list"
+                [rrDisable]="gender !== genderType.Male"
+              >
+                <h2 rr-id="pel_m_020501">
+                  {{ "pelvisMRT.anamnesis.cryptorchidism.value" | translate }}
+                </h2>
+                <p-checkbox
+                  label="{{ 'pelvisMRT.anamnesis.right.value' | translate }}"
+                  binary="true"
+                  rr-id="pel_m_020502"
+                  name="isCryptorchidismRight"
+                  [(ngModel)]="model.isCryptorchidismRight"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  label="{{ 'pelvisMRT.anamnesis.left.value' | translate }}"
+                  binary="true"
+                  rr-id="pel_m_020503"
+                  name="isCryptorchidismLeft"
+                  [(ngModel)]="model.isCryptorchidismLeft"
+                >
+                </p-checkbox>
+              </div>
+              <div class="m-t-25 o-radio-list">
+                <p-checkbox
+                  label="{{
+                    'pelvisMRT.anamnesis.weightChange.value' | translate
+                  }}"
+                  labelStyleClass="ui-fat-label"
+                  binary="true"
+                  rr-id="pel_m_020504"
+                  name="isWeightChange"
+                  [(ngModel)]="model.isWeightChange"
+                  rrContentReset="weightChangeBlock"
+                >
+                </p-checkbox>
+                <div
+                  class="o-radio-list nested-content"
+                  [rrDisable]="!model.isWeightChange"
+                  id="weightChangeBlock"
+                >
+                  <p-radioButton
+                    label="{{ 'pelvisMRT.anamnesis.gain.value' | translate }}"
+                    [value]="weightChangeType.Gain"
+                    name="weightChangeType"
+                    rr-id="pel_m_020505"
+                    [(ngModel)]="model.weightChangeType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    label="{{ 'pelvisMRT.anamnesis.loss.value' | translate }}"
+                    [value]="weightChangeType.Loss"
+                    name="weightChangeType"
+                    rr-id="pel_m_020506"
+                    [(ngModel)]="model.weightChangeType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="m-l-10 m-r-10 o-radio-list f-vertical">
+      <h2 rr-id="fra_13_24" class="header m-b-7">
+        {{'settings.license.value' | translate}}
+      </h2>
+      <p-dropdown
+        rr-id="fra_13_25"
+        class="inputLicenseSettings"
+        [options]="licenseListOptions"
+        [(ngModel)]="selectedLicenseId"
+        (onChange)="onLicenseSelect($event)"
+        rrDropdownClear
+        styleClass="ui-brown-box o-width-100"
+        name="onLicenseSelect"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      ></p-dropdown>
+      <div *ngIf="instituteConnectionType === 'Offline'" class="o-radio-list">
+        <h2 rr-id="fra_13_26" class="header m-t-21">
+          {{'settings.renewLicense.value' | translate}}
+        </h2>
+        <input
+          #importLicense
+          style="display: none"
+          class="m-t-20 m-b-20"
+          type="file"
+          (change)="uploadLicenseConfig($event)"
+          accept=".rrl"
+        />
+        <button
+          rr-id="fra_13_27"
+          class="button"
+          type="button"
+          (click)="importLicense?.click()"
+        >
+          {{'settings.importLicense.value' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div
+      *ngIf="showlicenseDetails"
+      class="m-l-10 m-r-10 o-radio-list f-vertical"
+    >
+      <h2 rr-id="fra_13_28" class="header">
+        {{'settings.licenseStatus.value' | translate}}
+      </h2>
+      <div
+        rr-id="fra_13_29"
+        class="progress-container f-vertical f-align-center p-t-23"
+        [ngStyle]="{background: getChartColor(true)}"
+      >
+        <circle-progress
+          style="font-family: BentonSansLight, sans-serif"
+          [percent]="selectedLicenseDetails.depletionPercentage"
+          [titleColor]="getChartColor()"
+          [unitsColor]="getChartColor()"
+          [innerStrokeColor]="getChartColor()"
+          [backgroundColor]="getChartColor(true)"
+        ></circle-progress>
+        <h2 rr-id="fra_13_28" class="header m-t-15">
+          {{'settings.expirationDateLicenseShare.value.text' | translate}}
+        </h2>
+        <h2 rr-id="fra_13_28" class="text">
+          {{selectedLicenseDetails.expirationDate | date: 'dd.MM.yyyy'}}
+        </h2>
+      </div>
+      <h2 rr-id="fra_13_30" class="text m-t-7 m-b-5">
+        {{'settings.totalContingent.value' | translate}}
+      </h2>
+      <rr-number-input
+        [config]="{ readonly: true}"
+        inputRrId="fra_13_31"
+        [(ngModel)]="selectedLicenseDetails.creditVolume"
+      ></rr-number-input>
+      <h2 rr-id="fra_13_32" class="text m-t-7 m-b-5">
+        {{'settings.totalConsumed.value' | translate}}
+      </h2>
+      <rr-number-input
+        [config]="{ readonly: true}"
+        inputRrId="fra_13_33"
+        [(ngModel)]="selectedLicenseDetails.currentCredit"
+      ></rr-number-input>
+    </div>
+  </div>
+  <div *ngIf="showlicenseFractions" class="c-col-3 c-sep c-pad m-t-10 m-b-10">
+    <div class="report-settings-table-header p-r-60 p-l-10">
+      <span rr-id="fra_13_34" class="header-text"
+        >{{'settings.overviewOfLicenses.value' | translate}}</span
+      >
+    </div>
+
+    <div class="report-settings-table p-l-10 p-r-10 p-t-5 p-b-10">
+      <div class="table-header">
+        <div class="table-row">
+          <div class="table-cell p-l-15" rr-id="fra_13_35">
+            {{'settings.key.value' | translate}}
+          </div>
+          <div class="table-cell" rr-id="fra_13_36">
+            {{'settings.licenseCreationDate.value' | translate}}
+          </div>
+          <div class="table-cell p-l-30" rr-id="fra_13_37">
+            {{'settings.expiryDate.value' | translate}}
+          </div>
+          <div class="table-cell p-l-34" rr-id="fra_13_38">
+            {{'settings.contingent.value' | translate}}
+          </div>
+        </div>
+      </div>
+      <div
+        class="table-row"
+        *ngFor="let fraction of selectedLicenseFractions | paginate: { id: 'licensesPaginatorId', itemsPerPage: 8, currentPage: page } ; let i = index"
+      >
+        <div class="table-cell p-l-15">{{ fraction.id }}</div>
+        <div class="table-cell">
+          {{ fraction.creationDate | date: 'dd.MM.yyyy'}}
+        </div>
+        <div class="table-cell p-l-30">
+          {{ fraction.expirationDate | date: 'dd.MM.yyyy' }}
+        </div>
+        <div class="table-cell p-l-34">{{ fraction.creditScore }}</div>
+      </div>
+    </div>
+
+    <pagination-template
+      #pagination="paginationApi"
+      id="licensesPaginatorId"
+      (pageChange)="setPage($event)"
+    >
+      <ul class="pagination" *ngIf="!(pagination.pages.length === 0)">
+        <li
+          class="pagination-item"
+          *ngFor="let page of pagination.pages"
+          (click)="pagination.setCurrent(page.value)"
+          [class.current]="pagination.getCurrent() === page.value"
+          [class.ellipsis]="page.label === '...'"
+        >
+          <a
+            tabindex="0"
+            (keyup.enter)="pagination.setCurrent(page.value)"
+            *ngIf="pagination.getCurrent() !== page.value"
+          >
+            <span>{{ getPageLabel(page)}}</span></a
+          >
+          <ng-container *ngIf="pagination.getCurrent() === page.value">
+            <span>{{ getPageLabel(page)}}</span>
+          </ng-container>
+        </li>
+      </ul>
+    </pagination-template>
+  </div>
+
+  <div
+    *ngIf="!showlicenseFractions"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-10"
+  ></div>
+  <div
+    *ngIf="!showlicenseFractions"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-10"
+  ></div>
+  <div
+    *ngIf="!showlicenseFractions"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-10"
+  ></div>
+</div>

@@ -1,0 +1,435 @@
+<div class="f-horizontal f-center h-510">
+  <div class="c-col-1 c-pad c-sep o-radio-list f-vertical">
+    <div class="p-l-10 o-radio-list">
+      <h2
+        rr-id="pel_m_040223"
+        *ngIf="zone === 'Peripheral'"
+        rrValidation="peripheralZonePZLocalizerType"
+      >
+        {{ 'pelvisMRT.prostata.localizationAsterisk.value' | translate }}
+      </h2>
+      <h2
+        *ngIf="zone === 'Transitional'"
+        rr-id="pel_m_040223"
+        rrValidation="transitionaZoneTZLocalizerType"
+      >
+        {{ 'pelvisMRT.prostata.localizationAsterisk.value' | translate }}
+      </h2>
+      <h2
+        *ngIf="zone === 'Central'"
+        rr-id="pel_m_040223"
+        rrValidation="centralZoneCZLocalizerType"
+      >
+        {{ 'pelvisMRT.prostata.localizationAsterisk.value' | translate }}
+      </h2>
+      <div class="p-r-10">
+        <rr-three-cross-section-small
+          *ngIf="zone === 'Peripheral'"
+          rr-id="pel_m_040231"
+          name="peripheralZonePZLocalizerType"
+          [(ngModel)]="model.peripheralZonePZLocalizerType"
+          (click)="openLargeLocaliserFn()"
+          rrValidation="peripheralZonePZLocalizerType"
+          isLocalizer="true"
+        >
+        </rr-three-cross-section-small>
+        <rr-three-cross-section-small
+          *ngIf="zone === 'Transitional'"
+          rr-id="pel_m_040224"
+          name="transitionaZoneTZLocalizerType"
+          [(ngModel)]="model.transitionaZoneTZLocalizerType"
+          (click)="openLargeLocaliserFn()"
+          rrValidation="transitionaZoneTZLocalizerType"
+          isLocalizer="true"
+        >
+        </rr-three-cross-section-small>
+        <rr-one-cross-section-small
+          *ngIf="zone === 'Central'"
+          name="centralZoneCZLocalizerType"
+          [(ngModel)]="model.centralZoneCZLocalizerType"
+          rr-id="pel_m_040233"
+          (click)="openLargeLocaliserFn()"
+          rrValidation="centralZoneCZLocalizerType"
+          isLocalizer="true"
+        >
+        </rr-one-cross-section-small>
+      </div>
+    </div>
+  </div>
+  <div class="c-sep c-pad f-vertical">
+    <h2 rr-id="pel_m_040305" class="p-l-10 m-b-10">
+      {{ 'pelvisMRT.prostata.morphology.value' | translate }}
+    </h2>
+    <div class="c-sep text-break f-horizontal f-center h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical">
+        <div class="o-radio-list p-l-10">
+          <p rr-id="pel_m_040306">
+            {{ 'pelvisMRT.prostata.t2wSignal.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_040307"
+            label="{{'pelvisMRT.prostata.increase.value' | translate}}"
+            name="signalPowerType"
+            [value]="signalPowerType.Increase"
+            [(ngModel)]="model.signalPowerType"
+            rrContentReset="signalLossFlowVoid"
+            rrValidation="signalPowerType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040308"
+            label="{{'pelvisMRT.prostata.reduction.value' | translate}}"
+            name="signalPowerType"
+            [value]="signalPowerType.Reduction"
+            [(ngModel)]="model.signalPowerType"
+            rrValidation="signalPowerType"
+          ></p-radioButton>
+          <div id="signalLossFlowVoid">
+            <p-checkbox
+              rr-id="pel_m_040309"
+              name="isSignalLossFlowVoid"
+              class="p-l-35"
+              label="{{'pelvisMRT.prostata.signalLossFlowVoid.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isSignalLossFlowVoid"
+              [rrDisable]="model.signalPowerType !== signalPowerType.Reduction"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+
+        <div class="o-radio-list p-l-10 m-t-10">
+          <p rr-id="pel_m_040310">
+            {{ 'pelvisMRT.prostata.margin.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_040311"
+            label="{{'pelvisMRT.prostata.circumscribed.value' | translate}}"
+            name="marginType"
+            [value]="limitationType.Circumscribed"
+            [(ngModel)]="model.marginType"
+            rrValidation="marginType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040312"
+            label="{{'pelvisMRT.prostata.nonCircumscribed.value' | translate}}"
+            name="marginType"
+            [value]="limitationType.NonCircumscribed"
+            [(ngModel)]="model.marginType"
+            rrValidation="marginType"
+          ></p-radioButton>
+        </div>
+
+        <div class="o-radio-list p-l-10 m-t-10">
+          <p rr-id="pel_m_040313">
+            {{ 'pelvisMRT.prostata.homogeneity.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_040314"
+            label="{{'pelvisMRT.prostata.homogeneous.value' | translate}}"
+            name="homogenityType"
+            [value]="homogenityType.Homogeneous"
+            [(ngModel)]="model.homogenityType"
+            rrValidation="homogenityType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040315"
+            label="{{'pelvisMRT.prostata.heterogeneous.value' | translate}}"
+            name="homogenityType"
+            [value]="homogenityType.Heterogeneous"
+            [(ngModel)]="model.homogenityType"
+            rrValidation="homogenityType"
+          ></p-radioButton>
+        </div>
+
+        <div class="o-radio-list p-l-10 m-t-10" *ngIf="zone === 'Transitional'">
+          <p rr-id="pel_m_040316">
+            {{ 'pelvisMRT.prostata.capsule.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_040317"
+            label="{{'pelvisMRT.prostata.fullyEnclosed.value' | translate}}"
+            name="transitionaZoneTZCapsuleType"
+            class="m-b-5"
+            [value]="transitionaZoneTZCapsuleType.FullyEnclosed"
+            [(ngModel)]="model.transitionaZoneTZCapsuleType"
+            rrValidation="transitionaZoneTZCapsuleType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040318"
+            label="{{'pelvisMRT.prostata.partiallyEncapsulatedMostly.value' | translate}}"
+            name="transitionaZoneTZCapsuleType"
+            class="m-b-5"
+            [value]="transitionaZoneTZCapsuleType.PartiallyEncapsulatedMostly"
+            [(ngModel)]="model.transitionaZoneTZCapsuleType"
+            rrValidation="transitionaZoneTZCapsuleType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040319"
+            label="{{'pelvisMRT.prostata.noCapsule.value' | translate}}"
+            name="transitionaZoneTZCapsuleType"
+            [value]="transitionaZoneTZCapsuleType.NoCapsule"
+            [(ngModel)]="model.transitionaZoneTZCapsuleType"
+            rrValidation="transitionaZoneTZCapsuleType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep f-vertical">
+        <div class="o-radio-list p-l-10">
+          <p rr-id="pel_m_040421">
+            {{ 'pelvisMRT.prostata.infiltration.value' | translate }}
+          </p>
+          <div
+            class="o-radio-list"
+            *ngIf="model.findingType === 'CentralZoneCZ'"
+          >
+            <p-checkbox
+              rr-id="pel_m_040453"
+              name="isAnteriorFibromuscularStroma"
+              label="{{'pelvisMRT.prostata.anteriorFibromuscularStroma.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isAnteriorFibromuscularStroma"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="pel_m_040454"
+              name="isCentralZone"
+              label="{{'pelvisMRT.prostata.centralZone.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isCentralZone"
+            >
+            </p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            *ngIf="model.findingType !== 'CentralZoneCZ'"
+          >
+            <p-checkbox
+              rr-id="pel_m_040422"
+              name="isAnteriorFibromuscularStroma"
+              label="{{'pelvisMRT.prostata.anteriorFibromuscularStroma.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isAnteriorFibromuscularStroma"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="pel_m_040423"
+              name="isCentralZone"
+              label="{{'pelvisMRT.prostata.centralZone.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isCentralZone"
+            >
+            </p-checkbox>
+          </div>
+
+          <p-checkbox
+            rr-id="pel_m_040424"
+            name="isEjaculatoryDuctGroup"
+            label="{{'pelvisMRT.prostata.ejaculatoryDuct.value' | translate }}"
+            binary="true"
+            class="m-b-5"
+            [(ngModel)]="model.isEjaculatoryDuct"
+            rrContentReset="isEjaculatoryDuctGroup"
+          >
+          </p-checkbox>
+          <div
+            class="p-l-35 o-radio-list"
+            id="isEjaculatoryDuctGroup"
+            [rrDisable]="!model.isEjaculatoryDuct"
+          >
+            <p rr-id="pel_m_0404400" class="m-b-5">
+              {{ 'pelvisMRT.prostata.site.value' | translate }}
+            </p>
+            <p-radioButton
+              rr-id="pel_m_040425"
+              label="{{'pelvisMRT.prostata.right.value' | translate}}"
+              name="ejaculatoryDuctDirectionType"
+              [value]="directionType.Right"
+              [(ngModel)]="model.ejaculatoryDuctDirectionType"
+              rrValidation="ejaculatoryDuctDirectionType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="pel_m_040426"
+              label="{{'pelvisMRT.prostata.left.value' | translate}}"
+              name="ejaculatoryDuctDirectionType"
+              [value]="directionType.Left"
+              [(ngModel)]="model.ejaculatoryDuctDirectionType"
+              rrValidation="ejaculatoryDuctDirectionType"
+            ></p-radioButton>
+          </div>
+          <p-checkbox
+            rr-id="pel_m_040427"
+            name="prostaticUrethra"
+            label="{{'pelvisMRT.prostata.prostaticUrethra.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isProstaticUrethra"
+          >
+          </p-checkbox>
+        </div>
+        <div class="o-radio-list p-l-10 m-t-15">
+          <p rr-id="pel_m_0404100">
+            {{ 'pelvisMRT.prostata.furtherFeatures.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="pel_m_040428"
+            name="isLentiform"
+            label="{{'pelvisMRT.prostata.lentiform.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isLentiform"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="pel_m_040429"
+            name="isInfiltrationSpiculated"
+            label="{{'pelvisMRT.prostata.spiculated.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isInfiltrationSpiculated"
+          >
+          </p-checkbox>
+          <div *ngIf="zone === 'Transitional'">
+            <p-checkbox
+              rr-id="pel_m_040430"
+              name="isErasedCharcoalSign"
+              label="{{'pelvisMRT.prostata.erasedCharcoalSignSmudgy.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isErasedCharcoalSign"
+            >
+            </p-checkbox>
+            <p-checkbox
+              class="m-t-10"
+              rr-id="pel_m_040431"
+              name="isTypicalBphNode"
+              label="{{'pelvisMRT.prostata.typicalBPHNode.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isTypicalBphNode"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="c-col-1 c-pad-l o-list f-vertical"
+    [rrDisable]="hasTechnologyDwiBeenSelected()"
+  >
+    <div class="o-radio-list p-l-10">
+      <h2 rr-id="pel_m_040515">
+        {{ 'pelvisMRT.prostata.diffusionRestriction.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="pel_m_040516"
+        name="isIncreasedDwiSignal"
+        label="{{'pelvisMRT.prostata.increasedDwiSignal.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isIncreasedDwiSignal"
+        rrContentReset="increasedDwiSignalGroup"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list p-l-35"
+        id="increasedDwiSignalGroup"
+        [rrDisable]="!model.isIncreasedDwiSignal"
+      >
+        <p-radioButton
+          rr-id="pel_m_040517"
+          label="{{'pelvisMRT.prostata.discrete.value' | translate}}"
+          name="increasedDwiSignalType"
+          [value]="increasedDwiSignalType.Discrete"
+          [(ngModel)]="model.increasedDwiSignalType"
+          rrUnClickRadio
+          rrContentReset="increasedDwiSignalTypeGroup"
+        ></p-radioButton>
+        <div
+          class="o-radio-list p-l-35"
+          id="increasedDwiSignalTypeGroup"
+          [rrDisable]="model.increasedDwiSignalType !== increasedDwiSignalType.Discrete"
+        >
+          <p-radioButton
+            rr-id="pel_m_040518"
+            label="{{'pelvisMRT.prostata.lineartriangular.value' | translate}}"
+            name="dwiDiscreteType"
+            [value]="discreteType.LinearTriangular"
+            [(ngModel)]="model.dwiDiscreteType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040519"
+            label="{{'pelvisMRT.prostata.focal.value' | translate}}"
+            name="dwiDiscreteType"
+            [value]="discreteType.Focal"
+            [(ngModel)]="model.dwiDiscreteType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="pel_m_040520"
+          label="{{'pelvisMRT.prostata.pronounced.value' | translate}}"
+          name="increasedDwiSignalType"
+          [value]="increasedDwiSignalType.Pronounced"
+          [(ngModel)]="model.increasedDwiSignalType"
+          rrUnClickRadio
+          rrContentReset="increasedDwiSignalTypeGroup"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div class="o-radio-list p-l-10">
+      <p-checkbox
+        rr-id="pel_m_040521"
+        name="isAdcHypointensity"
+        label="{{'pelvisMRT.prostata.adcHypointensity.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isAdcHypointensity"
+        rrContentReset="adcHypointensity"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list p-l-35"
+        [rrDisable]="!model.isAdcHypointensity"
+        id="adcHypointensity"
+      >
+        <p-radioButton
+          rr-id="pel_m_040522"
+          label="{{'pelvisMRT.prostata.discrete.value' | translate}}"
+          name="adcHypointensityType"
+          [value]="increasedDwiSignalType.Discrete"
+          [(ngModel)]="model.adcHypointensityType"
+          rrUnClickRadio
+          rrContentReset="adcDiscreteType"
+        ></p-radioButton>
+        <div
+          class="o-radio-list p-l-35"
+          [rrDisable]="model.adcHypointensityType !== increasedDwiSignalType.Discrete"
+          id="adcDiscreteType"
+        >
+          <p-radioButton
+            rr-id="pel_m_040523"
+            label="{{'pelvisMRT.prostata.lineartriangular.value' | translate}}"
+            name="adcDiscreteType"
+            [value]="discreteType.LinearTriangular"
+            [(ngModel)]="model.adcDiscreteType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_040524"
+            label="{{'pelvisMRT.prostata.focal.value' | translate}}"
+            name="adcDiscreteType"
+            [value]="discreteType.Focal"
+            [(ngModel)]="model.adcDiscreteType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          rr-id="pel_m_040525"
+          label="{{'pelvisMRT.prostata.pronounced.value' | translate}}"
+          name="adcHypointensityType"
+          [value]="increasedDwiSignalType.Pronounced"
+          [(ngModel)]="model.adcHypointensityType"
+          rrUnClickRadio
+          rrContentReset="adcDiscreteType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

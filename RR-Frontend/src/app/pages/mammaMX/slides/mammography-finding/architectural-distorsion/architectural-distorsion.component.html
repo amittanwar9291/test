@@ -1,0 +1,153 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h3
+      rr-id="mam_mx_050207"
+      class="localizer-header"
+      rrValidation="breastLocation"
+      innerHTML="{{'mammaMX.mammographyFinding.localizationMultipleonesided.value' | translate}}*"
+    ></h3>
+    <rr-breast-full-cross-shoulder
+      name="breastLocation"
+      class="m-b-23"
+      [(ngModel)]="model.breastLocation"
+      rr-id="mam_mx_050208"
+      rrValidation="breastLocation"
+      isLocalizer="true"
+    >
+    </rr-breast-full-cross-shoulder>
+    <rr-depth-section [model]="model"></rr-depth-section>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="mam_mx_050329" class="m-b-12">
+      {{'mammaMX.mammographyFinding.morphology.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="mam_mx_050330"
+      name="isAsymmetryWithoutEvidenceOfSuspiciousMasses"
+      class="m-b-30"
+      label="{{'mammaMX.mammographyFinding.asymmetryWithoutEvidenceOfSuspiciousMasses.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAsymmetryWithoutEvidenceOfSuspiciousMasses"
+    >
+    </p-checkbox>
+    <h2 rr-id="mam_mx_050331">
+      {{'mammaMX.mammographyFinding.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="mam_mx_050332"
+      name="isSkinRetraction"
+      label="{{'mammaMX.mammographyFinding.skinRetraction.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSkinRetraction"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050333"
+      name="isNippleRetraction"
+      label="{{'mammaMX.mammographyFinding.nippleRetraction.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isNippleRetraction"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050334"
+      name="isSkinThickening"
+      label="{{'mammaMX.mammographyFinding.skinThickening.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSkinThickening"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050335"
+      name="isTrabecularThickening"
+      label="{{'mammaMX.mammographyFinding.trabecularThickening.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isTrabecularThickening"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050336"
+      name="isAsymmetry"
+      label="{{'mammaMX.mammographyFinding.asymmetry.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAsymmetry"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050337"
+      name="isAxillaryLymphadenopathy"
+      label="{{'mammaMX.mammographyFinding.axillaryLymphadenopathy.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAxillaryLymphadenopathy"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="mam_mx_050338"
+      name="isCalcification"
+      label="{{'mammaMX.mammographyFinding.calcification.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isCalcification"
+      rrContentReset="calcificationInTheLesionTypeBlock"
+    >
+    </p-checkbox>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="mam_mx_050422">
+      {{'mammaMX.mammographyFinding.differentialDiagnosis.value' | translate}}
+    </h2>
+    <p rr-id="mam_mx_050423" class="m-b-3">
+      {{'mammaMX.mammographyFinding.differentialDiagnosis1.value' | translate}}*
+    </p>
+    <rr-differential-diagnosis-dropdown
+      [diagnosisNumber]="1"
+      [options]="architecturalDistorsionDiagnosis1Options"
+      [(ngModel)]="model.architectureDistorsionDiagnosis1Type"
+      name="architectureDistorsionDiagnosis1Type"
+      group="true"
+      rrId="mam_mx_050424"
+      [parentViewModel]="model"
+      rrValidation="architectureDistorsionDiagnosis1Type"
+      (selectionChanged)="resetIsSuspicionOf(); resetIsSubordinated()"
+    >
+    </rr-differential-diagnosis-dropdown>
+    <p-checkbox
+      rr-id="mam_mx_050425"
+      name="isSuspicionOf"
+      class="m-b-20"
+      label="{{'mammaMX.mammographyFinding.suspicionOf.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSuspicionOf"
+      [rrDisable]="model.architectureDistorsionDiagnosis1Type === 'None'"
+    >
+    </p-checkbox>
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="model.architectureDistorsionDiagnosis1Type === 'None'"
+    >
+      <p rr-id="mam_mx_050426" class="m-b-0">
+        {{'mammaMX.mammographyFinding.differentialDiagnosis2.value' |
+        translate}}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="architecturalDistorsionDiagnosis2Options"
+        [(ngModel)]="model.architectureDistorsionDiagnosis2Type"
+        name="architectureDistorsionDiagnosis2Type"
+        rrId="mam_mx_050427"
+        [parentViewModel]="model"
+        (selectionChanged)="resetIsSubordinated()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="mam_mx_050428"
+        name="isSubordinate"
+        label="{{'mammaMX.mammographyFinding.subordinate.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSubordinate"
+        [rrDisable]="model.architectureDistorsionDiagnosis2Type === 'None'"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list"></div>
+</div>

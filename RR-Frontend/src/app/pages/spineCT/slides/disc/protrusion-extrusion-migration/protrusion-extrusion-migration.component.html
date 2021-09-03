@@ -1,0 +1,134 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad o-radio-list p-t-25">
+    <h2
+      *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion], model)"
+      rr-id="spi_c_0502300"
+      rrInfoIcon="spi_c_05_02"
+    >
+      {{'spineCT.disc.protrusion.value' | translate}}
+    </h2>
+    <h2
+      *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Extrusion], model)"
+      rr-id="spi_c_0502302"
+      rrInfoIcon="spi_c_05_05"
+    >
+      {{'spineCT.disc.extrusion.value' | translate}}
+    </h2>
+    <h2
+      *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Migration], model)"
+      rr-id="spi_c_0502505"
+    >
+      {{'spineCT.disc.migration.value' | translate}}
+    </h2>
+    <h2 rrValidation="spineLocation" rr-id="spi_c_050202" class="m-b-0">
+      {{'spineCT.disc.localization.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_c_050203"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+
+    <div
+      *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Migration], model)"
+      class="o-radio-list"
+    >
+      <h2 rr-id="spi_c_0502201" class="m-t-25">
+        {{'spineCT.disc.directionOfMigration.value'|translate}}
+      </h2>
+      <p-radioButton
+        rr-id="spi_c_0502202"
+        label="{{ 'spineCT.disc.cranial.value' | translate }}"
+        name="directionOfMigrationType"
+        rrUnClickRadio
+        [value]="directionOfMigrationTypeEnum.Cranial"
+        [(ngModel)]="model.directionOfMigrationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_0502203"
+        label="{{ 'spineCT.disc.caudal.value' | translate }}"
+        name="directionOfMigrationType"
+        rrUnClickRadio
+        [value]="directionOfMigrationTypeEnum.Caudal"
+        [(ngModel)]="model.directionOfMigrationType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div>
+    <p-tabView
+      class="rr-tabView"
+      [activeIndex]="activeTabIndex"
+      (activeIndexChange)="activeTabIndexChange($event)"
+    >
+      <p-tabPanel [disabled]="!helperService.isSingleSelectOnLocalizer(model)">
+        <ng-template pTemplate="header">
+          <h1
+            [rrValidation]="tab1ValidationElements"
+            ifAny="true"
+            *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion], model)"
+            rr-id="spi_c_050308"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.protrusionDetailsI.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="tab1ValidationElements"
+            ifAny="true"
+            *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Extrusion], model)"
+            rr-id="spi_c_050341"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.extrusionDetailsI.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="tab1ValidationElements"
+            ifAny="true"
+            *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Migration], model)"
+            rr-id="spi_c_050387"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.migrationDetailsI.value'|translate}}
+          </h1>
+        </ng-template>
+        <rr-tab1 [model]="model"></rr-tab1>
+      </p-tabPanel>
+
+      <p-tabPanel [disabled]="!helperService.isSingleSelectOnLocalizer(model)">
+        <ng-template pTemplate="header">
+          <h1
+            [rrValidation]="tab2ValidationElements"
+            ifAny="true"
+            *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Protrusion], model)"
+            rr-id="spi_c_050401"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.protrusionDetailsII.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="tab2ValidationElements"
+            ifAny="true"
+            *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Extrusion], model)"
+            rr-id="spi_c_050409"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.extrusionDetailsII.value'|translate}}
+          </h1>
+          <h1
+            [rrValidation]="tab2ValidationElements"
+            ifAny="true"
+            *ngIf="helperService.shouldBeDisplayByFindingType([discFindingTypeEnum.Migration], model)"
+            rr-id="spi_c_0504201"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.migrationDetailsII.value'|translate}}
+          </h1>
+        </ng-template>
+        <rr-tab2 [model]="model"></rr-tab2>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

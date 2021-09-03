@@ -1,0 +1,233 @@
+<div class="f-horizontal col-h-100">
+  <div class="f-vertical o-radio-list c-pad-l">
+    <h2 rr-id="car_m_040348" class="text-break">
+      {{'cardioMRT.flaps.oneChamberHeartSingle.value' | translate}}
+    </h2>
+    <p rr-id="car_m_040345" class="m-b-7">
+      {{'cardioMRT.flaps.type.value' | translate}}*
+    </p>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+        <p-radioButton
+          rr-id="car_m_040349"
+          name="oneChamberHeartSingleType"
+          [value]="oneChamberHeartSingleType.Functional"
+          label="{{'cardioMRT.flaps.functional.value' | translate}}"
+          [(ngModel)]="model.oneChamberHeartSingleType"
+          rrContentReset="oneChamberHeartSingleTypeAnatomicalBlock mainVentricleTypeBlock"
+          rrValidation="oneChamberHeartSingleType"
+          inSecondFinding="true"
+          (onClick)="removeMainVentricleValidationError()"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040350"
+          name="oneChamberHeartSingleType"
+          [value]="oneChamberHeartSingleType.Anatomical"
+          label="{{'cardioMRT.flaps.anatomical.value' | translate}}"
+          [(ngModel)]="model.oneChamberHeartSingleType"
+          rrContentReset="oneChamberHeartSingleTypeFunctionalBlock mainVentricleTypeBlock"
+          rrValidation="oneChamberHeartSingleType"
+          inSecondFinding="true"
+          (onClick)="removeMainVentricleValidationError()"
+        >
+        </p-radioButton>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+        <!-- oneChamberHeartSingleType.Functional -->
+        <div
+          *ngIf="model.oneChamberHeartSingleType === oneChamberHeartSingleType.Functional"
+          class="o-radio-list"
+          id="oneChamberHeartSingleTypeFunctionalBlock"
+        >
+          <p rr-id="car_m_040450" class="m-b-6">
+            {{'cardioMRT.flaps.mainVentricle.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="car_m_040451"
+            name="mainVentricleType"
+            [value]="mainVentricleType.Left"
+            label="{{'cardioMRT.flaps.leftHypoplasticLeftHeart.value' | translate}}"
+            [(ngModel)]="model.mainVentricleType"
+            rrContentReset="mainVentricleTypeBlock2"
+            rrValidation="mainVentricleType"
+            inSecondFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_040452"
+            name="mainVentricleType"
+            class="m-b-23"
+            [value]="mainVentricleType.Right"
+            label="{{'cardioMRT.flaps.rightHypoplasticRightHeart.value' | translate}}"
+            [(ngModel)]="model.mainVentricleType"
+            rrContentReset="mainVentricleTypeBlock3"
+            rrValidation="mainVentricleType"
+            inSecondFinding="true"
+          >
+          </p-radioButton>
+
+          <!-- oneChamberHeartSingleType.Functional -> mainVerticleType.Left -->
+          <div
+            *ngIf="model.mainVentricleType === mainVentricleType.Left"
+            class="o-radio-list"
+            id="mainVentricleTypeBlock3"
+          >
+            <p rr-id="car_m_040434" class="m-b-7">
+              {{'cardioMRT.flaps.associatedFindings.value' | translate}}
+            </p>
+            <p-checkbox
+              rr-id="car_m_040453"
+              name="isMitralValveDysplasiaAtresia"
+              class="text-break"
+              label="{{'cardioMRT.flaps.mitralValveDysplasiaatresia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMitralValveDysplasiaAtresia"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="car_m_040454"
+              name="isHypoplasticAtreticLVOT"
+              class="text-break"
+              label="{{'cardioMRT.flaps.hypoplasticatreticLVOT.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isHypoplasticAtreticLVOT"
+            >
+            </p-checkbox>
+          </div>
+
+          <!-- oneChamberHeartSingleType.Functional -> mainVerticleType.Right -->
+          <div
+            *ngIf="model.mainVentricleType === mainVentricleType.Right"
+            class="o-radio-list"
+            id="mainVentricleTypeBlock2"
+          >
+            <p rr-id="car_m_040434">
+              {{'cardioMRT.flaps.associatedFindings.value' | translate}}
+            </p>
+            <p-checkbox
+              rr-id="car_m_040455"
+              name="isTricuspidalAtresia"
+              label="{{'cardioMRT.flaps.tricuspidalAtresia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isTricuspidalAtresia"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="car_m_040456"
+              name="isPulmonaryAtresia"
+              label="{{'cardioMRT.flaps.pulmonaryAtresia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPulmonaryAtresia"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+
+        <!-- oneChamberHeartSingleType.Anatomical -->
+        <div
+          *ngIf="model.oneChamberHeartSingleType === oneChamberHeartSingleType.Anatomical"
+          class="o-radio-list"
+          id="oneChamberHeartSingleTypeAnatomicalBlock"
+        >
+          <p rr-id="car_m_040450" class="m-b-6">
+            {{'cardioMRT.flaps.mainVentricle.value' | translate}}
+          </p>
+          <p-radioButton
+            rr-id="car_m_040457"
+            name="mainVentricleType"
+            [value]="mainVentricleType.Left"
+            label="{{'cardioMRT.flaps.left.value' | translate}}"
+            [(ngModel)]="model.mainVentricleType"
+            (onClick)="resetMainVerticle(mainVentricleType.Left)"
+            rrValidation="mainVentricleType"
+            inSecondFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_040458"
+            name="mainVentricleType"
+            class="m-b-26"
+            [value]="mainVentricleType.Right"
+            label="{{'cardioMRT.flaps.right.value' | translate}}"
+            [(ngModel)]="model.mainVentricleType"
+            (onClick)="resetMainVerticle(mainVentricleType.Right)"
+            rrValidation="mainVentricleType"
+            inSecondFinding="true"
+          >
+          </p-radioButton>
+
+          <!-- oneChamberHeartSingleType.Anatomical -> mainVerticleType.Left, mainVerticleType.Right -->
+          <div
+            *ngIf="model.mainVentricleType !== mainVentricleType.None"
+            class="o-radio-list"
+          >
+            <p rr-id="car_m_040459" class="m-b-7">
+              {{'cardioMRT.flaps.aVConnection.value' | translate}}
+            </p>
+            <p-radioButton
+              *ngIf="model.mainVentricleType === mainVentricleType.Left"
+              rr-id="car_m_040460"
+              rrUnClickRadio
+              name="avConnectionType"
+              [value]="avConnectionType.DoubleInletDILV"
+              label="{{'cardioMRT.flaps.doubleInletDILV.value' | translate}}"
+              [(ngModel)]="model.avConnectionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              *ngIf="model.mainVentricleType === mainVentricleType.Right"
+              rr-id="car_m_040463"
+              rrUnClickRadio
+              name="avConnectionType"
+              [value]="avConnectionType.DoubleInletDIRV"
+              label="{{'cardioMRT.flaps.doubleInletDIRV.value' | translate}}"
+              [(ngModel)]="model.avConnectionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_040461"
+              rrUnClickRadio
+              name="avConnectionType"
+              [value]="avConnectionType.SingleInlet"
+              label="{{'cardioMRT.flaps.singleInlet.value' | translate}}"
+              [(ngModel)]="model.avConnectionType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_040462"
+              rrUnClickRadio
+              name="avConnectionType"
+              [value]="avConnectionType.CommonInlet"
+              label="{{'cardioMRT.flaps.commonInlet.value' | translate}}"
+              [(ngModel)]="model.avConnectionType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l o-radio-list c-sep-l f-vertical f-start m-t-30">
+    <p rr-id="car_m_040506" class="m-b-7">
+      {{'cardioMRT.flaps.associatedFindings.value' | translate}}
+    </p>
+    <p-checkbox
+      rr-id="car_m_040507"
+      name="isAtrialSeptalDefect"
+      label="{{'cardioMRT.flaps.atrialSeptaldefectASD.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isAtrialSeptalDefect"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="car_m_040508"
+      name="isTranspositionOfTheGreatArteries"
+      class="text-break"
+      label="{{'cardioMRT.flaps.transpositionOfthegreatArteriesTGA.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isTranspositionOfTheGreatArteries"
+    >
+    </p-checkbox>
+  </div>
+</div>

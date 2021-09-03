@@ -1,0 +1,129 @@
+<div
+  class="c-col-3 c-pad-l f-horizontal col-h-100"
+  id="pulmonaryArteries-block"
+>
+  <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="car_m_090315"
+      [(ngModel)]="model.isThrombus"
+      label="{{ 'cardioMRT.pericardiumVessels.thrombus.value' | translate }}"
+      labelStyleClass="ui-fat-label"
+      name="isThrombus"
+      binary="true"
+      class="m-b-8"
+      rrContentReset="isThrombus-block"
+    ></p-checkbox>
+    <div
+      class="f-start f-vertical o-radio-list nested-content"
+      id="isThrombus-block"
+      [rrDisable]="!model.isThrombus"
+    >
+      <p rr-id="car_m_090316" class="m-b-6">
+        {{ 'cardioMRT.pericardiumVessels.localization.value' | translate }}*
+      </p>
+      <p-checkbox
+        rr-id="car_m_090317"
+        [(ngModel)]="model.isCentral"
+        label="{{ 'cardioMRT.pericardiumVessels.central.value' | translate }}"
+        name="isCentral"
+        binary="true"
+        rrValidation="isCentral isRight isRightSegmental isLeft isLeftSegmental"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="car_m_090318"
+        [(ngModel)]="model.isRight"
+        label="{{ 'cardioMRT.pericardiumVessels.right.value' | translate }}"
+        name="isRight"
+        binary="true"
+        rrValidation="isCentral isRight isRightSegmental isLeft isLeftSegmental"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="car_m_090319"
+        [(ngModel)]="model.isRightSegmental"
+        label="{{ 'cardioMRT.pericardiumVessels.rightSegmental.value' | translate }}"
+        name="isRightSegmental"
+        binary="true"
+        rrValidation="isCentral isRight isRightSegmental isLeft isLeftSegmental"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="car_m_090320"
+        [(ngModel)]="model.isLeft"
+        label="{{ 'cardioMRT.pericardiumVessels.left.value' | translate }}"
+        name="isLeft"
+        binary="true"
+        rrValidation="isCentral isRight isRightSegmental isLeft isLeftSegmental"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="car_m_090321"
+        [(ngModel)]="model.isLeftSegmental"
+        label="{{ 'cardioMRT.pericardiumVessels.leftSegmental.value' | translate }}"
+        name="isLeftSegmental"
+        binary="true"
+        rrValidation="isCentral isRight isRightSegmental isLeft isLeftSegmental"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+    <h2 rr-id="car_m_090415" class="m-t-2">
+      {{ 'cardioMRT.pericardiumVessels.quantitative.value' | translate }}
+    </h2>
+    <p rr-id="car_m_090416" class="text-break l-h-24" rrInfoIcon="car_m_09_04">
+      {{ 'cardioMRT.pericardiumVessels.centralPulmonaryArteryDiameter.value' |
+      translate }}
+    </p>
+    <rr-number-input
+      inputRrId="car_m_090417"
+      labelRrId="car_m_090418"
+      [(ngModel)]="model.maximumDiameterInMm"
+      label="{{ 'cardioMRT.pericardiumVessels.inMm.value' | translate }}"
+      name="maximumDiameterInMm"
+    >
+    </rr-number-input>
+  </div>
+
+  <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-radio-list">
+    <h2 rr-id="car_m_090527" class="m-t-2">
+      {{ 'cardioMRT.pericardiumVessels.diagnosis.value' | translate }}*
+    </h2>
+    <p-radioButton
+      rr-id="car_m_090528"
+      [(ngModel)]="model.pericardiumVesselsDiagnosisType"
+      label="{{ 'cardioMRT.pericardiumVessels.acutePulmonaryEmbolism.value' | translate }}"
+      name="pericardiumVesselsDiagnosisType"
+      [value]="pericardiumVesselsDiagnosisType.AcutePulmonaryEmbolism"
+      rrValidation="pericardiumVesselsDiagnosisType"
+      (onClick)="resetIsSuspicionOf()"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="car_m_090529"
+      [(ngModel)]="model.pericardiumVesselsDiagnosisType"
+      label="{{ 'cardioMRT.pericardiumVessels.chronicPulmonaryEmbolism.value' | translate }}"
+      name="pericardiumVesselsDiagnosisType"
+      [value]="pericardiumVesselsDiagnosisType.ChronicPulmonaryEmbolism"
+      rrValidation="pericardiumVesselsDiagnosisType"
+      (onClick)="resetIsSuspicionOf()"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="car_m_090530"
+      [(ngModel)]="model.pericardiumVesselsDiagnosisType"
+      label="{{ 'cardioMRT.pericardiumVessels.pulmonaryHypertension.value' | translate }}"
+      name="pericardiumVesselsDiagnosisType"
+      [value]="pericardiumVesselsDiagnosisType.PulmonaryHypertension"
+      rrValidation="pericardiumVesselsDiagnosisType"
+      (onClick)="resetIsSuspicionOf()"
+    ></p-radioButton>
+    <div
+      class="f-start f-vertical o-radio-list nested-content"
+      [rrDisable]="model.pericardiumVesselsDiagnosisType === pericardiumVesselsDiagnosisType.None"
+    >
+      <p-checkbox
+        rr-id="car_m_090531"
+        [(ngModel)]="model.isSuspicionOf"
+        label="{{ 'cardioMRT.pericardiumVessels.suspicionOf.value' | translate }}"
+        name="isSuspicionOf"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

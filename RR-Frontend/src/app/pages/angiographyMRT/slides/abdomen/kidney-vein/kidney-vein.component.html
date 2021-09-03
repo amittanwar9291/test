@@ -1,0 +1,230 @@
+<div class="f-vertical f-start main-container">
+  <h2 rr-id="ang_m_070202" class="m-b-10 c-pad-l">
+    {{ 'angiographyMRT.abdomen.localization.value' | translate }}*
+  </h2>
+
+  <div class="f-horizontal f-center height-100">
+    <div class="c-col-1 c-sep c-pad o-radio-list">
+      <p-radioButton
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        [value]="sideType.Right"
+        rrContentReset="mainBlock2"
+        label="{{ 'angiographyMRT.abdomen.right.value' | translate }}"
+        rr-id="ang_m_070203"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        [value]="sideType.Left"
+        rrContentReset="mainBlock1"
+        label="{{ 'angiographyMRT.abdomen.left.value' | translate }}"
+        rr-id="ang_m_070204"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="mainBlock1"
+      *ngIf="model.sideType === sideType.Right"
+      class="c-col-1 c-sep c-pad o-radio-list"
+    >
+      <h2 rr-id="ang_m_070379">
+        {{ 'angiographyMRT.abdomen.finding.value' | translate }}*
+      </h2>
+
+      <p-checkbox
+        name="isAnatomicVariants"
+        label="{{ 'angiographyMRT.abdomen.anatomicVariants.value' | translate }}"
+        rr-id="ang_m_070380"
+        binary="true"
+        [(ngModel)]="model.isAnatomicVariants"
+        rrContentReset="block1"
+        rrValidation="isAnatomicVariants isRenalVeinThrombosis"
+      ></p-checkbox>
+
+      <div
+        id="block1"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isAnatomicVariants"
+      >
+        <p-checkbox
+          name="isMultipleRenalVeins"
+          label="{{ 'angiographyMRT.abdomen.multipleRenalVeins.value' | translate }}"
+          rr-id="ang_m_070381"
+          binary="true"
+          [(ngModel)]="model.isMultipleRenalVeins"
+        ></p-checkbox>
+      </div>
+
+      <p-checkbox
+        name="isRenalVeinThrombosis"
+        label="{{ 'angiographyMRT.abdomen.renalVeinThrombosis.value' | translate }}"
+        rr-id="ang_m_070382"
+        binary="true"
+        [(ngModel)]="model.isRenalVeinThrombosis"
+        rrContentReset="block2"
+        rrValidation="isAnatomicVariants isRenalVeinThrombosis"
+      ></p-checkbox>
+
+      <div
+        id="block2"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isRenalVeinThrombosis"
+      >
+        <p-checkbox
+          name="isDecreasedPerfusion"
+          label="{{ 'angiographyMRT.abdomen.decreasedRenalPerfusion.value' | translate }}"
+          rr-id="ang_m_070383"
+          binary="true"
+          [(ngModel)]="model.isDecreasedPerfusion"
+        ></p-checkbox>
+        <p-checkbox
+          name="isT1wHyperintenseCorticalHaemorrhages"
+          label="{{ 'angiographyMRT.abdomen.t1wHyperintenseCorticalHaemorrhages.value' | translate }}"
+          rr-id="ang_m_070384"
+          binary="true"
+          [(ngModel)]="model.isT1wHyperintenseCorticalHaemorrhages"
+        ></p-checkbox>
+
+        <p rr-id="ang_m_070385">
+          {{ 'angiographyMRT.abdomen.organSize.value' | translate }}
+        </p>
+
+        <p-radioButton
+          rrUnClickRadio
+          [(ngModel)]="model.organSizeType"
+          name="organSizeType"
+          [value]="organSizeType.Enlargement"
+          label="{{ 'angiographyMRT.abdomen.enlargement.value' | translate }}"
+          rr-id="ang_m_070386"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          [(ngModel)]="model.organSizeType"
+          name="organSizeType"
+          [value]="organSizeType.ShrunkenKidney"
+          label="{{ 'angiographyMRT.abdomen.shrunkenKidney.value' | translate }}"
+          rr-id="ang_m_070387"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div
+      id="mainBlock2"
+      *ngIf="model.sideType === sideType.Left"
+      class="c-col-1 c-sep c-pad o-radio-list"
+    >
+      <h2 rr-id="ang_m_070379">
+        {{ 'angiographyMRT.abdomen.finding.value' | translate }}*
+      </h2>
+
+      <p-checkbox
+        name="isAnatomicVariants"
+        label="{{ 'angiographyMRT.abdomen.anatomicVariants.value' | translate }}"
+        rr-id="ang_m_070380"
+        binary="true"
+        [(ngModel)]="model.isAnatomicVariants"
+        rrContentReset="block1"
+        rrValidation="isAnatomicVariants isRenalVeinThrombosis"
+      ></p-checkbox>
+
+      <div
+        id="block1"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isAnatomicVariants"
+      >
+        <p-checkbox
+          name="isRetroaortalCourseLeftRenalVein"
+          label="{{ 'angiographyMRT.abdomen.retroaortalCourseLeftrenalVein.value' | translate }}"
+          rr-id="ang_m_070390"
+          binary="true"
+          [(ngModel)]="model.isRetroaortalCourseLeftRenalVein"
+        ></p-checkbox>
+
+        <p-checkbox
+          name="isMultipleRenalVeins"
+          label="{{ 'angiographyMRT.abdomen.multipleRenalVeins.value' | translate }}"
+          rr-id="ang_m_070391"
+          binary="true"
+          [(ngModel)]="model.isMultipleRenalVeins"
+          rrContentReset="block3"
+        ></p-checkbox>
+
+        <div
+          id="block3"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isMultipleRenalVeins"
+        >
+          <p-checkbox
+            name="isBifurcatedPreAndRetroarticLeftRenalVein"
+            label="{{ 'angiographyMRT.abdomen.bifurcatedPreAndRetroarticLeftRenal.value' | translate }}"
+            rr-id="ang_m_070392"
+            binary="true"
+            [(ngModel)]="model.isBifurcatedPreAndRetroarticLeftRenalVein"
+          ></p-checkbox>
+        </div>
+      </div>
+
+      <p-checkbox
+        name="isRenalVeinThrombosis"
+        label="{{ 'angiographyMRT.abdomen.renalVeinThrombosis.value' | translate }}"
+        rr-id="ang_m_070382"
+        binary="true"
+        [(ngModel)]="model.isRenalVeinThrombosis"
+        rrContentReset="block2"
+        rrValidation="isAnatomicVariants isRenalVeinThrombosis"
+      ></p-checkbox>
+
+      <div
+        id="block2"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isRenalVeinThrombosis"
+      >
+        <p-checkbox
+          name="isDecreasedPerfusion"
+          label="{{ 'angiographyMRT.abdomen.decreasedRenalPerfusion.value' | translate }}"
+          rr-id="ang_m_070383"
+          binary="true"
+          [(ngModel)]="model.isDecreasedPerfusion"
+        ></p-checkbox>
+        <p-checkbox
+          name="isT1wHyperintenseCorticalHaemorrhages"
+          label="{{ 'angiographyMRT.abdomen.t1wHyperintenseCorticalHaemorrhages.value' | translate }}"
+          rr-id="ang_m_070384"
+          binary="true"
+          [(ngModel)]="model.isT1wHyperintenseCorticalHaemorrhages"
+        ></p-checkbox>
+
+        <p rr-id="ang_m_070385">
+          {{ 'angiographyMRT.abdomen.organSize.value' | translate }}
+        </p>
+
+        <p-radioButton
+          rrUnClickRadio
+          [(ngModel)]="model.organSizeType"
+          name="organSizeType"
+          [value]="organSizeType.Enlargement"
+          label="{{ 'angiographyMRT.abdomen.enlargement.value' | translate }}"
+          rr-id="ang_m_070386"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          [(ngModel)]="model.organSizeType"
+          name="organSizeType"
+          [value]="organSizeType.ShrunkenKidney"
+          label="{{ 'angiographyMRT.abdomen.shrunkenKidney.value' | translate }}"
+          rr-id="ang_m_070387"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div
+      *ngIf="model.sideType === sideType.None"
+      class="c-col-1 c-sep c-pad o-radio-list"
+    ></div>
+    <div class="c-col-1 c-sep c-pad o-radio-list"></div>
+    <div class="c-col-1 c-sep c-pad-l o-radio-list"></div>
+  </div>
+</div>

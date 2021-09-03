@@ -1,0 +1,312 @@
+<div class="c-h-557">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-pad text-break column-margin">
+      <div class="o-radio-list p-l-10">
+        <h2 rr-id="pel_m_0902210">
+          {{'pelvisMRT.bladder.side.value' | translate}}*
+        </h2>
+        <div class="f-vertical f-start o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_0902211"
+            name="sideType"
+            [value]="sideTypeEnum.Right"
+            label="{{'pelvisMRT.bladder.right.value' | translate}}"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+            [rrContentReset]="clearMuscleLesionGroup(sideTypeEnum.Right)"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0902212"
+            name="sideType"
+            [value]="sideTypeEnum.Left"
+            label="{{'pelvisMRT.bladder.left.value' | translate}}"
+            [(ngModel)]="model.sideType"
+            rrValidation="sideType"
+            [rrContentReset]="clearMuscleLesionGroup(sideTypeEnum.Left)"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="text-break o-radio-list p-l-10 m-t-28">
+        <h2
+          rr-id="pel_m_0902213"
+          rrInfoIcon="pel_m_09_03"
+          infoIconPdfLandscape="true"
+        >
+          {{'pelvisMRT.bladder.localization.value' | translate}}*
+        </h2>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100 m-b-15"
+          [options]="w039"
+          name="musclesLocalizationType"
+          rr-id="pel_m_0902215"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          (onChange)="localisationOptionsChange()"
+          rrDropdownClear
+          [group]="true"
+          [(ngModel)]="model.musclesLocalizationType"
+          rrValidation="musclesLocalizationType"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep-l c-pad column-margin">
+      <div
+        class="o-radio-list p-l-10"
+        [rrDisable]="model.musclesLocalizationType === musclesLocalizationTypeEnum.None"
+      >
+        <h2 rr-id="pel_m_0903232" class="text-break m-b-21">
+          {{'pelvisMRT.bladder.localizationWithinMuscle.value' | translate}}
+        </h2>
+        <div class="f-vertical f-start o-radio-list">
+          <p-radioButton
+            rr-id="pel_m_0903233"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.ProximalEnthesis"
+            label="{{'pelvisMRT.bladder.proximalEnthesis.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903234"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.ProximalMusculotendinousTransition"
+            label="{{'pelvisMRT.bladder.proximalMusculotendinousTransition.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903235"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.ProximalThird"
+            label="{{'pelvisMRT.bladder.proximalThird.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903236"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.MiddleThird"
+            label="{{'pelvisMRT.bladder.middleThird.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903237"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.DistalThird"
+            label="{{'pelvisMRT.bladder.distalThird.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903238"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.DistalMusculotendinousTransitionInsertion"
+            label="{{'pelvisMRT.bladder.distalMusculotendinousTransitioninsertion.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_0903239"
+            name="localizationWithinMuscleType"
+            [value]="localizationWithinMuscleTypeEnum.DistalEnthesis"
+            label="{{'pelvisMRT.bladder.distalEnthesis.value' | translate}}"
+            [(ngModel)]="model.localizationWithinMuscleType"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="muscleLesionGroup"
+      class="c-col-2 c-sep-l c-pad-l f-vertical column-margin"
+    >
+      <div class="o-list text-break p-l-10 m-b-10">
+        <p-checkbox
+          rr-id="pel_m_0904200"
+          name="isMuscleLesion"
+          [rrDisable]="model.sideType === sideTypeEnum.None || model.musclesLocalizationType === musclesLocalizationTypeEnum.None"
+          labelStyleClass="ui-fat-label"
+          label="{{'pelvisMRT.bladder.muscleLesion.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMuscleLesion"
+          rrContentReset="classificationMunichConsensusTypeGroup muscleFibreRuptureGroup muscleBundleTearGroup muscleTendonRuptureGroup"
+        >
+        </p-checkbox>
+      </div>
+      <div class="text-break f-horizontal f-center h-100">
+        <div class="c-col-1 c-pad-r f-vertical f-start o-radio-list text-break">
+          <div class="m-l-45 m-t-12">
+            <h2
+              rr-id="pel_m_0904201"
+              class="text-break"
+              rrInfoIcon="pel_m_09_04"
+              [rrDisable]="!model.isMuscleLesion"
+            >
+              {{'pelvisMRT.bladder.classificationMunichConsensus.value' |
+              translate}}*
+            </h2>
+          </div>
+          <div class="m-l-45" [rrDisable]="!model.isMuscleLesion">
+            <div
+              id="classificationMunichConsensusTypeGroup"
+              class="f-start o-radio-list"
+            >
+              <p-radioButton
+                rr-id="pel_m_0904203"
+                name="classificationMunichConsensusType"
+                [value]="classificationMunichConsensusTypeEnum.MuscularEdema"
+                label="{{'pelvisMRT.bladder.muscularEdema.value' | translate}}"
+                [(ngModel)]="model.classificationMunichConsensusType"
+                rrContentReset="muscleFibreRuptureGroup muscleBundleTearGroup muscleTendonRuptureGroup"
+                rrValidation="classificationMunichConsensusType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="pel_m_0904204"
+                class="text-break"
+                name="classificationMunichConsensusType"
+                [value]="classificationMunichConsensusTypeEnum.MuscleFibreRupture"
+                label="{{'pelvisMRT.bladder.muscleFibreRuptureType.value' | translate}}"
+                [(ngModel)]="model.classificationMunichConsensusType"
+                rrContentReset="muscleBundleTearGroup muscleTendonRuptureGroup"
+                rrValidation="classificationMunichConsensusType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="pel_m_0904205"
+                class="text-break"
+                name="classificationMunichConsensusType"
+                [value]="classificationMunichConsensusTypeEnum.MuscleBundleTear"
+                label="{{'pelvisMRT.bladder.muscleBundleTearType.value' | translate}}"
+                [(ngModel)]="model.classificationMunichConsensusType"
+                rrContentReset="muscleFibreRuptureGroup muscleTendonRuptureGroup"
+                rrValidation="classificationMunichConsensusType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="pel_m_0904206"
+                class="text-break"
+                name="classificationMunichConsensusType"
+                [value]="classificationMunichConsensusTypeEnum.MuscleTendonRupture"
+                label="{{'pelvisMRT.bladder.muscletendonRuptureTypeIV.value' | translate}}"
+                [(ngModel)]="model.classificationMunichConsensusType"
+                rrContentReset="muscleFibreRuptureGroup muscleBundleTearGroup"
+                rrValidation="classificationMunichConsensusType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="c-col-1 c-pad-l c-sep-l f-vertical f-start o-radio-list m-t-55"
+        >
+          <div class="p-l-10 text-break">
+            <div
+              id="muscleFibreRuptureGroup"
+              *ngIf="model.classificationMunichConsensusType === classificationMunichConsensusTypeEnum.MuscleFibreRupture"
+            >
+              <p-checkbox
+                rr-id="pel_m_0905200"
+                class="text-break"
+                name="isCrossDiameterOfRuptureLessThan5Mm"
+                label="{{'pelvisMRT.bladder.crossDiameterOfRuptureLessThan5.value' | translate}}"
+                [(ngModel)]="model.isCrossDiameterOfRuptureLessThan5Mm"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+            <div
+              id="muscleBundleTearGroup"
+              *ngIf="model.classificationMunichConsensusType === classificationMunichConsensusTypeEnum.MuscleBundleTear"
+            >
+              <p-checkbox
+                rr-id="pel_m_0905201"
+                class="text-break"
+                name="isCrossDiameterOfRupture5OrMoreMm"
+                label="{{'pelvisMRT.bladder.crossDiameterOfRupture5OrMore.value' | translate}}"
+                [(ngModel)]="model.isCrossDiameterOfRupture5OrMoreMm"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+            <div
+              id="muscleTendonRuptureGroup"
+              *ngIf="model.classificationMunichConsensusType === classificationMunichConsensusTypeEnum.MuscleTendonRupture"
+            >
+              <div class="o-radio-list">
+                <div class="f-start f-horizontal m-b-15">
+                  <rr-number-input
+                    inputRrId="pel_m_090537"
+                    labelRrId="pel_m_090538"
+                    labelStyleClass="text-break2"
+                    name="retractionInMm"
+                    label="{{'pelvisMRT.bladder.retractionInMm.value' | translate}}"
+                    [(ngModel)]="model.retractionInMm"
+                  >
+                  </rr-number-input>
+                </div>
+                <p-checkbox
+                  rr-id="pel_m_090539"
+                  name="isWavyCourseOfTheFibres"
+                  class="m-b-18"
+                  label="{{'pelvisMRT.bladder.wavyCourseOfThe.value' | translate}}"
+                  [(ngModel)]="model.isWavyCourseOfTheFibres"
+                  binary="true"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="pel_m_090540"
+                  name="isOsseousAvulsion"
+                  label="{{'pelvisMRT.bladder.osseousAvulsion.value' | translate}}"
+                  [(ngModel)]="model.isOsseousAvulsion"
+                  binary="true"
+                  rrContentReset="osseousAvulsionGroup"
+                >
+                </p-checkbox>
+                <div
+                  id="osseousAvulsionGroup"
+                  class="f-start o-radio-list m-l-35 dropdown-container"
+                  [rrDisable]="!model.isOsseousAvulsion"
+                >
+                  <p rr-id="pel_m_090541">
+                    {{'pelvisMRT.bladder.localization.value' | translate}}
+                  </p>
+                  <p-dropdown
+                    styleClass="ui-brown-box o-width-100 m-b-15"
+                    [options]="w040"
+                    name="osseousAvulsionLocalizationType"
+                    rr-id="pel_m_090542"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    rrDropdownClear
+                    [(ngModel)]="model.osseousAvulsionLocalizationType"
+                  >
+                  </p-dropdown>
+                  <p-checkbox
+                    rr-id="pel_m_090543"
+                    name="isIntracorticalEdema"
+                    label="{{'pelvisMRT.bladder.intracorticalEdema.value' | translate}}"
+                    [(ngModel)]="model.isIntracorticalEdema"
+                    binary="true"
+                  >
+                  </p-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,491 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-2 c-pad-r c-sep f-vertical f-space-between o-list">
+      <div class="f-vertical f-start o-width-100 o-radio-list align-left">
+        <h1 rr-id="sho_m_020103">
+          {{ "shoulderMRT.anamnesis.trauma.value" | translate }}
+        </h1>
+        <img
+          src="assets/img/shoulderMRT/icons/2-1.svg"
+          alt="Trauma"
+          class="m-t-3 m-l-2"
+          rr-id="sho_m_020104"
+        />
+      </div>
+      <div class="c-col-2 f-horizontal f-center c-col-2--height">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-list m-l-2">
+          <p-checkbox
+            rr-id="sho_m_020105"
+            name="isLuxation"
+            labelStyleClass="ui-header-label"
+            label="{{ 'shoulderMRT.anamnesis.luxation.value' | translate }}"
+            [(ngModel)]="model.isLuxation"
+            (onChange)="clearLuxationCalendar()"
+            rrContentReset="luxation-block"
+            binary="true"
+          ></p-checkbox>
+          <div
+            class="nested-content"
+            id="luxation-block"
+            [rrDisable]="!model.isLuxation"
+          >
+            <div
+              class="f-vertical f-start o-radio-list m-b-33"
+              [rrDisable]="!model.isLuxation"
+            >
+              <h2 rr-id="sho_m_020106">
+                {{ 'shoulderMRT.anamnesis.frequency.value' | translate }}
+              </h2>
+              <div class="f-vertical f-start o-radio-list">
+                <p-radioButton
+                  rr-id="sho_m_020107"
+                  label="{{ 'shoulderMRT.anamnesis.once.value' | translate }}"
+                  name="frequency"
+                  [(ngModel)]="model.frequency"
+                  [value]="frequencyType.Once"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_020108"
+                  label="{{ 'shoulderMRT.anamnesis.moreThanOnce.value' | translate }}"
+                  name="frequency"
+                  [(ngModel)]="model.frequency"
+                  [value]="frequencyType.MoreThanOnce"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+            </div>
+            <div
+              class="f-vertical f-start o-radio-list m-b-30"
+              [rrDisable]="!model.isLuxation"
+            >
+              <h2 rr-id="sho_m_020109" class="m-b-18">
+                {{ 'shoulderMRT.anamnesis.details.value' | translate }}
+              </h2>
+              <div class="f-vertical f-start o-radio-list">
+                <p-radioButton
+                  rr-id="sho_m_020110"
+                  label="{{ 'shoulderMRT.anamnesis.ventral.value' | translate }}"
+                  name="details"
+                  [(ngModel)]="model.details"
+                  [value]="anamnesisDetailsType.Ventral"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_020111"
+                  label="{{ 'shoulderMRT.anamnesis.ventralSubluxation.value' | translate }}"
+                  name="details"
+                  [(ngModel)]="model.details"
+                  [value]="anamnesisDetailsType.VentralSubluxation"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_020112"
+                  label="{{ 'shoulderMRT.anamnesis.dorsal.value' | translate }}"
+                  name="details"
+                  [(ngModel)]="model.details"
+                  [value]="anamnesisDetailsType.Dorsal"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_020113"
+                  label="{{'shoulderMRT.anamnesis.dorsalSubluxation.value' | translate }}"
+                  name="details"
+                  [(ngModel)]="model.details"
+                  [value]="anamnesisDetailsType.DorsalSubluxation"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+            </div>
+            <div class="f-vertical f-start o-radio-list m-b-28">
+              <h2 rr-id="sho_m_020114" class="m-b-17">
+                {{ 'shoulderMRT.anamnesis.therapy.value' | translate }}
+              </h2>
+              <div class="f-vertical f-start o-radio-list ">
+                <p-radioButton
+                  rr-id="sho_m_020115"
+                  label="{{'shoulderMRT.anamnesis.spontaneousReduction.value' | translate}}"
+                  name="therapy"
+                  [(ngModel)]="model.therapy"
+                  [value]="therapyType.SpontaneousReduction"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="sho_m_020116"
+                  label="{{'shoulderMRT.anamnesis.nonSurgicalReduction.value' | translate}}"
+                  name="therapy"
+                  [(ngModel)]="model.therapy"
+                  [value]="therapyType.NonSurgicalReduction"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+            </div>
+            <div class="f-vertical f-start">
+              <h2 rr-id="sho_m_020118">
+                {{ "shoulderMRT.anamnesis.dateSubluxationDislocation.value" |
+                translate }}
+              </h2>
+              <rr-month-year-input
+                name="trauma.dateOfLuxation"
+                [(ngModel)]="model.dateOfLuxation"
+                monthRrId="sho_m_020119"
+                yearRrId="sho_m_020120"
+              ></rr-month-year-input>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-list">
+          <p-checkbox
+            class="m-b-20"
+            rr-id="sho_m_020201"
+            name="isFracture"
+            labelStyleClass="ui-header-label"
+            label="{{ 'shoulderMRT.anamnesis.fracture.value' | translate }}"
+            [(ngModel)]="model.isFracture"
+            (onChange)="clearFractureCalendar()"
+            rrContentReset="isFracture-block dateOfFracture-block"
+            binary="true"
+          ></p-checkbox>
+          <div
+            class="o-list m-b-30 nested-content"
+            [rrDisable]="!model.isFracture"
+            id="isFracture-block"
+          >
+            <h2 class="label-name m-b-0" rr-id="sho_m_020202">
+              {{ "shoulderMRT.anamnesis.localization.value" | translate }}*
+            </h2>
+            <p class="sub-header text-break m-b-8" rr-id="sho_m_020210">
+              {{ "shoulderMRT.anamnesis.localizationSubHeader.value" | translate
+              }}
+            </p>
+            <div class="f-vertical f-start o-radio-list">
+              <p-checkbox
+                rr-id="sho_m_020203"
+                name="isLocalizationHumeralHead"
+                label="{{ 'shoulderMRT.anamnesis.humeralHead.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isLocalizationHumeralHead"
+                rrValidation="isLocalizationHumeralHead isLocalizationScapula isGlenoid isLocalizationClavicle"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020204"
+                name="isLocalizationScapula"
+                label="{{ 'shoulderMRT.anamnesis.scapula.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isLocalizationScapula"
+                rrValidation="isLocalizationHumeralHead isLocalizationScapula isGlenoid isLocalizationClavicle"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020205"
+                name="isGlenoid"
+                label="{{ 'shoulderMRT.anamnesis.glenoid.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isGlenoid"
+                rrValidation="isLocalizationHumeralHead isLocalizationScapula isGlenoid isLocalizationClavicle"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020206"
+                name="isLocalizationClavicle"
+                label="{{ 'shoulderMRT.anamnesis.clavicle.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isLocalizationClavicle"
+                rrValidation="isLocalizationHumeralHead isLocalizationScapula isGlenoid isLocalizationClavicle"
+                binary="true"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div
+            id="dateOfFracture-block"
+            class="f-vertical f-start nested-content"
+            [rrDisable]="!model.isFracture"
+          >
+            <h2 class="label-name" rr-id="sho_m_020207">
+              {{ "shoulderMRT.anamnesis.dateFracture.value" | translate }}
+            </h2>
+            <rr-month-year-input
+              name="fracture.dateOfFracture"
+              [(ngModel)]="model.dateOfFracture"
+              monthRrId="sho_m_020208"
+              yearRrId="sho_m_020209"
+            >
+            </rr-month-year-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-2 c-pad c-sep f-vertical f-start o-list">
+      <div class="f-vertical f-start o-width-100 o-radio-list align-left m-b-2">
+        <h1 class="m-b-0" rr-id="sho_m_020301">
+          {{ "shoulderMRT.anamnesis.previousSurgery.value" | translate }}
+        </h1>
+        <img src="assets/img/shoulderMRT/icons/2-2.svg" alt="PreOperation" />
+      </div>
+      <div class="c-col-2 f-horizontal f-center col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-list">
+          <div class="f-vertical f-start o-radio-list m-b-45">
+            <h2 class="label-name m-b-20" rr-id="sho_m_020304">
+              {{ "shoulderMRT.anamnesis.tendonRepairSurgery.value" | translate
+              }}
+            </h2>
+            <div class="f-vertical f-start o-radio-list">
+              <p-checkbox
+                rr-id="sho_m_020305"
+                name="isTeresMinor"
+                label="{{ 'shoulderMRT.anamnesis.teresMinor.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isTeresMinor"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020306"
+                name="isSubscapularis"
+                label="{{ 'shoulderMRT.anamnesis.suscapularis.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isSubscapularis"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020307"
+                name="isInfraspinatus"
+                label="{{ 'shoulderMRT.anamnesis.infraspinatus.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isInfraspinatus"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020308"
+                name="isSupraspinatus"
+                label="{{ 'shoulderMRT.anamnesis.supraspinatus.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isSupraspinatus"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020309"
+                name="isBicepsCaputLongum"
+                label="{{ 'shoulderMRT.anamnesis.bicepsCaputLongum.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isBicepsCaputLongum"
+                binary="true"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div class="f-vertical f-start o-radio-list">
+            <h2 class="label-name m-b-13" rr-id="sho_m_020310">
+              {{ "shoulderMRT.anamnesis.otherSurgery.value" | translate }}
+            </h2>
+            <div class="f-vertical f-start o-radio-list">
+              <p-checkbox
+                rr-id="sho_m_020311"
+                name="isLabralReconstruction"
+                label="{{ 'shoulderMRT.anamnesis.labralReconstruction.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isLabralReconstruction"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020312"
+                name="isBalloonSpacer"
+                label="{{ 'shoulderMRT.anamnesis.balloonSpacer.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isBalloonSpacer"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_020313"
+                name="isAcromioplasty"
+                label="{{ 'shoulderMRT.anamnesis.acromioplasty.value' | translate }}"
+                [labelStyleClass]="'ui-chkbox-labelLight'"
+                [(ngModel)]="model.isAcromioplasty"
+                binary="true"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-list">
+          <h2 class="label-name m-b-22" rr-id="sho_m_020401">
+            {{ "shoulderMRT.anamnesis.osteosynthese.value" | translate }}
+          </h2>
+          <div class="f-vertical f-start o-radio-list m-b-45">
+            <p-checkbox
+              rr-id="sho_m_020402"
+              name="isOsteosynthesisHumeralHead"
+              label="{{ 'shoulderMRT.anamnesis.humeralHead.value' | translate }}"
+              [labelStyleClass]="'ui-chkbox-labelLight'"
+              [(ngModel)]="model.isOsteosynthesisHumeralHead"
+              binary="true"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="sho_m_020403"
+              name="isOsteosynthesisClavicle"
+              label="{{ 'shoulderMRT.anamnesis.clavicle.value' | translate }}"
+              [labelStyleClass]="'ui-chkbox-labelLight'"
+              [(ngModel)]="model.isOsteosynthesisClavicle"
+              binary="true"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="sho_m_020409"
+              name="isOsteosynthesisScapula"
+              label="{{ 'shoulderMRT.anamnesis.scapula.value' | translate }}"
+              [labelStyleClass]="'ui-chkbox-labelLight'"
+              [(ngModel)]="model.isOsteosynthesisScapula"
+              binary="true"
+            ></p-checkbox>
+          </div>
+          <div class="f-vertical f-start o-radio-list m-b-12">
+            <p-checkbox
+              rr-id="sho_m_020404"
+              name="isEndoprosthesis"
+              labelStyleClass="ui-fat-label"
+              label="{{ 'shoulderMRT.anamnesis.endoprosthesis.value' | translate }}"
+              [(ngModel)]="model.isEndoprosthesis"
+              binary="true"
+              rrContentReset="endoprosthesis-block"
+            ></p-checkbox>
+          </div>
+          <div
+            id="endoprosthesis-block"
+            class="f-vertical f-start o-radio-list nested-content m-b-46"
+            [rrDisable]="!model.isEndoprosthesis"
+          >
+            <p-radioButton
+              class="m-b-12"
+              rr-id="sho_m_020405"
+              label="{{ 'shoulderMRT.anamnesis.anatomicalShoulderProsthesis.value' | translate }}"
+              name="endoprosthesis"
+              [(ngModel)]="model.endoprosthesis"
+              [value]="endoprosthesisType.AnatomicalShoulderProsthesis"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="sho_m_020406"
+              label="{{ 'shoulderMRT.anamnesis.inverseShoulderProsthesis.value' | translate }}"
+              name="endoprosthesis"
+              [(ngModel)]="model.endoprosthesis"
+              [value]="endoprosthesisType.InverseShoulderProsthesis"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="sho_m_020407"
+              label="{{ 'shoulderMRT.anamnesis.totalShoulderReplacement.value' | translate }}"
+              name="endoprosthesis"
+              [(ngModel)]="model.endoprosthesis"
+              [value]="endoprosthesisType.TotalShoulderReplacement"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div class="f-vertical f-start o-radio-list">
+            <p-checkbox
+              rr-id="sho_m_020408"
+              name="isOther"
+              labelStyleClass="ui-fat-label"
+              label="{{ 'shoulderMRT.anamnesis.other.value' | translate }}"
+              [(ngModel)]="model.isOther"
+              binary="true"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-list">
+      <div class="f-vertical f-start o-radio-list align-left m-b-25">
+        <h1 class="label-name m-b-15" rr-id="sho_m_020501">
+          {{ "shoulderMRT.anamnesis.indication.value" | translate }}
+        </h1>
+        <img
+          rr-id="sho_m_020502"
+          src="assets/img/shoulderMRT/icons/2-3.svg"
+          alt="Clinic"
+        />
+      </div>
+      <p-checkbox
+        class="m-b-15"
+        rr-id="sho_m_020503"
+        name="isInstability"
+        labelStyleClass="ui-fat-label"
+        label="{{ 'shoulderMRT.anamnesis.instability.value' | translate }}"
+        [(ngModel)]="model.isInstability"
+        binary="true"
+        rrContentReset="instability-block"
+      >
+      </p-checkbox>
+      <div
+        id="instability-block"
+        class="f-vertical f-start o-radio-list nested-content m-b-43"
+        [rrDisable]="!model.isInstability"
+      >
+        <p-radioButton
+          rr-id="sho_m_020504"
+          label="{{ 'shoulderMRT.anamnesis.anterior.value' | translate }}"
+          name="instability"
+          [(ngModel)]="model.instability"
+          [value]="instabilityType.Anterior"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="sho_m_020505"
+          label="{{ 'shoulderMRT.anamnesis.posterior.value' | translate }}"
+          name="instability"
+          [(ngModel)]="model.instability"
+          [value]="instabilityType.Posterior"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        class="m-b-35"
+        rr-id="sho_m_020506"
+        name="isImpingement"
+        labelStyleClass="ui-fat-label"
+        label="{{ 'shoulderMRT.anamnesis.impingement.value' | translate }}"
+        [(ngModel)]="model.isImpingement"
+        binary="true"
+      ></p-checkbox>
+      <div class="f-vertical f-start o-radio-list">
+        <h2 rr-id="sho_m_020507" class="m-b-13">
+          {{ "shoulderMRT.anamnesis.riskFactors.value" | translate }}
+        </h2>
+        <div class="f-vertical f-start o-radio-list m-b-22">
+          <p-checkbox
+            rr-id="sho_m_020508"
+            name="isProfessionalOverheadWork"
+            label="{{'shoulderMRT.anamnesis.professionalOverheadWork.value' | translate}}"
+            [labelStyleClass]="'ui-chkbox-labelLight'"
+            [(ngModel)]="model.isProfessionalOverheadWork"
+            binary="true"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_020509"
+            name="isWeightTraining"
+            label="{{ 'shoulderMRT.anamnesis.weightTraining.value' | translate }}"
+            [labelStyleClass]="'ui-chkbox-labelLight'"
+            [(ngModel)]="model.isPowerSports"
+            binary="true"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="sho_m_020510"
+            name="areOverheadSports"
+            label="{{ 'shoulderMRT.anamnesis.overheadSports.value' | translate }}"
+            [labelStyleClass]="'ui-chkbox-labelLight'"
+            [(ngModel)]="model.areOverheadSports"
+            binary="true"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="f-vertical">
+        <h2 rr-id="sho_m_020511">
+          {{ 'shoulderMRT.anamnesis.mriPreliminaryExamination.value' | translate
+          }}
+        </h2>
+        <rr-month-year-input
+          [(ngModel)]="model.dateOfMRIPreliminaryExamination"
+          name="clinic.dateOfMRIPreliminaryExamination"
+          monthRrId="sho_m_020512"
+          yearRrId="sho_m_020513"
+        ></rr-month-year-input>
+      </div>
+    </div>
+  </div>
+</form>

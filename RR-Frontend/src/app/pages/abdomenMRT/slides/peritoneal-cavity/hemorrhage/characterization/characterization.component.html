@@ -1,0 +1,151 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_100292" class="m-t-2 m-b-8">
+        {{ 'abdomenMRT.peritonealCavity.extension.value' | translate }}
+      </h2>
+      <p rr-id="abd_m_100293" class="m-b-2">
+        {{ 'abdomenMRT.peritonealCavity.size.value' | translate }}
+      </p>
+      <rr-number-input
+        labelRrId="abd_m_100295"
+        inputRrId="abd_m_100294"
+        label="{{ 'abdomenMRT.peritonealCavity.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 999, placeholder: '---' }"
+        [(ngModel)]="model.extensionSizeInMm"
+        (announceModelChange)="resetBothPlanes()"
+        name="extensionSizeInMm"
+      ></rr-number-input>
+      <div [rrDisable]="!model.extensionSizeInMm">
+        <p rr-id="abd_m_100296" class="m-t-8 m-b-2">
+          {{ 'abdomenMRT.peritonealCavity.2ndPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="abd_m_100298"
+          inputRrId="abd_m_100297"
+          label="{{ 'abdomenMRT.peritonealCavity.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.secondPlaneInMm"
+          (announceModelChange)="resetThirdPlane()"
+          name="secondPlaneInMm"
+        ></rr-number-input>
+      </div>
+      <div [rrDisable]="!model.secondPlaneInMm">
+        <p rr-id="abd_m_100299" class="m-t-8 m-b-2">
+          {{ 'abdomenMRT.peritonealCavity.3rdPlane.value' | translate }}
+        </p>
+        <rr-number-input
+          labelRrId="abd_m_1002100"
+          inputRrId="abd_m_1002101"
+          label="{{ 'abdomenMRT.peritonealCavity.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.thirdPlaneInMm"
+          name="thirdPlaneInMm"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10 sliders-z-index">
+    <div class="o-radio-list m-b-29">
+      <h2 rr-id="abd_m_100370" class="m-t-2 m-b-15">
+        {{ 'abdomenMRT.peritonealCavity.t1wSignal.value' | translate }}
+      </h2>
+      <rr-signal-slider
+        name="t1wSignal"
+        rr-id="abd_m_100371"
+        [(ngModel)]="model.t1wSignal"
+      ></rr-signal-slider>
+    </div>
+    <div class="o-radio-list m-b-29">
+      <h2 rr-id="abd_m_100372" class="m-b-15">
+        {{ 'abdomenMRT.peritonealCavity.t2wSignal.value' | translate }}
+      </h2>
+      <rr-signal-slider
+        name="t2wSignal"
+        rr-id="abd_m_100373"
+        [(ngModel)]="model.t2wSignal"
+      ></rr-signal-slider>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_100374">
+        {{ 'abdomenMRT.peritonealCavity.t2SWISignal.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_100375"
+        label="{{ 'abdomenMRT.peritonealCavity.signalDrop.value' | translate }}"
+        [(ngModel)]="model.isSignalDrop"
+        binary="true"
+        name="isSignalDrop"
+        rrContentReset="signalDrop-block"
+      ></p-checkbox>
+      <div
+        id="signalDrop-block"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isSignalDrop"
+      >
+        <p-radioButton
+          rr-id="abd_m_100376"
+          label="{{ 'abdomenMRT.peritonealCavity.focal.value' | translate }}"
+          [(ngModel)]="model.signalDropExtensionType"
+          [value]="extensionType.Focal"
+          name="signalDropExtensionType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_100377"
+          label="{{ 'abdomenMRT.peritonealCavity.diffuse.value' | translate }}"
+          [(ngModel)]="model.signalDropExtensionType"
+          [value]="extensionType.Diffuse"
+          name="signalDropExtensionType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-b-31" [rrDisable]="!isDWI">
+      <h2 rr-id="abd_m_100475" class="m-t-2" rrInfoIcon="abd_m_10_01">
+        {{ 'abdomenMRT.peritonealCavity.diffusionImaging.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_100476"
+        label="{{ 'abdomenMRT.peritonealCavity.diffusionRestriction.value' | translate }}"
+        [(ngModel)]="model.isDiffusionRestriction"
+        binary="true"
+        name="isDiffusionRestriction"
+      ></p-checkbox>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_100477">
+        {{ 'abdomenMRT.peritonealCavity.associatedFindings.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_100478"
+        label="{{ 'abdomenMRT.peritonealCavity.sedimentationEffects.value' | translate }}"
+        [(ngModel)]="model.isSedimentationEffects"
+        binary="true"
+        name="isSedimentationEffects"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_100479"
+        label="{{ 'abdomenMRT.peritonealCavity.fluidLevel.value' | translate }}"
+        [(ngModel)]="model.isFluidLevel"
+        binary="true"
+        name="isFluidLevel"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_100480"
+        label="{{ 'abdomenMRT.peritonealCavity.signsOfSuperinfection.value' | translate }}"
+        [(ngModel)]="model.isSignsOfSuperinfection"
+        binary="true"
+        name="isSignsOfSuperinfection"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+</div>

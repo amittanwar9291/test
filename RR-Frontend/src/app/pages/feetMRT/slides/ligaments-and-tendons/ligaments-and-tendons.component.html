@@ -1,0 +1,78 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerOpen">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="anc_m_050103" class="m-b-15">
+        {{ 'feetMRT.ligamentsAndTendons.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="anc_m_050104"
+        label="{{ 'feetMRT.ligamentsAndTendons.normalImagingOfThe.value' | translate }}"
+        name="areFindings"
+        [value]="areFindingsType.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_050105"
+        label="{{'feetMRT.ligamentsAndTendons.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsType.Yes"
+        class="m-b-19"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsType.Yes"
+        [setConfig]="dynamicConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1 *ngIf="!isCurrentItem(findingTypesEnum.None)" rr-id="anc_m_050201">
+          {{ 'feetMRT.ligamentsAndTendons.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isCurrentItem(findingTypesEnum.None)"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-ligamenta
+        *ngIf="isCurrentItem(findingTypesEnum.Ligamenta)"
+        [model]="findingHandler.currentItem"
+      ></rr-ligamenta>
+      <rr-tendiophaty
+        *ngIf="isCurrentItem(findingTypesEnum.Tendinopathy)"
+        [model]="findingHandler.currentItem"
+        [side]="localizationUiModel.localization"
+        [w013DifferentialDiagnosis]="w013DifferentialDiagnosis"
+        (openLargeLocalizer)="openLargeLocalizer()"
+      ></rr-tendiophaty>
+    </div>
+  </div>
+  <div class="f-horizontal f-center m-t-100 m-l-25" *ngIf="largeLocalizerOpen">
+    <rr-foot-big-tendons-complex
+      name="extraarticularLocalizationType"
+      (closed)="onLargeLocalizerClose()"
+      [singleChoiceMode]="true"
+      [(ngModel)]="findingHandler.currentItem.extraarticularLocalizationType"
+      [side]="localizationUiModel.localization.right ? 'right' : 'left'"
+      (announceSelection)="clearModel()"
+    >
+    </rr-foot-big-tendons-complex>
+  </div>
+</form>

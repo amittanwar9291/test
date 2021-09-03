@@ -1,0 +1,222 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_070208" rrValidation="ribLocalization">
+      {{'thoraxMRT.bones.localization.value' |translate}}*
+    </h2>
+    <rr-ribs-simple
+      class="scaled-localizer"
+      [model]="model.ribLocalization"
+      (click)="openLargeLocalizer()"
+      rrValidation="ribLocalization"
+      isLocalizer="true"
+      rr-id="tho_m_070209"
+    ></rr-ribs-simple>
+    <div class="o-radio-list m-t-25" *ngIf="isLocalizerMultiSelection()">
+      <h2 rr-id="tho_m_070210">
+        {{'thoraxMRT.bones.fractureAge.value' |translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_m_070211"
+        label="{{ 'thoraxMRT.bones.fresh.value' | translate }}"
+        name="fractureAge"
+        [value]="fractureAgeEnum.Fresh"
+        [(ngModel)]="model.fractureAge"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070212"
+        label="{{ 'thoraxMRT.bones.olderConsolidated.value' | translate }}"
+        name="fractureAge"
+        [value]="fractureAgeEnum.OlderConsolidated"
+        [(ngModel)]="model.fractureAge"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="triple-col f-vertical">
+    <div class="triple-col-header c-pad-l">
+      <div *ngIf="isLocalizerSingleSelection()" class="o-radio-list">
+        <h2 rr-id="tho_m_070324">
+          {{'thoraxMRT.bones.aOClassification.value' |translate}} (A016)
+        </h2>
+        <p rr-id="tho_m_070325">
+          {{'thoraxMRT.bones.evaluationFracture.value' |translate}}*
+        </p>
+      </div>
+    </div>
+    <div class="triple-col-content f-horizontal">
+      <div class="c-col-1 c-sep c-pad">
+        <div *ngIf="isLocalizerSingleSelection()" class="o-radio-list">
+          <p-radioButton
+            rr-id="tho_m_070326"
+            label="16.{{getLabelPartBaseOnSelectedRib()}}.1: {{ 'thoraxMRT.bones.posteriorSegments.value' | translate }}"
+            name="fractureType"
+            [value]="fractureTypeEnum.PosteriorSegment16_1"
+            [(ngModel)]="model.fractureType"
+            rrValidation="fractureType"
+            (onClick)="resetSiblingsChildren(['shaftTypeContainer', 'anteriorEndSegmentTypeContainer'])"
+          ></p-radioButton>
+          <div
+            id="posteriorSegmentTypeContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.fractureType !== fractureTypeEnum.PosteriorSegment16_1"
+          >
+            <p rr-id="tho_m_070327">
+              {{'thoraxMRT.bones.fractureType.value' |translate}}
+            </p>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070328"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.1A: {{ 'thoraxMRT.bones.extraarticular.value' | translate }}"
+              name="fractureSubType"
+              [value]="fractureSubTypeEnum.Extraarticular16_1A"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070329"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.1B: {{ 'thoraxMRT.bones.partialCostotransverseDisruption.value' | translate }}"
+              name="fractureSubType"
+              labelStyleClass="text-break"
+              [value]="fractureSubTypeEnum.PartialCostotransverseDisruption16_1B"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070330"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.1C: {{ 'thoraxMRT.bones.completeCostotransverseDisruption.value' | translate }}"
+              name="fractureSubType"
+              labelStyleClass="text-break"
+              [value]="fractureSubTypeEnum.CompleteCostotransverseDisruption16_1C"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list">
+        <div *ngIf="isLocalizerSingleSelection()" class="o-radio-list">
+          <p-radioButton
+            rr-id="tho_m_070417"
+            label="16.{{getLabelPartBaseOnSelectedRib()}}.2: {{ 'thoraxMRT.bones.shaft.value' | translate }}"
+            name="fractureType"
+            [value]="fractureTypeEnum.Shaft16_2"
+            [(ngModel)]="model.fractureType"
+            rrValidation="fractureType"
+            (onClick)="resetSiblingsChildren(['posteriorSegmentTypeContainer', 'anteriorEndSegmentTypeContainer'])"
+          ></p-radioButton>
+          <div
+            id="shaftTypeContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.fractureType !== fractureTypeEnum.Shaft16_2"
+          >
+            <p rr-id="tho_m_070418">
+              {{'thoraxMRT.bones.fractureType.value' |translate}}
+            </p>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070419"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.2A: {{ 'thoraxMRT.bones.simpleFracture.value' | translate }}"
+              name="fractureSubType"
+              [value]="fractureSubTypeEnum.SimpleFracture16_2A"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070420"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.2B: {{ 'thoraxMRT.bones.multifragmentaryWedgeFracture.value' | translate }}"
+              name="fractureSubType"
+              labelStyleClass="text-break"
+              [value]="fractureSubTypeEnum.MultifragmentaryWedgeFracture16_2B"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070421"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.2C: {{ 'thoraxMRT.bones.multifragmentarySegmentalFracture.value' | translate }}"
+              name="fractureSubType"
+              labelStyleClass="text-break"
+              [value]="fractureSubTypeEnum.MultifragmentarySegmentalFracture16_2C"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+          </div>
+          <p-radioButton
+            rr-id="tho_m_070422"
+            label="16.{{getLabelPartBaseOnSelectedRib()}}.3: {{ 'thoraxMRT.bones.anteriorEndSegmentFracture.value' | translate }}"
+            name="fractureType"
+            [value]="fractureTypeEnum.AnteriorEndSegment16_3"
+            [(ngModel)]="model.fractureType"
+            rrValidation="fractureType"
+            (onClick)="resetSiblingsChildren(['posteriorSegmentTypeContainer', 'shaftTypeContainer'])"
+          ></p-radioButton>
+          <div
+            id="anteriorEndSegmentTypeContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.fractureType !== fractureTypeEnum.AnteriorEndSegment16_3"
+          >
+            <p rr-id="tho_m_070423">
+              {{'thoraxMRT.bones.fractureType.value' |translate}}
+            </p>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070424"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.3A: {{ 'thoraxMRT.bones.simpleFracture.value' | translate }}"
+              name="fractureSubType"
+              [value]="fractureSubTypeEnum.SimpleFracture16_3A"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070425"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.3B: {{ 'thoraxMRT.bones.wedgeFracture.value' | translate }}"
+              name="fractureSubType"
+              [value]="fractureSubTypeEnum.WedgeFracture16_3B"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070426"
+              label="16.{{getLabelPartBaseOnSelectedRib()}}.3c: {{ 'thoraxMRT.bones.multiFragmentFracture.value' | translate }}"
+              name="fractureSubType"
+              labelStyleClass="text-break"
+              [value]="fractureSubTypeEnum.MultifragmentaryFracture16_3C"
+              [(ngModel)]="model.fractureSubType"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l o-radio-list">
+        <div *ngIf="isLocalizerSingleSelection()" class="o-radio-list">
+          <p-radioButton
+            rr-id="tho_m_070514"
+            label="16: {{ 'thoraxMRT.bones.notFurtherSpecified.value' | translate }}"
+            name="fractureType"
+            [value]="fractureTypeEnum.NotFurtherSpecified16"
+            [(ngModel)]="model.fractureType"
+            rrValidation="fractureType"
+            rrContentReset="posteriorSegmentTypeContainer shaftTypeContainer anteriorEndSegmentTypeContainer"
+          ></p-radioButton>
+          <div
+            id="notFutherSpecfiedTypeContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.fractureType !== fractureTypeEnum.NotFurtherSpecified16"
+          >
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070515"
+              label="{{ 'thoraxMRT.bones.fractureOlderConsolidated.value' | translate }}"
+              name="notFutherSpecfiedType"
+              [value]="notFutherSpecfiedTypeEnum.FractureOlderConsolidated"
+              [(ngModel)]="model.notFutherSpecfiedType"
+            ></p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="tho_m_070516"
+              label="{{ 'thoraxMRT.bones.suspected.value' | translate }}"
+              name="notFutherSpecfiedType"
+              [value]="notFutherSpecfiedTypeEnum.Suspected"
+              [(ngModel)]="model.notFutherSpecfiedType"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

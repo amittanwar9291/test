@@ -1,0 +1,429 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="tho_c_040206">
+      {{'thoraxCT.mediastinum.lymphNodeDetails.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_040207"
+      name="lymphNodesType"
+      class="text-break"
+      [value]="lymphNodesTypeEnum.MultiplePathologicallyEnlargedLymphNodes"
+      label="{{'thoraxCT.mediastinum.multiplePathologicallyEnlargedLymph.value' | translate}}"
+      [(ngModel)]="model.lymphNodesType"
+      rrContentReset="lymphNodeStationsType-block fourthCol-block fifthCol-block"
+      rrValidation="lymphNodesType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_040208"
+      rrInfoIcon="tho_c_04_01"
+      name="lymphNodesType"
+      class="w-285-px"
+      [value]="lymphNodesTypeEnum.LocalizationAccToIASCL"
+      label="{{'thoraxCT.mediastinum.localizationAccToIASCL.value' | translate}}"
+      [(ngModel)]="model.lymphNodesType"
+      rrContentReset="MultiplePathologicallyEnlargedLymphNodes-block"
+      rrValidation="lymphNodesType"
+    ></p-radioButton>
+  </div>
+
+  <div
+    class="c-col-1 f-vertical f-start c-sep-l c-pad o-radio-list"
+    [class.m-t-32]="model.lymphNodesType !== lymphNodesTypeEnum.None"
+  >
+    <div
+      id="MultiplePathologicallyEnlargedLymphNodes-block"
+      *ngIf="model.lymphNodesType === lymphNodesTypeEnum.MultiplePathologicallyEnlargedLymphNodes"
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="tho_c_040307" class="m-b-12">
+        {{'thoraxCT.mediastinum.diameterOfLargestLN.value' | translate}}
+      </h2>
+      <rr-number-input
+        rr-id="tho_c_040202"
+        name="enlargedLymphNodesMaxDiameterSADInMm"
+        inputRrId="tho_c_040308"
+        labelRrId="tho_c_040309"
+        rrValidation="enlargedLymphNodesMaxDiameterSADInMm"
+        [label]="'thoraxCT.mediastinum.inMm.value' | translate"
+        [(ngModel)]="model.enlargedLymphNodesMaxDiameterSADInMm"
+        [config]="{min: 1, max: 99, labelWidth: 170}"
+      >
+      </rr-number-input>
+      <p-checkbox
+        rr-id="tho_c_040204"
+        name="isCalcification"
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        label="{{'thoraxCT.mediastinum.calcification.value' | translate}}"
+      ></p-checkbox>
+    </div>
+
+    <div
+      id="lymphNodeStationsType-block"
+      *ngIf="model.lymphNodesType === lymphNodesTypeEnum.LocalizationAccToIASCL"
+      class="f-vertical f-start o-radio-list"
+    >
+      <h2 rr-id="tho_c_040311" rrInfoIcon="tho_c_04_02">
+        {{'thoraxCT.mediastinum.lymphNodeStations.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_040312"
+        name="lymphNodeStationsType"
+        [value]="lymphNodeStationsTypeEnum.SupraclavicularZone"
+        label="{{'thoraxCT.mediastinum.supraclavicularZone.value' | translate}}"
+        [(ngModel)]="model.lymphNodeStationsType"
+        rrValidation="lymphNodeStationsType"
+        rrContentReset="Paratracheal-block Aortic-block InferiorMediastinal-block HilarLobarAndSegmental-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040313"
+        name="lymphNodeStationsType"
+        [value]="lymphNodeStationsTypeEnum.SuperiorMediastinalNodes"
+        label="{{'thoraxCT.mediastinum.superiorMediastinalNodes.value' | translate}}"
+        [(ngModel)]="model.lymphNodeStationsType"
+        rrValidation="lymphNodeStationsType"
+        rrContentReset="TopMediastinal-block Aortic-block InferiorMediastinal-block HilarLobarAndSegmental-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040314"
+        name="lymphNodeStationsType"
+        [value]="lymphNodeStationsTypeEnum.Aortic"
+        label="{{'thoraxCT.mediastinum.aorticLN.value' | translate}}"
+        [(ngModel)]="model.lymphNodeStationsType"
+        rrValidation="lymphNodeStationsType"
+        rrContentReset="TopMediastinal-block Paratracheal-block InferiorMediastinal-block HilarLobarAndSegmental-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040315"
+        name="lymphNodeStationsType"
+        [value]="lymphNodeStationsTypeEnum.InferiorMediastinal"
+        label="{{'thoraxCT.mediastinum.inferiorMediastinalLN.value' | translate}}"
+        [(ngModel)]="model.lymphNodeStationsType"
+        rrValidation="lymphNodeStationsType"
+        rrContentReset="TopMediastinal-block Paratracheal-block Aortic-block HilarLobarAndSegmental-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040316"
+        name="lymphNodeStationsType"
+        [value]="lymphNodeStationsTypeEnum.HilarLobarAndSegmental"
+        label="{{'thoraxCT.mediastinum.hilar(interlobarAnd(subsegmental.value' | translate}}"
+        [(ngModel)]="model.lymphNodeStationsType"
+        rrValidation="lymphNodeStationsType"
+        rrContentReset="TopMediastinal-block Paratracheal-block Aortic-block InferiorMediastinal-block"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="fourthCol-block"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad o-radio-list"
+    [class.m-t-31]="model.lymphNodesType === lymphNodesTypeEnum.LocalizationAccToIASCL"
+    [class.m-t-61]="model.lymphNodeStationsType !== lymphNodeStationsTypeEnum.None"
+  >
+    <div
+      id="TopMediastinal-block"
+      *ngIf="model.lymphNodeStationsType === lymphNodeStationsTypeEnum.SupraclavicularZone"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p rr-id="tho_c_040401">
+        {{'thoraxCT.mediastinum.side.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="tho_c_040402"
+        name="topMediastinalNodesType"
+        [value]="locationTypeEnum.Right"
+        label="{{'thoraxCT.mediastinum.1RSupraclavicular.value' | translate}}"
+        [(ngModel)]="model.topMediastinalNodesType"
+        rrValidation="topMediastinalNodesType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040403"
+        name="topMediastinalNodesType"
+        [value]="locationTypeEnum.Left"
+        label="{{'thoraxCT.mediastinum.1LSupraclavicular.value' | translate}}"
+        [(ngModel)]="model.topMediastinalNodesType"
+        rrValidation="topMediastinalNodesType"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="Paratracheal-block"
+      *ngIf="model.lymphNodeStationsType === lymphNodeStationsTypeEnum.SuperiorMediastinalNodes"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="tho_c_040405"
+        name="paratrachealNodesType"
+        [value]="paratrachealNodesTypeEnum.UpperParatrachealRight"
+        label="{{'thoraxCT.mediastinum.2RUpperParatrachealLN.value' | translate}}"
+        [(ngModel)]="model.paratrachealNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040406"
+        name="paratrachealNodesType"
+        [value]="paratrachealNodesTypeEnum.UpperParatrachealLeft"
+        label="{{'thoraxCT.mediastinum.2LUpperParatrachealLN.value' | translate}}"
+        [(ngModel)]="model.paratrachealNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040407"
+        name="paratrachealNodesType"
+        [value]="paratrachealNodesTypeEnum.Prevascular"
+        label="{{'thoraxCT.mediastinum.3APrevascularLN.value' | translate}}"
+        [(ngModel)]="model.paratrachealNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040408"
+        name="paratrachealNodesType"
+        [value]="paratrachealNodesTypeEnum.Prevertebral"
+        label="{{'thoraxCT.mediastinum.3PRetrotrachealLN.value' | translate}}"
+        [(ngModel)]="model.paratrachealNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040409"
+        name="paratrachealNodesType"
+        [value]="paratrachealNodesTypeEnum.LowerParatrachealRight"
+        label="{{'thoraxCT.mediastinum.4RLowerParatrachealLymph.value' | translate}}"
+        [(ngModel)]="model.paratrachealNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040410"
+        name="paratrachealNodesType"
+        [value]="paratrachealNodesTypeEnum.LowerParatrachealLeft"
+        label="{{'thoraxCT.mediastinum.4LLowerParatrachealLymph.value' | translate}}"
+        [(ngModel)]="model.paratrachealNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="Aortic-block"
+      *ngIf="model.lymphNodeStationsType === lymphNodeStationsTypeEnum.Aortic"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="tho_c_040411"
+        name="aorticNodesType"
+        [value]="aorticNodesTypeEnum.Subaortic"
+        label="{{'thoraxCT.mediastinum.subaorticLNaortopulmonaryWindow.value' | translate}}"
+        [(ngModel)]="model.aorticNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040412"
+        name="aorticNodesType"
+        [value]="aorticNodesTypeEnum.Paraaortic"
+        label="{{'thoraxCT.mediastinum.paraaorticLN.value' | translate}}"
+        [(ngModel)]="model.aorticNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="InferiorMediastinal-block"
+      *ngIf="model.lymphNodeStationsType === lymphNodeStationsTypeEnum.InferiorMediastinal"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="tho_c_040413"
+        name="inferiorMediastinalNodeType"
+        [value]="inferiorMediastinalNodesTypeEnum.Infracarinal"
+        label="{{'thoraxCT.mediastinum.infracarinalLN.value' | translate}}"
+        [(ngModel)]="model.inferiorMediastinalNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040414"
+        name="inferiorMediastinalNodeType"
+        [value]="inferiorMediastinalNodesTypeEnum.Paraesophageal"
+        label="{{'thoraxCT.mediastinum.paraesophagealLN.value' | translate}}"
+        [(ngModel)]="model.inferiorMediastinalNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040415"
+        name="inferiorMediastinalNodeType"
+        [value]="inferiorMediastinalNodesTypeEnum.PulmonaryLigNodesRight"
+        label="{{'thoraxCT.mediastinum.9RPulmonaryLig.value' | translate}}"
+        [(ngModel)]="model.inferiorMediastinalNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040416"
+        name="inferiorMediastinalNodeType"
+        [value]="inferiorMediastinalNodesTypeEnum.PulmonaryLigNodesLeft"
+        label="{{'thoraxCT.mediastinum.9LPulmonaryLig.value' | translate}}"
+        [(ngModel)]="model.inferiorMediastinalNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="HilarLobarAndSegmental-block"
+      *ngIf="model.lymphNodeStationsType === lymphNodeStationsTypeEnum.HilarLobarAndSegmental"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p-radioButton
+        rr-id="tho_c_040417"
+        name="hilarLobarNodesType"
+        [value]="hilarLobarNodesTypeEnum.HilarLymphNodes"
+        label="{{'thoraxCT.mediastinum.hilarLymphNodes.value' | translate}}"
+        [(ngModel)]="model.hilarLobarNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040418"
+        name="hilarLobarNodesType"
+        [value]="hilarLobarNodesTypeEnum.InterlobarLN"
+        label="{{'thoraxCT.mediastinum.interlobarLN.value' | translate}}"
+        [(ngModel)]="model.hilarLobarNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040419"
+        name="hilarLobarNodesType"
+        [value]="hilarLobarNodesTypeEnum.LobarNode"
+        label="{{'thoraxCT.mediastinum.lobarLN.value' | translate}}"
+        [(ngModel)]="model.hilarLobarNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040420"
+        name="hilarLobarNodesType"
+        [value]="hilarLobarNodesTypeEnum.SegmentalNode"
+        label="{{'thoraxCT.mediastinum.segmentalLN.value' | translate}}"
+        [(ngModel)]="model.hilarLobarNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040421"
+        name="hilarLobarNodesType"
+        [value]="hilarLobarNodesTypeEnum.SubsegmentalNode"
+        label="{{'thoraxCT.mediastinum.subsegmentalLN.value' | translate}}"
+        [(ngModel)]="model.hilarLobarNodesType"
+        rrUnClickRadio
+      ></p-radioButton>
+
+      <p rr-id="tho_c_040422" class="m-t-19">
+        {{'thoraxCT.mediastinum.localization.value' | translate}}*
+      </p>
+      <p-radioButton
+        rr-id="tho_c_040423"
+        name="lymphNodesLocalizationType"
+        [value]="locationTypeEnum.Right"
+        label="{{'thoraxCT.mediastinum.right.value' | translate}}"
+        [(ngModel)]="model.lymphNodesLocalizationType"
+        rrValidation="lymphNodesLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040424"
+        name="lymphNodesLocalizationType"
+        [value]="locationTypeEnum.Left"
+        label="{{'thoraxCT.mediastinum.left.value' | translate}}"
+        [(ngModel)]="model.lymphNodesLocalizationType"
+        rrValidation="lymphNodesLocalizationType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="fifthCol-block"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad-l o-radio-list"
+    [class.m-t-31]="model.lymphNodesType === lymphNodesTypeEnum.LocalizationAccToIASCL"
+  >
+    <div
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.lymphNodesType === lymphNodesTypeEnum.LocalizationAccToIASCL"
+    >
+      <h2 rr-id="tho_c_040501">
+        {{'thoraxCT.mediastinum.characterization.value' | translate}}
+      </h2>
+      <p rr-id="tho_c_040502" class="m-b-6">
+        {{'thoraxCT.mediastinum.diameterSAD.value' | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="tho_c_040503"
+        labelRrId="tho_c_040504"
+        name="enlargedLymphNodesCalcificationMaxDiameterSADInMm"
+        rrValidation="enlargedLymphNodesCalcificationMaxDiameterSADInMm"
+        [label]="'thoraxCT.mediastinum.inMm.value' | translate"
+        [(ngModel)]="model.enlargedLymphNodesCalcificationMaxDiameterSADInMm"
+        [config]="{min: 1, max: 99, labelWidth: 170}"
+      >
+      </rr-number-input>
+      <div
+        class="f-vertical f-start o-radio-list m-b-30"
+        [rrDisable]="!isEnlargedLymphNodesCalcificationMaxDiameterProvided()"
+      >
+        <p-checkbox
+          rr-id="tho_c_040505"
+          name="isSuspect"
+          binary="true"
+          [(ngModel)]="model.isSuspect"
+          label="{{'thoraxCT.mediastinum.suspicious.value' | translate}}"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="tho_c_040506"
+          name="isPreservedFattyHilum"
+          binary="true"
+          [(ngModel)]="model.isPreservedFattyHilum"
+          label="{{'thoraxCT.mediastinum.preservedFattyHilum.value' | translate}}"
+        ></p-checkbox>
+      </div>
+
+      <div class="w-330-px">
+        <p-checkbox
+          rr-id="tho_c_040507"
+          name="isReferenceLesionAccToRECIST"
+          binary="true"
+          rrInfoIcon="tho_c_04_03"
+          [(ngModel)]="model.isReferenceLesionAccToRECIST"
+          label="{{'thoraxCT.mediastinum.referenceLesionAccToRECIST.value' | translate}}"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="tho_c_040508"
+        name="isContinuous"
+        binary="true"
+        [(ngModel)]="model.isContinuous"
+        label="{{'thoraxCT.mediastinum.confluent.value' | translate}}"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_040509"
+        name="isCalcification"
+        binary="true"
+        rrContentReset="calcificationType-block"
+        [(ngModel)]="model.isCalcification"
+        label="{{'thoraxCT.mediastinum.calcification.value' | translate}}"
+      ></p-checkbox>
+
+      <div
+        id="calcificationType-block"
+        class="f-vertical f-start nested-content o-radio-list"
+        [rrDisable]="!model.isCalcification"
+      >
+        <p-radioButton
+          rr-id="tho_c_040510"
+          name="calcificationType"
+          [value]="mediastinumCalcificationTypeEnum.Complete"
+          rrUnClickRadio
+          [(ngModel)]="model.calcificationType"
+          label="{{'thoraxCT.mediastinum.complete.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_040511"
+          name="calcificationType"
+          [value]="mediastinumCalcificationTypeEnum.EggshellPattern"
+          rrUnClickRadio
+          [(ngModel)]="model.calcificationType"
+          label="{{'thoraxCT.mediastinum.eggshellPattern.value' | translate}}"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

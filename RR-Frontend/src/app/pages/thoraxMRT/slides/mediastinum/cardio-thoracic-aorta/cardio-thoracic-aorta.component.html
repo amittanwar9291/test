@@ -1,0 +1,382 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start o-radio-list">
+    <h2 rr-id="tho_m_040202">
+      {{'thoraxMRT.mediastinum.pathology.value' | translate}}
+    </h2>
+    <div class="f-horizontal f-start col-h-100">
+      <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+        <p-radioButton
+          rr-id="tho_m_040230"
+          name="pathologyType"
+          rrValidation="pathologyType"
+          [(ngModel)]="model.pathologyType"
+          (onClick)="clearLocalizer()"
+          [value]="pathologyTypeEnum.AorticAnomalies"
+          [rrContentReset]="clear1stColDetails(pathologyTypeEnum.AorticAnomalies)"
+          label="{{'thoraxMRT.mediastinum.aorticAnomalies.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_040231"
+          name="pathologyType"
+          rrValidation="pathologyType"
+          [(ngModel)]="model.pathologyType"
+          [value]="pathologyTypeEnum.AorticAneurysm"
+          [rrContentReset]="clear1stColDetails(pathologyTypeEnum.AorticAneurysm)"
+          label="{{'thoraxMRT.mediastinum.aorticAneurysm.value' | translate}}"
+        ></p-radioButton>
+      </div>
+
+      <div
+        id="second-col-block"
+        class="c-col-1 f-vertical f-start c-pad o-radio-list"
+      >
+        <div
+          *ngIf="model.pathologyType === pathologyTypeEnum.AorticAnomalies"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rr-id="tho_m_040341">
+            {{'thoraxMRT.mediastinum.anomalies.value' | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="tho_m_040342"
+            name="anomaliesType"
+            rrValidation="anomaliesType"
+            [(ngModel)]="model.anomaliesType"
+            [value]="anomaliesTypeEnum.AorticCoarctation"
+            [rrContentReset]="clear2ndColDetails(anomaliesTypeEnum.AorticCoarctation)"
+            label="{{'thoraxMRT.mediastinum.aorticCoarctationCoarctatioAortae.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040343"
+            name="anomaliesType"
+            rrValidation="anomaliesType"
+            [(ngModel)]="model.anomaliesType"
+            [value]="anomaliesTypeEnum.KinkingOfTheAorticArch"
+            [rrContentReset]="clear2ndColDetails(anomaliesTypeEnum.KinkingOfTheAorticArch)"
+            label="{{'thoraxMRT.mediastinum.kinkingOfTheAortic.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040344"
+            name="anomaliesType"
+            rrValidation="anomaliesType"
+            [(ngModel)]="model.anomaliesType"
+            [value]="anomaliesTypeEnum.CongenitalVascularRings"
+            [rrContentReset]="clear2ndColDetails(anomaliesTypeEnum.CongenitalVascularRings)"
+            label="{{'thoraxMRT.mediastinum.congenitalVascularRings.value' | translate}}"
+          ></p-radioButton>
+        </div>
+
+        <div
+          *ngIf="model.pathologyType === pathologyTypeEnum.AorticAneurysm"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rr-id="tho_m_040345" rrValidation="localizationType">
+            {{'thoraxMRT.mediastinum.localizationAorta.value' | translate}}*
+          </h2>
+          <rr-aortic-arch-small-localizer
+            [aorticArch]="model.localizationType"
+            [isArcusAortaeDivided]="false"
+            (click)="openLargeLocalizer('localizationType')"
+            rrValidation="localizationType"
+            isLocalizer="true"
+            rr-id="tho_m_040346"
+          >
+          </rr-aortic-arch-small-localizer>
+          <p-checkbox
+            rr-id="tho_m_040347"
+            name="isAorticEctasia"
+            binary="true"
+            [(ngModel)]="model.isAorticEctasia"
+            label="{{'thoraxMRT.mediastinum.aorticEctasia.value' | translate}}"
+          ></p-checkbox>
+
+          <h2 rr-id="tho_m_040348">
+            {{'thoraxMRT.mediastinum.shape.value' | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="tho_m_040349"
+            name="shapeType"
+            [value]="shapeTypeEnum.SackShaped"
+            rrUnClickRadio
+            [(ngModel)]="model.shapeType"
+            label="{{'thoraxMRT.mediastinum.sackshaped.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040350"
+            name="shapeType"
+            [value]="shapeTypeEnum.Fusiform"
+            rrUnClickRadio
+            [(ngModel)]="model.shapeType"
+            label="{{'thoraxMRT.mediastinum.fusiform.value' | translate}}"
+          ></p-radioButton>
+        </div>
+      </div>
+
+      <div
+        id="third-col-block"
+        class="c-col-1 f-vertical f-start c-sep-l c-sep c-pad o-radio-list"
+        [class.m-t-33]="model.anomaliesType !== anomaliesTypeEnum.None"
+      >
+        <div
+          *ngIf="model.anomaliesType === anomaliesTypeEnum.AorticCoarctation"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rr-id="tho_m_040433">
+            {{'thoraxMRT.mediastinum.detailsAorticCoarctationcoarctatioAortae.value'
+            | translate}}
+          </h2>
+          <p-checkbox
+            rr-id="tho_m_040434"
+            name="isHypoplasticAorticArch"
+            binary="true"
+            [(ngModel)]="model.isHypoplasticAorticArch"
+            label="{{'thoraxMRT.mediastinum.hypoplasticAorticArch.value' | translate}}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_040435"
+            name="isPoststenoticDilatation"
+            binary="true"
+            [(ngModel)]="model.isPoststenoticDilatation"
+            label="{{'thoraxMRT.mediastinum.poststenoticDilatation.value' | translate}}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="tho_m_040436"
+            name="isPostoperativeResidualStenosis"
+            binary="true"
+            [(ngModel)]="model.isPostoperativeResidualStenosis"
+            label="{{'thoraxMRT.mediastinum.postoperativeResidualStenosis.value' | translate}}"
+          ></p-checkbox>
+        </div>
+
+        <div
+          *ngIf="model.anomaliesType === anomaliesTypeEnum.KinkingOfTheAorticArch"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rr-id="tho_m_040437">
+            {{'thoraxMRT.mediastinum.detailsKinkingOfThe.value' | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="tho_m_040438"
+            name="detailsKinkingType"
+            [value]="detailsKinkingTypeEnum.FunctionalStenosis"
+            rrUnClickRadio
+            [(ngModel)]="model.detailsKinkingType"
+            label="{{'thoraxMRT.mediastinum.functionalStenosis.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040439"
+            name="detailsKinkingType"
+            [value]="detailsKinkingTypeEnum.MorphologicalStenosis"
+            rrUnClickRadio
+            [(ngModel)]="model.detailsKinkingType"
+            label="{{'thoraxMRT.mediastinum.morphologicalStenosis.value' | translate}}"
+          ></p-radioButton>
+        </div>
+
+        <div
+          *ngIf="model.anomaliesType === anomaliesTypeEnum.CongenitalVascularRings"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rr-id="tho_m_040440">
+            {{'thoraxMRT.mediastinum.detailsCongenitalVascularRings.value' |
+            translate}}
+          </h2>
+          <p-radioButton
+            rr-id="tho_m_040441"
+            class="text-break"
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.CommonOriginLeftCommonCarotidArteryAndRightBrachiocephalicArtery"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+            label="{{'thoraxMRT.mediastinum.commonOriginleftCommonCarotid.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040442"
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.LeftCommonCarotidArteryOriginatesFromRightBrachiocephalicArtery"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+            label="{{'thoraxMRT.mediastinum.leftCommonCarotidArtery.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040443"
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.LeftVertebralArteryOriginatesDirectlyFromAorticArc"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+            label="{{'thoraxMRT.mediastinum.leftVertebralArteryOriginates.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040444"
+            class="text-break"
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.AberrantRightSubclavianArteryALusoria"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+            label="{{'thoraxMRT.mediastinum.aberrantRightSubclavianArterya.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040445"
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.RightAorticArchWithAberrantLeftSubclavianArtery"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+            label="{{'thoraxMRT.mediastinum.rightAorticArchWithaberrant.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040446"
+            name="detailsCongenitalVascularRingsType"
+            [value]="detailsCongenitalVascularRingsTypeEnum.DoubleAorticArch"
+            [(ngModel)]="model.detailsCongenitalVascularRingsType"
+            rrValidation="detailsCongenitalVascularRingsType"
+            label="{{'thoraxMRT.mediastinum.doubleAorticArch.value' | translate}}"
+          ></p-radioButton>
+          <p-checkbox
+            rr-id="tho_m_040447"
+            name="isWithKommerellSDiverticulum"
+            binary="true"
+            class="m-t-8"
+            [(ngModel)]="model.isWithKommerellSDiverticulum"
+            label="{{'thoraxMRT.mediastinum.withKommerellsDiverticulum.value' | translate}}"
+          ></p-checkbox>
+        </div>
+
+        <div
+          id="fourth-col-block"
+          *ngIf="model.pathologyType === pathologyTypeEnum.AorticAneurysm"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2
+            rr-id="tho_m_040448"
+            rrInfoIcon="tho_m_04_08"
+            infoIconPdfLandscape="true"
+          >
+            {{'thoraxMRT.mediastinum.expansion.value' | translate}}
+          </h2>
+          <p rr-id="tho_m_040448">
+            {{'thoraxMRT.mediastinum.maxAxialDiameter.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_040450"
+            labelRrId="tho_m_040451"
+            name="expansionMaxAxialDiameter"
+            rrValidation="expansionMaxAxialDiameter"
+            [(ngModel)]="model.expansionMaxAxialDiameter"
+            [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+            [config]="{labelWidth: 170, min: 1, max: 150, placeholder: '---'}"
+          >
+          </rr-number-input>
+          <p rr-id="tho_m_040452">
+            {{'thoraxMRT.mediastinum.expansionCraniocaudal.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_040453"
+            labelRrId="tho_m_040454"
+            name="expansionCraniocaudalInMm"
+            [(ngModel)]="model.expansionCraniocaudalInMm"
+            [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+            [config]="{labelWidth: 150, min: 1, max: 500, placeholder: '---'}"
+          >
+          </rr-number-input>
+          <p rr-id="tho_m_040455">
+            {{'thoraxMRT.mediastinum.vesselDiameterProximalofThe.value' |
+            translate}}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_040456"
+            labelRrId="tho_m_040457"
+            name="vesselDiameterProximalOfTheAneurysmInMm"
+            [(ngModel)]="model.vesselDiameterProximalOfTheAneurysmInMm"
+            [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+            [config]="{labelWidth: 170, min: 1, max: 150, placeholder: '---'}"
+          >
+          </rr-number-input>
+
+          <h2 rr-id="tho_m_040458">
+            {{'thoraxMRT.mediastinum.details.value' | translate}}
+          </h2>
+          <p-checkbox
+            rr-id="tho_m_040459"
+            name="isEccentricPartialThrombosis"
+            binary="true"
+            [(ngModel)]="model.isEccentricPartialThrombosis"
+            label="{{'thoraxMRT.mediastinum.eccentricPartialThrombosis.value' | translate}}"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 f-vertical f-start c-pad-l o-radio-list">
+        <div
+          *ngIf="model.pathologyType === pathologyTypeEnum.AorticAneurysm"
+          class="f-vertical f-start o-radio-list"
+        >
+          <h2 rr-id="tho_m_040524">
+            {{'thoraxMRT.mediastinum.progressMonitoring.value' | translate}}
+          </h2>
+          <p-radioButton
+            rr-id="tho_m_040525"
+            name="progressMonitoringType"
+            [value]="progressMonitoringTypeEnum.Progression"
+            rrUnClickRadio
+            [(ngModel)]="model.progressMonitoringType"
+            label="{{'thoraxMRT.mediastinum.progression.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040526"
+            name="progressMonitoringType"
+            [value]="progressMonitoringTypeEnum.Stable"
+            rrUnClickRadio
+            [(ngModel)]="model.progressMonitoringType"
+            label="{{'thoraxMRT.mediastinum.stable.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="tho_m_040527"
+            name="progressMonitoringType"
+            [value]="progressMonitoringTypeEnum.Regression"
+            rrUnClickRadio
+            [(ngModel)]="model.progressMonitoringType"
+            label="{{'thoraxMRT.mediastinum.regression.value' | translate}}"
+          ></p-radioButton>
+          <p rr-id="tho_m_040528">
+            {{'thoraxMRT.mediastinum.maxAxialDiameterPreliminaryExamination.value'
+            | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="tho_m_040529"
+            labelRrId="tho_m_040530"
+            name="maxAxialDiameterPreliminaryExaminationInMm"
+            [(ngModel)]="model.maxAxialDiameterPreliminaryExaminationInMm"
+            [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+            [config]="{labelWidth: 170, min: 1, max: 150, placeholder: '---'}"
+          >
+          </rr-number-input>
+
+          <h2 rr-id="tho_m_040531">
+            {{'thoraxMRT.mediastinum.differentialDiagnosis.value' | translate}}
+          </h2>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="1"
+            [options]="ddlW006"
+            [(ngModel)]="model.diagnosisType1"
+            name="diagnosisType1"
+            rrId="tho_m_040532"
+            (selectionChanged)="clearIsSelected()"
+            [parentViewModel]="model"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <div
+            class="f-vertical f-start o-radio-list"
+            [rrDisable]="model.diagnosisType1 === mediastinumDifferentialDiagnosisTypeEnum.None"
+          >
+            <p-checkbox
+              rr-id="tho_m_040533"
+              name="isSuspected"
+              label="{{'thoraxMRT.mediastinum.suspected.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isSuspected"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

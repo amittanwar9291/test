@@ -1,0 +1,505 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep f-start f-vertical">
+    <h2 rr-id="pel_m_100202" class="m-b-27 m-t-3" rrValidation="hipLocalizer">
+      {{ 'pelvisMRT.bones.localization.value' | translate }}*
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+      rrValidation="hipLocalizer"
+      isLocalizer="true"
+    ></rr-hips-small>
+  </div>
+  <div class="c-col-3 c-pad-l f-start f-vertical c-sep col-h-100">
+    <h2 rr-id="pel_m_100301" class="m-b-27 m-t-3">
+      {{ 'pelvisMRT.bones.classification.value' | translate }}
+    </h2>
+    <div class="c-col-3 c-sep f-start f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="pel_m_100302"
+          [rrDisable]="isFemoralHeadFractureChosen()"
+          [(ngModel)]="model.fpfClassificationType"
+          label="{{ 'pelvisMRT.bones.31ATrochantericRegion.value' | translate }}"
+          [value]="fpfClassificationType.TrochantericRegion"
+          name="fpfClassificationType"
+          rrUnClickRadio
+          rrContentReset="pffNotFurtherSpecifiedType column4 column5"
+          rrValidation="fpfClassificationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100303"
+          [(ngModel)]="model.fpfClassificationType"
+          [rrDisable]="isFemoralHeadFractureChosen()"
+          label="{{ 'pelvisMRT.bones.31BFemoralNeckFracture.value' | translate }}"
+          [value]="fpfClassificationType.FemoralNeckFracture"
+          name="fpfClassificationType"
+          rrUnClickRadio
+          rrContentReset="pffNotFurtherSpecifiedType column4 column5"
+          rrValidation="fpfClassificationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100304"
+          [rrDisable]="isFemoralNeckFractureChosen()"
+          [(ngModel)]="model.fpfClassificationType"
+          label="{{ 'pelvisMRT.bones.31CFemoralHeadFracture.value' | translate }}"
+          [value]="fpfClassificationType.FemoralHeadFracture"
+          name="fpfClassificationType"
+          rrUnClickRadio
+          rrContentReset="pffNotFurtherSpecifiedType column4 column5"
+          rrValidation="fpfClassificationType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100305"
+          [(ngModel)]="model.fpfClassificationType"
+          label="{{ 'pelvisMRT.bones.proximalFemoralFractureNot.value' | translate }}"
+          labelStyleClass="text-break"
+          [value]="fpfClassificationType.ProximalFemurFractureNotSpecified"
+          name="fpfClassificationType"
+          rrUnClickRadio
+          rrContentReset="pffNotFurtherSpecifiedType column4 column5"
+          rrValidation="fpfClassificationType"
+        ></p-radioButton>
+        <div
+          id="pffNotFurtherSpecifiedType"
+          class="f-start f-vertical o-radio-list nested-content"
+          [rrDisable]="model.fpfClassificationType !== fpfClassificationType.ProximalFemurFractureNotSpecified"
+        ></div>
+      </div>
+      <div class="c-col-2 c-pad-l f-start f-vertical c-sep col-h-100">
+        <h2
+          *ngIf="isFractureFormAvailable()"
+          rr-id="pel_m_100401"
+          class="m-b-12"
+        >
+          {{ 'pelvisMRT.bones.fractureType.value' | translate }}
+        </h2>
+        <div class="c-col-2 c-sep f-start f-horizontal col-h-100">
+          <div id="column4" class="c-col-1 c-pad-r f-start f-vertical c-sep">
+            <ng-container [ngSwitch]="model.fpfClassificationType">
+              <div
+                *ngSwitchCase="fpfClassificationType.TrochantericRegion"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100402"
+                  [(ngModel)]="model.trochantericRegionFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31A1SimplePertrochanteric.value' | translate }}"
+                  [value]="trochantericRegionFractureFormType.SimplePertrochanteric"
+                  name="trochantericRegionFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100403"
+                  [(ngModel)]="model.trochantericRegionFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31A2MultifragmentaryPertrochanteric.value' | translate }}"
+                  [value]="trochantericRegionFractureFormType.MultifragmentalPertrochanteric"
+                  name="trochantericRegionFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100404"
+                  [(ngModel)]="model.trochantericRegionFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31A3Intertrochanteric.value' | translate }}"
+                  [value]="trochantericRegionFractureFormType.Intertrochanteric"
+                  name="trochantericRegionFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType column5"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="fpfClassificationType.FemoralNeckFracture"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100405"
+                  [(ngModel)]="model.femoralNeckFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31B1Subcapital.value' | translate }}"
+                  [value]="femoralNeckFractureFormType.Subcapital"
+                  name="femoralNeckFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="subcapitalType transcervicalType column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100406"
+                  [(ngModel)]="model.femoralNeckFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31B2Transcervical.value' | translate }}"
+                  [value]="femoralNeckFractureFormType.Transcervical"
+                  name="femoralNeckFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="subcapitalType transcervicalType column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100407"
+                  [(ngModel)]="model.femoralNeckFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31B3Basicervical.value' | translate }}"
+                  [value]="femoralNeckFractureFormType.BaseCervical"
+                  name="femoralNeckFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="subcapitalType transcervicalType column5"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="fpfClassificationType.FemoralHeadFracture"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100408"
+                  [(ngModel)]="model.femoralHeadFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31C1ShearFracture.value' | translate }}"
+                  [value]="femoralHeadFractureFormType.ShearFracture"
+                  name="femoralHeadFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="shearFractureType impressionFractureType column5"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100409"
+                  [(ngModel)]="model.femoralHeadFractureFormType"
+                  label="{{ 'pelvisMRT.bones.31C2DepressionFracture.value' | translate }}"
+                  [value]="femoralHeadFractureFormType.DepressionFracture"
+                  name="femoralHeadFractureFormType"
+                  rrUnClickRadio
+                  rrContentReset="shearFractureType impressionFractureType column5"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="fpfClassificationType.ProximalFemurFractureNotSpecified"
+                class="f-start f-vertical o-radio-list"
+              >
+                <h2 rr-id="pel_m_100410">
+                  {{ 'pelvisMRT.bones.details.value' | translate }}
+                </h2>
+                <p-radioButton
+                  rr-id="pel_m_100411"
+                  [(ngModel)]="model.fpfNotFurtherSpecifiedType"
+                  label="{{ 'pelvisMRT.bones.suspicionOf.value' | translate }}"
+                  [value]="pffNotFurtherSpecifiedType.SuspicionOf"
+                  name="pffNotFurtherSpecifiedType"
+                  rrUnClickRadio
+                  rrContentReset="shearFractureType impressionFractureType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100412"
+                  [(ngModel)]="model.fpfNotFurtherSpecifiedType"
+                  label="{{ 'pelvisMRT.bones.fractureOlderSigns.value' | translate }}"
+                  [value]="pffNotFurtherSpecifiedType.FractureOlderConsolidated"
+                  name="pffNotFurtherSpecifiedType"
+                  rrUnClickRadio
+                  rrContentReset="shearFractureType impressionFractureType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100413"
+                  [(ngModel)]="model.fpfNotFurtherSpecifiedType"
+                  label="{{ 'pelvisMRT.bones.fractureOlderNotConsolidated.value' | translate }}"
+                  [value]="pffNotFurtherSpecifiedType.FractureOlderNotConsolidated"
+                  name="pffNotFurtherSpecifiedType"
+                  rrUnClickRadio
+                  rrContentReset="shearFractureType impressionFractureType intertrochantericType"
+                ></p-radioButton>
+                <div
+                  id="intertrochantericType"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [class.disabled]="model.fpfNotFurtherSpecifiedType !== pffNotFurtherSpecifiedType.FractureOlderNotConsolidated"
+                >
+                  <p-checkbox
+                    name="isPseudarthrosis"
+                    label="{{ 'pelvisMRT.bones.pseudarthrosis.value' | translate }}"
+                    rr-id="pel_m_100414"
+                    binary="true"
+                    [(ngModel)]="model.isPseudarthrosis"
+                  ></p-checkbox>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div
+            id="column5"
+            class="c-col-1 c-sep f-vertical c-pad-l"
+            [class.f-start]="model.fpfClassificationType === fpfClassificationType.TrochantericRegion"
+            [class.f-start]="model.fpfClassificationType === fpfClassificationType.FemoralNeckFracture"
+            [class.f-start]="model.fpfClassificationType === fpfClassificationType.FemoralHeadFracture"
+          >
+            <ng-container [ngSwitch]="model.trochantericRegionFractureFormType">
+              <div
+                *ngSwitchCase="trochantericRegionFractureFormType.SimplePertrochanteric"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100501"
+                  [(ngModel)]="model.simplePertrochantericType"
+                  label="{{ 'pelvisMRT.bones.1A11TrochantericAvulsion.value' | translate }}"
+                  [value]="simplePertrochantericType.TrochantericTear"
+                  name="simplePertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType trochantericRuptureType"
+                ></p-radioButton>
+                <div
+                  id="trochantericRuptureType"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [class.disabled]="model.simplePertrochantericType !== simplePertrochantericType.TrochantericTear"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100502"
+                    [(ngModel)]="model.trochantericRuptureType"
+                    label="{{ 'pelvisMRT.bones.nGreaterTrochanter.value' | translate }}"
+                    [value]="trochantericRuptureType.Major"
+                    name="trochantericRuptureType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100503"
+                    [(ngModel)]="model.trochantericRuptureType"
+                    label="{{ 'pelvisMRT.bones.oLesserTrochanter.value' | translate }}"
+                    [value]="trochantericRuptureType.Minor"
+                    name="trochantericRuptureType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+                <p-radioButton
+                  rr-id="pel_m_100504"
+                  [(ngModel)]="model.simplePertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A122fragmentFracture.value' | translate }}"
+                  [value]="simplePertrochantericType.TwoFragmentFracture"
+                  name="simplePertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType trochantericRuptureType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100505"
+                  [(ngModel)]="model.simplePertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A133fragmentFractureWith.value' | translate }}"
+                  [value]="simplePertrochantericType.ThreeFragmentFractureDetachementTrochanter"
+                  name="simplePertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType trochantericRuptureType"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="trochantericRegionFractureFormType.MultifragmentalPertrochanteric"
+                class="f-start f-vertical o-radio-list text-break"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100506"
+                  [(ngModel)]="model.multiFragmentalPertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A22MultiFragmentIntermediate.value' | translate }}"
+                  [value]="multiFragmentalPertrochantericType.MultipleFragmentSingleIntermediateFragment"
+                  name="multiFragmentalPertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100507"
+                  [(ngModel)]="model.multiFragmentalPertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A23MultifragmentIntermediateFragments.value' | translate }}"
+                  [value]="multiFragmentalPertrochantericType.MultipleFragmentTwoMoreIntermediateFragments"
+                  name="multiFragmentalPertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="trochantericRegionFractureFormType.Intertrochanteric"
+                class="f-start f-vertical o-radio-list"
+                id="IntertrochantericBlock"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100508"
+                  [(ngModel)]="model.intertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A31SimpleObliqueFracture.value' | translate }}"
+                  [value]="intertrochantericType.SimpleObliqueFracture"
+                  name="intertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100509"
+                  [(ngModel)]="model.intertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A32SimpleTransverseFracture.value' | translate }}"
+                  [value]="intertrochantericType.SimpleTransverseFracture"
+                  name="intertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100510"
+                  [(ngModel)]="model.intertrochantericType"
+                  label="{{ 'pelvisMRT.bones.31A33WedgemultifragmentaryFracture.value' | translate }}"
+                  [value]="intertrochantericType.WedgemultipleFracture"
+                  name="intertrochantericType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+              </div>
+            </ng-container>
+            <ng-container [ngSwitch]="model.femoralNeckFractureFormType">
+              <div
+                *ngSwitchCase="femoralNeckFractureFormType.Subcapital"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100511"
+                  [(ngModel)]="model.subcapitalType"
+                  label="{{ 'pelvisMRT.bones.31B11ImpactedValgusFracture.value' | translate }}"
+                  [value]="subcapitalType.ValgusImpactedFracture"
+                  name="subcapitalType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100512"
+                  [(ngModel)]="model.subcapitalType"
+                  label="{{ 'pelvisMRT.bones.31B12NondisplacedFracture.value' | translate }}"
+                  [value]="subcapitalType.NonDisplacedFracture"
+                  name="subcapitalType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100513"
+                  [(ngModel)]="model.subcapitalType"
+                  label="{{ 'pelvisMRT.bones.31B13DisplacedFracture.value' | translate }}"
+                  [value]="subcapitalType.DisplacedFracture"
+                  name="subcapitalType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="femoralNeckFractureFormType.Transcervical"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100514"
+                  [(ngModel)]="model.transcervicalType"
+                  label="{{ 'pelvisMRT.bones.31B21SimpleFracture.value' | translate }}"
+                  [value]="transcervicalType.SimpleFracture"
+                  name="transcervicalType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType shearFractureAngleType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100515"
+                  [(ngModel)]="model.transcervicalType"
+                  label="{{ 'pelvisMRT.bones.31B22MultifragmentaryFracture.value' | translate }}"
+                  [value]="transcervicalType.MultipleFracture"
+                  name="transcervicalType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType shearFractureAngleType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100516"
+                  [(ngModel)]="model.transcervicalType"
+                  label="{{ 'pelvisMRT.bones.31B23ShearFracture.value' | translate }}"
+                  [value]="transcervicalType.ShearFracture"
+                  name="transcervicalType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType shearFractureAngleType"
+                ></p-radioButton>
+                <div
+                  id="shearFractureAngleType"
+                  class="f-start f-vertical o-radio-list nested-content"
+                  [rrDisable]="model.transcervicalType === transcervicalType.None"
+                >
+                  <p-radioButton
+                    rr-id="pel_m_100517"
+                    [(ngModel)]="model.shearFractureAngleType"
+                    label="{{ 'pelvisMRT.bones.pPauwelsAngleAbduction.value' | translate }}"
+                    [value]="shearFractureAngleType.PPauwelsAngle"
+                    name="shearFractureAngleType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100518"
+                    [(ngModel)]="model.shearFractureAngleType"
+                    label="{{ 'pelvisMRT.bones.qPauwels2angleAdduction.value' | translate }}"
+                    [value]="shearFractureAngleType.QPauwelsAngle"
+                    name="shearFractureAngleType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="pel_m_100519"
+                    [(ngModel)]="model.shearFractureAngleType"
+                    label="{{ 'pelvisMRT.bones.rPauwelsAngleShear.value' | translate }}"
+                    [value]="shearFractureAngleType.RPauwelsAngle"
+                    name="shearFractureAngleType"
+                    rrUnClickRadio
+                  ></p-radioButton>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container [ngSwitch]="model.femoralHeadFractureFormType">
+              <div
+                *ngSwitchCase="femoralHeadFractureFormType.ShearFracture"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100520"
+                  [(ngModel)]="model.shearFractureType"
+                  label="{{ 'pelvisMRT.bones.31C11AvulsionFractureOf.value' | translate }}"
+                  [value]="shearFractureType.AvulsionFractureLigamentumCapitisFemoris"
+                  name="shearFractureType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100521"
+                  [(ngModel)]="model.shearFractureType"
+                  label="{{ 'pelvisMRT.bones.31C12BonyAvulsionOf.value' | translate }}"
+                  [value]="shearFractureType.BonyAvulsionCaudalFractureFoveaCapitisFemoris"
+                  name="shearFractureType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100522"
+                  [(ngModel)]="model.shearFractureType"
+                  label="{{ 'pelvisMRT.bones.31C13BonyAvulsionOf.value' | translate }}"
+                  [value]="shearFractureType.BonyAvulsionCranialFractureFoveaCapitisFemoris"
+                  name="shearFractureType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+              </div>
+              <div
+                *ngSwitchCase="femoralHeadFractureFormType.DepressionFracture"
+                class="f-start f-vertical o-radio-list"
+              >
+                <p-radioButton
+                  rr-id="pel_m_100523"
+                  [(ngModel)]="model.impressionFractureType"
+                  label="{{ 'pelvisMRT.bones.31C21ChondralLesion.value' | translate }}"
+                  [value]="depressionFractureType.ChondralLesion"
+                  name="depressionFractureType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100524"
+                  [(ngModel)]="model.impressionFractureType"
+                  label="{{ 'pelvisMRT.bones.31C22DepressionFracture.value' | translate }}"
+                  [value]="depressionFractureType.DepressionFracture"
+                  name="depressionFractureType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="pel_m_100525"
+                  [(ngModel)]="model.impressionFractureType"
+                  label="{{ 'pelvisMRT.bones.31C23DepressionFractureWith.value' | translate }}"
+                  [value]="depressionFractureType.DepressionFractureHeadSplit"
+                  name="depressionFractureType"
+                  rrUnClickRadio
+                  rrContentReset="simplePertrochantericType trochantericRuptureType multiFragmentalPertrochantericType intertrochantericType"
+                ></p-radioButton>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

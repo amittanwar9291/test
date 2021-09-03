@@ -1,0 +1,169 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list f-vertical">
+      <h2 rr-id="hea_c_0902104">
+        {{ "headCT.cerebrospinalFluidSpace.extension.value" | translate}}
+      </h2>
+      <p rr-id="hea_c_0902105" class="m-b-0">
+        {{ "headCT.cerebrospinalFluidSpace.size.value" | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="hea_c_0902106"
+        labelRrId="hea_c_0902107"
+        name="size"
+        [(ngModel)]="model.size"
+        [label]="'headCT.cerebrospinalFluidSpace.inMm.value' | translate"
+        (announceModelChange)="resetSecondAndThirdPlane()"
+        [config]="{ min: 1, max: 99}"
+      >
+      </rr-number-input>
+      <div [rrDisable]="!model.size">
+        <p rr-id="hea_c_0902108">
+          {{ "headCT.cerebrospinalFluidSpace.secondPlane.value" | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="hea_c_0902109"
+          labelRrId="hea_c_0902110"
+          name="secondPlane"
+          [(ngModel)]="model.secondPlane"
+          [label]="'headCT.cerebrospinalFluidSpace.inMm.value' | translate"
+          (announceModelChange)="resetThirdPlane()"
+          [config]="{ min: 1, max: 99}"
+        >
+        </rr-number-input>
+      </div>
+      <div [rrDisable]="!model.secondPlane">
+        <p rr-id="hea_c_0902111">
+          {{ "headCT.cerebrospinalFluidSpace.thirdPlane.value" | translate}}
+        </p>
+        <rr-number-input
+          inputRrId="hea_c_0902112"
+          labelRrId="hea_c_0902113"
+          name="thirdPlane"
+          [(ngModel)]="model.thirdPlane"
+          [label]="'headCT.cerebrospinalFluidSpace.inMm.value' | translate"
+          [config]="{ min: 1, max: 99}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10">
+      <h2 rr-id="hea_c_0903118" class="m-b-10">
+        {{ "headCT.cerebrospinalFluidSpace.densityNonEnhanced.value" |
+        translate}}
+      </h2>
+      <p rr-id="hea_c_0903119">
+        {{ "headCT.cerebrospinalFluidSpace.quantitative.value" | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="hea_c_0903120"
+        labelRrId="hea_c_0903121"
+        name="quantitative"
+        [(ngModel)]="model.quantitative"
+        [label]="'headCT.cerebrospinalFluidSpace.inHU.value' | translate"
+        [config]="{ min: -1024, max: 3071, placeholder: '----'}"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_c_090447">
+        {{ "headCT.cerebrospinalFluidSpace.associatedFindings.value" |
+        translate}}
+      </h2>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.vasospasm.value' | translate}}"
+        rr-id="hea_c_090448"
+        binary="true"
+        name="isVasospasm"
+        [(ngModel)]="model.isVasospasm"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.ischemia.value' | translate}}"
+        rr-id="hea_c_090449"
+        binary="true"
+        name="isIschemia"
+        [(ngModel)]="model.isIschemia"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.subduralHematoma.value' | translate}}"
+        rr-id="hea_c_090450"
+        binary="true"
+        name="isSubduralHematoma"
+        [(ngModel)]="model.isSubduralHematoma"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'headCT.cerebrospinalFluidSpace.epiduralHematoma.value' | translate}}"
+        rr-id="hea_c_090451"
+        binary="true"
+        name="isEpiduralHematoma"
+        [(ngModel)]="model.isEpiduralHematoma"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_c_090578">
+        {{ "headCT.cerebrospinalFluidSpace.modifiedFisherScale.value" |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_090579"
+        label="{{'headCT.cerebrospinalFluidSpace.grade0NoSubarachnoidOrIntraventricularHemorrhage.value' | translate}}"
+        name="fisherScaleType"
+        labelStyleClass="text-break"
+        [value]="fisherScaleTypeEnum.Grade0"
+        [(ngModel)]="model.fisherScaleType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_090580"
+        label="{{'headCT.cerebrospinalFluidSpace.grade1FocalOrDiffuseSAHThickness.value' | translate}}"
+        name="fisherScaleType"
+        labelStyleClass="text-break"
+        [value]="fisherScaleTypeEnum.Grade1"
+        [(ngModel)]="model.fisherScaleType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_090581"
+        label="{{'headCT.cerebrospinalFluidSpace.grade2FocalOrDiffuseSAHThickness.value' | translate}}"
+        name="fisherScaleType"
+        labelStyleClass="text-break"
+        [value]="fisherScaleTypeEnum.Grade2"
+        [(ngModel)]="model.fisherScaleType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_090582"
+        label="{{'headCT.cerebrospinalFluidSpace.grade3FocalOrDiffuseSAHThickness.value' | translate}}"
+        name="fisherScaleType"
+        labelStyleClass="text-break"
+        [value]="fisherScaleTypeEnum.Grade3"
+        [(ngModel)]="model.fisherScaleType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_090583"
+        label="{{'headCT.cerebrospinalFluidSpace.grade4FocalOrDiffuseSAHThickness.value' | translate}}"
+        name="fisherScaleType"
+        labelStyleClass="text-break"
+        [value]="fisherScaleTypeEnum.Grade4"
+        [(ngModel)]="model.fisherScaleType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</div>

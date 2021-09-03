@@ -1,0 +1,498 @@
+<div class="f-horizontal height-100 nerve-compression-column m-t-88">
+  <div class="c-col-1 c-sep c-pad-r o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="han_m_070202">
+        {{'handMRT.nerveCompression.morphology.value' | translate}}
+      </h2>
+      <div class="o-radio-list text-break">
+        <p-checkbox
+          label="{{'handMRT.nerveCompression.distalFlatteningOfThe.value' | translate}}"
+          binary="true"
+          rr-id="han_m_070203"
+          name="isDistalFlatteningOfTheMedianNerve"
+          [(ngModel)]="model.isDistalFlatteningOfTheMedianNerve"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'handMRT.nerveCompression.protrusionOfTheTransverse.value' | translate}}"
+          binary="true"
+          rr-id="han_m_070204"
+          name="isProminenceOfTheLigCarpiTransversum"
+          [(ngModel)]="model.isProminenceOfTheLigCarpiTransversum"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'handMRT.nerveCompression.carpalTunnelEffusion.value' | translate}}"
+          binary="true"
+          rr-id="han_m_070205"
+          name="isCarpalTunnelEffusion"
+          [(ngModel)]="model.isCarpalTunnelEffusion"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'handMRT.nerveCompression.thickeningOfTendonSheaths.value' | translate}}"
+          binary="true"
+          rr-id="han_m_070206"
+          name="isThickeningOfTendonSheaths"
+          [(ngModel)]="model.isThickeningOfTendonSheaths"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'handMRT.nerveCompression.increasedT2wSignal.value' | translate}}"
+          binary="true"
+          rr-id="han_m_070207"
+          name="isIncreasedT2wSignal"
+          [(ngModel)]="model.isIncreasedT2wSignal"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'handMRT.nerveCompression.palmarProlapseOfThe.value' | translate}}"
+          binary="true"
+          rr-id="han_m_070208"
+          name="isProlapseOfFlexorTendons"
+          [(ngModel)]="model.isProlapseOfFlexorTendons"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad o-radio-list">
+    <h2 rr-id="han_m_070301">
+      {{'handMRT.nerveCompression.pathogenesis.value' | translate}}
+    </h2>
+    <div class="o-radio-list">
+      <p-radioButton
+        rr-id="han_m_070302"
+        label="{{'handMRT.nerveCompression.chronicIdiopatic.value' | translate}}"
+        name="pathogenesisType"
+        [value]="pathogenesisType.ChronicallyIdiopatic"
+        [(ngModel)]="model.pathogenesisType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="han_m_070303"
+        label="{{'handMRT.nerveCompression.secondary.value' | translate}}"
+        name="pathogenesisType"
+        [value]="pathogenesisType.Secondary"
+        [(ngModel)]="model.pathogenesisType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      *ngIf="model.pathogenesisType === pathogenesisType.Secondary"
+      class="o-radio-list f-vertical p-l-35 m-t-20"
+    >
+      <p-radioButton
+        rr-id="han_m_070304"
+        label="{{'handMRT.nerveCompression.osseousOrigin.value' | translate}}"
+        name="secondaryPathogenesisDetailsType"
+        [value]="secondaryPathogenesisDetailsType.OsseousOrigin"
+        [(ngModel)]="model.secondaryPathogenesisDetailsType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_070305"
+        label="{{'handMRT.nerveCompression.synovialOrigin.value' | translate}}"
+        name="secondaryPathogenesisDetailsType"
+        [value]="secondaryPathogenesisDetailsType.SynovialOrigin"
+        [(ngModel)]="model.secondaryPathogenesisDetailsType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_070306"
+        label="{{'handMRT.nerveCompression.neurogenevascularOrigin.value' | translate}}"
+        name="secondaryPathogenesisDetailsType"
+        [value]="secondaryPathogenesisDetailsType.NeurogenicvascularOrigin"
+        [(ngModel)]="model.secondaryPathogenesisDetailsType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_070307"
+        label="{{'handMRT.nerveCompression.softTissueMass.value' | translate}}"
+        name="secondaryPathogenesisDetailsType"
+        [value]="secondaryPathogenesisDetailsType.SoftTissueMass"
+        [(ngModel)]="model.secondaryPathogenesisDetailsType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="han_m_070308"
+        label="{{'handMRT.nerveCompression.postoperative.value' | translate}}"
+        name="secondaryPathogenesisDetailsType"
+        [value]="secondaryPathogenesisDetailsType.Postoperative"
+        [(ngModel)]="model.secondaryPathogenesisDetailsType"
+        rrUnClickRadio
+        (onClick)="clearSecondaryDetails()"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <ng-container
+    *ngIf="model.secondaryPathogenesisDetailsType === secondaryPathogenesisDetailsType.None"
+  >
+    <div class="c-col-1 c-sep-l c-pad"></div>
+    <div class="c-col-1 c-sep-l c-pad-l m-t-50"></div>
+  </ng-container>
+
+  <ng-container
+    *ngIf="model.secondaryPathogenesisDetailsType !== secondaryPathogenesisDetailsType.None"
+  >
+    <div class="f-horizontal height-100">
+      <div class="c-col-2 c-pad-l c-sep-l f-vertical f-start h-446 m-t-111">
+        <div class="f-horizontal col-h-100">
+          <ng-container
+            *ngIf="model.secondaryPathogenesisDetailsType === secondaryPathogenesisDetailsType.OsseousOrigin"
+          >
+            <div class="c-col-1 c-sep c-pad-r o-list">
+              <div class="o-list f-vertical">
+                <h2
+                  rr-id="han_m_070401"
+                  class="m-t-7 m-b-15"
+                  rrInfoIcon="han_m_07_01"
+                >
+                  {{'handMRT.nerveCompression.affectedOsseousStructure.value' |
+                  translate}}
+                </h2>
+                <div class="o-radio-list">
+                  <p-checkbox
+                    label="{{'handMRT.nerveCompression.osTrapezium.value' | translate}}"
+                    binary="true"
+                    rr-id="han_m_070402"
+                    name="isOsTrapezium"
+                    [(ngModel)]="model.isOsTrapezium"
+                    rrValidation="isOsTrapezium isOsTrapezoid isOsCapitatum isOsHamatum"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    label="{{'handMRT.nerveCompression.osTrapezoid.value' | translate}}"
+                    binary="true"
+                    rr-id="han_m_070403"
+                    name="isOsTrapezoid"
+                    [(ngModel)]="model.isOsTrapezoid"
+                    rrValidation="isOsTrapezium isOsTrapezoid isOsCapitatum isOsHamatum"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    label="{{'handMRT.nerveCompression.osCapitatum.value' | translate}}"
+                    binary="true"
+                    rr-id="han_m_070404"
+                    name="isOsCapitatum"
+                    [(ngModel)]="model.isOsCapitatum"
+                    rrValidation="isOsTrapezium isOsTrapezoid isOsCapitatum isOsHamatum"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    label="{{'handMRT.nerveCompression.osHamatum.value' | translate}}"
+                    binary="true"
+                    rr-id="han_m_070405"
+                    name="isOsHamatum"
+                    [(ngModel)]="model.isOsHamatum"
+                    rrValidation="isOsTrapezium isOsTrapezoid isOsCapitatum isOsHamatum"
+                  >
+                  </p-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l o-list">
+              <div class="o-radio-list m-t-7">
+                <p-radioButton
+                  rr-id="han_m_070501"
+                  label="{{'handMRT.nerveCompression.fracture.value' | translate}}"
+                  name="osseousCauseType"
+                  [value]="osseousCauseType.Fracture"
+                  [(ngModel)]="model.osseousCauseType"
+                  rrUnClickRadio
+                  rrContentReset="degenerationBlock"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070502"
+                  label="{{'handMRT.nerveCompression.dislocation.value' | translate}}"
+                  name="osseousCauseType"
+                  [value]="osseousCauseType.Dislocation"
+                  [(ngModel)]="model.osseousCauseType"
+                  rrUnClickRadio
+                  rrContentReset="degenerationBlock"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070503"
+                  label="{{'handMRT.nerveCompression.degeneration.value' | translate}}"
+                  name="osseousCauseType"
+                  [value]="osseousCauseType.Degeneration"
+                  [(ngModel)]="model.osseousCauseType"
+                  rrUnClickRadio
+                  rrContentReset="degenerationBlock"
+                >
+                </p-radioButton>
+                <div
+                  class="nested-content"
+                  id="degenerationBlock"
+                  [rrDisable]="model.osseousCauseType !== osseousCauseType.Degeneration"
+                >
+                  <p-checkbox
+                    label="{{'handMRT.nerveCompression.hypertrophicOsteophytes.value' | translate}}"
+                    binary="true"
+                    rr-id="han_m_070504"
+                    name="isHypertrophicOsteophytes"
+                    [(ngModel)]="model.isHypertrophicOsteophytes"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-radioButton
+                  rr-id="han_m_070505"
+                  label="{{'handMRT.nerveCompression.tumor.value' | translate}}"
+                  name="osseousCauseType"
+                  [value]="osseousCauseType.Tumor"
+                  [(ngModel)]="model.osseousCauseType"
+                  rrUnClickRadio
+                  rrContentReset="degenerationBlock"
+                >
+                </p-radioButton>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="model.secondaryPathogenesisDetailsType === secondaryPathogenesisDetailsType.SynovialOrigin"
+          >
+            <div class="c-col-1 c-sep c-pad-r o-list">
+              <div class="o-radio-list m-t-7">
+                <p-radioButton
+                  rr-id="han_m_070406"
+                  label="{{'handMRT.nerveCompression.ganglionCyst.value' | translate}}"
+                  name="synovialOriginType"
+                  [value]="synovialOriginType.Ganglion"
+                  [(ngModel)]="model.synovialOriginType"
+                  rrUnClickRadio
+                  rrContentReset="ganglionBlock"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070407"
+                  label="{{'handMRT.nerveCompression.tenosynovitis.value' | translate}}"
+                  name="synovialOriginType"
+                  [value]="synovialOriginType.Tenosynovitis"
+                  [(ngModel)]="model.synovialOriginType"
+                  rrUnClickRadio
+                  rrContentReset="ganglionBlock"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070408"
+                  label="{{'handMRT.nerveCompression.tenosynovialosis.value' | translate}}"
+                  name="synovialOriginType"
+                  [value]="synovialOriginType.Tenosynovialosis"
+                  [(ngModel)]="model.synovialOriginType"
+                  rrUnClickRadio
+                  rrContentReset="ganglionBlock"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070409"
+                  label="{{'handMRT.nerveCompression.tenosynovialGiantCellTumor.value' | translate}}"
+                  name="synovialOriginType"
+                  [value]="synovialOriginType.GiantCellTumor"
+                  [(ngModel)]="model.synovialOriginType"
+                  rrUnClickRadio
+                  rrContentReset="ganglionBlock"
+                >
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l o-list">
+              <div
+                class="o-radio-list m-t-7"
+                id="ganglionBlock"
+                *ngIf="model.synovialOriginType === synovialOriginType.Ganglion"
+              >
+                <div>
+                  <p rr-id="han_m_070506" class="m-b-0">
+                    {{'handMRT.nerveCompression.maxDiameter.value' | translate}}
+                  </p>
+                  <div class="f-start f-horizontal">
+                    <rr-number-input
+                      inputRrId="han_m_070507"
+                      labelRrId="han_m_070508"
+                      name="maxDiameter"
+                      class="text-break"
+                      [label]="'handMRT.nerveCompression.inMm.value' | translate"
+                      [config]="{min: 1, max: 80, labelWidth: 200}"
+                      [(ngModel)]="model.maxDiameter"
+                      (ngModelChange)="resetInputs()"
+                    >
+                    </rr-number-input>
+                  </div>
+                </div>
+
+                <div [rrDisable]="model.maxDiameter === null">
+                  <p rr-id="han_m_070509" class="m-b-0">
+                    {{'handMRT.nerveCompression.2ndPlane.value' | translate}}
+                  </p>
+                  <div class="f-start f-horizontal">
+                    <rr-number-input
+                      inputRrId="han_m_070510"
+                      labelRrId="han_m_070511"
+                      name="secondLevel"
+                      class="text-break"
+                      [label]="'handMRT.nerveCompression.inMm.value' | translate"
+                      [config]="{min: 1, max: 80, labelWidth: 200}"
+                      [(ngModel)]="model.secondLevel"
+                      (ngModelChange)="resetInputs()"
+                    >
+                    </rr-number-input>
+                  </div>
+                </div>
+
+                <div [rrDisable]="model.secondLevel === null">
+                  <p rr-id="han_m_070512" class="m-b-0">
+                    {{'handMRT.nerveCompression.3rdPlane.value' | translate}}
+                  </p>
+                  <div class="f-start f-horizontal">
+                    <rr-number-input
+                      inputRrId="han_m_070513"
+                      labelRrId="han_m_070514"
+                      name="thirdLevel"
+                      class="text-break"
+                      [label]="'handMRT.nerveCompression.inMm.value' | translate"
+                      [config]="{min: 1, max: 80, labelWidth: 200}"
+                      [(ngModel)]="model.thirdLevel"
+                    >
+                    </rr-number-input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="model.secondaryPathogenesisDetailsType === secondaryPathogenesisDetailsType.NeurogenicvascularOrigin"
+          >
+            <div class="c-col-1 c-sep c-pad-r o-list">
+              <div class="o-radio-list m-t-7">
+                <p-radioButton
+                  rr-id="han_m_070410"
+                  label="{{'handMRT.nerveCompression.softTissueTumor.value' | translate}}"
+                  name="neurogeneOriginType"
+                  [value]="neurogeneOriginType.SoftTissueTumor"
+                  [(ngModel)]="model.neurogeneOriginType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070411"
+                  label="{{'handMRT.nerveCompression.normalVariantOfMedian.value' | translate}}"
+                  name="neurogeneOriginType"
+                  [value]="neurogeneOriginType.NormalVariantArtery"
+                  [(ngModel)]="model.neurogeneOriginType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l o-list"></div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="model.secondaryPathogenesisDetailsType === secondaryPathogenesisDetailsType.SoftTissueMass"
+          >
+            <div class="c-col-1 c-sep c-pad-r o-list">
+              <div class="o-radio-list m-t-7">
+                <p-radioButton
+                  rr-id="han_m_070412"
+                  label="{{'handMRT.nerveCompression.calcification.value' | translate}}"
+                  name="softTissueSpaceRequirementType"
+                  [value]="softTissueOriginType.Calcification"
+                  [(ngModel)]="model.softTissueSpaceRequirementType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070413"
+                  label="{{'handMRT.nerveCompression.softTissueTumor.value' | translate}}"
+                  name="softTissueSpaceRequirementType"
+                  [value]="softTissueOriginType.Tumor"
+                  [(ngModel)]="model.softTissueSpaceRequirementType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070414"
+                  label="{{'handMRT.nerveCompression.lipomatosis.value' | translate}}"
+                  name="softTissueSpaceRequirementType"
+                  [value]="softTissueOriginType.Lipomastosis"
+                  [(ngModel)]="model.softTissueSpaceRequirementType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l o-list"></div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="model.secondaryPathogenesisDetailsType === secondaryPathogenesisDetailsType.Postoperative"
+          >
+            <div class="c-col-1 c-sep c-pad-r o-list">
+              <div class="o-radio-list m-t-7">
+                <p-radioButton
+                  rr-id="han_m_070415"
+                  label="{{'handMRT.nerveCompression.incompletelySplitRetinaculum.value' | translate}}"
+                  name="postoperativePathogenesisDetailsType"
+                  [value]="postoperativePathogenesisDetailsType.IncompletelySplit"
+                  [(ngModel)]="model.postoperativePathogenesisDetailsType"
+                  rrUnClickRadio
+                  rrContentReset="nerveInjuryBlock"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="han_m_070416"
+                  label="{{'handMRT.nerveCompression.nerveInjuryInThe.value' | translate}}"
+                  name="postoperativePathogenesisDetailsType"
+                  [value]="postoperativePathogenesisDetailsType.NerveInjury"
+                  [(ngModel)]="model.postoperativePathogenesisDetailsType"
+                  rrUnClickRadio
+                  rrContentReset="nerveInjuryBlock"
+                >
+                </p-radioButton>
+                <div
+                  class="nested-content"
+                  id="nerveInjuryBlock"
+                  [rrDisable]="model.postoperativePathogenesisDetailsType !== postoperativePathogenesisDetailsType.NerveInjury"
+                >
+                  <p-checkbox
+                    label="{{'handMRT.nerveCompression.completeCut.value' | translate}}"
+                    binary="true"
+                    rr-id="han_m_070417"
+                    name="isCompleteCut"
+                    [(ngModel)]="model.isCompleteCut"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-radioButton
+                  rr-id="han_m_070418"
+                  label="{{'handMRT.nerveCompression.perineuralFibrosisOfThe.value' | translate}}"
+                  name="postoperativePathogenesisDetailsType"
+                  [value]="postoperativePathogenesisDetailsType.PerineuralFibrosis"
+                  [(ngModel)]="model.postoperativePathogenesisDetailsType"
+                  rrUnClickRadio
+                  rrContentReset="nerveInjuryBlock"
+                >
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l o-list"></div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

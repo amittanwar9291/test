@@ -1,0 +1,1304 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="f-vertical c-sep">
+      <div class="c-pad ">
+        <h1 rr-id="hea_m_020103">
+          {{ "headMRT.anamnesis.indication.value" | translate }}
+        </h1>
+        <img
+          class="m-t-15"
+          rr-id="hea_m_020104"
+          src="assets/img/headMRT/icons/person.svg"
+          alt="person"
+        />
+      </div>
+      <div class="col-h-100 f-horizontal m-t-47">
+        <div class="c-col-1 c-pad c-sep f-vertical p-l-3">
+          <rr-finding-column
+            [handler]="clinicHandler"
+            [setConfig]="clinicDropdownConfig"
+            [disabled]="false"
+            [attr.name]="'findingHandlerComponent'"
+            validationName="clinicalSymptomFindings"
+          >
+          </rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Headache])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020201">
+              {{ "headMRT.anamnesis.headache.value" | translate }}
+            </h2>
+            <p rr-id="hea_m_020202">
+              {{ "headMRT.anamnesis.side.value" | translate }}
+            </p>
+            <p-checkbox
+              name="isRight"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+              rr-id="hea_m_020203"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isRight"
+            ></p-checkbox>
+            <p-checkbox
+              name="isLeft"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+              rr-id="hea_m_020204"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isLeft"
+            ></p-checkbox>
+            <p rr-id="hea_m_020205" class="p-t-15">
+              {{ "headMRT.anamnesis.characterization.value" | translate }}
+            </p>
+            <p-radioButton
+              rr-id="hea_m_020206"
+              label="{{ 'headMRT.anamnesis.acute.value' | translate }}"
+              name="characterizationType"
+              [value]="characterizationTypeEnum.Acute"
+              [(ngModel)]="clinicHandler.currentItem.characterizationType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020207"
+              label="{{ 'headMRT.anamnesis.chronic.value' | translate }}"
+              name="characterizationType"
+              [value]="characterizationTypeEnum.Chronic"
+              [(ngModel)]="clinicHandler.currentItem.characterizationType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Vertigo])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020208">
+              {{ "headMRT.anamnesis.vertigo.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020209"
+              label="{{
+                'headMRT.anamnesis.nonSpecificVertigo.value' | translate
+              }}"
+              name="vertigoType"
+              [value]="vertigoTypeEnum.NonSpecificVertigo"
+              [(ngModel)]="clinicHandler.currentItem.vertigoType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020210"
+              label="{{ 'headMRT.anamnesis.rotaryVertigo.value' | translate }}"
+              name="vertigoType"
+              [value]="vertigoTypeEnum.RotaryVertigo"
+              [(ngModel)]="clinicHandler.currentItem.vertigoType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020211"
+              label="{{
+                'headMRT.anamnesis.staggeringVertigo.value' | translate
+              }}"
+              name="vertigoType"
+              [value]="vertigoTypeEnum.StaggeringVertigo"
+              [(ngModel)]="clinicHandler.currentItem.vertigoType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020212"
+              label="{{
+                'headMRT.anamnesis.positionalVertigo.value' | translate
+              }}"
+              name="vertigoType"
+              [value]="vertigoTypeEnum.PositionalVertigo"
+              [(ngModel)]="clinicHandler.currentItem.vertigoType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020213"
+              label="{{ 'headMRT.anamnesis.centralVertigo.value' | translate }}"
+              name="vertigoType"
+              [value]="vertigoTypeEnum.CentralVertigo"
+              [(ngModel)]="clinicHandler.currentItem.vertigoType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.VisualDisturbances])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020214">
+              {{ "headMRT.anamnesis.visualDisturbances.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020215"
+              label="{{
+                'headMRT.anamnesis.visualFieldLoss.value' | translate
+              }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.VisualFieldLoss"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020216"
+              label="{{
+                'headMRT.anamnesis.bitemporalHemianopsia.value' | translate
+              }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.BitemporalHemianopsia"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020217"
+              label="{{
+                'headMRT.anamnesis.homonymousHemianopsia.value' | translate
+              }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.HomonymousHemianopsia"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020218"
+              label="{{
+                'headMRT.anamnesis.corticalBlindness.value' | translate
+              }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.CorticalBlindness"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020219"
+              label="{{ 'headMRT.anamnesis.diplopia.value' | translate }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.Diplopia"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020220"
+              label="{{
+                'headMRT.anamnesis.visualAcuityLoss.value' | translate
+              }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.VisualAcuityLoss"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020221"
+              label="{{ 'headMRT.anamnesis.blurredVision.value' | translate }}"
+              name="visualDisturbanceType"
+              [value]="visualDisturbanceTypeEnum.BlurredVision"
+              [(ngModel)]="clinicHandler.currentItem.visualDisturbanceType"
+              rrUnClickRadio
+              rrContentReset="visualDisturbancesSide"
+            >
+            </p-radioButton>
+            <div
+              class="nested-content m-t-15 o-radio-list"
+              [rrDisable]="!disableVisualDisturbancesSideCondition()"
+              id="visualDisturbancesSide"
+            >
+              <p rr-id="hea_m_0202117">
+                {{ 'headMRT.anamnesis.side.value' | translate }}
+              </p>
+              <p-checkbox
+                name="isRight"
+                label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+                rr-id="hea_m_0202118"
+                binary="true"
+                [(ngModel)]="clinicHandler.currentItem.isRight"
+              ></p-checkbox>
+              <p-checkbox
+                name="isLeft"
+                label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+                rr-id="hea_m_0202119"
+                binary="true"
+                [(ngModel)]="clinicHandler.currentItem.isLeft"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.CognitiveChanges])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020222">
+              {{ "headMRT.anamnesis.cognitiveChanges.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020223"
+              label="{{
+                'headMRT.anamnesis.impairedConcentration.value' | translate
+              }}"
+              name="cognitiveChangeType"
+              [value]="cognitiveChangeTypeEnum.ImpairedConcentration"
+              [(ngModel)]="clinicHandler.currentItem.cognitiveChangeType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020224"
+              label="{{
+                'headMRT.anamnesis.lossOfShorttermMemory.value' | translate
+              }}"
+              name="cognitiveChangeType"
+              [value]="cognitiveChangeTypeEnum.LossOfShortTermMemory"
+              [(ngModel)]="clinicHandler.currentItem.cognitiveChangeType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020225"
+              label="{{
+                'headMRT.anamnesis.lossOfLongtermMemory.value' | translate
+              }}"
+              name="cognitiveChangeType"
+              [value]="cognitiveChangeTypeEnum.LossOfLongTermMemory"
+              [(ngModel)]="clinicHandler.currentItem.cognitiveChangeType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020226"
+              label="{{
+                'headMRT.anamnesis.memoryImpairment.value' | translate
+              }}"
+              name="cognitiveChangeType"
+              [value]="cognitiveChangeTypeEnum.MemoryImpairment"
+              [(ngModel)]="clinicHandler.currentItem.cognitiveChangeType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="
+              isClinicFindingType([clinicTypeEnum.DisordersOfConsciousness])
+            "
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020227">
+              {{ "headMRT.anamnesis.disordersOfConsciousness.value" | translate
+              }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020228"
+              label="{{ 'headMRT.anamnesis.somnolence.value' | translate }}"
+              name="disorderOfConsciousnessType"
+              [value]="disorderOfConsciousnessTypeEnum.Somnolence"
+              [(ngModel)]="
+                clinicHandler.currentItem.disorderOfConsciousnessType
+              "
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020229"
+              label="{{ 'headMRT.anamnesis.sopor.value' | translate }}"
+              name="disorderOfConsciousnessType"
+              [value]="disorderOfConsciousnessTypeEnum.Sopor"
+              [(ngModel)]="
+                clinicHandler.currentItem.disorderOfConsciousnessType
+              "
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020230"
+              label="{{ 'headMRT.anamnesis.coma.value' | translate }}"
+              name="disorderOfConsciousnessType"
+              [value]="disorderOfConsciousnessTypeEnum.Coma"
+              [(ngModel)]="
+                clinicHandler.currentItem.disorderOfConsciousnessType
+              "
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020231"
+              label="{{ 'headMRT.anamnesis.delirium.value' | translate }}"
+              name="disorderOfConsciousnessType"
+              [value]="disorderOfConsciousnessTypeEnum.Delirium"
+              [(ngModel)]="
+                clinicHandler.currentItem.disorderOfConsciousnessType
+              "
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020232"
+              label="{{ 'headMRT.anamnesis.agitation.value' | translate }}"
+              name="disorderOfConsciousnessType"
+              [value]="disorderOfConsciousnessTypeEnum.Agitation"
+              [(ngModel)]="
+                clinicHandler.currentItem.disorderOfConsciousnessType
+              "
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="
+              isClinicFindingType([
+                clinicTypeEnum.SignsOfIncreasedIntracranialPressure
+              ])
+            "
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020233">
+              {{ "headMRT.anamnesis.signsOfIncreasedIntracranialPressure.value"
+              | translate }}
+            </h2>
+            <p-checkbox
+              name="isHeadache"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.headache.value' | translate }}"
+              rr-id="hea_m_020234"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isHeadache"
+            ></p-checkbox>
+            <p-checkbox
+              name="isNauseaVomiting"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.nauseaVomiting.value' | translate }}"
+              rr-id="hea_m_020235"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isNauseaVomiting"
+            ></p-checkbox>
+            <p-checkbox
+              name="isDisorderOfConsciousnesscoma"
+              class="text-break"
+              label="{{
+                'headMRT.anamnesis.disorderOfConsciousnesscoma.value'
+                  | translate
+              }}"
+              rr-id="hea_m_020236"
+              binary="true"
+              [(ngModel)]="
+                clinicHandler.currentItem.isDisorderOfConsciousnessComa
+              "
+            ></p-checkbox>
+            <p-checkbox
+              name="isPapilledema"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.papilledema.value' | translate }}"
+              rr-id="hea_m_020237"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isPapilledema"
+            ></p-checkbox>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.SignsOfInflammation])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020238">
+              {{ "headMRT.anamnesis.signsOfInflammation.value" | translate }}
+            </h2>
+            <p-checkbox
+              name="isMeningism"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.meningism.value' | translate }}"
+              rr-id="hea_m_020239"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isMeningism"
+            ></p-checkbox>
+            <p-checkbox
+              name="isFever"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.fever.value' | translate }}"
+              rr-id="hea_m_020240"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isFever"
+            ></p-checkbox>
+            <p-checkbox
+              name="isPhotophobia"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.photophobia.value' | translate }}"
+              rr-id="hea_m_020241"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isPhotophobia"
+            ></p-checkbox>
+            <p-checkbox
+              name="isNausea"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.nausea.value' | translate }}"
+              rr-id="hea_m_020242"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isNausea"
+            ></p-checkbox>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.MotorDeficit])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020243">
+              {{ "headMRT.anamnesis.motorDeficit.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020244"
+              label="{{ 'headMRT.anamnesis.apraxia.value' | translate }}"
+              name="motorDeficitType"
+              [value]="motorDeficitTypeEnum.Apraxia"
+              [(ngModel)]="clinicHandler.currentItem.motorDeficitType"
+              rrUnClickRadio
+              rrContentReset="hemiplegiaBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020245"
+              label="{{ 'headMRT.anamnesis.hemiparesis.value' | translate }}"
+              name="motorDeficitType"
+              [value]="motorDeficitTypeEnum.Hemiparesis"
+              [(ngModel)]="clinicHandler.currentItem.motorDeficitType"
+              rrUnClickRadio
+              rrContentReset="hemiplegiaBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020246"
+              label="{{ 'headMRT.anamnesis.hemiplegia.value' | translate }}"
+              name="motorDeficitType"
+              [value]="motorDeficitTypeEnum.Hemiplegia"
+              [(ngModel)]="clinicHandler.currentItem.motorDeficitType"
+              rrUnClickRadio
+              rrContentReset="hemiplegiaBlock"
+            >
+            </p-radioButton>
+            <div class="c-col-1 c-pad c-sep">
+              <div
+                id="hemiplegiaBlock"
+                class="o-radio-list m-l-20"
+                [rrDisable]="
+                  !(
+                    clinicHandler.currentItem.motorDeficitType ==
+                      motorDeficitTypeEnum.Hemiparesis ||
+                    clinicHandler.currentItem.motorDeficitType ==
+                      motorDeficitTypeEnum.Hemiplegia
+                  )
+                "
+              >
+                <p rr-id="hea_m_020247" rrValidation="sideType">
+                  {{ "headMRT.anamnesis.side.value" | translate }}*
+                </p>
+                <p-radioButton
+                  rr-id="hea_m_020248"
+                  label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+                  name="sideType"
+                  [value]="sideTypeEnum.Right"
+                  [(ngModel)]="clinicHandler.currentItem.sideType"
+                  rrValidation="sideType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="hea_m_020249"
+                  label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+                  name="sideType"
+                  [value]="sideTypeEnum.Left"
+                  [(ngModel)]="clinicHandler.currentItem.sideType"
+                  rrValidation="sideType"
+                >
+                </p-radioButton>
+                <p rr-id="hea_m_020250">
+                  {{ "headMRT.anamnesis.localization.value" | translate }}
+                </p>
+                <p-radioButton
+                  rr-id="hea_m_020251"
+                  label="{{
+                    'headMRT.anamnesis.brachiofacial.value' | translate
+                  }}"
+                  name="localizationType"
+                  [value]="localizationTypeEnum.Brachiofacial"
+                  [(ngModel)]="clinicHandler.currentItem.localizationType"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="hea_m_020252"
+                  label="{{ 'headMRT.anamnesis.lowerLimb.value' | translate }}"
+                  name="localizationType"
+                  [value]="localizationTypeEnum.LowerLimb"
+                  [(ngModel)]="clinicHandler.currentItem.localizationType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.CranialNerves])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020253">
+              {{ "headMRT.anamnesis.cranialNerves.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020254"
+              label="{{ 'headMRT.anamnesis.olfactoryNerve.value' | translate }}"
+              name="cranialNervesType"
+              [value]="cranialNervesTypeEnum.OlfactoryNerve"
+              [(ngModel)]="clinicHandler.currentItem.cranialNervesType"
+              rrUnClickRadio
+              rrContentReset="olfactoryNerveBlock TrigeminalNeuralgiaBlock facialNervePalsyBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020255"
+              label="{{
+                'headMRT.anamnesis.trigeminalNeuralgia.value' | translate
+              }}"
+              name="cranialNervesType"
+              [value]="cranialNervesTypeEnum.TrigeminalNeuralgia"
+              [(ngModel)]="clinicHandler.currentItem.cranialNervesType"
+              rrUnClickRadio
+              rrContentReset="olfactoryNerveBlock TrigeminalNeuralgiaBlock facialNervePalsyBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020256"
+              label="{{
+                'headMRT.anamnesis.facialNervePalsy.value' | translate
+              }}"
+              name="cranialNervesType"
+              [value]="cranialNervesTypeEnum.FacialNervePalsy"
+              [(ngModel)]="clinicHandler.currentItem.cranialNervesType"
+              rrUnClickRadio
+              rrContentReset="olfactoryNerveBlock TrigeminalNeuralgiaBlock facialNervePalsyBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020257"
+              label="{{
+                'headMRT.anamnesis.vestibularNeuritis.value' | translate
+              }}"
+              name="cranialNervesType"
+              [value]="cranialNervesTypeEnum.VestibularNeuritis"
+              [(ngModel)]="clinicHandler.currentItem.cranialNervesType"
+              rrUnClickRadio
+              rrContentReset="olfactoryNerveBlock TrigeminalNeuralgiaBlock facialNervePalsyBlock"
+            >
+            </p-radioButton>
+            <div class="c-col-1 c-pad c-sep">
+              <div
+                id="olfactoryNerveBlock"
+                *ngIf="
+                  clinicHandler.currentItem.cranialNervesType ==
+                  cranialNervesTypeEnum.OlfactoryNerve
+                "
+                class="o-radio-list m-l-20"
+              >
+                <p rr-id="hea_m_020258">
+                  {{ "headMRT.anamnesis.details.value" | translate }}
+                </p>
+                <p-radioButton
+                  rr-id="hea_m_020259"
+                  label="{{ 'headMRT.anamnesis.parosmia.value' | translate }}"
+                  name="olfactoryNerveDetailsType"
+                  [value]="olfactoryNerveDetailsTypeEnum.Parosmia"
+                  [(ngModel)]="
+                    clinicHandler.currentItem.olfactoryNerveDetailsType
+                  "
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="hea_m_020260"
+                  label="{{ 'headMRT.anamnesis.anosmia.value' | translate }}"
+                  name="olfactoryNerveDetailsType"
+                  [value]="olfactoryNerveDetailsTypeEnum.Anosmia"
+                  [(ngModel)]="
+                    clinicHandler.currentItem.olfactoryNerveDetailsType
+                  "
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <div
+                id="TrigeminalNeuralgiaBlock"
+                *ngIf="
+                  clinicHandler.currentItem.cranialNervesType ==
+                  cranialNervesTypeEnum.TrigeminalNeuralgia
+                  || clinicHandler.currentItem.cranialNervesType ==
+                  cranialNervesTypeEnum.VestibularNeuritis
+                "
+                class="o-radio-list m-l-20"
+              >
+                <p rr-id="hea_m_020261" rrValidation="isRight isLeft">
+                  {{ "headMRT.anamnesis.side.value" | translate }}*
+                </p>
+                <p-checkbox
+                  name="isRight"
+                  class="text-break"
+                  label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+                  rr-id="hea_m_020262"
+                  binary="true"
+                  [(ngModel)]="clinicHandler.currentItem.isRight"
+                  rrValidation="isRight isLeft"
+                ></p-checkbox>
+                <p-checkbox
+                  name="isLeft"
+                  class="text-break"
+                  label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+                  rr-id="hea_m_020263"
+                  binary="true"
+                  [(ngModel)]="clinicHandler.currentItem.isLeft"
+                  rrValidation="isRight isLeft"
+                ></p-checkbox>
+              </div>
+              <div
+                id="facialNervePalsyBlock"
+                *ngIf="
+                  clinicHandler.currentItem.cranialNervesType ==
+                  cranialNervesTypeEnum.FacialNervePalsy
+                "
+                class="o-radio-list m-l-20"
+              >
+                <p rr-id="hea_m_020264">
+                  {{ "headMRT.anamnesis.details.value" | translate }}
+                </p>
+                <p-radioButton
+                  rr-id="hea_m_0202112"
+                  label="{{ 'headMRT.anamnesis.central.value' | translate }}"
+                  name="facialNervePalsyDetailsType"
+                  [value]="facialNervePalsyDetailsTypeEnum.Central"
+                  [(ngModel)]="
+                    clinicHandler.currentItem.facialNervePalsyDetailsType
+                  "
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="hea_m_0202113"
+                  label="{{ 'headMRT.anamnesis.peripheral.value' | translate }}"
+                  name="facialNervePalsyDetailsType"
+                  [value]="facialNervePalsyDetailsTypeEnum.Peripheral"
+                  [(ngModel)]="
+                    clinicHandler.currentItem.facialNervePalsyDetailsType
+                  "
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p rr-id="hea_m_0202114" rrValidation="isRight isLeft">
+                  {{ "headMRT.anamnesis.side.value" | translate }}*
+                </p>
+                <p-checkbox
+                  name="isRight"
+                  class="text-break"
+                  label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+                  rr-id="hea_m_0202115"
+                  binary="true"
+                  [(ngModel)]="clinicHandler.currentItem.isRight"
+                  rrValidation="isRight isLeft"
+                ></p-checkbox>
+                <p-checkbox
+                  name="isLeft"
+                  class="text-break"
+                  label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+                  rr-id="hea_m_0202116"
+                  binary="true"
+                  [(ngModel)]="clinicHandler.currentItem.isLeft"
+                  rrValidation="isRight isLeft"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Dysesthesia])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020265">
+              {{ "headMRT.anamnesis.dysesthesia.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020266"
+              label="{{ 'headMRT.anamnesis.paresthesia.value' | translate }}"
+              name="dysesthesiaType"
+              [value]="dysesthesiaTypeEnum.Paresthesia"
+              [(ngModel)]="clinicHandler.currentItem.dysesthesiaType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020267"
+              label="{{ 'headMRT.anamnesis.hypesthesia.value' | translate }}"
+              name="dysesthesiaType"
+              [value]="dysesthesiaTypeEnum.Hypesthesia"
+              [(ngModel)]="clinicHandler.currentItem.dysesthesiaType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020268"
+              label="{{ 'headMRT.anamnesis.hyperesthesia.value' | translate }}"
+              name="dysesthesiaType"
+              [value]="dysesthesiaTypeEnum.Hyperesthesia"
+              [(ngModel)]="clinicHandler.currentItem.dysesthesiaType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Tremor])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020269">
+              {{ "headMRT.anamnesis.tremor.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020270"
+              label="{{ 'headMRT.anamnesis.actionTremor.value' | translate }}"
+              name="tremorType"
+              [value]="tremorTypeEnum.ActionTremor"
+              [(ngModel)]="clinicHandler.currentItem.tremorType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020271"
+              label="{{ 'headMRT.anamnesis.restTremor.value' | translate }}"
+              name="tremorType"
+              [value]="tremorTypeEnum.RestTremor"
+              [(ngModel)]="clinicHandler.currentItem.tremorType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Ataxia])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020272">
+              {{ "headMRT.anamnesis.ataxia.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020273"
+              label="{{
+                'headMRT.anamnesis.cerebellarAtaxia.value' | translate
+              }}"
+              name="ataxiaType"
+              [value]="ataxiaTypeEnum.CerebellarAtaxia"
+              [(ngModel)]="clinicHandler.currentItem.ataxiaType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020274"
+              label="{{ 'headMRT.anamnesis.gaitDisorder.value' | translate }}"
+              name="ataxiaType"
+              [value]="ataxiaTypeEnum.GaitDisorder"
+              [(ngModel)]="clinicHandler.currentItem.ataxiaType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020275"
+              label="{{ 'headMRT.anamnesis.truncalAtaxia.value' | translate }}"
+              name="ataxiaType"
+              [value]="ataxiaTypeEnum.TruncalAtaxia"
+              [(ngModel)]="clinicHandler.currentItem.ataxiaType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.SpeechDisorder])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020276">
+              {{ "headMRT.anamnesis.speechDisorder.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_020277"
+              label="{{ 'headMRT.anamnesis.dysarthria.value' | translate }}"
+              name="speechDisorderType"
+              [value]="speechDisorderTypeEnum.Dysarthria"
+              [(ngModel)]="clinicHandler.currentItem.speechDisorderType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_020278"
+              label="{{ 'headMRT.anamnesis.aphasia.value' | translate }}"
+              name="ataxispeechDisorderTypeaType"
+              [value]="speechDisorderTypeEnum.Aphasia"
+              [(ngModel)]="clinicHandler.currentItem.speechDisorderType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Dysphagia])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020279">
+              {{ "headMRT.anamnesis.dysphagia.value" | translate }}
+            </h2>
+            <p rr-id="hea_m_020280">
+              {{ "headMRT.anamnesis.noFurtherDetails.value" | translate }}
+            </p>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.HearingImpairment])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020281">
+              {{ "headMRT.anamnesis.hearingImpairment.value" | translate }}
+            </h2>
+            <p-checkbox
+              name="isHearingLoss"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.hearingLoss.value' | translate }}"
+              rr-id="hea_m_020282"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isHearingLoss"
+            ></p-checkbox>
+            <p-checkbox
+              name="isHyperacusis"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.hyperacusis.value' | translate }}"
+              rr-id="hea_m_020283"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isHyperacusis"
+            ></p-checkbox>
+            <p-checkbox
+              name="isHypoacusis"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.hypoacusis.value' | translate }}"
+              rr-id="hea_m_020284"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isHypoacusis"
+              rrContentReset="hypoacusisBlock"
+            ></p-checkbox>
+            <div
+              id="hypoacusisBlock"
+              [rrDisable]="!(clinicHandler.currentItem.isHypoacusis == true)"
+              class="o-radio-list m-l-35 margin-bottom-5"
+            >
+              <p-checkbox
+                name="isConductiveHearingLoss"
+                class="text-break"
+                label="{{
+                  'headMRT.anamnesis.conductiveHearingLoss.value' | translate
+                }}"
+                rr-id="hea_m_020285"
+                binary="true"
+                [(ngModel)]="clinicHandler.currentItem.isConductiveHearingLoss"
+              ></p-checkbox>
+              <p-checkbox
+                name="isHypoakusisSensorineuralHearingLoss"
+                class="text-break m-b-10"
+                label="{{
+                  'headMRT.anamnesis.hypoakusissensorineuralHearingLoss.value'
+                    | translate
+                }}"
+                rr-id="hea_m_020286"
+                binary="true"
+                [(ngModel)]="
+                  clinicHandler.currentItem.isHypoakusisSensorineuralHearingLoss
+                "
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              name="isTinnitus"
+              class="text-break m-t-0"
+              label="{{ 'headMRT.anamnesis.tinnitus.value' | translate }}"
+              rr-id="hea_m_020287"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isTinnitus"
+              rrContentReset="tinnitusBlock"
+            ></p-checkbox>
+            <div
+              id="tinnitusBlock"
+              [rrDisable]="!(clinicHandler.currentItem.isTinnitus == true)"
+              class="o-radio-list m-l-35"
+            >
+              <p-checkbox
+                name="isPulsatile"
+                class="text-break"
+                label="{{ 'headMRT.anamnesis.pulsatile.value' | translate }}"
+                rr-id="hea_m_020288"
+                binary="true"
+                [(ngModel)]="clinicHandler.currentItem.isPulsatile"
+              ></p-checkbox>
+            </div>
+            <p-checkbox
+              name="isSensorineuralHearingLoss"
+              class="text-break"
+              label="{{
+                'headMRT.anamnesis.sensorineuralHearingLoss.value' | translate
+              }}"
+              rr-id="hea_m_020289"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isSensorineuralHearingLoss"
+            ></p-checkbox>
+            <p rr-id="hea_m_020290" class="p-t-15">
+              {{ "headMRT.anamnesis.side.value" | translate }}
+            </p>
+            <p-checkbox
+              name="isRight"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+              rr-id="hea_m_020291"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isRight"
+            ></p-checkbox>
+            <p-checkbox
+              name="isLeft"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+              rr-id="hea_m_020292"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isLeft"
+            ></p-checkbox>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.PupilEyelidEyeOrbit])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020293">
+              {{ "headMRT.anamnesis.pupilEyelidEyeOrbit.value" | translate }}
+            </h2>
+            <p-checkbox
+              name="isAnisocoria"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.anisocoria.value' | translate }}"
+              rr-id="hea_m_020294"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isAnisocoria"
+            ></p-checkbox>
+            <p-checkbox
+              name="isMydriasis"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.mydriasis.value' | translate }}"
+              rr-id="hea_m_020295"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isMydriasis"
+            ></p-checkbox>
+            <p-checkbox
+              name="isMyosis"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.myosis.value' | translate }}"
+              rr-id="hea_m_020296"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isMyosis"
+            ></p-checkbox>
+            <p-checkbox
+              name="isPtosis"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.ptosis.value' | translate }}"
+              rr-id="hea_m_020297"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isPtosis"
+            ></p-checkbox>
+            <p-checkbox
+              name="isEnophthalmos"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.enophthalmos.value' | translate }}"
+              rr-id="hea_m_020298"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isEnophthalmos"
+            ></p-checkbox>
+            <p-checkbox
+              name="isExophthalmos"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.exophthalmos.value' | translate }}"
+              rr-id="hea_m_020299"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isExophthalmos"
+            ></p-checkbox>
+            <p
+              rr-id="hea_m_0202100"
+              class="p-t-15"
+              rrValidation="isRight isLeft"
+            >
+              {{ "headMRT.anamnesis.side.value" | translate }}*
+            </p>
+            <p-checkbox
+              name="isRight"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.right.value' | translate }}"
+              rr-id="hea_m_0202101"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isRight"
+              rrValidation="isRight isLeft"
+            ></p-checkbox>
+            <p-checkbox
+              name="isLeft"
+              class="text-break"
+              label="{{ 'headMRT.anamnesis.left.value' | translate }}"
+              rr-id="hea_m_0202102"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isLeft"
+              rrValidation="isRight isLeft"
+            ></p-checkbox>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Nystagmus])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_0202103">
+              {{ "headMRT.anamnesis.nystagmus.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_0202104"
+              label="{{ 'headMRT.anamnesis.acquired.value' | translate }}"
+              name="nystagmusType"
+              [value]="nystagmusTypeEnum.Acquired"
+              [(ngModel)]="clinicHandler.currentItem.nystagmusType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_0202105"
+              label="{{ 'headMRT.anamnesis.congenital.value' | translate }}"
+              name="nystagmusType"
+              [value]="nystagmusTypeEnum.Congenital"
+              [(ngModel)]="clinicHandler.currentItem.nystagmusType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.Sinusitis])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020279">
+              {{ "headMRT.anamnesis.sinusitis.value" | translate }}
+            </h2>
+            <p rr-id="hea_m_020280">
+              {{ "headMRT.anamnesis.noFurtherDetails.value" | translate }}
+            </p>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.EndocrineDisorder])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_020206">
+              {{ "headMRT.anamnesis.endocrineDisorder.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="hea_m_0202107"
+              label="{{
+                'headMRT.anamnesis.hyperprolactinemia.value' | translate
+              }}"
+              name="endocrineDisorderType"
+              [value]="endocrineDisorderTypeEnum.Hyperprolactinemia"
+              [(ngModel)]="clinicHandler.currentItem.endocrineDisorderType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_0202108"
+              label="{{
+                'headMRT.anamnesis.centralCushingsSyndrome.value' | translate
+              }}"
+              name="endocrineDisorderType"
+              [value]="endocrineDisorderTypeEnum.CentralCushingsSyndrome"
+              [(ngModel)]="clinicHandler.currentItem.endocrineDisorderType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_0202109"
+              label="{{
+                'headMRT.anamnesis.centralDiabetesInsipidus.value' | translate
+              }}"
+              name="endocrineDisorderType"
+              [value]="endocrineDisorderTypeEnum.CentralDiabetesInsipidus"
+              [(ngModel)]="clinicHandler.currentItem.endocrineDisorderType"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="isClinicFindingType([clinicTypeEnum.PsychiatricDisorder])"
+            class="o-radio-list"
+          >
+            <h2 rr-id="hea_m_0202110">
+              {{ "headMRT.anamnesis.psychiatricDisorder.value" | translate }}
+            </h2>
+            <p-checkbox
+              name="isPersonalityChanges"
+              class="text-break"
+              label="{{
+                'headMRT.anamnesis.personalityChanges.value' | translate
+              }}"
+              rr-id="hea_m_0202111"
+              binary="true"
+              [(ngModel)]="clinicHandler.currentItem.isPersonalityChanges"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="f-vertical c-sep">
+      <div class="c-pad">
+        <h1 rr-id="hea_m_020301" class="text-break">
+          {{ "headMRT.anamnesis.previousInterventionstherapies.value" |
+          translate }}
+        </h1>
+        <img
+          class="m-t-13 m-b-4"
+          rr-id="hea_m_020302"
+          src="assets/img/headMRT/icons/doctor.svg"
+          alt="Anamnesis Previous Operations"
+        />
+      </div>
+      <div class="col-h-100 c-sep f-horizontal m-t-5">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="previousInterventionsTherapiesHandler"
+            [setConfig]="previousInterventionsTherapiesDropdownConfig"
+            [disabled]="false"
+            validationName="previousInterventionsTherapiesFindings"
+            [validationSecondFinding]="true"
+          >
+          </rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad c-sep">
+          <div
+            *ngIf="
+              previousInterventionsTherapiesHandler.currentItem.findingType !==
+              previousInterventionsTherapiesTypeEnum.None
+            "
+          >
+            <p rr-id="hea_m_020401" class="bold">
+              {{ "headMRT.anamnesis.date.value" | translate }}
+            </p>
+            <rr-month-year-input
+              name="headMRT.date"
+              [(ngModel)]="
+                previousInterventionsTherapiesHandler.currentItem.date
+              "
+              monthRrId="sho_m_020402"
+              yearRrId="sho_m_020403"
+              (onChange)="clearCalendar()"
+            ></rr-month-year-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l o-radio-list">
+      <h1 rr-id="hea_m_020501" class="m-b-13">
+        {{ "headMRT.anamnesis.preliminaryExamination.value" | translate }}
+      </h1>
+      <img
+        rr-id="hea_m_020502"
+        class="m-b-31"
+        src="assets/img/headMRT/icons/symbol.svg"
+        alt="Preliminary Examinations"
+      />
+      <p-checkbox
+        name="IsMRI"
+        label="{{ 'headMRT.anamnesis.mRI.value' | translate }}"
+        rr-id="hea_m_020503"
+        customLabelClass="m-b-0"
+        labelRrId="nec_m_020512"
+        binary="true"
+        [(ngModel)]="model.isMRI"
+        (onChange)="clearMRICalendar()"
+      ></p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content m-b-20"
+        [rrDisable]="!model.isMRI"
+      >
+        <rr-month-year-input
+          name="headMRT.dateOfMRI"
+          [label]="'headMRT.anamnesis.date.value' | translate"
+          [(ngModel)]="model.dateOfMRI"
+          customLabelClass="m-b-0"
+          labelRrId="hea_m_020504"
+          monthRrId="hea_m_020505"
+          yearRrId="hea_m_020506"
+          class="o-width-100"
+          nested="true"
+        ></rr-month-year-input>
+      </div>
+      <p-checkbox
+        name="IsCT"
+        label="{{ 'headMRT.anamnesis.cT.value' | translate }}"
+        rr-id="hea_m_020507"
+        binary="true"
+        [(ngModel)]="model.isCT"
+        (onChange)="clearCTCalendar()"
+      ></p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isCT"
+      >
+        <rr-month-year-input
+          [label]="'headMRT.anamnesis.date.value' | translate"
+          name="headMRT.dateOfCT"
+          customLabelClass="m-b-0"
+          [(ngModel)]="model.dateOfCT"
+          monthRrId="hea_m_020509"
+          yearRrId="hea_m_020510"
+          nested="true"
+          class="o-width-100"
+          labelRrId="hea_m_020507"
+        ></rr-month-year-input>
+      </div>
+      <p-checkbox
+        name="isPETCT"
+        label="{{ 'headMRT.anamnesis.petCT.value' | translate }}"
+        rr-id="hea_m_020511"
+        binary="true"
+        [(ngModel)]="model.isPETCT"
+        (onChange)="clearPETCTCalendar()"
+      ></p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isPETCT"
+      >
+        <rr-month-year-input
+          [label]="'headMRT.anamnesis.date.value' | translate"
+          name="headMRT.dateOfPETCT"
+          customLabelClass="m-b-0"
+          [(ngModel)]="model.dateOfPETCT"
+          monthRrId="hea_m_020513"
+          yearRrId="hea_m_020514"
+          nested="true"
+          class="o-width-100"
+          labelRrId="hea_m_020512"
+        ></rr-month-year-input>
+      </div>
+      <p-checkbox
+        name="isDSA"
+        label="{{ 'headMRT.anamnesis.dsa.value' | translate }}"
+        rr-id="hea_m_020515"
+        binary="true"
+        [(ngModel)]="model.isDSA"
+        (onChange)="clearDSACalendar()"
+      ></p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isDSA"
+      >
+        <rr-month-year-input
+          [label]="'headMRT.anamnesis.date.value' | translate"
+          name="headMRT.dateOfDSA"
+          customLabelClass="m-b-0"
+          [(ngModel)]="model.dateOfDSA"
+          monthRrId="hea_m_020517"
+          yearRrId="hea_m_020518"
+          nested="true"
+          class="o-width-100"
+          labelRrId="hea_m_020516"
+        ></rr-month-year-input>
+      </div>
+    </div>
+  </div>
+</form>

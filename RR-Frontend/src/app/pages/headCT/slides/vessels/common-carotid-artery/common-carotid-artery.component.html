@@ -1,0 +1,331 @@
+<div class="f-horizontal f-start main o-width-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="hea_c_040249">{{'headCT.vessels.side.value' | translate}}*</h2>
+    <p-radioButton
+      rr-id="hea_c_040250"
+      label="{{'headCT.vessels.right.value' | translate}}"
+      name="sideType"
+      [value]="sideTypeEnum.Right"
+      [(ngModel)]="model.sideType"
+      rrValidation="sideType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_040251"
+      label="{{'headCT.vessels.left.value' | translate}}"
+      name="sideType"
+      [value]="sideTypeEnum.Left"
+      [(ngModel)]="model.sideType"
+      rrValidation="sideType"
+    >
+    </p-radioButton>
+
+    <h2 rr-id="hea_c_040252" class="m-t-35">
+      {{'headCT.vessels.pathology.value' | translate}}*
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_040253"
+      label="{{'headCT.vessels.stenosisOcclusion.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.StenosisOcclusion"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="stenosisOcclusionContainer dissectionContainer inflammatoryChangeContainer"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_040254"
+      label="{{'headCT.vessels.dissection.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.Dissection"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="stenosisOcclusionContainer dissectionContainer inflammatoryChangeContainer"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_040255"
+      label="{{'headCT.vessels.inflammatoryChange.value' | translate}}"
+      name="pathologyType"
+      [value]="pathologyTypeEnum.InflammatoryChange"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="stenosisOcclusionContainer dissectionContainer inflammatoryChangeContainer"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+  </div>
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.None)"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  ></div>
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.None)"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  ></div>
+
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.StenosisOcclusion)"
+    id="stenosisOcclusionContainer"
+    class="f-vertical c-sep"
+  >
+    <h2 rr-id="hea_c_0403104" class="m-b-10 p-l-15">
+      {{'headCT.vessels.detailsStenosisOcclusion.value' | translate}}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad o-radio-list f-vertical">
+        <h2 rr-id="hea_c_040392">
+          {{'headCT.vessels.severity.value' | translate}}*
+        </h2>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="w013"
+          name="severityType"
+          rr-id="hea_c_040393"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          rrValidation="severityType"
+          (onChange)="checkAndClearHemodynamicallyRelevant()"
+          [(ngModel)]="model.severityType"
+        >
+        </p-dropdown>
+        <p-checkbox
+          [rrDisable]="isHemodynamicallyRelevantDisable()"
+          rr-id="hea_c_040394"
+          name="isHemodynamicallyRelevant"
+          label="{{'headCT.vessels.hemodynamicallyRelevant.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isHemodynamicallyRelevant"
+        >
+        </p-checkbox>
+        <p rr-id="hea_c_040395" class="m-t-17 m-b-0">
+          {{ 'headCT.vessels.diameterStenosis.value' | translate}}
+        </p>
+        <rr-number-input
+          [label]="'headCT.vessels.inMm.value' | translate"
+          inputRrId="hea_c_040396"
+          labelRrId="hea_c_040397"
+          name="diameterStenosisInMm"
+          [config]="{min: 1, max: 30}"
+          [(ngModel)]="model.diameterStenosisInMm"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="hea_c_040398" class="text-break m-b-0">
+          {{ 'headCT.vessels.diameterDiseaseFreePoststenoticSegment.value' |
+          translate}}
+        </p>
+        <rr-number-input
+          [label]="'headCT.vessels.inMm.value' | translate"
+          inputRrId="hea_c_040399"
+          labelRrId="hea_c_0403100"
+          name="diameterDiseaseFreePoststenoticSegmentInMm"
+          [config]="{min: 1, max: 30}"
+          [(ngModel)]="model.diameterDiseaseFreePoststenoticSegmentInMm"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="hea_c_0403101" class="text-break m-b-0">
+          {{ 'headCT.vessels.degreeOfStenosisCalculatedInNASCET.value' |
+          translate}}
+        </p>
+        <rr-number-input
+          [label]="'headCT.vessels.inPercentage.value' | translate"
+          inputRrId="hea_c_0403102"
+          labelRrId="hea_c_0403103"
+          name="degreeOfStenosisCalculatedInNASCETInPercentage"
+          [config]="{readonly: true}"
+          [(ngModel)]="model.degreeOfStenosisCalculatedInNASCETInPercentage"
+          rrValidation="degreeOfStenosisCalculatedInNASCETInPercentage"
+        ></rr-number-input>
+      </div>
+      <div class="c-col-1 c-sep c-pad o-radio-list f-vertical">
+        <h2 rr-id="hea_c_0404163">
+          {{'headCT.vessels.quality.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="hea_c_0404164"
+          name="isCalcification"
+          label="{{'headCT.vessels.calcification.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCalcification"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0404165"
+          name="isSoftPlaque"
+          label="{{'headCT.vessels.softPlaque.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSoftPlaque"
+        >
+        </p-checkbox>
+        <h2 rr-id="hea_c_0404166" class="m-t-25">
+          {{'headCT.vessels.form.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="hea_c_0404167"
+          label="{{'headCT.vessels.concentric.value' | translate}}"
+          name="formType"
+          rrUnClickRadio
+          [value]="formTypeEnum.Concentric"
+          [(ngModel)]="model.formType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_0404168"
+          label="{{'headCT.vessels.eccentric.value' | translate}}"
+          name="formType"
+          rrUnClickRadio
+          [value]="formTypeEnum.Eccentric"
+          [(ngModel)]="model.formType"
+        >
+        </p-radioButton>
+        <h2 rr-id="hea_c_0404169" class="m-t-25">
+          {{'headCT.vessels.length.value' | translate}}
+        </h2>
+        <rr-number-input
+          [label]="'headCT.vessels.inMm.value' | translate"
+          inputRrId="hea_c_0404170"
+          labelRrId="hea_c_0404171"
+          name="lengthInMm"
+          [config]="{min: 1, max: 150, placeholder: '---'}"
+          [(ngModel)]="model.lengthInMm"
+        ></rr-number-input>
+        <p-checkbox
+          rr-id="hea_c_0404172"
+          name="isShortStenosis"
+          label="{{'headCT.vessels.shortStenosis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isShortStenosis"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.Dissection)"
+    id="dissectionContainer"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  >
+    <h2 rr-id="hea_c_0403112">
+      {{'headCT.vessels.detailsDissection.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="hea_c_0403113"
+      name="isWallHematoma"
+      label="{{'headCT.vessels.wallHematoma.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isWallHematoma"
+    >
+    </p-checkbox>
+    <p rr-id="hea_c_0403114">{{'headCT.vessels.length.value' | translate}}</p>
+    <rr-number-input
+      [label]="'headCT.vessels.inMm.value' | translate"
+      inputRrId="hea_c_0403115"
+      labelRrId="hea_c_0403116"
+      name="lengthInMm"
+      [config]="{min: 1, max: 150, placeholder: '---'}"
+      [(ngModel)]="model.lengthInMm"
+    ></rr-number-input>
+  </div>
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.Dissection)"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  ></div>
+
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.InflammatoryChange)"
+    id="inflammatoryChangeContainer"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  >
+    <h2 rr-id="hea_c_0403117">
+      {{'headCT.vessels.detailsInflammatoryChanges.value' | translate}}
+    </h2>
+    <p-checkbox
+      [rrDisable]="!isCMYes"
+      rr-id="hea_c_0403118"
+      name="isContrastEnhancementOfTheArterialWall"
+      label="{{'headCT.vessels.contrastEnhancementOfTheArterialWall.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isContrastEnhancementOfTheArterialWall"
+    >
+    </p-checkbox>
+    <p-checkbox
+      labelStyleClass="text-break"
+      rr-id="hea_c_0403119"
+      name="isLocoregionalObliterationOfFattyTissue"
+      label="{{'headCT.vessels.locoregionalObliterationOfFattyTissue.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isLocoregionalObliterationOfFattyTissue"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hea_c_0403120"
+      name="isCaliberIrregularities"
+      label="{{'headCT.vessels.caliberIrregularities.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isCaliberIrregularities"
+    >
+    </p-checkbox>
+    <h2 rr-id="hea_c_0403139" class="m-t-30">
+      {{'headCT.vessels.differentialDiagnosis.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="hea_c_0403140"
+      label="{{'headCT.vessels.takayasuArteritis.value' | translate}}"
+      name="differentialDiagnosisType"
+      rrUnClickRadio
+      rrContentReset="panarteritisNodosaContainer"
+      [value]="differentialDiagnosisTypeEnum.TakayasuArteritis"
+      [(ngModel)]="model.differentialDiagnosisType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0403141"
+      label="{{'headCT.vessels.giantCellArteritis.value' | translate}}"
+      name="differentialDiagnosisType"
+      rrUnClickRadio
+      rrContentReset="panarteritisNodosaContainer"
+      [value]="differentialDiagnosisTypeEnum.GiantCellArteritis"
+      [(ngModel)]="model.differentialDiagnosisType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hea_c_0403142"
+      label="{{'headCT.vessels.collagenosis.value' | translate}}"
+      name="differentialDiagnosisType"
+      rrUnClickRadio
+      rrContentReset="panarteritisNodosaContainer"
+      [value]="differentialDiagnosisTypeEnum.Collagenosis"
+      [(ngModel)]="model.differentialDiagnosisType"
+    >
+    </p-radioButton>
+    <div
+      class="nested-content"
+      id="panarteritisNodosaContainer"
+      [rrDisable]="model.differentialDiagnosisType !== differentialDiagnosisTypeEnum.Collagenosis"
+    >
+      <p-checkbox
+        rr-id="hea_c_0403143"
+        name="isPanarteritisNodosa"
+        label="{{'headCT.vessels.panarteritisNodosa.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPanarteritisNodosa"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div
+    *ngIf="isPathologyType(pathologyTypeEnum.InflammatoryChange)"
+    class="c-col-1 c-sep c-pad o-radio-list"
+  ></div>
+
+  <div class="c-col-1 c-sep c-pad-l o-radio-list">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      [elementsRrIds]="referencePictureElementsRrIds"
+      [pictureFileType]="headCTPicturesTypeEnum.ImageFile"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+</div>

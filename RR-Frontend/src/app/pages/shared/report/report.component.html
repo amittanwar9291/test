@@ -1,0 +1,267 @@
+<div class="report-box c-main f-horizontal f-space-between">
+  <div class="tab f-horizontal">
+    <div class="selection c-col-1 f-vertical">
+      <div
+        class="selection-button"
+        [ngClass]="
+          this.reportType === reportTypes.doctor
+            ? 'selected'
+            : 'unselected unselected-doctor'
+        "
+        (click)="setReportType(reportTypes.doctor)"
+      >
+        <h2 rr-id="fra_090103-1">
+          {{ "report.findingText" | translate }} {{ "report.doctor" | translate
+          }}
+        </h2>
+        <p-dropdown
+          rr-id="fra_090104-1"
+          styleClass="ui-brown-box"
+          [options]="languages"
+          [(ngModel)]="viewModel.selectedLangDoctor"
+          [style]="{ width: '75px' }"
+          *ngIf="reportType === reportTypes.doctor"
+          (onChange)="getReportText()"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="viewModel.selectedLangDoctor">
+              {{ viewModel.selectedLangDoctor.toUpperCase() }}
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div class="lang-label">{{ lang.label }}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div
+        class="selection-button"
+        [ngClass]="
+          this.reportType === reportTypes.patient
+            ? 'selected'
+            : 'unselected'
+        "
+        (click)="setReportType(reportTypes.patient)"
+      >
+        <h2 rr-id="fra_090105-2">
+          {{ "report.findingText" | translate }} {{ "report.patient" | translate
+          }}
+        </h2>
+        <p-dropdown
+          rr-id="fra_090104-2"
+          styleClass="ui-brown-box"
+          [options]="languages"
+          [(ngModel)]="viewModel.selectedLangPatient"
+          [style]="{ width: '75px' }"
+          *ngIf="reportType === reportTypes.patient"
+          (onChange)="getReportText()"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="viewModel.selectedLangPatient">
+              {{ viewModel.selectedLangPatient.toUpperCase() }}
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div class="lang-label">{{ lang.label }}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div
+        *ngFor="let customReport of customReportTypes"
+        class="selection-button"
+        [ngClass]="
+          this.reportType === customReport.reportTypeName
+            ? 'selected'
+            : 'unselected'
+        "
+        (click)="setReportType(customReport.reportTypeName)"
+      >
+        <h2 rr-id="fra_090105-2" class="custom-report-title">
+          {{ "report.findingText" | translate }} {{ customReport.title }}
+        </h2>
+        <p-dropdown
+          rr-id="fra_090104-2"
+          styleClass="ui-brown-box"
+          [options]="languages"
+          [(ngModel)]="viewModel.selectedLangPatient"
+          [style]="{ width: '75px' }"
+          *ngIf="reportType === customReport.reportTypeName && isReportCustomAndOfDoctorOrPatientType(reportTypes.patient)"
+          (onChange)="getReportText()"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="viewModel.selectedLangPatient">
+              {{ viewModel.selectedLangPatient.toUpperCase() }}
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div class="lang-label">{{ lang.label }}</div>
+          </ng-template>
+        </p-dropdown>
+        <p-dropdown
+          rr-id="fra_090104-2"
+          styleClass="ui-brown-box"
+          [options]="languages"
+          [(ngModel)]="viewModel.selectedLangDoctor"
+          [style]="{ width: '75px' }"
+          *ngIf="reportType === customReport.reportTypeName && isReportCustomAndOfDoctorOrPatientType(reportTypes.doctor)"
+          (onChange)="getReportText()"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="viewModel.selectedLangDoctor">
+              {{ viewModel.selectedLangDoctor.toUpperCase() }}
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div class="lang-label">{{ lang.label }}</div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div
+      class="c-col-3 report"
+      [ngClass]="{ 'report-top': this.reportType === reportTypes.doctor }"
+      *ngIf="isReportType(reportTypes.doctor)"
+    >
+      <div class="report-header">
+        <h2 rr-id="fra_090201" id="doctor-report-header">
+          {{ "report." + patientData.gender.toLowerCase() | translate }} {{
+          patientData.firstName }} {{ patientData.lastName }}, {{ "report.birth"
+          | translate }} {{ patientData.birthDate | date: "dd.MM.yyyy" }}
+        </h2>
+        <button
+          rr-id="fra_090401-1"
+          *ngIf="!viewModel.isEdit"
+          type="button"
+          class="button button-edit"
+          (click)="edit()"
+        >
+          {{ "report.edit" | translate }}
+        </button>
+        <button
+          rr-id="fra_090401-1"
+          *ngIf="viewModel.isEdit"
+          type="button"
+          class="button button-save"
+          (click)="edit()"
+        >
+          {{ "report.save" | translate }}
+        </button>
+      </div>
+      <div rr-id="fra_090202-1" class="report-content">
+        <div
+          id="doctor-report-content"
+          #reportContentDoctor
+          [ngClass]="{ 'text-edit': viewModel.isEdit }"
+        ></div>
+        <textarea
+          [disabled]="isUserViewer"
+          *ngIf="viewModel.isDiscussion"
+          class="discussion-input"
+          rr-id="fra_090508"
+          pInputTextarea
+          #discussionDoctor
+          placeholder="{{ 'report.addDiscussion' | translate }}"
+          [(ngModel)]="viewModel.discussion"
+        ></textarea>
+      </div>
+    </div>
+    <div class="c-col-3 report" *ngIf="isReportType(reportTypes.patient)">
+      <div class="report-header">
+        <h2 rr-id="fra_090201" id="patient-report-header">
+          {{ "report.findingSubject" | translate }} {{ report.examinationType
+          }}-{{ "report.examination" | translate }} {{ "report.from" | translate
+          }} {{ report.examinationDate | date: "dd.MM.yyyy" }}
+        </h2>
+      </div>
+      <div rr-id="fra_090202-1" class="report-content">
+        <div
+          id="patient-report-content"
+          #reportContentPatient
+          rr-id="fra_090202-2"
+        ></div>
+        <textarea
+          [disabled]="isUserViewer"
+          *ngIf="viewModel.isDiscussion"
+          class="discussion-input"
+          rr-id="fra_090508"
+          pInputTextarea
+          #discussionPatient
+          placeholder="{{ 'report.addFreeText' | translate }}"
+          [(ngModel)]="viewModel.discussion"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="settings c-col-1 c-pad o-radio-list">
+    <button
+      *ngIf="viewModel.isApproved"
+      rr-id="fra_090501"
+      class="export export-ris"
+      (click)="export()"
+    >
+      <h1>{{ "report.exportRis" | translate }}</h1>
+    </button>
+    <button
+      [disabled]="isUserViewer"
+      *ngIf="!viewModel.isApproved"
+      rr-id="fra_090501"
+      class="export export-ris"
+      (click)="approve()"
+    >
+      <h1>{{ "report.approve" | translate }}</h1>
+    </button>
+    <button
+      [disabled]="!viewModel.isApproved"
+      rr-id="fra_090502"
+      class="export export-clipboard"
+      (click)="copyToClipboard()"
+    >
+      <h1>{{ "report.copyToClipboard" | translate }}</h1>
+    </button>
+    <div class="check-options o-radio-list">
+      <p-checkbox
+        name="isLocalizer"
+        label="{{ 'report.localizer' | translate }}"
+        binary="true"
+        rr-id="fra_090503-"
+        [(ngModel)]="viewModel.isLocalizer"
+        (click)="updateAndReloadTextReport()"
+      ></p-checkbox>
+      <p-checkbox
+        name="referenceImage"
+        label="{{ 'report.referenceImage' | translate }}"
+        binary="true"
+        rr-id="fra_090504"
+        [(ngModel)]="viewModel.isReferenceImage"
+        (click)="updateAndReloadTextReport()"
+        *ngIf="isReportType(reportTypes.doctor)"
+      ></p-checkbox>
+      <p-checkbox
+        *ngIf="isReportType(reportTypes.doctor)"
+        name="isDiscussionDoctor"
+        label="{{ 'report.discussion' | translate }}"
+        binary="true"
+        rr-id="fra_090505"
+        [(ngModel)]="viewModel.isDiscussion"
+        (click)="checkDiscussion()"
+      ></p-checkbox>
+      <p-checkbox
+        *ngIf="isReportType(reportTypes.patient)"
+        name="isDiscussionPatient"
+        label="{{ 'report.freeText' | translate }}"
+        binary="true"
+        rr-id="fra_090505"
+        [(ngModel)]="viewModel.isDiscussion"
+        (click)="checkDiscussion()"
+      ></p-checkbox>
+      <p-checkbox
+        name="icd10"
+        label="{{ 'report.icd10' | translate }}"
+        binary="true"
+        rr-id="fra_090506"
+        *ngIf="isReportType(reportTypes.doctor)"
+        [(ngModel)]="viewModel.isICD10"
+        (click)="updateAndReloadTextReport()"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

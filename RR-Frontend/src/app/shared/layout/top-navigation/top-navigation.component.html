@@ -1,0 +1,79 @@
+<div class="nav-container f-horizontal" [ngStyle]="{ zoom: zoom }">
+  <div
+    class="nav_container__main f-horizontal f-space-between"
+    [style.width.px]="mainContainerWidth"
+  >
+    <div
+      class="nav-item f-vertical"
+      *ngFor="let page of navData.pages.slice(0, -1); let i = index"
+      [ngClass]="{
+        active: navData.currentPageNumber === i + 1,
+        'item-top': i + 1 <= rowPagesCount,
+        'item-bottom': i + 1 > rowPagesCount,
+        blocked: navData.pages[i].isBlocked,
+        visited: wasVisited(i)
+      }"
+    >
+      <div
+        class="indicator"
+        [ngClass]="{ 'indicator-visible': navData.currentPageNumber === i + 1 }"
+      ></div>
+      <a
+        (click)="navToPage(i + 1)"
+        rrResizableTooltip="{{ page.pageName | translate | pageNumber: i + 1 }}"
+        position="right"
+        showDelay="200"
+        >{{ i + 1 }}</a
+      >
+    </div>
+    <div
+      class="nav-item f-vertical item-bottom"
+      [ngClass]="{ active: navData.currentPageNumber === navData.pages.length }"
+      *ngIf="navData.pages && (navData.pages.length - 1) % 2 === 1"
+    >
+      <div
+        class="indicator"
+        [ngClass]="{
+          'indicator-visible':
+            navData.currentPageNumber === navData.pages.length
+        }"
+      ></div>
+      <a
+        (click)="navToPage(navData.pages.length)"
+        rrResizableTooltip="
+          ({{ 'layout.reportShortcut' | translate }})
+          {{ getLastReportPageName() | translate }}"
+        position="right"
+        showDelay="200"
+        >{{'layout.reportShortcut' | translate}}</a
+      >
+    </div>
+  </div>
+  <div
+    class="nav_container__report f-vertical f-center f-align-center"
+    *ngIf="navData.pages && !((navData.pages.length - 1) % 2 === 1)"
+  >
+    <div
+      class="nav-item f-vertical report-button item-separate"
+      [ngClass]="{ active: navData.currentPageNumber === navData.pages.length }"
+    >
+      <div
+        class="indicator"
+        [ngClass]="{
+          'indicator-visible':
+            navData.currentPageNumber === navData.pages.length
+        }"
+      ></div>
+      <a
+        (click)="navToPage(navData.pages.length)"
+        rrResizableTooltip="
+          ({{ 'layout.reportShortcut' | translate }})
+          {{ getLastReportPageName() | translate }}"
+        position="right"
+        showDelay="200"
+        >{{'layout.reportShortcut' | translate}}</a
+      >
+    </div>
+    <div class="align-box"></div>
+  </div>
+</div>

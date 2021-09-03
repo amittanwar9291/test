@@ -1,0 +1,478 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2 rr-id="nec_m_090202" class="m-t-3">
+      {{'neckMRT.vessels.side.value' | translate}}*
+    </h2>
+    <p-radioButton
+      rr-id="nec_m_090203"
+      name="sideType"
+      [value]="sideType.Right"
+      label="{{'neckMRT.vessels.right.value' | translate}}"
+      [(ngModel)]="model.sideType"
+      rrValidation="sideType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_090204"
+      name="sideType"
+      [value]="sideType.Left"
+      label="{{'neckMRT.vessels.left.value' | translate}}"
+      [(ngModel)]="model.sideType"
+      rrValidation="sideType"
+    >
+    </p-radioButton>
+    <h2 rr-id="nec_m_090228" rrInfoIcon="nec_m_09_04" class="m-t-24">
+      {{'neckMRT.vessels.localization2.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="nec_m_090229"
+      name="isProximalSegment"
+      label="{{'neckMRT.vessels.proximalSegment.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isProximalSegment"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_090230"
+      name="isIntermediateSegment"
+      label="{{'neckMRT.vessels.intermediateSegment.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isIntermediateSegment"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="nec_m_090231"
+      name="isDistalSegment"
+      label="{{'neckMRT.vessels.distalSegment.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isDistalSegment"
+    >
+    </p-checkbox>
+  </div>
+  <div class="c-col-1 c-pad f-vertical f-start o-radio-list">
+    <h2 rr-id="nec_m_090355" class="m-t-3">
+      {{'neckMRT.vessels.pathology.value' | translate}}*
+    </h2>
+    <p-radioButton
+      rr-id="nec_m_090356"
+      name="pathologyType"
+      [value]="pathologyType.StenosisOcclusion"
+      label="{{'neckMRT.vessels.stenosisocclusion.value' | translate}}"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="dissectionBlock inflammatoryChangesBlock aneurysmBlock1 aneurysmBlock2 vascularMalformationBlock"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_090357"
+      name="pathologyType"
+      [value]="pathologyType.Dissection"
+      label="{{'neckMRT.vessels.dissection.value' | translate}}"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="stenosisOcclusionBlock1 stenosisOcclusionBlock2 inflammatoryChangesBlock aneurysmBlock1 aneurysmBlock2 vascularMalformationBlock"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_090358"
+      name="pathologyType"
+      [value]="pathologyType.Aneurysm"
+      label="{{'neckMRT.vessels.aneurysm.value' | translate}}"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="stenosisOcclusionBlock1 stenosisOcclusionBlock2 dissectionBlock inflammatoryChangesBlock vascularMalformationBlock"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_090359"
+      name="pathologyType"
+      [value]="pathologyType.VascularMalformation"
+      label="{{'neckMRT.vessels.vascularMalformation.value' | translate}}"
+      [(ngModel)]="model.pathologyType"
+      rrContentReset="stenosisOcclusionBlock1 stenosisOcclusionBlock2 dissectionBlock aneurysmBlock1 aneurysmBlock2"
+      rrValidation="pathologyType"
+    >
+    </p-radioButton>
+  </div>
+  <div
+    class="c-col-1 c-pad c-sep-l f-vertical f-start o-radio-list"
+    [ngClass]="{'m-t-34' : !isPathologyTypeNone}"
+  >
+    <div
+      class="o-radio-list f-vertical"
+      id="stenosisOcclusionBlock1"
+      *ngIf="model.pathologyType === pathologyType.StenosisOcclusion"
+    >
+      <h2 rr-id="ec_m_0904197">
+        {{'neckMRT.vessels.extent.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ec_m_0904198"
+        name="extentType"
+        [value]="extentType.Mild"
+        label="{{'neckMRT.vessels.mild.value' | translate}}"
+        [(ngModel)]="model.extentType"
+        rrValidation="extentType"
+        (onClick)="resetExtentTypeBlock()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="ec_m_0904199"
+        name="extentType"
+        [value]="extentType.Moderate"
+        label="{{'neckMRT.vessels.moderate.value' | translate}}"
+        [(ngModel)]="model.extentType"
+        rrValidation="extentType"
+        (onClick)="resetExtentTypeBlock()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_0904200"
+        name="extentType"
+        [value]="extentType.Severe"
+        label="{{'neckMRT.vessels.severe.value' | translate}}"
+        [(ngModel)]="model.extentType"
+        rrValidation="extentType"
+        (onClick)="resetExtentTypeBlock()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_0904201"
+        name="extentType"
+        class="m-b-16"
+        [value]="extentType.CompleteOcclusion"
+        label="{{'neckMRT.vessels.completeOcclusion.value' | translate}}"
+        [(ngModel)]="model.extentType"
+        rrValidation="extentType"
+        (onClick)="resetExtentTypeBlock()"
+      >
+      </p-radioButton>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="extentTypeBlock"
+        [rrDisable]="model.extentType === extentType.None || model.extentType === extentType.CompleteOcclusion"
+      >
+        <p-checkbox
+          rr-id="nec_m_0904202"
+          name="isHemodynamicallyRelevant"
+          label="{{'neckMRT.vessels.hemodynamicallyRelevant.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isHemodynamicallyRelevant"
+        >
+        </p-checkbox>
+      </div>
+      <h3 rr-id="nec_m_0904203" class="m-t-20 m-b-4">
+        {{'neckMRT.vessels.diameterStenosis.value' | translate}}
+      </h3>
+      <rr-number-input
+        inputRrId="nec_m_0904204"
+        labelRrId="nec_m_0904205"
+        name="diameterStenosisInMm"
+        label="{{ 'neckMRT.vessels.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 99, placeholder: '--' }"
+        [(ngModel)]="model.diameterStenosisInMm"
+        (ngModelChange)="calculateDegreeOfStenosisInPercent()"
+      >
+      </rr-number-input>
+      <h3 rr-id="nec_m_0904206" class="m-t-6 m-b-7">
+        {{'neckMRT.vessels.diameterDiseaseFreePoststenotic.value' | translate}}
+      </h3>
+      <rr-number-input
+        inputRrId="nec_m_0904207"
+        labelRrId="nec_m_0904208"
+        name="diameterDiseaseFreePoststenoticSegmentInMm"
+        label="{{ 'neckMRT.vessels.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 99, placeholder: '--' }"
+        [(ngModel)]="model.diameterDiseaseFreePoststenoticSegmentInMm"
+        (ngModelChange)="calculateDegreeOfStenosisInPercent()"
+      >
+      </rr-number-input>
+      <h3 rr-id="nec_m_0904209" class="m-t-3 m-b-4">
+        {{'neckMRT.vessels.degreeOfStenosisAccording2.value' | translate}}
+      </h3>
+      <rr-number-input
+        inputRrId="nec_m_0904210"
+        labelRrId="nec_m_0904211"
+        name="degreeOfStenosisInPercent"
+        label="{{ 'neckMRT.vessels.inPercent.value' | translate }}"
+        [config]="{ readonly: true, min: 1, max: 99, placeholder: '--' }"
+        [(ngModel)]="model.degreeOfStenosisInPercent"
+        rrValidation="degreeOfStenosisInPercent"
+      >
+      </rr-number-input>
+    </div>
+    <div
+      class="o-radio-list"
+      id="dissectionBlock"
+      *ngIf="model.pathologyType === pathologyType.Dissection"
+    >
+      <h2 rr-id="nec_m_0904212">
+        {{'neckMRT.vessels.detailsDissection.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="nec_m_0904213"
+        name="isWallHematomaHyperintenseInUnenhancedT1W"
+        class="text-break"
+        label="{{'neckMRT.vessels.wallHematomahyperintenseInUnenhanced.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isWallHematomaHyperintenseInUnenhancedT1W"
+      >
+      </p-checkbox>
+      <h2 rr-id="nec_m_0904214" class="m-t-28 m-b-4">
+        {{'neckMRT.vessels.extent2.value' | translate}}
+      </h2>
+      <rr-number-input
+        inputRrId="nec_m_0904215"
+        labelRrId="nec_m_0904216"
+        name="dissectionExtentInMm"
+        label="{{ 'neckMRT.vessels.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 150, placeholder: '---' }"
+        [(ngModel)]="model.dissectionExtentInMm"
+      >
+      </rr-number-input>
+    </div>
+    <div
+      class="o-radio-list"
+      id="aneurysmBlock1"
+      *ngIf="model.pathologyType === pathologyType.Aneurysm"
+    >
+      <h2 rr-id="nec_m_0904217">
+        {{'neckMRT.vessels.shape.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="nec_m_0904218"
+        rrUnClickRadio
+        name="shapeType"
+        [value]="shapeType.Saccular"
+        label="{{'neckMRT.vessels.saccular.value' | translate}}"
+        [(ngModel)]="model.shapeType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_0904219"
+        rrUnClickRadio
+        name="shapeType"
+        [value]="shapeType.Fusiform"
+        label="{{'neckMRT.vessels.fusiform.value' | translate}}"
+        [(ngModel)]="model.shapeType"
+      >
+      </p-radioButton>
+      <h2 rr-id="nec_m_0904220" class="m-t-20">
+        {{'neckMRT.vessels.maxDiameter.value' | translate}}
+      </h2>
+      <rr-number-input
+        inputRrId="nec_m_0904221"
+        labelRrId="nec_m_0904222"
+        name="maxDiameterInMm"
+        label="{{ 'neckMRT.vessels.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 99, placeholder: '--' }"
+        [(ngModel)]="model.maxDiameterInMm"
+      >
+      </rr-number-input>
+      <h2 rr-id="nec_m_0904223" class="m-t-20">
+        {{'neckMRT.vessels.extent2.value' | translate}}
+      </h2>
+      <rr-number-input
+        inputRrId="nec_m_0904224"
+        labelRrId="nec_m_0904225"
+        name="aneurysmExtentInMm"
+        label="{{ 'neckMRT.vessels.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 150, placeholder: '---' }"
+        [(ngModel)]="model.aneurysmExtentInMm"
+      >
+      </rr-number-input>
+    </div>
+    <div
+      class="o-radio-list"
+      id="vascularMalformationBlock"
+      *ngIf="model.pathologyType === pathologyType.VascularMalformation"
+    >
+      <h2 rr-id="nec_m_0904226">
+        {{'neckMRT.vessels.detailsVascularMalformation.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="nec_m_0904227"
+        rrUnClickRadio
+        name="detailsVascularMalformationType"
+        [value]="detailsVascularMalformationType.ArteriovenousMalformation"
+        label="{{'neckMRT.vessels.arteriovenousMalformation.value' | translate}}"
+        [(ngModel)]="model.detailsVascularMalformationType"
+        rrContentReset="arteriovenousMalformationBlock"
+      >
+      </p-radioButton>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="arteriovenousMalformationBlock"
+        [rrDisable]="model.detailsVascularMalformationType !== detailsVascularMalformationType.ArteriovenousMalformation"
+      >
+        <p-radioButton
+          rr-id="nec_m_0904228"
+          rrUnClickRadio
+          name="arteriovenousMalformationType"
+          [value]="arteriovenousMalformationType.HighFlowLesion"
+          label="{{'neckMRT.vessels.highflowLesion.value' | translate}}"
+          [(ngModel)]="model.arteriovenousMalformationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_0904229"
+          rrUnClickRadio
+          name="arteriovenousMalformationType"
+          [value]="arteriovenousMalformationType.LowFlowLesion"
+          label="{{'neckMRT.vessels.lowflowLesion.value' | translate}}"
+          [(ngModel)]="model.arteriovenousMalformationType"
+        >
+        </p-radioButton>
+      </div>
+      <p-radioButton
+        rr-id="nec_m_0904230"
+        rrUnClickRadio
+        name="detailsVascularMalformationType"
+        [value]="detailsVascularMalformationType.Hemangioma"
+        label="{{'neckMRT.vessels.hemangioma.value' | translate}}"
+        [(ngModel)]="model.detailsVascularMalformationType"
+        rrContentReset="arteriovenousMalformationBlock"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad-l c-sep-l f-vertical f-start o-radio-list"
+    [ngClass]="{'m-t-34' : !isPathologyTypeNone}"
+  >
+    <div
+      class="o-radio-list f-vertical"
+      id="stenosisOcclusionBlock2"
+      *ngIf="model.pathologyType === pathologyType.StenosisOcclusion"
+    >
+      <h2 rr-id="nec_m_090558">
+        {{'neckMRT.vessels.shape.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="nec_m_090559"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Concentric"
+        label="{{'neckMRT.vessels.concentric.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_090560"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Eccentric"
+        label="{{'neckMRT.vessels.eccentric.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <h2 rr-id="nec_m_090561" class="m-t-20">
+        {{'neckMRT.vessels.extent2.value' | translate}}
+      </h2>
+      <rr-number-input
+        inputRrId="nec_m_090562"
+        labelRrId="nec_m_090563"
+        name="stenosisOcclusionExtentInMm"
+        class="m-b-16"
+        label="{{ 'neckMRT.vessels.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 150, placeholder: '---' }"
+        [(ngModel)]="model.stenosisOcclusionExtentInMm"
+      >
+      </rr-number-input>
+      <p-checkbox
+        rr-id="nec_m_090564"
+        name="isShortLength"
+        label="{{'neckMRT.vessels.shortlength.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isShortLength"
+      >
+      </p-checkbox>
+      <h2 rr-id="nec_m_090565" class="m-t-20">
+        {{'neckMRT.vessels.details.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="nec_m_090566"
+        name="isThrombusSurroundedByContrastAgent"
+        label="{{'neckMRT.vessels.thrombusSurroundedByContrast.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isThrombusSurroundedByContrastAgent"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="nec_m_090567"
+        name="isCollateralization"
+        label="{{'neckMRT.vessels.collateralization.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCollateralization"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="nec_m_090568"
+        name="isPreStenoticDilatation"
+        label="{{'neckMRT.vessels.prestenoticDilatation.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPreStenoticDilatation"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="nec_m_090569"
+        name="isSubclavianStealSyndrome"
+        label="{{'neckMRT.vessels.subclavianStealSyndrome.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSubclavianStealSyndrome"
+        rrContentReset="isSubclavianStealSyndromeBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="isSubclavianStealSyndromeBlock"
+        [rrDisable]="!model.isSubclavianStealSyndrome"
+      >
+        <p-checkbox
+          rr-id="nec_m_090570"
+          name="isSuspicionOf"
+          label="{{'neckMRT.vessels.suspicionOf.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSuspicionOf"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div
+      class="o-radio-list"
+      id="aneurysmBlock2"
+      *ngIf="model.pathologyType === pathologyType.Aneurysm"
+    >
+      <h2 rr-id="nec_m_090571">
+        {{'neckMRT.vessels.type.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="nec_m_090572"
+        rrUnClickRadio
+        name="characterizationType"
+        [value]="characterizationType.DissectingAneurysm"
+        label="{{'neckMRT.vessels.dissectingAneurysm.value' | translate}}"
+        [(ngModel)]="model.characterizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_090573"
+        rrUnClickRadio
+        name="characterizationType"
+        [value]="characterizationType.FalseAneurysm"
+        label="{{'neckMRT.vessels.falseAneurysm2.value' | translate}}"
+        [(ngModel)]="model.characterizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_090574"
+        rrUnClickRadio
+        name="characterizationType"
+        [value]="characterizationType.TrueAneurysm"
+        label="{{'neckMRT.vessels.trueAneurysm.value' | translate}}"
+        [(ngModel)]="model.characterizationType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</div>

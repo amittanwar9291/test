@@ -1,0 +1,145 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-2 f-vertical c-sep c-pad-r col-h-100">
+    <h2 rr-id="elb_m_060206" class="m-b-12">
+      {{ 'elbowMRT.tendonsAndMuscles.pathology.value' | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 f-vertical c-pad-r c-sep o-list">
+        <div class="o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="elb_m_060209"
+            label="{{ 'elbowMRT.tendonsAndMuscles.rupture.value' | translate }}"
+            name="pathologyType"
+            [value]="pathologyType.Rupture"
+            [(ngModel)]="model.pathologyType"
+            rrContentReset="rupture-block"
+            rrValidation="pathologyType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="elb_m_060210"
+            label="{{ 'elbowMRT.tendonsAndMuscles.enthesiopathy2.value' | translate }}"
+            name="pathologyType"
+            [value]="pathologyType.Enthesiopathy"
+            [(ngModel)]="model.pathologyType"
+            rrContentReset="enthesiopathy-block"
+            rrValidation="pathologyType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="elb_m_060207"
+            label="{{ 'elbowMRT.tendonsAndMuscles.subluxation.value' | translate }}"
+            name="pathologyType"
+            [value]="pathologyType.Subluxation"
+            [(ngModel)]="model.pathologyType"
+            rrContentReset="enthesiopathy-block rupture-block"
+            rrValidation="pathologyType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 f-vertical c-pad-l">
+        <ng-container *ngIf="model.pathologyType === pathologyType.Rupture">
+          <div id="enthesiopathy-block" class="o-list">
+            <div class="o-radio-list f-vertical m-b-32">
+              <h2 rr-id="elb_m_060323">
+                {{ 'elbowMRT.tendonsAndMuscles.extentTear.value' | translate }}
+              </h2>
+              <p-radioButton
+                rr-id="elb_m_060324"
+                label="{{ 'elbowMRT.tendonsAndMuscles.partialTear.value' | translate }}"
+                name="scopeType"
+                [value]="scopeType.PartiaTear"
+                rrUnClickRadio
+                rrContentReset="completeTear-block"
+                [(ngModel)]="model.scopeType"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="elb_m_060326"
+                label="{{ 'elbowMRT.tendonsAndMuscles.completeTear.value' | translate }}"
+                name="scopeType"
+                [value]="scopeType.CompleteTear"
+                rrUnClickRadio
+                rrContentReset="completeTear-block"
+                [(ngModel)]="model.scopeType"
+              ></p-radioButton>
+              <div
+                id="completeTear-block"
+                class="o-radio-list nested-content"
+                [rrDisable]="model.scopeType !== scopeType.CompleteTear"
+              >
+                <p-checkbox
+                  rr-id="elb_m_060327"
+                  label="{{ 'elbowMRT.tendonsAndMuscles.bonyAvulsion.value' | translate }}"
+                  name="isBonyAvulsion"
+                  [(ngModel)]="model.isBonyAvulsion"
+                  binary="true"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="elb_m_060328"
+                  label="{{ 'elbowMRT.tendonsAndMuscles.retraction.value' | translate }}"
+                  name="isRetraction"
+                  [(ngModel)]="model.isRetraction"
+                  rrContentReset="isRetraction-block"
+                  binary="true"
+                ></p-checkbox>
+                <div
+                  id="isRetraction-block"
+                  class="o-radio-list nested-content"
+                  [rrDisable]="!model.isRetraction"
+                >
+                  <rr-number-input
+                    [label]="'elbowMRT.tendonsAndMuscles.inMm.value' | translate"
+                    [inputRrId]="'elb_m_060329'"
+                    [labelRrId]="'elb_m_060330'"
+                    [(ngModel)]="model.retractionInMm"
+                    name="retractionInMm"
+                    [config]="{ min: 1, max: 200 }"
+                  ></rr-number-input>
+                </div>
+              </div>
+            </div>
+            <div class="o-radio-list f-vertical">
+              <h2 rr-id="elb_m_060337">
+                {{ 'elbowMRT.tendonsAndMuscles.tendonPortion.value' | translate
+                }}
+              </h2>
+              <p-checkbox
+                rr-id="elb_m_060338"
+                label="{{ 'elbowMRT.tendonsAndMuscles.superficial.value' | translate }}"
+                name="isSuperficial"
+                [(ngModel)]="model.isSuperficial"
+                binary="true"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="elb_m_060339"
+                label="{{ 'elbowMRT.tendonsAndMuscles.deep.value' | translate }}"
+                name="isDeep"
+                [(ngModel)]="model.isDeep"
+                binary="true"
+              ></p-checkbox>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="model.pathologyType === pathologyType.Enthesiopathy"
+        >
+          <div id="rupture-block">
+            <div class="o-radio-list f-vertical">
+              <h2 rr-id="elb_m_0603107">
+                {{ 'elbowMRT.tendonsAndMuscles.detailsEnthesiopathy.value' |
+                translate }}
+              </h2>
+              <p-checkbox
+                rr-id="elb_m_060340"
+                label="{{ 'elbowMRT.tendonsAndMuscles.bursitisOlecranii.value' | translate }}"
+                name="isBursitisOlecranii"
+                [(ngModel)]="model.isBursitisOlecranii"
+                binary="true"
+              ></p-checkbox>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical c-sep c-pad"></div>
+  <div class="c-col-1 f-vertical c-pad-l"></div>
+</div>

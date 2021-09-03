@@ -1,0 +1,202 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+    <h2
+      rr-id="hip_m_040204"
+      rrValidation="hipSpecificLocalizations"
+      class="m-t-5"
+    >
+      {{'hipMRT.bones.localization.value' | translate}}*
+    </h2>
+    <rr-hips-small
+      rr-id="hip_m_040205"
+      name="hipSpecificLocalizations"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipSpecificLocalizations"
+      rrValidation="hipSpecificLocalizations"
+      isLocalizer="true"
+      [elementUpdate]="applyFemoralNeckLogic()"
+      class="m-b-5"
+    >
+    </rr-hips-small>
+    <div class="o-radio-list" [rrDisable]="!isAnyFemoralNeckSelected">
+      <h2 rr-id="hip_m_040207">{{'hipMRT.bones.part.value' | translate}}*</h2>
+      <p-radioButton
+        rr-id="hip_m_040208"
+        name="partType"
+        [value]="partType.Medial"
+        label="{{'hipMRT.bones.medial.value' | translate}}"
+        [(ngModel)]="model.partType"
+        rrValidation="partType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_040209"
+        name="partType"
+        [value]="partType.Lateral"
+        label="{{'hipMRT.bones.lateral.value' | translate}}"
+        [(ngModel)]="model.partType"
+        rrValidation="partType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="f-vertical c-sep c-pad-l">
+    <h2 rr-id="hip_m_040340" class="m-b-10 m-t-5">
+      {{'hipMRT.bones.associatedFindings.value' | translate}}
+    </h2>
+    <div class="o-radio-list f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+        <p-checkbox
+          rr-id="hip_m_040341"
+          name="isBoneMarrowEdema"
+          label="{{'hipMRT.bones.boneMarrowEdema.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isBoneMarrowEdema"
+          rrContentReset="isBoneMarrowEdemaBlock"
+          (onChange)="applyFemoralNeckLogic()"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content m-b-20"
+          [rrDisable]="!model.isBoneMarrowEdema || !isAnyFemoralNeckSelected"
+          id="isBoneMarrowEdemaBlock"
+        >
+          <h3 rr-id="hip_m_040342" rrInfoIcon="hip_m_04_05">
+            {{'hipMRT.bones.expansion.value' | translate}}
+          </h3>
+          <p-radioButton
+            rr-id="hip_m_040343"
+            rrUnClickRadio
+            name="expansionType"
+            [value]="expansionType.BelowEqual6Mm"
+            label="{{'hipMRT.bones.belowEqual6Mm.value' | translate}}"
+            [(ngModel)]="model.expansionType"
+            (onClick)="applyFemoralNeckLogic()"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040344"
+            rrUnClickRadio
+            name="expansionType"
+            [value]="expansionType.Over6Mm"
+            label="{{'hipMRT.bones.over6Mm.value' | translate}}"
+            [(ngModel)]="model.expansionType"
+            (onClick)="applyFemoralNeckLogic()"
+          >
+          </p-radioButton>
+        </div>
+        <p-checkbox
+          rr-id="hip_m_040345"
+          name="isPeriostealEdema"
+          label="{{'hipMRT.bones.periostealEdema.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPeriostealEdema"
+          class="m-b-20"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_040346"
+          name="isT1wHypointenseLinePerpendicular"
+          label="{{'hipMRT.bones.t1wHypointenseLinePerpendicularTo.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isT1wHypointenseLinePerpendicular"
+          rrContentReset="t1wHypointenseLinePerpendicularToBlock"
+          (onChange)="applyFemoralNeckLogic()"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isT1wHypointenseLinePerpendicular"
+          id="t1wHypointenseLinePerpendicularToBlock"
+        >
+          <div class="o-radio-list" [rrDisable]="!isAnyFemoralNeckSelected">
+            <h3 rr-id="hip_m_040347" class="text-break">
+              {{'hipMRT.bones.expansionCoronalMeasurement.value' | translate}}
+            </h3>
+            <p-radioButton
+              rr-id="hip_m_040348"
+              rrUnClickRadio
+              name="expansionCoronalType"
+              [value]="expansionCoronalType.Below50"
+              label="{{'hipMRT.bones.below50.value' | translate}}"
+              [(ngModel)]="model.expansionCoronalType"
+              (onClick)="applyFemoralNeckLogic()"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hip_m_040349"
+              rrUnClickRadio
+              name="expansionCoronalType"
+              [value]="expansionCoronalType.EqualOver50"
+              label="{{'hipMRT.bones.equalOver50.value' | translate}}"
+              [(ngModel)]="model.expansionCoronalType"
+              (onClick)="applyFemoralNeckLogic()"
+            >
+            </p-radioButton>
+          </div>
+          <h3 rr-id="hip_m_040350">
+            {{'hipMRT.bones.expansion2.value' | translate}}
+          </h3>
+          <rr-number-input
+            inputRrId="hip_m_040352"
+            labelRrId="hip_m_040351"
+            name="expansionInMm"
+            label="{{'hipMRT.bones.inMm.value' | translate}}"
+            [config]="{min: 1, max: 30}"
+            [(ngModel)]="model.expansionInMm"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list">
+        <div class="o-radio-list" [rrDisable]="!isAnyFemoralNeckSelected">
+          <h3
+            rr-id="hip_m_040435"
+            rrInfoIcon="hip_m_04_06"
+            class="text-break m-b-15"
+          >
+            {{'hipMRT.bones.classificationAccordingToRohenaQuinquilla.value' |
+            translate}}
+          </h3>
+          <p-radioButton
+            rr-id="hip_m_040436"
+            name="classificationRohenaQuinquillaType"
+            [value]="classificationRohenaQuinquillaType.Grade1"
+            label="{{'hipMRT.bones.grade.value' | translate}} 1"
+            [(ngModel)]="model.classificationRohenaQuinquillaType"
+            class="radiobutton-readonly"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040437"
+            name="classificationRohenaQuinquillaType"
+            [value]="classificationRohenaQuinquillaType.Grade2"
+            label="{{'hipMRT.bones.grade.value' | translate}} 2"
+            [(ngModel)]="model.classificationRohenaQuinquillaType"
+            class="radiobutton-readonly"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040438"
+            name="classificationRohenaQuinquillaType"
+            [value]="classificationRohenaQuinquillaType.Grade3"
+            label="{{'hipMRT.bones.grade.value' | translate}} 3"
+            [(ngModel)]="model.classificationRohenaQuinquillaType"
+            class="radiobutton-readonly"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040439"
+            name="classificationRohenaQuinquillaType"
+            [value]="classificationRohenaQuinquillaType.Grade4"
+            label="{{'hipMRT.bones.grade.value' | translate}} 4"
+            [(ngModel)]="model.classificationRohenaQuinquillaType"
+            class="radiobutton-readonly"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list"></div>
+</div>

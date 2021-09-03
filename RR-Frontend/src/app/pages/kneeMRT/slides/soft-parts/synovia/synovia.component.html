@@ -1,0 +1,339 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list">
+    <h2 rr-id="kne_m_080210" class="m-t-1 m-b-13">
+      {{'kneeMRT.softParts.focalSynovialMass.value' | translate}}
+    </h2>
+    <p
+      rr-id="kne_m_080211"
+      rrValidation="location"
+      noUpdate="true"
+      class="m-b-2"
+    >
+      {{'kneeMRT.softParts.locationKneeCompartmentsMultiple.value' | translate}}
+    </p>
+    <rr-knee-compartment
+      class="m-b-31"
+      rrValidation="location"
+      isLocalizer="true"
+      name="location"
+      [(ngModel)]="model.location"
+    ></rr-knee-compartment>
+    <h2 class="locationTissueLayer__header" rr-id="kne_m_080213">
+      {{'kneeMRT.softParts.locationTissueLayer.value' | translate}}
+    </h2>
+    <p rr-id="kne_m_080214">{{'kneeMRT.softParts.joint.value' | translate}}</p>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080215"
+      name="hingeType"
+      label="{{'kneeMRT.softParts.intracapsular.value' | translate}}"
+      [value]="hingeTypeEnum.Intracapsular"
+      [(ngModel)]="model.hingeType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080216"
+      name="hingeType"
+      label="{{'kneeMRT.softParts.extracapsular.value' | translate}}"
+      [value]="hingeTypeEnum.Extracapsular"
+      [(ngModel)]="model.hingeType"
+    ></p-radioButton>
+    <p rr-id="kne_m_080217">
+      {{'kneeMRT.softParts.synovia.value' | translate}}
+    </p>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080218"
+      name="synoviaType"
+      label="{{'kneeMRT.softParts.intrasynovial.value' | translate}}"
+      [value]="synoviaTypeEnum.Intrasynovial"
+      [(ngModel)]="model.synoviaType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080219"
+      name="synoviaType"
+      label="{{'kneeMRT.softParts.extrasynovial.value' | translate}}"
+      [value]="synoviaTypeEnum.Extrasynovial"
+      [(ngModel)]="model.synoviaType"
+    ></p-radioButton>
+  </div>
+
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list">
+    <div
+      class="f-vertical f-start o-radio-list m-t-2 m-b-21"
+      [rrDisable]="model.descriptionType !== 'IKnow'"
+    >
+      <h2 rr-id="kne_m_080312">
+        {{'kneeMRT.softParts.differentialDiagnosis.value' | translate}}
+      </h2>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        isActiveOnIKnow="true"
+        [options]="diagnosisList"
+        [(ngModel)]="model.differentialDiagnosis"
+        name="differentialDiagnosis"
+        rrId="kne_m_080314"
+        (selectionChanged)="clearIsSecondary()"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <h2 rr-id="kne_m_080315">
+      {{'kneeMRT.softParts.signalBehaviourT1w.value' | translate}}
+    </h2>
+    <rr-slider-number-triple-input
+      name="t1w"
+      rr-id="kne_m_080315"
+      [(ngModel)]="model.t1w"
+    >
+    </rr-slider-number-triple-input>
+    <h2 class="m-t-13" rr-id="kne_m_080316">
+      {{'kneeMRT.softParts.signalBehaviourT2w.value' | translate}}
+    </h2>
+    <rr-slider-number-triple-input
+      name="t2w"
+      rr-id="kne_m_080316"
+      [(ngModel)]="model.t2w"
+    >
+    </rr-slider-number-triple-input>
+    <h2 class="m-t-17" rr-id="kne_m_080317">
+      {{'kneeMRT.softParts.susceptibilityArtifacts.value' | translate}}
+    </h2>
+    <p-checkbox
+      name="isBloomingArtifact"
+      rr-id="kne_m_080318"
+      label="{{'kneeMRT.softParts.bloomingArtifact.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isBloomingArtifact"
+    ></p-checkbox>
+    <div class="o-radio-list" [rrDisable]="!isCMReinforcedTypeYes">
+      <h2 class="p-t-13" rr-id="kne_m_080319">
+        {{'kneeMRT.softParts.cMEnhancement.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="kne_m_0803249"
+        name="synoviaCMEnhancementType"
+        label="{{'kneeMRT.softParts.no.value' | translate}}"
+        [value]="synoviaCMEnhancementType.No"
+        [(ngModel)]="model.synoviaCMEnhancementType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="kne_m_0803250"
+        name="synoviaCMEnhancementType"
+        label="{{'kneeMRT.softParts.weak.value' | translate}}"
+        [value]="synoviaCMEnhancementType.Weak"
+        [(ngModel)]="model.synoviaCMEnhancementType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="kne_m_0803251"
+        name="synoviaCMEnhancementType"
+        label="{{'kneeMRT.softParts.strong.value' | translate}}"
+        [value]="synoviaCMEnhancementType.Strong"
+        [(ngModel)]="model.synoviaCMEnhancementType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list">
+    <h2 rr-id="kne_m_080401">
+      {{'kneeMRT.softParts.shape.value' | translate}}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080402"
+      name="synoviaShapeType"
+      [value]="synoviaShapeTypeEnum.Multilobulated"
+      label="{{'kneeMRT.softParts.multilobulated.value' | translate}}"
+      rrContentReset="isSynovialNodulusGreaterThan1Lesions-block"
+      [(ngModel)]="model.synoviaShapeType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rrContentReset="isSynovialNodulusGreaterThan1Lesions-block"
+      rr-id="kne_m_080403"
+      name="synoviaShapeType"
+      [value]="synoviaShapeTypeEnum.SynovialNodulus"
+      label="{{'kneeMRT.softParts.synovialNodulus.value' | translate}}"
+      [(ngModel)]="model.synoviaShapeType"
+    ></p-radioButton>
+    <div
+      id="isSynovialNodulusGreaterThan1Lesions-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [class.disabled]="isSynovialNodulusGreaterThan1LesionsDisabled()"
+    >
+      <p-checkbox
+        name="isSynovialNodulusGreaterThan1Lesions"
+        rr-id="kne_m_080404"
+        label="{{'kneeMRT.softParts.lesions.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSynovialNodulusGreaterThan1Lesions"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080405"
+      name="synoviaShapeType"
+      rrContentReset="isSynovialNodulusGreaterThan1Lesions-block"
+      [value]="synoviaShapeTypeEnum.SynovialProliferations"
+      label="{{'kneeMRT.softParts.synovialProliferations.value' | translate}}"
+      [(ngModel)]="model.synoviaShapeType"
+    ></p-radioButton>
+    <h2 class="m-t-14" rr-id="kne_m_080406">
+      {{'kneeMRT.softParts.internalStructure.value' | translate}}
+    </h2>
+    <p-checkbox
+      name="isNecrosis"
+      rr-id="kne_m_080407"
+      class="m-b-20"
+      label="{{'kneeMRT.softParts.necrosis.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isNecrosis"
+    ></p-checkbox>
+    <p-checkbox
+      labelStyleClass="ui-fat-label"
+      rrContentReset="isLooseBodyGreaterThan1Lesions-block"
+      name="isLooseBody"
+      rr-id="kne_m_080408"
+      label="{{'kneeMRT.softParts.looseBody.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isLooseBody"
+    ></p-checkbox>
+    <div
+      id="isLooseBodyGreaterThan1Lesions-block"
+      class="f-vertical f-start o-radio-list nested-content m-b-25"
+      [rrDisable]="!model.isLooseBody"
+    >
+      <p-checkbox
+        name="isLooseBodyGreaterThan1Lesions"
+        rr-id="kne_m_080409"
+        label="{{'kneeMRT.softParts.lesions.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLooseBodyGreaterThan1Lesions"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      name="isBonyErosions"
+      rr-id="kne_m_080410"
+      class="text-break"
+      label="{{'kneeMRT.softParts.bonyErosions(insertionOf.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isBonyErosions"
+    ></p-checkbox>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad-l o-radio-list">
+    <h2 rr-id="kne_m_080501" class="m-t-2">
+      {{'kneeMRT.softParts.distributionPatterns.value' | translate}}
+    </h2>
+    <p-radioButton
+      rrUnClickRadio
+      rr-id="kne_m_080502"
+      name="distributionPatternsType"
+      rrContentReset="distributionPatternsTypeFocal-block"
+      value="Diffuse"
+      label="{{'kneeMRT.softParts.diffuse.value' | translate}}"
+      [(ngModel)]="model.distributionPatternsType"
+    ></p-radioButton>
+    <p-radioButton
+      rrUnClickRadio
+      rrContentReset="distributionPatternsTypeFocal-block"
+      rr-id="kne_m_080503"
+      name="distributionPatternsType"
+      value="Focal"
+      label="{{'kneeMRT.softParts.focal.value' | translate}}"
+      [(ngModel)]="model.distributionPatternsType"
+    ></p-radioButton>
+    <div
+      id="distributionPatternsTypeFocal-block"
+      class="f-vertical f-start o-radio-list nested-content m-b-18"
+      [class.disabled]="isFocalTypeDisable()"
+    >
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="kne_m_080504"
+        name="focalType"
+        value="HoffaFatBody"
+        label="{{'kneeMRT.softParts.hoffaFatBody.value' | translate}}"
+        [(ngModel)]="model.focalType"
+      ></p-radioButton>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="kne_m_080505"
+        name="focalType"
+        value="SuprapatellarRecess"
+        label="{{'kneeMRT.softParts.suprapatellarRecess.value' | translate}}"
+        [(ngModel)]="model.focalType"
+      ></p-radioButton>
+    </div>
+    <h2 rr-id="kne_m_080506">
+      {{'kneeMRT.softParts.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+    >
+      <p rr-id="kne_m_080508" class="m-b-2">
+        {{'kneeMRT.softParts.differentialDiagnosis01.value' | translate}}
+      </p>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="diagnosisList"
+        [(ngModel)]="model.differentialDiagnosis01"
+        name="differentialDiagnosis01"
+        rrId="kne_m_080509"
+        [parentViewModel]="model"
+        (selectionChanged)="clearIsSecondary()"
+        rrValidation="differentialDiagnosis01"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="shouldDifferentialDiagnosis2BeDisabled()"
+    >
+      <p rr-id="kne_m_080510" class="m-b-5">
+        {{'kneeMRT.softParts.differentialDiagnosis02.value' | translate}}
+      </p>
+
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="diagnosisList"
+        [(ngModel)]="model.differentialDiagnosis02"
+        name="differentialDiagnosis02"
+        (selectionChanged)="clearIsSecondary()"
+        rrId="kne_m_080510"
+        [parentViewModel]="model"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <p-checkbox
+      [rrDisable]="model.differentialDiagnosis02 === 'None'"
+      name="isSecondary"
+      rr-id="kne_m_080512"
+      class="m-b-26"
+      label="{{'kneeMRT.softParts.secondary.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isSecondary"
+    ></p-checkbox>
+    <h2 rr-id="kne_m_080513">
+      {{'kneeMRT.softParts.associatedFindings.value' | translate}}
+    </h2>
+    <p-checkbox
+      name="isHaemarthros"
+      rr-id="kne_m_080514"
+      label="{{'kneeMRT.softParts.haemarthros.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isHaemarthros"
+    ></p-checkbox>
+    <p-checkbox
+      name="isArticularEffusion"
+      rr-id="kne_m_080515"
+      label="{{'kneeMRT.softParts.jointEffusion.value' | translate}}"
+      binary="true"
+      [(ngModel)]="model.isArticularEffusion"
+    ></p-checkbox>
+  </div>
+</div>

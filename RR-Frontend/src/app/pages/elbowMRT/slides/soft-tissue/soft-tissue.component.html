@@ -1,0 +1,106 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="elb_m_070103" class="m-b-17">
+        {{'elbowMRT.softTissue.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="elb_m_070104"
+        label="{{'elbowMRT.softTissue.noJointEffusionRegularImaging.value' | translate}}"
+        rrUnClickRadio
+        name="areFindings"
+        [value]="areFindings.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070105"
+        label="{{'elbowMRT.softTissue.finding.value' | translate}}"
+        rrUnClickRadio
+        name="areFindings"
+        [value]="areFindings.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        class="m-b-21"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingHandlerComponent'"
+        [setDescriptionTypes]="['SoftTissueTumor']"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div
+      class="f-vertical f-space-between"
+      [class.c-pad-l]="findingHandler.currentItem.findingType !== findingType.SoftTissueTumor"
+    >
+      <div
+        class="f-vertical f-start"
+        [ngClass]="this.findingHandler.currentItem.findingType === findingType.SoftTissueTumor ? 'c-pad-l m-h-50': 'm-h-113'"
+      >
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="elb_m_070201"
+        >
+          {{'elbowMRT.softTissue.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        class="f-fill-available-space"
+        [ngSwitch]="findingHandler.currentItem.findingType"
+      >
+        <div
+          *ngSwitchCase="findingType.None"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-soft-tissue-tumor
+          *ngSwitchCase="findingType.SoftTissueTumor"
+          [model]="findingHandler.currentItem"
+          [differentialDiagnosis1Options]="differentialDiagnosis1Options"
+          [differentialDiagnosis2Options]="differentialDiagnosis2Options"
+          [isTechnologyCMReinforcedChecked]="isTechnologyCMReinforcedChecked"
+        ></rr-soft-tissue-tumor>
+        <rr-hematoma
+          *ngSwitchCase="findingType.Hematoma"
+          [model]="findingHandler.currentItem"
+        ></rr-hematoma>
+        <rr-abcess
+          *ngSwitchCase="findingType.Abcess"
+          [model]="findingHandler.currentItem"
+        ></rr-abcess>
+        <rr-articular-effusion
+          *ngSwitchCase="findingType.ArticularEffusion"
+          [model]="findingHandler.currentItem"
+        ></rr-articular-effusion>
+        <rr-bursitis
+          *ngSwitchCase="findingType.Bursitis"
+          [model]="findingHandler.currentItem"
+        ></rr-bursitis>
+        <rr-neuritis
+          *ngSwitchCase="findingType.Neuritis"
+          [model]="findingHandler.currentItem"
+          [isTechnologyCMReinforcedChecked]="isTechnologyCMReinforcedChecked"
+        ></rr-neuritis>
+        <rr-aneurysm
+          *ngSwitchCase="findingType.Aneurysm"
+          [model]="findingHandler.currentItem"
+        ></rr-aneurysm>
+      </div>
+    </div>
+  </div>
+</form>

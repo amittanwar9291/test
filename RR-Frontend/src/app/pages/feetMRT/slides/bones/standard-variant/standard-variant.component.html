@@ -1,0 +1,114 @@
+<div class="f-horizontal f-start col-h-555">
+  <div class="c-col-2 c-pad f-start f-vertical c-sep col-h-100">
+    <h2 rr-id="anc_m_040202" class="m-b-15">
+      {{ "feetMRT.bones.type.value" | translate }}
+    </h2>
+    <div class="c-col-2 c-sep f-start f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="anc_m_040203"
+          label="{{ 'feetMRT.bones.ossaAccessoriaPedis.value' | translate }}"
+          name="standardVariantType"
+          rrValidation="standardVariantType"
+          [value]="standardVariantType.OssaAccessoriaPedis"
+          [(ngModel)]="model.standardVariantType"
+          (ngModelChange)="clearLocalizer()"
+          [rrContentReset]="resetCoalitionBlock(standardVariantType.OssaAccessoriaPedis)"
+        ></p-radioButton>
+        <rr-feet-three-sides-view-simple
+          rr-id="anc_m_040204"
+          [model]="model.footThreeSidesLocalization"
+          (click)="openLargeLocalizer()"
+          name="footThreeSidesLocalization"
+          rrValidation="footThreeSidesLocalization"
+          isLocalizer="true"
+          [rrDisable]="
+            model.standardVariantType !==
+            standardVariantType.OssaAccessoriaPedis
+          "
+        ></rr-feet-three-sides-view-simple>
+      </div>
+      <div class="c-col-1 c-sep c-pad f-vertical f-start">
+        <p-radioButton
+          class="m-b-5"
+          rr-id="anc_m_0403200"
+          label="{{ 'feetMRT.bones.coalition.value' | translate }}"
+          name="standardVariantType"
+          [rrContentReset]="resetCoalitionBlock(standardVariantType.Coalition)"
+          rrValidation="standardVariantType"
+          [value]="standardVariantType.Coalition"
+          (ngModelChange)="clearLocalizer()"
+          [(ngModel)]="model.standardVariantType"
+        ></p-radioButton>
+        <div
+          class="o-radio-list"
+          id="coalitionBlock"
+          [rrDisable]="
+            model.standardVariantType !== standardVariantType.Coalition
+          "
+        >
+          <p rr-id="anc_m_0403201">
+            {{ "feetMRT.bones.type.value" | translate }}
+          </p>
+          <p-radioButton
+            rr-id="anc_m_040302"
+            label="{{ 'feetMRT.bones.calcaneonavicularCoalition.value' | translate }}"
+            name="radioulnarSynostosisType"
+            [value]="radioulnarSynostosisType.CalcaneonavicularCoalition"
+            [(ngModel)]="model.radioulnarSynostosisType"
+            rrValidation="radioulnarSynostosisType"
+            [rrContentReset]="resetRadioulnarSynostosisBlock(radioulnarSynostosisType.CalcaneonavicularCoalition)"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="anc_m_040303"
+            label="{{ 'feetMRT.bones.talocalcanearCoalition.value' | translate }}"
+            name="radioulnarSynostosisType"
+            [value]="radioulnarSynostosisType.TalocalcanearCoalition"
+            [(ngModel)]="model.radioulnarSynostosisType"
+            rrValidation="radioulnarSynostosisType"
+            [rrContentReset]="resetRadioulnarSynostosisBlock(radioulnarSynostosisType.TalocalcanearCoalition)"
+          ></p-radioButton>
+          <div
+            id="radioulnarSynostosisBlock"
+            class="nested-content"
+            [rrDisable]="
+              model.radioulnarSynostosisType === radioulnarSynostosisType.None
+            "
+          >
+            <p rr-id="anc_m_040304" class="m-b-10">
+              {{ "feetMRT.bones.synarthrosisType.value" | translate }}
+            </p>
+            <div class="o-radio-list">
+              <p-radioButton
+                rr-id="anc_m_040305"
+                label="{{ 'feetMRT.bones.syndesmosisOrFibrous.value' | translate }}"
+                name="synarthrosisType"
+                [value]="synarthrosisType.SyndesmosisOrFibrous"
+                [(ngModel)]="model.synarthrosisType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="anc_m_040306"
+                label="{{ 'feetMRT.bones.synchondrosisOrCartilagenous.value' | translate }}"
+                name="synarthrosisType"
+                [value]="synarthrosisType.SynchondrosisOrCartilagenous"
+                [(ngModel)]="model.synarthrosisType"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="anc_m_040307"
+                label="{{ 'feetMRT.bones.synostosisOrBony.value' | translate }}"
+                name="synarthrosisType"
+                [value]="synarthrosisType.SynostosisOrBony"
+                [(ngModel)]="model.synarthrosisType"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad"></div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

@@ -1,0 +1,294 @@
+<div class="f-horizontal f-start main o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_c_040217">
+        {{'headCT.vessels.extension.value' | translate}}
+      </h2>
+      <div>
+        <p rr-id="hea_c_040218">
+          {{ "headCT.vessels.maxDiameter.value" | translate }}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.maxDiameterInMm"
+          (announceModelChange)="onMaxDiameterChange()"
+          name="maxDiameterInMm"
+          inputRrId="hea_c_040219"
+          labelRrId="hea_c_040220"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          label="{{ 'headCT.vessels.inMm.value' | translate }}"
+        >
+        </rr-number-input>
+      </div>
+      <div [rrDisable]="!model.maxDiameterInMm">
+        <p rr-id="hea_c_040221">
+          {{ "headCT.vessels.2ndPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.secondPlaneInMm"
+          (announceModelChange)="onSize2ndPlaneChange()"
+          name="secondPlaneInMm"
+          inputRrId="hea_c_040222"
+          labelRrId="hea_c_040223"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          label="{{ 'headCT.vessels.inMm.value' | translate }}"
+        >
+        </rr-number-input>
+      </div>
+      <div [rrDisable]="!model.secondPlaneInMm">
+        <p rr-id="hea_c_040224">
+          {{ "headCT.vessels.3rdPlane.value" | translate }}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.thirdPlaneInMm"
+          name="thirdPlaneInMm"
+          inputRrId="hea_c_040225"
+          labelRrId="hea_c_040226"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          label="{{ 'headCT.vessels.inMm.value' | translate }}"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        class="m-t-25"
+        rr-id="hea_c_040227"
+        name="isMultipleLesions"
+        label="{{'headCT.vessels.multipleLesions.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMultipleLesions"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_c_0403153">
+        {{'headCT.vessels.pattern2.value' | translate}}
+      </h2>
+      <p-radioButton
+        rrInfoIcon="hea_c_04_02"
+        rr-id="hea_c_0403154"
+        label="{{'headCT.vessels.lacunary.value' | translate}}"
+        name="ischemicAreaPatternType"
+        rrUnClickRadio
+        [value]="ischemicAreaPatternTypeEnum.Lacunary"
+        [(ngModel)]="model.ischemicAreaPatternType"
+        rrContentReset="lacunaryDetailsContainer territorialDetailsContainer borderZoneDetailsContainer"
+      >
+      </p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="lacunaryDetailsContainer"
+        [rrDisable]="model.ischemicAreaPatternType !== ischemicAreaPatternTypeEnum.Lacunary"
+      >
+        <p-checkbox
+          rr-id="hea_c_0403155"
+          name="isPerifocalGliosis"
+          label="{{'headCT.vessels.perifocalGliosis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPerifocalGliosis"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rrInfoIcon="hea_c_04_03"
+          rr-id="hea_c_0403156"
+          name="isEtatLacunaire"
+          label="{{'headCT.vessels.etatLacunaire.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isEtatLacunaire"
+        >
+        </p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="hea_c_0403157"
+        label="{{'headCT.vessels.territorial.value' | translate}}"
+        name="ischemicAreaPatternType"
+        rrUnClickRadio
+        [value]="ischemicAreaPatternTypeEnum.Territorial"
+        [(ngModel)]="model.ischemicAreaPatternType"
+        rrContentReset="lacunaryDetailsContainer territorialDetailsContainer borderZoneDetailsContainer"
+      >
+      </p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="territorialDetailsContainer"
+        [rrDisable]="model.ischemicAreaPatternType !== ischemicAreaPatternTypeEnum.Territorial"
+      >
+        <p-checkbox
+          rr-id="hea_c_0403158"
+          name="isTerritorialPatternWedgeShapedConfiguration"
+          label="{{'headCT.vessels.wedgeShapedConfiguration.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isTerritorialPatternWedgeShapedConfiguration"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0403159"
+          name="isWhiteMatterAffected"
+          label="{{'headCT.vessels.whiteMatterAffected.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isWhiteMatterAffected"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_c_0403160"
+          name="isCortexAffected"
+          label="{{'headCT.vessels.cortexAffected.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCortexAffected"
+        >
+        </p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="hea_c_0403161"
+        label="{{'headCT.vessels.borderZone.value' | translate}}"
+        name="ischemicAreaPatternType"
+        rrUnClickRadio
+        [value]="ischemicAreaPatternTypeEnum.BorderZone"
+        [(ngModel)]="model.ischemicAreaPatternType"
+        rrContentReset="lacunaryDetailsContainer territorialDetailsContainer borderZoneDetailsContainer"
+      >
+      </p-radioButton>
+      <div
+        class="nested-content o-radio-list"
+        id="borderZoneDetailsContainer"
+        [rrDisable]="model.ischemicAreaPatternType !== ischemicAreaPatternTypeEnum.BorderZone"
+      >
+        <p-checkbox
+          rr-id="hea_c_0403162"
+          name="isStringOfPearlsAspect"
+          label="{{'headCT.vessels.stringOfPearlsAspect.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isStringOfPearlsAspect"
+        >
+        </p-checkbox>
+      </div>
+      <p-radioButton
+        rr-id="hea_c_0403163"
+        label="{{'headCT.vessels.cortical.value' | translate}}"
+        name="ischemicAreaPatternType"
+        rrUnClickRadio
+        [value]="ischemicAreaPatternTypeEnum.Cortical"
+        [(ngModel)]="model.ischemicAreaPatternType"
+        rrContentReset="lacunaryDetailsContainer territorialDetailsContainer borderZoneDetailsContainer"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="m-l-10 o-radio-list" [rrDisable]="!isCMYes">
+      <h2 rr-id="hea_c_0404206" rrInfoIcon="hea_c_04_07">
+        {{'headCT.vessels.contrastEnhancement.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_0404124"
+        label="{{'headCT.vessels.meningealEnhancement.value' | translate}}"
+        name="contrastEnhancementType"
+        rrUnClickRadio
+        [value]="contrastEnhancementTypeEnum.MeningealEnhancement"
+        [(ngModel)]="model.contrastEnhancementType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_0404125"
+        label="{{'headCT.vessels.parenchymalEnhancement.value' | translate}}"
+        name="contrastEnhancementType"
+        rrUnClickRadio
+        [value]="contrastEnhancementTypeEnum.ParenchymalEnhancement"
+        [(ngModel)]="model.contrastEnhancementType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-10">
+    <div class="m-l-10 o-radio-list">
+      <h2
+        rr-id="hea_c_040505"
+        rrInfoIcon="hea_c_04_08"
+        infoIconPdfLandscape="true"
+      >
+        {{'headCT.vessels.infarctStage.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_040506"
+        label="{{'headCT.vessels.earlyHyperacute.value' | translate}}"
+        name="infarctStageType"
+        rrUnClickRadio
+        [value]="infarctStageTypeEnum.EarlyHyperacute"
+        [(ngModel)]="model.infarctStageType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_040507"
+        label="{{'headCT.vessels.lateHyperacute.value' | translate}}"
+        name="infarctStageType"
+        rrUnClickRadio
+        [value]="infarctStageTypeEnum.LateHyperacute"
+        [(ngModel)]="model.infarctStageType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_040508"
+        label="{{'headCT.vessels.acute.value' | translate}}"
+        name="infarctStageType"
+        rrUnClickRadio
+        [value]="infarctStageTypeEnum.Acute"
+        [(ngModel)]="model.infarctStageType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_040509"
+        label="{{'headCT.vessels.subacute.value' | translate}}"
+        name="infarctStageType"
+        rrUnClickRadio
+        [value]="infarctStageTypeEnum.Subacute"
+        [(ngModel)]="model.infarctStageType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_040510"
+        label="{{'headCT.vessels.chronic.value' | translate}}"
+        name="infarctStageType"
+        rrUnClickRadio
+        [value]="infarctStageTypeEnum.Chronic"
+        [(ngModel)]="model.infarctStageType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_040511"
+        label="{{'headCT.vessels.cannotBeDetermined.value' | translate}}"
+        name="infarctStageType"
+        rrUnClickRadio
+        [value]="infarctStageTypeEnum.CannotBeDetermined"
+        [(ngModel)]="model.infarctStageType"
+      >
+      </p-radioButton>
+
+      <p-checkbox
+        class="m-t-40"
+        rr-id="hea_c_040512"
+        name="isInfarctionDemarked"
+        label="{{'headCT.vessels.infarctionDemarked.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isInfarctionDemarked"
+      >
+      </p-checkbox>
+      <p-checkbox
+        labelStyleClass="text-break"
+        rr-id="hea_c_040513"
+        name="isNoIntracerebralHemorrhage"
+        label="{{'headCT.vessels.noIntracerebralHemorrhage.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isNoIntracerebralHemorrhage"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_040560"
+        name="isCSFIsodense"
+        label="{{'headCT.vessels.cSFIsodense.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCSFIsodense"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    *ngIf="largeLocalizerConfig?.modelName === 'lungsLocation'"
+    class="f-horizontal f-center localizer-margin"
+  >
+    <rr-lungs-complex
+      name="lungsLocation"
+      [(ngModel)]="findingHandler.currentItem.lungsLocation"
+      (close)="onLargeLocalizerClosed()"
+    ></rr-lungs-complex>
+  </div>
+  <div
+    *ngIf="largeLocalizerConfig?.modelName === 'localizationType'"
+    class="f-horizontal f-center"
+  >
+    <rr-aortic-arch-big-localizer
+      name="localizationType"
+      [isArcusAortaeDivided]="false"
+      [isSingleChoice]="true"
+      [(ngModel)]="findingHandler.currentItem.localizationType"
+      (close)="onLargeLocalizerClosed()"
+    >
+    </rr-aortic-arch-big-localizer>
+  </div>
+  <div *ngIf="!largeLocalizerConfig" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="tho_m_040103" class="p-b-7">
+        {{'thoraxMRT.mediastinum.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="tho_m_040104"
+        label="{{'thoraxMRT.mediastinum.mediastinumMediastinalvesselsHeartPericardiumregular.value' | translate}}"
+        name="areFindings"
+        class="text-break"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        labelStyleClass="text-break"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_040105"
+        label="{{'thoraxMRT.mediastinum.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+        class="p-b-3"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findingsHandlerComponent'"
+        validationName="findings"
+        [setDescriptionTypes]="[mediastinumFindingTypeEnum.Mass]"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div
+      class="f-vertical f-start"
+      [class.c-pad-l]="findingHandler.currentItem.findingType !== mediastinumFindingTypeEnum.Mass"
+    >
+      <div class="header">
+        <h1
+          [class.c-pad-l]="findingHandler.currentItem.findingType === mediastinumFindingTypeEnum.Mass"
+          *ngIf="findingHandler.currentItem.findingType !== mediastinumFindingTypeEnum.None"
+          rr-id="tho_m_040201"
+        >
+          {{'thoraxMRT.mediastinum.finding.value' | translate}}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <div class="f-fill-available-space">
+        <div
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.None)"
+          class="c-col-4 f-horizontal f-start col-h-100"
+        >
+          <div class="c-col-1 c-sep c-pad-r col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-sep c-pad col-h-100"></div>
+          <div class="c-col-1 c-pad-l col-h-100"></div>
+        </div>
+
+        <rr-mediastinum-finding
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.Mediastinum)"
+          [model]="findingHandler.currentItem"
+        ></rr-mediastinum-finding>
+
+        <rr-lymph-nodes
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.LymphNodes)"
+          [model]="findingHandler.currentItem"
+        ></rr-lymph-nodes>
+
+        <rr-cardio-pulmonary-arteries
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.CardiovascularPulmonaryArteries)"
+          [model]="findingHandler.currentItem"
+        ></rr-cardio-pulmonary-arteries>
+
+        <rr-cardio-heart
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.CardiovascularHeart)"
+          [model]="findingHandler.currentItem"
+        ></rr-cardio-heart>
+
+        <rr-cardio-thoracic-aorta
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.CardiovascularThoracicAorta)"
+          [model]="findingHandler.currentItem"
+        ></rr-cardio-thoracic-aorta>
+
+        <rr-mass
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.Mass)"
+          [model]="findingHandler.currentItem"
+        ></rr-mass>
+
+        <rr-esuphagus
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.Esuphagus)"
+          [model]="findingHandler.currentItem"
+        ></rr-esuphagus>
+
+        <rr-trachea
+          *ngIf="isCurrentItem(mediastinumFindingTypeEnum.Trachea)"
+          [model]="findingHandler.currentItem"
+        ></rr-trachea>
+      </div>
+    </div>
+  </div>
+</form>

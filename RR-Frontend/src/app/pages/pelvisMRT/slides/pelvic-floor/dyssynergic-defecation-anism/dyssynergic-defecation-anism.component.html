@@ -1,0 +1,159 @@
+<div class="f-horizontal h-555">
+  <div class="c-col-1 c-pad c-sep f-start o-list">
+    <div class="o-radio-list text-break">
+      <p-checkbox
+        rr-id="pel_m_070261"
+        rrInfoIcon="pel_m_07_17"
+        label="{{ 'pelvisMRT.pelvicFloor.anorectalAngle.value' | translate }}"
+        name="isAnorectalAngle"
+        binary="true"
+        [(ngModel)]="model.isAnorectalAngle"
+        rrContentReset="anorectalAngleDetails"
+      ></p-checkbox>
+      <div
+        class="m-l-35"
+        [rrDisable]="!model.isAnorectalAngle"
+        id="anorectalAngleDetails"
+      >
+        <div class="o-radio-list">
+          <p rr-id="pel_m_070246">
+            {{ 'pelvisMRT.pelvicFloor.atRest.value' | translate }}
+          </p>
+          <rr-number-input
+            name="anorectalAngleAtRestInDegrees"
+            inputRrId="pel_m_070247"
+            labelRrId="pel_m_070248"
+            [config]="{inputWidth: 85, labelWidth: 200, min: 108, max: 127}"
+            label="{{ 'pelvisMRT.pelvicFloor.inDegrees.value' | translate }}"
+            [(ngModel)]="model.anorectalAngleAtRestInDegrees"
+            (ngModelChange)="setNumberValues()"
+          >
+          </rr-number-input>
+        </div>
+        <div>
+          <div class="o-radio-list">
+            <div
+              class="o-radio-list m-t-3"
+              [rrDisable]="!model.anorectalAngleAtRestInDegrees"
+            >
+              <p rr-id="pel_m_070249">
+                {{ 'pelvisMRT.pelvicFloor.whilePressing.value' | translate }}
+              </p>
+              <rr-number-input
+                name="anorectalAngleWhilePressingInDegrees"
+                inputRrId="pel_m_070250"
+                labelRrId="pel_m_070251"
+                [config]="{inputWidth: 85, labelWidth: 200, min: 15, max: 20}"
+                label="{{ 'pelvisMRT.pelvicFloor.inDegrees.value' | translate }}"
+                [(ngModel)]="model.anorectalAngleWhilePressingInDegrees"
+                rrValidation="anorectalAngleWhilePressingInDegrees"
+                (ngModelChange)="setNumberValues()"
+              ></rr-number-input>
+            </div>
+
+            <div
+              class="m-t-5 o-radio-list"
+              [rrDisable]="!model.anorectalAngleWhilePressingInDegrees"
+            >
+              <p rr-id="pel_m_070252">
+                {{ 'pelvisMRT.pelvicFloor.duringDefecation.value' | translate }}
+              </p>
+              <rr-number-input
+                name="anorectalAngleDuringDefecationInDegrees"
+                inputRrId="pel_m_070253"
+                labelRrId="pel_m_070254"
+                [config]="{inputWidth: 85, labelWidth: 200, min: 15, max: 20}"
+                label="{{ 'pelvisMRT.pelvicFloor.inDegrees.value' | translate }}"
+                [(ngModel)]="model.anorectalAngleDuringDefecationInDegrees"
+                rrValidation="anorectalAngleDuringDefecationInDegrees"
+                (ngModelChange)="setNumberValues()"
+              ></rr-number-input>
+            </div>
+          </div>
+        </div>
+        <div class="o-radio-list m-t-25">
+          <p rr-id="pel_m_070255">
+            {{ 'pelvisMRT.pelvicFloor.reductionOfTheAnorectalangle.value' |
+            translate }}
+          </p>
+          <rr-number-input
+            name="reductionOfTheAnorectalAngleDuringPressing"
+            inputRrId="pel_m_070256"
+            labelRrId="pel_m_070257"
+            [config]="{inputWidth: 85, labelWidth: 200, readonly: true}"
+            label="{{ 'pelvisMRT.pelvicFloor.inDegrees.value' | translate }}"
+            [(ngModel)]="model.reductionOfTheAnorectalAngleDuringPressing"
+          >
+          </rr-number-input>
+        </div>
+        <div class="m-t-10">
+          <p rr-id="pel_m_070258">
+            {{ 'pelvisMRT.pelvicFloor.openingOfTheAnorectalangle.value' |
+            translate }}
+          </p>
+          <rr-number-input
+            name="openingOfTheAnorectalAngleAtDefecation"
+            inputRrId="pel_m_070259"
+            labelRrId="pel_m_070260"
+            [config]="{inputWidth: 85, labelWidth: 200, readonly: true}"
+            label="{{ 'pelvisMRT.pelvicFloor.inDegrees.value' | translate }}"
+            [(ngModel)]="model.openingOfTheAnorectalAngleAtDefecation"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start o-list">
+    <div class="o-radio-list text-break">
+      <p rr-id="pel_m_070346">
+        {{ 'pelvisMRT.pelvicFloor.details.value' | translate }}
+      </p>
+      <p-checkbox
+        rr-id="pel_m_070347"
+        label="{{ 'pelvisMRT.pelvicFloor.lackOfPelvicFloorDescent.value' | translate }}"
+        name="isAbsentPelvicFloorDescentAtDefecation"
+        binary="true"
+        [(ngModel)]="model.isAbsentPelvicFloorDescentAtDefecation"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_070348"
+        label="{{ 'pelvisMRT.pelvicFloor.emphasizedPuborectalisMuscle.value' | translate }}"
+        name="isEmphasizedPuborectalisMuscle"
+        binary="true"
+        [(ngModel)]="model.isEmphasizedPuborectalisMuscle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="pel_m_070349"
+        label="{{ 'pelvisMRT.pelvicFloor.delayedDefecation.value' | translate }}"
+        name="isDelayedDefecation"
+        binary="true"
+        [(ngModel)]="model.isDelayedDefecation"
+        [rrContentReset]="'delayedDefecationBlock'"
+      ></p-checkbox>
+      <div
+        class="left-indent"
+        [rrDisable]="!model.isDelayedDefecation"
+        id="delayedDefecationBlock"
+      >
+        <p-checkbox
+          rr-id="pel_m_070350"
+          class="text-break"
+          label="{{ 'pelvisMRT.pelvicFloor.increasedTimeIntervalBetween.value' | translate }}"
+          name="isIncreasedIntervalBetweenOpeningAndDefecation"
+          binary="true"
+          [(ngModel)]="model.isIncreasedIntervalBetweenOpeningAndDefecation"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="pel_m_070351"
+        label="{{ 'pelvisMRT.pelvicFloor.incompleteRectalEvacuation.value' | translate }}"
+        name="isIncompleteRectalEvacuation"
+        binary="true"
+        [(ngModel)]="model.isIncompleteRectalEvacuation"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-start"></div>
+  <div class="c-col-1 c-pad-l f-start"></div>
+</div>

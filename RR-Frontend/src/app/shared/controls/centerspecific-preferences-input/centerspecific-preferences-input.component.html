@@ -1,0 +1,34 @@
+<div class="outer-container" [rrDisable]="inactive">
+  <div class="inner-container">
+    <p-dropdown
+      *ngIf="!isEditMode"
+      class="o-width-100"
+      styleClass="preferences-dropdown"
+      [(ngModel)]="customName"
+      [options]="dropdownOptions"
+    >
+      <ng-template let-item pTemplate="item">
+        <div *ngIf="!item.isDeleteOption">{{ item.label }}</div>
+        <div
+          *ngIf="item.isDeleteOption"
+          class="delete-item"
+          (click)="onDeleteSelected()"
+        >
+          {{ 'centerspecificPreferences.deleteEntry' | translate }}
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <input
+      *ngIf="isEditMode"
+      id="itemInput"
+      maxlength="10"
+      class="preferences-edit"
+      type="text"
+      name="preferenceCustomName"
+      [(ngModel)]="customName"
+    />
+  </div>
+  <div class="control-arrow">
+    <img src="assets/img/shared/right-arrow.svg" alt="right arrow image" />
+  </div>
+</div>

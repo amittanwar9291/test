@@ -1,0 +1,813 @@
+<div class="c-col-4 f-horizontal f-start col-h-100">
+  <!-- no fracture evaluation or "FractureDistNotSpecified" chosen -->
+  <ng-container
+    *ngIf="model.evaluationFractureType === evaluationFractureType.None
+        || model.evaluationFractureType === evaluationFractureType.FractureDistNotSpecified"
+  >
+    <div class="c-col-1 c-pad-r c-sep f-vertical o-list">
+      <ng-container *ngTemplateOutlet="evaluationFractureHeader"></ng-container>
+      <ng-container *ngTemplateOutlet="firstColumn"></ng-container>
+    </div>
+    <div class="c-col-1 c-pad c-sep"></div>
+    <div class="c-col-1 c-pad c-sep"></div>
+  </ng-container>
+
+  <!-- "Extraarticular" fracture chosen -->
+  <ng-container
+    *ngIf="model.evaluationFractureType === evaluationFractureType.Extraarticular"
+  >
+    <div class="c-col-3 c-pad-r c-sep f-vertical">
+      <ng-container *ngTemplateOutlet="evaluationFractureHeader"></ng-container>
+      <div class="c-col-3 f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep o-list">
+          <ng-container *ngTemplateOutlet="firstColumn"></ng-container>
+        </div>
+        <div class="c-col-2 c-pad-l c-sep f-vertical">
+          <ng-container
+            *ngTemplateOutlet="evaluationSeverityHeader"
+          ></ng-container>
+          <div class="c-col-2 f-horizontal col-h-100">
+            <div class="c-col-1 c-pad-r o-radio-list f-vertical">
+              <div class="o-radio-list f-vertical">
+                <p-radioButton
+                  rr-id="kne_m_040319"
+                  rrUnClickRadio
+                  rrContentReset="avulsionFractureType-block metaphysealOneFragmentType-block metaphysealMultifragmentaryType-block ratingFractureDetailsType-block"
+                  label="{{'kneeMRT.bones.41A1AvulsionFracture.value' | translate}}"
+                  name="tibiaExtraarticularType"
+                  [value]="tibiaExtraarticularType.AvulsionFracture"
+                  (onClick)="resetModel('wedgeFractureType')"
+                  [(ngModel)]="model.tibiaExtraarticularType"
+                >
+                </p-radioButton>
+
+                <!-- subradios "simpleFractureType" -->
+                <div
+                  id="avulsionFractureType-block"
+                  class="o-radio-list f-vertical nested-content m-b-9"
+                  [rrDisable]="model.tibiaExtraarticularType !== tibiaExtraarticularType.AvulsionFracture"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040320"
+                    rrUnClickRadio
+                    rrContentReset="ExtraarticularMediaLateralBlock"
+                    label="{{'kneeMRT.bones.41A11CapsuleRupture.value' | translate}}"
+                    name="avulsionFractureType"
+                    [value]="avulsionFractureType.CapsuleTear"
+                    [(ngModel)]="model.avulsionFractureType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040321"
+                    rrUnClickRadio
+                    rrContentReset="ExtraarticularMediaLateralBlock"
+                    label="{{'kneeMRT.bones.41A12Tuberculum.value' | translate}}"
+                    name="avulsionFractureType"
+                    [value]="avulsionFractureType.Tuberosity"
+                    [(ngModel)]="model.avulsionFractureType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040322"
+                    rrUnClickRadio
+                    rrContentReset="ExtraarticularMediaLateralBlock"
+                    label="{{'kneeMRT.bones.41A13IntercondylarEminence.value' | translate}}"
+                    name="avulsionFractureType"
+                    [value]="avulsionFractureType.EminentiaIntercondylaris"
+                    [(ngModel)]="model.avulsionFractureType"
+                  >
+                  </p-radioButton>
+                </div>
+
+                <p-radioButton
+                  rr-id="kne_m_040323"
+                  rrUnClickRadio
+                  rrContentReset="avulsionFractureType-block metaphysealOneFragmentType-block metaphysealMultifragmentaryType-block ratingFractureDetailsType-block"
+                  label="{{'kneeMRT.bones.41A2Metaphysär1Fragment.value' | translate}}"
+                  name="tibiaExtraarticularType"
+                  [value]="tibiaExtraarticularType.MetaphysealOneFragment"
+                  (onClick)="resetModel('avulsionFractureType')"
+                  [(ngModel)]="model.tibiaExtraarticularType"
+                >
+                </p-radioButton>
+                <div
+                  id="metaphysealOneFragmentType-block"
+                  class="o-radio-list f-vertical nested-content"
+                  [rrDisable]="model.tibiaExtraarticularType !== tibiaExtraarticularType.MetaphysealOneFragment"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040391"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41A21SpiralFracture.value' | translate}}"
+                    name="metaphysealOneFragmentType"
+                    [value]="metaphysealOneFragmentType.SpiralFracture"
+                    [(ngModel)]="model.metaphysealOneFragmentType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040392"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41A22ObliqueFracture.value' | translate}}"
+                    name="metaphysealOneFragmentType"
+                    [value]="metaphysealOneFragmentType.ObliqueFracture"
+                    [(ngModel)]="model.metaphysealOneFragmentType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040393"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41A23TransverseFracture.value' | translate}}"
+                    name="metaphysealOneFragmentType"
+                    [value]="metaphysealOneFragmentType.TransverseFracture"
+                    [(ngModel)]="model.metaphysealOneFragmentType"
+                  >
+                  </p-radioButton>
+                </div>
+                <p-radioButton
+                  rr-id="kne_m_040324"
+                  rrUnClickRadio
+                  rrContentReset="avulsionFractureType-block metaphysealOneFragmentType-block metaphysealMultifragmentaryType-block ratingFractureDetailsType-block"
+                  label="{{'kneeMRT.bones.41A3MetaphysärMehrfragmentär.value' | translate}}"
+                  name="tibiaExtraarticularType"
+                  [value]="tibiaExtraarticularType.MetaphysealMultifragmentary"
+                  (onClick)="resetModel('avulsionFractureType')"
+                  [(ngModel)]="model.tibiaExtraarticularType"
+                >
+                </p-radioButton>
+                <div
+                  id="metaphysealMultifragmentaryType-block"
+                  class="o-radio-list f-vertical nested-content"
+                  [rrDisable]="model.tibiaExtraarticularType !== tibiaExtraarticularType.MetaphysealMultifragmentary"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040394"
+                    rrUnClickRadio
+                    rrContentReset="ExtraarticularLateralMedialBlock"
+                    label="{{'kneeMRT.bones.41A31IntactWedge.value' | translate}}"
+                    name="metaphysealMultifragmentaryType"
+                    [value]="metaphysealMultifragmentaryType.IntactWedge"
+                    [(ngModel)]="model.metaphysealMultifragmentaryType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040395"
+                    rrUnClickRadio
+                    rrContentReset="ExtraarticularLateralMedialBlock"
+                    label="{{'kneeMRT.bones.41A32FragmentedWedge.value' | translate}}"
+                    name="metaphysealMultifragmentaryType"
+                    [value]="metaphysealMultifragmentaryType.FragmentedWedge"
+                    [(ngModel)]="model.metaphysealMultifragmentaryType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040396"
+                    rrUnClickRadio
+                    rrContentReset="ExtraarticularLateralMedialBlock"
+                    label="{{'kneeMRT.bones.41A33Multifragmentary.value' | translate}}"
+                    name="metaphysealMultifragmentaryType"
+                    [value]="metaphysealMultifragmentaryType.MultiFragmented"
+                    [(ngModel)]="model.metaphysealMultifragmentaryType"
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c-col-1 c-pad-l c-sep-l o-list f-vertical m-t-35"
+              id="ratingFractureDetailsType-block"
+            >
+              <div
+                [rrDisable]="model.avulsionFractureType !== avulsionFractureType.CapsuleTear"
+                class="o-radio-list m-t-11 m-b-36"
+                id="ExtraarticularMediaLateralBlock"
+              >
+                <p-radioButton
+                  rr-id="kne_m_0404880"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.hMedia.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.CapsuleTearMedial"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_0404890"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.nLateralSegondFracture.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.CapsuleTearLateral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+              </div>
+              <div
+                [rrDisable]="model.avulsionFractureType !== avulsionFractureType.EminentiaIntercondylaris"
+                class="o-radio-list m-b-36"
+                id="ExtraarticularAnteriorPosteriorBlock"
+              >
+                <p-radioButton
+                  rr-id="kne_m_0404900"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.oAnterior.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Anterior"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_0404910"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.pPosterior.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Posterior"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+              </div>
+              <div
+                [rrDisable]="model.metaphysealMultifragmentaryType !== metaphysealMultifragmentaryType.IntactWedge && model.metaphysealMultifragmentaryType !== metaphysealMultifragmentaryType.FragmentedWedge"
+                class="o-radio-list"
+                id="ExtraarticularLateralMedialBlock"
+              >
+                <p-radioButton
+                  rr-id="kne_m_0404128"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.fLateral.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Lateral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_0404129"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.hMedia.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Medial"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- "PartiallyArticular" fracture chosen -->
+  <ng-container
+    *ngIf="model.evaluationFractureType === evaluationFractureType.PartiallyArticular"
+  >
+    <div class="c-col-4 c-sep f-vertical">
+      <ng-container *ngTemplateOutlet="evaluationFractureHeader"></ng-container>
+      <div class="c-col-4 f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep o-list">
+          <ng-container *ngTemplateOutlet="firstColumn"></ng-container>
+        </div>
+        <div class="c-col-2 c-pad c-sep f-vertical">
+          <ng-container
+            *ngTemplateOutlet="evaluationSeverityHeader"
+          ></ng-container>
+          <div class="c-col-2 f-horizontal col-h-100">
+            <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+              <div class="o-radio-list f-vertical">
+                <p-radioButton
+                  rr-id="kne_m_040325"
+                  rrUnClickRadio
+                  rrContentReset="fissionFractureType-block impressionType-block fractureDetails-block fissionAndImpressionFractureType-block"
+                  label="{{'kneeMRT.bones.41B1SplitFracture.value' | translate}}"
+                  name="tibiaPartiallyArticularType"
+                  [value]="tibiaPartiallyArticularType.FissionFracture"
+                  (onClick)="resetModel('impressionType', 'impressionFractureDepthInMm',
+                       'fissionAndImpressionFractureType', 'fissionAndImpressionDepthInMm')"
+                  [(ngModel)]="model.tibiaPartiallyArticularType"
+                >
+                </p-radioButton>
+                <div
+                  id="fissionFractureType-block"
+                  class="o-radio-list f-vertical nested-content"
+                  [rrDisable]="model.tibiaPartiallyArticularType !== tibiaPartiallyArticularType.FissionFracture"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040326"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41B11LateralesPlateau.value' | translate}}"
+                    name="fissionFractureType"
+                    [value]="fissionFractureType.LateralPlateau"
+                    [(ngModel)]="model.fissionFractureType"
+                    rrContentReset="fractureDetails-block"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040327"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41B12MedialesPlateau.value' | translate}}"
+                    name="fissionFractureType"
+                    [value]="fissionFractureType.MedialPlateau"
+                    [(ngModel)]="model.fissionFractureType"
+                    rrContentReset="fractureDetails-block"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040328"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41B13ObliqueFractureInvolvingTheDiaphysis.value' | translate}}"
+                    name="fissionFractureType"
+                    [value]="fissionFractureType.ObliqueFractureUpToDiaphyseal"
+                    [(ngModel)]="model.fissionFractureType"
+                    rrContentReset="fractureDetails-block"
+                  >
+                  </p-radioButton>
+                </div>
+
+                <p-radioButton
+                  rr-id="kne_m_040329"
+                  rrUnClickRadio
+                  rrContentReset="fissionFractureType-block impressionType-block fractureDetails-block fissionAndImpressionFractureType-block"
+                  label="{{'kneeMRT.bones.41B2Impression.value' | translate}}"
+                  name="tibiaPartiallyArticularType"
+                  [value]="tibiaPartiallyArticularType.Impression"
+                  (onClick)="resetModel('fissionFractureType', 'impressionFractureDepthInMm',
+                       'fissionAndImpressionFractureType', 'fissionAndImpressionDepthInMm')"
+                  [(ngModel)]="model.tibiaPartiallyArticularType"
+                >
+                </p-radioButton>
+                <div
+                  id="impressionType-block"
+                  class="o-radio-list f-vertical nested-content"
+                  [rrDisable]="model.tibiaPartiallyArticularType !== 'Impression'"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040330"
+                    rrUnClickRadio
+                    rrContentReset="fractureDetails-block"
+                    label="{{'kneeMRT.bones.41B21Lateral.value' | translate}}"
+                    name="impressionType"
+                    [value]="impressionType.Lateral"
+                    [(ngModel)]="model.impressionType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040331"
+                    rrUnClickRadio
+                    rrContentReset="fractureDetails-block"
+                    label="{{'kneeMRT.bones.41B22Medial.value' | translate}}"
+                    name="impressionType"
+                    [value]="impressionType.Medial"
+                    [(ngModel)]="model.impressionType"
+                  >
+                  </p-radioButton>
+                </div>
+                <p-radioButton
+                  rr-id="kne_m_040332"
+                  rrUnClickRadio
+                  rrContentReset="fissionFractureType-block impressionType-block fractureDetails-block fissionAndImpressionFractureType-block"
+                  label="{{'kneeMRT.bones.41B3SplitDepressionFracture.value' | translate}}"
+                  name="tibiaPartiallyArticularType"
+                  [value]="tibiaPartiallyArticularType.SplittingAndImpressionFracture"
+                  (onClick)="resetModel('fissionFractureType', 'impressionType', 'impressionFractureDepthInMm',
+                        'fissionAndImpressionDepthInMm')"
+                  [(ngModel)]="model.tibiaPartiallyArticularType"
+                >
+                </p-radioButton>
+                <div
+                  id="fissionAndImpressionFractureType-block"
+                  class="o-radio-list f-vertical nested-content"
+                  [rrDisable]="model.tibiaPartiallyArticularType !== tibiaPartiallyArticularType.SplittingAndImpressionFracture"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040333"
+                    rrUnClickRadio
+                    rrContentReset="fractureDetails-block"
+                    label="{{'kneeMRT.bones.41B31Lateral.value' | translate}}"
+                    name="fissionAndImpressionFractureType"
+                    [value]="fissionAndImpressionFractureType.Lateral"
+                    [(ngModel)]="model.fissionAndImpressionFractureType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040397"
+                    rrUnClickRadio
+                    rrContentReset="fractureDetails-block"
+                    label="{{'kneeMRT.bones.41B32Media.value' | translate}}"
+                    name="fissionAndImpressionFractureType"
+                    [value]="fissionAndImpressionFractureType.Medial"
+                    [(ngModel)]="model.fissionAndImpressionFractureType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_040398"
+                    rrUnClickRadio
+                    rrContentReset="fractureDetails-block"
+                    label="{{'kneeMRT.bones.41B33ObliqueFractureInvolvingTheDiaphysis.value' | translate}}"
+                    name="fissionAndImpressionFractureType"
+                    [value]="fissionAndImpressionFractureType.ObliqueFractureUpToDiaphyseal"
+                    [(ngModel)]="model.fissionAndImpressionFractureType"
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c-col-1 c-pad-l c-sep o-list f-vertical"
+              id="fractureDetails-block"
+            >
+              <div
+                class="o-radio-list m-b-45"
+                [rrDisable]="model.impressionType !== impressionType.Lateral && model.fissionAndImpressionFractureType !== fissionAndImpressionFractureType.Lateral"
+              >
+                <p-radioButton
+                  rr-id="kne_m_040494"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.tAnterolateralAL.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Anterolateral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                  class="m-t-3"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_040495"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.uPosteriolateralPL.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Posteriolateral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_040496"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.xCentral.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.LateralCentral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                  class="m-b-5"
+                >
+                </p-radioButton>
+                <div class="nested-content">
+                  <rr-number-input
+                    inputRrId="kne_m_040497"
+                    name="lateralImpressionFractureDepthInMm"
+                    [(ngModel)]="model.lateralImpressionFractureDepthInMm"
+                    label="{{ 'kneeMRT.bones.depressionDepthInMm.value' | translate }}"
+                    labelRrId="kne_m_040498"
+                    [config]="{borderColor: 'blue', labelWidth: 130, max: 100}"
+                    class="text-break"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+              <div
+                class="o-radio-list m-b-42"
+                [rrDisable]="model.impressionType !== impressionType.Medial && model.fissionAndImpressionFractureType !== fissionAndImpressionFractureType.Medial"
+              >
+                <p-radioButton
+                  rr-id="kne_m_040499"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.vAnteromedialAM.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Anteromedial"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_0404100"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.wPosteriomedialPM.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Posteriomedial"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_0404101"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.xCentral.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.MedialCentral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                  class="m-b-5"
+                >
+                </p-radioButton>
+                <div class="nested-content">
+                  <rr-number-input
+                    inputRrId="kne_m_0404102"
+                    name="medialImpressionFractureDepthInMm"
+                    [(ngModel)]="model.medialImpressionFractureDepthInMm"
+                    label="{{ 'kneeMRT.bones.depressionDepthInMm.value' | translate }}"
+                    labelRrId="kne_m_0404103"
+                    [config]="{borderColor: 'blue', labelWidth: 130, max: 100}"
+                    class="text-break"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+              <div
+                class="o-radio-list"
+                [rrDisable]="model.fissionAndImpressionFractureType !== fissionAndImpressionFractureType.ObliqueFractureUpToDiaphyseal && model.fissionFractureType !== fissionFractureType.ObliqueFractureUpToDiaphyseal"
+              >
+                <p-radioButton
+                  rr-id="kne_m_0404104"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.fLateral.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Lateral"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_0404105"
+                  rrUnClickRadio
+                  label="{{'kneeMRT.bones.hMedial.value' | translate}}"
+                  name="ratingFractureDetailsType"
+                  [value]="ratingFractureDetailsType.Medial"
+                  [(ngModel)]="model.ratingFractureDetailsType"
+                >
+                </p-radioButton>
+                <div class="nested-content">
+                  <rr-number-input
+                    inputRrId="kne_m_0404106"
+                    name="obliqueImpressionFractureDepthInMm"
+                    [(ngModel)]="model.obliqueImpressionFractureDepthInMm"
+                    label="{{ 'kneeMRT.bones.depressionDepthInMm.value' | translate }}"
+                    labelRrId="kne_m_0404107"
+                    [config]="{borderColor: 'blue', labelWidth: 130, max: 100}"
+                    class="text-break"
+                  >
+                  </rr-number-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- "CompletelyIntraarticular" fracture chosen -->
+  <ng-container
+    *ngIf="model.evaluationFractureType === evaluationFractureType.Articular"
+  >
+    <div class="c-col-3 c-pad-r c-sep f-vertical">
+      <ng-container *ngTemplateOutlet="evaluationFractureHeader"></ng-container>
+      <div class="c-col-3 f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep o-list">
+          <ng-container *ngTemplateOutlet="firstColumn"></ng-container>
+        </div>
+        <div class="c-col-2 c-pad-l c-sep f-vertical">
+          <ng-container
+            *ngTemplateOutlet="evaluationSeverityHeader"
+          ></ng-container>
+          <div class="c-col-2 f-horizontal col-h-100">
+            <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+              <div class="o-radio-list f-vertical">
+                <p-radioButton
+                  rr-id="kne_m_040334"
+                  rrUnClickRadio
+                  rrContentReset="simplyArticulateType-block metaphysealMultifragmentaryType-block2 multifragmentaryFractureType-block articularLateralMedia-block"
+                  label="{{'kneeMRT.bones.41C1SimpleArticularSimple.value' | translate}}"
+                  name="tibiaArticularType"
+                  [value]="tibiaArticularType.SimpleArticularSimpleMetaphyseal"
+                  [(ngModel)]="model.tibiaArticularType"
+                  class="text-break m-t-3"
+                >
+                </p-radioButton>
+                <div
+                  class="nested-content o-radio-list m-b-3"
+                  [rrDisable]="model.tibiaArticularType !== tibiaArticularType.SimpleArticularSimpleMetaphyseal"
+                  id="simplyArticulateType-block"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_040399"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41C11RecesoDeLa.value' | translate}}"
+                    name="simplyArticulateType"
+                    [value]="simplyArticulateType.RecessOfTheEminentiaIntercondylaris"
+                    [(ngModel)]="model.simplyArticulateType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_0403100"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41C12ConLaFractura.value' | translate}}"
+                    name="simplyArticulateType"
+                    [value]="simplyArticulateType.WithFractureOfTheEminentiaIntercondylaris"
+                    [(ngModel)]="model.simplyArticulateType"
+                  >
+                  </p-radioButton>
+                </div>
+                <p-radioButton
+                  rr-id="kne_m_0403101"
+                  rrUnClickRadio
+                  rrContentReset="simplyArticulateType-block metaphysealMultifragmentaryType-block2 multifragmentaryFractureType-block articularLateralMedia-block"
+                  label="{{'kneeMRT.bones.41C2CompleteSimpleArticular.value' | translate}}"
+                  name="tibiaArticularType"
+                  [value]="tibiaArticularType.SingleArticularMultifragmentaryMetaphyseal"
+                  [(ngModel)]="model.tibiaArticularType"
+                >
+                </p-radioButton>
+                <div
+                  class="nested-content o-radio-list"
+                  [rrDisable]="model.tibiaArticularType !== tibiaArticularType.SingleArticularMultifragmentaryMetaphyseal"
+                  id="metaphysealMultifragmentaryType-block2"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_0403102"
+                    rrUnClickRadio
+                    rrContentReset="articularLateralMedia-block"
+                    label="{{'kneeMRT.bones.41C21IntactWedge.value' | translate}}"
+                    name="metaphysealMultifragmentaryType"
+                    [value]="metaphysealMultifragmentaryType.IntactWedge"
+                    [(ngModel)]="model.metaphysealMultifragmentaryType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_0403103"
+                    rrUnClickRadio
+                    rrContentReset="articularLateralMedia-block"
+                    label="{{'kneeMRT.bones.41C22FragmentedWedge.value' | translate}}"
+                    name="metaphysealMultifragmentaryType"
+                    [value]="metaphysealMultifragmentaryType.FragmentedWedge"
+                    [(ngModel)]="model.metaphysealMultifragmentaryType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_0403104"
+                    rrUnClickRadio
+                    rrContentReset="articularLateralMedia-block"
+                    label="{{'kneeMRT.bones.41C23Multifragmentary.value' | translate}}"
+                    name="metaphysealMultifragmentaryType"
+                    [value]="metaphysealMultifragmentaryType.MultiFragmented"
+                    [(ngModel)]="model.metaphysealMultifragmentaryType"
+                  >
+                  </p-radioButton>
+                </div>
+                <p-radioButton
+                  rr-id="kne_m_0403105"
+                  rrUnClickRadio
+                  rrContentReset="simplyArticulateType-block metaphysealMultifragmentaryType-block2 multifragmentaryFractureType-block articularLateralMedia-block"
+                  label="{{'kneeMRT.bones.41C3Multifragmentary.value' | translate}}"
+                  name="tibiaArticularType"
+                  [value]="tibiaArticularType.Multifragmentary"
+                  [(ngModel)]="model.tibiaArticularType"
+                >
+                </p-radioButton>
+                <div
+                  class="nested-content o-radio-list"
+                  [rrDisable]="model.tibiaArticularType !== tibiaArticularType.Multifragmentary"
+                  id="multifragmentaryFractureType-block"
+                >
+                  <p-radioButton
+                    rr-id="kne_m_0403106"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41C31LateralPlateau.value' | translate}}"
+                    name="multifragmentaryFractureType"
+                    [value]="multifragmentaryFractureType.LateralPlateau"
+                    [(ngModel)]="model.multifragmentaryFractureType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_0403107"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41C32MedialPlateau.value' | translate}}"
+                    name="multifragmentaryFractureType"
+                    [value]="multifragmentaryFractureType.MedialPlateau"
+                    [(ngModel)]="model.multifragmentaryFractureType"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rr-id="kne_m_0403108"
+                    rrUnClickRadio
+                    label="{{'kneeMRT.bones.41C33LatMedPlateau.value' | translate}}"
+                    name="multifragmentaryFractureType"
+                    [value]="multifragmentaryFractureType.LateralAndMedialPlateu"
+                    [(ngModel)]="model.multifragmentaryFractureType"
+                  >
+                  </p-radioButton>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c-col-1 c-pad-l c-sep o-radio-list f-vertical"
+              id="articularLateralMedia-block"
+              [rrDisable]="model.metaphysealMultifragmentaryType !== metaphysealMultifragmentaryType.IntactWedge && model.metaphysealMultifragmentaryType !== metaphysealMultifragmentaryType.FragmentedWedge"
+            >
+              <p-radioButton
+                rr-id="kne_m_0404108"
+                rrUnClickRadio
+                label="{{'kneeMRT.bones.fLateral.value' | translate}}"
+                name="ratingFractureDetailsType"
+                [value]="ratingFractureDetailsType.Lateral"
+                [(ngModel)]="model.ratingFractureDetailsType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="kne_m_0404109"
+                rrUnClickRadio
+                label="{{'kneeMRT.bones.hMedia.value' | translate}}"
+                name="ratingFractureDetailsType"
+                [value]="ratingFractureDetailsType.Medial"
+                [(ngModel)]="model.ratingFractureDetailsType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Last column (contant for all views) -->
+  <div
+    *ngIf="model.evaluationFractureType !== evaluationFractureType.PartiallyArticular"
+    class="c-col-1 c-pad-l"
+  ></div>
+</div>
+
+<!-- Common templates used across this view -->
+<ng-template #firstColumn>
+  <div class="o-radio-list">
+    <p-radioButton
+      rr-id="kne_m_040213"
+      label="{{'kneeMRT.bones.41AExtraarticular.value' | translate}}"
+      name="evaluationFractureType"
+      [value]="evaluationFractureType.Extraarticular"
+      (onClick)="resetModel('fractureDistType',
+                        'tibiaPartiallyArticularType', 'tibiaArticularType')"
+      [(ngModel)]="model.evaluationFractureType"
+      rrValidation="evaluationFractureType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="kne_m_040214"
+      label="{{'kneeMRT.bones.41BPartiallyArticular.value' | translate}}"
+      name="evaluationFractureType"
+      [value]="evaluationFractureType.PartiallyArticular"
+      (onClick)="resetModel('fractureDistType', 'tibiaExtraarticularType', 'tibiaArticularType')"
+      [(ngModel)]="model.evaluationFractureType"
+      rrValidation="evaluationFractureType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="kne_m_040215"
+      label="{{'kneeMRT.bones.41CArticular.value' | translate}}"
+      name="evaluationFractureType"
+      [value]="evaluationFractureType.Articular"
+      (onClick)="resetModel('fractureDistType', 'tibiaExtraarticularType',
+                        'tibiaPartiallyArticularType')"
+      [(ngModel)]="model.evaluationFractureType"
+      rrValidation="evaluationFractureType"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="kne_m_040216"
+      label="{{'kneeMRT.bones.fractureProxTibiaNot.value' | translate}}"
+      class="text-break"
+      name="evaluationFractureType"
+      [value]="evaluationFractureType.FractureDistNotSpecified"
+      (onClick)="resetModel('tibiaExtraarticularType',
+                        'tibiaPartiallyArticularType', 'tibiaArticularType')"
+      [(ngModel)]="model.evaluationFractureType"
+      rrValidation="evaluationFractureType"
+    >
+    </p-radioButton>
+    <div
+      class="o-radio-list nested-content"
+      [rrDisable]="model.evaluationFractureType !== evaluationFractureType.FractureDistNotSpecified"
+    >
+      <p-radioButton
+        rr-id="kne_m_040217"
+        rrUnClickRadio
+        label="{{'kneeMRT.bones.fractureOlderConsolidated.value' | translate}}"
+        name="fractureDistType"
+        [value]="fractureDistType.FractureOlderConsolidated"
+        [(ngModel)]="model.fractureDistType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_040218"
+        rrUnClickRadio
+        label="{{'kneeMRT.bones.suspicionOf.value' | translate}}"
+        name="fractureDistType"
+        [value]="fractureDistType.SuspicionOf"
+        [(ngModel)]="model.fractureDistType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #evaluationFractureHeader>
+  <h2 rr-id="kne_m_040203" class="m-t-4 m-b-19" rrInfoIcon="kne_m_040212">
+    {{ 'kneeMRT.bones.evaluationFracture.value' | translate }}*
+  </h2>
+</ng-template>
+
+<ng-template #evaluationSeverityHeader>
+  <h3 rr-id="kne_m_040301" class="m-b-9">
+    {{ 'kneeMRT.bones.evaluationSeverity.value' | translate }}
+  </h3>
+</ng-template>

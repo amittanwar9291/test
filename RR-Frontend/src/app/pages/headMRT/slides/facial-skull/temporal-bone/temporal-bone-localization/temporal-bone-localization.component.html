@@ -1,0 +1,233 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <div
+        class="o-radio-list"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="hea_m_110239">
+          {{ "headMRT.facialSkull.differentialDiagnosis1.value" | translate }}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_110240"
+          [diagnosisNumber]="1"
+          [options]="w047"
+          [(ngModel)]="model.differentialDiagnosis1LocalizationType"
+          name="differentialDiagnosis1LocalizationType"
+          group="true"
+          [parentViewModel]="model"
+          isActiveOnIKnow="true"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel1()"
+          rrValidation="differentialDiagnosis1LocalizationType"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_110333">
+        {{ "headMRT.facialSkull.side.value" | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_110334"
+        label="{{ 'headMRT.facialSkull.right.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_110335"
+        label="{{ 'headMRT.facialSkull.left.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_110336"
+        label="{{ 'headMRT.facialSkull.bothSides.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.BothSides"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <div
+        id="symmetryTypeBlock"
+        class="o-radio-list nested-content"
+        [rrDisable]="model.sideType !== sideTypeEnum.BothSides"
+      >
+        <p-radioButton
+          rr-id="hea_m_110337"
+          label="{{ 'headMRT.facialSkull.symmetrical.value' | translate }}"
+          name="symmetryType"
+          [value]="symmetryTypeEnum.Symmetrical"
+          [(ngModel)]="model.symmetryType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_110338"
+          label="{{ 'headMRT.facialSkull.asymmetrical.value' | translate }}"
+          name="symmetryType"
+          [value]="symmetryTypeEnum.Asymmetrical"
+          [(ngModel)]="model.symmetryType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list m-t-10 m-b-13">
+    <h2 rr-id="hea_m_110431" class="p-l-25">
+      {{ "headMRT.facialSkull.details.value" | translate }}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad">
+        <div class="m-l-10 o-radio-list">
+          <p-checkbox
+            rr-id="hea_m_110432"
+            name="isInnerEarLabyrinth"
+            label="{{ 'headMRT.facialSkull.innerEarLabyrinth.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isInnerEarLabyrinth"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110433"
+            name="isDuctusEndolymphaticus"
+            label="{{ 'headMRT.facialSkull.ductusEndolymphaticus.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isDuctusEndolymphaticus"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110434"
+            name="isSaccusEndolymphaticus"
+            label="{{ 'headMRT.facialSkull.saccusEndolymphaticus.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSaccusEndolymphaticus"
+          ></p-checkbox>
+          <p-checkbox
+            labelStyleClass="text-break"
+            rr-id="hea_m_110435"
+            name="isInternalAcousticCanal"
+            label="{{ 'headMRT.facialSkull.internalAcousticCanalMeatusAcusticusInternus.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isInternalAcousticCanal"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110436"
+            name="isPorusAcusticusInternus"
+            label="{{ 'headMRT.facialSkull.porusAcusticusInternus.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isPorusAcusticusInternus"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110437"
+            name="isMiddleEarTympanum"
+            label="{{ 'headMRT.facialSkull.middleEarTympanum.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isMiddleEarTympanum"
+            rrContentReset="middleEarTympanumDetailsContainer"
+          ></p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            id="middleEarTympanumDetailsContainer"
+            [rrDisable]="!model.isMiddleEarTympanum"
+          >
+            <p-checkbox
+              rr-id="hea_m_110438"
+              name="isEpitympanon"
+              label="{{ 'headMRT.facialSkull.epitympanon.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isEpitympanon"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_110439"
+              name="isMesotympanum"
+              label="{{ 'headMRT.facialSkull.mesotympanum.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isMesotympanum"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_110440"
+              name="isHypotympanon"
+              label="{{ 'headMRT.facialSkull.hypotympanon.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isHypotympanon"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            labelStyleClass="text-break"
+            rr-id="hea_m_110441"
+            name="isExternalAcousticCanalMeatusAcusticusExternus"
+            label="{{ 'headMRT.facialSkull.externalAcousticCanalMeatusAcusticusExternus.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isExternalAcousticCanalMeatusAcusticusExternus"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110442"
+            name="isTemporalBoneApex"
+            label="{{ 'headMRT.facialSkull.temporalBoneApex.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isTemporalBoneApex"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div class="m-l-10 o-radio-list">
+          <p-checkbox
+            rr-id="hea_m_110534"
+            name="isAuricle"
+            label="{{ 'headMRT.facialSkull.auricle.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isAuricle"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110535"
+            name="isMastoid"
+            label="{{ 'headMRT.facialSkull.mastoid.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isMastoid"
+            rrContentReset="antrumContainer"
+          ></p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            id="antrumContainer"
+            [rrDisable]="!model.isMastoid"
+          >
+            <p-checkbox
+              rr-id="hea_m_110536"
+              name="isAntrum"
+              label="{{ 'headMRT.facialSkull.antrum.value' | translate }}"
+              binary="true"
+              [(ngModel)]="model.isAntrum"
+            ></p-checkbox>
+          </div>
+          <p-checkbox
+            rr-id="hea_m_110537"
+            name="isForamenStylomastoideum"
+            label="{{ 'headMRT.facialSkull.foramenStylomastoideum.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isForamenStylomastoideum"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110538"
+            name="isTubaAuditiva"
+            label="{{ 'headMRT.facialSkull.tubaAuditiva.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isTubaAuditiva"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_110539"
+            name="isFacialNerveCanal"
+            label="{{ 'headMRT.facialSkull.facialNerveCanal.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isFacialNerveCanal"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

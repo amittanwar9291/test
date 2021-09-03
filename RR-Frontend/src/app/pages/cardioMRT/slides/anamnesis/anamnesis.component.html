@@ -1,0 +1,43 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center m-t-71 m-b-27">
+    <p-tabView class="rr-tabView">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            rr-id="car_m_020103"
+            [rrValidation]="['statusType', 'isAorticValve isMitralValve']"
+            ifAny="true"
+            noUpdate="true"
+            allFindings="true"
+          >
+            {{ 'cardioMRT.anamnesis.anamnesis.value' | translate }}
+          </h1>
+        </ng-template>
+        <rr-anamnesis-tab
+          [model]="model"
+          [indicationFindingsHandler]="indicationFindingsHandler"
+          [interventionOrPreOpsFindingsHandler]="interventionOrPreOpsFindingsHandler"
+        ></rr-anamnesis-tab>
+      </p-tabPanel>
+
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            rr-id="car_m_020201"
+            [rrValidation]="['unitType', numberInputValidationModelNames]"
+            ifAny="true"
+            notInFinding="true"
+          >
+            {{ 'cardioMRT.anamnesis.cardiovascularRisk.value' | translate }}
+          </h1>
+        </ng-template>
+        <rr-cardiovascular-risk-tab
+          [model]="model"
+          [age]="age"
+          [gender]="gender"
+          [numberInputValidationModelNames]="numberInputValidationModelNames"
+        ></rr-cardiovascular-risk-tab>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</form>

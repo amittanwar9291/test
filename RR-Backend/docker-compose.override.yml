@@ -1,0 +1,481 @@
+version: '3.4'
+
+services:
+
+  ocelotapigateway:
+    build:
+      context: .
+      dockerfile: RadioReport.Core/Ocelot/OcelotAPIGateway/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80:80"
+
+  vault:
+    build:
+      context: .
+      dockerfile: vault/Dockerfile
+    ports:
+      - "8200:8200"
+
+  portainer:
+    ports:
+      - "9002:9000"
+
+  postgres:
+    ports:
+      - "5432:5432"
+
+  zookeeper:
+    ports:
+      - '2181:2181'
+
+  broker:
+    ports:
+      - '9092:9092'
+
+  redis:
+    ports:
+      - '6379:6379'
+
+  seq:
+    ports:
+      - '5341:5341'
+      - '5342:80'
+
+  minio:
+    ports:
+      - '9000:9000'
+
+  browserless:
+    ports:
+      - '3000:3000'
+
+  radioreport-abdomenmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.AbdomenMRT/RadioReport.AbdomenMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-angiographymrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.AngiographyMRT/RadioReport.AngiographyMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-angiographyct-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.AngiographyCT/RadioReport.AngiographyCT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-cardiomrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.CardioMRT/RadioReport.CardioMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-elbowmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.ElbowMRT/RadioReport.ElbowMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-feetmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.FeetMRT/RadioReport.FeetMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-handmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.HandMRT/RadioReport.HandMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-hipmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.HipMRT/RadioReport.HipMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-kneemrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.KneeMRT/RadioReport.KneeMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-mammamrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.MammaMRT/RadioReport.MammaMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-pelvismrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.PelvisMRT/RadioReport.PelvisMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-shouldermrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.ShoulderMRT/RadioReport.ShoulderMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-spinect-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.SpineCT/RadioReport.SpineCT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-spinemrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.SpineMRT/RadioReport.SpineMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-thoraxct-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.ThoraxCT/RadioReport.ThoraxCT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-neckmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.NeckMRT/RadioReport.NeckMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-thoraxmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.ThoraxMRT/RadioReport.ThoraxMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-mammamx-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.MammaMX/RadioReport.MammaMX.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-headct-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.HeadCT/RadioReport.HeadCT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-headmrt-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.HeadMRT/RadioReport.HeadMRT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-abdomenct-api:
+    depends_on:
+      - radioreport-core-reportlist-api
+      - radioreport-core-centerspecificsettings-api
+    build:
+      context: .
+      dockerfile: RadioReport.AbdomenCT/RadioReport.AbdomenCT.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-users-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/Users/RadioReport.Core.Users.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      INSTITUTE_ID: cfdea220-325f-4450-af33-1c462ad38830
+    ports:
+      - "80"
+
+  radioreport-core-reportlist-api:
+    depends_on:
+      - ocelotapigateway
+      - vault
+      - radioreport-core-users-api
+      - radioreport-core-institutemanager-api
+      - radioreport-core-licensemanager-api
+      - radioreport-core-tracking-api
+      - radioreport-core-patientmanager-api
+      - radioreport-core-signalr-api
+      - radioreport-core-scheduler-api
+      - radioreport-core-fakedatagenerator-api
+      - radioreport-core-htmlrender-api
+      - radioreport-core-fileexposer-api
+      - radioreport-core-importinterface-api
+    build:
+      context: .
+      dockerfile: RadioReport.Core/ReportList/RadioReport.Core.ReportList.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-tracking-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/Tracking/RadioReport.Core.Tracking.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      INSTITUTE_ID: cfdea220-325f-4450-af33-1c462ad38830
+    ports:
+      - "80"
+
+  radioreport-core-signalr-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/SignalR/RadioReport.Core.SignalR.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-institutemanager-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/InstituteManager/RadioReport.Core.InstituteManager.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-patientmanager-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/PatientManager/RadioReport.Core.PatientManager.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-centerspecificsettings-api:
+    depends_on:
+      - ocelotapigateway
+      - radioreport-core-reportlist-api
+    build:
+      context: .
+      dockerfile: RadioReport.Core/CenterSpecificSettings/RadioReport.Core.CenterSpecificSettings.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-fileexposer-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/FileExposer/RadioReport.Core.FileExposer.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-exportinterface-api:
+    depends_on:
+      - ocelotapigateway
+      - radioreport-core-users-api
+      - radioreport-core-htmlrender-api
+    build:
+      context: .
+      dockerfile: RadioReport.Core/ExportInterface/RadioReport.Core.ExportInterface.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-importinterface-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/ImportInterface/RadioReport.Core.ImportInterface.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-scheduler-api:
+    build:
+      context: .
+      dockerfile: RadioReport.Core/Scheduler/RadioReport.Core.Scheduler.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-fakedatagenerator-api:
+    depends_on:
+      - broker
+      - redis
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/FakeDataGenerator/RadioReport.Core.FakeDataGenerator.API/Dockerfile
+    env_file: config/rr-service.env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-htmlrender-api:
+    depends_on:
+      - ocelotapigateway
+      - broker
+      - redis
+      - minio
+      - browserless
+    build:
+      context: .
+      dockerfile: RadioReport.Core/HtmlRender/RadioReport.Core.HtmlRender.API/Dockerfile
+    env_file: config/rr-service.env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"
+
+  radioreport-core-licensemanager-api:
+    depends_on:
+      - ocelotapigateway
+    build:
+      context: .
+      dockerfile: RadioReport.Core/LicenseManager/RadioReport.Core.LicenseManager.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "80"

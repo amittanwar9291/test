@@ -1,0 +1,156 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical f-start c-col-1 c-pad-r c-sep o-radio-list">
+    <p-checkbox
+      name="isTear"
+      binary="true"
+      labelStyleClass="ui-fat-label"
+      label="{{ 'kneeMRT.softParts.tear.value' | translate }}"
+      rrContentReset="isTear-block"
+      rr-id="kne_m_080240"
+      [(ngModel)]="model.isTear"
+      rrValidation="isTear isEnthesiopathy"
+    >
+    </p-checkbox>
+    <div
+      id="isTear-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isTear"
+    >
+      <p rr-id="kne_m_080266" class="m-b-7">
+        {{ 'kneeMRT.softParts.localization.value' | translate }}
+      </p>
+      <p-radioButton
+        name="tendonLocalizationType"
+        rrContentReset="isAvulsionFibulaHeads-block"
+        [value]="tendonsLocalizationTypeEnum.Intramuscular"
+        rrUnClickRadio
+        label="{{ 'kneeMRT.softParts.intramuscular.value' | translate }}"
+        rr-id="kne_m_080267"
+        [(ngModel)]="model.tendonLocalizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        name="tendonLocalizationType"
+        rrContentReset="isAvulsionFibulaHeads-block"
+        [value]="tendonsLocalizationTypeEnum.Intratendinous"
+        rrUnClickRadio
+        label="{{ 'kneeMRT.softParts.intratendinous.value' | translate }}"
+        rr-id="kne_m_080268"
+        [(ngModel)]="model.tendonLocalizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        name="tendonLocalizationType"
+        [value]="tendonsLocalizationTypeEnum.Insertion"
+        label="{{ 'kneeMRT.softParts.insertion.value' | translate }}"
+        rrUnClickRadio
+        rrContentReset="isAvulsionFibulaHeads-block"
+        rr-id="kne_m_080269"
+        [(ngModel)]="model.tendonLocalizationType"
+      >
+      </p-radioButton>
+      <div
+        id="isAvulsionFibulaHeads-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.tendonLocalizationType !== tendonsLocalizationTypeEnum.Insertion"
+      >
+        <p-checkbox
+          name="isAvulsionFibulaHeads"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.avulsionFibulaHeads.value' | translate }}"
+          rr-id="kne_m_080270"
+          [(ngModel)]="model.isAvulsionFibulaHeads"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        name="isRetraction"
+        binary="true"
+        label="{{ 'kneeMRT.softParts.retraction.value' | translate }}"
+        rrContentReset="isRetraction-block"
+        rr-id="kne_m_080271"
+        [(ngModel)]="model.isRetraction"
+      >
+      </p-checkbox>
+      <div
+        id="isRetraction-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isRetraction"
+      >
+        <rr-number-input
+          rr-id="kne_m_080246"
+          name="retractionInMm"
+          [(ngModel)]="model.retractionInMm"
+          [label]="'kneeMRT.softParts.dimensionInMm.value' | translate"
+          [config]="{placeholder: '--', min: 0, step: 1, max: 120}"
+        >
+        </rr-number-input>
+        <p rr-id="kne_m_080275">
+          {{ 'kneeMRT.softParts.associatedFindings.value' | translate }}
+        </p>
+        <p-checkbox
+          name="isHaematoma"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.haematoma.value' | translate }}"
+          rr-id="kne_m_080276"
+          [(ngModel)]="model.isHaematoma"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isBoneBruise"
+          binary="true"
+          label="{{ 'kneeMRT.softParts.boneBruise.value' | translate }}"
+          rr-id="kne_m_080277"
+          [(ngModel)]="model.isBoneBruise"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list">
+    <p-checkbox
+      name="isEnthesiopathy"
+      binary="true"
+      labelStyleClass="ui-fat-label"
+      label="{{ 'kneeMRT.softParts.enthesiopathy.value' | translate }}"
+      rr-id="kne_m_080354"
+      rrContentReset="isEnthesiopathy-block"
+      [(ngModel)]="model.isEnthesiopathy"
+      rrValidation="isTear isEnthesiopathy"
+    >
+    </p-checkbox>
+    <div
+      id="isEnthesiopathy-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isEnthesiopathy"
+    >
+      <p-checkbox
+        name="isThickeningEdema"
+        binary="true"
+        label="{{ 'kneeMRT.softParts.thickeningEdema.value' | translate }}"
+        rr-id="kne_m_080355"
+        [(ngModel)]="model.isThickeningEdema"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isBursitisSubtendineaMusculiBicipitisFemorisInferior"
+        binary="true"
+        class="m-b-6"
+        label="{{ 'kneeMRT.softParts.bursitisSubtendineaMusculiBicipitis.value' | translate }}"
+        rr-id="kne_m_080356"
+        [(ngModel)]="model.isBursitisSubtendineaMusculiBicipitisFemorisInferior"
+      >
+      </p-checkbox>
+      <p-checkbox
+        name="isMuscularAtrophy"
+        binary="true"
+        label="{{ 'kneeMRT.softParts.muscularAtrophy.value' | translate }}"
+        rr-id="kne_m_080358"
+        [(ngModel)]="model.isMuscularAtrophy"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="f-vertical f-start c-col-1 c-pad c-sep o-radio-list"></div>
+  <div class="f-vertical f-start c-col-1 c-pad-l o-radio-list"></div>
+</div>

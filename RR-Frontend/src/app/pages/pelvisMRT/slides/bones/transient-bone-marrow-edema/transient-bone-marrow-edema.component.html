@@ -1,0 +1,95 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 rr-id="pel_m_100202" class="m-b-27 m-t-3" rrValidation="hipLocalizer">
+      {{ "pelvisMRT.bones.localization.value" | translate }}*
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+      rrValidation="hipLocalizer"
+      isLocalizer="true"
+    >
+    </rr-hips-small>
+  </div>
+  <!-- TODO: wrong rr-ids for controls, wait for answer from client -->
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 class="m-t-3 m-b-29" rr-id="pel_m_100347">
+      {{ "pelvisMRT.bones.associatedFindings.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="pel_m_100349"
+      label="{{ 'pelvisMRT.bones.articularEffusion.value' | translate }}"
+      [(ngModel)]="model.isArticularEffusion"
+      name="isArticularEffusion"
+      binary="true"
+    ></p-checkbox>
+    <div class="o-radio-list m-t-47">
+      <p-checkbox
+        class="checkbox-readonly"
+        rr-id="pel_m_100350"
+        [(ngModel)]="model.isTbmeBoneMarrowEdema"
+        binary="true"
+        name="isTbmeBoneMarrowEdema"
+        label="{{ 'pelvisMRT.bones.boneMarrowEdema.value' | translate }}"
+      ></p-checkbox>
+      <p-checkbox
+        class="checkbox-readonly"
+        [(ngModel)]="model.isAbsentSubchondralLesion"
+        binary="true"
+        name="isAbsentSubchondralLesion"
+        rr-id="pel_m_100351"
+        label="{{ 'pelvisMRT.bones.missingSubchondralLesion.value' | translate }}"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 class="m-t-3 m-b-29" rr-id="pel_m_100470">
+      {{ "pelvisMRT.bones.differentialDiagnosis.value" | translate }}
+    </h2>
+    <div class="o-radio-list m-b-15">
+      <p-radioButton
+        rr-id="pel_m_100473"
+        label="{{ 'pelvisMRT.bones.stressFracture.value' | translate }}"
+        [(ngModel)]="model.tbmeDifferentialDiagnosisType"
+        [value]="tbmeDifferentialDiagnosisType.StressFracture"
+        name="tbmeDifferentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="tbmeDifferentialDiagnosisTypeBlock"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_100475"
+        label="{{ 'pelvisMRT.bones.metastasis.value' | translate }}"
+        [(ngModel)]="model.tbmeDifferentialDiagnosisType"
+        [value]="tbmeDifferentialDiagnosisType.Metastasis"
+        name="tbmeDifferentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="tbmeDifferentialDiagnosisTypeBlock"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_100476"
+        label="{{ 'pelvisMRT.bones.osteomyelitis.value' | translate }}"
+        [(ngModel)]="model.tbmeDifferentialDiagnosisType"
+        [value]="tbmeDifferentialDiagnosisType.Osteomyelitis"
+        name="tbmeDifferentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="tbmeDifferentialDiagnosisTypeBlock"
+      ></p-radioButton>
+    </div>
+    <div
+      class="left-indent"
+      id="tbmeDifferentialDiagnosisTypeBlock"
+      [rrDisable]="model.tbmeDifferentialDiagnosisType === 'None'"
+    >
+      <p-checkbox
+        rr-id="pel_m_100477"
+        label="{{ 'pelvisMRT.bones.subordinate.value' | translate }}"
+        [(ngModel)]="model.isSubordinated"
+        binary="true"
+        name="isSubordinated"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep f-vertical"></div>
+</div>

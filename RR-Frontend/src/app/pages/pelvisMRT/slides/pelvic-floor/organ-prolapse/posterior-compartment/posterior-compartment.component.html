@@ -1,0 +1,252 @@
+<div class="f-horizontal h-510">
+  <div class="c-col-1 c-pad f-start">
+    <div class="o-list p-l-10">
+      <h2 rr-id="pel_m_070236" class="m-b-17">
+        {{ 'pelvisMRT.pelvicFloor.posteriorCompartment.value' | translate }}
+      </h2>
+      <div class="o-radio-list text-break">
+        <p-checkbox
+          rr-id="pel_m_070237"
+          name="isAnteriorRectocele"
+          [(ngModel)]="model.isAnteriorRectocele"
+          label="{{ 'pelvisMRT.pelvicFloor.anteriorRectocele.value' | translate }}"
+          binary="true"
+          class="m-b-16"
+          rrInfoIcon="pel_m_07_11"
+          rrContentReset="inputField phaseBlock"
+          (onChange)="clearStaticInputs()"
+        ></p-checkbox>
+        <div
+          id="inputField"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isAnteriorRectocele"
+        >
+          <div class="label-align m-b-7">
+            <p class="m-b-10" rr-id="pel_m_0702103">
+              {{ 'pelvisMRT.pelvicFloor.extensionInReferenceTo.value' |
+              translate }}
+            </p>
+            <rr-number-input
+              inputRrId="pel_m_070239"
+              labelRrId="pel_m_070240"
+              [config]="{min: 1, max: 100, inputWidth: 85}"
+              name="expansionInReferenceToAnteriorRectalWallInMm"
+              [(ngModel)]="model.expansionInReferenceToAnteriorRectalWallInMm"
+              (announceModelChange)="setMPLGradingValue()"
+              [label]="'pelvisMRT.pelvicFloor.inMm.value' | translate"
+            >
+            </rr-number-input>
+          </div>
+          <div id="phaseBlock" class="o-radio-list">
+            <div
+              class="o-radio-list"
+              [rrDisable]="!isDynamicOnLocalization || model.expansionInReferenceToAnteriorRectalWallInMm === null"
+            >
+              <p rr-id="pel_m_0702113" class="m-b-6">
+                {{ 'pelvisMRT.pelvicFloor.phase.value' | translate }}
+              </p>
+              <p-radioButton
+                rr-id="pel_m_0702114"
+                name="anteriorRectocelePhaseType"
+                [value]="phaseType.Rest"
+                rrValidation="anteriorRectocelePhaseType"
+                [(ngModel)]="model.anteriorRectocelePhaseType"
+                label="{{ 'pelvisMRT.pelvicFloor.silenceNoAsterisk.value' | translate }}"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="pel_m_0702115"
+                name="anteriorRectocelePhaseType"
+                [value]="phaseType.Defecation"
+                rrValidation="anteriorRectocelePhaseType"
+                [(ngModel)]="model.anteriorRectocelePhaseType"
+                label="{{ 'pelvisMRT.pelvicFloor.defecationNoAsterisk.value' | translate }}"
+              ></p-radioButton>
+            </div>
+            <div
+              id="gardingBlock"
+              class="nested-content"
+              [rrDisable]="!(model.expansionInReferenceToAnteriorRectalWallInMm > 0)"
+            >
+              <p rr-id="pel_m_0702116" class="m-b-10">
+                {{ 'pelvisMRT.pelvicFloor.grading.value' | translate }}
+              </p>
+              <rr-number-input
+                rr-id="pel_m_0702117"
+                [config]="{readonly: true, inputWidth: 123}"
+                [ngModelOptions]="{standalone: true}"
+                name="pclGrading"
+                [ngModel]="pclGradingText | translate"
+              ></rr-number-input>
+            </div>
+          </div>
+          <p rr-id="pel_m_0702104" [rrDisable]="!isDynamicOnLocalization">
+            {{ 'pelvisMRT.pelvicFloor.details.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="pel_m_070241"
+            name="isIntraluminalCmRetentionAfterDefecation"
+            [(ngModel)]="model.isIntraluminalCmRetentionAfterDefecation"
+            [rrDisable]="!isDynamicOnLocalization"
+            label="{{ 'pelvisMRT.pelvicFloor.itraluminalRetentionAfterDefecation.value' | translate }}"
+            binary="true"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start m-t-40">
+    <div class="o-list p-l-8">
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="pel_m_070337"
+          name="isPosteriorRectocele"
+          [(ngModel)]="model.isPosteriorRectocele"
+          label="{{ 'pelvisMRT.pelvicFloor.posteriorRectocele.value' | translate }}"
+          binary="true"
+          class="m-b-26"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l f-start m-t-38">
+    <div class="o-list p-l-7">
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="pel_m_070430"
+          [(ngModel)]="model.isLateralRectocele"
+          name="isLateralRectocele"
+          rrContentReset="sideBlock"
+          label="{{ 'pelvisMRT.pelvicFloor.lateralRectocele.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+        <div
+          id="sideBlock"
+          class="o-radio-list p-l-35"
+          [rrDisable]="!model.isLateralRectocele"
+        >
+          <p rr-id="pel_m_070431">
+            {{ 'pelvisMRT.pelvicFloor.side.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="pel_m_070432"
+            name="lateralRectoceleDirectionType"
+            [(ngModel)]="model.lateralRectoceleDirectionType"
+            rrValidation="lateralRectoceleDirectionType"
+            [value]="directionType.Right"
+            label="{{ 'pelvisMRT.pelvicFloor.rightSideNoAsterisk.value' | translate }}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_070433"
+            rrValidation="lateralRectoceleDirectionType"
+            [(ngModel)]="model.lateralRectoceleDirectionType"
+            name="lateralRectoceleDirectionType"
+            [value]="directionType.Left"
+            label="{{ 'pelvisMRT.pelvicFloor.leftNoAsterisk.value' | translate }}"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l f-start m-t-35">
+    <div class="o-list p-l-10">
+      <p-checkbox
+        rr-id="pel_m_070526"
+        name="isRectalIntussusception"
+        [(ngModel)]="model.isRectalIntussusception"
+        rrContentReset="firstRadioBlock secondRadioBlock thirdRadioBlock"
+        label="{{ 'pelvisMRT.pelvicFloor.rectalIntussusception.value' | translate }}"
+        binary="true"
+        rrInfoIcon="pel_m_07_13"
+      ></p-checkbox>
+      <div
+        id="firstRadioBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="!model.isRectalIntussusception"
+      >
+        <p-radioButton
+          rr-id="pel_m_070515"
+          name="rectalIntussusceptionType"
+          [(ngModel)]="model.rectalIntussusceptionType"
+          [value]="rectalIntussusceptionType.MucosalInvolvement"
+          label="{{ 'pelvisMRT.pelvicFloor.mucosalInvolvement.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_070516"
+          name="rectalIntussusceptionType"
+          [(ngModel)]="model.rectalIntussusceptionType"
+          [value]="rectalIntussusceptionType.ParticipationOfTheEntireRectalWall"
+          label="{{ 'pelvisMRT.pelvicFloor.participationOfTheEntire.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <div
+        id="secondRadioBlock"
+        class="o-radio-list p-l-35 text-break"
+        [rrDisable]="!model.isRectalIntussusception"
+      >
+        <p rr-id="pel_m_070517" class="m-b-6">
+          {{ 'pelvisMRT.pelvicFloor.longitudinalExpansion.value' | translate }}
+        </p>
+        <p-radioButton
+          rr-id="pel_m_070518"
+          name="longitudinalExpansionType"
+          [(ngModel)]="model.longitudinalExpansionType"
+          [value]="expansionLongitudionalType.Intrarectal"
+          label="{{ 'pelvisMRT.pelvicFloor.intrarectal.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_070519"
+          name="longitudinalExpansionType"
+          [(ngModel)]="model.longitudinalExpansionType"
+          [value]="expansionLongitudionalType.Intraanal"
+          label="{{ 'pelvisMRT.pelvicFloor.intraanal.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_070520"
+          name="longitudinalExpansionType"
+          [(ngModel)]="model.longitudinalExpansionType"
+          class="m-b-14"
+          [value]="expansionLongitudionalType.ExtraanalWithRectalProlapse"
+          label="{{ 'pelvisMRT.pelvicFloor.extraanalWithRectalProlapse.value' | translate }}"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <div
+        id="thirdRadioBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="!model.isRectalIntussusception"
+      >
+        <p rr-id="pel_m_070521">
+          {{ 'pelvisMRT.pelvicFloor.horizontalExpansion.value' | translate }}
+        </p>
+        <p-radioButton
+          rr-id="pel_m_070522"
+          name="horizontalExpansionType"
+          [(ngModel)]="model.horizontalExpansionType"
+          rrUnClickRadio
+          [value]="horizontalExpansionType.Circumferent"
+          label="{{ 'pelvisMRT.pelvicFloor.circumferent.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_070523"
+          class="m-b-20"
+          rrUnClickRadio
+          [(ngModel)]="model.horizontalExpansionType"
+          name="horizontalExpansionType"
+          [value]="horizontalExpansionType.Partially"
+          label="{{ 'pelvisMRT.pelvicFloor.partially.value' | translate }}"
+        ></p-radioButton>
+        <p-checkbox
+          rr-id="pel_m_070524"
+          name="isPosteriorCompartmentFailureOfPassage"
+          [(ngModel)]="model.isPosteriorCompartmentFailureOfPassage"
+          label="{{ 'pelvisMRT.pelvicFloor.failureOfPassage.value' | translate }}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,411 @@
+<div class="h-580">
+  <p-tabView class="rr-tabView">
+    <p-tabPanel [selected]="true" [disabled]="!model.isTendinopathy">
+      <ng-template pTemplate="header">
+        <h1
+          [rrValidation]="[]"
+          ifAny="true"
+          rr-id="anc_m_050323"
+          class="custom-tab-header"
+        >
+          {{ 'feetMRT.ligamentsAndTendons.tendinopathyDetails.value' | translate
+          }}
+        </h1>
+      </ng-template>
+      <div
+        class="f-horizontal f-start col-h-100"
+        [rrDisable]="!model.isTendinopathy"
+      >
+        <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 o-list">
+          <div class="o-radio-list m-b-20 p-l-10">
+            <h2 rr-id="anc_m_050324">
+              {{ 'feetMRT.ligamentsAndTendons.localization.value' | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="anc_m_050325"
+              label="{{ 'feetMRT.ligamentsAndTendons.diffuse.value' | translate }}"
+              name="localizationTypes"
+              [value]="localizationType.Diffuse"
+              [(ngModel)]="model.localizationType"
+              rrContentReset="distanceFromTuberCalcaneiBlock"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_050326"
+              label="{{ 'feetMRT.ligamentsAndTendons.focal.value' | translate }}"
+              name="localizationTypes"
+              [value]="localizationType.Focal"
+              [(ngModel)]="model.localizationType"
+              rrContentReset="distanceFromTuberCalcaneiBlock"
+              rrUnClickRadio
+            ></p-radioButton>
+            <div
+              id="distanceFromTuberCalcaneiBlock"
+              class="o-radio-list p-l-35"
+              [rrDisable]="model.localizationType !== localizationType.Focal"
+            >
+              <p rr-id="anc_m_050327">
+                {{ 'feetMRT.ligamentsAndTendons.distanceFromTuberCalcanei.value'
+                | translate }}
+              </p>
+              <rr-number-input
+                [(ngModel)]="model.distanceToTuberCalcaneiInMm"
+                name="distanceToTuberCalcaneiInMm"
+                [label]="'feetMRT.ligamentsAndTendons.inMm.value' | translate"
+                inputRrId="anc_m_050328"
+                labelRrId="anc_m_050329"
+                infoIconRrId="anc_m_05_04"
+                [config]="{labelWidth: 160, min: 1, max: 50, hasInfoIcon: true}"
+              ></rr-number-input>
+            </div>
+          </div>
+          <div class="o-radio-list p-l-10">
+            <h2 rr-id="anc_m_050330" rrInfoIcon="anc_m_05_05">
+              {{ 'feetMRT.ligamentsAndTendons.morphology.value' | translate }}
+            </h2>
+            <p-checkbox
+              name="isT2wPDHyperintensity"
+              label="{{ 'feetMRT.ligamentsAndTendons.t2wPDHyperintensity.value' | translate }}"
+              rr-id="anc_m_050331"
+              binary="true"
+              [(ngModel)]="model.isT2wPDHyperintensity"
+            ></p-checkbox>
+            <p-checkbox
+              name="isT1wHyperintensity"
+              label="{{ 'feetMRT.ligamentsAndTendons.t1wHyperintensity.value' | translate }}"
+              rr-id="anc_m_050332"
+              binary="true"
+              [(ngModel)]="model.isT1wHyperintensity"
+            ></p-checkbox>
+            <p-checkbox
+              name="isThickening"
+              label="{{ 'feetMRT.ligamentsAndTendons.thickening.value' | translate }}"
+              rr-id="anc_m_050333"
+              binary="true"
+              [(ngModel)]="model.isThickening"
+              rrContentReset="thickeningBlock"
+            ></p-checkbox>
+            <div
+              id="thickeningBlock"
+              class="o-radio-list p-l-35"
+              [rrDisable]="!model.isThickening"
+            >
+              <p-checkbox
+                name="isConvexAnteriorContour"
+                label="{{ 'feetMRT.ligamentsAndTendons.ventralConvexity.value' | translate }}"
+                rr-id="anc_m_050334"
+                binary="true"
+                [(ngModel)]="model.isConvexAnteriorContour"
+              ></p-checkbox>
+              <p rr-id="anc_m_050335">
+                {{ 'feetMRT.ligamentsAndTendons.maxSagittalDiameter.value' |
+                translate }}
+              </p>
+              <div class="m-b-10">
+                <rr-number-input
+                  [(ngModel)]="model.maxSagittalDiameterInMm"
+                  name="maxSagittalDiameterInMm"
+                  [label]="'feetMRT.ligamentsAndTendons.inMm.value' | translate"
+                  [inputRrId]="'anc_m_050336'"
+                  [labelRrId]="'anc_m_050337'"
+                  [config]="{labelWidth: 160, min: 1, max: 20}"
+                ></rr-number-input>
+              </div>
+              <p-checkbox
+                name="isFusiformContour"
+                label="{{ 'feetMRT.ligamentsAndTendons.fusiformContour.value' | translate }}"
+                rr-id="anc_m_050338"
+                binary="true"
+                [(ngModel)]="model.isFusiformContour"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 o-list">
+          <div class="o-radio-list p-l-10 text-break">
+            <h2 rr-id="anc_m_050428">
+              {{ 'feetMRT.ligamentsAndTendons.associatedFindings.value' |
+              translate }}
+            </h2>
+            <p-checkbox
+              name="isRetrocalcanealSubachillealBursitis"
+              label="{{ 'feetMRT.ligamentsAndTendons.bursitisSubachillea.value' | translate }}"
+              rr-id="anc_m_050429"
+              binary="true"
+              [(ngModel)]="model.isRetrocalcanealSubachillealBursitis"
+            ></p-checkbox>
+            <p-checkbox
+              name="isCalcifyingTendinitis"
+              label="{{ 'feetMRT.ligamentsAndTendons.intratendinousCalcification.value' | translate }}"
+              rr-id="anc_m_050430"
+              binary="true"
+              [(ngModel)]="model.isCalcifyingTendinitis"
+            ></p-checkbox>
+            <p-checkbox
+              name="isIntratendinousSoftTissueFoci"
+              label="{{ 'feetMRT.ligamentsAndTendons.intratendinousSoftTissueIntensive.value' | translate }}"
+              rr-id="anc_m_050431"
+              binary="true"
+              [(ngModel)]="model.isIntratendinousSoftTissueFoci"
+            ></p-checkbox>
+            <p-checkbox
+              name="isTendonHypervascularisation"
+              label="{{ 'feetMRT.ligamentsAndTendons.hypervascularizationOfTheTendon.value' | translate }}"
+              rr-id="anc_m_050432"
+              binary="true"
+              [(ngModel)]="model.isTendonHypervascularisation"
+            ></p-checkbox>
+            <p-checkbox
+              name="isOsteitisOnTheTuberCalcanei"
+              label="{{ 'feetMRT.ligamentsAndTendons.osteitisOfTheTuber.value' | translate }}"
+              rr-id="anc_m_050433"
+              binary="true"
+              [(ngModel)]="model.isOsteitisOnTheTuberCalcanei"
+            ></p-checkbox>
+            <p-checkbox
+              name="isHaglundDeformity"
+              label="{{ 'feetMRT.ligamentsAndTendons.haglundDeformity.value' | translate }}"
+              rr-id="anc_m_050434"
+              binary="true"
+              [(ngModel)]="model.isHaglundDeformity"
+            ></p-checkbox>
+            <p-checkbox
+              name="isDorsalHeelSpur"
+              label="{{ 'feetMRT.ligamentsAndTendons.bonyAchillesSpur.value' | translate }}"
+              rr-id="anc_m_050435"
+              binary="true"
+              [(ngModel)]="model.isDorsalHeelSpur"
+              rrContentReset="sizeBlock"
+            ></p-checkbox>
+            <div
+              id="sizeBlock"
+              class="o-radio-list p-l-35"
+              [rrDisable]="!model.isDorsalHeelSpur"
+            >
+              <p rr-id="anc_m_050436">
+                {{ 'feetMRT.ligamentsAndTendons.size.value' | translate }}
+              </p>
+              <rr-number-input
+                [(ngModel)]="model.sizeInMm"
+                name="sizeInMm"
+                [label]="'feetMRT.ligamentsAndTendons.inMm.value' | translate"
+                [inputRrId]="'anc_m_050437'"
+                [labelRrId]="'anc_m_050438'"
+                infoIconRrId="anc_m_05_07"
+                [config]="{labelWidth: 160, min: 1, max: 50, hasInfoIcon: true}"
+              ></rr-number-input>
+            </div>
+            <p-checkbox
+              name="isPeritendinousEdema"
+              label="{{ 'feetMRT.ligamentsAndTendons.peritendinousEdema.value' | translate }}"
+              rr-id="anc_m_050439"
+              binary="true"
+              [(ngModel)]="model.isPeritendinousEdema"
+              rrContentReset="edemaInKagersTriangleBlock"
+            ></p-checkbox>
+            <div
+              id="edemaInKagersTriangleBlock"
+              class="o-radio-list p-l-35"
+              [rrDisable]="!model.isPeritendinousEdema"
+            >
+              <p-checkbox
+                name="isEdemaInKagerFatPad"
+                label="{{ 'feetMRT.ligamentsAndTendons.edemaInKagersTriangle.value' | translate }}"
+                rr-id="anc_m_050440"
+                binary="true"
+                [(ngModel)]="model.isEdemaInKagerFatPad"
+              ></p-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l m-t-15 m-b-15">
+          <div class="o-radio-list p-l-10 p-r-25">
+            <h2 rr-id="anc_m_050506">
+              {{ 'feetMRT.ligamentsAndTendons.differentialDiagnosis.value' |
+              translate }}
+            </h2>
+            <p-dropdown
+              rr-id="anc_m_050507"
+              name="differentialDiagnosisType"
+              [(ngModel)]="model.differentialDiagnosisType"
+              placeholder="{{'shared.pleaseSelect' | translate}}"
+              [options]="w013DifferentialDiagnosis"
+              styleClass="o-width-100 ui-brown-box"
+              rrDropdownClear
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="!model.isTear">
+      <ng-template pTemplate="header">
+        <h1
+          [rrValidation]="[]"
+          ifAny="true"
+          rr-id="anc_m_050427"
+          class="custom-tab-header"
+        >
+          {{ 'feetMRT.ligamentsAndTendons.ruptureDetails.value' | translate }}
+        </h1>
+      </ng-template>
+      <div class="f-horizontal f-start col-h-100" [rrDisable]="!model.isTear">
+        <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 o-list">
+          <div class="o-radio-list p-l-10">
+            <h2 rr-id="anc_m_050339">
+              {{ 'feetMRT.ligamentsAndTendons.extent.value' | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="anc_m_050340"
+              label="{{ 'feetMRT.ligamentsAndTendons.partialRupture.value' | translate }}"
+              name="ruptureType"
+              [value]="ruptureType.PartialTear"
+              [(ngModel)]="model.ruptureType"
+              [rrContentReset]="clearRuptureTypeDetails(ruptureType.PartialTear)"
+              rrValidation="ruptureType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_050341"
+              label="{{ 'feetMRT.ligamentsAndTendons.completeRupture.value' | translate }}"
+              name="ruptureType"
+              [value]="ruptureType.CompleteTear"
+              [(ngModel)]="model.ruptureType"
+              [rrContentReset]="clearRuptureTypeDetails(ruptureType.CompleteTear)"
+              rrValidation="ruptureType"
+            ></p-radioButton>
+            <div
+              id="partialRuptureBlock"
+              class="o-radio-list p-l-35"
+              *ngIf="model.ruptureType === ruptureType.PartialTear"
+            >
+              <p rr-id="anc_m_050342">
+                {{ 'feetMRT.ligamentsAndTendons.maxProportionInCross.value' |
+                translate }}
+              </p>
+              <div class="m-b-10">
+                <rr-number-input
+                  [(ngModel)]="model.maxExtentInCrossSectionInPercent"
+                  name="maxExtentInCrossSectionInPercent"
+                  [label]="'feetMRT.ligamentsAndTendons.in.value' | translate"
+                  [inputRrId]="'anc_m_050343'"
+                  [labelRrId]="'anc_m_050344'"
+                  [config]="{labelWidth: 160, min: 10, max: 90}"
+                ></rr-number-input>
+              </div>
+              <p-checkbox
+                name="isLongitudinalTear"
+                label="{{ 'feetMRT.ligamentsAndTendons.longitudinalTear.value' | translate }}"
+                rr-id="anc_m_050345"
+                binary="true"
+                [(ngModel)]="model.isLongitudinalTear"
+              ></p-checkbox>
+              <p rr-id="anc_m_050346">
+                {{ 'feetMRT.ligamentsAndTendons.craniocaudalExtension.value' |
+                translate }}
+              </p>
+              <rr-number-input
+                [(ngModel)]="model.craniocaudaleExtensionInMm"
+                name="craniocaudaleExtensionInMm"
+                [label]="'feetMRT.ligamentsAndTendons.inMm.value' | translate"
+                [inputRrId]="'anc_m_050347'"
+                [labelRrId]="'anc_m_050348'"
+                infoIconRrId="anc_m_05_08"
+                [config]="{labelWidth: 160, min: 1, max: 50, hasInfoIcon: true}"
+              ></rr-number-input>
+            </div>
+            <div
+              id="completeRuptureBlock"
+              class="o-radio-list p-l-35"
+              *ngIf="model.ruptureType === ruptureType.CompleteTear"
+            >
+              <p rr-id="anc_m_050349">
+                {{ 'feetMRT.ligamentsAndTendons.retraction.value' | translate }}
+              </p>
+              <rr-number-input
+                [(ngModel)]="model.retractionInMm"
+                name="retractionInMm"
+                [label]="'feetMRT.ligamentsAndTendons.inMm.value' | translate"
+                [inputRrId]="'anc_m_050350'"
+                [labelRrId]="'anc_m_0503501'"
+                [config]="{labelWidth: 160, min: 1, max: 50}"
+              ></rr-number-input>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 o-list">
+          <div class="o-radio-list p-l-10">
+            <h2 rr-id="anc_m_050441">
+              {{ 'feetMRT.ligamentsAndTendons.localizationOfTendonRupture.value'
+              | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="anc_m_050442"
+              label="{{ 'feetMRT.ligamentsAndTendons.muscleTendonTransition.value' | translate }}"
+              name="ruptureLocalizationType"
+              [value]="ruptureLocalizationType.MuscleTendonJunction"
+              [(ngModel)]="model.ruptureLocalizationType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_050443"
+              label="{{ 'feetMRT.ligamentsAndTendons.middleToDistalAchilles.value' | translate }}"
+              name="ruptureLocalizationType"
+              [value]="ruptureLocalizationType.MiddleToDistalAchillesTendon"
+              [(ngModel)]="model.ruptureLocalizationType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_050444"
+              label="{{ 'feetMRT.ligamentsAndTendons.achillesTendonInsertion.value' | translate }}"
+              name="ruptureLocalizationType"
+              [value]="ruptureLocalizationType.AchillesTendonApproach"
+              [(ngModel)]="model.ruptureLocalizationType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p rr-id="anc_m_050445">
+              {{ 'feetMRT.ligamentsAndTendons.distanceFromTuberCalcanei.value' |
+              translate }}
+            </p>
+            <rr-number-input
+              [(ngModel)]="model.distanceFromTuberCalcanei"
+              name="distanceFromTuberCalcanei"
+              [label]="'feetMRT.ligamentsAndTendons.inMm.value' | translate"
+              [inputRrId]="'anc_m_050446'"
+              [labelRrId]="'anc_m_050447'"
+              infoIconRrId="anc_m_05_04"
+              [config]="{labelWidth: 160, min: 1, max: 50, hasInfoIcon: true}"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div class="c-col-1 c-sep c-pad-l m-t-15 m-b-15 o-list">
+          <div class="o-radio-list p-l-10 m-b-50">
+            <h2 rr-id="anc_m_050508">
+              {{ 'feetMRT.ligamentsAndTendons.associatedFindings.value' |
+              translate }}
+            </h2>
+            <p-checkbox
+              name="isSoftTissueHematoma"
+              label="{{ 'feetMRT.ligamentsAndTendons.softTissueHematoma.value' | translate }}"
+              rr-id="anc_m_050509"
+              binary="true"
+              [(ngModel)]="model.isSoftTissueHematoma"
+            ></p-checkbox>
+          </div>
+          <div class="o-radio-list p-l-10">
+            <p-checkbox
+              name="isReRupture"
+              label="{{ 'feetMRT.ligamentsAndTendons.rerupture.value' | translate }}"
+              rr-id="anc_m_050510"
+              labelStyleClass="ui-fat-label"
+              binary="true"
+              [(ngModel)]="model.isReRupture"
+            ></p-checkbox>
+            <p rr-id="anc_m_050551" class="m-l-35">
+              {{ 'feetMRT.ligamentsAndTendons.statusPostTendonSuture.value' |
+              translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

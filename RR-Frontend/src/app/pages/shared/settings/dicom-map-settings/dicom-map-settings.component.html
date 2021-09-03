@@ -1,0 +1,207 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10 w-300">
+    <div class="m-l-10 m-r-10 o-radio-list f-vertical">
+      <h2 rr-id="fra_13_41" class="header">
+        {{'settings.dicomData.value' | translate}}
+      </h2>
+      <p rr-id="fra_13_42" class="text">
+        {{'settings.moduleSelection.value' | translate}}
+      </p>
+
+      <p-dropdown
+        class="selected-module-dropdown"
+        rr-id="fra_13_43"
+        rrDropdownClear
+        styleClass="ui-brown-box o-width-100"
+        name="selectedModule"
+        [options]="modulesOptions"
+        [(ngModel)]="selectedModule"
+        (onChange)="onModuleSelectionChangeEvent()"
+        placeholder="{{'shared.pleaseSelect' | translate }}"
+      ></p-dropdown>
+
+      <p rr-id="fra_13_44" class="text">
+        {{'settings.retrieveLevel.value' | translate}}
+      </p>
+
+      <p-dropdown
+        rr-id="fra_13_45"
+        rrDropdownClear
+        styleClass="ui-brown-box o-width-100"
+        name="selectedRetrieveLevel"
+        [options]="retrieveLevelOptions"
+        [(ngModel)]="selectedRetrieveLevel"
+        (onChange)="onRetrieveLevelChangeEvent()"
+        placeholder="{{'shared.pleaseSelect' | translate}}"
+      ></p-dropdown>
+
+      <div class="f-horizontal f-space-between">
+        <input
+          #importDicom
+          style="display: none"
+          type="file"
+          (change)="importDicomMap($event)"
+          accept=".rrl"
+        />
+        <button
+          rr-id="fra_13_46"
+          type="button"
+          class="button m-r-2"
+          (click)="importDicom?.click()"
+        >
+          {{'settings.import.value' | translate}}
+        </button>
+        <button
+          rr-id="fra_13_47"
+          type="button"
+          class="button m-l-2"
+          (click)="exportDicomMap()"
+          [ngClass]="{disabled: !dicomMap}"
+        >
+          {{'settings.export.value' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-4 c-sep c-pad m-t-10 m-b-10">
+    <div class="m-l-10 m-r-5 o-radio-list f-vertical">
+      <p *ngIf="!showDicomMapEntries()" rr-id="fra_13_48" class="text">
+        {{'settings.noDataToDisplayPleaseSelectModuleAndRetrieveLevel.value'
+        |translate}}
+      </p>
+
+      <div
+        *ngIf="showDicomMapEntries()"
+        class="report-settings-table-header m-t-10 m-b-10 f-align-end"
+      >
+        <h2 rr-id="fra_13_49" class="header header-text table-header-label">
+          {{'settings.dicomMapping.value' | translate}}
+        </h2>
+        <div class="header-buttons f-align-center">
+          <button
+            rr-id="fra_13_50"
+            type="button"
+            class="grey-button m-r-5"
+            (click)="removeMapEntries()"
+            [ngClass]="{disabled: getSelectedDicomMapEntries().length === 0}"
+          >
+            {{'settings.remove.value' | translate | uppercase}}
+          </button>
+          <button
+            rr-id="fra_13_51"
+            type="button"
+            class="grey-button m-r-5"
+            (click)="editMapEntry()"
+            [ngClass]="{disabled: getSelectedDicomMapEntries().length !== 1}"
+          >
+            {{'settings.edit.value' | translate | uppercase}}
+          </button>
+          <button
+            rr-id="fra_13_52"
+            type="button"
+            class="grey-button m-r-5"
+            (click)="resetDicomMap()"
+          >
+            {{'settings.reset.value' | translate | uppercase}}
+          </button>
+          <button
+            rr-id="fra_13_53"
+            type="button"
+            class="grey-button m-r-46"
+            (click)="saveDicomMap()"
+          >
+            {{'settings.save2.value' | translate | uppercase}}
+          </button>
+          <button
+            rr-id="fra_13_73"
+            type="button"
+            class="button w-282"
+            (click)="addMapEntry()"
+          >
+            {{'settings.addEntryPlus.value' | translate}}
+          </button>
+        </div>
+      </div>
+
+      <div
+        *ngIf="showDicomMapEntries()"
+        class="report-settings-table p-t-5 p-b-10"
+      >
+        <div class="table-header">
+          <div class="table-row">
+            <div class="table-cell f-start p-l-20">
+              <p-checkbox
+                (onChange)="selectAllDicomMapEntries($event)"
+                binary="true"
+              ></p-checkbox>
+            </div>
+            <div class="table-cell f-start" rr-id="fra_13_54">
+              {{'settings.dicomTag.value' | translate}}
+            </div>
+            <div class="table-cell f-start" rr-id="fra_13_55">
+              {{'settings.description.value' | translate}}
+            </div>
+            <div class="table-cell f-start" rr-id="fra_13_56">
+              {{'settings.regex.value' | translate}}
+            </div>
+            <div class="table-cell f-start" rr-id="fra_13_57">
+              {{'settings.rRID.value' | translate}}
+            </div>
+            <div class="table-cell f-start" rr-id="fra_13_58">
+              {{'settings.rRValue.value' | translate}}
+            </div>
+            <div class="table-cell f-start" rr-id="fra_13_59">
+              {{'settings.listPrefix.value' | translate}}
+            </div>
+          </div>
+        </div>
+        <div
+          class="table-row"
+          *ngFor="let entry of dicomMapEntries | paginate: { id: 'dicomPaginatorId', itemsPerPage: 7, currentPage: page } ; let i = index"
+        >
+          <div class="table-cell f-start p-l-20">
+            <p-checkbox
+              name="isSelected"
+              [(ngModel)]="entry.isSelected"
+              binary="true"
+            ></p-checkbox>
+          </div>
+          <div class="table-cell f-start">{{ entry.DicomTag }}</div>
+          <div class="table-cell f-start">{{ entry.Description}}</div>
+          <div class="table-cell f-start">{{ entry.Regex }}</div>
+          <div class="table-cell f-start">{{ entry.RadioReportId }}</div>
+          <div class="table-cell f-start">{{ entry.RadioReportValue }}</div>
+          <div class="table-cell f-start">{{ entry.ListPrefix }}</div>
+        </div>
+      </div>
+
+      <pagination-template
+        *ngIf="showDicomMapEntries()"
+        #pagination="paginationApi"
+        id="dicomPaginatorId"
+        (pageChange)="setPage($event)"
+      >
+        <ul class="pagination" *ngIf="!(pagination.pages.length === 0)">
+          <li
+            class="pagination-item"
+            *ngFor="let page of pagination.pages"
+            (click)="pagination.setCurrent(page.value)"
+            [class.current]="pagination.getCurrent() === page.value"
+            [class.ellipsis]="page.label === '...'"
+          >
+            <a
+              tabindex="0"
+              (keyup.enter)="pagination.setCurrent(page.value)"
+              *ngIf="pagination.getCurrent() !== page.value"
+            >
+              <span>{{ getPageLabel(page)}}</span></a
+            >
+            <ng-container *ngIf="pagination.getCurrent() === page.value">
+              <span>{{ getPageLabel(page)}}</span>
+            </ng-container>
+          </li>
+        </ul>
+      </pagination-template>
+    </div>
+  </div>
+</div>

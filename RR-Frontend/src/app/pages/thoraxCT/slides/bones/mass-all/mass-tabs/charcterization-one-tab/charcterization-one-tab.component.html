@@ -1,0 +1,355 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div
+    *ngIf="model.findingType === thoraxBonesFindingsTypeEnum.MassClavicle || model.findingType === thoraxBonesFindingsTypeEnum.MassScapula"
+    class="c-col-1 c-sep c-pad m-t-13 m-b-15"
+  >
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="tho_c_080202" class="m-b-20">
+        {{ 'thoraxCT.bones.side.value' | translate }}*
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        [value]="locationTypeEnum.Right"
+        label="{{ 'thoraxCT.bones.right.value' | translate }}"
+        rr-id="tho_c_080203"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        [value]="locationTypeEnum.Left"
+        label="{{ 'thoraxCT.bones.left.value' | translate }}"
+        rr-id="tho_c_080204"
+        rrValidation="sideType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div
+    *ngIf="model.findingType === thoraxBonesFindingsTypeEnum.MassRibs"
+    class="c-col-1 c-sep c-pad m-t-15 m-b-15"
+  >
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="tho_c_080205">
+        {{ 'thoraxCT.bones.localization.value' | translate }}*
+      </h2>
+      <rr-ribs-simple
+        class="nested-localizer"
+        rr-id="tho_c_080206"
+        [model]="model.ribLocation"
+        (click)="openLargeLocalizer(largeLocalizers.RIBS)"
+        rrValidation="ribLocation"
+        isLocalizer="true"
+      ></rr-ribs-simple>
+    </div>
+  </div>
+  <div
+    *ngIf="model.findingType === thoraxBonesFindingsTypeEnum.MassSternum"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-15"
+  >
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="tho_c_080205">
+        {{ 'thoraxCT.bones.localization.value' | translate }}*
+      </h2>
+      <p-checkbox
+        name="isManubrium"
+        label="{{ 'thoraxCT.bones.manubrium.value' | translate }}"
+        rr-id="tho_c_080241"
+        binary="true"
+        [(ngModel)]="model.isManubrium"
+        rrValidation="isManubrium isCorpus isXiphoidProcess"
+      ></p-checkbox>
+      <p-checkbox
+        name="isCorpus"
+        label="{{ 'thoraxCT.bones.corpus.value' | translate }}"
+        rr-id="tho_c_080242"
+        binary="true"
+        [(ngModel)]="model.isCorpus"
+        rrValidation="isManubrium isCorpus isXiphoidProcess"
+      ></p-checkbox>
+      <p-checkbox
+        name="isXiphoidProcess"
+        label="{{ 'thoraxCT.bones.xiphoidProcess.value' | translate }}"
+        rr-id="tho_c_080243"
+        binary="true"
+        [(ngModel)]="model.isXiphoidProcess"
+        rrValidation="isManubrium isCorpus isXiphoidProcess"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div
+    *ngIf="model.findingType === thoraxBonesFindingsTypeEnum.MassSpine"
+    class="c-col-1 c-sep c-pad m-t-10 m-b-15"
+  >
+    <div class="m-l-10">
+      <h2 rr-id="tho_c_080205">
+        {{ 'thoraxCT.bones.localization.value' | translate }}*
+      </h2>
+      <rr-spine-simple
+        rr-id="tho_c_080213"
+        [selectionAccessibilityMode]="spineSelectionAccessibilityModeEnum.C7toL1"
+        [spineLocation]="model.vertebralColumnLocalization"
+        (click)="openLargeLocalizer(largeLocalizers.SPINE)"
+        rrValidation="vertebralColumnLocalization"
+        isLocalizer="true"
+      ></rr-spine-simple>
+      <div [rrDisable]="!disabledDiscLocalizer()">
+        <h2 rr-id="tho_c_080216" class="text-break m-t-25 m-b-5">
+          {{ 'thoraxCT.bones.localizationWithinTheVertebralBody.value' |
+          translate }}
+        </h2>
+        <rr-spine-disc-general-localizer
+          rr-id="tho_c_080217"
+          logicType="ventralAndDorsal"
+          [(ngModel)]="model.vertebralBodyLocalization"
+          name="vertebralBodyLocalization"
+          [disabled]="!disabledDiscLocalizer()"
+        >
+        </rr-spine-disc-general-localizer>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-15">
+    <div class="m-l-10 o-radio-list f-vertical">
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.descriptionType == descriptionTypeEnum.IDescribe"
+      >
+        <p rr-id="tho_c_080346" rrInfoIcon="tho_c_08_06" class="m-b-0">
+          {{ 'thoraxCT.bones.differentialDiagnosis.value' | translate }} 1*
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          isActiveOnIKnow="true"
+          rrId="tho_c_080347"
+          [(ngModel)]="model.bonesDifferentialDiagnosisType"
+          name="bonesDifferentialDiagnosisType"
+          rrValidation="bonesDifferentialDiagnosisType"
+          group="true"
+          [options]="ddW052"
+          (selectionChanged)="clearDDCheckboxes()"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+      </div>
+      <h2 rr-id="tho_c_080348">
+        {{ 'thoraxCT.bones.extension.value' | translate }}
+      </h2>
+      <div class="o-radio-list f-vertical">
+        <p rr-id="tho_c_0803240" class="m-b-0">
+          {{ 'thoraxCT.bones.size.value' | translate }}*
+        </p>
+        <rr-number-input
+          name="sizeInMm"
+          inputRrId="tho_c_0803227"
+          labelRrId="tho_c_0803228"
+          [(ngModel)]="model.sizeInMm"
+          [label]="'thoraxCT.bones.inMm.value' | translate"
+          (announceModelChange)="checkAndClearTwoAndThree()"
+          rrValidation="sizeInMm"
+          [config]="{min: 1, max: 150}"
+        >
+        </rr-number-input>
+      </div>
+      <div class="o-radio-list f-vertical" [rrDisable]="!model.sizeInMm">
+        <p rr-id="tho_c_0803241" class="m-b-0">
+          {{ 'thoraxCT.bones.2plane.value' | translate }}
+        </p>
+        <rr-number-input
+          name="secondPlaneInMm"
+          inputRrId="tho_c_080351"
+          labelRrId="tho_c_080352"
+          [(ngModel)]="model.secondPlaneInMm"
+          [label]="'thoraxCT.bones.inMm.value' | translate"
+          (announceModelChange)="checkAndClearThree()"
+          [config]="{min: 1, max: 150}"
+        >
+        </rr-number-input>
+      </div>
+      <div class="o-radio-list f-vertical" [rrDisable]="!model.secondPlaneInMm">
+        <p rr-id="tho_c_0803242" class="m-b-0">
+          {{ 'thoraxCT.bones.3plane.value' | translate }}
+        </p>
+        <rr-number-input
+          name="thirdPlaneInMm"
+          inputRrId="tho_c_080353"
+          labelRrId="tho_c_080354"
+          [(ngModel)]="model.thirdPlaneInMm"
+          [label]="'thoraxCT.bones.inMm.value' | translate"
+          [config]="{min: 1, max: 150}"
+        >
+        </rr-number-input>
+      </div>
+      <h2 rr-id="tho_c_080355" class="m-t-17">
+        {{ 'thoraxCT.bones.margin.value' | translate }}
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.marginType"
+        name="marginType"
+        [value]="marginTypeEnum.WellDefined"
+        label="{{ 'thoraxCT.bones.wellDefined.value' | translate }}"
+        rr-id="tho_c_080356"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.marginType"
+        name="marginType"
+        [value]="marginTypeEnum.IllDefined"
+        label="{{ 'thoraxCT.bones.illDefined.value' | translate }}"
+        rr-id="tho_c_080357"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.marginType"
+        name="marginType"
+        [value]="marginTypeEnum.BrushShaped"
+        label="{{ 'thoraxCT.bones.brushShaped.value' | translate }}"
+        rr-id="tho_c_080358"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="tho_c_0804229">
+        {{ 'thoraxCT.bones.homogeneity.value' | translate }}
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.homogeneityType"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Homogeneous"
+        label="{{ 'thoraxCT.bones.homogeneous.value' | translate }}"
+        rr-id="tho_c_0804230"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.homogeneityType"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Heterogeneous"
+        label="{{ 'thoraxCT.bones.heterogeneous.value' | translate }}"
+        rr-id="tho_c_0804231"
+        rrUnClickRadio
+      ></p-radioButton>
+      <h2 rr-id="tho_c_0804216" class="m-t-15">
+        {{ 'thoraxCT.bones.corticalBone.value' | translate }}
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.corticalBoneType"
+        name="corticalBoneType"
+        [value]="corticalBoneTypeEnum.Intact"
+        label="{{ 'thoraxCT.bones.intact.value' | translate }}"
+        rr-id="tho_c_0804217"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.corticalBoneType"
+        name="corticalBoneType"
+        [value]="corticalBoneTypeEnum.Destruction"
+        label="{{ 'thoraxCT.bones.destruction.value' | translate }}"
+        rr-id="tho_c_0804218"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.corticalBoneType"
+        name="corticalBoneType"
+        [value]="corticalBoneTypeEnum.ThinningScalopping"
+        label="{{ 'thoraxCT.bones.thinningScalopping.value' | translate }}"
+        rr-id="tho_c_0804219"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.corticalBoneType"
+        name="corticalBoneType"
+        [value]="corticalBoneTypeEnum.Permeation"
+        label="{{ 'thoraxCT.bones.permeation.value' | translate }}"
+        rr-id="tho_c_0804220"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.corticalBoneType"
+        name="corticalBoneType"
+        [value]="corticalBoneTypeEnum.Thickening"
+        label="{{ 'thoraxCT.bones.thickening.value' | translate }}"
+        rr-id="tho_c_0804221"
+        rrUnClickRadio
+      ></p-radioButton>
+      <h2 rr-id="tho_c_080430" class="m-t-20">
+        {{ 'thoraxCT.bones.form.value' | translate }}
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formTypeEnum.Round"
+        label="{{ 'thoraxCT.bones.round.value' | translate }}"
+        rr-id="tho_c_080431"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formTypeEnum.Oval"
+        label="{{ 'thoraxCT.bones.oval.value' | translate }}"
+        rr-id="tho_c_080432"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formTypeEnum.Irregular"
+        label="{{ 'thoraxCT.bones.irregular.value' | translate }}"
+        rr-id="tho_c_080433"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-15 m-b-15">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="tho_c_0805232">
+        {{ 'thoraxCT.bones.density.value' | translate }}
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.densityType"
+        name="densityType"
+        [value]="densityTypeEnum.FatEquivalent"
+        label="{{ 'thoraxCT.bones.fatIsodense.value' | translate }}"
+        rr-id="tho_c_0805233"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.densityType"
+        name="densityType"
+        [value]="densityTypeEnum.LiquidEquivalent"
+        label="{{ 'thoraxCT.bones.liquidIsodense.value' | translate }}"
+        rr-id="tho_c_0805234"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.densityType"
+        name="densityType"
+        [value]="densityTypeEnum.SoftTissueTight"
+        label="{{ 'thoraxCT.bones.softTissueIsodense.value' | translate }}"
+        rr-id="tho_c_0805235"
+        rrUnClickRadio
+      ></p-radioButton>
+      <h2 rr-id="tho_c_0805220" class="m-t-15">
+        {{ 'thoraxCT.bones.matrix.value' | translate }}
+      </h2>
+      <p-radioButton
+        [(ngModel)]="model.matrixType"
+        name="matrixType"
+        [value]="matrixTypeEnum.Osseous"
+        label="{{ 'thoraxCT.bones.osseous.value' | translate }}"
+        rr-id="tho_c_0805221"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        [(ngModel)]="model.matrixType"
+        name="matrixType"
+        [value]="matrixTypeEnum.Chondroid"
+        label="{{ 'thoraxCT.bones.chondroid.value' | translate }}"
+        rr-id="tho_c_0805222"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<form #autosaveForm="ngForm" rrBlockForm>
+  <div class="c-main f-horizontal f-center" [hidden]="!modelInitialized">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-list m-b-17">
+        <h1 class="m-b-16" rr-id="pel_m_090103">
+          {{ 'pelvisMRT.bladder.finding.value' | translate }}*
+        </h1>
+        <div class="f-vertical o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="pel_m_090104"
+            name="areFindings"
+            class="m-b-18 text-break"
+            [value]="areFindingsEnum.No"
+            rrValidation="areFindings"
+            label="{{ 'pelvisMRT.bladder.regularImagingOfThe.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            notInFinding="true"
+            (onClick)="resetSharedUrinaryBladderColumnModel()"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="pel_m_090105"
+            name="areFindings"
+            [value]="areFindingsEnum.Yes"
+            rrValidation="areFindings"
+            label="{{ 'pelvisMRT.bladder.finding.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [setConfig]="findingColumnConfig"
+        [setDescriptionTypes]="[bladderFindingTypeEnum.SoftTissueMass]"
+        [customLabelCalculator]="getCustomLabel"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        validationName="findings"
+        (findingTypeChange)="onFindingTypeChange()"
+        (findingRemoved)="onFindingRemoved()"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-vertical f-space-between">
+      <div
+        *ngIf="findingHandler.currentItem.findingType !== bladderFindingTypeEnum.None"
+        class="c-pad-l"
+      >
+        <h1 rr-id="pel_m_090201">
+          {{ 'pelvisMRT.bladder.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <rr-ascites
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.Ascites"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-ascites>
+      <rr-peritoneal-nodules
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.PeritonealNodules"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-peritoneal-nodules>
+      <rr-vessels-ureter
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.VesselsUreter"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-vessels-ureter>
+      <rr-urinary-bladder-wall-thickening
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.UrinaryBladderWallThickening"
+        class="col-h-100 f-horizontal p-t-27"
+        [model]="findingHandler.currentItem"
+      ></rr-urinary-bladder-wall-thickening>
+      <rr-urinary-bladder-diverticulum
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.UrinaryBladderDiverticulum"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-urinary-bladder-diverticulum>
+      <rr-urinary-bladder-standard-variation-anomalies
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.UrinaryBladderStandardVariationAnomalies"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-urinary-bladder-standard-variation-anomalies>
+      <rr-urinary-bladder-trauma
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.UrinaryBladderTrauma"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-urinary-bladder-trauma>
+      <rr-peripheral-nerve-sheath-tumor
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.PeripheralNerveSheathTumor"
+        class="col-h-100 f-horizontal p-t-90"
+        [model]="findingHandler.currentItem"
+      ></rr-peripheral-nerve-sheath-tumor>
+      <rr-soft-tissue-mass
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.SoftTissueMass"
+        class="col-h-100 f-horizontal p-t-27"
+        [model]="findingHandler.currentItem"
+      ></rr-soft-tissue-mass>
+      <rr-muscles
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.Muscles"
+        class="col-h-100 f-horizontal p-t-21"
+        [model]="findingHandler.currentItem"
+      ></rr-muscles>
+      <rr-tendons
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.Tendons"
+        class="col-h-100 f-horizontal p-t-95"
+        [model]="findingHandler.currentItem"
+      ></rr-tendons>
+      <div
+        class="f-horizontal col-h-100"
+        *ngIf="findingHandler.currentItem.findingType === bladderFindingTypeEnum.None"
+      >
+        <div class="f-horizontal">
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

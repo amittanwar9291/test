@@ -1,0 +1,194 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="tho_m_040202">
+      {{'thoraxMRT.mediastinum.pathology.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_040278"
+      name="tracheaType"
+      [value]="tracheaTypeEnum.TrachealDeviation"
+      rrContentReset="TrachealStenosis-block Tracheomalacia-block Mass-block"
+      rrValidation="tracheaType"
+      label="{{'thoraxMRT.mediastinum.trachealDeviation.value' | translate}}"
+      [(ngModel)]="model.tracheaType"
+      (onClick)="this.model.diagnosisType1 =  mediastinumDifferentialDiagnosisTypeEnum.None"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_040279"
+      name="tracheaType"
+      rrContentReset="TrachealDeviation-block Tracheomalacia-block Mass-block"
+      [value]="tracheaTypeEnum.TrachealStenosis"
+      rrValidation="tracheaType"
+      label="{{'thoraxMRT.mediastinum.trachealStenosis.value' | translate}}"
+      [(ngModel)]="model.tracheaType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_040280"
+      name="tracheaType"
+      rrContentReset="TrachealStenosis-block TrachealDeviation-block Mass-block"
+      [value]="tracheaTypeEnum.Tracheomalacia"
+      rrValidation="tracheaType"
+      label="{{'thoraxMRT.mediastinum.tracheomalacia.value' | translate}}"
+      [(ngModel)]="model.tracheaType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_040281"
+      name="tracheaType"
+      rrContentReset="TrachealStenosis-block Tracheomalacia-block TrachealDeviation-block"
+      [value]="tracheaTypeEnum.Mass"
+      rrValidation="tracheaType"
+      label="{{'thoraxMRT.mediastinum.mass.value' | translate}}"
+      [(ngModel)]="model.tracheaType"
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-sep-l c-pad o-radio-list m-t-31">
+    <div
+      id="TrachealDeviation-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.tracheaType === tracheaTypeEnum.TrachealDeviation"
+    >
+      <h2 rr-id="tho_m_040382">
+        {{'thoraxMRT.mediastinum.trachealDeviationDetails.value' | translate}}
+      </h2>
+      <p rr-id="tho_m_040383">
+        {{'thoraxMRT.mediastinum.side.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="tho_m_040384"
+        name="tracheaShiftType"
+        [value]="locationTypeEnum.Right"
+        rrValidation="tracheaShiftType"
+        label="{{'thoraxMRT.mediastinum.right.value' | translate}}"
+        [(ngModel)]="model.tracheaShiftType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_040385"
+        name="tracheaShiftType"
+        [value]="locationTypeEnum.Left"
+        rrValidation="tracheaShiftType"
+        label="{{'thoraxMRT.mediastinum.left.value' | translate}}"
+        [(ngModel)]="model.tracheaShiftType"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="TrachealStenosis-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.tracheaType === tracheaTypeEnum.TrachealStenosis"
+    >
+      <h2 rr-id="tho_m_040386">
+        {{'thoraxMRT.mediastinum.trachealStenosisDetails.value' | translate}}
+      </h2>
+      <p rr-id="tho_m_040387" class="m-b-minus-2">
+        {{'thoraxMRT.mediastinum.levelInRelationTovertebra.value' | translate}}
+      </p>
+      <p-dropdown
+        styleClass="o-width-100 ui-brown-box"
+        [options]="ddlW010"
+        [(ngModel)]="model.heightInRelationType"
+        [placeholder]="'shared.pleaseSelect' | translate"
+        rr-id="tho_m_040388"
+        rrDropdownClear
+        name="heightInRelationType"
+      ></p-dropdown>
+      <p rr-id="tho_m_040389" class="m-t-19 m-b-2">
+        {{'thoraxMRT.mediastinum.minDiameterAxialPlane.value' | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="tho_m_040390"
+        labelRrId="tho_m_040391"
+        name="minDiameterAxial"
+        [(ngModel)]="model.minDiameterAxial"
+        [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+        [config]="{labelWidth: 170, min: 1, max: 10}"
+      >
+      </rr-number-input>
+      <p rr-id="tho_m_040392" class="m-t-17 m-b-3">
+        {{'thoraxMRT.mediastinum.diameterCraniocaudal.value' | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="tho_m_040393"
+        labelRrId="tho_m_040394"
+        name="minDiameterCraniocaudal"
+        [(ngModel)]="model.minDiameterCraniocaudal"
+        [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+        [config]="{labelWidth: 170, min: 1, max: 20}"
+      >
+      </rr-number-input>
+    </div>
+
+    <div
+      id="Tracheomalacia-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.tracheaType === tracheaTypeEnum.Tracheomalacia"
+    >
+      <h2 rr-id="tho_m_040395">
+        {{'thoraxMRT.mediastinum.tracheomalaciaDetails.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="tho_m_040396"
+        name="isTracheomalaciaCollapseInExpiration"
+        [(ngModel)]="model.isTracheomalaciaCollapseInExpiration"
+        label="{{'thoraxMRT.mediastinum.collapseInExpiration.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_m_040397"
+        name="isSuspected"
+        [(ngModel)]="model.isSuspected"
+        label="{{'thoraxMRT.mediastinum.suspected.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+
+    <div
+      id="Mass-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.tracheaType === tracheaTypeEnum.Mass"
+    >
+      <h2 rr-id="tho_m_040398">
+        {{'thoraxMRT.mediastinum.spatialGrowthDetails.value' | translate}}
+      </h2>
+      <p rr-id="tho_m_040399" class="m-b-2">
+        {{'thoraxMRT.mediastinum.maxDiameter.value' | translate}}
+      </p>
+      <rr-number-input
+        inputRrId="tho_m_0403100"
+        labelRrId="tho_m_0403101"
+        name="massDetailsMaxDiameterInMm"
+        [(ngModel)]="model.massDetailsMaxDiameterInMm"
+        [label]="'thoraxMRT.mediastinum.inMm.value' | translate"
+        [config]="{labelWidth: 170, min: 1, max: 200}"
+      >
+      </rr-number-input>
+
+      <p rr-id="tho_m_0403102" class="m-t-17 m-b-2">
+        {{'thoraxMRT.mediastinum.differentialDiagnosis.value' | translate}}*
+      </p>
+      <p-dropdown
+        styleClass="o-width-100 ui-brown-box"
+        [options]="ddlW011"
+        [(ngModel)]="model.diagnosisType1"
+        name="diagnosisType1"
+        rr-id="tho_m_0403103"
+        [placeholder]="'shared.pleaseSelect' | translate"
+        (onChange)="clearIsSuspected()"
+        rrDropdownClear
+        rrValidation="diagnosisType1"
+      ></p-dropdown>
+      <div
+        [rrDisable]="model.diagnosisType1 === mediastinumDifferentialDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          rr-id="tho_m_0403104"
+          name="isSuspected"
+          [(ngModel)]="model.isSuspected"
+          label="{{'thoraxMRT.mediastinum.suspected.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-sep c-pad"></div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

@@ -1,0 +1,145 @@
+<div class="c-col-4 f-horizontal col-h-100">
+  <div class="c-col-2 c-pad-r c-sep f-vertical o-radio-list">
+    <h2 rr-id="spi_c_040213" class="m-b-20 o-width-50">
+      {{ 'spineCT.configuration.transitionalVertebraDetails.value' | translate
+      }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep  o-radio-list ">
+        <p-checkbox
+          rr-id="spi_c_040214"
+          [(ngModel)]="model.isCervical"
+          binary="true"
+          name="isCervical"
+          label="{{'spineCT.configuration.cervical.value' | translate}}"
+          rrContentReset="isC7NeckRib"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <div id="isC7NeckRib" [rrDisable]="!model.isCervical">
+          <p-checkbox
+            rr-id="spi_c_040215"
+            [(ngModel)]="model.isC7NeckRib"
+            binary="true"
+            name="isC7NeckRib"
+            label="{{'spineCT.configuration.cervicalRib7.value' | translate}}"
+            class="nested-content"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_040216"
+          [(ngModel)]="model.isThoracolumbar"
+          binary="true"
+          name="isThoracolumbar"
+          label="{{'spineCT.configuration.thoracolumbar.value' | translate}}"
+          rrContentReset="isLumbalizedTH12"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <div id="isLumbalizedTH12" [rrDisable]="!model.isThoracolumbar">
+          <p-checkbox
+            rr-id="spi_c_040217"
+            [(ngModel)]="model.isLumbalizedTH12"
+            binary="true"
+            name="isLumbalizedTH12"
+            label="{{'spineCT.configuration.lumbarizationOfT12.value' | translate}}"
+            class="nested-content"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="spi_c_040218"
+          [(ngModel)]="model.isLumbosacral"
+          binary="true"
+          name="isLumbosacral"
+          label="{{'spineCT.configuration.lumbosacral.value' | translate}}"
+          rrContentReset="lumbosakralSection"
+          [rrValidation]="validationElements"
+        ></p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="lumbosakralSection"
+          [rrDisable]="!model.isLumbosacral"
+        >
+          <p-radioButton
+            rr-id="spi_c_040219"
+            [(ngModel)]="model.lumbosacralType"
+            label="{{'spineCT.configuration.lumbarizationOfS1.value' | translate}}"
+            name="lumbosacralType"
+            rrUnClickRadio
+            [value]="lumbosacralTypeEnum.LumbalizedS1"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="spi_c_040220"
+            [(ngModel)]="model.lumbosacralType"
+            label="{{'spineCT.configuration.sacralizationOfL5.value' | translate}}"
+            name="lumbosacralType"
+            rrUnClickRadio
+            [value]="lumbosacralTypeEnum.SacralizedL5"
+          ></p-radioButton>
+          <p
+            rr-id="spi_c_040221"
+            rrInfoIcon="spi_c_04_03"
+            infoIconPdfLandscape="true"
+          >
+            {{'spineCT.configuration.typeAccordingToCastellvi.value' |
+            translate}}
+          </p>
+          <p-dropdown
+            rr-id="spi_c_040222"
+            name="castellviType"
+            styleClass="o-width-100 ui-brown-box m-b-10"
+            [options]="w009"
+            [(ngModel)]="model.castellviType"
+            rrDropdownClear
+            placeholder="{{ 'shared.pleaseSelect' | translate }}"
+            (onChange)="clearDependElements()"
+          >
+          </p-dropdown>
+          <div *ngIf="displaySideOption()" class="o-radio-list">
+            <p rr-id="spi_c_0402200">
+              {{'spineCT.configuration.side.value' | translate}}*
+            </p>
+            <p-radioButton
+              rr-id="spi_c_0402201"
+              [(ngModel)]="model.sideType"
+              label="{{'spineCT.configuration.right.value' | translate}}"
+              name="sideType"
+              [value]="sideTypeEnum.Right"
+              rrValidation="sideType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="spi_c_0402202"
+              [(ngModel)]="model.sideType"
+              label="{{'spineCT.configuration.left.value' | translate}}"
+              name="sideType"
+              [value]="sideTypeEnum.Left"
+              rrValidation="sideType"
+            ></p-radioButton>
+          </div>
+          <div *ngIf="displayDefinitionOption()" class="o-radio-list">
+            <p rr-id="spi_c_0402213">
+              {{'spineCT.configuration.definition.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="spi_c_0402214"
+              [(ngModel)]="model.definitionType"
+              label="{{'spineCT.configuration.rightType2leftType3.value' | translate}}"
+              name="definitionType"
+              rrUnClickRadio
+              [value]="definitionTypeEnum.RightType2"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="spi_c_0402215"
+              [(ngModel)]="model.definitionType"
+              label="{{'spineCT.configuration.rightType3leftType2.value' | translate}}"
+              name="definitionType"
+              rrUnClickRadio
+              [value]="definitionTypeEnum.RightType3"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1"></div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep"></div>
+  <div class="c-col-1 c-pad-l c-sep"></div>
+</div>

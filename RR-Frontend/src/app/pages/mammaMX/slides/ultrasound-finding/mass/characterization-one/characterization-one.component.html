@@ -1,0 +1,402 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-29 m-b-12">
+    <div class="c-col-1 c-pad c-sep f-start f-vertical">
+      <div class="m-l-9 m-r-9 f-start f-vertical o-list">
+        <div
+          class="f-start f-vertical o-radio-list m-b-22"
+          [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+        >
+          <h2 rr-id="mam_mx_070203" class="m-b-5">
+            {{ 'mammaMX.ultrasoundFinding.differentialDiagnosis1.value' |
+            translate }}*
+          </h2>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="1"
+            isActiveOnIKnow="true"
+            [options]="differentialDiagnosisOptionsList"
+            [(ngModel)]="model.differentialDiagnosis"
+            name="differentialDiagnosis"
+            group="true"
+            rrId="mam_mx_070204"
+            [parentViewModel]="model"
+            rrValidation="massKnownDiagnosisType"
+            (selectionChanged)="clearDiffDiagnosisBlock(true); clearPresetsDependentProperties()"
+            rrValidation="differentialDiagnosis"
+          >
+          </rr-differential-diagnosis-dropdown>
+          <div
+            class="f-start f-vertical o-radio-list m-b-16"
+            [rrDisable]="model.differentialDiagnosis === massDiagnosisType.None"
+          >
+            <p-checkbox
+              rr-id="mam_mx_070205"
+              [(ngModel)]="model.isHistologicallyConfirmed"
+              label="{{ 'mammaMX.ultrasoundFinding.histologicallyConfirmed.value' | translate }}"
+              name="isHistologicallyConfirmed"
+              binary="true"
+              rrContentReset="isHistologicallyConfirmedBlock"
+            >
+            </p-checkbox>
+            <div
+              class="f-start f-vertical o-radio-list nested-content"
+              id="isHistologicallyConfirmedBlock"
+              [rrDisable]="!model.isHistologicallyConfirmed"
+            >
+              <p-radioButton
+                rr-id="mam_mx_070206"
+                [(ngModel)]="model.histologicallySecuredType"
+                label="{{ 'mammaMX.ultrasoundFinding.benign.value' | translate }}"
+                name="histologicallySecuredType"
+                [value]="histologicallySecuredType.Benign"
+                rrUnClickRadio
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="mam_mx_070207"
+                [(ngModel)]="model.histologicallySecuredType"
+                label="{{ 'mammaMX.ultrasoundFinding.malignant.value' | translate }}"
+                name="histologicallySecuredType"
+                [value]="histologicallySecuredType.Malignant"
+                rrUnClickRadio
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+
+        <div class="f-start f-vertical o-radio-list">
+          <div rr-id="mam_mx_070208" class="m-b-2">
+            <h2
+              rrInfoIcon="mam_mx_07_01"
+              class="l-h-18"
+              rrValidation="location"
+            >
+              {{ 'mammaMX.ultrasoundFinding.localization.value' | translate }}*
+            </h2>
+            <p>
+              {{ 'mammaMX.ultrasoundFinding.singleSelectionPerMamma.value' |
+              translate }}
+            </p>
+          </div>
+          <rr-breast-pizza-slices
+            rr-id="mam_mx_070209"
+            [(ngModel)]="model.location"
+            name="location"
+            #location
+            [elementUpdate]="location.announceSelection"
+            rrValidation="location"
+            isLocalizer="true"
+            class="m-b-0"
+          ></rr-breast-pizza-slices>
+          <p-checkbox
+            rr-id="mam_mx_070210"
+            [(ngModel)]="model.isPartiallyWithinTheSkin"
+            label="{{ 'mammaMX.ultrasoundFinding.partiallyWithinTheSkin.value' | translate }}"
+            name="isPartiallyWithinTheSkin"
+            binary="true"
+            rrInfoIcon="mam_mx_07_02"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-start f-vertical">
+      <div class="m-l-9 m-r-9 f-start f-vertical o-list">
+        <div class="f-start f-vertical o-radio-list m-b-29">
+          <h2 rr-id="mam_mx_070314" class="m-t-3">
+            {{ 'mammaMX.ultrasoundFinding.form.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="mam_mx_070315"
+            [(ngModel)]="model.formType"
+            label="{{ 'mammaMX.ultrasoundFinding.oval.value' | translate }}"
+            name="formType"
+            [value]="formType.Oval"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070316"
+            [(ngModel)]="model.formType"
+            label="{{ 'mammaMX.ultrasoundFinding.round.value' | translate }}"
+            name="formType"
+            [value]="formType.Round"
+            rrUnClickRadio
+            rrContentReset="roundFormTypeBlock"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070317"
+            [(ngModel)]="model.formType"
+            label="{{ 'mammaMX.ultrasoundFinding.irregular.value' | translate }}"
+            name="formType"
+            [value]="formType.Irregular"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+
+        <div class="f-start f-vertical o-radio-list m-b-31">
+          <h2 rr-id="mam_mx_070304" class="m-b-7">
+            {{ 'mammaMX.ultrasoundFinding.size.value' | translate }}
+          </h2>
+          <p rr-id="mam_mx_070305" class="m-b-0">
+            {{ 'mammaMX.ultrasoundFinding.diameter.value' | translate }}*
+          </p>
+          <rr-number-input
+            inputRrId="mam_mx_070306"
+            labelRrId="mam_mx_070307"
+            [(ngModel)]="model.diameterInMm"
+            label="{{ 'mammaMX.ultrasoundFinding.inMm.value' | translate }}"
+            name="diameterInMm"
+            [config]="{ min: 1, max: 999 }"
+            rrValidation="diameterInMm"
+          >
+          </rr-number-input>
+
+          <div
+            class="f-start f-vertical o-radio-list"
+            id="roundFormTypeBlock"
+            [rrDisable]="model.formType === formType.Round"
+          >
+            <p rr-id="mam_mx_070308" class="m-b-0">
+              {{ 'mammaMX.ultrasoundFinding.layer2.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="mam_mx_070309"
+              labelRrId="mam_mx_070310"
+              [(ngModel)]="model.sizeOfSecondLayerInMm"
+              label="{{ 'mammaMX.ultrasoundFinding.inMm.value' | translate }}"
+              name="sizeOfSecondLayerInMm"
+              [config]="{ min: 1, max: 150 }"
+            >
+            </rr-number-input>
+            <p rr-id="mam_mx_070311" class="m-b-0">
+              {{ 'mammaMX.ultrasoundFinding.layer3.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="mam_mx_070312"
+              labelRrId="mam_mx_070313"
+              [(ngModel)]="model.sizeOfThirdLayerInMm"
+              label="{{ 'mammaMX.ultrasoundFinding.inMm.value' | translate }}"
+              name="sizeOfThirdLayerInMm"
+              [config]="{ min: 1, max: 150 }"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+
+        <div class="f-start f-vertical o-radio-list">
+          <h2 rr-id="mam_mx_070318" class="m-b-5">
+            {{ 'mammaMX.ultrasoundFinding.distanceToNipple.value' | translate }}
+          </h2>
+          <rr-number-input
+            inputRrId="mam_mx_070319"
+            labelRrId="mam_mx_070320"
+            [(ngModel)]="model.distanceToNippleInMm"
+            label="{{ 'mammaMX.ultrasoundFinding.inMm.value' | translate }}"
+            name="distanceToNippleInMm"
+            [config]="{ min: 1, max: 999 }"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad c-sep f-start f-vertical">
+      <div class="m-l-9 m-r-9 f-start f-vertical">
+        <div class="f-start f-vertical o-radio-list m-b-29">
+          <h2 rr-id="mam_mx_070401" rrInfoIcon="mam_mx_07_03">
+            {{ 'mammaMX.ultrasoundFinding.orientation.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="mam_mx_070402"
+            [(ngModel)]="model.orientationType"
+            label="{{ 'mammaMX.ultrasoundFinding.parallel.value' | translate }}"
+            name="orientationType"
+            [value]="orientationType.Parallel"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070403"
+            [(ngModel)]="model.orientationType"
+            label="{{ 'mammaMX.ultrasoundFinding.notParallel.value' | translate }}"
+            name="orientationType"
+            [value]="orientationType.NotParallel"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+
+        <div class="f-start f-vertical o-radio-list m-b-29">
+          <h2 rr-id="mam_mx_070404">
+            {{ 'mammaMX.ultrasoundFinding.marginEchoDelimitation.value' |
+            translate }}
+          </h2>
+          <p-radioButton
+            rr-id="mam_mx_070405"
+            [(ngModel)]="model.marginEchodelimitationType"
+            label="{{ 'mammaMX.ultrasoundFinding.circumscribed.value' | translate }}"
+            name="marginEchodelimitationType"
+            [value]="marginEchoDelimitationType.Circumscribed"
+            rrUnClickRadio
+            rrContentReset="notOutlinedMarginEchoDelimitationTypeBlock"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070406"
+            [(ngModel)]="model.marginEchodelimitationType"
+            label="{{ 'mammaMX.ultrasoundFinding.notCircumscribed.value' | translate }}"
+            name="marginEchodelimitationType"
+            [value]="marginEchoDelimitationType.NotCircumscribed"
+            rrUnClickRadio
+            rrContentReset="notOutlinedMarginEchoDelimitationTypeBlock"
+          ></p-radioButton>
+          <div
+            class="f-start f-vertical o-radio-list nested-content"
+            id="notOutlinedMarginEchoDelimitationTypeBlock"
+            [rrDisable]="model.marginEchodelimitationType !== marginEchoDelimitationType.NotCircumscribed"
+          >
+            <p-checkbox
+              rr-id="mam_mx_070407"
+              [(ngModel)]="model.isIndistinct"
+              label="{{ 'mammaMX.ultrasoundFinding.indistinct.value' | translate }}"
+              name="isIndistinct"
+              binary="true"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_mx_070408"
+              [(ngModel)]="model.isAngularMargins"
+              label="{{ 'mammaMX.ultrasoundFinding.angularMargins.value' | translate }}"
+              name="isAngularMargins"
+              binary="true"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_mx_070409"
+              [(ngModel)]="model.isMicrolobulated"
+              label="{{ 'mammaMX.ultrasoundFinding.microlobulated.value' | translate }}"
+              name="isMicrolobulated"
+              binary="true"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="mam_mx_070410"
+              [(ngModel)]="model.isSpiculated"
+              label="{{ 'mammaMX.ultrasoundFinding.spiculated.value' | translate }}"
+              name="isSpiculated"
+              binary="true"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+
+        <div class="f-start f-vertical o-radio-list">
+          <h2 rr-id="mam_mx_070411">
+            {{ 'mammaMX.ultrasoundFinding.echoPattern.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="mam_mx_070412"
+            [(ngModel)]="model.echoPatternType"
+            label="{{ 'mammaMX.ultrasoundFinding.homogeneous.value' | translate }}"
+            name="echoPatternType"
+            [value]="echoPatternType.Homogeneous"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070413"
+            [(ngModel)]="model.echoPatternType"
+            label="{{ 'mammaMX.ultrasoundFinding.inhomogeneous.value' | translate }}"
+            name="echoPatternType"
+            [value]="echoPatternType.Inhomogeneous"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad-l c-sep f-start f-vertical">
+      <div class="m-l-9 m-r-9 f-start f-vertical">
+        <div class="f-start f-vertical o-radio-list m-b-29">
+          <h2 rr-id="mam_mx_070501" class="m-t-2">
+            {{ 'mammaMX.ultrasoundFinding.echoContent.value' | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="mam_mx_070502"
+            [(ngModel)]="model.echoContentType"
+            label="{{ 'mammaMX.ultrasoundFinding.anechoic.value' | translate }}"
+            name="echoContentType"
+            [value]="echoContentType.Anechoic"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070503"
+            [(ngModel)]="model.echoContentType"
+            label="{{ 'mammaMX.ultrasoundFinding.hypoechoic.value' | translate }}"
+            name="echoContentType"
+            [value]="echoContentType.Hypoechoic"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070504"
+            [(ngModel)]="model.echoContentType"
+            label="{{ 'mammaMX.ultrasoundFinding.isoechoic.value' | translate }}"
+            name="echoContentType"
+            [value]="echoContentType.Isoechoic"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070505"
+            [(ngModel)]="model.echoContentType"
+            label="{{ 'mammaMX.ultrasoundFinding.hyperechoic.value' | translate }}"
+            name="echoContentType"
+            [value]="echoContentType.Hyperechoic"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070506"
+            [(ngModel)]="model.echoContentType"
+            label="{{ 'mammaMX.ultrasoundFinding.complex.value' | translate }}"
+            name="echoContentType"
+            [value]="echoContentType.Complex"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+
+        <div class="f-start f-vertical o-radio-list">
+          <h2 rr-id="mam_mx_070507" class="text-break">
+            {{ 'mammaMX.ultrasoundFinding.exitEchodorsalSoundPatterns.value' |
+            translate }}
+          </h2>
+          <p-radioButton
+            rr-id="mam_mx_070508"
+            [(ngModel)]="model.exitEchodorsalSoundPatternsType"
+            label="{{ 'mammaMX.ultrasoundFinding.noPosteriorFeaturesd.value' | translate }}"
+            name="exitEchodorsalSoundPatternsType"
+            [value]="exitEchoDorsalSoundPatternsType.NoPosteriorFeatures"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070509"
+            [(ngModel)]="model.exitEchodorsalSoundPatternsType"
+            label="{{ 'mammaMX.ultrasoundFinding.soundEnhancement.value' | translate }}"
+            name="exitEchodorsalSoundPatternsType"
+            [value]="exitEchoDorsalSoundPatternsType.SoundEnhancement"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070510"
+            [(ngModel)]="model.exitEchodorsalSoundPatternsType"
+            label="{{ 'mammaMX.ultrasoundFinding.posteriorShadowing.value' | translate }}"
+            name="exitEchodorsalSoundPatternsType"
+            [value]="exitEchoDorsalSoundPatternsType.PosteriorShadowing"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_mx_070511"
+            [(ngModel)]="model.exitEchodorsalSoundPatternsType"
+            label="{{ 'mammaMX.ultrasoundFinding.combinedPattern.value' | translate }}"
+            name="exitEchodorsalSoundPatternsType"
+            [value]="exitEchoDorsalSoundPatternsType.CombinedPattern"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

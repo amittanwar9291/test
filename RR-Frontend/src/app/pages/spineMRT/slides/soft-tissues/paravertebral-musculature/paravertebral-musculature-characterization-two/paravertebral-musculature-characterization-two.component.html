@@ -1,0 +1,361 @@
+<div
+  class="c-col-1  c-pad f-vertical f-start custom-column-height o-radio-list tab-column"
+>
+  <p rr-id="spi_m_080256" class="custom-text">
+    {{'spineMRT.softTissues.pleaseSelectAtLeast.value' | translate}}
+  </p>
+  <p-checkbox
+    rr-id="spi_m_080257"
+    label="{{'spineMRT.softTissues.muscleLesion.value' | translate}}"
+    name="isMuscleLesion"
+    class="m-t-12"
+    labelStyleClass="ui-fat-label"
+    [(ngModel)]="model.isMuscleLesion"
+    binary="true"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    rrContentReset="isMuscleLesion-block"
+  >
+  </p-checkbox>
+  <div
+    id="isMuscleLesion-block"
+    class="f-vertical f-start o-radio-list nested-content"
+    [rrDisable]="!model.isMuscleLesion"
+  >
+    <p
+      rr-id="spi_m_080258"
+      rrInfoIcon="spi_m_08_05"
+      class="m-t-13 m-b-6 text-break"
+    >
+      {{'spineMRT.softTissues.classificationMunichConsensus.value' | translate}}
+    </p>
+    <p-radioButton
+      rr-id="spi_m_080259"
+      name="classificationMunichConsensusType"
+      label="{{'spineMRT.softTissues.muscleEdema.value' | translate }}"
+      [value]="classificationMunichConsensusTypeEnum.MuscleEdema"
+      [(ngModel)]="model.classificationMunichConsensusType"
+      rrValidation="classificationMunichConsensusType"
+      rrContentReset="MuscleFiberTear-block MuscleBundleTears-block MuscleTearTendonTear-block"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080260"
+      name="classificationMunichConsensusType"
+      label="{{'spineMRT.softTissues.muscleFiberTearTypeIIIa.value' | translate }}"
+      [value]="classificationMunichConsensusTypeEnum.MuscleFiberTear"
+      [(ngModel)]="model.classificationMunichConsensusType"
+      rrValidation="classificationMunichConsensusType"
+      rrContentReset="MuscleBundleTears-block  MuscleTearTendonTear-block"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080261"
+      name="classificationMunichConsensusType"
+      label="{{'spineMRT.softTissues.muscleBundleTearsTypeIIIb.value' | translate }}"
+      [value]="classificationMunichConsensusTypeEnum.MuscleBundleTears"
+      [(ngModel)]="model.classificationMunichConsensusType"
+      rrValidation="classificationMunichConsensusType"
+      rrContentReset="MuscleFiberTear-block  MuscleTearTendonTear-block"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080262"
+      name="classificationMunichConsensusType"
+      label="{{'spineMRT.softTissues.muscleTearTendonTearType.value' | translate }}"
+      [value]="classificationMunichConsensusTypeEnum.MuscleTearTendonTear"
+      [(ngModel)]="model.classificationMunichConsensusType"
+      rrValidation="classificationMunichConsensusType"
+      rrContentReset="MuscleFiberTear-block MuscleBundleTears-block"
+    ></p-radioButton>
+
+    <div
+      id="MuscleFiberTear-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      *ngIf="model.classificationMunichConsensusType === classificationMunichConsensusTypeEnum.MuscleFiberTear"
+    >
+      <p-checkbox
+        rr-id="spi_m_080263"
+        label="{{'spineMRT.softTissues.diameterOfRuptureBelow.value' | translate}}"
+        name="isDiameterOfRupture"
+        [(ngModel)]="model.isDiameterOfRupture"
+        binary="true"
+      ></p-checkbox>
+    </div>
+
+    <div
+      id="MuscleBundleTears-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      *ngIf="model.classificationMunichConsensusType === classificationMunichConsensusTypeEnum.MuscleBundleTears"
+    >
+      <p-checkbox
+        rr-id="spi_m_080263"
+        label="{{'spineMRT.softTissues.diameterOfRuptureOver.value' | translate}}"
+        name="isDiameterOfRupture"
+        [(ngModel)]="model.isDiameterOfRupture"
+        binary="true"
+      ></p-checkbox>
+    </div>
+
+    <div
+      id="MuscleTearTendonTear-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      *ngIf="model.classificationMunichConsensusType === classificationMunichConsensusTypeEnum.MuscleTearTendonTear"
+    >
+      <p-checkbox
+        rr-id="spi_m_080264"
+        label="{{'spineMRT.softTissues.retraction.value' | translate}}"
+        name="isRetraction"
+        [(ngModel)]="model.isRetraction"
+        binary="true"
+        rrContentReset="retractionInMm-block"
+      ></p-checkbox>
+      <div
+        id="retractionInMm-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isRetraction"
+      >
+        <rr-number-input
+          inputRrId="spi_m_080266"
+          labelRrId="spi_m_080265"
+          name="retractionInMm"
+          [label]="'spineMRT.softTissues.inMm.value' | translate"
+          [config]="{min: 1, max: 50}"
+          [(ngModel)]="model.retractionInMm"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="spi_m_080267"
+        label="{{'spineMRT.softTissues.wavyCourseOfThe.value' | translate}}"
+        name="isWavyAppearanceOfTheFibers"
+        class="text-nowrap"
+        [(ngModel)]="model.isWavyAppearanceOfTheFibers"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="spi_m_080268"
+        label="{{'spineMRT.softTissues.osseousAvulsion.value' | translate}}"
+        name="isOsseousAvulsion"
+        [(ngModel)]="model.isOsseousAvulsion"
+        binary="true"
+        rrContentReset="bonyAvulsionType-block"
+      ></p-checkbox>
+      <div
+        id="bonyAvulsionType-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isOsseousAvulsion"
+      >
+        <p-radioButton
+          rr-id="spi_m_080269"
+          name="bonyAvulsionType"
+          label="{{'spineMRT.softTissues.intracorticalEdema.value' | translate }}"
+          [value]="bonyAvulsionTypeEnum.IntracorticalEdema"
+          [(ngModel)]="model.bonyAvulsionType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="c-col-1 c-sep-l c-pad f-vertical f-start second-col o-radio-list sliders-z-index"
+>
+  <p-checkbox
+    rr-id="spi_m_080362"
+    label="{{'spineMRT.softTissues.hematoma.value' | translate}}"
+    name="isHematoma"
+    labelStyleClass="ui-fat-label"
+    [(ngModel)]="model.isHematoma"
+    (onChange)="clearSignalSlider()"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    rrContentReset="isHematoma-block isHematoma-block2"
+    binary="true"
+  >
+  </p-checkbox>
+
+  <div
+    id="isHematoma-block"
+    class="f-vertical f-start o-radio-list nested-content"
+    [rrDisable]="!model.isHematoma"
+  >
+    <p rr-id="spi_m_080363" class="m-t-10">
+      {{'spineMRT.softTissues.localization.value' | translate}}*
+    </p>
+    <p-checkbox
+      rr-id="spi_m_080364"
+      label="{{'spineMRT.softTissues.intramuscularly.value' | translate}}"
+      name="isIntramuscularly"
+      [(ngModel)]="model.isIntramuscularly"
+      rrValidation="isIntramuscularly isInterfascial isIntermuscular"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="spi_m_080365"
+      label="{{'spineMRT.softTissues.interfascial.value' | translate}}"
+      name="isInterfascial"
+      [(ngModel)]="model.isInterfascial"
+      rrValidation="isIntramuscularly isInterfascial isIntermuscular"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="spi_m_080366"
+      label="{{'spineMRT.softTissues.intermuscular.value' | translate}}"
+      name="isIntermuscular"
+      [(ngModel)]="model.isIntermuscular"
+      rrValidation="isIntramuscularly isInterfascial isIntermuscular"
+      binary="true"
+    ></p-checkbox>
+
+    <div class="f-vertical f-start o-radio-list">
+      <h2 rr-id="spi_m_080373" class="m-t-16 m-b-0">
+        {{'spineMRT.softTissues.t1wSignal.value' | translate}}
+      </h2>
+      <p rr-id="spi_m_080367">
+        {{'spineMRT.softTissues.inComparisonMuscle.value' | translate}}
+      </p>
+      <rr-slider-number-triple-input
+        name="signalT1w"
+        rr-id="spi_m_080368"
+        [(ngModel)]="model.signalT1w"
+      >
+      </rr-slider-number-triple-input>
+
+      <h2 rr-id="spi_m_080374" class="m-t-10 m-b-0">
+        {{'spineMRT.softTissues.t2wSignal.value' | translate}}
+      </h2>
+      <p rr-id="spi_m_080369">
+        {{'spineMRT.softTissues.inComparisonMuscle.value' | translate}}
+      </p>
+      <rr-slider-number-triple-input
+        name="signalT2w"
+        rr-id="spi_m_080370"
+        [(ngModel)]="model.signalT2w"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+  </div>
+</div>
+
+<div class="c-col-1 c-sep-l c-pad f-vertical f-start o-radio-list third-col">
+  <div
+    id="isHematoma-block2"
+    class="f-vertical f-start o-radio-list nested-content"
+    [rrDisable]="!model.isHematoma"
+  >
+    <p rr-id="spi_m_080432" rrInfoIcon="spi_m_08_06">
+      {{'spineMRT.softTissues.hematomaCharacterization.value' | translate}}
+    </p>
+    <p-radioButton
+      rr-id="spi_m_080433"
+      name="hematomaCharacterizationType"
+      label="{{'spineMRT.softTissues.hyperacute.value' | translate }}"
+      [value]="hematomaCharacterizationTypeEnum.Hyperacute"
+      [(ngModel)]="model.hematomaCharacterizationType"
+      rrValidation="hematomaCharacterizationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080434"
+      name="hematomaCharacterizationType"
+      label="{{'spineMRT.softTissues.acute.value' | translate }}"
+      [value]="hematomaCharacterizationTypeEnum.Acute"
+      [(ngModel)]="model.hematomaCharacterizationType"
+      rrValidation="hematomaCharacterizationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080435"
+      name="hematomaCharacterizationType"
+      label="{{'spineMRT.softTissues.subacute.value' | translate }}"
+      [value]="hematomaCharacterizationTypeEnum.Subacute"
+      [(ngModel)]="model.hematomaCharacterizationType"
+      rrValidation="hematomaCharacterizationType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080436"
+      name="hematomaCharacterizationType"
+      label="{{'spineMRT.softTissues.chronicOrganised.value' | translate }}"
+      [value]="hematomaCharacterizationTypeEnum.ChronicOrganised"
+      [(ngModel)]="model.hematomaCharacterizationType"
+      rrValidation="hematomaCharacterizationType"
+    ></p-radioButton>
+  </div>
+</div>
+
+<div class="c-col-1 c-sep-l c-pad-l f-vertical f-start fourth-col o-radio-list">
+  <h2 rr-id="spi_m_080524">
+    {{'spineMRT.softTissues.furtherImageCharacteristics.value' | translate}}
+  </h2>
+  <p-checkbox
+    rr-id="spi_m_080525"
+    label="{{'spineMRT.softTissues.fattyDegeneration.value' | translate}}"
+    name="isFattyDegeneration"
+    [(ngModel)]="model.isFattyDegeneration"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    binary="true"
+  ></p-checkbox>
+  <p-checkbox
+    rr-id="spi_m_080526"
+    label="{{'spineMRT.softTissues.muscleHypertrophy.value' | translate}}"
+    name="isMuscleHypertrophy"
+    [(ngModel)]="model.isMuscleHypertrophy"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    binary="true"
+  ></p-checkbox>
+  <p-checkbox
+    rr-id="spi_m_080527"
+    label="{{'spineMRT.softTissues.muscleAtrophy.value' | translate}}"
+    name="isMuscleAtrophy"
+    [(ngModel)]="model.isMuscleAtrophy"
+    binary="true"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    rrContentReset="isMuscleAtrophy-block"
+  ></p-checkbox>
+  <div
+    id="isMuscleAtrophy-block"
+    class="f-vertical f-start o-radio-list nested-content"
+    [rrDisable]="!model.isMuscleAtrophy"
+  >
+    <p-radioButton
+      rr-id="spi_m_080528"
+      name="muscleAtrophyType"
+      label="{{'spineMRT.softTissues.complete.value' | translate }}"
+      [value]="muscleAtrophyTypeEnum.Complete"
+      [(ngModel)]="model.muscleAtrophyType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="spi_m_080529"
+      name="muscleAtrophyType"
+      label="{{'spineMRT.softTissues.partial.value' | translate }}"
+      [value]="muscleAtrophyTypeEnum.Partial"
+      [(ngModel)]="model.muscleAtrophyType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+  <p-checkbox
+    rr-id="spi_m_080530"
+    label="{{'spineMRT.softTissues.apophysitis.value' | translate}}"
+    name="isApophysitis"
+    [(ngModel)]="model.isApophysitis"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    binary="true"
+  ></p-checkbox>
+  <p-checkbox
+    rr-id="spi_m_080531"
+    label="{{'spineMRT.softTissues.fascialRupture.value' | translate}}"
+    name="isFascialRupture"
+    [(ngModel)]="model.isFascialRupture"
+    [rrValidation]="setOfMandatoryCheckboxes"
+    binary="true"
+    rrContentReset="isFascialRupture-block"
+  ></p-checkbox>
+  <div
+    id="isFascialRupture-block"
+    class="f-vertical f-start o-radio-list nested-content"
+    [rrDisable]="!model.isFascialRupture"
+  >
+    <p-checkbox
+      rr-id="spi_m_080532"
+      label="{{'spineMRT.softTissues.muscleHernia.value' | translate}}"
+      name="isMuscleHernia"
+      [(ngModel)]="model.isMuscleHernia"
+      binary="true"
+    ></p-checkbox>
+  </div>
+</div>

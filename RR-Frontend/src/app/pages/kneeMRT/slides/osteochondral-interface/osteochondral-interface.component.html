@@ -1,0 +1,98 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-start f-vertical o-list">
+      <h1 rr-id="kne_m_060103">
+        {{ 'kneeMRT.osteoInterface.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="kne_m_060104"
+          [(ngModel)]="model.areFindings"
+          label="{{'kneeMRT.osteoInterface.regularRepresentationOfCartillage.value' | translate}}"
+          name="areFindingsFalse"
+          [value]="areFindings.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_060105"
+          [(ngModel)]="model.areFindings"
+          label="{{'kneeMRT.osteoInterface.mainFinding.value' | translate}}"
+          name="areFindingsTrue"
+          [value]="areFindings.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [setConfig]="findingDropdownConfig"
+          [customLabelCalculator]="getCustomLabel"
+          [disabled]="model.areFindings !== areFindings.Yes"
+          validationName="findings"
+        ></rr-finding-column>
+      </div>
+    </div>
+    <div class="c-col-4 c-sep c-pad-l f-start f-vertical">
+      <div class="f-start f-vertical m-h-115">
+        <h1
+          rr-id="kne_m_060201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ 'kneeMRT.osteoInterface.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <rr-osteoarthrosis
+          *ngSwitchCase="findingType.Osteoarthrosis"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-osteoarthrosis>
+
+        <rr-trauma-chondral-lesion
+          *ngSwitchCase="findingType.TraumaChondralLesion"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-trauma-chondral-lesion>
+
+        <rr-trauma-subchondral-fracture
+          *ngSwitchCase="findingType.TraumaSubchondralFracture"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-trauma-subchondral-fracture>
+
+        <rr-trauma-subchondral-insufficiency-fracture
+          *ngSwitchCase="findingType.TraumaSubchondralInsufficiencyFracture"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-trauma-subchondral-insufficiency-fracture>
+
+        <rr-trauma-osteochondral-fracture
+          *ngSwitchCase="findingType.TraumaOsteochondralFracture"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-trauma-osteochondral-fracture>
+
+        <rr-osteochondrosis-dissecans
+          *ngSwitchCase="findingType.OsteochondrosisDissecans"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-osteochondrosis-dissecans>
+
+        <rr-avascular-necrosis
+          *ngSwitchCase="findingType.AvascularNecrosis"
+          [model]="findingHandler.currentItem"
+          class="col-h-100"
+        ></rr-avascular-necrosis>
+
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-sep c-pad-r"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad"></div>
+          <div class="c-col-1 c-sep c-pad-l"></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>

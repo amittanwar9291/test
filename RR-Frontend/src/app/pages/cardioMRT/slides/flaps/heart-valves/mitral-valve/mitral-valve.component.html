@@ -1,0 +1,152 @@
+<div class="f-vertical o-radio-list c-pad-l col-h-100">
+  <h2 rr-id="car_m_040326" class="m-b-9">
+    {{'cardioMRT.flaps.mitralValve.value' | translate}}
+  </h2>
+  <p rr-id="car_m_040318" class="m-b-7">
+    {{'cardioMRT.flaps.pathology.value' | translate}}*
+  </p>
+  <p-checkbox
+    rr-id="car_m_040327"
+    name="isStenosis"
+    label="{{'cardioMRT.flaps.stenosis.value' | translate}}"
+    binary="true"
+    [(ngModel)]="model.isStenosis"
+    rrValidation="isStenosis isInsufficiency isCalcification"
+  >
+  </p-checkbox>
+  <p-checkbox
+    rr-id="car_m_040328"
+    name="isInsufficiency"
+    class="m-b-7"
+    label="{{'cardioMRT.flaps.insufficiency.value' | translate}}"
+    binary="true"
+    [(ngModel)]="model.isInsufficiency"
+    rrContentReset="mitralisIsInsufficiencyBlock mitralisIsQuantificationBlock2"
+    rrValidation="isStenosis isInsufficiency isCalcification"
+  >
+  </p-checkbox>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="!model.isInsufficiency"
+        id="mitralisIsInsufficiencyBlock"
+      >
+        <p-checkbox
+          rr-id="car_m_040329"
+          rrInfoIcon="car_m_04_02"
+          name="isQuantification"
+          label="{{'cardioMRT.flaps.quantification.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isQuantification"
+          rrContentReset="mitralisIsQuantificationBlock1 mitralisIsQuantificationBlock2"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isQuantification"
+          id="mitralisIsQuantificationBlock1"
+        >
+          <rr-number-input
+            inputRrId="car_m_040330"
+            labelRrId="car_m_040331"
+            name="quantificationInMm"
+            labelStyleClass="text-break"
+            label="{{'cardioMRT.flaps.inMl.value' | translate}}"
+            [config]="{max: 99}"
+            [(ngModel)]="model.quantificationInMm"
+          >
+          </rr-number-input>
+        </div>
+        <p-checkbox
+          rr-id="car_m_040332"
+          rrInfoIcon="car_m_04_03"
+          name="isSAMPhenomenon"
+          label="{{'cardioMRT.flaps.samPhenomenon.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSAMPhenomenon"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="car_m_040333"
+        name="isCalcification"
+        label="{{'cardioMRT.flaps.calcification.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        rrValidation="isStenosis isInsufficiency isCalcification"
+      >
+      </p-checkbox>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <div
+        class="o-radio-list"
+        [rrDisable]="!model.isQuantification"
+        id="mitralisIsQuantificationBlock2"
+      >
+        <p rr-id="car_m_040425" class="m-b-8">
+          {{'cardioMRT.flaps.regurgitantVolume.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="car_m_040426"
+          rrUnClickRadio
+          name="regurgitationVolumeTypeInMl"
+          [value]="regurgitationVolumeType.LowMl"
+          label="{{'cardioMRT.flaps.lowMl.value' | translate}}"
+          [(ngModel)]="model.regurgitationVolumeTypeInMl"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040427"
+          rrUnClickRadio
+          name="regurgitationVolumeTypeInMl"
+          [value]="regurgitationVolumeType.Moderate"
+          label="{{'cardioMRT.flaps.moderateMl.value' | translate}}"
+          [(ngModel)]="model.regurgitationVolumeTypeInMl"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040428"
+          rrUnClickRadio
+          name="regurgitationVolumeTypeInMl"
+          class="m-b-20"
+          [value]="regurgitationVolumeType.SevereMl"
+          label="{{'cardioMRT.flaps.severeMl.value' | translate}}"
+          [(ngModel)]="model.regurgitationVolumeTypeInMl"
+        >
+        </p-radioButton>
+
+        <p rr-id="car_m_040429" class="m-b-8">
+          {{'cardioMRT.flaps.regurgitantFraction.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="car_m_040430"
+          rrUnClickRadio
+          name="regurgitationVolumeTypeInPercent"
+          [value]="regurgitationVolumeType.LowMl"
+          label="{{'cardioMRT.flaps.low.value' | translate}}"
+          [(ngModel)]="model.regurgitationVolumeTypeInPercent"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040431"
+          rrUnClickRadio
+          name="regurgitationVolumeTypeInPercent"
+          [value]="regurgitationVolumeType.Moderate"
+          label="{{'cardioMRT.flaps.moderate.value' | translate}}"
+          [(ngModel)]="model.regurgitationVolumeTypeInPercent"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040432"
+          rrUnClickRadio
+          name="regurgitationVolumeTypeInPercent"
+          [value]="regurgitationVolumeType.SevereMl"
+          label="{{'cardioMRT.flaps.severe.value' | translate}}"
+          [(ngModel)]="model.regurgitationVolumeTypeInPercent"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

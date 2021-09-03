@@ -1,0 +1,70 @@
+<div class="f-horizontal col-h-100 o-width-100">
+  <div class="f-horizontal m-t-9 m-b-12">
+    <div class="c-col-1 c-sep c-pad f-start f-vertical o-radio-list">
+      <h2 rr-id="car_m_0902172" class="m-b-14">
+        {{ 'cardioMRT.pericardiumVessels.differentialDiagnosis.value' |
+        translate }}
+      </h2>
+      <h3 rr-id="car_m_0902173" class="m-b-6">
+        {{ 'cardioMRT.pericardiumVessels.differentialDiagnosis1.value' |
+        translate }} *
+      </h3>
+      <p-dropdown
+        rr-id="car_m_0902174"
+        [(ngModel)]="model.differentialDiagnosis01"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        name="differentialDiagnosis01"
+        styleClass="ui-brown-box o-width-100"
+        [options]="differentialDiagnosis01List"
+        [group]="true"
+        (onChange)="clearDiagnosis(0)"
+        class="m-b-11"
+        rrDropdownClear
+        rrValidation="differentialDiagnosis01"
+      >
+      </p-dropdown>
+      <div
+        class="f-start f-vertical o-radio-list"
+        [rrDisable]="model.differentialDiagnosis01 === differentialDiagnosisType.None"
+      >
+        <p-checkbox
+          rr-id="car_m_0902175"
+          [(ngModel)]="model.isSuspicionOf"
+          label="{{ 'cardioMRT.pericardiumVessels.suspicionOf.value' | translate }}"
+          name="isSuspicionOf"
+          binary="true"
+        >
+        </p-checkbox>
+        <h3 rr-id="car_m_0902176" class="m-b-6">
+          {{ 'cardioMRT.pericardiumVessels.differentialDiagnosis2.value' |
+          translate }}
+        </h3>
+        <p-dropdown
+          rr-id="car_m_0902177"
+          [(ngModel)]="model.differentialDiagnosis02"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          name="differentialDiagnosis02"
+          styleClass="ui-brown-box o-width-100"
+          [options]="differentialDiagnosis02List"
+          [group]="true"
+          [rrDropdownExcludedOptions]="[model.differentialDiagnosis01]"
+          (onChange)="clearDiagnosis(1)"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="car_m_0902178"
+        [(ngModel)]="model.isSubordinated"
+        label="{{ 'cardioMRT.pericardiumVessels.subordinated.value' | translate }}"
+        name="isSubordinated"
+        binary="true"
+        [rrDisable]="model.differentialDiagnosis02 === differentialDiagnosisType.None"
+      >
+      </p-checkbox>
+    </div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-sep c-pad-l"></div>
+  </div>
+</div>

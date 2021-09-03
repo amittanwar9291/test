@@ -1,0 +1,81 @@
+<div class="f-vertical f-start main-container">
+  <div class="col-h-100 f-horizontal">
+    <div class="f-vertical c-sep">
+      <div class="p-l-15">
+        <h2 class="m-b-10" rr-id="ang_c_040231">
+          {{ "angiographyCT.coronaryArteries.distalAnastomosis.value" |
+          translate }}
+        </h2>
+      </div>
+      <rr-shared-coronary-artery-columns
+        [model]="model"
+        class="col-h-100"
+      ></rr-shared-coronary-artery-columns>
+    </div>
+
+    <div class="f-vertical c-col-1 c-sep c-pad-l">
+      <h2 class="m-b-10" rr-id="ang_c_040528">
+        {{ "angiographyCT.coronaryArteries.noStenosis.value" | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-radioButton
+          rrContentReset="stenosisBlock"
+          [(ngModel)]="model.noStenosisType"
+          name="noStenosisType"
+          [value]="noStenosisTypeEnum.IntactAndNoStenosis"
+          label="{{ 'angiographyCT.coronaryArteries.intactAndNoStenosis.value' | translate }}"
+          rr-id="ang_c_040529"
+          rrUnClickRadio
+        ></p-radioButton>
+
+        <p-radioButton
+          rrContentReset="stenosisBlock"
+          [(ngModel)]="model.noStenosisType"
+          name="noStenosisType"
+          [value]="noStenosisTypeEnum.Stenosis"
+          label="{{ 'angiographyCT.coronaryArteries.stenosis.value' | translate }}"
+          rr-id="ang_c_040530"
+          rrUnClickRadio
+        ></p-radioButton>
+
+        <div
+          class="nested-content"
+          id="stenosisBlock"
+          [rrDisable]="model.noStenosisType !== noStenosisTypeEnum.Stenosis"
+        >
+          <p-checkbox
+            rr-id="ang_c_040531"
+            binary="true"
+            name="isAnastomoticStenosis"
+            label="{{ 'angiographyCT.coronaryArteries.anastomoticStenosis.value' | translate }}"
+            [(ngModel)]="model.isAnastomoticStenosis"
+          >
+          </p-checkbox>
+        </div>
+
+        <p-radioButton
+          rrContentReset="stenosisBlock"
+          [(ngModel)]="model.noStenosisType"
+          name="noStenosisType"
+          [value]="noStenosisTypeEnum.Occlusion"
+          label="{{ 'angiographyCT.coronaryArteries.occlusion.value' | translate }}"
+          rr-id="ang_c_040532"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+
+      <h2 class="m-b-10 m-t-30" rr-id="ang_c_040533">
+        {{ "angiographyCT.coronaryArteries.complication.value" | translate }}
+      </h2>
+
+      <p-checkbox
+        rr-id="ang_c_040534"
+        binary="true"
+        name="isCoronaryFistula"
+        label="{{ 'angiographyCT.coronaryArteries.coronaryFistula.value' | translate }}"
+        [(ngModel)]="model.isCoronaryFistula"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

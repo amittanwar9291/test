@@ -1,0 +1,261 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="f-vertical f-start c-pad-r c-sep o-radio-list col-h-100">
+      <div class="header-image-container">
+        <h1 rr-id="tho_c_020103">
+          {{ "thoraxCT.anamnesis.indication.value" | translate }}
+        </h1>
+        <!-- todo icon svg file the same as in cardio - unify-->
+        <img
+          class="m-t-10"
+          rr-id="tho_c_020104"
+          src="assets/img/thoraxCT/icons/2-1.svg"
+          alt="Indication"
+        />
+      </div>
+      <div class="f-horizontal f-start col-h-100 m-t-12">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+          <p-dropdown
+            styleClass="o-width-100 ui-brown-box"
+            [placeholder]="'shared.pleaseSelect' | translate"
+            [options]="indicationTypeOptions"
+            [(ngModel)]="model.indicationType"
+            (ngModelChange)="clearIndicationDetails()"
+            rrDropdownClear
+            [scrollHeight]="'300px'"
+            name="indicationType"
+            rr-id="tho_c_020105"
+          >
+          </p-dropdown>
+          <p-checkbox
+            [rrDisable]="model.indicationType === indicationTypeEnum.None"
+            rr-id="tho_c_020106"
+            binary="true"
+            [(ngModel)]="model.isSuspected"
+            name="isSuspected"
+            label="{{ 'thoraxCT.anamnesis.suspected.value' | translate }}"
+          ></p-checkbox>
+        </div>
+        <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+          <div
+            *ngIf="shortColCondition()"
+            class="f-vertical f-start o-radio-list"
+          >
+            <h2 rr-id="tho_c_020201">{{getIndicationLabel()}}</h2>
+            <p rr-id="tho_c_020202">
+              {{ "thoraxCT.anamnesis.noFurtherDetails.value" | translate }}
+            </p>
+          </div>
+
+          <div
+            *ngIf="model.indicationType === indicationTypeEnum.Infection"
+            class="f-vertical f-start o-radio-list"
+          >
+            <h2 rr-id="tho_c_020203">
+              {{ "thoraxCT.anamnesis.pCRTestForSARSCoV2.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="tho_c_020204"
+              label="{{ 'thoraxCT.anamnesis.negative.value' | translate }}"
+              name="pCRTestForSARSCoV2Type"
+              [value]="pcrTestForSarsCov2TypeEnum.Negative"
+              [(ngModel)]="model.pcrTestForSARSCoV2Type"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="tho_c_020205"
+              label="{{ 'thoraxCT.anamnesis.positive.value' | translate }}"
+              name="pCRTestForSARSCoV2Type"
+              [value]="pcrTestForSarsCov2TypeEnum.Positive"
+              [(ngModel)]="model.pcrTestForSARSCoV2Type"
+              rrUnClickRadio
+            ></p-radioButton>
+            <rr-number-input
+              inputRrId="tho_c_020206"
+              labelRrId="tho_c_020207"
+              name="ageOfTestInDays"
+              label="{{'thoraxCT.anamnesis.ageOfTestInDays.value' | translate}}"
+              [config]="{min: 0, max: 99}"
+              labelStyleClass="text-break"
+              [(ngModel)]="model.ageOfTestInDays"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-vertical f-start c-pad c-sep o-radio-list col-h-100">
+      <div class="header-image-container">
+        <h1 rr-id="tho_c_020301">
+          {{ "thoraxCT.anamnesis.anamnesisPreOps.value" | translate }}
+        </h1>
+        <!-- todo icon svg file the same as in cardio - unify-->
+        <img
+          class="m-t-10"
+          rr-id="tho_c_020302"
+          src="assets/img/thoraxCT/icons/2-2.svg"
+          alt="Indication"
+        />
+      </div>
+      <div class="f-horizontal f-start col-h-100 m-t-19">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [disabled]="false"
+            [setConfig]="findingDropdownConfig"
+            [attr.name]="'findingHandlerComponent'"
+          ></rr-finding-column>
+        </div>
+        <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+          <div
+            *ngIf="isFindingType(anamnesisFindingTypeEnum.NicotineAbuse)"
+            class="f-vertical f-start o-radio-list"
+          >
+            <h2 rr-id="tho_c_020401">
+              {{ "thoraxCT.anamnesis.nicotineAbuse.value" | translate }}
+            </h2>
+            <p rr-id="tho_c_020402" rrInfoIcon="tho_c_02_01">
+              {{ "thoraxCT.anamnesis.packYears.value" | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="tho_c_020403"
+              labelRrId="tho_c_020404"
+              name="packYears"
+              label="{{'thoraxCT.anamnesis.cigarettePacksPerDay.value' | translate}}"
+              [config]="{min: 1, max: 140, labelWidth: 200}"
+              [(ngModel)]="findingHandler.currentItem.packYears"
+            >
+            </rr-number-input>
+          </div>
+
+          <div
+            *ngIf="shortFindingColCondition()"
+            class="f-vertical f-start o-radio-list text-break"
+          >
+            <h2 rr-id="tho_c_020405">{{getFindingIndicationLabel()}}</h2>
+            <p rr-id="tho_c_020406">
+              {{ "thoraxCT.anamnesis.noFurtherDetails.value" | translate }}
+            </p>
+          </div>
+
+          <div
+            *ngIf="isFindingType(anamnesisFindingTypeEnum.Stentgraft)"
+            class="f-vertical f-start o-radio-list"
+          >
+            <h2 rr-id="tho_c_020411">
+              {{ "thoraxCT.anamnesis.stentgraft.value" | translate }}
+            </h2>
+            <p-checkbox
+              rr-id="tho_c_020412"
+              binary="true"
+              [(ngModel)]="findingHandler.currentItem.isAorticValveTAVI"
+              name="isAorticValveTAVI"
+              label="{{ 'thoraxCT.anamnesis.aorticValveTAVI.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="tho_c_020413"
+              binary="true"
+              [(ngModel)]="findingHandler.currentItem.isCoronary"
+              name="isCoronary"
+              label="{{ 'thoraxCT.anamnesis.coronary.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="tho_c_020414"
+              binary="true"
+              [(ngModel)]="findingHandler.currentItem.isThoracicAortaTEVAR"
+              name="isThoracicAortaTEVAR"
+              label="{{ 'thoraxCT.anamnesis.thoracicAortaTEVAR.value' | translate }}"
+            ></p-checkbox>
+          </div>
+
+          <div
+            *ngIf="isFindingType(anamnesisFindingTypeEnum.StatusPostPartialLungResection)"
+            class="f-vertical f-start o-radio-list"
+          >
+            <h2 rr-id="tho_c_020407">
+              {{ "thoraxCT.anamnesis.statusPostPartialLungResection.value" |
+              translate }}
+            </h2>
+            <p rr-id="tho_c_020408">
+              {{ "thoraxCT.anamnesis.localization.value" | translate }}
+            </p>
+            <p-checkbox
+              rr-id="tho_c_020409"
+              binary="true"
+              [(ngModel)]="findingHandler.currentItem.isAfterPartialLungResectionRight"
+              name="isAfterPartialLungResectionRight"
+              label="{{ 'thoraxCT.anamnesis.right.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="tho_c_020410"
+              binary="true"
+              [(ngModel)]="findingHandler.currentItem.isAfterPartialLungResectionLeft"
+              name="isAfterPartialLungResectionLeft"
+              label="{{ 'thoraxCT.anamnesis.left.value' | translate }}"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad-l f-vertical f-start o-radio-list">
+      <div class="header-image-container">
+        <h1 rr-id="tho_c_020501">
+          {{ "thoraxCT.anamnesis.preliminaryExaminations.value" | translate }}
+        </h1>
+        <!-- todo icon svg file the same as in cardio - unify-->
+        <img
+          class="m-t-10"
+          rr-id="tho_c_020508"
+          src="assets/img/thoraxCT/icons/2-3.svg"
+          alt="preliminaryExaminations"
+        />
+      </div>
+
+      <p-checkbox
+        rr-id="tho_c_020502"
+        binary="true"
+        [(ngModel)]="model.isCTPreliminaryExamination"
+        name="isCTPreliminaryExamination"
+        (onChange)="clearMonthYearInput('cTPreliminaryExamination')"
+        label="{{ 'thoraxCT.anamnesis.cTPreliminaryExamination.value' | translate }}"
+      ></p-checkbox>
+      <div
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isCTPreliminaryExamination"
+      >
+        <rr-month-year-input
+          nested="true"
+          name="cTPreliminaryExamination"
+          class="o-width-100"
+          monthRrId="tho_c_020503"
+          yearRrId="tho_c_020504"
+          [(ngModel)]="model.cTPreliminaryExamination"
+        ></rr-month-year-input>
+      </div>
+      <p-checkbox
+        rr-id="tho_c_020505"
+        binary="true"
+        class="m-t-9"
+        [(ngModel)]="model.isMRIPreliminaryExamination"
+        name="isMRIPreliminaryExamination"
+        (onChange)="clearMonthYearInput('mRIPreliminaryExamination')"
+        label="{{ 'thoraxCT.anamnesis.mRIPreliminaryExamination.value' | translate }}"
+      ></p-checkbox>
+      <div
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isMRIPreliminaryExamination"
+      >
+        <rr-month-year-input
+          yearRrId="tho_c_020507"
+          monthRrId="tho_c_020506"
+          nested="true"
+          name="mRIPreliminaryExamination"
+          class="o-width-100"
+          [(ngModel)]="model.mRIPreliminaryExamination"
+        ></rr-month-year-input>
+      </div>
+    </div>
+  </div>
+</form>

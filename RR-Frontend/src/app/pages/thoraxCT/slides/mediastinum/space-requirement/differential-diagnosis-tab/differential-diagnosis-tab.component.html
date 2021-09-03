@@ -1,0 +1,137 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_040274">
+        {{'thoraxCT.mediastinum.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.descriptionType !== 'IDescribe'"
+      >
+        <p rr-id="tho_c_040275" class="m-b-0">
+          {{'thoraxCT.mediastinum.differentialDiagnosis1.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="extendedDiagnosisList"
+          [(ngModel)]="model.differentialDiagnosis01"
+          group="true"
+          name="differentialDiagnosis01"
+          rrId="tho_c_040276"
+          (selectionChanged)="clearDropdownCheckboxes()"
+          [parentViewModel]="model"
+          rrValidation="differentialDiagnosis01"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+      <div
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosis01 === 'None' && this.model.mainCharacteristicsDifferentialDiagnosis01 === 'None'"
+      >
+        <p-checkbox
+          [rrDisable]="model.differentialDiagnosis01 === 'None'"
+          rr-id="tho_c_040277"
+          name="isSuspected"
+          label="{{'thoraxCT.mediastinum.suspected.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isSuspected"
+        ></p-checkbox>
+        <p rr-id="tho_c_040278" class="m-b-0">
+          {{'thoraxCT.mediastinum.differentialDiagnosis2.value' | translate}}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="diagnosisList"
+          [(ngModel)]="model.differentialDiagnosis02"
+          group="true"
+          name="differentialDiagnosis02"
+          rrId="tho_c_040279"
+          (selectionChanged)="clearDDL2Details()"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <div
+          class="f-vertical f-start o-radio-list"
+          [rrDisable]="model.differentialDiagnosis02 === 'None'"
+        >
+          <p-checkbox
+            rr-id="tho_c_040280"
+            name="isSubordinated"
+            label="{{'thoraxCT.mediastinum.subordinated.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isSubordinated"
+          ></p-checkbox>
+          <p rr-id="tho_c_040281" class="m-b-0">
+            {{'thoraxCT.mediastinum.differentialDiagnosis3.value' | translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            [diagnosisNumber]="3"
+            [options]="diagnosisList"
+            [(ngModel)]="model.differentialDiagnosis03"
+            group="true"
+            name="differentialDiagnosis03"
+            rrId="tho_c_040282"
+            (selectionChanged)="clearDDL3Details()"
+            [parentViewModel]="model"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="f-horizontal ddl-details-wrapper-height m-t-35">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <ng-container
+        *ngTemplateOutlet="diagnosisDetails;context{key: 1}"
+      ></ng-container>
+    </div>
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <ng-container
+        *ngTemplateOutlet="diagnosisDetails;context{key: 2}"
+      ></ng-container>
+    </div>
+    <div class="c-col-1 f-vertical f-start c-pad-l o-radio-list">
+      <ng-container
+        *ngTemplateOutlet="diagnosisDetails;context{key: 3}"
+      ></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  #diagnosisDetails
+  let-key="key"
+  class="f-vertical f-start o-radio-list"
+>
+  <div
+    class="f-vertical f-start o-radio-list"
+    *ngIf="isDifferentialDiagnosis1Checked()"
+    [rrDisable]="!isDiagnosisChecked(key)"
+  >
+    <h2 [attr.rr-id]="diagnosisDetailsConfig[key].headerID">
+      {{diagnosisDetailsConfig[key].headerTranslation | translate}}
+    </h2>
+    <p
+      *ngIf="isNoDetails(key)"
+      [attr.rr-id]="diagnosisDetailsConfig[key].noDetailsID"
+    >
+      {{'thoraxCT.mediastinum.noFurtherDetails.value' | translate}}
+    </p>
+
+    <div
+      *ngIf="isStrumaRetrosternal(key)"
+      class="f-vertical f-start o-radio-list"
+    >
+      <p [attr.rr-id]="diagnosisDetailsConfig[key].caudalExtensionHeaderID">
+        {{'thoraxCT.mediastinum.caudalExtension.value' | translate}}
+      </p>
+      <rr-number-input
+        [inputRrId]="diagnosisDetailsConfig[key].inputRrId"
+        [labelRrId]="diagnosisDetailsConfig[key].labelRrId"
+        name="caudalExtensionInMm"
+        [(ngModel)]="model[diagnosisDetailsConfig[key].caudalExtensionModelName]"
+        [label]="'thoraxCT.mediastinum.inMm.value' | translate"
+        [config]="{labelWidth: 170, max: 150, min: 1, placeholder: '---'}"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+</ng-template>

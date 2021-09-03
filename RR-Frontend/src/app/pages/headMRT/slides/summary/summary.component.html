@@ -1,0 +1,35 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center main-container">
+    <p-tabView class="rr-tabView">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            rr-id="hea_m_1201114"
+            class="p-l-10"
+            [rrValidation]="['hemorrhageLocalizationType', 'neurodegenerationType', 'sideType', 'mesialTemporalLobeAtrophyScore', 'koedamScore']"
+            ifAny="true"
+            allFindings="true"
+            class="tab-header"
+          >
+            {{ "headMRT.summary.diagnosis.value" | translate }}
+          </h1>
+        </ng-template>
+        <rr-diagnose-tab
+          [model]="model"
+          [summaryFindingHandler]="summaryFindingHandler"
+          [findingDropdownConfig]="findingDropdownConfig"
+          [isContrastEnhanced]="isContrastEnhanced"
+        ></rr-diagnose-tab>
+      </p-tabPanel>
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1 rr-id="hea_m_120201">
+            {{ "headMRT.summary.procedurecourse.value" | translate }}
+          </h1>
+        </ng-template>
+        <rr-procedure-or-course-tab [model]="model">
+        </rr-procedure-or-course-tab>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</form>

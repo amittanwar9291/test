@@ -1,0 +1,530 @@
+<div class="f-horizontal f-start h-100 o-width-100">
+  <div class="m-b-22 o-width-100 f-horizontal">
+    <div
+      class="c-col-1 h-100 c-pad-r c-sep o-list m-t-10 f-vertical f-start p-l-3"
+    >
+      <div class="o-radio-list p-l-25">
+        <h2 rr-id="abd_m_120104">
+          {{ 'abdomenMRT.summary.course.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_120105"
+          label="{{ 'abdomenMRT.summary.progression.value' | translate }}"
+          name="courseType"
+          [(ngModel)]="model.courseType"
+          [value]="courseTypeEnum.Progression"
+          rrContentReset="isProgressionActive isRemissonReponseActive"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_120106"
+          label="{{ 'abdomenMRT.summary.stable.value' | translate }}"
+          name="courseType"
+          [(ngModel)]="model.courseType"
+          [value]="courseTypeEnum.Stable"
+          rrContentReset="isProgressionActive isRemissonReponseActive"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_120107"
+          label="{{ 'abdomenMRT.summary.remissonreponse.value' | translate }}"
+          name="courseType"
+          [(ngModel)]="model.courseType"
+          [value]="courseTypeEnum.RemissonReponse"
+          rrContentReset="isProgressionActive isRemissonReponseActive"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+      <div
+        id="isProgressionActive"
+        class="nested-content o-radio-list p-l-25"
+        *ngIf="model.courseType === courseTypeEnum.Progression"
+      >
+        <h3 rr-id="abd_m_120108">
+          {{ 'abdomenMRT.summary.progressionDetails.value' | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_120109"
+          label="{{ 'abdomenMRT.summary.quantity.value' | translate }}"
+          name="isQuantity"
+          binary="true"
+          [(ngModel)]="model.isQuantity"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_120110"
+          label="{{ 'abdomenMRT.summary.size.value' | translate }}"
+          name="isSize"
+          binary="true"
+          [(ngModel)]="model.isSize"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="nested-content o-radio-list p-l-25"
+        id="isRemissonReponseActive"
+        *ngIf="model.courseType === courseTypeEnum.RemissonReponse"
+      >
+        <h3 rr-id="abd_m_120127">
+          {{ 'abdomenMRT.summary.remissionDetails.value' | translate }}
+        </h3>
+        <p-radioButton
+          rr-id="abd_m_120128"
+          label="{{ 'abdomenMRT.summary.partial.value' | translate }}"
+          name="remissionDetailsType"
+          [(ngModel)]="model.remissionDetailsType"
+          [value]="remissionDetailsTypeEnum.Partial"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_120129"
+          label="{{ 'abdomenMRT.summary.complete.value' | translate }}"
+          name="remissionDetailsType"
+          [(ngModel)]="model.remissionDetailsType"
+          [value]="remissionDetailsTypeEnum.Complete"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="f-vertical col-h-100">
+      <h2 rr-id="abd_m_120202" class="p-t-10 m-b-15 p-l-25">
+        {{ 'abdomenMRT.summary.recommendation.value' | translate }}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="f-vertical col-h-100">
+          <h2 rr-id="abd_m_120203" class="p-l-25">
+            {{ 'abdomenMRT.summary.imaging.value' | translate }}
+          </h2>
+          <div class="f-horizontal col-h-100">
+            <div class="c-col-1 h-100 c-sep c-pad m-t-10">
+              <div class="o-radio-list p-l-10">
+                <p-checkbox
+                  rr-id="abd_m_120204"
+                  label="{{ 'abdomenMRT.summary.cT.value' | translate }}"
+                  name="isCt"
+                  binary="true"
+                  [(ngModel)]="model.isCt"
+                  rrContentReset="isCtActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isCtActive"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isCt"
+                >
+                  <p-checkbox
+                    rr-id="abd_m_120205"
+                    label="{{ 'abdomenMRT.summary.withIVContrastAgent.value' | translate }}"
+                    name="isWithIVContrastAgent"
+                    binary="true"
+                    [(ngModel)]="model.isWithIVContrastAgent"
+                    rrContentReset="isKMActive"
+                  >
+                  </p-checkbox>
+                  <div
+                    id="isKMActive"
+                    class="nested-content o-radio-list"
+                    [rrDisable]="!model.isWithIVContrastAgent"
+                  >
+                    <h3 rr-id="abd_m_120206">
+                      {{ 'abdomenMRT.summary.phase.value' | translate }}
+                    </h3>
+                    <p-checkbox
+                      rr-id="abd_m_120207"
+                      label="{{ 'abdomenMRT.summary.arterialPhase.value' | translate }}"
+                      name="isArterialPhase"
+                      binary="true"
+                      [(ngModel)]="model.isArterialPhase"
+                    >
+                    </p-checkbox>
+                    <p-checkbox
+                      rr-id="abd_m_120208"
+                      label="{{ 'abdomenMRT.summary.portalVenousPhase.value' | translate }}"
+                      name="isPortalVenousPhase"
+                      binary="true"
+                      [(ngModel)]="model.isPortalVenousPhase"
+                    >
+                    </p-checkbox>
+                    <p-checkbox
+                      rr-id="abd_m_120209"
+                      label="{{ 'abdomenMRT.summary.urographicPhase.value' | translate }}"
+                      name="isUrographicPhase"
+                      binary="true"
+                      [(ngModel)]="model.isUrographicPhase"
+                    >
+                    </p-checkbox>
+                  </div>
+                  <p-checkbox
+                    rr-id="abd_m_120210"
+                    label="{{ 'abdomenMRT.summary.nonenhanced.value' | translate }}"
+                    name="isNonEnhanced"
+                    binary="true"
+                    [(ngModel)]="model.isNonEnhanced"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-checkbox
+                  rr-id="abd_m_120211"
+                  label="{{ 'abdomenMRT.summary.contrastenhancedMRI.value' | translate }}"
+                  name="isContrastEnhancedMri"
+                  binary="true"
+                  [(ngModel)]="model.isContrastEnhancedMri"
+                  rrContentReset="isContrastenhancedMRIActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isContrastenhancedMRIActive"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isContrastEnhancedMri"
+                >
+                  <h3 rr-id="abd_m_120212">
+                    {{ 'abdomenMRT.summary.type.value' | translate }}
+                  </h3>
+                  <p-checkbox
+                    rr-id="abd_m_120213"
+                    label="{{ 'abdomenMRT.summary.hepatocytespecificContrastAgent.value' | translate }}"
+                    name="isHepatocyteSpecificContrastAgent"
+                    binary="true"
+                    class="text-break"
+                    [(ngModel)]="model.isHepatocyteSpecificContrastAgent"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-checkbox
+                  rr-id="abd_m_120214"
+                  label="{{ 'abdomenMRT.summary.mRCP.value' | translate }}"
+                  name="isMRCP"
+                  binary="true"
+                  [(ngModel)]="model.isMRCP"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+            <div class="c-col-1 h-100 c-pad m-t-10">
+              <div class="o-radio-list p-l-10">
+                <p-checkbox
+                  rr-id="abd_m_120302"
+                  label="{{ 'abdomenMRT.summary.ultrasoundExamination.value' | translate }}"
+                  name="isUltrasoundExamination"
+                  binary="true"
+                  [(ngModel)]="model.isUltrasoundExamination"
+                  rrContentReset="isUltrasoundExaminationActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isUltrasoundExaminationActive"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isUltrasoundExamination"
+                >
+                  <h3 rr-id="abd_m_120303">
+                    {{ 'abdomenMRT.summary.type.value' | translate }}
+                  </h3>
+                  <p-checkbox
+                    rr-id="abd_m_120304"
+                    class="m-b-0"
+                    label="{{ 'abdomenMRT.summary.contrastenhancedultrasoundExaminationCEUS.value' | translate }}"
+                    name="isContrastEnhancedUltrasoundExaminationCeus"
+                    binary="true"
+                    [(ngModel)]="model.isContrastEnhancedUltrasoundExaminationCeus"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120305"
+                    label="{{ 'abdomenMRT.summary.transesophageal.value' | translate }}"
+                    name="isTransesophageal"
+                    binary="true"
+                    [(ngModel)]="model.isTransesophageal"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120306"
+                    label="{{ 'abdomenMRT.summary.transrectal.value' | translate }}"
+                    name="isTransrectal"
+                    binary="true"
+                    [(ngModel)]="model.isTransrectal"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120307"
+                    label="{{ 'abdomenMRT.summary.transvaginal.value' | translate }}"
+                    name="isTransvaginal"
+                    binary="true"
+                    [(ngModel)]="model.isTransvaginal"
+                    [rrDisable]="gender !== genderTypeEnum.Female"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-checkbox
+                  rr-id="abd_m_120308"
+                  label="{{ 'abdomenMRT.summary.followup.value' | translate }}"
+                  name="isFollowUp"
+                  binary="true"
+                  [(ngModel)]="model.isFollowUp"
+                  rrContentReset="isFollowupActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isFollowupActive"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isFollowUp"
+                >
+                  <h3 rr-id="abd_m_120309">
+                    {{ 'abdomenMRT.summary.period.value' | translate }}
+                  </h3>
+                  <p-dropdown
+                    rr-id="abd_m_120310"
+                    name="periodType"
+                    placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                    styleClass="o-width-100 ui-brown-box"
+                    [(ngModel)]="model.periodType"
+                    [options]="periodTypeOptions"
+                    rrDropdownClear
+                  >
+                  </p-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-vertical col-h-100  ">
+          <h2 rr-id="abd_m_120401" class="c-sep-l p-l-25">
+            {{ 'abdomenMRT.summary.furtherDiagnostics.value' | translate }}
+          </h2>
+          <div class="f-horizontal col-h-100">
+            <div class="c-col-1 h-100 c-sep-l p-t-10 c-pad">
+              <div class="o-radio-list p-l-10">
+                <p-checkbox
+                  rr-id="abd_m_120402"
+                  label="{{ 'abdomenMRT.summary.gastroscopy.value' | translate }}"
+                  name="isGastroscopy"
+                  binary="true"
+                  [(ngModel)]="model.isGastroscopy"
+                  rrContentReset="isGastroscopyActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isGastroscopyActive"
+                  class="nested-content"
+                  [rrDisable]="!model.isGastroscopy"
+                >
+                  <p-checkbox
+                    rr-id="abd_m_120403"
+                    label="{{ 'abdomenMRT.summary.endoscopicRetrogradeCholangiopancreatography(ERCP.value' | translate }}"
+                    name="isERCP"
+                    binary="true"
+                    [(ngModel)]="model.isERCP"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-checkbox
+                  rr-id="abd_m_120404"
+                  label="{{ 'abdomenMRT.summary.colonoscopy.value' | translate }}"
+                  name="isColonoscopy"
+                  binary="true"
+                  [(ngModel)]="model.isColonoscopy"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_120405"
+                  label="{{ 'abdomenMRT.summary.biopsy.value' | translate }}"
+                  name="isBiopsy"
+                  binary="true"
+                  [(ngModel)]="model.isBiopsy"
+                  rrContentReset="isBiopsyActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isBiopsyActive"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isBiopsy"
+                >
+                  <h3 rr-id="abd_m_120417">
+                    {{ 'abdomenMRT.summary.method.value' | translate }}
+                  </h3>
+                  <p-checkbox
+                    rr-id="abd_m_120406"
+                    label="{{ 'abdomenMRT.summary.sonographicallyguided.value' | translate }}"
+                    name="isSonographicallyGuided"
+                    binary="true"
+                    [(ngModel)]="model.isSonographicallyGuided"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120407"
+                    label="{{ 'abdomenMRT.summary.cTguided.value' | translate }}"
+                    name="isCTGuided"
+                    binary="true"
+                    [(ngModel)]="model.isCTGuided"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120408"
+                    label="{{ 'abdomenMRT.summary.mRIguided.value' | translate }}"
+                    name="isMriGuided"
+                    binary="true"
+                    [(ngModel)]="model.isMriGuided"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120409"
+                    label="{{ 'abdomenMRT.summary.open.value' | translate }}"
+                    name="isOpen"
+                    binary="true"
+                    [(ngModel)]="model.isOpen"
+                  >
+                  </p-checkbox>
+                </div>
+                <p-checkbox
+                  rr-id="abd_m_120410"
+                  label="{{ 'abdomenMRT.summary.drainage.value' | translate }}"
+                  name="isDrainage"
+                  binary="true"
+                  [(ngModel)]="model.isDrainage"
+                  rrContentReset="isDrainageActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isDrainageActive"
+                  class="nested-content f-vertical o-radio-list"
+                  [rrDisable]="!model.isDrainage"
+                >
+                  <h3 rr-id="abd_m_120418">
+                    {{ 'abdomenMRT.summary.accessRoute.value' | translate }}
+                  </h3>
+                  <p-checkbox
+                    rr-id="abd_m_120411"
+                    label="{{ 'abdomenMRT.summary.percutaneous.value' | translate }}"
+                    name="isPercutaneous"
+                    binary="true"
+                    [(ngModel)]="model.isPercutaneous"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120412"
+                    label="{{ 'abdomenMRT.summary.transgastric.value' | translate }}"
+                    name="isTransgastric"
+                    binary="true"
+                    [(ngModel)]="model.isTransgastric"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120413"
+                    label="{{ 'abdomenMRT.summary.transhepatic.value' | translate }}"
+                    name="isTranshepatic"
+                    binary="true"
+                    [(ngModel)]="model.isTranshepatic"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120414"
+                    label="{{ 'abdomenMRT.summary.pTCD.value' | translate }}"
+                    name="isPTCD"
+                    binary="true"
+                    [(ngModel)]="model.isPTCD"
+                  >
+                  </p-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="c-col-1 h-100 c-pad-l m-t-10 c-sep-l">
+              <div class="o-radio-list p-l-10">
+                <p-checkbox
+                  rr-id="abd_m_120501"
+                  label="{{ 'abdomenMRT.summary.clinicalCorrelation.value' | translate }}"
+                  name="isClinicalCorrelation"
+                  binary="true"
+                  [(ngModel)]="model.isClinicalCorrelation"
+                  rrContentReset="isClinicalCorrelationActive"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_120502"
+                  label="{{ 'abdomenMRT.summary.correlationWithLaboratoryFindings.value' | translate }}"
+                  name="isCorrelationWithLaboratoryFindings"
+                  binary="true"
+                  class="text-break"
+                  [(ngModel)]="model.isCorrelationWithLaboratoryFindings"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_120503"
+                  label="{{ 'abdomenMRT.summary.interdisciplinaryDiscussioninTumourBoard.value' | translate }}"
+                  name="isInterdisciplinaryDiscussioninTumourBoard"
+                  binary="true"
+                  class="text-break"
+                  [(ngModel)]="model.isInterdisciplinaryDiscussionInTumourBoard"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="abd_m_120504"
+                  label="{{ 'abdomenMRT.summary.recommendedConsultation.value' | translate }}"
+                  name="isRecommendedConsultation"
+                  binary="true"
+                  [(ngModel)]="model.isRecommendedConsultation"
+                  rrContentReset="isRecommendedConsultationActive"
+                >
+                </p-checkbox>
+                <div
+                  id="isRecommendedConsultationActive"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isRecommendedConsultation"
+                >
+                  <h3 rr-id="abd_m_120521">
+                    {{ 'abdomenMRT.summary.medicalDiscipline.value' |
+                    translate}}
+                  </h3>
+                  <p-checkbox
+                    rr-id="abd_m_120505"
+                    label="{{ 'abdomenMRT.summary.internalMedicine.value' | translate }}"
+                    name="isInternalMedicine"
+                    binary="true"
+                    [(ngModel)]="model.isInternalMedicine"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120506"
+                    label="{{ 'abdomenMRT.summary.surgery.value' | translate }}"
+                    name="isSurgery"
+                    binary="true"
+                    [(ngModel)]="model.isSurgery"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120507"
+                    label="{{ 'abdomenMRT.summary.endocrinology.value' | translate }}"
+                    name="isEndocrinology"
+                    binary="true"
+                    [(ngModel)]="model.isEndocrinology"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120508"
+                    label="{{ 'abdomenMRT.summary.gynecology.value' | translate }}"
+                    name="isGynecology"
+                    binary="true"
+                    [(ngModel)]="model.isGynecology"
+                    [rrDisable]="gender !== genderTypeEnum.Female"
+                  >
+                  </p-checkbox>
+                  <p-checkbox
+                    rr-id="abd_m_120509"
+                    label="{{ 'abdomenMRT.summary.urology.value' | translate }}"
+                    name="isUrology"
+                    binary="true"
+                    [(ngModel)]="model.isUrology"
+                  >
+                  </p-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

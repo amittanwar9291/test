@@ -1,0 +1,138 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2 rr-id="elb_m_070202" class="m-b-10 m-t-4">
+      {{'elbowMRT.softTissue.intensity.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="elb_m_070203"
+      label="{{'elbowMRT.softTissue.low.value' | translate}}"
+      name="intensityType"
+      [value]="intensityType.Low"
+      [(ngModel)]="model.intensityType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="elb_m_070204"
+      class="m-b-32"
+      label="{{'elbowMRT.softTissue.marked.value' | translate}}"
+      name="intensityType"
+      [value]="intensityType.Marked"
+      [(ngModel)]="model.intensityType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <h2 rr-id="elb_m_0702211">
+      {{'elbowMRT.softTissue.associatedFinding.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="elb_m_070205"
+      label="{{'elbowMRT.softTissue.hemarthros.value' | translate}}"
+      name="associatedFindingsType"
+      [value]="associatedFindingsType.Hemarthros"
+      [(ngModel)]="model.associatedFindingsType"
+      rrUnClickRadio
+      rrContentReset="capsuleRupture-block"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="elb_m_070206"
+      label="{{'elbowMRT.softTissue.capsuleRupture.value' | translate}}"
+      name="associatedFindingsType"
+      class="m-b-13"
+      [value]="associatedFindingsType.CapsuleRupture"
+      [(ngModel)]="model.associatedFindingsType"
+      rrUnClickRadio
+      (onClick)="toggleIsExtraarticularArticularEffusion()"
+    ></p-radioButton>
+    <div class="nested-content" id="capsuleRupture-block">
+      <p-checkbox
+        rr-id="elb_m_070207"
+        name="isExtraarticularArticularEffusion"
+        label="{{'elbowMRT.softTissue.extraarticularArticularEffusion.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isExtraarticularArticularEffusion"
+        class="checkbox-readonly"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad">
+    <p-checkbox
+      rr-id="elb_m_0703218"
+      label="{{'elbowMRT.softTissue.looseBody.value' | translate}}"
+      binary="true"
+      name="isLooseBody"
+      class="m-t-4 m-b-6"
+      labelStyleClass="ui-fat-label"
+      [(ngModel)]="model.isLooseBody"
+      rrContentReset="free-gel-block"
+    >
+    </p-checkbox>
+
+    <div
+      id="free-gel-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isLooseBody"
+    >
+      <p rr-id="elb_m_0703219" class="m-b-2">
+        {{'elbowMRT.softTissue.maxDiameter.value' | translate}}
+      </p>
+      <rr-number-input
+        [(ngModel)]="model.maxDiameterInMm"
+        name="maxDiameterInMm"
+        class="m-b-18"
+        label="{{'elbowMRT.softTissue.inMm.value' | translate}}"
+        inputRrId="elb_m_0703220"
+        labelRrId="elb_m_0703221"
+        [config]="{min: 1, max: 99}"
+      ></rr-number-input>
+      <p rr-id="elb_m_0703222">
+        {{'elbowMRT.softTissue.localization.value' | translate}}
+      </p>
+      <p-radioButton
+        rr-id="elb_m_0703223"
+        label="{{'elbowMRT.softTissue.radial.value' | translate}}"
+        name="articularEffusionLocalizationType"
+        [value]="articularEffusionLocalizationType.Radial"
+        [(ngModel)]="model.articularEffusionLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_0703224"
+        label="{{'elbowMRT.softTissue.ulnar.value' | translate}}"
+        name="articularEffusionLocalizationType"
+        class="m-b-18"
+        [value]="articularEffusionLocalizationType.Ulnar"
+        [(ngModel)]="model.articularEffusionLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p rr-id="elb_m_0703225">
+        {{'elbowMRT.softTissue.details.value' | translate}}
+      </p>
+      <p-checkbox
+        rr-id="elb_m_0703226"
+        name="isIsointenseToCartilage"
+        label="{{'elbowMRT.softTissue.isointenseToCartilage.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isIsointenseToCartilage"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_0703227"
+        name="isIsointenseToBone"
+        label="{{'elbowMRT.softTissue.isointenseToBone.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isIsointenseToBone"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_0703228"
+        name="isForeignBody"
+        label="{{'elbowMRT.softTissue.foreignBody.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isForeignBody"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad"></div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

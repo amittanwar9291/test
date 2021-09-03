@@ -1,0 +1,145 @@
+<div class="seminal-requirement-height">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-26 m-b-13">
+      <h2 rr-id="pel_m_0502142" class="p-l-10 m-b-15">
+        {{'pelvisMRT.maleGender.infiltrationOfAdjacent.value' | translate}}
+      </h2>
+      <div class="o-radio-list p-l-10">
+        <p-checkbox
+          label="{{'pelvisMRT.maleGender.testicles.value' | translate}}"
+          rr-id="pel_m_0502143"
+          binary="true"
+          name="isTesticles"
+          [(ngModel)]="model.isTesticles"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.maleGender.epididymis.value' | translate}}"
+          rr-id="pel_m_0502144"
+          binary="true"
+          name="isEpididymis"
+          [(ngModel)]="model.isEpididymis"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.maleGender.prostate.value' | translate}}"
+          rr-id="pel_m_0502145"
+          binary="true"
+          name="isProstate"
+          [(ngModel)]="model.isProstate"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.maleGender.urinaryBladder.value' | translate}}"
+          rr-id="pel_m_0502146"
+          binary="true"
+          name="isUrinaryBladder"
+          [(ngModel)]="model.isUrinaryBladder"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.maleGender.vasDeferens.value' | translate}}"
+          rr-id="pel_m_0502147"
+          binary="true"
+          name="isVasDeferens"
+          [(ngModel)]="model.isVasDeferens"
+          rrContentReset="vasDeferensBlock"
+        >
+        </p-checkbox>
+        <div
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isVasDeferens"
+          id="vasDeferensBlock"
+        >
+          <p rr-id="pel_m_0502148">
+            {{'pelvisMRT.maleGender.side.value' | translate}}
+          </p>
+          <p-checkbox
+            rr-id="pel_m_0502149"
+            label="{{'pelvisMRT.maleGender.rightNoAsterisk.value' | translate}}"
+            name="isDuctusDeferensRight"
+            binary="true"
+            [(ngModel)]="model.isDuctusDeferensRight"
+            rrValidation="isDuctusDeferensRight isDuctusDeferensLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="pel_m_0502150"
+            label="{{'pelvisMRT.maleGender.leftNoAsterisk.value' | translate}}"
+            name="isDuctusDeferensLeft"
+            binary="true"
+            [(ngModel)]="model.isDuctusDeferensLeft"
+            rrValidation="isDuctusDeferensRight isDuctusDeferensLeft"
+          >
+          </p-checkbox>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.maleGender.rectum.value' | translate}}"
+          rr-id="pel_m_0502151"
+          binary="true"
+          name="isRectum"
+          [(ngModel)]="model.isRectum"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-26 m-b-13 o-list">
+      <h2 rr-id="pel_m_0503117" class="p-l-10 m-b-13">
+        {{'pelvisMRT.maleGender.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="o-radio-list p-l-10">
+        <div [rrDisable]="model.descriptionType !== 'IDescribe'" class="m-b-13">
+          <p rr-id="pel_m_0503118">
+            {{'pelvisMRT.maleGender.differentialDiagnosis1.value' | translate}}
+            <span *ngIf="model.descriptionType !== 'IKnow'">*</span>
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0503119"
+            [diagnosisNumber]="1"
+            [options]="seminalVesiclesMassDifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosisSeminalVesiclesMass01Type"
+            name="differentialDiagnosisSeminalVesiclesMass01Type"
+            group="true"
+            [parentViewModel]="model"
+            rrValidation="differentialDiagnosisSeminalVesiclesMass01Type"
+            (selectionChanged)="resetSubordinated()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          class="m-b-13"
+          [rrDisable]="model.differentialDiagnosisSeminalVesiclesMass01Type === 'None'
+             && model.differentialDiagnosisSeminalVesiclesMassMainFeatures01Type === 'None'"
+        >
+          <p rr-id="pel_m_0503120">
+            {{'pelvisMRT.maleGender.differentialDiagnosis2.value' | translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0503121"
+            [diagnosisNumber]="2"
+            [options]="seminalVesiclesMassDifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosisSeminalVesiclesMass02Type"
+            name="differentialDiagnosisSeminalVesiclesMass02Type"
+            group="true"
+            [parentViewModel]="model"
+            (selectionChanged)="resetSubordinated()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div
+          [rrDisable]="model.differentialDiagnosisSeminalVesiclesMass02Type === 'None'"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.maleGender.subordinate.value' | translate}}"
+            rr-id="pel_m_0503122"
+            binary="true"
+            name="isSubordinate"
+            [(ngModel)]="model.isSubordinate"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-26 m-b-13"></div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-26 m-b-13"></div>
+  </div>
+</div>

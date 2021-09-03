@@ -1,0 +1,440 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_m_010103">
+        {{ 'headMRT.examination.examinationArea.value' | translate }}
+      </h1>
+      <div class="f-vertical f-start o-radio-list">
+        <p-checkbox
+          name="isBrainMRI"
+          [(ngModel)]="model.isBrainMRI"
+          label="{{'headMRT.examination.brainMRI.value' | translate}}"
+          binary="true"
+          rr-id="hea_m_010104"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isBrainstemMRI"
+          [(ngModel)]="model.isBrainstemMRI"
+          label="{{'headMRT.examination.brainstemMRI.value' | translate}}"
+          binary="true"
+          rr-id="hea_m_010105"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isPituitaryMRI"
+          [(ngModel)]="model.isPituitaryMRI"
+          label="{{'headMRT.examination.pituitaryMRI.value' | translate}}"
+          binary="true"
+          rr-id="hea_m_010106"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isOrbitaMRI"
+          [(ngModel)]="model.isOrbitaMRI"
+          label="{{'headMRT.examination.orbitaMRI.value' | translate}}"
+          binary="true"
+          rr-id="hea_m_010107"
+        >
+        </p-checkbox>
+        <p-checkbox
+          name="isParanasalSinusMRI"
+          [(ngModel)]="model.isParanasalSinusMRI"
+          label="{{'headMRT.examination.paranasalSinusMRI.value' | translate}}"
+          binary="true"
+          rr-id="hea_m_010108"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-2 c-sep c-pad">
+      <rr-patient-information
+        [model]="model.patientInformation"
+      ></rr-patient-information>
+    </div>
+    <div class="double-col f-vertical">
+      <div class="double-col-header p-l-15">
+        <h1 rr-id="hea_m_010401">
+          {{ 'headMRT.examination.indication.value' | translate }}
+        </h1>
+      </div>
+      <div class="double-col-content f-horizontal">
+        <div class="c-col-1 c-pad c-sep f-vertical">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [disabled]="false"
+            [setConfig]="findingDropdownConfig"
+          >
+          </rr-finding-column>
+        </div>
+        <div
+          *ngIf="isFindingType([examinationIndicationFindingTypeEnum.None])"
+          class="c-col-1 c-pad-l c-sep f-start"
+        ></div>
+        <div
+          *ngIf="!isFindingType([examinationIndicationFindingTypeEnum.None])"
+          class="c-col-1 c-pad-l c-sep f-start o-radio-list"
+        >
+          <h2 [attr.ii-id]="getRRId('indicationFindingHeader')">
+            {{getIndicationFindingHeaderLabel()}}
+          </h2>
+          <p-radioButton
+            [attr.rr-id]="getRRId('suspected')"
+            label="{{ 'headMRT.examination.suspected.value' | translate }}"
+            name="ischemiaIntracranialHemorrhageType"
+            [value]="ischemiaIntracranialHemorrhageTypeEnum.Suspected"
+            [(ngModel)]="findingHandler.currentItem.ischemiaIntracranialHemorrhageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            [attr.rr-id]="getRRId('exclusion')"
+            label="{{ 'headMRT.examination.exclusion.value' | translate }}"
+            name="ischemiaIntracranialHemorrhageType"
+            [value]="ischemiaIntracranialHemorrhageTypeEnum.Exclusion"
+            [(ngModel)]="findingHandler.currentItem.ischemiaIntracranialHemorrhageType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            [attr.rr-id]="getRRId('followUpExamination')"
+            label="{{ 'headMRT.examination.followUpExamination.value' | translate }}"
+            name="ischemiaIntracranialHemorrhageType"
+            [value]="ischemiaIntracranialHemorrhageTypeEnum.FollowUpExamination"
+            [(ngModel)]="findingHandler.currentItem.ischemiaIntracranialHemorrhageType"
+            rrUnClickRadio
+          ></p-radioButton>
+
+          <h2
+            *ngIf="isDetailsHeaderShown()"
+            class="p-t-23"
+            [attr.rr-id]="getRRId('details')"
+          >
+            {{ 'headMRT.examination.details.value' | translate }}
+          </h2>
+
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.Ischemia])"
+          >
+            <h3 rr-id="hea_m_010508" rrInfoIcon="hea_m_01_01" class="m-b-0">
+              {{ 'headMRT.examination.NIHSSScore.value' | translate }}
+            </h3>
+            <rr-number-input
+              [label]="'headMRT.examination.points.value' | translate"
+              [config]="{max: 22}"
+              inputRrId="hea_m_010509"
+              labelRrId="hea_m_010510"
+              name="nihssScore"
+              [(ngModel)]="findingHandler.currentItem.nihssScore"
+            ></rr-number-input>
+            <h3
+              rr-id="hea_m_010511"
+              rrInfoIcon="hea_m_01_02"
+              class="m-b-0 m-t-15"
+            >
+              {{ 'headMRT.examination.aSPECTScore.value' | translate }}
+            </h3>
+            <rr-number-input
+              [label]="'headMRT.examination.points.value' | translate"
+              [config]="{max: 10}"
+              inputRrId="hea_m_010512"
+              labelRrId="hea_m_010513"
+              name="aspectScore"
+              [(ngModel)]="findingHandler.currentItem.aspectScore"
+            ></rr-number-input>
+            <h3 rr-id="hea_m_010514" class="text-break m-b-0 m-t-15">
+              {{ 'headMRT.examination.hoursAfterSymptomOnset.value' | translate
+              }}
+            </h3>
+            <rr-number-input
+              [label]="'headMRT.examination.hours.value' | translate"
+              [config]="{min: 1, max: 99}"
+              inputRrId="hea_m_010515"
+              labelRrId="hea_m_010516"
+              name="hoursAfterSymptomOnset"
+              [(ngModel)]="findingHandler.currentItem.hoursAfterSymptomOnset"
+            ></rr-number-input>
+            <p-checkbox
+              class="m-t-15"
+              name="isWakeUpStroke"
+              [(ngModel)]="findingHandler.currentItem.isWakeUpStroke"
+              label="{{'headMRT.examination.wakeUpStroke.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_010517"
+            >
+            </p-checkbox>
+          </div>
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.IntracranialHemorrhage])"
+            class="o-radio-list"
+          >
+            <p-radioButton
+              rr-id="hea_m_010518"
+              label="{{ 'headMRT.examination.subduralHematoma.value' | translate }}"
+              name="intracranialHemorrhageType"
+              [value]="intracranialHemorrhageTypeEnum.SubduralHematoma"
+              [(ngModel)]="findingHandler.currentItem.intracranialHemorrhageType"
+              rrUnClickRadio
+              rrContentReset="huntHessScaleTypeContainer"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_010519"
+              label="{{ 'headMRT.examination.intraparenchymalHemorrhage.value' | translate }}"
+              name="intracranialHemorrhageType"
+              [value]="intracranialHemorrhageTypeEnum.IntraparenchymalHemorrhage"
+              [(ngModel)]="findingHandler.currentItem.intracranialHemorrhageType"
+              rrUnClickRadio
+              rrContentReset="huntHessScaleTypeContainer"
+            ></p-radioButton>
+            <p-radioButton
+              rrInfoIcon="hea_m_01_03"
+              labelStyleClass="text-break"
+              rr-id="hea_m_010520"
+              label="{{ 'headMRT.examination.subarachnoidHemorrhageSAH.value' | translate }}"
+              name="intracranialHemorrhageType"
+              [value]="intracranialHemorrhageTypeEnum.SubarachnoidHemorrhageSah"
+              [(ngModel)]="findingHandler.currentItem.intracranialHemorrhageType"
+              rrUnClickRadio
+              rrContentReset="huntHessScaleTypeContainer"
+            ></p-radioButton>
+            <div
+              id="huntHessScaleTypeContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="findingHandler.currentItem.intracranialHemorrhageType !== intracranialHemorrhageTypeEnum.SubarachnoidHemorrhageSah"
+            >
+              <h3 rr-id="hea_m_010521" class="m-b-0">
+                {{ 'headMRT.examination.huntHessScale.value' | translate }}
+              </h3>
+              <p-dropdown
+                styleClass="o-width-100 ui-brown-box"
+                [placeholder]="'shared.pleaseSelect' | translate"
+                [options]="dropdownW005"
+                [(ngModel)]="findingHandler.currentItem.huntHessScaleType"
+                rrDropdownClear
+                name="huntHessScaleType"
+                rr-id="hea_m_010522"
+              >
+              </p-dropdown>
+            </div>
+            <p-radioButton
+              rr-id="hea_m_010523"
+              label="{{ 'headMRT.examination.epiduralHematoma.value' | translate }}"
+              name="intracranialHemorrhageType"
+              [value]="intracranialHemorrhageTypeEnum.EpiduralHematoma"
+              [(ngModel)]="findingHandler.currentItem.intracranialHemorrhageType"
+              rrUnClickRadio
+              rrContentReset="huntHessScaleTypeContainer"
+            ></p-radioButton>
+          </div>
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.Inflammation, examinationIndicationFindingTypeEnum.AutoimmuneDisease, examinationIndicationFindingTypeEnum.Demyelination])"
+            class="o-radio-list"
+          >
+            <p-checkbox
+              name="isMultipleSclerosis"
+              [(ngModel)]="findingHandler.currentItem.isMultipleSclerosis"
+              label="{{'headMRT.examination.multipleSclerosis.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_010533"
+            >
+            </p-checkbox>
+            <p-checkbox
+              name="isVasculitis"
+              [(ngModel)]="findingHandler.currentItem.isVasculitis"
+              label="{{'headMRT.examination.vasculitis.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_010534"
+            >
+            </p-checkbox>
+          </div>
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.Neoplasia])"
+            class="o-radio-list"
+          >
+            <p-radioButton
+              rr-id="hea_m_010540"
+              label="{{ 'headMRT.examination.mass.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.Mass"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_010541"
+              label="{{ 'headMRT.examination.pituaryGlandTumor.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.PituaryGlandTumor"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.Seizure])"
+            class="o-radio-list"
+          >
+            <p-radioButton
+              rr-id="hea_m_010547"
+              label="{{ 'headMRT.examination.knownEpilepsy.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.KnownEpilepsy"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+              (click)="clearDate()"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_010548"
+              label="{{ 'headMRT.examination.firstSeizure.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.FirstSeizure"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+              (click)="clearDate()"
+            ></p-radioButton>
+            <div
+              class="o-radio-list nested-content dropdown-holder"
+              [rrDisable]="findingHandler.currentItem.detailsType !== detailsTypeEnum.FirstSeizure"
+            >
+              <rr-month-year-input
+                labelRrId="hea_m_010549"
+                monthRrId="hea_m_010550"
+                yearRrId="hea_m_010551"
+                [(ngModel)]="findingHandler.currentItem.date"
+                [label]="'headMRT.examination.date.value' | translate"
+                name="date"
+                customLabelClass="m-t-0"
+                class="o-width-100"
+              ></rr-month-year-input>
+            </div>
+            <p-radioButton
+              rr-id="hea_m_010552"
+              label="{{ 'headMRT.examination.statusEpilepticus.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.StatusEpilepticus"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+              (click)="clearDate()"
+            ></p-radioButton>
+            <p-checkbox
+              name="isRefractoryEpilepsy"
+              [(ngModel)]="findingHandler.currentItem.isRefractoryEpilepsy"
+              label="{{'headMRT.examination.refractoryEpilepsy.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_010553"
+            >
+            </p-checkbox>
+          </div>
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.Trauma])"
+            class="o-radio-list"
+          >
+            <p-checkbox
+              name="isIntracranialHemorrhage"
+              [(ngModel)]="findingHandler.currentItem.isIntracranialHemorrhage"
+              label="{{'headMRT.examination.intracranialHemorrhage.value' | translate}}"
+              binary="true"
+              rr-id="hea_m_010559"
+            >
+            </p-checkbox>
+
+            <h3 rr-id="hea_m_010560" class="m-t-27">
+              {{ 'headMRT.examination.characterization.value' | translate }}
+            </h3>
+            <p-checkbox
+              name="isMinorTrauma"
+              [(ngModel)]="findingHandler.currentItem.isMinorTrauma"
+              label="{{'headMRT.examination.minorTrauma.value' | translate}}"
+              binary="true"
+              (click)="clearGlasgowComaScale()"
+              rr-id="hea_m_010561"
+            >
+            </p-checkbox>
+            <p-checkbox
+              name="isPolytrauma"
+              [(ngModel)]="findingHandler.currentItem.isPolytrauma"
+              label="{{'headMRT.examination.polytrauma.value' | translate}}"
+              binary="true"
+              (click)="clearGlasgowComaScale()"
+              rr-id="hea_m_010562"
+            >
+            </p-checkbox>
+            <p-checkbox
+              name="isHighVelocityTrauma"
+              [(ngModel)]="findingHandler.currentItem.isHighVelocityTrauma"
+              label="{{'headMRT.examination.highVelocityTrauma.value' | translate}}"
+              binary="true"
+              (click)="clearGlasgowComaScale()"
+              rr-id="hea_m_010563"
+            >
+            </p-checkbox>
+            <div
+              class="o-radio-list m-t-25"
+              [rrDisable]="!findingHandler.currentItem.isHighVelocityTrauma && !findingHandler.currentItem.isPolytrauma"
+            >
+              <h3
+                rr-id="hea_m_010564"
+                class="m-b-0"
+                rrInfoIcon="hea_m_01_04"
+                infoIconPdfLandscape="true"
+              >
+                {{ 'headMRT.examination.glasgowComaScaleGCS.value' | translate
+                }}
+              </h3>
+              <rr-number-input
+                [label]="'headMRT.examination.points.value' | translate"
+                [config]="{min: 3, max: 15}"
+                inputRrId="hea_m_010565"
+                labelRrId="hea_m_010566"
+                name="glasgowComaScale"
+                [(ngModel)]="findingHandler.currentItem.glasgowComaScale"
+              ></rr-number-input>
+            </div>
+          </div>
+          <div
+            *ngIf="isFindingType([examinationIndicationFindingTypeEnum.OtherIndications])"
+            class="o-radio-list"
+          >
+            <p-radioButton
+              rr-id="hea_m_010572"
+              label="{{ 'headMRT.examination.focalNeurologicDeficit.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.FocalNeurologicDeficit"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_010573"
+              label="{{ 'headMRT.examination.clinicalSymptomInNeedOfFurtherClarification.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.ClinicalSymptomInNeedOfFurtherClarification"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              labelStyleClass="text-break"
+              rr-id="hea_m_010576"
+              label="{{ 'headMRT.examination.exclusionOfOrganicCorrelateForClinicalPsychiatricSymptoms.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.ExclusionOfOrganicCorrelate"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_010574"
+              label="{{ 'headMRT.examination.postoperative.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.Postoperative"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_m_010575"
+              label="{{ 'headMRT.examination.postinterventional.value' | translate }}"
+              name="detailsType"
+              [value]="detailsTypeEnum.Postinterventional"
+              [(ngModel)]="findingHandler.currentItem.detailsType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,114 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center m-t-minus-8" *ngIf="largeLocalizerOpened">
+    <rr-aortic-arch-big-ct-localizer
+      (close)="onLargeLocalizerClosed()"
+      [isArcusAortaeDivided]="isLocalizerAortaDivided"
+      [isAdjacentSelection]="isLocalizerAdjacentChoice"
+      [isSingleChoice]="isLocalizerSingleChoice"
+      name="aorticArchLocalizer"
+      [(ngModel)]="findingHandler.currentItem[localizationModelType]"
+    >
+    </rr-aortic-arch-big-ct-localizer>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerOpened">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-18">
+      <h1 rr-id="ang_c_070103">
+        {{'angiographyCT.aorta.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          labelStyleClass="text-break"
+          rr-id="ang_c_070104"
+          label="{{'angiographyCT.aorta.noAbnormalFindingsIn.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.False"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_070105"
+          label="{{'angiographyCT.aorta.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.True"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-checkbox
+          [rrDisable]="isNoMorePathologiesDisabled()"
+          class="nested-content"
+          name="isNoMoreAorticPathologies"
+          [(ngModel)]="model.isNoMoreAorticPathologies"
+          label="{{ 'angiographyCT.aorta.noMoreAorticPathologies.value' | translate }}"
+          rr-id="ang_c_070110"
+          binary="true"
+          notInFinding="true"
+        ></p-checkbox>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          [validationName]="'findings'"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(aortaFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(aortaFindingTypeEnum.None)"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad main-height"
+        ></div>
+        <div class="c-col-1 c-pad main-height"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(aortaFindingTypeEnum.None)"
+        class="c-col-1 c-pad-l f-vertical"
+      >
+        <h1 rr-id="ang_m_040201">
+          {{'angiographyCT.aorta.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <rr-aortic-abnormalities
+        *ngIf="isFindingType(aortaFindingTypeEnum.AorticAbnormalities)"
+        [model]="findingHandler.currentItem"
+      ></rr-aortic-abnormalities>
+      <rr-dilatation-aorta
+        *ngIf="isFindingType(aortaFindingTypeEnum.DilatationAorta)"
+        [model]="findingHandler.currentItem"
+      ></rr-dilatation-aorta>
+      <rr-arteriosclerotic-changes
+        *ngIf="isFindingType(aortaFindingTypeEnum.ArterioscleroticChanges)"
+        [model]="findingHandler.currentItem"
+      ></rr-arteriosclerotic-changes>
+      <rr-acute-aorta-syndrome
+        *ngIf="isFindingType(aortaFindingTypeEnum.AcuteAortalSyndromeAas)"
+        [model]="findingHandler.currentItem"
+      ></rr-acute-aorta-syndrome>
+      <rr-endoleak
+        *ngIf="isFindingType(aortaFindingTypeEnum.Endoleak)"
+        [model]="findingHandler.currentItem"
+      ></rr-endoleak>
+      <rr-preoperative-measurements
+        *ngIf="isFindingType(aortaFindingTypeEnum.PreoperativeMeasurements)"
+        [model]="findingHandler.currentItem"
+      ></rr-preoperative-measurements>
+      <rr-aortitis
+        *ngIf="isFindingType(aortaFindingTypeEnum.Aortitis)"
+        [model]="findingHandler.currentItem"
+      ></rr-aortitis>
+    </div>
+  </div>
+</form>

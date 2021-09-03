@@ -1,0 +1,91 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="tho_c_040202">
+      {{'thoraxCT.mediastinum.pathology.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="tho_c_040203"
+      name="mediastinumType"
+      [value]="mediastinumTypeEnum.MediastinalShift"
+      label="{{'thoraxCT.mediastinum.mediastinalShift.value' | translate}}"
+      [(ngModel)]="model.mediastinumType"
+      rrValidation="mediastinumType"
+      rrContentReset="MediastinalWidening-block"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_040204"
+      name="mediastinumType"
+      [value]="mediastinumTypeEnum.MediastinalWidening"
+      label="{{'thoraxCT.mediastinum.mediastinalWidening.value' | translate}}"
+      [(ngModel)]="model.mediastinumType"
+      rrValidation="mediastinumType"
+      rrContentReset="MediastinalShift-block"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_c_040205"
+      name="mediastinumType"
+      [value]="mediastinumTypeEnum.Pneumomediastinum"
+      label="{{'thoraxCT.mediastinum.pneumomediastinum.value' | translate}}"
+      [(ngModel)]="model.mediastinumType"
+      rrValidation="mediastinumType"
+      rrContentReset="MediastinalShift-block MediastinalWidening-block"
+    ></p-radioButton>
+  </div>
+  <div
+    [class.m-t-33]="model.mediastinumType === mediastinumTypeEnum.MediastinalShift
+    || model.mediastinumType === mediastinumTypeEnum.MediastinalWidening"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad"
+  >
+    <div
+      id="MediastinalShift-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.mediastinumType === mediastinumTypeEnum.MediastinalShift"
+    >
+      <h2 rr-id="tho_c_040301">
+        {{'thoraxCT.mediastinum.direction.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_040302"
+        name="directionType"
+        [value]="locationTypeEnum.Right"
+        label="{{'thoraxCT.mediastinum.right.value' | translate}}"
+        [(ngModel)]="model.directionType"
+        rrValidation="directionType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_040303"
+        name="directionType"
+        [value]="locationTypeEnum.Left"
+        label="{{'thoraxCT.mediastinum.left.value' | translate}}"
+        [(ngModel)]="model.directionType"
+        rrValidation="directionType"
+      ></p-radioButton>
+    </div>
+
+    <div
+      id="MediastinalWidening-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.mediastinumType === mediastinumTypeEnum.MediastinalWidening"
+    >
+      <h2 rr-id="tho_c_040304">
+        {{'thoraxCT.mediastinum.localization.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="tho_c_040305"
+        name="isUpperMediastinum"
+        [(ngModel)]="model.isUpperMediastinum"
+        label="{{'thoraxCT.mediastinum.upperMediastinum.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_040306"
+        name="isLowerMediastinum"
+        [(ngModel)]="model.isLowerMediastinum"
+        label="{{'thoraxCT.mediastinum.lowerMediastinum.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-sep-l c-sep c-pad"></div>
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-l"></div>
+</div>

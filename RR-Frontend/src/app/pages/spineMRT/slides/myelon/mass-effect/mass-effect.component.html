@@ -1,0 +1,126 @@
+<div class="content-height">
+  <p-tabView
+    class="rr-tabView"
+    [activeIndex]="activeTabIndex"
+    (activeIndexChange)="activeTabIndexChange($event)"
+    [ngClass]="{'right-edge-tab': isExtramedullaryExtraduralEpidural()}"
+  >
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <h1
+          rr-id="spi_m_070209"
+          rrValidation="spineLocation spinalCanalDifferentialDiagnosisType"
+          ifAny="true"
+        >
+          {{ 'spineMRT.spinalCanal.characterizationI.value' | translate }}
+        </h1>
+      </ng-template>
+      <div class="f-horizontal col-h-100 o-width-100">
+        <div class="c-col-1 c-pad m-t-10 m-b-10">
+          <div class="o-list p-l-10 p-r-10">
+            <div class="o-radio-list m-b-28">
+              <h2
+                rr-id="spi_m_070210"
+                class="text-break"
+                rrValidation="spineLocation"
+              >
+                {{ 'spineMRT.spinalCanal.localizationTopBottomVertebra.value' |
+                translate }}*
+              </h2>
+              <rr-spine-simple
+                rr-id="spi_m_070203"
+                (click)="openLargeLocalizer()"
+                [spineLocation]="model.spineLocation"
+                rrValidation="spineLocation"
+                isLocalizer="true"
+                [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+              >
+              </rr-spine-simple>
+            </div>
+            <div class="o-radio-list">
+              <h2 rr-id="spi_m_070212">
+                {{ 'spineMRT.spinalCanal.locationInTheSpinal.value' | translate
+                }}
+              </h2>
+              <rr-spinal-canal-simple
+                class="block-click"
+                rr-id="spi_m_070213"
+                (click)="resetModel()"
+                [(ngModel)]="model.spinalCanalLocation"
+                name="canalLocalizator"
+              >
+              </rr-spinal-canal-simple>
+            </div>
+          </div>
+        </div>
+        <rr-intramedullary-characteristic-one
+          *ngIf="isIntramedullary()"
+          [model]="model"
+          [diagnosisOptions]="getDiagnosisOptions(1)"
+        ></rr-intramedullary-characteristic-one>
+        <rr-extramedullary-extradural-epidural-characteristic-one
+          *ngIf="isExtramedullaryExtraduralEpidural()"
+          [model]="model"
+          [diagnosisOptions]="getDiagnosisOptions(1)"
+        ></rr-extramedullary-extradural-epidural-characteristic-one>
+        <div
+          *ngIf="isNoSpinalCanalSelected()"
+          class="f-horizontal col-h-100 o-width-100"
+        >
+          <div
+            *ngFor="let emptyCol of [].constructor(2)"
+            class="c-col-1 c-pad c-sep-l m-t-10 m-b-10"
+          ></div>
+          <div class="c-col-1 c-pad-l c-sep-l m-t-10 m-b-10"></div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel
+      rr-id="spi_m_070327"
+      header="{{ 'spineMRT.spinalCanal.characterizationII.value' | translate }}"
+      [disabled]="isNoSpinalCanalSelected()"
+    >
+      <div class="f-horizontal col-h-100 o-width-100">
+        <rr-intramedullary-characteristic-two
+          *ngIf="isIntramedullary()"
+          [model]="model"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+          (emitLocalizer)="emitSpineComplexLocalizer.emit($event)"
+        ></rr-intramedullary-characteristic-two>
+        <rr-extramedullary-extradural-epidural-characteristic-two
+          *ngIf="isExtramedullaryExtraduralEpidural()"
+          [model]="model"
+          [isCMReinforcedTypeYes]="isCMReinforcedTypeYes"
+        ></rr-extramedullary-extradural-epidural-characteristic-two>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel
+      *ngIf="isExtramedullaryExtraduralEpidural()"
+      rr-id="spi_m_070484"
+      header="{{ 'spineMRT.spinalCanal.characterizationIII.value' | translate }}"
+    >
+      <div class="f-horizontal col-h-100 o-width-100">
+        <rr-extramedullary-extradural-epidural-characteristic-three
+          [model]="model"
+          (emitSpineComplexLocalizer)="emitSpineComplexLocalizer.emit($event)"
+          (emitSpineDirectionalLocalizer)="emitSpineDirectionalLocalizer.emit($event)"
+        ></rr-extramedullary-extradural-epidural-characteristic-three>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="isNoSpinalCanalSelected()">
+      <ng-template pTemplate="header">
+        <h1 rr-id="spi_m_070425" rrValidation="differentialDiagnosis01">
+          {{ 'spineMRT.spinalCanal.differentialDiagnosisTabHeader.value' |
+          translate }}
+        </h1>
+      </ng-template>
+      <div class="f-horizontal col-h-100 o-width-100">
+        <rr-differential-diagnosis
+          [model]="model"
+          [diagnosisOptions1]="getDiagnosisOptions(1)"
+          [diagnosisOptions2]="getDiagnosisOptions(2)"
+        ></rr-differential-diagnosis>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

@@ -1,0 +1,68 @@
+<p-tabView class="rr-tabView right-edge-tab">
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="abd_m_060251"
+        [rrValidation]="[localizationValidationProperties, 'mainMassDifferentialDiagnosisType1', 'size']"
+        ifAny="true"
+      >
+        {{ 'abdomenMRT.pancreas.characterizationI.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-mass-characterization-one
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [mainMassOptions1]="mainMassOptions1"
+      [validationProps]="localizationValidationProperties"
+      (resetDetailedDiagnosisEmitter)="applyTab1DiffDiagnosisLogic()"
+    >
+    </rr-mass-characterization-one>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="abd_m_060331">
+        {{ 'abdomenMRT.pancreas.characterizationII.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-mass-characterization-two
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [isCMReinforced]="isCMReinforced"
+      [isDWI]="isDWI"
+    >
+    </rr-mass-characterization-two>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="abd_m_060433"
+        [rrValidation]="characterizationIIIValidationProps"
+        ifAny="true"
+      >
+        {{ 'abdomenMRT.pancreas.characterizationIII.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-mass-characterization-three
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [validationProps]="affectedVesselValidationProperties"
+    >
+    </rr-mass-characterization-three>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1 rr-id="abd_m_060525" rrValidation="massDifferentialDiagnosisType1">
+        {{ 'abdomenMRT.pancreas.differentialDiagnosis_v2.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-differential-diagnosis
+      class="f-horizontal col-h-100"
+      [model]="model"
+      [mainMassOptions1]="mainMassOptions1"
+      [mainMassOptions2]="mainMassOptions2"
+      [firstPageEvents]="diagnosisChanged.asObservable()"
+      [isCMReinforced]="isCMReinforced"
+    >
+    </rr-differential-diagnosis>
+  </p-tabPanel>
+</p-tabView>

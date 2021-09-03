@@ -1,0 +1,107 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center col-h-100">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="mam_mx_050103" class="m-b-18">
+        {{'mammaMX.mammographyFinding.finding.value' | translate}}*
+      </h1>
+      <p-radioButton
+        rr-id="mam_mx_050104"
+        rrUnClickRadio
+        name="areFindings"
+        [value]="areFindings.No"
+        label="{{'mammaMX.mammographyFinding.noFinding.value' | translate}}"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="mam_mx_050105"
+        rrUnClickRadio
+        name="areFindings"
+        class="m-b-15"
+        [value]="areFindings.Yes"
+        label="{{'mammaMX.mammographyFinding.finding.value' | translate}}"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      >
+      </p-radioButton>
+      <rr-finding-column
+        name="findingHandler"
+        validationName="findings"
+        [handler]="findingHandler"
+        [setConfig]="findingDropdownConfig"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setDescriptionTypes]="['Mass']"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-start f-vertical c-pad-l">
+      <div class="col-h-139">
+        <h1
+          [hidden]="findingHandler.currentItem.findingType === findingType.None"
+        >
+          {{ 'mammaMX.mammographyFinding.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+      <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+        <div *ngSwitchCase="findingType.None" class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad-r c-sep f-vertical f-start"></div>
+          <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+          <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+          <div class="c-col-1 c-pad-l c-sep f-vertical f-start"></div>
+        </div>
+        <rr-architectural-distorsion
+          *ngSwitchCase="findingType.ArchitecturalDistorsion"
+          [model]="findingHandler.currentItem"
+          [architecturalDistorsionDiagnosis1Options]="architecturalDistorsionDiagnosis1Options"
+          [architecturalDistorsionDiagnosis2Options]="architecturalDistorsionDiagnosis2Options"
+          class="col-h-100"
+        >
+        </rr-architectural-distorsion>
+        <rr-asymmetry
+          *ngSwitchCase="findingType.Asymmetry"
+          [model]="findingHandler.currentItem"
+          [asymmetricDiagnosisOptions]="asymmetricDiagnosisOptions"
+          class="col-h-100"
+        >
+        </rr-asymmetry>
+        <rr-calcification
+          *ngSwitchCase="findingType.Calcification"
+          [model]="findingHandler.currentItem"
+          [calcificationFormOptions]="calcificationFormOptions"
+          [massKnownDiagnosisOptions]="massKnownDiagnosisOptions"
+          class="col-h-100"
+        >
+        </rr-calcification>
+        <rr-mass
+          *ngSwitchCase="findingType.Mass"
+          [model]="findingHandler.currentItem"
+          [massKnownDiagnosisOptions]="massKnownDiagnosisOptions"
+          [massDifferentialDiagnosisOptions]="massDifferentialDiagnosisOptions"
+          [calcificationInTheLesionOptions]="calcificationInTheLesionOptions"
+          class="col-h-100"
+        >
+        </rr-mass>
+        <rr-skin-lesion
+          *ngSwitchCase="findingType.SkinLesion"
+          [model]="findingHandler.currentItem"
+          [skinLesionDiagnosis1Options]="skinLesionDiagnosis1Options"
+          [skinLesionDiagnosis2Options]="skinLesionDiagnosis2Options"
+          class="col-h-100"
+        >
+        </rr-skin-lesion>
+        <rr-solitary-mammary-duct-dilatation
+          *ngSwitchCase="findingType.SolitaryMammaryDuctDilatation"
+          [model]="findingHandler.currentItem"
+          [solitaryMammaryDuctDilatationDiagnosis1Options]="solitaryMammaryDuctDilatationDiagnosis1Options"
+          [solitaryMammaryDuctDilatationDiagnosis2Options]="solitaryMammaryDuctDilatationDiagnosis2Options"
+          class="col-h-100"
+        >
+        </rr-solitary-mammary-duct-dilatation>
+      </ng-container>
+    </div>
+  </div>
+</form>

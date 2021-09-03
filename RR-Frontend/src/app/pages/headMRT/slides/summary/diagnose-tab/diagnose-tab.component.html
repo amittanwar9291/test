@@ -1,0 +1,48 @@
+<div class="f-horizontal f-start h-100 o-width-100">
+  <div class="c-col-1 c-pad-r o-list f-vertical f-start p-l-3">
+    <div class="o-radio-list f-vertical h-100 c-pad">
+      <h2 rr-id="hea_m_120104" class="p-l-10 p-t-10">
+        {{ "headMRT.summary.diagnosis.value" | translate }}
+      </h2>
+      <rr-finding-column
+        [handler]="summaryFindingHandler"
+        [disabled]="false"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        [showIndexLabel]="false"
+        class="diagnosis-finding-column p-l-10"
+      >
+      </rr-finding-column>
+    </div>
+  </div>
+  <rr-multiple-sclerosis
+    *ngIf="isFindingType(summaryFindingTypeEnum.MultipleSclerosis)"
+    [model]="summaryFindingHandler.currentItem"
+    [isContrastEnhanced]="isContrastEnhanced"
+  ></rr-multiple-sclerosis>
+  <rr-signs-of-intracranial-pressure
+    *ngIf="isFindingType(summaryFindingTypeEnum.SignsOfIntracranialPressure)"
+    [model]="summaryFindingHandler.currentItem"
+  ></rr-signs-of-intracranial-pressure>
+  <rr-hemorrhage
+    *ngIf="isFindingType(summaryFindingTypeEnum.Hemorrhage)"
+    [model]="summaryFindingHandler.currentItem"
+  ></rr-hemorrhage>
+  <rr-neurodegeneration
+    *ngIf="isFindingType(summaryFindingTypeEnum.Neurodegeneration)"
+    [model]="summaryFindingHandler.currentItem"
+  ></rr-neurodegeneration>
+  <rr-seizure
+    *ngIf="isFindingType(summaryFindingTypeEnum.Seizure)"
+    [model]="summaryFindingHandler.currentItem"
+  ></rr-seizure>
+  <div
+    *ngIf="isFindingType(summaryFindingTypeEnum.None)"
+    class="h-100 f-horizontal o-width-100"
+  >
+    <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-10"></div>
+    <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-10"></div>
+    <div class="c-col-1 c-pad c-sep-l m-b-11 m-t-10"></div>
+    <div class="c-col-1 c-pad-l c-sep-l m-b-11 m-t-10"></div>
+  </div>
+</div>

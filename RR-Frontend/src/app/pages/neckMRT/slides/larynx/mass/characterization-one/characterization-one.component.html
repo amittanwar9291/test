@@ -1,0 +1,320 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <div
+    class="f-vertical o-radio-list m-b-23"
+    [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+  >
+    <h2 rr-id="nec_m_050203" class="m-b-4">
+      {{ 'neckMRT.larynx.differentialDiagnosis1.value' | translate }}*
+    </h2>
+    <rr-differential-diagnosis-dropdown
+      rrId="nec_m_050204"
+      [diagnosisNumber]="1"
+      [options]="diffDiagnosisOptions"
+      [(ngModel)]="model.differentialDiagnosis"
+      name="differentialDiagnosis"
+      group="true"
+      isActiveOnIKnow="true"
+      [parentViewModel]="model"
+      (selectionChanged)="resetDifferentialDiagnosisDependantModel()"
+      rrValidation="differentialDiagnosis"
+    ></rr-differential-diagnosis-dropdown>
+  </div>
+  <div
+    class="f-vertical o-radio-list"
+    [rrDisable]="model.differentialDiagnosis === differentialDiagnosistype.None"
+  >
+    <p-checkbox
+      rr-id="nec_m_050205"
+      [(ngModel)]="model.isHistologyKnown"
+      name="isHistologyKnown"
+      label="{{ 'neckMRT.larynx.histologyKnown.value' | translate }}"
+      binary="true"
+      rrContentReset="isHistologyKnown-block"
+    >
+    </p-checkbox>
+    <div
+      id="isHistologyKnown-block"
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isHistologyKnown"
+    >
+      <p-radioButton
+        rr-id="nec_m_050206"
+        [(ngModel)]="model.histologyKnownType"
+        label="{{ 'neckMRT.larynx.benign.value' | translate }}"
+        [value]="histologyKnownType.Benign"
+        rrUnClickRadio
+        name="histologyKnownType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="nec_m_050207"
+        [(ngModel)]="model.histologyKnownType"
+        label="{{ 'neckMRT.larynx.malignant.value' | translate }}"
+        [value]="histologyKnownType.Malignant"
+        rrUnClickRadio
+        name="histologyKnownType"
+      ></p-radioButton>
+    </div>
+  </div>
+</div>
+<div class="c-col-2 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <h2 rr-id="nec_m_050302" rrInfoIcon="nec_m_05_01" infoIconPdfLandscape="true">
+    {{ 'neckMRT.larynx.localization.value' | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 o-list c-pad-r c-sep">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_050303"
+          [(ngModel)]="model.isSupraglotticSpace"
+          name="isSupraglotticSpace"
+          label="{{ 'neckMRT.larynx.supraglotticSpace.value' | translate }}"
+          binary="true"
+          rrContentReset="isSupraglotticSpace-block"
+          rrValidation="isSupraglotticSpace isGlottis isSubglotticSpace"
+        >
+        </p-checkbox>
+        <div
+          id="isSupraglotticSpace-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isSupraglotticSpace"
+        >
+          <p-checkbox
+            rr-id="nec_m_050304"
+            [(ngModel)]="model.isVestibularFold"
+            name="isVestibularFold"
+            label="{{ 'neckMRT.larynx.vestibularFold.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050305"
+            [(ngModel)]="model.isVocalCord"
+            name="isVocalCord"
+            label="{{ 'neckMRT.larynx.vocalCord.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050306"
+            [(ngModel)]="model.isThyroidCartilage"
+            name="isThyroidCartilage"
+            label="{{ 'neckMRT.larynx.thyroidCartilage2.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050307"
+            [(ngModel)]="model.isAryepiglotticFold"
+            name="isAryepiglotticFold"
+            label="{{ 'neckMRT.larynx.aryepiglotticFold.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050308"
+            [(ngModel)]="model.isEpiglottis"
+            name="isEpiglottis"
+            label="{{ 'neckMRT.larynx.epiglottis.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_050309"
+          [(ngModel)]="model.isGlottis"
+          name="isGlottis"
+          label="{{ 'neckMRT.larynx.glottis.value' | translate }}"
+          binary="true"
+          rrContentReset="isGlottis-block"
+          rrValidation="isSupraglotticSpace isGlottis isSubglotticSpace"
+        >
+        </p-checkbox>
+        <div
+          id="isGlottis-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isGlottis"
+        >
+          <p-checkbox
+            rr-id="nec_m_050310"
+            [(ngModel)]="model.isThyroarytenoidMuscle"
+            name="isThyroarytenoidMuscle"
+            label="{{ 'neckMRT.larynx.thyroarytenoidMuscle.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050311"
+            [(ngModel)]="model.isSinusOfMorgagni"
+            name="isSinusOfMorgagni"
+            labelStyleClass="text-break"
+            label="{{ 'neckMRT.larynx.sinusOfMorgagni.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050312"
+            [(ngModel)]="model.isAnteriorCommissure"
+            name="isAnteriorCommissure"
+            label="{{ 'neckMRT.larynx.anteriorCommissure.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="nec_m_050313"
+            [(ngModel)]="model.isPosteriorCommissure"
+            name="isPosteriorCommissure"
+            label="{{ 'neckMRT.larynx.posteriorCommissure.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_050314"
+          [(ngModel)]="model.isSubglotticSpace"
+          name="isSubglotticSpace"
+          label="{{ 'neckMRT.larynx.subglotticSpace.value' | translate }}"
+          binary="true"
+          rrValidation="isSupraglotticSpace isGlottis isSubglotticSpace"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 o-list c-pad-l">
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="nec_m_050402">
+          {{ 'neckMRT.larynx.localizationAxial.value' | translate }}*
+        </h3>
+        <p-radioButton
+          rr-id="nec_m_050403"
+          [(ngModel)]="model.localizationAxialType"
+          name="localizationAxialType"
+          label="{{ 'neckMRT.larynx.left.value' | translate }}"
+          [value]="localizationAxialType.Left"
+          rrValidation="localizationAxialType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050404"
+          [(ngModel)]="model.localizationAxialType"
+          name="localizationAxialType"
+          label="{{ 'neckMRT.larynx.right.value' | translate }}"
+          [value]="localizationAxialType.Right"
+          rrValidation="localizationAxialType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050405"
+          [(ngModel)]="model.localizationAxialType"
+          name="localizationAxialType"
+          label="{{ 'neckMRT.larynx.bilateral.value' | translate }}"
+          [value]="localizationAxialType.Bilateral"
+          rrValidation="localizationAxialType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_050406"
+          [(ngModel)]="model.localizationAxialType"
+          name="localizationAxialType"
+          label="{{ 'neckMRT.larynx.median.value' | translate }}"
+          [value]="localizationAxialType.Median"
+          rrValidation="localizationAxialType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-10 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_050501">
+      {{ 'neckMRT.larynx.extension.value' | translate }}
+    </h2>
+    <div class="f-vertical o-radio-list">
+      <h3 rr-id="nec_m_050502">
+        {{ 'neckMRT.larynx.size.value' | translate }}*
+      </h3>
+      <rr-number-input
+        inputRrId="nec_m_050504"
+        labelRrId="nec_m_050503"
+        name="sizeInMm"
+        label="{{ 'neckMRT.larynx.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 150, placeholder: '---' }"
+        [(ngModel)]="model.sizeInMm"
+        (announceModelChange)="resetBothPlanes()"
+        rrValidation="sizeInMm"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-vertical o-radio-list" [rrDisable]="!model.sizeInMm">
+      <h3 rr-id="nec_m_050505">
+        {{ 'neckMRT.larynx.2ndPlane.value' | translate }}
+      </h3>
+      <rr-number-input
+        inputRrId="nec_m_050507"
+        labelRrId="nec_m_050506"
+        name="secondPlaneInMm"
+        label="{{ 'neckMRT.larynx.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 150, placeholder: '---' }"
+        [(ngModel)]="model.secondPlaneInMm"
+        (announceModelChange)="resetThirdPlane()"
+      >
+      </rr-number-input>
+    </div>
+    <div class="f-vertical o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+      <h3 rr-id="nec_m_050508">
+        {{ 'neckMRT.larynx.3rdPlane.value' | translate }}
+      </h3>
+      <rr-number-input
+        inputRrId="nec_m_050510"
+        labelRrId="nec_m_050509"
+        name="thirdPlaneInMm"
+        label="{{ 'neckMRT.larynx.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 150, placeholder: '---' }"
+        [(ngModel)]="model.thirdPlaneInMm"
+      >
+      </rr-number-input>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_050511">
+      {{ 'neckMRT.larynx.margin.value' | translate }}*
+    </h2>
+    <p-radioButton
+      rr-id="nec_m_050512"
+      [(ngModel)]="model.marginType"
+      name="marginType"
+      label="{{ 'neckMRT.larynx.welldefined.value' | translate }}"
+      [value]="marginType.WellDefined"
+      rrValidation="marginType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_050513"
+      [(ngModel)]="model.marginType"
+      name="marginType"
+      label="{{ 'neckMRT.larynx.illDefined.value' | translate }}"
+      [value]="marginType.IllDefined"
+      rrValidation="marginType"
+    ></p-radioButton>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="nec_m_050514">
+      {{ 'neckMRT.larynx.homogeneity.value' | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="nec_m_050515"
+      [(ngModel)]="model.homogeneityType"
+      name="homogeneityType"
+      label="{{ 'neckMRT.larynx.homogeneous.value' | translate }}"
+      rrUnClickRadio
+      [value]="homogeneityType.Homogeneous"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="nec_m_050516"
+      [(ngModel)]="model.homogeneityType"
+      name="homogeneityType"
+      label="{{ 'neckMRT.larynx.heterogeneous.value' | translate }}"
+      rrUnClickRadio
+      [value]="homogeneityType.Heterogeneous"
+    ></p-radioButton>
+  </div>
+</div>

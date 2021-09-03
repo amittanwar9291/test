@@ -1,0 +1,216 @@
+<div class="f-horizontal f-start col-h-100">
+  <div
+    class="c-col-1 c-pad-r f-vertical f-start o-radio-list"
+    [ngClass]="{'c-sep': !isAlignmentTypePathology}"
+  >
+    <p-radioButton
+      rr-id="hip_m_040202"
+      rrUnClickRadio
+      name="alignmentType"
+      [value]="alignmentType.RegularJointPosition"
+      label="{{'hipMRT.bones.regularJointPosition.value' | translate}}"
+      [(ngModel)]="model.alignmentType"
+      rrContentReset="pathologyBlock"
+      class="m-t-5"
+    >
+    </p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_040203"
+      rrUnClickRadio
+      name="alignmentType"
+      [value]="alignmentType.Pathology"
+      label="{{'hipMRT.bones.pathology.value' | translate}}"
+      [(ngModel)]="model.alignmentType"
+      rrContentReset="pathologyBlock"
+    >
+    </p-radioButton>
+  </div>
+  <div
+    class="c-sep f-horizontal"
+    id="pathologyBlock"
+    [ngClass]="{'m-t-40': isAlignmentTypePathology}"
+  >
+    <div
+      class="c-col-1 c-pad f-vertical f-start o-radio-list"
+      [ngClass]="isAlignmentTypePathology ? 'c-sep-l' : 'c-sep'"
+    >
+      <ng-container *ngIf="isAlignmentTypePathology">
+        <h2 rr-id="hip_m_040301">{{'hipMRT.bones.side.value' | translate}}*</h2>
+        <p-checkbox
+          rr-id="hip_m_040302"
+          name="isRight"
+          label="{{'hipMRT.bones.right.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isRight"
+          rrValidation="isRight isLeft"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_040303"
+          name="isLeft"
+          label="{{'hipMRT.bones.left.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isLeft"
+          rrValidation="isRight isLeft"
+          class="m-b-32"
+        >
+        </p-checkbox>
+        <h2 rr-id="hip_m_040304">
+          {{'hipMRT.bones.positioning.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="hip_m_040305"
+          rrUnClickRadio
+          name="positioningType"
+          [value]="positioningType.Centered"
+          label="{{'hipMRT.bones.centered.value' | translate}}"
+          [(ngModel)]="model.positioningType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040306"
+          rrUnClickRadio
+          name="positioningType"
+          [value]="positioningType.Decentered"
+          label="{{'hipMRT.bones.decentered.value' | translate}}"
+          [(ngModel)]="model.positioningType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_040307"
+          rrUnClickRadio
+          name="positioningType"
+          [value]="positioningType.Dislocated"
+          label="{{'hipMRT.bones.dislocated.value' | translate}}"
+          [(ngModel)]="model.positioningType"
+        >
+        </p-radioButton>
+      </ng-container>
+    </div>
+    <div
+      class="c-col-1 c-pad f-vertical f-start o-radio-list"
+      [ngClass]="isAlignmentTypePathology ? 'c-sep-l' : 'c-sep'"
+    >
+      <ng-container *ngIf="isAlignmentTypePathology">
+        <h2 rr-id="hip_m_040401">
+          {{'hipMRT.bones.congenitalAndNormalVariants.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="hip_m_040402"
+          name="isDysplasia"
+          label="{{'hipMRT.bones.dysplasia.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDysplasia"
+          rrContentReset="isDysplasiaBlock"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isDysplasia"
+          id="isDysplasiaBlock"
+        >
+          <h3 rr-id="hip_m_040403">
+            {{'hipMRT.bones.femoralHead.value' | translate}}
+          </h3>
+          <p-checkbox
+            rr-id="hip_m_040404"
+            name="isFlattened"
+            label="{{'hipMRT.bones.flattened.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isFlattened"
+          >
+          </p-checkbox>
+          <h3 rr-id="hip_m_040405">
+            {{'hipMRT.bones.acetabulum.value' | translate}}
+          </h3>
+          <p-radioButton
+            rr-id="hip_m_040406"
+            rrUnClickRadio
+            name="acetabulumType"
+            [value]="acetabulumType.Insufficiency"
+            label="{{'hipMRT.bones.insufficiency.value' | translate}}"
+            [(ngModel)]="model.acetabulumType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_040407"
+            rrUnClickRadio
+            name="acetabulumType"
+            [value]="acetabulumType.Enlarged"
+            label="{{'hipMRT.bones.enlarged.value' | translate}}"
+            [(ngModel)]="model.acetabulumType"
+          >
+          </p-radioButton>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      class="c-col-1 c-pad-l f-vertical f-start o-radio-list"
+      [ngClass]="isAlignmentTypePathology ? 'c-sep-l' : 'c-sep'"
+    >
+      <ng-container *ngIf="isAlignmentTypePathology">
+        <h2 rr-id="hip_m_040501">
+          {{'hipMRT.bones.epiphyse.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="hip_m_040502"
+          rrInfoIcon="hip_m_04_01"
+          name="isEpiphysiolysis"
+          label="{{'hipMRT.bones.epiphysiolysis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isEpiphysiolysis"
+          rrContentReset="isEpiphysiolysisBlock"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isEpiphysiolysis"
+          id="isEpiphysiolysisBlock"
+        >
+          <p-checkbox
+            rr-id="hip_m_040503"
+            name="isEpiphysealBoneMarrowEdema"
+            label="{{'hipMRT.bones.epiphysealBoneMarrowEdema.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isEpiphysealBoneMarrowEdema"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hip_m_040504"
+            name="isEnlargedEpiphysealPlate"
+            label="{{'hipMRT.bones.enlargedEpiphysealPlate.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isEnlargedEpiphysealPlate"
+            class="text-break"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hip_m_040505"
+            name="isIrregularEpiphysealPlate"
+            label="{{'hipMRT.bones.irregularEpiphysealPlate.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isIrregularEpiphysealPlate"
+            class="text-break"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hip_m_040506"
+            name="isCrushedPhysis"
+            label="{{'hipMRT.bones.crushedPhysis.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isCrushedPhysis"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hip_m_040507"
+            name="isDislocatedFemoralHead"
+            label="{{'hipMRT.bones.dislocatedFemoralHead.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isDislocatedFemoralHead"
+          >
+          </p-checkbox>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,297 @@
+<div class="col-h-552">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15 o-radio-list">
+      <div
+        class="f-vertical o-radio-list m-b-10"
+        [rrDisable]="model.descriptionType !== descriptionType.IKnow"
+      >
+        <h2 rr-id="abd_m_040203" class="m-b-4 m-t-2">
+          {{'abdomenMRT.liver.differentialDiagnosisI.value' | translate}}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="abd_m_040204"
+          [diagnosisNumber]="1"
+          [options]="focalLiverLesionDDOptions1"
+          [(ngModel)]="model.differentialDiagnosis"
+          name="differentialDiagnosis"
+          [parentViewModel]="model"
+          (selectionChanged)="resetDD1Dependent()"
+          group="true"
+          isActiveOnIKnow="true"
+          rrValidation="differentialDiagnosis"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <div
+          class="f-vertical o-radio-list m-b-32"
+          [rrDisable]="model.differentialDiagnosis === differentialDiagnosis.None"
+        >
+          <p-checkbox
+            rr-id="abd_m_040205"
+            [(ngModel)]="model.isHistologyKnown"
+            name="isHistologyKnown"
+            label="{{ 'abdomenMRT.liver.histologyKnown.value' | translate }}"
+            binary="true"
+            rrContentReset="isHistologyKnownBlock"
+          >
+          </p-checkbox>
+          <div
+            id="isHistologyKnownBlock"
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isHistologyKnown"
+          >
+            <p-radioButton
+              rr-id="abd_m_040206"
+              [(ngModel)]="model.histologyKnownType"
+              label="{{ 'abdomenMRT.liver.benign.value' | translate }}"
+              [value]="histologyKnownType.Benign"
+              rrUnClickRadio
+              name="histologyKnownType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="abd_m_040207"
+              [(ngModel)]="model.histologyKnownType"
+              label="{{ 'abdomenMRT.liver.malignant.value' | translate }}"
+              [value]="histologyKnownType.Malignant"
+              rrUnClickRadio
+              name="histologyKnownType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-10 m-b-15 f-vertical o-radio-list">
+      <h2 rr-id="abd_m_040302" class="m-t-2">
+        {{'abdomenMRT.liver.localization.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_040303"
+        name="focalLocalizationType"
+        [value]="focalLocalizationType.Lobe"
+        label="{{'abdomenMRT.liver.lobe.value' | translate}}"
+        [(ngModel)]="model.focalLocalizationType"
+        rrValidation="focalLocalizationType"
+        (onClick)="resetLiverSegmentsLocalizer(); checkIfShouldDisableReferencePicture()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_040304"
+        name="focalLocalizationType"
+        [value]="focalLocalizationType.LiverSegments"
+        label="{{'abdomenMRT.liver.liverSegments.value' | translate}}"
+        [(ngModel)]="model.focalLocalizationType"
+        rrValidation="focalLocalizationType"
+        (ngModelChange)="resetLiverSegmentsCheckboxes(); checkIfShouldDisableReferencePicture()"
+      >
+      </p-radioButton>
+      <div
+        class="f-start nested-content"
+        *ngIf="model.focalLocalizationType !== focalLocalizationType.None"
+      >
+        <div
+          class="o-radio-list"
+          *ngIf="model.focalLocalizationType === focalLocalizationType.Lobe"
+        >
+          <h3 rr-id="abd_m_040305" class="m-t-6">
+            {{'abdomenMRT.liver.localizationLobe.value' | translate}}*
+          </h3>
+          <p-checkbox
+            rr-id="abd_m_040306"
+            name="isRightLobeOfLiver"
+            label="{{'abdomenMRT.liver.rightLobeOfLiver.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isRightLobeOfLiver"
+            [rrValidation]="lobeValidationGroup"
+            (onChange)="checkIfShouldDisableReferencePicture()"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_040307"
+            name="isLeftLobeOfLiver"
+            label="{{'abdomenMRT.liver.leftLobeOfLiver.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLeftLobeOfLiver"
+            [rrValidation]="lobeValidationGroup"
+            (onChange)="checkIfShouldDisableReferencePicture()"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_040308"
+            name="isLobusCaudatus"
+            label="{{'abdomenMRT.liver.lobusCaudatus.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLobusCaudatus"
+            [rrValidation]="lobeValidationGroup"
+            (onChange)="checkIfShouldDisableReferencePicture()"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_040309"
+            name="isLobusQuadratus"
+            label="{{'abdomenMRT.liver.lobusQuadratus.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLobusQuadratus"
+            [rrValidation]="lobeValidationGroup"
+            (onChange)="checkIfShouldDisableReferencePicture()"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          class="o-radio-list"
+          *ngIf="model.focalLocalizationType === focalLocalizationType.LiverSegments"
+        >
+          <h3
+            rr-id="abd_m_040310"
+            rrValidation="liverSegmentsLocations"
+            class="m-t-6"
+          >
+            {{'abdomenMRT.liver.localizationLiverSegments.value' | translate}}*
+          </h3>
+          <rr-liver-segments-focal-small-localizer
+            rr-id="abd_m_040311"
+            name="liverSegmentsLocations"
+            [(ngModel)]="model.liverSegmentsLocations"
+            rrValidation="liverSegmentsLocations"
+            isLocalizer="true"
+            (click)="openLargeLocalizer()"
+          >
+          </rr-liver-segments-focal-small-localizer>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-15 o-radio-list">
+      <h2 rr-id="abd_m_040402">
+        {{'abdomenMRT.liver.extension.value' | translate}}
+      </h2>
+      <h3 rr-id="abd_m_040403">
+        {{'abdomenMRT.liver.size.value' | translate}}*
+      </h3>
+      <rr-number-input
+        inputRrId="abd_m_040404"
+        labelRrId="abd_m_040405"
+        name="sizeInMm"
+        label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+        [config]="{ min: 1, max: 999, placeholder: '---' }"
+        [(ngModel)]="model.sizeInMm"
+        (announceModelChange)="resetExtensionInputs()"
+        rrValidation="sizeInMm"
+        class="m-b-8"
+      >
+      </rr-number-input>
+      <div class="o-radio-list m-b-6" [rrDisable]="!model.sizeInMm">
+        <h3 rr-id="abd_m_040406">
+          {{'abdomenMRT.liver.2ndPlane.value' | translate}}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_040407"
+          labelRrId="abd_m_040408"
+          name="secondPlaneInMm"
+          label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.secondPlaneInMm"
+          (announceModelChange)="resetExtensionInputs()"
+        >
+        </rr-number-input>
+      </div>
+      <div class="o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+        <h3 rr-id="abd_m_040409">
+          {{'abdomenMRT.liver.3rdPlane.value' | translate}}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_040410"
+          labelRrId="abd_m_040411"
+          name="thirdPlaneInMm"
+          label="{{ 'abdomenMRT.liver.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.thirdPlaneInMm"
+          (announceModelChange)="resetExtensionInputs()"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-15 o-radio-list">
+      <h2 rr-id="abd_m_040502">
+        {{'abdomenMRT.liver.margin.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_040503"
+        rrUnClickRadio
+        name="marginType"
+        [value]="marginType.Sharp"
+        label="{{'abdomenMRT.liver.sharp.value' | translate}}"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_040504"
+        rrUnClickRadio
+        name="marginType"
+        [value]="marginType.NonCircumscribed"
+        label="{{'abdomenMRT.liver.noncircumscribed.value' | translate}}"
+        [(ngModel)]="model.marginType"
+      >
+      </p-radioButton>
+      <h2 rr-id="abd_m_040505" class="m-t-22">
+        {{'abdomenMRT.liver.homogeneity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_040506"
+        rrUnClickRadio
+        name="homogeneityType"
+        [value]="homogeneityType.Homogeneous"
+        label="{{'abdomenMRT.liver.homogeneous.value' | translate}}"
+        [(ngModel)]="model.homogeneityType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_040507"
+        rrUnClickRadio
+        name="homogeneityType"
+        [value]="homogeneityType.Heterogeneous"
+        label="{{'abdomenMRT.liver.heterogeneous.value' | translate}}"
+        [(ngModel)]="model.homogeneityType"
+      >
+      </p-radioButton>
+      <h2 rr-id="abd_m_040508" class="m-t-21">
+        {{'abdomenMRT.liver.form.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_040509"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Round"
+        label="{{'abdomenMRT.liver.round.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_040510"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Oval"
+        label="{{'abdomenMRT.liver.oval.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_040511"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Multilobulated"
+        label="{{'abdomenMRT.liver.multilobulated.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_040512"
+        rrUnClickRadio
+        name="formType"
+        [value]="formType.Irregular"
+        label="{{'abdomenMRT.liver.irregular.value' | translate}}"
+        [(ngModel)]="model.formType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</div>

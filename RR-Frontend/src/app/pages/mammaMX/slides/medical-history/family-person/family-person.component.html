@@ -1,0 +1,97 @@
+<div class="f-fill-available-space f-vertical">
+  <div class="f-start f-vertical m-b-10">
+    <h2 rr-id="mam_mx_020219-1" class="m-b-3">
+      {{ "mammaMX.medicalHistory.familyHistory.value" | translate }}
+    </h2>
+    <h2 rr-id="mam_mx_020220" class="m-b-10">
+      {{ selectedPerson }}
+    </h2>
+    <h2 rr-id="mam_mx_020221">
+      {{ 'mammaMX.medicalHistory.medicalHistory.value' | translate }}*
+    </h2>
+  </div>
+  <p-checkbox
+    rr-id="mam_mx_020203"
+    [(ngModel)]="model.isBreastCarcinoma"
+    label="{{ 'mammaMX.medicalHistory.breastCarcinoma.value' | translate }}"
+    labelStyleClass="ui-fat-label"
+    name="isBreastCarcinoma"
+    binary="true"
+    class="m-b-15"
+    rrContentReset="isBreastCarcinomaBlock"
+    rrValidation="isBreastCarcinoma isOvarianCancer"
+  >
+  </p-checkbox>
+  <div
+    class="f-start f-vertical"
+    id="isBreastCarcinomaBlock"
+    [rrDisable]="!model.isBreastCarcinoma"
+  >
+    <p-dropdown
+      rr-id="mam_mx_020204"
+      [(ngModel)]="model.breastCarcinomaType"
+      placeholder="{{ 'shared.pleaseSelect' | translate }}"
+      styleClass="o-width-100 ui-brown-box"
+      name="model.breastCarcinomaType"
+      [options]="sides"
+      rrDropdownClear
+    >
+    </p-dropdown>
+    <p rr-id="mam_mx_020205" class="m-t-12">
+      {{ "mammaMX.medicalHistory.yearOfLife.value" | translate }}
+    </p>
+    <div class="f-start f-vertical o-width-50">
+      <p-dropdown
+        rr-id="mam_mx_020206"
+        [(ngModel)]="model.breastCarcinomaAge"
+        placeholder="{{ 'shared.year' | translate }}"
+        name="breastCarcinomaAge"
+        styleClass="o-width-100 ui-brown-box"
+        [virtualScroll]="false"
+        itemSize="20"
+        (onShow)="center45Value(mammaKarziom)"
+        [options]="years"
+        #mammaKarziom
+        rrDropdownClear
+      >
+      </p-dropdown>
+    </div>
+  </div>
+  <p-checkbox
+    rr-id="mam_mx_020207"
+    [(ngModel)]="model.isOvarianCancer"
+    label="{{ 'mammaMX.medicalHistory.ovarianCancer.value' | translate }}"
+    labelStyleClass="ui-fat-label"
+    name="isOvarianCancer"
+    binary="true"
+    class="m-b-8 m-t-32"
+    rrContentReset="isOvarianCancerBlock"
+    rrValidation="isBreastCarcinoma isOvarianCancer"
+  >
+  </p-checkbox>
+  <div
+    class="f-start f-vertical"
+    id="isOvarianCancerBlock"
+    [rrDisable]="!model.isOvarianCancer"
+  >
+    <p rr-id="mam_mx_020208">
+      {{ "mammaMX.medicalHistory.yearOfLife.value" | translate }}
+    </p>
+    <div class="f-start f-vertical o-width-50">
+      <p-dropdown
+        rr-id="mam_mx_020209"
+        [(ngModel)]="model.ovarianCancerAge"
+        placeholder="{{ 'shared.year' | translate }}"
+        name="ovarianCancerAge"
+        styleClass="o-width-100 ui-brown-box"
+        [virtualScroll]="false"
+        itemSize="20"
+        (onShow)="center45Value(familyPerson1CancerYearOfAge)"
+        [options]="years"
+        #familyPerson1CancerYearOfAge
+        rrDropdownClear
+      >
+      </p-dropdown>
+    </div>
+  </div>
+</div>

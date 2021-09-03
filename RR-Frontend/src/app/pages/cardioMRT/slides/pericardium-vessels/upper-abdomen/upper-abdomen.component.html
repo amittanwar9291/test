@@ -1,0 +1,487 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-4 c-pad-r c-sep f-start f-vertical">
+    <h2 rr-id="car_m_09021786" class="m-b-11">
+      {{ 'cardioMRT.pericardiumVessels.detailsUpperAbdomen.value' | translate
+      }}*
+    </h2>
+    <div class="c-col-4 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="car_m_0902187"
+          [(ngModel)]="model.isFocalLiverLesions"
+          label="{{ 'cardioMRT.pericardiumVessels.focalLiverLesions.value' | translate }}"
+          name="isFocalLiverLesions"
+          binary="true"
+          rrContentReset="isFocalLiverLesion-block"
+          class="m-b-7"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content m-b-29"
+          id="isFocalLiverLesion-block"
+          [rrDisable]="!model.isFocalLiverLesions"
+        >
+          <p rr-id="car_m_0902188" class="m-b-9">
+            {{ 'cardioMRT.pericardiumVessels.dignity.value' | translate }}*
+          </p>
+          <p-radioButton
+            rr-id="car_m_0902189"
+            [(ngModel)]="model.focalLiverLesionsType"
+            label="{{ 'cardioMRT.pericardiumVessels.benign.value' | translate }}"
+            name="focalLiverLesionsType"
+            [value]="otherFocalType.Benign"
+            rrValidation="focalLiverLesionsType"
+          >
+          </p-radioButton>
+          <div
+            class="f-start f-vertical o-radio-list nested-content"
+            id="benignFocal-block"
+            [rrDisable]="model.focalLiverLesionsType !== otherFocalType.Benign"
+          >
+            <p-radioButton
+              rr-id="car_m_0902190"
+              [(ngModel)]="model.benignType"
+              label="{{ 'cardioMRT.pericardiumVessels.cyst.value' | translate }}"
+              name="benignType"
+              [value]="benignType.Cyst"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_0902191"
+              [(ngModel)]="model.benignType"
+              label="{{ 'cardioMRT.pericardiumVessels.hemangioma.value' | translate }}"
+              name="benignType"
+              [value]="benignType.Hemangioma"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <p-radioButton
+            rr-id="car_m_0902192"
+            [(ngModel)]="model.focalLiverLesionsType"
+            label="{{ 'cardioMRT.pericardiumVessels.malignant.value' | translate }}"
+            name="focalLiverLesionsType"
+            [value]="otherFocalType.Malignant"
+            rrContentReset="benignFocal-block"
+            rrValidation="focalLiverLesionsType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_0902193"
+            [(ngModel)]="model.focalLiverLesionsType"
+            label="{{ 'cardioMRT.pericardiumVessels.unknown.value' | translate }}"
+            name="focalLiverLesionsType"
+            [value]="otherFocalType.Unknown"
+            rrContentReset="benignFocal-block"
+            rrValidation="focalLiverLesionsType"
+          >
+          </p-radioButton>
+          <p-checkbox
+            rr-id="car_m_0902194"
+            [(ngModel)]="model.isLesionsMoreOneOfFocalLiver"
+            label="{{ 'cardioMRT.pericardiumVessels.lesionOfTheSame.value' | translate }}"
+            name="isLesionsMoreOneOfFocalLiver"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+
+        <p-checkbox
+          rr-id="car_m_0902195"
+          [(ngModel)]="model.isDiffuseLiverLesion"
+          label="{{ 'cardioMRT.pericardiumVessels.diffuseLiverLesion.value' | translate }}"
+          name="isDiffuseLiverLesion"
+          binary="true"
+          rrContentReset="isDiffuseLiverLesion-block"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="isDiffuseLiverLesion-block"
+          [rrDisable]="!model.isDiffuseLiverLesion"
+        >
+          <p-radioButton
+            rr-id="car_m_0902196"
+            [(ngModel)]="model.diffuseLiverLesionType"
+            label="{{ 'cardioMRT.pericardiumVessels.hemosiderosis.value' | translate }}"
+            name="diffuseLiverLesionType"
+            [value]="diffuseLiverLesionType.Hemosiderosis"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_0902197"
+            [(ngModel)]="model.diffuseLiverLesionType"
+            label="{{ 'cardioMRT.pericardiumVessels.steatosis.value' | translate }}"
+            name="diffuseLiverLesionType"
+            [value]="diffuseLiverLesionType.Steatosis"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_0902198"
+            [(ngModel)]="model.diffuseLiverLesionType"
+            label="{{ 'cardioMRT.pericardiumVessels.cirrhosis.value' | translate }}"
+            name="diffuseLiverLesionType"
+            [value]="diffuseLiverLesionType.Cirrhosis"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep f-start f-vertical o-list">
+        <p-checkbox
+          rr-id="car_m_090361"
+          [(ngModel)]="model.isCholecystolithiasis"
+          label="{{ 'cardioMRT.pericardiumVessels.cholecystolithiasis.value' | translate }}"
+          name="isCholecystolithiasis"
+          binary="true"
+          class="m-t-1 m-b-22"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="car_m_090362"
+          [(ngModel)]="model.isSplenomegaly"
+          label="{{ 'cardioMRT.pericardiumVessels.splenomegaly.value' | translate }}"
+          name="isSplenomegaly"
+          binary="true"
+          class="m-b-21"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="car_m_090363"
+          [(ngModel)]="model.isHiatalHernia"
+          label="{{ 'cardioMRT.pericardiumVessels.hiatalHernia.value' | translate }}"
+          name="isHiatalHernia"
+          binary="true"
+          class="m-b-21"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="car_m_090364"
+          [(ngModel)]="model.isMassAdrenalGland"
+          label="{{ 'cardioMRT.pericardiumVessels.massAdrenalGland.value' | translate }}"
+          name="isMassAdrenalGland"
+          binary="true"
+          class="m-b-3"
+          rrContentReset="isMassAdrenalGland-block"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="isMassAdrenalGland-block"
+          [rrDisable]="!model.isMassAdrenalGland"
+        >
+          <p rr-id="car_m_090365" class="m-b-9">
+            {{ 'cardioMRT.pericardiumVessels.side.value' | translate }}*
+          </p>
+          <p-checkbox
+            rr-id="car_m_090366"
+            [(ngModel)]="model.isMassAdrenalGlandRight"
+            label="{{ 'cardioMRT.pericardiumVessels.right.value' | translate }}"
+            name="isMassAdrenalGlandRight"
+            binary="true"
+            rrValidation="isMassAdrenalGlandRight isMassAdrenalGlandLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_090367"
+            [(ngModel)]="model.isMassAdrenalGlandLeft"
+            label="{{ 'cardioMRT.pericardiumVessels.left.value' | translate }}"
+            name="isMassAdrenalGlandLeft"
+            binary="true"
+            class="m-b-12"
+            rrValidation="isMassAdrenalGlandRight isMassAdrenalGlandLeft"
+          >
+          </p-checkbox>
+          <rr-number-input
+            inputRrId="car_m_090368"
+            labelRrId="car_m_090369"
+            [(ngModel)]="model.maximumDiameterAxialInMm"
+            label="{{ 'cardioMRT.pericardiumVessels.maxDiameterInMm.value' | translate }}"
+            name="maximumDiameterAxialInMm"
+            labelStyleClass="text-break"
+            [config]="{ labelWidth: 130 }"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="car_m_090453"
+          [(ngModel)]="model.isFocalLesionOfKidney"
+          label="{{ 'cardioMRT.pericardiumVessels.focalLesionOfKidney.value' | translate }}"
+          name="isFocalLesionOfKidney"
+          binary="true"
+          class="m-t-4 m-b-3"
+          rrContentReset="isFocalLesionOfKidney-block"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="isFocalLesionOfKidney-block"
+          [rrDisable]="!model.isFocalLesionOfKidney"
+        >
+          <p rr-id="car_m_090454" class="m-b-9">
+            {{ 'cardioMRT.pericardiumVessels.side.value' | translate }}*
+          </p>
+          <p-checkbox
+            rr-id="car_m_090455"
+            [(ngModel)]="model.isFocalLesionOfKidneyRight"
+            label="{{ 'cardioMRT.pericardiumVessels.right.value' | translate }}"
+            name="isFocalLesionOfKidneyRight"
+            binary="true"
+            rrValidation="isFocalLesionOfKidneyRight isFocalLesionOfKidneyLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_090456"
+            [(ngModel)]="model.isFocalLesionOfKidneyLeft"
+            label="{{ 'cardioMRT.pericardiumVessels.left.value' | translate }}"
+            name="isFocalLesionOfKidneyLeft"
+            binary="true"
+            class="m-b-7"
+            rrValidation="isFocalLesionOfKidneyRight isFocalLesionOfKidneyLeft"
+          >
+          </p-checkbox>
+          <p rr-id="car_m_090457" class="m-b-9">
+            {{ 'cardioMRT.pericardiumVessels.dignity.value' | translate }}*
+          </p>
+          <p-radioButton
+            rr-id="car_m_090458"
+            [(ngModel)]="model.focalLesionOfKidneyType"
+            label="{{ 'cardioMRT.pericardiumVessels.benign.value' | translate }}"
+            name="focalLesionOfKidneyType"
+            [value]="otherFocalType.Benign"
+            rrContentReset="unknownFocalLesionOfKidneyType-block"
+            rrValidation="focalLesionOfKidneyType"
+          >
+          </p-radioButton>
+          <div
+            class="f-start f-vertical o-radio-list nested-content"
+            id="benignFocalLesionOfKidneyType-block"
+            [rrDisable]="model.focalLesionOfKidneyType !== otherFocalType.Benign"
+          >
+            <p-checkbox
+              rr-id="car_m_090459"
+              [(ngModel)]="model.isFocalLesionOfKidneyBenignCyst"
+              label="{{ 'cardioMRT.pericardiumVessels.cyst.value' | translate }}"
+              name="isFocalLesionOfKidneyBenignCyst"
+              binary="true"
+            >
+            </p-checkbox>
+          </div>
+          <p-radioButton
+            rr-id="car_m_090460"
+            [(ngModel)]="model.focalLesionOfKidneyType"
+            label="{{ 'cardioMRT.pericardiumVessels.malignant.value' | translate }}"
+            name="focalLesionOfKidneyType"
+            [value]="otherFocalType.Malignant"
+            rrContentReset="benignFocalLesionOfKidneyType-block unknownFocalLesionOfKidneyType-block"
+            rrValidation="focalLesionOfKidneyType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090461"
+            [(ngModel)]="model.focalLesionOfKidneyType"
+            label="{{ 'cardioMRT.pericardiumVessels.unknown.value' | translate }}"
+            name="focalLesionOfKidneyType"
+            [value]="otherFocalType.Unknown"
+            rrContentReset="benignFocalLesionOfKidneyType-block"
+            rrValidation="focalLesionOfKidneyType"
+          >
+          </p-radioButton>
+          <div
+            class="f-start f-vertical o-radio-list nested-content m-b-17"
+            id="unknownFocalLesionOfKidneyType-block"
+            [rrDisable]="model.focalLesionOfKidneyType !== otherFocalType.Unknown"
+          >
+            <p-radioButton
+              rr-id="car_m_090462"
+              [(ngModel)]="model.unknownType"
+              label="{{ 'cardioMRT.pericardiumVessels.complicatedCyst.value' | translate }}"
+              name="unknownType"
+              [value]="unknownType.ComplicatedCyst"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090463"
+              [(ngModel)]="model.unknownType"
+              label="{{ 'cardioMRT.pericardiumVessels.solidMass.value' | translate }}"
+              name="unknownType"
+              [value]="unknownType.SolidMass"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <rr-number-input
+            inputRrId="car_m_090464"
+            labelRrId="car_m_090465"
+            [(ngModel)]="model.unknownMaxDiameterInMm"
+            label="{{ 'cardioMRT.pericardiumVessels.maxDiameterInMm.value' | translate }}"
+            labelStyleClass="text-break"
+            name="unknownMaxDiameterInMm"
+            [config]="{ labelWidth: 170 }"
+            class="m-b-11"
+          >
+          </rr-number-input>
+          <p-checkbox
+            rr-id="car_m_090466"
+            [(ngModel)]="model.isLesionsMoreOneOfFocalLesionOfKidney"
+            label="{{ 'cardioMRT.pericardiumVessels.lesionOfTheSame.value' | translate }}"
+            name="isLesionsMoreOneOfFocalLesionOfKidney"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad-l c-sep f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="car_m_090546"
+          [(ngModel)]="model.isHydronephrosis"
+          label="{{ 'cardioMRT.pericardiumVessels.hydronephrosis.value' | translate }}"
+          name="isHydronephrosis"
+          binary="true"
+          class="m-t-4 m-b-3"
+          rrContentReset="isHydronephrosis-block"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content m-b-31"
+          id="isHydronephrosis-block"
+          [rrDisable]="!model.isHydronephrosis"
+        >
+          <p rr-id="car_m_090547" class="m-b-9">
+            {{ 'cardioMRT.pericardiumVessels.side.value' | translate }}*
+          </p>
+          <p-checkbox
+            rr-id="car_m_090548"
+            [(ngModel)]="model.isHydronephrosisRight"
+            label="{{ 'cardioMRT.pericardiumVessels.right.value' | translate }}"
+            name="isHydronephrosisRight"
+            binary="true"
+            rrValidation="isHydronephrosisRight isHydronephrosisLeft"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="car_m_090549"
+            [(ngModel)]="model.isHydronephrosisLeft"
+            label="{{ 'cardioMRT.pericardiumVessels.left.value' | translate }}"
+            name="isHydronephrosisLeft"
+            binary="true"
+            class="m-b-12"
+            rrValidation="isHydronephrosisRight isHydronephrosisLeft"
+          >
+          </p-checkbox>
+          <h3 rr-id="car_m_090550" class="m-b-12">
+            {{ 'cardioMRT.pericardiumVessels.gradingMax.value' | translate }}
+          </h3>
+          <p-radioButton
+            rr-id="car_m_090551"
+            [(ngModel)]="model.gradingMaxType"
+            label="{{ 'cardioMRT.pericardiumVessels.grade1.value' | translate }}"
+            name="gradingMaxType"
+            [value]="gradingMaxType.Grade1"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090552"
+            [(ngModel)]="model.gradingMaxType"
+            label="{{ 'cardioMRT.pericardiumVessels.grade2.value' | translate }}"
+            name="gradingMaxType"
+            [value]="gradingMaxType.Grade2"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090553"
+            [(ngModel)]="model.gradingMaxType"
+            label="{{ 'cardioMRT.pericardiumVessels.grade3.value' | translate }}"
+            name="gradingMaxType"
+            [value]="gradingMaxType.Grade3"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090554"
+            [(ngModel)]="model.gradingMaxType"
+            label="{{ 'cardioMRT.pericardiumVessels.grade4.value' | translate }}"
+            name="gradingMaxType"
+            [value]="gradingMaxType.Grade4"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+
+        <p-checkbox
+          rr-id="car_m_090555"
+          [(ngModel)]="model.isEnlargedAbdLymphNodes"
+          label="{{ 'cardioMRT.pericardiumVessels.enlargedAbdLymphNodes.value' | translate }}"
+          name="isEnlargedAbdLymphNodes"
+          binary="true"
+          rrContentReset="isEnlargedAbdLymphNodes-block"
+          [rrValidation]="upperAbdomenValidationGroup"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list nested-content"
+          id="isEnlargedAbdLymphNodes-block"
+          [rrDisable]="!model.isEnlargedAbdLymphNodes"
+        >
+          <rr-number-input
+            inputRrId="car_m_090556"
+            labelRrId="car_m_090557"
+            [(ngModel)]="model.enlargedAbdLymphNodesMaxDiameterSADInMm"
+            label="{{ 'cardioMRT.pericardiumVessels.maxDiameterSADIn.value' | translate }}"
+            labelStyleClass="text-break"
+            name="enlargedAbdLymphNodesMaxDiameterSADInMm"
+            [config]="{ labelWidth: 170 }"
+            class="m-b-7"
+          >
+          </rr-number-input>
+          <p-radioButton
+            rr-id="car_m_090558"
+            [(ngModel)]="model.enlargedAbdLymphNodesType"
+            label="{{ 'cardioMRT.pericardiumVessels.preservedFattyHilum.value' | translate }}"
+            name="enlargedAbdLymphNodesType"
+            [value]="enlargedAbdLymphNodesType.PreservedFattyHilum"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090559"
+            [(ngModel)]="model.enlargedAbdLymphNodesType"
+            label="{{ 'cardioMRT.pericardiumVessels.suspect.value' | translate }}"
+            name="enlargedAbdLymphNodesType"
+            [value]="enlargedAbdLymphNodesType.Suspect"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090560"
+            [(ngModel)]="model.enlargedAbdLymphNodesType"
+            label="{{ 'cardioMRT.pericardiumVessels.confluent.value' | translate }}"
+            name="enlargedAbdLymphNodesType"
+            [value]="enlargedAbdLymphNodesType.Confluent"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

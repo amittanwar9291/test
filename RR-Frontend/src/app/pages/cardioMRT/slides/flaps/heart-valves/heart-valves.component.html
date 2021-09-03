@@ -1,0 +1,107 @@
+<div class="f-vertical o-width-100 col-h-100">
+  <h2 rr-id="car_m_040220" class="c-pad-l m-t-14 m-b-26">
+    {{'cardioMRT.flaps.pathology.value' | translate}}
+  </h2>
+  <div class="f-horizontal c-col-4 c-sep c-pad-l col-h-100 m-b-12">
+    <div class="f-vertical c-sep">
+      <h2 rr-id="car_m_040221" class="m-b-12">
+        {{'cardioMRT.flaps.heartValves.value' | translate}}
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-vertical f-start">
+          <rr-finding-column
+            [handler]="heartValveFindingsHandler"
+            [disabled]="model.areFindings !== areFindings.Yes"
+            [setConfig]="heartValveFindingsConfig"
+            validationName="heartValves"
+          >
+          </rr-finding-column>
+        </div>
+        <ng-container
+          [ngSwitch]="heartValveFindingsHandler.currentItem.findingType"
+        >
+          <!-- AorticValve -->
+          <rr-aortic-valve
+            *ngSwitchCase="findingType.AorticValve"
+            [model]="heartValveFindingsHandler.currentItem"
+            [stenosisTypeList]="stenosisTypeList"
+            [insufficiencyTypeList]="insufficiencyTypeList"
+            [classificationTypeList]="classificationTypeList"
+            [classificationPhenotypeList]="classificationPhenotypeList"
+            [dropdownTranslationBits]="dropdownTranslationBits"
+          ></rr-aortic-valve>
+
+          <!-- MitralValve -->
+          <rr-heart-valves-mitral-valve
+            *ngSwitchCase="findingType.MitralValve"
+            [model]="heartValveFindingsHandler.currentItem"
+          ></rr-heart-valves-mitral-valve>
+
+          <!-- PulmonaryValve -->
+          <rr-pulmonary-valve
+            *ngSwitchCase="findingType.PulmonaryValve"
+            [model]="heartValveFindingsHandler.currentItem"
+          >
+          </rr-pulmonary-valve>
+
+          <!-- TricuspidValve -->
+          <rr-tricuspid-valve
+            *ngSwitchCase="findingType.TricuspidValve"
+            [model]="heartValveFindingsHandler.currentItem"
+          ></rr-tricuspid-valve>
+
+          <ng-container *ngSwitchDefault>
+            <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+            <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+      <h2 rr-id="car_m_040501">
+        {{'cardioMRT.flaps.outflowTractOFT.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="car_m_040502"
+        name="isRVOTObstruction"
+        label="{{'cardioMRT.flaps.rVOTObstruction.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isRVOTObstruction"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="car_m_040503"
+        name="isLVOTObstruction"
+        label="{{'cardioMRT.flaps.lVOTObstruction.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLVOTObstruction"
+        rrContentReset="isLVOTObstructionBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        [rrDisable]="!model.isLVOTObstruction"
+        id="isLVOTObstructionBlock"
+      >
+        <p-radioButton
+          rr-id="car_m_040504"
+          rrUnClickRadio
+          name="lvotObstructionType"
+          [value]="lvotObstructionType.AtRest"
+          label="{{'cardioMRT.flaps.atRest.value' | translate}}"
+          [(ngModel)]="model.lvotObstructionType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040505"
+          rrUnClickRadio
+          name="lvotObstructionType"
+          [value]="lvotObstructionType.WithValsalva"
+          label="{{'cardioMRT.flaps.withValsalva.value' | translate}}"
+          [(ngModel)]="model.lvotObstructionType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

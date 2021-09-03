@@ -1,0 +1,100 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad o-radio-list p-t-10">
+    <h2 rr-id="spi_m_050202" class="m-b-3" rrValidation="spineLocation">
+      {{'spineMRT.disc.localization.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_m_050203"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list p-t-10">
+    <h2 rr-id="spi_m_050301">
+      {{'spineMRT.disc.degenerationDetails.value' | translate}}
+    </h2>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isNarrowing"
+      label="{{'spineMRT.disc.narrowingofTheIntervertebralDisc.value'| translate}}"
+      rr-id="spi_m_0503306"
+      labelStyleClass="text-break"
+      name="isNarrowing"
+    >
+    </p-checkbox>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isT2SignalReductionOfTheIntervertebralDisc"
+      label="{{'spineMRT.disc.t2SignalReductionOfTheIntervertebralDisc.value'| translate}}"
+      rr-id="spi_m_0503200"
+      labelStyleClass="text-break"
+      name="isT2SignalReductionOfTheIntervertebralDisc"
+    >
+    </p-checkbox>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isBulging"
+      label="{{'spineMRT.disc.bulging.value'| translate}}"
+      rr-id="spi_m_050303"
+      rrInfoIcon="spi_m_0503201"
+      rrContentReset="bulgingTypeContainer"
+      name="isBulging"
+    >
+    </p-checkbox>
+    <div
+      id="bulgingTypeContainer"
+      class="o-radio-list nested-content"
+      [rrDisable]="!model.isBulging"
+    >
+      <p-radioButton
+        rr-id="spi_m_050304"
+        name="bulgingType"
+        label="{{ 'spineMRT.disc.symmetric.value' | translate }}"
+        [value]="bulgingTypesEnum.Symetric"
+        [(ngModel)]="model.bulgingType"
+        rrContentReset="sideTypesContainer"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_m_050305"
+        label="{{ 'spineMRT.disc.asymmetric.value' | translate }}"
+        name="bulgingType"
+        [value]="bulgingTypesEnum.Asymetric"
+        [(ngModel)]="model.bulgingType"
+        rrContentReset="sideTypesContainer"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="sideTypesContainer"
+        class="o-radio-list nested-content"
+        [rrDisable]="model.bulgingType !== bulgingTypesEnum.Asymetric"
+      >
+        <p rr-id="spi_m_0503202">
+          {{'spineMRT.disc.side.value'| translate}}*
+        </p>
+        <p-radioButton
+          name="sideType"
+          rr-id="spi_m_050306"
+          label="{{ 'spineMRT.disc.left.value' | translate }}"
+          [value]="sideTypesEnum.Left"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+        <p-radioButton
+          name="sideType"
+          rr-id="spi_m_050307"
+          label="{{ 'spineMRT.disc.right.value' | translate }}"
+          [value]="sideTypesEnum.Right"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad"></div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

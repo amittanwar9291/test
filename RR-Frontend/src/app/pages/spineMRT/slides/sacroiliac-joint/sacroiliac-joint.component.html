@@ -1,0 +1,505 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div *ngIf="!isScoreEditorOpen" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_m_090103" class="m-b-17">
+        {{ "spineMRT.sacroiliacJoint.findings.value" | translate }}*
+      </h1>
+      <div class="o-radio-list f-vertical m-b-17">
+        <p-radioButton
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="sacroiliacJointAreFindingTypesEnum.Incospicuous"
+          rr-id="spi_m_090104"
+          rrValidation="areFindings"
+          notInFinding="true"
+          label="{{ 'spineMRT.sacroiliacJoint.bothSidesInconspicuous.value' | translate }}"
+        >
+        </p-radioButton>
+        <p-radioButton
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="sacroiliacJointAreFindingTypesEnum.NonSpecified"
+          rr-id="spi_m_090105"
+          rrValidation="areFindings"
+          notInFinding="true"
+          label="{{ 'spineMRT.sacroiliacJoint.notSpecified.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="sacroiliacJointAreFindingTypesEnum.PathologicFinding"
+          rr-id="spi_m_090106"
+          rrValidation="areFindings"
+          notInFinding="true"
+          label="{{ 'spineMRT.sacroiliacJoint.findings.value' | translate }}"
+        ></p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+        [setDescriptionTypes]="['Degeneration', 'Inflammation']"
+      ></rr-finding-column>
+    </div>
+    <div class="f-vertical f-space-between">
+      <h1
+        class="c-pad"
+        rr-id="spi_m_090201"
+        *ngIf="findingHandler.currentItem.findingType!=='None'"
+      >
+        {{ 'spineMRT.sacroiliacJoint.findings.value' | translate }}
+        {{findingHandler.currentItemIndex +1 | number: '2.0-0'}}
+      </h1>
+      <div></div>
+      <div
+        *ngIf="!isPartShown(sacroiliacJointFindingTypesEnum.None)"
+        class=" f-horizontal selection-columns"
+      >
+        <!--Degeneration & Inflammation-->
+        <div class="c-col-1 c-sep c-pad f-vertical f-start">
+          <div class="o-radio-list f-vertical">
+            <h2
+              rr-id="spi_m_090202"
+              class="m-b-15"
+              rrValidation="pelvisLocation"
+            >
+              {{ 'spineMRT.sacroiliacJoint.localization.value' | translate }}*
+            </h2>
+            <rr-pelvis-simple
+              name="pelvisLocation"
+              [(ngModel)]="findingHandler.currentItem.pelvisLocation"
+              rr-id="spi_m_090203"
+              rrValidation="pelvisLocation"
+              isLocalizer="true"
+            ></rr-pelvis-simple>
+          </div>
+        </div>
+
+        <div class="c-col-1 c-pad c-sep f-vertical f-start o-list">
+          <!--Degeneration & Inflammation-->
+          <div
+            [rrDisable]="!isDescriptionTypeIKnow()"
+            class="o-list f-vertical m-b-38"
+          >
+            <h2 rr-id="spi_m_090301" class="m-b-15">
+              {{ 'spineMRT.sacroiliacJoint.differentialDiagnosis.value'
+              |translate }}
+            </h2>
+            <div>
+              <p rr-id="spi_m_090302">
+                {{ 'spineMRT.sacroiliacJoint.differentialDiagnosis1.value'
+                |translate }}*
+              </p>
+              <rr-differential-diagnosis-dropdown
+                [diagnosisNumber]="1"
+                isActiveOnIKnow="true"
+                [options]="isPartShown(sacroiliacJointFindingTypesEnum.Degeneration) ? differentialDiagnosisOptions1: differentialDiagnosisOptions2"
+                [(ngModel)]="findingHandler.currentItem.iKnowDifferentialDiagnosis01"
+                name="iKnowDifferentialDiagnosis01"
+                rrId="spi_m_090303"
+                [parentViewModel]="findingHandler.currentItem"
+                rrValidation="iKnowDifferentialDiagnosis01"
+                (selectionChanged)="clearSecondary()"
+              >
+              </rr-differential-diagnosis-dropdown>
+            </div>
+          </div>
+          <!--Degeneration-->
+          <div
+            class="o-list"
+            *ngIf="isPartShown(sacroiliacJointFindingTypesEnum.Degeneration)"
+          >
+            <h2 rr-id="spi_m_090304" class="m-b-17">
+              {{ 'spineMRT.sacroiliacJoint.changeJoint.value' | translate }}
+            </h2>
+            <div class="o-radio-list m-b-38">
+              <p-checkbox
+                name="isBoneBridges"
+                binary="true"
+                [(ngModel)]="findingHandler.currentItem.isBoneBridges"
+                rr-id="spi_m_090305"
+                label="{{ 'spineMRT.sacroiliacJoint.boneBridges.value' | translate }}"
+              ></p-checkbox>
+              <p-checkbox
+                name="isAnkylosis"
+                binary="true"
+                [(ngModel)]="findingHandler.currentItem.isAnkylosis"
+                rr-id="spi_m_090307"
+                rrContentReset="anyklosis-options"
+                label="{{ 'spineMRT.sacroiliacJoint.ankylosis.value' | translate }}"
+              ></p-checkbox>
+              <div
+                id="anyklosis-options"
+                class="o-radio-list left-indent"
+                [rrDisable]="!findingHandler.currentItem.isAnkylosis"
+              >
+                <p-radioButton
+                  rrUnClickRadio
+                  [(ngModel)]="findingHandler.currentItem.jointSurfaceSubType"
+                  [value]="jointSurfaceSubTypesEnum.Totally"
+                  name="jointSurfaceSubType"
+                  rr-id="spi_m_090308"
+                  label="{{ 'spineMRT.sacroiliacJoint.totally.value' | translate }}"
+                ></p-radioButton>
+                <p-radioButton
+                  rrUnClickRadio
+                  [(ngModel)]="findingHandler.currentItem.jointSurfaceSubType"
+                  [value]="jointSurfaceSubTypesEnum.Partial"
+                  name="jointSurfaceSubType"
+                  rr-id="spi_m_090309"
+                  label="{{ 'spineMRT.sacroiliacJoint.partially.value' | translate }}"
+                ></p-radioButton>
+                <p-radioButton
+                  rrUnClickRadio
+                  [(ngModel)]="findingHandler.currentItem.jointSurfaceSubType"
+                  [value]="jointSurfaceSubTypesEnum.Periarticular"
+                  name="jointSurfaceSubType"
+                  rr-id="spi_m_090310"
+                  label="{{ 'spineMRT.sacroiliacJoint.periarticular.value' | translate }}"
+                ></p-radioButton>
+              </div>
+              <p-checkbox
+                name="isOsteophytes"
+                binary="true"
+                [(ngModel)]="findingHandler.currentItem.isOsteophytes"
+                rr-id="spi_m_090311"
+                label="{{ 'spineMRT.sacroiliacJoint.osteophytesAnterior.value' | translate }}"
+              ></p-checkbox>
+            </div>
+            <div class="o-list">
+              <h2 rr-id="spi_m_090312" class="m-b-15">
+                {{'spineMRT.sacroiliacJoint.changeJointSurface.value' |
+                translate}}
+              </h2>
+              <div class="o-radio-list">
+                <p-checkbox
+                  name="isErosions"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isErosions"
+                  rr-id="spi_m_090313"
+                  label="{{ 'spineMRT.sacroiliacJoint.erosions.value' | translate }}"
+                ></p-checkbox>
+                <p-checkbox
+                  name="isSurfaceNarrowing"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isSurfaceNarrowing"
+                  rr-id="spi_m_090314"
+                  label="{{ 'spineMRT.sacroiliacJoint.jointSpaceNarrowing.value' | translate }}"
+                ></p-checkbox>
+                <p-checkbox
+                  name="isVacuumPhenomenon"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isVacuumPhenomenon"
+                  rr-id="spi_m_090315"
+                  label="{{ 'spineMRT.sacroiliacJoint.vacuumPhenomenon.value' | translate }}"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+          <!--Inflammation-->
+          <div
+            class="o-radio-list f-vertical text-break"
+            *ngIf="isPartShown(sacroiliacJointFindingTypesEnum.Inflammation)"
+          >
+            <h2 rr-id="spi_m_090316" class="m-b-15 text-break">
+              {{ 'spineMRT.sacroiliacJoint.changeJointSurface.value' |
+              translate}}
+            </h2>
+            <p-checkbox
+              name="isEnthesitis"
+              [(ngModel)]="findingHandler.currentItem.isEnthesitis"
+              binary="true"
+              rr-id="spi_m_090317"
+              class="m-b-7"
+              label="{{ 'spineMRT.sacroiliacJoint.entheitisOfTheJoint.value' | translate }}"
+              [rrContentReset]="'symmetric'"
+            ></p-checkbox>
+            <div
+              id="symmetric"
+              class="f-vertical o-radio-list left-indent"
+              [rrDisable]="!areEntheitisOfTheJointActive()"
+            >
+              <p-radioButton
+                rrUnClickRadio
+                [(ngModel)]="findingHandler.currentItem.entheitisType"
+                [value]="sacroiliacJointEntheitisTypesEnum.Asymetric"
+                name="entheitisType"
+                rr-id="spi_m_090318"
+                label="{{ 'spineMRT.sacroiliacJoint.asymmetric.value' | translate }}"
+              ></p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                [(ngModel)]="findingHandler.currentItem.entheitisType"
+                [value]="sacroiliacJointEntheitisTypesEnum.Symetric"
+                name="entheitisType"
+                rr-id="spi_m_090319"
+                label="{{ 'spineMRT.sacroiliacJoint.symmetric.value' | translate }}"
+              ></p-radioButton>
+            </div>
+            <p-checkbox
+              name="isSynovitis"
+              [(ngModel)]="findingHandler.currentItem.isSynovitis"
+              binary="true"
+              rr-id="spi_m_090320"
+              label="{{ 'spineMRT.sacroiliacJoint.synovitisCapsulitis.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              [rrDisable]="!isCMYes"
+              name="isCmEnhancement"
+              [(ngModel)]="findingHandler.currentItem.isCmEnhancement"
+              binary="true"
+              rr-id="spi_m_090321"
+              label="{{ 'spineMRT.sacroiliacJoint.cMEnhancement.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              name="isJointSpaceWidening"
+              [(ngModel)]="findingHandler.currentItem.isJointSpaceWidening"
+              binary="true"
+              rr-id="spi_m_090322"
+              label="{{ 'spineMRT.sacroiliacJoint.jointSpaceWidening.value' | translate }}"
+            ></p-checkbox>
+            <p-checkbox
+              name="isJointEffusion"
+              [(ngModel)]="findingHandler.currentItem.isJointEffusion"
+              binary="true"
+              rr-id="spi_m_090323"
+              label="{{ 'spineMRT.sacroiliacJoint.jointEffusion.value' | translate }}"
+            ></p-checkbox>
+          </div>
+        </div>
+
+        <div class="c-col-1 c-pad c-sep f-vertical f-start">
+          <div class="o-list f-vertical">
+            <!--Degeneration-->
+            <div
+              class="o-list f-vertical"
+              *ngIf="isPartShown(sacroiliacJointFindingTypesEnum.Degeneration)"
+            >
+              <h2 rr-id="spi_m_090401" class="m-b-15">
+                {{ 'spineMRT.sacroiliacJoint.changePeriarticular.value'
+                |translate }}
+              </h2>
+              <div class="o-radio-list">
+                <p-checkbox
+                  name="isSubchondralCysts"
+                  [(ngModel)]="findingHandler.currentItem.isSubchondralCysts"
+                  binary="true"
+                  rr-id="spi_m_090402"
+                  label="{{ 'spineMRT.sacroiliacJoint.subchondralCysts.value' | translate }}"
+                ></p-checkbox>
+                <p-checkbox
+                  name="isSubchondralSclerosis"
+                  [(ngModel)]="findingHandler.currentItem.isSubchondralSclerosis"
+                  binary="true"
+                  rr-id="spi_m_090403"
+                  label="{{ 'spineMRT.sacroiliacJoint.subchondralSclerosis.value' | translate }}"
+                  rrContentReset="sclerosis-options"
+                ></p-checkbox>
+                <div
+                  id="sclerosis-options"
+                  class="o-radio-list left-indent text-break"
+                  [rrDisable]="!findingHandler.currentItem.isSubchondralSclerosis"
+                >
+                  <p-radioButton
+                    rrUnClickRadio
+                    [value]="sclerosisTypesEnum.CloseToJoint"
+                    [(ngModel)]="findingHandler.currentItem.sclerosisType"
+                    name="sclerosisType"
+                    rr-id="spi_m_090404"
+                    label="{{ 'spineMRT.sacroiliacJoint.closeToTheJoint.value' | translate }}"
+                  >
+                  </p-radioButton>
+                  <p-radioButton
+                    rrUnClickRadio
+                    [value]="sclerosisTypesEnum.MoreThan5mm"
+                    [(ngModel)]="findingHandler.currentItem.sclerosisType"
+                    name="sclerosisType"
+                    rr-id="spi_m_090405"
+                    label="{{ 'spineMRT.sacroiliacJoint.mmDistanceFromJoint.value' | translate }}"
+                  >
+                  </p-radioButton>
+                </div>
+                <p-checkbox
+                  name="isFatDeposition"
+                  [(ngModel)]="findingHandler.currentItem.isFatDeposition"
+                  binary="true"
+                  rr-id="spi_m_090406"
+                  label="{{ 'spineMRT.sacroiliacJoint.fatDeposition.value' | translate }}"
+                ></p-checkbox>
+              </div>
+            </div>
+            <!--Inflammation-->
+            <div
+              class="o-list f-vertical"
+              *ngIf="isPartShown(sacroiliacJointFindingTypesEnum.Inflammation)"
+            >
+              <h2 rr-id="spi_m_090407" class="m-b-17">
+                {{ 'spineMRT.sacroiliacJoint.changePeriarticular.value'
+                |translate }}
+              </h2>
+              <div class="o-radio-list">
+                <p-checkbox
+                  name="boneMarrow"
+                  [(ngModel)]="findingHandler.currentItem.isBoneMarrow"
+                  binary="true"
+                  rr-id="spi_m_090408"
+                  (click)="resetSPARCScore()"
+                  rrContentReset="sparccScoreMainContainer"
+                  label="{{ 'spineMRT.sacroiliacJoint.boneMarrowEdemaosteitis.value' | translate }}"
+                >
+                </p-checkbox>
+                <div
+                  id="sparccScoreMainContainer"
+                  class="o-radio-list f-vertical nested-content m-b-15"
+                  [rrDisable]="!findingHandler.currentItem.isBoneMarrow"
+                >
+                  <p-checkbox
+                    [rrDisable]="!isDedicatedISGInvestigation"
+                    binary="true"
+                    rr-id="spi_m_090409"
+                    label="{{ 'spineMRT.sacroiliacJoint.sPARCCScoreEditor.value' | translate }}"
+                    [(ngModel)]="findingHandler.currentItem.isSPARCCScore"
+                    name="isSPARCCScore"
+                    rrContentReset="sparccScoreContainer"
+                    (click)="resetSPARCScore()"
+                  ></p-checkbox>
+                  <div
+                    id="sparccScoreContainer"
+                    class="o-radio-list"
+                    [rrDisable]="!findingHandler.currentItem.isSPARCCScore"
+                  >
+                    <rr-sparcc-score-localizer-simple
+                      rr-id="spi_m_0904100"
+                      [model]="findingHandler.currentItem"
+                      (click)="toggleScoreEditor()"
+                    ></rr-sparcc-score-localizer-simple>
+                    <p rr-id="spi_m_0904101">
+                      {{ 'spineMRT.sacroiliacJoint.sPARCCScore.value' |
+                      translate}}
+                    </p>
+                    <rr-number-input
+                      [(ngModel)]="findingHandler.currentItem.sparccScore"
+                      name="sparccScore"
+                      [label]="'spineMRT.sacroiliacJoint.0to72Points.value' | translate"
+                      inputRrId="spi_m_0904102"
+                      labelRrId="spi_m_0904201"
+                      [config]="{labelWidth: 160, readonly: true, readonlyColor: findingHandler.currentItem.sparccScore !== null ? 'blue' : 'grey'}"
+                    >
+                    </rr-number-input>
+                  </div>
+                </div>
+                <p-checkbox
+                  binary="true"
+                  rr-id="spi_m_090416"
+                  label="{{ 'spineMRT.sacroiliacJoint.abscess.value' | translate }}"
+                  [(ngModel)]="findingHandler.currentItem.isAbscess"
+                  rrContentReset="maximumExpansionContainer"
+                  name="isAbscess"
+                ></p-checkbox>
+                <div
+                  id="maximumExpansionContainer"
+                  class="nested-content o-radio-list f-vertical"
+                  [rrDisable]="!findingHandler.currentItem.isAbscess"
+                >
+                  <p rr-id="spi_m_0904200">
+                    {{ 'spineMRT.sacroiliacJoint.maximumExpansion.value' |
+                    translate }}
+                  </p>
+                  <rr-number-input
+                    [(ngModel)]="findingHandler.currentItem.maximumExpansion"
+                    name="maximumExpansion"
+                    [label]="'spineMRT.sacroiliacJoint.inMm.value' | translate"
+                    inputRrId="spi_m_0904202"
+                    labelRrId="spi_m_0904203"
+                    [config]="{labelWidth: 160, max: 30}"
+                    rrValidation="axialMaxInMm"
+                  ></rr-number-input>
+                </div>
+                <p-checkbox
+                  binary="true"
+                  rr-id="spi_m_090417"
+                  label="{{ 'spineMRT.sacroiliacJoint.softTissueInvolvement.value' | translate }}"
+                  [(ngModel)]="findingHandler.currentItem.isSoftTissue"
+                  name="isSoftTissue"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Degeneration & Inflammation-->
+        <div class="c-col-1 c-pad-l c-sep f-vertical f-start">
+          <div class="o-list">
+            <h2
+              rr-id="spi_m_090501"
+              [rrDisable]="!isDifferentialDiagnosis01Selected() && isDescriptionTypeIKnow()"
+              class="m-b-15"
+            >
+              {{ 'spineMRT.sacroiliacJoint.differentialDiagnosis.value'
+              |translate }}
+            </h2>
+            <div [rrDisable]="isDescriptionTypeIKnow()" class="m-b-20">
+              <p rr-id="spi_m_090502" class="m-b-2">
+                {{ 'spineMRT.sacroiliacJoint.differentialDiagnosis1.value'
+                |translate }}*
+              </p>
+              <rr-differential-diagnosis-dropdown
+                [diagnosisNumber]="1"
+                [options]="isPartShown(sacroiliacJointFindingTypesEnum.Degeneration) ? differentialDiagnosisOptions1: differentialDiagnosisOptions2"
+                [(ngModel)]="findingHandler.currentItem.iDescribeDifferentialDiagnosis01"
+                name="iDescribeDifferentialDiagnosis01"
+                rrId="spi_m_090503"
+                [parentViewModel]="findingHandler.currentItem"
+                rrValidation="iDescribeDifferentialDiagnosis01"
+                (selectionChanged)="clearSecondary()"
+              >
+              </rr-differential-diagnosis-dropdown>
+            </div>
+            <div [rrDisable]="!isDifferentialDiagnosis01Selected()">
+              <div class="m-b-13">
+                <p rr-id="spi_m_090504" class="m-b-2">
+                  {{ 'spineMRT.sacroiliacJoint.differentialDiagnosis2.value' |
+                  translate }}
+                </p>
+                <rr-differential-diagnosis-dropdown
+                  [diagnosisNumber]="2"
+                  [options]="isPartShown(sacroiliacJointFindingTypesEnum.Degeneration) ? differentialDiagnosisOptions1: differentialDiagnosisOptions2"
+                  [(ngModel)]="findingHandler.currentItem.differentialDiagnosis02"
+                  name="differentialDiagnosis02"
+                  rrId="spi_m_090505"
+                  [parentViewModel]="findingHandler.currentItem"
+                  (selectionChanged)="clearSecondary()"
+                >
+                </rr-differential-diagnosis-dropdown>
+              </div>
+              <div
+                [rrDisable]="findingHandler.currentItem.differentialDiagnosis02 === 'None'"
+              >
+                <p-checkbox
+                  name="secondary"
+                  [(ngModel)]="findingHandler.currentItem.isSecondary"
+                  binary="true"
+                  rr-id="spi_m_090506"
+                  label="{{ 'spineMRT.sacroiliacJoint.secondary.value' | translate }}"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="isPartShown(sacroiliacJointFindingTypesEnum.None)"
+        class="selection-columns f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-pad c-sep"
+        ></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+    </div>
+  </div>
+</form>

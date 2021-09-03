@@ -1,0 +1,98 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center m-t-minus-8" *ngIf="largeLocalizerOpen">
+    <rr-cortex-localizer-complex
+      [(ngModel)]="findingHandler.currentItem.cortexLocations"
+      name="cortexLocalizerComplex"
+      (close)="onLargeLocalizerClosed()"
+    >
+    </rr-cortex-localizer-complex>
+  </div>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_c_060103">
+        {{'headCT.cortex.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_c_060104"
+          label="{{'headCT.cortex.normalImaging.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NormalImagingOfTheCortex"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_060113"
+          label="{{'headCT.cortex.noDetails.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NoDetails"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_060105"
+          label="{{'headCT.cortex.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+          (findingTypeChange)="disableChosenValueInRegionTypeDropdown()"
+          (newFindingAdded)="disableChosenValueInRegionTypeDropdown()"
+          (findingChange)="disableChosenValueInRegionTypeDropdown()"
+          (findingRemoved)="disableChosenValueInRegionTypeDropdown()"
+          (activeFindingChanged)="disableChosenValueInRegionTypeDropdown()"
+          [setDescriptionTypes]="[cortexFindingTypeEnum.Focal, cortexFindingTypeEnum.Diffuse]"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical col-h-100"
+      [ngClass]="isFindingType(cortexFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(cortexFindingTypeEnum.None)"
+        class="f-horizontal main-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(cortexFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="hea_c_060201">
+          {{'headCT.cortex.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <rr-focal
+        *ngIf="isFindingType(cortexFindingTypeEnum.Focal)"
+        [model]="findingHandler.currentItem"
+        [isExaminationArea]="isExaminationArea"
+        [isContrastEnhanced]="isContrastEnhanced"
+      ></rr-focal>
+      <rr-diffuse
+        *ngIf="isFindingType(cortexFindingTypeEnum.Diffuse)"
+        [model]="findingHandler.currentItem"
+        [isContrastEnhanced]="isContrastEnhanced"
+      ></rr-diffuse>
+    </div>
+  </div>
+</form>

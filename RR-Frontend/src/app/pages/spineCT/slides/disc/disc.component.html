@@ -1,0 +1,100 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div *ngIf="largeLocalizerConfig" style="margin-top: -100px">
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="findingHandler.currentItem.spineLocation"
+      [logicType]="largeLocalizerConfig.logicType"
+      (close)="closeLargeLocalizer()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      [localizationDescription]="largeLocalizerConfig.localizationDescription"
+    >
+    </rr-spine-complex>
+  </div>
+  <div *ngIf="!largeLocalizerConfig" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="spi_c_050103" class="m-b-15">
+        {{ 'spineCT.disc.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="spi_c_050104"
+        label="{{ 'spineCT.disc.intervertebralDiscJointsWithoutPathologicFindings.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_050105"
+        label="{{'spineCT.disc.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+        (findingChange)="setTabIndex()"
+        (findingTypeChange)="setTabIndex()"
+        (newFindingAdded)="setTabIndex()"
+        (findingRemoved)="setTabIndex()"
+        (activeFindingChanged)="setTabIndex()"
+        (allElementsDeleted)="setTabIndex()"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="!isCurrentItem([discFindingTypeEnum.None])"
+          rr-id="spi_c_050201"
+        >
+          {{ 'spineCT.disc.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isCurrentItem([discFindingTypeEnum.None])"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-bulging-degeneration
+        *ngIf="isCurrentItem([discFindingTypeEnum.BulgingDegeneration])"
+        [model]="findingHandler.currentItem"
+      ></rr-bulging-degeneration>
+      <rr-facet-joints
+        *ngIf="isCurrentItem([discFindingTypeEnum.FacetJoints])"
+        [model]="findingHandler.currentItem"
+      ></rr-facet-joints>
+      <rr-protrusion-extrusion-migration
+        *ngIf="isCurrentItem([discFindingTypeEnum.Protrusion, discFindingTypeEnum.Extrusion, discFindingTypeEnum.Migration])"
+        [model]="findingHandler.currentItem"
+      ></rr-protrusion-extrusion-migration>
+      <rr-rheumatoid-diseases
+        *ngIf="isCurrentItem([discFindingTypeEnum.RheumatoidDiseases])"
+        [model]="findingHandler.currentItem"
+      ></rr-rheumatoid-diseases>
+      <rr-spondylodiscitis
+        *ngIf="isCurrentItem([discFindingTypeEnum.Spondylodiscitis])"
+        [model]="findingHandler.currentItem"
+      ></rr-spondylodiscitis>
+      <rr-trauma
+        *ngIf="isCurrentItem([discFindingTypeEnum.Trauma])"
+        [model]="findingHandler.currentItem"
+      ></rr-trauma>
+    </div>
+  </div>
+</form>

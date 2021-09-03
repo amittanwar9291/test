@@ -1,0 +1,27 @@
+<p-dropdown
+  #dropdown
+  [styleClass]="styleClass"
+  [options]="options"
+  (onChange)="selectFilterValue($event)"
+  [disabled]="state.viewMode !== viewModes.List"
+>
+  <ng-template pTemplate="selectedItem">
+    <span
+      [ngClass]="{
+        'ui-dropdown-item--bold': hasSelection()
+      }"
+      >{{ caption }}</span
+    >
+    <i class="pi pi-sort-down"></i>
+  </ng-template>
+
+  <ng-template let-item pTemplate="item">
+    <span
+      *ngIf="item.label !== '--'"
+      [ngClass]="{
+        'ui-dropdown-item--bold': isSelected(item.value)
+      }"
+      >{{ item.label }}</span
+    >
+  </ng-template>
+</p-dropdown>

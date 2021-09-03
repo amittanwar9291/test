@@ -1,0 +1,108 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r f-vertical">
+    <div class="f-vertical f-start o-radio-list m-t-7">
+      <h2 rr-id="sho_m_040230" class="m-b-6">
+        {{ 'shoulderMRT.bones.impression.value' | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="sho_m_040211"
+        [(ngModel)]="model.posttraumaticHillSachsType"
+        label="{{ 'shoulderMRT.bones.hillSachs.value' | translate }}"
+        labelStyleClass="ui-fat-label"
+        name="posttraumaticHillSachsType"
+        [value]="postTraumaticHillSachsType.Normal"
+        rrContentReset="reversePostTraumaHillSachsType-block"
+        rrValidation="posttraumaticHillSachsType"
+      >
+      </p-radioButton>
+      <div
+        class="f-start f-vertical o-radio-list nested-content m-b-19"
+        id="normalPostTraumaHillSachsType-block"
+        [rrDisable]="model.posttraumaticHillSachsType !== postTraumaticHillSachsType.Normal"
+      >
+        <p-checkbox
+          rr-id="sho_m_040212"
+          [(ngModel)]="model.isImpressionPosteroSuperior"
+          label="{{ 'shoulderMRT.bones.impressionPosteroSuperior.value' | translate }}"
+          name="isImpressionPosteroSuperior"
+          binary="true"
+          rrContentReset="isImpressionPosteroSuperior-block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list"
+          id="isImpressionPosteroSuperior-block"
+          [rrDisable]="!model.isImpressionPosteroSuperior"
+        >
+          <p rr-id="sho_m_040213">
+            {{ 'shoulderMRT.bones.angleCircumference.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="sho_m_040225"
+            [(ngModel)]="model.posteroSuperiorDegrees"
+            label="{{ 'shoulderMRT.bones.degrees.value' | translate }}"
+            labelRrId="sho_m_040214"
+            name="posteroSuperiorDegrees"
+            [config]="{ min: 10, max: 145, labelWidth: 180 }"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+      <p-radioButton
+        rr-id="sho_m_040215"
+        [(ngModel)]="model.posttraumaticHillSachsType"
+        label="{{ 'shoulderMRT.bones.reverseHillSachs.value' | translate }}"
+        labelStyleClass="ui-fat-label"
+        name="posttraumaticHillSachsType"
+        [value]="postTraumaticHillSachsType.Reverse"
+        rrContentReset="normalPostTraumaHillSachsType-block"
+        rrValidation="posttraumaticHillSachsType"
+      >
+      </p-radioButton>
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        id="reversePostTraumaHillSachsType-block"
+        [rrDisable]="model.posttraumaticHillSachsType !== postTraumaticHillSachsType.Reverse"
+      >
+        <p-checkbox
+          rr-id="sho_m_040216"
+          [(ngModel)]="model.isImpressionAnteroSuperior"
+          label="{{ 'shoulderMRT.bones.impressionAnteroSuperior.value' | translate }}"
+          name="isImpressionAnteroSuperior"
+          binary="true"
+          rrContentReset="isImpressionAnteroSuperior-block"
+        >
+        </p-checkbox>
+        <div
+          class="f-start f-vertical o-radio-list"
+          id="isImpressionAnteroSuperior-block"
+          [rrDisable]="!model.isImpressionAnteroSuperior"
+        >
+          <p rr-id="sho_m_040217">
+            {{ 'shoulderMRT.bones.angleCircumference.value' | translate }}
+          </p>
+          <rr-number-input
+            inputRrId="sho_m_040226"
+            [(ngModel)]="model.anteroSuperiorDegrees"
+            label="{{ 'shoulderMRT.bones.degrees.value' | translate }}"
+            labelRrId="sho_m_040218"
+            name="anteroSuperiorDegrees"
+            [config]="{ min: 10, max: 145, labelWidth: 180 }"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical">
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+      class="m-t-7"
+    ></rr-reference-picture>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical"></div>
+  <div class="c-col-1 c-pad-l f-vertical"></div>
+</div>

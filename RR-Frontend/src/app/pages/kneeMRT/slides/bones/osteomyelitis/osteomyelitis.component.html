@@ -1,0 +1,304 @@
+<div class="c-col-4 f-vertical col-h-100">
+  <h2 rr-id="kne_m_040226" class="m-b-25" rrValidation="kneeLocation">
+    {{ 'kneeMRT.bones.localizationMultipleSelection.value' | translate }}*
+  </h2>
+  <div class="c-col-4 f-horizontal col-h-100">
+    <div
+      *ngIf="!showLargeLocalizer"
+      class="c-col-2 c-pad-r c-sep f-horizontal col-h-100"
+    >
+      <div class="c-col-1 f-vertical c-sep c-pad-r">
+        <rr-knee-details-simple-small
+          rr-id="kne_m_040230"
+          (click)="toggleLocalizer()"
+          name="kneeLocation"
+          [(ngModel)]="model.kneeLocation"
+          rrValidation="kneeLocation"
+          isLocalizer="true"
+        >
+        </rr-knee-details-simple-small>
+      </div>
+      <div class="c-col-1 f-vertical c-pad-l o-list">
+        <div class="o-radio-list f-vertical m-b-10">
+          <p-checkbox
+            rr-id="kne_m_040352"
+            labelStyleClass="ui-fat-label text-break"
+            label="{{ 'kneeMRT.bones.intraossalAbscessBrodieAbscess.value' | translate }}"
+            name="isAbscess"
+            binary="true"
+            rrContentReset="isAbscess-block"
+            [(ngModel)]="model.isAbscess"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          id="isAbscess-block"
+          class="nested-content o-radio-list f-vertical"
+          [rrDisable]="!model.isAbscess"
+        >
+          <h3 rr-id="kne_m_040353">
+            {{ 'kneeMRT.bones.diameter.value' | translate }}
+          </h3>
+          <rr-number-input
+            inputRrId="kne_m_040354"
+            name="abscessDiameter"
+            [(ngModel)]="model.abscessDiameter"
+            label="{{ 'kneeMRT.bones.largestLesionAxialIn.value' | translate }}"
+            labelRrId="kne_m_040355"
+            [config]="{borderColor: 'blue', min: 1, max: 100}"
+          >
+          </rr-number-input>
+          <p-checkbox
+            rr-id="kne_m_040356"
+            label="{{ 'kneeMRT.bones.moreThanLesion.value' | translate }}"
+            name="isAbscessMoreThanOneLesion"
+            binary="true"
+            [(ngModel)]="model.isAbscessMoreThanOneLesion"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="kne_m_040357"
+            label="{{ 'kneeMRT.bones.peripheralCMEnhancement.value' | translate }}"
+            name="isAbscessPeripheralCMEnhancement"
+            binary="true"
+            [(ngModel)]="model.isAbscessPeripheralCMEnhancement"
+            [rrDisable]="!isCMYes"
+          >
+          </p-checkbox>
+        </div>
+        <div class="o-radio-list f-vertical m-b-28">
+          <p-checkbox
+            rr-id="kne_m_040358"
+            labelStyleClass="ui-fat-label"
+            label="{{ 'kneeMRT.bones.boneMarrowEdema.value' | translate }}"
+            name="isOsteomyelitisBoneMarrowEdema"
+            binary="true"
+            [(ngModel)]="model.isOsteomyelitisBoneMarrowEdema"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="kne_m_040359"
+            labelStyleClass="ui-fat-label"
+            label="{{ 'kneeMRT.bones.osteolysis.value' | translate }}"
+            name="isOsteolysis"
+            binary="true"
+            [(ngModel)]="model.isOsteolysis"
+          >
+          </p-checkbox>
+        </div>
+        <div class="o-radio-list f-vertical m-b-10">
+          <p-checkbox
+            rr-id="kne_m_040360"
+            labelStyleClass="ui-fat-label"
+            label="{{ 'kneeMRT.bones.sequestrum.value' | translate }}"
+            name="isSequestrum"
+            binary="true"
+            rrContentReset="isSequestrum-block"
+            [(ngModel)]="model.isSequestrum"
+          >
+          </p-checkbox>
+        </div>
+        <div
+          id="isSequestrum-block"
+          class="nested-content o-radio-list f-vertical"
+          [rrDisable]="!model.isSequestrum"
+        >
+          <h3 rr-id="kne_m_040361">
+            {{ 'kneeMRT.bones.diameter.value' | translate }}
+          </h3>
+          <rr-number-input
+            inputRrId="kne_m_040362"
+            name="sequestrumDiameter"
+            [(ngModel)]="model.sequestrumDiameter"
+            label="{{ 'kneeMRT.bones.largestLesionAxialIn.value' | translate }}"
+            labelRrId="kne_m_040363"
+            [config]="{ min: 1, max: 100, borderColor: 'blue' }"
+          >
+          </rr-number-input>
+          <p-checkbox
+            rr-id="kne_m_040364"
+            label="{{ 'kneeMRT.bones.moreThanLesion.value' | translate }}"
+            name="isSequestrumMoreThanOneLesion"
+            binary="true"
+            [(ngModel)]="model.isSequestrumMoreThanOneLesion"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="kne_m_040365"
+            label="{{ 'kneeMRT.bones.noCMEnhancement.value' | translate }}"
+            name="isSequestrumNoCMEnhancement"
+            binary="true"
+            [(ngModel)]="model.isSequestrumNoCMEnhancement"
+            [rrDisable]="!isCMYes"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="showLargeLocalizer"
+      class="c-col-2 c-sep c-pad-r f-horizontal col-h-100"
+    >
+      <rr-knee-details-simple-large
+        rr-id="kne_m_040230"
+        name="kneeLocation"
+        (close)="toggleLocalizer()"
+        [(ngModel)]="model.kneeLocation"
+      >
+      </rr-knee-details-simple-large>
+    </div>
+    <div class="c-col-1 c-sep c-pad o-list">
+      <div class="o-radio-list f-vertical">
+        <h2 rr-id="kne_m_040455">
+          {{ 'kneeMRT.bones.corticalis.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="kne_m_040456"
+          label="{{ 'kneeMRT.bones.destruction.value' | translate }}"
+          name="isCorticalisDestruction"
+          binary="true"
+          [(ngModel)]="model.isCorticalisDestruction"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="kne_m_040454"
+          label="{{ 'kneeMRT.bones.thinningScalopping.value' | translate }}"
+          name="isCorticalisThinning"
+          binary="true"
+          [(ngModel)]="model.isCorticalisThinning"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list f-vertical">
+        <h2 rr-id="kne_m_040457">
+          {{ 'kneeMRT.bones.periosteum.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="kne_m_040458"
+          label="{{ 'kneeMRT.bones.periostealThickening.value' | translate }}"
+          name="isPeriostealThickening"
+          binary="true"
+          [(ngModel)]="model.isPeriostealThickening"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="kne_m_040459"
+          label="{{ 'kneeMRT.bones.subperiostealAbscess.value' | translate }}"
+          name="isSubperiostealAbscess"
+          binary="true"
+          rrContentReset="isSubperiostealAbscess-block"
+          [(ngModel)]="model.isSubperiostealAbscess"
+        >
+        </p-checkbox>
+        <div
+          id="isSubperiostealAbscess-block"
+          class="nested-content o-radio-list f-vertical"
+          [rrDisable]="!model.isSubperiostealAbscess"
+        >
+          <h3 rr-id="kne_m_040460">
+            {{ 'kneeMRT.bones.periosteumDiameter.value' | translate }}
+          </h3>
+          <rr-number-input
+            inputRrId="kne_m_040461"
+            name="subperiostealAbscessDiameter"
+            [(ngModel)]="model.subperiostealAbscessDiameter"
+            label="{{ 'kneeMRT.bones.largestLesionAxialIn.value' | translate }}"
+            labelRrId="kne_m_040462"
+            [config]="{ min: 1, max: 150, borderColor: 'blue' }"
+          >
+          </rr-number-input>
+        </div>
+        <p-checkbox
+          rr-id="kne_m_040463"
+          label="{{ 'kneeMRT.bones.periostrupture.value' | translate }}"
+          name="isPeriostrupture"
+          binary="true"
+          [(ngModel)]="model.isPeriostrupture"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list f-vertical">
+        <p-checkbox
+          rr-id="kne_m_040464"
+          label="{{ 'kneeMRT.bones.softTissueEdema.value' | translate }}"
+          name="isOsteomyelitisSoftTissueEdema"
+          binary="true"
+          [(ngModel)]="model.isOsteomyelitisSoftTissueEdema"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="kne_m_040465"
+          label="{{ 'kneeMRT.bones.periostealBoneApposition.value' | translate }}"
+          name="isPeriostealBoneApposition"
+          binary="true"
+          [(ngModel)]="model.isPeriostealBoneApposition"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l o-list">
+      <div class="o-radio-list f-vertical">
+        <h2 rr-id="kne_m_040507">
+          {{ 'kneeMRT.bones.stage.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="kne_m_040508"
+          rrUnClickRadio
+          label="{{ 'kneeMRT.bones.acutely.value' | translate }}"
+          name="stageType"
+          [value]="stageType.Acutely"
+          [(ngModel)]="model.stageType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_040509"
+          rrUnClickRadio
+          label="{{ 'kneeMRT.bones.chronically.value' | translate }}"
+          name="stageType"
+          [value]="stageType.Chronically"
+          [(ngModel)]="model.stageType"
+        >
+        </p-radioButton>
+      </div>
+      <div class="o-radio-list f-vertical">
+        <h2 rr-id="kne_m_040510">
+          {{ 'kneeMRT.bones.differentialDiagnosis.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="kne_m_040511"
+          rrUnClickRadio
+          rrContentReset="isDiagnosisSubordinated"
+          label="{{ 'kneeMRT.bones.ewingSarcoma.value' | translate }}"
+          name="differentialDiagnosisType"
+          [value]="differentialDiagnosisType.EwingSarcoma"
+          [(ngModel)]="model.differentialDiagnosisType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="kne_m_040512"
+          rrUnClickRadio
+          rrContentReset="isDiagnosisSubordinated"
+          label="{{ 'kneeMRT.bones.chondroblastoma.value' | translate }}"
+          name="differentialDiagnosisType"
+          [value]="differentialDiagnosisType.Chondroblastoma"
+          [(ngModel)]="model.differentialDiagnosisType"
+        >
+        </p-radioButton>
+        <div
+          id="isDiagnosisSubordinated"
+          class="nested-content"
+          [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisType.None"
+        >
+          <p-checkbox
+            rr-id="kne_m_040513"
+            label="{{ 'kneeMRT.bones.subordinated.value' | translate }}"
+            name="isDiagnosisSubordinated"
+            binary="true"
+            [(ngModel)]="model.isDiagnosisSubordinated"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r o-list">
+    <h2
+      rr-id="kne_m_060202"
+      rrInfoIcon="kne_m_060204"
+      class="m-t-4 m-b-13 non-break-icon"
+      rrValidation="location"
+    >
+      {{ 'kneeMRT.osteoInterface.localization.value' | translate }}
+    </h2>
+    <rr-knee-osteo
+      rr-id="kne_m_060203"
+      [(ngModel)]="model.location"
+      name="location"
+      rrValidation="location"
+      isLocalizer="true"
+    ></rr-knee-osteo>
+  </div>
+  <div class="c-col-2 c-sep c-pad f-vertical">
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad-r m-t-40">
+        <div class="f-start f-vertical o-list">
+          <h2 rr-id="kne_m_060339" class="m-b-15">
+            {{ 'kneeMRT.osteoInterface.classification.value' | translate }}
+          </h2>
+          <div class="f-start f-vertical o-radio-list">
+            <p-radioButton
+              rr-id="kne_m_060340"
+              [(ngModel)]="model.classificationType"
+              label="{{ 'kneeMRT.osteoInterface.cartilageIntactStableLesion.value' | translate }}"
+              name="classificationType"
+              [value]="classificationType.CartilageIntactStableLesion"
+              rrUnClickRadio
+              rrContentReset="cartilageIntactStableLesion-block chondralLesionUnstableLesion-block"
+            ></p-radioButton>
+            <div
+              class="f-start f-vertical nested-content"
+              id="cartilageIntactStableLesion-block"
+              [rrDisable]="model.classificationType !== classificationType.CartilageIntactStableLesion"
+            >
+              <p-checkbox
+                rr-id="kne_m_060341"
+                [(ngModel)]="model.isBoneMarrowOedema"
+                label="{{ 'kneeMRT.osteoInterface.boneMarrowEdema.value' | translate }}"
+                binary="true"
+                name="isBoneMarrowOedema"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="f-start f-vertical o-radio-list">
+            <p-radioButton
+              rr-id="kne_m_060342"
+              [(ngModel)]="model.classificationType"
+              label="{{ 'kneeMRT.osteoInterface.chondralLesionUnstableLesion.value' | translate }}"
+              name="classificationType"
+              [value]="classificationType.ChondralLesionUnstableLesion"
+              rrUnClickRadio
+              rrContentReset="cartilageIntactStableLesion-block chondralLesionUnstableLesion-block"
+            ></p-radioButton>
+            <div
+              id="chondralLesionUnstableLesion-block"
+              class="f-start f-vertical o-radio-list nested-content"
+              [rrDisable]="model.classificationType !== classificationType.ChondralLesionUnstableLesion"
+            >
+              <p-checkbox
+                rr-id="kne_m_060343"
+                [(ngModel)]="model.isDetectionOsteochondralFragment"
+                label="{{ 'kneeMRT.osteoInterface.detectionOsteochondralFragment.value' | translate }}"
+                binary="true"
+                name="isDetectionOsteochondralFragment"
+                rrContentReset="isDetectionOsteochondralFragment-block"
+              >
+              </p-checkbox>
+              <div
+                class="f-start f-vertical o-radio-list nested-content"
+                id="isDetectionOsteochondralFragment-block"
+                [rrDisable]="!model.isDetectionOsteochondralFragment"
+              >
+                <p-radioButton
+                  rr-id="kne_m_060344"
+                  [(ngModel)]="model.detectionDissekatType"
+                  label="{{ 'kneeMRT.osteoInterface.inSitu.value' | translate }}"
+                  name="detectionDissekatType"
+                  [value]="detectionDissekatType.InSitu"
+                  rrUnClickRadio
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="kne_m_060345"
+                  [(ngModel)]="model.detectionDissekatType"
+                  label="{{ 'kneeMRT.osteoInterface.displaced.value' | translate }}"
+                  name="detectionDissekatType"
+                  [value]="detectionDissekatType.Displaced"
+                  rrUnClickRadio
+                ></p-radioButton>
+              </div>
+              <p-checkbox
+                rr-id="kne_m_060346"
+                [(ngModel)]="model.isIntraosseousCysts"
+                label="{{ 'kneeMRT.osteoInterface.intraosseousCystsNextTo.value' | translate }}"
+                binary="true"
+                name="isIntraosseousCysts"
+                labelStyleClass="text-break"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="kne_m_060347"
+                [(ngModel)]="model.isFluidEquivalentHem"
+                label="{{ 'kneeMRT.osteoInterface.detectionOfAFluidEquivalentZone.value' | translate }}"
+                binary="true"
+                name="isFluidEquivalentHem"
+                rrContentReset="isFluidEquivalentHem-block"
+              >
+              </p-checkbox>
+              <div
+                class="f-start f-vertical nested-content"
+                id="isFluidEquivalentHem-block"
+                [rrDisable]="!model.isFluidEquivalentHem"
+              >
+                <p-checkbox
+                  rr-id="kne_m_060348"
+                  [(ngModel)]="model.isIsointensToSynovia"
+                  label="{{ 'kneeMRT.osteoInterface.isointensToSynovia.value' | translate }}"
+                  labelStyleClass="text-break2"
+                  binary="true"
+                  name="isIsointensToSynovia"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </div>
+          <p-radioButton
+            rr-id="kne_m_060349"
+            [(ngModel)]="model.classificationType"
+            [value]="classificationType.OldLesionEntirelyFilledWithFluid"
+            label="{{ 'kneeMRT.osteoInterface.oldLesionEntirelyFilledWithFluid.value' | translate }}"
+            name="classificationType"
+            labelStyleClass="text-break"
+            rrUnClickRadio
+            rrContentReset="cartilageIntactStableLesion-block chondralLesionUnstableLesion-block"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l m-t-40">
+        <div class="f-start f-vertical o-list">
+          <h2 rr-id="kne_m_060434" class="m-b-15">
+            {{
+            'kneeMRT.osteoInterface.classificationRegardingGrowthPlates.value' |
+            translate }}
+          </h2>
+          <div class="f-start f-vertical o-radio-list">
+            <p-radioButton
+              rr-id="kne_m_060435"
+              [(ngModel)]="model.epiphysealJointType"
+              label="{{ 'kneeMRT.osteoInterface.openJuwenileShape.value' | translate }}"
+              name="epiphysealJointType"
+              [value]="epiphysealJointType.Open"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="kne_m_060436"
+              [(ngModel)]="model.epiphysealJointType"
+              label="{{ 'kneeMRT.osteoInterface.closedAddulteForm.value' | translate }}"
+              name="epiphysealJointType"
+              [value]="epiphysealJointType.Close"
+              rrUnClickRadio
+            ></p-radioButton>
+            <h2 rr-id="kne_m_060437" class="m-b-14">
+              {{ 'kneeMRT.osteoInterface.lesionDiameter.value' | translate }}
+            </h2>
+            <rr-number-input
+              rr-id="kne_m_060438"
+              labelRrId="kne_m_060439"
+              [(ngModel)]="model.lesionDiameter"
+              name="lesionDiameter"
+              label="{{ 'kneeMRT.osteoInterface.lesionDiameterInMm.value' | translate }}"
+              [config]="{ max: 30 }"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

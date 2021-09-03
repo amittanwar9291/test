@@ -1,0 +1,23 @@
+<div class="main-header-container f-horizontal f-space-between f-align-center">
+  <div class="header-title f-horizontal f-start f-align-center">
+    <div class="header-title__circle f-vertical f-center f-align-center">
+      <div class="circle-page" *ngIf="!isLastPage()">
+        {{navData.currentPageNumber}}
+      </div>
+      <div class="circle-report" *ngIf="isLastPage()">
+        {{'layout.reportShortcut' | translate}}
+      </div>
+    </div>
+    <div class="header-title__title">
+      {{navData.currentPageName | translate}}
+      <rr-info-icon
+        *ngIf="infoIconConfig.rrid"
+        [attr.rr-id]="infoIconConfig.rrid"
+        [pdfLandscape]="infoIconConfig.isHorizontal"
+      >
+      </rr-info-icon>
+    </div>
+  </div>
+  <rr-slide-navigation (searchClicked)="onSearchClicked()">
+  </rr-slide-navigation>
+</div>

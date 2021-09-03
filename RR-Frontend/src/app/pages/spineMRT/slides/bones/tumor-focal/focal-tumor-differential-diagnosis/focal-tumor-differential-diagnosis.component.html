@@ -1,0 +1,92 @@
+<div class="f-horizontal w-100">
+  <div
+    class="c-col-1 c-sep c-pad f-vertical f-start bones-tab-column o-list m-t-10"
+  >
+    <div class="f-vertical f-start o-list m-l-9">
+      <h2 rr-id="spi_m_060224" class="m-b-12">
+        {{'spineMRT.bones.differentialDiagnosis.value' | translate}}
+      </h2>
+      <div class="o-radio-list">
+        <div [rrDisable]="disabledDiagnosis()" class="m-b-7">
+          <p rr-id="spi_m_060225" class="m-b-2">
+            {{'spineMRT.bones.differentialDiagnosis1.value' | translate}}*
+          </p>
+          <div class="diagnosis-width">
+            <rr-differential-diagnosis-dropdown
+              [diagnosisNumber]="1"
+              [options]="differentialDiagnosisOptions1"
+              [(ngModel)]="model.differentialDiagnosis01"
+              name="differentialDiagnosis01"
+              group="true"
+              rrId="spi_m_060226"
+              [parentViewModel]="model"
+              rrValidation="differentialDiagnosis01"
+              (selectionChanged)="clearSubordinated()"
+            >
+            </rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+
+        <div
+          [rrDisable]="model.differentialDiagnosis01 === 'None' && model.mainCharacteristicsDifferentialDiagnosis01 === 'None'"
+          class="o-radio-list"
+        >
+          <p rr-id="spi_m_060227" class="m-b-2">
+            {{'spineMRT.bones.differentialDiagnosis2.value' | translate}}
+          </p>
+          <div class="spine-bones_dropdown">
+            <rr-differential-diagnosis-dropdown
+              [diagnosisNumber]="2"
+              [options]="differentialDiagnosisOptions2"
+              [(ngModel)]="model.differentialDiagnosis02"
+              name="differentialDiagnosis02"
+              group="true"
+              rrId="spi_m_060228"
+              [parentViewModel]="model"
+              (selectionChanged)="clearSubordinated()"
+            >
+            </rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+        <div [rrDisable]="model.differentialDiagnosis02 === 'None'">
+          <p-checkbox
+            rr-id="spi_m_060229"
+            class="m-b-7"
+            label="{{'spineMRT.bones.secondary.value' | translate}}"
+            name="isSecondary"
+            [(ngModel)]="model.isSecondary"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+
+        <div
+          [rrDisable]="model.differentialDiagnosis02 === 'None'"
+          class="o-radio-list"
+        >
+          <p rr-id="spi_m_060230" class="m-b-2">
+            {{'spineMRT.bones.differentialDiagnosis3.value' | translate}}
+          </p>
+          <div class="spine-bones_dropdown">
+            <rr-differential-diagnosis-dropdown
+              [diagnosisNumber]="3"
+              [options]="differentialDiagnosisOptions2"
+              [(ngModel)]="model.differentialDiagnosis03"
+              name="differentialDiagnosis03"
+              group="true"
+              rrId="spi_m_060231"
+              [parentViewModel]="model"
+            ></rr-differential-diagnosis-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-sep c-pad f-vertical f-start bones-tab-column m-t-10"
+  ></div>
+  <div
+    class="c-col-1 c-sep c-pad f-vertical f-start bones-tab-column m-t-10"
+  ></div>
+  <div class="c-col-1 c-pad-l f-vertical f-start bones-tab-column m-t-10"></div>
+</div>

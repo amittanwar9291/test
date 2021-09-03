@@ -1,0 +1,23 @@
+export enum AnamnesisFindingTypeEnum {
+  None = 'None',
+  Headache = 'Headache',
+  Vertigo = 'Vertigo',
+  VisualDisturbances = 'Visual disturbances',
+  CognitiveChanges = 'Cognitive changes',
+  DisordersOfConsciousness = 'Disorders of consciousness',
+  SignsOfIncreasedIntracranialPressureICP = 'Signs of increased intracranial pressure (ICP)',
+  SignsOfInflammation = 'Signs of inflammation',
+  MotorDeficit = 'Motor deficit',
+  CranialNerves = 'Cranial nerves',
+  Dysesthesia = 'Dysesthesia',
+  Tremor = 'Tremor',
+  Ataxia = 'Ataxia',
+  SpeechDisorder = 'Speech disorder',
+  Dysphagia = 'Dysphagia',
+  HearingImpairment = 'Hearing impairment',
+  PupilEyelidEyeOrbit = 'Pupil/eyelid/eye orbit',
+  Nystagmus = 'Nystagmus',
+  Sinusitis = 'Sinusitis',
+  EndocrineDisorder = 'Endocrine disorder',
+  PsychiatricDisorder = 'Psychiatric disorder'
+}

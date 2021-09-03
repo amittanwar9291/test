@@ -1,0 +1,170 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r">
+    <div class="o-list f-vertical">
+      <div class="f-start f-vertical m-b-23">
+        <h2 rr-id="kne_m_070234" rrInfoIcon="kne_m_070235" class="text-break">
+          {{ 'kneeMRT.patella.osteochondrosisDissecans.value' | translate }}
+        </h2>
+      </div>
+      <div class="f-start f-vertical o-radio-list">
+        <h2 rr-id="kne_m_070217" rrInfoIcon="kne_m_07_01">
+          {{ 'kneeMRT.patella.localization.value' | translate }}
+        </h2>
+      </div>
+      <div class="f-start f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="kne_m_070219"
+          [(ngModel)]="model.isMedialFacet"
+          binary="true"
+          label="{{ 'kneeMRT.patella.medialFacet.value' | translate }}"
+          name="isMedialFacet"
+          rrValidation="isMedialFacet isLateralFacet"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="kne_m_070221"
+          [(ngModel)]="model.isLateralFacet"
+          binary="true"
+          label="{{ 'kneeMRT.patella.lateralFacet.value' | translate }}"
+          name="isLateralFacet"
+          rrValidation="isMedialFacet isLateralFacet"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad">
+    <div class="f-start f-vertical o-list">
+      <h2 rr-id="kne_m_070324">
+        {{ 'kneeMRT.patella.classification.value' | translate }}
+      </h2>
+      <div class="f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="kne_m_070325"
+          [(ngModel)]="model.classificationType"
+          label="{{ 'kneeMRT.patella.cartilageIntactStableLesion.value' | translate }}"
+          name="classificationType"
+          [value]="patellaClassificationType.CartilageIntact"
+          rrUnClickRadio
+          rrContentReset="cartilageIntact-block cartilageDefect-block"
+        >
+        </p-radioButton>
+        <div
+          id="cartilageIntact-block"
+          class="f-start f-vertical nested-content"
+          [rrDisable]="model.classificationType !== 'CartilageIntact'"
+        >
+          <p-checkbox
+            rr-id="kne_m_070326"
+            [(ngModel)]="model.isBoneMarrowEdema"
+            binary="true"
+            label="{{ 'kneeMRT.patella.boneMarrowEdema.value' | translate }}"
+            name="isBoneMarrowEdema"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="kne_m_070327"
+          [(ngModel)]="model.classificationType"
+          label="{{ 'kneeMRT.patella.chondralLesion.value' | translate }}"
+          name="classificationType"
+          [value]="patellaClassificationType.ChondralLesion"
+          rrUnClickRadio
+          rrContentReset="cartilageIntact-block cartilageDefect-block"
+        >
+        </p-radioButton>
+        <div
+          id="cartilageDefect-block"
+          class="f-start f-vertical o-radio-list nested-content"
+          [rrDisable]="model.classificationType !== 'ChondralLesion'"
+        >
+          <p rr-id="kne_m_070328">
+            {{ 'kneeMRT.patella.detectionDissekat.value' | translate }}
+          </p>
+          <p-radioButton
+            rr-id="kne_m_070329"
+            [(ngModel)]="model.detectionDissekatType"
+            label="{{ 'kneeMRT.patella.inSitu.value' | translate }}"
+            name="detectionDissekatType"
+            [value]="patellaDetectionDissekatType.InSitu"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="kne_m_070330"
+            class="m-b-80"
+            [(ngModel)]="model.detectionDissekatType"
+            label="{{ 'kneeMRT.patella.displaced.value' | translate }}"
+            name="detectionDissekatType"
+            [value]="patellaDetectionDissekatType.Displaced"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="f-start f-vertical o-radio-list">
+      <h2 rr-id="kne_m_070331" class="m-b-15">
+        {{ 'kneeMRT.patella.classificationRegardingEpiphysealJoints.value' |
+        translate }}
+      </h2>
+      <p-radioButton
+        rr-id="kne_m_070332"
+        [(ngModel)]="model.classificationRegardingJointsType"
+        label="{{ 'kneeMRT.patella.openJuwenileForm.value' | translate }}"
+        name="classificationRegardingJointsType"
+        [value]="classificationRegardingJointsType.Open"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="kne_m_070333"
+        [(ngModel)]="model.classificationRegardingJointsType"
+        label="{{ 'kneeMRT.patella.closedAddultForm.value' | translate }}"
+        name="classificationRegardingJointsType"
+        [value]="classificationRegardingJointsType.Closed"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad">
+    <div class="f-start f-vertical o-radio-list m-b-35">
+      <p-checkbox
+        rr-id="kne_m_070418"
+        [(ngModel)]="model.isLesionDiameter"
+        binary="true"
+        label="{{ 'kneeMRT.patella.lesionDiameterInMm.value' | translate }}"
+        name="isLesionDiameter"
+        labelStyleClass="ui-fat-label"
+        rrContentReset="lesionDiameterInMm-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start f-vertical"
+        id="lesionDiameterInMm-block"
+        [rrDisable]="!model.isLesionDiameter"
+      >
+        <rr-number-input
+          inputRrId="kne_m_070419"
+          labelRrId="kne_m_070420"
+          [(ngModel)]="model.lesionDiameterInMm"
+          name="lesionDiameterInMm"
+          [label]="'kneeMRT.patella.maxDiameterInMm.value' | translate"
+          [config]="{ labelWidth: 150,  max: 30 }"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+    <p-checkbox
+      rr-id="kne_m_070421"
+      [(ngModel)]="model.isOldLesion"
+      binary="true"
+      label="{{ 'kneeMRT.patella.oldLesionEntirelyFilledWithLiquid.value' | translate }}"
+      name="isOldLesion"
+      labelStyleClass="ui-fat-label"
+    >
+    </p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

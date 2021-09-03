@@ -1,0 +1,433 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 o-list">
+    <div class="o-radio-list f-vertical">
+      <h2 rr-id="hea_m_040271">
+        {{ "headMRT.vessels.arterialTerritory.value" | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_040272"
+        name="arterialTerritoryType"
+        [(ngModel)]="model.arterialTerritoryType"
+        [value]="arterialTerritoryEnum.ArteriaSupplyArea"
+        label="{{'headMRT.vessels.arterialSupplyArea.value' | translate}}"
+        rrContentReset="shapeTypeContainer venousVascularTerritoriesContainer"
+        rrValidation="arterialTerritoryType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_040273"
+        name="localizationType"
+        [(ngModel)]="model.arterialTerritoryType"
+        [value]="arterialTerritoryEnum.VenousVascularTerritories"
+        (click)="resetLocalizer(); closeError(); resetVascularTerritoryType()"
+        rrInfoIcon="hea_m_04_13"
+        [infoIconPdfLandscape]="true"
+        rrContentReset="shapeTypeContainer venousVascularTerritoriesContainer"
+        rrValidation="arterialTerritoryType"
+        label="{{'headMRT.vessels.venousVascularTerritories.value' | translate}}"
+      >
+      </p-radioButton>
+      <div
+        class="o-radio-list f-vertical"
+        *ngIf="model.arterialTerritoryType === arterialTerritoryEnum.ArteriaSupplyArea"
+        id="shapeTypeContainer"
+      >
+        <h3 rr-id="hea_m_040274">
+          {{ "headMRT.vessels.pattern.value" | translate }}*
+        </h3>
+        <p-dropdown
+          rr-id="hea_m_040275"
+          name="formType"
+          styleClass="ui-brown-box o-width-100"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          rrDropdownClear
+          [options]="formDropdown"
+          [(ngModel)]="model.formType"
+          rrValidation="formType"
+          (onChange)="resetFormTypeDropdown()"
+        >
+        </p-dropdown>
+        <div
+          class="o-radio-list f-vertical"
+          *ngIf="model.formType === formTypeEnum.TypicalAreasOfInfarction"
+        >
+          <h3 rr-id="hea_m_040276" rrValidation="vascularTerritoryLocations">
+            {{ "headMRT.vessels.vascularTerritory.value" | translate }}*
+          </h3>
+          <rr-arterial-territories-localizer-simple
+            rr-id="hea_m_040277"
+            (click)="openLargeLocalizer('arterialTerritories')"
+            [(ngModel)]="model.vascularTerritoryLocations"
+            name="vascularTerritoryLocations"
+            rrValidation="vascularTerritoryLocations"
+            isLocalizer="true"
+          ></rr-arterial-territories-localizer-simple>
+        </div>
+        <div
+          class="o-radio-list f-vertical"
+          *ngIf="model.formType === formTypeEnum.RareTerritorialInfarcts"
+        >
+          <h3 rr-id="hea_m_040276">
+            {{ "headMRT.vessels.vascularTerritory.value" | translate }}*
+          </h3>
+          <p-radioButton
+            rr-id="hea_m_040278"
+            labelStyleClass="text-break"
+            rrInfoIcon="hea_m_04_01"
+            name="vascularTerritoryType"
+            [(ngModel)]="model.vascularTerritoryType"
+            [value]="vascularTerritoryTypeEnum.MultipleSmallInfarcts"
+            rrValidation="vascularTerritoryType"
+            label="{{'headMRT.vessels.multipleSmallInfarctsIndifferent.value' | translate}}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_040279"
+            labelStyleClass="text-break"
+            name="vascularTerritoryType"
+            [(ngModel)]="model.vascularTerritoryType"
+            [value]="vascularTerritoryTypeEnum.BilateralThalamicInfarcts
+                          "
+            rrValidation="vascularTerritoryType"
+            label="{{'headMRT.vessels.bilateralThalamicInfarctsPercheron.value' | translate
+                          }}"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_040280"
+            labelStyleClass="text-break"
+            class="text-break"
+            name="vascularTerritoryType"
+            [(ngModel)]="model.vascularTerritoryType"
+            [value]="vascularTerritoryTypeEnum.DorsolateralInfarctMedulla"
+            rrValidation="vascularTerritoryType"
+            label="{{'headMRT.vessels.dorsolateralInfarctInmedullaOblongataWallenberg.value'| translate}}"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div
+      class="o-list f-vertical"
+      *ngIf="model.arterialTerritoryType === arterialTerritoryEnum.VenousVascularTerritories"
+      id="venousVascularTerritoriesContainer"
+    >
+      <h2 rr-id="hea_m_040281">
+        {{ "headMRT.vessels.drainageAreas.value" | translate }}*
+      </h2>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="hea_m_040282"
+          id="corticalVeins"
+          name="isCorticalVeins"
+          [rrValidation]="drainageAreasValidation"
+          [(ngModel)]="model.isCorticalVeins"
+          rrContentReset="corticalVeinsContainer"
+          binary="true"
+          label="{{ 'headMRT.vessels.corticalVeins.value' | translate }}"
+        >
+        </p-checkbox>
+        <div
+          id="corticalVeinsContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isCorticalVeins"
+        >
+          <p-checkbox
+            rr-id="hea_m_040283"
+            name="isCorticalVeinsRight"
+            [(ngModel)]="model.isCorticalVeinsRight"
+            binary="true"
+            label="{{ 'headMRT.vessels.right.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040284"
+            name="isCorticalVeinsLeft"
+            [(ngModel)]="model.isCorticalVeinsLeft"
+            binary="true"
+            label="{{ 'headMRT.vessels.left.value' | translate }}"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="hea_m_040285"
+          name="isInternalCerebralVeins"
+          [rrValidation]="drainageAreasValidation"
+          [(ngModel)]="model.isInternalCerebralVeins"
+          rrContentReset="internalCerebralVeinsContainer"
+          binary="true"
+          label="{{ 'headMRT.vessels.internalCerebralVeins.value' | translate }}"
+        >
+        </p-checkbox>
+        <div
+          id="internalCerebralVeinsContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isInternalCerebralVeins"
+        >
+          <p-checkbox
+            rr-id="hea_m_040286"
+            name="isInternalCerebralVeinsRight"
+            [(ngModel)]="model.isInternalCerebralVeinsRight"
+            binary="true"
+            label="{{ 'headMRT.vessels.right.value' | translate }}"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040287"
+            name="isInternalCerebralVeinsLeft"
+            [(ngModel)]="model.isInternalCerebralVeinsLeft"
+            binary="true"
+            label="{{ 'headMRT.vessels.left.value' | translate }}"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="hea_m_040288"
+          name="isVeinOfLabbeRight"
+          [(ngModel)]="model.isVeinOfLabbeRight"
+          [rrValidation]="drainageAreasValidation"
+          binary="true"
+          label="{{ 'headMRT.vessels.rightVeinOfLabbé.value' | translate }}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040289"
+          name="isVeinOfLabbeLeft"
+          [(ngModel)]="model.isVeinOfLabbeLeft"
+          [rrValidation]="drainageAreasValidation"
+          binary="true"
+          label="{{ 'headMRT.vessels.leftVeinOfLabbé.value' | translate }}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040290"
+          name="isSphenoparietalSinusRight"
+          [(ngModel)]="model.isSphenoparietalSinusRight"
+          binary="true"
+          [rrValidation]="drainageAreasValidation"
+          label="{{'headMRT.vessels.rightSphenoparietalSinus.value' | translate}}"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hea_m_040291"
+          name="isSphenoparietalSinusLeft"
+          [(ngModel)]="model.isSphenoparietalSinusLeft"
+          binary="true"
+          [rrValidation]="drainageAreasValidation"
+          label="{{'headMRT.vessels.leftSphenoparietalSinus.value' | translate}}"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="f-vertical m-t-15 o-radio-list">
+    <h2 rr-id="hea_m_040385" class="c-pad-l">
+      {{ "headMRT.vessels.allocation.value" | translate }}
+    </h2>
+    <div class="f-horizontal">
+      <div class="c-sep f-vertical m-b-15">
+        <h2 rr-id="hea_m_040203" class="c-pad-l m-b-5">
+          {{ "headMRT.vessels.localizationCortexwhiteMatter.value" | translate
+          }}
+        </h2>
+        <div class="f-horizontal">
+          <div class="c-col-1 c-sep c-pad">
+            <h2 rr-id="hea_m_040203">
+              <rr-cortex-localizer-simple
+                rr-id="hea_m_040387"
+                (click)="openLargeLocalizer('cortex')"
+                [(ngModel)]="model.cortexLocations"
+                name="cortexLocalizerSimple"
+              >
+              </rr-cortex-localizer-simple>
+            </h2>
+          </div>
+          <div
+            class="c-col-1 c-sep c-pad o-radio-list"
+            [rrDisable]="col4TitleCondition()"
+          >
+            <h2 rr-id="hea_m_040481">
+              {{ "headMRT.vessels.brainAreasDetailed.value" | translate }}
+            </h2>
+            <div
+              class="o-radio-list"
+              [rrDisable]="!model.cortexLocations.parietalLobeRight && !model.cortexLocations.parietalLobeLeft"
+            >
+              <h3 rr-id="hea_m_040482">
+                {{ "headMRT.vessels.parietalLobe.value" | translate }}
+              </h3>
+              <p-checkbox
+                rr-id="hea_m_040483"
+                name="isPraecuneus"
+                binary="true"
+                label="{{'headMRT.vessels.praecuneus.value' | translate}}"
+                [(ngModel)]="model.isPraecuneus"
+              >
+              </p-checkbox>
+            </div>
+            <div
+              class="o-radio-list"
+              [rrDisable]="!model.cortexLocations.occipitalLobeRight && !model.cortexLocations.occipitalLobeLeft"
+            >
+              <h3 rr-id="hea_m_040484">
+                {{ "headMRT.vessels.occipitalLobe.value" | translate }}
+              </h3>
+              <p-checkbox
+                rr-id="hea_m_040485"
+                name="isCuneus"
+                binary="true"
+                label="{{'headMRT.vessels.cuneus.value' | translate}}"
+                [(ngModel)]="model.isCuneus"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_040486"
+                name="isLingualGyrus"
+                binary="true"
+                label="{{'headMRT.vessels.lingualGyrus.value' | translate}}"
+                [(ngModel)]="model.isLingualGyrus"
+              >
+              </p-checkbox>
+            </div>
+            <div
+              class="o-radio-list"
+              [rrDisable]="!model.cortexLocations.temporalLobeRight && !model.cortexLocations.temporalLobeLeft"
+            >
+              <h3 rr-id="hea_m_040487">
+                {{ "headMRT.vessels.temporalLobe.value" | translate }}
+              </h3>
+              <p-checkbox
+                rr-id="hea_m_040488"
+                name="isGyrusTemporalisTransversus"
+                binary="true"
+                label="{{'headMRT.vessels.gyrusTemporalisTransversus.value' | translate}}"
+                [(ngModel)]="model.isGyrusTemporalisTransversus"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_040489"
+                name="isLateralOccipitotemporalGyrus"
+                binary="true"
+                label="{{'headMRT.vessels.lateralOccipitotemporalGyrus.value' | translate}}"
+                [(ngModel)]="model.isLateralOccipitotemporalGyrus"
+              >
+              </p-checkbox>
+            </div>
+            <div
+              class="o-radio-list"
+              [rrDisable]="!model.cortexLocations.cerebellum"
+            >
+              <h3 rr-id="hea_m_040490">
+                {{ "headMRT.vessels.cerebellum.value" | translate }}
+              </h3>
+              <p-checkbox
+                rr-id="hea_m_040491"
+                name="isParsIntermedia"
+                binary="true"
+                label="{{'headMRT.vessels.parsIntermedia.value' | translate}}"
+                [(ngModel)]="model.isParsIntermedia"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_040492"
+                name="isSuperiorCerebellarPeduncle"
+                binary="true"
+                label="{{'headMRT.vessels.superiorCerebellarPeduncle.value' | translate}}"
+                [(ngModel)]="model.isSuperiorCerebellarPeduncle"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_040493"
+                name="isMiddleCerebellarPeduncle"
+                binary="true"
+                label="{{'headMRT.vessels.middleCerebellarPeduncle.value' | translate}}"
+                [(ngModel)]="model.isMiddleCerebellarPeduncle"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_040494"
+                name="isInferiorCerebellarPeduncle"
+                binary="true"
+                label="{{'headMRT.vessels.inferiorCerebellarPeduncle.value' | translate}}"
+                [(ngModel)]="model.isInferiorCerebellarPeduncle"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l o-list">
+        <div class="o-radio-list">
+          <h2 rr-id="hea_m_040545">
+            {{ "headMRT.vessels.allocationTwo.value" | translate }}
+          </h2>
+          <p-checkbox
+            rr-id="hea_m_040546"
+            name="isCortex"
+            binary="true"
+            label="{{'headMRT.vessels.cortex.value' | translate}}"
+            [(ngModel)]="model.isCortex"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_040547"
+            name="isWhiteMatter"
+            binary="true"
+            label="{{'headMRT.vessels.whiteMatter.value' | translate}}"
+            [(ngModel)]="model.isWhiteMatter"
+            (onChange)="model.whiteMatterType = whiteMatterDropdownEnum.None"
+          >
+          </p-checkbox>
+          <div class="p-r-20 o-radio-list nested-content">
+            <p-dropdown
+              [rrDisable]="!model.isWhiteMatter"
+              rr-id="hea_m_040548"
+              name="whiteMatterType"
+              styleClass="ui-brown-box o-width-100"
+              placeholder="{{ 'headMRT.vessels.w067PlaceholderLokalisationWhiteMatter.value' | translate }}"
+              rrDropdownClear
+              [options]="whiteMatterDropdown"
+              [(ngModel)]="model.whiteMatterType"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="hea_m_040549">
+            {{ "headMRT.vessels.details.value" | translate }}
+          </h2>
+          <p-radioButton
+            rr-id="hea_m_040550"
+            name="detailsTypeEnum"
+            label="{{'headMRT.vessels.periventricular.value' | translate}}"
+            [(ngModel)]="model.detailsType"
+            [value]="detailsTypeEnum.Periventricular"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hea_m_040551"
+            name="detailsTypeEnum"
+            label="{{'headMRT.vessels.confluent.value' | translate}}"
+            [(ngModel)]="model.detailsType"
+            [value]="detailsTypeEnum.Confluent"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <h2 rr-id="hea_m_040552" class="m-b-5">
+          {{ "headMRT.vessels.localizationBasalGanglia.value" | translate }}
+        </h2>
+        <rr-basal-ganglia-locations-simple
+          rr-id="hea_m_040553"
+          (click)="openLargeLocalizer('basalGanglia')"
+          [(ngModel)]="model.basalGangliaLocations"
+          name="basalGangliaLocations"
+          isLocalizer="true"
+        >
+        </rr-basal-ganglia-locations-simple>
+      </div>
+    </div>
+  </div>
+</div>

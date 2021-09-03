@@ -1,0 +1,395 @@
+<div
+  class="f-horizontal f-start col-h-100 c-sep-l c-pad-l"
+  id="chronicFemoropoplitealCont"
+>
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="ang_m_080320">
+      {{'angiographyMRT.pelvisLegArteries.side.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="ang_m_080321"
+      label="{{'angiographyMRT.pelvisLegArteries.right.value' | translate}}"
+      name="sideType"
+      [value]="locationTypeEnum.Right"
+      [(ngModel)]="model.sideType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080322"
+      label="{{'angiographyMRT.pelvisLegArteries.left.value' | translate}}"
+      name="sideType"
+      [value]="locationTypeEnum.Left"
+      [(ngModel)]="model.sideType"
+      rrUnClickRadio
+    ></p-radioButton>
+
+    <h2 rr-id="ang_m_080323" class="m-t-28 m-b-10">
+      {{'angiographyMRT.pelvisLegArteries.type.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="ang_m_080324"
+      label="{{'angiographyMRT.pelvisLegArteries.typeA.value' | translate}}"
+      name="classificationAccordingToTASCIISubType"
+      [value]="classificationAccordingToTASCIISubTypeEnum.TypeA"
+      [(ngModel)]="model.classificationAccordingToTASCIISubType"
+      [rrContentReset]="'typBCont typCCont typDCont'"
+      rrValidation="classificationAccordingToTASCIISubType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080325"
+      label="{{'angiographyMRT.pelvisLegArteries.typeB.value' | translate}}"
+      name="classificationAccordingToTASCIISubType"
+      [value]="classificationAccordingToTASCIISubTypeEnum.TypeB"
+      [(ngModel)]="model.classificationAccordingToTASCIISubType"
+      [rrContentReset]="'typACont typCCont typDCont'"
+      rrValidation="classificationAccordingToTASCIISubType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080326"
+      label="{{'angiographyMRT.pelvisLegArteries.typeC.value' | translate}}"
+      name="classificationAccordingToTASCIISubType"
+      [value]="classificationAccordingToTASCIISubTypeEnum.TypeC"
+      [(ngModel)]="model.classificationAccordingToTASCIISubType"
+      [rrContentReset]="'typACont typBCont typDCont'"
+      rrValidation="classificationAccordingToTASCIISubType"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="ang_m_080327"
+      label="{{'angiographyMRT.pelvisLegArteries.typeD.value' | translate}}"
+      name="classificationAccordingToTASCIISubType"
+      [value]="classificationAccordingToTASCIISubTypeEnum.TypeD"
+      [(ngModel)]="model.classificationAccordingToTASCIISubType"
+      [rrContentReset]="'typACont typBCont typCCont'"
+      rrValidation="classificationAccordingToTASCIISubType"
+    ></p-radioButton>
+  </div>
+  <ng-container [ngSwitch]="model.classificationAccordingToTASCIISubType">
+    <ng-container
+      *ngSwitchCase="classificationAccordingToTASCIISubTypeEnum.None"
+    >
+      <ng-container *ngTemplateOutlet="None"></ng-container>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="classificationAccordingToTASCIISubTypeEnum.TypeA"
+    >
+      <ng-container *ngTemplateOutlet="typeA"></ng-container>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="classificationAccordingToTASCIISubTypeEnum.TypeB"
+    >
+      <ng-container *ngTemplateOutlet="typeB"></ng-container>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="classificationAccordingToTASCIISubTypeEnum.TypeC"
+    >
+      <ng-container *ngTemplateOutlet="typeC"></ng-container>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="classificationAccordingToTASCIISubTypeEnum.TypeD"
+    >
+      <ng-container *ngTemplateOutlet="typeD"></ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #None>
+  <div class="f-horizontal f-start c-sep-l col-h-100 c-pad-l">
+    <div class="c-col-1 c-sep c-pad-r"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</ng-template>
+
+<ng-template #typeA>
+  <div id="typACont" class="f-horizontal c-sep-l f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad o-radio-list">
+      <h2 rrid="ang_m_080435">
+        {{'angiographyMRT.pelvisLegArteries.localization.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080436"
+        label="{{'angiographyMRT.pelvisLegArteries.commonFemoralArteryCFA.value' | translate}}"
+        name="vascularPathologyLocalizationType"
+        [value]="vascularPathologyLocalizationTypeEnum.CommonFemoralArtery"
+        [(ngModel)]="model.vascularPathologyLocalizationType"
+        rrValidation="vascularPathologyLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080437"
+        label="{{'angiographyMRT.pelvisLegArteries.superficialFemoralArterySFA.value' | translate}}"
+        name="vascularPathologyLocalizationType"
+        [value]="vascularPathologyLocalizationTypeEnum.SuperficialFemoralArtery"
+        [(ngModel)]="model.vascularPathologyLocalizationType"
+        rrValidation="vascularPathologyLocalizationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080438"
+        label="{{'angiographyMRT.pelvisLegArteries.poplitealArteryPA.value' | translate}}"
+        name="vascularPathologyLocalizationType"
+        [value]="vascularPathologyLocalizationTypeEnum.PoplitealArtery"
+        [(ngModel)]="model.vascularPathologyLocalizationType"
+        rrValidation="vascularPathologyLocalizationType"
+      ></p-radioButton>
+      <h2 rrid="ang_m_080439" class="m-t-22">
+        {{'angiographyMRT.pelvisLegArteries.extent.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080440"
+        label="{{'angiographyMRT.pelvisLegArteries.singularStenosisCm.value' | translate}}"
+        name="extentType"
+        [value]="extentTypeEnum.SingularStenosisLessThan10Cm"
+        [(ngModel)]="model.extentType"
+        rrValidation="extentType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080441"
+        label="{{'angiographyMRT.pelvisLegArteries.singularOcclusionCm.value' | translate}}"
+        name="extentType"
+        [value]="extentTypeEnum.SingularOcclusionLessThan5Cm"
+        [(ngModel)]="model.extentType"
+        rrContentReset="hemodynamicallyEffectiveCont"
+        rrValidation="extentType"
+      ></p-radioButton>
+
+      <h2 rrid="ang_m_080442" class="m-t-21">
+        {{'angiographyMRT.pelvisLegArteries.length.value' | translate}}
+      </h2>
+      <rr-number-input
+        [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+        inputRrId="ang_m_080444"
+        labelRrId="ang_m_080442"
+        name="lengthInMm"
+        [(ngModel)]="model.lengthInMm"
+        [config]="{labelWidth: 160, min: 1, max: 150}"
+      ></rr-number-input>
+
+      <p-checkbox
+        name="isShortLengthStenosis"
+        label="{{ 'angiographyMRT.pelvisLegArteries.shortLengthStenosis.value' | translate }}"
+        rr-id="ang_m_080445"
+        [(ngModel)]="model.isShortLengthStenosis"
+        binary="true"
+      ></p-checkbox>
+    </div>
+
+    <div
+      class="c-col-1 f-vertical f-start c-sep-l c-pad-l o-radio-list m-t-156"
+    >
+      <div
+        id="hemodynamicallyEffectiveCont"
+        class="f-vertical f-start o-radio-list"
+        *ngIf="model.extentType === extentTypeEnum.SingularStenosisLessThan10Cm"
+      >
+        <h2 rr-id="ang_m_080515">
+          {{ 'angiographyMRT.pelvisLegArteries.severityNoAsterisk.value' |
+          translate }}
+        </h2>
+        <p-checkbox
+          name="isHemodynamicallyRelevant"
+          label="{{ 'angiographyMRT.pelvisLegArteries.hemodynamicallyRelevant.value' | translate }}"
+          rr-id="ang_m_080516"
+          [(ngModel)]="model.isHemodynamicallyRelevant"
+          binary="true"
+        ></p-checkbox>
+        <p rr-id="ang_m_080517" class="m-b-minus-4">
+          {{ 'angiographyMRT.pelvisLegArteries.diameterStenosis.value' |
+          translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_m_080519"
+          labelRrId="ang_m_080518"
+          name="diameterStenosisInMm"
+          [(ngModel)]="model.diameterStenosisInMm"
+          [config]="{labelWidth: 160, min: 1, max: 99}"
+          (announceModelChange)="calculate()"
+        ></rr-number-input>
+        <p rr-id="ang_m_080520" class="m-b-minus-4">
+          {{
+          'angiographyMRT.pelvisLegArteries.diameterNormalpoststenoticSegment.value'
+          | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_m_080522"
+          labelRrId="ang_m_080521"
+          name="diameterNormalPoststenoticSegmentInMm"
+          [(ngModel)]="model.diameterNormalPoststenoticSegmentInMm"
+          [config]="{labelWidth: 160, min: 1, max: 99}"
+          (announceModelChange)="calculate()"
+          class="m-t-5"
+        ></rr-number-input>
+        <p rr-id="ang_m_080523" class="m-b-0">
+          {{
+          'angiographyMRT.pelvisLegArteries.calculationOfStenosisAccording.value'
+          | translate }}
+        </p>
+        <rr-number-input
+          [label]="'angiographyMRT.pelvisLegArteries.in.value' | translate"
+          inputRrId="ang_m_080525"
+          labelRrId="ang_m_080524"
+          name="degreeOfStenosisAccordingToNASCETInPercentage"
+          [(ngModel)]="model.degreeOfStenosisAccordingToNASCETInPercentage"
+          [config]="{readonly: true, min: 1, max: 99}"
+          rrValidation=""
+          class="m-t-5 m-b-10"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #typeB>
+  <div class="f-horizontal f-start c-sep-l col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad o-radio-list">
+      <h2 rr-id="ang_m_080446">
+        {{ 'angiographyMRT.pelvisLegArteries.details.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080447"
+        label="{{'angiographyMRT.pelvisLegArteries.multipleStenosesAndocclusionsCm.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.MultipleStenosesAndOcclusionsLessThan5Cm"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.MultipleStenosesAndOcclusionsLessThan5Cm, 'b-fifth-col')"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080448"
+        label="{{'angiographyMRT.pelvisLegArteries.singularStenosisocclusionCmAbove.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.SingularStenosisOrOcclusionLessThan15Cm"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.SingularStenosisOrOcclusionLessThan15Cm, 'b-fifth-col')"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080449"
+        label="{{'angiographyMRT.pelvisLegArteries.singleOrMultipleLesionswith.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.SingleOrMultipleLesions"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.SingleOrMultipleLesions, 'b-fifth-col')"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080450"
+        label="{{'angiographyMRT.pelvisLegArteries.occlusionCmWithheavyCalcifications.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.OcclusionLessThan5Cm"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.OcclusionLessThan5Cm, 'b-fifth-col')"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080451"
+        label="{{'angiographyMRT.pelvisLegArteries.singularPoplitealArteryPA.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.SingularStenosis"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.SingularStenosis, 'b-fifth-col')"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+    </div>
+    <div id="b-fifth-col" class="c-col-1 c-sep-l c-pad-l m-t-33">
+      <div
+        *ngIf="model.classificationAccordingToTASCIIDetailsType === classificationAccordingToTASCIIDetailsTypeEnum.SingularStenosisOrOcclusionLessThan15Cm
+                || model.classificationAccordingToTASCIIDetailsType === classificationAccordingToTASCIIDetailsTypeEnum.SingularStenosis"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_m_080526">
+          {{ 'angiographyMRT.pelvisLegArteries.length.value' | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_m_080528"
+          labelRrId="ang_m_080527"
+          name="lengthInMm"
+          [(ngModel)]="model.lengthInMm"
+          [config]="{placeholder: '---', labelWidth: 50, min: 1, max: 150}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #typeC>
+  <div id="typCCont" class="f-horizontal c-sep-l f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <h2 rrid="ang_m_080452">
+        {{'angiographyMRT.pelvisLegArteries.details.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080453"
+        label="{{'angiographyMRT.pelvisLegArteries.multipleStenosesOrocclusionsCmwithout.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.MultipleStenosesOrOcclusionsMoreThan15Cm"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080454"
+        label="{{'angiographyMRT.pelvisLegArteries.recurrentStenosisWithNeed.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.RecurrentStenosis"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+      ></p-radioButton>
+    </div>
+    <div class="c-col-1 f-vertical f-start c-pad-l o-radio-list"></div>
+  </div>
+</ng-template>
+
+<ng-template #typeD>
+  <div id="typDCont" class="f-horizontal c-sep-l f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-pad o-radio-list">
+      <h2 rrid="ang_m_080455">
+        {{'angiographyMRT.pelvisLegArteries.details.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="ang_m_080456"
+        label="{{'angiographyMRT.pelvisLegArteries.chronicOcclusionOfthe.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.ChronicOcclusionMoreThan20Cm"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.ChronicOcclusionMoreThan20Cm, 'd-fifth-col')"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_m_080457"
+        label="{{'angiographyMRT.pelvisLegArteries.chronicOcclusionOfthePopliteal.value' | translate}}"
+        name="classificationAccordingToTASCIIDetailsType"
+        [value]="classificationAccordingToTASCIIDetailsTypeEnum.ChronicOcclusionAndProximalTrifurcation"
+        class="text-break2"
+        [(ngModel)]="model.classificationAccordingToTASCIIDetailsType"
+        rrValidation="classificationAccordingToTASCIIDetailsType"
+        [rrContentReset]="clearLengthOnFifthCol(classificationAccordingToTASCIIDetailsTypeEnum.ChronicOcclusionAndProximalTrifurcation, 'd-fifth-col')"
+      ></p-radioButton>
+    </div>
+    <div id="d-fifth-col" class="c-col-1 c-sep-l c-pad-l m-t-33">
+      <div
+        *ngIf="model.classificationAccordingToTASCIIDetailsType === classificationAccordingToTASCIIDetailsTypeEnum.ChronicOcclusionMoreThan20Cm"
+        class="f-vertical f-start o-radio-list"
+      >
+        <h2 rr-id="ang_m_080529">
+          {{ 'angiographyMRT.pelvisLegArteries.length.value' | translate }}
+        </h2>
+        <rr-number-input
+          [label]="'angiographyMRT.pelvisLegArteries.inMm.value' | translate"
+          inputRrId="ang_m_080531"
+          labelRrId="ang_m_080530"
+          name="lengthInMm"
+          [(ngModel)]="model.lengthInMm"
+          [config]="{labelWidth: 50, min: 1, max: 800, placeholder: '---'}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+</ng-template>

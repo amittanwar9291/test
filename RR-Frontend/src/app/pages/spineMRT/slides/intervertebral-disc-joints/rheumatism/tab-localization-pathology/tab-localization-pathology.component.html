@@ -1,0 +1,154 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+    <h2
+      rr-id="spi_m_0502303"
+      rrValidation="spineLocation"
+      style="margin-top: -17px"
+    >
+      {{'spineMRT.disc.lokalizationSegmental.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_m_050209"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="spi_m_050342" class="m-t-10">
+        {{'spineMRT.disc.pathology.value' | translate}}*
+      </h2>
+      <p-radioButton
+        name="pathologyType"
+        rr-id="spi_m_050344"
+        label="{{ 'spineMRT.disc.ankylosingSpondylitis.value' | translate }}"
+        [value]="pathologyTypesEnum.SpondyliltisAnkylosane"
+        (onClick)="checkAndClearModel(pathologyTypesEnum.SpondyliltisAnkylosane)"
+        [(ngModel)]="model.pathologyType"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        rr-id="spi_m_050345"
+        label="{{ 'spineMRT.disc.psoriaticArthritis.value' | translate }}"
+        [value]="pathologyTypesEnum.PsoriaticArthritis"
+        (onClick)="checkAndClearModel(pathologyTypesEnum.PsoriaticArthritis)"
+        [(ngModel)]="model.pathologyType"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        rr-id="spi_m_050346"
+        label="{{ 'spineMRT.disc.rheumatoidArthritis.value' | translate }}"
+        [value]="pathologyTypesEnum.RheumatoidArthritis"
+        (onClick)="checkAndClearModel(pathologyTypesEnum.RheumatoidArthritis)"
+        [(ngModel)]="model.pathologyType"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+      <p-radioButton
+        name="pathologyType"
+        rr-id="spi_m_050347"
+        label="{{ 'spineMRT.disc.rheumatoidDiseasesNotFurtherSpecified.value' | translate }}"
+        [value]="pathologyTypesEnum.RheumatoidDisease"
+        (onClick)="checkAndClearModel(pathologyTypesEnum.RheumatoidDisease)"
+        [(ngModel)]="model.pathologyType"
+        rrValidation="pathologyType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15 p-t-41">
+    <div
+      class="o-radio-list m-l-10"
+      *ngIf="shouldBeShown([pathologyTypesEnum.SpondyliltisAnkylosane, pathologyTypesEnum.PsoriaticArthritis])"
+    >
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isEntheitis"
+        label="{{'spineMRT.disc.enthesitis.value'| translate}}"
+        rr-id="spi_m_050438"
+        (onChange)="clearEntheitis()"
+        name="isEntheitis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isDiscitis"
+        label="{{'spineMRT.disc.discitis.value'| translate}}"
+        rr-id="spi_m_050439"
+        (onChange)="clearDiscitis()"
+        name="isDiscitis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        labelStyleClass="text-break"
+        [(ngModel)]="model.isArthritis"
+        label="{{'spineMRT.disc.arthritisOfTheFacetJoints.value'| translate}}"
+        rr-id="spi_m_0504701"
+        (onChange)="clearArthritisFacetJoints()"
+        name="isArthritis"
+      ></p-checkbox>
+    </div>
+    <div
+      class="o-radio-list m-l-10"
+      *ngIf="shouldBeShown(pathologyTypesEnum.RheumatoidArthritis)"
+    >
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isArthritis"
+        label="{{'spineMRT.disc.arthritis.value'| translate}}"
+        rr-id="spi_m_0504701"
+        (onChange)="clearArthritis()"
+        name="isArthritis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isPeriostitis"
+        label="{{'spineMRT.disc.periostitis.value'| translate}}"
+        rr-id="spi_m_050438"
+        (onChange)="clearPeriostitis()"
+        name="isPeriostitis"
+      ></p-checkbox>
+    </div>
+    <div
+      class="o-radio-list m-l-10"
+      *ngIf="shouldBeShown(pathologyTypesEnum.RheumatoidDisease)"
+    >
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isEntheitis"
+        label="{{'spineMRT.disc.enthesitis.value'| translate}}"
+        rr-id="spi_m_050438"
+        (onChange)="clearEntheitis()"
+        name="isEntheitis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isDiscitis"
+        label="{{'spineMRT.disc.discitis.value'| translate}}"
+        rr-id="spi_m_050439"
+        (onChange)="clearDiscitis()"
+        name="isDiscitis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isArthritis"
+        label="{{'spineMRT.disc.arthritis.value'| translate}}"
+        rr-id="spi_m_0504701"
+        (onChange)="clearArthritis()"
+        name="isArthritis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isPeriostitis"
+        label="{{'spineMRT.disc.periostitis.value'| translate}}"
+        rr-id="spi_m_050451"
+        (onChange)="clearPeriostitis()"
+        name="isPeriostitis"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l"></div>
+</div>

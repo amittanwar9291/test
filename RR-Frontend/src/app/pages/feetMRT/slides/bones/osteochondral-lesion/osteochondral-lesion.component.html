@@ -1,0 +1,258 @@
+<div class="f-horizontal f-start col-h-555">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="anc_m_040207">
+      {{ "feetMRT.bones.localization.value" | translate }}
+    </h2>
+    <rr-foot-big-bones-simple
+      rr-id="anc_m_040217"
+      [model]="model.threeDimensionalLocalization"
+      [side]="side"
+      [noMal]="true"
+      [noComplex]="true"
+      (click)="openLargeLocalizer()"
+      rrValidation="threeDimensionalLocalization"
+      isLocalizer="true"
+    ></rr-foot-big-bones-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+    <h2 rr-id="anc_m_040367">
+      {{ "feetMRT.bones.diameterLesion.value" | translate }}
+    </h2>
+    <rr-number-input
+      [label]="'feetMRT.bones.inMm.value' | translate"
+      [inputRrId]="'anc_m_040368'"
+      [labelRrId]="'anc_m_040369'"
+      class="m-b-30"
+      name="diameterLesionInMm"
+      [(ngModel)]="model.diameterLesionInMm"
+      [config]="{ placeholder: '--', min: 1, max: 30, step: 1 }"
+    ></rr-number-input>
+    <h2 rr-id="anc_m_040370">
+      {{ "feetMRT.bones.classification.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="anc_m_040371"
+      label="{{ 'feetMRT.bones.cartilageIntactStableLesion.value' | translate }}"
+      name="osteochondralLesionClassificationType"
+      [value]="
+        osteochondralLesionClassificationType.CartilageIntactStableLesion
+      "
+      [rrContentReset]="
+        'CartilageDefectiveUnstableLesionDetails CartilageIntactStableLesionDetails'
+      "
+      [(ngModel)]="model.osteochondralLesionClassificationType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <div
+      id="CartilageIntactStableLesionDetails"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="
+        model.osteochondralLesionClassificationType !==
+        'CartilageIntactStableLesion'
+      "
+    >
+      <p-checkbox
+        rr-id="anc_m_040372"
+        label="{{ 'feetMRT.bones.boneMarrowEdema.value' | translate }}"
+        name="isBoneMarrowEdema"
+        binary="true"
+        [(ngModel)]="model.isBoneMarrowEdema"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="anc_m_040373"
+      label="{{ 'feetMRT.bones.cartilageDefectLesionUnstable.value' | translate }}"
+      name="osteochondralLesionClassificationType"
+      [value]="
+        osteochondralLesionClassificationType.CartilageDefectLesionUnstable
+      "
+      [rrContentReset]="
+        'CartilageDefectiveUnstableLesionDetails CartilageIntactStableLesionDetails'
+      "
+      [(ngModel)]="model.osteochondralLesionClassificationType"
+      rrUnClickRadio
+    ></p-radioButton>
+    <div
+      id="CartilageDefectiveUnstableLesionDetails"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model.osteochondralLesionClassificationType !== osteochondralLesionClassificationType.CartilageDefectLesionUnstable"
+    >
+      <p-checkbox
+        rr-id="anc_m_040374"
+        label="{{ 'feetMRT.bones.detectionFragment.value' | translate }}"
+        name="isDetectionFragment"
+        binary="true"
+        [rrContentReset]="'isDetectionDissekatDetails'"
+        [(ngModel)]="model.isDetectionFragment"
+      ></p-checkbox>
+      <div
+        id="isDetectionDissekatDetails"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isDetectionFragment"
+      >
+        <p-radioButton
+          rr-id="anc_m_040375"
+          label="{{ 'feetMRT.bones.nonDisplaced.value' | translate }}"
+          name="detectionDissekatType"
+          [value]="detectionDissekatType.NonDisplaced"
+          [(ngModel)]="model.detectionDissekatType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_040376"
+          label="{{ 'feetMRT.bones.displaced.value' | translate }}"
+          name="detectionDissekatType"
+          [value]="detectionDissekatType.Displaced"
+          [(ngModel)]="model.detectionDissekatType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        rr-id="anc_m_040377"
+        label="{{ 'feetMRT.bones.subchondralCyst.value' | translate }}"
+        name="isSubchondralCyst"
+        binary="true"
+        class="text-break"
+        [(ngModel)]="model.isSubchondralCyst"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="anc_m_040378"
+        label="{{ 'feetMRT.bones.t2HyperintenseRim.value' | translate }}"
+        name="isT2HyperintenseRim"
+        binary="true"
+        [(ngModel)]="model.isT2HyperintenseRim"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="anc_m_040379"
+      label="{{ 'feetMRT.bones.donorSiteFluidFilled.value' | translate }}"
+      name="osteochondralLesionClassificationType"
+      binary="true"
+      [value]="
+        osteochondralLesionClassificationType.DonorSiteFluidFilled
+      "
+      [(ngModel)]="model.osteochondralLesionClassificationType"
+      [rrContentReset]="
+        'CartilageDefectiveUnstableLesionDetails CartilageIntactStableLesionDetails'
+      "
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+  <div class="c-col-1 f-vertical f-start o-radio-list c-sep c-pad">
+    <div class="f-vertical f-start o-radio-list">
+      <h2 rr-id="anc_m_040482">
+        {{ "feetMRT.bones.articularEffusion.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="anc_m_040486"
+        label="{{ 'feetMRT.bones.adjacentArticularEffusion.value' | translate }}"
+        name="isAdjacentArticularEffusion"
+        binary="true"
+        [(ngModel)]="model.isAdjacentArticularEffusion"
+      ></p-checkbox>
+      <div class="f-vertical f-start o-radio-list m-t-20">
+        <h2 rr-id="anc_m_040485">
+          {{
+          "feetMRT.bones.classificationConsideringEpiphysealPlateStatus.value" |
+          translate }}
+        </h2>
+        <p-radioButton
+          rr-id="anc_m_040483"
+          label="{{ 'feetMRT.bones.openjuvenileType.value' | translate }}"
+          name="epiphysealJointsType"
+          [value]="epiphysealJointsType.OpenJuvenileType"
+          [(ngModel)]="model.epiphysealJointsType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_040484"
+          label="{{ 'feetMRT.bones.closedAdultType.value' | translate }}"
+          name="epiphysealJointsType"
+          [value]="epiphysealJointsType.ClosedAdultType"
+          class="m-b-33"
+          [(ngModel)]="model.epiphysealJointsType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad-l o-radio-list"
+    [rrDisable]="
+      model.threeDimensionalLocalization.tibia === true ||
+      model.threeDimensionalLocalization.fibula === true ||
+      model.threeDimensionalLocalization.anterolateralTalus === true ||
+      model.threeDimensionalLocalization.posteromedialTalus === true
+    "
+  >
+    <h2 rr-id="anc_m_0405302">
+      {{ "feetMRT.bones.diagnosis.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="anc_m_0405303"
+      label="{{ 'feetMRT.bones.apophysitisMorbusSever.value' | translate }}"
+      name="apophysitisMorbusSever"
+      binary="true"
+      [(ngModel)]="model.apophysitisMorbusSever"
+      [rrDisable]="model.threeDimensionalLocalization.calcaneus === false"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_0405304"
+      label="{{ 'feetMRT.bones.apophysitisMorbusIselin.value' | translate }}"
+      name="apophysitisMorbusIselin"
+      binary="true"
+      [(ngModel)]="model.apophysitisMorbusIselin"
+      [rrDisable]="
+        model.threeDimensionalLocalization.osMetatarsale5Distal === false
+      "
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_0405305"
+      label="{{ 'feetMRT.bones.thiemannsDisease.value' | translate }}"
+      name="thiemannDisease"
+      binary="true"
+      [(ngModel)]="model.thiemannDisease"
+      [rrDisable]="
+        model.threeDimensionalLocalization.proximalPhalanxD1 === false &&
+        model.threeDimensionalLocalization.proximalPhalanxD2 === false &&
+        model.threeDimensionalLocalization.proximalPhalanxD3 === false &&
+        model.threeDimensionalLocalization.proximalPhalanxD4 === false &&
+        model.threeDimensionalLocalization.proximalPhalanxD5 === false &&
+        model.threeDimensionalLocalization.middlePhalanxD2 === false &&
+        model.threeDimensionalLocalization.middlePhalanxD3 === false &&
+        model.threeDimensionalLocalization.middlePhalanxD4 === false &&
+        model.threeDimensionalLocalization.middlePhalanxD5 === false
+      "
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_0405306"
+      label="{{ 'feetMRT.bones.kohlerDiseaseI.value' | translate }}"
+      name="kohlerDiseaseI"
+      binary="true"
+      [(ngModel)]="model.kohlerDiseaseI"
+      [rrDisable]="
+        model.threeDimensionalLocalization.osNaviculare === false
+      "
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_0405307"
+      label="{{ 'feetMRT.bones.kohlerDiseaseII.value' | translate }}"
+      name="kohlerDiseaseII"
+      binary="true"
+      [(ngModel)]="model.kohlerDiseaseII"
+      [rrDisable]="
+        model.threeDimensionalLocalization.osMetatarsale1 === false &&
+        model.threeDimensionalLocalization.osMetatarsale2 === false &&
+        model.threeDimensionalLocalization.osMetatarsale3 === false &&
+        model.threeDimensionalLocalization.osMetatarsale4 === false &&
+        model.threeDimensionalLocalization.osMetatarsale5 === false &&
+        model.threeDimensionalLocalization.osMetatarsale5Distal === false
+      "
+    >
+    </p-checkbox>
+  </div>
+</div>

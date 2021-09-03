@@ -1,0 +1,66 @@
+<div class="tuba-uterina-height">
+  <div class="f-horizontal col-h-100 o-width-100">
+    <div class="c-col-1 c-pad c-sep f-vertical m-t-32 m-b-15 tuba-uterina">
+      <div class="p-l-10">
+        <h2 rr-id="pel_m_060220" class="m-b-10">
+          {{'pelvisMRT.femaleGender.differentialDiagnosis.value' | translate}}
+        </h2>
+        <div [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow">
+          <p rr-id="pel_m_060221">
+            {{'pelvisMRT.femaleGender.differentialDiagnosis1.value' |
+            translate}}
+            <span
+              *ngIf="model.descriptionType === descriptionTypeEnum.IDescribe"
+              >*</span
+            >
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0602420"
+            [diagnosisNumber]="1"
+            group="true"
+            [options]="w045DifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosis1"
+            [parentViewModel]="model"
+            name="differentialDiagnosis1"
+            (selectionChanged)="resetSubordinated()"
+            rrValidation="differentialDiagnosis1"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <div [rrDisable]="isSecondDifferentialDisabled()">
+          <p rr-id="pel_m_060223" class="m-t-15">
+            {{'pelvisMRT.femaleGender.differentialDiagnosis2.value' |
+            translate}}
+          </p>
+          <rr-differential-diagnosis-dropdown
+            rrId="pel_m_0602421"
+            [diagnosisNumber]="2"
+            group="true"
+            [options]="w045DifferentialDiagnosisType"
+            [(ngModel)]="model.differentialDiagnosis2"
+            [parentViewModel]="model"
+            name="differentialDiagnosis2"
+            (selectionChanged)="resetSubordinated()"
+          ></rr-differential-diagnosis-dropdown>
+        </div>
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.subordinate.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_060225"
+          name="isSubordinate"
+          class="m-t-15"
+          [(ngModel)]="model.isSubordinate"
+          [rrDisable]="model.differentialDiagnosis2 === femaleGenderDiagnosisTypeEnum.None"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div
+      class="c-col-1 c-pad c-sep f-horizontal m-t-32 m-b-15 tuba-uterina"
+    ></div>
+    <div
+      class="c-col-1 c-pad c-sep f-horizontal m-t-32 m-b-15 tuba-uterina"
+    ></div>
+    <div
+      class="c-col-1 c-pad-l c-sep f-vertical m-t-32 m-b-15 tuba-uterina"
+    ></div>
+  </div>
+</div>

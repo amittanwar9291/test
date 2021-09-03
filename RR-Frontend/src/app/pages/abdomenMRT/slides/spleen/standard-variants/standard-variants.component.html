@@ -1,0 +1,145 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="f-vertical">
+    <h2 rr-id="abd_m_050239" class="text-break m-t-6 m-b-20">
+      {{ 'abdomenMRT.spleen.standardVariant.value' | translate }}
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 f-vertical c-sep c-pad-r o-list">
+        <div class="f-vertical o-radio-list">
+          <h3 rr-id="abd_m_050202" class="text-break">
+            {{ 'abdomenMRT.spleen.plantVariationpathologicalAnatomy.value' |
+            translate }}*
+          </h3>
+          <p-radioButton
+            rr-id="abd_m_050203"
+            label="{{'abdomenMRT.spleen.asplenia.value' | translate}}"
+            name="plantVariationPathologicalAnatomyType"
+            [value]="plantVariationPathologicalAnatomyTypeEnum.Asplenia"
+            [(ngModel)]="model.plantVariationPathologicalAnatomyType"
+            rrValidation="plantVariationPathologicalAnatomyType"
+            rrContentReset="plantVariationType-block"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_050204"
+            label="{{'abdomenMRT.spleen.polysplenia.value' | translate}}"
+            name="plantVariationPathologicalAnatomyType"
+            [value]="plantVariationPathologicalAnatomyTypeEnum.Polysplenia"
+            [(ngModel)]="model.plantVariationPathologicalAnatomyType"
+            rrValidation="plantVariationPathologicalAnatomyType"
+            rrContentReset="plantVariationType-block"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_050205"
+            label="{{'abdomenMRT.spleen.splenosis.value' | translate}}"
+            name="plantVariationPathologicalAnatomyType"
+            [value]="plantVariationPathologicalAnatomyTypeEnum.Splenosis"
+            [(ngModel)]="model.plantVariationPathologicalAnatomyType"
+            rrValidation="plantVariationPathologicalAnatomyType"
+            rrContentReset="plantVariationType-block"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="abd_m_050240"
+            label="{{'abdomenMRT.spleen.subsidiarySpleen.value' | translate}}"
+            name="plantVariationPathologicalAnatomyType"
+            [value]="plantVariationPathologicalAnatomyTypeEnum.SubsidiarySpleen"
+            [(ngModel)]="model.plantVariationPathologicalAnatomyType"
+            rrValidation="plantVariationPathologicalAnatomyType"
+            rrContentReset="plantVariationType-block"
+          >
+          </p-radioButton>
+        </div>
+        <div
+          class="f-vertical nested-content o-radio-list m-b-30"
+          id="plantVariationType-block"
+          [rrDisable]="!isPolyspleniaOrSplenosisOrSubsidiarySpleen"
+        >
+          <div class="f-vertical o-radio-list m-b-11">
+            <h3 rr-id="abd_m_050241" class="m-b-5">
+              {{ 'abdomenMRT.spleen.size.value' | translate }}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_050242"
+              labelRrId="abd_m_050243"
+              name="sizeInMm"
+              label="{{ 'abdomenMRT.spleen.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 999, placeholder: '---' }"
+              [(ngModel)]="model.sizeInMm"
+              (announceModelChange)="resetBothPlanes()"
+            >
+            </rr-number-input>
+          </div>
+          <div class="f-vertical o-radio-list" [rrDisable]="!model.sizeInMm">
+            <h3 rr-id="abd_m_050244" class="m-b-5">
+              {{ 'abdomenMRT.spleen.2ndPlane.value' | translate }}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_050245"
+              labelRrId="abd_m_050246"
+              name="secondPlaneInMm"
+              label="{{ 'abdomenMRT.spleen.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 999, placeholder: '---' }"
+              [(ngModel)]="model.secondPlaneInMm"
+              (announceModelChange)="resetThirdPlane()"
+            >
+            </rr-number-input>
+          </div>
+          <div
+            class="f-vertical o-radio-list"
+            [rrDisable]="!model.secondPlaneInMm"
+          >
+            <h3 rr-id="abd_m_050247" class="m-b-5">
+              {{ 'abdomenMRT.spleen.3rdPlane.value' | translate }}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_050248"
+              labelRrId="abd_m_050249"
+              name="thirdPlaneInMm"
+              label="{{ 'abdomenMRT.spleen.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 999, placeholder: '---' }"
+              [(ngModel)]="model.thirdPlaneInMm"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+        <h3 rr-id="abd_m_050301" class="m-t-5 m-b-22">
+          {{'abdomenMRT.spleen.spleenContour.value' | translate}}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_050302"
+          name="isCleaves"
+          [(ngModel)]="model.isCleaves"
+          label="{{'abdomenMRT.spleen.columns.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_050303"
+          name="isNotches"
+          [(ngModel)]="model.isNotches"
+          label="{{'abdomenMRT.spleen.notches.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_050304"
+          name="isNodes"
+          [(ngModel)]="model.isNodes"
+          label="{{'abdomenMRT.spleen.node.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_050305"
+          name="isLobulation"
+          [(ngModel)]="model.isLobulation"
+          label="{{'abdomenMRT.spleen.lobulation.value' | translate}}"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <div class="c-col-1 c-pad c-sep"></div>
+      <div class="c-col-1 c-pad-l"></div>
+    </div>
+  </div>
+</div>

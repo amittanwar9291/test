@@ -1,0 +1,388 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-10">
+    <div class="o-radio-list m-l-10 f-vertical">
+      <h2
+        rr-id="hea_m_090238"
+        class="m-b-10"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+      >
+        {{'headMRT.cerebrospinalFluid.differentialDiagnosis1.value' |
+        translate}}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="ddlW042"
+        [(ngModel)]="model.massDifferentialDiagnosisIKnow1Type"
+        group="true"
+        isActiveOnIKnow="true"
+        name="massDifferentialDiagnosisIKnow1Type"
+        rrId="hea_m_090239"
+        (selectionChanged)="clearDDLCheckboxes(); clearHistologyKnownBlock()"
+        [parentViewModel]="model"
+        rrValidation="massDifferentialDiagnosisIKnow1Type"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+        class="m-r-10"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="hea_m_090240"
+        name="isHistologyKnown"
+        class="m-t-4"
+        [(ngModel)]="model.isHistologyKnown"
+        rrContentReset="isHistologyKnown-block"
+        label="{{'headMRT.cerebrospinalFluid.histologyKnown.value' | translate}}"
+        binary="true"
+        [rrDisable]="model.massDifferentialDiagnosisIKnow1Type === cerebrospinalMassDiagnosisTypeEnum.None"
+      ></p-checkbox>
+      <div
+        id="isHistologyKnown-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isHistologyKnown"
+      >
+        <p-radioButton
+          rr-id="hea_m_090241"
+          label="{{'headMRT.cerebrospinalFluid.benign.value' | translate}}"
+          name="histologyKnownType"
+          [value]="histologyKnownTypeEnum.Benign"
+          [(ngModel)]="model.histologyKnownType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_090242"
+          label="{{'headMRT.cerebrospinalFluid.malignant.value' | translate}}"
+          name="histologyKnownType"
+          [value]="histologyKnownTypeEnum.Malignant"
+          [(ngModel)]="model.histologyKnownType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div class="f-vertical m-t-10 m-b-10 o-radio-list">
+    <h2
+      rr-id="hea_m_090322"
+      class="p-l-25"
+      rrInfoIcon="hea_m_09_02"
+      [infoIconPdfLandscape]="true"
+    >
+      {{ 'headMRT.cerebrospinalFluid.localization.value' | translate }}*
+    </h2>
+    <div class="f-horizontal multi-col">
+      <div class="c-col-1 c-sep c-pad">
+        <div class="o-radio-list m-l-10">
+          <p-checkbox
+            rr-id="hea_m_090323"
+            label="{{ 'headMRT.cerebrospinalFluid.lateralVentricle.value' | translate }}"
+            binary="true"
+            name="isLateralVentricle"
+            [(ngModel)]="model.isLateralVentricle"
+            rrContentReset="lateralVentricleBlock"
+            [rrValidation]="localizationValidationGroup"
+            class="m-t-10"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isLateralVentricle"
+            id="lateralVentricleBlock"
+          >
+            <p rr-id="hea_m_090324">
+              {{ 'headMRT.cerebrospinalFluid.right.value' | translate }}
+            </p>
+            <p-checkbox
+              rr-id="hea_m_090325"
+              label="{{ 'headMRT.cerebrospinalFluid.anteriorHorn.value' | translate }}"
+              binary="true"
+              name="isAnteriorHornRight"
+              [(ngModel)]="model.isAnteriorHornRight"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090326"
+              label="{{ 'headMRT.cerebrospinalFluid.cellaMedia.value' | translate }}"
+              binary="true"
+              name="isCellaMediaRight"
+              [(ngModel)]="model.isCellaMediaRight"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090327"
+              label="{{ 'headMRT.cerebrospinalFluid.trigonum.value' | translate }}"
+              binary="true"
+              name="isTrigonumRight"
+              [(ngModel)]="model.isTrigonumRight"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090328"
+              label="{{ 'headMRT.cerebrospinalFluid.posteriorHorn.value' | translate }}"
+              binary="true"
+              name="isPosteriorHornRight"
+              [(ngModel)]="model.isPosteriorHornRight"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090329"
+              label="{{ 'headMRT.cerebrospinalFluid.temporalHorn.value' | translate }}"
+              binary="true"
+              name="isTemporalHornRight"
+              [(ngModel)]="model.isTemporalHornRight"
+            >
+            </p-checkbox>
+            <p rr-id="hea_m_090330" class="m-t-10">
+              {{'headMRT.cerebrospinalFluid.left.value' | translate }}
+            </p>
+            <p-checkbox
+              rr-id="hea_m_090331"
+              label="{{ 'headMRT.cerebrospinalFluid.anteriorHorn.value' | translate }}"
+              binary="true"
+              name="isAnteriorHornLeft"
+              [(ngModel)]="model.isAnteriorHornLeft"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090332"
+              label="{{ 'headMRT.cerebrospinalFluid.cellaMedia.value' | translate }}"
+              binary="true"
+              name="isCellaMediaLeft"
+              [(ngModel)]="model.isCellaMediaLeft"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090333"
+              label="{{ 'headMRT.cerebrospinalFluid.trigonum.value' | translate }}"
+              binary="true"
+              name="isTrigonumLeft"
+              [(ngModel)]="model.isTrigonumLeft"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090334"
+              label="{{ 'headMRT.cerebrospinalFluid.posteriorHorn.value' | translate }}"
+              binary="true"
+              name="isPosteriorHornLeft"
+              [(ngModel)]="model.isPosteriorHornLeft"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090335"
+              label="{{ 'headMRT.cerebrospinalFluid.temporalHorn.value' | translate }}"
+              binary="true"
+              name="isTemporalHornLeft"
+              [(ngModel)]="model.isTemporalHornLeft"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad">
+        <div class="o-radio-list m-l-10">
+          <p-checkbox
+            rr-id="hea_m_090424"
+            label="{{ 'headMRT.cerebrospinalFluid.foramenMonroi.value' | translate }}"
+            binary="true"
+            name="isForamenOfMonro"
+            [(ngModel)]="model.isForamenOfMonro"
+            rrContentReset="foramenOfMonroBlock"
+            [rrValidation]="localizationValidationGroup"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isForamenOfMonro"
+            id="foramenOfMonroBlock"
+          >
+            <p-checkbox
+              rr-id="hea_m_090425"
+              label="{{ 'headMRT.cerebrospinalFluid.right.value' | translate }}"
+              binary="true"
+              name="isForamenOfMonroRight"
+              [(ngModel)]="model.isForamenOfMonroRight"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090426"
+              label="{{ 'headMRT.cerebrospinalFluid.left.value' | translate }}"
+              binary="true"
+              name="isForamenOfMonroLeft"
+              [(ngModel)]="model.isForamenOfMonroLeft"
+            >
+            </p-checkbox>
+          </div>
+          <div class="o-radio-list">
+            <p-checkbox
+              rr-id="hea_m_090427"
+              label="{{ 'headMRT.cerebrospinalFluid.iIIVentricle.value' | translate }}"
+              binary="true"
+              name="isIIIVentricle"
+              [(ngModel)]="model.isIIIVentricle"
+              [rrValidation]="localizationValidationGroup"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090428"
+              label="{{ 'headMRT.cerebrospinalFluid.aquaeductusMesencephaliSylvii.value' | translate }}"
+              binary="true"
+              name="isAquaeductusMesencephaliSylvii"
+              [(ngModel)]="model.isAquaeductusMesencephaliSylvii"
+              [rrValidation]="localizationValidationGroup"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090429"
+              label="{{ 'headMRT.cerebrospinalFluid.iVVentricle.value' | translate }}"
+              binary="true"
+              name="isIVVentricle"
+              [(ngModel)]="model.isIVVentricle"
+              [rrValidation]="localizationValidationGroup"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090430"
+              label="{{ 'headMRT.cerebrospinalFluid.foramenLuschkae.value' | translate }}"
+              binary="true"
+              name="isForaminaOfLuschka"
+              [(ngModel)]="model.isForaminaOfLuschka"
+              rrContentReset="foraminaOfLuschkaBlock"
+              [rrValidation]="localizationValidationGroup"
+            >
+            </p-checkbox>
+            <div
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isForaminaOfLuschka"
+              id="foraminaOfLuschkaBlock"
+            >
+              <p-checkbox
+                rr-id="hea_m_090431"
+                label="{{ 'headMRT.cerebrospinalFluid.right.value' | translate }}"
+                binary="true"
+                name="isForaminaOfLuschkaRight"
+                [(ngModel)]="model.isForaminaOfLuschkaRight"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_m_090452"
+                label="{{ 'headMRT.cerebrospinalFluid.left.value' | translate }}"
+                binary="true"
+                name="isForaminaOfLuschkaLeft"
+                [(ngModel)]="model.isForaminaOfLuschkaLeft"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div class="o-radio-list m-l-10">
+          <p-checkbox
+            rr-id="hea_m_090518"
+            label="{{ 'headMRT.cerebrospinalFluid.foramenMagendie.value' | translate }}"
+            binary="true"
+            name="isForamenOfMagendie"
+            [(ngModel)]="model.isForamenOfMagendie"
+            [rrValidation]="localizationValidationGroup"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_m_090519"
+            label="{{ 'headMRT.cerebrospinalFluid.subarachnoidCisterns.value' | translate }}"
+            binary="true"
+            name="isSubarachnoidCisterns"
+            [(ngModel)]="model.isSubarachnoidCisterns"
+            rrContentReset="subarachnoidCisterns"
+            [rrValidation]="localizationValidationGroup"
+          >
+          </p-checkbox>
+          <div
+            class="nested-content o-radio-list"
+            [rrDisable]="!model.isSubarachnoidCisterns"
+            id="subarachnoidCisterns"
+          >
+            <p-checkbox
+              rr-id="hea_m_090520"
+              label="{{ 'headMRT.cerebrospinalFluid.suprasellarCistern.value' | translate }}"
+              binary="true"
+              name="isSuprasellarCistern"
+              [(ngModel)]="model.isSuprasellarCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090521"
+              label="{{ 'headMRT.cerebrospinalFluid.interpeduncularCistern.value' | translate }}"
+              binary="true"
+              name="isInterpeduncularCistern"
+              [(ngModel)]="model.isInterpeduncularCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090522"
+              label="{{ 'headMRT.cerebrospinalFluid.quadrigeminalCistern.value' | translate }}"
+              binary="true"
+              name="isQuadrigeminalCistern"
+              [(ngModel)]="model.isQuadrigeminalCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090523"
+              label="{{ 'headMRT.cerebrospinalFluid.pontineCistern.value' | translate }}"
+              binary="true"
+              name="isPontineCistern"
+              [(ngModel)]="model.isPontineCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090524"
+              label="{{ 'headMRT.cerebrospinalFluid.prepontineCistern.value' | translate }}"
+              binary="true"
+              name="isPrepontineCistern"
+              [(ngModel)]="model.isPrepontineCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090525"
+              label="{{ 'headMRT.cerebrospinalFluid.pontomedullaryCistern.value' | translate }}"
+              binary="true"
+              name="isPontomedullaryCistern"
+              [(ngModel)]="model.isPontomedullaryCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090526"
+              label="{{ 'headMRT.cerebrospinalFluid.pontocerebellarCistern.value' | translate }}"
+              binary="true"
+              name="isPontocerebellarCistern"
+              [(ngModel)]="model.isPontocerebellarCistern"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090527"
+              label="{{ 'headMRT.cerebrospinalFluid.meckelCave.value' | translate }}"
+              binary="true"
+              name="isMeckelCave"
+              [(ngModel)]="model.isMeckelCave"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090528"
+              label="{{ 'headMRT.cerebrospinalFluid.cisternaMagna.value' | translate }}"
+              binary="true"
+              name="isCisternaMagna"
+              [(ngModel)]="model.isCisternaMagna"
+            >
+            </p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_090529"
+              label="{{ 'headMRT.cerebrospinalFluid.insularCistern.value' | translate }}"
+              binary="true"
+              name="isInsularCistern"
+              [(ngModel)]="model.isInsularCistern"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

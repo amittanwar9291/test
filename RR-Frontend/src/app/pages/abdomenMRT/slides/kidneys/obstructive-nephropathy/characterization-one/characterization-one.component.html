@@ -1,0 +1,488 @@
+<div class="f-horizontal c-pad-l c-sep m-t-14 m-b-13">
+  <div class="c-col-1 c-sep c-pad-r f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_070202">
+        {{'abdomenMRT.kidneys.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070203"
+        name="sideType"
+        [value]="sideType.Right"
+        label="{{'abdomenMRT.kidneys.right.value' | translate}}"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070204"
+        name="sideType"
+        [value]="sideType.Left"
+        label="{{'abdomenMRT.kidneys.left.value' | translate}}"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_070205">
+        {{'abdomenMRT.kidneys.severity.value' | translate}}*
+      </h2>
+      <p-dropdown
+        rr-id="abd_m_070206"
+        [(ngModel)]="model.severityType"
+        styleClass="o-width-100 ui-brown-box"
+        name="severityType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="severityTypeOptions"
+        (ngModelChange)="clearSeverityDependent()"
+        rrDropdownClear
+        rrValidation="severityType"
+      >
+      </p-dropdown>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <div [ngSwitch]="model.severityType">
+        <div class="o-radio-list" *ngSwitchCase="severityType.Grade1">
+          <h3 rr-id="abd_m_070207">
+            {{'abdomenMRT.kidneys.detailsGradeI.value' | translate}}
+          </h3>
+          <p-checkbox
+            rr-id="abd_m_070208"
+            name="isRenalPelvisDilatation"
+            label="{{'abdomenMRT.kidneys.renalPelvisDilatation.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isRenalPelvisDilatation"
+            rrContentReset="isRenalPelvisDilatationBlock"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isRenalPelvisDilatationBlock"
+            [rrDisable]="!model.isRenalPelvisDilatation"
+          >
+            <h3 rr-id="abd_m_070209">
+              {{'abdomenMRT.kidneys.maxDilatation.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_070210"
+              labelRrId="abd_m_070211"
+              name="maxDilatationInMm"
+              label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99, placeholder: '--' }"
+              [(ngModel)]="model.maxDilatationInMm"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+        <div class="o-radio-list" *ngSwitchCase="severityType.Grade2">
+          <h3 rr-id="abd_m_070212">
+            {{'abdomenMRT.kidneys.detailsGradeII.value' | translate}}
+          </h3>
+          <p-checkbox
+            rr-id="abd_m_070213"
+            name="isReducedRenalParenchymaThickness"
+            label="{{'abdomenMRT.kidneys.dilatationOfTheRenalPelvisand.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isReducedRenalParenchymaThickness"
+            rrContentReset="isDilatationOfTheRenalPelvisAndTheRenalCalicesBlock1"
+            class="text-break"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isDilatationOfTheRenalPelvisAndTheRenalCalicesBlock1"
+            [rrDisable]="!model.isReducedRenalParenchymaThickness"
+          >
+            <h3 rr-id="abd_m_070214">
+              {{'abdomenMRT.kidneys.maxDilatation.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_070215"
+              labelRrId="abd_m_070216"
+              name="maxDilatationInMm"
+              label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99, placeholder: '--' }"
+              [(ngModel)]="model.maxDilatationInMm"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+        <div class="o-radio-list" *ngSwitchCase="severityType.Grade3">
+          <h3 rr-id="abd_m_070217">
+            {{'abdomenMRT.kidneys.detailsGradeIII.value' | translate}}
+          </h3>
+          <p-checkbox
+            rr-id="abd_m_070218"
+            name="isDilatationOfTheRenalPelvisAndTheRenalCalices"
+            label="{{'abdomenMRT.kidneys.dilatationOfTheRenalPelvisand.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isDilatationOfTheRenalPelvisAndTheRenalCalices"
+            rrContentReset="isDilatationOfTheRenalPelvisAndTheRenalCalicesBlock2"
+            class="text-break"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isDilatationOfTheRenalPelvisAndTheRenalCalicesBlock2"
+            [rrDisable]="!model.isDilatationOfTheRenalPelvisAndTheRenalCalices"
+          >
+            <h3 rr-id="abd_m_070219">
+              {{'abdomenMRT.kidneys.maxDilatation.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_070220"
+              labelRrId="abd_m_070221"
+              name="maxDilatationInMm"
+              label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99, placeholder: '--' }"
+              [(ngModel)]="model.maxDilatationInMm"
+            >
+            </rr-number-input>
+          </div>
+          <p-checkbox
+            rr-id="abd_m_070222"
+            name="isReducedRenalParenchymaThickness"
+            label="{{'abdomenMRT.kidneys.reducedRenalparenchymaThickness.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isReducedRenalParenchymaThickness"
+            rrContentReset="isReducedRenalParenchymaThicknessBlock"
+            class="text-break"
+          >
+          </p-checkbox>
+          <div
+            class="f-start o-radio-list nested-content"
+            id="isReducedRenalParenchymaThicknessBlock"
+            [rrDisable]="!model.isReducedRenalParenchymaThickness"
+          >
+            <h3 rr-id="abd_m_070223">
+              {{'abdomenMRT.kidneys.maxDilatation.value' | translate}}
+            </h3>
+            <rr-number-input
+              inputRrId="abd_m_070224"
+              labelRrId="abd_m_070225"
+              name="maxDilatationParenchymaInMm"
+              label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99, placeholder: '--' }"
+              [(ngModel)]="model.maxDilatationParenchymaInMm"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+        <div class="o-radio-list" *ngSwitchCase="severityType.Grade4">
+          <h3 rr-id="abd_m_070226">
+            {{'abdomenMRT.kidneys.detailsGradeIV.value' | translate}}
+          </h3>
+          <p-checkbox
+            rr-id="abd_m_070227"
+            name="isLossOfParenchymaHydronephrosis"
+            label="{{'abdomenMRT.kidneys.lossOfParenchymahydronephrosis.value' | translate}}"
+            binary="true"
+            [(ngModel)]="model.isLossOfParenchymaHydronephrosis"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_070306">
+        {{'abdomenMRT.kidneys.kidneyMorphology.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_070307"
+        name="isSideDifferenceContrastEnhancement"
+        label="{{'abdomenMRT.kidneys.sideDifferenceOfTheContrast.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSideDifferenceContrastEnhancement"
+        class="text-break"
+        [rrDisable]="!isCMReinforced"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_070308"
+        name="isLossCorticomedullaryDifferentiation"
+        label="{{'abdomenMRT.kidneys.lossOfCorticomedullarydifferentiation.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isLossCorticomedullaryDifferentiation"
+        class="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_070309"
+        name="isSwollenKidney"
+        label="{{'abdomenMRT.kidneys.swollenKidney.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSwollenKidney"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_070310"
+        name="isIndurationPerirenal"
+        label="{{'abdomenMRT.kidneys.indurationOfThePerirenaladiposeTissue.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isIndurationPerirenal"
+        class="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_070311"
+        name="isPerirenalFluid"
+        label="{{'abdomenMRT.kidneys.perirenalFluid.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPerirenalFluid"
+      >
+      </p-checkbox>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_070312">
+        {{'abdomenMRT.kidneys.ureteralFindings.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_070313"
+        name="isDilatationUreter"
+        label="{{'abdomenMRT.kidneys.dilatationOfTheUreter.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isDilatationUreter"
+        rrContentReset="isDilatationUreterBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="isDilatationUreterBlock"
+        [rrDisable]="!model.isDilatationUreter"
+      >
+        <h3 rr-id="abd_m_070314">
+          {{'abdomenMRT.kidneys.dilatation.value' | translate}}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_070315"
+          labelRrId="abd_m_070316"
+          name="dilatationInMm"
+          label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 99, placeholder: '--' }"
+          [(ngModel)]="model.dilatationInMm"
+        >
+        </rr-number-input>
+      </div>
+      <p-checkbox
+        rr-id="abd_m_070317"
+        name="isContrastEnhancementUreteralWall"
+        label="{{'abdomenMRT.kidneys.contrastEnhancementOfTheureteralWall.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isContrastEnhancementUreteralWall"
+        class="text-break"
+        [rrDisable]="!isCMReinforced"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad f-vertical o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_070419">
+        {{'abdomenMRT.kidneys.associatedCausalFindings.value' | translate}}
+      </h2>
+      <p-dropdown
+        rr-id="abd_m_070420"
+        [(ngModel)]="model.associatedCausalFindingsType"
+        styleClass="o-width-100 ui-brown-box"
+        name="associatedCausalFindingsType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="associatedCausalFindingsOptions"
+        group="true"
+        rrDropdownClear
+        (ngModelChange)="clearAssociatedCausalFindingsDependent()"
+      >
+      </p-dropdown>
+      <p-checkbox
+        rr-id="abd_m_070421"
+        name="isSuspicionOf"
+        label="{{'abdomenMRT.kidneys.suspicionOf.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isSuspicionOf"
+        [rrDisable]="model.associatedCausalFindingsType === associatedCausalFindingsType.None"
+      >
+      </p-checkbox>
+    </div>
+    <div *ngIf="isAssociatedCausalUrolithiasis" class="o-radio-list">
+      <h2 rr-id="abd_m_070490">
+        {{'abdomenMRT.kidneys.urolithiasisDetails.value' | translate}}
+      </h2>
+      <h3 rr-id="abd_m_070491">
+        {{'abdomenMRT.kidneys.localization.value' | translate}}
+      </h3>
+      <p-checkbox
+        rr-id="abd_m_070492"
+        name="isRenalCalice"
+        label="{{'abdomenMRT.kidneys.renalCalice.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isRenalCalice"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_070493"
+        name="isRenalPelvis"
+        label="{{'abdomenMRT.kidneys.renalPelvis.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isRenalPelvis"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_070494"
+        name="isUreter"
+        label="{{'abdomenMRT.kidneys.ureter2.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isUreter"
+        rrContentReset="isUreterBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="isUreterBlock"
+        [rrDisable]="!model.isUreter"
+      >
+        <p-dropdown
+          rr-id="abd_m_070495"
+          [(ngModel)]="model.urolithiasisDetailsUreterType"
+          styleClass="o-width-100 ui-brown-box"
+          name="urolithiasisDetailsUreterType"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+          [options]="ureterOptions"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+      <p-checkbox
+        rr-id="abd_m_070496"
+        name="isUrinaryBladder"
+        label="{{'abdomenMRT.kidneys.urinaryBladder.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isUrinaryBladder"
+        rrContentReset="isUrinaryBladderBlock"
+      >
+      </p-checkbox>
+      <div
+        class="f-start o-radio-list nested-content"
+        id="isUrinaryBladderBlock"
+        [rrDisable]="!model.isUrinaryBladder"
+      >
+        <p-checkbox
+          rr-id="abd_m_070497"
+          name="isOstiumRight"
+          label="{{'abdomenMRT.kidneys.ostiumRight.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isOstiumRight"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070498"
+          name="isOstiumLeft"
+          label="{{'abdomenMRT.kidneys.ostiumLeft.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isOstiumLeft"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="abd_m_070499"
+        name="isUrethra"
+        label="{{'abdomenMRT.kidneys.urethra.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isUrethra"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      *ngIf="model.associatedCausalFindingsType === associatedCausalFindingsType.EnlargedUterus"
+      class="o-radio-list"
+    >
+      <h2 rr-id="abd_m_0704101">
+        {{'abdomenMRT.kidneys.enlargedUterusDetails.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_0704102"
+        rrUnClickRadio
+        name="enlargedUterusDetailsType"
+        [value]="enlargedUterusDetailsType.DuringPregnancy"
+        label="{{'abdomenMRT.kidneys.duringPregnancy.value' | translate}}"
+        [(ngModel)]="model.enlargedUterusDetailsType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_0704103"
+        rrUnClickRadio
+        name="enlargedUterusDetailsType"
+        [value]="enlargedUterusDetailsType.AfterPregnancy"
+        label="{{'abdomenMRT.kidneys.afterPregnancy.value' | translate}}"
+        [(ngModel)]="model.enlargedUterusDetailsType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div
+    class="c-col-1 c-pad-l c-sep-l f-vertical o-list"
+    [ngClass]="{'m-t-110': isAssociatedCausalUrolithiasis}"
+  >
+    <ng-container *ngIf="isAssociatedCausalUrolithiasis">
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="abd_m_0705106">
+          {{'abdomenMRT.kidneys.maxDiameterOfTheConcrement.value' | translate}}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_0705107"
+          labelRrId="abd_m_0705108"
+          name="maxDiameterConcrementInMm"
+          label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 99, placeholder: '--' }"
+          [(ngModel)]="model.maxDiameterConcrementInMm"
+        >
+        </rr-number-input>
+      </div>
+      <div class="o-radio-list">
+        <h3 rr-id="abd_m_070587">
+          {{'abdomenMRT.kidneys.differentialDiagnosis.value' | translate}}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_070588"
+          name="isPhlebolite"
+          label="{{'abdomenMRT.kidneys.phlebolite.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPhlebolite"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070589"
+          name="isPapillaryCalcifications"
+          label="{{'abdomenMRT.kidneys.papillaryCalcifications.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isPapillaryCalcifications"
+          class="m-b-20"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070590"
+          name="isMoreThanOneLesionSameEntity"
+          label="{{ 'abdomenMRT.kidneys.findingOfTheSameEntity.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isMoreThanOneLesionSameEntity"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_0705109">
+          {{'abdomenMRT.kidneys.referenceImageConcretion.value' | translate}}
+        </h2>
+        <rr-reference-picture
+          [(ngModel)]="model.obstructiveNephropathyChar1ReferencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="obstructiveNephropathyChar1ReferencePicture"
+          [elementsRrIds]="obstructiveNephropathyChar1ReferencePictureElementsRrIds"
+          [pictureFileType]="imageFileTypeEnum.ObstructiveNephropathyChar1ImageFile"
+          [isHeader]="false"
+        >
+        </rr-reference-picture>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,149 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    *ngIf="largeLocalizerOpen"
+    [ngStyle]="{'margin-top': largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.arteriesSegments ? '-102px' : '-12px'}"
+  >
+    <rr-arterial-territories-localizer-complex
+      *ngIf="largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.arterialTerritories"
+      [(ngModel)]="findingHandler.currentItem.vascularTerritoryLocation"
+      name="vascularTerritoryLocation"
+      (close)="onLargeLocalizerClose()"
+    >
+    </rr-arterial-territories-localizer-complex>
+    <rr-basal-ganglia-locations-complex
+      [(ngModel)]="findingHandler.currentItem.basalGangliaLocation"
+      *ngIf="largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.basalGanglia"
+      name="basalGangliaLocation"
+      (close)="onLargeLocalizerClose()"
+    >
+    </rr-basal-ganglia-locations-complex>
+    <rr-cortex-localizer-complex
+      [(ngModel)]="findingHandler.currentItem.cortexLocation"
+      *ngIf="largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.cortex"
+      name="cortexLocation"
+      (close)="onLargeLocalizerClose()"
+    >
+    </rr-cortex-localizer-complex>
+
+    <rr-arteries-segments-big-localizer
+      name="affectedSegmentsOrVesselsLocation"
+      *ngIf="largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.arteriesSegments"
+      [ngModel]="findingHandler.currentItem.affectedSegmentsOrVesselsLocation"
+      multipleChoiceDescriptionVer2="true"
+      (close)="onLargeLocalizerClose()"
+    ></rr-arteries-segments-big-localizer>
+
+    <rr-carotid-artery-big-localizer
+      (close)="onLargeLocalizerClose()"
+      *ngIf="largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.carotidArtery"
+      name="internalCarotidArterySegmentsLocations"
+      [(ngModel)]="findingHandler.currentItem.internalCarotidArterySegmentsLocations"
+    >
+    </rr-carotid-artery-big-localizer>
+
+    <rr-cerebral-venous-thrombosis-localizer-complex
+      [ngModel]="findingHandler.currentItem.cerebralVenousThrombosisLocation"
+      *ngIf="largeLocalizerOpen === headCTVesselsLocalizersTypeEnum.cerebralVenousThrombosis"
+      name="cerebralVenousThrombosisLocation"
+      (close)="onLargeLocalizerClose()"
+    >
+    </rr-cerebral-venous-thrombosis-localizer-complex>
+  </div>
+  <div *ngIf="!largeLocalizerOpen" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r f-vertical f-start o-radio-list">
+      <h1 rr-id="hea_c_040103" class="m-b-15">
+        {{ 'headCT.vessels.finding.value' | translate }}*
+      </h1>
+      <p-radioButton
+        rr-id="hea_c_040104"
+        label="{{ 'headCT.vessels.noSignsOfAcuteIschemiaOrCerebralVenousThrombosisNoPathologicalChangesOfTheScannedVessels.value' | translate }}"
+        labelStyleClass="text-break"
+        name="areFindings"
+        [value]="areFindingsEnum.No"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_040105"
+        label="{{'headCT.vessels.finding.value' | translate}}"
+        name="areFindings"
+        [value]="areFindingsEnum.Yes"
+        [(ngModel)]="model.areFindings"
+        rrValidation="areFindings"
+        notInFinding="true"
+      ></p-radioButton>
+
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindingsEnum.Yes"
+        [setConfig]="findingDropdownConfig"
+        [attr.name]="'findings'"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <div class="c-pad-l">
+        <h1
+          *ngIf="!isFindingType(vesselsFindingTypeEnum.None)"
+          rr-id="hea_c_040201"
+        >
+          {{ 'headCT.vessels.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <div
+        *ngIf="isFindingType(vesselsFindingTypeEnum.None)"
+        class="f-horizontal f-start main"
+      >
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+
+      <rr-norm-variant
+        *ngIf="isFindingType(vesselsFindingTypeEnum.NormVariant)"
+        [model]="findingHandler.currentItem"
+      ></rr-norm-variant>
+      <rr-ischemia
+        *ngIf="isFindingType(vesselsFindingTypeEnum.Ischemia)"
+        [model]="findingHandler.currentItem"
+      ></rr-ischemia>
+      <rr-perfusion
+        *ngIf="isFindingType(vesselsFindingTypeEnum.Perfusion)"
+        [model]="findingHandler.currentItem"
+      ></rr-perfusion>
+      <rr-circle-of-willis-and-cerebral-arteries
+        *ngIf="isFindingType(vesselsFindingTypeEnum.CircleOfWillisAndCerebralArteries)"
+        [model]="findingHandler.currentItem"
+      ></rr-circle-of-willis-and-cerebral-arteries>
+      <rr-common-carotid-artery
+        *ngIf="isFindingType(vesselsFindingTypeEnum.CommonCarotidArtery)"
+        [model]="findingHandler.currentItem"
+      ></rr-common-carotid-artery>
+      <rr-internal-carotid-vertebral-carotid-artery
+        *ngIf="isFindingType(vesselsFindingTypeEnum.InternalCarotidArtery) || isFindingType(vesselsFindingTypeEnum.VertebralArtery)"
+        [model]="findingHandler.currentItem"
+      ></rr-internal-carotid-vertebral-carotid-artery>
+      <rr-external-carotid-artery
+        *ngIf="isFindingType(vesselsFindingTypeEnum.ExternalCarotidArtery)"
+        [model]="findingHandler.currentItem"
+      ></rr-external-carotid-artery>
+      <rr-cerebral-veins-sinus-durae-matris
+        *ngIf="isFindingType(vesselsFindingTypeEnum.CerebralVeinsSinusDuraeMatris)"
+        [model]="findingHandler.currentItem"
+      ></rr-cerebral-veins-sinus-durae-matris>
+      <rr-vascular-malformation
+        *ngIf="isFindingType(vesselsFindingTypeEnum.VascularMalformation)"
+        [model]="findingHandler.currentItem"
+      ></rr-vascular-malformation>
+      <rr-dural-avfistula
+        *ngIf="isFindingType(vesselsFindingTypeEnum.DuralAVFistula)"
+        [model]="findingHandler.currentItem"
+      ></rr-dural-avfistula>
+    </div>
+  </div>
+</form>

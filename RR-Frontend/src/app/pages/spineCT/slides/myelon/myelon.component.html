@@ -1,0 +1,121 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="!!localizerConfig && !localizerConfig.isDirectional"
+  >
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="localizerConfig.model"
+      [logicType]="localizerConfig.logicType"
+      [localizationTitle]="localizerConfig.title"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      [localizationDescription]="localizerConfig.localizationDescription"
+      (close)="closeLargeLocalizer()"
+    ></rr-spine-complex>
+  </div>
+
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="!!localizerConfig && localizerConfig.isDirectional"
+  >
+    <rr-spine-directional
+      [localizationDescription]="localizerConfig.localizationDescription"
+      name="spineDirectional"
+      [(ngModel)]="localizerConfig.model"
+      (close)="closeLargeLocalizer()"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    ></rr-spine-directional>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!localizerConfig">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <h1 rr-id="spi_c_070103">
+        {{ "spineCT.myelonSpinalCanal.finding.value" | translate }}*
+      </h1>
+      <div class="col-h-100 f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="spi_c_070104"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NormalImagingSpinalCanal"
+          rrValidation="areFindings"
+          notInFinding="true"
+          label="{{'spineCT.myelonSpinalCanal.normalImagingOfThe.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070109"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NoEvidenceSpinalTumor"
+          rrValidation="areFindings"
+          notInFinding="true"
+          label="{{'spineCT.myelonSpinalCanal.noEvidenceOfA.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_070105"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.True"
+          rrValidation="areFindings"
+          notInFinding="true"
+          label="{{'spineCT.myelonSpinalCanal.finding.value' | translate}}"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [setConfig]="findingColumnConfig"
+          [disabled]="model.areFindings !== areFindingsEnum.True"
+          [attr.name]="'findings'"
+          validationName="findings"
+          (findingChange)="clearActiveTab()"
+          (findingTypeChange)="clearActiveTab()"
+          (newFindingAdded)="clearActiveTab()"
+          (findingRemoved)="clearActiveTab()"
+          (activeFindingChanged)="clearActiveTab()"
+          (allElementsDeleted)="clearActiveTab()"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <div class="f-vertical f-space-between">
+      <!-- Finding number -->
+      <div>
+        <h1
+          rr-id="spi_c_070201"
+          class="p-l-15"
+          *ngIf="findingHandler.currentItem.findingType !== findingTypeEnum.None"
+        >
+          {{ 'spineCT.myelonSpinalCanal.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+
+      <div
+        *ngIf="findingHandler.currentItem.findingType === findingTypeEnum.None; else findings"
+        class="f-horizontal"
+        style="height: 552px"
+      >
+        <div class="f-horizontal col-h-100">
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+          <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+        </div>
+      </div>
+      <ng-template #findings>
+        <div class="f-horizontal">
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <rr-spinal-canal-stenosis
+              *ngSwitchCase="findingTypeEnum.SpinalCanalStenosis"
+              [model]="findingHandler.currentItem"
+            ></rr-spinal-canal-stenosis>
+            <rr-mass
+              *ngSwitchCase="findingTypeEnum.Mass"
+              [model]="findingHandler.currentItem"
+            ></rr-mass>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

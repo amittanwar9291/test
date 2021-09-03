@@ -1,0 +1,145 @@
+<div class="f-vertical col-h-100">
+  <h2 rr-id="nec_m_100202" class="m-b-10">
+    {{ 'neckMRT.bones.externalMaterial.value' | translate }}*
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep o-list">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_100203"
+          [(ngModel)]="model.isSpondylodesis"
+          name="isSpondylodesis"
+          label="{{ 'neckMRT.bones.spondylodesis.value' | translate }}"
+          binary="true"
+          rrValidation="isSpondylodesis isOsteosynthesis isIntervertebralDiscProthesis isVertebroplasty"
+          (onChange)="resetSpondylodesisLocalizers()"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isSpondylodesis"
+        >
+          <h3 rr-id="nec_m_100204" rrValidation="spondylodesisSpineLocations">
+            {{ 'neckMRT.bones.localization.value' | translate }}*
+          </h3>
+          <rr-spine-simple
+            rr-id="nec_m_100205"
+            [selectionAccessibilityMode]="selectionAccessibilityMode.C0toTH4"
+            [spineLocation]="model.spondylodesisSpineLocations"
+            rrValidation="spondylodesisSpineLocations"
+            isLocalizer="true"
+            (click)="openLargeLocalizer('spondylodesis')"
+          ></rr-spine-simple>
+        </div>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isSpondylodesis"
+        >
+          <h3 rr-id="nec_m_100206" rrValidation="spondylodesisTraumaLocations">
+            {{ 'neckMRT.bones.localizationSagittal.value' | translate }}*
+          </h3>
+          <rr-spine-disc-general-localizer
+            [(ngModel)]="model.spondylodesisTraumaLocations"
+            name="spondylodesisTraumaLocations"
+            isSingleChoice="true"
+            isLocalizer="true"
+            [logicType]="'ventralAndDorsal'"
+            rrValidation="spondylodesisTraumaLocations"
+            [disabled]="!model.isSpondylodesis"
+          >
+          </rr-spine-disc-general-localizer>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-list">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_100301"
+          [(ngModel)]="model.isOsteosynthesis"
+          name="isOsteosynthesis"
+          label="{{ 'neckMRT.bones.osteosynthesis.value' | translate }}"
+          binary="true"
+          rrValidation="isSpondylodesis isOsteosynthesis isIntervertebralDiscProthesis isVertebroplasty"
+          (onChange)="resetOsteosynthesisLocalizer()"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isOsteosynthesis"
+        >
+          <h3 rr-id="nec_m_100302" rrValidation="osteosynthesisSpineLocations">
+            {{ 'neckMRT.bones.localization.value' | translate }}*
+          </h3>
+          <rr-spine-simple
+            rr-id="nec_m_100303"
+            [selectionAccessibilityMode]="selectionAccessibilityMode.C0toTH4"
+            [spineLocation]="model.osteosynthesisSpineLocations"
+            rrValidation="osteosynthesisSpineLocations"
+            isLocalizer="true"
+            (click)="openLargeLocalizer('osteosynthesis')"
+          ></rr-spine-simple>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep o-list">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_100401"
+          [(ngModel)]="model.isIntervertebralDiscProthesis"
+          name="isIntervertebralDiscProthesis"
+          label="{{ 'neckMRT.bones.intervertebralDiscProthesis.value' | translate }}"
+          binary="true"
+          rrValidation="isSpondylodesis isOsteosynthesis isIntervertebralDiscProthesis isVertebroplasty"
+          (onChange)="resetProthesisLocalizer()"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isIntervertebralDiscProthesis"
+        >
+          <h3 rr-id="nec_m_100402" rrValidation="prothesisSpineLocations">
+            {{ 'neckMRT.bones.localization.value' | translate }}*
+          </h3>
+          <rr-spine-simple
+            rr-id="nec_m_100403"
+            [selectionAccessibilityMode]="selectionAccessibilityMode.C0toTH4"
+            [spineLocation]="model.prothesisSpineLocations"
+            rrValidation="prothesisSpineLocations"
+            isLocalizer="true"
+            (click)="openLargeLocalizer('prothesis')"
+          ></rr-spine-simple>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l o-list">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="nec_m_100501"
+          [(ngModel)]="model.isVertebroplasty"
+          name="isVertebroplasty"
+          label="{{ 'neckMRT.bones.vertebroplasty.value' | translate }}"
+          binary="true"
+          rrValidation="isSpondylodesis isOsteosynthesis isIntervertebralDiscProthesis isVertebroplasty"
+          (onChange)="resetVertebroplastyLocalizer()"
+        >
+        </p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isVertebroplasty"
+        >
+          <h3 rr-id="nec_m_100502" rrValidation="vertebroplastySpineLocations">
+            {{ 'neckMRT.bones.localization.value' | translate }}*
+          </h3>
+          <rr-spine-simple
+            rr-id="nec_m_100503"
+            [selectionAccessibilityMode]="selectionAccessibilityMode.C0toTH4"
+            [spineLocation]="model.vertebroplastySpineLocations"
+            rrValidation="vertebroplastySpineLocations"
+            isLocalizer="true"
+            (click)="openLargeLocalizer('vertebroplasty')"
+          ></rr-spine-simple>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

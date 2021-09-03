@@ -1,0 +1,305 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-sep c-pad-r o-list">
+    <div class="f-start f-vertical o-radio-list m-t-10">
+      <h2 rr-id="sho_m_0503200" class="m-t-3 m-b-8">
+        {{ 'shoulderMRT.rotator.pathology.value' | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="sho_m_050202"
+        [(ngModel)]="model.afflicationType"
+        label="{{ 'shoulderMRT.rotator.degeneration.value' | translate }}"
+        name="afflicationType"
+        [value]="afflicationType.Degeneration"
+        rrContentReset="inflammation-block trauma-block"
+        rrValidation="afflicationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="sho_m_050204"
+        [(ngModel)]="model.afflicationType"
+        label="{{ 'shoulderMRT.rotator.trauma.value' | translate }}"
+        name="afflicationType"
+        [value]="afflicationType.Trauma"
+        rrContentReset="degeneration-block inflammation-block"
+        rrValidation="afflicationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="sho_m_050206"
+        [(ngModel)]="model.afflicationType"
+        label="{{ 'shoulderMRT.rotator.inflammation.value' | translate }}"
+        name="afflicationType"
+        class="m-b-6"
+        [value]="afflicationType.Inflammation"
+        rrContentReset="degeneration-block trauma-block"
+        rrValidation="afflicationType"
+      >
+      </p-radioButton>
+      <div
+        class="f-start f-vertical nested-content"
+        id="inflammation-block"
+        [rrDisable]="model.afflicationType !== afflicationType.Inflammation"
+      >
+        <p-checkbox
+          rr-id="sho_m_050208"
+          [(ngModel)]="model.isApophysitis"
+          label="{{ 'shoulderMRT.rotator.apophysitis.value' | translate }}"
+          name="isApophysitis"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-list">
+    <div
+      class="f-start f-vertical o-radio-list m-t-11"
+      id="degeneration-block"
+      [rrDisable]="model.afflicationType !== afflicationType.Degeneration"
+    >
+      <h2 rr-id="sho_m_0503200">
+        {{ 'shoulderMRT.rotator.degenerativeChanges.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="sho_m_050301"
+        [(ngModel)]="model.isOsteophytes"
+        label="{{ 'shoulderMRT.rotator.osteophytes.value' | translate }}"
+        name="isOsteophytes"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="sho_m_050302"
+        [(ngModel)]="model.isCapsularHypertrophy"
+        label="{{ 'shoulderMRT.rotator.capsularHypertrophy.value' | translate }}"
+        name="isCapsularHypertrophy"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="sho_m_050303"
+        [(ngModel)]="model.isSubchondralCysts"
+        label="{{ 'shoulderMRT.rotator.subchondralCysts.value' | translate }}"
+        name="isSubchondralCysts"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="sho_m_050304"
+        [(ngModel)]="model.isSubchondralEdema"
+        label="{{ 'shoulderMRT.rotator.subchondralEdema.value' | translate }}"
+        name="isSubchondralEdema"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="sho_m_050305"
+        [(ngModel)]="model.isArticularEffusion"
+        label="{{ 'shoulderMRT.rotator.articularEffusion.value' | translate }}"
+        binary="true"
+        name="isArticularEffusion"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="sho_m_050306"
+        [(ngModel)]="model.isSclerosis"
+        label="{{ 'shoulderMRT.rotator.sclerosis.value' | translate }}"
+        name="isSclerosis"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="sho_m_050307"
+        [(ngModel)]="model.isOsteolysisOrLateralClavicles"
+        label="{{ 'shoulderMRT.rotator.osteolysisOrLateralClavicles.value' | translate }}"
+        name="isOsteolysisOrLateralClavicles"
+        class="m-b-20"
+        binary="true"
+        rrContentReset="isOsteolysisOrLateralClavicles-block"
+      >
+      </p-checkbox>
+      <div
+        class="f-start f-vertical o-radio-list nested-content"
+        id="isOsteolysisOrLateralClavicles-block"
+        [rrDisable]="!model.isOsteolysisOrLateralClavicles"
+      >
+        <p-checkbox
+          rr-id="sho_m_050308"
+          [(ngModel)]="model.isCorticalThinning"
+          label="{{ 'shoulderMRT.rotator.corticalThinning.value' | translate }}"
+          name="isCorticalThinning"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="sho_m_050309"
+          [(ngModel)]="model.isCorticalBoneErosion"
+          label="{{ 'shoulderMRT.rotator.corticalBoneErosion.value' | translate }}"
+          name="isCorticalBoneErosion"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-2 c-sep c-pad-l f-start f-vertical o-radio-list">
+    <h2
+      rr-id="sho_m_0504200"
+      class="m-t-11"
+      [rrDisable]="model.afflicationType !== afflicationType.Trauma"
+    >
+      {{ 'shoulderMRT.rotator.traumaClassification.value' | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad-r" id="trauma-block">
+        <div
+          class="f-start f-vertical o-list"
+          [rrDisable]="model.afflicationType !== afflicationType.Trauma"
+        >
+          <div class="f-start f-vertical o-radio-list m-b-39">
+            <p-radioButton
+              rr-id="sho_m_050401"
+              [(ngModel)]="model.acJointClassificationType"
+              label="{{ 'shoulderMRT.rotator.tossyClassification.value' | translate }}"
+              labelStyleClass="ui-fat-label"
+              name="acJointClassificationType"
+              class="m-b-18"
+              [value]="acJointClassificationType.TossyClassification"
+              rrInfoIcon="sho_m_050402"
+              rrContentReset="rockwood-block"
+              rrValidation="acJointClassificationType"
+            >
+            </p-radioButton>
+            <div
+              class="f-start f-vertical o-radio-list nested-content"
+              id="tossy-block"
+              [rrDisable]="model.acJointClassificationType !== acJointClassificationType.TossyClassification"
+            >
+              <p rr-id="sho_m_050425">
+                {{ 'shoulderMRT.rotator.typeOfInjury.value' | translate }}*
+              </p>
+
+              <p-radioButton
+                rr-id="sho_m_050403"
+                [(ngModel)]="model.tossyType"
+                label="{{ 'shoulderMRT.rotator.tossy1.value' | translate }}"
+                name="tossyType"
+                [value]="tossyType.Tossy1"
+                rrValidation="tossyType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050404"
+                [(ngModel)]="model.tossyType"
+                label="{{ 'shoulderMRT.rotator.tossy2.value' | translate }}"
+                name="tossyType"
+                [value]="tossyType.Tossy2"
+                rrValidation="tossyType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050405"
+                [(ngModel)]="model.tossyType"
+                label="{{ 'shoulderMRT.rotator.tossy3.value' | translate }}"
+                name="tossyType"
+                [value]="tossyType.Tossy3"
+                rrValidation="tossyType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+          <div class="f-start f-vertical o-radio-list">
+            <p-radioButton
+              rr-id="sho_m_050406"
+              [(ngModel)]="model.acJointClassificationType"
+              label="{{ 'shoulderMRT.rotator.rockwoodClassification.value' | translate }}"
+              labelStyleClass="ui-fat-label"
+              name="acJointClassificationType"
+              class="m-b-17"
+              [value]="acJointClassificationType.RockwoodClassification"
+              rrInfoIcon="sho_m_050407"
+              rrContentReset="tossy-block"
+              rrValidation="acJointClassificationType"
+            >
+            </p-radioButton>
+            <div
+              class="f-start f-vertical o-radio-list nested-content"
+              id="rockwood-block"
+              [rrDisable]="model.acJointClassificationType !== acJointClassificationType.RockwoodClassification"
+            >
+              <p rr-id="sho_m_050426">
+                {{ 'shoulderMRT.rotator.typeOfInjury.value' | translate }}*
+              </p>
+
+              <p-radioButton
+                rr-id="sho_m_050408"
+                [(ngModel)]="model.rockwoodType"
+                label="{{ 'shoulderMRT.rotator.grade1.value' | translate }}"
+                name="rockwoodType"
+                [value]="rockwoodType.Grade1"
+                rrValidation="rockwoodType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050409"
+                [(ngModel)]="model.rockwoodType"
+                label="{{ 'shoulderMRT.rotator.grade2.value' | translate }}"
+                name="rockwoodType"
+                [value]="rockwoodType.Grade2"
+                rrValidation="rockwoodType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050410"
+                [(ngModel)]="model.rockwoodType"
+                label="{{ 'shoulderMRT.rotator.grade3.value' | translate }}"
+                name="rockwoodType"
+                [value]="rockwoodType.Grade3"
+                rrValidation="rockwoodType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050411"
+                [(ngModel)]="model.rockwoodType"
+                label="{{ 'shoulderMRT.rotator.grade4.value' | translate }}"
+                name="rockwoodType"
+                [value]="rockwoodType.Grade4"
+                rrValidation="rockwoodType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050412"
+                [(ngModel)]="model.rockwoodType"
+                label="{{ 'shoulderMRT.rotator.grade5.value' | translate }}"
+                name="rockwoodType"
+                [value]="rockwoodType.Grade5"
+                rrValidation="rockwoodType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="sho_m_050413"
+                [(ngModel)]="model.rockwoodType"
+                label="{{ 'shoulderMRT.rotator.grade6.value' | translate }}"
+                name="rockwoodType"
+                [value]="rockwoodType.Grade6"
+                rrValidation="rockwoodType"
+              >
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad-l">
+        <div class="c-sep f-vertical">
+          <rr-reference-picture
+            [(ngModel)]="model.referencePicture"
+            [referenceId]="model.id"
+            [fileUploadUrl]="fileUploadUrl"
+            name="referencePicture"
+            class="m-t-2"
+          ></rr-reference-picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

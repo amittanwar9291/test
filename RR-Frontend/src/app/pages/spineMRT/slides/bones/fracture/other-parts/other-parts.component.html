@@ -1,0 +1,388 @@
+<div class="f-horizontal f-start col-h-100 c-pad-l">
+  <div class="c-col-1 f-vertical o-radio-list f-start c-pad-r">
+    <h2 rr-id="spi_m_060301" class="m-b-38">
+      {{ "spineMRT.bones.fractureXX.value" | translate
+      }}{{convertSelectedPart()}}*
+    </h2>
+
+    <p-radioButton
+      [value]="c3FractureTypeEnum.A0Classification"
+      [(ngModel)]="model.c3FractureType"
+      label="{{ 'spineMRT.bones.a0Classification.value' | translate }}"
+      rr-id="spi_m_060320"
+      name="c3FractureType"
+      rrValidation="c3FractureType"
+      rrContentReset="differentialDiagnosisType-block GenantClassification-block NoSpec-block c3FractureFormType-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="c3FractureTypeEnum.GenantClassification"
+      [(ngModel)]="model.c3FractureType"
+      label="{{ 'spineMRT.bones.genantClassification.value' | translate }}"
+      rr-id="spi_m_060321"
+      name="c3FractureType"
+      rrValidation="c3FractureType"
+      rrInfoIcon="spi_m_06_03"
+      rrContentReset="differentialDiagnosisType-block A0Classification-block NoSpec-block CompressionInjury-block DistractionInjury-block"
+    >
+    </p-radioButton>
+    <p-radioButton
+      [value]="c3FractureTypeEnum.NoSpec"
+      [(ngModel)]="model.c3FractureType"
+      label="{{ 'spineMRT.bones.fractureNotFurtherDefined.value' | translate }}"
+      rr-id="spi_m_060322"
+      name="c3FractureType"
+      rrValidation="c3FractureType"
+      rrContentReset="c3FractureFormType-block A0Classification-block GenantClassification-block CompressionInjury-block DistractionInjury-block"
+    >
+    </p-radioButton>
+  </div>
+
+  <div
+    class="c-col-1 f-vertical o-radio-list f-start c-sep-l c-pad"
+    [ngClass]="{
+  'm-t-60': model.c3FractureType === c3FractureTypeEnum.A0Classification || model.c3FractureType === c3FractureTypeEnum.GenantClassification,
+  'm-t-69': model.c3FractureType === c3FractureTypeEnum.NoSpec
+  }"
+  >
+    <div
+      id="A0Classification-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c3FractureType === c3FractureTypeEnum.A0Classification"
+    >
+      <h2 rr-id="spi_m_060429">
+        {{ "spineMRT.bones.evaluationSeverity.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="valuationOfFractureTypeEnum.CompressionInjury"
+        [(ngModel)]="model.valuationOfFractureType"
+        label="{{ 'spineMRT.bones.aCompressionInjury.value' | translate }}"
+        rr-id="spi_m_060430"
+        name="valuationOfFractureType"
+        rrValidation="valuationOfFractureType"
+        rrContentReset="DistractionInjury-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="valuationOfFractureTypeEnum.TensionBandInjury"
+        [(ngModel)]="model.valuationOfFractureType"
+        label="{{ 'spineMRT.bones.bTensionBandInjury.value' | translate }}"
+        rr-id="spi_m_060431"
+        name="valuationOfFractureType"
+        rrValidation="valuationOfFractureType"
+        rrContentReset="CompressionInjury-block"
+        labelStyleClass="text-break"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="valuationOfFractureTypeEnum.DisplacementTranslationalInjury"
+        [(ngModel)]="model.valuationOfFractureType"
+        label="{{ 'spineMRT.bones.cDisplacementtranslationalInjury.value' | translate }}"
+        rr-id="spi_m_060432"
+        name="valuationOfFractureType"
+        rrValidation="valuationOfFractureType"
+        rrContentReset="DistractionInjury-block CompressionInjury-block"
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      id="GenantClassification-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c3FractureType === c3FractureTypeEnum.GenantClassification"
+    >
+      <h2 rr-id="spi_m_060433">
+        {{ "spineMRT.bones.evaluationOfFracture.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="valuationOfFractureTypeEnum.MildFractureGrade1"
+        [(ngModel)]="model.valuationOfFractureType"
+        label="{{ 'spineMRT.bones.mildFractureGrade.value' | translate }}"
+        rr-id="spi_m_060434"
+        rrValidation="valuationOfFractureType"
+        name="valuationOfFractureType"
+        [rrContentReset]="resetOnValuationChange(valuationOfFractureTypeEnum.MildFractureGrade1)"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="valuationOfFractureTypeEnum.ModerateFractureGrade2"
+        [(ngModel)]="model.valuationOfFractureType"
+        label="{{ 'spineMRT.bones.moderateFractureGrade.value' | translate }}"
+        rr-id="spi_m_060435"
+        rrValidation="valuationOfFractureType"
+        name="valuationOfFractureType"
+        [rrContentReset]="resetOnValuationChange(valuationOfFractureTypeEnum.ModerateFractureGrade2)"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="valuationOfFractureTypeEnum.SevereFractureGrade3"
+        [(ngModel)]="model.valuationOfFractureType"
+        label="{{ 'spineMRT.bones.severeFractureGrade.value' | translate }}"
+        rr-id="spi_m_060436"
+        rrValidation="valuationOfFractureType"
+        name="valuationOfFractureType"
+        [rrContentReset]="resetOnValuationChange(valuationOfFractureTypeEnum.SevereFractureGrade3)"
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      id="NoSpec-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c3FractureType === c3FractureTypeEnum.NoSpec"
+    >
+      <p-radioButton
+        [value]="noSpecTypeEnum.AppearanceOfAnOlderFracture"
+        [(ngModel)]="model.noSpecType"
+        label="{{ 'spineMRT.bones.appearanceOfAnOlder.value' | translate }}"
+        rr-id="spi_m_060437"
+        name="noSpecType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="noSpecTypeEnum.SuspicionOf"
+        [(ngModel)]="model.noSpecType"
+        label="{{ 'spineMRT.bones.suspicionOf.value' | translate }}"
+        rr-id="spi_m_060438"
+        name="noSpecType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+
+  <div
+    class="c-col-1 f-vertical f-start o-radio-list c-sep-l c-pad-l"
+    [ngClass]="{
+  'm-t-60': model.c3FractureType === c3FractureTypeEnum.A0Classification || model.c3FractureType === c3FractureTypeEnum.GenantClassification,
+  'm-t-69': model.c3FractureType === c3FractureTypeEnum.NoSpec
+  }"
+  >
+    <div
+      id="CompressionInjury-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.valuationOfFractureType === valuationOfFractureTypeEnum.CompressionInjury"
+    >
+      <h2 rr-id="spi_m_060504">
+        {{ "spineMRT.bones.fractureType.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.A0"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.a0MinorNonstructuralFracture.value' | translate }}"
+        rr-id="spi_m_060505"
+        class="text-break"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.A1"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.a1WedgeFracturewedgeCompression.value' | translate }}"
+        rr-id="spi_m_060506"
+        class="text-break"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.A2"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.a2CleavageFracture.value' | translate }}"
+        rr-id="spi_m_060507"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.A3"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.a3BurstFractureincompleteFracture.value' | translate }}"
+        rr-id="spi_m_060508"
+        class="text-break"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.A4"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.a4BurstFracturecompleteFracture.value' | translate }}"
+        rr-id="spi_m_060509"
+        class="text-break"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      id="DistractionInjury-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.valuationOfFractureType === valuationOfFractureTypeEnum.TensionBandInjury"
+    >
+      <h2 rr-id="spi_m_060510">
+        {{ "spineMRT.bones.fractureType.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.B1"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.b1TransossareFissionFracturechanceFracture.value' | translate }}"
+        rr-id="spi_m_060511"
+        class="text-break"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.B2"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.b2TearOfThe.value' | translate }}"
+        rr-id="spi_m_060512"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.B3"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.b3DestructionOfTheintervertebral.value' | translate }}"
+        rr-id="spi_m_060513"
+        class="text-break"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      id="c3FractureFormType-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c3FractureType === c3FractureTypeEnum.GenantClassification
+      && model.valuationOfFractureType !== valuationOfFractureTypeEnum.None"
+    >
+      <h2 rr-id="spi_m_060514">
+        {{ "spineMRT.bones.fractureType.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.WedgeFracture"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.wedgeFracture.value' | translate }}"
+        rr-id="spi_m_060515"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.BiconcaveFracture"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.biconcaveFracture.value' | translate }}"
+        rr-id="spi_m_060516"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="c3FractureFormTypeEnum.CrushFracture"
+        [(ngModel)]="model.c3FractureFormType"
+        label="{{ 'spineMRT.bones.crushFracture.value' | translate }}"
+        rr-id="spi_m_060517"
+        name="c3FractureFormType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+
+    <div
+      id="differentialDiagnosisType-block"
+      class="f-vertical f-start o-radio-list"
+      *ngIf="model.c3FractureType === c3FractureTypeEnum.NoSpec"
+    >
+      <h2 rr-id="spi_m_060518">
+        {{ "spineMRT.bones.differentialDiagnosis.value" | translate }}
+      </h2>
+      <p-radioButton
+        [value]="differentialDiagnosisTypeEnum.HeightLoss"
+        [(ngModel)]="model.differentialDiagnosisType"
+        label="{{ 'spineMRT.bones.heightLossstandardVariant.value' | translate }}"
+        rr-id="spi_m_060519"
+        class="text-break"
+        name="differentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="isSchmorlNode-block isSecondary-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="differentialDiagnosisTypeEnum.MorbusScheuermann"
+        [(ngModel)]="model.differentialDiagnosisType"
+        label="{{ 'spineMRT.bones.scheuermannsDisease.value' | translate }}"
+        rr-id="spi_m_060520"
+        name="differentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="isSchmorlNode-block isSecondary-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="differentialDiagnosisTypeEnum.VertebraRemodelling"
+        [(ngModel)]="model.differentialDiagnosisType"
+        label="{{ 'spineMRT.bones.vertebraRemodellingforOsteochondrosis.value' | translate }}"
+        rr-id="spi_m_060521"
+        class="text-break"
+        name="differentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="isSchmorlNode-block isSecondary-block"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="differentialDiagnosisTypeEnum.StructuralDisturbance"
+        [(ngModel)]="model.differentialDiagnosisType"
+        label="{{ 'spineMRT.bones.dysplasia.value' | translate }}"
+        rr-id="spi_m_060522"
+        name="differentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="isSchmorlNode-block isSecondary-block"
+      >
+      </p-radioButton>
+      <div
+        id="isSchmorlNode-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.differentialDiagnosisType !== differentialDiagnosisTypeEnum.StructuralDisturbance"
+      >
+        <p-checkbox
+          label="{{'spineMRT.bones.schmorlNode.value' | translate}}"
+          binary="true"
+          rr-id="spi_m_060523"
+          name="isSchmorlNode"
+          [(ngModel)]="model.isSchmorlNode"
+        >
+        </p-checkbox>
+      </div>
+      <p-radioButton
+        [value]="differentialDiagnosisTypeEnum.BoneMarrowBait"
+        [(ngModel)]="model.differentialDiagnosisType"
+        label="{{ 'spineMRT.bones.boneMarrowEdema.value' | translate }}"
+        rr-id="spi_m_060524"
+        name="differentialDiagnosisType"
+        rrUnClickRadio
+        rrContentReset="isSchmorlNode-block isSecondary-block"
+      >
+      </p-radioButton>
+      <div
+        id="isSecondary-block"
+        class="f-vertical f-start o-radio-list"
+        [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisTypeEnum.None"
+      >
+        <p-checkbox
+          label="{{'spineMRT.bones.secondary.value' | translate}}"
+          binary="true"
+          rr-id="spi_m_060525"
+          name="isSecondary"
+          [(ngModel)]="model.isSecondary"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

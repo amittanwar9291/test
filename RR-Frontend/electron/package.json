@@ -1,0 +1,53 @@
+{
+  "name": "RadioReport",
+  "version": "0.0.0",
+  "description": "RadioReport Desktop Version",
+  "main": "main.js",
+  "scripts": {
+    "electron:start": "npm-run-all -p ngserve:dev wait:serve",
+    "wait:serve": "wait-on http-get://localhost:4200 && npm run open:serve",
+    "open": "npm run compile && electron . --dev",
+    "open:serve": "npm run compile && electron . --serve",
+    "ngbuild:open": "npm-run-all ngbuild:dev open",
+    "ngbuild:release:windows:dev": "npm-run-all ngbuild:dev release:windows",
+    "ngbuild:release:windows:prod": "npm-run-all ngbuild:prod release:windows",
+    "ngbuild:release:windows:docker": "npm-run-all ngbuild:docker release:windows",
+    "release:windows": "npm-run-all clean:electron compile copy electronbuild:windows",
+    "electronbuild:windows": "electron-builder build --windows",
+    "ngbuild:dev": "cd .. && node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng run RadioReport-FrontEnd:builddesktop --base-href=./ && npm run cap:copy:electron",
+    "ngbuild:prod": "cd .. && node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng run RadioReport-FrontEnd:builddesktop --configuration=production --base-href=./ && npm run cap:copy:electron",
+    "ngbuild:docker": "cd .. && node --max_old_space_size=13000 ./node_modules/@angular/cli/bin/ng run RadioReport-FrontEnd:builddesktop --configuration=docker --base-href=./ && npm run cap:copy:electron",
+    "ngserve:dev": "cd .. && node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng run RadioReport-FrontEnd:servedesktop --base-href=./",
+    "ngserve:prod": "cd .. && node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng run RadioReport-FrontEnd:servedesktop --configuration=production --base-href=./",
+    "copy": "cd .. && npm run cap:copy:electron",
+    "compile": "tsc -p tsconfig.electron.json --skipLibCheck",
+    "clean:electron": "node ./clean-electron.js",
+    "clean:all": "node ./clean-all.js"
+  },
+  "dependencies": {
+    "@capacitor/electron": "2.4.4",
+    "@types/minimist": "^1.2.0",
+    "chalk": "^4.1.0",
+    "custom-electron-titlebar": "3.2.5",
+    "del": "^5.1.0",
+    "electron-debug": "^3.1.0",
+    "electron-updater": "^4.3.8",
+    "electron-util": "^0.14.2",
+    "lodash": "^4.17.20",
+    "minimist": "^1.2.5",
+    "moment": "^2.24.0",
+    "serialize-error": "^7.0.1",
+    "ts-simple-nameof": "^1.3.0",
+    "wait-on": "^4.0.1"
+  },
+  "devDependencies": {
+    "electron": "11.0.3",
+    "electron-builder": "22.9.1",
+    "electron-reload": "^1.5.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.7.5"
+  },
+  "keywords": ["capacitor", "electron"],
+  "author": "",
+  "license": "ISC"
+}

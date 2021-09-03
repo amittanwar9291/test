@@ -1,0 +1,211 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-4 f-vertical col-h-100">
+    <h2 rr-id="ang_c_080230">
+      {{ "angiographyCT.abdomen.pathology.value" | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list m-t-13">
+        <p-checkbox
+          rr-id="ang_c_080217"
+          name="isSignsOfPortalHypertension"
+          [(ngModel)]="model.isSignsOfPortalHypertension"
+          binary="true"
+          [rrValidation]="patologyValidation"
+          rrContentReset="signsOfPortalhypertensionDetails"
+          label="{{ 'angiographyCT.abdomen.signsOfPortalhypertension.value' | translate }}"
+        ></p-checkbox>
+        <div
+          class="o-radio-list nested-content"
+          id="signsOfPortalhypertensionDetails"
+          [rrDisable]="!model.isSignsOfPortalHypertension"
+        >
+          <p rr-id="ang_c_080231">
+            {{ 'angiographyCT.abdomen.maxPortalVeinDiameter.value' | translate
+            }}
+          </p>
+          <rr-number-input
+            name="maxPortalVeinDiameterInMm"
+            [(ngModel)]="model.maxPortalVeinDiameterInMm"
+            inputRrId="ang_c_080218"
+            labelRrId="ang_c_080219"
+            [config]="{ min: 1, max: 99 }"
+            label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+          ></rr-number-input>
+        </div>
+        <p-checkbox
+          rr-id="ang_c_080220"
+          name="isPortalVeinThrombosis"
+          [(ngModel)]="model.isPortalVeinThrombosis"
+          binary="true"
+          [rrValidation]="patologyValidation"
+          rrContentReset="portalVeinThrombosisDetails"
+          label="{{ 'angiographyCT.abdomen.portalVeinThrombosis.value' | translate }}"
+        ></p-checkbox>
+        <div
+          class="o-radio-list nested-content"
+          id="portalVeinThrombosisDetails"
+          [rrDisable]="!model.isPortalVeinThrombosis"
+        >
+          <p-radioButton
+            rr-id="ang_c_080221"
+            name="portalVeinThrombosisType"
+            [(ngModel)]="model.portalVeinThrombosisType"
+            [value]="portalVeinThrombosisType.CompleteOcclusion"
+            rrUnClickRadio
+            rrContentReset="stenosisDetails"
+            label="{{ 'angiographyCT.abdomen.completeOcclusion.value' | translate }}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_080222"
+            name="portalVeinThrombosisType"
+            [(ngModel)]="model.portalVeinThrombosisType"
+            [value]="portalVeinThrombosisType.Stenosis"
+            rrUnClickRadio
+            rrContentReset="stenosisDetails"
+            label="{{ 'angiographyCT.abdomen.stenosis.value' | translate }}"
+          ></p-radioButton>
+          <div
+            class="o-radio-list nested-content"
+            id="stenosisDetails"
+            [rrDisable]="model.portalVeinThrombosisType !== portalVeinThrombosisType.Stenosis"
+          >
+            <p rr-id="ang_c_080232">
+              {{ 'angiographyCT.abdomen.minVesselDiameter.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="ang_c_080223"
+              labelRrId="ang_c_080224"
+              name="minVesselDiameterInMm"
+              [(ngModel)]="model.minVesselDiameterInMm"
+              label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 10 }"
+            ></rr-number-input>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list m-t-13">
+        <p-checkbox
+          rr-id="ang_c_0803147"
+          name="isObstructionHepatovenousOutflow"
+          [(ngModel)]="model.isObstructionHepatovenousOutflow"
+          binary="true"
+          [rrValidation]="patologyValidation"
+          rrContentReset="obstructionHepatovenousOutflowDetails"
+          class="text-break"
+          label="{{ 'angiographyCT.abdomen.obstructionHepatovenousoutflowBuddChiariSyndrome.value' | translate }}"
+        ></p-checkbox>
+        <div
+          class="o-radio-list nested-content"
+          id="obstructionHepatovenousOutflowDetails"
+          [rrDisable]="!model.isObstructionHepatovenousOutflow"
+        >
+          <p rr-id="ang_c_0803160">
+            {{ 'angiographyCT.abdomen.levelOfTheObstruction.value' | translate
+            }}
+          </p>
+          <p-radioButton
+            rr-id="ang_c_0803161"
+            class="text-break"
+            name="levelOfTheObstructionType"
+            [(ngModel)]="model.levelOfTheObstructionType"
+            [value]="levelOfTheObstructionType.SuprahepaticVCavaInferior"
+            rrUnClickRadio
+            rrContentReset="venulesWithinThePortalDetails"
+            label="{{ 'angiographyCT.abdomen.suprahepaticVCavaInferior.value' | translate }}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_0803162"
+            name="levelOfTheObstructionType"
+            [(ngModel)]="model.levelOfTheObstructionType"
+            [value]="levelOfTheObstructionType.HepaticVeinStar"
+            rrUnClickRadio
+            rrContentReset="venulesWithinThePortalDetails"
+            label="{{ 'angiographyCT.abdomen.hepaticVeinStar.value' | translate }}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_0803157"
+            name="levelOfTheObstructionType"
+            [(ngModel)]="model.levelOfTheObstructionType"
+            [value]="levelOfTheObstructionType.LiverVeins"
+            rrUnClickRadio
+            rrContentReset="venulesWithinThePortalDetails"
+            label="{{ 'angiographyCT.abdomen.liverVeins.value' | translate }}"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_0803163"
+            name="levelOfTheObstructionType"
+            [(ngModel)]="model.levelOfTheObstructionType"
+            [value]="levelOfTheObstructionType.VenulesWithinThePortalField"
+            rrUnClickRadio
+            rrContentReset="venulesWithinThePortalDetails"
+            label="{{ 'angiographyCT.abdomen.venulesWithinThePortal.value' | translate }}"
+          ></p-radioButton>
+          <div
+            class="o-radio-list nested-content"
+            id="venulesWithinThePortalDetails"
+            [rrDisable]="model.levelOfTheObstructionType !== levelOfTheObstructionType.VenulesWithinThePortalField"
+          >
+            <p-checkbox
+              rr-id="ang_c_0803164"
+              class="text-break"
+              name="isPersistentDottedHyperContrastEnhancement"
+              [(ngModel)]="model.isPersistentDottedHyperContrastEnhancement"
+              binary="true"
+              label="{{ 'angiographyCT.abdomen.persistentDottedHypercontrastEnhancementin.value' | translate }}"
+            ></p-checkbox>
+          </div>
+          <p rr-id="ang_c_0803156">
+            {{ 'angiographyCT.abdomen.furtherImageFeature.value' | translate }}
+          </p>
+          <p-checkbox
+            rr-id="ang_c_0803165"
+            class="text-break"
+            name="isDecreasedPerfusionOfTheLiverPeriphery"
+            [(ngModel)]="model.isDecreasedPerfusionOfTheLiverPeriphery"
+            binary="true"
+            label="{{ 'angiographyCT.abdomen.decreasedPerfusionOfTheliver.value' | translate }}"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad c-sep f-vertical f-start o-radio-list m-t-13">
+        <p-checkbox
+          rr-id="ang_c_080456"
+          name="isCollaterals"
+          [(ngModel)]="model.isCollaterals"
+          binary="true"
+          [rrValidation]="patologyValidation"
+          rrContentReset="collateralsDetails"
+          label="{{ 'angiographyCT.abdomen.collaterals.value' | translate }}"
+        ></p-checkbox>
+        <div
+          class="o-radio-list nested-content"
+          id="collateralsDetails"
+          [rrDisable]="!model.isCollaterals"
+        >
+          <p-checkbox
+            rr-id="ang_c_080457"
+            name="isPortoportalCollaterals"
+            [(ngModel)]="model.isPortoportalCollaterals"
+            binary="true"
+            label="{{ 'angiographyCT.abdomen.portoportalCollaterals.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="ang_c_080458"
+            name="isPortosystemicCollateralPathways"
+            [(ngModel)]="model.isPortosystemicCollateralPathways"
+            binary="true"
+            label="{{ 'angiographyCT.abdomen.portosystemiccollateralPathways.value' | translate }}"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="ang_c_080459"
+            name="isProminentPeriportalCollaterals"
+            [(ngModel)]="model.isProminentPeriportalCollaterals"
+            binary="true"
+            label="{{ 'angiographyCT.abdomen.prominentPeriportalcollaterals.value' | translate }}"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l  f-vertical f-start"></div>
+    </div>
+  </div>
+</div>

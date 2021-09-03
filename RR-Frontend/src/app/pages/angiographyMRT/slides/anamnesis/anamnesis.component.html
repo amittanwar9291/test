@@ -1,0 +1,475 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="double-col f-vertical c-sep">
+      <div class="double-col-header o-radio-list">
+        <h1 rr-id="ang_m_020103">
+          {{'angiographyMRT.anamnesis.anamnesisIndication.value' | translate }}
+        </h1>
+        <img
+          alt="Anamnesis"
+          rr-id="ang_m_020104"
+          src="assets/img/angiographyMRT/icons/2-1.svg"
+        />
+      </div>
+      <div class="double-col-content f-horizontal">
+        <div class="c-col-1 c-sep c-pad-r o-radio-list f-vertical">
+          <rr-finding-column
+            [handler]="findingHandler"
+            [disabled]="false"
+            [setConfig]="findingDropdownConfig"
+            [attr.name]="'findingHandlerComponent'"
+          >
+          </rr-finding-column>
+        </div>
+        <div class="c-col-1 c-sep c-pad o-radio-list">
+          <h2 [attr.rr-id]="getFindingHeaderRrId()">
+            {{getFindingHeaderText() | translate }}
+          </h2>
+
+          <div
+            *ngIf="isFindingType(anamnesisIndicationFindingTypeEnum.PeripheralArteryDiseasePAD)"
+            class="o-radio-list"
+          >
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isSuspiciousFor"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.suspiciousFor.value' | translate }}"
+              name="isSuspiciousFor"
+              rr-id="ang_m_020222"
+            >
+            </p-checkbox>
+
+            <h2 rr-id="ang_m_020223" rrInfoIcon="ang_m_02_01" class="m-t-32">
+              {{'angiographyMRT.anamnesis.stadiumAccordingToFontaine.value' |
+              translate }}
+            </h2>
+            <p-radioButton
+              [(ngModel)]="findingHandler.currentItem.stadiumAccordingToFontaineType"
+              label="{{ 'angiographyMRT.anamnesis.stageI.value' | translate }}"
+              name="stadiumAccordingToFontaineType"
+              rr-id="ang_m_020202"
+              rrUnClickRadio
+              [value]="stadiumAccordingToFontaineTypeEnum.StageI"
+            >
+            </p-radioButton>
+            <p-radioButton
+              [(ngModel)]="findingHandler.currentItem.stadiumAccordingToFontaineType"
+              label="{{ 'angiographyMRT.anamnesis.stageIIa.value' | translate }}"
+              name="stadiumAccordingToFontaineType"
+              rr-id="ang_m_020203"
+              rrUnClickRadio
+              [value]="stadiumAccordingToFontaineTypeEnum.StageIIa"
+            >
+            </p-radioButton>
+            <p-radioButton
+              [(ngModel)]="findingHandler.currentItem.stadiumAccordingToFontaineType"
+              label="{{ 'angiographyMRT.anamnesis.stageIIb.value' | translate }}"
+              name="stadiumAccordingToFontaineType"
+              rr-id="ang_m_020204"
+              rrUnClickRadio
+              [value]="stadiumAccordingToFontaineTypeEnum.StageIIb"
+            >
+            </p-radioButton>
+            <p-radioButton
+              [(ngModel)]="findingHandler.currentItem.stadiumAccordingToFontaineType"
+              label="{{ 'angiographyMRT.anamnesis.stageIII.value' | translate }}"
+              name="stadiumAccordingToFontaineType"
+              rr-id="ang_m_020205"
+              rrUnClickRadio
+              [value]="stadiumAccordingToFontaineTypeEnum.StageIII"
+            >
+            </p-radioButton>
+            <p-radioButton
+              [(ngModel)]="findingHandler.currentItem.stadiumAccordingToFontaineType"
+              label="{{ 'angiographyMRT.anamnesis.stageIV.value' | translate }}"
+              name="stadiumAccordingToFontaineType"
+              rr-id="ang_m_020206"
+              rrUnClickRadio
+              [value]="stadiumAccordingToFontaineTypeEnum.StageIV"
+            >
+            </p-radioButton>
+          </div>
+
+          <div
+            *ngIf="isFindingType(anamnesisIndicationFindingTypeEnum.Aneurysm)"
+            class="o-radio-list"
+          >
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isSuspiciousFor"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.suspiciousFor.value' | translate }}"
+              name="isSuspiciousFor"
+              rr-id="ang_m_020222"
+            >
+            </p-checkbox>
+
+            <h2 rr-id="ang_m_020224" class="m-t-31">
+              {{'angiographyMRT.anamnesis.localisation.value' | translate }}
+            </h2>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isIntracranial"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.intracranial.value' | translate }}"
+              name="isIntracranial"
+              rr-id="ang_m_020208"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isCervical"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.cervical.value' | translate }}"
+              name="isCervical"
+              rrContentReset="CervicalSideContainer"
+              rr-id="ang_m_020209"
+            >
+            </p-checkbox>
+            <div
+              id="CervicalSideContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!findingHandler.currentItem.isCervical"
+            >
+              <p-checkbox
+                [(ngModel)]="findingHandler.currentItem.isCervicalRight"
+                binary="true"
+                label="{{ 'angiographyMRT.anamnesis.right.value' | translate }}"
+                name="isCervicalRight"
+                rr-id="ang_m_020225"
+              >
+              </p-checkbox>
+              <p-checkbox
+                [(ngModel)]="findingHandler.currentItem.isCervicalLeft"
+                binary="true"
+                label="{{ 'angiographyMRT.anamnesis.left.value' | translate }}"
+                name="isCervicalLeft"
+                rr-id="ang_m_020226"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isUpperLimb"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.upperLimb.value' | translate }}"
+              name="isUpperLimb"
+              rrContentReset="UpperLimbSideContainer"
+              rr-id="ang_m_020227"
+            >
+            </p-checkbox>
+            <div
+              id="UpperLimbSideContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!findingHandler.currentItem.isUpperLimb"
+            >
+              <p-checkbox
+                [(ngModel)]="findingHandler.currentItem.isUpperLimbRight"
+                binary="true"
+                label="{{ 'angiographyMRT.anamnesis.right.value' | translate }}"
+                name="isUpperLimbRight"
+                rr-id="ang_m_020228"
+              >
+              </p-checkbox>
+              <p-checkbox
+                [(ngModel)]="findingHandler.currentItem.isUpperLimbLeft"
+                binary="true"
+                label="{{ 'angiographyMRT.anamnesis.left.value' | translate }}"
+                name="isUpperLimbLeft"
+                rr-id="ang_m_020229"
+              >
+              </p-checkbox>
+            </div>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isChest"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.chest.value' | translate }}"
+              name="isChest"
+              rr-id="ang_m_020230"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isAbdomen"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.abdomen.value' | translate }}"
+              name="isAbdomen"
+              rr-id="ang_m_020231"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isLowerLimb"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.lowerLimb.value' | translate }}"
+              name="isLowerLimb"
+              rrContentReset="LowerLimbSideContainer"
+              rr-id="ang_m_020232"
+            >
+            </p-checkbox>
+            <div
+              id="LowerLimbSideContainer"
+              class="nested-content o-radio-list"
+              [rrDisable]="!findingHandler.currentItem.isLowerLimb"
+            >
+              <p-checkbox
+                [(ngModel)]="findingHandler.currentItem.isLowerLimbRight"
+                binary="true"
+                label="{{ 'angiographyMRT.anamnesis.right.value' | translate }}"
+                name="isLowerLimbRight"
+                rr-id="ang_m_020233"
+              >
+              </p-checkbox>
+              <p-checkbox
+                [(ngModel)]="findingHandler.currentItem.isLowerLimbLeft"
+                binary="true"
+                label="{{ 'angiographyMRT.anamnesis.left.value' | translate }}"
+                name="isLowerLimbLeft"
+                rr-id="ang_m_020234"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+
+          <div
+            *ngIf="isFindingType(anamnesisIndicationFindingTypeEnum.RiskFactors)"
+            class="o-radio-list"
+          >
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isArterialHypertension"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.arterialHypertension.value' | translate }}"
+              name="isArterialHypertension"
+              rr-id="ang_m_020213"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isDiabetesMellitus"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.diabetesMellitus.value' | translate }}"
+              name="isDiabetesMellitus"
+              rr-id="ang_m_020214"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isSmoking"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.smoking.value' | translate }}"
+              name="isSmoking"
+              rr-id="ang_m_020215"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isHyperlipidemia"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.hyperlipidemia.value' | translate }}"
+              name="isHyperlipidemia"
+              rr-id="ang_m_020216"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isCollagenosis"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.collagenosis.value' | translate }}"
+              name="isCollagenosis"
+              rr-id="ang_m_020217"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isBicuspidAorticValve"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.bicuspidAorticValve.value' | translate }}"
+              name="isBicuspidAorticValve"
+              rr-id="ang_m_020218"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isKnownLiverCirrhosis"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.knownLiverCirrhosis.value' | translate }}"
+              name="isKnownLiverCirrhosis"
+              rr-id="ang_m_020219"
+            >
+            </p-checkbox>
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isCocaine"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.cocaine.value' | translate }}"
+              name="isCocaine"
+              rr-id="ang_m_020220"
+            >
+            </p-checkbox>
+          </div>
+
+          <div *ngIf="isOtherFindingType()" class="o-radio-list">
+            <p-checkbox
+              [(ngModel)]="findingHandler.currentItem.isSuspiciousFor"
+              binary="true"
+              label="{{ 'angiographyMRT.anamnesis.suspiciousFor.value' | translate }}"
+              name="isSuspiciousFor"
+              rr-id="ang_m_020222"
+            >
+            </p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad o-radio-list">
+      <h1 rr-id="ang_m_020301">
+        {{'angiographyMRT.anamnesis.priorInterventions.value' | translate }}
+      </h1>
+      <img
+        alt="Before operation"
+        rr-id="ang_m_020302"
+        src="assets/img/angiographyMRT/icons/2-2.svg"
+      />
+      <p-checkbox
+        class="m-t-15"
+        [(ngModel)]="model.isPTAOrStentImplantation"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.pTAstentImplantation.value' | translate }}"
+        name="isPTAOrStentImplantation"
+        rr-id="ang_m_020303"
+      >
+      </p-checkbox>
+      <p-checkbox
+        [(ngModel)]="model.isBypass"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.bypass.value' | translate }}"
+        name="isBypass"
+        rr-id="ang_m_020304"
+      >
+      </p-checkbox>
+      <p-checkbox
+        [(ngModel)]="model.isLysis"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.lysis.value' | translate }}"
+        name="isLysis"
+        rr-id="ang_m_020305"
+      >
+      </p-checkbox>
+      <p-checkbox
+        [(ngModel)]="model.isAfterTransplantation"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.afterTransplantation.value' | translate }}"
+        name="isAfterTransplantation"
+        rrContentReset="afterTransplantationTypeContainer"
+        rr-id="ang_m_020306"
+      >
+      </p-checkbox>
+      <div
+        id="afterTransplantationTypeContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isAfterTransplantation"
+      >
+        <p-radioButton
+          [(ngModel)]="model.afterTransplantationType"
+          label="{{ 'angiographyMRT.anamnesis.kidney.value' | translate }}"
+          name="afterTransplantationType"
+          rr-id="ang_m_020307"
+          rrUnClickRadio
+          [value]="afterTransplantationTypeEnum.Kidney"
+        >
+        </p-radioButton>
+        <p-radioButton
+          [(ngModel)]="model.afterTransplantationType"
+          label="{{ 'angiographyMRT.anamnesis.liver.value' | translate }}"
+          name="afterTransplantationType"
+          rr-id="ang_m_020308"
+          rrUnClickRadio
+          [value]="afterTransplantationTypeEnum.Liver"
+        >
+        </p-radioButton>
+      </div>
+      <p-checkbox
+        [(ngModel)]="model.isValveSurgery"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.valveSurgery.value' | translate }}"
+        name="isValveSurgery"
+        rr-id="ang_m_020309"
+      >
+      </p-checkbox>
+    </div>
+    <div class="c-col-1 c-sep c-pad o-radio-list">
+      <h1 rr-id="ang_m_020401">
+        {{'angiographyMRT.anamnesis.priorExams.value' | translate }}
+      </h1>
+      <img
+        alt="Preliminary investigation"
+        rr-id="ang_m_020402"
+        src="assets/img/angiographyMRT/icons/2-3.svg"
+      />
+      <p-checkbox
+        class="m-t-23"
+        [(ngModel)]="model.isMRAngiography"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.mRAngiography.value' | translate }}"
+        name="isMRAngiography"
+        (click)="clearDateMRAngiography()"
+        rr-id="ang_m_020403"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isMRAngiography"
+      >
+        <rr-month-year-input
+          name="dateMRAngiography"
+          [label]="'angiographyMRT.anamnesis.date.value' | translate"
+          labelRrId="ang_m_020404"
+          monthRrId="ang_m_020405"
+          yearRrId="ang_m_020406"
+          [(ngModel)]="model.dateMRAngiography"
+          customLabelClass="m-b-0"
+          class="o-width-100"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        [(ngModel)]="model.isCTAngiography"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.cTAngiography.value' | translate }}"
+        name="isCTAngiography"
+        (click)="clearDateCTAngiography()"
+        rr-id="ang_m_020407"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isCTAngiography"
+      >
+        <rr-month-year-input
+          name="dateCTAngiography"
+          [label]="'angiographyMRT.anamnesis.date.value' | translate"
+          labelRrId="ang_m_020408"
+          monthRrId="ang_m_020409"
+          yearRrId="ang_m_020410"
+          [(ngModel)]="model.dateCTAngiography"
+          customLabelClass="m-b-0"
+          class="o-width-100"
+        >
+        </rr-month-year-input>
+      </div>
+      <p-checkbox
+        [(ngModel)]="model.isDigitalSubtractionAngiography"
+        binary="true"
+        label="{{ 'angiographyMRT.anamnesis.digitalSubtractionAngiography.value' | translate }}"
+        name="isDigitalSubtractionAngiography"
+        (click)="clearDateDigitalSubtractionAngiography()"
+        rr-id="ang_m_020411"
+      >
+      </p-checkbox>
+      <div
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isDigitalSubtractionAngiography"
+      >
+        <rr-month-year-input
+          name="dateDigitalSubtractionAngiography"
+          [label]="'angiographyMRT.anamnesis.date.value' | translate"
+          labelRrId="ang_m_020412"
+          monthRrId="ang_m_020413"
+          yearRrId="ang_m_020414"
+          [(ngModel)]="model.dateDigitalSubtractionAngiography"
+          customLabelClass="m-b-0"
+          class="o-width-100"
+        >
+        </rr-month-year-input>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l o-radio-list"></div>
+  </div>
+</form>

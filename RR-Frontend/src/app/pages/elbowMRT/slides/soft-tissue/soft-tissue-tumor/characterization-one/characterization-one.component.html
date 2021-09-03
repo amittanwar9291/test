@@ -1,0 +1,292 @@
+<div class="f-horizontal f-start col-h-550 o-width-100 p-t-28 p-b-12">
+  <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <div
+        class="f-vertical o-radio-list m-b-23"
+        [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+      >
+        <h2 rr-id="elb_m_0702200" class="m-b-6">
+          {{'elbowMRT.softTissue.differentialDiagnosis1.value' | translate}}
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          name="mainFeaturesDifferentialDiagnosisType"
+          [(ngModel)]="model.mainFeaturesDifferentialDiagnosisType"
+          [options]="differentialDiagnosis1Options"
+          group="true"
+          rrId="elb_m_0702201"
+          (selectionChanged)="resetHistoryConfirmedBlock(); resetIsSecondary()"
+          [parentViewModel]="model"
+          isActiveOnIKnow="true"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="elb_m_0702206"
+          name="isHistologicallyConfirmed"
+          label="{{'elbowMRT.softTissue.histologicallyConfirmed.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isHistologicallyConfirmed"
+          rrContentReset="isHistologyConfirmed-block"
+          [rrDisable]="model.mainFeaturesDifferentialDiagnosisType === 'None'"
+        >
+        </p-checkbox>
+        <div
+          class="f-start o-radio-list nested-content"
+          [rrDisable]="!model.isHistologicallyConfirmed"
+          id="isHistologyConfirmed-block"
+        >
+          <p-radioButton
+            rr-id="elb_m_0702207"
+            rrUnClickRadio
+            name="histologyConfirmedType"
+            [value]="histologyConfirmedType.Benign"
+            label="{{'elbowMRT.softTissue.benign.value' | translate}}"
+            [(ngModel)]="model.histologyConfirmedType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="elb_m_0702208"
+            rrUnClickRadio
+            name="histologyConfirmedType"
+            [value]="histologyConfirmedType.Malignant"
+            label="{{'elbowMRT.softTissue.malignant.value' | translate}}"
+            [(ngModel)]="model.histologyConfirmedType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <h2 rr-id="elb_m_070240" class="m-b-15">
+        {{'elbowMRT.softTissue.localizationAxial.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="elb_m_070242"
+        label="{{'elbowMRT.softTissue.anterior.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialType.Anterior"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070243"
+        label="{{'elbowMRT.softTissue.posterior.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialType.Posterior"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070244"
+        label="{{'elbowMRT.softTissue.medial.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialType.Medial"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070245"
+        label="{{'elbowMRT.softTissue.lateral.value' | translate}}"
+        name="localizationAxialType"
+        [value]="localizationAxialType.Lateral"
+        class="m-b-29"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <h2 rr-id="elb_m_070246" class="text-break m-b-18">
+        {{'elbowMRT.softTissue.craniocaudalLocalizationRelatingToJointSpace.value'
+        | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="elb_m_070247"
+        label="{{'elbowMRT.softTissue.proximal.value' | translate}}"
+        name="localizationRelatedJointSpaceLevelType"
+        [value]="localizationRelatedJointSpaceLevelType.Proximal"
+        [(ngModel)]="model.localizationRelatedJointSpaceLevelType"
+        rrValidation="localizationRelatedJointSpaceLevelType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070248"
+        label="{{'elbowMRT.softTissue.distal.value' | translate}}"
+        name="localizationRelatedJointSpaceLevelType"
+        [value]="localizationRelatedJointSpaceLevelType.Distal"
+        [(ngModel)]="model.localizationRelatedJointSpaceLevelType"
+        rrValidation="localizationRelatedJointSpaceLevelType"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-10">
+      <h2 rr-id="elb_m_070315" class="m-b-10">
+        {{'elbowMRT.softTissue.extension.value' | translate}}
+      </h2>
+      <p rr-id="elb_m_0703200" class="m-b-2">
+        {{'elbowMRT.softTissue.size.value' | translate}}*
+      </p>
+      <rr-number-input
+        [(ngModel)]="model.extensionSizeInMm"
+        name="extensionSizeInMm"
+        label="{{'elbowMRT.softTissue.inMm.value' | translate}}"
+        inputRrId="elb_m_070316"
+        labelRrId="elb_m_070317"
+        class="m-b-8"
+        [config]="{min: 1, max: 150}"
+        rrValidation="extensionSizeInMm"
+        (announceModelChange)="resetRelatedNumberInputs()"
+      >
+      </rr-number-input>
+      <div [rrDisable]="!model.extensionSizeInMm">
+        <p rr-id="elb_m_0703201">
+          2{{'elbowMRT.softTissue.2ndLevel.value' | translate}}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.extensionLevel2InMm"
+          name="extensionLevel2InMm"
+          label="{{'elbowMRT.softTissue.inMm.value' | translate}}"
+          inputRrId="elb_m_070318"
+          labelRrId="elb_m_070319"
+          class="m-b-15"
+          [config]="{min: 1, max: 150}"
+          (announceModelChange)="resetRelatedNumberInputs()"
+        >
+        </rr-number-input>
+      </div>
+      <div [rrDisable]="!model.extensionLevel2InMm">
+        <p rr-id="elb_m_0703202">
+          3{{'elbowMRT.softTissue.3rdLevel.value' | translate}}
+        </p>
+        <rr-number-input
+          [(ngModel)]="model.extensionLevel3InMm"
+          name="extensionLevel3InMm"
+          label="{{'elbowMRT.softTissue.inMm.value' | translate}}"
+          inputRrId="elb_m_070320"
+          labelRrId="elb_m_070321"
+          [config]="{min: 1, max: 150}"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-11">
+      <h2 rr-id="elb_m_070402" class="m-b-13">
+        {{'elbowMRT.softTissue.demarcation.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="elb_m_070403"
+        label="{{'elbowMRT.softTissue.wellDefined.value' | translate}}"
+        name="demarcationType"
+        [value]="demarcationType.WellDefined"
+        [(ngModel)]="model.demarcationType"
+        rrValidation="demarcationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070404"
+        label="{{'elbowMRT.softTissue.illdefined.value' | translate}}"
+        name="demarcationType"
+        [value]="demarcationType.Illdefined"
+        class="m-b-31"
+        [(ngModel)]="model.demarcationType"
+        rrValidation="demarcationType"
+      ></p-radioButton>
+      <h2 rr-id="elb_m_070405" class="m-b-15">
+        {{'elbowMRT.softTissue.homogeneity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="elb_m_070406"
+        label="{{'elbowMRT.softTissue.homogeneous.value' | translate}}"
+        name="mainHomogeneityType"
+        [value]="mainHomogeneityType.Homogeneous"
+        [(ngModel)]="model.mainHomogeneityType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="elb_m_070407"
+        label="{{'elbowMRT.softTissue.heterogeneous.value' | translate}}"
+        name="mainHomogeneityType"
+        [value]="mainHomogeneityType.Heterogeneous"
+        [(ngModel)]="model.mainHomogeneityType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 f-vertical f-start c-pad-l c-sep o-radio-list">
+    <div class="f-vertical f-start o-radio-list p-l-8">
+      <h2 rr-id="elb_m_070501" class="m-b-19">
+        {{'elbowMRT.softTissue.internalArchitecturalChanges.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="elb_m_070502"
+        label="{{'elbowMRT.softTissue.fat.value' | translate}}"
+        binary="true"
+        name="isFat"
+        [(ngModel)]="model.isFat"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070503"
+        label="{{'elbowMRT.softTissue.cysts.value' | translate}}"
+        binary="true"
+        name="isCysts"
+        [(ngModel)]="model.isCysts"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070504"
+        label="{{'elbowMRT.softTissue.calcification.value' | translate}}"
+        binary="true"
+        name="isCalcification"
+        [(ngModel)]="model.isCalcification"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070505"
+        label="{{'elbowMRT.softTissue.capsule.value' | translate}}"
+        binary="true"
+        name="isCapsule"
+        [(ngModel)]="model.isCapsule"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070506"
+        label="{{'elbowMRT.softTissue.septa.value' | translate}}"
+        binary="true"
+        name="isSepta"
+        [(ngModel)]="model.isSepta"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070507"
+        label="{{'elbowMRT.softTissue.necrosis.value' | translate}}"
+        binary="true"
+        name="isNecrosis"
+        [(ngModel)]="model.isNecrosis"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070508"
+        label="{{'elbowMRT.softTissue.signalVoids.value' | translate}}"
+        binary="true"
+        name="isSignalVoids"
+        [(ngModel)]="model.isSignalVoids"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070509"
+        label="{{'elbowMRT.softTissue.spaghettiLikeAppearanceOfTheNerveSagittal.value' | translate}}"
+        binary="true"
+        name="isSpaghettiLikeAppearanceOfTheNerve"
+        class="text-break"
+        [(ngModel)]="model.isSpaghettiLikeAppearanceOfTheNerve"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="elb_m_070510"
+        label="{{'elbowMRT.softTissue.distractedNerveFasciclesAxialPomegranateSign.value' | translate}}"
+        binary="true"
+        name="IsDistractedNerveFasciclesAxialPomegranateSign"
+        class="text-break"
+        [(ngModel)]="model.isDistractedNerveFasciclesAxialPomegranateSign"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

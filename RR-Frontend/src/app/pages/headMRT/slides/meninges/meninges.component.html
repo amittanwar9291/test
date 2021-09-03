@@ -1,0 +1,102 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_m_050103">
+        {{ "headMRT.meninges.finding.value" | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_m_050104"
+          name="areFindings"
+          [value]="areFindings.NormalImagingOfTheMeninges"
+          label="{{
+            'headMRT.meninges.normalImagingOfTheMeninges.value' | translate
+          }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_050113"
+          name="areFindings"
+          [value]="areFindings.NoDetails"
+          label="{{ 'headMRT.meninges.noDetails.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_050105"
+          name="areFindings"
+          [value]="areFindings.True"
+          label="{{ 'headMRT.meninges.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="model.areFindings !== areFindings.True"
+          [setConfig]="findingDropdownConfig"
+          [setDescriptionTypes]="[findingType.Mass]"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div
+      class="f-vertical col-h-100"
+      [ngClass]="isFindingType(findingType.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(findingType.None)"
+        class="f-horizontal main-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(findingType.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="hea_m_050201">
+          {{'headMRT.meninges.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <rr-mass
+        *ngIf="isFindingType(findingType.Mass)"
+        [model]="findingHandler.currentItem"
+        [isDWIInAnySequence]="isDWIInAnySequence"
+        [isContrastEnhanced]="isContrastEnhanced"
+      >
+      </rr-mass>
+      <rr-diffuse-changes
+        *ngIf="isFindingType(findingType.DiffuseChanges)"
+        [model]="findingHandler.currentItem"
+        [isDWIInAnySequence]="isDWIInAnySequence"
+        [isContrastEnhanced]="isContrastEnhanced"
+      >
+      </rr-diffuse-changes>
+      <rr-subdural-hematoma
+        *ngIf="isFindingType(findingType.SubduralHematoma)"
+        [model]="findingHandler.currentItem"
+        [isDWIInAnySequence]="isDWIInAnySequence"
+        [isContrastEnhanced]="isContrastEnhanced"
+      ></rr-subdural-hematoma>
+      <rr-epidural-hematoma
+        *ngIf="isFindingType(findingType.EpiduralHematoma)"
+        [model]="findingHandler.currentItem"
+      ></rr-epidural-hematoma>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,256 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad c-sep">
+    <h2 rr-id="pel_m_100202" class="m-b-27 m-t-3" rrValidation="hipLocalizer">
+      {{ 'pelvisMRT.bones.localization.value' | translate }}*
+    </h2>
+    <rr-hips-small
+      rr-id="pel_m_100203"
+      name="hipLocalizer"
+      (click)="openLargeLocalizer()"
+      [(ngModel)]="model.hipLocalizer"
+      rrValidation="hipLocalizer"
+      isLocalizer="true"
+    >
+    </rr-hips-small>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <h2 class="m-b-35" rr-id="pel_m_100334">
+      {{ 'pelvisMRT.bones.characterization.value' | translate }}
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="pel_m_100362"
+        label="{{ 'pelvisMRT.bones.subchondralGeographicalDemarcationLine.value' | translate }}"
+        labelStyleClass="text-break"
+        name="isSubchondralgeographicalDemarcationLine"
+        class="checkbox-readonly"
+        binary="true"
+        rrContentReset="isSubchondralgeographicalDemarcationLine-block"
+        [(ngModel)]="model.isSubchondralgeographicalDemarcationLine"
+      >
+      </p-checkbox>
+      <div
+        id="isSubchondralgeographicalDemarcationLine-block"
+        class="left-indent o-radio-list"
+        [class.disabled]="!model.isSubchondralgeographicalDemarcationLine"
+      >
+        <p-checkbox
+          rr-id="pel_m_100319"
+          label="{{ 'pelvisMRT.bones.doubleLineSignT2w.value' | translate }}"
+          labelStyleClass="text-break"
+          name="isDoubleLineCharacterT2w"
+          binary="true"
+          [(ngModel)]="model.isDoubleLineCharacterT2w"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100320"
+          label="{{ 'pelvisMRT.bones.parallelToJointSpace.value' | translate }}"
+          labelStyleClass="text-break"
+          name="isInverselyRelatedToThe"
+          binary="true"
+          [(ngModel)]="model.isInverselyRelatedToThe"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100352"
+          label="{{ 'pelvisMRT.bones.anterosuperior.value' | translate }}"
+          name="isAnterosuperior"
+          binary="true"
+          [(ngModel)]="model.isAnterosuperior"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100353"
+          label="{{ 'pelvisMRT.bones.adjacentBoneMarrowEdema.value' | translate }}"
+          name="isAdjacentBoneMarrowEdema"
+          labelStyleClass="text-break"
+          binary="true"
+          [(ngModel)]="model.isAdjacentBoneMarrowEdema"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <h2 class="m-b-33" rr-id="pel_m_100478">
+      {{ 'pelvisMRT.bones.involvedCircumference.value' | translate }}
+    </h2>
+    <div class="o-radio-list f-vertical m-b-30">
+      <rr-number-input
+        rr-id="pel_m_100479"
+        name="measurementCoronaryInDegrees"
+        [(ngModel)]="model.measurementCoronaryInDegrees"
+        [label]="'pelvisMRT.bones.coronalMeasurementInDegrees.value' | translate"
+        labelStyleClass="text-break"
+        [config]="{ placeholder: '--', min: 1, max: 360, labelWidth: 180 }"
+      >
+      </rr-number-input>
+      <rr-number-input
+        rr-id="pel_m_100481"
+        name="measurementSagittalinDegrees"
+        labelStyleClass="text-break"
+        [(ngModel)]="model.measurementSagittalinDegrees"
+        [label]="'pelvisMRT.bones.sagittalMeasurementInDegrees.value' | translate"
+        [config]="{ placeholder: '--',  min: 1, max: 360, labelWidth: 180 }"
+      >
+      </rr-number-input>
+    </div>
+    <div class="o-radio-list m-b-35">
+      <h2 rr-id="pel_m_100483">
+        {{ 'pelvisMRT.bones.corticalis.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="pel_m_100484"
+        rrUnClickRadio
+        label="{{ 'pelvisMRT.bones.intact.value' | translate }}"
+        name="anfhCortexType"
+        [value]="anfhCortexTypeEnum.Intact"
+        [(ngModel)]="model.anfhCortexType"
+        (onClick)="checkARCO()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_100485"
+        rrUnClickRadio
+        label="{{ 'pelvisMRT.bones.insufficiencyFracture.value' | translate }}"
+        name="anfhCortexType"
+        [value]="anfhCortexTypeEnum.InsufficiencyFracture"
+        [(ngModel)]="model.anfhCortexType"
+        (onClick)="checkARCO()"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_100486"
+        rrUnClickRadio
+        label="{{ 'pelvisMRT.bones.collapse.value' | translate }}"
+        name="anfhCortexType"
+        [value]="anfhCortexTypeEnum.Collapse"
+        [(ngModel)]="model.anfhCortexType"
+        (onClick)="checkARCO()"
+      >
+      </p-radioButton>
+    </div>
+    <div class="o-list">
+      <h2 rr-id="pel_m_100487" class="m-b-10">
+        {{ 'pelvisMRT.bones.associatedFindings.value' | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="pel_m_100488"
+          label="{{ 'pelvisMRT.bones.coxarthrosis.value' | translate }}"
+          name="isCoexistenceCoaxarthosis"
+          binary="true"
+          [(ngModel)]="model.isCoexistenceCoaxarthosis"
+          (onChange)="checkARCOIfActive()"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100489"
+          label="{{ 'pelvisMRT.bones.articularEffusion.value' | translate }}"
+          name="isArticularEffusion"
+          binary="true"
+          [(ngModel)]="model.isArticularEffusion"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100490"
+          label="{{ 'pelvisMRT.bones.osteochondralFragment.value' | translate }}"
+          name="isOsteochondralFragment"
+          binary="true"
+          [(ngModel)]="model.isOsteochondralFragment"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="pel_m_100491"
+          label="{{ 'pelvisMRT.bones.bilateralFinding.value' | translate }}"
+          name="isBilateralDiagnosis"
+          binary="true"
+          [(ngModel)]="model.isBilateralDiagnosis"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l">
+    <h2 class="m-b-35" rr-id="pel_m_100543">
+      {{ 'pelvisMRT.bones.evaluation.value' | translate }}
+    </h2>
+    <div class="o-radio-list m-b-30">
+      <p-checkbox
+        rr-id="pel_m_100544"
+        label="{{ 'pelvisMRT.bones.classificationAccordingToARCO.value' | translate }}"
+        [ngClass]="model.anfhCortexType !== anfhCortexTypeEnum.None ? 'checkbox-readonly' : ''"
+        name="isClassificationAccordingToARCO"
+        binary="true"
+        [(ngModel)]="model.isClassificationAccordingToARCO"
+        rrContentReset="arcoGroup"
+      >
+      </p-checkbox>
+      <div
+        class="left-indent o-radio-list"
+        id="arcoGroup"
+        [rrDisable]="!model.isClassificationAccordingToARCO"
+      >
+        <p-radioButton
+          rr-id="pel_m_100545"
+          rrUnClickRadio
+          label="{{ 'pelvisMRT.bones.i/II.value' | translate }}"
+          name="classificationAccordingToARCOType"
+          [ngClass]="model.anfhCortexType !== anfhCortexTypeEnum.None ? 'radiobutton-readonly' : ''"
+          [value]="classificationAccordingToARCOTypeEnum.ItoII"
+          [(ngModel)]="model.classificationAccordingToARCOType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100546"
+          rrUnClickRadio
+          label="{{ 'pelvisMRT.bones.iII.value' | translate }}"
+          name="classificationAccordingToARCOType"
+          [ngClass]="model.anfhCortexType !== anfhCortexTypeEnum.None ? 'radiobutton-readonly' : ''"
+          [value]="classificationAccordingToARCOTypeEnum.III"
+          [(ngModel)]="model.classificationAccordingToARCOType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_100547"
+          rrUnClickRadio
+          label="{{ 'pelvisMRT.bones.iV.value' | translate }}"
+          name="classificationAccordingToARCOType"
+          [ngClass]="model.anfhCortexType !== anfhCortexTypeEnum.None ? 'radiobutton-readonly' : ''"
+          [value]="classificationAccordingToARCOTypeEnum.IV"
+          [(ngModel)]="model.classificationAccordingToARCOType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="o-radio-list m-b-5 m-t-5">
+      <h2 rr-id="pel_m_100549" rrInfoIcon="pel_m_10_04">
+        {{ 'pelvisMRT.bones.differentialDiagnosis.value' | translate }}
+      </h2>
+      <p-dropdown
+        styleClass="ui-brown-box o-width-100 m-b-15"
+        [options]="differentialDiagnosisOptions"
+        name="anfhDifferentialDiagnosisType"
+        rr-id="pel_m_100550"
+        scrollHeight="500"
+        placeholder="{{'shared.pleaseSelect' | translate}}"
+        [(ngModel)]="model.anfhDifferentialDiagnosisType"
+        (onChange)="resetSubordinate()"
+        rrDropdownClear
+      >
+      </p-dropdown>
+    </div>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="pel_m_100557"
+        label="{{ 'pelvisMRT.bones.subordinate.value' | translate }}"
+        name="isSubordinated"
+        binary="true"
+        [rrDisable]="model.anfhDifferentialDiagnosisType === 'None'"
+        [(ngModel)]="model.isSubordinated"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

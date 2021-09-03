@@ -1,0 +1,98 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_m_080103">
+        {{'headMRT.brainstemCranialNerves.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_m_080104"
+          label="{{'headMRT.brainstemCranialNerves.brainstemWithoutEvidenceOfpathologicalsignal.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.BrainstemWithoutEvidence"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <div
+          id="noFindings-block"
+          class="nested-content"
+          [rrDisable]="model.areFindings !== areFindingsEnum.BrainstemWithoutEvidence"
+        >
+          <p-checkbox
+            name="isInTheHighResolution"
+            [(ngModel)]="model.isInTheHighResolutionSequences"
+            label="{{'headMRT.brainstemCranialNerves.inTheHighresolutionsequencesInconspicuousintra.value' | translate}}"
+            binary="true"
+            rr-id="hea_m_080105"
+          >
+          </p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="hea_m_080114"
+          label="{{'headMRT.brainstemCranialNerves.noDetails.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NoDetails"
+          rrValidation="areFindings"
+          notInFinding="true"
+          rrContentReset="noFindings-block"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_080106"
+          label="{{'headMRT.brainstemCranialNerves.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.True"
+          rrValidation="areFindings"
+          notInFinding="true"
+          rrContentReset="noFindings-block"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+          [setDescriptionTypes]="[brainstemCranialNervesFindingTypeEnum.Brainstem, brainstemCranialNervesFindingTypeEnum.CranialNerves]"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(brainstemCranialNervesFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(brainstemCranialNervesFindingTypeEnum.None)"
+        class="f-horizontal main-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(brainstemCranialNervesFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="hea_m_080201">
+          {{'headMRT.brainstemCranialNerves.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <rr-brainstem
+        *ngIf="isFindingType(brainstemCranialNervesFindingTypeEnum.Brainstem)"
+        [model]="findingHandler.currentItem"
+      ></rr-brainstem>
+      <rr-cranial-nerves
+        *ngIf="isFindingType(brainstemCranialNervesFindingTypeEnum.CranialNerves)"
+        [model]="findingHandler.currentItem"
+      ></rr-cranial-nerves>
+    </div>
+  </div>
+</form>

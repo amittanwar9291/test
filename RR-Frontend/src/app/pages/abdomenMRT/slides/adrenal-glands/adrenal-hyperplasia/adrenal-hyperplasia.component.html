@@ -1,0 +1,113 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_080203">
+        {{ 'abdomenMRT.adrenalGlands.localization.value' | translate }}*
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_080217"
+        [(ngModel)]="model.isRight"
+        name="isRight"
+        binary="true"
+        rrValidation="isRight isLeft"
+        label="{{ 'abdomenMRT.adrenalGlands.right.value' | translate }}"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_080218"
+        [(ngModel)]="model.isLeft"
+        name="isLeft"
+        binary="true"
+        rrValidation="isLeft isRight"
+        label="{{ 'abdomenMRT.adrenalGlands.left.value' | translate }}"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <rr-expansion-inputs-group
+        [model]="model"
+        [config]="expansionGroupConfig"
+      >
+      </rr-expansion-inputs-group>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_080413">
+        {{ 'abdomenMRT.adrenalGlands.form.value' | translate }}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_080414"
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formType.DiffuseHyperplasia"
+        label="{{ 'abdomenMRT.adrenalGlands.diffuseHyperplasia.value' | translate }}"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_080415"
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formType.NodularHyperplasia"
+        label="{{ 'abdomenMRT.adrenalGlands.nodularHyperplasia.value' | translate }}"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_080416"
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formType.MicronodularHyperplasia"
+        label="{{ 'abdomenMRT.adrenalGlands.micronodularHyperplasia.value' | translate }}"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_080417"
+        [(ngModel)]="model.formType"
+        name="formType"
+        [value]="formType.MacronodularHyperplasia"
+        label="{{ 'abdomenMRT.adrenalGlands.macronodularHyperplasia.value' | translate }}"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep o-list">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_080505">
+        {{ 'abdomenMRT.adrenalGlands.differentialDiagnosis.value' | translate }}
+      </h2>
+      <h3 rr-id="abd_m_080518" class="m-b-4">
+        {{ 'abdomenMRT.adrenalGlands.differentialDiagnosis.value' | translate }}
+      </h3>
+      <rr-differential-diagnosis-dropdown
+        rrId="abd_m_080519"
+        [diagnosisNumber]="1"
+        [(ngModel)]="model.differentialDiagnosisType"
+        name="differentialDiagnosisType"
+        class="m-b-12"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosisType"
+        [options]="dDOptions1"
+        [group]="true"
+        (selectionChanged)="clearDependentControls()"
+      >
+      </rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        rr-id="abd_m_080520"
+        label="{{ 'abdomenMRT.adrenalGlands.suspicionOf.value' | translate }}"
+        name="isSuspicionOf"
+        binary="true"
+        [(ngModel)]="model.isSuspicionOf"
+        [rrDisable]="model.differentialDiagnosisType === diagnosisType.None"
+      >
+      </p-checkbox>
+    </div>
+    <div class="f-vertical o-radio-list p-r-15">
+      <rr-reference-picture
+        [(ngModel)]="model.referencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="referencePicture"
+      ></rr-reference-picture>
+    </div>
+  </div>
+</div>

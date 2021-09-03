@@ -1,0 +1,280 @@
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <div class="f-vertical o-radio-list">
+    <h2 rr-id="hip_m_060221" class="m-b-15">
+      {{ 'hipMRT.capsuleAndLigaments.associatedFindings.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_060222"
+      [(ngModel)]="model.isArticularEffusion"
+      name="isArticularEffusion"
+      label="{{ 'hipMRT.capsuleAndLigaments.articularEffusion.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_060223"
+      [(ngModel)]="model.isHaemarthrosis"
+      name="isHaemarthrosis"
+      label="{{ 'hipMRT.capsuleAndLigaments.haemarthrosis.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_060224"
+      [(ngModel)]="model.isLooseBody"
+      name="isLooseBody"
+      label="{{ 'hipMRT.capsuleAndLigaments.looseBody.value' | translate }}"
+      binary="true"
+      rrContentReset="isLooseBody-block"
+    >
+    </p-checkbox>
+    <div
+      id="isLooseBody-block"
+      class="nested-content o-radio-list m-b-6"
+      [rrDisable]="!model.isLooseBody"
+    >
+      <p-checkbox
+        rr-id="hip_m_060225"
+        [(ngModel)]="model.isAbove1Lesion"
+        name="isAbove1Lesion"
+        label="{{ 'hipMRT.capsuleAndLigaments.moreThan1Lesion.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="hip_m_060226">
+          {{ 'hipMRT.capsuleAndLigaments.maxDiameter.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="hip_m_060227"
+          labelRrId="hip_m_060228"
+          name="looseBodyMaxDiameterInMm"
+          label="{{ 'hipMRT.capsuleAndLigaments.inMm.value' | translate }}"
+          [(ngModel)]="model.looseBodyMaxDiameterInMm"
+          [config]="{ min: 1, max: 30, placeholder: '--' }"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_060229"
+      [(ngModel)]="model.isBonyErosionsSynovialInsertion"
+      labelStyleClass="text-break"
+      name="isBonyErosionsSynovialInsertion"
+      label="{{ 'hipMRT.capsuleAndLigaments.bonyErosionsSynovialInsertion.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_060230"
+      [(ngModel)]="model.isPerifocalSoftTissueEdema"
+      name="isPerifocalSoftTissueEdema"
+      label="{{ 'hipMRT.capsuleAndLigaments.perifocalSoftTissueEdema.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+    <p-checkbox
+      rr-id="hip_m_060231"
+      [(ngModel)]="model.isPeriarticularCalcification"
+      name="isPeriarticularCalcification"
+      label="{{ 'hipMRT.capsuleAndLigaments.periarticularCalcification.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <div
+    class="f-vertical o-radio-list m-b-30"
+    [rrDisable]="!this.isContrastEnhanced"
+  >
+    <h2 rr-id="hip_m_060325" class="text-break m-b-13">
+      {{ 'hipMRT.capsuleAndLigaments.contrastEnhancementQuantitative.value' |
+      translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_060326"
+      [(ngModel)]="model.contrastEnhancementQuantitativeType"
+      name="contrastEnhancementQuantitativeType"
+      label="{{ 'hipMRT.capsuleAndLigaments.no.value' | translate }}"
+      [value]="contrastEnhancementQuantitativeType.No"
+      rrContentReset="pronouncedHomogeneityType-block contrastEnhancementDistributionType-block"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060327"
+      [(ngModel)]="model.contrastEnhancementQuantitativeType"
+      name="contrastEnhancementQuantitativeType"
+      label="{{ 'hipMRT.capsuleAndLigaments.low.value' | translate }}"
+      [value]="contrastEnhancementQuantitativeType.Low"
+      rrContentReset="pronouncedHomogeneityType-block contrastEnhancementDistributionType-block"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060328"
+      [(ngModel)]="model.contrastEnhancementQuantitativeType"
+      name="contrastEnhancementQuantitativeType"
+      label="{{ 'hipMRT.capsuleAndLigaments.pronounced.value' | translate }}"
+      [value]="contrastEnhancementQuantitativeType.Pronounced"
+      rrContentReset="pronouncedHomogeneityType-block contrastEnhancementDistributionType-block"
+      rrUnClickRadio
+    ></p-radioButton>
+    <div
+      id="pronouncedHomogeneityType-block"
+      class="nested-content o-radio-list"
+      [rrDisable]="model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Low
+         && model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Pronounced"
+    >
+      <p-radioButton
+        rr-id="hip_m_060329"
+        [(ngModel)]="model.pronouncedHomogeneityType"
+        name="pronouncedHomogeneityType"
+        label="{{ 'hipMRT.capsuleAndLigaments.homogeneous.value' | translate }}"
+        [value]="pronouncedHomogeneityType.Homogeneous"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hip_m_060330"
+        [(ngModel)]="model.pronouncedHomogeneityType"
+        name="pronouncedHomogeneityType"
+        label="{{ 'hipMRT.capsuleAndLigaments.heterogeneous.value' | translate }}"
+        [value]="pronouncedHomogeneityType.Heterogeneous"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div
+    id="contrastEnhancementDistributionType-block"
+    class="f-vertical o-radio-list"
+    [rrDisable]="model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Low
+         && model.contrastEnhancementQuantitativeType !== contrastEnhancementQuantitativeType.Pronounced"
+  >
+    <h2 rr-id="hip_m_060331" class="text-break m-b-12">
+      {{ 'hipMRT.capsuleAndLigaments.contrastEnhancementDistribution.value' |
+      translate }}
+    </h2>
+    <p-radioButton
+      rr-id="hip_m_060332"
+      [(ngModel)]="model.contrastEnhancementDistributionType"
+      name="contrastEnhancementDistributionType"
+      label="{{ 'hipMRT.capsuleAndLigaments.entireLesion.value' | translate }}"
+      [value]="contrastEnhancementDistributionType.EntireLesion"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060333"
+      [(ngModel)]="model.contrastEnhancementDistributionType"
+      name="contrastEnhancementDistributionType"
+      label="{{ 'hipMRT.capsuleAndLigaments.central.value' | translate }}"
+      [value]="contrastEnhancementDistributionType.Central"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060334"
+      [(ngModel)]="model.contrastEnhancementDistributionType"
+      name="contrastEnhancementDistributionType"
+      label="{{ 'hipMRT.capsuleAndLigaments.marginal.value' | translate }}"
+      [value]="contrastEnhancementDistributionType.Marginal"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060335"
+      [(ngModel)]="model.contrastEnhancementDistributionType"
+      name="contrastEnhancementDistributionType"
+      label="{{ 'hipMRT.capsuleAndLigaments.peripheral.value' | translate }}"
+      [value]="contrastEnhancementDistributionType.Peripheral"
+      rrUnClickRadio
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="hip_m_060336"
+      [(ngModel)]="model.contrastEnhancementDistributionType"
+      name="contrastEnhancementDistributionType"
+      label="{{ 'hipMRT.capsuleAndLigaments.septal.value' | translate }}"
+      [value]="contrastEnhancementDistributionType.Septal"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+</div>
+<div class="c-col-1 c-sep c-pad f-vertical o-list m-t-10 m-b-13">
+  <h2 rr-id="hip_m_060417" class="m-b-15">
+    {{ 'hipMRT.capsuleAndLigaments.differentialDiagnosis.value' | translate }}
+  </h2>
+  <div
+    class="f-vertical o-radio-list m-b-18"
+    [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+  >
+    <h3 rr-id="hip_m_060418" class="m-b-4">
+      {{ 'hipMRT.capsuleAndLigaments.differentialDiagnosis1.value' | translate
+      }}*
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="hip_m_060419"
+      class="m-b-11"
+      [diagnosisNumber]="1"
+      [options]="diffDiagnosisFullOptions"
+      [(ngModel)]="model.differentialDiagnosis1"
+      name="differentialDiagnosis1"
+      group="true"
+      [parentViewModel]="model"
+      rrValidation="differentialDiagnosis1"
+      (selectionChanged)="model.isSuspected = false; model.isSubordinated = false;"
+    ></rr-differential-diagnosis-dropdown>
+    <div
+      class="o-radio-list"
+      [rrDisable]="model.differentialDiagnosis1 === 'None'"
+    >
+      <p-checkbox
+        rr-id="hip_m_060420"
+        [(ngModel)]="model.isSuspected"
+        name="isSuspected"
+        label="{{ 'hipMRT.capsuleAndLigaments.suspected.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-30"
+    [rrDisable]="model.synoviaDifferentialDiagnosis === 'None' && model.differentialDiagnosis1 === 'None'"
+  >
+    <h3 rr-id="hip_m_060421" class="m-b-4">
+      {{ 'hipMRT.capsuleAndLigaments.differentialDiagnosis2.value' | translate
+      }}
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="hip_m_060422"
+      class="m-b-11"
+      [diagnosisNumber]="2"
+      [options]="diffDiagnosisRestrictedOptions"
+      [(ngModel)]="model.differentialDiagnosis2"
+      name="differentialDiagnosis2"
+      group="true"
+      [parentViewModel]="model"
+      (selectionChanged)="model.isSubordinated = false;"
+    ></rr-differential-diagnosis-dropdown>
+    <div
+      class="o-radio-list"
+      [rrDisable]="model.differentialDiagnosis2 === 'None'"
+    >
+      <p-checkbox
+        rr-id="hip_m_060423"
+        [(ngModel)]="model.isSubordinated"
+        name="isSubordinated"
+        label="{{ 'hipMRT.capsuleAndLigaments.subordinated.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="hip_m_060424"
+      [(ngModel)]="model.isAbove1LesionSameEntity"
+      name="isAbove1LesionSameEntity"
+      label="{{ 'hipMRT.capsuleAndLigaments.moreThenOnelesionSameEntity.value' | translate }}"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div class="c-col-1 c-pad-l f-vertical o-list m-t-10 m-b-13"></div>

@@ -1,0 +1,212 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_060202">
+      {{ "thoraxMRT.pleura.side.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060203"
+      name="pleuraSiteType"
+      [rrDisable]="
+        pleuraHelperService.isSiteDisabled(
+          findings,
+          model,
+          pleuraSiteTypeEnum.Right
+        )
+      "
+      [(ngModel)]="model.pleuraSiteType"
+      rrValidation="pleuraSiteType"
+      [value]="pleuraSiteTypeEnum.Right"
+      label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060204"
+      name="pleuraSiteType"
+      [rrDisable]="
+        pleuraHelperService.isSiteDisabled(
+          findings,
+          model,
+          pleuraSiteTypeEnum.Left
+        )
+      "
+      [(ngModel)]="model.pleuraSiteType"
+      rrValidation="pleuraSiteType"
+      [value]="pleuraSiteTypeEnum.Left"
+      label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+    ></p-radioButton>
+    <div class="nested-content" [rrDisable]="!leftOrRightSelected()">
+      <p rr-id="tho_m_060205">
+        {{ "thoraxMRT.pleura.maxWidth.value" | translate }}
+      </p>
+      <rr-number-input
+        inputRrId="tho_m_060206"
+        labelRrId="tho_m_060207"
+        name="maxWidthInMM"
+        [(ngModel)]="model.maxWidthInMM"
+        [label]="'thoraxMRT.pleura.inMm.value' | translate"
+        [config]="{ labelWidth: 80, min: 1, max: 300 }"
+      ></rr-number-input>
+    </div>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_060301">
+      {{ "thoraxMRT.pleura.shape.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060302"
+      name="formType"
+      rrUnClickRadio
+      [(ngModel)]="model.pleuraFormType"
+      [value]="formTypeEnum.Biconvex"
+      label="{{ 'thoraxMRT.pleura.biconvex.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060303"
+      name="formType"
+      rrUnClickRadio
+      [(ngModel)]="model.pleuraFormType"
+      [value]="formTypeEnum.Concave"
+      label="{{ 'thoraxMRT.pleura.concave.value' | translate }}"
+    ></p-radioButton>
+
+    <h2 rr-id="tho_m_060304" class="m-t-26">
+      {{ "thoraxMRT.pleura.distribution.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060305"
+      name="distributionType"
+      [(ngModel)]="model.distributionType"
+      rrUnClickRadio
+      [value]="distributionTypeEnum.FreeFlow"
+      label="{{ 'thoraxMRT.pleura.freeFlow.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060306"
+      name="distributionType"
+      [(ngModel)]="model.distributionType"
+      rrUnClickRadio
+      [value]="distributionTypeEnum.Interlobal"
+      label="{{ 'thoraxMRT.pleura.interlobal.value' | translate }}"
+    ></p-radioButton>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_m_060401" rrInfoIcon="tho_m_06_01">
+      {{ "thoraxMRT.pleura.quality.value" | translate }}
+    </h2>
+    <p-radioButton
+      rr-id="tho_m_060402"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block Chylothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Transudate"
+      label="{{ 'thoraxMRT.pleura.transudate.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060403"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block Chylothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Exsudate"
+      label="{{ 'thoraxMRT.pleura.exsudate.value' | translate }}"
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="tho_m_060404"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block Chylothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Hematothorax"
+      label="{{ 'thoraxMRT.pleura.hematothorax.value' | translate }}"
+    ></p-radioButton>
+    <div
+      id="Hematothorax-block"
+      class="nested-content"
+      [rrDisable]="model.qualityType !== qualityTypeEnum.Hematothorax"
+    >
+      <p-checkbox
+        rr-id="tho_m_060405"
+        name="isCoagulum"
+        [(ngModel)]="model.isCoagulum"
+        label="{{ 'thoraxMRT.pleura.coagulum.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="tho_m_060406"
+      name="qualityType"
+      rrContentReset="Empyema-block Hematothorax-block Chylothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Chylothorax"
+      label="{{ 'thoraxMRT.pleura.chylothorax.value' | translate }}"
+    ></p-radioButton>
+    <div
+      id="Chylothorax-block"
+      class="nested-content"
+      [rrDisable]="model.qualityType !== qualityTypeEnum.Chylothorax"
+    >
+      <p-checkbox
+        rr-id="tho_m_060407"
+        name="isT1wHyperintense"
+        [(ngModel)]="model.isT1wHyperintense"
+        label="{{ 'thoraxMRT.pleura.t1wHyperintense.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+    <p-radioButton
+      rr-id="tho_m_060408"
+      name="qualityType"
+      rrContentReset="Hematothorax-block Empyema-block Chylothorax-block"
+      [(ngModel)]="model.qualityType"
+      rrUnClickRadio
+      [value]="qualityTypeEnum.Empyema"
+      label="{{ 'thoraxMRT.pleura.empyema.value' | translate }}"
+    ></p-radioButton>
+    <div
+      id="Empyema-block"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="model.qualityType !== qualityTypeEnum.Empyema"
+    >
+      <p-checkbox
+        rr-id="tho_m_060409"
+        [rrDisable]="!isCMYes"
+        name="isCMEnrichingCapsule"
+        [(ngModel)]="model.isCMEnrichingCapsule"
+        label="{{
+          'thoraxMRT.pleura.contrastenhancingCapsule.value' | translate
+        }}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_m_060410"
+        name="isFocalSignalVoids"
+        [(ngModel)]="model.isFocalSignalVoids"
+        label="{{ 'thoraxMRT.pleura.focalSignalVoids.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start c-pad-l o-radio-list">
+    <h2 rr-id="tho_m_060501">
+      {{ "thoraxMRT.pleura.associatedFindings.value" | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="tho_m_060502"
+      name="isSedimentation"
+      [(ngModel)]="model.isSedimentation"
+      label="{{ 'thoraxMRT.pleura.sedimentation.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="tho_m_060503"
+      name="isSplitPleuraSign"
+      [(ngModel)]="model.isSplitPleuraSign"
+      label="{{ 'thoraxMRT.pleura.splitPleuraSign.value' | translate }}"
+      binary="true"
+    ></p-checkbox>
+  </div>
+</div>

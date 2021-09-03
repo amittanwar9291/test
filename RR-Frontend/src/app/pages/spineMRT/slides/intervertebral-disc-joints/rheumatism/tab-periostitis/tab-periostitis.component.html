@@ -1,0 +1,46 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad  m-t-15 m-b-15">
+    <div class="o-radio-list m-l-10">
+      <h1 rr-id="spi_m_050261" class="text-break">
+        {{'spineMRT.disc.periostitis.value' | translate}}
+      </h1>
+      <h2 rr-id="spi_m_050262" class="text-break m-t-40">
+        {{'spineMRT.disc.florids.value' | translate}}
+      </h2>
+      <p-checkbox
+        [rrDisable]="!isCMYes"
+        binary="true"
+        [(ngModel)]="model.isContrastEnhancement"
+        label="{{'spineMRT.disc.CMEnhancement.value'| translate}}"
+        rr-id="spi_m_050263"
+        name="isContrastEnhancement"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isIrregularThickeningOfTheCorticalBone"
+        label="{{'spineMRT.disc.irregularThickeningOfTheCorticalis.value'| translate}}"
+        rr-id="spi_m_050264"
+        name="isIrregularThickeningOfTheCorticalBone"
+        (onChange)="clearImage()"
+      ></p-checkbox>
+
+      <div
+        class="nested-content m-t-40"
+        [rrDisable]="!model.isIrregularThickeningOfTheCorticalBone"
+      >
+        <rr-reference-picture
+          [(ngModel)]="model.periostitisReferencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          name="periostitisReferencePicture"
+          shortLabels="true"
+          [elementsRrIds]="periostitisReferencePictureElementsRrIds"
+          [pictureFileType]="imageFileTypeEnum.PeriostitisImageFile"
+        ></rr-reference-picture>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15"></div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"></div>
+</div>

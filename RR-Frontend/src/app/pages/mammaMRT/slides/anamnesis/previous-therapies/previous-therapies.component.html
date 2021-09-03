@@ -1,0 +1,172 @@
+<div [hidden]="model.findingType === 'None'" class="f-vertical c-col-1">
+  <div class="col-h-100">
+    <!-- findings: radiatio-->
+    <!-- findings: antihormonale chemiotherapie kontzeption-->
+    <div
+      class="f-vertical f-space-between col-h-100"
+      *ngIf="model.findingType === findingType.Radio ||isAntiHormonalOrChemoOrHormonal()"
+    >
+      <div>
+        <h2 rr-id="mam_m_020501" class="m-b-28">
+          {{ "mammaMRT.anamnesis.therapy.value" | translate }} ({{
+          model.number}})
+        </h2>
+        <div class="o-radio-list f-vertical m-b-12">
+          <p-radioButton
+            rr-id="mam_m_020520"
+            label="{{ 'mammaMRT.anamnesis.ongoing.value' | translate }}"
+            [(ngModel)]="model.timeStatusType"
+            [value]="timeStatusType.Ongoing"
+            name="TimeStatusType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="mam_m_020521"
+            label="{{ 'mammaMRT.anamnesis.dateUntil.value' | translate }}"
+            [(ngModel)]="model.timeStatusType"
+            [value]="timeStatusType.DateUntil"
+            name="TimeStatusType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <rr-month-year-input
+          [disabled]="model.timeStatusType !== timeStatusType.DateUntil"
+          customLabelClass="date-label-display"
+          label="{{ 'mammaMRT.anamnesis.date.value' | translate }}"
+          rr-id="mam_m_020503"
+          name="monthyear"
+          [(ngModel)]="model.monthyear"
+        >
+        </rr-month-year-input>
+      </div>
+      <div *ngIf="model.findingType === findingType.Radio">
+        <p
+          rr-id="mam_m_020517"
+          class="m-b-5"
+          rrValidation="breastLocation"
+          inSecondFinding="true"
+          noUpdate="true"
+        >
+          {{ 'mammaMRT.anamnesis.localizationSingle.value' | translate }}*
+        </p>
+        <div class="localizer-fix">
+          <rr-breast-simple
+            rr-id="mam_m_020506"
+            [(ngModel)]="model.breastLocation"
+            name="BreastLocation"
+            [isSingleChoice]="true"
+            rrValidation="breastLocation"
+            inSecondFinding="true"
+            isLocalizer="true"
+            #breastLocation
+            [elementUpdate]="breastLocation.announceSelection"
+          ></rr-breast-simple>
+        </div>
+      </div>
+    </div>
+
+    <!-- findings: mammaaugmentation mammareduktion BET-->
+    <!-- findings: feinnadelsapiration, vakuumbiopsie offene biopsie-->
+    <!-- findings: amputation-->
+    <!-- findings: stanzbiopsie-->
+    <div
+      class="f-vertical f-space-between col-h-100"
+      *ngIf="isAugmentationOrFineNeedleOrAmputationOrPunch()"
+    >
+      <div>
+        <h2 rr-id="mam_m_020501" class="m-b-37">
+          {{ "mammaMRT.anamnesis.therapy.value" | translate }} ({{ model.number
+          }})
+        </h2>
+        <rr-month-year-input
+          label="{{ 'mammaMRT.anamnesis.date.value' | translate }}"
+          rr-id="mam_m_020503"
+          [(ngModel)]="model.monthyear"
+          name="monthyear"
+          customLabelClass="date-label-custom"
+        >
+        </rr-month-year-input>
+      </div>
+      <div>
+        <p
+          rr-id="mam_m_020516"
+          class="m-b-5"
+          rrValidation="breastLocation"
+          inSecondFinding="true"
+          noUpdate="ture"
+          *ngIf="isAugmentationOrFineNeedleOrAmputationOrPunch() && model.findingType !== findingType.PunchBiopsy && !isFineNeedleOrVacuumOrOpenBiopsy()"
+        >
+          {{ 'mammaMRT.anamnesis.localizationMulti.value' | translate }}*
+        </p>
+        <p
+          rr-id="mam_m_020517"
+          class="m-b-5"
+          rrValidation="breastLocation"
+          inSecondFinding="true"
+          noUpdate="ture"
+          *ngIf="model.findingType === findingType.PunchBiopsy || isFineNeedleOrVacuumOrOpenBiopsy()"
+        >
+          {{ 'mammaMRT.anamnesis.localizationSingle.value' | translate }}*
+        </p>
+        <div
+          *ngIf="isAugmentationOrReductionOrBET() || model.findingType === findingType.BreastAmputation"
+          class="localizer-fix"
+        >
+          <rr-breast-simple
+            rr-id="mam_m_020506"
+            [(ngModel)]="model.breastLocation"
+            name="BreastLocation"
+            (ngModelChange)="updateReconstruction()"
+            rrValidation="breastLocation"
+            inSecondFinding="true"
+            isLocalizer="true"
+            #breastLocation2
+            [elementUpdate]="breastLocation2.announceSelection"
+          ></rr-breast-simple>
+        </div>
+        <div *ngIf="isFineNeedleOrVacuumOrOpenBiopsy()" class="localizer-fix">
+          <rr-breast-cross
+            rr-id="mam_m_020518"
+            [(ngModel)]="model.breastLocation"
+            name="BreastLocation"
+            [isSingleChoice]="true"
+            rrValidation="breastLocation"
+            inSecondFinding="true"
+            isLocalizer="true"
+          ></rr-breast-cross>
+        </div>
+        <div
+          *ngIf="model.findingType === findingType.PunchBiopsy"
+          class="localizer-fix"
+        >
+          <rr-breast-simple-shoulder
+            rr-id="mam_m_020519"
+            [(ngModel)]="model.breastLocation"
+            name="BreastLocation"
+            [isSingleChoice]="true"
+            rrValidation="breastLocation"
+            inSecondFinding="true"
+            isLocalizer="true"
+            #breastLocation4
+            [elementUpdate]="breastLocation4.announceSelection"
+          ></rr-breast-simple-shoulder>
+        </div>
+        <div
+          *ngIf="model.findingType === findingType.BreastAmputation"
+          class="m-t-7"
+        >
+          <rr-breast-reconstruction
+            name="model.previousProcedure1.reconstruction"
+            [labels]="reconstructionLabels"
+            [breastLocation]="model.breastLocation"
+            [(ngModel)]="model.reconstruction"
+            rrValidation="breastLocation"
+            inSecondFinding="true"
+            isLocalizer="true"
+          >
+          </rr-breast-reconstruction>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

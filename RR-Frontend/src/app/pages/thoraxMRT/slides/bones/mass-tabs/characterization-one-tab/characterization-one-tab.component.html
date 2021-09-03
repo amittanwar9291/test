@@ -1,0 +1,418 @@
+<div class="f-horizontal f-start o-width-100 main">
+  <div class="c-col-1 c-sep c-pad m-t-10">
+    <!--for ClavicularMass ScapularMass MassOfTheRibs SternalMass-->
+    <div *ngIf="!isSpinalMass()" class="m-l-10">
+      <div
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+        class="o-radio-list"
+      >
+        <h2 rr-id="tho_m_070229" class="m-b-5" rrInfoIcon="tho_m_07_03">
+          {{'thoraxMRT.bones.differentialDiagnosis1.value' |translate}}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="tho_m_070230"
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosisW036Options"
+          [(ngModel)]="model.characterizationOneDifferentialDiagnosis"
+          name="characterizationOneDifferentialDiagnosis"
+          rrValidation="characterizationOneDifferentialDiagnosis"
+          group="true"
+          isActiveOnIKnow="true"
+          [parentViewModel]="model"
+          (selectionChanged)="onDiffDiagnosisSelectionChange()"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          class="m-t-10"
+          binary="true"
+          [(ngModel)]="model.isHistologyKnown"
+          label="{{'thoraxMRT.bones.histologyKnown.value'| translate}}"
+          rr-id="tho_m_070231"
+          name="isHistologyKnown"
+          rrContentReset="histologyKnownTypeContainer"
+        ></p-checkbox>
+        <div
+          id="histologyKnownTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isHistologyKnown"
+        >
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="tho_m_070232"
+            label="{{ 'thoraxMRT.bones.benign.value' | translate }}"
+            name="histologyKnownType"
+            [value]="histologyKnownTypeEnum.Benign"
+            [(ngModel)]="model.histologyKnownType"
+          ></p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="tho_m_070233"
+            label="{{ 'thoraxMRT.bones.malignant.value' | translate }}"
+            name="histologyKnownType"
+            [value]="histologyKnownTypeEnum.Malignant"
+            [(ngModel)]="model.histologyKnownType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        *ngIf="isFinding([findingTypeEnum.ClavicularMass, findingTypeEnum.ScapularMass])"
+        class="o-radio-list m-t-30"
+      >
+        <h2 rr-id="tho_m_070234">
+          {{'thoraxMRT.bones.side.value' |translate}}*
+        </h2>
+        <p-radioButton
+          rr-id="tho_m_070235"
+          label="{{ 'thoraxMRT.bones.right.value' | translate }}"
+          name="sideType"
+          [value]="locationTypeEnum.Right"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_070236"
+          label="{{ 'thoraxMRT.bones.left.value' | translate }}"
+          name="sideType"
+          [value]="locationTypeEnum.Left"
+          [(ngModel)]="model.sideType"
+          rrValidation="sideType"
+        ></p-radioButton>
+      </div>
+      <div
+        *ngIf="isFinding([findingTypeEnum.MassOfTheRibs])"
+        class="o-radio-list m-t-30"
+      >
+        <h2 rr-id="tho_m_070269" rrValidation="ribLocalization">
+          {{'thoraxMRT.bones.localization.value' |translate}}*
+        </h2>
+        <rr-ribs-simple
+          class="scaled-localizer"
+          [model]="model.ribLocalization"
+          (click)="openLargeRibsLocalizer()"
+          rrValidation="ribLocalization"
+          isLocalizer="true"
+          rr-id="tho_m_070270"
+        ></rr-ribs-simple>
+      </div>
+      <div
+        *ngIf="isFinding([findingTypeEnum.SternalMass])"
+        class="o-radio-list m-t-30"
+      >
+        <h2 rr-id="tho_m_070271">
+          {{'thoraxMRT.bones.localization.value' |translate}}*
+        </h2>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isSternalManubriumLocalized"
+          label="{{'thoraxMRT.bones.sternalManubrium.value'| translate}}"
+          rr-id="tho_m_070272"
+          name="isSternalManubriumLocalized"
+          rrValidation="isSternalManubriumLocalized isSternalBodyLocalized isXiphoidProcessLocalized"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isSternalBodyLocalized"
+          label="{{'thoraxMRT.bones.sternalBody.value'| translate}}"
+          rr-id="tho_m_070273"
+          name="isSternalBodyLocalized"
+          rrValidation="isSternalManubriumLocalized isSternalBodyLocalized isXiphoidProcessLocalized"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isXiphoidProcessLocalized"
+          label="{{'thoraxMRT.bones.xiphoidProcess.value'| translate}}"
+          rr-id="tho_m_070274"
+          name="isXiphoidProcessLocalized"
+          rrValidation="isSternalManubriumLocalized isSternalBodyLocalized isXiphoidProcessLocalized"
+        ></p-checkbox>
+      </div>
+    </div>
+    <!--for SpinalMass-->
+    <div *ngIf="isSpinalMass()" class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_070275">
+        {{'thoraxMRT.bones.localization.value' |translate}}*
+      </h2>
+      <rr-spine-simple
+        rr-id="tho_m_070226"
+        [spineLocation]="model.spineLocalization"
+        [selectionAccessibilityMode]="spineSelectionAccessibilityModeEnum.C3toL5"
+        (click)="openLargeSpineLocalizer()"
+        rrValidation="spineLocalization"
+        isLocalizer="true"
+      ></rr-spine-simple>
+
+      <div
+        [rrDisable]="!isSpineLocalizationSelected()"
+        class="o-radio-list m-t-25"
+      >
+        <h2 rr-id="tho_m_070277" class="text-break">
+          {{'thoraxMRT.bones.localizationInTheVertebralBodyCenterOfTheLesion.value'
+          | translate}}
+        </h2>
+        <rr-spine-disc-general-localizer
+          [disabled]="!isSpineLocalizationSelected()"
+          rr-id="tho_m_070278"
+          [logicType]="'ventralAndDorsal'"
+          isSingleChoice="true"
+          [(ngModel)]="model.vertebralBodyLocalization"
+          name="vertebralBodyLocalization"
+        >
+        </rr-spine-disc-general-localizer>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10">
+    <div class="m-l-10 f-vertical">
+      <div
+        class="o-radio-list"
+        *ngIf="isSpinalMass()"
+        [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+      >
+        <h2 rr-id="tho_m_070377" class="m-b-5" rrInfoIcon="tho_m_07_03">
+          {{'thoraxMRT.bones.differentialDiagnosis1.value' |translate}}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="tho_m_070378"
+          [diagnosisNumber]="1"
+          [options]="differentialDiagnosisW036Options"
+          [(ngModel)]="model.characterizationOneDifferentialDiagnosis"
+          name="characterizationOneDifferentialDiagnosis"
+          rrValidation="characterizationOneDifferentialDiagnosis"
+          group="true"
+          isActiveOnIKnow="true"
+          [parentViewModel]="model"
+          (selectionChanged)="onDiffDiagnosisSelectionChange()"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          class="m-t-10"
+          binary="true"
+          [(ngModel)]="model.isHistologyKnown"
+          label="{{'thoraxMRT.bones.histologyKnown.value'| translate}}"
+          rr-id="tho_m_070379"
+          name="isHistologyKnown"
+          rrContentReset="histologyKnownTypeContainer2"
+        ></p-checkbox>
+        <div
+          id="histologyKnownTypeContainer2"
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isHistologyKnown"
+        >
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="tho_m_070380"
+            label="{{ 'thoraxMRT.bones.benign.value' | translate }}"
+            name="histologyKnownType"
+            [value]="histologyKnownTypeEnum.Benign"
+            [(ngModel)]="model.histologyKnownType"
+          ></p-radioButton>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="tho_m_070381"
+            label="{{ 'thoraxMRT.bones.malignant.value' | translate }}"
+            name="histologyKnownType"
+            [value]="histologyKnownTypeEnum.Malignant"
+            [(ngModel)]="model.histologyKnownType"
+          ></p-radioButton>
+        </div>
+      </div>
+      <h2
+        [attr.rr-id]="isSpinalMass() ? 'tho_m_070382' : 'tho_m_070348'"
+        [ngClass]="{'m-t-25': isSpinalMass()}"
+      >
+        {{'thoraxMRT.bones.extension.value' |translate}}
+      </h2>
+      <p
+        [attr.rr-id]="isSpinalMass() ? 'tho_m_070383' : 'tho_m_070349'"
+        class="m-t-10"
+      >
+        {{'thoraxMRT.bones.size.value' |translate}}*
+      </p>
+      <rr-number-input
+        [label]="'thoraxMRT.bones.inMm.value' | translate"
+        [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+        [inputRrId]="isSpinalMass() ? 'tho_m_070384' : 'tho_m_070376'"
+        [labelRrId]="isSpinalMass() ? 'tho_m_070385' : 'tho_m_070351'"
+        name="extensionSize"
+        [(ngModel)]="model.extensionSize"
+        rrValidation="extensionSize"
+        (announceModelChange)="onExtensionSizeChange()"
+      ></rr-number-input>
+      <p
+        [rrDisable]="!model.extensionSize"
+        [attr.rr-id]="isSpinalMass() ? 'tho_m_070386' : 'tho_m_070352'"
+        class="m-t-10"
+      >
+        {{'thoraxMRT.bones.2ndPlane.value' |translate}}
+      </p>
+      <rr-number-input
+        [rrDisable]="!model.extensionSize"
+        [label]="'thoraxMRT.bones.inMm.value' | translate"
+        [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+        [inputRrId]="isSpinalMass() ? 'tho_m_070387' : 'tho_m_070353'"
+        [labelRrId]="isSpinalMass() ? 'tho_m_070388' : 'tho_m_070354'"
+        name="extensionSecondPlane"
+        [(ngModel)]="model.extensionSecondPlane"
+        (announceModelChange)="onExtensionSecondPlaneChange()"
+      ></rr-number-input>
+      <p
+        [rrDisable]="!model.extensionSecondPlane"
+        [attr.rr-id]="isSpinalMass() ? 'tho_m_070389' : 'tho_m_070355'"
+        class="m-t-10"
+      >
+        {{'thoraxMRT.bones.3rdPlane.value' |translate}}
+      </p>
+      <rr-number-input
+        [rrDisable]="!model.extensionSecondPlane"
+        [label]="'thoraxMRT.bones.inMm.value' | translate"
+        [config]="{min: 1, max: 300, labelWidth: 180, placeholder: '---'}"
+        [inputRrId]="isSpinalMass() ? 'tho_m_070390' : 'tho_m_070356'"
+        [labelRrId]="isSpinalMass() ? 'tho_m_070391' : 'tho_m_070357'"
+        name="extensionThirdPlane"
+        [(ngModel)]="model.extensionThirdPlane"
+      ></rr-number-input>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_070428">
+        {{'thoraxMRT.bones.margin.value' |translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="tho_m_070429"
+        label="{{ 'thoraxMRT.bones.cirumscribed.value' | translate }}"
+        name="marginType"
+        [value]="marginTypeEnum.Circumscribed"
+        [(ngModel)]="model.marginType"
+        rrValidation="marginType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070430"
+        label="{{ 'thoraxMRT.bones.nonCircumscribed.value' | translate }}"
+        name="marginType"
+        [value]="marginTypeEnum.NonCircumscribed"
+        [(ngModel)]="model.marginType"
+        rrValidation="marginType"
+      ></p-radioButton>
+
+      <h2 rr-id="tho_m_070431" class="m-t-30">
+        {{'thoraxMRT.bones.homogeneity.value' |translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_m_070432"
+        label="{{ 'thoraxMRT.bones.homogeneous.value' | translate }}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Homogeneous"
+        [(ngModel)]="model.homogeneityType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070433"
+        label="{{ 'thoraxMRT.bones.heterogeneous.value' | translate }}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Heterogeneous"
+        [(ngModel)]="model.homogeneityType"
+        rrUnClickRadio
+      ></p-radioButton>
+
+      <h2 rr-id="tho_m_070434" class="m-t-25">
+        {{'thoraxMRT.bones.corticalBone.value' |translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="tho_m_070435"
+        label="{{ 'thoraxMRT.bones.intact.value' | translate }}"
+        name="corticalBone"
+        [value]="corticalBoneEnum.Intact"
+        [(ngModel)]="model.corticalBone"
+        rrValidation="corticalBone"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070436"
+        label="{{ 'thoraxMRT.bones.thinningScalopping.value' | translate }}"
+        name="corticalBone"
+        [value]="corticalBoneEnum.Thinning"
+        [(ngModel)]="model.corticalBone"
+        rrValidation="corticalBone"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070437"
+        label="{{ 'thoraxMRT.bones.destruction.value' | translate }}"
+        name="corticalBone"
+        [value]="corticalBoneEnum.Destruction"
+        [(ngModel)]="model.corticalBone"
+        rrValidation="corticalBone"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070438"
+        label="{{ 'thoraxMRT.bones.neocorticalis.value' | translate }}"
+        name="corticalBone"
+        [value]="corticalBoneEnum.Neocorticalis"
+        [(ngModel)]="model.corticalBone"
+        rrValidation="corticalBone"
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_070530">{{'thoraxMRT.bones.shape.value' |translate}}</h2>
+      <p-radioButton
+        rr-id="tho_m_070531"
+        label="{{ 'thoraxMRT.bones.round.value' | translate }}"
+        name="massShapeType"
+        [value]="massShapeTypeEnum.Round"
+        [(ngModel)]="model.massShapeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070532"
+        label="{{ 'thoraxMRT.bones.lobulated.value' | translate }}"
+        name="massShapeType"
+        [value]="massShapeTypeEnum.Lobulated"
+        [(ngModel)]="model.massShapeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070533"
+        label="{{ 'thoraxMRT.bones.geographicMapLikeAppearance.value' | translate }}"
+        name="massShapeType"
+        [value]="massShapeTypeEnum.Geographic"
+        [(ngModel)]="model.massShapeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070534"
+        label="{{ 'thoraxMRT.bones.broadBased.value' | translate }}"
+        name="massShapeType"
+        [value]="massShapeTypeEnum.BroadBased"
+        [(ngModel)]="model.massShapeType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070535"
+        label="{{ 'thoraxMRT.bones.pedunculated.value' | translate }}"
+        name="massShapeType"
+        [value]="massShapeTypeEnum.Pedunculated"
+        [(ngModel)]="model.massShapeType"
+        rrUnClickRadio
+      ></p-radioButton>
+
+      <h2 rr-id="tho_m_070536" class="m-t-30">
+        {{'thoraxMRT.bones.matrix.value' |translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_m_070537"
+        label="{{ 'thoraxMRT.bones.osseous.value' | translate }}"
+        name="matrixType"
+        [value]="matrixTypeEnum.Osseous"
+        [(ngModel)]="model.matrixType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_m_070538"
+        label="{{ 'thoraxMRT.bones.chondroid.value' | translate }}"
+        name="matrixType"
+        [value]="matrixTypeEnum.Chondroid"
+        [(ngModel)]="model.matrixType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</div>

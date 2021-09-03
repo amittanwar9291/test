@@ -1,0 +1,292 @@
+<div class="f-vertical h-100">
+  <h2 rr-id="spi_c_060314" class="c-pad-l m-b-36">
+    {{'spineCT.bones.fracture.value' | translate}}*
+  </h2>
+  <div class="c-pad-l c-sep col-h-100 f-horizontal">
+    <div class="c-col-1 c-pad-r f-vertical f-start o-radio-list">
+      <p-radioButton
+        rr-id="spi_c_060315"
+        name="c2FractureLocalizationType"
+        [value]="c2FractureLocalizationTypeEnum.C2"
+        label="{{'spineCT.bones.c2.value' | translate}}"
+        [(ngModel)]="model.c2FractureLocalizationType"
+        rrContentReset="c2FractureDetailsTypeContainer c1ToC2FractureTypeContainer densityTypeContainer axisArcTypeContainer c2NoFutherDefinedTypeStabilityTypeContainer atlantodentalIntervalContainer"
+        rrValidation="c2FractureLocalizationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="spi_c_060317"
+        name="c2FractureLocalizationType"
+        [value]="c2FractureLocalizationTypeEnum.C1ToC2"
+        label="{{'spineCT.bones.c1-2.value' | translate}}"
+        [(ngModel)]="model.c2FractureLocalizationType"
+        rrContentReset="c2FractureDetailsTypeContainer c1ToC2FractureTypeContainer densityTypeContainer axisArcTypeContainer c2NoFutherDefinedTypeStabilityTypeContainer atlantodentalIntervalContainer"
+        rrValidation="c2FractureLocalizationType"
+      >
+      </p-radioButton>
+      <h2 rr-id="spi_c_0603251" class="m-t-40">
+        {{'spineCT.bones.specialFractureTypes.value' | translate}}
+      </h2>
+      <p-dropdown
+        rr-id="spi_c_0603252"
+        styleClass="ui-brown-box o-width-100"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="w017Values"
+        name="c2SpecialFractureTypesType"
+        [(ngModel)]="model.c2SpecialFractureTypesType"
+        rrDropdownClear
+      >
+      </p-dropdown>
+    </div>
+    <div class="c-pad-l col-h-100 f-vertical o-radio-list c-sep-l">
+      <div class="f-horizontal col-h-100">
+        <div class="f-vertical">
+          <h2
+            rr-id="spi_c_0604110"
+            class="m-b-10"
+            *ngIf="model.c2FractureLocalizationType !== c2FractureLocalizationTypeEnum.None"
+          >
+            {{'spineCT.bones.details.value' | translate}}*
+          </h2>
+          <div class="f-horizontal h-100">
+            <div class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list">
+              <div
+                class="o-radio-list"
+                *ngIf="model.c2FractureLocalizationType === c2FractureLocalizationTypeEnum.C2"
+                id="c2FractureDetailsTypeContainer"
+              >
+                <p-radioButton
+                  rr-id="spi_c_0604104"
+                  name="c2FractureDetailsType"
+                  [value]="c2FractureDetailsTypeEnum.Dens"
+                  label="{{'spineCT.bones.dens.value' | translate}}"
+                  [(ngModel)]="model.c2FractureDetailsType"
+                  rrInfoIcon="spi_c_06_01"
+                  rrContentReset="densityTypeContainer axisArcTypeContainer c2NoFutherDefinedTypeStabilityTypeContainer atlantodentalIntervalContainer "
+                  rrValidation="c2FractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_0604105"
+                  name="c2FractureDetailsType"
+                  [value]="c2FractureDetailsTypeEnum.Vertebra"
+                  label="{{'spineCT.bones.vertebra.value' | translate}}"
+                  [(ngModel)]="model.c2FractureDetailsType"
+                  rrContentReset="densityTypeContainer axisArcTypeContainer c2NoFutherDefinedTypeStabilityTypeContainer atlantodentalIntervalContainer "
+                  rrValidation="c2FractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_0604106"
+                  name="c2FractureDetailsType"
+                  [value]="c2FractureDetailsTypeEnum.AxisArc"
+                  label="{{'spineCT.bones.axisArc.value' | translate}}"
+                  [(ngModel)]="model.c2FractureDetailsType"
+                  rrContentReset="densityTypeContainer axisArcTypeContainer c2NoFutherDefinedTypeStabilityTypeContainer atlantodentalIntervalContainer "
+                  rrValidation="c2FractureDetailsType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_0604107"
+                  name="c2FractureDetailsType"
+                  [value]="c2FractureDetailsTypeEnum.NoSpec"
+                  label="{{'spineCT.bones.notFurtherSpecifiedC2fracture.value' | translate}}"
+                  [(ngModel)]="model.c2FractureDetailsType"
+                  rrContentReset="densityTypeContainer axisArcTypeContainer c2NoFutherDefinedTypeStabilityTypeContainer atlantodentalIntervalContainer "
+                  rrValidation="c2FractureDetailsType"
+                >
+                </p-radioButton>
+              </div>
+              <div
+                class="o-radio-list"
+                id="c1ToC2FractureTypeContainer"
+                *ngIf="model.c2FractureLocalizationType === c2FractureLocalizationTypeEnum.C1ToC2"
+              >
+                <p-radioButton
+                  rr-id="spi_c_0604108"
+                  name="c1ToC2FractureType"
+                  [value]="c1ToC2FractureTypeEnum.SubluxationWithRotation"
+                  label="{{'spineCT.bones.subluxationWithRotation.value' | translate}}"
+                  [(ngModel)]="model.c1ToC2FractureType"
+                  rrContentReset="atlantodentalIntervalContainer"
+                  rrValidation="c1ToC2FractureType"
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_0604109"
+                  name="c1ToC2FractureType"
+                  [value]="c1ToC2FractureTypeEnum.Displacement"
+                  label="{{'spineCT.bones.displacement.value' | translate}}"
+                  [(ngModel)]="model.c1ToC2FractureType"
+                  rrContentReset="atlantodentalIntervalContainer"
+                  rrValidation="c1ToC2FractureType"
+                >
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="c-col-1 c-pad-l c-sep f-vertical f-start o-radio-list">
+              <h2
+                rr-id="spi_c_060579"
+                *ngIf="model.c2FractureDetailsType === c2FractureDetailsTypeEnum.Dens"
+              >
+                {{'spineCT.bones.classification.value' | translate}}
+              </h2>
+              <h2
+                rr-id="spi_c_060579"
+                *ngIf="model.c2FractureDetailsType === c2FractureDetailsTypeEnum.AxisArc"
+                rrInfoIcon="spi_c_06_02"
+              >
+                {{'spineCT.bones.classification.value' | translate}}
+              </h2>
+              <div
+                class="o-radio-list"
+                *ngIf="model.c2FractureDetailsType === c2FractureDetailsTypeEnum.Dens"
+                id="densityTypeContainer"
+              >
+                <p-radioButton
+                  rr-id="spi_c_060580"
+                  name="densityType"
+                  [value]="bonesDensityTypeEnum.Type1"
+                  label="{{'spineCT.bones.andersonDAlonzoTypeI.value' | translate}}"
+                  [(ngModel)]="model.densityType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060568"
+                  name="densityType"
+                  [value]="bonesDensityTypeEnum.Type2"
+                  label="{{'spineCT.bones.andersonDAlonzoTypeII.value' | translate}}"
+                  [(ngModel)]="model.densityType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060569"
+                  name="densityType"
+                  [value]="bonesDensityTypeEnum.Type3"
+                  label="{{'spineCT.bones.andersonDAlonzoTypeIII.value' | translate}}"
+                  [(ngModel)]="model.densityType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+              <div
+                class="o-radio-list"
+                *ngIf="model.c2FractureDetailsType === c2FractureDetailsTypeEnum.AxisArc"
+                id="axisArcTypeContainer"
+              >
+                <p-radioButton
+                  rr-id="spi_c_060575"
+                  name="axisArcType"
+                  [value]="axisArcTypeEnum.Type1"
+                  label="{{'spineCT.bones.levineEdwardsType1.value' | translate}}"
+                  [(ngModel)]="model.axisArcType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060576"
+                  name="axisArcType"
+                  [value]="axisArcTypeEnum.Type2"
+                  label="{{'spineCT.bones.levineEdwardsType2.value' | translate}}"
+                  [(ngModel)]="model.axisArcType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060577"
+                  name="axisArcType"
+                  [value]="axisArcTypeEnum.Type2a"
+                  label="{{'spineCT.bones.levineEdwardsType2a.value' | translate}}"
+                  [(ngModel)]="model.axisArcType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060578"
+                  name="axisArcType"
+                  [value]="axisArcTypeEnum.Type3"
+                  label="{{'spineCT.bones.levineEdwardsType3.value' | translate}}"
+                  [(ngModel)]="model.axisArcType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+              <div
+                class="o-radio-list"
+                *ngIf="model.c2FractureDetailsType === c2FractureDetailsTypeEnum.NoSpec"
+                id="c2NoFutherDefinedTypeStabilityTypeContainer"
+              >
+                <p-radioButton
+                  rr-id="spi_c_060570"
+                  name="c2NoFutherDefinedType"
+                  [value]="noFutherDefinedTypeEnum.SuspectedFracture"
+                  label="{{'spineCT.bones.suspectedFracture.value' | translate}}"
+                  [(ngModel)]="model.c2NoFutherDefinedType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060571"
+                  name="c2NoFutherDefinedType"
+                  [value]="noFutherDefinedTypeEnum.OldAppearingConsolidatedFracture"
+                  label="{{'spineCT.bones.oldAppearingConsolidatedFracture.value' | translate}}"
+                  [(ngModel)]="model.c2NoFutherDefinedType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p rr-id="spi_c_060572">
+                  {{'spineCT.bones.stability.value' | translate}}
+                </p>
+                <p-radioButton
+                  rr-id="spi_c_060573"
+                  name="stabilityType"
+                  [value]="stabilityTypeEnum.Stable"
+                  label="{{'spineCT.bones.stable.value' | translate}}"
+                  [(ngModel)]="model.stabilityType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+                <p-radioButton
+                  rr-id="spi_c_060574"
+                  name="stabilityType"
+                  [value]="stabilityTypeEnum.Unstable"
+                  label="{{'spineCT.bones.unstable.value' | translate}}"
+                  [(ngModel)]="model.stabilityType"
+                  rrUnClickRadio
+                >
+                </p-radioButton>
+              </div>
+              <div
+                class="o-radio-list f-vertical"
+                *ngIf="model.c1ToC2FractureType === c1ToC2FractureTypeEnum.Displacement"
+                id="atlantodentalIntervalContainer"
+              >
+                <p rr-id="spi_c_0605202">
+                  {{'spineCT.bones.atlantodentalInterval.value' | translate}}
+                </p>
+                <rr-number-input
+                  inputRrId="spi_c_0605203"
+                  labelRrId="spi_c_0605204"
+                  name="atlantodentalIntervalInMm"
+                  label="{{'spineCT.bones.inMM.value' | translate}}"
+                  [(ngModel)]="model.atlantodentalIntervalInMm"
+                  [config]="{min: 1, max: 15}"
+                >
+                </rr-number-input>
+                <p-checkbox
+                  label="{{ 'spineCT.bones.increasedAtlantodentalInterval.value' | translate }}"
+                  rr-id="spi_c_0605205"
+                  binary="true"
+                  name="isIncreasedAtlantodentalInterval"
+                  [(ngModel)]="model.isIncreasedAtlantodentalInterval"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

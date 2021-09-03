@@ -1,0 +1,290 @@
+<form #autosaveForm="ngForm">
+  <div class="c-main slide f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep f-vertical o-list">
+      <div class="f-vertical o-radio-list m-b-51">
+        <h2 rr-id="fra_07_02" class="m-b-15">
+          {{ 'centerspecificPreferences.moduleSelection.value' | translate }}
+        </h2>
+        <p-dropdown
+          rr-id="fra_07_03"
+          [rrDisable]="isEditMode"
+          [options]="modulesListOptions"
+          [(ngModel)]="selectedModuleId"
+          (onChange)="toggleModule($event)"
+          rrDropdownClear
+          styleClass="o-width-100"
+          name="selectedModuleId"
+          placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        ></p-dropdown>
+      </div>
+      <div *ngIf="isModuleSelected()" class="f-vertical o-radio-list col-h-100">
+        <rr-centerspecific-preferences-column
+          [handler]="handler"
+          [config]="preferencesColumnConfig"
+          [mode]="currentModuleType"
+          [isDisabled]="!isModuleSelected()"
+          (activeElementChanged)="updateNestedHandlers()"
+          (editModeToggled)="toggleEditMode($event)"
+        >
+        </rr-centerspecific-preferences-column>
+      </div>
+    </div>
+    <ng-template [ngIf]="areSetsVisible()" [ngIfElse]="empty">
+      <!-- MRI modules template -->
+      <ng-container *ngIf="currentModuleType === moduleTypes.MRI">
+        <div
+          class="c-col-3 c-pad c-sep f-vertical f-align-start sequences-container"
+        >
+          <div class="f-horizontal f-space-between header-group m-b-28">
+            <h2 rr-id="fra_070201" class="sequences-header">
+              {{ 'centerspecificPreferences.sequenceSetHeader.value' | translate
+              }} {{ handler.currentItem?.setName }}
+            </h2>
+            <rr-reset-button
+              rr-id="uni_x_030412"
+              class="m-t-16"
+              [disabled]="sequenceHandler.currentItem?.weightingType === weightingType.None"
+              (reset)="onSequencesReset()"
+            >
+            </rr-reset-button>
+          </div>
+          <div class="f-horizontal col-h-100">
+            <div class="c-col-1 c-pad-r c-sep f-vertical">
+              <img
+                class="sequences-image"
+                src="assets/img/technology/rr-sequence.svg"
+                rr-id="mam_m_030202"
+              />
+              <rr-sequences-finding-column
+                *ngIf="handler.collection.length > 0"
+                class="m-t-21"
+                [handler]="sequenceHandler"
+                [customItemCount]="6"
+                [customFindingOptionsTranslationKey]="getCustomFindingOptionsTranslationKey()"
+                [customFindingPropertyName]="getCustomFindingPropertyName()"
+                [customColumnTitleTranslationKey]="getCustomColumnTitleTranslationKey()"
+              ></rr-sequences-finding-column>
+            </div>
+            <div class="c-col-2 c-pad-l c-sep f-vertical">
+              <!-- HERE PLACE ALL MRI MODULE SPECIFIC SEQUENCES TEMPLATES (preferably in the same order as in the modules dropdown) -->
+              <rr-abdomen-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIAbdomen"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              >
+              </rr-abdomen-mrt-sequence>
+              <rr-angiography-mrt-method
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIAngiography"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="sequenceHandler.currentItem.methodType === 'None'"
+              >
+              </rr-angiography-mrt-method>
+              <rr-pelvis-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIPelvis"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              >
+              </rr-pelvis-mrt-sequence>
+              <rr-elbow-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIElbow"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-elbow-mrt-sequence>
+              <rr-hand-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIHand"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-hand-mrt-sequence>
+              <rr-hip-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIHip"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-hip-mrt-sequence>
+              <rr-cardio-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRICardio"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              >
+              </rr-cardio-mrt-sequence>
+              <rr-knee-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIKnee"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-knee-mrt-sequence>
+              <rr-mamma-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIMamma"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              >
+              </rr-mamma-mrt-sequence>
+              <rr-shoulder-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIShoulder"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-shoulder-mrt-sequence>
+              <rr-spine-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRISpine"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-spine-mrt-sequence>
+              <rr-feet-mrt-sequence
+                *ngIf="areSequencesVisible() && ngValue.findingType === centerspecificPreferencesMRIModules.MRIUAJFoot"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+              >
+              </rr-feet-mrt-sequence>
+              <rr-thorax-mrt-sequence
+                *ngIf="
+                  areSequencesVisible() &&
+                  ngValue.findingType ===
+                    centerspecificPreferencesMRIModules.MRIThorax
+                "
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              ></rr-thorax-mrt-sequence>
+              <rr-neck-mrt-sequence
+                *ngIf="
+                  areSequencesVisible() &&
+                  ngValue.findingType ===
+                    centerspecificPreferencesMRIModules.MRINeck
+                "
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              ></rr-neck-mrt-sequence>
+              <rr-head-mrt-sequence
+                *ngIf="
+                areSequencesVisible() &&
+                ngValue.findingType === centerspecificPreferencesMRIModules.MRIHead"
+                class="col-h-100"
+                [model]="sequenceHandler.currentItem"
+                [itemIndex]="sequenceHandler.currentItemIndex"
+                [disabled]="areSequencesDisabled()"
+                [formRef]="autosaveForm"
+              >
+              </rr-head-mrt-sequence>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l"></div>
+      </ng-container>
+
+      <!-- CT modules template -->
+      <ng-container *ngIf="currentModuleType === moduleTypes.CT">
+        <div class="c-col-1 c-sep c-pad f-vertical">
+          <h2 rr-id="fra_07_20" class="sequences-header m-b-8">
+            {{ 'centerspecificPreferences.settingsSetHeader.value' | translate
+            }} {{ handler.currentItem?.setName }}
+          </h2>
+          <img
+            class="acquisitions-image m-b-21"
+            src="assets/img/technology/rr-sequence.svg"
+            rr-id="fra_07_10"
+          />
+          <rr-reset-button
+            rr-id="fra_07_12"
+            class="ct-module-reset-btn"
+            [disabled]="acquisitionHandler.currentItem?.acquisitionType === acquisitionType.None"
+            (reset)="onAcquisitionsReset()"
+          >
+          </rr-reset-button>
+          <rr-acquisitions-finding-column
+            [handler]="acquisitionHandler"
+            [customItemCount]="6"
+            [findingOptionsTranslationKey]="getCustomFindingOptionsTranslationKey()"
+            [customFindingPropertyName]="getCustomFindingPropertyName()"
+            [customColumnTitleTranslationKey]="getCustomColumnTitleTranslationKey()"
+            (findingTypeChangedOrActiveFindingChanged)="updateReconstructionsHandler()"
+          >
+          </rr-acquisitions-finding-column>
+        </div>
+        <div class="c-col-3 c-pad-l">
+          <!-- HERE PLACE ALL CT MODULE SPECIFIC SEQUENCES TEMPLATES (preferably in the same order as in the modules dropdown) -->
+          <rr-angiography-ct-acquisition
+            *ngIf="areAcquisitionsVisible() && ngValue.findingType === centerspecificPreferencesCTModules.CTAngiography"
+            [model]="acquisitionHandler.currentItem"
+            [cspMode]="true"
+            [disabled]="areAcquisitionsDisabled()"
+            [reconstructionsHandler]="reconstructionHandler"
+            [formRef]="autosaveForm"
+            [(activeTabIndex)]="activeTabIndex"
+          >
+          </rr-angiography-ct-acquisition>
+          <rr-head-ct-acquisition
+            *ngIf="areAcquisitionsVisible() && ngValue.findingType === centerspecificPreferencesCTModules.CTHead"
+            [model]="acquisitionHandler.currentItem"
+            [cspMode]="true"
+            [disabled]="areAcquisitionsDisabled()"
+            [reconstructionsHandler]="reconstructionHandler"
+            [formRef]="autosaveForm"
+            [(activeTabIndex)]="activeTabIndex"
+          >
+          </rr-head-ct-acquisition>
+          <rr-thorax-ct-acquisition
+            *ngIf="areAcquisitionsVisible() && ngValue.findingType === centerspecificPreferencesCTModules.CTThorax"
+            [model]="acquisitionHandler.currentItem"
+            [cspMode]="true"
+            [disabled]="areAcquisitionsDisabled()"
+            [reconstructionsHandler]="reconstructionHandler"
+            [formRef]="autosaveForm"
+            [(activeTabIndex)]="activeTabIndex"
+          >
+          </rr-thorax-ct-acquisition>
+          <rr-spine-ct-acquisition
+            *ngIf="areAcquisitionsVisible() && ngValue.findingType === centerspecificPreferencesCTModules.CTSpine"
+            [model]="acquisitionHandler.currentItem"
+            [cspMode]="true"
+            [disabled]="areAcquisitionsDisabled()"
+            [reconstructionsHandler]="reconstructionHandler"
+            [formRef]="autosaveForm"
+            [(activeTabIndex)]="activeTabIndex"
+          >
+          </rr-spine-ct-acquisition>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #empty>
+      <div class="c-col-4 c-pad-l"></div>
+    </ng-template>
+  </div>
+</form>

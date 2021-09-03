@@ -1,0 +1,300 @@
+<div
+  class="f-start f-vertical col-h-100 o-width-100 o-list anamnesis__align-left"
+>
+  <h1 rr-id="car_m_020109" class="m-t-27 p-l-24 m-b-14">
+    {{ 'cardioMRT.anamnesis.cardiovascularrisk.value' | translate }}
+  </h1>
+  <img
+    rr-id="car_m_020302"
+    src="assets/img/cardioMRT/icons/2-4.svg"
+    alt="Intervention/Pre-Ops"
+    class="p-l-24 m-b-11"
+  />
+  <div class="f-horizontal m-t-5 m-b-21 col-h-100">
+    <div class="c-col-2 c-pad-r c-sep f-start f-vertical o-radio-list">
+      <p-checkbox
+        rr-id="car_m_020112"
+        [(ngModel)]="model.isLaboratoryParameters"
+        label="{{ 'cardioMRT.anamnesis.laboratoryparameters.value' | translate }}"
+        name="isLaboratoryParameters"
+        binary="true"
+        class="m-b-8 p-l-24"
+        labelStyleClass="ui-fat-label"
+        rrContentReset="isLaboratoryParameters-block"
+        (onChange)="calculateEscScore(); calculateProcamScore()"
+      ></p-checkbox>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+          <div class="f-start f-vertical p-l-24 p-r-9 col-h-100">
+            <div
+              class="f-space-between f-vertical nested-content col-h-100"
+              id="isLaboratoryParameters-block"
+              [rrDisable]="!model.isLaboratoryParameters"
+            >
+              <div class="f-start f-vertical o-radio-list">
+                <p rr-id="car_m_020113">
+                  {{ 'cardioMRT.anamnesis.unit.value' | translate }}*
+                </p>
+                <p-radioButton
+                  rr-id="car_m_020114"
+                  [(ngModel)]="model.unitType"
+                  label="{{ 'cardioMRT.anamnesis.mgdl.value' | translate }}"
+                  name="unitType"
+                  [value]="unitType.Mgdl"
+                  rrValidation="unitType"
+                  notInFinding="true"
+                  (onClick)="clearInputsRelatedToUnit()"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="car_m_020115"
+                  [(ngModel)]="model.unitType"
+                  label="{{ 'cardioMRT.anamnesis.mmoll.value' | translate }}"
+                  name="unitType"
+                  [value]="unitType.Mmoll"
+                  rrValidation="unitType"
+                  notInFinding="true"
+                  (onClick)="clearInputsRelatedToUnit()"
+                ></p-radioButton>
+                <p rr-id="car_m_020111">
+                  {{ 'cardioMRT.anamnesis.parameters.value' | translate }}*
+                </p>
+                <rr-number-input
+                  inputRrId="car_m_020116"
+                  [(ngModel)]="model.totalCholesterolAmount"
+                  label="{{ 'cardioMRT.anamnesis.totalcholesterol.value' | translate }}"
+                  labelRrId="car_m_020117"
+                  name="totalCholesterolAmount"
+                  [config]="{ max: 999, min: 1 }"
+                  (announceModelChange)="calculateEscScore()"
+                  [rrValidation]="numberInputValidationModelNames"
+                  notInFinding="true"
+                ></rr-number-input>
+                <rr-number-input
+                  inputRrId="car_m_020118"
+                  [(ngModel)]="model.hdlCholesterolAmount"
+                  label="{{ 'cardioMRT.anamnesis.hDLCholesterol.value' | translate }}"
+                  labelRrId="car_m_020119"
+                  name="hdlCholesterolAmount"
+                  [config]="{ max: 999, min: 1 }"
+                  (announceModelChange)="calculateProcamScore()"
+                  [rrValidation]="numberInputValidationModelNames"
+                  notInFinding="true"
+                ></rr-number-input>
+                <rr-number-input
+                  inputRrId="car_m_020120"
+                  [(ngModel)]="model.ldlCholesterolAmount"
+                  label="{{ 'cardioMRT.anamnesis.lDLCholesterol.value' | translate }}"
+                  labelRrId="car_m_020121"
+                  name="ldlCholesterolAmount"
+                  [config]="{ max: 999, min: 1 }"
+                  (announceModelChange)="calculateProcamScore()"
+                  [rrValidation]="numberInputValidationModelNames"
+                  notInFinding="true"
+                ></rr-number-input>
+                <rr-number-input
+                  inputRrId="car_m_020122"
+                  [(ngModel)]="model.triglyceridesAmount"
+                  label="{{ 'cardioMRT.anamnesis.triglycerides.value' | translate }}"
+                  labelRrId="car_m_020123"
+                  name="triglyceridesAmount"
+                  [config]="{ max: 999, min: 1 }"
+                  (announceModelChange)="calculateProcamScore()"
+                  [rrValidation]="numberInputValidationModelNames"
+                  notInFinding="true"
+                ></rr-number-input>
+              </div>
+              <rr-number-input
+                inputRrId="car_m_020124"
+                [(ngModel)]="model.hematocritInPercent"
+                label="{{ 'cardioMRT.anamnesis.hematocritIn.value' | translate }}"
+                labelRrId="car_m_020125"
+                name="hematocritInPercent"
+                [config]="{ max: 99, min: 1 }"
+                [rrValidation]="numberInputValidationModelNames"
+                notInFinding="true"
+              ></rr-number-input>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l f-start f-vertical">
+          <div class="f-start f-vertical p-l-9 p-r-9 col-h-100">
+            <h2 rr-id="car_m_020226" class="m-b-15">
+              {{ 'cardioMRT.anamnesis.riskProfile.value' | translate }}
+            </h2>
+            <div class="f-space-between f-vertical col-h-100">
+              <div class="f-start f-vertical o-radio-list">
+                <p-checkbox
+                  rr-id="car_m_020227"
+                  [(ngModel)]="model.isNicotineAbuse"
+                  label="{{ 'cardioMRT.anamnesis.nicotineAbuse.value' | translate }}"
+                  name="isNicotineAbuse"
+                  binary="true"
+                  (onChange)="calculateEscScore(); calculateProcamScore()"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="car_m_020228"
+                  [(ngModel)]="model.isDiabetesMellitus"
+                  label="{{ 'cardioMRT.anamnesis.diabetesMellitus.value' | translate }}"
+                  name="isDiabetesMellitus"
+                  binary="true"
+                  rrInfoIcon="car_m_02_01"
+                  (onChange)="calculateProcamScore()"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="car_m_020229"
+                  [(ngModel)]="model.isRenalInsufficiency"
+                  label="{{ 'cardioMRT.anamnesis.renalInsufficiency.value' | translate }}"
+                  name="isRenalInsufficiency"
+                  binary="true"
+                  class="m-b-2"
+                  rrContentReset="isRenalInsufficiency-block"
+                ></p-checkbox>
+                <div
+                  class="f-start f-vertical o-radio-list nested-content"
+                  id="isRenalInsufficiency-block"
+                  [rrDisable]="!model.isRenalInsufficiency"
+                >
+                  <p rr-id="car_m_020230" class="m-b-3">
+                    {{ 'cardioMRT.anamnesis.eGFR.value' | translate }}
+                  </p>
+                  <rr-number-input
+                    inputRrId="car_m_020231"
+                    [(ngModel)]="model.egfrInMlMin"
+                    label="{{ 'cardioMRT.anamnesis.inMlmin.value' | translate }}"
+                    labelRrId="car_m_020232"
+                    name="egfrInMlMin"
+                    [config]="{ max: 999, min: 1 }"
+                  ></rr-number-input>
+                </div>
+                <p-checkbox
+                  rr-id="car_m_020233"
+                  [(ngModel)]="model.isPositiveFamilyHistory"
+                  label="{{ 'cardioMRT.anamnesis.positiveFamilyHistory.value' | translate }}"
+                  name="isPositiveFamilyHistory"
+                  binary="true"
+                  rrInfoIcon="car_m_02_02"
+                ></p-checkbox>
+                <p-checkbox
+                  rr-id="car_m_020234"
+                  [(ngModel)]="model.isArterialHypertension"
+                  label="{{ 'cardioMRT.anamnesis.arterialHypertension.value' | translate }}"
+                  name="isArterialHypertension"
+                  binary="true"
+                  rrContentReset="isArterialHypertension-block"
+                ></p-checkbox>
+                <div
+                  class="f-start f-vertical o-radio-list nested-content"
+                  id="isArterialHypertension-block"
+                  [rrDisable]="!model.isArterialHypertension"
+                >
+                  <p-checkbox
+                    rr-id="car_m_020238"
+                    [(ngModel)]="model.isCurrentAntihypertensiveTherapy"
+                    label="{{ 'cardioMRT.anamnesis.currentAntihypertensivetherapy.value' | translate }}"
+                    labelStyleClass="text-break"
+                    name="isCurrentAntihypertensiveTherapy"
+                    binary="true"
+                  ></p-checkbox>
+                </div>
+              </div>
+              <div class="f-start f-vertical o-radio-list">
+                <p rr-id="car_m_020235">
+                  {{ 'cardioMRT.anamnesis.systolicbloodpressure.value' |
+                  translate }}
+                </p>
+                <rr-number-input
+                  inputRrId="car_m_020236"
+                  [(ngModel)]="model.systolicbloodpressureInMmHg"
+                  label="{{ 'cardioMRT.anamnesis.inMmHg.value' | translate }}"
+                  labelRrId="car_m_020237"
+                  name="systolicbloodpressureInMmHg"
+                  [config]="{ max: 999, min: 1 }"
+                  (announceModelChange)="calculateEscScore(); calculateProcamScore()"
+                ></rr-number-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-start f-vertical">
+      <div class="f-start f-vertical o-radio-list p-l-9 p-r-9 col-h-100">
+        <p-checkbox
+          rr-id="car_m_020310"
+          class="m-b-6"
+          rrInfoIcon="car_m_02_03"
+          label="{{ 'cardioMRT.anamnesis.eSCScore.value' | translate }}"
+          [(ngModel)]="model.isEscScore"
+          (onChange)="calculateEscScore()"
+          name="isEscScore"
+          labelStyleClass="ui-fat-label"
+          binary="true"
+        >
+        </p-checkbox>
+        <div
+          class="f-space-between f-vertical col-h-100 nested-content"
+          [rrDisable]="!model.isEscScore"
+        >
+          <p rr-id="car_m_020306" class="text-break l-h-22">
+            {{ 'cardioMRT.anamnesis.escScoreForTheCalculationInformation.value'
+            | translate }}
+          </p>
+          <div class="f-start f-vertical m-b-100">
+            <rr-score-result
+              [score]="model.escScore"
+              resultRrId="car_m_020307"
+              measureRrId="car_m_020308"
+              [disabled]="!model.isEscScore"
+            ></rr-score-result>
+            <div
+              rr-id="car_m_020309"
+              class="score-result-blue-box text-center m-b-64"
+            >
+              <p>{{ escScoreResultText | translate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-start f-vertical">
+      <div class="f-start f-vertical p-l-9 p-r-9 col-h-100">
+        <p-checkbox
+          rr-id="car_m_020416"
+          class="m-b-6"
+          rrInfoIcon="car_m_02_04"
+          infoIconPdfLandscape="true"
+          label="{{ 'cardioMRT.anamnesis.procamScore.value' | translate }}"
+          [(ngModel)]="model.isProcamScore"
+          name="isProcamScore"
+          labelStyleClass="ui-fat-label"
+          binary="true"
+          (onChange)="calculateProcamScore()"
+        >
+        </p-checkbox>
+        <div
+          class="f-space-between f-vertical col-h-100 nested-content"
+          [rrDisable]="!model.isProcamScore"
+        >
+          <p rr-id="car_m_020417" class="text-break l-h-22">
+            {{
+            'cardioMRT.anamnesis.procamScoreForTheCalculationInformation.value'
+            | translate }}
+          </p>
+          <div class="f-start f-vertical m-b-100">
+            <rr-score-result
+              [score]="model.procamScore"
+              digitsInfo="1.1-1"
+              [limit]="30"
+              [equalEdge]="true"
+              resultRrId="car_m_020418"
+              measureRrId="car_m_020419"
+              class="m-b-83"
+              [disabled]="!model.isProcamScore"
+            ></rr-score-result>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l f-start f-vertical"></div>
+  </div>
+</div>

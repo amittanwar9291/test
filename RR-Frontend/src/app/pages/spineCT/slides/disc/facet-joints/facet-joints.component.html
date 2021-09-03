@@ -1,0 +1,448 @@
+<div class="f-horizontal f-start main">
+  <div class="c-col-1 c-sep c-pad p-t-10">
+    <h2 rrValidation="spineLocation" rr-id="spi_c_0502303">
+      {{'spineCT.disc.localization.value' | translate}}*
+    </h2>
+    <rr-spine-simple
+      [spineLocation]="model.spineLocation"
+      (click)="openLocalizer()"
+      rr-id="spi_c_050205"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+
+    <div class="o-radio-list m-t-25">
+      <h2 rr-id="spi_c_0502204">
+        {{'spineCT.disc.pathology.value'|translate}}*
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isOsteoarthritis"
+        label="{{'spineCT.disc.osteoarthritis.value'| translate}}"
+        rr-id="spi_c_0502205"
+        name="isOsteoarthritis"
+        (onChange)="clearFacetJointArthrosisDetails()"
+        rrValidation="isOsteoarthritis isUncovertebralArthrosis isSpondylolysis isLuxation"
+      ></p-checkbox>
+      <p-checkbox
+        [rrDisable]="!isC1dtoC7dSelected()"
+        binary="true"
+        [(ngModel)]="model.isUncovertebralArthrosis"
+        label="{{'spineCT.disc.uncovertebralArthrosis.value'| translate}}"
+        rr-id="spi_c_0502206"
+        name="isUncovertebralArthrosis"
+        (onChange)="clearUncovertebralArthrosisDetails()"
+        rrValidation="isOsteoarthritis isUncovertebralArthrosis isSpondylolysis isLuxation"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSpondylolysis"
+        label="{{'spineCT.disc.spondylolysis.value'| translate}}"
+        rr-id="spi_c_0502207"
+        name="isSpondylolysis"
+        (onChange)="clearSpondylolysisDetails()"
+        rrValidation="isOsteoarthritis isUncovertebralArthrosis isSpondylolysis isLuxation"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isLuxation"
+        label="{{'spineCT.disc.luxation.value'| translate}}"
+        rr-id="spi_c_0502208"
+        name="isLuxation"
+        (onChange)="clearLuxationDetails()"
+        rrValidation="isOsteoarthritis isUncovertebralArthrosis isSpondylolysis isLuxation"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div>
+    <p-tabView class="rr-tabView">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            [rrValidation]="['isFacetJointArthrosisRight isFacetJointArthrosisLeft']"
+            ifAny="true"
+            rr-id="spi_c_0503206"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.pathologyI.value'|translate}}
+          </h1>
+        </ng-template>
+
+        <div
+          class="f-vertical col-h-100 p-t-13"
+          [rrDisable]="!(isSingleSelectOnLocalizer() && model.isOsteoarthritis)"
+        >
+          <h2 rr-id="spi_c_050325" class="p-l-25">
+            {{'spineCT.disc.facetJointArthrosisDetails.value'|translate}}
+          </h2>
+          <div class="f-horizontal col-h-100">
+            <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+              <div class="o-radio-list m-l-10">
+                <h2 rr-id="spi_c_050327">
+                  {{'spineCT.disc.side.value'|translate}}*
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isFacetJointArthrosisRight"
+                  label="{{'spineCT.disc.right.value'| translate}}"
+                  rr-id="spi_c_050328"
+                  name="isFacetJointArthrosisRight"
+                  (onChange)="clearOtherFacetJointArthrosisFields()"
+                  rrValidation="isFacetJointArthrosisRight isFacetJointArthrosisLeft"
+                ></p-checkbox>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isFacetJointArthrosisLeft"
+                  label="{{'spineCT.disc.left.value'| translate}}"
+                  rr-id="spi_c_050329"
+                  name="isFacetJointArthrosisLeft"
+                  (onChange)="clearOtherFacetJointArthrosisFields()"
+                  rrValidation="isFacetJointArthrosisRight isFacetJointArthrosisLeft"
+                ></p-checkbox>
+
+                <div
+                  class="o-radio-list"
+                  [rrDisable]="model.isFacetJointArthrosisRight && model.isFacetJointArthrosisLeft"
+                >
+                  <h2
+                    rr-id="spi_c_0503207"
+                    rrInfoIcon="spi_c_05_10"
+                    class="m-t-15"
+                  >
+                    {{'spineCT.disc.pathriaClassification.value'|translate}}
+                  </h2>
+                  <p-radioButton
+                    rr-id="spi_c_0503208"
+                    label="{{ 'spineCT.disc.grade1.value' | translate }}"
+                    name="pathriaClassificationType"
+                    rrUnClickRadio
+                    [value]="pathriaClassificationTypeEnum.Grade1"
+                    [(ngModel)]="model.pathriaClassificationType"
+                    (onClick)="model.isHypertrophy = false"
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="spi_c_0503209"
+                    label="{{ 'spineCT.disc.grade2.value' | translate }}"
+                    name="pathriaClassificationType"
+                    rrUnClickRadio
+                    [value]="pathriaClassificationTypeEnum.Grade2"
+                    [(ngModel)]="model.pathriaClassificationType"
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="spi_c_0503210"
+                    label="{{ 'spineCT.disc.grade3.value' | translate }}"
+                    name="pathriaClassificationType"
+                    rrUnClickRadio
+                    [value]="pathriaClassificationTypeEnum.Grade3"
+                    [(ngModel)]="model.pathriaClassificationType"
+                  ></p-radioButton>
+                </div>
+
+                <div
+                  class="o-radio-list m-t-20"
+                  [rrDisable]="model.isFacetJointArthrosisRight && model.isFacetJointArthrosisLeft"
+                >
+                  <p-checkbox
+                    [rrDisable]="model.pathriaClassificationType === pathriaClassificationTypeEnum.Grade1"
+                    labelStyleClass="ui-fat-label"
+                    binary="true"
+                    [(ngModel)]="model.isHypertrophy"
+                    label="{{'spineCT.disc.hypertrophy.value'| translate}}"
+                    rr-id="spi_c_0503211"
+                    name="isHypertrophy"
+                  ></p-checkbox>
+                  <p-checkbox
+                    labelStyleClass="ui-fat-label"
+                    binary="true"
+                    [(ngModel)]="model.isCyst"
+                    label="{{'spineCT.disc.cyst.value'| translate}}"
+                    rr-id="spi_c_0503212"
+                    name="isCyst"
+                    rrContentReset="cystDetailsContainer"
+                  ></p-checkbox>
+                </div>
+                <div
+                  id="cystDetailsContainer"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isCyst"
+                >
+                  <p-checkbox
+                    binary="true"
+                    [(ngModel)]="model.isMultiple"
+                    label="{{'spineCT.disc.multiple.value'| translate}}"
+                    rr-id="spi_c_0503213"
+                    name="isMultiple"
+                  ></p-checkbox>
+                  <p rr-id="spi_c_0503214" class="m-b-5">
+                    {{'spineCT.disc.maxDiameter.value'|translate}}
+                  </p>
+                  <rr-number-input
+                    label="{{ 'spineCT.disc.inMm.value' | translate }}"
+                    inputRrId="spi_c_0503215"
+                    labelRrId="spi_c_0503216"
+                    name="maxDiameterInMm"
+                    [(ngModel)]="model.maxDiameterInMm"
+                    [config]="{ min: 1, max: 30}"
+                  ></rr-number-input>
+                </div>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+              <div
+                class="o-radio-list m-l-10"
+                [rrDisable]="model.isFacetJointArthrosisRight && model.isFacetJointArthrosisLeft"
+              >
+                <p-checkbox
+                  labelStyleClass="ui-fat-label"
+                  binary="true"
+                  rrInfoIcon="spi_c_05_04"
+                  [(ngModel)]="model.isSpinalCanalStenosis"
+                  label="{{'spineCT.disc.spinalCanalStenosis.value'| translate}}"
+                  rr-id="spi_c_0504228"
+                  name="isSpinalCanalStenosis"
+                  rrContentReset="spinalCanalStenosisDetailsContainer"
+                ></p-checkbox>
+
+                <div
+                  id="spinalCanalStenosisDetailsContainer"
+                  class="o-radio-list nested-content f-vertical"
+                  [rrDisable]="!model.isSpinalCanalStenosis"
+                >
+                  <p rr-id="spi_c_0504229" class="m-b-2">
+                    {{'spineCT.disc.grade.value'|translate}}
+                  </p>
+                  <p-dropdown
+                    styleClass="ui-brown-box o-width-100"
+                    [options]="w027DropdownOptions"
+                    name="gradeType"
+                    rr-id="spi_c_0504230"
+                    placeholder="{{'shared.pleaseSelect' | translate}}"
+                    rrDropdownClear
+                    [(ngModel)]="model.gradeType"
+                    [rrDropdownExcludedOptions]="getGradeTypeExcludedOptions()"
+                  >
+                  </p-dropdown>
+                  <p rr-id="spi_c_0504231" class="m-b-2">
+                    {{'spineCT.disc.sagittalDiameter.value'|translate}}
+                  </p>
+                  <rr-number-input
+                    [label]="'spineCT.disc.inMm.value' | translate"
+                    inputRrId="spi_c_0504232"
+                    labelRrId="spi_c_0504233"
+                    name="sagittalDiameterInMm"
+                    [(ngModel)]="model.sagittalDiameterInMm"
+                    [config]="{ min: 1, max: 25}"
+                  ></rr-number-input>
+                  <p rr-id="spi_c_0504234" class="text-break m-b-2">
+                    {{'spineCT.disc.transverseDiameterSpinalCanalWidth.value'|translate}}
+                  </p>
+                  <rr-number-input
+                    [label]="'spineCT.disc.inMm.value' | translate"
+                    inputRrId="spi_c_0504235"
+                    labelRrId="spi_c_0504236"
+                    name="transverseDiameterSpinalCanalWidthInMm"
+                    [(ngModel)]="model.transverseDiameterSpinalCanalWidthInMm"
+                    [config]="{ min: 1, max: 50}"
+                  ></rr-number-input>
+                </div>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad-l o-radio-list m-t-15 m-b-15">
+              <div
+                class="o-radio-list m-l-10"
+                [rrDisable]="model.isFacetJointArthrosisRight && model.isFacetJointArthrosisLeft"
+              >
+                <h2 rr-id="spi_c_0505227">
+                  {{'spineCT.disc.foraminalStenosis.value'|translate}}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isFacetJointArthrosisForaminalStenosis"
+                  label="{{'spineCT.disc.osseousNeuralForaminalStenosis.value'| translate}}"
+                  rr-id="spi_c_0505228"
+                  name="isFacetJointArthrosisForaminalStenosis"
+                  rrContentReset="facetJointArthrosisForaminalStenosisTypeContainer"
+                ></p-checkbox>
+                <div
+                  id="facetJointArthrosisForaminalStenosisTypeContainer"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isFacetJointArthrosisForaminalStenosis"
+                >
+                  <p-radioButton
+                    rr-id="spi_c_0505229"
+                    label="{{ 'spineCT.disc.moderate2.value' | translate }}"
+                    name="facetJointArthrosisForaminalStenosisType"
+                    rrUnClickRadio
+                    [value]="foraminalStenosisTypeEnum.Moderate"
+                    [(ngModel)]="model.facetJointArthrosisForaminalStenosisType"
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="spi_c_0505230"
+                    label="{{ 'spineCT.disc.highGrade.value' | translate }}"
+                    name="facetJointArthrosisForaminalStenosisType"
+                    rrUnClickRadio
+                    [value]="foraminalStenosisTypeEnum.HighGrade"
+                    [(ngModel)]="model.facetJointArthrosisForaminalStenosisType"
+                  ></p-radioButton>
+
+                  <p rr-id="spi_c_0505231">
+                    {{'spineCT.disc.side.value'|translate}}
+                  </p>
+                  <p-checkbox
+                    binary="true"
+                    [(ngModel)]="model.isForaminalStenosisRight"
+                    label="{{'spineCT.disc.right.value'| translate}}"
+                    rr-id="spi_c_0505232"
+                    name="isForaminalStenosisRight"
+                  ></p-checkbox>
+                  <p-checkbox
+                    binary="true"
+                    [(ngModel)]="model.isForaminalStenosisLeft"
+                    label="{{'spineCT.disc.left.value'| translate}}"
+                    rr-id="spi_c_0505233"
+                    name="isForaminalStenosisLeft"
+                  ></p-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <h1
+            [rrValidation]="['isSpondylolysisRight isSpondylolysisLeft', 'isLuxationRight isLuxationLeft']"
+            ifAny="true"
+            rr-id="spi_c_0504227"
+            class="custom-tab-header"
+          >
+            {{'spineCT.disc.pathologyII.value'|translate}}
+          </h1>
+        </ng-template>
+        <div class="col-h-100">
+          <div class="f-horizontal f-start col-h-100 o-width-100">
+            <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+              <div
+                class="o-radio-list m-l-10"
+                [rrDisable]="!(isSingleSelectOnLocalizer() && model.isUncovertebralArthrosis)"
+              >
+                <h2 rr-id="spi_c_0503217">
+                  {{'spineCT.disc.uncovertebralArthrosisDetails.value'|translate}}
+                </h2>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isUncovertebralArthrosisForaminalStenosis"
+                  label="{{'spineCT.disc.osseousNeuralForaminalStenosis.value'| translate}}"
+                  rr-id="spi_c_0503218"
+                  name="isUncovertebralArthrosisForaminalStenosis"
+                  rrContentReset="uncovertebralArthrosisForaminalStenosisTypeContainer"
+                ></p-checkbox>
+                <div
+                  id="uncovertebralArthrosisForaminalStenosisTypeContainer"
+                  class="nested-content o-radio-list"
+                  [rrDisable]="!model.isUncovertebralArthrosisForaminalStenosis"
+                >
+                  <p-radioButton
+                    rr-id="spi_c_0503219"
+                    label="{{ 'spineCT.disc.moderate2.value' | translate }}"
+                    name="uncovertebralArthrosisForaminalStenosisType"
+                    rrUnClickRadio
+                    [value]="foraminalStenosisTypeEnum.Moderate"
+                    [(ngModel)]="model.uncovertebralArthrosisForaminalStenosisType"
+                  ></p-radioButton>
+                  <p-radioButton
+                    rr-id="spi_c_0503220"
+                    label="{{ 'spineCT.disc.highGrade.value' | translate }}"
+                    name="uncovertebralArthrosisForaminalStenosisType"
+                    rrUnClickRadio
+                    [value]="foraminalStenosisTypeEnum.HighGrade"
+                    [(ngModel)]="model.uncovertebralArthrosisForaminalStenosisType"
+                  ></p-radioButton>
+                </div>
+
+                <p rr-id="spi_c_0503221">
+                  {{'spineCT.disc.side.value'|translate}}
+                </p>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isUncovertebralArthrosisRight"
+                  label="{{'spineCT.disc.right.value'| translate}}"
+                  rr-id="spi_c_0503222"
+                  name="isUncovertebralArthrosisRight"
+                ></p-checkbox>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isUncovertebralArthrosisLeft"
+                  label="{{'spineCT.disc.left.value'| translate}}"
+                  rr-id="spi_c_0503223"
+                  name="isUncovertebralArthrosisLeft"
+                ></p-checkbox>
+              </div>
+            </div>
+            <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+              <div
+                class="o-radio-list m-l-10"
+                [rrDisable]="!(isSingleSelectOnLocalizer() && model.isSpondylolysis)"
+              >
+                <h2 rr-id="spi_c_0504237" rrInfoIcon="spi_c_05_06">
+                  {{'spineCT.disc.spondylolysisDetails.value'|translate}}
+                </h2>
+                <p rr-id="spi_c_0504238">
+                  {{'spineCT.disc.side.value'|translate}}*
+                </p>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isSpondylolysisRight"
+                  label="{{'spineCT.disc.right.value'| translate}}"
+                  rr-id="spi_c_0504239"
+                  name="isSpondylolysisRight"
+                  rrValidation="isSpondylolysisRight isSpondylolysisLeft"
+                ></p-checkbox>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isSpondylolysisLeft"
+                  label="{{'spineCT.disc.left.value'| translate}}"
+                  rr-id="spi_c_0504240"
+                  name="isSpondylolysisLeft"
+                  rrValidation="isSpondylolysisRight isSpondylolysisLeft"
+                ></p-checkbox>
+              </div>
+            </div>
+            <div
+              class="c-col-1 c-sep c-pad-l o-radio-list m-t-15 m-b-15"
+              [rrDisable]="!(isSingleSelectOnLocalizer() && model.isLuxation)"
+            >
+              <div class="o-radio-list m-l-10">
+                <h2 rr-id="spi_c_0505234">
+                  {{'spineCT.disc.luxationDetails.value'|translate}}
+                </h2>
+                <p rr-id="spi_c_0505235">
+                  {{'spineCT.disc.side.value'|translate}}*
+                </p>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isLuxationRight"
+                  label="{{'spineCT.disc.right.value'| translate}}"
+                  rr-id="spi_c_0505236"
+                  name="isLuxationRight"
+                  rrValidation="isLuxationRight isLuxationLeft"
+                ></p-checkbox>
+                <p-checkbox
+                  binary="true"
+                  [(ngModel)]="model.isLuxationLeft"
+                  label="{{'spineCT.disc.left.value'| translate}}"
+                  rr-id="spi_c_0505237"
+                  name="isLuxationLeft"
+                  rrValidation="isLuxationRight isLuxationLeft"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

@@ -1,0 +1,416 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep o-list">
+    <div class="f-vertical o-radio-list m-b-32">
+      <h2 rr-id="abd_m_070202">
+        {{ 'abdomenMRT.kidneys.side.value' | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070203"
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        label="{{ 'abdomenMRT.kidneys.right.value' | translate }}"
+        [value]="sideType.Right"
+        rrValidation="sideType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070204"
+        [(ngModel)]="model.sideType"
+        name="sideType"
+        label="{{ 'abdomenMRT.kidneys.left.value' | translate }}"
+        [value]="sideType.Left"
+        rrValidation="sideType"
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_070288">
+        {{ 'abdomenMRT.kidneys.pathology.value' | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_070289"
+        [(ngModel)]="model.pathologyType"
+        name="pathologyType"
+        label="{{ 'abdomenMRT.kidneys.renalInfarction.value' | translate }}"
+        [value]="pathologyType.RenalInfarction"
+        rrValidation="pathologyType"
+        rrContentReset="renalVeinBlock1 renalVeinBlock2 renalCorticalBlock"
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_070290"
+        [(ngModel)]="model.pathologyType"
+        name="pathologyType"
+        label="{{ 'abdomenMRT.kidneys.renalCorticalNecrosis.value' | translate }}"
+        [value]="pathologyType.RenalCorticalNecrosis"
+        (onClick)="resetPathologyDependentModels()"
+        rrValidation="pathologyType"
+        rrContentReset="renalInfarctionBlock1 renalInfarctionBlock2 renalInfarctionBlock3 renalVeinBlock1 renalVeinBlock2"
+      >
+      </p-radioButton>
+
+      <p-radioButton
+        rr-id="abd_m_070291"
+        [(ngModel)]="model.pathologyType"
+        name="pathologyType"
+        label="{{ 'abdomenMRT.kidneys.renalVeinThrombosis.value' | translate }}"
+        [value]="pathologyType.RenalVeinThrombosis"
+        (onClick)="resetPathologyDependentModels()"
+        rrValidation="pathologyType"
+        rrContentReset="renalInfarctionBlock1 renalInfarctionBlock2 renalInfarctionBlock3 renalCorticalBlock"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep">
+    <div
+      class="o-list"
+      id="renalInfarctionBlock1"
+      *ngIf="model.pathologyType === pathologyType.RenalInfarction"
+    >
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_070361">
+          {{'abdomenMRT.kidneys.localization.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_070362"
+          rrUnClickRadio
+          name="renalInfarctionLocalizationType"
+          [value]="localizationType.UpperPoleOfTheKidney"
+          label="{{'abdomenMRT.kidneys.upperPoleOfTheKidney.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070363"
+          rrUnClickRadio
+          name="renalInfarctionLocalizationType"
+          [value]="localizationType.CranialThird"
+          label="{{'abdomenMRT.kidneys.cranialThird.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070364"
+          rrUnClickRadio
+          name="renalInfarctionLocalizationType"
+          [value]="localizationType.MiddleThird"
+          label="{{'abdomenMRT.kidneys.middleThird.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070365"
+          rrUnClickRadio
+          name="renalInfarctionLocalizationType"
+          [value]="localizationType.LowerThird"
+          label="{{'abdomenMRT.kidneys.lowerThird.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070366"
+          rrUnClickRadio
+          name="renalInfarctionLocalizationType"
+          [value]="localizationType.LowerPoleOfTheKidney"
+          label="{{'abdomenMRT.kidneys.lowerPoleOfTheKidney.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070367"
+          rrUnClickRadio
+          name="renalInfarctionLocalizationType"
+          [value]="localizationType.RenalHilus"
+          label="{{'abdomenMRT.kidneys.renalHilus.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionLocalizationType"
+        >
+        </p-radioButton>
+      </div>
+      <rr-expansion-inputs-group
+        [model]="model"
+        [config]="expansionGroupConfig"
+      >
+      </rr-expansion-inputs-group>
+    </div>
+    <div
+      class="o-list"
+      id="renalCorticalBlock"
+      *ngIf="model.pathologyType === pathologyType.RenalCorticalNecrosis"
+    >
+      <div class="o-radio-list" [rrDisable]="!isCMReinforced">
+        <h2 rr-id="abd_m_070378">
+          {{'abdomenMRT.kidneys.acutePhase.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_070379"
+          name="isOnyMedullaryContrastEnhancement"
+          label="{{'abdomenMRT.kidneys.onyMedullaryContrastEnhancement.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isOnyMedullaryContrastEnhancement"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070380"
+          name="isNarrowContrastedRimAroundCortex"
+          label="{{'abdomenMRT.kidneys.narrowContrastedrimAroundTheCortex.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isNarrowContrastedRimAroundCortex"
+          class="text-break"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_070381">
+          {{'abdomenMRT.kidneys.chronicChanges.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_070382"
+          name="isCorticalCalcifications"
+          label="{{'abdomenMRT.kidneys.corticalCalcifications.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCorticalCalcifications"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070383"
+          name="isAtrophy"
+          label="{{'abdomenMRT.kidneys.atrophy.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isAtrophy"
+          class="m-b-30"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070384"
+          name="isCompleteRenalCorticalNecrosis"
+          label="{{'abdomenMRT.kidneys.completeRenalCorticalNecrosis.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCompleteRenalCorticalNecrosis"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div
+      id="renalVeinBlock1"
+      *ngIf="model.pathologyType === pathologyType.RenalVeinThrombosis"
+    >
+      <div class="f-vertical o-radio-list m-b-27">
+        <h2 rr-id="abd_m_070385" class="text-break">
+          {{ 'abdomenMRT.kidneys.dilatationOfTheRenalVein.value' | translate }}
+        </h2>
+        <rr-number-input
+          inputRrId="abd_m_070386"
+          labelRrId="abd_m_070387"
+          [config]="{ min: 1, max: 99 }"
+          name="dilatationOfTheRenalVeinInMm"
+          label="{{ 'abdomenMRT.kidneys.inMm.value' | translate }}"
+          [(ngModel)]="model.dilatationOfTheRenalVeinInMm"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list">
+        <h2 rr-id="abd_m_070388">
+          {{ 'abdomenMRT.kidneys.associatedFindings.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_070389"
+          [rrDisable]="!isCMReinforced"
+          [(ngModel)]="model.isFillingDefectAfterContrastAdministration"
+          name="isFillingDefectAfterContrastAdministration"
+          label="{{ 'abdomenMRT.kidneys.fillingDefectAfterContrastAdministration.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070390"
+          [rrDisable]="!isCMReinforced"
+          [(ngModel)]="model.isNodularThrombusEnhancement"
+          name="isNodularThrombusEnhancement"
+          label="{{ 'abdomenMRT.kidneys.nodularThrombusEnhancement.value' | translate }}"
+          binary="true"
+          class="text-break"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070391"
+          [rrDisable]="!isDWI"
+          [(ngModel)]="model.isDiffusionRestrictionInTheThrombus"
+          name="isDiffusionRestrictionInTheThrombus"
+          label="{{ 'abdomenMRT.kidneys.diffusionRestrictionInTheThrombus.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070392"
+          [rrDisable]="!isCMReinforced"
+          [(ngModel)]="model.isAlteredRenalPerfusion"
+          name="isAlteredRenalPerfusion"
+          label="{{ 'abdomenMRT.kidneys.alteredRenalPerfusion.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep o-list">
+    <div
+      class="f-vertical o-radio-list"
+      id="renalInfarctionBlock2"
+      *ngIf="model.pathologyType === pathologyType.RenalInfarction"
+    >
+      <h2 rr-id="abd_m_070479">
+        {{'abdomenMRT.liver.t1wSignal.value' | translate}}
+      </h2>
+      <rr-slider-number-triple-input
+        name="renalInfarctionT1wSignal"
+        rr-id="abd_m_070481"
+        class="m-b-40"
+        [(ngModel)]="model.renalInfarctionT1wSignal"
+      >
+      </rr-slider-number-triple-input>
+      <h2 rr-id="abd_m_070482">
+        {{'abdomenMRT.liver.t2wSignal.value' | translate}}
+      </h2>
+      <rr-slider-number-triple-input
+        name="renalInfarctionT2wSignal"
+        rr-id="abd_m_070484"
+        [(ngModel)]="model.renalInfarctionT2wSignal"
+      >
+      </rr-slider-number-triple-input>
+    </div>
+    <div
+      *ngIf="model.pathologyType === pathologyType.RenalVeinThrombosis"
+      id="renalVeinBlock2"
+      class="f-vertical o-radio-list"
+    >
+      <h2 rr-id="abd_m_070485">
+        {{ 'abdomenMRT.kidneys.differentialDiagnosis.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_070486"
+        [(ngModel)]="model.isTumorThrombosis"
+        name="isTumorThrombosis"
+        label="{{ 'abdomenMRT.kidneys.tumorThrombosis.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l">
+    <div
+      class="f-vertical o-list"
+      id="renalInfarctionBlock3"
+      *ngIf="model.pathologyType === pathologyType.RenalInfarction"
+    >
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_070575">
+          {{'abdomenMRT.kidneys.associatedFindings.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_070576"
+          name="isWedgeShapedDefect"
+          label="{{'abdomenMRT.kidneys.wedgeShapedDefect.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isWedgeShapedDefect"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070577"
+          name="isMissingCMEnhancement"
+          label="{{'abdomenMRT.kidneys.missingCMEnhancement.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isMissingCMEnhancement"
+          [rrDisable]="!isCMReinforced"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070578"
+          rrInfoIcon="abd_m_07_04"
+          name="isCorticalRimSign"
+          label="{{'abdomenMRT.kidneys.corticalRimSign.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isCorticalRimSign"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070579"
+          name="isFibroticChangesOrScarTissue"
+          label="{{'abdomenMRT.kidneys.fibroticChangesscarTissue.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isFibroticChangesOrScarTissue"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070580"
+          name="isDeformationsBarkContour"
+          label="{{'abdomenMRT.kidneys.deformationsOfTheBarkContour.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDeformationsBarkContour"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070581"
+          name="isShrinkageInfarctedTissue"
+          label="{{'abdomenMRT.kidneys.shrinkageOfTheInfarctedtissue.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isShrinkageInfarctedTissue"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070582"
+          name="isDissectionRenalArtery"
+          label="{{'abdomenMRT.kidneys.dissectionRenalArtery.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isDissectionRenalArtery"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_070583"
+          name="isStenosisOrOcclusionRenalArtery"
+          label="{{'abdomenMRT.kidneys.stenosisocclusionOfRenalArtery.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isStenosisOrOcclusionRenalArtery"
+        >
+        </p-checkbox>
+      </div>
+      <div class="o-radio-list">
+        <h2 rr-id="abd_m_070584">
+          {{'abdomenMRT.kidneys.characterization.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="abd_m_070585"
+          rrUnClickRadio
+          name="renalInfarctionCharacterizationType"
+          [value]="renalInfarctionCharacterizationType.AcuteInfarction"
+          label="{{'abdomenMRT.kidneys.acuteInfarction.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionCharacterizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_070586"
+          rrUnClickRadio
+          name="renalInfarctionCharacterizationType"
+          [value]="renalInfarctionCharacterizationType.ChronicInfarct"
+          label="{{'abdomenMRT.kidneys.chronicInfarct.value' | translate}}"
+          [(ngModel)]="model.renalInfarctionCharacterizationType"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div
+      class="o-radio-list"
+      *ngIf="model.pathologyType === pathologyType.RenalVeinThrombosis"
+    >
+      <rr-reference-picture
+        [(ngModel)]="model.vascularNephropathyReferencePicture"
+        [referenceId]="model.id"
+        [fileUploadUrl]="fileUploadUrl"
+        name="vascularNephropathyReferencePicture"
+        [elementsRrIds]="vascularNephropathyReferencePictureElementsRrIds"
+        [pictureFileType]="imageFileTypeEnum.VascularNephropathyImageFile"
+      >
+      </rr-reference-picture>
+    </div>
+  </div>
+</div>

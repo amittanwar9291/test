@@ -1,0 +1,54 @@
+<p-tabView class="rr-tabView">
+  <p-tabPanel [selected]="true">
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="pel_m_100240"
+        class="custom-tab-header"
+        rrValidation="singleSelectionTumorHipLocalizer expansionSizeInMm"
+        ifAny="true"
+      >
+        {{ 'pelvisMRT.bones.localizationTabHeader.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-tumor-localization
+      [model]="model"
+      (emitLocalizer)="emitLocalizer.emit($event)"
+    ></rr-tumor-localization>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="pel_m_100387"
+        class="custom-tab-header"
+        rrValidation="limitationType corticalisType"
+        ifAny="true"
+      >
+        {{ 'pelvisMRT.bones.characterizationITabHeader.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-one
+      [model]="model"
+      [diagnosisList1]="diagnosisList1"
+      [technologyModel]="technologyModel"
+    ></rr-characterization-one>
+  </p-tabPanel>
+
+  <p-tabPanel>
+    <ng-template pTemplate="header">
+      <h1
+        rr-id="pel_m_1004118"
+        class="custom-tab-header"
+        rrValidation="differentialDiagnosis1"
+        ifAny="true"
+      >
+        {{ 'pelvisMRT.bones.characterizationIITabHeader.value' | translate }}
+      </h1>
+    </ng-template>
+    <rr-characterization-two
+      [model]="model"
+      [diagnosisList1]="diagnosisList1"
+      [diagnosisList2]="diagnosisList2"
+    ></rr-characterization-two>
+  </p-tabPanel>
+</p-tabView>

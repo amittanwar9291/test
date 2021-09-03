@@ -1,0 +1,289 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div
+      class="f-vertical m-l-10 o-radio-list"
+      [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+    >
+      <h2 rr-id="hea_c_100203">
+        {{ 'headCT.sellarRegion.differentialDiagnosis1.value' | translate }}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="hea_c_100204"
+        [diagnosisNumber]="1"
+        name="sellarRegionDiagnosisLocalizationType"
+        group="true"
+        isActiveOnIKnow="true"
+        [parentViewModel]="model"
+        [options]="differentialDiagnoseW48"
+        [(ngModel)]="model.sellarRegionDiagnosisLocalizationType"
+        (selectionChanged)="sellarRegionDiagnosisLocalizationChangeReset()"
+        rrValidation="sellarRegionDiagnosisLocalizationType"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.sellarRegionDiagnosisLocalizationType === sellarRegionDiagnosisLocalizationType.None"
+        rr-id="hea_c_100217"
+        label="{{'headCT.sellarRegion.histologyKnown.value' | translate}}"
+        name="isHistologyKnown"
+        binary="true"
+        [(ngModel)]="model.isHistologyKnown"
+        rrContentReset="histologyKnownTypeContainer"
+      >
+      </p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        id="histologyKnownTypeContainer"
+        [rrDisable]="!model.isHistologyKnown"
+      >
+        <p-radioButton
+          rr-id="hea_c_100218"
+          label="{{ 'headCT.sellarRegion.benign.value' | translate }}"
+          name="histologyKnownType"
+          [(ngModel)]="model.histologyKnownType"
+          [value]="histologyKnownType.Benign"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_100219"
+          label="{{ 'headCT.sellarRegion.malignant.value' | translate }}"
+          name="histologyKnownType"
+          [(ngModel)]="model.histologyKnownType"
+          [value]="histologyKnownType.Malignant"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+
+  <div class="f-vertical">
+    <h2 rr-id="hea_c_100302" class="p-l-25 m-t-10">
+      {{ 'headCT.sellarRegion.localization.value' | translate }}
+    </h2>
+    <div class="f-horizontal h-100">
+      <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+        <div class="m-l-10 o-list">
+          <div class="o-radio-list">
+            <h3 rr-id="hea_c_100303">
+              {{ 'headCT.sellarRegion.relationToThePituitary.value' | translate
+              }}
+            </h3>
+            <p-radioButton
+              rr-id="hea_c_100304"
+              [(ngModel)]="model.relationToThePituitaryGlandType"
+              label="{{ 'headCT.sellarRegion.extrahypophyseal.value' | translate }}"
+              [value]="relationPituitaryGlandType.Extrahypophyseal"
+              rrUnClickRadio
+              name="relationToThePituitaryGlandType"
+              rrContentReset="relationPituitaryGlandBlock"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_c_100305"
+              [(ngModel)]="model.relationToThePituitaryGlandType"
+              label="{{ 'headCT.sellarRegion.intrahypophyseal.value' | translate }}"
+              [value]="relationPituitaryGlandType.Intrahypophyseal"
+              rrUnClickRadio
+              name="relationToThePituitaryGlandType"
+              rrContentReset="relationPituitaryGlandBlock"
+            ></p-radioButton>
+            <div
+              class="o-radio-list nested-content"
+              id="relationPituitaryGlandBlock"
+              [rrDisable]="model.relationToThePituitaryGlandType !== relationPituitaryGlandType.Intrahypophyseal"
+            >
+              <p-checkbox
+                rr-id="hea_c_100306"
+                [(ngModel)]="model.isNeurohypophysis"
+                name="isNeurohypophysis"
+                label="{{ 'headCT.sellarRegion.neurohypophysis.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_c_100307"
+                [(ngModel)]="model.isAdenohypophysis"
+                name="isAdenohypophysis"
+                label="{{ 'headCT.sellarRegion.adenohypophysis.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hea_c_100308"
+                [(ngModel)]="model.isPituitaryStalk"
+                name="isPituitaryStalk"
+                label="{{ 'headCT.sellarRegion.pituitaryStalk.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="o-radio-list">
+            <h3 rr-id="hea_c_100309">
+              {{ 'headCT.sellarRegion.side.value' | translate }}
+            </h3>
+            <p-radioButton
+              rr-id="hea_c_100310"
+              [(ngModel)]="model.sideType"
+              label="{{ 'headCT.sellarRegion.right.value' | translate }}"
+              [value]="sideType.Right"
+              rrUnClickRadio
+              name="sideType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="hea_c_100311"
+              [(ngModel)]="model.sideType"
+              label="{{ 'headCT.sellarRegion.left.value' | translate }}"
+              [value]="sideType.Left"
+              rrUnClickRadio
+              name="sideType"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+        <div class="f-vertical m-l-10 o-radio-list">
+          <h3 rr-id="hea_c_100402">
+            {{ 'headCT.sellarRegion.anatomicalRelation.value' | translate }}
+          </h3>
+          <p-checkbox
+            rr-id="hea_c_100403"
+            [(ngModel)]="model.isCavernousSinus"
+            name="isCavernousSinus"
+            label="{{ 'headCT.sellarRegion.cavernousSinus.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100404"
+            [(ngModel)]="model.isOpticNerveI"
+            name="isOpticNerveI"
+            label="{{ 'headCT.sellarRegion.opticNerveI.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100405"
+            [(ngModel)]="model.isOpticChiasm"
+            name="isOpticChiasm"
+            label="{{ 'headCT.sellarRegion.opticChiasm.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100406"
+            [(ngModel)]="model.isOlfactoryNerveII"
+            name="isOlfactoryNerveII"
+            label="{{ 'headCT.sellarRegion.olfactoryNerveII.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100407"
+            [(ngModel)]="model.isOculomotorNerveIII"
+            name="isOculomotorNerveIII"
+            label="{{ 'headCT.sellarRegion.oculomotorNerveIII.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100408"
+            [(ngModel)]="model.isTrochlearNerveIV"
+            name="isTrochlearNerveIV"
+            label="{{ 'headCT.sellarRegion.trochlearNerveIV.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100409"
+            [(ngModel)]="model.isAbducensNerveVI"
+            name="isAbducensNerveVI"
+            label="{{ 'headCT.sellarRegion.abducensNerveVI.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100410"
+            [(ngModel)]="model.isInternalCarotidArtery"
+            name="isInternalCarotidArtery"
+            label="{{ 'headCT.sellarRegion.internalCarotidArtery.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100411"
+            [(ngModel)]="model.isDuraMaterMeningen"
+            name="isDuraMaterMeningen"
+            label="{{ 'headCT.sellarRegion.duraMatermeningen.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100412"
+            [(ngModel)]="model.isSphenoidSinus"
+            name="isSphenoidSinus"
+            label="{{ 'headCT.sellarRegion.sphenoidSinus.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_100413"
+            [(ngModel)]="model.isNasopharynx"
+            name="isNasopharynx"
+            label="{{ 'headCT.sellarRegion.nasopharynx.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l m-t-10 m-b-13">
+    <div class="m-l-10 f-vertical o-radio-list">
+      <h2 rr-id="hea_c_100502">
+        {{ 'headCT.sellarRegion.extension.value' | translate }}
+      </h2>
+      <h3 rr-id="hea_c_100503" class="m-b-0">
+        {{ 'headCT.sellarRegion.size.value' | translate }}*
+      </h3>
+      <rr-number-input
+        inputRrId="hea_c_100504"
+        labelRrId="hea_c_100505"
+        name="extensionSize"
+        [(ngModel)]="model.extensionSize"
+        [label]="'headCT.sellarRegion.inMm.value' | translate"
+        [config]="{ min: 1, max: 99}"
+        rrValidation="extensionSize"
+        (announceModelChange)="onSizeInMmChange()"
+      ></rr-number-input>
+      <h3 rr-id="hea_c_100506" class="m-b-0" [rrDisable]="!model.extensionSize">
+        {{ 'headCT.sellarRegion.2ndPlane.value' | translate }}
+      </h3>
+      <rr-number-input
+        [rrDisable]="!model.extensionSize"
+        inputRrId="hea_c_100507"
+        labelRrId="hea_c_100508"
+        name="extensionSize2ndPlane"
+        [(ngModel)]="model.extensionSize2ndPlane"
+        [label]="'headCT.sellarRegion.inMm.value' | translate"
+        [config]="{ min: 1, max: 99}"
+        (announceModelChange)="onSecondPlaneInMmChange()"
+      ></rr-number-input>
+      <h3
+        rr-id="hea_c_100509"
+        class="m-b-0"
+        [rrDisable]="!model.extensionSize2ndPlane"
+      >
+        {{ 'headCT.sellarRegion.3rdPlane.value' | translate }}
+      </h3>
+      <rr-number-input
+        [rrDisable]="!model.extensionSize2ndPlane"
+        inputRrId="hea_c_100510"
+        labelRrId="hea_c_100511"
+        name="extensionSize3rdPlane"
+        [(ngModel)]="model.extensionSize3rdPlane"
+        [label]="'headCT.sellarRegion.inMm.value' | translate"
+        [config]="{ min: 1, max: 99}"
+      ></rr-number-input>
+    </div>
+  </div>
+</div>

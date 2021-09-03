@@ -1,0 +1,106 @@
+<div class="f-vertical f-start o-radio-list col-h-100 c-pad-l">
+  <h2 rr-id="anc_m_040337">
+    {{'feetMRT.bones.aOClassificationAO83.value' | translate}}
+  </h2>
+  <p rr-id="anc_m_0403203" class="m-b-5">
+    {{'feetMRT.bones.evaluationFracture.value' | translate}}
+  </p>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad-r">
+      <p-radioButton
+        rr-id="anc_m_040338"
+        label="{{'feetMRT.bones.83AAvulsion.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.Avulsion83A"
+        [rrContentReset]="'fractureFormDetails distalTibiaFractureType'"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040339"
+        label="{{'feetMRT.bones.83BPartialArticular.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.PartialArticular83B"
+        [rrContentReset]="'distalTibiaFractureType'"
+        [(ngModel)]="model.fractureClassificationType"
+        (onClick)="onFractureClassificationTypeChange()"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_040340"
+        label="{{'feetMRT.bones.83CCompleteArticular.value' | translate}}"
+        name="fractureClassificationType"
+        [value]="fractureClassificationType.CompleteArticular83C"
+        [rrContentReset]="'distalTibiaFractureType'"
+        [(ngModel)]="model.fractureClassificationType"
+        (onClick)="onFractureClassificationTypeChange()"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_0403211"
+        label="{{'feetMRT.bones.83NotFurtherSpecified.value' | translate}}"
+        name="fractureClassificationType"
+        class="text-break"
+        [value]="fractureClassificationType.OsNaviculareFractureNotFurtherSpecified"
+        [rrContentReset]="'fractureFormDetails'"
+        [(ngModel)]="model.fractureClassificationType"
+        rrValidation="fractureClassificationType"
+      ></p-radioButton>
+      <div
+        id="distalTibiaFractureType"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.fractureClassificationType !== fractureClassificationType.OsNaviculareFractureNotFurtherSpecified"
+      >
+        <p-radioButton
+          rr-id="anc_m_0403212"
+          label="{{'feetMRT.bones.fractureConsolidation.value' | translate}}"
+          name="distalTibiaFractureType"
+          [value]="distalTibiaFractureType.FractureConsolidation"
+          [(ngModel)]="model.distalTibiaFractureType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_0403213"
+          label="{{'feetMRT.bones.suspicionOf.value' | translate}}"
+          name="distalTibiaFractureType"
+          [value]="distalTibiaFractureType.SuspicionOf"
+          [(ngModel)]="model.distalTibiaFractureType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div class="f-horizontal f-start col-h-100">
+      <div class="f-vertical f-start o-radio-list c-col-1 c-sep c-pad">
+        <ng-container *ngIf="isFractureFormGroupVisible()">
+          <div
+            id="fractureFormDetails"
+            class="f-vertical f-start o-radio-list"
+            [rrDisable]="model.fractureClassificationType === fractureClassificationType.Avulsion83A"
+          >
+            <p rr-id="anc_m_040407">
+              {{'feetMRT.bones.fractureType.value' | translate}}
+            </p>
+            <p-radioButton
+              rr-id="anc_m_040443"
+              label="{{'feetMRT.bones.aSimple.value' | translate}}"
+              name="fractureTypeType"
+              [value]="fractureTypeType.OsNaviculareSimpleA"
+              [(ngModel)]="model.fractureTypeType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_040444"
+              label="{{'feetMRT.bones.bMultifragmentary.value' | translate}}"
+              name="fractureTypeType"
+              [value]="fractureTypeType.OsNaviculareMultifragmentaryB"
+              [(ngModel)]="model.fractureTypeType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </ng-container>
+      </div>
+      <div class="f-vertical f-start o-radio-list c-col-1 c-pad-l"></div>
+    </div>
+  </div>
+</div>

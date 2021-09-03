@@ -1,0 +1,676 @@
+<div class="f-horizontal content-height">
+  <div class="c-col-1 c-pad">
+    <div class="o-radio-list">
+      <h2 rr-id="spi_m_070204" class="text-break m-b-14">
+        {{ 'spineMRT.spinalCanal.developmentFailureMalformation.value' |
+        translate}}*
+      </h2>
+      <p-radioButton
+        label="{{'spineMRT.spinalCanal.tetheredCord.value' | translate}}"
+        [value]="malformationTypeEnum.TetheredCord"
+        name="malformationType"
+        rr-id="spi_m_070205"
+        (ngModelChange)="resetLocalizer($event)"
+        [(ngModel)]="model.malformationType"
+        rrContentReset="syringohydromyelitisBlock chiariMalformationBlock dysraphyBlock"
+        rrValidation="malformationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'spineMRT.spinalCanal.syringohydromyelitis.value' | translate}}"
+        [value]="malformationTypeEnum.Syringohydromyelia"
+        name="malformationType"
+        rr-id="spi_m_070206"
+        (ngModelChange)="resetLocalizer($event)"
+        [(ngModel)]="model.malformationType"
+        rrContentReset="tetheredCordBlock chiariMalformationBlock dysraphyBlock"
+        rrValidation="malformationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'spineMRT.spinalCanal.chiariMalformation.value' | translate}}"
+        [value]="malformationTypeEnum.ChiariMalformation"
+        name="malformationType"
+        rr-id="spi_m_070207"
+        (ngModelChange)="resetLocalizer($event)"
+        [(ngModel)]="model.malformationType"
+        rrInfoIcon="spi_m_07_02"
+        rrContentReset="tetheredCordBlock syringohydromyelitisBlock dysraphyBlock"
+        rrValidation="malformationType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'spineMRT.spinalCanal.dysraphy.value' | translate}}"
+        [value]="malformationTypeEnum.Dysraphy"
+        name="malformationType"
+        rr-id="spi_m_070208"
+        (ngModelChange)="resetLocalizer($event)"
+        [(ngModel)]="model.malformationType"
+        rrContentReset="tetheredCordBlock syringohydromyelitisBlock chiariMalformationBlock"
+        rrValidation="malformationType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div
+    *ngIf="model.malformationType === malformationTypeEnum.TetheredCord"
+    id="tetheredCordBlock"
+    class="f-horizontal"
+  >
+    <div class="c-col-1 c-pad c-sep-l m-t-56">
+      <div class="o-radio-list text-break">
+        <p-checkbox
+          label="{{'spineMRT.spinalCanal.depthOfTheConusMedullaris.value' | translate}}"
+          binary="true"
+          rr-id="spi_m_070309"
+          [(ngModel)]="model.isCaudalPositionOfTheMedullaryCone"
+          name="isCaudalPositionOfTheMedullaryCone"
+        >
+        </p-checkbox>
+        <p-checkbox
+          label="{{'spineMRT.spinalCanal.thickenedFilumTerminaleMm.value' | translate}}"
+          binary="true"
+          rr-id="spi_m_070310"
+          [(ngModel)]="model.isThickenedFilumTerminale"
+          name="isThickenedFilumTerminale"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l m-t-34"></div>
+    <div class="c-col-1 c-pad-l c-sep-l m-t-34"></div>
+  </div>
+  <div
+    *ngIf="model.malformationType === malformationTypeEnum.Syringohydromyelia"
+    id="syringohydromyelitisBlock"
+    class="f-horizontal"
+  >
+    <div class="c-col-1 c-pad c-sep-l m-t-56">
+      <div class="o-radio-list">
+        <h2
+          rr-id="spi_m_070311"
+          class="text-break"
+          rrValidation="spineLocation"
+        >
+          {{ "spineMRT.spinalCanal.localizationTopBottomVertebra.value" |
+          translate }}*
+        </h2>
+        <rr-spine-simple
+          rr-id="spi_m_070312"
+          [spineLocation]="model.spineLocation"
+          (click)="openLargeLocalizer()"
+          rrValidation="spineLocation"
+          isLocalizer="true"
+          [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+        >
+        </rr-spine-simple>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l m-t-56">
+      <div class="o-list">
+        <div class="o-radio-list">
+          <p rr-id="spi_m_070401">
+            {{'spineMRT.spinalCanal.expansionInCcDirection.value' | translate}}
+          </p>
+          <rr-number-input
+            inputRrId="spi_m_070402"
+            labelRrId="spi_m_070403"
+            name="expansionInCcDimension"
+            [(ngModel)]="model.expansionInCcDimension"
+            [config]="{min: 1, max: 500}"
+            label="{{ 'spineMRT.spinalCanal.inMm.value' | translate }}"
+          ></rr-number-input>
+        </div>
+        <p-checkbox
+          label="{{'spineMRT.spinalCanal.lesion.value' | translate}}"
+          binary="true"
+          rr-id="spi_m_070404"
+          [(ngModel)]="model.isMoreThanOneLesion"
+          name="isMoreThanOneLesion"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l c-sep-l m-t-34"></div>
+  </div>
+  <div
+    *ngIf="model.malformationType === malformationTypeEnum.ChiariMalformation"
+    id="chiariMalformationBlock"
+    class="f-horizontal"
+  >
+    <div class="c-col-1 c-pad c-sep-l m-t-56">
+      <div class="o-list">
+        <div class="o-radio-list m-b-30">
+          <h2 rr-id="spi_m_070313">
+            {{'spineMRT.spinalCanal.characterization.value' | translate}}
+          </h2>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.chiariI.value' | translate}}"
+            [value]="characterizationTypeEnum.ChiariI"
+            name="characterizationType"
+            [(ngModel)]="model.characterizationType"
+            rr-id="spi_m_070314"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.chiariII.value' | translate}}"
+            [value]="characterizationTypeEnum.ChiariII"
+            name="characterizationType"
+            [(ngModel)]="model.characterizationType"
+            rr-id="spi_m_070315"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+        <div class="o-radio-list">
+          <p rr-id="spi_m_070316" class="text-break">
+            {{'spineMRT.spinalCanal.expansionProtrusionCcExpansion.value' |
+            translate}}
+          </p>
+          <rr-number-input
+            inputRrId="spi_m_070317"
+            labelRrId="spi_m_070318"
+            name="expansionProtrusionCcDimension"
+            [(ngModel)]="model.expansionProtrusionCcDimension"
+            [config]="{min: 1, max: 50}"
+            label="{{ 'spineMRT.spinalCanal.inMm.value' | translate }}"
+          ></rr-number-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep-l m-t-34"></div>
+    <div class="c-col-1 c-pad-l c-sep-l m-t-34"></div>
+  </div>
+  <div
+    *ngIf="model.malformationType === malformationTypeEnum.Dysraphy"
+    id="dysraphyBlock"
+    class="f-horizontal"
+  >
+    <div class="c-col-1 c-pad c-sep-l">
+      <div class="o-list">
+        <div class="o-radio-list m-b-28">
+          <h2
+            rr-id="spi_m_070319"
+            class="text-break"
+            rrValidation="spineLocation"
+          >
+            {{ "spineMRT.spinalCanal.localizationTopBottomVertebra.value" |
+            translate }}*
+          </h2>
+          <rr-spine-simple
+            rr-id="spi_m_070312"
+            [spineLocation]="model.spineLocation"
+            (click)="openLargeLocalizer()"
+            rrValidation="spineLocation"
+            isLocalizer="true"
+            [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+          >
+          </rr-spine-simple>
+        </div>
+        <div class="o-radio-list m-b-50">
+          <h2 rr-id="spi_m_070321">
+            {{'spineMRT.spinalCanal.diameter.value' | translate}}
+          </h2>
+          <rr-number-input
+            inputRrId="spi_m_070322"
+            labelRrId="spi_m_070323"
+            name="diameter"
+            [(ngModel)]="model.diameter"
+            [config]="{min: 1, max: 200}"
+            label="{{ 'spineMRT.spinalCanal.inMm.value' | translate }}"
+          ></rr-number-input>
+        </div>
+        <div class="o-radio-list">
+          <h2 rr-id="spi_m_070324">
+            {{ "spineMRT.spinalCanal.characterization.value" | translate }}*
+          </h2>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.open.value' | translate}}"
+            [value]="characterizationTypeEnum.Open"
+            name="characterizationType"
+            rr-id="spi_m_070325"
+            [(ngModel)]="model.characterizationType"
+            rrContentReset="closedBlock"
+            rrValidation="characterizationType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.closed.value' | translate}}"
+            [value]="characterizationTypeEnum.Closed"
+            name="characterizationType"
+            rr-id="spi_m_070326"
+            [(ngModel)]="model.characterizationType"
+            rrContentReset="openBlock"
+            rrValidation="characterizationType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="model.characterizationType === characterizationTypeEnum.Open"
+      id="openBlock"
+      class="f-horizontal"
+    >
+      <div class="c-col-1 c-pad c-sep-l m-t-50">
+        <div class="o-list">
+          <div class="o-radio-list">
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.myelomeningocele.value' | translate}}"
+              [value]="characterizationOpenTypeEnum.Myelomeningocele"
+              name="characterizationOpenType"
+              rr-id="spi_m_070405"
+              [(ngModel)]="model.characterizationOpenType"
+              rrUnClickRadio
+              rrContentReset="localizationTypeBlock differentialDiagnosisBlock"
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.meningocele.value' | translate}}"
+              [value]="characterizationOpenTypeEnum.Meningocele"
+              name="characterizationOpenType"
+              rr-id="spi_m_070406"
+              [(ngModel)]="model.characterizationOpenType"
+              rrUnClickRadio
+              rrContentReset="localizationTypeBlock differentialDiagnosisBlock"
+            >
+            </p-radioButton>
+          </div>
+          <div
+            id="localizationTypeBlock"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.characterizationOpenType === characterizationOpenTypeEnum.None"
+          >
+            <p rr-id="spi_m_070407">
+              {{ "spineMRT.spinalCanal.localization.value" | translate }}
+            </p>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.lateral.value' | translate}}"
+              [value]="localizationTypeEnum.Lateral"
+              name="localizationType"
+              [(ngModel)]="model.localizationType"
+              rr-id="spi_m_070408"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.intrasacral.value' | translate}}"
+              [value]="localizationTypeEnum.Intrasacral"
+              name="localizationType"
+              [(ngModel)]="model.localizationType"
+              rr-id="spi_m_070409"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.anterior.value' | translate}}"
+              [value]="localizationTypeEnum.Anterior"
+              name="localizationType"
+              [(ngModel)]="model.localizationType"
+              rr-id="spi_m_070410"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.posterior.value' | translate}}"
+              [value]="localizationTypeEnum.Posterior"
+              name="localizationType"
+              [(ngModel)]="model.localizationType"
+              rr-id="spi_m_070411"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <div
+            id="differentialDiagnosisBlock"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.characterizationOpenType === characterizationOpenTypeEnum.None"
+          >
+            <p rr-id="spi_m_070412">
+              {{ "spineMRT.spinalCanal.differentialDiagnosis.value" | translate
+              }}
+            </p>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.perineuralCyst.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070413"
+              [(ngModel)]="model.isPerineuralCyst"
+              name="isPerineuralCyst"
+              rrContentReset="subordinatedBlock"
+            >
+            </p-checkbox>
+            <div
+              id="subordinatedBlock"
+              class="nested-content o-radio-list"
+              [rrDisable]="!model.isPerineuralCyst"
+            >
+              <p-checkbox
+                label="{{'spineMRT.spinalCanal.subordinated.value' | translate}}"
+                binary="true"
+                rr-id="spi_m_070414"
+                [(ngModel)]="model.isSecondary"
+                name="isSecondary"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep-l m-t-50"></div>
+    </div>
+    <div
+      *ngIf="model.characterizationType === characterizationTypeEnum.Closed"
+      id="closedBlock"
+      class="f-horizontal"
+    >
+      <div class="c-col-1 c-pad c-sep-l m-t-50">
+        <div class="o-list">
+          <div class="o-radio-list">
+            <h2 rr-id="spi_m_070415">
+              {{ "spineMRT.spinalCanal.detailsClosedDysraphism.value" |
+              translate }}*
+            </h2>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.withSubcutaneousMass.value' | translate}}"
+              [value]="detailsClosedDysraphismTypeEnum.WithSubcutaneousMass"
+              name="detailsClosedDysraphismType"
+              rr-id="spi_m_070416"
+              [(ngModel)]="model.detailsClosedDysraphismType"
+              rrContentReset="withoutSubcutaneousSpaceRequirementBlock simpleDysraphyBlock complexDysraphyBlock"
+              rrValidation="detailsClosedDysraphismType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.withoutSubcutaneousMass.value' | translate}}"
+              [value]="detailsClosedDysraphismTypeEnum.WithoutSubcutaneousMass"
+              name="detailsClosedDysraphismType"
+              rr-id="spi_m_070417"
+              [(ngModel)]="model.detailsClosedDysraphismType"
+              rrContentReset="withSubcutaneousSpaceRequirementBlock"
+              rrValidation="detailsClosedDysraphismType"
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="model.detailsClosedDysraphismType === detailsClosedDysraphismTypeEnum.WithSubcutaneousMass"
+            id="withSubcutaneousSpaceRequirementBlock"
+            class="nested-content o-radio-list"
+          >
+            <p rr-id="spi_m_070418" class="m-b-7">
+              {{
+              "spineMRT.spinalCanal.subcutaneousClassificationRoomRequirement.value"
+              | translate }}*
+            </p>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.lipomasWithDuradefect.value' | translate}}"
+              [value]="classificationSubcutaneousMassTypeEnum.LipomasWithDuraDefect"
+              name="classificationSubcutaneousMassType"
+              rr-id="spi_m_070419"
+              [(ngModel)]="model.classificationSubcutaneousMassType"
+              rrValidation="classificationSubcutaneousMassType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.meningocele.value' | translate}}"
+              [value]="classificationSubcutaneousMassTypeEnum.Meningocele"
+              name="classificationSubcutaneousMassType"
+              rr-id="spi_m_070420"
+              [(ngModel)]="model.classificationSubcutaneousMassType"
+              rrValidation="classificationSubcutaneousMassType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.terminalMyelocystocele.value' | translate}}"
+              [value]="classificationSubcutaneousMassTypeEnum.TerminalMyelocystocele"
+              name="classificationSubcutaneousMassType"
+              rr-id="spi_m_070421"
+              [(ngModel)]="model.classificationSubcutaneousMassType"
+              rrValidation="classificationSubcutaneousMassType"
+            >
+            </p-radioButton>
+          </div>
+          <div
+            *ngIf="model.detailsClosedDysraphismType === detailsClosedDysraphismTypeEnum.WithoutSubcutaneousMass"
+            id="withoutSubcutaneousSpaceRequirementBlock"
+            class="nested-content o-radio-list"
+          >
+            <p rr-id="spi_m_070422">
+              {{ "spineMRT.spinalCanal.classificationDysraphy.value" | translate
+              }}*
+            </p>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.simpleDysraphism.value' | translate}}"
+              [value]="classificationDysraphyTypeEnum.SimpleDysraphism"
+              name="classificationDysraphyType"
+              rr-id="spi_m_070423"
+              [(ngModel)]="model.classificationDysraphyType"
+              rrContentReset="complexDysraphyBlock"
+              rrValidation="classificationDysraphyType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              label="{{'spineMRT.spinalCanal.complexDysraphism.value' | translate}}"
+              [value]="classificationDysraphyTypeEnum.ComplexDysraphism"
+              name="classificationDysraphyType"
+              rr-id="spi_m_070424"
+              [(ngModel)]="model.classificationDysraphyType"
+              rrContentReset="simpleDysraphyBlock"
+              rrValidation="classificationDysraphyType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep-l m-t-50">
+        <div
+          *ngIf="model.classificationDysraphyType === classificationDysraphyTypeEnum.SimpleDysraphism"
+          id="simpleDysraphyBlock"
+          class="o-radio-list"
+        >
+          <h2 rr-id="spi_m_070501" class="m-b-15">
+            {{ "spineMRT.spinalCanal.differentialDiagnoses.value" | translate }}
+          </h2>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.intraduralLipoma.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.IntraduralLipoma"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070502"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="intraduralLipomaBlock"
+          >
+          </p-radioButton>
+          <div
+            id="intraduralLipomaBlock"
+            class="nested-content o-radio-list m-b-20"
+            [rrDisable]="model.differentialDiagnosesType !== differentialDiagnosesTypeEnum.IntraduralLipoma"
+          >
+            <p rr-id="spi_m_070503">
+              {{ "spineMRT.spinalCanal.signalIntensity.value" | translate }}
+            </p>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.t1wHyperintense.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070504"
+              [(ngModel)]="model.isT1wHyperintense"
+              name="isT1wHyperintense"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.t2wHyperintense.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070505"
+              [(ngModel)]="model.isT2wHyperintense"
+              name="isT2wHyperintense"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.t1wFatSaturationHypointens.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070506"
+              [(ngModel)]="model.isT1wFatSaturationHypointense"
+              name="isT1wFatSaturationHypointense"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.noKMEnhancement.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070507"
+              [(ngModel)]="model.isNoContrastEnhancement"
+              name="isNoContrastEnhancement"
+            >
+            </p-checkbox>
+          </div>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.filiumTerminaleLipoma.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.FiliumTerminaleLipoma"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070508"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="intraduralLipomaBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.shortBranchTerminals.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.ShortFiliumTerminale"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070509"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="intraduralLipomaBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.ventriculusTerminalis.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.VentriculusTerminalis"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070510"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="intraduralLipomaBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.dermalsine.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.Dermalsinus"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070511"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="intraduralLipomaBlock"
+          >
+          </p-radioButton>
+        </div>
+        <div
+          *ngIf="model.classificationDysraphyType === classificationDysraphyTypeEnum.ComplexDysraphism"
+          id="complexDysraphyBlock"
+          class="o-radio-list"
+        >
+          <h2 rr-id="spi_m_070512" class="m-b-15">
+            {{ "spineMRT.spinalCanal.differentialDiagnoses.value" | translate }}
+          </h2>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.diastematomyeliaSplitCord.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.Diastematomyelia"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070513"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="enterogenicCystFistulaBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.enterogenicCystFistula.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.EnterogenicCystOrFistula"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070514"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="enterogenicCystFistulaBlock"
+          >
+          </p-radioButton>
+          <div
+            id="enterogenicCystFistulaBlock"
+            class="nested-content o-radio-list m-b-15"
+            [rrDisable]="model.differentialDiagnosesType !== differentialDiagnosesTypeEnum.EnterogenicCystOrFistula"
+          >
+            <p rr-id="spi_m_070515">
+              {{ "spineMRT.spinalCanal.signalIntensity.value" | translate }}
+            </p>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.t1wHyperintense.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070516"
+              [(ngModel)]="model.isT1wHyperintense"
+              name="isT1wHyperintense"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.t2wHyperintense.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070517"
+              [(ngModel)]="model.isT2wHyperintense"
+              name="isT2wHyperintense"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.t1wFatSaturationHypointens.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070518"
+              [(ngModel)]="model.isT1wFatSaturationHypointense"
+              name="isT1wFatSaturationHypointense"
+            >
+            </p-checkbox>
+            <p-checkbox
+              label="{{'spineMRT.spinalCanal.noKMEnhancement.value' | translate}}"
+              binary="true"
+              rr-id="spi_m_070519"
+              [(ngModel)]="model.isNoContrastEnhancement"
+              name="isNoContrastEnhancement"
+            >
+            </p-checkbox>
+          </div>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.caudalAgenesia.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.CaudalAgenesia"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070520"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="enterogenicCystFistulaBlock"
+          >
+          </p-radioButton>
+          <p-radioButton
+            label="{{'spineMRT.spinalCanal.segmentalSpinalDysgenesis.value' | translate}}"
+            [value]="differentialDiagnosesTypeEnum.SegmentalSpinalDysgenesis"
+            name="differentialDiagnosesType"
+            rr-id="spi_m_070521"
+            [(ngModel)]="model.differentialDiagnosesType"
+            rrUnClickRadio
+            rrContentReset="enterogenicCystFistulaBlock"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="model.characterizationType === characterizationTypeEnum.None"
+      class="f-horizontal"
+    >
+      <div class="c-col-1 c-pad c-sep-l m-t-50"></div>
+      <div class="c-col-1 c-pad-l c-sep-l m-t-50"></div>
+    </div>
+  </div>
+  <div
+    *ngIf="model.malformationType === malformationTypeEnum.None"
+    class="f-horizontal"
+  >
+    <div
+      *ngFor="let emptyCol of [].constructor(2)"
+      class="c-col-1 c-pad c-sep-l"
+    ></div>
+    <div class="c-col-1 c-pad-l c-sep-l"></div>
+  </div>
+</div>

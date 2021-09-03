@@ -1,0 +1,108 @@
+<div class="c-col-1 c-pad c-sep m-t-10 m-b-10">
+  <div class="p-l-10 o-list">
+    <h2 rr-id="han_m_040287">
+      {{'handMRT.bones.differentialDiagnosis.value' | translate}}
+    </h2>
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="model.descriptionType !== descriptionTypeEnum.IDescribe"
+    >
+      <p rr-id="han_m_040288" rrInfoIcon="han_m_04_16">
+        {{'handMRT.bones.differentialDiagnosis1.value' | translate}}*
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="tumorDifferentialDiagnoseType"
+        [(ngModel)]="model.tumorDifferentialDiagnosis1Type"
+        group="true"
+        name="tumorDifferentialDiagnosis1Type"
+        rrId="han_m_040289"
+        (selectionChanged)="resetDependenciesDifferentialDiagnose1D()"
+        [parentViewModel]="model"
+        rrValidation="tumorDifferentialDiagnosis1Type"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        label="{{'handMRT.bones.suspected.value' | translate}}"
+        rr-id="han_m_040290"
+        binary="true"
+        name="isDifferentialDiagnosisSuspected"
+        [(ngModel)]="model.isDifferentialDiagnosisSuspected"
+        [rrDisable]="model.tumorDifferentialDiagnosis1Type === differentialDiagnoseTypeEnum.None"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="model.tumorDifferentialDiagnosis1Type === differentialDiagnoseTypeEnum.None && model.tumorDifferentialDiagnosisType === differentialDiagnoseTypeEnum.None"
+    >
+      <p rr-id="han_m_040291">
+        {{'handMRT.bones.differentialDiagnosis2.value' | translate}}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="2"
+        [options]="tumorDifferentialDiagnoseType2"
+        [(ngModel)]="model.tumorDifferentialDiagnosis2Type"
+        group="true"
+        name="tumorDifferentialDiagnosis2Type"
+        rrId="han_m_040292"
+        (selectionChanged)="resetDependenciesDifferentialDiagnose2D()"
+        [parentViewModel]="model"
+        rrValidation="tumorDifferentialDiagnosis2Type"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        label="{{'handMRT.bones.secondaryV2.value' | translate}}"
+        rr-id="han_m_040293"
+        binary="true"
+        name="isSecondary"
+        [(ngModel)]="model.isSecondary"
+        [rrDisable]="model.tumorDifferentialDiagnosis2Type === differentialDiagnoseTypeEnum.None"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="model.tumorDifferentialDiagnosis2Type === differentialDiagnoseTypeEnum.None"
+    >
+      <p rr-id="han_m_040294">
+        {{'handMRT.bones.differentialDiagnosis3.value' | translate}}
+      </p>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="3"
+        [options]="tumorDifferentialDiagnoseType2"
+        [(ngModel)]="model.tumorDifferentialDiagnosis3Type"
+        group="true"
+        name="tumorDifferentialDiagnosis3Type"
+        rrId="han_m_040295"
+        (selectionChanged)="resetDependenciesDifferentialDiagnose2D()"
+        [parentViewModel]="model"
+        rrValidation="tumorDifferentialDiagnosis3Type"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-pad c-sep m-t-10 m-b-10">
+  <div class="p-l-10 o-radio-list">
+    <p-checkbox
+      label="{{'handMRT.bones.lesionSameEntity.value' | translate}}"
+      rr-id="han_m_0403171"
+      binary="true"
+      name="isLesionSameEntity"
+      [(ngModel)]="model.isLesionSameEntity"
+      rrContentReset="isLesionSameEntityGroup"
+    >
+    </p-checkbox>
+    <div class="nested-content" id="isLesionSameEntityGroup">
+      <p-checkbox
+        label="{{'handMRT.bones.inThePrimarilyInvolved.value' | translate}}"
+        rr-id="han_m_0403172"
+        [rrDisable]="!model.isLesionSameEntity"
+        binary="true"
+        name="isPrimarilyInvolvedBone"
+        [(ngModel)]="model.isPrimarilyInvolvedBone"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>
+<div class="c-col-1 c-pad c-sep m-t-10 m-b-10"></div>
+<div class="c-col-1 c-pad-l m-t-10 m-b-10"></div>

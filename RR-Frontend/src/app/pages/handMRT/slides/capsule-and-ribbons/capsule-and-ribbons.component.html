@@ -1,0 +1,76 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="han_m_050103">
+        {{'handMRT.capsuleAndRibbons.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          name="areFindings"
+          rr-id="han_m_050104"
+          label="{{'handMRT.capsuleAndRibbons.noPathologicFindingOf.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          value="False"
+          rrValidation="areFindings"
+          notInFinding="true"
+        ></p-radioButton>
+        <p-radioButton
+          name="areFindings"
+          rr-id="han_m_050105"
+          label="{{'handMRT.capsuleAndRibbons.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+          value="True"
+        ></p-radioButton>
+        <rr-finding-column
+          class="m-t-10"
+          [handler]="findingHandler"
+          [attr.name]="'findingHandlerComponent'"
+          [setConfig]="findingDropdownConfig"
+          [disabled]="isDynamicPartDisabled()"
+          validationName="findings"
+        ></rr-finding-column>
+      </div>
+    </div>
+    <div class="f-vertical f-end">
+      <div class="c-col-4 c-pad-l f-vertical">
+        <h1 *ngIf="!isFindingType('None')" rr-id="han_m_050201">
+          {{'handMRT.capsuleAndRibbons.findingXX.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <div *ngIf="isFindingType('None')" class="f-horizontal ">
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad lower-columns"
+        ></div>
+        <div class="c-col-1 c-pad-l lower-columns"></div>
+      </div>
+      <div class="f-horizontal">
+        <rr-rupture-of-scapholunatum
+          [model]="findingHandler.currentItem"
+          *ngIf="isFindingType('RuptureOfTheLigScapholunatum')"
+        ></rr-rupture-of-scapholunatum>
+        <rr-rupture-of-lunotriquetrum
+          [model]="findingHandler.currentItem"
+          *ngIf="isFindingType('RuptureOfTheLigLunotriquetrum')"
+        ></rr-rupture-of-lunotriquetrum>
+        <rr-rupture-of-extrinsic-ligaments
+          [model]="findingHandler.currentItem"
+          *ngIf="isFindingType('RuptureOfExtrinsicLigaments')"
+        ></rr-rupture-of-extrinsic-ligaments>
+        <rr-tfcc-lesion
+          [model]="findingHandler.currentItem"
+          *ngIf="isFindingType('TFCCLesion')"
+        >
+        </rr-tfcc-lesion>
+        <rr-ligament-lesions-of-the-fingers
+          [model]="findingHandler.currentItem"
+          *ngIf="isFindingType('BandLesionsOfTheFingers')"
+        ></rr-ligament-lesions-of-the-fingers>
+      </div>
+    </div>
+  </div>
+</form>

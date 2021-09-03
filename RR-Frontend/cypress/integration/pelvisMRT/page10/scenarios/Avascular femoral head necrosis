@@ -1,0 +1,77 @@
+Given	I'm logged-in with valid credentials
+And I go to Page 10 of Pelvic MRI
+And I select 'Finding' radio button
+
+When I select 'Avascular femoral head necrosis' from the dropdown menu
+Then 'Add new finding' button is enabled
+And a single selection localizer is enabled
+And 'Subchondral (geographical) demarcation line' automatically checkbox is enabled and checked
+
+And 'Double-line sign, T2w hyperintensity' checkbox is enabled
+And 'Parallel to joint space' checkbox is enabled
+And 'Anterosuperior' checkbox is enabled
+And 'Adjacent bone marrow edema (distal to demarcation line)' checkbox is enabled
+
+And 'Coronal measurement in degrees' input field is enabled
+And 'Sagittal measurement in degrees' input field is enabled
+
+And 'Intact' radio button is enabled
+And 'Insufficiency fracture' radio button is enabled
+And 'Collapse' radio button is enabled
+
+And 'Coxarthrosis' checkbox is enabled
+And 'Articular effusion' checkbox is enabled
+And 'Osteochondral fragment' checkbox is enabled
+And 'Bilateral finding' checkbox is enabled
+
+And 'Classification according to ARCO (I-IV)' checkbox is enabled
+And 'Differential diagnosis' dropdown menu is enabled
+
+When I enter 1 in 'Coronal measurement in degrees' input field
+Then the value is accepted
+
+When I enter 360 in 'Coronal measurement in degrees' input field
+Then the value is accepted
+
+When I enter 0 in 'Coronal measurement in degrees' input field
+Then the value is rejected and reset
+
+When I enter 361 in 'Coronal measurement in degrees' input field
+Then the value is rejected and reset
+
+When I enter 1 in 'Sagittal measurement in degrees' input field
+Then the value is accepted
+
+When I enter 360 in 'Sagittal measurement in degrees' input field
+Then the value is accepted
+
+When I enter 0 in 'Sagittal measurement in degrees' input field
+Then the value is rejected and reset
+
+When I enter 361 in 'Sagittal measurement in degrees' input field
+Then the value is rejected and reset
+
+When I select 'Intact' radio button
+Then 'Classification according to ARCO (I-IV)' checkbox is automatically selected
+And 'I/II' checkbox is automatically selected
+
+When I select 'Insufficiency fracture' radio button
+Then 'Classification according to ARCO (I-IV)' checkbox is automatically selected
+And 'III' checkbox is automatically selected
+
+When I select 'Collapse' radio button
+Then 'Classification according to ARCO (I-IV)' checkbox is automatically selected
+And 'III' checkbox is automatically selected
+
+When I select 'Insufficiency fracture' radio button
+And I select 'Coxarthrosis' checkbox
+Then 'Classification according to ARCO (I-IV)' checkbox is automatically selected
+And 'IV' checkbox is automatically selected
+
+When I select 'Collapse' radio button
+And I select 'Coxarthrosis' checkbox
+Then 'Classification according to ARCO (I-IV)' checkbox is automatically selected
+And 'IV' checkbox is automatically selected
+
+When I select any diagnosis from 'Differential diagnosis' dropdown menu
+Then 'Subordinate' checkbox is enabled

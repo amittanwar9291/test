@@ -1,0 +1,287 @@
+<div class="f-horizontal col-h-100 w-100 p-t-29 text-break">
+  <div class="c-col-1 c-pad o-list m-b-20">
+    <div class="o-radio-list p-l-8">
+      <h2 rr-id="pel_m_080203" rrInfoIcon="pel_m_08_01" class="m-b-15">
+        {{ 'pelvisMRT.rectum.locationRectumSagittal.value' | translate }}
+      </h2>
+      <p rr-id="pel_m_080205" class="font-15">
+        {{ 'pelvisMRT.rectum.pleaseSelectAtLeast.value' | translate }}
+      </p>
+      <div class="o-radio-list m-b-28">
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.upperThird.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080206"
+          name="isUpperThird"
+          [(ngModel)]="model.isUpperThird"
+          rrValidation="isUpperThird isMiddleThird isLowerThird"
+          rrContentReset="detailsUpperThirdBlock"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.middleThird.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080207"
+          name="isMiddleThird"
+          [(ngModel)]="model.isMiddleThird"
+          rrValidation="isUpperThird isMiddleThird isLowerThird"
+          rrContentReset="detailsMiddleThirdBlock"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.lowerThird.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_080208"
+          name="isLowerThird"
+          [(ngModel)]="model.isLowerThird"
+          rrValidation="isUpperThird isMiddleThird isLowerThird"
+          rrContentReset="characterizationTwoColumnOneOptionTwo secondColumnBlock organBlock T4DirectInfiltrationBlock "
+        ></p-checkbox>
+      </div>
+      <h2 rr-id="pel_m_080214">
+        {{ 'pelvisMRT.rectum.associatedFindings.value' | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <div class="m-b-10">
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.distanceToThePectinateLine.value' | translate}}"
+            binary="true"
+            rr-id="pel_m_080209"
+            name="isDistanceToPectinateLine"
+            [(ngModel)]="model.isDistanceToPectinateLine"
+            rrContentReset="distanceToTheLineaGroup"
+          ></p-checkbox>
+          <div
+            id="distanceToTheLineaGroup"
+            [rrDisable]="!model.isDistanceToPectinateLine"
+            class="p-t-15 p-l-35"
+          >
+            <rr-number-input
+              [label]="'pelvisMRT.rectum.inMm.value' | translate"
+              [config]="{min: 0, max: 9999}"
+              [inputRrId]="'pel_m_080210'"
+              [labelRrId]="'pel_m_080211'"
+              name="distanceToPectinateLine"
+              [(ngModel)]="model.distanceToPectinateLine"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div
+          id="detailsUpperThirdBlock"
+          class="o-radio-list"
+          [rrDisable]="!model.isUpperThird"
+        >
+          <p rr-id="pel_m_080212">
+            {{ 'pelvisMRT.rectum.detailsUpperThird.value' | translate }}
+          </p>
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.peritonealFoldInfiltration.value' | translate}}"
+            binary="true"
+            rrInfoIcon="pel_m_08_03"
+            infoIconPdfLandscape="true"
+            rr-id="pel_m_080216"
+            name="isUpperPeritonealFoldInfiltration"
+            [(ngModel)]="model.isUpperPeritonealFoldInfiltration"
+          ></p-checkbox>
+        </div>
+        <div
+          id="detailsMiddleThirdBlock"
+          class="o-radio-list"
+          [rrDisable]="!model.isMiddleThird"
+        >
+          <p rr-id="pel_m_080215">
+            {{ 'pelvisMRT.rectum.detailsMiddleThird.value' | translate }}
+          </p>
+          <p-checkbox
+            label="{{'pelvisMRT.rectum.peritonealFoldInfiltration.value' | translate}}"
+            binary="true"
+            rrInfoIcon="pel_m_08_03"
+            infoIconPdfLandscape="true"
+            rr-id="pel_m_080213"
+            name="isMiddlePeritonealFoldInfiltration"
+            [(ngModel)]="model.isMiddlePeritonealFoldInfiltration"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l o-list m-t-86 m-b-20">
+    <div
+      id="secondColumnBlock"
+      class="o-radio-list p-l-8"
+      [rrDisable]="!model.isLowerThird"
+    >
+      <p rr-id="pel_m_080302">
+        {{ 'pelvisMRT.rectum.relationToPuborectalisMuscle.value' | translate }}
+      </p>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.above.value' | translate}}"
+        rr-id="pel_m_080303"
+        name="relationToPuborectalisMuscleType"
+        [value]="relationToPuborectalisMuscleType.Above"
+        [(ngModel)]="model.relationToPuborectalisMuscleType"
+        rrContentReset="checkboxBlock characterizationTwoColumnOneBlock characterizationTwoColumnTwoBlock distanceinMmBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="distanceinMmBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="model.relationToPuborectalisMuscleType !== relationToPuborectalisMuscleType.Above"
+      >
+        <rr-number-input
+          [label]="'pelvisMRT.rectum.distanceinMm.value' | translate"
+          [config]="{min: 0, max: 9999}"
+          [inputRrId]="'pel_m_080304'"
+          [labelRrId]="'pel_m_0803123'"
+          name="puborectalisMuscleDistance"
+          [(ngModel)]="model.puborectalisMuscleDistance"
+        ></rr-number-input>
+      </div>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.belowOrAtTheSameHeight.value' | translate}}"
+        rr-id="pel_m_0803124"
+        name="relationToPuborectalisMuscleType"
+        [value]="relationToPuborectalisMuscleType.Below"
+        [(ngModel)]="model.relationToPuborectalisMuscleType"
+        rrContentReset="distanceinMm characterizationTwoColumnOneBlock characterizationTwoColumnTwoBlock checkboxBlock distanceinMmBlock"
+        rrUnClickRadio
+      ></p-radioButton>
+      <div
+        id="checkboxBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="model.relationToPuborectalisMuscleType !== relationToPuborectalisMuscleType.Below"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.infiltrationOfTheMSphincter.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0803126"
+          name="isInfiltrationOfInternalSphicter"
+          [(ngModel)]="model.isInfiltrationOfInternalSphicter"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.infiltrationOfTheMSphincterEx.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0803127"
+          name="isInfiltrationOfExternalSphicter"
+          [(ngModel)]="model.isInfiltrationOfExternalSphicter"
+        ></p-checkbox>
+        <p-checkbox
+          label="{{'pelvisMRT.rectum.infiltrationOfTheMLevator.value' | translate}}"
+          binary="true"
+          rr-id="pel_m_0803128"
+          name="isInfiltrationOfLevatorMuscle"
+          [(ngModel)]="model.isInfiltrationOfLevatorMuscle"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep-l o-list m-b-20">
+    <div class="o-radio-list p-l-13">
+      <h2 rr-id="pel_m_080402" class="m-b-19">
+        {{ 'pelvisMRT.rectum.localizationAxial.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.circular.value' | translate}}"
+        rr-id="pel_m_080403"
+        name="localizationAxialType"
+        [value]="localizationAxialTypeEnum.Circular"
+        [(ngModel)]="model.localizationAxialType"
+        rrContentReset="quadrantsBlock"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.locationAccordingToSSL.value' | translate}}"
+        rr-id="pel_m_080404"
+        name="localizationAxialType"
+        [value]="localizationAxialTypeEnum.LocationAccordingToSsl"
+        [(ngModel)]="model.localizationAxialType"
+        rrValidation="localizationAxialType"
+      ></p-radioButton>
+      <div
+        id="quadrantsBlock"
+        class="o-radio-list p-l-35"
+        [rrDisable]="model.localizationAxialType !== localizationAxialTypeEnum.LocationAccordingToSsl"
+      >
+        <p-dropdown
+          styleClass="ui-brown-box"
+          [options]="localisationDropdownOptions"
+          name="locationAccordingToSslType"
+          class="w-188"
+          rr-id="pel_m_080405"
+          placeholder="{{'shared.pleaseSelect' | translate}}"
+          rrDropdownClear
+          [(ngModel)]="model.locationAccordingToSslType"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l o-list m-b-20">
+    <div class="o-radio-list p-l-8">
+      <h2 rr-id="pel_m_080501" class="m-b-17">
+        {{ 'pelvisMRT.rectum.measuredValues.value' | translate }}
+      </h2>
+      <div class="m-b-18">
+        <p rr-id="pel_m_080502" class="m-b-4">
+          {{ 'pelvisMRT.rectum.maximumTumourDiameter.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'pelvisMRT.rectum.inMm.value' | translate"
+          [config]="{min: 0, max: 9999}"
+          [inputRrId]="'pel_m_080503'"
+          [labelRrId]="'pel_m_080504'"
+          name="maximumTumourDiameter"
+          [(ngModel)]="model.maximumTumourDiameter"
+        ></rr-number-input>
+      </div>
+      <div class="m-b-22">
+        <p rr-id="pel_m_080505" class="m-b-4">
+          {{ 'pelvisMRT.rectum.maximumCCExpansion.value' | translate }}
+        </p>
+        <rr-number-input
+          [label]="'pelvisMRT.rectum.inMm.value' | translate"
+          [config]="{min: 0, max: 9999}"
+          [inputRrId]="'pel_m_080506'"
+          [labelRrId]="'pel_m_080507'"
+          name="maximumCcExpansion"
+          [(ngModel)]="model.maximumCcExpansion"
+        ></rr-number-input>
+      </div>
+    </div>
+    <div class="o-radio-list p-l-8">
+      <h2 rr-id="pel_m_080508" class="m-b-19">
+        {{ 'pelvisMRT.rectum.morphology.value' | translate }}
+      </h2>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.ulcerating.value' | translate}}"
+        rr-id="pel_m_080509"
+        name="rectalCarcinomaMorphologyType"
+        [value]="rectalCarcinomaMorphologyType.Ulcerating"
+        [(ngModel)]="model.rectalCarcinomaMorphologyType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.polypoid.value' | translate}}"
+        rr-id="pel_m_080510"
+        name="rectalCarcinomaMorphologyType"
+        [value]="rectalCarcinomaMorphologyType.Polypoid"
+        [(ngModel)]="model.rectalCarcinomaMorphologyType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.rectum.signetRingCellTumor.value' | translate}}"
+        rr-id="pel_m_080511"
+        name="rectalCarcinomaMorphologyType"
+        [value]="rectalCarcinomaMorphologyType.SignetRingTumor"
+        [(ngModel)]="model.rectalCarcinomaMorphologyType"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-checkbox
+        label="{{'pelvisMRT.rectum.highT2wSignalIntensity.value' | translate}}"
+        binary="true"
+        rr-id="pel_m_080512"
+        name="highT2wSignalIntensityMucinous"
+        class="m-t-35"
+        [(ngModel)]="model.highT2wSignalIntensityMucinous"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    *ngIf="isLargeLocalizerOpen"
+    class="large-localizer f-horizontal f-center"
+  >
+    <rr-basal-ganglia-locations-complex
+      [(ngModel)]="findingHandler.currentItem.basalGangliaLocations"
+      name="basalGangliaLocations"
+      (close)="onLargeLocalizerClosed()"
+    >
+    </rr-basal-ganglia-locations-complex>
+  </div>
+  <div *ngIf="!isLargeLocalizerOpen" class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start p-l-3">
+      <h1 rr-id="hea_C_070103">
+        {{'headCT.basalNuclei.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="hea_C_070104"
+          label="{{'headCT.basalNuclei.normalImagingOfbasalGanglia.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="basalNucleiAreFindingsEnum.NormalImagingOfBasalGanglia"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_C_070113"
+          label="{{'headCT.basalNuclei.noDetails.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="basalNucleiAreFindingsEnum.NoDetails"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_C_070105"
+          label="{{'headCT.basalNuclei.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="basalNucleiAreFindingsEnum.True"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+          [setDescriptionTypes]="[basalNucleiFindingTypeEnum.Pathology]"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(basalNucleiFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(basalNucleiFindingTypeEnum.None)"
+        class="f-horizontal main-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(basalNucleiFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="hea_C_060201">
+          {{'headCT.basalNuclei.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+      <rr-pathology
+        *ngIf="isFindingType(basalNucleiFindingTypeEnum.Pathology)"
+        [model]="findingHandler.currentItem"
+      ></rr-pathology>
+    </div>
+  </div>
+</form>

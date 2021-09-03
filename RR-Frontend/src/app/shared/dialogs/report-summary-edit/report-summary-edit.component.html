@@ -1,0 +1,92 @@
+<div class="main" [ngStyle]="{ 'zoom': zoom }">
+  <div class="header">
+    {{'report.summaryEdit.header' | translate}}
+  </div>
+
+  <div *ngIf="!!summary" class="content" id="content">
+    <span
+      *ngFor="let text of getSortedLines();"
+      class="content-line"
+      [attr.id]="text.id"
+    >
+      <span class="content-line-number">{{text.order}}. </span>
+      <span *ngIf="!text.inEdition">
+        <span
+          *ngIf="!text.isAddedByUser"
+          class="content-line-text"
+          [ngClass]="{'content-line-text-selected': text.selected, 'content-line-text-blocked': userLineInEditing}"
+          (click)="selectLine(text)"
+          >{{getTextByLang(text.translations)}}</span
+        >
+        <span
+          *ngIf="text.isAddedByUser"
+          class="content-line-text-added-by-user"
+          [ngClass]="{'content-line-text-blocked': userLineInEditing, 'content-line-text-added-by-user-wrong-lang': !isTextInCorrectLang(text.translations)}"
+          (click)="selectLine(text)"
+          >{{getTextByLang(text.translations)}}</span
+        >
+      </span>
+      <input
+        name="newLineText"
+        type="text"
+        class="newLineInput"
+        *ngIf="text.inEdition"
+        [(ngModel)]="newLineText"
+        maxlength="500"
+      />
+    </span>
+  </div>
+
+  <div class="edition-buttons">
+    <div
+      class="bubble moveLineUp"
+      (click)="moveLineUp()"
+      [ngClass]="{bubbleDisabled: !isMoveLineButtonEnable()}"
+    >
+      <i class="pi pi-chevron-up"></i>
+    </div>
+    <div
+      class="bubble moveLineDown"
+      (click)="moveLineDown()"
+      [ngClass]="{bubbleDisabled: !isMoveLineButtonEnable()}"
+    >
+      <i class="pi pi-chevron-down"></i>
+    </div>
+    <div
+      *ngIf="!getLineInEdition()"
+      class="bubble addNewLine"
+      (click)="addNewLine()"
+    >
+      <i class="pi pi-plus"></i>
+    </div>
+    <div
+      *ngIf="!!getLineInEdition()"
+      class="bubble saveNewLine"
+      (click)="saveUserAddedLine()"
+      [ngClass]="{bubbleDisabled: !isNewLineText()}"
+    >
+      OK
+    </div>
+    <div
+      class="bubble removeLine"
+      (click)="removeLine()"
+      [ngClass]="{bubbleDisabled: !isRemoveLineButtonEnable()}"
+    >
+      <i class="pi pi-times"></i>
+    </div>
+  </div>
+
+  <div class="dialog-buttons">
+    <button type="button" class="dialog-button cancel" (click)="dialogCancel()">
+      {{'report.summaryEdit.cancel' | translate}}
+    </button>
+    <button
+      type="button"
+      class="dialog-button save"
+      (click)="dialogSave()"
+      [ngClass]="{disabled: !!getLineInEdition()}"
+    >
+      {{'report.summaryEdit.save' | translate}}
+    </button>
+  </div>
+</div>

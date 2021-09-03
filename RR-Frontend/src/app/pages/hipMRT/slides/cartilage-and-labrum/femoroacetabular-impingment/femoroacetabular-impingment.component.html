@@ -1,0 +1,160 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-1 c-pad-r c-sep f-start f-vertical">
+    <rr-side [(ngModel)]="model.sideType" name="sideType"></rr-side>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-list">
+    <h2 rr-id="hip_m_050331" class="m-b-11">
+      {{ 'hipMRT.cartilageAndLabrum.type2.value' | translate }}*
+    </h2>
+    <div class="f-start f-vertical o-radio-list m-b-20">
+      <p-radioButton
+        rr-id="hip_m_050321"
+        [(ngModel)]="model.morphologyType"
+        label="{{ 'hipMRT.cartilageAndLabrum.camMorphology.value' | translate }}"
+        name="morphologyType"
+        [value]="morphologyType.CAM"
+        rrContentReset="pincerMorphologyTypeBlock"
+        rrValidation="morphologyType"
+      >
+      </p-radioButton>
+      <div
+        id="camMorphologyTypeBlock"
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="model.morphologyType !== morphologyType.CAM"
+      >
+        <p-checkbox
+          rr-id="hip_m_050322"
+          [(ngModel)]="model.isCartilageLesionAnteriorSuperior"
+          label="{{ 'hipMRT.cartilageAndLabrum.cartilageLesionAnterior.value' | translate }}"
+          labelStyleClass="text-break"
+          class="l-h-24-5"
+          name="isCartilageLesionAnteriorSuperior"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_050323"
+          [(ngModel)]="model.isChondrolabralSeparation"
+          label="{{ 'hipMRT.cartilageAndLabrum.chondrolabralSeparation.value' | translate }}"
+          name="isChondrolabralSeparation"
+          binary="true"
+        >
+        </p-checkbox>
+        <p rr-id="hip_m_050332" rrInfoIcon="hip_m_05_04" class="text-break">
+          {{ 'hipMRT.cartilageAndLabrum.quantitativeAnalysisAlphaAngle.value' |
+          translate }}
+        </p>
+        <rr-number-input
+          inputRrId="hip_m_050333"
+          labelRrId="hip_m_050334"
+          [(ngModel)]="model.quantitativeAnalysisAlphaAngleInDegrees"
+          label="{{ 'hipMRT.cartilageAndLabrum.inDegrees.value' | translate }}"
+          class="m-b-16"
+          name="quantitativeAnalysisAlphaAngleInDegrees"
+          [config]="{ min: 1, max: 90 }"
+          (ngModelChange)="updateDecreasedOffset()"
+        >
+        </rr-number-input>
+        <p-checkbox
+          rr-id="hip_m_050335"
+          [(ngModel)]="model.isDecreasedOffset"
+          class="checkbox-readonly"
+          label="{{ 'hipMRT.cartilageAndLabrum.decreasedOffset.value' | translate }}"
+          name="isDecreasedOffset"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="f-start f-vertical o-radio-list">
+      <p-radioButton
+        rr-id="hip_m_050324"
+        [(ngModel)]="model.morphologyType"
+        label="{{ 'hipMRT.cartilageAndLabrum.pincerMorphology.value' | translate }}"
+        name="morphologyType"
+        [value]="morphologyType.Pincer"
+        rrContentReset="camMorphologyTypeBlock"
+        rrValidation="morphologyType"
+      >
+      </p-radioButton>
+      <div
+        id="pincerMorphologyTypeBlock"
+        class="f-start f-vertical o-radio-list nested-content"
+        [rrDisable]="model.morphologyType !== morphologyType.Pincer"
+      >
+        <p-checkbox
+          rr-id="hip_m_050325"
+          [(ngModel)]="model.isAcetabularOvercoverage"
+          label="{{ 'hipMRT.cartilageAndLabrum.acetabularOvercoverage.value' | translate }}"
+          labelStyleClass="text-break"
+          class="l-h-24-5"
+          name="isAcetabularOvercoverage"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="hip_m_050326"
+          [(ngModel)]="model.isCartilageLesionPosteriorInferior"
+          label="{{ 'hipMRT.cartilageAndLabrum.cartilageLesionPosterior.value' | translate }}"
+          labelStyleClass="text-break"
+          class="l-h-24-5"
+          name="isCartilageLesionPosteriorInferior"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-pad c-sep f-start f-vertical o-radio-list">
+    <h2 rr-id="hip_m_050420" class="m-b-11">
+      {{ 'hipMRT.cartilageAndLabrum.associatedFindings.value' | translate }}
+    </h2>
+    <p-checkbox
+      rr-id="hip_m_050421"
+      [(ngModel)]="model.isHerniationPitAnterolateralFemoralNeck"
+      label="{{ 'hipMRT.cartilageAndLabrum.herniationPit.value' | translate }}"
+      labelStyleClass="text-break"
+      class="l-h-24-5"
+      name="isHerniationPitAnterolateralFemoralNeck"
+      binary="true"
+      rrContentReset="isHernPitAntFemNeckBlock"
+    >
+    </p-checkbox>
+    <div
+      id="isHernPitAntFemNeckBlock"
+      class="f-start f-vertical o-radio-list nested-content"
+      [rrDisable]="!model.isHerniationPitAnterolateralFemoralNeck"
+    >
+      <p-checkbox
+        rr-id="hip_m_050422"
+        [(ngModel)]="model.isFluidIsointense"
+        label="{{ 'hipMRT.cartilageAndLabrum.fluidIsointense.value' | translate }}"
+        name="isFluidIsointense"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="hip_m_050423"
+        [(ngModel)]="model.isPeripheralSclerosis"
+        label="{{ 'hipMRT.cartilageAndLabrum.peripheralSclerosis.value' | translate }}"
+        name="isPeripheralSclerosis"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="hip_m_050424"
+      [(ngModel)]="model.isBoneMarrowEdemaAtHeadNeckTransition"
+      label="{{ 'hipMRT.cartilageAndLabrum.boneMarrowEdema.value' | translate }}"
+      labelStyleClass="text-break"
+      class="l-h-24-5"
+      name="isBoneMarrowEdemaAtHeadNeckTransition"
+      binary="true"
+    >
+    </p-checkbox>
+  </div>
+
+  <div class="c-col-1 c-pad-l c-sep f-vertical"></div>
+</div>

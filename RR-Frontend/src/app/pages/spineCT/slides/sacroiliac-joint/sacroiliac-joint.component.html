@@ -1,0 +1,73 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <!-- First column, with dynamic components -->
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <h1 rr-id="spi_c_090103">
+        {{ "spineCT.sacroiliacJoint.findings.value" | translate }}*
+      </h1>
+      <div class="col-h-100 f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="spi_c_090104"
+          name="areFindings"
+          [value]="areFindingsEnum.No"
+          label="{{
+            'spineCT.sacroiliacJoint.sIJWithoutPathologic.value' | translate
+          }}"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="spi_c_090105"
+          name="areFindings"
+          [value]="areFindingsEnum.Yes"
+          label="{{ 'spineCT.sacroiliacJoint.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [setConfig]="findingDropdownConfig"
+          [disabled]="model.areFindings !== areFindingsEnum.Yes"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-vertical col-h-100 c-pad-l">
+      <!-- Finding number -->
+      <div class="header__min-height">
+        <h1
+          [hidden]="findingHandler.currentItem.findingType === sacroiliacJointFindingTypeEnum.None"
+          rr-id="spi_c_090201"
+        >
+          {{ "spineCT.sacroiliacJoint.findingsXX.value" | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+
+      <div class="f-horizontal col-h-100 o-width-100">
+        <div
+          *ngIf="findingHandler.currentItem.findingType === 'None'"
+          class="f-horizontal col-h-100 o-width-100"
+        >
+          <div class="c-col-1 c-pad-r c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad c-sep"></div>
+          <div class="c-col-1 c-pad-l c-sep"></div>
+        </div>
+        <rr-finding
+          *ngIf="findingHandler.currentItem.findingType !== sacroiliacJointFindingTypeEnum.None"
+          [model]="findingHandler.currentItem"
+          [differentialDiagnosisDropdown]="differentialDiagnosisDropdown()"
+        ></rr-finding>
+      </div>
+    </div>
+  </div>
+</form>

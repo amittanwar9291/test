@@ -1,0 +1,232 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list">
+        <h1 class="m-b-16" rr-id="hip_m_080103">
+          {{ 'hipMRT.softTissue.findings.value' | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="hip_m_080104"
+          name="areFindings"
+          [value]="areFindings.No"
+          label="{{ 'hipMRT.softTissue.noJointEffusionRegular.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_080105"
+          name="areFindings"
+          [value]="areFindings.Yes"
+          label="{{ 'hipMRT.softTissue.findings2.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setDescriptionTypes]="[findingType.SoftTissueMass]"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+        [customLabelCalculator]="getCustomLabel"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div
+      class="f-vertical col-h-100"
+      [class.c-pad-l]="findingHandler.currentItem.findingType !== findingType.SoftTissueMass"
+    >
+      <div
+        [ngClass]="findingHandler.currentItem.findingType === findingType.SoftTissueMass ? 'm-h-48' : 'm-h-130'"
+      >
+        <h1
+          rr-id="hip_m_080201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          [class.c-pad-l]="findingHandler.currentItem.findingType === findingType.SoftTissueMass"
+        >
+          {{ 'hipMRT.softTissue.findings2.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === findingType.None; else findings"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-pad-r c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+
+      <ng-template #findings>
+        <div class="f-horizontal col-h-100">
+          <!-- The first column - common for all findings but OtherPathologies -->
+          <div
+            *ngIf="findingHandler.currentItem.findingType !== findingType.SoftTissueMass"
+            class="c-col-1 c-sep c-pad-r o-list"
+          >
+            <div class="o-radio-list m-b-70">
+              <h2 rr-id="hip_m_080202" class="m-b-12">
+                {{ 'hipMRT.softTissue.side.value' | translate }}*
+                <span
+                  *ngIf="findingHandler.currentItem.findingType === findingType.MorelLavalleeLesion"
+                  rrInfoIcon="hip_m_08_01"
+                >
+                </span>
+              </h2>
+              <p-radioButton
+                rr-id="hip_m_080203"
+                [(ngModel)]="findingHandler.currentItem.sideType"
+                label="{{ 'hipMRT.softTissue.right.value' | translate }}"
+                [value]="sideType.Right"
+                name="sideType"
+                rrValidation="sideType"
+              >
+              </p-radioButton>
+              <p-radioButton
+                rr-id="hip_m_080204"
+                [(ngModel)]="findingHandler.currentItem.sideType"
+                label="{{ 'hipMRT.softTissue.left.value' | translate }}"
+                [value]="sideType.Left"
+                name="sideType"
+                rrValidation="sideType"
+              >
+              </p-radioButton>
+            </div>
+
+            <!-- This part is shown only in Hematoma finding -->
+            <div
+              *ngIf="findingHandler.currentItem.findingType === findingType.Hematoma"
+              class="o-radio-list"
+            >
+              <h2 rr-id="hip_m_080205">
+                {{ 'hipMRT.softTissue.localization.value' | translate }}*
+              </h2>
+              <p-checkbox
+                rr-id="hip_m_080206"
+                label="{{ 'hipMRT.softTissue.pelvis.value' | translate }}"
+                name="isPelvis"
+                binary="true"
+                [(ngModel)]="findingHandler.currentItem.isPelvis"
+                (onChange)="resetLocalizationBlock()"
+                rrValidation="isPelvis isThigh"
+              >
+              </p-checkbox>
+              <p-checkbox
+                rr-id="hip_m_080207"
+                label="{{ 'hipMRT.softTissue.thigh.value' | translate }}"
+                name="isThigh"
+                binary="true"
+                [(ngModel)]="findingHandler.currentItem.isThigh"
+                (onChange)="resetLocalizationBlock()"
+                rrValidation="isPelvis isThigh"
+              >
+              </p-checkbox>
+              <div
+                class="nested-content o-radio-list"
+                [rrDisable]="isLocalizationBlockDisabled()"
+              >
+                <h3 rr-id="hip_m_080208">
+                  {{ 'hipMRT.softTissue.localizationAxial.value' | translate}}*
+                </h3>
+                <p-checkbox
+                  rr-id="hip_m_080209"
+                  label="{{ 'hipMRT.softTissue.ventral.value' | translate }}"
+                  name="isVentral"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isVentral"
+                  rrValidation="isVentral isMedial isLateral isDorsal"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="hip_m_080210"
+                  label="{{ 'hipMRT.softTissue.medial.value' | translate }}"
+                  name="isMedial"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isMedial"
+                  rrValidation="isVentral isMedial isLateral isDorsal"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="hip_m_080211"
+                  label="{{ 'hipMRT.softTissue.lateral.value' | translate }}"
+                  name="isLateral"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isLateral"
+                  rrValidation="isVentral isMedial isLateral isDorsal"
+                >
+                </p-checkbox>
+                <p-checkbox
+                  rr-id="hip_m_080212"
+                  label="{{ 'hipMRT.softTissue.dorsal.value' | translate }}"
+                  name="isDorsal"
+                  binary="true"
+                  [(ngModel)]="findingHandler.currentItem.isDorsal"
+                  rrValidation="isVentral isMedial isLateral isDorsal"
+                >
+                </p-checkbox>
+              </div>
+            </div>
+          </div>
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <!-- ArticularEffusion -->
+            <rr-articular-effusion
+              *ngSwitchCase="findingType.ArticularEffusion"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-articular-effusion>
+
+            <!-- MorelLavalleeLesion -->
+            <rr-morel-lavallee-lesion
+              *ngSwitchCase="findingType.MorelLavalleeLesion"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-morel-lavallee-lesion>
+
+            <!-- Vessels -->
+            <rr-vessels
+              *ngSwitchCase="findingType.Vessels"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-vessels>
+
+            <!-- Hematoma -->
+            <rr-hematoma
+              *ngSwitchCase="findingType.Hematoma"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-hematoma>
+
+            <!-- Abscess -->
+            <rr-abscess
+              *ngSwitchCase="findingType.Abscess"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-abscess>
+
+            <!-- SoftTissueMass -->
+            <rr-soft-tissue-mass
+              *ngSwitchCase="findingType.SoftTissueMass"
+              [model]="findingHandler.currentItem"
+              [isCMReinforced]="isContrastEnhanced"
+            >
+            </rr-soft-tissue-mass>
+
+            <!-- OtherPathologies -->
+            <rr-other-pathologies
+              *ngSwitchCase="findingType.OtherPathologies"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-other-pathologies>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,208 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10 p-r-10">
+      <h2 rr-id="tho_c_0603108">
+        {{'thoraxCT.lungInterstitium.distributionSecondaryPulmonaryLobule.value'
+        | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_0603109"
+        rrValidation="distributionSecondaryPulmonaryLobuleType"
+        name="distributionSecondaryPulmonaryLobuleType"
+        [value]="distributionSecondaryPulmonaryLobuleTypeEnum.Centrilobular"
+        [(ngModel)]="model.distributionSecondaryPulmonaryLobuleType"
+        label="{{'thoraxCT.lungInterstitium.centrilobular.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0603110"
+        rrValidation="distributionSecondaryPulmonaryLobuleType"
+        name="distributionSecondaryPulmonaryLobuleType"
+        rrContentReset="randomDistributionType-block"
+        (onClick)="clearFileUpload()"
+        [value]="distributionSecondaryPulmonaryLobuleTypeEnum.Perilymphatic"
+        [(ngModel)]="model.distributionSecondaryPulmonaryLobuleType"
+        label="{{'thoraxCT.lungInterstitium.perilymphatic.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0603111"
+        rrValidation="distributionSecondaryPulmonaryLobuleType"
+        name="distributionSecondaryPulmonaryLobuleType"
+        rrContentReset="randomDistributionType-block"
+        class="m-b-5"
+        (onClick)="clearFileUpload()"
+        [value]="distributionSecondaryPulmonaryLobuleTypeEnum.RandomDistribution"
+        [(ngModel)]="model.distributionSecondaryPulmonaryLobuleType"
+        label="{{'thoraxCT.lungInterstitium.randomDistribution.value' | translate}}"
+      ></p-radioButton>
+      <div
+        id="randomDistributionType-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="model.distributionSecondaryPulmonaryLobuleType !== distributionSecondaryPulmonaryLobuleTypeEnum.Centrilobular"
+      >
+        <p rr-id="tho_c_0603112" class="m-b-5">
+          {{'thoraxCT.lungInterstitium.pattern.value' | translate}}
+        </p>
+        <p-radioButton
+          rr-id="tho_c_0603113"
+          rrUnClickRadio
+          name="randomDistributionType"
+          [value]="randomDistributionTypeEnum.TreeInBud"
+          [(ngModel)]="model.randomDistributionType"
+          class="text-break"
+          (onClick)="clearFileUpload()"
+          label="{{'thoraxCT.lungInterstitium.treeinbud.value' | translate}}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_0603114"
+          rrUnClickRadio
+          (onClick)="clearFileUpload()"
+          name="randomDistributionType"
+          [value]="randomDistributionTypeEnum.NonTreeInBud"
+          [(ngModel)]="model.randomDistributionType"
+          label="{{'thoraxCT.lungInterstitium.nontreeinbud.value' | translate}}"
+        ></p-radioButton>
+      </div>
+      <div
+        [rrDisable]="model.randomDistributionType != randomDistributionTypeEnum.TreeInBud"
+      >
+        <rr-reference-picture
+          [(ngModel)]="model.referencePicture"
+          [referenceId]="model.id"
+          [fileUploadUrl]="fileUploadUrl"
+          [elementsRrIds]="referencePictureElementsRrIds"
+          name="referencePicture"
+        ></rr-reference-picture>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-10 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10">
+      <h2 rr-id="tho_c_0604106">
+        {{'thoraxCT.lungInterstitium.localization.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_0604107"
+        rrValidation="localizationType"
+        name="localizationType"
+        [value]="lungInterstitiumLocalizationTypeEnum.MiliaryPatternDiffuse"
+        [(ngModel)]="model.localizationType"
+        label="{{'thoraxCT.lungInterstitium.miliaryPatterndiffuse.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0604202"
+        rrValidation="localizationType"
+        name="localizationType"
+        [value]="lungInterstitiumLocalizationTypeEnum.Peripheral"
+        [(ngModel)]="model.localizationType"
+        label="{{'thoraxCT.lungInterstitium.peripheral.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0604203"
+        rrValidation="localizationType"
+        name="localizationType"
+        [value]="lungInterstitiumLocalizationTypeEnum.IrregularSpotted"
+        [(ngModel)]="model.localizationType"
+        label="{{'thoraxCT.lungInterstitium.irregularspotted.value' | translate}}"
+      ></p-radioButton>
+
+      <h2 rr-id="tho_c_0604110" class="m-t-10">
+        {{'thoraxCT.lungInterstitium.margin.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="tho_c_0604111"
+        rrUnClickRadio
+        name="marginType"
+        [value]="marginTypeEnum.WellDefined"
+        [(ngModel)]="model.marginType"
+        label="{{'thoraxCT.lungInterstitium.wellDefined.value' | translate}}"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="tho_c_0604112"
+        rrUnClickRadio
+        name="marginType"
+        [value]="marginTypeEnum.IllDefined"
+        [(ngModel)]="model.marginType"
+        label="{{'thoraxCT.lungInterstitium.illDefined.value' | translate}}"
+      ></p-radioButton>
+
+      <h2 rr-id="tho_c_0604113" class="m-t-12">
+        {{'thoraxCT.lungInterstitium.size.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="tho_c_0604114"
+        name="isMicronodular"
+        rrInfoIcon="tho_c_06_01"
+        label="{{'thoraxCT.lungInterstitium.micronodular.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMicronodular"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0604115"
+        name="isMacronodular"
+        rrInfoIcon="tho_c_06_02"
+        rrContentReset="isMacronodular-block"
+        label="{{'thoraxCT.lungInterstitium.macronodular.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMacronodular"
+      >
+      </p-checkbox>
+      <div
+        id="isMacronodular-block"
+        class="nested-content"
+        [rrDisable]="!model.isMacronodular"
+      >
+        <p-checkbox
+          rr-id="tho_c_0604116"
+          name="isConfluentGranulomasSarcoidGalaxy"
+          label="{{'thoraxCT.lungInterstitium.confluentGranulomas(SarcoidGalaxy.value' | translate}}"
+          binary="true"
+          [(ngModel)]="model.isConfluentGranulomasSarcoidGalaxy"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep c-pad-l f-vertical m-t-10 m-b-10">
+    <div class="f-vertical f-start o-radio-list p-l-10">
+      <h2 rr-id="tho_c_0605139">
+        {{'thoraxCT.lungInterstitium.otherImageCharacteristics.value' |
+        translate}}
+      </h2>
+      <p-checkbox
+        rr-id="tho_c_0605106"
+        name="isGroundGlassNodules"
+        label="{{'thoraxCT.lungInterstitium.groundglassNodules.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isGroundGlassNodules"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0605107"
+        name="isMicronodulesClusters"
+        label="{{'thoraxCT.lungInterstitium.micronodulesClusters.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isMicronodulesClusters"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0605108"
+        name="isReversedHaloSign"
+        rrInfoIcon="tho_c_06_03"
+        label="{{'thoraxCT.lungInterstitium.reversedHaloSign.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isReversedHaloSign"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="tho_c_0605109"
+        name="isPseudoplaque"
+        label="{{'thoraxCT.lungInterstitium.pseudoplaque.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isPseudoplaque"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

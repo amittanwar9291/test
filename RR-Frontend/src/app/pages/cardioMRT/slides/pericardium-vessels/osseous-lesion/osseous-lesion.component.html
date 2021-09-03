@@ -1,0 +1,222 @@
+<div class="f-horizontal col-h-100">
+  <div class="c-col-4 c-pad-r c-sep f-start f-vertical">
+    <h2 rr-id="car_m_0902166" class="m-b-12">
+      {{ 'cardioMRT.pericardiumVessels.localization.value' | translate }}*
+    </h2>
+    <div class="c-col-4 f-horizontal col-h-100">
+      <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-radio-list">
+        <p-radioButton
+          rr-id="car_m_0902167"
+          [(ngModel)]="model.ossLesionLocalizationType"
+          label="{{ 'cardioMRT.pericardiumVessels.humerus.value' | translate }}"
+          name="ossLesionLocalizationType"
+          [value]="ossLesionLocalizationType.Humerus"
+          (onClick)="clearLocalizationDetailsAndDignity()"
+          rrValidation="ossLesionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902168"
+          [(ngModel)]="model.ossLesionLocalizationType"
+          label="{{ 'cardioMRT.pericardiumVessels.clavicle.value' | translate }}"
+          name="ossLesionLocalizationType"
+          [value]="ossLesionLocalizationType.Cavicula"
+          (onClick)="clearLocalizationDetailsAndDignity()"
+          rrValidation="ossLesionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902169"
+          [(ngModel)]="model.ossLesionLocalizationType"
+          label="{{ 'cardioMRT.pericardiumVessels.sternum.value' | translate }}"
+          name="ossLesionLocalizationType"
+          [value]="ossLesionLocalizationType.Sternum"
+          (onClick)="clearLocalizationDetailsAndDignity()"
+          rrValidation="ossLesionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902170"
+          [(ngModel)]="model.ossLesionLocalizationType"
+          label="{{ 'cardioMRT.pericardiumVessels.ribs.value' | translate }}"
+          name="ossLesionLocalizationType"
+          [value]="ossLesionLocalizationType.Ribs"
+          (onClick)="clearLocalizationDetailsAndDignity()"
+          rrValidation="ossLesionLocalizationType"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_0902171"
+          [(ngModel)]="model.ossLesionLocalizationType"
+          label="{{ 'cardioMRT.pericardiumVessels.vertebralBody.value' | translate }}"
+          name="ossLesionLocalizationType"
+          [value]="ossLesionLocalizationType.VertebralBody"
+          (onClick)="clearLocalizationDetailsAndDignity()"
+          rrValidation="ossLesionLocalizationType"
+        >
+        </p-radioButton>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep f-start f-vertical o-list">
+        <div
+          *ngIf="isSideEnabled"
+          class="f-start f-vertical o-radio-list m-b-29"
+        >
+          <h2 rr-id="car_m_090370" class="m-b-12">
+            {{ 'cardioMRT.pericardiumVessels.side.value' | translate }}*
+          </h2>
+          <p-radioButton
+            rr-id="car_m_090371"
+            [(ngModel)]="model.upperAbdomenSide"
+            label="{{ 'cardioMRT.pericardiumVessels.right.value' | translate }}"
+            name="upperAbdomenSide"
+            [value]="locationType.Right"
+            rrValidation="upperAbdomenSide"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090372"
+            [(ngModel)]="model.upperAbdomenSide"
+            label="{{ 'cardioMRT.pericardiumVessels.left.value' | translate }}"
+            name="upperAbdomenSide"
+            [value]="locationType.Left"
+            rrValidation="upperAbdomenSide"
+          >
+          </p-radioButton>
+        </div>
+
+        <div
+          *ngIf="isLocalizationDetailsEnabled"
+          class="f-start f-vertical o-radio-list m-b-31"
+        >
+          <h2 rr-id="car_m_090376" class="m-b-12">
+            {{ 'cardioMRT.pericardiumVessels.localizationDetails.value' |
+            translate }}
+          </h2>
+
+          <ng-container [ngSwitch]="model.ossLesionLocalizationType">
+            <p-dropdown
+              *ngSwitchCase="ossLesionLocalizationType.Ribs"
+              rr-id="car_m_090377"
+              [(ngModel)]="model.ribsLocalizationDetails"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              name="ribsLocalizationDetails"
+              styleClass="ui-brown-box o-width-100"
+              [options]="getLocalizationDetailsOptions()"
+              scrollHeight="340px"
+              rrDropdownClear
+            >
+            </p-dropdown>
+
+            <p-dropdown
+              *ngSwitchCase="ossLesionLocalizationType.VertebralBody"
+              rr-id="car_m_090378"
+              [(ngModel)]="model.vertebralBodyLocalizationDetails"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              name="vertebralBodyLocalizationDetails"
+              styleClass="ui-brown-box o-width-100"
+              [options]="getLocalizationDetailsOptions()"
+              scrollHeight="340px"
+              rrDropdownClear
+            >
+            </p-dropdown>
+          </ng-container>
+        </div>
+
+        <div
+          *ngIf="model.ossLesionLocalizationType !== ossLesionLocalizationType.None"
+          class="f-start f-vertical o-radio-list"
+        >
+          <h2 rr-id="car_m_090373" class="m-b-9">
+            {{ 'cardioMRT.pericardiumVessels.size.value' | translate }}
+          </h2>
+          <rr-number-input
+            inputRrId="car_m_090374"
+            labelRrId="car_m_090375"
+            [(ngModel)]="model.maximumDiameterInMm"
+            label="{{ 'cardioMRT.pericardiumVessels.maxDiameterInMm.value' | translate }}"
+            labelStyleClass="text-break"
+            name="maximumDiameterInMm"
+            [config]="{ labelWidth: 130 }"
+            class="m-b-21"
+          >
+          </rr-number-input>
+        </div>
+      </div>
+
+      <div class="c-col-1 c-pad c-sep">
+        <div
+          *ngIf="model.ossLesionLocalizationType !== ossLesionLocalizationType.None"
+          class="f-start f-vertical o-radio-list"
+        >
+          <h2 rr-id="car_m_090467" class="m-b-11">
+            {{ 'cardioMRT.pericardiumVessels.dignity.value' | translate }}*
+          </h2>
+          <p-radioButton
+            rr-id="car_m_090468"
+            [(ngModel)]="model.focalClavicleType"
+            label="{{ 'cardioMRT.pericardiumVessels.benign.value' | translate }}"
+            name="focalClavicleType"
+            [value]="otherFocalType.Benign"
+            rrValidation="focalClavicleType"
+          >
+          </p-radioButton>
+          <div
+            class="o-radio-list nested-content"
+            id="benignFocalClavicleType-block"
+            [rrDisable]="model.focalClavicleType !== otherFocalType.Benign"
+          >
+            <p-radioButton
+              rr-id="car_m_090469"
+              [(ngModel)]="model.ossLesionBenignType"
+              label="{{ 'cardioMRT.pericardiumVessels.hemangioma.value' | translate }}"
+              name="ossLesionBenignType"
+              [value]="ossLesionBenignType.Hemangioma"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090470"
+              [(ngModel)]="model.ossLesionBenignType"
+              label="{{ 'cardioMRT.pericardiumVessels.paraspinalCyst.value' | translate }}"
+              name="ossLesionBenignType"
+              [value]="ossLesionBenignType.ParaspinalCyst"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="car_m_090471"
+              [(ngModel)]="model.ossLesionBenignType"
+              label="{{ 'cardioMRT.pericardiumVessels.enostosis.value' | translate }}"
+              name="ossLesionBenignType"
+              [value]="ossLesionBenignType.Enostosis"
+              rrUnClickRadio
+            >
+            </p-radioButton>
+          </div>
+          <p-radioButton
+            rr-id="car_m_090472"
+            [(ngModel)]="model.focalClavicleType"
+            label="{{ 'cardioMRT.pericardiumVessels.malignant.value' | translate }}"
+            name="focalClavicleType"
+            [value]="otherFocalType.Malignant"
+            rrContentReset="benignFocalClavicleType-block"
+            rrValidation="focalClavicleType"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="car_m_090473"
+            [(ngModel)]="model.focalClavicleType"
+            label="{{ 'cardioMRT.pericardiumVessels.unknown.value' | translate }}"
+            name="focalClavicleType"
+            [value]="otherFocalType.Unknown"
+            rrContentReset="benignFocalClavicleType-block"
+            rrValidation="focalClavicleType"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <div class="c-col-1 c-pad-l c-sep"></div>
+    </div>
+  </div>
+</div>

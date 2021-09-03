@@ -1,0 +1,292 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15 f-vertical o-list">
+    <div
+      class="o-radio-list f-vertical m-r-15"
+      [rrDisable]="model.descriptionType === descriptionTypeEnum.IDescribe"
+    >
+      <h2 rr-id="hea_m_060203">
+        {{'headMRT.cortex.differentialDiagnosis.value' | translate}}
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        rrId="hea_m_060254"
+        name="differentialDiagnosisType"
+        group="true"
+        [diagnosisNumber]="1"
+        [options]="differentialDiagnosisOptions01"
+        [(ngModel)]="model.differentialDiagnosisType"
+        [parentViewModel]="model"
+        (selectionChanged)="resetDifferentialDiagnosisDependantModel()"
+        rrValidation="differentialDiagnosisType"
+        isActiveOnIKnow="true"
+      ></rr-differential-diagnosis-dropdown>
+      <p-checkbox
+        [rrDisable]="model.differentialDiagnosisType === differentialDiagnosisEnum.None"
+        rr-id="hea_m_060205"
+        label="{{'headMRT.cortex.histologyKnown.value' | translate}}"
+        name="isHistologyKnown"
+        binary="true"
+        [(ngModel)]="model.isHistologyKnown"
+        rrContentReset="histologyKnownContainer"
+      >
+      </p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        id="histologyKnownContainer"
+        [rrDisable]="!model.isHistologyKnown"
+      >
+        <p-radioButton
+          rr-id="hea_m_060206"
+          label="{{ 'headMRT.cortex.benign.value' | translate }}"
+          name="histologyKnownType"
+          [(ngModel)]="model.histologyKnownType"
+          [value]="histologyKnownTypeEnum.Benign"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_060207"
+          label="{{ 'headMRT.cortex.malignant.value' | translate }}"
+          name="histologyKnownType"
+          [(ngModel)]="model.histologyKnownType"
+          [value]="histologyKnownTypeEnum.Malignant"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div
+      [rrDisable]="model.differentialDiagnosisType !== differentialDiagnosisEnum.Microangiopathy"
+      class="o-radio-list m-r-15"
+    >
+      <h3 rr-id="hea_m_060250" rrInfoIcon="hea_m_06_03">
+        {{ "headMRT.cortex.fazekasScale.value" | translate }}
+      </h3>
+      <p-dropdown
+        rr-id="hea_m_060251"
+        name="localizationFazekasScale"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        styleClass="o-width-100 ui-brown-box"
+        [(ngModel)]="model.localizationFazekasScale"
+        [options]="classificationFazekasOptions"
+        rrDropdownClear
+      ></p-dropdown>
+    </div>
+    <div
+      [rrDisable]="!whoConditionFunction(model.differentialDiagnosisType)"
+      class="o-radio-list m-r-15"
+      *ngIf="model.findingType === findingEnum.Focal"
+    >
+      <h3 rr-id="hea_m_060252" rrInfoIcon="hea_m_06_04">
+        {{ "headMRT.cortex.wHOClassification.value" | translate }}
+      </h3>
+      <p-dropdown
+        rr-id="hea_m_060253"
+        name="localizationWHOClassification"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        styleClass="o-width-100 ui-brown-box"
+        [options]="classificationWhoOptions"
+        [(ngModel)]="model.localizationWHOClassification"
+        rrDropdownClear
+      ></p-dropdown>
+    </div>
+    <div
+      [rrDisable]="model.differentialDiagnosisType !== differentialDiagnosisEnum.DiffuseAxonalInjury"
+      class="o-radio-list m-r-15"
+      *ngIf="model.findingType === findingEnum.Diffuse"
+    >
+      <h3 rr-id="hea_m_060287" class="text-break">
+        {{ "headMRT.cortex.modifiedClassificationAccordingToAdams.value" |
+        translate }}
+      </h3>
+      <p-dropdown
+        rr-id="hea_m_060288"
+        name="localizationModifiedClassificationAdams"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        styleClass="o-width-100 ui-brown-box"
+        [options]="classificationAdamsOptions"
+        [(ngModel)]="model.localizationModifiedClassificationAdams"
+        rrDropdownClear
+      ></p-dropdown>
+    </div>
+  </div>
+  <div class=" f-vertical c-sep m-t-15 m-b-15 o-radio-list">
+    <h2 rr-id="hea_m_0603200" class="c-pad">
+      {{'headMRT.cortex.localizationCortexwhiteMatter.value' | translate}}
+    </h2>
+    <div class="c-sep f-horizontal col-h-100">
+      <div class="c-col-1 c-sep c-pad f-vertical o-radio-list">
+        <rr-cortex-localizer-simple
+          rr-id="hea_m_0603201"
+          (click)="openLargeLocalizer()"
+          [(ngModel)]="model.cortexLocations"
+          name="cortexLocalizerSimple"
+        >
+        </rr-cortex-localizer-simple>
+      </div>
+      <div
+        class="c-col-1 c-sep  c-pad f-vertical o-list"
+        [rrDisable]="col4TitleCondition()"
+      >
+        <h2 rr-id="hea_m_0604200">
+          {{'headMRT.cortex.brainAreasDetailed.value' | translate}}
+        </h2>
+        <div class="o-radio-list">
+          <div
+            class="o-radio-list"
+            [rrDisable]="!model.cortexLocations.parietalLobeRight && !model.cortexLocations.parietalLobeLeft"
+          >
+            <h3 rr-id="hea_m_0604201">
+              {{'headMRT.cortex.parietalLobe.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="hea_m_0604202"
+              name="isPraecuneus"
+              label="{{'headMRT.cortex.praecuneus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isPraecuneus"
+            ></p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            [rrDisable]="!model.cortexLocations.occipitalLobeRight && !model.cortexLocations.occipitalLobeLeft"
+          >
+            <h3 rr-id="hea_m_0604203">
+              {{'headMRT.cortex.occipitalLobe.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="hea_m_0604204"
+              name="isCuneus"
+              label="{{'headMRT.cortex.cuneus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isCuneus"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_0604205"
+              name="isLingualGyrus"
+              label="{{'headMRT.cortex.lingualGyrus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isLingualGyrus"
+            ></p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            [rrDisable]="!model.cortexLocations.temporalLobeRight && !model.cortexLocations.temporalLobeLeft"
+          >
+            <h3 rr-id="hea_m_0604206">
+              {{'headMRT.cortex.temporalLobe.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="hea_m_0604207"
+              name="isGyrusTemporalisTransversus"
+              label="{{'headMRT.cortex.gyrusTemporalisTransversus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isGyrusTemporalisTransversus"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_0604208"
+              name="isGyrusOccipitotemporalislateralis"
+              label="{{'headMRT.cortex.lateralOccipitotemporalGyrus.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isLateralOccipitotemporalGyrus"
+            ></p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            [rrDisable]="!model.cortexLocations.cerebellum"
+          >
+            <h3 rr-id="hea_m_0604209">
+              {{'headMRT.cortex.cerebellum.value' | translate}}
+            </h3>
+            <p-checkbox
+              rr-id="hea_m_0604210"
+              name="isParsIntermedia"
+              label="{{'headMRT.cortex.parsIntermedia.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isParsIntermedia"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_0604211"
+              name="isSuperiorCerebellarPeduncle"
+              label="{{'headMRT.cortex.superiorCerebellarPeduncle.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isSuperiorCerebellarPeduncle"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_0604212"
+              name="isMiddleCerebellarPeduncle"
+              label="{{'headMRT.cortex.middleCerebellarPeduncle.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isMiddleCerebellarPeduncle"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_m_0604213"
+              name="isInferiorCerebellarPeduncle"
+              label="{{'headMRT.cortex.inferiorCerebellarPeduncle.value' | translate}}"
+              binary="true"
+              [(ngModel)]="model.isInferiorCerebellarPeduncle"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-15 f-vertical o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="hea_m_0605200">
+        {{'headMRT.cortex.depth.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_0605201"
+        name="isCortex"
+        label="{{'headMRT.cortex.cortex.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isCortex"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_0605202"
+        name="isWhiteMatter"
+        label="{{'headMRT.cortex.whiteMatter.value' | translate}}"
+        binary="true"
+        [(ngModel)]="model.isWhiteMatter"
+        rrContentReset="medullaryContainer"
+      ></p-checkbox>
+      <div
+        class="nested-content f-vertical o-radio-list p-r-15"
+        [rrDisable]="!model.isWhiteMatter"
+        id="medullaryContainer"
+      >
+        <p-dropdown
+          rr-id="hea_m_0605203"
+          name="localizationType"
+          placeholder="{{ 'headMRT.cortex.w020PlaceholderLocalizationWhiteMatter.value'  | translate }}"
+          styleClass="o-width-100 ui-brown-box"
+          [(ngModel)]="model.localizationType"
+          [options]="localizationTypeOptions"
+          rrDropdownClear
+        >
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="o-radio-list">
+      <h2 rr-id="hea_m_060502">
+        {{'headMRT.cortex.details.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_060503"
+        name="detailsType"
+        label="{{'headMRT.cortex.periventricular.value' | translate}}"
+        [(ngModel)]="model.detailsType"
+        [value]="detailsTypeEnum.Periventricular"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_060504"
+        name="detailsType"
+        label="{{'headMRT.cortex.confluent.value' | translate}}"
+        [(ngModel)]="model.detailsType"
+        [value]="detailsTypeEnum.Confluent"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+</div>

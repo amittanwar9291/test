@@ -1,0 +1,100 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="f-horizontal f-center" *ngIf="isLargeLocalizerOpened">
+    <rr-hip-cartilage-large
+      name="hipLocationLarge"
+      [(ngModel)]="findingHandler.currentItem.cartilageLocalizer"
+      (close)="closeLocalizer()"
+    >
+    </rr-hip-cartilage-large>
+  </div>
+
+  <div class="c-main f-horizontal f-center" [hidden]="isLargeLocalizerOpened">
+    <!-- First column, with dynamic components -->
+    <div class="c-col-1 c-pad-r c-sep f-start f-vertical o-list ">
+      <div class="f-start f-vertical o-list m-b-14">
+        <h1 class="m-b-16" rr-id="hip_m_050103">
+          {{ "hipMRT.cartilageAndLabrum.finding.value" | translate }}*
+        </h1>
+        <div class="f-start f-vertical o-radio-list">
+          <p-radioButton
+            rr-id="hip_m_050104"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'hipMRT.cartilageAndLabrum.noPathologicFinding.value' | translate }}"
+            class="text-break"
+            name="areFindings"
+            [value]="areFindings.No"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="hip_m_050105"
+            [(ngModel)]="model.areFindings"
+            label="{{ 'hipMRT.cartilageAndLabrum.finding.value' | translate }}"
+            name="areFindings"
+            [value]="areFindings.Yes"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        [customLabelCalculator]="getCustomLabel"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="c-col-4 c-pad-l f-start f-vertical">
+      <!-- Finding number -->
+      <div class="f-start f-vertical h-142">
+        <h1
+          rr-id="hip_m_050201"
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+        >
+          {{ "hipMRT.cartilageAndLabrum.finding.value" | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: "2.0-0" }}
+        </h1>
+      </div>
+
+      <div class="f-start f-vertical col-h-100">
+        <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+          <rr-labrum
+            *ngSwitchCase="findingType.Labrum"
+            [model]="findingHandler.currentItem"
+            class="col-h-100"
+            (emitLocalizer)="openLocalizer()"
+          ></rr-labrum>
+
+          <rr-femoroacetabular-impingment
+            *ngSwitchCase="findingType.FAI"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+          ></rr-femoroacetabular-impingment>
+
+          <rr-cartilage-lesion
+            *ngSwitchCase="findingType.CartilageLesion"
+            [model]="findingHandler.currentItem"
+            class="col-h-100"
+            (emitLocalizer)="openLocalizer()"
+          ></rr-cartilage-lesion>
+
+          <div
+            *ngSwitchCase="findingType.None"
+            class="f-start f-horizontal col-h-100"
+          >
+            <div class="c-col-1 c-pad-r c-sep"></div>
+            <div class="c-col-1 c-pad c-sep"></div>
+            <div class="c-col-1 c-pad c-sep"></div>
+            <div class="c-col-1 c-pad-l c-sep"></div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form>

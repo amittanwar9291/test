@@ -1,0 +1,98 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep">
+      <h1 rr-id="car_m_040103" class="m-b-17">
+        {{ "cardioMRT.flaps.finding.value" | translate }}*
+      </h1>
+      <div class="o-radio-list">
+        <p-radioButton
+          rr-id="car_m_040104"
+          class="text-break"
+          label="{{
+            'cardioMRT.flaps.normalFormAndFunction.value' | translate
+          }}"
+          [value]="areFindings.No"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          (onClick)="removeTabHeadersHighlighting(); resetMeasuredValuesTab()"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="car_m_040105"
+          label="{{ 'cardioMRT.flaps.finding.value' | translate }}"
+          [value]="areFindings.Yes"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div *ngIf="model.areFindings === areFindings.Yes" class="f-vertical c-sep">
+      <h1 rr-id="car_m_040201" class="c-pad-l m-b-24">
+        {{ "cardioMRT.flaps.detailedDescription.value" | translate }}
+      </h1>
+      <p-tabView [activeIndex]="activeTabIndex" class="rr-tabView col-h-100">
+        <p-tabPanel [disabled]="measuredValuesDisabled">
+          <ng-template pTemplate="header">
+            <h2 rr-id="car_m_040202">
+              {{ "cardioMRT.flaps.measuredValues.value" | translate }}
+            </h2>
+          </ng-template>
+          <rr-measured-values [model]="model"></rr-measured-values>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <h2
+              rr-id="car_m_040301"
+              [rrValidation]="['isStenosis isInsufficiency isCalcification', 'stenosisType', 'insufficiencyType']"
+              ifAny="true"
+              allFindings="true"
+            >
+              {{ "cardioMRT.flaps.heartValvesOutflowTract.value" | translate }}
+            </h2>
+          </ng-template>
+          <rr-heart-valves
+            [model]="model"
+            [heartValveFindingsHandler]="heartValveFindingsHandler"
+          ></rr-heart-valves>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <h2
+              rr-id="car_m_040401"
+              [rrValidation]="['transpositionOfTheGreatArteriesType', 'oneChamberHeartSingleType', 'mainVentricleType']"
+              inSecondFinding="true"
+              ifAny="true"
+              allFindings="true"
+            >
+              {{ "cardioMRT.flaps.congenitalheartdisease.value" | translate }}
+            </h2>
+          </ng-template>
+          <rr-congenital-heart-disease
+            [model]="model"
+            [congenitalHeartDiseasesFindingsHandler]="
+              congenitalHeartDiseasesFindingsHandler
+            "
+          >
+          </rr-congenital-heart-disease>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+
+    <div
+      *ngIf="model.areFindings !== areFindings.Yes"
+      class="f-start f-vertical"
+    >
+      <div class="c-col-4 c-pad-l f-horizontal f-start col-h-100 m-t-100">
+        <div class="c-col-1 c-sep c-pad-r"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad"></div>
+        <div class="c-col-1 c-sep c-pad-l"></div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,165 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 o-radio-list c-sep c-pad-r">
+      <h2 rr-id="anc_m_070103" class="m-b-30">
+        {{'feetMRT.summary.evaluation.value' | translate}}
+      </h2>
+      <p-radioButton
+        name="evaluationType"
+        [value]="evaluationType.Improvement"
+        rrUnClickRadio
+        [(ngModel)]="model.evaluationType"
+        label="{{'feetMRT.summary.improvement.value' | translate}}"
+        rr-id="anc_m_070104"
+      ></p-radioButton>
+      <p-radioButton
+        name="evaluationType"
+        [value]="evaluationType.NoChange"
+        rrUnClickRadio
+        [(ngModel)]="model.evaluationType"
+        label="{{'feetMRT.summary.noChange.value' | translate}}"
+        rr-id="anc_m_070105"
+      ></p-radioButton>
+      <p-radioButton
+        name="evaluationType"
+        [value]="evaluationType.ProgressiveFindingDisease"
+        rrUnClickRadio
+        [(ngModel)]="model.evaluationType"
+        label="{{'feetMRT.summary.progressiveFindingdisease.value' | translate}}"
+        rr-id="anc_m_070106"
+      ></p-radioButton>
+    </div>
+    <div class="c-col-1 o-radio-list c-sep c-pad">
+      <h2 rr-id="anc_m_070201" class="m-b-2">
+        {{'feetMRT.summary.recommendationAdditionalDiagnosticImaging.value.recommendation'
+        | translate}}
+      </h2>
+      <h2 rr-id="anc_m_070201" class="m-b-7">
+        {{'feetMRT.summary.recommendationAdditionalDiagnosticImaging.value.additionalDiagnosticImaging'
+        | translate}}
+      </h2>
+      <p rr-id="anc_m_070202">
+        {{'feetMRT.summary.modality.value' | translate}}
+      </p>
+      <p-checkbox
+        name="isSupplementaryDiagnosticsXray"
+        label="{{'feetMRT.summary.xray.value' | translate}}"
+        [(ngModel)]="model.isSupplementaryDiagnosticsXray"
+        binary="true"
+        rr-id="anc_m_070203"
+      ></p-checkbox>
+      <p-checkbox
+        name="isSupplementaryDiagnosticsCT"
+        label="{{'feetMRT.summary.cT.value' | translate}}"
+        class="m-b-30"
+        [(ngModel)]="model.isSupplementaryDiagnosticsCT"
+        binary="true"
+        rr-id="anc_m_070204"
+      ></p-checkbox>
+      <p-checkbox
+        name="isFollowUp"
+        labelStyleClass="ui-fat-label"
+        label="{{'feetMRT.summary.followup.value' | translate}}"
+        [(ngModel)]="model.isFollowUp"
+        binary="true"
+        class="m-b-8"
+        rr-id="anc_m_070205"
+        rrContentReset="followUpTimeTypeBlock"
+      ></p-checkbox>
+      <div
+        id="followUpTimeTypeBlock"
+        class="o-radio-list-custom nested-content m-b-30"
+        [rrDisable]="!model.isFollowUp"
+      >
+        <p rr-id="anc_m_070206" class="m-b-8">
+          {{'feetMRT.summary.date.value' | translate}}
+        </p>
+        <p-radioButton
+          name="followUpTimeType"
+          [value]="timeTypeEnum.ThreeMonths"
+          rrUnClickRadio
+          [(ngModel)]="model.followUpTimeType"
+          label="{{'feetMRT.summary.months.value' | translate}}"
+          rr-id="anc_m_070207"
+        ></p-radioButton>
+        <p-radioButton
+          name="followUpTimeType"
+          [value]="timeTypeEnum.FromThreeToSixMonths"
+          rrUnClickRadio
+          [(ngModel)]="model.followUpTimeType"
+          label="{{'feetMRT.summary.3to6months.value' | translate}}"
+          rr-id="anc_m_070208"
+        ></p-radioButton>
+        <p-radioButton
+          name="followUpTimeType"
+          [value]="timeTypeEnum.FromSixToTwelveMonths"
+          rrUnClickRadio
+          [(ngModel)]="model.followUpTimeType"
+          label="{{'feetMRT.summary.6to12months.value' | translate}}"
+          rr-id="anc_m_070209"
+        ></p-radioButton>
+        <p-radioButton
+          name="followUpTimeType"
+          [value]="timeTypeEnum.TwelveMonths"
+          rrUnClickRadio
+          [(ngModel)]="model.followUpTimeType"
+          label="{{'feetMRT.summary.12months.value' | translate}}"
+          rr-id="anc_m_070210"
+        ></p-radioButton>
+        <p-radioButton
+          name="followUpTimeType"
+          [value]="timeTypeEnum.FromEighteenToTwentyFourMonths"
+          rrUnClickRadio
+          [(ngModel)]="model.followUpTimeType"
+          label="{{'feetMRT.summary.18to24months.value' | translate}}"
+          rr-id="anc_m_070211"
+        ></p-radioButton>
+      </div>
+      <p-checkbox
+        name="isBiopsy"
+        labelStyleClass="ui-fat-label"
+        label="{{'feetMRT.summary.biopsy.value' | translate}}"
+        [(ngModel)]="model.isBiopsy"
+        binary="true"
+        rr-id="anc_m_070212"
+      ></p-checkbox>
+    </div>
+    <div
+      class="c-col-1 o-radio-list c-sep c-pad text-break"
+      [rrDisable]="!isStagingEnabled"
+    >
+      <h2 rr-id="anc_m_070301" class="m-b-27">
+        {{'feetMRT.summary.staging.value' | translate}}
+      </h2>
+      <p rr-id="anc_m_070302">
+        {{'feetMRT.summary.tClassification.value' | translate}}
+      </p>
+      <p-radioButton
+        name="tClassificationType"
+        [value]="tClassificationType.T1CmInLargest"
+        rrUnClickRadio
+        [(ngModel)]="model.tClassificationType"
+        label="{{'feetMRT.summary.t1CmInLargest.value' | translate}}"
+        rr-id="anc_m_070303"
+      ></p-radioButton>
+      <p-radioButton
+        name="tClassificationType"
+        [value]="tClassificationType.T2CmInLargest"
+        rrUnClickRadio
+        [(ngModel)]="model.tClassificationType"
+        label="{{'feetMRT.summary.t2CmInLargest.value' | translate}}"
+        rr-id="anc_m_070304"
+      ></p-radioButton>
+      <p-radioButton
+        name="tClassificationType"
+        [value]="tClassificationType.T3DiscontinuousSpreadinPrimarily"
+        rrUnClickRadio
+        [(ngModel)]="model.tClassificationType"
+        label="{{'feetMRT.summary.t3DiscontinuousSpreadinPrimarily.value' | translate}}"
+        rr-id="anc_m_070305"
+      ></p-radioButton>
+    </div>
+    <div class="c-col-1 c-sep c-pad"></div>
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</form>

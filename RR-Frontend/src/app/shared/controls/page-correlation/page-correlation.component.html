@@ -1,0 +1,93 @@
+<div class="f-vertical o-width-100 col-h-100">
+  <div class="f-space-between f-horizontal f-fill-available-space">
+    <div class="f-vertical o-width-100">
+      <div
+        *ngIf="!(initializationFinished$ | async) || handler.collection.length === 0; else findingsEnabled"
+        class="f-horizontal f-space-between disabled"
+      >
+        <div class="left-page-content">
+          {{'shared.noFinding' | translate}}
+        </div>
+        <div class="right-page-content">
+          {{'shared.noFinding' | translate}}
+        </div>
+      </div>
+      <ng-template #findingsEnabled>
+        <ng-container
+          *ngFor="let correlation of handler.collection | paginate:
+         { id: instanceId, itemsPerPage: correlationsPerPage, currentPage: page }; let i = index"
+        >
+          <div class="f-horizontal f-space-between">
+            <div
+              class="left-page-content"
+              [attr.rr-id]="findingListsRrIds[0] + '-' + (i + 1)"
+            >
+              {{ correlation.number | number: '2.0-0'}} – {{
+              getFindingTranslationKey(correlation.leftFindingType) | translate
+              }}
+            </div>
+            <p-dropdown
+              [(ngModel)]="correlation.rightFindingSelectedOption"
+              name="rightFindingSelectedOption"
+              [options]="rightFindingDropdownOptions"
+              styleClass="ui-brown-box"
+              [style]="{'width':'150px'}"
+              [name]="'correlation'+(i+1)"
+              placeholder="{{ 'shared.pleaseSelect' | translate }}"
+              [attr.rr-id]="findingListsRrIds[1] + '-' + (i + 1)"
+              (onChange)="saveCorrelation(correlation, $event)"
+              rrDropdownClear
+              [rrDropdownExcludedOptions]="excludedOptions(correlation.rightFindingSelectedOption)"
+              [skipOnExclusion]="['None', 'NoSonographicCorrelation']"
+            >
+              <ng-template let-item pTemplate="selectedItem">
+                <ng-container
+                  *ngIf="getCustomLabel(item.value); else regularLabel"
+                >
+                  {{ getCustomLabel(item.value) }}
+                </ng-container>
+                <ng-template #regularLabel>{{ item.label }}</ng-template>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                {{ item.label }}
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
+  </div>
+  <pagination-template
+    #pagination="paginationApi"
+    [id]="instanceId"
+    (pageChange)="setPage($event)"
+  >
+    <ul class="pagination" *ngIf="pagination.pages.length > 0">
+      <li
+        class="pagination-item"
+        *ngFor="let page of pagination.pages"
+        (click)="pagination.setCurrent(page.value)"
+        [class.current]="pagination.getCurrent() === page.value"
+        [class.ellipsis]="page.label === '...'"
+        [ngClass]="getPaginatorClass(page)"
+      >
+        <a
+          tabindex="0"
+          (keyup.enter)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() !== page.value"
+        >
+          <span
+            >{{ (page.label === '...') ? page.label : (page.label |
+            number:'')}}</span
+          >
+        </a>
+        <ng-container *ngIf="pagination.getCurrent() === page.value">
+          <span
+            >{{ (page.label === '...') ? page.label : (page.label |
+            number:'')}}</span
+          >
+        </ng-container>
+      </li>
+    </ul>
+  </pagination-template>
+</div>

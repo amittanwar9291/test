@@ -1,0 +1,250 @@
+<div class="f-horizontal col-h-100 o-width-100 anamnesis">
+  <div class="f-horizontal m-t-27 m-b-21">
+    <div
+      class="c-col-2 c-pad-r c-sep f-start f-vertical anamnesis__align-left o-list"
+    >
+      <h1 rr-id="car_m_020104" class="p-l-24 m-b-22">
+        {{ 'cardioMRT.anamnesis.indication.value' | translate }}
+      </h1>
+      <img
+        rr-id="car_m_020105"
+        src="assets/img/cardioMRT/icons/2-1.svg"
+        alt="Indication"
+        class="p-l-24 m-b-24"
+      />
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-start f-vertical">
+          <rr-finding-column
+            [handler]="indicationFindingsHandler"
+            [disabled]="false"
+            [setConfig]="indicationFindingsConfig"
+            [attr.name]="'indicationFindingType'"
+            validationName="indicationFindings"
+            class="p-l-24 p-r-9 boundary-finding-column"
+          >
+          </rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l f-start f-vertical">
+          <div class="f-start f-vertical p-l-9 p-r-9">
+            <ng-container
+              [ngSwitch]="indicationFindingsHandler.currentItem.indicationFindingType"
+            >
+              <rr-coronary-heart-disease
+                *ngSwitchCase="indicationFindingType.CoronaryHeartDisease"
+                [model]="indicationFindingsHandler.currentItem"
+              ></rr-coronary-heart-disease>
+
+              <div
+                *ngSwitchCase="indicationFindingType.Other"
+                class="f-start f-vertical o-radio-list"
+              >
+                <h2 rr-id="car_m_020224">
+                  {{ 'cardioMRT.anamnesis.other.value' | translate }}
+                </h2>
+                <p rr-id="car_m_020225">
+                  {{ 'cardioMRT.anamnesis.noFurtherDetails.value' | translate }}
+                </p>
+              </div>
+
+              <ng-container
+                *ngSwitchDefault
+                [ngSwitch]="indicationFindingsHandler.currentItem.indicationFindingType"
+              >
+                <div class="f-start f-vertical o-radio-list">
+                  <h2
+                    *ngSwitchCase="indicationFindingType.Myocarditis"
+                    rr-id="car_m_020215"
+                  >
+                    {{ 'cardioMRT.anamnesis.myocarditis.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.Cardiomyopathy"
+                    rr-id="car_m_020217"
+                  >
+                    {{ 'cardioMRT.anamnesis.cardiomyopathy.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.Valvulopathy"
+                    rr-id="car_m_020218"
+                  >
+                    {{ 'cardioMRT.anamnesis.valvulopathy.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.MassOrTumor"
+                    rr-id="car_m_020219"
+                  >
+                    {{ 'cardioMRT.anamnesis.massTumor.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.CongenitalHeartDisease"
+                    rr-id="car_m_020220"
+                  >
+                    {{ 'cardioMRT.anamnesis.congenitalheartdisease.value' |
+                    translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.RejectionHTX"
+                    rr-id="car_m_020221"
+                  >
+                    {{ 'cardioMRT.anamnesis.rejectionHTx.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.ARVC"
+                    rr-id="car_m_020222"
+                    class="text-break"
+                  >
+                    {{
+                    'cardioMRT.anamnesis.arrhythmogenicrightventricularcardiomyopathyARVC.value'
+                    | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="indicationFindingType.PulmonaryHypertension"
+                    rr-id="car_m_020223"
+                  >
+                    {{ 'cardioMRT.anamnesis.pulmonaryHypertension.value' |
+                    translate }}
+                  </h2>
+                  <p-checkbox
+                    rr-id="car_m_020216"
+                    *ngIf="indicationFindingsHandler.currentItem.indicationFindingType !== indicationFindingType.None"
+                    [(ngModel)]="indicationFindingsHandler.currentItem.isSuspicionOf"
+                    label="{{ 'cardioMRT.anamnesis.suspicionOf.value' | translate }}"
+                    name="isSuspicionOf"
+                    binary="true"
+                  ></p-checkbox>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="c-col-2 c-pad c-sep f-start f-vertical anamnesis__align-left o-list"
+    >
+      <h1 rr-id="car_m_020301" class="p-l-9 m-b-12">
+        {{ 'cardioMRT.anamnesis.interventionPreOps.value' | translate }}
+      </h1>
+      <img
+        rr-id="car_m_020302"
+        src="assets/img/cardioMRT/icons/2-2.svg"
+        alt="Intervention/Pre-Ops"
+        class="p-l-9"
+      />
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep f-start f-vertical">
+          <rr-finding-column
+            [handler]="interventionOrPreOpsFindingsHandler"
+            [disabled]="false"
+            [setConfig]="interventionOrPreOpsFindingsConfig"
+            [attr.name]="'interventionOrPreOpsFindingType'"
+            validationName="interventionOrPreOpsFindings"
+            validationSecondFinding="true"
+            class="p-l-9 p-r-9 middle-finding-column"
+          >
+          </rr-finding-column>
+        </div>
+
+        <div class="c-col-1 c-pad-l f-start f-vertical">
+          <div class="f-start f-vertical p-l-9 p-r-9">
+            <ng-container
+              [ngSwitch]="interventionOrPreOpsFindingsHandler.currentItem.interventionOrPreOpsFindingType"
+            >
+              <rr-valve-replacement
+                *ngSwitchCase="interventionOrPreOpsFindingType.ValveReplacement"
+                [model]="interventionOrPreOpsFindingsHandler.currentItem"
+              ></rr-valve-replacement>
+
+              <div
+                *ngSwitchCase="interventionOrPreOpsFindingType.RVOTReconstruction"
+                class="f-start f-vertical o-radio-list"
+              >
+                <h2 rr-id="car_m_020413">
+                  {{ 'cardioMRT.anamnesis.rVOTIntervention.value' | translate }}
+                </h2>
+                <p-checkbox
+                  rr-id="car_m_020414"
+                  [(ngModel)]="interventionOrPreOpsFindingsHandler.currentItem.isPulmonaryArteryBandingPAB"
+                  label="{{ 'cardioMRT.anamnesis.pulmonaryArteryBandingPAB.value' | translate }}"
+                  name="isPulmonaryArteryBandingPAB"
+                  binary="true"
+                ></p-checkbox>
+              </div>
+
+              <ng-container
+                *ngSwitchDefault
+                [ngSwitch]="interventionOrPreOpsFindingsHandler.currentItem.interventionOrPreOpsFindingType"
+              >
+                <div
+                  *ngIf="interventionOrPreOpsFindingsHandler.currentItem.interventionOrPreOpsFindingType !== interventionOrPreOpsFindingType.None"
+                  class="f-start f-vertical o-radio-list"
+                >
+                  <h2
+                    *ngSwitchCase="interventionOrPreOpsFindingType.CoronaryStents"
+                    rr-id="car_m_020401"
+                  >
+                    {{ 'cardioMRT.anamnesis.coronaryStents.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="interventionOrPreOpsFindingType.Bypass"
+                    rr-id="car_m_020403"
+                  >
+                    {{ 'cardioMRT.anamnesis.bypass.value' | translate }}
+                  </h2>
+                  <h2
+                    *ngSwitchCase="interventionOrPreOpsFindingType.PatentDuctOcclusion"
+                    rr-id="car_m_020415"
+                  >
+                    {{ 'cardioMRT.anamnesis.patentDuctOcclusion.value' |
+                    translate }}
+                  </h2>
+
+                  <p rr-id="car_m_020402">
+                    {{ 'cardioMRT.anamnesis.noFurtherDetails.value' | translate
+                    }}
+                  </p>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-pad-l f-start f-vertical">
+      <div class="f-start f-vertical p-l-9 anamnesis__align-left o-list">
+        <h1 rr-id="car_m_020501" class="m-b-11">
+          {{ 'cardioMRT.anamnesis.mRIPreExamination.value' | translate }}
+        </h1>
+        <img
+          rr-id="car_m_020502"
+          src="assets/img/cardioMRT/icons/2-3.svg"
+          alt="MRI Pre-examination"
+          class="m-b-17"
+        />
+        <p-checkbox
+          rr-id="car_m_020503"
+          [(ngModel)]="model.isMRIPreExamination"
+          label="{{ 'cardioMRT.anamnesis.mRIPreExamination.value' | translate }}"
+          name="isMRIPreExamination"
+          class="m-b-0"
+          binary="true"
+          (onChange)="clearDateOfMRIPreExamination()"
+        ></p-checkbox>
+        <div
+          class="f-start f-vertical o-width-100"
+          [rrDisable]="!model.isMRIPreExamination"
+        >
+          <rr-month-year-input
+            rr-id="car_m_020504"
+            [(ngModel)]="model.dateOfMRIPreExamination"
+            name="dateOfMRIPreExamination"
+            class="p-r-24"
+          ></rr-month-year-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

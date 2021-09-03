@@ -1,0 +1,133 @@
+<div class="f-horizontal f-start col-h-100 c-pad-l">
+  <div class="c-col-1 c-pad-r f-vertical f-start o-radio-list">
+    <h2 rr-id="spi_m_060205" class="m-t-15 m-b-35">
+      {{ "spineMRT.bones.posttherapeuticChange.value" | translate }}
+    </h2>
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isHistoryOfVertebroplastyy"
+      label="{{'spineMRT.bones.historyOfVertebroplasty.value'| translate}}"
+      rr-id="spi_m_060206"
+      (onChange)="clearLocalizer('spineLocation')"
+      name="isHistoryOfVertebroplastyy"
+      class="m-b-23"
+      rrValidation="isHistoryOfVertebroplastyy isHistoryOfSpondylodesis isHistoryOfOsteosynthesis"
+    >
+    </p-checkbox>
+    <p
+      rr-id="spi_m_0602104"
+      rrValidation="spineLocation"
+      noUpdate="true"
+      class="nested-content"
+      [rrDisable]="!model.isHistoryOfVertebroplastyy"
+    >
+      {{ "spineMRT.bones.localization.value" | translate }}
+    </p>
+    <rr-spine-simple
+      [rrDisable]="!model.isHistoryOfVertebroplastyy"
+      rr-id="spi_m_060204"
+      class="scaled-localizer"
+      [spineLocation]="model.spineLocation"
+      rrValidation="spineLocation"
+      isLocalizer="true"
+      (click)="openLargeLocalizer('spineLocation', logicTypeEnum.VertebreEach, 'spineMRT.bones.selectVertebraMultiple.value')"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+  </div>
+
+  <div class="c-col-1 c-pad f-vertical c-sep-l f-start o-radio-list m-t-72">
+    <p-checkbox
+      binary="true"
+      class="m-b-22"
+      [(ngModel)]="model.isHistoryOfSpondylodesis"
+      label="{{'spineMRT.bones.historyOfSpondylodesis.value'| translate}}"
+      rr-id="spi_m_060340"
+      (onChange)="clearLocalizer('spineLocation2')"
+      name="isHistoryOfSpondylodesis"
+      rrContentReset="isHistoryOfSpondylodesis-block"
+      rrValidation="isHistoryOfVertebroplastyy isHistoryOfSpondylodesis isHistoryOfOsteosynthesis"
+    >
+    </p-checkbox>
+    <p
+      rr-id="spi_m_060373"
+      rrValidation="spineLocation2"
+      noUpdate="true"
+      class="nested-content"
+      [rrDisable]="!model.isHistoryOfSpondylodesis"
+    >
+      {{ "spineMRT.bones.localization.value" | translate }}
+    </p>
+    <rr-spine-simple
+      [rrDisable]="!model.isHistoryOfSpondylodesis"
+      rr-id="spi_m_0603100"
+      class="scaled-localizer"
+      [spineLocation]="model.spineLocation2"
+      rrValidation="spineLocation2"
+      isLocalizer="true"
+      (click)="openLargeLocalizer('spineLocation2', logicTypeEnum.VertebreRange, 'spineMRT.bones.selectTopAndBottomVertebra.value')"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-simple>
+    <div
+      id="isHistoryOfSpondylodesis-block"
+      class="f-vertical f-start o-radio-list saggital-localization"
+      [rrDisable]="!model.isHistoryOfSpondylodesis"
+    >
+      <p rr-id="spi_m_060373">
+        {{ "spineMRT.bones.localizationSagittal.value" | translate }}
+      </p>
+      <p-radioButton
+        [value]="localizationSagittalTypeEnum.Anterior"
+        [(ngModel)]="model.localizationSagittalType"
+        label="{{ 'spineMRT.bones.anterior.value' | translate }}"
+        rr-id="spi_m_060375"
+        name="localizationSagittalType"
+        rrValidation="localizationSagittalType"
+      >
+      </p-radioButton>
+      <p-radioButton
+        [value]="localizationSagittalTypeEnum.Posterior"
+        [(ngModel)]="model.localizationSagittalType"
+        label="{{ 'spineMRT.bones.posterior.value' | translate }}"
+        rr-id="spi_m_060376"
+        name="localizationSagittalType"
+        rrValidation="localizationSagittalType"
+      >
+      </p-radioButton>
+    </div>
+  </div>
+
+  <div class="c-col-1 f-vertical f-start o-radio-list c-pad c-sep-l m-t-71">
+    <p-checkbox
+      binary="true"
+      [(ngModel)]="model.isHistoryOfOsteosynthesis"
+      label="{{'spineMRT.bones.historyOfOsteosynthesis.value'| translate}}"
+      rr-id="spi_m_0604200"
+      name="isHistoryOfOsteosynthesis"
+      class="m-b-21"
+      (onChange)="clearLocalizer('spineLocation3')"
+      rrValidation="isHistoryOfVertebroplastyy isHistoryOfSpondylodesis isHistoryOfOsteosynthesis"
+    >
+    </p-checkbox>
+    <div
+      class="nested-content o-radio-list"
+      [rrDisable]="!model.isHistoryOfOsteosynthesis"
+    >
+      <p rr-id="spi_m_0604206" rrValidation="spineLocation3" noUpdate="true">
+        {{ "spineMRT.bones.localization.value" | translate }}
+      </p>
+      <rr-spine-simple
+        rr-id="spi_m_0604201"
+        class="scaled-localizer"
+        [spineLocation]="model.spineLocation3"
+        rrValidation="spineLocation3"
+        isLocalizer="true"
+        (click)="openLargeLocalizer('spineLocation3', logicTypeEnum.VertebreEach, 'spineMRT.bones.selectVertebraMultiple.value')"
+        [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+      >
+      </rr-spine-simple>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l"></div>
+</div>

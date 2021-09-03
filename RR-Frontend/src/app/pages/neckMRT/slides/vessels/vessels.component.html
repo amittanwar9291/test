@@ -1,0 +1,145 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="f-horizontal f-center"
+    *ngIf="largeLocalizerOpened === supraaorticVesselsLocalizerType.carotidArtery"
+  >
+    <rr-carotid-artery-big-localizer
+      name="arteryLocalisationType"
+      [(ngModel)]="findingHandler.currentItem.arteryLocalisationType"
+      (close)="onLargeLocalizerCosed()"
+    >
+    </rr-carotid-artery-big-localizer>
+  </div>
+  <div
+    class="f-horizontal f-center m-t-minus-100"
+    *ngIf="largeLocalizerOpened === supraaorticVesselsLocalizerType.arteriesSegments"
+  >
+    <rr-arteries-segments-big-localizer
+      (close)="onLargeLocalizerCosed()"
+      name="arteriesSegmentType"
+      [(ngModel)]="findingHandler.currentItem.arteriesSegmentType"
+    >
+    </rr-arteries-segments-big-localizer>
+  </div>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerOpened">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list">
+        <h1 class="m-b-16" rr-id="nec_m_090103">
+          {{ 'neckMRT.vessels.finding.value' | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="nec_m_090104"
+          name="areFindings"
+          class="text-break"
+          [value]="areFindings.No"
+          label="{{ 'neckMRT.vessels.normalImagingOfThearterial.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="nec_m_090105"
+          name="areFindings"
+          [value]="areFindings.Yes"
+          label="{{ 'neckMRT.vessels.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <!-- Columns from second to fifth -->
+    <div class="f-vertical col-h-100 c-pad-l">
+      <div class="m-h-139">
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="nec_m_090201"
+        >
+          {{ 'neckMRT.vessels.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === findingType.None; else findings"
+        class="f-horizontal col-h-100"
+      >
+        <div class="c-col-1 c-pad-r c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad c-sep"></div>
+        <div class="c-col-1 c-pad-l c-sep"></div>
+      </div>
+
+      <ng-template #findings>
+        <div class="f-horizontal col-h-100">
+          <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+            <rr-common-carotid-artery
+              *ngSwitchCase="findingType.CommonCarotidArtery"
+              [model]="findingHandler.currentItem"
+              [isContrastEnhanced]="isContrastEnhanced"
+            >
+            </rr-common-carotid-artery>
+            <rr-internal-carotid-artery
+              *ngSwitchCase="findingType.InternalCarotidArtery"
+              [model]="findingHandler.currentItem"
+              [isContrastEnhanced]="isContrastEnhanced"
+            >
+            </rr-internal-carotid-artery>
+            <rr-external-carotid-artery
+              *ngSwitchCase="findingType.ExternalCarotidArtery"
+              [model]="findingHandler.currentItem"
+              [isContrastEnhanced]="isContrastEnhanced"
+            >
+            </rr-external-carotid-artery>
+            <rr-vertebral-artery
+              *ngSwitchCase="findingType.VertebralArtery"
+              [model]="findingHandler.currentItem"
+              [isContrastEnhanced]="isContrastEnhanced"
+            >
+            </rr-vertebral-artery>
+            <rr-circle-of-willis
+              *ngSwitchCase="findingType.CircleOfWillisCerebralArteries"
+              [model]="findingHandler.currentItem"
+              [isContrastEnhanced]="isContrastEnhanced"
+            >
+            </rr-circle-of-willis>
+            <rr-brachiocephalic-trunk
+              *ngSwitchCase="findingType.BrachiocephalicTrunk"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-brachiocephalic-trunk>
+            <rr-subclavian-artery
+              *ngSwitchCase="findingType.SubclavianArtery"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-subclavian-artery>
+            <rr-axillary-artery
+              *ngSwitchCase="findingType.AxillaryArtery"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-axillary-artery>
+            <rr-cerebral-veins
+              *ngSwitchCase="findingType.CerebralVeinsDuralSinuses"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-cerebral-veins>
+            <rr-veins
+              *ngSwitchCase="findingType.Veins"
+              [model]="findingHandler.currentItem"
+            >
+            </rr-veins>
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

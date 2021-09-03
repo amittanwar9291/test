@@ -1,0 +1,324 @@
+<div class="endometriosis-mass-height f-horizontal w-100">
+  <div class="c-col-1 c-pad m-t-30 m-b-13 o-list">
+    <h2 rr-id="pel_m_0602468" class="p-l-10 m-b-15">
+      {{'pelvisMRT.femaleGender.depthOfInfiltration.value' | translate}}
+    </h2>
+    <div class="o-radio-list p-l-10 text-break">
+      <p-radioButton
+        rr-id="pel_m_0602469"
+        label="{{'pelvisMRT.femaleGender.restrictedToSerosa.value' | translate}}"
+        name="depthOfInfiltrationType"
+        [value]="depthOfInfiltrationTypeEnum.RestrictedToSerosa"
+        [(ngModel)]="model.depthOfInfiltrationType"
+        rrContentReset="subperitonealBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_0602470"
+        label="{{'pelvisMRT.femaleGender.subperitonealInfiltrationOfMm.value' | translate}}"
+        name="depthOfInfiltrationType"
+        labelStyleClass="text-break"
+        [value]="depthOfInfiltrationTypeEnum.SubperitonealInfiltrationOfMoreThan5Mm"
+        [(ngModel)]="model.depthOfInfiltrationType"
+        rrContentReset="subperitonealBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <div
+        id="subperitonealBlock"
+        class="o-radio-list p-l-35 text-break"
+        [rrDisable]="model.depthOfInfiltrationType !== depthOfInfiltrationTypeEnum.SubperitonealInfiltrationOfMoreThan5Mm"
+      >
+        <p-radioButton
+          rr-id="pel_m_0602471"
+          label="{{'pelvisMRT.femaleGender.infiltrationMuscularisPropria.value' | translate}}"
+          name="subperitonealInfiltrationType"
+          [value]="subperitonealInfiltrationTypeEnum.InfiltrationMuscularisPropria"
+          [(ngModel)]="model.subperitonealInfiltrationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0602472"
+          label="{{'pelvisMRT.femaleGender.mucosalwallcrossingInfiltration.value' | translate}}"
+          name="subperitonealInfiltrationType"
+          labelStyleClass="text-break"
+          [value]="subperitonealInfiltrationTypeEnum.MucosalOrWallCrossingInfiltration"
+          [(ngModel)]="model.subperitonealInfiltrationType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-30 m-b-13 o-list">
+    <div class="o-radio-list p-l-10 m-b-30" [rrDisable]="!isCM">
+      <h2 rr-id="pel_m_0603253" class="m-b-15">
+        {{'pelvisMRT.femaleGender.contrastEnhancement.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="pel_m_0603254"
+        label="{{'pelvisMRT.femaleGender.strong.value' | translate}}"
+        name="contrastEnhancementType1"
+        [value]="contrastEnhancementTypeEnum.Strong"
+        [(ngModel)]="model.contrastEnhancementType1"
+        rrContentReset="contrastEnhancementHomogenityType1Block"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_0603255"
+        label="{{'pelvisMRT.femaleGender.low.value' | translate}}"
+        name="contrastEnhancementType1"
+        [value]="contrastEnhancementTypeEnum.Low"
+        [(ngModel)]="model.contrastEnhancementType1"
+        rrContentReset="contrastEnhancementHomogenityType1Block"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="pel_m_0603256"
+        label="{{'pelvisMRT.femaleGender.no.value' | translate}}"
+        name="contrastEnhancementType1"
+        [value]="contrastEnhancementTypeEnum.No"
+        [(ngModel)]="model.contrastEnhancementType1"
+        rrContentReset="contrastEnhancementHomogenityType1Block"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <div
+        id="contrastEnhancementHomogenityType1Block"
+        class="m-l-35 o-radio-list"
+        [rrDisable]="model.contrastEnhancementType1 !== contrastEnhancementTypeEnum.Low &&
+          model.contrastEnhancementType1 !== contrastEnhancementTypeEnum.Strong"
+      >
+        <p-radioButton
+          rr-id="pel_m_0603257"
+          label="{{'pelvisMRT.femaleGender.homogeneous.value' | translate}}"
+          name="contrastEnhancementHomogenityType1"
+          [value]="homogenityTypeEnum.Homogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogenityType1"
+          rrContentReset="nodularFractionsBlock"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="pel_m_0603258"
+          label="{{'pelvisMRT.femaleGender.heterogeneous.value' | translate}}"
+          name="contrastEnhancementHomogenityType1"
+          [value]="homogenityTypeEnum.Heterogeneous"
+          [(ngModel)]="model.contrastEnhancementHomogenityType1"
+          rrContentReset="nodularFractionsBlock"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <div
+          id="nodularFractionsBlock"
+          class="p-l-35"
+          [rrDisable]="model.contrastEnhancementHomogenityType1 !== homogenityTypeEnum.Heterogeneous"
+        >
+          <p-checkbox
+            label="{{'pelvisMRT.femaleGender.nodularParts.value' | translate}}"
+            rr-id="pel_m_0603259"
+            binary="true"
+            name="isHeterogeneousNodularParts"
+            [(ngModel)]="model.isHeterogeneousNodularParts"
+          >
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="o-radio-list p-l-10 m-b-30" [rrDisable]="!isDWI">
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.diffusionRestriction.value' | translate}}"
+        rr-id="pel_m_0603260"
+        [labelStyleClass]="'ui-fat-label'"
+        binary="true"
+        name="isDiffusionRestriction"
+        [(ngModel)]="model.isDiffusionRestriction"
+      >
+      </p-checkbox>
+    </div>
+    <div class="o-radio-list p-l-10 text-break">
+      <h2 rr-id="pel_m_0603492" class="m-b-15">
+        {{'pelvisMRT.femaleGender.surrounding.value' | translate}}
+      </h2>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.perifocalFatTissueObliteration.value' | translate}}"
+        rr-id="pel_m_0603261"
+        binary="true"
+        name="isPerifocalFatTissueObliteration"
+        [(ngModel)]="model.isPerifocalFatTissueObliteration"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.perifocalTighteningshortening.value' | translate}}"
+        rr-id="pel_m_0603262"
+        binary="true"
+        name="isPerifocalTighteningOrShortening"
+        [(ngModel)]="model.isPerifocalTighteningOrShortening"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad m-t-30 m-b-13 o-list">
+    <h2 rr-id="pel_m_0604277" class="p-l-10 m-b-15">
+      {{'pelvisMRT.femaleGender.complications.value' | translate}}
+    </h2>
+    <div class="o-radio-list p-l-10">
+      <p-radioButton
+        label="{{'pelvisMRT.femaleGender.ureteralStenosis.value' | translate}}"
+        rr-id="pel_m_0604278"
+        [value]="complicationsTypeEnum.UreteralStenosis"
+        [(ngModel)]="model.complicationsType"
+        name="complicationsType"
+        rrContentReset="detailsUreteralStenosisBlock detailsIntestinalStenosisBlock adhesionsBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.femaleGender.intestinalStenosis.value' | translate}}"
+        rr-id="pel_m_0604279"
+        [value]="complicationsTypeEnum.IntestinalStenosis"
+        [(ngModel)]="model.complicationsType"
+        name="complicationsType"
+        rrContentReset="detailsUreteralStenosisBlock detailsIntestinalStenosisBlock adhesionsBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.femaleGender.haematosalpinx.value' | translate}}"
+        rr-id="pel_m_0604280"
+        [value]="complicationsTypeEnum.Haematosalpinx"
+        [(ngModel)]="model.complicationsType"
+        name="complicationsType"
+        rrContentReset="detailsUreteralStenosisBlock detailsIntestinalStenosisBlock adhesionsBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.femaleGender.hydrosalpinx.value' | translate}}"
+        rr-id="pel_m_0604281"
+        [value]="complicationsTypeEnum.Hydrosalpinx"
+        [(ngModel)]="model.complicationsType"
+        name="complicationsType"
+        rrContentReset="detailsUreteralStenosisBlock detailsIntestinalStenosisBlock adhesionsBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        label="{{'pelvisMRT.femaleGender.adhesions.value' | translate}}"
+        rr-id="pel_m_0604282"
+        [value]="complicationsTypeEnum.Adhesions"
+        [(ngModel)]="model.complicationsType"
+        name="complicationsType"
+        rrContentReset="detailsUreteralStenosisBlock detailsIntestinalStenosisBlock adhesionsBlock"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l m-t-60 m-b-13 o-list">
+    <div
+      id="detailsUreteralStenosisBlock"
+      class="o-radio-list p-l-10"
+      *ngIf="model.complicationsType === complicationsTypeEnum.UreteralStenosis"
+    >
+      <p rr-id="pel_m_0605285">
+        {{'pelvisMRT.femaleGender.detailsUreteralStenosis.value' | translate}}
+      </p>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.atTheLevelOf.value' | translate}}"
+        rr-id="pel_m_0605286"
+        binary="true"
+        name="isAtTheLevelOfTheUreterostium"
+        [(ngModel)]="model.isAtTheLevelOfTheUreterostium"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      id="detailsIntestinalStenosisBlock"
+      class="o-radio-list p-l-10"
+      *ngIf="model.complicationsType === complicationsTypeEnum.IntestinalStenosis"
+    >
+      <p rr-id="pel_m_0605276">
+        {{'pelvisMRT.femaleGender.detailsIntestinalStenosis.value' | translate}}
+      </p>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.prestenoticDilatation.value' | translate}}"
+        rr-id="pel_m_0605277"
+        binary="true"
+        name="isPrestenoticDilatation"
+        [(ngModel)]="model.isPrestenoticDilatation"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.poststenoticCollapse.value' | translate}}"
+        rr-id="pel_m_0605278"
+        binary="true"
+        name="isPoststenoticCollapse"
+        [(ngModel)]="model.isPoststenoticCollapse"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      id="adhesionsBlock"
+      class="o-radio-list p-l-10 text-break"
+      *ngIf="model.complicationsType === complicationsTypeEnum.Adhesions"
+    >
+      <p rr-id="pel_m_0605279">
+        {{'pelvisMRT.femaleGender.detailsAdhesions.value' | translate}}
+      </p>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.posteriorDisplacementOfTheUterus.value' | translate}}"
+        rr-id="pel_m_0605280"
+        binary="true"
+        labelStyleClass="text-break"
+        name="isPosteriorDisplacementOfTheUterus"
+        [(ngModel)]="model.isPosteriorDisplacementOfTheUterus"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.posteriorDisplacementOfTheOvaries.value' | translate}}"
+        rr-id="pel_m_0605281"
+        binary="true"
+        labelStyleClass="text-break"
+        name="isPosteriorDisplacementOfTheOvaries"
+        [(ngModel)]="model.isPosteriorDisplacementOfTheOvaries"
+        rrContentReset="kissingOvariesBlock"
+      >
+      </p-checkbox>
+      <div
+        id="kissingOvariesBlock"
+        class="o-radio-list m-l-35"
+        [rrDisable]="!model.isPosteriorDisplacementOfTheOvaries"
+      >
+        <p-checkbox
+          label="{{'pelvisMRT.femaleGender.kissingOvaries.value' | translate}}"
+          rr-id="pel_m_0605282"
+          binary="true"
+          name="isKissingOvaries"
+          [(ngModel)]="model.isKissingOvaries"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.cranialDisplacementOfThe.value' | translate}}"
+        rr-id="pel_m_0605283"
+        binary="true"
+        name="isCranialDisplacementOfThePosteriorFornixVaginae"
+        [(ngModel)]="model.isCranialDisplacementOfThePosteriorFornixVaginae"
+      >
+      </p-checkbox>
+      <p-checkbox
+        label="{{'pelvisMRT.femaleGender.displacementOfIntestinalLoops.value' | translate}}"
+        rr-id="pel_m_0605284"
+        binary="true"
+        name="isDisplacementOfIntestinalLoops"
+        [(ngModel)]="model.isDisplacementOfIntestinalLoops"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</div>

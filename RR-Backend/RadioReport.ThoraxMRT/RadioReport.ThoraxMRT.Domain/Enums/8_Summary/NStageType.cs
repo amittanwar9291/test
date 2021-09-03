@@ -1,0 +1,12 @@
+namespace RadioReport.ThoraxMRT.Domain.Enums
+{
+    public enum NStageType : byte
+    {
+        None = 0,
+        N1 = 1,
+        N2 = 2,
+        N3 = 3,
+        Nx = 4,
+        N0 = 5
+    }
+}

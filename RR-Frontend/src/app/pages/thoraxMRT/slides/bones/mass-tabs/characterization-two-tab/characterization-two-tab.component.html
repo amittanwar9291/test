@@ -1,0 +1,298 @@
+<div class="f-horizontal f-start o-width-100 main">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-10">
+    <div class="f-vertical sliders-z-index m-l-10">
+      <h2 rr-id="tho_m_070237" class="m-b-0">
+        {{'thoraxMRT.bones.t1wSignal.value' | translate}}
+      </h2>
+      <span class="m-b-15" rr-id="tho_m_070238"
+        >{{'thoraxMRT.bones.comparedToMuscleSignal.value' | translate}}</span
+      >
+      <rr-signal-slider
+        class="sliders-z-index"
+        name="t1wSignal"
+        rr-id="tho_m_070239"
+        [(ngModel)]="model.t1wSignal"
+      ></rr-signal-slider>
+      <h2 rr-id="tho_m_070240" class="m-t-20 m-b-0">
+        {{'thoraxMRT.bones.t2wSignal.value' | translate}}
+      </h2>
+      <span class="m-b-15" rr-id="tho_m_070241"
+        >{{'thoraxMRT.bones.comparedToMuscleSignal.value' | translate}}</span
+      >
+      <rr-signal-slider
+        class="sliders-z-index"
+        name="t2wSignal"
+        rr-id="tho_m_070242"
+        [(ngModel)]="model.t2wSignal"
+      ></rr-signal-slider>
+    </div>
+    <h2 rr-id="tho_m_070243" class="m-l-10 m-t-30">
+      {{'thoraxMRT.bones.diffusionImaging.value' | translate}}
+    </h2>
+    <p-checkbox
+      class="m-l-10"
+      binary="true"
+      rrInfoIcon="tho_m_07_04"
+      [(ngModel)]="model.isDiffusionRestriction"
+      label="{{'thoraxMRT.bones.diffusionRestriction.value'| translate}}"
+      rr-id="tho_m_070244"
+      name="isDiffusionRestriction"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_070358">
+        {{'thoraxMRT.bones.internalArchitecture.value' | translate}}
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCystic"
+        label="{{'thoraxMRT.bones.cystic.value'| translate}}"
+        rr-id="tho_m_070359"
+        name="isCystic"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSeptatedOrChambered"
+        label="{{'thoraxMRT.bones.septatedChambered.value'| translate}}"
+        rr-id="tho_m_070360"
+        name="isSeptatedOrChambered"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isFluidLevel"
+        label="{{'thoraxMRT.bones.fluidLevel.value'| translate}}"
+        rr-id="tho_m_070361"
+        name="isFluidLevel"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isNecrosis"
+        label="{{'thoraxMRT.bones.necrosis.value'| translate}}"
+        rr-id="tho_m_070362"
+        name="isNecrosis"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCalcification"
+        label="{{'thoraxMRT.bones.calcification.value'| translate}}"
+        rr-id="tho_m_070363"
+        name="isCalcification"
+        rrContentReset="centralDiffuselyDistributedContainer"
+      ></p-checkbox>
+      <div
+        id="centralDiffuselyDistributedContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isCalcification"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isCentral"
+          label="{{'thoraxMRT.bones.central.value'| translate}}"
+          rr-id="tho_m_070364"
+          name="isCentral"
+        ></p-checkbox>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isDiffuselyDistributed"
+          label="{{'thoraxMRT.bones.diffuselyDistributed.value'| translate}}"
+          rr-id="tho_m_070365"
+          name="isDiffuselyDistributed"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isNidus"
+        label="{{'thoraxMRT.bones.nidus.value'| translate}}"
+        rr-id="tho_m_070366"
+        name="isNidus"
+        rrContentReset="isT2wHyperintenseNidusContainer"
+      ></p-checkbox>
+      <div
+        id="isT2wHyperintenseNidusContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isNidus"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isT2wHyperintenseNidus"
+          label="{{'thoraxMRT.bones.t2wHyperintense.value'| translate}}"
+          rr-id="tho_m_070367"
+          name="isT2wHyperintenseNidus"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isFatSignal"
+        label="{{'thoraxMRT.bones.fatSignal.value'| translate}}"
+        rr-id="tho_m_070368"
+        name="isFatSignal"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSclerosis"
+        label="{{'thoraxMRT.bones.sclerosis.value'| translate}}"
+        rr-id="tho_m_070369"
+        name="isSclerosis"
+      ></p-checkbox>
+      <p-checkbox
+        *ngIf="model.findingType === thoraxMRTBonesFindingTypeEnum.SpinalMass"
+        binary="true"
+        [(ngModel)]="model.isPolkaDotSign"
+        label="{{'thoraxMRT.bones.polkaDotSign.value'| translate}}"
+        rr-id="tho_m_070392"
+        name="isPolkaDotSign"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_070439">
+        {{'thoraxMRT.bones.peripheralChanges.value' | translate}}
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isPeriostealReaction"
+        label="{{'thoraxMRT.bones.periostealReaction.value'| translate}}"
+        rr-id="tho_m_070440"
+        name="isPeriostealReaction"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isCartilageCap"
+        label="{{'thoraxMRT.bones.cartilageCap.value'| translate}}"
+        rr-id="tho_m_070441"
+        name="isCartilageCap"
+        rrContentReset="cartilageCapMaxThicknessContainer"
+      ></p-checkbox>
+      <div
+        id="cartilageCapMaxThicknessContainer"
+        class="nested-content o-radio-list f-vertical"
+        [rrDisable]="!model.isCartilageCap"
+      >
+        <p rr-id="tho_m_070442" class="m-b-0">
+          {{'thoraxMRT.bones.maxThickness.value' | translate}}
+        </p>
+        <rr-number-input
+          [label]="'thoraxMRT.bones.inMm.value' | translate"
+          [config]="{min: 1, max: 20, labelWidth: 180}"
+          inputRrId="tho_m_070443"
+          labelRrId="tho_m_070444"
+          name="cartilageCapMaxThickness"
+          [(ngModel)]="model.cartilageCapMaxThickness"
+        ></rr-number-input>
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isT2wHyperintenseCartilageCap"
+          label="{{'thoraxMRT.bones.t2wHyperintense.value'| translate}}"
+          rr-id="tho_m_070445"
+          name="isT2wHyperintenseCartilageCap"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isSingalPoorPerichondrium"
+        label="{{'thoraxMRT.bones.signalPoorPerichondriumCoveringCartilageCap.value'| translate}}"
+        rr-id="tho_m_070446"
+        name="isSingalPoorPerichondrium"
+        labelStyleClass="text-break"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isScleroticMargin"
+        label="{{'thoraxMRT.bones.scleroticMargin.value'| translate}}"
+        rr-id="tho_m_070447"
+        name="isScleroticMargin"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-radio-list m-t-10">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_m_070539">
+        {{'thoraxMRT.bones.growthPattern.value' | translate}}
+      </h2>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isExpansile"
+        label="{{'thoraxMRT.bones.expansile.value'| translate}}"
+        rr-id="tho_m_070540"
+        name="isExpansile"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isOsteolytic"
+        label="{{'thoraxMRT.bones.osteolytic.value'| translate}}"
+        rr-id="tho_m_070541"
+        name="isOsteolytic"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isOsteoblastic"
+        label="{{'thoraxMRT.bones.osteoblastic.value'| translate}}"
+        rr-id="tho_m_070542"
+        name="isOsteoblastic"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isPermeativeGrowth"
+        label="{{'thoraxMRT.bones.permeativeGrowth.value'| translate}}"
+        rr-id="tho_m_070543"
+        name="isPermeativeGrowth"
+      ></p-checkbox>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isScleroticMarginGrowthPattern"
+        label="{{'thoraxMRT.bones.scleroticMargin2.value'| translate}}"
+        rr-id="tho_m_070544"
+        name="isScleroticMarginGrowthPattern"
+        rrContentReset="isMapLikeContainer"
+      ></p-checkbox>
+      <div
+        id="isMapLikeContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isScleroticMarginGrowthPattern"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isMapLike"
+          label="{{'thoraxMRT.bones.mapLike.value'| translate}}"
+          rr-id="tho_m_070545"
+          name="isMapLike"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        binary="true"
+        [(ngModel)]="model.isPedunculated"
+        label="{{'thoraxMRT.bones.pedunculatedGrowingAwayFromEpiphysisGrowingAwayFromEpiphysis.value'| translate}}"
+        rr-id="tho_m_070546"
+        name="isPedunculated"
+        labelStyleClass="text-break"
+      ></p-checkbox>
+
+      <p-checkbox
+        *ngIf="model.findingType === thoraxMRTBonesFindingTypeEnum.SpinalMass"
+        binary="true"
+        [(ngModel)]="model.isInterruptionOfVertebralEndPlate"
+        label="{{'thoraxMRT.bones.interruptionOfVertebralEndPlate.value'| translate}}"
+        rr-id="tho_m_070547"
+        name="isInterruptionOfVertebralEndPlate"
+        rrContentReset="isEdgreenVainoSignContainer"
+      ></p-checkbox>
+      <div
+        id="isEdgreenVainoSignContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isInterruptionOfVertebralEndPlate"
+        *ngIf="model.findingType === thoraxMRTBonesFindingTypeEnum.SpinalMass"
+      >
+        <p-checkbox
+          binary="true"
+          [(ngModel)]="model.isEdgreenVainoSign"
+          label="{{'thoraxMRT.bones.edgrenVainoSign.value'| translate}}"
+          rr-id="tho_m_070548"
+          name="isEdgreenVainoSign"
+          labelStyleClass="text-break"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

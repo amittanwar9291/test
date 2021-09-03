@@ -1,0 +1,279 @@
+<div class="f-horizontal f-start main-container">
+  <div class="c-col-1 c-sep c-pad o-radio-list">
+    <h2 rr-id="tho_c_080205">
+      {{ 'thoraxCT.bones.localization.value' | translate }}*
+    </h2>
+    <rr-spine-simple
+      [selectionAccessibilityMode]="spineSelectionAccessibilityModeEnum.C7toL1"
+      [spineLocation]="model.vertebralColumnLocalization"
+      (click)="openLargeLocalizer()"
+      rrValidation="vertebralColumnLocalization"
+      isLocalizer="true"
+    ></rr-spine-simple>
+    <div class="o-radio-list" [rrDisable]="!isLocalizerMultipleSelectionMade()">
+      <h2 rr-id="tho_c_0802214" class="m-t-25">
+        {{ 'thoraxCT.bones.fractureAge.value' | translate }}
+      </h2>
+      <p-checkbox
+        name="isAcute"
+        label="{{ 'thoraxCT.bones.acute.value' | translate }}"
+        rr-id="tho_c_0802217"
+        binary="true"
+        [(ngModel)]="model.isAcute"
+      ></p-checkbox>
+      <p-checkbox
+        name="isOlderRemodeled"
+        label="{{ 'thoraxCT.bones.olderRemodeled.value' | translate }}"
+        rr-id="tho_c_0802218"
+        binary="true"
+        [(ngModel)]="model.isOlderRemodeled"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="triple-col f-vertical">
+    <div
+      class="triple-col-header c-pad-l"
+      [rrDisable]="!isLocalizerSingleSelectionMade()"
+    >
+      <h2 class="m-b-10 text-break" rr-id="tho_c_080337">
+        {{ 'thoraxCT.bones.characterizationAOClassificationAO52.value' |
+        translate }}{{getLabelBeginning()}}*
+      </h2>
+    </div>
+    <div class="triple-col-content f-horizontal">
+      <div
+        class="c-col-1 c-sep c-pad o-radio-list"
+        [rrDisable]="!isLocalizerSingleSelectionMade()"
+      >
+        <p-radioButton
+          name="fractureOfSpineType"
+          [value]="fractureOfSpineTypeEnum.ACompressionInjury"
+          label="{{getLabelBeginning()}}{{'thoraxCT.bones.52ACompressionInjury.value' | translate }}"
+          rr-id="tho_c_080339"
+          [(ngModel)]="model.fractureOfSpineType"
+          rrValidation="fractureOfSpineType"
+          rrContentReset="distractionInjuryTypeContainer fractureOlderConsolidatedContainer pathologyTypeContainer"
+        ></p-radioButton>
+        <div
+          id="compressionInjuryTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.fractureOfSpineType !== fractureOfSpineTypeEnum.ACompressionInjury"
+        >
+          <p-radioButton
+            name="compressionInjuryType"
+            [value]="compressionInjuryTypeEnum.A0MinorNonStructuralFracture"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52A0MinorNonStructuralFracture.value' | translate }}"
+            rr-id="tho_c_080340"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.compressionInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="compressionInjuryType"
+            [value]="compressionInjuryTypeEnum.A1SingleEndplate"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52A1SingleEndplate.value' | translate }}"
+            rr-id="tho_c_080341"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.compressionInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="compressionInjuryType"
+            [value]="compressionInjuryTypeEnum.A2CoronalSplit"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52A2CoronalSplit.value' | translate }}"
+            rr-id="tho_c_080342"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.compressionInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="compressionInjuryType"
+            [value]="compressionInjuryTypeEnum.A3BurstFractureIncomplete"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52A3BurstFractureIncomplete.value' | translate }}"
+            rr-id="tho_c_080343"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.compressionInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="compressionInjuryType"
+            [value]="compressionInjuryTypeEnum.A4BurstFractureComplete"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52A4BurstFractureComplete.value' | translate }}"
+            rr-id="tho_c_080344"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.compressionInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+      </div>
+      <div
+        class="c-col-1 c-sep c-pad o-radio-list"
+        [rrDisable]="!isLocalizerSingleSelectionMade()"
+      >
+        <p-radioButton
+          name="fractureOfSpineType"
+          [value]="fractureOfSpineTypeEnum.BTensionBandInjury"
+          label="{{getLabelBeginning()}}{{'thoraxCT.bones.52BTensionBandInjury.value' | translate }}"
+          rr-id="tho_c_080422"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.fractureOfSpineType"
+          rrValidation="fractureOfSpineType"
+          rrContentReset="compressionInjuryTypeContainer fractureOlderConsolidatedContainer pathologyTypeContainer"
+        ></p-radioButton>
+        <div
+          id="distractionInjuryTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.fractureOfSpineType !== fractureOfSpineTypeEnum.BTensionBandInjury"
+        >
+          <p-radioButton
+            name="tensionBandInjuryType"
+            [value]="tensionBandInjuryTypeEnum.B1MonosegmentalOsseousFailure"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52B1MonosegmentalOsseousFailure.value' | translate }}"
+            rr-id="tho_c_080423"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.tensionBandInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="tensionBandInjuryType"
+            [value]="tensionBandInjuryTypeEnum.B2DisruptionOfPostTensionBand"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52B2DisruptionOfPostTensionBand.value' | translate }}"
+            rr-id="tho_c_080424"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.tensionBandInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+          <p-radioButton
+            name="tensionBandInjuryType"
+            [value]="tensionBandInjuryTypeEnum.B3DestructionOfTheIntervertebralDisc"
+            label="{{getLabelBeginning()}}{{ 'thoraxCT.bones.52B3DestructionOfTheIntervertebralDisc.value' | translate }}"
+            rr-id="tho_c_080425"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.tensionBandInjuryType"
+            rrUnClickRadio
+          ></p-radioButton>
+        </div>
+        <p-radioButton
+          name="fractureOfSpineType"
+          [value]="fractureOfSpineTypeEnum.CTranslationalInjury"
+          label="{{getLabelBeginning()}}{{'thoraxCT.bones.52CTranslationalInjury.value' | translate }}"
+          rr-id="tho_c_080426"
+          [(ngModel)]="model.fractureOfSpineType"
+          rrValidation="fractureOfSpineType"
+          rrContentReset="compressionInjuryTypeContainer distractionInjuryTypeContainer fractureOlderConsolidatedContainer pathologyTypeContainer"
+        ></p-radioButton>
+        <p-radioButton
+          name="fractureOfSpineType"
+          [value]="fractureOfSpineTypeEnum.NotFurtherDefined"
+          label="{{getLabelBeginning()}}{{'thoraxCT.bones.52NotFurtherDefined.value' | translate }}"
+          rr-id="tho_c_080427"
+          [(ngModel)]="model.fractureOfSpineType"
+          rrValidation="fractureOfSpineType"
+          rrContentReset="compressionInjuryTypeContainer distractionInjuryTypeContainer pathologyTypeContainer"
+        ></p-radioButton>
+        <div
+          id="fractureOlderConsolidatedContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.fractureOfSpineType !== fractureOfSpineTypeEnum.NotFurtherDefined"
+        >
+          <p-checkbox
+            name="isFractureOlderRemodeled"
+            label="{{ 'thoraxCT.bones.fractureOlderRemodeled.value' | translate }}"
+            rr-id="tho_c_080428"
+            binary="true"
+            [(ngModel)]="model.isFractureOlderRemodeled"
+          ></p-checkbox>
+        </div>
+      </div>
+      <div
+        class="c-col-1 c-sep c-pad-l o-radio-list"
+        [rrDisable]="!isLocalizerSingleSelectionMade()"
+      >
+        <p-radioButton
+          name="fractureOfSpineType"
+          [value]="fractureOfSpineTypeEnum.PathologyNoFracture"
+          label="{{'thoraxCT.bones.pathologyNoFracture.value' | translate }}"
+          rr-id="tho_c_080502"
+          [(ngModel)]="model.fractureOfSpineType"
+          rrValidation="fractureOfSpineType"
+          rrContentReset="compressionInjuryTypeContainer distractionInjuryTypeContainer fractureOlderConsolidatedContainer"
+        ></p-radioButton>
+        <div
+          id="pathologyTypeContainer"
+          class="nested-content o-radio-list"
+          [rrDisable]="model.fractureOfSpineType !== fractureOfSpineTypeEnum.PathologyNoFracture"
+        >
+          <p rr-id="tho_c_0805214">
+            {{'thoraxCT.bones.type.value' | translate }}*
+          </p>
+          <p-radioButton
+            name="pathologyType"
+            [value]="pathologyTypeEnum.HeightReductionAnatomicVariation"
+            label="{{ 'thoraxCT.bones.heightReductionAnatomicVariation.value' | translate }}"
+            rr-id="tho_c_080503"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.pathologyType"
+            rrValidation="pathologyType"
+            rrContentReset="isSchmorlNodesContainer isEndplateHerniationContainer"
+          ></p-radioButton>
+          <p-radioButton
+            name="pathologyType"
+            [value]="pathologyTypeEnum.ScheuermannsDisease"
+            label="{{ 'thoraxCT.bones.scheuermannsDisease.value' | translate }}"
+            rr-id="tho_c_080504"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.pathologyType"
+            rrValidation="pathologyType"
+            rrContentReset="isEndplateHerniationContainer"
+          ></p-radioButton>
+          <div
+            id="isSchmorlNodesContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.pathologyType !== pathologyTypeEnum.ScheuermannsDisease"
+          >
+            <p-checkbox
+              name="isSchmorlNodes"
+              label="{{ 'thoraxCT.bones.schmorlNodes.value' | translate }}"
+              rr-id="tho_c_0805215"
+              binary="true"
+              [(ngModel)]="model.isSchmorlNodes"
+            ></p-checkbox>
+          </div>
+          <p-radioButton
+            name="pathologyType"
+            [value]="pathologyTypeEnum.VertebralBodyRemodeling"
+            label="{{ 'thoraxCT.bones.vertebralBodyRemodeling.value' | translate }}"
+            rr-id="tho_c_080505"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.pathologyType"
+            rrValidation="pathologyType"
+            rrContentReset="isSchmorlNodesContainer"
+          ></p-radioButton>
+          <div
+            id="isEndplateHerniationContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.pathologyType !== pathologyTypeEnum.VertebralBodyRemodeling"
+          >
+            <p-checkbox
+              name="isEndplateHerniation"
+              label="{{ 'thoraxCT.bones.endplateHerniation.value' | translate }}"
+              rr-id="tho_c_0805216"
+              binary="true"
+              [(ngModel)]="model.isEndplateHerniation"
+            ></p-checkbox>
+          </div>
+          <p-radioButton
+            name="pathologyType"
+            [value]="pathologyTypeEnum.IncompleteNotochordRegression"
+            label="{{ 'thoraxCT.bones.incompleteNotochordRegression.value' | translate }}"
+            rr-id="tho_c_0805217"
+            labelStyleClass="text-break"
+            [(ngModel)]="model.pathologyType"
+            rrValidation="pathologyType"
+            rrContentReset="isSchmorlNodesContainer isEndplateHerniationContainer"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

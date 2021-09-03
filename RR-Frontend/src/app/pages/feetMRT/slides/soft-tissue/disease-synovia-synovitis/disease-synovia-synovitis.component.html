@@ -1,0 +1,116 @@
+<div class="f-horizontal f-start col-h-100 m-t-11">
+  <div class="c-col-1 f-vertical f-start c-pad-r o-radio-list">
+    <h2 rr-id="anc_m_060239">
+      {{'feetMRT.softTissue.localization.value' | translate}}
+    </h2>
+    <p-radioButton
+      rr-id="anc_m_060240"
+      label="{{'feetMRT.softTissue.diffuse.value' | translate}}"
+      name="localizationOfTheSynoviaSynovitisType "
+      [value]="diseaseOfTheSynoviaEnum.Diffuse"
+      (onClick)="clearDiseaseOfTheSynoviaDetails(diseaseOfTheSynoviaEnum.Diffuse)"
+      [(ngModel)]="model.localizationOfTheSynoviaSynovitisType "
+      rrValidation="localizationOfTheSynoviaSynovitisType "
+    ></p-radioButton>
+    <p-radioButton
+      rr-id="anc_m_060241"
+      label="{{'feetMRT.softTissue.focal.value' | translate}}"
+      name="localizationOfTheSynoviaSynovitisType "
+      [value]="diseaseOfTheSynoviaEnum.Focus"
+      (onClick)="clearDiseaseOfTheSynoviaDetails(diseaseOfTheSynoviaEnum.Focus)"
+      [(ngModel)]="model.localizationOfTheSynoviaSynovitisType "
+      rrValidation="localizationOfTheSynoviaSynovitisType "
+    ></p-radioButton>
+  </div>
+  <div
+    class="c-col-1 c-sep-l c-pad f-vertical f-start o-radio-list m-b-10"
+    [rrDisable]="model.localizationOfTheSynoviaSynovitisType  !== diseaseOfTheSynoviaEnum.Focus"
+  >
+    <h2 rr-id="anc_m_0603137">
+      {{'feetMRT.softTissue.focalDetails.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="anc_m_0603138"
+      label="{{'feetMRT.softTissue.intraarticular.value' | translate}}"
+      name="isIntraarticular"
+      [(ngModel)]="model.isIntraarticular"
+      rrValidation="isIntraarticular isExtraarticular"
+      binary="true"
+      (onChange)="clearThreeDimensionalLocalizer()"
+    ></p-checkbox>
+    <div class="o-radio-list" [rrDisable]="!model.isIntraarticular">
+      <p
+        rr-id="anc_m_0603127"
+        class="m-l-35"
+        rrValidation="threeDimensionalLocalization"
+      >
+        {{'feetMRT.softTissue.localizationIntrarticular.value' | translate}}
+      </p>
+      <rr-foot-big-joints-simple
+        rrValidation="threeDimensionalLocalization"
+        rr-id="anc_m_060243"
+        name="threeDimensionalLocalization"
+        class="m-l-15"
+        isLocalizer="true"
+        (click)="openLargeLocalizerJoints()"
+        [side]="side"
+        height="175"
+        [model]="model.threeDimensionalLocalization"
+      ></rr-foot-big-joints-simple>
+    </div>
+    <p-checkbox
+      rr-id="anc_m_0603139"
+      label="{{'feetMRT.softTissue.extraarticular.value' | translate}}"
+      name="isExtraarticular"
+      [(ngModel)]="model.isExtraarticular"
+      (onChange)="clearTendonsLocalizer()"
+      rrValidation="isIntraarticular isExtraarticular"
+      binary="true"
+    ></p-checkbox>
+    <div class="o-radio-list" [rrDisable]="!model.isExtraarticular">
+      <p rr-id="anc_m_060356" class="m-l-35" rrValidation="tendonsLocalization">
+        {{'feetMRT.softTissue.extraarticularLocalization.value' | translate}}
+      </p>
+      <rr-foot-big-tendons-simple
+        rr-id="anc_m_060357"
+        name="tendonsLocalization"
+        rrValidation="tendonsLocalization"
+        isLocalizer="true"
+        class="m-l-15"
+        (click)="openLargeLocalizerTendons()"
+        [side]="side"
+        height="175"
+        [model]="model.tendonsLocalization"
+      ></rr-foot-big-tendons-simple>
+    </div>
+  </div>
+
+  <div class="c-col-1 c-sep-l c-pad f-vertical f-start o-radio-list m-b-10">
+    <h2 rr-id="anc_m_0604108">
+      {{'feetMRT.softTissue.synovitis.value' | translate}}
+    </h2>
+    <p-checkbox
+      rr-id="anc_m_0604109"
+      label="{{'feetMRT.softTissue.hyperplasia.value' | translate}}"
+      name="isHyperplasia"
+      [(ngModel)]="model.isHyperplasia"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_0604110"
+      label="{{'feetMRT.softTissue.elevatedT2wPDSignal.value' | translate}}"
+      name="isHigherT2wOrPDSignal"
+      [(ngModel)]="model.isHigherT2wOrPDSignal"
+      binary="true"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="anc_m_0604111"
+      [rrDisable]="!isCMYes"
+      label="{{'feetMRT.softTissue.increasedKMEnhancement.value' | translate}}"
+      name="isIncreasedCMEnhancement"
+      [(ngModel)]="model.isIncreasedCMEnhancement"
+      binary="true"
+    ></p-checkbox>
+  </div>
+  <div class="c-col-1 c-sep-l c-pad-l m-b-10"></div>
+</div>

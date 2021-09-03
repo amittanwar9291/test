@@ -1,0 +1,259 @@
+<div id="chronicAortiliacCont" class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep-l c-pad o-list">
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_090311">
+        {{'angiographyCT.pelvisLegArteries.side.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_090312"
+        label="{{'angiographyCT.pelvisLegArteries.right.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090313"
+        label="{{'angiographyCT.pelvisLegArteries.left.value' | translate}}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrValidation="sideType"
+      ></p-radioButton>
+
+      <h2 rr-id="ang_c_090314" class="m-t-20">
+        {{'angiographyCT.pelvisLegArteries.type.value' | translate}}*
+      </h2>
+      <p-radioButton
+        rr-id="ang_c_090315"
+        label="{{'angiographyCT.pelvisLegArteries.typeA.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.TypeA"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="clearClassificationDetails(chronicLesionsTypeEnum.TypeA)"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090316"
+        label="{{'angiographyCT.pelvisLegArteries.typeB.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.TypeB"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="clearClassificationDetails(chronicLesionsTypeEnum.TypeB)"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090317"
+        label="{{'angiographyCT.pelvisLegArteries.typeC.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.TypeC"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="clearClassificationDetails(chronicLesionsTypeEnum.TypeC)"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090318"
+        label="{{'angiographyCT.pelvisLegArteries.typeD.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.TypeD"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="clearClassificationDetails(chronicLesionsTypeEnum.TypeD)"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="ang_c_090319"
+        label="{{'angiographyCT.pelvisLegArteries.lerichSyndrome.value' | translate}}"
+        name="chronicLesionsType"
+        [value]="chronicLesionsTypeEnum.LerichSyndrome"
+        [(ngModel)]="model.chronicLesionsType"
+        [rrContentReset]="clearClassificationDetails(chronicLesionsTypeEnum.LerichSyndrome)"
+        rrValidation="chronicLesionsType"
+      ></p-radioButton>
+    </div>
+  </div>
+
+  <div
+    id="fourth-col"
+    [class.m-t-130]="isDetailsHeaderActive()"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad o-list"
+  >
+    <div class="o-radio-list">
+      <h2 rr-id="ang_c_090421" *ngIf="isDetailsHeaderActive()">
+        {{'angiographyCT.pelvisLegArteries.details.value' | translate}}*
+      </h2>
+      <ng-container
+        *ngIf="model.chronicLesionsType === chronicLesionsTypeEnum.TypeA"
+      >
+        <p-radioButton
+          rr-id="ang_c_090422"
+          class="text-break2"
+          label="{{'angiographyCT.pelvisLegArteries.shortStenosisCmOfcommon.value' | translate}}"
+          name="typeADetailsType"
+          [value]="typeADetailsTypeEnum.ShortStenosis"
+          [(ngModel)]="model.typeADetailsType"
+          rrValidation="typeADetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090423"
+          class="text-break2"
+          label="{{'angiographyCT.pelvisLegArteries.uniOrBilateralstenosisCm.value' | translate}}"
+          name="typeADetailsType"
+          [value]="typeADetailsTypeEnum.UniOrBilateralStenosis"
+          [(ngModel)]="model.typeADetailsType"
+          rrValidation="typeADetailsType"
+        ></p-radioButton>
+      </ng-container>
+      <ng-container
+        *ngIf="model.chronicLesionsType === chronicLesionsTypeEnum.TypeB"
+      >
+        <p-radioButton
+          rr-id="ang_c_090424"
+          label="{{'angiographyCT.pelvisLegArteries.shortStenosisCmOf.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.ShortStenosis"
+          class="text-break2 m-b-6"
+          [(ngModel)]="model.typeBDetailsType"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090425"
+          class="m-b-4"
+          label="{{'angiographyCT.pelvisLegArteries.unilateralCommonIliacArteryCIA.value' | translate}}"
+          name="typeBDetailsType"
+          class="text-break2"
+          [value]="typeBDetailsTypeEnum.UnilateralCommonIliacArtery"
+          [(ngModel)]="model.typeBDetailsType"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090426"
+          label="{{'angiographyCT.pelvisLegArteries.unilateralEIAStenosisstenosestotalingCm.value' | translate}}"
+          name="typeBDetailsType"
+          [value]="typeBDetailsTypeEnum.UnilateralEIAStenosisStenoses"
+          class="text-break2"
+          [(ngModel)]="model.typeBDetailsType"
+          rrValidation="typeBDetailsType"
+        ></p-radioButton>
+      </ng-container>
+      <ng-container
+        *ngIf="model.chronicLesionsType === chronicLesionsTypeEnum.TypeC"
+      >
+        <p-radioButton
+          rr-id="ang_c_090427"
+          label="{{'angiographyCT.pelvisLegArteries.bilateralCommonIliacArteryCIA.value' | translate}}"
+          name="typeCDetailsType"
+          [value]="typeCDetailsTypeEnum.BilateralCommonIliacArtery"
+          class="text-break2 m-b-4"
+          [(ngModel)]="model.typeCDetailsType"
+          rrValidation="typeCDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090428"
+          label="{{'angiographyCT.pelvisLegArteries.bilateralEIAStenosesCm.value' | translate}}"
+          name="typeCDetailsType"
+          [value]="typeCDetailsTypeEnum.BilateralEIAStenoses"
+          class="text-break2 m-b-4"
+          [(ngModel)]="model.typeCDetailsType"
+          rrValidation="typeCDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090429"
+          label="{{'angiographyCT.pelvisLegArteries.unilateralEIAStenosis\ninvolving.value' | translate}}"
+          name="typeCDetailsType"
+          [value]="typeCDetailsTypeEnum.UnilateralEIAStenosis"
+          class="text-break2 m-b-4"
+          [(ngModel)]="model.typeCDetailsType"
+          rrValidation="typeCDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090430"
+          label="{{'angiographyCT.pelvisLegArteries.heavenlyCalcifiedUnilateralEIAOcclusion.value' | translate}}"
+          name="typeCDetailsType"
+          [value]="typeCDetailsTypeEnum.HeavenlyCalcifiedUnilateral"
+          class="text-break2"
+          [(ngModel)]="model.typeCDetailsType"
+          rrValidation="typeCDetailsType"
+        ></p-radioButton>
+      </ng-container>
+      <ng-container
+        *ngIf="model.chronicLesionsType === chronicLesionsTypeEnum.TypeD"
+      >
+        <p-radioButton
+          rr-id="ang_c_090431"
+          label="{{'angiographyCT.pelvisLegArteries.infrarenalAortoiliacOcclusion.value' | translate}}"
+          name="typeDDetailsType"
+          [value]="typeDDetailsTypeEnum.InfrarenalAortoiliacOcclusion"
+          class="text-break2"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090432"
+          label="{{'angiographyCT.pelvisLegArteries.diffuseDiseaseInvolvingTheaorta.value' | translate}}"
+          name="typeDDetailsType"
+          class="text-break2"
+          [value]="typeDDetailsTypeEnum.DiffuseDisease"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090433"
+          label="{{'angiographyCT.pelvisLegArteries.diffuseMultipleStenosesInvolving.value' | translate}}"
+          name="typeDDetailsType"
+          class="text-break2"
+          [value]="typeDDetailsTypeEnum.DiffuseMultipleStenoses"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090434"
+          class="text-break2"
+          label="{{'angiographyCT.pelvisLegArteries.unilateralOcclusionOfThe.value' | translate}}"
+          name="typeDDetailsType"
+          [value]="typeDDetailsTypeEnum.UnilateralOcclusionOfTheCIAAndEIA"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+      </ng-container>
+    </div>
+  </div>
+  <div
+    id="fifth-col"
+    class="c-col-1 f-vertical f-start c-sep-l c-pad-l o-list"
+    [class.m-t-157]="model.chronicLesionsType === chronicLesionsTypeEnum.TypeD"
+  >
+    <div class="o-radio-list">
+      <ng-container
+        *ngIf="model.chronicLesionsType === chronicLesionsTypeEnum.TypeD"
+      >
+        <p-radioButton
+          rr-id="ang_c_090512"
+          class="text-break"
+          label="{{'angiographyCT.pelvisLegArteries.bilateralOcclusionsOfTheEIA.value' | translate}}"
+          name="typeDDetailsType"
+          [value]="typeDDetailsTypeEnum.BilateralOcclusionsOfTheEIA"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090513"
+          label="{{'angiographyCT.pelvisLegArteries.iliacStenosisInPatients.value' | translate}}"
+          name="typeDDetailsType"
+          class="text-break2"
+          [value]="typeDDetailsTypeEnum.IliacStenosis"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_090514"
+          class="text-break2"
+          label="{{'angiographyCT.pelvisLegArteries.lesionsThatRequireOpen.value' | translate}}"
+          name="typeDDetailsType"
+          [value]="typeDDetailsTypeEnum.LesionsThatRequireOpenSurgery"
+          [(ngModel)]="model.typeDDetailsType"
+          rrValidation="typeDDetailsType"
+        ></p-radioButton>
+      </ng-container>
+    </div>
+  </div>
+</div>

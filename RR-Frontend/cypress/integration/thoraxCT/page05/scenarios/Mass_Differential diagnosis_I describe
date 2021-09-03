@@ -1,0 +1,43 @@
+Given	I'm logged-in with valid credentials
+And	I go to Page 05 of Thoracic CT
+And I select 'Finding' radio button
+And I select 'Mass' from the dropdown menu
+And I select 'I describe' radio button
+
+When I select 'Differential diagnosis' tab
+Then 'Differential diagnosis 1' dropdown menu is enabled
+And '> 1 lesion, same entity' checkbox is enabled
+
+When I select any diagnosis from 'Differential diagnosis 1' dropdown menu
+Then 'Suspected' checkbox is enabled
+And 'Differential diagnosis 2' dropdown menu is enabled
+
+When I select another diagnosis from 'Differential diagnosis 2' dropdown menu
+Then 'Subordinated' checkbox is enabled
+And 'Differential diagnosis 3' dropdown menu is enabled
+
+When I select '> 1 lesion, same entity' checkbox
+Then 'At segment level' radio button is enabled
+And 'At lobe level' radio button is enabled
+
+When I select 'At segment level' radio button
+Then 'Localization at segment level' localizer is enabled
+When I click on 'Localization at segment level' localizer
+Then canvas opens
+When I select 'RI 1'
+Then 'RI 1' is selected
+When I select 'RI 4'
+Then 'RI 4' is selected
+And 'RI 4' is automatically deselected
+
+
+When I close the canvas
+And I select 'At lobe level' radio button
+Then 'Localization at lobe level*' localizer is enabled
+When I click on the localizer
+Then canvas opens
+When I select 'UL' from 'R'
+Then 'UL' is selected
+When I select 'LI' from 'L'
+Then 'LI' is selected
+And 'UL' is automatically deselected

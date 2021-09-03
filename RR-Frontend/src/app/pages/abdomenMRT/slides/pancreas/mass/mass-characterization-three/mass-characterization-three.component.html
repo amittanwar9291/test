@@ -1,0 +1,428 @@
+<div class="c-col-4 f-vertical c-sep c-pad-l m-t-14 m-b-13">
+  <h2 rr-id="abd_m_060266" class="m-b-10">
+    {{ 'abdomenMRT.pancreas.associatedFindings.value' | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-pad-r c-sep">
+      <div class="f-vertical o-radio-list">
+        <p-checkbox
+          rr-id="abd_m_060267"
+          [(ngModel)]="model.isParenchymalFattyDegeneration"
+          name="isParenchymalFattyDegeneration"
+          label="{{ 'abdomenMRT.pancreas.parenchymalFattyDegeneration.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060268"
+          [(ngModel)]="model.isParenchymalAtrophy"
+          name="isParenchymalAtrophy"
+          label="{{ 'abdomenMRT.pancreas.parenchymalAtrophy.value' | translate }}"
+          binary="true"
+          rrContentReset="isParenchymalAtrophy-block"
+        >
+        </p-checkbox>
+        <div
+          id="isParenchymalAtrophy-block"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isParenchymalAtrophy"
+        >
+          <h3 rr-id="abd_m_060269">
+            {{ 'abdomenMRT.pancreas.localization.value' | translate }}
+          </h3>
+          <p-checkbox
+            rr-id="abd_m_060270"
+            [(ngModel)]="model.isParenchymalAtrophyUncinateProcess"
+            name="isParenchymalAtrophyUncinateProcess"
+            label="{{ 'abdomenMRT.pancreas.uncinateProcess.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_060271"
+            [(ngModel)]="model.isParenchymalAtrophyPancreaticHead"
+            name="isParenchymalAtrophyPancreaticHead"
+            label="{{ 'abdomenMRT.pancreas.pancreaticHead.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_060272"
+            [(ngModel)]="model.isParenchymalAtrophyPancreaticBody"
+            name="isParenchymalAtrophyPancreaticBody"
+            label="{{ 'abdomenMRT.pancreas.pancreaticBody.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+          <p-checkbox
+            rr-id="abd_m_060273"
+            [(ngModel)]="model.isParenchymalAtrophyPancreaticTail"
+            name="isParenchymalAtrophyPancreaticTail"
+            label="{{ 'abdomenMRT.pancreas.pancreaticTail.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="abd_m_060274"
+          [(ngModel)]="model.isExtensionDuctHepatocholedochus"
+          name="isExtensionDuctHepatocholedochus"
+          label="{{ 'abdomenMRT.pancreas.extensionductHepatocholedochus.value' | translate }}"
+          labelStyleClass="text-break"
+          binary="true"
+          rrContentReset="isExtensionDuctHepatocholedochus-block1 isExtensionDuctHepatocholedochus-block2"
+        >
+        </p-checkbox>
+        <div
+          id="isExtensionDuctHepatocholedochus-block1"
+          class="o-radio-list nested-content"
+          [rrDisable]="!model.isExtensionDuctHepatocholedochus"
+        >
+          <h3 rr-id="abd_m_060275">
+            {{ 'abdomenMRT.pancreas.maxDiameter.value' | translate }}
+          </h3>
+          <rr-number-input
+            inputRrId="abd_m_060276"
+            labelRrId="abd_m_060277"
+            name="maxDiameter"
+            [(ngModel)]="model.maxDiameter"
+            label="{{ 'abdomenMRT.pancreas.inMm.value' | translate }}"
+            [config]="{ placeholder: '--', min: 1, max: 99, labelWidth: 140 }"
+          ></rr-number-input>
+        </div>
+        <div
+          id="isExtensionDuctHepatocholedochus-block2"
+          [rrDisable]="!model.isExtensionDuctHepatocholedochus
+             || model.pancreaticDuctPathologyType !== pancreaticDuctPathologyType.Dilatation"
+        >
+          <p-checkbox
+            rr-id="abd_m_060278"
+            [(ngModel)]="model.isDoubleDuctSign"
+            name="isDoubleDuctSign"
+            label="{{ 'abdomenMRT.pancreas.doubleDuctSign.value' | translate }}"
+            binary="true"
+          >
+          </p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="abd_m_060279"
+          [(ngModel)]="model.isVesselInvolvement"
+          name="isVesselInvolvement"
+          label="{{ 'abdomenMRT.pancreas.vesselInvolvement.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-3 f-vertical c-pad-l c-sep">
+      <h2 rr-id="abd_m_060381" class="m-b-10" rrInfoIcon="abd_m_06_03">
+        {{ 'abdomenMRT.pancreas.affectedVessel.value' | translate }}*
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-pad-r c-sep o-list">
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_060382"
+              [(ngModel)]="model.isCeliacTrunk"
+              name="isCeliacTrunk"
+              label="{{ 'abdomenMRT.pancreas.celiacTrunk.value' | translate }}"
+              binary="true"
+              rrContentReset="isCeliacTrunk-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isCeliacTrunk-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isCeliacTrunk"
+            >
+              <h3 rr-id="abd_m_060383">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060384"
+                [(ngModel)]="model.celiacTrunkCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="celiacTrunkCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions1"
+                rrDropdownClear
+                rrValidation="celiacTrunkCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_060385"
+              [(ngModel)]="model.isSplenicArtery"
+              name="isSplenicArtery"
+              label="{{ 'abdomenMRT.pancreas.splenicArtery.value' | translate }}"
+              binary="true"
+              rrContentReset="isSplenicArtery-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isSplenicArtery-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isSplenicArtery"
+            >
+              <h3 rr-id="abd_m_060386">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060387"
+                [(ngModel)]="model.splenicArteryCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="splenicArteryCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions1"
+                rrDropdownClear
+                rrValidation="splenicArteryCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_060388"
+              [(ngModel)]="model.isCommonHepaticArtery"
+              name="isCommonHepaticArtery"
+              label="{{ 'abdomenMRT.pancreas.commonHepaticArtery.value' | translate }}"
+              binary="true"
+              rrContentReset="isCommonHepaticArtery-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isCommonHepaticArtery-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isCommonHepaticArtery"
+            >
+              <h3 rr-id="abd_m_060389">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060390"
+                [(ngModel)]="model.commonHepaticArteryCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="commonHepaticArteryCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions1"
+                rrDropdownClear
+                rrValidation="commonHepaticArteryCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad c-sep o-list">
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_060453"
+              [(ngModel)]="model.isGastroduodenalArtery"
+              name="isGastroduodenalArtery"
+              label="{{ 'abdomenMRT.pancreas.gastroduodenalArtery.value' | translate }}"
+              binary="true"
+              rrContentReset="gastroduodenalArtery-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="gastroduodenalArtery-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isGastroduodenalArtery"
+            >
+              <h3 rr-id="abd_m_060454">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060455"
+                [(ngModel)]="model.gastroduodenalArteryCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="gastroduodenalArteryCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions1"
+                rrDropdownClear
+                rrValidation="gastroduodenalArteryCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_060456"
+              [(ngModel)]="model.isPancreaticoduodenalArtery"
+              name="isPancreaticoduodenalArtery"
+              label="{{ 'abdomenMRT.pancreas.pancreaticoduodenalArtery.value' | translate }}"
+              binary="true"
+              rrContentReset="isPancreaticoduodenalArtery-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isPancreaticoduodenalArtery-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isPancreaticoduodenalArtery"
+            >
+              <h3 rr-id="abd_m_060457">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060458"
+                [(ngModel)]="model.pancreaticoduodenalArteryCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="pancreaticoduodenalArteryCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions1"
+                rrDropdownClear
+                rrValidation="pancreaticoduodenalArteryCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list">
+            <p-checkbox
+              rr-id="abd_m_060459"
+              [(ngModel)]="model.isASuperiorMesentericArtery"
+              name="isASuperiorMesentericArtery"
+              label="{{ 'abdomenMRT.pancreas.superiorMesentericArtery.value' | translate }}"
+              binary="true"
+              rrContentReset="isASuperiorMesentericArtery-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isASuperiorMesentericArtery-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isASuperiorMesentericArtery"
+            >
+              <h3 rr-id="abd_m_060460">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060461"
+                [(ngModel)]="model.aSuperiorMesentericArteryCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="aSuperiorMesentericArteryCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions1"
+                rrDropdownClear
+                rrValidation="aSuperiorMesentericArteryCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l o-list">
+          <div class="f-vertical o-radio-list p-r-15">
+            <p-checkbox
+              rr-id="abd_m_060537"
+              [(ngModel)]="model.isPortalVein"
+              name="isPortalVein"
+              label="{{ 'abdomenMRT.pancreas.portalVein.value' | translate }}"
+              binary="true"
+              rrContentReset="isPortalVein-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isPortalVein-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isPortalVein"
+            >
+              <h3 rr-id="abd_m_060538">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060539"
+                [(ngModel)]="model.portalVeinCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="portalVeinCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions2"
+                rrDropdownClear
+                rrValidation="portalVeinCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list p-r-15">
+            <p-checkbox
+              rr-id="abd_m_060540"
+              [(ngModel)]="model.isVSuperiorMesentericArtery"
+              name="isVSuperiorMesentericArtery"
+              label="{{ 'abdomenMRT.pancreas.superiorMesentericArtery.value' | translate }}"
+              binary="true"
+              rrContentReset="isVSuperiorMesentericArtery-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isVSuperiorMesentericArtery-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isVSuperiorMesentericArtery"
+            >
+              <h3 rr-id="abd_m_060541">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060542"
+                [(ngModel)]="model.vSuperiorMesentericArteryCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="vSuperiorMesentericArteryCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions2"
+                rrDropdownClear
+                rrValidation="vSuperiorMesentericArteryCharacteristicsType"
+              >
+              </p-dropdown>
+              <p-checkbox
+                rr-id="abd_m_060543"
+                [(ngModel)]="model.isTearDropSign"
+                name="isTearDropSign"
+                class="m-t-10"
+                label="{{ 'abdomenMRT.pancreas.tearDropSign.value' | translate }}"
+                binary="true"
+              >
+              </p-checkbox>
+            </div>
+          </div>
+          <div class="f-vertical o-radio-list p-r-15">
+            <p-checkbox
+              rr-id="abd_m_060544"
+              [(ngModel)]="model.isVCavaInferior"
+              name="isVCavaInferior"
+              label="{{ 'abdomenMRT.pancreas.vCavaInferior.value' | translate }}"
+              binary="true"
+              rrContentReset="isVCavaInferior-block"
+              [rrValidation]="validationProps"
+            >
+            </p-checkbox>
+            <div
+              id="isVCavaInferior-block"
+              class="o-radio-list nested-content"
+              [rrDisable]="!model.isVCavaInferior"
+            >
+              <h3 rr-id="abd_m_060545">
+                {{ 'abdomenMRT.pancreas.characteristics.value' | translate }}*
+              </h3>
+              <p-dropdown
+                rr-id="abd_m_060550"
+                [(ngModel)]="model.vCavaInferiorCharacteristicsType"
+                styleClass="o-width-100 ui-brown-box"
+                name="vCavaInferiorCharacteristicsType"
+                placeholder="{{ 'shared.pleaseSelect' | translate }}"
+                [options]="characteristicsOptions2"
+                rrDropdownClear
+                rrValidation="vCavaInferiorCharacteristicsType"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

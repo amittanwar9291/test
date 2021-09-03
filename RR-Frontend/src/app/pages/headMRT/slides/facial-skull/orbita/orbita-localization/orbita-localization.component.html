@@ -1,0 +1,403 @@
+<div class="f-horizontal main-container o-width-100">
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.descriptionType === descriptionType.IDescribe"
+      >
+        <h2 rr-id="hea_m_110281" class="m-b-6">
+          {{ "headMRT.facialSkull.differentialDiagnosis1.value" | translate }}*
+        </h2>
+        <rr-differential-diagnosis-dropdown
+          rrId="hea_m_110282"
+          [diagnosisNumber]="1"
+          [options]="w049"
+          [(ngModel)]="model.orbitaDiagnosis1LocalizationType"
+          name="orbitaDiagnosis1LocalizationType"
+          group="true"
+          [parentViewModel]="model"
+          isActiveOnIKnow="true"
+          rrValidation="orbitaDiagnosis1LocalizationType"
+          (selectionChanged)="resetDifferentialDiagnosisDependantModel1()"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+
+      <div class="o-radio-list" *ngIf="isDiagnosisSubperiostealAbscess()">
+        <p rr-id="hea_m_1102345" rrInfoIcon="hea_m_11_04">
+          {{ "headMRT.facialSkull.chandlerClassification.value" | translate }}
+        </p>
+        <p-radioButton
+          rr-id="hea_m_1102346"
+          label="{{ 'headMRT.facialSkull.typeIPreseptalPhlegmon.value' | translate }}"
+          name="chandlerClassificationLocalizationType"
+          [value]="chandlerClassificationFullTypeEnum.TypeIPreseptalPhlegmon"
+          [(ngModel)]="model.chandlerClassificationLocalizationType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102347"
+          label="{{ 'headMRT.facialSkull.typeIIPeriorbitalEdema.value' | translate }}"
+          name="chandlerClassificationLocalizationType"
+          [value]="chandlerClassificationFullTypeEnum.TypeIIPeriorbitalEdema"
+          [(ngModel)]="model.chandlerClassificationLocalizationType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102343"
+          label="{{ 'headMRT.facialSkull.typeIIISubperiostealAbscess.value' | translate }}"
+          name="chandlerClassificationLocalizationType"
+          [value]="chandlerClassificationFullTypeEnum.TypeIIISubperiostealAbscess"
+          [(ngModel)]="model.chandlerClassificationLocalizationType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_1102348"
+          label="{{ 'headMRT.facialSkull.typeIVIntraorbitalAbscess.value' | translate }}"
+          name="chandlerClassificationLocalizationType"
+          [value]="chandlerClassificationFullTypeEnum.TypeIVIntraorbitalAbscess"
+          [(ngModel)]="model.chandlerClassificationLocalizationType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          labelStyleClass="text-break"
+          rr-id="hea_m_1102349"
+          label="{{ 'headMRT.facialSkull.typeVSinusCavernosusThrombosis.value' | translate }}"
+          name="chandlerClassificationLocalizationType"
+          [value]="chandlerClassificationFullTypeEnum.TypeVSinusCavernosusThrombosis"
+          [(ngModel)]="model.chandlerClassificationLocalizationType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+
+      <h2
+        rr-id="hea_m_110283"
+        [ngClass]="isDiagnosisSubperiostealAbscess() ? 'm-t-10' : 'm-t-20'"
+      >
+        {{ "headMRT.facialSkull.side.value" | translate }}*
+      </h2>
+      <p-radioButton
+        rr-id="hea_m_110284"
+        label="{{ 'headMRT.facialSkull.right.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Right"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_110285"
+        label="{{ 'headMRT.facialSkull.left.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.Left"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="hea_m_110286"
+        label="{{ 'headMRT.facialSkull.bothSides.value' | translate }}"
+        name="sideType"
+        [value]="sideTypeEnum.BothSides"
+        [(ngModel)]="model.sideType"
+        rrContentReset="symmetryTypeBlock"
+        rrValidation="sideType"
+      ></p-radioButton>
+      <div
+        id="symmetryTypeBlock"
+        class="o-radio-list nested-content"
+        [rrDisable]="model.sideType !== sideTypeEnum.BothSides"
+      >
+        <p-radioButton
+          rr-id="hea_m_110287"
+          label="{{ 'headMRT.facialSkull.symmetrical.value' | translate }}"
+          name="symmetryType"
+          [value]="symmetryTypeEnum.Symmetrical"
+          [(ngModel)]="model.symmetryType"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="hea_m_110288"
+          label="{{ 'headMRT.facialSkull.asymmetrical.value' | translate }}"
+          name="symmetryType"
+          [value]="symmetryTypeEnum.Asymmetrical"
+          [(ngModel)]="model.symmetryType"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_110359">
+        {{ "headMRT.facialSkull.bone.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_110360"
+        name="isFrontalBone"
+        label="{{ 'headMRT.facialSkull.frontalBone.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFrontalBone"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="isZygomaticBone"
+        name="isMaxilla"
+        label="{{ 'headMRT.facialSkull.zygomaticBone.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isZygomaticBone"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110362"
+        name="isSphenoidBone"
+        label="{{ 'headMRT.facialSkull.sphenoidBone.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSphenoidBone"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110363"
+        name="isMaxillaryBone"
+        label="{{ 'headMRT.facialSkull.maxillaOsMaxillaris.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isMaxillaryBone"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110364"
+        name="isLacrimalBone"
+        label="{{ 'headMRT.facialSkull.lacrimalBone.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isLacrimalBone"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110365"
+        name="isEthmoidBone"
+        label="{{ 'headMRT.facialSkull.ethmoidBone.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isEthmoidBone"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_1103315"
+        name="isOrbitalFloor"
+        label="{{ 'headMRT.facialSkull.orbitalFloor.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isOrbitalFloor"
+        rrContentReset="infraorbitalGrooveContainer"
+      ></p-checkbox>
+      <div
+        class="nested-content o-radio-list"
+        id="infraorbitalGrooveContainer"
+        [rrDisable]="!model.isOrbitalFloor"
+      >
+        <p-checkbox
+          rr-id="hea_m_110366"
+          name="isInfraorbitalGroove"
+          label="{{ 'headMRT.facialSkull.infraorbitalGroove.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isInfraorbitalGroove"
+          rrContentReset="infraorbitalNerveContainer"
+        ></p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          id="infraorbitalNerveContainer"
+          [rrDisable]="!model.isInfraorbitalGroove"
+        >
+          <p-checkbox
+            rr-id="hea_m_110367"
+            name="isInfraorbitalNerve"
+            label="{{ 'headMRT.facialSkull.infraorbitalNerve.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isInfraorbitalNerve"
+          ></p-checkbox>
+        </div>
+      </div>
+
+      <h2 rr-id="hea_m_110368" class="m-t-30">
+        {{ "headMRT.facialSkull.compartment.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_110369"
+        name="isIntraconalSpace"
+        label="{{ 'headMRT.facialSkull.intraconalSpace.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isIntraconalSpace"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110370"
+        name="isExtraconalSpace"
+        label="{{ 'headMRT.facialSkull.extraconalSpace.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isExtraconalSpace"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110371"
+        name="isOpticNerveIICompartment"
+        label="{{ 'headMRT.facialSkull.opticNerveII.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isOpticNerveIICompartment"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110372"
+        name="isBulbusOculi"
+        label="{{ 'headMRT.facialSkull.bulbusOculi.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isBulbusOculi"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_110457">
+        {{ "headMRT.facialSkull.eye.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_110458"
+        name="isAnteriorChamber"
+        label="{{ 'headMRT.facialSkull.anteriorChamber.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isAnteriorChamber"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110459"
+        name="isLens"
+        label="{{ 'headMRT.facialSkull.lens.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isLens"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_1104265"
+        name="isPosteriorChamber"
+        label="{{ 'headMRT.facialSkull.posteriorChamber.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isPosteriorChamber"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="isCiliaryBody"
+        name="isCiliaryBody"
+        label="{{ 'headMRT.facialSkull.ciliaryBody.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isCiliaryBody"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110461"
+        name="isVitreousBody"
+        label="{{ 'headMRT.facialSkull.vitreousBody.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isVitreousBody"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110462"
+        name="isSclera"
+        label="{{ 'headMRT.facialSkull.sclera.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSclera"
+      ></p-checkbox>
+
+      <h2 rr-id="hea_m_110463" class="text-break m-t-40">
+        {{ "headMRT.facialSkull.extrinsicEyMusculature.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_110464"
+        name="isRectusSuperiorMuscle"
+        label="{{ 'headMRT.facialSkull.rectusSuperiorMuscle.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isRectusSuperiorMuscle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110465"
+        name="isRectusInferiorMuscle"
+        label="{{ 'headMRT.facialSkull.rectusInferiorMuscle.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isRectusInferiorMuscle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110466"
+        name="isRectusLateralisMuscle"
+        label="{{ 'headMRT.facialSkull.rectusLateralisMuscle.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isRectusLateralisMuscle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110467"
+        name="isRectusMedialisMuscle"
+        label="{{ 'headMRT.facialSkull.rectusMedialisMuscle.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isRectusMedialisMuscle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110468"
+        name="isObliquusSuperiorMuscle"
+        label="{{ 'headMRT.facialSkull.obliquusSuperiorMuscle.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isObliquusSuperiorMuscle"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110469"
+        name="isObliquusInferiorMuscle"
+        label="{{ 'headMRT.facialSkull.obliquusInferiorMuscle.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isObliquusInferiorMuscle"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l m-t-10 m-b-13">
+    <div class="m-l-10 o-radio-list">
+      <h2 rr-id="hea_m_110559">
+        {{ "headMRT.facialSkull.otherStructures.value" | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="hea_m_110560"
+        name="isFissuraOrbitalisSuperior"
+        label="{{ 'headMRT.facialSkull.fissuraOrbitalisSuperior.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFissuraOrbitalisSuperior"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110561"
+        name="isFissuraOrbitalisInferior"
+        label="{{ 'headMRT.facialSkull.fissuraOrbitalisInferior.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFissuraOrbitalisInferior"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110562"
+        name="isFossaPterygopalatina"
+        label="{{ 'headMRT.facialSkull.fossaPterygopalatina.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFossaPterygopalatina"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110563"
+        name="isOpticNerveIIOther"
+        label="{{ 'headMRT.facialSkull.opticNerveII.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isOpticNerveIIOther"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110564"
+        name="isTrigeminalNerveV"
+        label="{{ 'headMRT.facialSkull.trigeminalNerveV.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isTrigeminalNerveV"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110565"
+        name="isMeningeaRecurrensArtery"
+        label="{{ 'headMRT.facialSkull.meningeaRecurrensArtery.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isMeningeaRecurrensArtery"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110566"
+        name="isSuperiorOphthalmicVein"
+        label="{{ 'headMRT.facialSkull.superiorOphthalmicVein.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isSuperiorOphthalmicVein"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_m_110567"
+        name="isLacrimalGland"
+        label="{{ 'headMRT.facialSkull.lacrimalGland.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isLacrimalGland"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

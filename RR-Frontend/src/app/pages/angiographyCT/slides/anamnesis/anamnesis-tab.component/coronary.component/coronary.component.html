@@ -1,0 +1,156 @@
+<div class="f-vertical col-h-100">
+  <h2 rr-id="ang_c_020226" class="c-pad-l">
+    {{'angiographyCT.anamnesis.coronaryHeartDisease.value' | translate }}
+  </h2>
+  <div class="f-start f-horizontal col-h-100 o-list">
+    <div class="c-col-1 c-sep c-pad m-t-14 m-b-12 f-vertical o-list">
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="ang_c_020227"
+          label="{{ 'angiographyCT.anamnesis.anginaPectoris.value'  | translate }}"
+          name="isAnginaPectoris"
+          [(ngModel)]="model.isAnginaPectoris"
+          binary="true"
+          rrContentReset="isAnginaPectorisContainer"
+        >
+        </p-checkbox>
+        <div
+          id="isAnginaPectorisContainer"
+          class="nested-content f-vertical o-radio-list"
+          [rrDisable]="!model.isAnginaPectoris"
+        >
+          <p-radioButton
+            rr-id="ang_c_020228"
+            label="{{ 'angiographyCT.anamnesis.unstable.value' | translate }}"
+            name="afterTransplantationType"
+            [(ngModel)]="model.anginaPectorisType"
+            [value]="anginaPectorisType.Unstable"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="ang_c_020229"
+            label="{{ 'angiographyCT.anamnesis.stable.value' | translate }}"
+            name="afterTransplantationType"
+            [(ngModel)]="model.anginaPectorisType"
+            [value]="anginaPectorisType.Stable"
+            rrUnClickRadio
+          >
+          </p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-14 m-b-12  f-vertical o-list">
+      <div class="o-radio-list f-vertical">
+        <h2 rr-id="ang_c_020321">
+          {{'angiographyCT.anamnesis.previousDisease.value' | translate }}
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_020322"
+          label="{{ 'angiographyCT.anamnesis.knownCAD.value' | translate }}"
+          name="previousDiseaseType"
+          [(ngModel)]="model.previousDiseaseType"
+          [value]="previousDisease.KnownCAD"
+          rrUnClickRadio
+          rrContentReset="SuspectedCADContainer"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_020323"
+          label="{{ 'angiographyCT.anamnesis.suspectedCAD.value' | translate }}"
+          name="previousDiseaseType"
+          [(ngModel)]="model.previousDiseaseType"
+          [value]="previousDisease.SuspectedCAD"
+          rrUnClickRadio
+          rrContentReset="SuspectedCADContainer"
+        >
+        </p-radioButton>
+        <div
+          id="SuspectedCADContainer"
+          class="nested-content f-vertical o-radio-list"
+          [rrDisable]="model.previousDiseaseType !== previousDisease.SuspectedCAD"
+        >
+          <h3
+            rr-id="ang_c_020324"
+            class="text-break"
+            rrInfoIcon="ang_c_02_02"
+            infoIconPdfLandscape="true"
+          >
+            {{'angiographyCT.anamnesis.pretestProbabilityforStenosingCADwith.value'
+            | translate }}
+          </h3>
+          <rr-number-input
+            name="penumbraTissueAtRisk"
+            inputRrId="ang_c_020325"
+            labelRrId="ang_c_020326"
+            [label]="'angiographyCT.anamnesis.in.value' | translate"
+            [config]="{min: 1, max: 100, placeholder: '---'}"
+            [(ngModel)]="model.pretestProbabilityCADInPercent"
+          ></rr-number-input>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad m-t-14 m-b-12  f-vertical o-list">
+      <p-checkbox
+        rr-id="ang_c_020417"
+        labelStyleClass="text-break ui-fat-label"
+        label="{{'angiographyCT.anamnesis.stressTestingperformed.value' | translate }}"
+        name="isStressTestingPerformed"
+        [(ngModel)]="model.isStressTestingPerformed"
+        binary="true"
+        rrContentReset="isStressTestingPerformedContainer"
+      ></p-checkbox>
+      <div
+        id="isStressTestingPerformedContainer"
+        class="nested-content o-radio-list f-vertical"
+        [rrDisable]="!model.isStressTestingPerformed"
+      >
+        <h3 rr-id="ang_c_020418">
+          {{'angiographyCT.anamnesis.method.value' | translate }}*
+        </h3>
+        <p-checkbox
+          rr-id="ang_c_020419"
+          label="{{ 'angiographyCT.anamnesis.eCG.value'  | translate }}"
+          name="isECG"
+          [(ngModel)]="model.isECG"
+          binary="true"
+          rrValidation="isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="ang_c_020420"
+          label="{{ 'angiographyCT.anamnesis.echocardiography.value'  | translate }}"
+          name="isEchocardiography"
+          [(ngModel)]="model.isEchocardiography"
+          binary="true"
+          rrValidation="isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="ang_c_020421"
+          label="{{ 'angiographyCT.anamnesis.myocardialScintigraphySPECTCT.value'  | translate }}"
+          name="isMyocardialScintigraphySPECT"
+          [(ngModel)]="model.isMyocardialScintigraphySPECT"
+          binary="true"
+          labelStyleClass="text-break"
+          rrValidation="isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="ang_c_020422"
+          label="{{ 'angiographyCT.anamnesis.pET.value'  | translate }}"
+          name="isPET"
+          [(ngModel)]="model.isPET"
+          binary="true"
+          rrValidation="isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="ang_c_020423"
+          label="{{ 'angiographyCT.anamnesis.cT.value'  | translate }}"
+          name="isCT"
+          [(ngModel)]="model.isCT"
+          binary="true"
+          rrValidation="isCT isPET isMyocardialScintigraphySPECT isEchocardiography isECG"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad m-t-14 m-b-12"></div>
+  </div>
+</div>

@@ -1,0 +1,183 @@
+<div class="f-horizontal f-start o-width-100 col-h-100">
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15 f-vertical">
+    <div class="o-radio-list m-l-10">
+      <h2 rr-id="tho_c_050230">
+        {{ "thoraxCT.lungParenchyma.differentialDiagnosis.value" | translate }}
+      </h2>
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="model.descriptionType === descriptionTypeEnum.IKnow"
+      >
+        <p rr-id="tho_c_050231" class="m-b-0">
+          {{ "thoraxCT.lungParenchyma.differentialDiagnosis1.value" | translate
+          }}
+        </p>
+
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="1"
+          [options]="model.findingType === lungParenchymaFindingTypeEnum.Nodule ? ddW019 : ddW022"
+          name="differentialDiagnosis01"
+          group="true"
+          (selectionChanged)="dd1Change()"
+          [(ngModel)]="model.differentialDiagnosis01"
+          rrValidation="differentialDiagnosis01"
+          rrId="tho_c_050232"
+          [parentViewModel]="model"
+        >
+        </rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          [rrDisable]="
+            model.differentialDiagnosis01 ===
+            lungParenchymaDiagnosisTypeEnum.None
+          "
+          rr-id="tho_c_050233"
+          label="{{
+            'thoraxCT.lungParenchyma.suspected.value' | translate
+          }}"
+          name="isSuspected"
+          binary="true"
+          [(ngModel)]="model.isSuspected"
+        ></p-checkbox>
+      </div>
+      <div class="o-radio-list f-vertical" [rrDisable]="!dd2Enabled()">
+        <p rr-id="tho_c_050234" class="m-b-0">
+          {{ "thoraxCT.lungParenchyma.differentialDiagnosis2.value" | translate
+          }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="2"
+          [options]="model.findingType === lungParenchymaFindingTypeEnum.Nodule ? ddW020 : ddW023"
+          name="differentialDiagnosis02"
+          group="true"
+          (selectionChanged)="dd2Change()"
+          [(ngModel)]="model.differentialDiagnosis02"
+          rrId="tho_c_050235"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+        <p-checkbox
+          rr-id="tho_c_050236"
+          [rrDisable]="
+            model.differentialDiagnosis02 ===
+            lungParenchymaDiagnosisTypeEnum.None
+          "
+          label="{{
+            'thoraxCT.lungParenchyma.subordinated.value' | translate
+          }}"
+          name="isSubordinated"
+          binary="true"
+          [(ngModel)]="model.isSubordinated"
+        ></p-checkbox>
+      </div>
+      <div
+        class="o-radio-list f-vertical"
+        [rrDisable]="
+          model.differentialDiagnosis02 === lungParenchymaDiagnosisTypeEnum.None
+        "
+      >
+        <p rr-id="tho_c_050237" class="m-b-0">
+          {{ "thoraxCT.lungParenchyma.differentialDiagnosis3.value" | translate
+          }}
+        </p>
+        <rr-differential-diagnosis-dropdown
+          [diagnosisNumber]="3"
+          [options]="model.findingType === lungParenchymaFindingTypeEnum.Nodule ? ddW020 : ddW023"
+          name="differentialDiagnosis03"
+          group="true"
+          [(ngModel)]="model.differentialDiagnosis03"
+          rrId="tho_c_050238"
+          [parentViewModel]="model"
+        ></rr-differential-diagnosis-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-radio-list m-t-15 m-b-15">
+    <div class="o-radio-list m-l-10">
+      <p-checkbox
+        rr-id="tho_c_050320"
+        label="{{
+          'thoraxCT.lungParenchyma.moreTen1LesionSamePathology.value'
+            | translate
+        }}"
+        name="isMoreThanOneLesionSamePathology"
+        binary="true"
+        [(ngModel)]="model.isMoreThanOneLesionSamePathology"
+        (onChange)="clearLocalizers()"
+        rrContentReset="localizationContainer"
+      ></p-checkbox>
+      <div
+        id="localizationContainer"
+        class="nested-content o-radio-list"
+        [rrDisable]="!model.isMoreThanOneLesionSamePathology"
+      >
+        <h2 rr-id="tho_c_050321">
+          {{ "thoraxCT.lungParenchyma.localization.value" | translate }}*
+        </h2>
+        <p-radioButton
+          rr-id="tho_c_050322"
+          label="{{
+            'thoraxCT.lungParenchyma.atSegmentLevel.value' | translate
+          }}"
+          name="differentialDiagnosisLocalizationType"
+          [value]="lungParenchymaLocalizationTypeEnum.AtSegmentLevel"
+          [(ngModel)]="model.differentialDiagnosisLocalizationType"
+          rrValidation="differentialDiagnosisLocalizationType"
+          (click)="clearLocalizer('flaps')"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="tho_c_050323"
+          label="{{
+            'thoraxCT.lungParenchyma.atLobeLevel.value' | translate
+          }}"
+          name="differentialDiagnosisLocalizationType"
+          [value]="lungParenchymaLocalizationTypeEnum.AtLobeLevel"
+          [(ngModel)]="model.differentialDiagnosisLocalizationType"
+          rrValidation="differentialDiagnosisLocalizationType"
+          (click)="clearLocalizer('segments')"
+        >
+        </p-radioButton>
+        <div
+          class="nested-content"
+          *ngIf="
+            model.differentialDiagnosisLocalizationType ===
+            lungParenchymaLocalizationTypeEnum.AtSegmentLevel
+          "
+        >
+          <rr-lungs-segments-simple
+            name="differentialDiagnosisLungsSegmentsLocation"
+            (click)="
+              openLargeLocalizer(
+                'segments',
+                'differentialDiagnosisLungsSegmentsLocation'
+              )
+            "
+            [(ngModel)]="model.differentialDiagnosisLungsSegmentsLocation"
+            rr-id="tho_c_0503401"
+          ></rr-lungs-segments-simple>
+        </div>
+        <div
+          class="nested-content"
+          *ngIf="
+            model.differentialDiagnosisLocalizationType ===
+            lungParenchymaLocalizationTypeEnum.AtLobeLevel
+          "
+        >
+          <rr-lungs-flaps-simple
+            class="scale-flaps-localizer"
+            name="differentialDiagnosisLungsFlapsLocation"
+            (click)="
+              openLargeLocalizer(
+                'flaps',
+                'differentialDiagnosisLungsFlapsLocation'
+              )
+            "
+            [(ngModel)]="model.differentialDiagnosisLungsFlapsLocation"
+            rr-id="tho_c_0503235"
+          ></rr-lungs-flaps-simple>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-15 m-b-15"></div>
+  <div class="c-col-1 c-sep c-pad-l m-t-15 m-b-15"></div>
+</div>

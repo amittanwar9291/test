@@ -1,0 +1,375 @@
+<div class="f-horizontal f-start col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad o-list m-t-10 m-b-10">
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+    >
+      <h2 rr-id="abd_m_050217" rrInfoIcon="abd_m_05_02" class="m-t-9">
+        {{'abdomenMRT.spleen.differentialDiagnosis1.value' | translate}}*
+      </h2>
+      <rr-differential-diagnosis-dropdown
+        [diagnosisNumber]="1"
+        [options]="ddlW007"
+        [(ngModel)]="model.differentialDiagnosis"
+        group="true"
+        isActiveOnIKnow="true"
+        name="differentialDiagnosis"
+        rrId="abd_m_050218"
+        (selectionChanged)="clearDDLCheckboxes(); clearHistologyKnownBlock()"
+        [parentViewModel]="model"
+        rrValidation="differentialDiagnosis"
+      ></rr-differential-diagnosis-dropdown>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <p-checkbox
+        rr-id="abd_m_050219"
+        name="isHistologyKnown"
+        class="m-t-4"
+        [(ngModel)]="model.isHistologyKnown"
+        rrContentReset="isHistologyKnown-block"
+        label="{{'abdomenMRT.spleen.histologyKnown.value' | translate}}"
+        binary="true"
+        [rrDisable]="model.differentialDiagnosis === 'None'"
+      ></p-checkbox>
+      <div
+        id="isHistologyKnown-block"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isHistologyKnown"
+      >
+        <p-radioButton
+          rr-id="abd_m_050220"
+          label="{{'abdomenMRT.spleen.benign.value' | translate}}"
+          name="histologyKnownType"
+          [value]="histologyKnownTypeEnum.Benign"
+          [(ngModel)]="model.histologyKnownType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_050221"
+          label="{{'abdomenMRT.spleen.malignant.value' | translate}}"
+          name="histologyKnownType"
+          [value]="histologyKnownTypeEnum.Malignant"
+          [(ngModel)]="model.histologyKnownType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050262">
+        {{ 'abdomenMRT.spleen.localization.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_050263"
+        name="isExtremitasAnterior"
+        [(ngModel)]="model.isExtremitasAnterior"
+        label="{{ 'abdomenMRT.spleen.extremitasAnterior.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050264"
+        name="isMiddleThird"
+        [(ngModel)]="model.isMiddleThird"
+        label="{{ 'abdomenMRT.spleen.middleThird.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050265"
+        name="isAtTheHilus"
+        [(ngModel)]="model.isAtTheHilus"
+        label="{{ 'abdomenMRT.spleen.atTheHilus.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050266"
+        name="isExtremePosterior"
+        [(ngModel)]="model.isExtremePosterior"
+        label="{{ 'abdomenMRT.spleen.extremePosterior.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h3 class="abd_m_050267">
+        {{ 'abdomenMRT.spleen.details.value' | translate }}
+      </h3>
+      <p-checkbox
+        rr-id="abd_m_050268"
+        name="isParenchymatous"
+        [(ngModel)]="model.isParenchymatous"
+        label="{{ 'abdomenMRT.spleen.parenchymatous.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050269"
+        name="isSubcapsular"
+        [(ngModel)]="model.isSubcapsular"
+        label="{{ 'abdomenMRT.spleen.subcapsular.value' | translate }}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-list m-t-10 m-b-10">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050339">
+        {{ 'abdomenMRT.spleen.expansion.value' | translate }}
+      </h2>
+      <div class="f-vertical o-radio-list">
+        <h3 rr-id="abd_m_050340" class="m-b-5">
+          {{ 'abdomenMRT.spleen.size.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_050341"
+          labelRrId="abd_m_050342"
+          name="sizeInMm"
+          label="{{ 'abdomenMRT.spleen.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.sizeInMm"
+          (announceModelChange)="resetBothPlanes()"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.sizeInMm">
+        <h3 rr-id="abd_m_050343" class="m-b-5">
+          {{ 'abdomenMRT.spleen.2ndPlane.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_050344"
+          labelRrId="abd_m_050345"
+          name="secondPlaneInMm"
+          label="{{ 'abdomenMRT.spleen.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.secondPlaneInMm"
+          (announceModelChange)="resetThirdPlane()"
+        >
+        </rr-number-input>
+      </div>
+      <div class="f-vertical o-radio-list" [rrDisable]="!model.secondPlaneInMm">
+        <h3 rr-id="abd_m_050346" class="m-b-5">
+          {{ 'abdomenMRT.spleen.3rdPlane.value' | translate }}
+        </h3>
+        <rr-number-input
+          inputRrId="abd_m_050347"
+          labelRrId="abd_m_050348"
+          name="thirdPlaneInMm"
+          label="{{ 'abdomenMRT.spleen.inMm.value' | translate }}"
+          [config]="{ min: 1, max: 999, placeholder: '---' }"
+          [(ngModel)]="model.thirdPlaneInMm"
+        >
+        </rr-number-input>
+      </div>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050307">
+        {{'abdomenMRT.spleen.quantity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_050308"
+        label="{{'abdomenMRT.spleen.solitaire.value' | translate}}"
+        name="quantityType"
+        [value]="quantityTypeEnum.Solitaire"
+        [(ngModel)]="model.quantityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050309"
+        label="{{'abdomenMRT.spleen.multilocular.value' | translate}}"
+        name="quantityType"
+        [value]="quantityTypeEnum.Multilocular"
+        [(ngModel)]="model.quantityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad o-list m-t-10 m-b-10">
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050422">
+        {{'abdomenMRT.spleen.margin.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_050423"
+        label="{{'abdomenMRT.spleen.circumscribed.value' | translate}}"
+        name="delimitationType"
+        [value]="delimitationTypeEnum.Circumscribed"
+        [(ngModel)]="model.delimitationType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050424"
+        label="{{'abdomenMRT.spleen.nonCircumscribed.value' | translate}}"
+        name="delimitationType"
+        [value]="delimitationTypeEnum.NonCircumscribed"
+        [(ngModel)]="model.delimitationType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050425"
+        label="{{'abdomenMRT.spleen.nodular.value' | translate}}"
+        name="delimitationType"
+        [value]="delimitationTypeEnum.Nodular"
+        [(ngModel)]="model.delimitationType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050426"
+        label="{{'abdomenMRT.spleen.multinodular.value' | translate}}"
+        name="delimitationType"
+        [value]="delimitationTypeEnum.Multinodular"
+        [(ngModel)]="model.delimitationType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050401">
+        {{'abdomenMRT.spleen.homogeneity.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_050402"
+        label="{{'abdomenMRT.spleen.homogeneous.value' | translate}}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Homogeneous"
+        [(ngModel)]="model.homogeneityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050403"
+        label="{{'abdomenMRT.spleen.heterogeneous.value' | translate}}"
+        name="homogeneityType"
+        [value]="homogeneityTypeEnum.Heterogeneous"
+        [(ngModel)]="model.homogeneityType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050404">
+        {{'abdomenMRT.spleen.form.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="abd_m_050405"
+        label="{{'abdomenMRT.spleen.round.value' | translate}}"
+        name="formType"
+        [value]="formTypeEnum.Round"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050406"
+        label="{{'abdomenMRT.spleen.lobulated.value' | translate}}"
+        name="formType"
+        [value]="formTypeEnum.Lobulated"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050407"
+        label="{{'abdomenMRT.spleen.irregular.value' | translate}}"
+        name="formType"
+        [value]="formTypeEnum.Irregular"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="abd_m_050408"
+        label="{{'abdomenMRT.spleen.geographic.value' | translate}}"
+        name="formType"
+        [value]="formTypeEnum.Geographic"
+        [(ngModel)]="model.formType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad-l o-list m-t-10 m-b-10">
+    <div class="o-radio-list">
+      <h2 rr-id="abd_m_050501">
+        {{'abdomenMRT.spleen.internalChanges.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_050502"
+        name="isFat"
+        [(ngModel)]="model.isFat"
+        label="{{'abdomenMRT.spleen.fat.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050503"
+        name="isLiquid"
+        [(ngModel)]="model.isLiquid"
+        label="{{'abdomenMRT.spleen.liquid.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050504"
+        name="isCalcium"
+        [(ngModel)]="model.isCalcium"
+        label="{{'abdomenMRT.spleen.calcium.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050505"
+        name="isCapsule"
+        [(ngModel)]="model.isCapsule"
+        label="{{'abdomenMRT.spleen.capsule.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050506"
+        name="isSepts"
+        [(ngModel)]="model.isSepts"
+        label="{{'abdomenMRT.spleen.septs.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050507"
+        name="isNecrosis"
+        [(ngModel)]="model.isNecrosis"
+        label="{{'abdomenMRT.spleen.necrosis.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050508"
+        name="isFlowVoid"
+        [(ngModel)]="model.isFlowVoid"
+        label="{{'abdomenMRT.spleen.flowVoid.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050509"
+        name="isBleeding"
+        [(ngModel)]="model.isBleeding"
+        label="{{'abdomenMRT.spleen.bleeding.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+    <div class="f-vertical o-radio-list">
+      <h2 rr-id="abd_m_050510">
+        {{'abdomenMRT.spleen.growthPatterns.value' | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_050511"
+        name="isNoDisplacement"
+        [(ngModel)]="model.isNoDisplacement"
+        label="{{'abdomenMRT.spleen.noDisplacement.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_050512"
+        name="isMass"
+        [(ngModel)]="model.isMass"
+        label="{{'abdomenMRT.spleen.mass.value' | translate}}"
+        binary="true"
+      ></p-checkbox>
+    </div>
+  </div>
+</div>

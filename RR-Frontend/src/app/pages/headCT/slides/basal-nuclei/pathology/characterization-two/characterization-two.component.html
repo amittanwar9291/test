@@ -1,0 +1,291 @@
+<div class="f-horizontal main-container col-h-100 o-width-100">
+  <div class="c-col-1 c-sep c-pad f-vertical m-t-13 m-b-10">
+    <div class="o-radio-list p-l-10 p-r-10">
+      <h2 rr-id="hea_c_070246">
+        {{ "headCT.basalNuclei.growthPattern.value" | translate}}
+      </h2>
+      <p-checkbox
+        rr-id="hea_c_070247"
+        binary="true"
+        name="isConfluent"
+        label="{{ 'headCT.basalNuclei.confluent.value' | translate }}"
+        [(ngModel)]="model.isConfluent"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_070248"
+        binary="true"
+        name="isMassEffect"
+        label="{{ 'headCT.basalNuclei.masseffect.value' | translate }}"
+        [(ngModel)]="model.isMassEffect"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_070249"
+        binary="true"
+        name="isInfiltration"
+        label="{{ 'headCT.basalNuclei.infiltration.value' | translate }}"
+        [(ngModel)]="model.isInfiltration"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="hea_c_070250"
+        binary="true"
+        name="isAtrophy"
+        label="{{ 'headCT.basalNuclei.atrophy.value' | translate }}"
+        [(ngModel)]="model.isAtrophy"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="f-vertical m-t-13 m-b-15">
+    <h2 rr-id="hea_c_070334" class="c-pad m-b-10">
+      {{ "headCT.basalNuclei.associatedFindings.value" | translate}}
+    </h2>
+    <div class="f-horizontal h-100">
+      <div class="c-pad c-col-1 c-sep">
+        <div class="o-radio-list">
+          <p-checkbox
+            rr-id="hea_c_070335"
+            binary="true"
+            name="isPerifocalEdema"
+            label="{{ 'headCT.basalNuclei.perifocalEdema.value' | translate }}"
+            [(ngModel)]="model.isPerifocalEdema"
+          ></p-checkbox>
+          <p-checkbox
+            rr-id="hea_c_070336"
+            binary="true"
+            name="isAbscess"
+            label="{{ 'headCT.basalNuclei.abscess.value' | translate }}"
+            [(ngModel)]="model.isAbscess"
+            rrContentReset="isAbscessBlock"
+          ></p-checkbox>
+          <div
+            id="isAbscessBlock"
+            [rrDisable]="!model.isAbscess"
+            class="nested-content"
+          >
+            <p rr-id="hea_c_070337" class="m-t-10">
+              {{ "headCT.basalNuclei.maxDiameter.value" | translate}}
+            </p>
+            <rr-number-input
+              labelRrId="hea_c_070338"
+              inputRrId="hea_c_070339"
+              name="maximumDiameter"
+              [(ngModel)]="model.maximumDiameter"
+              [label]="'headCT.basalNuclei.inMm.value' | translate"
+              [config]="{ min: 1, max: 99}"
+            >
+            </rr-number-input>
+          </div>
+          <p-checkbox
+            rr-id="hea_c_070340"
+            binary="true"
+            name="isMidlineShift"
+            label="{{ 'headCT.basalNuclei.midlineShift.value' | translate }}"
+            [(ngModel)]="model.isMidlineShift"
+            rrContentReset="isMidlineShiftBlock"
+          ></p-checkbox>
+          <div
+            id="isMidlineShiftBlock"
+            [rrDisable]="!model.isMidlineShift"
+            class="nested-content o-radio-list"
+          >
+            <p rr-id="hea_c_070341">
+              {{ "headCT.basalNuclei.side.value" | translate}}
+            </p>
+            <p-radioButton
+              rr-id="hea_c_070342"
+              name="midlineShiftSideType"
+              [value]="midlineShiftSideType.ToTheRight"
+              label="{{'headCT.basalNuclei.toTheRight.value' | translate}}"
+              [(ngModel)]="model.midlineShiftSideType"
+              rrValidation="midlineShiftSideType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rr-id="hea_c_070343"
+              name="midlineShiftSideType"
+              [value]="midlineShiftSideType.ToTheLeft"
+              label="{{'headCT.basalNuclei.toTheLeft.value' | translate}}"
+              [(ngModel)]="model.midlineShiftSideType"
+              rrValidation="midlineShiftSideType"
+            >
+            </p-radioButton>
+            <p rr-id="hea_c_070344" class="m-b-5">
+              {{ "headCT.basalNuclei.extentOfMidlineShift.value" | translate}}
+            </p>
+            <rr-number-input
+              labelRrId="hea_c_070345"
+              inputRrId="hea_c_070346"
+              name="extentOfMidlineShift"
+              [(ngModel)]="model.extentOfMidlineShift"
+              [label]="'headCT.basalNuclei.inMm.value' | translate"
+              [config]="{ min: 1, max: 99}"
+            >
+            </rr-number-input>
+          </div>
+        </div>
+      </div>
+      <div class="c-col-1 c-sep c-pad m-b-15">
+        <div class="o-radio-list">
+          <p-checkbox
+            rr-id="hea_c_070431"
+            binary="true"
+            name="isInvolvementOfVentricles"
+            label="{{ 'headCT.basalNuclei.involvementOfVentricles.value' | translate }}"
+            [(ngModel)]="model.isInvolvementOfVentricles"
+            rrContentReset="isInvolvementOfVentriclesBlock"
+          ></p-checkbox>
+          <div
+            id="isInvolvementOfVentriclesBlock"
+            [rrDisable]="!model.isInvolvementOfVentricles"
+            class="nested-content o-radio-list"
+          >
+            <p-checkbox
+              rr-id="hea_c_070432"
+              binary="true"
+              name="isKateralVentricleRight"
+              label="{{ 'headCT.basalNuclei.lateralVentricleRight.value' | translate }}"
+              [(ngModel)]="model.isLateralVentricleRight"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_c_070433"
+              binary="true"
+              name="isLateralVentricleLeft"
+              label="{{ 'headCT.basalNuclei.lateralVentricleLeft.value' | translate }}"
+              [(ngModel)]="model.isLateralVentricleLeft"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_c_070434"
+              binary="true"
+              name="isThirdVentricle"
+              label="{{ 'headCT.basalNuclei.3rdVentricle.value' | translate }}"
+              [(ngModel)]="model.isThirdVentricle"
+            ></p-checkbox>
+            <p-checkbox
+              rr-id="hea_c_070444"
+              binary="true"
+              name="isFourthVentricle"
+              label="{{ 'headCT.basalNuclei.4thVentricle.value' | translate }}"
+              [(ngModel)]="model.isFourthVentricle"
+            ></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l c-sep-l m-t-13 m-b-15">
+    <div [rrDisable]="!isCMYes" class="o-radio-list">
+      <h2 rr-id="hea_c_070536">
+        {{ "headCT.basalNuclei.contrastEnhancementQuantitative.value" |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_070537"
+        name="contrastEnhancementType"
+        [value]="contrastEnhancementType.No"
+        label="{{'headCT.basalNuclei.no.value' | translate}}"
+        rrContentReset="contrastEnhancementHomogeneityTypeBlock contrastEnhancementDistributionBlock"
+        [(ngModel)]="model.contrastEnhancementType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_070538"
+        name="contrastEnhancementType"
+        [value]="contrastEnhancementType.Low"
+        label="{{'headCT.basalNuclei.low.value' | translate}}"
+        rrContentReset="contrastEnhancementHomogeneityTypeBlock contrastEnhancementDistributionBlock"
+        [(ngModel)]="model.contrastEnhancementType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_070539"
+        name="contrastEnhancementType"
+        [value]="contrastEnhancementType.Strong"
+        label="{{'headCT.basalNuclei.strong.value' | translate}}"
+        rrContentReset="contrastEnhancementHomogeneityTypeBlock contrastEnhancementDistributionBlock"
+        [(ngModel)]="model.contrastEnhancementType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <div
+        id="contrastEnhancementHomogeneityTypeBlock"
+        [rrDisable]="!checkIfLowOrStrong()"
+        class="nested-content o-radio-list"
+      >
+        <p-radioButton
+          rr-id="hea_c_070540"
+          name="contrastEnhancementHomogeneityType"
+          [value]="contrastEnhancementHomogeneityType.Homogeneous"
+          label="{{'headCT.basalNuclei.homogeneous.value' | translate}}"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hea_c_070541"
+          name="contrastEnhancementHomogeneityType"
+          [value]="contrastEnhancementHomogeneityType.Heterogeneous"
+          label="{{'headCT.basalNuclei.heterogeneous.value' | translate}}"
+          [(ngModel)]="model.contrastEnhancementHomogeneityType"
+          rrUnClickRadio
+        >
+        </p-radioButton>
+      </div>
+    </div>
+    <div
+      id="contrastEnhancementDistributionBlock"
+      [rrDisable]="!checkIfLowOrStrong()"
+      class="o-radio-list"
+    >
+      <h2 rr-id="hea_c_070542" class="m-t-35">
+        {{ "headCT.basalNuclei.contrastEnhancementDistribution.value" |
+        translate}}
+      </h2>
+      <p-radioButton
+        rr-id="hea_c_070543"
+        name="contrastDistributionType"
+        [value]="contrastDistributionType.Peripheral"
+        label="{{'headCT.basalNuclei.peripheral.value' | translate}}"
+        [(ngModel)]="model.contrastDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_070544"
+        name="contrastDistributionType"
+        [value]="contrastDistributionType.RingShaped"
+        label="{{'headCT.basalNuclei.ringshaped.value' | translate}}"
+        [(ngModel)]="model.contrastDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_070545"
+        name="contrastDistributionType"
+        [value]="contrastDistributionType.EntireLesion"
+        label="{{'headCT.basalNuclei.entireLesion.value' | translate}}"
+        [(ngModel)]="model.contrastDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_070546"
+        name="contrastDistributionType"
+        [value]="contrastDistributionType.Central"
+        label="{{'headCT.basalNuclei.central.value' | translate}}"
+        [(ngModel)]="model.contrastDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+      <p-radioButton
+        rr-id="hea_c_070547"
+        name="contrastDistributionType"
+        [value]="contrastDistributionType.Septal"
+        label="{{'headCT.basalNuclei.septal.value' | translate}}"
+        [(ngModel)]="model.contrastDistributionType"
+        rrUnClickRadio
+      >
+      </p-radioButton>
+    </div>
+  </div>
+</div>

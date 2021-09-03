@@ -1,0 +1,208 @@
+<div class="f-vertical col-h-100">
+  <h2 class="c-pad-l m-b-10 m-t-4" rr-id="sho_m_070202">
+    {{ "shoulderMRT.jointAndBursae.capsule.value" | translate }}
+  </h2>
+  <div class="f-horizontal col-h-100">
+    <div class="f-vertical c-sep col-h-100">
+      <h2 class="c-pad m-b-21" rr-id="sho_m_070203">
+        {{ "shoulderMRT.jointAndBursae.pathology.value" | translate }}*
+      </h2>
+      <div class="f-horizontal col-h-100">
+        <div class="c-col-1 c-sep c-pad f-vertical">
+          <div class="o-radio-list">
+            <p-radioButton
+              rr-id="sho_m_070204"
+              label="{{
+                'shoulderMRT.jointAndBursae.osteochondromatosis.value' | translate
+              }}"
+              [value]="pathologyType.Osteochondromatosis"
+              [(ngModel)]="model.pathologyType"
+              name="pathologyType"
+              rrContentReset="adhesiveCapsulitisBlock synovialitisBlock"
+              rrValidation="pathologyType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="sho_m_070205"
+              label="{{
+                'shoulderMRT.jointAndBursae.adhesiveCapsulitis.value' | translate
+              }}"
+              [value]="pathologyType.AdhesiveCapsulitis"
+              [(ngModel)]="model.pathologyType"
+              name="pathologyType"
+              rrContentReset="synovialitisBlock"
+              rrValidation="pathologyType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="sho_m_070206"
+              label="{{ 'shoulderMRT.jointAndBursae.synovialitis.value' | translate }}"
+              [value]="pathologyType.Synovialltis"
+              [(ngModel)]="model.pathologyType"
+              name="pathologyType"
+              rrContentReset="adhesiveCapsulitisBlock"
+              rrValidation="pathologyType"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="sho_m_070207"
+              label="{{ 'shoulderMRT.jointAndBursae.rupture.value' | translate }}"
+              [value]="pathologyType.Rupture"
+              [(ngModel)]="model.pathologyType"
+              name="pathologyType"
+              rrContentReset="adhesiveCapsulitisBlock synovialitisBlock"
+              rrValidation="pathologyType"
+            ></p-radioButton>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad f-vertical">
+          <ng-container [ngSwitch]="model.pathologyType">
+            <div
+              class="o-radio-list"
+              *ngSwitchCase="pathologyType.AdhesiveCapsulitis"
+              id="adhesiveCapsulitisBlock"
+            >
+              <p-checkbox
+                rr-id="sho_m_070301"
+                [(ngModel)]="model.isThickeningJointCapsule"
+                label="{{
+                  'shoulderMRT.jointAndBursae.thickeningOfTheJoint.value' | translate
+                }}"
+                labelStyleClass="text-break"
+                binary="true"
+                name="isThickeningJointCapsule"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_070302"
+                [(ngModel)]="model.isThickeningLigCoracohumeraleMoreThan3"
+                label="{{
+                  'shoulderMRT.jointAndBursae.thickeningOfTheLig.value' | translate
+                }}"
+                labelStyleClass="text-break"
+                binary="true"
+                name="isThickeningLigCoracohumeraleMoreThan3"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_070303"
+                [(ngModel)]="model.isPericapsularEdema"
+                label="{{
+                  'shoulderMRT.jointAndBursae.pericapsularEdema.value' | translate
+                }}"
+                binary="true"
+                name="isPericapsularEdema"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_070304"
+                [(ngModel)]="model.isEdemaAroundRotatorInterval"
+                label="{{
+                  'shoulderMRT.jointAndBursae.edemaAroundRotatorInterval.value' | translate
+                }}"
+                labelStyleClass="text-break"
+                binary="true"
+                name="isEdemaAroundRotatorInterval"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_070305"
+                [(ngModel)]="model.isIncreasedCAEnhancementByRotator"
+                label="{{
+                  'shoulderMRT.jointAndBursae.increasedCAEnhancementBy.value' | translate
+                }}"
+                labelStyleClass="text-break"
+                binary="true"
+                name="isIncreasedCAEnhancementByRotator"
+                [rrDisable]="!isCmReinforcedTypeYes"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_070306"
+                [(ngModel)]="model.isIncreasedCAEnhancementOfTheCapsule"
+                label="{{
+                  'shoulderMRT.jointAndBursae.increasedCAEnhancementOf.value' | translate
+                }}"
+                labelStyleClass="text-break"
+                binary="true"
+                name="isIncreasedCAEnhancementOfTheCapsule"
+                [rrDisable]="!isCmReinforcedTypeYes"
+              ></p-checkbox>
+              <p-checkbox
+                rr-id="sho_m_070307"
+                [(ngModel)]="model.isObliterationOfTheTriangular"
+                label="{{
+                  'shoulderMRT.jointAndBursae.obliterationOfTheTriangular.value' | translate
+                }}"
+                labelStyleClass="text-break"
+                binary="true"
+                name="isObliterationOfTheTriangular"
+              ></p-checkbox>
+            </div>
+            <div
+              *ngSwitchCase="pathologyType.Synovialltis"
+              id="synovialitisBlock"
+            >
+              <p-checkbox
+                rr-id="sho_m_070308"
+                [(ngModel)]="model.isProliferations"
+                label="{{
+                  'shoulderMRT.jointAndBursae.proliferations.value' | translate
+                }}"
+                binary="true"
+                name="isProliferations"
+              ></p-checkbox>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical">
+      <h2 rr-id="sho_m_070401" class="m-b-18">
+        {{ "shoulderMRT.jointAndBursae.anatomicVariations.value" | translate }}
+      </h2>
+      <div class="o-radio-list">
+        <p-checkbox
+          rr-id="sho_m_070402"
+          label="{{
+            'shoulderMRT.jointAndBursae.insertionAnteriorJointCapsule.value' | translate
+          }}"
+          binary="true"
+          class="m-b-15"
+          [(ngModel)]="model.isInsertionAnteriorJointCapsule"
+          name="isInsertionAnteriorJointCapsule"
+          rrContentReset="isInsertionAnteriorJointCapsuleBlock"
+        ></p-checkbox>
+        <div
+          class="nested-content o-radio-list"
+          [rrDisable]="!model.isInsertionAnteriorJointCapsule"
+          id="isInsertionAnteriorJointCapsuleBlock"
+        >
+          <p rr-id="sho_m_070406" class="m-b-7">
+            {{'shoulderMRT.jointAndBursae.localizationOfTheInsertion.value' |
+            translate}}
+          </p>
+          <p-radioButton
+            rr-id="sho_m_070403"
+            label="{{
+              'shoulderMRT.jointAndBursae.typeInOrDirectly.value' | translate
+            }}"
+            [value]="insertionPosteriorType.Type1"
+            [(ngModel)]="model.insertionPosteriorType"
+            name="insertionPosteriorType"
+            rrValidation="insertionPosteriorType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_070404"
+            label="{{ 'shoulderMRT.jointAndBursae.typeMaxMmBeside.value' | translate }}"
+            [value]="insertionPosteriorType.Type2"
+            [(ngModel)]="model.insertionPosteriorType"
+            name="insertionPosteriorType"
+            rrValidation="insertionPosteriorType"
+          ></p-radioButton>
+          <p-radioButton
+            rr-id="sho_m_070405"
+            label="{{ 'shoulderMRT.jointAndBursae.typeMmNextTo.value' | translate }}"
+            [value]="insertionPosteriorType.Type3"
+            [(ngModel)]="model.insertionPosteriorType"
+            name="insertionPosteriorType"
+            rrValidation="insertionPosteriorType"
+          ></p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad-l f-vertical"></div>
+  </div>
+</div>

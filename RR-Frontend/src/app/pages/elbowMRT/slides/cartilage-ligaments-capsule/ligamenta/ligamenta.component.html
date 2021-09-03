@@ -1,0 +1,628 @@
+<div class="c-col-4 f-vertical f-start col-h-100 o-radio-list">
+  <div
+    class="c-col-4 f-horizontal f-center col-h-100"
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.None"
+  >
+    <div
+      class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+    >
+      <ng-container *ngTemplateOutlet="localizationHeader"></ng-container>
+      <ng-container *ngTemplateOutlet="localizationControls"></ng-container>
+    </div>
+    <div class="c-col-1 f-vertical f-start c-sep c-pad col-h-100"></div>
+    <div class="c-col-1 f-vertical f-start c-sep c-pad col-h-100"></div>
+    <div class="c-col-1 f-vertical f-start c-sep c-pad-l col-h-100"></div>
+  </div>
+
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType !== ligamentsLocalizationType.None"
+  >
+    <ng-container *ngTemplateOutlet="localizationHeader"></ng-container>
+
+    <div class="c-col-4 f-horizontal f-center col-h-100">
+      <ng-container *ngTemplateOutlet="firstColumn"></ng-container>
+      <ng-container *ngTemplateOutlet="secondColumn"></ng-container>
+      <ng-container *ngIf="isRupture()">
+        <ng-container *ngTemplateOutlet="thirdFourthColumns"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="!isRupture()">
+        <ng-container
+          *ngTemplateOutlet="thirdFourthColumnsEmpty"
+        ></ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
+
+<!-- First column -->
+<ng-template #localizationHeader>
+  <h2 rr-id="elb_m_050212">
+    {{'elbowMRT.cartilage.localization.value' | translate}}*
+  </h2>
+</ng-template>
+
+<ng-template #localizationControls>
+  <p-radioButton
+    rr-id="elb_m_050213"
+    label="{{'elbowMRT.cartilage.medialCollateralLigamentTearLig.value' | translate}}"
+    name="ligamentsLocalizationType"
+    [value]="ligamentsLocalizationType.MedialCollateralLigamentTear"
+    [(ngModel)]="model.ligamentsLocalizationType"
+    (onClick)="onClickMedialCollateralLigamentTear()"
+    rrValidation="ligamentsLocalizationType"
+  ></p-radioButton>
+
+  <p-radioButton
+    rr-id="elb_m_050215"
+    label="{{'elbowMRT.cartilage.lateralCollateralLigamentTearLig.value' | translate}}"
+    name="ligamentsLocalizationType"
+    [value]="ligamentsLocalizationType.LateralCollateralLigamentTear"
+    [(ngModel)]="model.ligamentsLocalizationType"
+    (onClick)="onClickLateralCollateralLigamentTear()"
+    rrValidation="ligamentsLocalizationType"
+  ></p-radioButton>
+
+  <p-radioButton
+    rr-id="elb_m_050217"
+    label="{{'elbowMRT.cartilage.dislocationWithLesionsOfMCLAndLCL.value' | translate}}"
+    name="ligamentsLocalizationType"
+    [value]="ligamentsLocalizationType.DislocationWithLesionsOfMCLAndLCL"
+    class="text-break2"
+    [(ngModel)]="model.ligamentsLocalizationType"
+    (onClick)="onClickDisplacementsWithLesionsOfMCLAndLCL()"
+    rrValidation="ligamentsLocalizationType"
+  ></p-radioButton>
+</ng-template>
+
+<!-- Second column -->
+<ng-template #medialCollateralLigament>
+  <h2 rr-id="elb_m_0503104" rrInfoIcon="elb_m_05_07" class="m-r--2 text-break">
+    {{'elbowMRT.cartilage.medialCollateralLigamentComplex.value' | translate}}
+  </h2>
+
+  <div class="c-col-1 f-vertical f-start o-radio-list col-h-100">
+    <p-checkbox
+      rr-id="elb_m_050315"
+      label="{{'elbowMRT.cartilage.anteriorBundleAMCL.value' | translate}}"
+      binary="true"
+      name="isAnteriorBundle"
+      [(ngModel)]="model.isAnteriorBundle"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050316"
+      label="{{'elbowMRT.cartilage.posteriorBundlePMCL.value' | translate}}"
+      binary="true"
+      name="isPosteriorBundle"
+      [(ngModel)]="model.isPosteriorBundle"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050317"
+      label="{{'elbowMRT.cartilage.transversalBundleCoopersLigament.value' | translate}}"
+      binary="true"
+      name="isTransversalBundle"
+      [(ngModel)]="model.isTransversalBundle"
+      class="text-break2"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050318"
+      label="{{'elbowMRT.cartilage.lesionOfThePronator.value' | translate}}"
+      binary="true"
+      name="isLesionOfThePronatorFlexorTendonComplex"
+      [(ngModel)]="model.isLesionOfThePronatorFlexorTendonComplex"
+    ></p-checkbox>
+  </div>
+</ng-template>
+
+<ng-template #lateralCollateralLigament>
+  <h2 rr-id="elb_m_050322" rrInfoIcon="elb_m_05_08" class="m-r--5 text-break">
+    {{'elbowMRT.cartilage.lateralCollateralLigamentComplex.value' | translate}}
+  </h2>
+
+  <div class="c-col-1 f-vertical f-start o-radio-list col-h-100">
+    <p-checkbox
+      rr-id="elb_m_050324"
+      label="{{'elbowMRT.cartilage.radialCollateralLigamentRCL.value' | translate}}"
+      binary="true"
+      name="isRadialCollateralLigament"
+      [(ngModel)]="model.isRadialCollateralLigament"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050325"
+      label="{{'elbowMRT.cartilage.lateralUlnarCollateralLigament.value' | translate}}"
+      binary="true"
+      name="isLateralUlnarCollateralLigament"
+      [(ngModel)]="model.isLateralUlnarCollateralLigament"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050326"
+      label="{{'elbowMRT.cartilage.LUCL.value' | translate}}"
+      binary="true"
+      name="isAnnularLigament"
+      [(ngModel)]="model.isAnnularLigament"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050327"
+      label="{{'elbowMRT.cartilage.accessoryLateralCollateralLigament.value' | translate}}"
+      binary="true"
+      name="isAccessoryLateralCollateralLigament"
+      [(ngModel)]="model.isAccessoryLateralCollateralLigament"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050328"
+      label="{{'elbowMRT.cartilage.anconeusMuscleLesionExtensorTendonComplex.value' | translate}}"
+      binary="true"
+      name="isAnconeusMuscleLesionExtensorTendonComplex"
+      [(ngModel)]="model.isAnconeusMuscleLesionExtensorTendonComplex"
+    ></p-checkbox>
+  </div>
+</ng-template>
+
+<ng-template #instabilityAfterODriscollRingTheory>
+  <h2 rr-id="elb_m_050329" class="text-break2">
+    {{'elbowMRT.cartilage.instabilityAfterODriscollRingTheory.value' |
+    translate}}
+  </h2>
+
+  <div class="c-col-1 f-vertical f-start o-radio-list col-h-100">
+    <p-radioButton
+      rr-id="elb_m_050330"
+      label="{{'elbowMRT.cartilage.stageDisruptionLUCLLCL.value' | translate}}"
+      name="instabilityRingTheoryType"
+      [value]="instabilityRingTheoryType.Stage1"
+      [(ngModel)]="model.instabilityRingTheoryType"
+      rrUnClickRadio
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050331"
+      label="{{'elbowMRT.cartilage.stageDisruptionLUCLLCL2.value' | translate}}"
+      name="instabilityRingTheoryType"
+      [value]="instabilityRingTheoryType.Stage2"
+      [(ngModel)]="model.instabilityRingTheoryType"
+      rrUnClickRadio
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050332"
+      label="{{'elbowMRT.cartilage.stage3ADisruptionOf.value' | translate}}"
+      name="instabilityRingTheoryType"
+      [value]="instabilityRingTheoryType.Stage3A"
+      [(ngModel)]="model.instabilityRingTheoryType"
+      rrUnClickRadio
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050333"
+      label="{{'elbowMRT.cartilage.stage3BDisruptionOf.value' | translate}}"
+      name="instabilityRingTheoryType"
+      [value]="instabilityRingTheoryType.Stage3B"
+      [(ngModel)]="model.instabilityRingTheoryType"
+      rrUnClickRadio
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050334"
+      label="{{'elbowMRT.cartilage.stage3C3BLesion.value' | translate}}"
+      name="instabilityRingTheoryType"
+      [value]="instabilityRingTheoryType.Stage3C"
+      [(ngModel)]="model.instabilityRingTheoryType"
+      rrUnClickRadio
+    ></p-radioButton>
+  </div>
+</ng-template>
+
+<!-- Third Column -->
+<ng-template #extentOfTearHeader>
+  <h2
+    rr-id="elb_m_050417"
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.MedialCollateralLigamentTear"
+  >
+    {{'elbowMRT.cartilage.extentOfTear.value' | translate}}
+  </h2>
+  <h2
+    rr-id="elb_m_050420"
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.LateralCollateralLigamentTear"
+  >
+    {{'elbowMRT.cartilage.extentOfTear.value' | translate}}
+  </h2>
+</ng-template>
+
+<ng-template #extentOfTearControls>
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.MedialCollateralLigamentTear"
+  >
+    <p-radioButton
+      rr-id="elb_m_050418"
+      label="{{'elbowMRT.cartilage.completeTear.value' | translate}}"
+      name="extentOfTearType"
+      [value]="extentOfTearType.CompleteTear"
+      class="text-break2"
+      [(ngModel)]="model.extentOfTearType"
+      (onClick)="clearPartialTearDetails()"
+      rrValidation="extentOfTearType"
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050419"
+      label="{{'elbowMRT.cartilage.partialTear.value' | translate}}"
+      name="extentOfTearType"
+      [value]="extentOfTearType.PartialTear"
+      class="text-break2"
+      [(ngModel)]="model.extentOfTearType"
+      (onClick)="clearCompleteTearDetails()"
+      rrValidation="extentOfTearType"
+    ></p-radioButton>
+  </ng-container>
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.LateralCollateralLigamentTear"
+    class="o-radio-list"
+  >
+    <p-radioButton
+      rr-id="elb_m_050421"
+      label="{{'elbowMRT.cartilage.completeTear.value' | translate}}"
+      name="extentOfTearType"
+      [value]="extentOfTearType.CompleteTear"
+      class="text-break2"
+      [(ngModel)]="model.extentOfTearType"
+      (onClick)="clearPartialTearDetails()"
+      rrValidation="extentOfTearType"
+    ></p-radioButton>
+
+    <p-radioButton
+      rr-id="elb_m_050422"
+      label="{{'elbowMRT.cartilage.partialTear.value' | translate}}"
+      name="extentOfTearType"
+      [value]="extentOfTearType.PartialTear"
+      class="text-break2"
+      [(ngModel)]="model.extentOfTearType"
+      (onClick)="clearCompleteTearDetails()"
+      rrValidation="extentOfTearType"
+    ></p-radioButton>
+  </ng-container>
+</ng-template>
+
+<!-- Fourth column -->
+<ng-template #completeTearDetails>
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.MedialCollateralLigamentTear"
+  >
+    <h2 rr-id="elb_m_050514">
+      {{'elbowMRT.cartilage.detailsCompleteTear.value' | translate}}
+    </h2>
+
+    <p-checkbox
+      rr-id="elb_m_050515"
+      label="{{'elbowMRT.cartilage.localization.value' | translate}}"
+      binary="true"
+      name="isLocalization"
+      [(ngModel)]="model.isLocalization"
+      rrContentReset="completeTearLocalization"
+    ></p-checkbox>
+
+    <div
+      id="completeTearLocalization"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isLocalization"
+    >
+      <p-radioButton
+        rr-id="elb_m_050516"
+        label="{{'elbowMRT.cartilage.proximal.value' | translate}}"
+        name="completeRuptureLocalizationType"
+        [value]="completeRuptureLocalizationType.Proximal"
+        [(ngModel)]="model.completeRuptureLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+
+      <p-radioButton
+        rr-id="elb_m_050517"
+        label="{{'elbowMRT.cartilage.distal.value' | translate}}"
+        name="completeRuptureLocalizationType"
+        [value]="completeRuptureLocalizationType.Distal"
+        [(ngModel)]="model.completeRuptureLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <p-checkbox
+      rr-id="elb_m_050518"
+      label="{{'elbowMRT.cartilage.retraction.value' | translate}}"
+      binary="true"
+      name="isRetraction"
+      [(ngModel)]="model.isRetraction"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050519"
+      label="{{'elbowMRT.cartilage.adjacentSoftTissueEdema.value' | translate}}"
+      binary="true"
+      name="isAdjacentSoftTissueEdema"
+      [(ngModel)]="model.isAdjacentSoftTissueEdema"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050520"
+      label="{{'elbowMRT.cartilage.concomitantInjuriesOfTheAdjacentMuscleEnthesis.value' | translate}}"
+      binary="true"
+      name="isConcomitantInjuriesOfTheAdjacentMuscleEnthesis"
+      class="text-break2"
+      [(ngModel)]="model.isConcomitantInjuriesOfTheAdjacentMuscleEnthesis"
+    ></p-checkbox>
+  </ng-container>
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.LateralCollateralLigamentTear"
+  >
+    <h2 rr-id="elb_m_050528">
+      {{'elbowMRT.cartilage.detailsCompleteTear.value' | translate}}
+    </h2>
+
+    <p-checkbox
+      rr-id="elb_m_050529"
+      label="{{'elbowMRT.cartilage.localization.value' | translate}}"
+      binary="true"
+      name="isLocalization"
+      [(ngModel)]="model.isLocalization"
+      rrContentReset="completeTearLocalization"
+    ></p-checkbox>
+
+    <div
+      id="completeTearLocalization"
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isLocalization"
+    >
+      <p-radioButton
+        rr-id="elb_m_050530"
+        label="{{'elbowMRT.cartilage.proximal.value' | translate}}"
+        name="completeRuptureLocalizationType"
+        [value]="completeRuptureLocalizationType.Proximal"
+        [(ngModel)]="model.completeRuptureLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+
+      <p-radioButton
+        rr-id="elb_m_050531"
+        label="{{'elbowMRT.cartilage.distal.value' | translate}}"
+        name="completeRuptureLocalizationType"
+        [value]="completeRuptureLocalizationType.Distal"
+        [(ngModel)]="model.completeRuptureLocalizationType"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+
+    <p-checkbox
+      rr-id="elb_m_050532"
+      label="{{'elbowMRT.cartilage.retraction.value' | translate}}"
+      binary="true"
+      name="isRetraction"
+      [(ngModel)]="model.isRetraction"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050533"
+      label="{{'elbowMRT.cartilage.adjacentSoftTissueEdema.value' | translate}}"
+      binary="true"
+      name="isAdjacentSoftTissueEdema"
+      [(ngModel)]="model.isAdjacentSoftTissueEdema"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050534"
+      label="{{'elbowMRT.cartilage.concomitantInjuriesOfTheAdjacentMuscleEnthesis.value' | translate}}"
+      binary="true"
+      name="isConcomitantInjuriesOfTheAdjacentMuscleEnthesis"
+      class="text-break2"
+      [(ngModel)]="model.isConcomitantInjuriesOfTheAdjacentMuscleEnthesis"
+    ></p-checkbox>
+  </ng-container>
+</ng-template>
+
+<ng-template #partialTearDetails>
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.MedialCollateralLigamentTear"
+  >
+    <h2 rr-id="elb_m_050521">
+      {{'elbowMRT.cartilage.detailsPartialRupture.value' | translate}}
+    </h2>
+
+    <p-checkbox
+      rr-id="elb_m_050522"
+      label="{{'elbowMRT.cartilage.illDefinedMargin.value' | translate}}"
+      binary="true"
+      name="isIllDefinedMargin"
+      [(ngModel)]="model.isIllDefinedMargin"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050523"
+      label="{{'elbowMRT.cartilage.increasedSignal.value' | translate}}"
+      binary="true"
+      name="isIncreasedSignal"
+      [(ngModel)]="model.isIncreasedSignal"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050524"
+      label="{{'elbowMRT.cartilage.thickening.value' | translate}}"
+      binary="true"
+      name="isThickening"
+      [(ngModel)]="model.isThickening"
+      (onChange)="clearThickeningDetails()"
+    ></p-checkbox>
+
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isThickening"
+    >
+      <p-checkbox
+        rr-id="elb_m_050525"
+        label="{{'elbowMRT.cartilage.mmDiameterinTheMedial.value' | translate}}"
+        binary="true"
+        name="isMoreThan4MmDiameter"
+        class="text-break2"
+        [(ngModel)]="model.isMoreThan4MmDiameter"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="elb_m_050526"
+      label="{{'elbowMRT.cartilage.tSign.value' | translate}}"
+      binary="true"
+      name="isTSign"
+      [(ngModel)]="model.isTSign"
+      rrInfoIcon="elb_m_05_06"
+    ></p-checkbox>
+    <p-checkbox
+      rr-id="elb_m_050527"
+      label="{{'elbowMRT.cartilage.wavyAppearance.value' | translate}}"
+      binary="true"
+      name="isWavyAppearance"
+      [(ngModel)]="model.isWavyAppearance"
+    ></p-checkbox>
+  </ng-container>
+  <ng-container
+    *ngIf="model.ligamentsLocalizationType === ligamentsLocalizationType.LateralCollateralLigamentTear"
+  >
+    <h2 rr-id="elb_m_050535">
+      {{'elbowMRT.cartilage.detailsPartialRupture.value' | translate}}
+    </h2>
+
+    <p-checkbox
+      rr-id="elb_m_050536"
+      label="{{'elbowMRT.cartilage.illDefinedMargin.value' | translate}}"
+      binary="true"
+      name="isIllDefinedMargin"
+      [(ngModel)]="model.isIllDefinedMargin"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050537"
+      label="{{'elbowMRT.cartilage.increasedSignal.value' | translate}}"
+      binary="true"
+      name="isIncreasedSignal"
+      [(ngModel)]="model.isIncreasedSignal"
+    ></p-checkbox>
+
+    <p-checkbox
+      rr-id="elb_m_050538"
+      label="{{'elbowMRT.cartilage.thickening.value' | translate}}"
+      binary="true"
+      name="isThickening"
+      [(ngModel)]="model.isThickening"
+      (onChange)="clearThickeningDetails()"
+    ></p-checkbox>
+
+    <div
+      class="f-vertical f-start o-radio-list nested-content"
+      [rrDisable]="!model.isThickening"
+    >
+      <p-checkbox
+        rr-id="elb_m_050539"
+        label="{{'elbowMRT.cartilage.mmDiameterinTheMedial.value' | translate}}"
+        binary="true"
+        name="isMoreThan4MmDiameter"
+        class="text-break2"
+        [(ngModel)]="model.isMoreThan4MmDiameter"
+      ></p-checkbox>
+    </div>
+    <p-checkbox
+      rr-id="elb_m_050540"
+      label="{{'elbowMRT.cartilage.wavyAppearance.value' | translate}}"
+      binary="true"
+      name="isWavyAppearance"
+      [(ngModel)]="model.isWavyAppearance"
+    ></p-checkbox>
+  </ng-container>
+</ng-template>
+
+<!-- First Column -->
+<ng-template #firstColumn>
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100">
+    <ng-container *ngTemplateOutlet="localizationControls"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Second column -->
+<ng-template #secondColumn>
+  <div
+    class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list col-h-100"
+    [ngSwitch]="model.ligamentsLocalizationType"
+  >
+    <ng-container
+      *ngSwitchCase="ligamentsLocalizationType.MedialCollateralLigamentTear"
+    >
+      <ng-container *ngTemplateOutlet="medialCollateralLigament"></ng-container>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="ligamentsLocalizationType.LateralCollateralLigamentTear"
+    >
+      <ng-container
+        *ngTemplateOutlet="lateralCollateralLigament"
+      ></ng-container>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="ligamentsLocalizationType.DislocationWithLesionsOfMCLAndLCL"
+    >
+      <ng-container
+        *ngTemplateOutlet="instabilityAfterODriscollRingTheory"
+      ></ng-container>
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- Third+Fourth columns -->
+<ng-template #thirdFourthColumns>
+  <div
+    #col3and4
+    class="c-col-2 f-vertical f-start c-pad-l o-radio-list col-h-100"
+    [ngSwitch]="model.extentOfTearType"
+  >
+    <ng-container *ngSwitchCase="extentOfTearType.None">
+      <div class="c-col-2 f-horizontal f-center col-h-100">
+        <div
+          class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+        >
+          <ng-container *ngTemplateOutlet="extentOfTearHeader"></ng-container>
+          <ng-container *ngTemplateOutlet="extentOfTearControls"></ng-container>
+        </div>
+        <div class="c-col-1 f-vertical f-start c-sep c-pad-l col-h-100"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <ng-container *ngTemplateOutlet="extentOfTearHeader"></ng-container>
+
+      <div class="c-col-2 f-horizontal f-center col-h-100">
+        <div
+          class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list col-h-100"
+        >
+          <ng-container *ngTemplateOutlet="extentOfTearControls"></ng-container>
+        </div>
+        <div
+          class="c-col-1 f-vertical f-start c-sep c-pad-l o-radio-list col-h-100"
+          [ngSwitch]="model.extentOfTearType"
+        >
+          <ng-container *ngSwitchCase="extentOfTearType.CompleteTear">
+            <ng-container
+              *ngTemplateOutlet="completeTearDetails"
+            ></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="extentOfTearType.PartialTear">
+            <ng-container *ngTemplateOutlet="partialTearDetails"></ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #thirdFourthColumnsEmpty>
+  <div class="c-col-2 f-horizontal f-center c-pad-l col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad-r col-h-100"></div>
+    <div class="c-col-1 f-vertical f-start c-sep c-pad-l col-h-100"></div>
+  </div>
+</ng-template>

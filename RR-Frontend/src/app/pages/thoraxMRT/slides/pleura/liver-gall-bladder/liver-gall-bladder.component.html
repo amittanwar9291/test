@@ -1,0 +1,190 @@
+<div class="f-vertical f-start o-radio-list col-h-100">
+  <h2 rr-id="tho_m_0602102" class="c-pad-l">
+    {{ "thoraxMRT.pleura.liverDetails.value" | translate }}
+  </h2>
+  <div class="f-horizontal f-start col-h-100">
+    <div class="c-col-1 f-vertical f-start c-sep c-pad o-radio-list">
+      <p-checkbox
+        rr-id="tho_m_0602103"
+        name="isFocalLiverLesion"
+        rrValidation="isFocalLiverLesion isDiffuseLiverLesion isCholecystolithiasis isWallThickeningOfTheGallBladder"
+        rrContentReset="isFocalLiverLesion-block"
+        labelStyleClass="ui-fat-label"
+        label="{{ 'thoraxMRT.pleura.focalLiverLesion.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isFocalLiverLesion"
+      ></p-checkbox>
+      <div
+        id="isFocalLiverLesion-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isFocalLiverLesion"
+      >
+        <p rr-id="tho_m_0602104" class="m-b-3">
+          {{ "thoraxMRT.pleura.localizationLiverLobe.value" | translate }}
+        </p>
+        <p-radioButton
+          rr-id="tho_m_0602105"
+          name="siteTypeEnum"
+          [(ngModel)]="model.pleuraSiteType"
+          rrUnClickRadio
+          [value]="siteTypeEnum.Right"
+          label="{{ 'thoraxMRT.pleura.right.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0602106"
+          name="siteTypeEnum"
+          [(ngModel)]="model.pleuraSiteType"
+          rrUnClickRadio
+          [value]="siteTypeEnum.Left"
+          label="{{ 'thoraxMRT.pleura.left.value' | translate }}"
+        ></p-radioButton>
+        <p rr-id="tho_m_0602107" class="m-t-19 m-b-2">
+          {{ "thoraxMRT.pleura.maxDiameter.value" | translate }}*
+        </p>
+        <rr-number-input
+          inputRrId="tho_m_0602108"
+          labelRrId="tho_m_0602109"
+          name="focalLiverLesionMaxDiameterAxialInMm"
+          rrValidation="focalLiverLesionMaxDiameterAxialInMm"
+          [(ngModel)]="model.focalLiverLesionMaxDiameterAxialInMm"
+          [label]="'thoraxMRT.pleura.inMm.value' | translate"
+          [config]="{ labelWidth: 175, min: 1, max: 400, placeholder: '---' }"
+        ></rr-number-input>
+        <p rr-id="tho_m_0602110" class="m-t-17 m-b-1">
+          {{ "thoraxMRT.pleura.differentialDiagnosis.value" | translate }}
+        </p>
+        <p-dropdown
+          styleClass="ui-brown-box o-width-100"
+          [options]="differentialDiagnosisOptions"
+          name="differentialDiagnosis"
+          rr-id="tho_m_0602111"
+          [placeholder]="'shared.pleaseSelect' | translate"
+          rrDropdownClear
+          [(ngModel)]="model.differentialDiagnosis"
+          (selectionChanged)="clearSuspicionCheckbox()"
+        >
+        </p-dropdown>
+        <div
+          class="f-vertical f-start o-radio-list"
+          [rrDisable]="
+            model.differentialDiagnosis === pleuraDiagnosisTypeEnum.None
+          "
+        >
+          <p-checkbox
+            rr-id="tho_m_0602112"
+            name="isSuspicionOf"
+            label="{{ 'thoraxMRT.pleura.suspicionOf.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOf"
+          ></p-checkbox>
+        </div>
+        <p-checkbox
+          rr-id="tho_m_0602113"
+          name="isMoreThanOneLesion"
+          class="m-t-21"
+          label="{{ 'thoraxMRT.pleura.lesionOfTheSame.value' | translate }}"
+          binary="true"
+          [(ngModel)]="model.isMoreThan1Lesion"
+        ></p-checkbox>
+      </div>
+    </div>
+
+    <div class="c-col-1 f-vertical f-start c-pad c-sep o-radio-list">
+      <p-checkbox
+        rr-id="tho_m_0603101"
+        name="isDiffuseLiverLesion"
+        rrValidation="isFocalLiverLesion isDiffuseLiverLesion isCholecystolithiasis isWallThickeningOfTheGallBladder"
+        [labelStyleClass]="'ui-fat-label'"
+        rrContentReset="isDiffuseLiverLesion-block"
+        label="{{ 'thoraxMRT.pleura.diffuseLiverLesion.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isDiffuseLiverLesion"
+      ></p-checkbox>
+      <div
+        id="isDiffuseLiverLesion-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isDiffuseLiverLesion"
+      >
+        <p-radioButton
+          rr-id="tho_m_0603102"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.HepaticSteatosis"
+          label="{{ 'thoraxMRT.pleura.hepaticSteatosis.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0603103"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.HepatitisCirrhosis"
+          label="{{ 'thoraxMRT.pleura.hepatitisCirrhosis.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0603104"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.Hemosiderosis"
+          label="{{ 'thoraxMRT.pleura.hemosiderosis.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="tho_m_0603105"
+          name="diffuseLesionType"
+          rrContentReset="Hemosiderosis-block"
+          [(ngModel)]="model.diffuseLesionType"
+          rrUnClickRadio
+          [value]="diffuseLesionTypeEnum.NotFurtherSpecified"
+          label="{{ 'thoraxMRT.pleura.notFurtherSpecified.value' | translate }}"
+        ></p-radioButton>
+        <div
+          id="Hemosiderosis-block"
+          class="f-vertical f-start o-radio-list nested-content"
+          [rrDisable]="
+            model.diffuseLesionType !== diffuseLesionTypeEnum.Hemosiderosis &&
+            model.diffuseLesionType !==
+              diffuseLesionTypeEnum.HepatitisCirrhosis
+          "
+        >
+          <p-checkbox
+            rr-id="tho_m_0603106"
+            name="isSuspicionOfDiffuseLiverLesion"
+            label="{{ 'thoraxMRT.pleura.suspicionOf.value' | translate }}"
+            binary="true"
+            [(ngModel)]="model.isSuspicionOfDiffuseLiverLesion"
+          ></p-checkbox>
+        </div>
+      </div>
+      <p-checkbox
+        rr-id="tho_m_0603107"
+        name="isCholecystolithiasis"
+        class="m-t-20 m-b-30"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{ 'thoraxMRT.pleura.cholelithiasis.value' | translate }}"
+        binary="true"
+        [(ngModel)]="model.isCholecystolithiasis"
+        rrValidation="isFocalLiverLesion isDiffuseLiverLesion isCholecystolithiasis isWallThickeningOfTheGallBladder"
+      ></p-checkbox>
+      <p-checkbox
+        rr-id="tho_m_0603108"
+        class="text-break"
+        name="isWallThickeningOfTheGallBladder"
+        [labelStyleClass]="'ui-fat-label'"
+        label="{{
+          'thoraxMRT.pleura.wallThickeningofTheGallbladder.value' | translate
+        }}"
+        binary="true"
+        rrValidation="isFocalLiverLesion isDiffuseLiverLesion isCholecystolithiasis isWallThickeningOfTheGallBladder"
+        [(ngModel)]="model.isWallThickeningOfTheGallBladder"
+      ></p-checkbox>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad"></div>
+
+    <div class="c-col-1 c-pad-l"></div>
+  </div>
+</div>

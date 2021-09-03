@@ -1,0 +1,118 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div
+    class="c-main f-horizontal f-center"
+    [hidden]="handDetailslocalizerConfig || isLargeJointLocalizerOpened"
+  >
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-list m-b-20">
+        <h1 class="m-b-16" rr-id="han_m_080103">
+          {{ 'handMRT.softTissue.finding.value' | translate }}*
+        </h1>
+        <div class="f-vertical o-radio-list f-vertical">
+          <p-radioButton
+            rr-id="han_m_080104"
+            name="areFindings"
+            value="False"
+            label="{{ 'handMRT.softTissue.noJointEffusionNormal.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+          <p-radioButton
+            rr-id="han_m_080105"
+            name="areFindings"
+            value="True"
+            label="{{ 'handMRT.softTissue.finding.value' | translate }}"
+            [(ngModel)]="model.areFindings"
+            rrValidation="areFindings"
+            notInFinding="true"
+          >
+          </p-radioButton>
+        </div>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [attr.name]="'findingHandlerComponent'"
+        [disabled]="isDynamicPartDisabled()"
+        [setConfig]="findingDropdownConfig"
+        (findingChange)="resetTabIndex()"
+        [setDescriptionTypes]="['SoftTissueMass']"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+    <div class="f-vertical f-space-between">
+      <div
+        *ngIf="findingHandler.currentItem.findingType !== 'None'"
+        class="f-space-between h-100"
+      >
+        <h1 rr-id="han_m_080201" class="m-l-15">
+          {{ 'handMRT.softTissue.findingXX.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+        <div
+          class="f-horizontal m-t-90"
+          [ngClass]="{'m-t-25 h-620' : findingHandler.currentItem.findingType === 'SoftTissueMass',
+                      'm-t-90 h-555': findingHandler.currentItem.findingType !== 'SoftTissueMass'}"
+        >
+          <rr-abscess
+            *ngIf="findingHandler.currentItem.findingType === softTissueFindingTypeEnum.Abscess"
+            [model]="findingHandler.currentItem"
+            [localizerModel]="localizerSide"
+          >
+          </rr-abscess>
+          <rr-articular-effusion
+            *ngIf="findingHandler.currentItem.findingType === softTissueFindingTypeEnum.ArticularEffusion"
+            [model]="findingHandler.currentItem"
+            [localizerSide]="localizerSide"
+            (emitToggleLocalizer)="toggleJointLocalizer();"
+          >
+          </rr-articular-effusion>
+          <rr-haematoma
+            *ngIf="findingHandler.currentItem.findingType === softTissueFindingTypeEnum.Haematoma"
+            [localizerSide]="localizerSide"
+            [model]="findingHandler.currentItem"
+          >
+          </rr-haematoma>
+          <rr-soft-tissue-mass
+            *ngIf="findingHandler.currentItem.findingType === softTissueFindingTypeEnum.SoftTissueMass"
+            [model]="findingHandler.currentItem"
+            [localizerModel]="localizerSide"
+            [technologyModel]="technologyModel"
+            [w018]="w018"
+            [w019]="w019"
+          >
+          </rr-soft-tissue-mass>
+        </div>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType === softTissueFindingTypeEnum.None"
+        class="f-horizontal h-555 m-t-115"
+      >
+        <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+        <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+        <div class="c-col-1 c-pad c-sep f-horizontal"></div>
+        <div class="c-col-1 c-pad-l c-sep f-horizontal"></div>
+      </div>
+    </div>
+  </div>
+  <rr-hand-details-large
+    *ngIf="handDetailslocalizerConfig"
+    name="handLocationsLocalizer"
+    [side]="localizerSide"
+    [isComplex]="false"
+    [isSingleChoice]="handDetailslocalizerConfig.isSingleselection"
+    [subtitle]="handDetailslocalizerConfig.description"
+    (close)="toggleLocalizer(); removeValidationError()"
+    [(ngModel)]="findingHandler.currentItem.handLocationsLocalizer"
+  ></rr-hand-details-large>
+  <rr-hand-joints-large
+    *ngIf="isLargeJointLocalizerOpened"
+    name="handJointsLocalizer"
+    (close)="toggleJointLocalizer()"
+    [side]="localizerSide"
+    [page]="handJointsPageTypeEnum.SoftTissue"
+    [(ngModel)]="findingHandler.currentItem.handJointsLocalizer"
+  ></rr-hand-joints-large>
+</form>

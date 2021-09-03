@@ -1,0 +1,101 @@
+<div class="f-horizontal h-100" id="mainBlock1">
+  <div class="c-col-1 c-pad c-sep f-vertical">
+    <h2 rr-id="han_m_0403243" class="m-b-10">
+      {{ 'handMRT.bones.etiology.value' | translate }}
+    </h2>
+    <div class="o-radio-list">
+      <p-checkbox
+        rr-id="han_m_0403116"
+        binary="true"
+        name="isNegativeUlnarVariance"
+        label="{{ 'handMRT.bones.negativeUlnarVariance.value' | translate }}"
+        [(ngModel)]="model.isNegativeUlnarVariance"
+        rrContentReset="isSecondaryUlnarVariance"
+      ></p-checkbox>
+      <div
+        class="nested-content"
+        [rrDisable]="!model.isNegativeUlnarVariance"
+        id="isSecondaryUlnarVariance"
+      >
+        <p-checkbox
+          rr-id="han_m_0403244"
+          binary="true"
+          name="isSecondaryUlnarVariance"
+          label="{{ 'handMRT.bones.secondary.value' | translate }}"
+          [(ngModel)]="model.isSecondaryUlnarVariance"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="m-t-30 o-radio-list">
+      <h2 rr-id="han_m_0403245">
+        {{ 'handMRT.bones.classification.value' | translate }}
+      </h2>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="han_m_0403117"
+        name="radioulnarImpingementType"
+        [value]="radioulnarImpingementType.EarlyStage"
+        label="{{ 'handMRT.bones.earlyPhase.value' | translate }}"
+        [(ngModel)]="model.radioulnarImpingementType"
+        rrContentReset="lateStageDiv earlyStageDiv"
+      ></p-radioButton>
+      <div
+        class="o-radio-list nested-content"
+        [rrDisable]="model.radioulnarImpingementType !== radioulnarImpingementType.EarlyStage"
+        id="earlyStageDiv"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="han_m_0403118"
+          name="radioulnarEarlyPhaseType"
+          [value]="radioulnarEarlyPhaseType.FocalBoneMarrowEdema"
+          label="{{ 'handMRT.bones.focalBoneMarrowEdema.value' | translate }}"
+          [(ngModel)]="model.radioulnarEarlyPhaseType"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="han_m_0403119"
+          name="radioulnarEarlyPhaseType"
+          [value]="radioulnarEarlyPhaseType.UlnarHeadChondropathy"
+          label="{{ 'handMRT.bones.chondropathyAtUlnarHead.value' | translate }}"
+          [(ngModel)]="model.radioulnarEarlyPhaseType"
+        ></p-radioButton>
+      </div>
+      <p-radioButton
+        rrUnClickRadio
+        rr-id="han_m_0403120"
+        name="radioulnarImpingementType"
+        [value]="radioulnarImpingementType.LateStage"
+        label="{{ 'handMRT.bones.latePhase.value' | translate }}"
+        [(ngModel)]="model.radioulnarImpingementType"
+        [rrContentReset]="'lateStageDiv earlyStageDiv'"
+      ></p-radioButton>
+      <div
+        class="o-radio-list nested-content"
+        [rrDisable]="model.radioulnarImpingementType !== radioulnarImpingementType.LateStage"
+        id="lateStageDiv"
+      >
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="han_m_0403121"
+          name="radioulnarLatePhaseType"
+          [value]="radioulnarLatePhaseType.PerifocalBoneMarrowEdema"
+          label="{{ 'handMRT.bones.perifocalBoneMarrowEdema.value' | translate }}"
+          [(ngModel)]="model.radioulnarLatePhaseType"
+          class="text-break"
+        ></p-radioButton>
+        <p-radioButton
+          rrUnClickRadio
+          rr-id="han_m_0403122"
+          name="radioulnarLatePhaseType"
+          [value]="radioulnarLatePhaseType.ArrosionWithEnvironmentalSclerosis"
+          label="{{ 'handMRT.bones.arrosionWithPerifocalSclerosis.value' | translate }}"
+          [(ngModel)]="model.radioulnarLatePhaseType"
+          class="text-break"
+        ></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad c-sep"></div>
+  <div class="c-col-1 c-pad c-sep"></div>
+</div>

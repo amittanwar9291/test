@@ -1,0 +1,429 @@
+<div class="c-col-1 c-sep c-pad f-vertical m-t-9 m-b-13 o-list">
+  <h2 rr-id="abd_m_060287" class="c-pad m-t-1 m-b-11">
+    {{ 'abdomenMRT.pancreas.differentialDiagnosis.value' | translate }}
+  </h2>
+  <div
+    class="f-vertical o-radio-list m-b-11"
+    [rrDisable]="model.descriptionType !== descriptionType.IDescribe"
+  >
+    <h3 rr-id="abd_m_060288" class="m-b-4">
+      {{ 'abdomenMRT.pancreas.differentialDiagnosis.value' | translate }} 1*
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="abd_m_060289"
+      [diagnosisNumber]="1"
+      [options]="mainMassOptions1"
+      [(ngModel)]="model.massDifferentialDiagnosisType1"
+      name="massDifferentialDiagnosisType1"
+      class="m-b-11"
+      [parentViewModel]="model"
+      rrValidation="massDifferentialDiagnosisType1"
+      (selectionChanged)="clearDD1Dependent()"
+      group="true"
+    >
+    </rr-differential-diagnosis-dropdown>
+    <p-checkbox
+      rr-id="abd_m_060290"
+      label="{{ 'abdomenMRT.pancreas.suspicionOf.value' | translate }}"
+      name="isSuspicionOf"
+      binary="true"
+      [(ngModel)]="model.isSuspicionOf"
+      [rrDisable]="model.massDifferentialDiagnosisType1 === mainMassDifferentialDiagnosis.None"
+    >
+    </p-checkbox>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-9"
+    [rrDisable]="model.massDifferentialDiagnosisType1 === mainMassDifferentialDiagnosis.None
+         && model.mainMassDifferentialDiagnosisType1 === mainMassDifferentialDiagnosis.None"
+  >
+    <h3 rr-id="abd_m_060291" class="m-b-4 m-t-5">
+      {{ 'abdomenMRT.pancreas.differentialDiagnosis.value' | translate }} 2
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="abd_m_060292"
+      [diagnosisNumber]="2"
+      [options]="mainMassOptions2"
+      [(ngModel)]="model.massDifferentialDiagnosisType2"
+      name="massDifferentialDiagnosisType2"
+      class="m-b-12"
+      [parentViewModel]="model"
+      (selectionChanged)="clearDD2Dependent();"
+      group="true"
+    >
+    </rr-differential-diagnosis-dropdown>
+    <p-checkbox
+      rr-id="abd_m_060293"
+      label="{{ 'abdomenMRT.pancreas.subordinate.value' | translate }}"
+      name="isSubordinate"
+      binary="true"
+      [(ngModel)]="model.isSubordinate"
+      [rrDisable]="model.massDifferentialDiagnosisType2 === mainMassDifferentialDiagnosis.None"
+    >
+    </p-checkbox>
+  </div>
+  <div
+    class="f-vertical o-radio-list m-b-28"
+    [rrDisable]="model.massDifferentialDiagnosisType2 === mainMassDifferentialDiagnosis.None"
+  >
+    <h3 rr-id="abd_m_060294" class="m-b-4 m-t-6">
+      {{ 'abdomenMRT.pancreas.differentialDiagnosis.value' | translate }} 3
+    </h3>
+    <rr-differential-diagnosis-dropdown
+      rrId="abd_m_060295"
+      [diagnosisNumber]="3"
+      [options]="mainMassOptions2"
+      [(ngModel)]="model.massDifferentialDiagnosisType3"
+      name="massDifferentialDiagnosisType3"
+      [parentViewModel]="model"
+      group="true"
+    >
+    </rr-differential-diagnosis-dropdown>
+  </div>
+  <div class="f-vertical o-radio-list">
+    <p-checkbox
+      rr-id="abd_m_060296"
+      name="isLesionAboveOne"
+      label="{{ 'abdomenMRT.pancreas.lesionOfTheSame.value' | translate }}"
+      binary="true"
+      [(ngModel)]="model.isLesionAboveOne"
+    >
+    </p-checkbox>
+  </div>
+</div>
+<div
+  *ngIf="showDoubleFukuokaCriteriaCol()"
+  class="c-col-2 c-sep c-pad m-t-9 m-b-13 f-vertical"
+>
+  <ng-container *ngTemplateOutlet="fukuokaCriteriaHeader"></ng-container>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad-r o-list">
+      <div class="f-vertical o-radio-list">
+        <ng-container
+          *ngTemplateOutlet="fukuokaCriteriaRadiobuttons"
+        ></ng-container>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad-l o-list">
+      <div
+        *ngIf="model.fukuokaCriteriaType === fukuokaCriteriaType.BelowFiveMm"
+        class="f-vertical o-radio-list"
+      >
+        <h3 rr-id="abd_m_0604125">
+          {{ 'abdomenMRT.pancreas.recommendation.value' | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_060462"
+          name="isFollowUpInOneTwoYears"
+          label="{{ 'abdomenMRT.pancreas.followUpInOneTwoYears.value' | translate }}"
+          binary="true"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.isFollowUpInOneTwoYears"
+        >
+        </p-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="showSingleFukuokaCriteriaCol()">
+  <div class="c-col-1 c-sep c-pad m-t-9 m-b-13 o-list">
+    <div class="f-vertical o-radio-list m-b-32">
+      <ng-container *ngTemplateOutlet="fukuokaCriteriaHeader"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="fukuokaCriteriaRadiobuttons"
+      ></ng-container>
+    </div>
+    <ng-container
+      *ngIf="model.fukuokaCriteriaType === fukuokaCriteriaType.AboveFiveMm"
+    >
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="isHighRiskStigmataGroupDisabled()"
+      >
+        <h2 rr-id="abd_m_060376">
+          {{ 'abdomenMRT.pancreas.highriskStigmata.value' | translate }}
+        </h2>
+        <p-checkbox
+          rr-id="abd_m_060377"
+          name="isObstructiveCholestasisWithCysticLesion"
+          label="{{ 'abdomenMRT.pancreas.obstructiveCholestasiswithCysticLesion.value' | translate }}"
+          binary="true"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.isObstructiveCholestasisWithCysticLesion"
+        >
+        </p-checkbox>
+        <p-checkbox
+          rr-id="abd_m_060378"
+          name="isDilatationOfThePancreaticDuct"
+          label="{{ 'abdomenMRT.pancreas.dilatationOfThePancreaticDuct.value' | translate }}"
+          binary="true"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.isDilatationOfThePancreaticDuct"
+        >
+        </p-checkbox>
+        <p-checkbox
+          [rrDisable]="!isCMReinforced"
+          rr-id="abd_m_060379"
+          name="isHighRiskContrastEnhancingmuralNodule"
+          label="{{ 'abdomenMRT.pancreas.contrastEnhancingmuralNoduleMm.value' | translate }}"
+          binary="true"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.isHighRiskContrastEnhancingmuralNodule"
+        >
+        </p-checkbox>
+      </div>
+      <div
+        class="f-vertical o-radio-list"
+        [rrDisable]="isHighRiskStigmataGroupDisabled()"
+      >
+        <h3 rr-id="abd_m_0603121">
+          {{ 'abdomenMRT.pancreas.recommendation.value' | translate }}
+        </h3>
+        <p-checkbox
+          rr-id="abd_m_060380"
+          name="isDiscussionSurgicalIndication"
+          label="{{ 'abdomenMRT.pancreas.discussionSurgicalIndication.value' | translate }}"
+          binary="true"
+          labelStyleClass="text-break"
+          [(ngModel)]="model.isDiscussionSurgicalIndication"
+        >
+        </p-checkbox>
+      </div>
+    </ng-container>
+  </div>
+  <div class="c-col-1 c-sep c-pad m-t-9 m-b-13 o-list">
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="isWorrisomeFeaturesGroupDisabled()"
+    >
+      <h2 rr-id="abd_m_060474">
+        {{ 'abdomenMRT.pancreas.worrisomeFeatures.value' | translate }}
+      </h2>
+      <p-checkbox
+        rr-id="abd_m_060475"
+        name="isClinicalPancreatitis"
+        [(ngModel)]="model.isClinicalPancreatitis"
+        label="{{ 'abdomenMRT.pancreas.clinicalPancreatitis.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_060476"
+        name="isDiameterCysticLesionOver3cm"
+        [(ngModel)]="model.isDiameterCysticLesionOver3cm"
+        label="{{ 'abdomenMRT.pancreas.diameterCysticLesionCm.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_060483"
+        name="isGrowthAboveFiveMmInTwoYears"
+        [(ngModel)]="model.isGrowthAboveFiveMmInTwoYears"
+        label="{{ 'abdomenMRT.pancreas.growthMm2years.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        [rrDisable]="!isCMReinforced"
+        rr-id="abd_m_060477"
+        name="isContrastEnhancingMuralNodules"
+        [(ngModel)]="model.isContrastEnhancingMuralNodules"
+        label="{{ 'abdomenMRT.pancreas.contrastEnhancingMuralNodules.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_060478"
+        name="isThickenedWall"
+        [(ngModel)]="model.isThickenedWall"
+        label="{{ 'abdomenMRT.pancreas.thickenedWall.value' | translate }}"
+        binary="true"
+        rrContentReset="isThickenedWall-block"
+      >
+      </p-checkbox>
+      <div
+        id="isThickenedWall-block"
+        class="o-radio-list nested-content"
+        [rrDisable]="!model.isThickenedWall || !isCMReinforced"
+      >
+        <p-checkbox
+          rr-id="abd_m_060479"
+          name="isContrastEnhancement"
+          [(ngModel)]="model.isContrastEnhancement"
+          label="{{ 'abdomenMRT.pancreas.contrastEnhancementOfThe.value' | translate }}"
+          binary="true"
+        >
+        </p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="abd_m_060480"
+        name="isPancreaticDuctFiveToNineMm"
+        [(ngModel)]="model.isPancreaticDuctFiveToNineMm"
+        label="{{ 'abdomenMRT.pancreas.pancreaticDuctMm.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_060481"
+        name="isAbruptChangeInPancreatic"
+        [(ngModel)]="model.isAbruptChangeInPancreatic"
+        label="{{ 'abdomenMRT.pancreas.abruptChangeInPancreatic.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_060482"
+        name="isCAIsIncreased"
+        [(ngModel)]="model.isCAIsIncreased"
+        label="{{ 'abdomenMRT.pancreas.cAIsIncreased.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+      <p-checkbox
+        rr-id="abd_m_060463"
+        name="isLymphNodes"
+        [(ngModel)]="model.isLymphNodes"
+        label="{{ 'abdomenMRT.pancreas.lymphNodes.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+    <div
+      class="f-vertical o-radio-list"
+      [rrDisable]="isWorrisomeFeaturesGroupDisabled()"
+    >
+      <h3 rr-id="abd_m_0604126">
+        {{ 'abdomenMRT.pancreas.recommendation.value' | translate }}
+      </h3>
+      <p-checkbox
+        rr-id="abd_m_0604127"
+        name="isDiscussionEndosonography"
+        [(ngModel)]="model.isDiscussionEndosonography"
+        label="{{ 'abdomenMRT.pancreas.discussionEndosonography.value' | translate }}"
+        binary="true"
+      >
+      </p-checkbox>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!showFukuokaCriteriaContent()">
+  <div class="c-col-1 c-sep c-pad m-t-9 m-b-13 o-list"></div>
+  <div class="c-col-1 c-sep c-pad m-t-9 m-b-13 o-list"></div>
+</ng-container>
+<div class="c-col-1 c-sep c-pad-l m-t-9 m-b-13 o-list">
+  <ng-container
+    *ngIf="model.fukuokaCriteriaType === fukuokaCriteriaType.AboveFiveMm"
+  >
+    <div
+      class="f-vertical o-radio-list p-r-15"
+      [rrDisable]="isFukuokaNegativeCystSizeDisabled()"
+    >
+      <h2 rr-id="abd_m_060546">
+        {{ 'abdomenMRT.pancreas.fukuokaNegativeCystSize.value' | translate }}
+      </h2>
+      <p-dropdown
+        rr-id="abd_m_060555"
+        [(ngModel)]="model.fukuokaNegativeCystSizeType"
+        styleClass="o-width-100 ui-brown-box"
+        name="fukuokaNegativeCystSizeType"
+        placeholder="{{ 'shared.pleaseSelect' | translate }}"
+        [options]="fukuokaNegativeCystSizeOptions"
+        rrDropdownClear
+        (onChange)="resetFukuokaNegativeCystDependentModel()"
+      >
+      </p-dropdown>
+    </div>
+    <div
+      *ngIf="model.fukuokaNegativeCystSizeType !== fukuokaNegativeCystSizeType.None"
+      class="f-vertical o-radio-list"
+    >
+      <h3 rr-id="abd_m_060569">
+        {{ 'abdomenMRT.pancreas.recommendation.value' | translate }}
+      </h3>
+      <p-checkbox
+        *ngIf="model.fukuokaNegativeCystSizeType === fukuokaNegativeCystSizeType.BelowOneCm"
+        rr-id="abd_m_060551"
+        [(ngModel)]="model.isCTMRIIn6MonthsThen"
+        name="isCTMRIIn6MonthsThen"
+        label="{{ 'abdomenMRT.pancreas.cTMRIInMonthsthenEvery.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        *ngIf="model.fukuokaNegativeCystSizeType === fukuokaNegativeCystSizeType.OneToTwoCm"
+        rr-id="abd_m_060552"
+        [(ngModel)]="model.isCTMRIIn6MonthsThereafter"
+        name="isCTMRIIn6MonthsThereafter"
+        label="{{ 'abdomenMRT.pancreas.cTMRIInMonthsThereafterafter.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        *ngIf="model.fukuokaNegativeCystSizeType === fukuokaNegativeCystSizeType.TwoToThreeCm"
+        rr-id="abd_m_060553"
+        [(ngModel)]="model.isEndosonography"
+        name="isEndosonography"
+        label="{{ 'abdomenMRT.pancreas.endosonographyEUSinMonthsThen.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+      <p-checkbox
+        *ngIf="model.fukuokaNegativeCystSizeType === fukuokaNegativeCystSizeType.AboveThreeCm"
+        rr-id="abd_m_060554"
+        [(ngModel)]="model.isMRIWithEndosonography"
+        name="isMRIWithEndosonography"
+        label="{{ 'abdomenMRT.pancreas.mRIWithEndosonographyeveryMonthsdiscussionOP.value' | translate }}"
+        binary="true"
+        labelStyleClass="text-break"
+      >
+      </p-checkbox>
+    </div>
+  </ng-container>
+  <div
+    class="f-vertical o-radio-list p-r-15"
+    [rrDisable]="isReferencePictureDisabled()"
+  >
+    <rr-reference-picture
+      [(ngModel)]="model.referencePicture"
+      [referenceId]="model.id"
+      [fileUploadUrl]="fileUploadUrl"
+      name="referencePicture"
+    ></rr-reference-picture>
+  </div>
+</div>
+
+<!-- Reusable templates for this html -->
+<ng-template #fukuokaCriteriaHeader>
+  <h2 rr-id="abd_m_060372" class="m-b-10" rrInfoIcon="abd_m_06_04">
+    {{ 'abdomenMRT.pancreas.fukuokaCriteria.value' | translate }}
+  </h2>
+</ng-template>
+
+<ng-template #fukuokaCriteriaRadiobuttons>
+  <p-radioButton
+    rr-id="abd_m_060373"
+    [(ngModel)]="model.fukuokaCriteriaType"
+    [value]="fukuokaCriteriaType.BelowFiveMm"
+    name="fukuokaCriteriaType"
+    label="{{ 'abdomenMRT.pancreas.mmLessThan5.value' | translate }}"
+    rrUnClickRadio
+    (onClick)="resetFukuokaCriteriaDependentModel()"
+  >
+  </p-radioButton>
+  <p-radioButton
+    rr-id="abd_m_060374"
+    [(ngModel)]="model.fukuokaCriteriaType"
+    [value]="fukuokaCriteriaType.AboveFiveMm"
+    name="fukuokaCriteriaType"
+    label="{{ 'abdomenMRT.pancreas.mmMoreThan5.value' | translate }}"
+    rrUnClickRadio
+    (onClick)="resetFukuokaCriteriaDependentModel()"
+  >
+  </p-radioButton>
+</ng-template>

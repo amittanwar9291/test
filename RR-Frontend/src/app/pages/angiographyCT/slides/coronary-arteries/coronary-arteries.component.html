@@ -1,0 +1,94 @@
+<form #autosaveForm="ngForm" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="ang_c_040103">
+        {{'angiographyCT.coronaryArteries.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical p-l-6">
+        <p-radioButton
+          rr-id="ang_c_040104"
+          label="{{'angiographyCT.coronaryArteries.normalImagingOfThecoronary.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.No"
+          rrValidation="areFindings"
+          notInFinding="true"
+          class="text-break"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_040105"
+          label="{{'angiographyCT.coronaryArteries.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="isDropdownDisabled()"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findingHandlerComponent'"
+          validationName="findings"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical"
+      [ngClass]="isFindingType(coronaryArteriesFindingTypeEnum.None) ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.None)"
+        class="f-horizontal"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad main-height"
+        ></div>
+        <div class="c-col-1 c-pad-l main-height"></div>
+      </div>
+      <div
+        *ngIf="!isFindingType(coronaryArteriesFindingTypeEnum.None)"
+        class="c-col-4 c-pad-l f-vertical"
+      >
+        <h1 rr-id="ang_c_040201">
+          {{'angiographyCT.coronaryArteries.finding.value' | translate }}
+          {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+        </h1>
+      </div>
+
+      <rr-coronary-arterial-dominance
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.CoronaryArterialDominance)"
+        [model]="findingHandler.currentItem"
+      ></rr-coronary-arterial-dominance>
+      <rr-coronary-anomaly
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.CoronaryAnomaly)"
+        [model]="findingHandler.currentItem"
+      ></rr-coronary-anomaly>
+      <rr-calcification
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.Calcification)"
+        [model]="findingHandler.currentItem"
+      ></rr-calcification>
+      <rr-stenosis-occlusion
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.StenosisOcclusion)"
+        [model]="findingHandler.currentItem"
+      ></rr-stenosis-occlusion>
+      <rr-extracoronary-intracardiac-findings
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.ExtracoronaryIntracardiacFindings)"
+        [model]="findingHandler.currentItem"
+        [isCMYes]="isCMYes"
+      ></rr-extracoronary-intracardiac-findings>
+      <rr-follow-up-after-bypass
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.FollowUpAfterBypass)"
+        [model]="findingHandler.currentItem"
+      ></rr-follow-up-after-bypass>
+      <rr-follow-up-after-stent
+        *ngIf="isFindingType(coronaryArteriesFindingTypeEnum.FollowUpAfterStent)"
+        [model]="findingHandler.currentItem"
+      ></rr-follow-up-after-stent>
+    </div>
+  </div>
+</form>

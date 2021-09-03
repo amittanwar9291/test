@@ -1,0 +1,608 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-4 f-vertical col-h-100">
+    <h2
+      rr-id="ang_c_080229"
+      *ngIf="model.anatomicVariantsOrPathologyType !== anatomicVariantsOrPathologyType.MesentericArteryStenosis"
+    >
+      {{ "angiographyCT.abdomen.anatomicVariantsPathology.value" | translate }}*
+    </h2>
+    <div class="f-horizontal col-h-100">
+      <div
+        class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list"
+        [ngClass]="{ 'm-t-13' : model.anatomicVariantsOrPathologyType !== anatomicVariantsOrPathologyType.MesentericArteryStenosis }"
+      >
+        <h2
+          rr-id="ang_c_080229"
+          class="m-b-13"
+          *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.MesentericArteryStenosis"
+        >
+          {{ "angiographyCT.abdomen.anatomicVariantsPathology.value" | translate
+          }}*
+        </h2>
+        <p-radioButton
+          rr-id="ang_c_080213"
+          name="anatomicVariantsOrPathologyType"
+          [(ngModel)]="model.anatomicVariantsOrPathologyType"
+          [value]="anatomicVariantsOrPathologyType.AnatomicVariants"
+          rrValidation="anatomicVariantsOrPathologyType"
+          (click)="clearMesentricModel()"
+          label="{{ 'angiographyCT.abdomen.anatomicVariants.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_080214"
+          name="anatomicVariantsOrPathologyType"
+          [(ngModel)]="model.anatomicVariantsOrPathologyType"
+          [value]="anatomicVariantsOrPathologyType.MesentericArteryStenosis"
+          rrValidation="anatomicVariantsOrPathologyType"
+          (click)="clearMesentricModel();"
+          label="{{ 'angiographyCT.abdomen.mesentericArteryStenosis.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_080215"
+          name="anatomicVariantsOrPathologyType"
+          [(ngModel)]="model.anatomicVariantsOrPathologyType"
+          [value]="anatomicVariantsOrPathologyType.Aneurysm"
+          rrValidation="anatomicVariantsOrPathologyType"
+          (click)="clearMesentricModel();"
+          label="{{ 'angiographyCT.abdomen.aneurysm.value' | translate }}"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="ang_c_080216"
+          name="anatomicVariantsOrPathologyType"
+          [(ngModel)]="model.anatomicVariantsOrPathologyType"
+          [value]="anatomicVariantsOrPathologyType.StatusPostLiverTransplantation"
+          rrValidation="anatomicVariantsOrPathologyType"
+          (click)="clearMesentricModel()"
+          label="{{ 'angiographyCT.abdomen.statusPostLiverTransplantationtransplant.value' | translate }}"
+        ></p-radioButton>
+      </div>
+      <div
+        class="f-horizontal col-h-100"
+        *ngIf="model.anatomicVariantsOrPathologyType !== anatomicVariantsOrPathologyType.MesentericArteryStenosis"
+      >
+        <div class="c-col-1 c-pad f-vertical f-start m-t-13">
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.AnatomicVariants"
+          >
+            <h2 rr-id="ang_c_080394">
+              {{ "angiographyCT.abdomen.directOriginFromThe.value" | translate
+              }}
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_080395"
+              name="directOriginFromTheAbdominalAortaType"
+              [(ngModel)]="model.directOriginFromTheAbdominalAortaType"
+              [value]="directOriginFromTheAbdominalAortaType.LeftGastricArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.leftGastricArteryLGA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080396"
+              name="directOriginFromTheAbdominalAortaType"
+              [(ngModel)]="model.directOriginFromTheAbdominalAortaType"
+              [value]="directOriginFromTheAbdominalAortaType.CommonHepaticArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.commonHepaticArteryCHA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080397"
+              class="text-break"
+              name="directOriginFromTheAbdominalAortaType"
+              [(ngModel)]="model.directOriginFromTheAbdominalAortaType"
+              [value]="directOriginFromTheAbdominalAortaType.CommonOrigin"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.commonOriginofTheCeliac.value' | translate }}"
+            ></p-radioButton>
+            <h2 rr-id="ang_c_080398" class="m-t-20">
+              {{ "angiographyCT.abdomen.originFromSuperiorMesentery.value" |
+              translate }}
+            </h2>
+            <p-checkbox
+              rrInfoIcon="ang_c_08_02"
+              rr-id="ang_c_080399"
+              class="text-break"
+              name="isHepatomesentericTrunk"
+              [(ngModel)]="model.isHepatomesentericTrunk"
+              binary="true"
+              rrContentReset="hepatomesentericTrunkDetails"
+              label="{{ 'angiographyCT.abdomen.hepatomesentericTrunk.value' | translate }}"
+            ></p-checkbox>
+            <div
+              class="o-radio-list nested-content"
+              id="hepatomesentericTrunkDetails"
+              [rrDisable]="!model.isHepatomesentericTrunk"
+            >
+              <p-radioButton
+                rr-id="ang_c_0803101"
+                name="hepatomesentericTrunkType"
+                [(ngModel)]="model.hepatomesentericTrunkType"
+                [value]="hepatomesentericTrunkType.Complete"
+                rrUnClickRadio
+                rrContentReset="incompleteDetails"
+                label="{{ 'angiographyCT.abdomen.complete.value' | translate }}"
+              ></p-radioButton>
+              <p-radioButton
+                rr-id="ang_c_0803103"
+                name="hepatomesentericTrunkType"
+                [(ngModel)]="model.hepatomesentericTrunkType"
+                [value]="hepatomesentericTrunkType.Incomplete"
+                rrUnClickRadio
+                rrContentReset="incompleteDetails"
+                label="{{ 'angiographyCT.abdomen.incomplete.value' | translate }}"
+              ></p-radioButton>
+              <div
+                class="o-radio-list nested-content"
+                id="incompleteDetails"
+                [rrDisable]="model.hepatomesentericTrunkType !== hepatomesentericTrunkType.Incomplete"
+              >
+                <p-radioButton
+                  rr-id="ang_c_0803150"
+                  class="text-break"
+                  name="incompleteHepatomesentericTrunkType"
+                  [(ngModel)]="model.incompleteHepatomesentericTrunkType"
+                  [value]="incompleteHepatomesentericTrunkType.RightHepatomesentericTrunk"
+                  rrUnClickRadio
+                  label="{{ 'angiographyCT.abdomen.rightHepatomesentericTrunk.value' | translate }}"
+                ></p-radioButton>
+                <p-radioButton
+                  rr-id="ang_c_0803151"
+                  class="text-break"
+                  name="incompleteHepatomesentericTrunkType"
+                  [(ngModel)]="model.incompleteHepatomesentericTrunkType"
+                  [value]="incompleteHepatomesentericTrunkType.LeftHepatomesentericTrunk"
+                  rrUnClickRadio
+                  label="{{ 'angiographyCT.abdomen.leftHepatomesentericTrunk.value' | translate }}"
+                ></p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.MesentericArteryStenosis"
+          ></div>
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.Aneurysm"
+          >
+            <h2 rr-id="ang_c_0803120">
+              {{ "angiographyCT.abdomen.localization.value" | translate }}*
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_0803121"
+              name="mesentericVesselsLocalizationType"
+              [(ngModel)]="model.mesentericVesselsLocalizationType"
+              [value]="mesentericVesselsLocalizationType.SplenicArtery"
+              rrValidation="mesentericVesselsLocalizationType"
+              label="{{ 'angiographyCT.abdomen.splenicArterySA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803122"
+              name="mesentericVesselsLocalizationType"
+              [(ngModel)]="model.mesentericVesselsLocalizationType"
+              [value]="mesentericVesselsLocalizationType.CommonHepaticArtery"
+              rrValidation="mesentericVesselsLocalizationType"
+              label="{{ 'angiographyCT.abdomen.commonHepaticArteryCHA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803123"
+              name="mesentericVesselsLocalizationType"
+              [(ngModel)]="model.mesentericVesselsLocalizationType"
+              [value]="mesentericVesselsLocalizationType.SuperiorMesenteryArtery"
+              rrValidation="mesentericVesselsLocalizationType"
+              label="{{ 'angiographyCT.abdomen.superiorMesenteryArterySMA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803124"
+              name="mesentericVesselsLocalizationType"
+              [(ngModel)]="model.mesentericVesselsLocalizationType"
+              [value]="mesentericVesselsLocalizationType.CeliacTrunk"
+              rrValidation="mesentericVesselsLocalizationType"
+              label="{{ 'angiographyCT.abdomen.celiacTrunk.value' | translate }}"
+            ></p-radioButton>
+            <h2 rr-id="ang_c_0803125" class="m-t-25">
+              {{ "angiographyCT.abdomen.type.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_0803126"
+              name="shapeType"
+              [(ngModel)]="model.shapeType"
+              [value]="shapeType.Saccular"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.saccular.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803127"
+              name="shapeType"
+              [(ngModel)]="model.shapeType"
+              [value]="shapeType.Fusiform"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.fusiform.value' | translate }}"
+            ></p-radioButton>
+            <h2 rr-id="ang_c_0803152" class="m-t-25">
+              {{ "angiographyCT.abdomen.maxDiameter.value" | translate }}
+            </h2>
+            <rr-number-input
+              inputRrId="ang_c_0803128"
+              labelRrId="ang_c_0803129"
+              name="maxDiameterInMm"
+              [(ngModel)]="model.maxDiameterInMm"
+              label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+              [config]="{ min: 1, max: 99 }"
+            ></rr-number-input>
+            <h2 rr-id="ang_c_0803153" class="m-t-25">
+              {{ "angiographyCT.abdomen.length.value" | translate }}
+            </h2>
+            <rr-number-input
+              inputRrId="ang_c_0803154"
+              labelRrId="ang_c_0803155"
+              name="lengthInMm"
+              label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+              [(ngModel)]="model.lengthInMm"
+              [config]="{ min: 1, max: 150, placeholder: '---' }"
+            ></rr-number-input>
+          </div>
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.StatusPostLiverTransplantation"
+          >
+            <h2 rr-id="ang_c_0803131">
+              {{ "angiographyCT.abdomen.transplantArteryStenosis.value" |
+              translate }}
+            </h2>
+            <h2 rr-id="ang_c_0803132">
+              {{ "angiographyCT.abdomen.severity.value" | translate }}*
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_0803133"
+              name="severityType"
+              [(ngModel)]="model.severityType"
+              [value]="severityType.Mild"
+              rrValidation="severityType"
+              rrContentReset="isHemodynamicallyRelevantContainer"
+              label="{{ 'angiographyCT.abdomen.mild.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803134"
+              name="severityType"
+              [(ngModel)]="model.severityType"
+              [value]="severityType.Moderate"
+              rrValidation="severityType"
+              rrContentReset="isHemodynamicallyRelevantContainer"
+              label="{{ 'angiographyCT.abdomen.moderate.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803135"
+              name="severityType"
+              [(ngModel)]="model.severityType"
+              [value]="severityType.Severe"
+              rrValidation="severityType"
+              rrContentReset="isHemodynamicallyRelevantContainer"
+              label="{{ 'angiographyCT.abdomen.severe.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_0803136"
+              name="severityType"
+              [(ngModel)]="model.severityType"
+              [value]="severityType.CompleteOcclusion"
+              rrValidation="severityType"
+              rrContentReset="isHemodynamicallyRelevantContainer"
+              label="{{ 'angiographyCT.abdomen.completeOcclusion.value' | translate }}"
+            ></p-radioButton>
+            <div
+              class="o-radio-list nested-content"
+              id="isHemodynamicallyRelevantContainer"
+              [rrDisable]="model.severityType === severityType.None || model.severityType === severityType.CompleteOcclusion"
+            >
+              <p-checkbox
+                rr-id="ang_c_0803137"
+                name="isHemodynamicallyRelevant"
+                [(ngModel)]="model.isHemodynamicallyRelevant"
+                binary="true"
+                label="{{ 'angiographyCT.abdomen.hemodynamicallyRelevant.value' | translate }}"
+                >xxx</p-checkbox
+              >
+            </div>
+            <p rr-id="ang_c_0803138" class="m-t-20">
+              {{ 'angiographyCT.abdomen.diameterStenosis.value' | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="ang_c_0803139"
+              labelRrId="ang_c_0803140"
+              name="diameterStenosisInMm"
+              [(ngModel)]="model.diameterStenosisInMm"
+              [config]="{labelWidth: 160, min: 1, max: 99}"
+              (announceModelChange)="calculate()"
+              label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+            ></rr-number-input>
+            <p rr-id="ang_c_0803141" class="m-t-10 text-break">
+              {{ 'angiographyCT.abdomen.diameterNormalPoststenoticSegment.value'
+              | translate }}
+            </p>
+            <rr-number-input
+              inputRrId="ang_c_0803142"
+              labelRrId="ang_c_0803143"
+              name="diameterNormalPoststenoticSegmentInMm"
+              [(ngModel)]="model.diameterNormalPoststenoticSegmentInMm"
+              [config]="{labelWidth: 160, min: 1, max: 99}"
+              (announceModelChange)="calculate()"
+              label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+            ></rr-number-input>
+            <p rr-id="ang_c_0803144" class="m-t-10">
+              {{ 'angiographyCT.abdomen.degreeOfStenosisAccording.value' |
+              translate }}
+            </p>
+            <rr-number-input
+              inputRrId="ang_c_0803145"
+              labelRrId="ang_c_0803146"
+              name="degreeOfStenosisAccordingToNASCETInPercentage"
+              [(ngModel)]="model.degreeOfStenosisAccordingToNASCETInPercentage"
+              [config]="{ min: 1, max: 99, readonly: true }"
+              label="{{ 'angiographyCT.abdomen.inPercentage.value' | translate }}"
+              rrValidation="degreeOfStenosisAccordingToNASCETInPercentage"
+            ></rr-number-input>
+          </div>
+        </div>
+        <div
+          class="c-col-1 c-pad c-sep c-sep-l f-vertical f-start m-t-13"
+          [class.m-t-45]="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.StatusPostLiverTransplantation"
+        >
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.AnatomicVariants"
+          >
+            <h2 rr-id="ang_c_080417">
+              {{ "angiographyCT.abdomen.arisesFromCeliacTrunk.value" | translate
+              }}
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_080418"
+              name="arisesFromCeliacTrunkType"
+              [(ngModel)]="model.arisesFromCeliacTrunkType"
+              [value]="arisesFromCeliacTrunkType.DorsalPancreaticArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.dorsalPancreaticArteryDPA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080419"
+              name="arisesFromCeliacTrunkType"
+              [(ngModel)]="model.arisesFromCeliacTrunkType"
+              [value]="arisesFromCeliacTrunkType.RightHepaticArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.rightHepaticArteryRHA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080420"
+              name="arisesFromCeliacTrunkType"
+              [(ngModel)]="model.arisesFromCeliacTrunkType"
+              [value]="arisesFromCeliacTrunkType.GastroduodenalArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.gastroduodenalArteryGDA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080421"
+              name="arisesFromCeliacTrunkType"
+              [(ngModel)]="model.arisesFromCeliacTrunkType"
+              [value]="arisesFromCeliacTrunkType.InferiorPhrenicArteries"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.inferiorPhrenicArteriesIPA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080422"
+              name="arisesFromCeliacTrunkType"
+              [(ngModel)]="model.arisesFromCeliacTrunkType"
+              [value]="arisesFromCeliacTrunkType.LeftHepaticArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.leftHepaticArteryLHA.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080423"
+              class="text-break"
+              name="arisesFromCeliacTrunkType"
+              [(ngModel)]="model.arisesFromCeliacTrunkType"
+              [value]="arisesFromCeliacTrunkType.TrifurkationOfRHALHAAndGDA"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.trifurcationOfRHALHAAnd.value' | translate }}"
+            ></p-radioButton>
+            <h2 rr-id="ang_c_080424" class="m-t-20">
+              {{ "angiographyCT.abdomen.arisesFromLeftGastric.value" | translate
+              }}
+            </h2>
+            <p-checkbox
+              rr-id="ang_c_080463"
+              class="text-break"
+              binary="true"
+              name="isLeftHepaticArteryArisesFromLeftGastricArtery"
+              [(ngModel)]="model.isLeftHepaticArteryArisesFromLeftGastricArtery"
+              label="{{ 'angiographyCT.abdomen.leftHepaticArteryArises.value' | translate }}"
+            ></p-checkbox>
+          </div>
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.Aneurysm"
+          >
+            <h2 rr-id="ang_c_080436">
+              {{ "angiographyCT.abdomen.characterization.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_080441"
+              name="characterizationType"
+              [(ngModel)]="model.characterizationType"
+              [value]="characterizationType.Verum"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.trueAneurysm.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080440"
+              name="characterizationType"
+              [(ngModel)]="model.characterizationType"
+              [value]="characterizationType.Spurium"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.falseAneurysm.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080437"
+              name="characterizationType"
+              [(ngModel)]="model.characterizationType"
+              [value]="characterizationType.Dissecans"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.dissectingAneurysm.value' | translate }}"
+            ></p-radioButton>
+            <h2 rr-id="ang_c_080454" class="m-t-25">
+              {{ "angiographyCT.abdomen.furtherImageFeatures.value" | translate
+              }}
+            </h2>
+            <p-checkbox
+              rr-id="ang_c_080455"
+              name="isMultifocalChanges"
+              [(ngModel)]="model.isMultifocalChanges"
+              binary="true"
+              label="{{ 'angiographyCT.abdomen.multifocalChanges.value' | translate }}"
+            ></p-checkbox>
+            <h2 rr-id="ang_c_080442" class="m-t-25">
+              {{ "angiographyCT.abdomen.differentialDiagnosis.value" | translate
+              }}
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_080444"
+              name="mesentericVesselsDifferentialDiagnosisType"
+              [(ngModel)]="model.mesentericVesselsDifferentialDiagnosisType"
+              [value]="mesentericVesselsDifferentialDiagnosisType.FibromuscularDysplasia"
+              rrContentReset="pseudoaneurysmDetails"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.fibromuscularDysplasia.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080479"
+              name="mesentericVesselsDifferentialDiagnosisType"
+              [(ngModel)]="model.mesentericVesselsDifferentialDiagnosisType"
+              [value]="mesentericVesselsDifferentialDiagnosisType.Pseudoaneurysm"
+              rrContentReset="pseudoaneurysmDetails"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.pseudoaneurysm.value' | translate }}"
+            ></p-radioButton>
+            <div
+              class="o-radio-list nested-content"
+              id="pseudoaneurysmDetails"
+              [rrDisable]="model.mesentericVesselsDifferentialDiagnosisType === mesentericVesselsDifferentialDiagnosisType.None"
+            >
+              <p-checkbox
+                rr-id="ang_c_080445"
+                name="isSuspicionOf"
+                [(ngModel)]="model.isSuspicionOf"
+                binary="true"
+                label="{{ 'angiographyCT.abdomen.suspicionOf.value' | translate }}"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.StatusPostLiverTransplantation"
+          >
+            <h2 rr-id="ang_c_080480">
+              {{ "angiographyCT.abdomen.length.value" | translate }}
+            </h2>
+            <rr-number-input
+              inputRrId="ang_c_080464"
+              labelRrId="ang_c_080465"
+              name="lengthInMm"
+              [(ngModel)]="model.lengthInMm"
+              [config]="{ min: 1, max: 150, placeholder: '---' }"
+              label="{{ 'angiographyCT.abdomen.inMm.value' | translate }}"
+            ></rr-number-input>
+            <p-checkbox
+              class="m-t-15"
+              rr-id="ang_c_080466"
+              name="isShortLengthStenosis"
+              [(ngModel)]="model.isShortLengthStenosis"
+              binary="true"
+              label="{{ 'angiographyCT.abdomen.shortLengthStenosis.value' | translate }}"
+            ></p-checkbox>
+          </div>
+        </div>
+        <div class="c-col-1 c-pad-l c-sep f-vertical f-start m-t-13">
+          <div
+            class="o-radio-list"
+            *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.AnatomicVariants"
+          >
+            <h2 rr-id="ang_c_080501">
+              {{ "angiographyCT.abdomen.furtherVariants.value" | translate }}
+            </h2>
+            <p-radioButton
+              rr-id="ang_c_080502"
+              class="text-break"
+              name="furtherVariantsType"
+              [(ngModel)]="model.furtherVariantsType"
+              [value]="furtherVariantsType.GastroduodenalArteryAberrantHepaticArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.gastroduodenalArteryArisesfromAberrant.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080503"
+              class="text-break"
+              name="furtherVariantsType"
+              [(ngModel)]="model.furtherVariantsType"
+              [value]="furtherVariantsType.GastroduodenalArterySplenicArtery"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.gastroduodenalArteryArisesFrom.value' | translate }}"
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="ang_c_080504"
+              class="text-break"
+              name="furtherVariantsType"
+              [(ngModel)]="model.furtherVariantsType"
+              [value]="furtherVariantsType.MedialSegment"
+              rrUnClickRadio
+              label="{{ 'angiographyCT.abdomen.medialSegmentOfTheleft.value' | translate }}"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div
+        class="rr-tabView h-575"
+        *ngIf="model.anatomicVariantsOrPathologyType === anatomicVariantsOrPathologyType.MesentericArteryStenosis"
+      >
+        <p-tabView
+          class="rr-tabView "
+          [activeIndex]="activeTabIndex"
+          (activeIndexChange)="activeTabIndexChange($event)"
+        >
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                rr-id="ang_c_0803167"
+                ifAny="true"
+                rrValidation="mesentericVesselsLocalizationType stenosisSeverityType"
+              >
+                {{ 'angiographyCT.abdomen.localizationStenosis.value' |
+                translate }}
+              </h1>
+            </ng-template>
+            <rr-localization-stenosis
+              class="f-horizontal col-h-100"
+              [model]="model"
+            >
+            </rr-localization-stenosis>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <h1
+                rr-id="ang_c_080467"
+                [rrValidation]="localizationIschemicValiadtion"
+              >
+                {{ 'angiographyCT.abdomen.associatedFindingsTab.value' |
+                translate }}
+              </h1>
+            </ng-template>
+            <rr-associated-findings
+              class="f-horizontal col-h-100"
+              [model]="model"
+              [localizationIschemicValiadtion]="localizationIschemicValiadtion"
+            >
+            </rr-associated-findings>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

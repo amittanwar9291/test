@@ -1,0 +1,67 @@
+<div class="dialog-main" [ngStyle]="{ 'zoom': zoom }">
+  <div rr-id="uni_dia_030" class="dialog-header">
+    {{'settings.logoImport.value' | translate}}
+  </div>
+
+  <div class="dialog-content" id="content">
+    <div *ngIf="!imageChangedEvent" class="import-container">
+      <input
+        #logoUpload
+        style="display: none"
+        class="m-t-20 m-b-20"
+        type="file"
+        (change)="fileChangeEvent($event)"
+        [accept]="acceptedFormats"
+      />
+      <button
+        rr-id="uni_dia_031"
+        class="upload-button"
+        type="button"
+        (click)="logoUpload.click()"
+      >
+        {{'settings.selectFilePlus.value' | translate}}
+      </button>
+      <span rr-id="uni_dia_032" class="import-text"
+        >{{'settings.supportsJPGPNGSVG.value' | translate}}</span
+      >
+    </div>
+    <div *ngIf="imageChangedEvent" class="cropper-container">
+      <span rr-id="uni_dia_035" class="cropper-text m-t-13 m-b-7"
+        >{{'settings.optionalCropLogo.value' | translate}}</span
+      >
+      <div rr-id="uni_dia_036" class="cropper">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [backgroundColor]="'transparent'"
+          [aspectRatio]="4 / 3"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+        >
+        </image-cropper>
+      </div>
+    </div>
+  </div>
+  <div class="dialog-buttons">
+    <button
+      rr-id="uni_dia_033"
+      type="button"
+      class="dialog-button cancel"
+      (click)="dialogCancel()"
+    >
+      {{'settings.cancel.value' | translate}}
+    </button>
+    <button
+      rr-id="uni_dia_034"
+      type="button"
+      class="dialog-button save"
+      (click)="uploadLogo()"
+      [ngClass]="{disabled: !imageChangedEvent}"
+    >
+      {{'settings.save.value' | translate}}
+    </button>
+  </div>
+  <div class="dialog-logo">
+    <img src="/assets/img/layout/rr-logo-rgb.svg" alt="RR logo" />
+  </div>
+</div>

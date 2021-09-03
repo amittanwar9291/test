@@ -1,0 +1,18 @@
+
+Given	I'm logged-in with valid credentials
+And I select 'Yes' radio button in Contrast enhanced box on Page 03 of Thoracic MRT
+And	I go to Page 05 of Thoracic MRT
+And I select 'Finding' radio button
+And I select 'Cystic fibrosis' from the dropdown menu
+And I select 'Quantitative, Eichinger score' radio button
+
+When I click on any localizer from Parameter
+And I click on the color picker '< 50% of the area'
+And I click on 'UL' & 'ML' & 'LL' parts on 'R' side of the localizer
+Then 'UL' & 'ML' & 'LL' parts are selected and turn yellow
+When I click on the color picker '> 50% of the area'
+And I click on 'UL' & 'LI' & 'LL' parts on  'R' side of the localizer
+Then 'UL' & 'LI' & 'LL' parts are selected and turn purple
+
+When I close the localizer
+Then 'Score' is equal to '9'             // each yellow selection contributes 1 to the score and each purple selection contributes 2 to the score

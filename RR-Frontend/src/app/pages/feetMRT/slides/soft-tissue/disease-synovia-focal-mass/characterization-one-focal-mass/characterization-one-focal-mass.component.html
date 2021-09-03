@@ -1,0 +1,273 @@
+<div class="main-height">
+  <div class="f-horizontal o-width-100 col-h-100 p-t-10">
+    <div class="c-col-1 c-sep c-pad f-vertical f-start m-b-10">
+      <div class="o-radio-list m-l-10">
+        <h2 rr-id="anc_m_060239">
+          {{'feetMRT.softTissue.localization.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="anc_m_060240"
+          label="{{'feetMRT.softTissue.diffuse.value' | translate}}"
+          name="localizationOfTheSynoviaSynovitisType"
+          [value]="diseaseOfTheSynoviaEnum.Diffuse"
+          (onClick)="
+              clearDiseaseOfTheSynoviaDetails(diseaseOfTheSynoviaEnum.Diffuse);
+              clearTendonsLocalizer();
+              clearThreeDimensionalLocalizer();"
+          [(ngModel)]="model.localizationOfTheSynoviaSynovitisType"
+          rrContentReset="isLocalizationOfTheSynoviaSynovitisTypeBlock"
+          rrValidation="localizationOfTheSynoviaSynovitisType"
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_060241"
+          label="{{'feetMRT.softTissue.focal.value' | translate}}"
+          name="localizationOfTheSynoviaSynovitisType"
+          [value]="diseaseOfTheSynoviaEnum.Focus"
+          (onClick)="clearDiseaseOfTheSynoviaDetails(diseaseOfTheSynoviaEnum.Focus)"
+          [(ngModel)]="model.localizationOfTheSynoviaSynovitisType"
+          rrValidation="localizationOfTheSynoviaSynovitisType"
+        ></p-radioButton>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical f-start m-b-10">
+      <div
+        [rrDisable]="model.localizationOfTheSynoviaSynovitisType  !== diseaseOfTheSynoviaEnum.Focus"
+        id="isLocalizationOfTheSynoviaSynovitisTypeBlock"
+      >
+        <div class="m-l-10 o-radio-list">
+          <h2 rr-id="anc_m_0603137">
+            {{'feetMRT.softTissue.focalDetails.value' | translate}}
+          </h2>
+          <p-checkbox
+            rr-id="anc_m_0603138"
+            label="{{'feetMRT.softTissue.intraarticular.value' | translate}}"
+            name="isIntraarticular"
+            [(ngModel)]="model.isIntraarticular"
+            rrValidation="isIntraarticular isExtraarticular"
+            (onChange)="clearThreeDimensionalLocalizer()"
+            binary="true"
+          ></p-checkbox>
+          <div
+            class="o-radio-list nested-content m-b-minus-15"
+            [rrDisable]="!model.isIntraarticular"
+          >
+            <p
+              rr-id="anc_m_0603127"
+              rrValidation="threeDimensionalLocalization"
+            >
+              {{'feetMRT.softTissue.localizationIntrarticular.value' |
+              translate}}
+            </p>
+            <rr-foot-big-joints-simple
+              rrValidation="threeDimensionalLocalization"
+              rr-id="anc_m_060243"
+              name="threeDimensionalLocalization"
+              isLocalizer="true"
+              (click)="openLargeLocalizerJoints()"
+              [side]="side"
+              class="nested-localizer"
+              [model]="model.threeDimensionalLocalization"
+            ></rr-foot-big-joints-simple>
+          </div>
+
+          <p-checkbox
+            rr-id="anc_m_0603139"
+            label="{{'feetMRT.softTissue.extraarticular.value' | translate}}"
+            name="isExtraarticular"
+            [(ngModel)]="model.isExtraarticular"
+            (onChange)="clearTendonsLocalizer()"
+            rrValidation="isIntraarticular isExtraarticular"
+            binary="true"
+          ></p-checkbox>
+          <div
+            class="o-radio-list nested-content"
+            [rrDisable]="!model.isExtraarticular"
+          >
+            <p rr-id="anc_m_060356" rrValidation="tendonsLocalization">
+              {{'feetMRT.softTissue.extraarticularLocalization.value' |
+              translate}}
+            </p>
+            <rr-foot-big-tendons-simple
+              rr-id="anc_m_060357"
+              name="tendonsLocalization"
+              rrValidation="tendonsLocalization"
+              isLocalizer="true"
+              (click)="openLargeLocalizerTendons()"
+              [side]="side"
+              class="nested-localizer"
+              [model]="model.tendonsLocalization"
+            ></rr-foot-big-tendons-simple>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-sep c-pad f-vertical f-start m-b-10">
+      <div class="o-radio-list sliders-z-index m-l-15">
+        <div
+          class="o-radio-list"
+          [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+        >
+          <h2 rr-id="anc_m_0604112" class="m-b-5">
+            {{'feetMRT.softTissue.differentialDiagnosis1.value' | translate}}*
+          </h2>
+          <rr-differential-diagnosis-dropdown
+            rrId="anc_m_0604113"
+            [diagnosisNumber]="1"
+            isActiveOnIKnow="true"
+            [options]="differentialDiagnosisW027"
+            [(ngModel)]="model.differentialDiagnosis"
+            name="differentialDiagnosis"
+            [parentViewModel]="model"
+            (selectionChanged)="clearDiagnosis2()"
+            [rrDisable]="model.descriptionType !== descriptionTypeEnum.IKnow"
+            rrValidation="differentialDiagnosis"
+          ></rr-differential-diagnosis-dropdown>
+
+          <p-checkbox
+            rr-id="anc_m_0604156"
+            class="m-t-7"
+            label="{{'feetMRT.softTissue.histologyKnown.value' | translate}}"
+            name="isHistologyKnown"
+            rrContentReset="histologyBlock"
+            [(ngModel)]="model.isHistologyKnown"
+            binary="true"
+          ></p-checkbox>
+          <div
+            id="histologyBlock"
+            class="f-vertical f-start o-radio-list nested-content m-b-10"
+            [rrDisable]="!model.isHistologyKnown"
+          >
+            <p-radioButton
+              rr-id="anc_m_0604157"
+              label="{{'feetMRT.softTissue.benigne.value' | translate}}"
+              name="histologyKnownType"
+              [value]="histologyKnownTypeEnum.Benigne"
+              [(ngModel)]="model.histologyKnownType"
+              rrUnClickRadio
+            ></p-radioButton>
+            <p-radioButton
+              rr-id="anc_m_0604158"
+              label="{{'feetMRT.softTissue.maligne.value' | translate}}"
+              name="histologyKnownType"
+              [value]="histologyKnownTypeEnum.Maligne"
+              [(ngModel)]="model.histologyKnownType"
+              rrUnClickRadio
+            ></p-radioButton>
+          </div>
+        </div>
+        <h2 rr-id="anc_m_0604153" class="m-b-0 m-t-30">
+          {{'feetMRT.softTissue.t1wSignal.value' | translate}}
+        </h2>
+        <span rr-id="anc_m_0604114">
+          {{'feetMRT.softTissue.comparedToMuscleSignal.value' | translate}}
+        </span>
+        <div class="m-t-15">
+          <rr-slider-number-triple-input
+            name="t1w"
+            rr-id="kne_m_0803235"
+            [(ngModel)]="model.signalT1w"
+          >
+          </rr-slider-number-triple-input>
+        </div>
+
+        <h2 rr-id="anc_m_0604154" class="m-b-0 m-t-20">
+          {{'feetMRT.softTissue.t2wSignal.value' | translate}}
+        </h2>
+        <span rr-id="anc_m_0604116">
+          {{'feetMRT.softTissue.comparedToBonesSignal.value' | translate}}
+        </span>
+        <div class="m-t-15">
+          <rr-slider-number-triple-input
+            name="t2w"
+            rr-id="anc_m_0604117"
+            [(ngModel)]="model.signalT2w"
+          >
+          </rr-slider-number-triple-input>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-col-1 c-sep c-pad-l f-vertical f-start o-radio-list m-b-10 ">
+      <div class="f-vertical f-start o-radio-list p-l-10">
+        <h2 rr-id="anc_m_060529">
+          {{'feetMRT.softTissue.shape.value' | translate}}
+        </h2>
+        <p-radioButton
+          rr-id="anc_m_060530"
+          label="{{'feetMRT.softTissue.multilobulated.value' | translate}}"
+          name="synoviaFormType"
+          [value]="synoviaFormType.Multilobulated"
+          [(ngModel)]="model.synoviaFormType"
+          rrContentReset="synovialNodulusGroup"
+          rrUnClickRadio
+        ></p-radioButton>
+        <p-radioButton
+          rr-id="anc_m_060531"
+          label="{{'feetMRT.softTissue.synovialNodule.value' | translate}}"
+          name="synoviaFormType"
+          [value]="synoviaFormType.SynovialNodulus"
+          [(ngModel)]="model.synoviaFormType"
+          rrContentReset="synovialNodulusGroup"
+          rrUnClickRadio
+        ></p-radioButton>
+        <div
+          class="m-l-35"
+          id="synovialNodulusGroup"
+          [rrDisable]="model.synoviaFormType !== synoviaFormType.SynovialNodulus"
+        >
+          <p-checkbox
+            rr-id="anc_m_060532"
+            label="{{'feetMRT.softTissue.lesion.value' | translate}}"
+            name="isSynovialNodulusMoreThanOneLesion"
+            [(ngModel)]="model.isSynovialNodulusMoreThanOneLesion"
+            binary="true"
+          ></p-checkbox>
+        </div>
+        <p-radioButton
+          rr-id="anc_m_060547"
+          label="{{'feetMRT.softTissue.synovialProliferations.value' | translate}}"
+          name="synoviaFormType"
+          [value]="synoviaFormType.SynovialProliferations"
+          [(ngModel)]="model.synoviaFormType"
+          rrContentReset="synovialNodulusGroup"
+          rrUnClickRadio
+        ></p-radioButton>
+      </div>
+
+      <div class="f-vertical f-start o-radio-list p-l-10 m-t-20">
+        <h2 rr-id="anc_m_060548">
+          {{'feetMRT.softTissue.internalArchitecture2.value' | translate}}
+        </h2>
+        <p-checkbox
+          rr-id="anc_m_060549"
+          label="{{'feetMRT.softTissue.necrosis.value' | translate}}"
+          name="isNecrosis"
+          [(ngModel)]="model.isNecrosis"
+          binary="true"
+        ></p-checkbox>
+        <p-checkbox
+          rr-id="anc_m_060527"
+          label="{{'feetMRT.softTissue.susceptibilityArtifact.value' | translate}}"
+          name="isSusceptibilityArtifact"
+          [(ngModel)]="model.isSusceptibilityArtifact"
+          binary="true"
+          rrContentReset="susceptibilityGroup"
+        ></p-checkbox>
+
+        <div
+          id="susceptibilityGroup"
+          class="m-l-35"
+          [rrDisable]="!model.isSusceptibilityArtifact"
+        >
+          <p-checkbox
+            rr-id="anc_m_060528"
+            label="{{'feetMRT.softTissue.bloomingArtifact.value' | translate}}"
+            name="isBloomingArtifact"
+            [(ngModel)]="model.isBloomingArtifact"
+            binary="true"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

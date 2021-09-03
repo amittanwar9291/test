@@ -1,0 +1,65 @@
+<div class="f-vertical f-center col-h-100 o-width-100">
+  <h1 rr-id="ang_c_020108" class="c-pad-l m-t-14">
+    {{'angiographyCT.anamnesis.priorInterventions.value' | translate }}
+  </h1>
+  <div class="f-horizontal col-h-100">
+    <div class="c-col-1 c-sep c-pad m-t-14 m-b-12 f-vertical o-list">
+      <rr-finding-column
+        [handler]="priorIntervestionFindingHandler"
+        [disabled]="false"
+        [setConfig]="priorIntervestionFindingDropdownConfig"
+        attr.name="findingHandlerComponent"
+        [validationName]="['isPartialLungResectionSideLeft isPartialLungResectionSideRight', 'isAorticValve isMitralValve']"
+        [validationSecondFinding]="true"
+      >
+      </rr-finding-column>
+    </div>
+    <div
+      *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.None"
+      class="f-start f-horizontal col-h-100 col-h-100 m-t-14 m-b-12"
+    >
+      <div class="c-col-1 c-sep c-pad m-t-14 m-b-12"></div>
+      <div class="c-col-1 c-sep c-pad m-t-14 m-b-12"></div>
+      <div class="c-col-1 c-sep c-pad m-t-14 m-b-12"></div>
+      <div class="c-col-1 c-pad m-t-14 m-b-12"></div>
+    </div>
+    <div>
+      <rr-pta-lysis-thoracotomy-pacemakerk
+        *ngIf="isPtaLysisThoracotomyPacemaker()"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-pta-lysis-thoracotomy-pacemakerk>
+      <rr-thrombectomy
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.Thrombectomy"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-thrombectomy>
+      <rr-bypass
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.Bypass"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-bypass>
+      <rr-embolisation
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.Embolization"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-embolisation>
+      <rr-partial
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.PartialLungResection"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-partial>
+      <rr-endovascular
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.EndovascularAorticRepair"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-endovascular>
+      <rr-valve
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.ValveReplacement"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-valve>
+      <rr-vitium
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.VitiumClosure"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-vitium>
+      <rr-transplantation
+        *ngIf="priorIntervestionFindingHandler.currentItem.priorInterventionsFindingType === priorInterventionsFindingType.AfterTransplantation"
+        [model]="priorIntervestionFindingHandler.currentItem"
+      ></rr-transplantation>
+    </div>
+  </div>
+</div>

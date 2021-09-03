@@ -1,0 +1,64 @@
+import 'cypress-shadow-dom';
+import { IAppConfig } from '@interfaces/configs';
+import { Guid } from '@models/shared/guid/guid';
+import { elbowMRTRoutes } from '@environments/pages-routes';
+import { clickElement, elementShouldBeEnabled, getAppConfig } from '../../../../shared/service';
+import { signIn } from '../../../../shared/requests';
+import { createReport } from '../../../../shared/report-creation';
+import { testUser } from '../../../../shared/test-usert';
+import { FindingColumnPageObject } from '../../../../page objects/finding-column-page-object';
+
+context('Page 07 - Soft tissue', () => {
+  let config: IAppConfig;
+  let pageId: Guid = Guid.createEmpty();
+  const findingColumn = new FindingColumnPageObject('elb_m_070107', 'elb_m_070106-');
+
+  before('sign-in', () => {
+    getAppConfig().then(result => {
+      config = result;
+      signIn(config).then(() => {
+        createReport(testUser.firstName, 'ElbowMRT', config).then(id => {
+          pageId = id;
+          cy.visit(elbowMRTRoutes.ElbowMRT_SoftTissue.url + '/' + pageId);
+        });
+      });
+    });
+  });
+
+  describe('Soft tissue', () => {
+    it('Soft tissue -> Bursitis', () => {
+      clickElement('elb_m_070105', true, 'radio');
+      findingColumn.selectFindingOptionByAppearance(4);
+      elementShouldBeEnabled('elb_m_070106-1');
+      elementShouldBeEnabled('elb_m_070107');
+
+      elementShouldBeEnabled('elb_m_070214');
+      elementShouldBeEnabled('elb_m_070215');
+      elementShouldBeEnabled('elb_m_070216');
+      elementShouldBeEnabled('elb_m_070217');
+      elementShouldBeEnabled('elb_m_070218');
+      elementShouldBeEnabled('elb_m_070221');
+      elementShouldBeEnabled('elb_m_070222');
+
+      elementShouldBeEnabled('elb_m_070302');
+      elementShouldBeEnabled('elb_m_070303');
+      elementShouldBeEnabled('elb_m_070304');
+      elementShouldBeEnabled('elb_m_070306');
+
+      clickElement('elb_m_070304', true, 'checkbox');
+      elementShouldBeEnabled('elb_m_070305');
+
+      cy.byRRID('elb_m_070218').type('100');
+      cy.byRRID('elb_m_070218').should('be.empty');
+
+      cy.byRRID('elb_m_070218').type('0');
+      cy.byRRID('elb_m_070218').should('be.empty');
+
+      cy.byRRID('elb_m_070218').type('1');
+      cy.byRRID('elb_m_070218').should('be.visible');
+
+      cy.byRRID('elb_m_070218').type('99');
+      cy.byRRID('elb_m_070218').should('be.visible');
+    });
+  });
+});

@@ -1,0 +1,107 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center" *ngIf="!largeLocalizerConfig">
+    <div class="c-col-1 c-sep c-pad-r o-list f-vertical f-start">
+      <h1 rr-id="abd_m_110103">
+        {{'abdomenMRT.lymphaticSystem.finding.value' | translate }}*
+      </h1>
+      <div class="col-h-100 o-radio-list f-vertical">
+        <p-radioButton
+          rr-id="abd_m_110104"
+          label="{{'abdomenMRT.lymphaticSystem.normalImagingOfTheLymph.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.False"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_110109"
+          label="{{'abdomenMRT.lymphaticSystem.noDetails.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.NoDetails"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="abd_m_110105"
+          label="{{'abdomenMRT.lymphaticSystem.finding.value' | translate }}"
+          name="areFindings"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindingsEnum.True"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <rr-finding-column
+          [handler]="findingHandler"
+          [disabled]="model.areFindings !== areFindingsEnum.True"
+          [setConfig]="findingDropdownConfig"
+          [attr.name]="'findings'"
+          validationName="findings"
+          (findingChange)="updateLymphNodeStationsFindingHandler()"
+          (newFindingAdded)="updateLymphNodeStationsFindingHandler()"
+          (findingRemoved)="updateLymphNodeStationsFindingHandler()"
+          (findingTypeChange)="updateLymphNodeStationsFindingHandler()"
+        >
+        </rr-finding-column>
+      </div>
+    </div>
+    <div
+      class="f-vertical h-100"
+      [ngClass]="findingHandler.currentItem.findingType === lymphaticSystemFindingTypeEnum.None ? 'f-end' : 'f-space-between'"
+    >
+      <div
+        *ngIf="findingHandler.currentItem.findingType === lymphaticSystemFindingTypeEnum.None"
+        class="f-horizontal main-container empty-column-container"
+      >
+        <div
+          *ngFor="let empty of [].constructor(3)"
+          class="c-col-1 c-sep c-pad"
+        ></div>
+        <div class="c-col-1 c-pad-l"></div>
+      </div>
+      <div
+        *ngIf="findingHandler.currentItem.findingType !== lymphaticSystemFindingTypeEnum.None"
+      >
+        <div class="c-pad-l m-b-22">
+          <h1 rr-id="abd_m_110201">
+            {{ 'abdomenMRT.lymphaticSystem.finding.value' | translate }}
+            {{findingHandler.currentItemIndex + 1 | number: '2.0-0'}}
+          </h1>
+        </div>
+        <div
+          *ngIf="findingHandler.currentItem.findingType === lymphaticSystemFindingTypeEnum.LymphNodes"
+        >
+          <rr-lymph-nodes
+            [model]="findingHandler.currentItem"
+            [findingLymphNodeStationsHandler]="nestedFindingLymphNodeStationsHandler"
+            [findingDropdownConfig]="nestedFindingDropdownConfig"
+            [W085]="W085"
+            [isCM]="isCM"
+            [isDWI]="isDWI"
+            [closedLocalizer]="closedLocalizer"
+            (emitLocalizer)="setLargeLocalizerOpened($event)"
+          ></rr-lymph-nodes>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="large-localizer f-horizontal f-center"
+    *ngIf="largeLocalizerConfig"
+  >
+    <rr-spine-complex
+      name="localizerModel"
+      [(ngModel)]="largeLocalizerConfig.localizerModel"
+      [selectionAccessibilityMode]="largeLocalizerConfig.selectionAccessibilityMode"
+      [localizationTitle]="largeLocalizerConfig.localizerTitle"
+      [localizationDescription]="largeLocalizerConfig.localizerDescription"
+      (close)="onLargeLocalizerClosed()"
+      [logicType]="largeLocalizerConfig.localizerLogicType"
+    ></rr-spine-complex>
+  </div>
+</form>

@@ -1,0 +1,225 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="large-localizer f-horizontal f-center" *ngIf="bigLocalizerShown">
+    <rr-spine-complex
+      name="spineLocation"
+      [(ngModel)]="interventionHandler.currentItem.spineLocation"
+      [logicType]="getLocalizerLogicAndDescription().logicType"
+      (close)="toggleLocalizer()"
+      [localizationDescription]="getLocalizerLogicAndDescription().description"
+      [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+    >
+    </rr-spine-complex>
+  </div>
+  <div *ngIf="!bigLocalizerShown" class="c-main f-horizontal f-center">
+    <div
+      class="c-col-1 c-pad-r c-sep f-vertical f-start o-radio-list col-h-100"
+    >
+      <h1 rr-id="spi_m_020103" class="m-b-13">
+        {{ 'spineMRT.anamnesis.previousInterventions.value' | translate }}
+      </h1>
+      <div rr-id="spi_m_020104" class="m-b-15">
+        <img src="assets/img/shared/building.svg" />
+      </div>
+      <rr-finding-column
+        [handler]="interventionHandler"
+        [disabled]="false"
+        [setConfig]="interventionDropdownConfig"
+        [attr.name]="'findingHandlerComponent'"
+        validationName="interventionType"
+        (findingChange)="onFindingChange()"
+      ></rr-finding-column>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <div *ngIf="isAnyPartShown()">
+        <h1 rr-id="spi_m_020201">
+          {{'spineMRT.anamnesis.intervention.value' |
+          translate}}{{interventionHandler.currentItemIndex +1 | number:
+          '2.0-0'}}
+        </h1>
+        <div class="intervention__gap o-width-100"></div>
+        <div class="m-b-13">
+          <h2
+            *ngIf="isPartShown(interventionTypes.Spondylodesis)"
+            rr-id="spi_m_020202"
+            rrValidation="spineLocation"
+          >
+            {{'spineMRT.anamnesis.localization.value' | translate}}*
+          </h2>
+          <h2
+            *ngIf="!isPartShown(interventionTypes.Spondylodesis)"
+            rr-id="spi_m_020220"
+            rrValidation="spineLocation"
+          >
+            {{'spineMRT.anamnesis.localizationMultiChoice.value' | translate}}*
+          </h2>
+        </div>
+      </div>
+      <div>
+        <div *ngIf="isPartShown(interventionTypes.Spondylodesis)">
+          <div>
+            <rr-spine-simple
+              rrValidation="spineLocation"
+              isLocalizer="true"
+              [spineLocation]="interventionHandler.currentItem.spineLocation"
+              (click)="toggleLocalizer()"
+              [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+              [darkRedDisc]="true"
+            ></rr-spine-simple>
+          </div>
+        </div>
+        <div *ngIf="isPartShown(interventionTypes.Laminectomy)">
+          <div>
+            <rr-spine-simple
+              rrValidation="spineLocation"
+              isLocalizer="true"
+              [spineLocation]="interventionHandler.currentItem.spineLocation"
+              (click)="toggleLocalizer()"
+              [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+            ></rr-spine-simple>
+          </div>
+        </div>
+        <div *ngIf="isPartShown(interventionTypes.DiscReplacement)">
+          <div>
+            <rr-spine-simple
+              rrValidation="spineLocation"
+              isLocalizer="true"
+              [spineLocation]="interventionHandler.currentItem.spineLocation"
+              (click)="toggleLocalizer()"
+              [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+            ></rr-spine-simple>
+          </div>
+        </div>
+        <div *ngIf="isPartShown(interventionTypes.VertebraReplacement)">
+          <div>
+            <rr-spine-simple
+              rrValidation="spineLocation"
+              isLocalizer="true"
+              [spineLocation]="interventionHandler.currentItem.spineLocation"
+              (click)="toggleLocalizer()"
+              [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+            ></rr-spine-simple>
+          </div>
+        </div>
+        <div
+          *ngIf="isPartShown(interventionTypes.BoneCementApplication)"
+          class="o-list"
+        >
+          <div>
+            <rr-spine-simple
+              rrValidation="spineLocation"
+              isLocalizer="true"
+              [spineLocation]="interventionHandler.currentItem.spineLocation"
+              (click)="toggleLocalizer()"
+              [spineLocalizerPermittedSelection]="spineLocalizerPermittedSelection"
+            ></rr-spine-simple>
+          </div>
+          <div class="o-radio-list" [rrDisable]="!isSingleElementSelected()">
+            <h2 rr-id="spi_m_020210">
+              {{'spineMRT.anamnesis.detailIntervention.value' | translate}}
+            </h2>
+            <div class="o-radio-list f-vertical f-start">
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_020211"
+                label="{{'spineMRT.anamnesis.vertebroplastie.value' | translate}}"
+                [(ngModel)]="interventionHandler.currentItem.detailInterventionType"
+                [value]="detailInterventionTypes.Vertebroplasty"
+                name="detailInterventionType"
+              ></p-radioButton>
+              <p-radioButton
+                rrUnClickRadio
+                rr-id="spi_m_020212"
+                label="{{'spineMRT.anamnesis.kyphoblastie.value' | translate}}"
+                [(ngModel)]="interventionHandler.currentItem.detailInterventionType"
+                [value]="detailInterventionTypes.Kyphoplasty"
+                name="detailInterventionType"
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start">
+      <div>
+        <h1 rr-id="spi_m_020301" class="m-b-26">
+          {{'spineMRT.anamnesis.complaints.value' | translate}}
+        </h1>
+        <div class="m-b-46">
+          <img rr-id="spi_m_020302" src="assets/img/shared/person.svg" />
+        </div>
+        <div class="f-vertical f-start o-radio-list">
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="spi_m_020303"
+            label="{{'spineMRT.anamnesis.lumbago.value' | translate}}"
+            [(ngModel)]="model.complaintsType"
+            [value]="complaintsTypesEnum.Lumbago"
+            name="complaintsType"
+            rrContentReset="lumbagoLocationTypeContainer neurologyLocationTypeContainer"
+          >
+          </p-radioButton>
+          <div
+            id="lumbagoLocationTypeContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.complaintsType !== complaintsTypesEnum.Lumbago"
+          >
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="spi_m_020305"
+              label="{{'spineMRT.anamnesis.right.value' | translate}}"
+              [(ngModel)]="model.lumbagoSideType"
+              [value]="sideTypesEnum.Right"
+              name="lumbagoLocationType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="spi_m_020306"
+              label="{{'spineMRT.anamnesis.left.value' | translate}}"
+              [(ngModel)]="model.lumbagoSideType"
+              [value]="sideTypesEnum.Left"
+              name="lumbagoLocationType"
+            >
+            </p-radioButton>
+          </div>
+          <p-radioButton
+            rrUnClickRadio
+            rr-id="spi_m_020304"
+            label="{{'spineMRT.anamnesis.neurology.value' | translate}}"
+            [(ngModel)]="model.complaintsType"
+            [value]="complaintsTypesEnum.Neurology"
+            name="complaintsType"
+            rrContentReset="lumbagoLocationTypeContainer neurologyLocationTypeContainer"
+          >
+          </p-radioButton>
+          <div
+            id="neurologyLocationTypeContainer"
+            class="nested-content o-radio-list"
+            [rrDisable]="model.complaintsType !== complaintsTypesEnum.Neurology"
+          >
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="spi_m_020307"
+              label="{{'spineMRT.anamnesis.right.value' | translate}}"
+              [(ngModel)]="model.neurologySideType"
+              [value]="sideTypesEnum.Right"
+              name="neurologyLocationType"
+            >
+            </p-radioButton>
+            <p-radioButton
+              rrUnClickRadio
+              rr-id="spi_m_020308"
+              label="{{'spineMRT.anamnesis.left.value' | translate}}"
+              [(ngModel)]="model.neurologySideType"
+              [value]="sideTypesEnum.Left"
+              name="neurologyLocationType"
+            >
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-col-1 c-pad c-sep f-vertical f-start"></div>
+    <div class="c-col-1 c-pad-l c-sep f-vertical f-start"></div>
+  </div>
+</form>

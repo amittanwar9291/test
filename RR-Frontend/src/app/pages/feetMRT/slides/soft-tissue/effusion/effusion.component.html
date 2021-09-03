@@ -1,0 +1,112 @@
+<div class="f-horizontal f-start col-h-100">
+  <div class="c-col-1 f-vertical f-start c-sep c-pad-r o-radio-list">
+    <h2
+      rrValidation="threeDimensionalLocalization"
+      noUpdate="true"
+      rr-id="anc_m_060203"
+      class="m-t-10"
+    >
+      {{'feetMRT.softTissue.localization.value' | translate}}
+    </h2>
+    <rr-foot-big-joints-simple
+      rr-id="anc_m_060204"
+      name="threeDimensionalLocalization"
+      rrValidation="threeDimensionalLocalization"
+      isLocalizer="true"
+      (click)="openLargeLocalizer()"
+      [side]="side"
+      [model]="model.threeDimensionalLocalization"
+    ></rr-foot-big-joints-simple>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="!isSingleChoice()"
+    >
+      <h2 rr-id="anc_m_060301" class="m-b-33 m-t-11">
+        {{'feetMRT.softTissue.extent.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="anc_m_060302"
+        label="{{'feetMRT.softTissue.mild.value' | translate}}"
+        name="dimensionType"
+        [(ngModel)]="model.dimensionType"
+        [value]="dimensionTypeEnum.Mild"
+        rrUnClickRadio
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_060303"
+        label="{{'feetMRT.softTissue.significant.value' | translate}}"
+        name="dimensionType"
+        [(ngModel)]="model.dimensionType"
+        [value]="dimensionTypeEnum.Significant"
+        rrUnClickRadio
+      ></p-radioButton>
+    </div>
+  </div>
+  <div class="c-col-1 c-sep c-pad f-vertical f-start o-radio-list">
+    <div
+      class="f-vertical f-start o-radio-list"
+      [rrDisable]="!isSingleChoice()"
+    >
+      <h2 rr-id="anc_m_060401" class="m-b-33 m-t-11">
+        {{'feetMRT.softTissue.quality.value' | translate}}
+      </h2>
+      <p-radioButton
+        rr-id="anc_m_060402"
+        label="{{'feetMRT.softTissue.haemarthros.value' | translate}}"
+        name="qualityType"
+        [value]="qualityTypeEnum.Haemarthros"
+        [(ngModel)]="model.qualityType"
+        rrUnClickRadio
+        rrContentReset="isExtravasationArticularEffusion-block"
+      ></p-radioButton>
+      <p-radioButton
+        rr-id="anc_m_060403"
+        label="{{'feetMRT.softTissue.capsuleRupture.value' | translate}}"
+        name="qualityType"
+        class="m-b-14"
+        [value]="qualityTypeEnum.CapsuleRupture"
+        [(ngModel)]="model.qualityType"
+        rrUnClickRadio
+        rrContentReset="isExtravasationArticularEffusion-block"
+      ></p-radioButton>
+      <div
+        id="isExtravasationArticularEffusion-block"
+        class="f-vertical f-start o-radio-list nested-content m-b-24"
+        [rrDisable]="model.qualityType !== qualityTypeEnum.CapsuleRupture"
+      >
+        <p-checkbox
+          rr-id="anc_m_060404"
+          label="{{'feetMRT.softTissue.extraarticularArticularEffusion.value' | translate}}"
+          name="isExtravasationArticularEffusion"
+          [(ngModel)]="model.isExtravasationArticularEffusion"
+          binary="true"
+        ></p-checkbox>
+      </div>
+      <p-checkbox
+        rr-id="anc_m_060405"
+        label="{{'feetMRT.softTissue.looseFragment.value' | translate}}"
+        name="isFreeJointBody"
+        rrContentReset="isFreeJointBody-block"
+        [(ngModel)]="model.isFreeJointBody"
+        binary="true"
+      ></p-checkbox>
+      <div
+        id="isFreeJointBody-block"
+        class="f-vertical f-start o-radio-list nested-content"
+        [rrDisable]="!model.isFreeJointBody"
+      >
+        <rr-number-input
+          [label]="'feetMRT.softTissue.diameterInMm.value' | translate"
+          inputRr="anc_m_060406"
+          labelRr="anc_m_060407"
+          name="freeJointBodyDiameterInMm"
+          [(ngModel)]="model.freeJointBodyDiameterInMm"
+          [config]="{labelWidth: 100, min: 1, max: 30}"
+        ></rr-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="c-col-1 c-pad-l"></div>
+</div>

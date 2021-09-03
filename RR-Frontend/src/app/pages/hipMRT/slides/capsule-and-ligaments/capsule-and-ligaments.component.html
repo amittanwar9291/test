@@ -1,0 +1,93 @@
+<form #autosaveForm="ngForm" [hidden]="!modelInitialized" rrBlockForm>
+  <div class="c-main f-horizontal f-center">
+    <div class="c-col-1 c-pad-r c-sep o-list f-vertical">
+      <div class="f-vertical o-radio-list m-b-13">
+        <h1 class="m-b-17" rr-id="hip_m_060103">
+          {{ 'hipMRT.capsuleAndLigaments.finding.value' | translate }}*
+        </h1>
+        <p-radioButton
+          rr-id="hip_m_060104"
+          name="areFindings"
+          label="{{ 'hipMRT.capsuleAndLigaments.normalImaging.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindings.No"
+          class="m-b-8"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+        <p-radioButton
+          rr-id="hip_m_060105"
+          name="areFindings"
+          label="{{ 'hipMRT.capsuleAndLigaments.finding.value' | translate }}"
+          [(ngModel)]="model.areFindings"
+          [value]="areFindings.Yes"
+          rrValidation="areFindings"
+          notInFinding="true"
+        >
+        </p-radioButton>
+      </div>
+      <rr-finding-column
+        [handler]="findingHandler"
+        [disabled]="model.areFindings !== areFindings.Yes"
+        [setDescriptionTypes]="[{ findingName: findingType.SynoviaMass }]"
+        [setConfig]="findingDropdownConfig"
+        validationName="findings"
+      >
+      </rr-finding-column>
+    </div>
+
+    <div class="f-vertical">
+      <div
+        class="c-pad-l"
+        [ngClass]="findingHandler.currentItem.findingType === findingType.SynoviaMass ? 'h-53' : 'h-161'"
+      >
+        <h1
+          *ngIf="findingHandler.currentItem.findingType !== findingType.None"
+          rr-id="hip_m_060201"
+        >
+          {{ 'hipMRT.capsuleAndLigaments.finding.value' | translate }} {{
+          findingHandler.currentItemIndex + 1 | number: '2.0-0' }}
+        </h1>
+      </div>
+      <div class="f-horizontal col-h-100">
+        <ng-container [ngSwitch]="findingHandler.currentItem.findingType">
+          <!-- None -->
+          <div
+            *ngSwitchCase="findingType.None"
+            class="f-horizontal c-pad-l col-h-100"
+          >
+            <div class="c-col-1 c-pad-r c-sep"></div>
+            <div class="c-col-1 c-pad c-sep"></div>
+            <div class="c-col-1 c-pad c-sep"></div>
+            <div class="c-col-1 c-pad-l c-sep"></div>
+          </div>
+
+          <!-- Ligamentous Lesion -->
+          <rr-ligamentous-lesion
+            *ngSwitchCase="findingType.LigamentousLesion"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+          ></rr-ligamentous-lesion>
+
+          <!-- Synovia Diffuse Pathology -->
+          <rr-synovia-diffuse-pathology
+            *ngSwitchCase="findingType.SynoviaDiffusePathology"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+            [isContrastEnhanced]="isContrastEnhanced"
+          ></rr-synovia-diffuse-pathology>
+
+          <!-- Synovia Mass -->
+          <rr-synovia-mass
+            *ngSwitchCase="findingType.SynoviaMass"
+            class="col-h-100"
+            [model]="findingHandler.currentItem"
+            [isContrastEnhanced]="isContrastEnhanced"
+          >
+          </rr-synovia-mass>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form>

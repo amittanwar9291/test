@@ -1,0 +1,51 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { NumberInputModule } from '@controls/number-input/number-input.module';
+import { DynamicComponentWrapperModule } from '@controls/dynamic-component-wrapper/dynamic-component-wrapper.module';
+import { CalendarInputModule } from '@controls/calendar-input/calendar-input.module';
+import { MultiValueDropdownModule } from '@controls/multi-value-dropdown/multi-value-dropdown.module';
+import { ResetButtonModule } from '@controls/reset-button/reset-button.module';
+
+import { DynamicBaseModule } from '@abstractions/dynamic-base/dynamic-base.module';
+
+import { TranslateModule } from '@ngx-translate/core';
+
+import { TechnologyComponent } from './technology.component';
+
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CheckboxModule } from 'primeng/checkbox';
+
+import { ResetDialogModule } from 'app/shared/dialogs/reset-dialog/reset-dialog.module';
+import { CommonImportsModule } from 'app/shared/common-imports/common-imports.module';
+import { ResetDialogComponent } from 'app/shared/dialogs/reset-dialog/reset-dialog.component';
+import { TechnologyCommonTemplatesModule } from 'app/shared/common-templates/technology/technology-common-templates.module';
+
+import { SliderNumberInputModule } from '@controls/slider-number-input/slider-number-input.module';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    TranslateModule,
+    DropdownModule,
+    RadioButtonModule,
+    CheckboxModule,
+    MultiValueDropdownModule,
+    DynamicBaseModule,
+    RadioButtonModule,
+    CalendarInputModule,
+    ResetDialogModule,
+    CommonImportsModule,
+    DynamicComponentWrapperModule,
+    NumberInputModule,
+    TechnologyCommonTemplatesModule,
+    ResetButtonModule,
+    SliderNumberInputModule
+  ],
+  declarations: [TechnologyComponent],
+  entryComponents: [ResetDialogComponent]
+})
+export class TechnologyModule {}
