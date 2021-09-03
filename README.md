@@ -18,6 +18,12 @@ Can ignore the ssh part and cronjob as of now, whenever we have new update relea
 Need this pipeline for Demo on monday...
 
 
+Future task might include:
+
+Vault integration.
+K8s multi region deployment.
+
+
 
 
 
